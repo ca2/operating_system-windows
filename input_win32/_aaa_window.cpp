@@ -341,7 +341,7 @@ namespace windowing_win32
       wcscpy(szWindowClass, L"WindowsDestkop1");
 
       //HWND hwnd = CreateWindowExW(pusersystem->m_createstruct.dwExStyle, szWindowClass, wstrWindowName, pusersystem->m_createstruct.style,
-        // pusersystem->m_createstruct.x, pusersystem->m_createstruct.y, pusersystem->m_createstruct.cx(), pusersystem->m_createstruct.cy(), pusersystem->m_createstruct.hwndParent, pusersystem->m_createstruct.hMenu, pusersystem->m_createstruct.hInstance, pusersystem->m_createstruct.lpCreateParams);
+        // pusersystem->m_createstruct.x, pusersystem->m_createstruct.y, pusersystem->m_createstruct.cx, pusersystem->m_createstruct.cy, pusersystem->m_createstruct.hwndParent, pusersystem->m_createstruct.hMenu, pusersystem->m_createstruct.hInstance, pusersystem->m_createstruct.lpCreateParams);
       HWND hwnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPED,
          CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, pusersystem->m_createstruct.hInstance, nullptr);
       //if (!hwnd)
@@ -390,8 +390,8 @@ namespace windowing_win32
 
       int x = puserinteraction->const_layout().sketch().origin().x;
       int y = puserinteraction->const_layout().sketch().origin().y;
-      int cx = puserinteraction->const_layout().sketch().size().cx();
-      int cy = puserinteraction->const_layout().sketch().size().cy();
+      int cx = puserinteraction->const_layout().sketch().size().cx;
+      int cy = puserinteraction->const_layout().sketch().size().cy;
 
       HWND hwndParent = nullptr;
 
@@ -2084,8 +2084,8 @@ namespace windowing_win32
 //            m_pimpl->m_puserinteraction->const_layout().design().zorder(),
 //            point.x,
 //            point.y,
-//            size.cx(),
-//            size.cy(),
+//            size.cx,
+//            size.cy,
 //            m_pimpl->m_puserinteraction->const_layout().design().activation(),
 //            true, false, false, true, false,
 //            uFlagsSetWindowPos);
@@ -2363,9 +2363,9 @@ namespace windowing_win32
       if (!(nFlags & SWP_NOSIZE))
       {
 
-         m_sizeWindow.cx() = cx;
+         m_sizeWindow.cx = cx;
 
-         m_sizeWindow.cy() = cy;
+         m_sizeWindow.cy = cy;
 
       }
 
@@ -5312,8 +5312,8 @@ namespace windowing_win32
 
             ::int_size size;
 
-            size.cx() = GetSystemMetrics(SM_CXICON);
-            size.cy() = GetSystemMetrics(SM_CYICON);
+            size.cx = GetSystemMetrics(SM_CXICON);
+            size.cy = GetSystemMetrics(SM_CYICON);
 
             HICON hicon = (HICON)m_picon->get_os_data(size);
 
@@ -5333,8 +5333,8 @@ namespace windowing_win32
 
             ::int_size size;
 
-            size.cx() = GetSystemMetrics(SM_CXSMICON);
-            size.cy() = GetSystemMetrics(SM_CYSMICON);
+            size.cx = GetSystemMetrics(SM_CXSMICON);
+            size.cy = GetSystemMetrics(SM_CYSMICON);
 
             HICON hicon = (HICON)m_picon->get_os_data(size);
 
@@ -5817,19 +5817,19 @@ namespace windowing_win32
 
       ::int_size sizeSmall;
 
-      //sizeSmall.cx() = GetSystemMetrics(SM_CXSMICON);
-      //sizeSmall.cy() = GetSystemMetrics(SM_CYSMICON);
-      sizeSmall.cx() = 24;
-      sizeSmall.cy() = 24;
+      //sizeSmall.cx = GetSystemMetrics(SM_CXSMICON);
+      //sizeSmall.cy = GetSystemMetrics(SM_CYSMICON);
+      sizeSmall.cx = 24;
+      sizeSmall.cy = 24;
 
       HICON hiconSmall = (HICON)picon->get_os_data(sizeSmall);
 
       ::int_size sizeBig;
 
-      //sizeBig.cx() = GetSystemMetrics(SM_CXICON);
-      //sizeBig.cy() = GetSystemMetrics(SM_CYICON);
-      sizeBig.cx() = 32;
-      sizeBig.cy() = 32;
+      //sizeBig.cx = GetSystemMetrics(SM_CXICON);
+      //sizeBig.cy = GetSystemMetrics(SM_CYICON);
+      sizeBig.cx = 32;
+      sizeBig.cy = 32;
 
       HICON hiconBig = (HICON)picon->get_os_data(sizeBig);
 

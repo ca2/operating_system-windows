@@ -659,10 +659,10 @@ namespace draw2d_gdiplus
 
       rectangle = arc;
 
-      //rectangle.left      = arc.m_pointCenter.x - arc.m_sizeRadius.cx();
-      //rectangle.right     = arc.m_pointCenter.x + arc.m_sizeRadius.cx();
-      //rectangle.top       = arc.m_pointCenter.y - arc.m_sizeRadius.cy();
-      //rectangle.bottom    = arc.m_pointCenter.y + arc.m_sizeRadius.cy();
+      //rectangle.left      = arc.m_pointCenter.x - arc.m_sizeRadius.cx;
+      //rectangle.right     = arc.m_pointCenter.x + arc.m_sizeRadius.cx;
+      //rectangle.top       = arc.m_pointCenter.y - arc.m_sizeRadius.cy;
+      //rectangle.bottom    = arc.m_pointCenter.y + arc.m_sizeRadius.cy;
 
       //if (!m_bHasPath && m_bHasPointInternal)
       //{

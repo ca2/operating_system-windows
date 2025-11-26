@@ -208,15 +208,15 @@ namespace windows
 
       BITMAPINFO bitmapinfo{};
 
-      auto iScan = size.cx() * 4;
+      auto iScan = size.cx * 4;
 
       bitmapinfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-      bitmapinfo.bmiHeader.biWidth = (int)size.cx();
-      bitmapinfo.bmiHeader.biHeight = (int)-size.cy();
+      bitmapinfo.bmiHeader.biWidth = (int)size.cx;
+      bitmapinfo.bmiHeader.biHeight = (int)-size.cy;
       bitmapinfo.bmiHeader.biPlanes = 1;
       bitmapinfo.bmiHeader.biBitCount = 32;
       bitmapinfo.bmiHeader.biCompression = BI_RGB;
-      bitmapinfo.bmiHeader.biSizeImage = (int)(size.cy() * iScan);
+      bitmapinfo.bmiHeader.biSizeImage = (int)(size.cy * iScan);
 
       ::image32_t * pimage32 = nullptr;
 

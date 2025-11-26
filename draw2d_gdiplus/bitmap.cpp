@@ -92,7 +92,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pbitmap = øraw_new Gdiplus::Bitmap(ppixmap->m_sizeRaw.cx(), ppixmap->m_sizeRaw.cy(), m_iStride, PixelFormat32bppPARGB, (BYTE *) ppixmap->image32());
+      m_pbitmap = øraw_new Gdiplus::Bitmap(ppixmap->m_sizeRaw.cx, ppixmap->m_sizeRaw.cy, m_iStride, PixelFormat32bppPARGB, (BYTE *) ppixmap->image32());
 
       if (m_pbitmap == nullptr)
       {
@@ -127,8 +127,8 @@ namespace draw2d_gdiplus
       BITMAPINFO info = {};
 
       info.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-      info.bmiHeader.biWidth = size.cx();
-      info.bmiHeader.biHeight = -size.cy();
+      info.bmiHeader.biWidth = size.cx;
+      info.bmiHeader.biHeight = -size.cy;
       info.bmiHeader.biPlanes = 1;
       info.bmiHeader.biBitCount = 32;
       info.bmiHeader.biCompression = BI_RGB;

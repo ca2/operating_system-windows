@@ -295,36 +295,36 @@ namespace windowing_win32
 
       auto sizeLargeInternalBitmap = rectangleUnion.size();
 
-      if (pbufferitem->m_size.cx() > sizeLargeInternalBitmap.cx())
+      if (pbufferitem->m_size.cx > sizeLargeInternalBitmap.cx)
       {
 
-         sizeLargeInternalBitmap.cx() = pbufferitem->m_size.cx();
+         sizeLargeInternalBitmap.cx = pbufferitem->m_size.cx;
 
       }
 
-      if (pbufferitem->m_size.cy() > sizeLargeInternalBitmap.cy())
+      if (pbufferitem->m_size.cy > sizeLargeInternalBitmap.cy)
       {
 
-         sizeLargeInternalBitmap.cy() = pbufferitem->m_size.cy();
+         sizeLargeInternalBitmap.cy = pbufferitem->m_size.cy;
 
       }
 
-      if (playeredwindowbuffer->m_pixmap.m_sizeRaw.cx() > sizeLargeInternalBitmap.cx())
+      if (playeredwindowbuffer->m_pixmap.m_sizeRaw.cx > sizeLargeInternalBitmap.cx)
       {
 
-         sizeLargeInternalBitmap.cx() = playeredwindowbuffer->m_pixmap.m_sizeRaw.cx();
+         sizeLargeInternalBitmap.cx = playeredwindowbuffer->m_pixmap.m_sizeRaw.cx;
 
       }
 
-      if (playeredwindowbuffer->m_pixmap.m_sizeRaw.cy() > sizeLargeInternalBitmap.cy())
+      if (playeredwindowbuffer->m_pixmap.m_sizeRaw.cy > sizeLargeInternalBitmap.cy)
       {
 
-         sizeLargeInternalBitmap.cy() = playeredwindowbuffer->m_pixmap.m_sizeRaw.cy();
+         sizeLargeInternalBitmap.cy = playeredwindowbuffer->m_pixmap.m_sizeRaw.cy;
 
       }
 
-      if (playeredwindowbuffer->m_pixmap.m_sizeRaw.cx() < sizeLargeInternalBitmap.cx()
-         || playeredwindowbuffer->m_pixmap.m_sizeRaw.cy() < sizeLargeInternalBitmap.cy())
+      if (playeredwindowbuffer->m_pixmap.m_sizeRaw.cx < sizeLargeInternalBitmap.cx
+         || playeredwindowbuffer->m_pixmap.m_sizeRaw.cy < sizeLargeInternalBitmap.cy)
       {
 
          HBITMAP hbitmap = ::windows::create_windows_dib(sizeLargeInternalBitmap, &iScan, &pimage32);
@@ -506,7 +506,7 @@ namespace windowing_win32
 
       auto sizeLayeredWindowBuffer = playeredwindowbuffer->m_pixmap.size();
 
-      //informationf("windowing_win32::buffer::update_screen size(%d, %d)", size.cx(), size.cy());
+      //informationf("windowing_win32::buffer::update_screen size(%d, %d)", size.cx, size.cy);
 
       auto pixmapRawData = playeredwindowbuffer->m_pixmap.m_pimage32Raw;
 
@@ -569,7 +569,7 @@ namespace windowing_win32
 
          auto sizeBuffer = pbufferitem->m_pimage2->size();
 
-         //if (size.cx() < sizeDrawn.cx() && size.cy() < sizeDrawn.cy())
+         //if (size.cx < sizeDrawn.cx && size.cy < sizeDrawn.cy)
          //if (size != sizeDrawn || sizeDesign != size)
          if (size != sizeBuffer)
          {
@@ -657,7 +657,7 @@ namespace windowing_win32
                //rectangle.left = 10;
                //rectangle.right = 20;
                //rectangle.top = 0;
-               //rectangle.bottom = sz.cy();
+               //rectangle.bottom = sz.cy;
 
                //::FillRect(m_hdc, rectangle, h);
 
@@ -672,7 +672,7 @@ namespace windowing_win32
                rectangle.X = 10;
                rectangle.Width = 10;
                rectangle.Y = 0;
-               rectangle.Height = size.cy();
+               rectangle.Height = size.cy;
 
                Gdiplus::SolidBrush b(Gdiplus::Color(255, 155, 240, 255));
 
@@ -701,7 +701,7 @@ namespace windowing_win32
                //rectangle.left = 20;
                //rectangle.right = 30;
                //rectangle.top = 0;
-               //rectangle.bottom = sz.cy();
+               //rectangle.bottom = sz.cy;
 
                //::FillRect(m_hdc, rectangle, h);
 
@@ -714,8 +714,8 @@ namespace windowing_win32
 
                rectangle.X = 0;
                rectangle.Y = 0;
-               rectangle.Width = size.cx();
-               rectangle.Height = size.cy();
+               rectangle.Width = size.cx;
+               rectangle.Height = size.cy;
 
                Gdiplus::SolidBrush b(Gdiplus::Color(127, 255, 210, 170));
 
@@ -735,7 +735,7 @@ namespace windowing_win32
                               //rectangle.left = 20;
                               //rectangle.right = 30;
                               //rectangle.top = 0;
-                              //rectangle.bottom = sz.cy();
+                              //rectangle.bottom = sz.cy;
 
                               //::FillRect(m_hdc, rectangle, h);
 
@@ -792,11 +792,11 @@ namespace windowing_win32
 
             //point.y = 100;
 
-            //size.cx() = 200;
+            //size.cx = 200;
 
-            //size.cy() = 200;
+            //size.cy = 200;
 
-            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x, point.y, size.cx(), size.cy(), SWP_NOZORDER);
+            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x, point.y, size.cx, size.cy, SWP_NOZORDER);
 
             string strType = __type_name(m_pimpl->m_puserinteraction);
 
@@ -883,7 +883,7 @@ namespace windowing_win32
 
                         auto Δ = r.bottom_right() - p;
 
-                        if (Δ.cx() != 0 || Δ.cy() != 0)
+                        if (Δ.cx != 0 || Δ.cy != 0)
                         {
 
                            //information() << "sketch_to_lading top right offset not null " << Δ;
@@ -904,8 +904,8 @@ namespace windowing_win32
                   //      m_pimpl->m_puserinteraction->const_layout().design().zorder(),
                   //      point.x,
                   //      point.y,
-                  //      size.cx(),
-                  //      size.cy(),
+                  //      size.cx,
+                  //      size.cy,
                   //      m_pimpl->m_puserinteraction->const_layout().design().activation(),
                   //      true, false, false, true, false, 
                   //      uFlagsSetWindowPos);
@@ -983,7 +983,7 @@ namespace windowing_win32
             //                     | SWP_NOOWNERZORDER
             //                     | SWP_DEFERERASE
             //                  | SWP_NOZORDER;
-            //                  ::SetWindowPos(get_hwnd(), NULL, point.x, point.y, size.cx(), size.cy(), 
+            //                  ::SetWindowPos(get_hwnd(), NULL, point.x, point.y, size.cx, size.cy, 
             //                     uFlags);
             //                  m_pimpl->on_visual_applied();
             //
@@ -1014,7 +1014,7 @@ namespace windowing_win32
 
             //::GetObject(b1, sizeof(BITMAP), &bmp1);
 
-            //if (bmp1.bmHeight != size.cy())
+            //if (bmp1.bmHeight != size.cy)
             //{
 
             //   output_debug_string("damn1");
@@ -1033,7 +1033,7 @@ namespace windowing_win32
             //   else
             //   {
 
-            //      if (::height(rClipScreen) != size.cy())
+            //      if (::height(rClipScreen) != size.cy)
             //      {
 
             //         output_debug_string("damn2");
@@ -1056,7 +1056,7 @@ namespace windowing_win32
             //   else
             //   {
 
-            //      if (::height(rClip) != size.cy())
+            //      if (::height(rClip) != size.cy)
             //      {
 
             //         output_debug_string("damn3");

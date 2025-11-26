@@ -537,7 +537,7 @@ namespace draw2d_gdiplus
    double_size graphics::SetViewportExt(const ::double_size & size)
    {
 
-      return SetViewportExt(size.cx(), size.cy());
+      return SetViewportExt(size.cx, size.cy);
 
    }
 
@@ -553,7 +553,7 @@ namespace draw2d_gdiplus
    double_size graphics::set_window_ext(const ::double_size & size)
    {
 
-      return set_window_ext(size.cx(), size.cy());
+      return set_window_ext(size.cx, size.cy);
 
    }
 
@@ -3467,7 +3467,7 @@ namespace draw2d_gdiplus
 
    //         const ::int_rectangle & rectangle = *prectangle;
 
-   //         rectangle.inflate(-size.cx(), -size.cy());
+   //         rectangle.inflate(-size.cx, -size.cy);
    //         rectangle.intersect(rectangle, prectangle);
 
    //         rgnInside.create_rect(rectangle);
@@ -3497,7 +3497,7 @@ namespace draw2d_gdiplus
 
    //            rectangle = *pRectLast;
 
-   //            rectangle.inflate(-sizeLast.cx(), -sizeLast.cy());
+   //            rectangle.inflate(-sizeLast.cx, -sizeLast.cy);
    //            rectangle.intersect(rectangle, pRectLast);
 
    //            rgnInside.SetRectRgn(rectangle);
@@ -4803,10 +4803,10 @@ namespace draw2d_gdiplus
    //{
    //   int nRetVal = ERROR;
    //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-   //   //   nRetVal = ::OffsetClipRgn(get_handle1(), size.cx(), size.cy());
+   //   //   nRetVal = ::OffsetClipRgn(get_handle1(), size.cx, size.cy);
    //   //if(get_handle2() != nullptr)
-   //   //   nRetVal = ::OffsetClipRgn(get_handle2(), size.cx(), size.cy());
-   //   m_pgraphics->TranslateClip(size.cx(), size.cy());
+   //   //   nRetVal = ::OffsetClipRgn(get_handle2(), size.cx, size.cy);
+   //   m_pgraphics->TranslateClip(size.cx, size.cy);
    //   return nRetVal;
    //}
 
@@ -5312,9 +5312,9 @@ namespace draw2d_gdiplus
 
       double_size sizeWinExt = GetWindowExt();
       double_size sizeVpExt = GetViewportExt();
-      psize->cx = psize->cx * abs(sizeVpExt.cx()) / abs(sizeWinExt.cx());
+      psize->cx = psize->cx * abs(sizeVpExt.cx) / abs(sizeWinExt.cx);
 
-      psize->cy = psize->cy * abs(sizeVpExt.cy()) / abs(sizeWinExt.cy());
+      psize->cy = psize->cy * abs(sizeVpExt.cy) / abs(sizeWinExt.cy);
 
    }
 
@@ -5328,9 +5328,9 @@ namespace draw2d_gdiplus
 
       double_size sizeVpExt = GetViewportExt();
 
-      psize->cx = psize->cx * abs(sizeWinExt.cx()) / abs(sizeVpExt.cx());
+      psize->cx = psize->cx * abs(sizeWinExt.cx) / abs(sizeVpExt.cx);
 
-      psize->cy = psize->cy * abs(sizeWinExt.cy()) / abs(sizeVpExt.cy());
+      psize->cy = psize->cy * abs(sizeWinExt.cy) / abs(sizeVpExt.cy);
 
    }
 
@@ -5880,7 +5880,7 @@ namespace draw2d_gdiplus
 
    //   //return const ::double_size & size(0, 0);
 
-   //   //return const ::double_size & size((long) size.cx(), (long) size.cy());
+   //   //return const ::double_size & size((long) size.cx, (long) size.cy);
 
    //   /*if(m_pgraphics == nullptr)
    //      return ::double_size(0, 0);
@@ -6080,9 +6080,9 @@ namespace draw2d_gdiplus
 
       rectangleBound.GetSize(&float_size);
 
-      size.cx() = float_size.Width * m_pfont->m_dFontWidth;
+      size.cx = float_size.Width * m_pfont->m_dFontWidth;
 
-      size.cy() = float_size.Height;
+      size.cy = float_size.Height;
 
       return true;
    }
@@ -6131,9 +6131,9 @@ namespace draw2d_gdiplus
       if(!bOk)
          return false;
 
-      size.cx() = box.Width * m_pfont->m_dFontWidth;
+      size.cx = box.Width * m_pfont->m_dFontWidth;
 
-      size.cy() = box.Height;
+      size.cy = box.Height;
 
       return true;
 
@@ -6185,9 +6185,9 @@ namespace draw2d_gdiplus
 
       }
 
-      size.cx() = box.Width * m_pfont->m_dFontWidth;
+      size.cx = box.Width * m_pfont->m_dFontWidth;
 
-      size.cy() = box.Height;
+      size.cy = box.Height;
 
       return true;
 
@@ -7147,9 +7147,9 @@ namespace draw2d_gdiplus
 
          const ::double_size & size = ::double_size(get_text_extent(block));
 
-         //size.cx() = size.cx() * 110 / 100;
+         //size.cx = size.cx * 110 / 100;
 
-         //size.cy() = size.cy() * 110 / 100;
+         //size.cy = size.cy * 110 / 100;
 
          ::int_rectangle rectangleText(int_point((LONG)x, (LONG)y), size);
 

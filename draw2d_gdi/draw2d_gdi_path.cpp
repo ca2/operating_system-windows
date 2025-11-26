@@ -35,9 +35,9 @@ namespace draw2d_gdi
 
          lprect->top    = (LONG)minimum(p.m_y,lprect->top);
 
-         lprect->right  = (LONG)maximum(p.m_x + size.cx(),lprect->right);
+         lprect->right  = (LONG)maximum(p.m_x + size.cx,lprect->right);
 
-         lprect->bottom = (LONG)maximum(p.m_y + size.cy(),lprect->bottom);
+         lprect->bottom = (LONG)maximum(p.m_y + size.cy,lprect->bottom);
       }
 
 

@@ -527,16 +527,16 @@ namespace production
             if(m_pproduction->m_straStatus.get_size() > 0)
             {
                ::int_size sizePage = get_page_size();
-               m_sizeTotal.cx() = 80;
-               m_sizeTotal.cy() = (LONG)(m_pproduction.m_straStatus.get_size() * iLineHeight + 84);
+               m_sizeTotal.cx = 80;
+               m_sizeTotal.cy = (LONG)(m_pproduction.m_straStatus.get_size() * iLineHeight + 84);
                synchronouslock.unlock();
-               set_context_offset_y(maximum(0,m_sizeTotal.cy() - sizePage.cy() + iLineHeight));
+               set_context_offset_y(maximum(0,m_sizeTotal.cy - sizePage.cy + iLineHeight));
                on_change_impact_size();
             }
             else
             {
-               m_sizeTotal.cx() = 80;
-               m_sizeTotal.cy() = 80;
+               m_sizeTotal.cx = 80;
+               m_sizeTotal.cy = 80;
             }
          }
          set_need_redraw();

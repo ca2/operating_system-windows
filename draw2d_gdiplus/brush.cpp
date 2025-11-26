@@ -81,7 +81,7 @@ namespace draw2d_gdiplus
 
             Gdiplus::GraphicsPath * ppath = øraw_new Gdiplus::GraphicsPath();
 
-            ppath->AddEllipse((Gdiplus::REAL) (m_point.x - m_size.cx() / 2),(Gdiplus::REAL)(m_point.y - m_size.cy() / 2),(Gdiplus::REAL) (m_size.cx()),(Gdiplus::REAL) (m_size.cy()));
+            ppath->AddEllipse((Gdiplus::REAL) (m_point.x - m_size.cx / 2),(Gdiplus::REAL)(m_point.y - m_size.cy / 2),(Gdiplus::REAL) (m_size.cx),(Gdiplus::REAL) (m_size.cy));
 
             Gdiplus::PathGradientBrush * pgradientbrush = øraw_new Gdiplus::PathGradientBrush(ppath);
 

@@ -511,7 +511,7 @@ namespace innate_ui_win32
       main_send([this, size]()
          {
 
-            ::SetWindowPos(m_hwnd, nullptr, 0, 0, size.cx(), size.cy(), SWP_NOMOVE);
+            ::SetWindowPos(m_hwnd, nullptr, 0, 0, size.cx, size.cy, SWP_NOMOVE);
 
             RECT rThis2;
             ::GetWindowRect(m_hwnd, &rThis2);
@@ -532,8 +532,8 @@ namespace innate_ui_win32
 
             RECT r{};
 
-            r.right = r.left + size.cx();
-            r.bottom = r.top + size.cy();
+            r.right = r.left + size.cx;
+            r.bottom = r.top + size.cy;
 
 
             ::AdjustWindowRect(&r, (DWORD) _get_style(), FALSE);

@@ -618,7 +618,7 @@ namespace windowing_win32
             else 
             {
 
-               iconitem.m_hicon = (HICON) ::LoadImageW(nullptr, wstring(m_pathProcessed), IMAGE_ICON, size.cx(), size.cy(), LR_LOADFROMFILE);
+               iconitem.m_hicon = (HICON) ::LoadImageW(nullptr, wstring(m_pathProcessed), IMAGE_ICON, size.cx, size.cy, LR_LOADFROMFILE);
 
             }
 
@@ -644,11 +644,11 @@ namespace windowing_win32
 
                   auto info = MyGetIconInfo((HICON)iconitem1.m_hicon);
 
-                  if (info.nWidth > size1.cx() && info.nHeight > size1.cy())
+                  if (info.nWidth > size1.cx && info.nHeight > size1.cy)
                   {
 
-                     size1.cx() = info.nWidth;
-                     size1.cy() = info.nHeight;
+                     size1.cx = info.nWidth;
+                     size1.cy = info.nHeight;
                      iconitem.m_hicon = (HICON)iconitem1.m_hicon;
 
                   }
@@ -660,8 +660,8 @@ namespace windowing_win32
             if (!iconitem.m_hicon)
             {
 
-               size1.cx() = 0;
-               size1.cy() = 0;
+               size1.cx = 0;
+               size1.cy = 0;
 
                for (auto& pair : m_iconmap)
                {
@@ -673,12 +673,12 @@ namespace windowing_win32
 
                      auto info = MyGetIconInfo(iconitem1.m_hicon);
 
-                     if (info.nWidth > size1.cx()
-                        && info.nHeight > size1.cy())
+                     if (info.nWidth > size1.cx
+                        && info.nHeight > size1.cy)
                      {
 
-                        size1.cx() = info.nWidth;
-                        size1.cy() = info.nHeight;
+                        size1.cx = info.nWidth;
+                        size1.cy = info.nHeight;
                         iconitem.m_hicon = iconitem1.m_hicon;
 
                      }
@@ -889,15 +889,15 @@ namespace windowing_win32
 
          ZeroMemory(&info, sizeof(BITMAPINFO));
 
-         auto iScan = size.cx() * 4;
+         auto iScan = size.cx * 4;
 
          info.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-         info.bmiHeader.biWidth = size.cx();
-         info.bmiHeader.biHeight = -size.cy();
+         info.bmiHeader.biWidth = size.cx;
+         info.bmiHeader.biHeight = -size.cy;
          info.bmiHeader.biPlanes = 1;
          info.bmiHeader.biBitCount = 32;
          info.bmiHeader.biCompression = BI_RGB;
-         info.bmiHeader.biSizeImage = size.cy() * iScan;
+         info.bmiHeader.biSizeImage = size.cy * iScan;
 
          ::image32_t * pimage32 = nullptr;
          void * pBits = nullptr;
@@ -913,7 +913,7 @@ namespace windowing_win32
 
          hbitmapOld = (HBITMAP) ::SelectObject(hdc, hbitmap);
 
-         if (!::DrawIconEx(hdc, 0, 0, hicon, size.cx(), size.cy(), 0, nullptr, DI_IMAGE | DI_MASK))
+         if (!::DrawIconEx(hdc, 0, 0, hicon, size.cx, size.cy, 0, nullptr, DI_IMAGE | DI_MASK))
          {
 
             return nullptr;
@@ -942,10 +942,10 @@ namespace windowing_win32
             HGDIOBJ oldMask = SelectObject(hMaskDC, iconInfo.hbmMask);
 
 
-            for (int y = 0; y < size.cy(); ++y)
+            for (int y = 0; y < size.cy; ++y)
             {
 
-               for (int x = 0; x < size.cx(); ++x)
+               for (int x = 0; x < size.cx; ++x)
                {
 
                   // Get mask pixel

@@ -453,7 +453,7 @@ namespace draw2d_gdi
    ::int_size graphics::SetViewportExt(const ::int_size & size)
    {
 
-      return SetViewportExt(size.cx(), size.cy());
+      return SetViewportExt(size.cx, size.cy);
 
    }
 
@@ -469,7 +469,7 @@ namespace draw2d_gdi
    ::int_size graphics::set_window_ext(const ::int_size & size)
    {
 
-      return set_window_ext(size.cx(), size.cy());
+      return set_window_ext(size.cx, size.cy);
 
    }
 
@@ -755,7 +755,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), hBrush,
-   //                      nullptr, (LPARAM)hBitmap, 0, point.x, point.y, size.cx(), size.cy(), nFlags|DST_BITMAP) != false;
+   //                      nullptr, (LPARAM)hBitmap, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_BITMAP) != false;
 
    //}
 
@@ -766,7 +766,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(),
-   //                      nullptr, (LPARAM)pBitmap->get_os_data(), 0, point.x, point.y, size.cx(), size.cy(), nFlags|DST_BITMAP) != false;
+   //                      nullptr, (LPARAM)pBitmap->get_os_data(), 0, point.x, point.y, size.cx, size.cy, nFlags|DST_BITMAP) != false;
 
    //}
 
@@ -777,7 +777,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), hBrush, nullptr,
-   //                      (LPARAM)hIcon, 0, point.x, point.y, size.cx(), size.cy(), nFlags|DST_ICON) != false;
+   //                      (LPARAM)hIcon, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_ICON) != false;
 
    //}
 
@@ -788,7 +788,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(), nullptr,
-   //                      (LPARAM)hIcon, 0, point.x, point.y, size.cx(), size.cy(), nFlags|DST_ICON) != false;
+   //                      (LPARAM)hIcon, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_ICON) != false;
 
    //}
 
@@ -799,7 +799,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), hBrush,
-   //                      nullptr, (LPARAM)lpszText, (WPARAM)nTextLen, point.x, point.y, size.cx(), size.cy(), nFlags|(bPrefixText ? DST_PREFIXTEXT : DST_TEXT)) != false;
+   //                      nullptr, (LPARAM)lpszText, (WPARAM)nTextLen, point.x, point.y, size.cx, size.cy, nFlags|(bPrefixText ? DST_PREFIXTEXT : DST_TEXT)) != false;
 
    //}
 
@@ -810,7 +810,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(),
-   //                      nullptr, (LPARAM)lpszText, (WPARAM)nTextLen, point.x, point.y, size.cx(), size.cy(), nFlags|(bPrefixText ? DST_PREFIXTEXT : DST_TEXT)) != false;
+   //                      nullptr, (LPARAM)lpszText, (WPARAM)nTextLen, point.x, point.y, size.cx, size.cy, nFlags|(bPrefixText ? DST_PREFIXTEXT : DST_TEXT)) != false;
 
    //}
 
@@ -821,7 +821,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), hBrush,
-   //                      lpDrawProc, lData, 0, point.x, point.y, size.cx(), size.cy(), nFlags|DST_COMPLEX) != false;
+   //                      lpDrawProc, lData, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_COMPLEX) != false;
 
    //}
 
@@ -832,7 +832,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(),
-   //                      lpDrawProc, lData, 0, point.x, point.y, size.cx(), size.cy(), nFlags|DST_COMPLEX) != false;
+   //                      lpDrawProc, lData, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_COMPLEX) != false;
 
    //}
 
@@ -1262,25 +1262,25 @@ namespace draw2d_gdi
 
             if(pointDst.x < 0)
             {
-               size.cx() += pointDst.x;
+               size.cx += pointDst.x;
                pointDst.x = 0;
             }
 
-            if(size.cx() < 0)
+            if(size.cx < 0)
                return true;
 
             if(pointDst.y < 0)
             {
-               size.cy() += pointDst.y;
+               size.cy += pointDst.y;
                pointDst.y = 0;
             }
 
-            if(size.cy() < 0)
+            if(size.cy < 0)
                return true;
 
-            int xEnd = minimum(size.cx(), minimum(pimage->width() - pointSrc.x, m_pimage->width() - pointDst->x));
+            int xEnd = minimum(size.cx, minimum(pimage->width() - pointSrc.x, m_pimage->width() - pointDst->x));
 
-            int yEnd = minimum(size.cy(), minimum(pimage->height() - pointSrc.y, m_pimage->height() - pointDst->y));
+            int yEnd = minimum(size.cy, minimum(pimage->height() - pointSrc.y, m_pimage->height() - pointDst->y));
 
             if(xEnd < 0)
                return false;
@@ -1289,8 +1289,8 @@ namespace draw2d_gdi
                return false;
 
 
-            size.cx() = xEnd;
-            size.cy() = yEnd;
+            size.cx = xEnd;
+            size.cy = yEnd;
 
             pimage = image_work(size, false);
 
@@ -1375,7 +1375,7 @@ namespace draw2d_gdi
 
             GdiFlush();
 
-            ::AlphaBlend(m_hdc, pointDst.x, pointDst.y, size.cx(), size.cy(), (HDC) pimage->g()->get_os_data(), 0, 0, size.cx(), size.cy(), bf);
+            ::AlphaBlend(m_hdc, pointDst.x, pointDst.y, size.cx, size.cy, (HDC) pimage->g()->get_os_data(), 0, 0, size.cx, size.cy, bf);
 
             /*for(int y = 0; y < nHeight; y++)
             {
@@ -1474,7 +1474,7 @@ namespace draw2d_gdi
 //   0, 0,
 //   pimage1->m_pdata.width(), pimage1->m_pdata.height(),
 //   0, 0,
-//   pimage->get_size().cx(), pimage->get_size().cy(),
+//   pimage->get_size().cx, pimage->get_size().cy,
 //   pimage->get_data(),
 //   &dynamic_cast < image_impl * > (image_impl)->m_info,
 //   DIB_RGB_COLORS,
@@ -1649,7 +1649,7 @@ namespace draw2d_gdi
 
             pimage->dc_select();
 
-            ::AlphaBlend(m_hdc, (int) x, (int) y, size.cx(), size.cy(), (HDC) pimage->g()->get_os_data(), 0, 0, size.cx(), size.cy(), bf);
+            ::AlphaBlend(m_hdc, (int) x, (int) y, size.cx, size.cy, (HDC) pimage->g()->get_os_data(), 0, 0, size.cx, size.cy, bf);
 
          }
 
@@ -3153,7 +3153,7 @@ namespace draw2d_gdi
          __keep(m_pimageAlphaBlend->m_pimpl, nullptr);
 
 
-         return BitBlt(pointDest.x, pointDest.y, size.cx(), size.cy(), pimage1->g(), pointSrc.x, pointSrc.y, SRCCOPY) != false;
+         return BitBlt(pointDest.x, pointDest.y, size.cx, size.cy, pimage1->g(), pointSrc.x, pointSrc.y, SRCCOPY) != false;
 
       }
       if(dOpacity < 0.0)
@@ -3280,8 +3280,8 @@ namespace draw2d_gdi
 
       ::int_size sz = get_text_extent(string(lpszString), iIndex);
 
-      size.cx() = sz.cx();
-      size.cy() = sz.cy();
+      size.cx = sz.cx;
+      size.cy = sz.cy;
 
       return true;
 
@@ -3468,7 +3468,7 @@ namespace draw2d_gdi
    //   ::draw2d::region_pointer rgnOutside(e_create), rgnInside(e_create);
    //   rgnOutside->create_rect(&rectangle);
    //   const ::int_rectangle & rectangle = rectangle;
-   //   rectangle.inflate(-size.cx(), -size.cy());
+   //   rectangle.inflate(-size.cx, -size.cy);
    //   rectangle.intersect(rectangle, &rectangle);
    //   rgnInside->create_rect(rectangle);
    //   rgnNew->create_rect_dim(0, 0, 0, 0);
@@ -3497,7 +3497,7 @@ namespace draw2d_gdi
    //      rgnLast->create_rect_dim(0, 0, 0, 0);
    //      rgnOutside->create_rect(&lpRectLast);
    //      rectangle = lpRectLast;
-   //      rectangle.inflate(-sizeLast.cx(), -sizeLast.cy());
+   //      rectangle.inflate(-sizeLast.cx, -sizeLast.cy);
    //      rectangle.intersect(rectangle, &lpRectLast);
    //      rgnInside->create_rect(rectangle);
    //      rgnLast->combine(rgnOutside, rgnInside, ::draw2d::region::combine_xor);
@@ -4233,9 +4233,9 @@ namespace draw2d_gdi
    {
       int nRetVal = ERROR;
       if(get_handle1() != nullptr && get_handle1() != get_handle2())
-         nRetVal = ::OffsetClipRgn(get_handle1(), size.cx(), size.cy());
+         nRetVal = ::OffsetClipRgn(get_handle1(), size.cx, size.cy);
       if(get_handle2() != nullptr)
-         nRetVal = ::OffsetClipRgn(get_handle2(), size.cx(), size.cy());
+         nRetVal = ::OffsetClipRgn(get_handle2(), size.cx, size.cy);
       return nRetVal;
    }
 
@@ -4658,8 +4658,8 @@ namespace draw2d_gdi
 
       int_size sizeWinExt = GetWindowExt();
       int_size sizeVpExt = GetViewportExt();
-      lpSize->cx = MulDiv(lpSize->cx, abs(sizeVpExt.cx()), abs(sizeWinExt.cx()));
-      lpSize->cy = MulDiv(lpSize->cy, abs(sizeVpExt.cy()), abs(sizeWinExt.cy()));
+      lpSize->cx = MulDiv(lpSize->cx, abs(sizeVpExt.cx), abs(sizeWinExt.cx));
+      lpSize->cy = MulDiv(lpSize->cy, abs(sizeVpExt.cy), abs(sizeWinExt.cy));
 
    }
 
@@ -4670,8 +4670,8 @@ namespace draw2d_gdi
 
       int_size sizeWinExt = GetWindowExt();
       int_size sizeVpExt = GetViewportExt();
-      lpSize->cx = MulDiv(lpSize->cx, abs(sizeWinExt.cx()), abs(sizeVpExt.cx()));
-      lpSize->cy = MulDiv(lpSize->cy, abs(sizeWinExt.cy()), abs(sizeVpExt.cy()));
+      lpSize->cx = MulDiv(lpSize->cx, abs(sizeWinExt.cx), abs(sizeVpExt.cx));
+      lpSize->cy = MulDiv(lpSize->cy, abs(sizeWinExt.cy), abs(sizeVpExt.cy));
 
    }
 

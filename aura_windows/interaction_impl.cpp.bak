@@ -410,7 +410,7 @@ namespace windows
                           wstrClassName,
                           wstrWindowName,
                           cs.style,
-                          cs.x, cs.y, cs.cx(), cs.cy(),
+                          cs.x, cs.y, cs.cx, cs.cy,
                           cs.hwndParent, cs.hMenu, cs.hInstance, cs.lpCreateParams);
 
       ::set_thread_name(m_puserinteraction->type_name());
