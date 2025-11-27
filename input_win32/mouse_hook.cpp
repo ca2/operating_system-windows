@@ -102,6 +102,8 @@ namespace input_win32
             )
          {
 
+            ::information("mouse up/down");
+
             ::user::enum_message eusermessage = (::user::enum_message)wParam;
 
             s_pmousehook->mouse_proc(eusermessage);

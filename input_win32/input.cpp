@@ -1523,31 +1523,26 @@ namespace input_win32
    void input::handle_message(::message::message * pmessage)
    {
 
-      if (pmessage->m_eusermessage == atom::e_type_message)
+      if (pmessage->m_eusermessage >= ::user::e_message_mouse_first
+         && pmessage->m_eusermessage <= ::user::e_message_mouse_last)
       {
 
-         if (pmessage->m_eusermessage >= ::user::e_message_mouse_first
-            && pmessage->m_eusermessage <= ::user::e_message_mouse_last)
+         for (auto & pparticle : m_particleaMouseHandler)
          {
 
-            for (auto & pparticle : m_particleaMouseHandler)
-            {
-
-               pparticle->call_handle_message(pmessage);
-
-            }
+            pparticle->call_handle_message(pmessage);
 
          }
-         else if (pmessage->m_eusermessage >= ::user::e_message_key_first
-            && pmessage->m_eusermessage <= ::user::e_message_key_last)
+
+      }
+      else if (pmessage->m_eusermessage >= ::user::e_message_key_first
+         && pmessage->m_eusermessage <= ::user::e_message_key_last)
+      {
+
+         for (auto & pparticle : m_particleaKeyboardHandler)
          {
 
-            for (auto & pparticle : m_particleaKeyboardHandler)
-            {
-
-               pparticle->call_handle_message(pmessage);
-
-            }
+            pparticle->call_handle_message(pmessage);
 
          }
 
