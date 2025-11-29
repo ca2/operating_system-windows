@@ -19,6 +19,13 @@ namespace acme_windows
       STARTUPINFOEX m_si = {};
       PROCESS_INFORMATION m_pi = {};
       ::memory m_memoryAttrList;
+      bool m_bInteractive = false;
+
+      // === 2. Create PTY ===
+      HPCON m_hpcon = NULL;
+      COORD m_coordSize;
+
+
 
       const memsize m_iPipeSize = 16_KiB;
 
@@ -36,6 +43,9 @@ namespace acme_windows
 
       SECURITY_ATTRIBUTES m_saAttr = {};
       LPPROC_THREAD_ATTRIBUTE_LIST m_pattrList;
+
+      ::string m_strCommand;
+      ::string m_strPendingCommand;
 
       string m_strError;
 
@@ -67,7 +77,7 @@ namespace acme_windows
 
       void call_create_process(const ::scoped_string& scopedstr);
 
-      void wait_process(const trace_function& tracefunction);
+      void wait_process(const trace_function& tracefunction, bool bLineTrace = true);
 
       //void _read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string * pstrOut, OVERLAPPED * poverlapped);
       //void __read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string* pstrOut, const void * p, ::collection::count c);

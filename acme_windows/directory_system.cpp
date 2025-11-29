@@ -2111,7 +2111,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //   }
 
 
-   ::file::path directory_system::get_current()
+   ::file::path directory_system::current()
    {
 
       auto size = GetCurrentDirectoryW(0, nullptr);

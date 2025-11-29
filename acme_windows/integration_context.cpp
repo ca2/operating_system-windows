@@ -881,9 +881,8 @@ namespace acme_windows
 
          ::string strCommand;
 
-         printf("Current Directory: %s\n", directory_system()->get_current().c_str());
-
-         printf("%s\n", strEscaped.c_str());
+         print_line("Current Directory: {}", directory_system()->current());
+         print_line("{}", strEscaped);
 
          if (m_bMsys2)
          {
@@ -924,9 +923,9 @@ namespace acme_windows
 
          ::string strCommand;
 
-         printf("Current Directory: %s\n", directory_system()->get_current().c_str());
+         print_line("Current Directory: {}", directory_system()->current());
+         print_line("{}", strEscaped);
 
-         printf("%s\n", strEscaped.c_str());
          strEscaped.find_replace("\"", "\\\"");
             strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -l -c \"" + strEscaped + "\"";
 
@@ -947,8 +946,8 @@ namespace acme_windows
 
          ::string strCommand;
 
-         printf("Current Directory: %s\n", directory_system()->get_current().c_str());
-         printf("%s\n", strEscaped.c_str());
+         print_line("Current Directory: {}", directory_system()->current());
+         print_line("{}", strEscaped);
 
          if (m_bMsys2)
          {
@@ -1053,8 +1052,8 @@ namespace acme_windows
 
             ::string strCommand;
 
-            informationf("Current Directory: %s\n", directory_system()->get_current().c_str());
-            informationf("%s\n", strEscaped.c_str());
+            information("Current Directory: {}", directory_system()->current());
+            information("{}", strEscaped);
 
             if (m_bMsys2)
             {

@@ -7,9 +7,10 @@
 #include "acme/platform/application.h"
 #include "acme/platform/node.h"
 #include "acme/prototype/datetime/datetime.h"
+#include "acme/operating_system/windows_common/com/hresult_exception.h"
 #include "acme/prototype/string/str.h"
 #include "registry.h"
-
+#include <conio.h>
 ///******************************************************************************\
 //*       This is a part of the Microsoft Source Code Samples.
 //*       Copyright 1995 - 1997 Microsoft Corporation.
@@ -305,6 +306,12 @@
 //*/
 //
 
+
+bool is_file_ready_for_write(HANDLE hFile)
+{
+   DWORD wait = WaitForSingleObject(hFile, 0);
+   return wait == WAIT_OBJECT_0;
+}
 namespace acme_windows
 {
 
@@ -328,6 +335,7 @@ namespace acme_windows
 
    create_process::~create_process()
    {
+
       if (m_hOutRd) ::CloseHandle(m_hOutRd);
       if (m_hOutWr) ::CloseHandle(m_hOutWr);
       if (m_hErrRd) ::CloseHandle(m_hErrRd);
@@ -336,7 +344,7 @@ namespace acme_windows
       if (m_hInWr) ::CloseHandle(m_hInWr);
       if (m_pi.hProcess)::CloseHandle(m_pi.hProcess);
       if (m_pi.hThread)::CloseHandle(m_pi.hThread);
-
+      if (m_hpcon) ::ClosePseudoConsole(m_hpcon);
       //::CloseHandle(hInWr);
 
 
@@ -346,6 +354,7 @@ namespace acme_windows
       m_hErrWr = nullptr;
       m_hInRd = nullptr;
       m_hInWr = nullptr;
+      m_hpcon = nullptr;
 
       if (m_pattrList)
       {
@@ -596,6 +605,25 @@ namespace acme_windows
    void create_process::prepare()
    {
 
+      if (m_bInteractive)
+      {
+
+
+
+         // === 2. Create PTY ===
+         m_hpcon = NULL;
+
+         m_coordSize = { 80, 25 };
+         auto hr = ::CreatePseudoConsole(
+            m_coordSize, 
+            m_hInRd,
+            m_hOutWr,
+            0, 
+            &m_hpcon);
+         ::defer_throw_hresult(hr);
+
+      }
+
       ZeroMemory(&m_si, sizeof(m_si));
       m_si.StartupInfo.cb = sizeof(m_si);
 
@@ -618,49 +646,78 @@ namespace acme_windows
             0,
             &sizeAttrList
          );
-
-
-         HANDLE hList[3];
-         int c = 0;
-         if (m_hErrWr)
-            hList[c++] = m_hErrWr;
-         if (m_hOutWr)
-            hList[c++] = m_hOutWr;
-         if (m_hInRd)
-            hList[c++] = m_hInRd;
-
-         auto s = sizeof(hList);
-
-         UpdateProcThreadAttribute(
-            m_pattrList,
-            0,
-            PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
-            hList,
-            c * sizeof(HANDLE),
-            nullptr,
-            nullptr
-         );
-         m_si.StartupInfo.dwFlags |= STARTF_USESTDHANDLES;
          m_si.lpAttributeList = m_pattrList;
 
-         m_si.StartupInfo.hStdError = m_hErrWr;
-         m_si.StartupInfo.hStdOutput = m_hOutWr;
-         m_si.StartupInfo.hStdInput = m_hInRd;
+
+         if (m_bInteractive && m_hpcon)
+         {
+
+            if (!UpdateProcThreadAttribute(
+               m_si.lpAttributeList,
+               0,
+               PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE,
+               m_hpcon,
+               sizeof(m_hpcon),
+               nullptr,
+               nullptr))
+            {
+
+               throw ::exception(::error_failed);
+            }
+            m_dwCreationFlags |= EXTENDED_STARTUPINFO_PRESENT;
+         }
+         else
+         {
+
+
+
+            HANDLE hList[3];
+            int c = 0;
+            if (m_hErrWr)
+               hList[c++] = m_hErrWr;
+            if (m_hOutWr)
+               hList[c++] = m_hOutWr;
+            if (m_hInRd)
+               hList[c++] = m_hInRd;
+
+            auto s = sizeof(hList);
+
+            UpdateProcThreadAttribute(
+               m_pattrList,
+               0,
+               PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
+               hList,
+               c * sizeof(HANDLE),
+               nullptr,
+               nullptr
+            );
+            m_si.StartupInfo.dwFlags |= STARTF_USESTDHANDLES;
+
+            m_si.StartupInfo.hStdError = m_hErrWr;
+            m_si.StartupInfo.hStdOutput = m_hOutWr;
+            m_si.StartupInfo.hStdInput = m_hInRd;
+
+         }
+
+         m_si.StartupInfo.dwFlags |= STARTF_USESHOWWINDOW;
+         if (::is_screen_visible(m_edisplay))
+         {
+
+            m_si.StartupInfo.wShowWindow = SW_SHOWNORMAL; // Show show the console window (DOS box)
+
+         }
+         else
+         {
+            m_si.StartupInfo.wShowWindow = SW_HIDE; // Don't show the console window (DOS box)
+         }
+         //m_si.StartupInfo.wShowWindow = SW_HIDE; // Don't show the console window (DOS box)
+         //m_si.StartupInfo.dwFlags |= STARTF_USESHOWWINDOW;
+
+
+
       }
 
-      m_si.StartupInfo.dwFlags |= STARTF_USESHOWWINDOW;
-      if (::is_screen_visible(m_edisplay))
-      {
 
-         m_si.StartupInfo.wShowWindow = SW_SHOWNORMAL; // Show show the console window (DOS box)
-
-      }
-      else
-      {
-         m_si.StartupInfo.wShowWindow = SW_HIDE; // Don't show the console window (DOS box)
-      }
-      //m_si.StartupInfo.wShowWindow = SW_HIDE; // Don't show the console window (DOS box)
-      //m_si.StartupInfo.dwFlags |= STARTF_USESHOWWINDOW;
 
 
       ZeroMemory(&m_pi, sizeof(m_pi));
@@ -996,23 +1053,42 @@ namespace acme_windows
 //
 //   }
 
-   void create_process::wait_process(const trace_function& tracefunction)
+   void create_process::wait_process(const trace_function& tracefunction, bool bLineTrace)
    {
 
       //auto phappeningEndOut = øcreate_new < manual_reset_happening >();
 
       //application()->fork([this, tracefunction, phappeningEndOut]()
 
+      if(m_bInteractive)
+      {
+
+         //m_strPendingCommand = "bash --noprofile --norc -i -c \"";
+         m_strPendingCommand = m_strCommand;
+         m_strPendingCommand += "; echo __END_OF_COMMAND:$?__\n";
+
+      }
+
+
       char szOut[4096];
       char szErr[4096];
+      char szIn[4096];
       DWORD dwReadOut = 0;
       DWORD dwReadErr = 0;
+      DWORD dwReadIn = 0;
       DWORD dwError = 0;
       bool bFinished = false;
       m_dwExitCode2 = 0;
 
       m_iExitCode = -1;
 
+      // Handles for WaitForMultipleObjects
+      HANDLE hConsole = GetStdHandle(STD_INPUT_HANDLE);
+      HANDLE handlesConsole[2] = { hConsole, m_pi.hProcess };
+
+      string_array straOutput;
+
+      int iEmptyCycles = 0;
 
       while (!bFinished)
       {
@@ -1042,7 +1118,9 @@ namespace acme_windows
          do
          {
 
+            dwReadOut = 0;
 
+            dwReadErr = 0;
 
             //if (ecommandsystem & e_command_system_inline_log)
             //{
@@ -1056,47 +1134,272 @@ namespace acme_windows
             //strOutput += str;
 
             //::str().get_lines(straOutput, strOutput, "I: ", false, &sl, pfileLines);
-
-            if (ReadFile(m_hOutRd, szOut, sizeof(szOut), &dwReadOut, nullptr) && dwReadOut > 0)
+            if (m_hOutRd)
             {
-
-               m_strOutput.append(szOut, dwReadOut);
-
-               if (tracefunction)
+               if (ReadFile(m_hOutRd, szOut, sizeof(szOut), &dwReadOut, nullptr))
                {
 
-                  ::str::get_lines(m_strOutput, false, [&](auto& str, bool bCarriage)
+                  if(dwReadOut > 0)
+                  {
+
+                  m_strOutput.append(szOut, dwReadOut);
+
+                  if (tracefunction)
+                  {
+
+                     if (bLineTrace)
                      {
 
-                        tracefunction(e_trace_level_information, str, bCarriage);
 
-                     });
+                        ::str::get_lines(m_strOutput, false, [&](auto& str, bool bCarriage)
+                           {
+
+                              tracefunction(e_trace_level_information, str, bCarriage);
+
+                           });
+
+                     }
+                     else
+                     {
+
+                        ::str::get_lines(m_strOutput, false, [&](auto& strParam, bool bCarriage)
+                           {
+
+                              ::string str = strParam;
+
+                              if (str.contains("__END_OF_COMMAND:"))
+                              {
+                                 auto pos = str.find("__END_OF_COMMAND:");
+                                 auto strExitCode = str.substr(pos + strlen("__END_OF_COMMAND:"));
+                                 str = str.substr(0, pos);
+                                 m_iExitCode = atoi(strExitCode);
+                                 bFinished = true;
+                              }
+                              else if (str.contains("cannot set terminal process group")
+                                 || str.contains("Inappropriate ioctl for device")
+                                 || str.contains("no job control in this shell"))
+                              {
+                                 information() << ".";
+                              }
+                              else
+                              {
+
+                                 information() << str;
+                                 //straOutput.add(str);
+
+                              }
+
+                           });
+
+                        }
+
+                     }
+
+                  }
+               }
+
+            }
+
+            if(m_hErrRd)
+            {
+
+               if (ReadFile(m_hErrRd, szErr, sizeof(szErr), &dwReadErr, nullptr) && dwReadErr > 0)
+               {
+
+                  m_strError.append(szErr, dwReadErr);
+
+                  if (tracefunction)
+                  {
+
+                     if (bLineTrace)
+                     {
+                        ::str::get_lines(m_strError, false, [&](auto& str, bool bCarriage)
+                           {
+
+                              tracefunction(e_trace_level_error, str, bCarriage);
+
+                           });
+
+                     }
+                     else
+                     {
+
+                        tracefunction(e_trace_level_error, m_strOutput, false);
+
+                        m_strOutput.empty();
+
+                     }
+
+                  }
 
                }
 
             }
 
-            if (ReadFile(m_hErrRd, szErr, sizeof(szErr), &dwReadErr, nullptr) && dwReadErr > 0)
+            //if (ReadFile(m_hErrRd, szErr, sizeof(szErr), &dwReadErr, nullptr) && dwReadErr > 0)
+            //{
+
+            //   m_strError.append(szErr, dwReadErr);
+
+            //   if (tracefunction)
+            //   {
+
+            //      if (bLineTrace)
+            //      {
+            //         ::str::get_lines(m_strError, false, [&](auto& str, bool bCarriage)
+            //            {
+
+            //               tracefunction(e_trace_level_error, str, bCarriage);
+
+            //            });
+
+            //      }
+            //      else
+            //      {
+
+            //         tracefunction(e_trace_level_error, m_strOutput, false);
+
+            //         m_strOutput.empty();
+
+            //      }
+
+            //   }
+
+            //}
+
+            if (dwReadErr == 0 && dwReadOut == 0)
+            {
+                  if (m_bInteractive)
+                  {
+                     iEmptyCycles++;
+                     if (iEmptyCycles > 50)
+                     {
+                        if (m_strOutput.has_character())
+                        {
+                           print_out(m_strOutput);
+
+                           m_strOutput.empty();
+
+                        }
+                     }
+                     //else if (iEmptyCycles > 500)
+                     //{
+                     //   // assume process is hung
+                     //   bFinished = true;
+                     //   m_iExitCode = -1;
+                     //}
+                  }
+            }
+            else
+            {
+               iEmptyCycles = 0;
+            }
+
+         }
+         while (dwReadOut > 0 || dwReadErr > 0);
+
+         if(m_bInteractive)
+         {
+
+            INPUT_RECORD rec;
+            DWORD eventsRead;
+            DWORD bytesAvail;
+
+            DWORD written;
+
+
+            //while(true)
             {
 
-               m_strError.append(szErr, dwReadErr);
+               // check if child is waiting for input
 
-               if (tracefunction)
+               if (!is_file_ready_for_write(m_hInWr))
                {
 
-                  ::str::get_lines(m_strError, false, [&](auto& str, bool bCarriage)
+                  break;
+
+               }
+               // child is waiting → forward keystroke
+
+               //if (m_strPendingCommand.has_character())
+               //{
+               //   
+               //   auto strCommand = ::transfer(m_strPendingCommand);
+               //   written = 0;
+               //   WriteFile(
+               //      m_hInWr, 
+               //      strCommand.c_str(),
+               //      strCommand.size(),
+               //      &written,
+               //      NULL);
+
+               //   ::information("It has been written {} bytes of command", written);
+               //}
+
+
+                     DWORD dw = WaitForMultipleObjects(2, handlesConsole, FALSE, 100);
+
+                     if (dw == WAIT_OBJECT_0) 
                      {
 
-                        tracefunction(e_trace_level_error, str, bCarriage);
+                  // raw console event
+               ReadConsoleInput(hConsole, &rec, 1, &eventsRead);
 
-                     });
+               if (rec.EventType == KEY_EVENT && rec.Event.KeyEvent.bKeyDown)
+               {
+
+
+
+                  char c = rec.Event.KeyEvent.uChar.AsciiChar;
+
+                  if (c != 0) {  // normal characters only
+                     WriteFile(m_hInWr, &c, 1, &written, NULL);
+                  }
+                  else
+                  {
+                     switch (rec.Event.KeyEvent.wVirtualKeyCode) {
+                     case VK_UP:
+                        WriteFile(m_hInWr, "\x1b[A", 3, &written, NULL);
+                        break;
+                     case VK_DOWN:
+                        WriteFile(m_hInWr, "\x1b[B", 3, &written, NULL);
+                        break;
+                     case VK_RIGHT:
+                        WriteFile(m_hInWr, "\x1b[C", 3, &written, NULL);
+                        break;
+                     case VK_LEFT:
+                        WriteFile(m_hInWr, "\x1b[D", 3, &written, NULL);
+                        break;
+                     }
+                  }
+                  //}
+
+
+               //// TO SUPPORT SPECIAL KEYS (arrows, F1, etc.)
+               //// You map them here, see below ↓
+               //}
+               //else
+               //{
+
+               //   char ch;
+               //   while (kbhit())
+               //   {
+               //      if ((ch = _getch()) != 3)
+               //      {
+
+               //         break;
+
+               //      }
+               //      WriteFile(m_hInWr, &ch, 1, &written, NULL);
+
+               //   //}
+               }
 
                }
 
             }
 
          }
-         while (dwReadOut > 0 || dwReadErr > 0);
 
          if (tracefunction
             && !tracefunction.timeout().is_infinite()

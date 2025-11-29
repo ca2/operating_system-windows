@@ -3137,17 +3137,38 @@ namespace acme_windows
    //}
 
 
-   int node::command_system(const ::scoped_string& scopedstr, const ::trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
+   int node::_command_system(const ::scoped_string& scopedstrPrompt, const ::scoped_string& scopedstrCommand,  const ::trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay, bool bInteractive)
    {
 
       auto pcreateprocess = øcreate_new < ::acme_windows::create_process>();
 
-      pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
+      pcreateprocess->m_bInteractive = bInteractive;
+
+      if(bInteractive)
+      {
+         pcreateprocess->m_strCommand = scopedstrCommand;
+      }
+
+      if (pathWorkingDirectory.is_empty())
+      {
+
+         pcreateprocess->m_pathWorkingDirectory = directory_system()->current();
+
+      }
+      else
+      {
+
+         pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
+
+      }
 
       pcreateprocess->m_edisplay = edisplay;
 
       pcreateprocess->initialize_stdout();
-      pcreateprocess->initialize_stderr();
+      if (!bInteractive)
+      {
+         pcreateprocess->initialize_stderr();
+      }
       pcreateprocess->initialize_stdin();
 
       pcreateprocess->prepare();
@@ -3160,7 +3181,7 @@ namespace acme_windows
       }
 
       //pcreateprocess->set_create_new_console();
-      pcreateprocess->call_create_process(scopedstr);
+      pcreateprocess->call_create_process(scopedstrPrompt);
       //string str(scopedstr);
 
 
@@ -3228,7 +3249,7 @@ namespace acme_windows
 
   //    timeStart.Now();
 
-      pcreateprocess->wait_process(tracefunction);
+      pcreateprocess->wait_process(tracefunction, !bInteractive);
 
       //      return iExitCode;
 
@@ -3236,6 +3257,131 @@ namespace acme_windows
 
    }
 
+
+   int node::command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
+   {
+
+      return _command_system(scopedstr, {}, tracefunction, pathWorkingDirectory, edisplay, false);
+
+   }  
+
+
+
+   int node::interactive_command_system(const ::scoped_string& scopedstrPrompt, const ::scoped_string& scopedstrCommand,  const ::trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
+   {
+
+      return _command_system(scopedstrPrompt, scopedstrCommand, tracefunction, pathWorkingDirectory, edisplay, true);
+//      auto pcreateprocess = øcreate_new < ::acme_windows::create_process>();
+//
+//      pcreateprocess->m_bInteractive = bInteractive;
+//
+//      if (pathWorkingDirectory.is_empty())
+//      {
+//
+//         pcreateprocess->m_pathWorkingDirectory = directory_system()->current();
+//
+//      }
+//      else
+//      {
+//
+//         pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
+//
+//      }
+//
+//      pcreateprocess->m_edisplay = edisplay;
+//
+//      pcreateprocess->initialize_stdout();
+//      if (!bInteractive)
+//      {
+//         pcreateprocess->initialize_stderr();
+//      }
+//      pcreateprocess->initialize_stdin();
+//
+//      pcreateprocess->prepare();
+//
+//      if (edisplay == e_display_up)
+//      {
+//
+//         pcreateprocess->set_create_new_console();
+//
+//      }
+//
+//      //pcreateprocess->set_create_new_console();
+//      pcreateprocess->call_create_process(scopedstr);
+//      //string str(scopedstr);
+//
+//
+//      //::string str1;
+//      //auto range = str();
+//      //range.m_erange = e_range_none;
+//      //try
+//      //{
+//      //   str1 = range.consume_quoted_value();
+//
+//      //}
+//      //catch (...)
+//      //{
+//
+//
+//      //}
+//      //::string str2;
+//      //if (str1.is_empty())
+//      //{
+//      //   ::string strCmd = this->get_environment_variable("ComSpec");
+//      //   str1 = strCmd;
+//      //   str2 = "\"" + strCmd + "\" /c \"" + scopedstr + "\"";
+//      //}
+//      //else
+//      //{
+//
+//      //   str2 = scopedstr;
+//      //   str2.trim();
+//      //}
+//
+//      //wstring wstr1;
+//      //wstring wstr2;
+//
+//      //wstr1 = str1;
+//      //wstr2 = str2;
+//
+//
+//
+//      //if (!CreateProcessW(
+//      //   (WCHAR *)wstr1.c_str(), (WCHAR*)wstr2.c_str(), 
+//      //   NULL, NULL, TRUE, EXTENDED_STARTUPINFO_PRESENT | CREATE_NEW_CONSOLE, NULL, NULL,
+//      //   &pcreateprocess->m_si.StartupInfo, &pcreateprocess->m_pi))
+//      //{
+//
+//      //   //::CloseHandle(hOutRd);
+//      //   //::CloseHandle(hOutWr);
+//      //   //::CloseHandle(hErrRd);
+//      //   //::CloseHandle(hErrWr);
+//      //   //::CloseHandle(hInRd);
+//      //   //::CloseHandle(hInWr);
+//
+//      //   DWORD dwLastError = ::GetLastError();
+//
+//      //   printf("Create Process failed with lasterror = %d\n", dwLastError);
+//      //   printf("Parameters: %s %s\n", str1.c_str(), str2.c_str());
+//
+//      //   auto estatus = ::windows::last_error_status(dwLastError);
+//
+//      //   throw ::exception(estatus);
+//
+//      //}
+//
+//
+////      class ::time timeStart;
+//
+//  //    timeStart.Now();
+//
+//      pcreateprocess->wait_process(tracefunction, bLineTrace);
+//
+//      //      return iExitCode;
+//
+//      return pcreateprocess->m_iExitCode;
+
+   }
 
    void node::launch_command_system(const ::scoped_string& scopedstr, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
    {
@@ -3311,8 +3457,8 @@ namespace acme_windows
 
          //::string strCommand;
 
-         //informationf("Current Directory: %s\n", directory_system()->get_current().c_str());
-         //informationf("%s\n", strEscaped.c_str());
+         //information("Current Directory: {}", directory_system()->current());
+         //information("{}", strEscaped);
 
          ////if (m_bMsys)
          ////{
@@ -3468,7 +3614,7 @@ namespace acme_windows
 
    //   ::file::path pathCurrentDirectory;
 
-   //   pathCurrentDirectory = directory_system()->get_current();
+   //   pathCurrentDirectory = directory_system()->current();
 
    //   auto windowspathCurrentDirectory = pathCurrentDirectory.windows_path();
 
