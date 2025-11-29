@@ -777,9 +777,9 @@ namespace acme_windows
          str2 = "\"" + strPowerShell + "\" /c " + scopedstr;
 
       }
-      else if (file_system()->exists(strCandidateFile))
+      else if (file_system()->exists(str1))
       {
-         str1 = strCandidateFile;
+         //str1 = strCandidateFile;
          str1.trim();
 
          str2 = scopedstr;
