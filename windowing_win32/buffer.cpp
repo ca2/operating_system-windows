@@ -633,7 +633,7 @@ namespace windowing_win32
 
       auto sizeBufferItemWindow = pbufferitem->m_sizeBufferItemWindow;
 
-      string strType = ::type(m_pwindow->user_interaction()).name();
+      string strType = ::platform::type(m_pwindow->user_interaction()).name();
 
       // bool bOk = true;
 
@@ -1288,7 +1288,7 @@ namespace windowing_win32
 
             //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x, point.y, size.cx, size.cy, SWP_NOZORDER);
 
-            string strType = ::type(m_pwindow->user_interaction()).name();
+            string strType = ::platform::type(m_pwindow->user_interaction()).name();
 
             if (!strType.case_insensitive_contains("main_frame"))
             {
