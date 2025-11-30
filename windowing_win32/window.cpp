@@ -2302,7 +2302,7 @@ namespace windowing_win32
 
       auto puserinteraction = user_interaction();
 
-      ::string strType = ::type(puserinteraction).name();
+      ::string strType = ::platform::type(puserinteraction).name();
 
       set_destroying_flag();
 
@@ -2584,7 +2584,7 @@ namespace windowing_win32
 
             auto puserinteraction = user_interaction();
 
-            strType = ::type(puserinteraction).name();
+            strType = ::platform::type(puserinteraction).name();
 
             if (strType.contains("list_box"))
             {
@@ -8412,7 +8412,7 @@ namespace windowing_win32
          else if (message == 33815)
          {
 
-            string strType = ::type(puserinteraction).name();
+            string strType = ::platform::type(puserinteraction).name();
 
             if (strType.contains("list_box"))
             {
