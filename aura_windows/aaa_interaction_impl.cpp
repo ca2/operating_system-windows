@@ -1146,7 +1146,7 @@ namespace aura_windows
 
    if(pwindow->get_handle() == nullptr)
    {
-   return ::user::primitive::IsChild(pwindow);
+   return ::user::prototype::IsChild(pwindow);
    }
    else
    {
@@ -1382,7 +1382,7 @@ namespace aura_windows
    //void interaction_impl::design_window_minimize(const ::user::activation & useractivation)
    //{
 
-   //   primitive_impl::design_window_minimize(useractivation);
+   //   prototype_impl::design_window_minimize(useractivation);
 
    //}
 
@@ -1390,7 +1390,7 @@ namespace aura_windows
    //void interaction_impl::design_window_maximize()
    //{
 
-   //   primitive_impl::design_window_maximize();
+   //   prototype_impl::design_window_maximize();
 
    //}
 
@@ -1398,7 +1398,7 @@ namespace aura_windows
    //void interaction_impl::design_window_full_screen(const ::int_rectangle & rectangleHint)
    //{
 
-   //   primitive_impl::design_window_full_screen(rectangleHint);
+   //   prototype_impl::design_window_full_screen(rectangleHint);
 
    //}
 
@@ -1406,7 +1406,7 @@ namespace aura_windows
    //void interaction_impl::design_window_normal(::e_display edisplay)
    //{
 
-   //   primitive_impl::design_window_normal(edisplay);
+   //   prototype_impl::design_window_normal(edisplay);
 
    //}
 

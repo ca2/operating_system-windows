@@ -34,35 +34,35 @@
 template <>
 inline unsigned int HashKey < oswindow >(oswindow key)
 {
-   // default identity hash - works for most primitive values
+   // default identity hash - works for most prototype values
    return (unsigned int)((uptr)key);
 }
 
 template <>
 inline unsigned int HashKey < HMENU >(HMENU key)
 {
-   // default identity hash - works for most primitive values
+   // default identity hash - works for most prototype values
    return (unsigned int)((uptr)key);
 }
 
 template <>
 inline unsigned int HashKey < HDC >(HDC key)
 {
-   // default identity hash - works for most primitive values
+   // default identity hash - works for most prototype values
    return (unsigned int)((uptr)key);
 }
 
 template <>
 inline unsigned int HashKey < HGDIOBJ >(HGDIOBJ key)
 {
-   // default identity hash - works for most primitive values
+   // default identity hash - works for most prototype values
    return (unsigned int)((uptr)key);
 }
 
 template <>
 inline unsigned int HashKey < HIMAGELIST >(HIMAGELIST key)
 {
-   // default identity hash - works for most primitive values
+   // default identity hash - works for most prototype values
    return (unsigned int)((uptr)key);
 }
 

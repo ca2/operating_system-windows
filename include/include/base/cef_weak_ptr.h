@@ -369,7 +369,7 @@ class WeakPtrFactoryBase {
 /// A class may be composed of a WeakPtrFactory and thereby control how it
 /// exposes weak pointers to itself.  This is helpful if you only need weak
 /// pointers within the implementation of a class.  This class is also useful
-/// when working with primitive types.  For example, you could have a
+/// when working with prototype types.  For example, you could have a
 /// WeakPtrFactory<bool> that is used to pass around a weak reference to a
 /// bool.
 ///

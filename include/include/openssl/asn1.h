@@ -826,7 +826,7 @@ int ASN1_str2mask(const char *str, unsigned long *pmask);
 # define ASN1_PCTX_FLAGS_SHOW_SEQUENCE           0x002
 /* Mark start and end of SEQUENCE/SET OF */
 # define ASN1_PCTX_FLAGS_SHOW_SSOF               0x004
-/* Show the ASN1 type of primitives */
+/* Show the ASN1 type of prototypes */
 # define ASN1_PCTX_FLAGS_SHOW_TYPE               0x008
 /* Don't show ASN1 type of ANY */
 # define ASN1_PCTX_FLAGS_NO_ANY_TYPE             0x010

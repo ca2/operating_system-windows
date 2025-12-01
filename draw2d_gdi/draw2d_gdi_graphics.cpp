@@ -169,7 +169,7 @@ namespace draw2d_gdi
    }
 
 
-   int graphics::ExcludeUpdateRgn(::user::primitive * pwindow)
+   int graphics::ExcludeUpdateRgn(::user::prototype * pwindow)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -3428,7 +3428,7 @@ namespace draw2d_gdi
 
 
    /////////////////////////////////////////////////////////////////////////////
-   // special graphics drawing primitives/helpers
+   // special graphics drawing prototypes/helpers
 
    ::draw2d::brush* graphics::GetHalftoneBrush(::particle * pparticle)
    {

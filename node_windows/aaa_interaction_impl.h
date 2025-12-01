@@ -35,7 +35,7 @@ namespace windows
 
       int_point                                 m_point;
 
-      ::user::primitive *                       m_pbasewnd;
+      ::user::prototype *                       m_pbasewnd;
 
       unsigned int                                       m_uiLastRedrawRequest;
 

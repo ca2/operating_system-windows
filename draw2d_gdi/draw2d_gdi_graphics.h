@@ -235,7 +235,7 @@ namespace draw2d_gdi
       int SelectClipRgn(::draw2d::region* pRgn) override;
       int ExcludeClipRect(int x1, int y1, int x2, int y2) override;
       int ExcludeClipRect(const ::int_rectangle & rectangle) override;
-      int ExcludeUpdateRgn(::user::primitive * pwindow);
+      int ExcludeUpdateRgn(::user::prototype * pwindow);
       int IntersectClipRect(int x1, int y1, int x2, int y2) override;
       int IntersectClipRect(const ::int_rectangle & rectangle) override;
       int OffsetClipRgn(int x, int y) override;

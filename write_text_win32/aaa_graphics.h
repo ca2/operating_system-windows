@@ -218,7 +218,7 @@ namespace draw2d_gdiplus
 
 
 
-//      int ExcludeUpdateRgn(::user::primitive * pwindow) override;
+//      int ExcludeUpdateRgn(::user::prototype * pwindow) override;
       //int IntersectClipRect(int x1, int y1, int x2, int y2) override;
       //int IntersectClipRect(const int_rectangle &  prectangle) override;
 

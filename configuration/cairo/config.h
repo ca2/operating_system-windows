@@ -173,7 +173,7 @@
 /* Define to 1 if you have the `getline' function. */
 #undef HAVE_GETLINE
 
-/* Enable if your compiler supports the Intel __sync_* atomic primitives */
+/* Enable if your compiler supports the Intel __sync_* atomic prototypes */
 #undef HAVE_INTEL_ATOMIC_PRIMITIVES
 
 /* Define to 1 if you have the "_inttypes.h" header file. */

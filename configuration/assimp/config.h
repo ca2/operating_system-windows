@@ -242,7 +242,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // ---------------------------------------------------------------------------
 /** @brief Configures the #aiProcess_FindDegenerates step to
- *  remove degenerated primitives from the import - immediately.
+ *  remove degenerated prototypes from the import - immediately.
  *
  * The default behaviour converts degenerated triangles to lines and
  * degenerated lines to points. See the documentation to the
@@ -462,7 +462,7 @@ enum aiComponent
 
  // ---------------------------------------------------------------------------
  /** @brief Input parameter to the #aiProcess_SortByPType step:
-  *  Specifies which primitive types are removed by the step.
+  *  Specifies which prototype types are removed by the step.
   *
   *  This is a bitwise combination of the aiPrimitiveType flags.
   *  Specifying all of them is illegal, of course. A typical use would

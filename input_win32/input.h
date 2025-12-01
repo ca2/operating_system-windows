@@ -67,7 +67,7 @@ namespace input_win32
 
       //virtual HICON _load_icon(string_array_base& straMatter, const ::scoped_string & scopedstrIcon, int cx, int cy);
 
-      //virtual ::windows::hwnd_array _get_hwnda(const ::user::primitive_pointer_array& primitivepointera);
+      //virtual ::windows::hwnd_array _get_hwnda(const ::user::prototype_pointer_array& prototypepointera);
 
       //virtual ::windowing::window * window(oswindow oswindow) override;
 

@@ -578,7 +578,7 @@ struct ASN1_ADB_TABLE_st {
 /* This is the actual ASN1 item itself */
 
 struct ASN1_ITEM_st {
-    char itype;                 /* The item type, primitive, SEQUENCE, CHOICE
+    char itype;                 /* The item type, prototype, SEQUENCE, CHOICE
                                  * or extern */
     long utype;                 /* underlying type */
     const ASN1_TEMPLATE *templates; /* If SEQUENCE or CHOICE this contains
@@ -768,7 +768,7 @@ typedef struct ASN1_STREAM_ARG_st {
 # define ASN1_OP_DETACHED_PRE    12
 # define ASN1_OP_DETACHED_POST   13
 
-/* Macro to implement a primitive type */
+/* Macro to implement a prototype type */
 # define IMPLEMENT_ASN1_TYPE(stname) IMPLEMENT_ASN1_TYPE_ex(stname, stname, 0)
 # define IMPLEMENT_ASN1_TYPE_ex(itname, vname, ex) \
                                 ASN1_ITEM_start(itname) \
@@ -898,7 +898,7 @@ typedef struct ASN1_STREAM_ARG_st {
         IMPLEMENT_ASN1_ENCODE_FUNCTIONS_const_fname(stname, itname, fname) \
         IMPLEMENT_ASN1_ALLOC_FUNCTIONS_fname(stname, itname, fname)
 
-/* external definitions for primitive types */
+/* external definitions for prototype types */
 
 DECLARE_ASN1_ITEM(ASN1_BOOLEAN)
 DECLARE_ASN1_ITEM(ASN1_TBOOLEAN)

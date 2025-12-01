@@ -70,12 +70,12 @@ inline void copy(Gdiplus::PointF * ppoint1, const ::double_point * ppoint2)
 
 
 
-// template < primitive_point POINT >
+// template < prototype_point POINT >
 // void __copy(POINT & p, const Gdiplus::Point & t) noexcept { ::copy_point(&p, &t); }
-// template < primitive_point POINT >
+// template < prototype_point POINT >
 // void __copy(POINT * p1, const Gdiplus::Point * p2) noexcept { ::copy_point(p1, p2); }
 
-// template < primitive_point POINT >
+// template < prototype_point POINT >
 // void __copy(POINT & p, const Gdiplus::PointF & t) noexcept { ::copy_point(&p, &t); }
-template < primitive_point POINT >
+template < prototype_point POINT >
 void copy(POINT * p1, const Gdiplus::PointF * p2) noexcept { ::copy_point(p1, p2); }

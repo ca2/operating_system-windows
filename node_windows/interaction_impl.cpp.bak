@@ -3369,7 +3369,7 @@ namespace windows
    void interaction_impl::_001WindowMinimize(bool bNoActivate)
    {
 
-      primitive_impl::_001WindowMinimize(bNoActivate);
+      prototype_impl::_001WindowMinimize(bNoActivate);
 
    }
 
@@ -3377,7 +3377,7 @@ namespace windows
    void interaction_impl::_001WindowMaximize()
    {
 
-      primitive_impl::_001WindowMaximize();
+      prototype_impl::_001WindowMaximize();
 
    }
 
@@ -3385,7 +3385,7 @@ namespace windows
    void interaction_impl::_001WindowFullScreen(const ::rectangle_i32 & rectHint)
    {
 
-      primitive_impl::_001WindowFullScreen(rectHint);
+      prototype_impl::_001WindowFullScreen(rectHint);
 
    }
 
@@ -3393,7 +3393,7 @@ namespace windows
    void interaction_impl::_001WindowRestore()
    {
 
-      primitive_impl::_001WindowRestore();
+      prototype_impl::_001WindowRestore();
 
    }
 
