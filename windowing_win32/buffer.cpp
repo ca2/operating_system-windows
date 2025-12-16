@@ -1293,7 +1293,7 @@ namespace windowing_win32
             if (!strType.case_insensitive_contains("main_frame"))
             {
 
-               information() << "not main_frame";
+               //information() << "not main_frame";
 
             }
 
