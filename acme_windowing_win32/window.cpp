@@ -1,8 +1,9 @@
 // Created by camilo on 2022-01-21 05:05 PM <3ThomasBorregaardSorensen
 #include "framework.h"
-#include "acme/nano/graphics/device.h"
 #include "window.h"
-//#include "user.h"
+#include "acme/nano/graphics/device.h"
+#include "acme/operating_system/windows/windowing.h"
+// #include "user.h"
 #include "acme/parallelization/task.h"
 #include "acme/parallelization/task.h"
 //#include "acme/nano/nano.h"
@@ -1625,6 +1626,24 @@ namespace win32
 
          }
 
+
+         void window::get_os_window_handle(void * p, int iSize)
+         {
+
+            if (iSize != sizeof(::windows::os_window_handle))
+            {
+
+               throw ::exception(error_bad_argument);
+
+            }
+
+            auto poswindowhandle = (::windows::os_window_handle *)p;
+
+            poswindowhandle->m_hwnd = m_hwnd;
+
+         }
+
+         
 
       } // namespace windowing
 

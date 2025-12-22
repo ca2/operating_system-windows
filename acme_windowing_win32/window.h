@@ -163,6 +163,7 @@ namespace win32
             //void set_mouse_capture() override;
 
             //bool has_mouse_capture() override;
+            void get_os_window_handle(void *p, int iSize) override;
 
 
          };

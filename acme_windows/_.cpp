@@ -20,30 +20,6 @@ namespace acme_windows
    }
 
 
-   bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::path& str, int csidl, bool fCreate)
-   {
-
-      return ::SHGetSpecialFolderPathW(hwnd, wstring_adaptor(str, MAX_PATH * 8), csidl, fCreate) != false;
-
-   }
-
-
-   ::file::path CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(int csidl, bool fCreate, ::windowing::window* pwindow)
-   {
-
-      ::file::path path;
-
-      if (!shell_get_special_folder_path(nullptr, path, csidl, fCreate))
-      {
-
-         return {};
-
-      }
-
-      return path;
-
-   }
-
 
 
 
