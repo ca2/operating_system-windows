@@ -384,7 +384,7 @@ namespace win32
 
 
 
-         void windowing::on_start_system()
+         void windowing::windowing_application_on_system_start()
          {
 
             //auto * psystem = this->system();

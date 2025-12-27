@@ -62,7 +62,7 @@ namespace win32
 
             ::color::color get_operating_system_background_color() override;
 
-            void on_start_system() override;
+            void windowing_application_on_system_start() override;
 
             void set_finish() override;
             void kick_idle() override;
