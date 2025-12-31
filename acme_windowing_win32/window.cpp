@@ -21,7 +21,7 @@
 void win32_post(HWND hwnd, const ::procedure& procedure)
 {
 
-   auto p = procedure.m_pbase.m_p;
+   auto p = procedure.m_p;
 
    p->increment_reference_count();
 
@@ -33,7 +33,7 @@ void win32_post(HWND hwnd, const ::procedure& procedure)
 void win32_send(HWND hwnd, const ::procedure& procedure)
 {
 
-   auto p = procedure.m_pbase.m_p;
+   auto p = procedure.m_p;
 
    p->increment_reference_count();
 

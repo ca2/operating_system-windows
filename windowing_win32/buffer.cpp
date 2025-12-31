@@ -837,7 +837,7 @@ namespace windowing_win32
                      auto cx = rectangleRequest.width();
 
                      pwindow->_main_send(
-                        [&]()
+                        [=]()
                         {
                            // if (!(nFlags & SWP_NOMOVE))
                            //{
