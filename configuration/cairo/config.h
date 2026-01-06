@@ -5,7 +5,7 @@
 //#include "operating_system/third_private_config.h"
 
 
-#include "configuration/common/config.h"
+#include "configuration/common/configuration.h"
 
 
 #ifdef _WIN32

@@ -1,6 +1,6 @@
    /* src/config.h.in.  Generated from configure.ac by autoheader.  */
 
-#include "operating_system/third_private_config.h"
+#include "configuration/common/configuration.h"
 
 /* Define if your architecture wants/needs/can use attribute_align_arg and
    alignment checks. It is for 32bit x86... */
@@ -200,9 +200,6 @@
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #undef HAVE_STDLIB_H
-
-/* Define to 1 if you have the `strerror' function. */
-#undef HAVE_STRERROR
 
 /* Define to 1 if you have the <strings.h> header file. */
 #undef HAVE_STRINGS_H
@@ -493,19 +490,6 @@
 #define strcasecmp _stricmp
 #define strncasecmp _strnicmp
 #elif defined(WINDOWS_DESKTOP)
-#define HAVE_STRING_H 1
-#define HAVE_STRERROR 1
-#define HAVE_INTTYPES_H 1
-#define HAVE_SYS_TYPES_H 1
-#define HAVE_MEMORY_H 1
-#define STDC_HEADERS 1
-#define HAVE_STDLIB_H 1
-#define HAVE_STDINT_H 1
-#define HAVE_STDIO_H 1
-#define HAVE_WINDOWS_H 1
-#define HAVE_STRDUP 1
-#define strcasecmp _stricmp
-#define strncasecmp _strnicmp
 #elif defined(ANDROID)
 #define HAVE_STRING_H 1
 #define HAVE_STRERROR 1

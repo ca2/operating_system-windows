@@ -1,5 +1,5 @@
 // Created by camilo on 2023-03-11 00:05 BRT <3ThomasBorregaardSorensen!!
-#include "configuration/common_configuration.h"
+#include "configuration/common/configuration.h"
 
 
 /* config.h.in.  Generated automatically from configure.in by autoheader.  */

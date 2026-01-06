@@ -2,13 +2,13 @@
 #pragma once
 
 
-#include "configuration/common_configuration.h"
+#include "configuration/common/configuration.h"
 
 
 #define ZLIB_DLL
 #undef Z_HAVE_UNISTD_H
 #undef _LARGEFILE64_SOURCE
-#define _CRT_SECURE_NO_WARNINGS
+
 
 
 

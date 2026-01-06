@@ -5,7 +5,7 @@
 #define __LIBARCHIVE_CONFIG_H_INCLUDED
 
 
-#include "configuration/common_configuration.h"
+#include "configuration/common/configuration.h"
 
 
 

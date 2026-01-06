@@ -32,8 +32,8 @@
 /* Does your compiler support the declaration "unsigned char" ?
  * How about "unsigned short" ?
  */
-#define HAVE_UNSIGNED_CHAR
-#define HAVE_UNSIGNED_SHORT
+//#define HAVE_UNSIGNED_CHAR
+//#define HAVE_UNSIGNED_SHORT
 
 /* Define "void" as "char" if your compiler doesn't know about type void.
  * NOTE: be sure to define void such that "void *" represents the most general

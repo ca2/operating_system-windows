@@ -1,14 +1,43 @@
+// Created by camilo on 2026-01-06 10:55 <3ThomasBorregaardSørensen!!
 // Changed by camilo on 2025-09-10 09:08 <3ThomasBorregaardSørensen!!
 #pragma once
+
+
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
+
+#include <inttypes.h>
+#include <sys/types.h>
+#include <BaseTsd.h>
+#include <string.h>
+
+
+#define USE_PORT_FREEIMAGE
+#define USE_PORT_JPEG
+#define USE_PORT_PNG
+
+#define HAVE_STRERROR 1
+
+#define HAVE_STRING_H 1
+#define HAVE_STRERROR 1
+#define HAVE_INTTYPES_H 1
+#define HAVE_SYS_TYPES_H 1
+#define HAVE_MEMORY_H 1
+#define STDC_HEADERS 1
+#define HAVE_STDLIB_H 1
+#define HAVE_STDINT_H 1
+#define HAVE_STDIO_H 1
+#define HAVE_WINDOWS_H 1
+#define HAVE_STRDUP 1
+#define strcasecmp _stricmp
+#define strncasecmp _strnicmp
 
 
 //#define WIN32
 //#define _CRT_SECURE_NO_WARNINGS
 
-#if defined(_MSC_VER)
-#ifndef _CRT_SECURE_NO_WARNINGS
-#define _CRT_SECURE_NO_WARNINGS
-#endif
 #define HAVE_WCTYPE_H 1
 #define HAVE_INTTYPES_H 1
 #define HAVE_STRING_H 1
@@ -17,8 +46,8 @@
 #define HAVE_WINCRYPT_H 1
 #define HAVE_STDARG_H 1
 #define HAVE_STDINT_H 1
+#define HAVE_BCRYPT_H
 
-#include <BaseTsd.h>
 #define HAVE_DECL_SIZE_MAX 1
 #define HAVE_DECL_UINT32_MAX 1
 #define HAVE_DECL_INT32_MAX 1
@@ -108,12 +137,9 @@ typedef int mode_t;
 #define HAVE_DECL_UINTMAX_MAX 1
 #define HAVE_DECL_INTMAX_MAX 1
 #define HAVE_DECL_INTMAX_MIN 1
+#define HAVE_UNSIGNED_CHAR 1
 
-
-#define NO_STRERROR 1
-
-
-#endif
+#undef NO_STRERROR
 
 
 

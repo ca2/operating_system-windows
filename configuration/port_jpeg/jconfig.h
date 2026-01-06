@@ -28,13 +28,13 @@
 /* Does your compiler support function prototypes?
  * (If not, you also need to use ansi2knr, see install.txt)
  */
-#define HAVE_PROTOTYPES
+//#define HAVE_PROTOTYPES
 
 /* Does your compiler support the declaration "unsigned char" ?
  * How about "unsigned short" ?
  */
-#define HAVE_UNSIGNED_CHAR
-#define HAVE_UNSIGNED_SHORT
+//#define HAVE_UNSIGNED_CHAR
+//#define HAVE_UNSIGNED_SHORT
 
 /* Define "void" as "char" if your compiler doesn't know about type void.
  * NOTE: be sure to define void such that "void *" represents the most general
@@ -54,11 +54,11 @@
 
 /* Define this if your system has an ANSI-conforming <stddef.h> file.
  */
-#define HAVE_STDDEF_H
+//#define HAVE_STDDEF_H
 
 /* Define this if your system has an ANSI-conforming <stdlib.h> file.
  */
-#define HAVE_STDLIB_H
+///#define HAVE_STDLIB_H
 
 /* Define this if your system does not have an ANSI/SysV <string.h>,
  * but does have a BSD-style <strings.h>.

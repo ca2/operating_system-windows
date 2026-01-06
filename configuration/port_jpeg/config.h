@@ -2,7 +2,10 @@
 #pragma once
 
 
-#include "configuration/common/config.h"
+#include "configuration/common/configuration.h"
+
+
+#define HAVE_PROTOTYPES 1
 
 
 
