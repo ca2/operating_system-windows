@@ -3,20 +3,8 @@
 #pragma once
 
 
-#ifndef _CRT_SECURE_NO_WARNINGS
-#define _CRT_SECURE_NO_WARNINGS
-#endif
+#include "configuration/common/__quite_strict_configuration.h"
 
-
-#include <inttypes.h>
-#include <sys/types.h>
-#include <BaseTsd.h>
-#include <string.h>
-
-
-#define USE_PORT_FREEIMAGE
-#define USE_PORT_JPEG
-#define USE_PORT_PNG
 
 #define HAVE_STRERROR 1
 

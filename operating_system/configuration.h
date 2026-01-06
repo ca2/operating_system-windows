@@ -13,7 +13,7 @@
 #include <sdkddkver.h>
 
 
-#include "configuration/common/config.h"
+#include "configuration/common/__quite_strict_configuration.h"
 
 
 //#define NTDDI_VERSION   NTDDI_WIN10_CO // NTDDI_WIN10
