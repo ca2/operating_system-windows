@@ -3,6 +3,11 @@
   This file maintained for backward compatibility. Do not use definitions
   from this file in your programs.
 */
+#pragma once
+
+
+#include "configuration/common/__quite_strict_configuration.h"
+
 
 #ifndef _TIFFCONF_
 #define _TIFFCONF_

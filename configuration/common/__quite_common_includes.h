@@ -8,4 +8,12 @@
 #include <string.h>
 
 
+typedef SSIZE_T ssize_t;
+typedef int id_t;
+typedef int uid_t;
+typedef int gid_t;
+typedef int pid_t;
+typedef int mode_t;
+
+
 

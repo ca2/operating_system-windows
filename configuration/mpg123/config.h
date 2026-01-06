@@ -1,6 +1,7 @@
    /* src/config.h.in.  Generated from configure.ac by autoheader.  */
 
 #include "configuration/common/configuration.h"
+#include "configuration/common/__quite_common_includes.h"
 
 /* Define if your architecture wants/needs/can use attribute_align_arg and
    alignment checks. It is for 32bit x86... */

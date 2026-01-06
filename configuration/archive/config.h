@@ -6,7 +6,7 @@
 
 
 #include "configuration/common/configuration.h"
-
+#include "configuration/common/__quite_common_includes.h"
 
 
 
@@ -18,11 +18,6 @@
 #define ARCHIVE_CRYPTO_SHA512_WIN 1
 
 
-#if defined(_MSC_VER) && !defined(MPG123_DEF_SSIZE_T)
-#define MPG123_DEF_SSIZE_T
-#include <stddef.h>
-typedef ptrdiff_t ssize_t;
-#endif
 
 
 
