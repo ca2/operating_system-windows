@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <BaseDir>$(SolutionDir)..\</BaseDir>
+    <TimeDir>$(BaseDir)time-windows\</TimeDir>
+    <__operating_system>$(BaseDir)operating_system\</__operating_system>
+    <__toolsbin>$(__operating_system)tool-windows\bin\</__toolsbin>
+    <RootParentDir>$(SolutionDir)..\..\</RootParentDir>
+    <RootParentDirOperatingSystem>$(RootParentDir)operating_system\</RootParentDirOperatingSystem>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(RootParentDirOperatingSystem)storage-windows\$(PlatformName)\$(Configuration)\third\binary\</OutDir>
+    <IntDir>$(TimeDir)intermediate\$(PlatformName)\$(Configuration)\$(RootNamespace)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)../port/include;$(SolutionDir)../operating_system/operating_system-windows/configuration;$(SolutionDir)../operating_system/operating_system-windows/configuration/$(RootNamespace);$(SolutionDir)../operating_system/operating_system-windows/include;$(SolutionDir)../operating_system/operating_system-windows;$(ProjectDir)/include/$(RootNamespace);$(ProjectDir)/include;$(ProjectDir);$(SolutionDir)../include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_$(ProjectName)_project;_output_type_$(OutputType);WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <AssemblerListingLocation>$(IntDir)%(RelativeDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <PreBuildEvent>
+      <Command>application_build_helper $(ProjectDir) $(ProjectName) $(PlatformName) $(Configuration)</Command>
+    </PreBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>$(RootParentDirOperatingSystem)storage-windows\$(PlatformName)\$(Configuration)\library\;$(RootParentDirOperatingSystem)storage-windows\$(PlatformName)\library\;$(RootParentDirOperatingSystem)storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
+      <ImportLibrary>$(RootParentDirOperatingSystem)storage-windows\$(PlatformName)\$(Configuration)\third\library\$(TargetName).lib</ImportLibrary>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(__operating_system)operating_system-windows\windows10.manifest</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="BaseDir">
+      <Value>$(BaseDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="TimeDir">
+      <Value>$(TimeDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="__operating_system">
+      <Value>$(__operating_system)</Value>
+    </BuildMacro>
+    <BuildMacro Include="__toolsbin">
+      <Value>$(__toolsbin)</Value>
+    </BuildMacro>
+    <BuildMacro Include="RootParentDir">
+      <Value>$(RootParentDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="RootParentDirOperatingSystem">
+      <Value>$(RootParentDirOperatingSystem)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
