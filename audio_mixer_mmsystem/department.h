@@ -14,7 +14,7 @@ namespace audio_mixer_mmsystem
 
 
    class CLASS_DECL_AUDIO_MIXER_MMSYSTEM department :
-      virtual public ::acme::department,
+      virtual public ::platform::department,
       virtual public ::user::interaction
    {
    public:
