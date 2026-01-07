@@ -13,7 +13,7 @@ namespace typeface_gdiplus
    typeface::~typeface() {}
 
 
-   ::file::path typeface::_get_font_file_path_by_font_name(const ::scoped_string &scopedstr);
+   ::file::path typeface::_get_font_file_path_by_font_name(const ::scoped_string &scopedstr)
    {
 
 

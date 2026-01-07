@@ -720,7 +720,6 @@
     <ClInclude Include="face.h" />
     <ClInclude Include="allocator.h" />
     <ClInclude Include="typeface.h" />
-    <ClInclude Include="typeface_gdiplus.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="framework.h" />
   </ItemGroup>
@@ -738,7 +737,6 @@
     </ClCompile>
     <ClCompile Include="allocator.cpp" />
     <ClCompile Include="typeface.cpp" />
-    <ClCompile Include="typeface_gdiplus.cpp" />
     <ClCompile Include="_.cpp" />
     <ClCompile Include="_factory.cpp" />
   </ItemGroup>

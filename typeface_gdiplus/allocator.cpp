@@ -1,6 +1,8 @@
 // Created by camilo on 2026-01-06 22:33 <3ThomasBorregaardSørensen!!
 #include "framework.h"
 #include "allocator.h"
+#include "typeface.h"
+#include "face.h"
 
 
 
@@ -20,12 +22,14 @@ namespace typeface_gdiplus
       if (scopedstrName == "gdiplus" || scopedstrName.is_empty())
       {
 
-         return ::øcreate_new<::typeface_gdiplus::typeface>();
+         return øcreate_new<::typeface_gdiplus::typeface>();
+
       }
       else
       {
 
          throw ::exception(error_wrong_state, "not know typeface");
+
       }
 
       return {};
@@ -38,18 +42,18 @@ namespace typeface_gdiplus
       if (scopedstrName == "gdiplus" || scopedstrName.is_empty())
       {
 
-         return ::øcreate_new<::typeface_gdiplus::face>();
+         return øcreate_new<::typeface_gdiplus::face>();
+
       }
       else
       {
 
          throw ::exception(error_wrong_state, "not know face");
+
       }
 
-
-      throw ::interface_only();
-
       return {};
+
    }
 
 

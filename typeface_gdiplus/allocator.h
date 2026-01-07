@@ -5,7 +5,7 @@
 #include "bred/typeface/allocator.h"
 
 
-namespace typeface
+namespace typeface_gdiplus
 {
 
 
@@ -26,4 +26,4 @@ namespace typeface
    };
 
 
-} // namespace typeface
+} // namespace typeface_gdiplus
