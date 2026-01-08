@@ -391,7 +391,7 @@ namespace acme_windows
       ::file::path _get_font_path_from_name(const ::scoped_string & scopedstrName) override;
       virtual ::file::path __get_font_path_from_name(const ::scoped_string& scopedstrName, bool bTrueType);
 
-
+      void restart_application() override;
    };
 
 

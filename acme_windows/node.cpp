@@ -30,6 +30,7 @@
 #include "acme/prototype/string/adaptor.h"
 #include "acme/prototype/string/international.h"
 #include "acme/prototype/string/str.h"
+#include "acme/user/user/interaction.h"
 
 #include "acme/_operating_system.h"
 
@@ -5432,6 +5433,71 @@ namespace acme_windows
       RegCloseKey(hKey);
       return str;
    }
+
+
+   void node::restart_application()
+   {
+
+      fork(
+         [this]()
+         {
+            WCHAR szPath[_MAX_PATH];
+            // Get the full path to the current executable
+            if (GetModuleFileNameW(NULL, szPath, _MAX_PATH) == 0)
+            {
+               warning() << "Failed to get module file name. Error: " << GetLastError();
+               return;
+            }
+
+            STARTUPINFOW si;
+            PROCESS_INFORMATION pi;
+
+            ZeroMemory(&si, sizeof(si));
+            si.cb = sizeof(si);
+            ZeroMemory(&pi, sizeof(pi));
+
+            // Optional: add a command line argument to indicate it's a restart, if needed
+            // Example: L" --restarted"
+            // szPath;
+
+            // Convert wstring to a modifiable LPWSTR for CreateProcess
+            wstring cmdLineBuf = szPath;
+            // cmdLineBuf.push_back(L'\0'); // Ensure null-termination
+
+            // Create the new process
+            if (!CreateProcessW(NULL, // No module name (use command line)
+                                (WCHAR *)(const WCHAR *)cmdLineBuf.data(), // Command line
+                                NULL, // Process handle not inheritable
+                                NULL, // Thread handle not inheritable
+                                FALSE, // Set handle inheritance to FALSE
+                                DETACHED_PROCESS, // Detach the new process from the current console
+                                NULL, // Use parent's environment block
+                                NULL, // Use parent's starting directory
+                                &si, // Pointer to STARTUPINFO structure
+                                &pi // Pointer to PROCESS_INFORMATION structure
+                                ))
+            {
+               warning() << "CreateProcess failed. Error: " << GetLastError();
+               return;
+            }
+
+            // Close process and thread handles as they are not needed
+            CloseHandle(pi.hProcess);
+            CloseHandle(pi.hThread);
+
+            // Terminate the current process gracefully
+            // ExitProcess(0);
+            if (application()->m_pacmeuserinteractionMain)
+            {
+               application()->m_pacmeuserinteractionMain->hide();
+               application()->m_pacmeuserinteractionMain->set_finish();
+
+            }
+            application()->set_finish();
+            system()->set_finish();
+         });
+   }
+
 
 
 } // namespace acme_windows
