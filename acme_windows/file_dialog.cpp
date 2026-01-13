@@ -440,7 +440,7 @@ namespace acme_windows
 
                   t_popenfilename = nullptr;
 
-                  pdialog->do_callback();
+                  pdialog->on_dialog_response();
 
                   return;
 
@@ -477,7 +477,7 @@ namespace acme_windows
 
                   DWORD dwError = CommDlgExtendedError();
 
-                  pdialog->do_callback();
+                  pdialog->on_dialog_response();
 
                   return;
 
@@ -609,7 +609,7 @@ namespace acme_windows
       //
       //#endif
             //pdialog->m_patha = patha;
-            pdialog->do_callback();
+            pdialog->on_dialog_response();
 
          });
 

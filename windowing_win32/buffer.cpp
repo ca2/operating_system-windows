@@ -744,6 +744,17 @@ namespace windowing_win32
 
                ::GetWindowRect(hwnd, &rectWindow);
 
+               {
+                  int_rectangle rWindow2;
+                  ::GetWindowRect(hwnd, (LPRECT)&rWindow2);
+                  int_rectangle rClient2;
+                  ::GetClientRect(hwnd, (LPRECT)&rClient2);
+                  information("rWindow2 x{} y{} w{} h{}", rWindow2.left, rWindow2.top, rWindow2.width(), rWindow2.height());
+                  information("rClient2 x{} y{} w{} h{}", rClient2.left, rClient2.top, rClient2.width(),
+                              rClient2.height());
+               }
+
+
                rectangleWindow = rectWindow;
 
                ::int_rectangle rectangleRequest(pointBufferItemWindow, sizeBufferItemWindow);
@@ -858,10 +869,24 @@ namespace windowing_win32
 
                               //informationf("test");
                            }
+                           ::string str;
+                           if (nFlags & SWP_NOSIZE)
+                           {
 
-                           ::SetWindowPos(hwnd, hwndInsertAfter, rectangleRequest.left, rectangleRequest.top, cx,
-                                          rectangleRequest.height(), nFlags);
+                              str += "SWP_NOSIZE; ";
 
+                           }
+
+                           int iRequestWidth = rectangleRequest.width();
+                           int iRequestHeight = rectangleRequest.height();
+                           str.append_formatf("w=%d; ", iRequestWidth);
+                           str.append_formatf("h=%d; ", iRequestHeight);
+                           ::SetWindowPos(hwnd, hwndInsertAfter, rectangleRequest.left, rectangleRequest.top,
+                              iRequestWidth,
+                              iRequestHeight,
+                              nFlags);
+                           pwindow->m_uSetWindowPosLastFlags |= SWP_NOZORDER;
+                           information("SetWindowPos: " + str);
                            if (pwindow->m_activationSetWindowPosLast & ::user::e_activation_set_foreground)
                            {
 
@@ -886,8 +911,9 @@ namespace windowing_win32
                                  pwindow->m_activationSetWindowPosLast.clear();
                               }
 
-                              pwindow->m_uSetWindowPosLastFlags &= ~SWP_NOACTIVATE;
                            }
+                           pwindow->m_uSetWindowPosLastFlags |= SWP_NOACTIVATE;
+
                         });
                   }
                }

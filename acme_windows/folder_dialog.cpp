@@ -80,10 +80,11 @@ namespace acme_windows
             if (SUCCEEDED(hr))
             {
 
-               if (pdialog->m_path.has_character())
+               if (pdialog->m_patha.has_element()
+                  && pdialog->m_patha.first().has_character())
                {
 
-                  wstring wstr(pdialog->m_path);
+                  wstring wstr(pdialog->m_patha.first());
 
                   comptr < IShellItem > psi;
 
@@ -122,9 +123,11 @@ namespace acme_windows
                      if (SUCCEEDED(hr))
                      {
 
-                        pdialog->m_path = ::string((PWSTR)pwszFilePath);
+                        pdialog->on_chooser_response(::string((PWSTR)pwszFilePath));
 
-                        pdialog->m_function(::transfer(pdialog));
+                        /*pdialog->m_patha.add();
+
+                        pdialog->m_function(::transfer(pdialog));*/
 
                         bOk = true;
 
@@ -140,7 +143,7 @@ namespace acme_windows
             if (!bOk)
             {
 
-               pdialog->m_function({});
+               pdialog->on_chooser_response(nullptr);
 
             }
 
