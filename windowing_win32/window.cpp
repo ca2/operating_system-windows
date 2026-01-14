@@ -655,7 +655,7 @@ namespace windowing_win32
 
             auto pgpuapproach = m_papplication->get_gpu_approach();
 
-            pgpuapproach->on_before_create_window(this);
+            pgpuapproach->gpu_on_before_create_window(this);
 
          }
 
@@ -745,8 +745,11 @@ namespace windowing_win32
 
          if (m_papplication->m_bGpu)
          {
+            
             auto pgpuapproach = m_papplication->get_gpu_approach();
-            pgpuapproach->on_create_window(this);
+            
+            pgpuapproach->gpu_on_create_window(this);
+
          }
          //draw2d()->on_create_window(this);
 
