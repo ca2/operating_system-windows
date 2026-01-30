@@ -8,6 +8,7 @@
     <__toolsbin>$(__operating_system)tool-windows\bin\</__toolsbin>
     <RootParentDir>$(SolutionDir)..\..\</RootParentDir>
     <RootParentDirOperatingSystem>$(RootParentDir)operating_system\</RootParentDirOperatingSystem>
+    <PlatformLower>$([System.String]::Copy('$(Platform)').ToLower())</PlatformLower>
   </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(TimeDir)$(PlatformName)\$(Configuration)\</OutDir>
@@ -64,5 +65,9 @@
     <BuildMacro Include="RootParentDirOperatingSystem">
       <Value>$(RootParentDirOperatingSystem)</Value>
     </BuildMacro>
+    <BuildMacro Include="PlatformLower">
+      <Value>$(PlatformLower)</Value>
+    </BuildMacro>
+	
   </ItemGroup>
 </Project>

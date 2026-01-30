@@ -1,0 +1,12 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="StaticDebug" />
+    <BuildType Name="StaticRelease" />
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="_detect_architecture.vcxproj" Id="7f268eb5-9883-48c7-a71b-eb1f4d7038e1">
+    <BuildType Solution="StaticRelease|x64" Project="StaticDebug" />
+  </Project>
+</Solution>
