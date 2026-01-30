@@ -160,7 +160,6 @@ OSSL_STORE_CTX *OSSL_STORE_attach(BIO *bio, const char *scheme,
 #define OSSL_STORE_INFO_PKEY 4 /* EVP_PKEY * */
 #define OSSL_STORE_INFO_CERT 5 /* X509 * */
 #define OSSL_STORE_INFO_CRL 6 /* X509_CRL * */
-#define OSSL_STORE_INFO_SKEY 7 /* EVP_SKEY * */
 
 /*
  * Functions to generate OSSL_STORE_INFOs, one function for each type we
@@ -177,7 +176,6 @@ OSSL_STORE_INFO *OSSL_STORE_INFO_new_PUBKEY(EVP_PKEY *pubkey);
 OSSL_STORE_INFO *OSSL_STORE_INFO_new_PKEY(EVP_PKEY *pkey);
 OSSL_STORE_INFO *OSSL_STORE_INFO_new_CERT(X509 *x509);
 OSSL_STORE_INFO *OSSL_STORE_INFO_new_CRL(X509_CRL *crl);
-OSSL_STORE_INFO *OSSL_STORE_INFO_new_SKEY(EVP_SKEY *skey);
 
 /*
  * Functions to try to extract data from a OSSL_STORE_INFO.
@@ -198,8 +196,6 @@ X509 *OSSL_STORE_INFO_get0_CERT(const OSSL_STORE_INFO *info);
 X509 *OSSL_STORE_INFO_get1_CERT(const OSSL_STORE_INFO *info);
 X509_CRL *OSSL_STORE_INFO_get0_CRL(const OSSL_STORE_INFO *info);
 X509_CRL *OSSL_STORE_INFO_get1_CRL(const OSSL_STORE_INFO *info);
-EVP_SKEY *OSSL_STORE_INFO_get0_SKEY(const OSSL_STORE_INFO *info);
-EVP_SKEY *OSSL_STORE_INFO_get1_SKEY(const OSSL_STORE_INFO *info);
 
 const char *OSSL_STORE_INFO_type_string(int type);
 
@@ -263,6 +259,8 @@ int OSSL_STORE_find(OSSL_STORE_CTX *ctx, const OSSL_STORE_SEARCH *search);
  *  ---------------------------------------------------
  */
 
+typedef struct ossl_store_loader_st OSSL_STORE_LOADER;
+
 OSSL_STORE_LOADER *OSSL_STORE_LOADER_fetch(OSSL_LIB_CTX *libctx,
     const char *scheme,
     const char *properties);
@@ -316,8 +314,7 @@ typedef int (*OSSL_STORE_close_fn)(OSSL_STORE_LOADER_CTX *ctx);
 #endif
 #ifndef OPENSSL_NO_DEPRECATED_3_0
 OSSL_DEPRECATEDIN_3_0
-OSSL_STORE_LOADER *OSSL_STORE_LOADER_new(ENGINE *e /* must be NULL */,
-    const char *scheme);
+OSSL_STORE_LOADER *OSSL_STORE_LOADER_new(ENGINE *e, const char *scheme);
 OSSL_DEPRECATEDIN_3_0
 int OSSL_STORE_LOADER_set_open(OSSL_STORE_LOADER *loader,
     OSSL_STORE_open_fn open_function);
@@ -348,6 +345,8 @@ int OSSL_STORE_LOADER_set_error(OSSL_STORE_LOADER *loader,
 OSSL_DEPRECATEDIN_3_0
 int OSSL_STORE_LOADER_set_close(OSSL_STORE_LOADER *loader,
     OSSL_STORE_close_fn close_function);
+OSSL_DEPRECATEDIN_3_0
+const ENGINE *OSSL_STORE_LOADER_get0_engine(const OSSL_STORE_LOADER *loader);
 OSSL_DEPRECATEDIN_3_0
 const char *OSSL_STORE_LOADER_get0_scheme(const OSSL_STORE_LOADER *loader);
 OSSL_DEPRECATEDIN_3_0

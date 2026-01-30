@@ -162,6 +162,7 @@ extern "C" {
 #define SSL_TXT_SHA256 "SHA256"
 #define SSL_TXT_SHA384 "SHA384"
 
+#define SSL_TXT_SSLV3 "SSLv3"
 #define SSL_TXT_TLSV1 "TLSv1"
 #define SSL_TXT_TLSV1_1 "TLSv1.1"
 #define SSL_TXT_TLSV1_2 "TLSv1.2"
@@ -249,7 +250,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(SRTP_PROTECTION_PROFILE, SRTP_PROTECTION_PROFILE, S
 #define sk_SRTP_PROTECTION_PROFILE_num(sk) OPENSSL_sk_num(ossl_check_const_SRTP_PROTECTION_PROFILE_sk_type(sk))
 #define sk_SRTP_PROTECTION_PROFILE_value(sk, idx) ((SRTP_PROTECTION_PROFILE *)OPENSSL_sk_value(ossl_check_const_SRTP_PROTECTION_PROFILE_sk_type(sk), (idx)))
 #define sk_SRTP_PROTECTION_PROFILE_new(cmp) ((STACK_OF(SRTP_PROTECTION_PROFILE) *)OPENSSL_sk_new(ossl_check_SRTP_PROTECTION_PROFILE_compfunc_type(cmp)))
-#define sk_SRTP_PROTECTION_PROFILE_new_null() ((STACK_OF(SRTP_PROTECTION_PROFILE) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_SRTP_PROTECTION_PROFILE_freefunc_thunk))
+#define sk_SRTP_PROTECTION_PROFILE_new_null() ((STACK_OF(SRTP_PROTECTION_PROFILE) *)OPENSSL_sk_new_null())
 #define sk_SRTP_PROTECTION_PROFILE_new_reserve(cmp, n) ((STACK_OF(SRTP_PROTECTION_PROFILE) *)OPENSSL_sk_new_reserve(ossl_check_SRTP_PROTECTION_PROFILE_compfunc_type(cmp), (n)))
 #define sk_SRTP_PROTECTION_PROFILE_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_SRTP_PROTECTION_PROFILE_sk_type(sk), (n))
 #define sk_SRTP_PROTECTION_PROFILE_free(sk) OPENSSL_sk_free(ossl_check_SRTP_PROTECTION_PROFILE_sk_type(sk))
@@ -775,6 +776,9 @@ void SSL_CTX_set_client_cert_cb(SSL_CTX *ctx,
         EVP_PKEY **pkey));
 int (*SSL_CTX_get_client_cert_cb(SSL_CTX *ctx))(SSL *ssl, X509 **x509,
     EVP_PKEY **pkey);
+#ifndef OPENSSL_NO_ENGINE
+__owur int SSL_CTX_set_client_cert_engine(SSL_CTX *ctx, ENGINE *e);
+#endif
 void SSL_CTX_set_cookie_generate_cb(SSL_CTX *ctx,
     int (*app_gen_cookie_cb)(SSL *ssl,
         unsigned char
@@ -848,10 +852,6 @@ void SSL_CTX_set_alpn_select_cb(SSL_CTX *ctx,
     void *arg);
 void SSL_get0_alpn_selected(const SSL *ssl, const unsigned char **data,
     unsigned int *len);
-void SSL_CTX_get0_alpn_protos(SSL_CTX *ctx, const unsigned char **protos,
-    unsigned int *protos_len);
-void SSL_get0_alpn_protos(SSL *ssl, const unsigned char **protos,
-    unsigned int *protos_len);
 
 #ifndef OPENSSL_NO_PSK
 /*
@@ -1005,7 +1005,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(SSL_CIPHER, const SSL_CIPHER, SSL_CIPHER)
 #define sk_SSL_CIPHER_num(sk) OPENSSL_sk_num(ossl_check_const_SSL_CIPHER_sk_type(sk))
 #define sk_SSL_CIPHER_value(sk, idx) ((const SSL_CIPHER *)OPENSSL_sk_value(ossl_check_const_SSL_CIPHER_sk_type(sk), (idx)))
 #define sk_SSL_CIPHER_new(cmp) ((STACK_OF(SSL_CIPHER) *)OPENSSL_sk_new(ossl_check_SSL_CIPHER_compfunc_type(cmp)))
-#define sk_SSL_CIPHER_new_null() ((STACK_OF(SSL_CIPHER) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_SSL_CIPHER_freefunc_thunk))
+#define sk_SSL_CIPHER_new_null() ((STACK_OF(SSL_CIPHER) *)OPENSSL_sk_new_null())
 #define sk_SSL_CIPHER_new_reserve(cmp, n) ((STACK_OF(SSL_CIPHER) *)OPENSSL_sk_new_reserve(ossl_check_SSL_CIPHER_compfunc_type(cmp), (n)))
 #define sk_SSL_CIPHER_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_SSL_CIPHER_sk_type(sk), (n))
 #define sk_SSL_CIPHER_free(sk) OPENSSL_sk_free(ossl_check_SSL_CIPHER_sk_type(sk))
@@ -1881,9 +1881,6 @@ int SSL_up_ref(SSL *s);
 int SSL_is_dtls(const SSL *s);
 int SSL_is_tls(const SSL *s);
 int SSL_is_quic(const SSL *s);
-int SSL_CTX_is_quic(const SSL_CTX *c);
-int SSL_CTX_is_server(const SSL_CTX *c);
-
 __owur int SSL_set_session_id_context(SSL *ssl, const unsigned char *sid_ctx,
     unsigned int sid_ctx_len);
 
@@ -1973,9 +1970,7 @@ typedef int (*SSL_new_pending_conn_cb_fn)(SSL_CTX *ctx, SSL *new_ssl,
 void SSL_CTX_set_new_pending_conn_cb(SSL_CTX *c, SSL_new_pending_conn_cb_fn cb,
     void *arg);
 
-#ifndef OPENSSL_NO_DEPRECATED_4_0
-OSSL_DEPRECATEDIN_4_0 int SSL_client_hello_isv2(SSL *s);
-#endif
+int SSL_client_hello_isv2(SSL *s);
 unsigned int SSL_client_hello_get0_legacy_version(SSL *s);
 size_t SSL_client_hello_get0_random(SSL *s, const unsigned char **out);
 size_t SSL_client_hello_get0_session_id(SSL *s, const unsigned char **out);
@@ -2362,7 +2357,6 @@ size_t SSL_CTX_get_num_tickets(const SSL_CTX *ctx);
 /* QUIC support */
 int SSL_handle_events(SSL *s);
 __owur int SSL_get_event_timeout(SSL *s, struct timeval *tv, int *is_infinite);
-__owur int SSL_get_peer_addr(SSL *ssl, BIO_ADDR *peer_addr);
 __owur int SSL_get_rpoll_descriptor(SSL *s, BIO_POLL_DESCRIPTOR *desc);
 __owur int SSL_get_wpoll_descriptor(SSL *s, BIO_POLL_DESCRIPTOR *desc);
 __owur int SSL_net_read_desired(SSL *s);
@@ -2638,8 +2632,6 @@ void SSL_trace(int write_p, int version, int content_type,
 #ifndef OPENSSL_NO_SOCK
 int DTLSv1_listen(SSL *s, BIO_ADDR *client);
 #endif
-
-int SSL_listen_ex(SSL *listener, SSL *new_conn);
 
 #ifndef OPENSSL_NO_CT
 

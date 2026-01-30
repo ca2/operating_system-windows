@@ -56,7 +56,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_NAME, X509_NAME, X509_NAME)
 #define sk_X509_NAME_num(sk) OPENSSL_sk_num(ossl_check_const_X509_NAME_sk_type(sk))
 #define sk_X509_NAME_value(sk, idx) ((X509_NAME *)OPENSSL_sk_value(ossl_check_const_X509_NAME_sk_type(sk), (idx)))
 #define sk_X509_NAME_new(cmp) ((STACK_OF(X509_NAME) *)OPENSSL_sk_new(ossl_check_X509_NAME_compfunc_type(cmp)))
-#define sk_X509_NAME_new_null() ((STACK_OF(X509_NAME) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_NAME_freefunc_thunk))
+#define sk_X509_NAME_new_null() ((STACK_OF(X509_NAME) *)OPENSSL_sk_new_null())
 #define sk_X509_NAME_new_reserve(cmp, n) ((STACK_OF(X509_NAME) *)OPENSSL_sk_new_reserve(ossl_check_X509_NAME_compfunc_type(cmp), (n)))
 #define sk_X509_NAME_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_NAME_sk_type(sk), (n))
 #define sk_X509_NAME_free(sk) OPENSSL_sk_free(ossl_check_X509_NAME_sk_type(sk))
@@ -82,7 +82,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509, X509, X509)
 #define sk_X509_num(sk) OPENSSL_sk_num(ossl_check_const_X509_sk_type(sk))
 #define sk_X509_value(sk, idx) ((X509 *)OPENSSL_sk_value(ossl_check_const_X509_sk_type(sk), (idx)))
 #define sk_X509_new(cmp) ((STACK_OF(X509) *)OPENSSL_sk_new(ossl_check_X509_compfunc_type(cmp)))
-#define sk_X509_new_null() ((STACK_OF(X509) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_freefunc_thunk))
+#define sk_X509_new_null() ((STACK_OF(X509) *)OPENSSL_sk_new_null())
 #define sk_X509_new_reserve(cmp, n) ((STACK_OF(X509) *)OPENSSL_sk_new_reserve(ossl_check_X509_compfunc_type(cmp), (n)))
 #define sk_X509_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_sk_type(sk), (n))
 #define sk_X509_free(sk) OPENSSL_sk_free(ossl_check_X509_sk_type(sk))
@@ -108,7 +108,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_REVOKED, X509_REVOKED, X509_REVOKED)
 #define sk_X509_REVOKED_num(sk) OPENSSL_sk_num(ossl_check_const_X509_REVOKED_sk_type(sk))
 #define sk_X509_REVOKED_value(sk, idx) ((X509_REVOKED *)OPENSSL_sk_value(ossl_check_const_X509_REVOKED_sk_type(sk), (idx)))
 #define sk_X509_REVOKED_new(cmp) ((STACK_OF(X509_REVOKED) *)OPENSSL_sk_new(ossl_check_X509_REVOKED_compfunc_type(cmp)))
-#define sk_X509_REVOKED_new_null() ((STACK_OF(X509_REVOKED) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_REVOKED_freefunc_thunk))
+#define sk_X509_REVOKED_new_null() ((STACK_OF(X509_REVOKED) *)OPENSSL_sk_new_null())
 #define sk_X509_REVOKED_new_reserve(cmp, n) ((STACK_OF(X509_REVOKED) *)OPENSSL_sk_new_reserve(ossl_check_X509_REVOKED_compfunc_type(cmp), (n)))
 #define sk_X509_REVOKED_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_REVOKED_sk_type(sk), (n))
 #define sk_X509_REVOKED_free(sk) OPENSSL_sk_free(ossl_check_X509_REVOKED_sk_type(sk))
@@ -134,7 +134,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_CRL, X509_CRL, X509_CRL)
 #define sk_X509_CRL_num(sk) OPENSSL_sk_num(ossl_check_const_X509_CRL_sk_type(sk))
 #define sk_X509_CRL_value(sk, idx) ((X509_CRL *)OPENSSL_sk_value(ossl_check_const_X509_CRL_sk_type(sk), (idx)))
 #define sk_X509_CRL_new(cmp) ((STACK_OF(X509_CRL) *)OPENSSL_sk_new(ossl_check_X509_CRL_compfunc_type(cmp)))
-#define sk_X509_CRL_new_null() ((STACK_OF(X509_CRL) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_CRL_freefunc_thunk))
+#define sk_X509_CRL_new_null() ((STACK_OF(X509_CRL) *)OPENSSL_sk_new_null())
 #define sk_X509_CRL_new_reserve(cmp, n) ((STACK_OF(X509_CRL) *)OPENSSL_sk_new_reserve(ossl_check_X509_CRL_compfunc_type(cmp), (n)))
 #define sk_X509_CRL_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_CRL_sk_type(sk), (n))
 #define sk_X509_CRL_free(sk) OPENSSL_sk_free(ossl_check_X509_CRL_sk_type(sk))
@@ -209,7 +209,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_NAME_ENTRY, X509_NAME_ENTRY, X509_NAME_ENTRY)
 #define sk_X509_NAME_ENTRY_num(sk) OPENSSL_sk_num(ossl_check_const_X509_NAME_ENTRY_sk_type(sk))
 #define sk_X509_NAME_ENTRY_value(sk, idx) ((X509_NAME_ENTRY *)OPENSSL_sk_value(ossl_check_const_X509_NAME_ENTRY_sk_type(sk), (idx)))
 #define sk_X509_NAME_ENTRY_new(cmp) ((STACK_OF(X509_NAME_ENTRY) *)OPENSSL_sk_new(ossl_check_X509_NAME_ENTRY_compfunc_type(cmp)))
-#define sk_X509_NAME_ENTRY_new_null() ((STACK_OF(X509_NAME_ENTRY) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_NAME_ENTRY_freefunc_thunk))
+#define sk_X509_NAME_ENTRY_new_null() ((STACK_OF(X509_NAME_ENTRY) *)OPENSSL_sk_new_null())
 #define sk_X509_NAME_ENTRY_new_reserve(cmp, n) ((STACK_OF(X509_NAME_ENTRY) *)OPENSSL_sk_new_reserve(ossl_check_X509_NAME_ENTRY_compfunc_type(cmp), (n)))
 #define sk_X509_NAME_ENTRY_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_NAME_ENTRY_sk_type(sk), (n))
 #define sk_X509_NAME_ENTRY_free(sk) OPENSSL_sk_free(ossl_check_X509_NAME_ENTRY_sk_type(sk))
@@ -242,7 +242,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_EXTENSION, X509_EXTENSION, X509_EXTENSION)
 #define sk_X509_EXTENSION_num(sk) OPENSSL_sk_num(ossl_check_const_X509_EXTENSION_sk_type(sk))
 #define sk_X509_EXTENSION_value(sk, idx) ((X509_EXTENSION *)OPENSSL_sk_value(ossl_check_const_X509_EXTENSION_sk_type(sk), (idx)))
 #define sk_X509_EXTENSION_new(cmp) ((STACK_OF(X509_EXTENSION) *)OPENSSL_sk_new(ossl_check_X509_EXTENSION_compfunc_type(cmp)))
-#define sk_X509_EXTENSION_new_null() ((STACK_OF(X509_EXTENSION) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_EXTENSION_freefunc_thunk))
+#define sk_X509_EXTENSION_new_null() ((STACK_OF(X509_EXTENSION) *)OPENSSL_sk_new_null())
 #define sk_X509_EXTENSION_new_reserve(cmp, n) ((STACK_OF(X509_EXTENSION) *)OPENSSL_sk_new_reserve(ossl_check_X509_EXTENSION_compfunc_type(cmp), (n)))
 #define sk_X509_EXTENSION_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_EXTENSION_sk_type(sk), (n))
 #define sk_X509_EXTENSION_free(sk) OPENSSL_sk_free(ossl_check_X509_EXTENSION_sk_type(sk))
@@ -273,7 +273,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_ATTRIBUTE, X509_ATTRIBUTE, X509_ATTRIBUTE)
 #define sk_X509_ATTRIBUTE_num(sk) OPENSSL_sk_num(ossl_check_const_X509_ATTRIBUTE_sk_type(sk))
 #define sk_X509_ATTRIBUTE_value(sk, idx) ((X509_ATTRIBUTE *)OPENSSL_sk_value(ossl_check_const_X509_ATTRIBUTE_sk_type(sk), (idx)))
 #define sk_X509_ATTRIBUTE_new(cmp) ((STACK_OF(X509_ATTRIBUTE) *)OPENSSL_sk_new(ossl_check_X509_ATTRIBUTE_compfunc_type(cmp)))
-#define sk_X509_ATTRIBUTE_new_null() ((STACK_OF(X509_ATTRIBUTE) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_ATTRIBUTE_freefunc_thunk))
+#define sk_X509_ATTRIBUTE_new_null() ((STACK_OF(X509_ATTRIBUTE) *)OPENSSL_sk_new_null())
 #define sk_X509_ATTRIBUTE_new_reserve(cmp, n) ((STACK_OF(X509_ATTRIBUTE) *)OPENSSL_sk_new_reserve(ossl_check_X509_ATTRIBUTE_compfunc_type(cmp), (n)))
 #define sk_X509_ATTRIBUTE_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_ATTRIBUTE_sk_type(sk), (n))
 #define sk_X509_ATTRIBUTE_free(sk) OPENSSL_sk_free(ossl_check_X509_ATTRIBUTE_sk_type(sk))
@@ -397,7 +397,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_INFO, X509_INFO, X509_INFO)
 #define sk_X509_INFO_num(sk) OPENSSL_sk_num(ossl_check_const_X509_INFO_sk_type(sk))
 #define sk_X509_INFO_value(sk, idx) ((X509_INFO *)OPENSSL_sk_value(ossl_check_const_X509_INFO_sk_type(sk), (idx)))
 #define sk_X509_INFO_new(cmp) ((STACK_OF(X509_INFO) *)OPENSSL_sk_new(ossl_check_X509_INFO_compfunc_type(cmp)))
-#define sk_X509_INFO_new_null() ((STACK_OF(X509_INFO) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_INFO_freefunc_thunk))
+#define sk_X509_INFO_new_null() ((STACK_OF(X509_INFO) *)OPENSSL_sk_new_null())
 #define sk_X509_INFO_new_reserve(cmp, n) ((STACK_OF(X509_INFO) *)OPENSSL_sk_new_reserve(ossl_check_X509_INFO_compfunc_type(cmp), (n)))
 #define sk_X509_INFO_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_INFO_sk_type(sk), (n))
 #define sk_X509_INFO_free(sk) OPENSSL_sk_free(ossl_check_X509_INFO_sk_type(sk))
@@ -535,7 +535,7 @@ char *NETSCAPE_SPKI_b64_encode(NETSCAPE_SPKI *x);
 EVP_PKEY *NETSCAPE_SPKI_get_pubkey(NETSCAPE_SPKI *x);
 int NETSCAPE_SPKI_set_pubkey(NETSCAPE_SPKI *x, EVP_PKEY *pkey);
 
-int NETSCAPE_SPKI_print(BIO *out, const NETSCAPE_SPKI *spki);
+int NETSCAPE_SPKI_print(BIO *out, NETSCAPE_SPKI *spki);
 
 int X509_signature_dump(BIO *bp, const ASN1_STRING *sig, int indent);
 int X509_signature_print(BIO *bp, const X509_ALGOR *alg,
@@ -689,15 +689,10 @@ int X509_ALGOR_copy(X509_ALGOR *dest, const X509_ALGOR *src);
 DECLARE_ASN1_DUP_FUNCTION(X509_NAME)
 DECLARE_ASN1_DUP_FUNCTION(X509_NAME_ENTRY)
 
-#ifndef OPENSSL_NO_DEPRECATED_4_0
-OSSL_DEPRECATEDIN_4_0 int X509_cmp_time(const ASN1_TIME *s, time_t *t);
-OSSL_DEPRECATEDIN_4_0 int X509_cmp_current_time(const ASN1_TIME *s);
-OSSL_DEPRECATEDIN_4_0 int X509_cmp_timeframe(const X509_VERIFY_PARAM *vpm,
-    const ASN1_TIME *start,
-    const ASN1_TIME *end);
-#endif
-int X509_check_certificate_times(const X509_VERIFY_PARAM *vpm, const X509 *x,
-    int *error);
+int X509_cmp_time(const ASN1_TIME *s, time_t *t);
+int X509_cmp_current_time(const ASN1_TIME *s);
+int X509_cmp_timeframe(const X509_VERIFY_PARAM *vpm,
+    const ASN1_TIME *start, const ASN1_TIME *end);
 ASN1_TIME *X509_time_adj(ASN1_TIME *s, long adj, time_t *t);
 ASN1_TIME *X509_time_adj_ex(ASN1_TIME *s,
     int offset_day, long offset_sec, time_t *t);
@@ -796,8 +791,8 @@ ASN1_OCTET_STRING *X509_REQ_get0_distinguishing_id(X509_REQ *x);
 
 int X509_alias_set1(X509 *x, const unsigned char *name, int len);
 int X509_keyid_set1(X509 *x, const unsigned char *id, int len);
-unsigned char *X509_alias_get0(const X509 *x, int *len);
-unsigned char *X509_keyid_get0(const X509 *x, int *len);
+unsigned char *X509_alias_get0(X509 *x, int *len);
+unsigned char *X509_keyid_get0(X509 *x, int *len);
 
 DECLARE_ASN1_FUNCTIONS(X509_REVOKED)
 DECLARE_ASN1_FUNCTIONS(X509_CRL_INFO)
@@ -866,6 +861,7 @@ int X509_set1_notBefore(X509 *x, const ASN1_TIME *tm);
 const ASN1_TIME *X509_get0_notAfter(const X509 *x);
 ASN1_TIME *X509_getm_notAfter(const X509 *x);
 int X509_set1_notAfter(X509 *x, const ASN1_TIME *tm);
+int X509_set_pubkey(X509 *x, EVP_PKEY *pkey);
 int X509_up_ref(X509 *x);
 int X509_get_signature_type(const X509 *x);
 
@@ -876,20 +872,19 @@ int X509_get_signature_type(const X509 *x);
 #define X509_set_notAfter X509_set1_notAfter
 #endif
 
-int X509_set_pubkey(X509 *x, EVP_PKEY *pkey);
-EVP_PKEY *X509_get_pubkey(X509 *x); /* deprecated */
-EVP_PKEY *X509_get0_pubkey(const X509 *x);
 /*
  * This one is only used so that a binary form can output, as in
  * i2d_X509_PUBKEY(X509_get_X509_PUBKEY(x), &buf)
  */
-const X509_PUBKEY *X509_get_X509_PUBKEY(const X509 *x);
+X509_PUBKEY *X509_get_X509_PUBKEY(const X509 *x);
 const STACK_OF(X509_EXTENSION) *X509_get0_extensions(const X509 *x);
 void X509_get0_uids(const X509 *x, const ASN1_BIT_STRING **piuid,
     const ASN1_BIT_STRING **psuid);
 const X509_ALGOR *X509_get0_tbs_sigalg(const X509 *x);
 
-const ASN1_BIT_STRING *X509_get0_pubkey_bitstr(const X509 *x);
+EVP_PKEY *X509_get0_pubkey(const X509 *x);
+EVP_PKEY *X509_get_pubkey(X509 *x);
+ASN1_BIT_STRING *X509_get0_pubkey_bitstr(const X509 *x);
 
 #define X509_REQ_VERSION_1 0
 
@@ -904,13 +899,13 @@ int X509_REQ_set1_signature_algo(X509_REQ *req, X509_ALGOR *palg);
 int X509_REQ_get_signature_nid(const X509_REQ *req);
 int i2d_re_X509_REQ_tbs(X509_REQ *req, unsigned char **pp);
 int X509_REQ_set_pubkey(X509_REQ *x, EVP_PKEY *pkey);
-EVP_PKEY *X509_REQ_get_pubkey(X509_REQ *req); /* deprecated */
+EVP_PKEY *X509_REQ_get_pubkey(X509_REQ *req);
 EVP_PKEY *X509_REQ_get0_pubkey(const X509_REQ *req);
-X509_PUBKEY *X509_REQ_get_X509_PUBKEY(const X509_REQ *req);
+X509_PUBKEY *X509_REQ_get_X509_PUBKEY(X509_REQ *req);
 int X509_REQ_extension_nid(int nid);
 int *X509_REQ_get_extension_nids(void);
 void X509_REQ_set_extension_nids(int *nids);
-STACK_OF(X509_EXTENSION) *X509_REQ_get_extensions(const X509_REQ *req);
+STACK_OF(X509_EXTENSION) *X509_REQ_get_extensions(OSSL_FUTURE_CONST X509_REQ *req);
 int X509_REQ_add_extensions_nid(X509_REQ *req,
     const STACK_OF(X509_EXTENSION) *exts, int nid);
 int X509_REQ_add_extensions(X509_REQ *req, const STACK_OF(X509_EXTENSION) *ext);
@@ -955,7 +950,7 @@ OSSL_DEPRECATEDIN_1_1_0 ASN1_TIME *X509_CRL_get_nextUpdate(X509_CRL *crl);
 #endif
 X509_NAME *X509_CRL_get_issuer(const X509_CRL *crl);
 const STACK_OF(X509_EXTENSION) *X509_CRL_get0_extensions(const X509_CRL *crl);
-STACK_OF(X509_REVOKED) *X509_CRL_get_REVOKED(const X509_CRL *crl);
+STACK_OF(X509_REVOKED) *X509_CRL_get_REVOKED(X509_CRL *crl);
 const X509_ALGOR *X509_CRL_get0_tbs_sigalg(const X509_CRL *crl);
 void X509_CRL_get0_signature(const X509_CRL *crl, const ASN1_BIT_STRING **psig,
     const X509_ALGOR **palg);
@@ -1017,24 +1012,29 @@ unsigned long X509_NAME_hash_old(const X509_NAME *x);
 
 int X509_CRL_cmp(const X509_CRL *a, const X509_CRL *b);
 int X509_CRL_match(const X509_CRL *a, const X509_CRL *b);
-int X509_aux_print(BIO *out, const X509 *x, int indent);
+int X509_aux_print(BIO *out, X509 *x, int indent);
 #ifndef OPENSSL_NO_STDIO
-int X509_print_ex_fp(FILE *bp, X509 *x, unsigned long nmflag, unsigned long cflag);
+int X509_print_ex_fp(FILE *bp, X509 *x, unsigned long nmflag,
+    unsigned long cflag);
 int X509_print_fp(FILE *bp, X509 *x);
 int X509_CRL_print_fp(FILE *bp, X509_CRL *x);
-int X509_REQ_print_fp(FILE *bp, const X509_REQ *req);
-int X509_NAME_print_ex_fp(FILE *fp, const X509_NAME *nm, int indent, unsigned long flags);
+int X509_REQ_print_fp(FILE *bp, X509_REQ *req);
+int X509_NAME_print_ex_fp(FILE *fp, const X509_NAME *nm, int indent,
+    unsigned long flags);
 #endif
 
 int X509_NAME_print(BIO *bp, const X509_NAME *name, int obase);
-int X509_NAME_print_ex(BIO *out, const X509_NAME *nm, int indent, unsigned long flags);
-int X509_print_ex(BIO *bp, const X509 *x, unsigned long nmflag, unsigned long cflag);
-int X509_print(BIO *bp, const X509 *x);
-int X509_ocspid_print(BIO *bp, const X509 *x);
-int X509_CRL_print_ex(BIO *out, const X509_CRL *x, unsigned long nmflag);
-int X509_CRL_print(BIO *bp, const X509_CRL *x);
-int X509_REQ_print_ex(BIO *bp, const X509_REQ *x, unsigned long nmflag, unsigned long cflag);
-int X509_REQ_print(BIO *bp, const X509_REQ *req);
+int X509_NAME_print_ex(BIO *out, const X509_NAME *nm, int indent,
+    unsigned long flags);
+int X509_print_ex(BIO *bp, X509 *x, unsigned long nmflag,
+    unsigned long cflag);
+int X509_print(BIO *bp, X509 *x);
+int X509_ocspid_print(BIO *bp, X509 *x);
+int X509_CRL_print_ex(BIO *out, X509_CRL *x, unsigned long nmflag);
+int X509_CRL_print(BIO *bp, X509_CRL *x);
+int X509_REQ_print_ex(BIO *bp, X509_REQ *x, unsigned long nmflag,
+    unsigned long cflag);
+int X509_REQ_print(BIO *bp, X509_REQ *req);
 
 int X509_NAME_entry_count(const X509_NAME *name);
 int X509_NAME_get_text_by_NID(const X509_NAME *name, int nid,

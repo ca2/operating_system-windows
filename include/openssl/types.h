@@ -33,26 +33,32 @@ extern "C" {
 #include <openssl/safestack.h>
 #include <openssl/macros.h>
 
+#if OPENSSL_VERSION_MAJOR >= 4
+#define OSSL_FUTURE_CONST const
+#else
+#define OSSL_FUTURE_CONST
+#endif
+
 typedef struct ossl_provider_st OSSL_PROVIDER; /* Provider Object */
 
 #ifdef NO_ASN1_TYPEDEFS
-typedef ASN1_STRING ASN1_INTEGER;
-typedef ASN1_STRING ASN1_ENUMERATED;
-typedef ASN1_STRING ASN1_BIT_STRING;
-typedef ASN1_STRING ASN1_OCTET_STRING;
-typedef ASN1_STRING ASN1_PRINTABLESTRING;
-typedef ASN1_STRING ASN1_T61STRING;
-typedef ASN1_STRING ASN1_IA5STRING;
-typedef ASN1_STRING ASN1_UTCTIME;
-typedef ASN1_STRING ASN1_GENERALIZEDTIME;
-typedef ASN1_STRING ASN1_TIME;
-typedef ASN1_STRING ASN1_GENERALSTRING;
-typedef ASN1_STRING ASN1_UNIVERSALSTRING;
-typedef ASN1_STRING ASN1_BMPSTRING;
-typedef ASN1_STRING ASN1_VISIBLESTRING;
-typedef ASN1_STRING ASN1_UTF8STRING;
-typedef int ASN1_BOOLEAN;
-typedef int ASN1_NULL;
+#define ASN1_INTEGER ASN1_STRING
+#define ASN1_ENUMERATED ASN1_STRING
+#define ASN1_BIT_STRING ASN1_STRING
+#define ASN1_OCTET_STRING ASN1_STRING
+#define ASN1_PRINTABLESTRING ASN1_STRING
+#define ASN1_T61STRING ASN1_STRING
+#define ASN1_IA5STRING ASN1_STRING
+#define ASN1_UTCTIME ASN1_STRING
+#define ASN1_GENERALIZEDTIME ASN1_STRING
+#define ASN1_TIME ASN1_STRING
+#define ASN1_GENERALSTRING ASN1_STRING
+#define ASN1_UNIVERSALSTRING ASN1_STRING
+#define ASN1_BMPSTRING ASN1_STRING
+#define ASN1_VISIBLESTRING ASN1_STRING
+#define ASN1_UTF8STRING ASN1_STRING
+#define ASN1_BOOLEAN int
+#define ASN1_NULL int
 #else
 typedef struct asn1_string_st ASN1_INTEGER;
 typedef struct asn1_string_st ASN1_ENUMERATED;
@@ -217,7 +223,6 @@ typedef struct ct_policy_eval_ctx_st CT_POLICY_EVAL_CTX;
 
 typedef struct ossl_store_info_st OSSL_STORE_INFO;
 typedef struct ossl_store_search_st OSSL_STORE_SEARCH;
-typedef struct ossl_store_loader_st OSSL_STORE_LOADER;
 
 typedef struct ossl_lib_ctx_st OSSL_LIB_CTX;
 

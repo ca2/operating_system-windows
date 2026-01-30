@@ -219,7 +219,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(void, void, void)
 #define sk_void_num(sk) OPENSSL_sk_num(ossl_check_const_void_sk_type(sk))
 #define sk_void_value(sk, idx) ((void *)OPENSSL_sk_value(ossl_check_const_void_sk_type(sk), (idx)))
 #define sk_void_new(cmp) ((STACK_OF(void) *)OPENSSL_sk_new(ossl_check_void_compfunc_type(cmp)))
-#define sk_void_new_null() ((STACK_OF(void) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_void_freefunc_thunk))
+#define sk_void_new_null() ((STACK_OF(void) *)OPENSSL_sk_new_null())
 #define sk_void_new_reserve(cmp, n) ((STACK_OF(void) *)OPENSSL_sk_new_reserve(ossl_check_void_compfunc_type(cmp), (n)))
 #define sk_void_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_void_sk_type(sk), (n))
 #define sk_void_free(sk) OPENSSL_sk_free(ossl_check_void_sk_type(sk))
@@ -510,6 +510,13 @@ int CRYPTO_memcmp(const void *in_a, const void *in_b, size_t len);
 #define OPENSSL_INIT_LOAD_CONFIG 0x00000040L
 #define OPENSSL_INIT_NO_LOAD_CONFIG 0x00000080L
 #define OPENSSL_INIT_ASYNC 0x00000100L
+#define OPENSSL_INIT_ENGINE_RDRAND 0x00000200L
+#define OPENSSL_INIT_ENGINE_DYNAMIC 0x00000400L
+#define OPENSSL_INIT_ENGINE_OPENSSL 0x00000800L
+#define OPENSSL_INIT_ENGINE_CRYPTODEV 0x00001000L
+#define OPENSSL_INIT_ENGINE_CAPI 0x00002000L
+#define OPENSSL_INIT_ENGINE_PADLOCK 0x00004000L
+#define OPENSSL_INIT_ENGINE_AFALG 0x00008000L
 /* FREE:                                     0x00010000L */
 #define OPENSSL_INIT_ATFORK 0x00020000L
 /* OPENSSL_INIT_BASE_ONLY                    0x00040000L */
@@ -523,18 +530,10 @@ int CRYPTO_memcmp(const void *in_a, const void *in_b, size_t len);
 /* FREE: 0x80000000L */
 /* Max OPENSSL_INIT flag value is 0x80000000 */
 
-/* ENGINEs are no longer available */
-#define OPENSSL_INIT_ENGINE_ALL_BUILTIN 0
-
-#ifdef OPENSSL_ENGINE_STUBS
-#define OPENSSL_INIT_ENGINE_RDRAND 0
-#define OPENSSL_INIT_ENGINE_DYNAMIC 0
-#define OPENSSL_INIT_ENGINE_OPENSSL 0
-#define OPENSSL_INIT_ENGINE_CRYPTODEV 0
-#define OPENSSL_INIT_ENGINE_CAPI 0
-#define OPENSSL_INIT_ENGINE_PADLOCK 0
-#define OPENSSL_INIT_ENGINE_AFALG 0
-#endif
+/* openssl and dasync not counted as builtin */
+#define OPENSSL_INIT_ENGINE_ALL_BUILTIN                       \
+    (OPENSSL_INIT_ENGINE_RDRAND | OPENSSL_INIT_ENGINE_DYNAMIC \
+        | OPENSSL_INIT_ENGINE_CRYPTODEV | OPENSSL_INIT_ENGINE_CAPI | OPENSSL_INIT_ENGINE_PADLOCK)
 
 /* Library initialisation functions */
 void OPENSSL_cleanup(void);

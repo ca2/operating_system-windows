@@ -75,7 +75,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_LOOKUP, X509_LOOKUP, X509_LOOKUP)
 #define sk_X509_LOOKUP_num(sk) OPENSSL_sk_num(ossl_check_const_X509_LOOKUP_sk_type(sk))
 #define sk_X509_LOOKUP_value(sk, idx) ((X509_LOOKUP *)OPENSSL_sk_value(ossl_check_const_X509_LOOKUP_sk_type(sk), (idx)))
 #define sk_X509_LOOKUP_new(cmp) ((STACK_OF(X509_LOOKUP) *)OPENSSL_sk_new(ossl_check_X509_LOOKUP_compfunc_type(cmp)))
-#define sk_X509_LOOKUP_new_null() ((STACK_OF(X509_LOOKUP) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_LOOKUP_freefunc_thunk))
+#define sk_X509_LOOKUP_new_null() ((STACK_OF(X509_LOOKUP) *)OPENSSL_sk_new_null())
 #define sk_X509_LOOKUP_new_reserve(cmp, n) ((STACK_OF(X509_LOOKUP) *)OPENSSL_sk_new_reserve(ossl_check_X509_LOOKUP_compfunc_type(cmp), (n)))
 #define sk_X509_LOOKUP_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_LOOKUP_sk_type(sk), (n))
 #define sk_X509_LOOKUP_free(sk) OPENSSL_sk_free(ossl_check_X509_LOOKUP_sk_type(sk))
@@ -101,7 +101,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_OBJECT, X509_OBJECT, X509_OBJECT)
 #define sk_X509_OBJECT_num(sk) OPENSSL_sk_num(ossl_check_const_X509_OBJECT_sk_type(sk))
 #define sk_X509_OBJECT_value(sk, idx) ((X509_OBJECT *)OPENSSL_sk_value(ossl_check_const_X509_OBJECT_sk_type(sk), (idx)))
 #define sk_X509_OBJECT_new(cmp) ((STACK_OF(X509_OBJECT) *)OPENSSL_sk_new(ossl_check_X509_OBJECT_compfunc_type(cmp)))
-#define sk_X509_OBJECT_new_null() ((STACK_OF(X509_OBJECT) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_OBJECT_freefunc_thunk))
+#define sk_X509_OBJECT_new_null() ((STACK_OF(X509_OBJECT) *)OPENSSL_sk_new_null())
 #define sk_X509_OBJECT_new_reserve(cmp, n) ((STACK_OF(X509_OBJECT) *)OPENSSL_sk_new_reserve(ossl_check_X509_OBJECT_compfunc_type(cmp), (n)))
 #define sk_X509_OBJECT_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_OBJECT_sk_type(sk), (n))
 #define sk_X509_OBJECT_free(sk) OPENSSL_sk_free(ossl_check_X509_OBJECT_sk_type(sk))
@@ -127,7 +127,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_VERIFY_PARAM, X509_VERIFY_PARAM, X509_VERIFY_P
 #define sk_X509_VERIFY_PARAM_num(sk) OPENSSL_sk_num(ossl_check_const_X509_VERIFY_PARAM_sk_type(sk))
 #define sk_X509_VERIFY_PARAM_value(sk, idx) ((X509_VERIFY_PARAM *)OPENSSL_sk_value(ossl_check_const_X509_VERIFY_PARAM_sk_type(sk), (idx)))
 #define sk_X509_VERIFY_PARAM_new(cmp) ((STACK_OF(X509_VERIFY_PARAM) *)OPENSSL_sk_new(ossl_check_X509_VERIFY_PARAM_compfunc_type(cmp)))
-#define sk_X509_VERIFY_PARAM_new_null() ((STACK_OF(X509_VERIFY_PARAM) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_VERIFY_PARAM_freefunc_thunk))
+#define sk_X509_VERIFY_PARAM_new_null() ((STACK_OF(X509_VERIFY_PARAM) *)OPENSSL_sk_new_null())
 #define sk_X509_VERIFY_PARAM_new_reserve(cmp, n) ((STACK_OF(X509_VERIFY_PARAM) *)OPENSSL_sk_new_reserve(ossl_check_X509_VERIFY_PARAM_compfunc_type(cmp), (n)))
 #define sk_X509_VERIFY_PARAM_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_VERIFY_PARAM_sk_type(sk), (n))
 #define sk_X509_VERIFY_PARAM_free(sk) OPENSSL_sk_free(ossl_check_X509_VERIFY_PARAM_sk_type(sk))
@@ -166,7 +166,7 @@ SKM_DEFINE_STACK_OF_INTERNAL(X509_TRUST, X509_TRUST, X509_TRUST)
 #define sk_X509_TRUST_num(sk) OPENSSL_sk_num(ossl_check_const_X509_TRUST_sk_type(sk))
 #define sk_X509_TRUST_value(sk, idx) ((X509_TRUST *)OPENSSL_sk_value(ossl_check_const_X509_TRUST_sk_type(sk), (idx)))
 #define sk_X509_TRUST_new(cmp) ((STACK_OF(X509_TRUST) *)OPENSSL_sk_new(ossl_check_X509_TRUST_compfunc_type(cmp)))
-#define sk_X509_TRUST_new_null() ((STACK_OF(X509_TRUST) *)OPENSSL_sk_set_thunks(OPENSSL_sk_new_null(), sk_X509_TRUST_freefunc_thunk))
+#define sk_X509_TRUST_new_null() ((STACK_OF(X509_TRUST) *)OPENSSL_sk_new_null())
 #define sk_X509_TRUST_new_reserve(cmp, n) ((STACK_OF(X509_TRUST) *)OPENSSL_sk_new_reserve(ossl_check_X509_TRUST_compfunc_type(cmp), (n)))
 #define sk_X509_TRUST_reserve(sk, n) OPENSSL_sk_reserve(ossl_check_X509_TRUST_sk_type(sk), (n))
 #define sk_X509_TRUST_free(sk) OPENSSL_sk_free(ossl_check_X509_TRUST_sk_type(sk))
@@ -236,8 +236,8 @@ int X509_add1_trust_object(X509 *x, const ASN1_OBJECT *obj);
 int X509_add1_reject_object(X509 *x, const ASN1_OBJECT *obj);
 void X509_trust_clear(X509 *x);
 void X509_reject_clear(X509 *x);
-STACK_OF(ASN1_OBJECT) *X509_get0_trust_objects(const X509 *x);
-STACK_OF(ASN1_OBJECT) *X509_get0_reject_objects(const X509 *x);
+STACK_OF(ASN1_OBJECT) *X509_get0_trust_objects(X509 *x);
+STACK_OF(ASN1_OBJECT) *X509_get0_reject_objects(X509 *x);
 
 int (*X509_TRUST_set_default(int (*trust)(int, X509 *, int)))(int, X509 *,
     int);
@@ -266,7 +266,7 @@ typedef int (*X509_STORE_CTX_cert_crl_fn)(X509_STORE_CTX *ctx,
     X509_CRL *crl, X509 *x);
 typedef int (*X509_STORE_CTX_check_policy_fn)(X509_STORE_CTX *ctx);
 typedef STACK_OF(X509)
-    *(*X509_STORE_CTX_lookup_certs_fn)(const X509_STORE_CTX *ctx,
+    *(*X509_STORE_CTX_lookup_certs_fn)(X509_STORE_CTX *ctx,
         const X509_NAME *nm);
 typedef STACK_OF(X509_CRL)
     *(*X509_STORE_CTX_lookup_crls_fn)(const X509_STORE_CTX *ctx,
@@ -518,13 +518,10 @@ void X509_STORE_free(X509_STORE *xs);
 int X509_STORE_lock(X509_STORE *xs);
 int X509_STORE_unlock(X509_STORE *xs);
 int X509_STORE_up_ref(X509_STORE *xs);
-#ifndef OPENSSL_NO_DEPRECATED_4_0
-OSSL_DEPRECATEDIN_4_0_FOR("Use X509_STORE_get1_objects")
 STACK_OF(X509_OBJECT) *X509_STORE_get0_objects(const X509_STORE *xs);
-#endif
 STACK_OF(X509_OBJECT) *X509_STORE_get1_objects(X509_STORE *xs);
 STACK_OF(X509) *X509_STORE_get1_all_certs(X509_STORE *xs);
-STACK_OF(X509) *X509_STORE_CTX_get1_certs(const X509_STORE_CTX *xs,
+STACK_OF(X509) *X509_STORE_CTX_get1_certs(X509_STORE_CTX *xs,
     const X509_NAME *nm);
 STACK_OF(X509_CRL) *X509_STORE_CTX_get1_crls(const X509_STORE_CTX *st,
     const X509_NAME *nm);
