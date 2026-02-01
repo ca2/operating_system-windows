@@ -15,6 +15,7 @@
 #include "acme/filesystem/filesystem/file_context.h"
 #include "acme/filesystem/filesystem/directory_context.h"
 //#include "acme/filesystem/filesystem/folder_dialog.h"
+#include "acme/operating_system/cpu_features.h"
 #include "acme/operating_system/process.h"
 #include "acme/operating_system/summary.h"
 #include "acme/parallelization/install_mutex.h"
@@ -4784,12 +4785,15 @@ namespace acme_windows
 
          m_poperatingsystemsummary = psummary;
 
+
+         ::string strArchitecture = ::operating_system::machine_architecture();
+
          psummary->m_strSystem = "windows";
          psummary->m_strSystemBranch = "windows";
          psummary->m_strSystemFamily = "windows";
          psummary->m_strSystemRelease = "10";
-         psummary->m_strSystemArchitecture = "x64";
-         psummary->m_strSystemAmbientReleaseArchitecture = "windows/x64";
+         psummary->m_strSystemArchitecture = strArchitecture;
+         psummary->m_strSystemAmbientReleaseArchitecture = "windows/" + strArchitecture;
          //psummary->m_strSlashedStore = "windows";
 
       }
