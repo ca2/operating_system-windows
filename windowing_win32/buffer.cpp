@@ -488,10 +488,10 @@ namespace windowing_win32
       else
       {
 
-         if (!pbufferitem->m_pgraphics)
+         if (!pbufferitem->m_pgraphicsBufferItem)
          {
 
-            øconstruct(pbufferitem->m_pgraphics);
+            øconstruct(pbufferitem->m_pgraphicsBufferItem);
 
             auto puserinteraction = dynamic_cast < ::user::interaction * >( m_pwindow->m_pacmeuserinteraction.m_p);
 
@@ -504,7 +504,7 @@ namespace windowing_win32
             //else
             //{
 
-            pbufferitem->m_pgraphics->create_for_window_draw2d(puserinteraction, pbufferitem->m_sizeBufferItemDraw);
+            pbufferitem->m_pgraphicsBufferItem->create_for_window_draw2d(puserinteraction, pbufferitem->m_sizeBufferItemDraw);
 
                //pbufferitem->m_pgraphics->create_memory_graphics(pbufferitem->m_sizeBufferItemDraw);
 
@@ -518,7 +518,7 @@ namespace windowing_win32
          else
          {
 
-            pbufferitem->m_pgraphics->defer_set_size(pbufferitem->m_sizeBufferItemDraw);
+            pbufferitem->m_pgraphicsBufferItem->defer_set_size(pbufferitem->m_sizeBufferItemDraw);
 
          }
 
@@ -1068,7 +1068,8 @@ namespace windowing_win32
             if (m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
             {
 
-               throw ::exception(error_failed);
+               //throw ::exception(error_failed);
+               warning("m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s");
 
             }
 

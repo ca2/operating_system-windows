@@ -10,7 +10,7 @@
 #include "aqua/multimedia/exception.h"
 #include "aqua/platform/system.h"
 #include "app-veriwell/multimedia/multimedia.h"
-#include "app-veriwell/multimedia/ikaraoke/lyric_event_v1.h"
+#include "app-veriwell/multimedia/ikaraoke/lyric_event_track1.h"
 #include "app-veriwell/multimedia/music/midi/file.h"
 #include "app-veriwell/multimedia/music/midi/player_command.h"
 #include "app-veriwell/multimedia/music/midi/happening.h"
@@ -1064,8 +1064,8 @@ namespace music
             {
             case 0:
             {
-               array < ::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1 &> * plyriceventa = nullptr;
-               array < ::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1 &> lyriceventa;
+               ::pointer < pointer_array < ::ikaraoke::lyric_event_track > > plyriceventa;
+               pointer_array < ::ikaraoke::lyric_event_track > lyriceventa;
                for (int i = sizeof(file::midi_stream_happening_header); i < iSize;)
                {
                   pheader = (file::midi_stream_happening_header *)&lpbData[i];
@@ -1075,9 +1075,9 @@ namespace music
                   {
                   case EVENT_ID_LYRIC_V1:
                   {
-                     if (plyriceventa == nullptr)
+                     if (!plyriceventa)
                      {
-                        plyriceventa = ___new array <::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1 &>;
+                        plyriceventa = øallocate ::ikaraoke::lyric_event_track1();
                      }
                      ::memory_file memFile((LPBYTE)&lpdwParam[1], pheader->m_dwLength - sizeof(DWORD));
                      /* x2x                  CArchive ar(&memFile, CArchive::load);
