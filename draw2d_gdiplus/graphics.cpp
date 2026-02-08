@@ -175,7 +175,7 @@ namespace draw2d_gdiplus
       m_ppath = nullptr;
       m_ppathPaint = nullptr;
       m_ewritetextrendering = ::write_text::e_rendering_none;
-      m_dFontFactor = 1.0;
+      //m_dSizeScaler = 1.0;
 
    }
 

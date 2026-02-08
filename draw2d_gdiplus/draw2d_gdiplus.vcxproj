@@ -77,6 +77,30 @@
       <Configuration>StaticDebug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticMetaDebug|ARM64">
+      <Configuration>StaticMetaDebug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticMetaDebug|Win32">
+      <Configuration>StaticMetaDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticMetaDebug|x64">
+      <Configuration>StaticMetaDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticMetaRelease|ARM64">
+      <Configuration>StaticMetaRelease</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticMetaRelease|Win32">
+      <Configuration>StaticMetaRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticMetaRelease|x64">
+      <Configuration>StaticMetaRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="StaticReleaseWithDbgInfo|ARM64">
       <Configuration>StaticReleaseWithDbgInfo</Configuration>
       <Platform>ARM64</Platform>
@@ -146,6 +170,13 @@
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfAtl>false</UseOfAtl>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfAtl>false</UseOfAtl>
@@ -168,6 +199,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfAtl>false</UseOfAtl>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfAtl>false</UseOfAtl>
     <PlatformToolset>v145</PlatformToolset>
@@ -232,7 +270,21 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfAtl>false</UseOfAtl>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfAtl>false</UseOfAtl>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|ARM64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfAtl>false</UseOfAtl>
     <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -290,7 +342,21 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfAtl>false</UseOfAtl>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfAtl>false</UseOfAtl>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|ARM64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfAtl>false</UseOfAtl>
     <PlatformToolset>v145</PlatformToolset>
@@ -330,6 +396,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
@@ -343,6 +413,10 @@
     <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
   </ImportGroup>
@@ -378,7 +452,15 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|ARM64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|ARM64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
   </ImportGroup>
@@ -410,7 +492,15 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|ARM64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|ARM64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\operating_system\operating_system-windows\Common.props" />
   </ImportGroup>
@@ -429,44 +519,58 @@
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='DebugWithInlOpt|Win32'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|Win32'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">false</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|Win32'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|Win32'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">false</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|Win32'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|Win32'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">false</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|x64'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticDebug|ARM64'">false</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|ARM64'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|x64'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|ARM64'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">false</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|x64'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticRelease|ARM64'">false</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|ARM64'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|x64'">false</IgnoreImportLibrary>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|ARM64'">false</IgnoreImportLibrary>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='DebugWithInlOpt|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|Win32'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|Win32'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|x64'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticDebug|ARM64'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|ARM64'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|x64'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|ARM64'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|x64'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticRelease|ARM64'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|ARM64'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|x64'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|ARM64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='DebugWithInlOpt|Win32'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|Win32'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|Win32'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|Win32'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|Win32'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|Win32'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">false</GenerateManifest>
@@ -475,7 +579,9 @@
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|x64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|ARM64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|x64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticDebug|ARM64'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|ARM64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|x64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|ARM64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</GenerateManifest>
@@ -483,17 +589,21 @@
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|x64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|ARM64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|x64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticRelease|ARM64'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|ARM64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|x64'">false</GenerateManifest>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|ARM64'">false</GenerateManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='DebugWithInlOpt|Win32'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|Win32'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|Win32'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|Win32'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|Win32'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|Win32'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">false</EmbedManifest>
@@ -502,7 +612,9 @@
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|x64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|ARM64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|x64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticDebug|ARM64'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|ARM64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|x64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|ARM64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</EmbedManifest>
@@ -510,7 +622,9 @@
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|x64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|ARM64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|x64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticRelease|ARM64'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|ARM64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|x64'">false</EmbedManifest>
     <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|ARM64'">false</EmbedManifest>
   </PropertyGroup>
@@ -518,10 +632,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithInlOpt|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" />
@@ -824,6 +940,70 @@
       <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
     </Xdcmake>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|Win32'">
+    <PreBuildEvent />
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(ProjectDir)/win.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <FloatingPointExceptions>true</FloatingPointExceptions>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../source</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <ShowProgress>NotSet</ShowProgress>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>
+      </AdditionalManifestFiles>
+    </Manifest>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <Bscmake>
+      <OutputFile>
+      </OutputFile>
+    </Bscmake>
+    <Bscmake>
+      <PreserveSBR>false</PreserveSBR>
+    </Bscmake>
+    <Xdcmake>
+      <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
+    </Xdcmake>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|Win32'">
     <PreBuildEvent />
     <Midl>
@@ -1023,6 +1203,83 @@
     <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <PreBuildEvent />
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(ProjectDir)/win.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../source</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <ShowProgress>NotSet</ShowProgress>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <MergeSections>
+      </MergeSections>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>
+      </AdditionalManifestFiles>
+    </Manifest>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <Bscmake>
+      <OutputFile>
+      </OutputFile>
+    </Bscmake>
+    <Bscmake>
+      <PreserveSBR>false</PreserveSBR>
+    </Bscmake>
+    <Xdcmake>
+      <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
+    </Xdcmake>
+    <Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|Win32'">
     <PreBuildEvent />
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1659,7 +1916,109 @@
     <Lib />
     <Lib />
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|x64'">
+    <PreBuildEvent />
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>$(ProjectDir)/win.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <OmitFramePointers>false</OmitFramePointers>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../source</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <MapFileName>
+      </MapFileName>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(SolutionDir)../..core/include/manifest.dll.embed.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <Bscmake>
+      <OutputFile>
+      </OutputFile>
+    </Bscmake>
+    <Bscmake>
+      <PreserveSBR>false</PreserveSBR>
+    </Bscmake>
+    <Lib />
+    <Lib />
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|ARM64'">
+    <PreBuildEvent />
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>$(ProjectDir)/win.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <OmitFramePointers>false</OmitFramePointers>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../source</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <MapFileName>
+      </MapFileName>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(SolutionDir)../..core/include/manifest.dll.embed.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <Bscmake>
+      <OutputFile>
+      </OutputFile>
+    </Bscmake>
+    <Bscmake>
+      <PreserveSBR>false</PreserveSBR>
+    </Bscmake>
+    <Lib />
+    <Lib />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|ARM64'">
     <PreBuildEvent />
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -2102,7 +2461,123 @@
     <Lib />
     <Lib />
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|x64'">
+    <PreBuildEvent />
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>$(ProjectDir)/win.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../source</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(SolutionDir)../..core/include/manifest.dll.embed.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <Bscmake>
+      <OutputFile>
+      </OutputFile>
+    </Bscmake>
+    <Bscmake>
+      <PreserveSBR>false</PreserveSBR>
+    </Bscmake>
+    <Lib />
+    <Lib />
+    <Lib />
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|ARM64'">
+    <PreBuildEvent />
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>$(ProjectDir)/win.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../source</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(SolutionDir)..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(SolutionDir)../..core/include/manifest.dll.embed.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <Bscmake>
+      <OutputFile>
+      </OutputFile>
+    </Bscmake>
+    <Bscmake>
+      <PreserveSBR>false</PreserveSBR>
+    </Bscmake>
+    <Lib />
+    <Lib />
+    <Lib />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|ARM64'">
     <PreBuildEvent />
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -2310,7 +2785,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|ARM64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticDebug|ARM64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|ARM64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|ARM64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -2318,17 +2795,21 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|ARM64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticRelease|ARM64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|ARM64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|ARM64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugWithInlOpt|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ASanStaticDebug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticMetaRelease|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="graphics.cpp" />
