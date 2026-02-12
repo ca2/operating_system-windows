@@ -11,9 +11,9 @@
 
 //CLASS_DECL_ACME ::pointer<message_queue>__get_mq(itask atom);
 
-//CLASS_DECL_ACME int_bool WINAPI GetMessage(LPMESSAGE lpMsg, oswindow oswindow, unsigned int wMsgFilterMin, unsigned int wMsgFilterMax);
+//CLASS_DECL_ACME int_bool WINAPI GetMessage(LPMESSAGE lpMsg, ::acme::windowing::window * pacmewindowingwindow, unsigned int wMsgFilterMin, unsigned int wMsgFilterMax);
 
-//CLASS_DECL_ACME int_bool WINAPI PeekMessage(LPMESSAGE lpMsg, oswindow oswindow, unsigned int wMsgFilterMin, unsigned int wMsgFilterMax, unsigned int wRemoveMsg);
+//CLASS_DECL_ACME int_bool WINAPI PeekMessage(LPMESSAGE lpMsg, ::acme::windowing::window * pacmewindowingwindow, unsigned int wMsgFilterMin, unsigned int wMsgFilterMax, unsigned int wRemoveMsg);
 
 //CLASS_DECL_ACME int_bool WINAPI PostThreadMessage(itask idthread, unsigned int Msg, WPARAM wParam, LPARAM lParam);
 

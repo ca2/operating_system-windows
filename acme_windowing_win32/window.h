@@ -68,7 +68,7 @@ namespace win32
 
             virtual void _draw(HDC hdc);
 
-            ::oswindow oswindow() override;
+            ::::acme::windowing::window * pacmewindowingwindow() override;
 
             //void on_draw(::nano::graphics::device * pnanodevice) override;
 

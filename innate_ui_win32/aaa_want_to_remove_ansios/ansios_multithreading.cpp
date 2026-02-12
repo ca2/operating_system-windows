@@ -255,9 +255,9 @@ CLASS_DECL_ACME itask current_itask()
 
 #if defined(LINUX) // || defined(ANDROID)
 
-bool (* g_pfn_defer_process_x_message)(htask htask,LPMESSAGE lpMsg,oswindow oswindow,bool bPeek) = nullptr;
+bool (* g_pfn_defer_process_x_message)(htask htask,LPMESSAGE lpMsg,::acme::windowing::window * pacmewindowingwindow,bool bPeek) = nullptr;
 
-bool aura_defer_process_x_message(htask htask,LPMESSAGE lpMsg,oswindow oswindow,bool bPeek)
+bool aura_defer_process_x_message(htask htask,LPMESSAGE lpMsg,::acme::windowing::window * pacmewindowingwindow,bool bPeek)
 {
 
    if(g_pfn_defer_process_x_message == nullptr)
@@ -267,7 +267,7 @@ bool aura_defer_process_x_message(htask htask,LPMESSAGE lpMsg,oswindow oswindow,
 
 }
 
-void set_defer_process_x_message(bool (* pfn)(htask htask,LPMESSAGE lpMsg,oswindow oswindow,bool bPeek))
+void set_defer_process_x_message(bool (* pfn)(htask htask,LPMESSAGE lpMsg,::acme::windowing::window * pacmewindowingwindow,bool bPeek))
 {
 
    g_pfn_defer_process_x_message = pfn;

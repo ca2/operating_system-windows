@@ -396,7 +396,7 @@ namespace windowing_win32
    }
 
 
-   void window::_set_oswindow(::oswindow oswindow)
+   void window::_set_oswindow(::::acme::windowing::window * pacmewindowingwindow)
    {
 
       m_hwnd = (HWND)oswindow;
@@ -4053,9 +4053,9 @@ namespace windowing_win32
       //HideCaret();
 
       //PAINTSTRUCT ps;
-      //HDC hdc1 = BeginPaint(m_oswindow, &ps);
+      //HDC hdc1 = BeginPaint(m_pacmewindowingwindow, &ps);
       //// TODO: Add any drawing code that uses hdc here...
-      //EndPaint(m_oswindow, &ps);
+      //EndPaint(m_pacmewindowingwindow, &ps);
 
       //return
       //   ;
@@ -4256,7 +4256,7 @@ namespace windowing_win32
    ::windowing::window *window::window_get_owner()
    {
 
-      ::oswindow oswindow = get_owner_oswindow();
+      ::::acme::windowing::window * pacmewindowingwindow = get_owner_oswindow();
 
       auto pacmewindowingwindow = win32_windowing()->window(oswindow);
 
@@ -4386,7 +4386,7 @@ namespace windowing_win32
    void window::default_message_handler(::message::message *pmessage)
    {
 
-      HWND hwnd = as_hwnd(pmessage->m_oswindow);
+      HWND hwnd = as_hwnd(pmessage->m_pacmewindowingwindow);
 
       UINT message = pmessage->m_eusermessage;
 
@@ -6918,13 +6918,13 @@ namespace windowing_win32
    //   if (pfnWndProc == nullptr)
    //   {
 
-   //      lresult = ::DefWindowProcW(m_oswindow, (unsigned int)pmessage->m_eusermessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::DefWindowProcW(m_pacmewindowingwindow, (unsigned int)pmessage->m_eusermessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
    //   else
    //   {
 
-   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (unsigned int)pmessage->m_eusermessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::CallWindowProc(pfnWndProc, m_pacmewindowingwindow, (unsigned int)pmessage->m_eusermessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
 
@@ -7050,7 +7050,7 @@ namespace windowing_win32
    //
    //         }
    //
-   //         pmessage->m_lresult = ::DefWindowProcW(m_oswindow, m_uiMessage, m_wparam, m_lparam);
+   //         pmessage->m_lresult = ::DefWindowProcW(m_pacmewindowingwindow, m_uiMessage, m_wparam, m_lparam);
    //
    //         pmessage->m_bRet = true;
    //
@@ -7567,7 +7567,7 @@ namespace windowing_win32
    //      //   else
    //      //   {
    //      //
-   //      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_eusermessage, pmessage->m_wparam, pmessage->m_lparam));
+   //      //      pmessage->set_lresult(::DefWindowProcW(m_pacmewindowingwindow, pmessage->m_eusermessage, pmessage->m_wparam, pmessage->m_lparam));
    //
    //      //   }
    //
@@ -7919,7 +7919,7 @@ namespace windowing_win32
    float window::get_dpi_for_window()
    {
 
-      ::oswindow oswindow = this->oswindow();
+      ::::acme::windowing::window * pacmewindowingwindow = this->oswindow();
 
       return (float)::get_dpi_for_window(oswindow);
 

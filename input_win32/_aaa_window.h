@@ -65,7 +65,7 @@ namespace windowing_win32
       ::windowing_win32::windowing* windowing() const { return m_pwindowing.cast < ::windowing_win32::windowing >(); }
 
 
-      //virtual void set_oswindow(oswindow oswindow) override;
+      //virtual void set_oswindow(::acme::windowing::window * pacmewindowingwindow) override;
 
 
       DECLARE_MESSAGE_HANDLER(_001OnMessage);

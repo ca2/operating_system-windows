@@ -33,7 +33,7 @@
 // // namespace str
 // // {
 
-// //    string CLASS_DECL_ACME get_window_text_timeout(oswindow oswindow, class ::time tickTimeout = 1000);
+// //    string CLASS_DECL_ACME get_window_text_timeout(::acme::windowing::window * pacmewindowingwindow, class ::time tickTimeout = 1000);
 
 // // } // namespace str
 
@@ -45,7 +45,7 @@
 // #include "acme/os/windows_common/comptr.h"
 
 
-// inline HWND as_hwnd(oswindow oswindow)
+// inline HWND as_hwnd(::acme::windowing::window * pacmewindowingwindow)
 // {
 
 //    return (HWND)oswindow;

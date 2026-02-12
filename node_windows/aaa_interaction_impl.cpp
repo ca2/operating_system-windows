@@ -1430,13 +1430,13 @@ namespace windows
 
       //::int_rectangle rectangleX;
 
-      //::GetClientRect(m_oswindow, rectangleX);
+      //::GetClientRect(m_pacmewindowingwindow, rectangleX);
 
       //::int_rectangle rectangleScreen;
 
-      //::GetWindowRect(m_oswindow, rectangleScreen);
+      //::GetWindowRect(m_pacmewindowingwindow, rectangleScreen);
 
-      //if (::IsIconic(m_oswindow))
+      //if (::IsIconic(m_pacmewindowingwindow))
       //{
 
       //   information() << "interaction_impl::rects_from_os window is iconic";
@@ -1465,9 +1465,9 @@ namespace windows
 
       ////m_puserinteraction->m_pointScreenClient.y = 0;
 
-      ////::ScreenToClient(m_oswindow, m_puserinteraction->m_pointScreenClient);
+      ////::ScreenToClient(m_pacmewindowingwindow, m_puserinteraction->m_pointScreenClient);
 
-      ////HWND hwndParent = ::get_parent(m_oswindow);
+      ////HWND hwndParent = ::get_parent(m_pacmewindowingwindow);
 
       ////if (hwndParent != NULL)
       ////{
@@ -1476,7 +1476,7 @@ namespace windows
 
       ////   m_puserinteraction->m_pointParentClient.y = 0;
 
-      ////   ::ClientToScreen(m_oswindow, m_puserinteraction->m_pointParentClient);
+      ////   ::ClientToScreen(m_pacmewindowingwindow, m_puserinteraction->m_pointParentClient);
 
       ////   ::ScreenToClient(hwndParent, m_puserinteraction->m_pointParentClient);
 
@@ -1500,7 +1500,7 @@ namespace windows
 
    //   ::int_point point;
 
-   //   ::ClientToScreen(m_oswindow, &point);
+   //   ::ClientToScreen(m_pacmewindowingwindow, &point);
 
    //   return double_point(point.x, point.y);
 
@@ -1522,7 +1522,7 @@ namespace windows
       //if (!(GetExStyle() & WS_EX_LAYERED))
       //{
 
-      //   ::GetWindowRect(m_oswindow, rectangleWindow);
+      //   ::GetWindowRect(m_pacmewindowingwindow, rectangleWindow);
 
       //   m_puserinteraction->m_pointParentClientRequest = rectangleWindow.origin();
 
@@ -2756,7 +2756,7 @@ namespace windows
 
    //      m_bSystemCaret = true;
 
-   //      //::CreateCaret(m_oswindow, nullptr, 1, 1);
+   //      //::CreateCaret(m_pacmewindowingwindow, nullptr, 1, 1);
 
    //   }
 
@@ -4253,13 +4253,13 @@ void interaction_impl::set_tool_window(bool bSet)
 //      if (pfnWndProc == nullptr)
 //      {
 //
-//         lresult = ::DefWindowProcW(m_oswindow, (unsigned int) pmessage->m_emessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
+//         lresult = ::DefWindowProcW(m_pacmewindowingwindow, (unsigned int) pmessage->m_emessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
 //
 //      }
 //      else
 //      {
 //
-//         lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (unsigned int) pmessage->m_emessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
+//         lresult = ::CallWindowProc(pfnWndProc, m_pacmewindowingwindow, (unsigned int) pmessage->m_emessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
 //
 //      }
 //
@@ -4342,7 +4342,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //         }
 //
-//         pusermessage->m_lresult = ::DefWindowProcW(m_oswindow, m_uiMessage, m_wparam, m_lparam);
+//         pusermessage->m_lresult = ::DefWindowProcW(m_pacmewindowingwindow, m_uiMessage, m_wparam, m_lparam);
 //
 //         pusermessage->m_bRet = true;
 //
@@ -4855,7 +4855,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //      //   else
 //      //   {
 //      //      
-//      //      pusermessage->set_lresult(::DefWindowProcW(m_oswindow, pusermessage->id(), pusermessage->m_wparam, pusermessage->m_lparam));
+//      //      pusermessage->set_lresult(::DefWindowProcW(m_pacmewindowingwindow, pusermessage->id(), pusermessage->m_wparam, pusermessage->m_lparam));
 //
 //      //   }
 //

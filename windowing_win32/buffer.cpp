@@ -1604,11 +1604,11 @@ namespace windowing_win32
 
                            //::int_rectangle r3;
 
-                           //GetWindowRect(m_oswindow, &r3);
+                           //GetWindowRect(m_pacmewindowingwindow, &r3);
 
                            //::int_rectangle r4;
 
-                           //GetClientRect(m_oswindow, &r4);
+                           //GetClientRect(m_pacmewindowingwindow, &r4);
 
                            //::SendMessage(get_hwnd(), WM_PRINT, (wparam)m_hdcScreen, PRF_OWNED | PRF_CHILDREN);
 

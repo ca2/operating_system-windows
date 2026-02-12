@@ -15,7 +15,7 @@ namespace ca2plugin_container
 
    
       oswindow                                  m_oswindowMessage;
-      oswindow                                  m_oswindow;
+      oswindow                                  m_pacmewindowingwindow;
       bool                                      m_bStream;
 
       string                                    m_vssPluginName;

@@ -18,7 +18,7 @@ window_opengl::~window_opengl()
 }
 
 
-void window_opengl::on_create_window(oswindow wnd)
+void window_opengl::on_create_window(::acme::windowing::window * pacmewindowingwindow)
 {
 
 }
@@ -61,7 +61,7 @@ void window_opengl::destroy_window_graphics()
    if(m_spgraphics->get_os_data() == nullptr)
    {
 
-      bool bOk = m_spgraphics->CreateWindowDC(m_pimpl->m_oswindow);
+      bool bOk = m_spgraphics->CreateWindowDC(m_pimpl->m_pacmewindowingwindow);
 
       if (!bOk)
       {
@@ -72,7 +72,7 @@ void window_opengl::destroy_window_graphics()
 
    }
 
-   m_spgraphics->on_begin_draw(m_pimpl->m_oswindow, m_pimpl->m_rectangleParentClient.size());
+   m_spgraphics->on_begin_draw(m_pimpl->m_pacmewindowingwindow, m_pimpl->m_rectangleParentClient.size());
 
    return m_spgraphics;
 
@@ -82,7 +82,7 @@ void window_opengl::destroy_window_graphics()
 void window_opengl::update_window()
 {
 
-   m_spgraphics->on_end_draw(m_pimpl->m_oswindow);
+   m_spgraphics->on_end_draw(m_pimpl->m_pacmewindowingwindow);
 
 }
 

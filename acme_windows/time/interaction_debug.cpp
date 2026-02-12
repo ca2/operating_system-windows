@@ -7,7 +7,7 @@
 #define STATE_WINDOW_DEACTIVATING 3
 #define STATE_WINDOW_ACTIVATING 4
 
-bool __windows_message_bypass(oswindow oswindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam, LRESULT & lresult, unsigned int * puia)
+bool __windows_message_bypass(::acme::windowing::window * pacmewindowingwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam, LRESULT & lresult, unsigned int * puia)
 {
 
    for (int i = 0; puia[i] != -1; i++)
@@ -43,7 +43,7 @@ namespace windows
 {
 
 
-   bool interaction_impl::__windows_message_bypass(oswindow oswindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam, LRESULT & lresult)
+   bool interaction_impl::__windows_message_bypass(::acme::windowing::window * pacmewindowingwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam, LRESULT & lresult)
    {
 
       //if (message == ::user::e_message_mouse_move)

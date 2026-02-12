@@ -48,7 +48,7 @@ namespace ca2plugin_container
 
       m_pfile                 = nullptr;
 
-      m_oswindow              = nullptr;
+      m_pacmewindowingwindow              = nullptr;
       m_bStream               = false;
 
    }
@@ -151,7 +151,7 @@ namespace ca2plugin_container
    void host::post_message(unsigned int emessage, wparam wparam, lparam lparam)
    {
 
-      ::PostMessage(m_oswindow, eusermessage, wparam, lparam);
+      ::PostMessage(m_pacmewindowingwindow, eusermessage, wparam, lparam);
 
    }
 
@@ -165,7 +165,7 @@ namespace ca2plugin_container
 
       plugin_finalize();
 
-      m_oswindow = nullptr;
+      m_pacmewindowingwindow = nullptr;
 
    }
 
@@ -201,7 +201,7 @@ namespace ca2plugin_container
 
    oswindow host::get_host_window()
    {
-      return m_oswindow;
+      return m_pacmewindowingwindow;
    }
 
 
@@ -213,7 +213,7 @@ namespace ca2plugin_container
    }
 
 
-   LRESULT CALLBACK window_proc(oswindow oswindow, unsigned int message, WPARAM wParam, LPARAM lParam)
+   LRESULT CALLBACK window_proc(::acme::windowing::window * pacmewindowingwindow, unsigned int message, WPARAM wParam, LPARAM lParam)
    {
       return DefWindowProc(oswindow, message, wParam, lParam);
    }

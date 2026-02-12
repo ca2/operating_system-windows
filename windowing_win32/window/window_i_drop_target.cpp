@@ -52,7 +52,7 @@ namespace windowing_win32
    HRESULT STDMETHODCALLTYPE window::DragOver(DWORD grfKeyState, POINTL point, DWORD * pdwEffect)
    {
 
-      //::message::drag_and_drop m(m_oswindow, this, MESSAGE_OLE_DRAGOVER);
+      //::message::drag_and_drop m(m_pacmewindowingwindow, this, MESSAGE_OLE_DRAGOVER);
 
       //m.pDataObj = nullptr;
       //m.grfKeyState = grfKeyState;
@@ -91,7 +91,7 @@ namespace windowing_win32
    HRESULT STDMETHODCALLTYPE window::DragLeave(void)
    {
 
-      //::message::drag_and_drop m(m_oswindow, this, MESSAGE_OLE_DRAGLEAVE);
+      //::message::drag_and_drop m(m_pacmewindowingwindow, this, MESSAGE_OLE_DRAGLEAVE);
 
       //m.pDataObj = nullptr;
       //m.grfKeyState = 0;
@@ -124,7 +124,7 @@ namespace windowing_win32
    HRESULT STDMETHODCALLTYPE window::Drop(IDataObject * pDataObj, DWORD grfKeyState, POINTL point, DWORD * pdwEffect)
    {
 
-      //::message::drag_and_drop m(m_oswindow, this, MESSAGE_OLE_DRAGDROP);
+      //::message::drag_and_drop m(m_pacmewindowingwindow, this, MESSAGE_OLE_DRAGDROP);
 
       //m.pDataObj = pDataObj;
       //m.grfKeyState = grfKeyState;

@@ -120,8 +120,8 @@ namespace windowing_win32
       inline HWND get_hwnd() const { return (HWND)oswindow(); }
       inline void set_hwnd(HWND hwnd) { set_oswindow(as_oswindow(hwnd)); }
 
-      ::oswindow oswindow() const override;
-      void _set_oswindow(::oswindow oswindow) override;
+      ::::acme::windowing::window * pacmewindowingwindow() const override;
+      void _set_oswindow(::::acme::windowing::window * pacmewindowingwindow) override;
 
       bool operator== (const window& window) const
       {
@@ -139,7 +139,7 @@ namespace windowing_win32
       ::windowing_win32::windowing * win32_windowing();
 
 
-      //virtual void set_oswindow(oswindow oswindow) override;
+      //virtual void set_oswindow(::acme::windowing::window * pacmewindowingwindow) override;
 
 
 

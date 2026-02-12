@@ -12,7 +12,7 @@ namespace windowing_win32
 
 
       manual_reset_happening m_happening;
-      oswindow m_oswindow;
+      oswindow m_pacmewindowingwindow;
       HDC m_hdc;
 
 
@@ -20,7 +20,7 @@ namespace windowing_win32
          ::object(pobject)
       {
 
-         m_oswindow = oswindow;
+         m_pacmewindowingwindow = oswindow;
 
          m_hdc = hdc;
 
@@ -42,7 +42,7 @@ namespace windowing_win32
          try
          {
 
-            ::PrintWindow(m_oswindow, m_hdc, 0);
+            ::PrintWindow(m_pacmewindowingwindow, m_hdc, 0);
 
          }
          catch (...)

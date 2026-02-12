@@ -28,7 +28,7 @@ namespace apex_windows
       //{
 
       //   m_h = ::ShellExecuteW(
-      //      m_oswindow,
+      //      m_pacmewindowingwindow,
       //      wstring(m_strOperation),
       //      wstring(m_strFile),
       //      wstring(m_strParameters),

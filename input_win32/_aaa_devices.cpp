@@ -186,7 +186,7 @@ namespace windowing_win32
 //
 //   }
 //
-//   ::windows::g_pdevices = ___new ::windows::devices((HWND) psysteminteraction->m_oswindow);
+//   ::windows::g_pdevices = ___new ::windows::devices((HWND) psysteminteraction->m_pacmewindowingwindow);
 //
 //   ::windows::g_pdevices->initialize(psysteminteraction);
 //
