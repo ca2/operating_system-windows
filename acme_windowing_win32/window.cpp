@@ -631,12 +631,13 @@ namespace win32
       //}
 
 
-         ::oswindow window::oswindow()
+         void * window::__win32_HWND()
          {
 
-            return as_oswindow(m_hwnd);
+            return (void *) m_hwnd;
 
          }
+
 
          bool window::_is_light_theme()
          {
@@ -792,9 +793,9 @@ namespace win32
 
                auto pmouse = øcreate_new < ::user::mouse >();
 
-               pmouse->m_pointHost = lparam;
+               pmouse->m_pointHost = lparam.point();
 
-               pmouse->m_pointAbsolute = client_to_screen(lparam);
+               pmouse->m_pointAbsolute = client_to_screen(lparam.point());
 
                ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
@@ -865,9 +866,9 @@ namespace win32
 
                auto pmouse = øcreate_new < ::user::mouse >();
 
-               pmouse->m_pointHost = lparam;
+               pmouse->m_pointHost = lparam.point();
 
-               pmouse->m_pointAbsolute = client_to_screen(lparam);
+               pmouse->m_pointAbsolute = client_to_screen(lparam.point());
 
                fore_on_mouse_move(pmouse);
 
@@ -901,9 +902,9 @@ namespace win32
 
                auto pmouse = øcreate_new < ::user::mouse >();
 
-               pmouse->m_pointHost = lparam;
+               pmouse->m_pointHost = lparam.point();
 
-               pmouse->m_pointAbsolute = client_to_screen(lparam);
+               pmouse->m_pointAbsolute = client_to_screen(lparam.point());
 
                ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
@@ -935,9 +936,9 @@ namespace win32
 
                auto pmouse = øcreate_new < ::user::mouse >();
 
-               pmouse->m_pointHost = lparam;
+               pmouse->m_pointHost = lparam.point();
 
-               pmouse->m_pointAbsolute = client_to_screen(lparam);
+               pmouse->m_pointAbsolute = client_to_screen(lparam.point());
 
                ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
@@ -969,9 +970,9 @@ namespace win32
 
                auto pmouse = øcreate_new < ::user::mouse >();
 
-               pmouse->m_pointHost = lparam;
+               pmouse->m_pointHost = lparam.point();
 
-               pmouse->m_pointAbsolute = client_to_screen(lparam);
+               pmouse->m_pointAbsolute = client_to_screen(lparam.point());
 
                ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
