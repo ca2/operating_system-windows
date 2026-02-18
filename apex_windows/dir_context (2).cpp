@@ -245,7 +245,7 @@ namespace windows
    //   return strPath;
    //}
 
-   //string directory_context::relpath(const string & pcszSource,const string & lpcszRelative)
+   //string directory_context::relpath(const ::scoped_string & scopedstrSource,const ::scoped_string & scopedstrRelative)
 
    //{
    //   const scoped_string & strRequest;
@@ -287,7 +287,7 @@ namespace windows
    //}
 
 
-   //string directory_context::relpath(const string & pcszSource, const string & lpcszRelative, const ::scoped_string & scopedstr2)
+   //string directory_context::relpath(const ::scoped_string & scopedstrSource, const ::scoped_string & scopedstrRelative, const ::scoped_string & scopedstr2)
 
    //{
    //   const scoped_string & strRequest;

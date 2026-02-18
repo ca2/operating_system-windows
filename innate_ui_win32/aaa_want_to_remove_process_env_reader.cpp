@@ -322,7 +322,7 @@ void CProcessEnvReader::SeparateVariablesAndValues(const string_array_base& EnvS
    int nLen = (int) EnvStrArray.get_size();
    for(int i = 0; i< nLen; i++)
    {
-      const string& csVal = EnvStrArray[i];
+      const ::scoped_string & scopedstrVal = EnvStrArray[i];
       int nIndex = (int) csVal.find("=",0);
 
       if(-1 == nIndex || 0 == nIndex)

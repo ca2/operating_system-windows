@@ -167,7 +167,7 @@ namespace windows
    void interaction_impl::native_create_host()
    {
 
-      auto estatus = __øconstruct(m_pwindow);
+      auto estatus = øconstruct(m_pwindow);
 
       if (!estatus)
       {
@@ -198,7 +198,7 @@ namespace windows
    }
 
 
-   // bool interaction_impl::create_message_queue(::user::interaction * pinteraction, const ::string & lpszName)
+   // bool interaction_impl::create_message_queue(::user::interaction * pinteraction, const ::scoped_string & scopedstrName)
    // {
 
    //    if (_is_window())
@@ -1094,7 +1094,7 @@ namespace windows
 //
 //   bool gen_GotScrollLines;
 //
-//   void interaction_impl::OnSettingChange(unsigned int uFlags, const ::string & pszSection)
+//   void interaction_impl::OnSettingChange(unsigned int uFlags, const ::scoped_string & scopedstrSection)
 //
 //   {
 //      UNUSED_ALWAYS(uFlags);
@@ -1834,7 +1834,7 @@ namespace windows
    //}
 
 
-   void interaction_impl::set_window_text(const ::string & pszString)
+   void interaction_impl::set_window_text(const ::scoped_string & scopedstrString)
    {
 
       m_pwindow->set_window_text(pszString);
@@ -2003,7 +2003,7 @@ namespace windows
 
    //   ASSERT(_is_window());
 
-   //   auto pgraphics = __øcreate < ::draw2d::graphics > ();
+   //   auto pgraphics = øcreate < ::draw2d::graphics > ();
 
    //   throw ::exception(todo);
 
@@ -2362,7 +2362,7 @@ namespace windows
    //   ASSERT(_is_window());
    //   ::SetDlgItemInt(get_handle(), nID, nValue, bSigned);
    //}
-   //void interaction_impl::SetDlgItemText(int nID, const ::string & pszString)
+   //void interaction_impl::SetDlgItemText(int nID, const ::scoped_string & scopedstrString)
 
    //{
    //   ASSERT(_is_window());
@@ -3337,7 +3337,7 @@ namespace windows
    { m_nIdleFlags |= (idleLayout | (bNotify ? idleNotify : 0)); };
    bool frame_window::InModalState() const
    { return m_cModalStack != 0; }
-   void frame_window::set_title(const ::string & pszTitle)
+   void frame_window::set_title(const ::scoped_string & scopedstrTitle)
 
    { m_strTitle = pszTitle; }
 

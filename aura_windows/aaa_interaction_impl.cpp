@@ -877,7 +877,7 @@ namespace aura_windows
 //
 //   bool gen_GotScrollLines;
 //
-//   void interaction_impl::OnSettingChange(unsigned int uFlags, const ::string & pszSection)
+//   void interaction_impl::OnSettingChange(unsigned int uFlags, const ::scoped_string & scopedstrSection)
 //
 //   {
 //      UNUSED_ALWAYS(uFlags);
@@ -1620,7 +1620,7 @@ namespace aura_windows
    //}
 
 
-   //void interaction_impl::set_window_text(const ::string & pszString)
+   //void interaction_impl::set_window_text(const ::scoped_string & scopedstrString)
    //{
 
    //   m_pwindow->set_window_text(pszString);
@@ -2104,7 +2104,7 @@ namespace aura_windows
    //   ASSERT(_is_window());
    //   ::SetDlgItemInt(get_handle(), nID, nValue, bSigned);
    //}
-   //void interaction_impl::SetDlgItemText(int nID, const ::string & pszString)
+   //void interaction_impl::SetDlgItemText(int nID, const ::scoped_string & scopedstrString)
 
    //{
    //   ASSERT(_is_window());
@@ -3317,7 +3317,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
    { m_nIdleFlags |= (idleLayout | (bNotify ? idleNotify : 0)); };
    bool frame_window::InModalState() const
    { return m_cModalStack != 0; }
-   void frame_window::set_title(const ::string & pszTitle)
+   void frame_window::set_title(const ::scoped_string & scopedstrTitle)
 
    { m_strTitle = pszTitle; }
 
@@ -4227,7 +4227,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      //auto estatus = 
 //
-//      __øconstruct(m_pwindow);
+//      øconstruct(m_pwindow);
 //
 //      //if (!estatus)
 //      //{

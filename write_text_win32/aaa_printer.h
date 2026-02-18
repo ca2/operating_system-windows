@@ -41,7 +41,7 @@ namespace draw2d_gdiplus
       virtual ~printer();
 
 
-      virtual bool open(const ::string & pszDeviceName);
+      virtual bool open(const ::scoped_string & scopedstrDeviceName);
       virtual ::draw2d::graphics_pointer create_graphics() override;
       virtual bool is_opened();
       virtual bool close();

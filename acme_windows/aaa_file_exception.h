@@ -8,7 +8,7 @@ class CLASS_DECL_ACME_WINDOWS windows_file_exception :
 public:
 
 
-   windows_file_exception(const ::e_status & estatus, int iOsError, const ::string & strPath, const ::string & strMessage);
+   windows_file_exception(const ::e_status & estatus, int iOsError, const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrMessage);
 
 
 };

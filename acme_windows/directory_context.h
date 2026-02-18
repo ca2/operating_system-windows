@@ -80,11 +80,11 @@ namespace acme_windows
       //virtual ::file::path userdata();
       //virtual ::file::path userfolder();
       //virtual ::file::path default_os_user_path_prefix();
-      //virtual ::file::path default_userappdata(const string & pcszPrefix,const string & lpcszLogin );
+      //virtual ::file::path default_userappdata(const ::scoped_string & scopedstrPrefix,const ::scoped_string & scopedstrLogin );
 
-      //virtual ::file::path default_userdata(const string & pcszPrefix,const string & lpcszLogin);
+      //virtual ::file::path default_userdata(const ::scoped_string & scopedstrPrefix,const ::scoped_string & scopedstrLogin);
 
-      //virtual ::file::path default_userfolder(const string & pcszPrefix,const string & lpcszLogin);
+      //virtual ::file::path default_userfolder(const ::scoped_string & scopedstrPrefix,const ::scoped_string & scopedstrLogin);
 
       virtual ::file::path userquicklaunch();
       virtual ::file::path userprograms();

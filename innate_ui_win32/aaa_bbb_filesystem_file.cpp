@@ -68,7 +68,7 @@ string url_dir_name_for_relative(const scoped_string & strPath)
 }
 
 
-CLASS_DECL_ACME string solve_relative(const ::string & strParam, bool * pbUrl)
+CLASS_DECL_ACME string solve_relative(const ::scoped_string & scopedstrParam, bool * pbUrl)
 {
 
    string str(strParam);

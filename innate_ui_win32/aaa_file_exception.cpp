@@ -3,7 +3,7 @@
 #include "file_exception.h"
 
 
-windows_file_exception::windows_file_exception(const ::e_status & estatus, int iOsError, const ::string & strPath, const ::string & strMessage) :
+windows_file_exception::windows_file_exception(const ::e_status & estatus, int iOsError, const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrMessage) :
    ::file_exception(estatus, iOsError, strPath, strMessage)
 {
 

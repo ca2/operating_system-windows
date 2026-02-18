@@ -23,7 +23,7 @@ public:
 
    ::string       m_strTask;
 
-   scoped_task_name(const ::string& strTask)
+   scoped_task_name(const ::scoped_string & scopedstrTask)
    {
 
       m_strTask = ::task_get_name();
@@ -701,7 +701,7 @@ namespace windows
 
                POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
-               auto pmouse = __create_new < ::user::mouse >();
+               auto pmouse = øcreate_new < ::user::mouse >();
 
                pmouse->m_pointHost = { point.x, point.y };
 
@@ -718,7 +718,7 @@ namespace windows
 
                POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
-               auto pmouse = __create_new < ::user::mouse >();
+               auto pmouse = øcreate_new < ::user::mouse >();
 
                pmouse->m_pointHost = { point.x, point.y };
 
@@ -735,7 +735,7 @@ namespace windows
 
                POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
-               auto pmouse = __create_new < ::user::mouse >();
+               auto pmouse = øcreate_new < ::user::mouse >();
 
                pmouse->m_pointHost = { point.x, point.y };
 
@@ -752,7 +752,7 @@ namespace windows
 
                POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
-               auto pmouse = __create_new < ::user::mouse >();
+               auto pmouse = øcreate_new < ::user::mouse >();
 
                pmouse->m_pointHost = { point.x, point.y };
 
@@ -769,7 +769,7 @@ namespace windows
 
                POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
-               auto pmouse = __create_new < ::user::mouse >();
+               auto pmouse = øcreate_new < ::user::mouse >();
 
                pmouse->m_pointHost = { point.x, point.y };
 

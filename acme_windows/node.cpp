@@ -45,7 +45,7 @@
 #include <Shldisp.h>
 #include <shellapi.h>
 #include <Shlobj.h>
-
+#include "remoting/common/remoting.h"
 
 #pragma comment(lib, "Version.lib")
 
@@ -5501,6 +5501,42 @@ namespace acme_windows
             system()->set_finish();
          });
    }
+
+
+   memsize node::get_current_memory_usage()
+   {
+
+         if (!_windows_isVistaOrLater())
+            {
+            return 0;
+         }
+         PROCESS_MEMORY_COUNTERS pmc;
+         GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+         return (size_t)pmc.WorkingSetSize;
+      //}
+
+   }
+
+
+   bool node::_windows_isVistaOrLater()
+   {
+      defer_init_os_version_info();
+      return m_osversioninfo.dwMajorVersion >= 6;
+   }
+
+
+   void node::defer_init_os_version_info()
+   {
+      if (m_osversioninfo.dwOSVersionInfoSize == 0) {
+        m_osversioninfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+
+        if (!GetVersionEx(&m_osversioninfo)) {
+          m_osversioninfo.dwOSVersionInfoSize = 0;
+        }
+      }
+
+   }
+
 
 
 

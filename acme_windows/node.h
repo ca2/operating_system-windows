@@ -32,6 +32,10 @@ namespace acme_windows
       ::file::path            m_strCommonPrograms;
       ::pointer<::operating_system::summary> m_poperatingsystemsummary;
 
+      OSVERSIONINFO m_osversioninfo;
+
+
+
       node();
       ~node() override;
 
@@ -392,6 +396,15 @@ namespace acme_windows
       virtual ::file::path __get_font_path_from_name(const ::scoped_string& scopedstrName, bool bTrueType);
 
       void restart_application() override;
+
+
+      memsize get_current_memory_usage() override;
+
+
+      virtual void defer_init_os_version_info();
+
+      bool _windows_isVistaOrLater() override;
+
    };
 
 

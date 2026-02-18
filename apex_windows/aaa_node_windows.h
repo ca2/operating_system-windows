@@ -52,13 +52,13 @@ int CLASS_DECL_APEX_WINDOWS __windows_main(::apex::system * psystem, ::create * 
 //
 //// Sanity checks for ATOMs
 //CLASS_DECL_APEX_WINDOWS bool __is_valid_atom(ATOM nAtom);
-////CLASS_DECL_APEX_WINDOWS bool __is_valid_atom(const ::string & psz);
+////CLASS_DECL_APEX_WINDOWS bool __is_valid_atom(const ::scoped_string & scopedstr);
 //CLASS_DECL_APEX_WINDOWS bool __is_valid_atom(const wchar_t * psz);
 //
 
 ///////////////////////////////////////////////////////////////////////////////
 //// locale-invariant comparison helpers till CRT gets that support
-//inline int __invariant_stricmp(const ::string &pszLeft, const ::string &pszRight)
+//inline int __invariant_stricmp(const ::scoped_string & scopedstrLeft, const ::scoped_string & scopedstrRight)
 //{
 //#ifdef WINDOWS_DESKTOP
 //   return ::CompareStringA(MAKELCID(MAKELANGID(LANG_ENGLISH,SUBLANG_ENGLISH_US),SORT_DEFAULT),
@@ -118,7 +118,7 @@ int CLASS_DECL_APEX_WINDOWS __windows_main(::apex::system * psystem, ::create * 
 //      int function();
 //   };
 //
-//   CLASS_DECL_APEX_WINDOWS HINSTANCE   load_library(const ::string & psz);
+//   CLASS_DECL_APEX_WINDOWS HINSTANCE   load_library(const ::scoped_string & scopedstr);
 //
 //   CLASS_DECL_APEX_WINDOWS bool        shell_get_special_folder_path(::windowing::window * pwindow,::file::path &str,int csidl,bool fCreate);
 //   CLASS_DECL_APEX_WINDOWS ::file::path  shell_get_special_folder_path(int csidl, bool fCreate = true, ::windowing::window * pwindow = nullptr);
@@ -126,9 +126,9 @@ int CLASS_DECL_APEX_WINDOWS __windows_main(::apex::system * psystem, ::create * 
 //
 //   CLASS_DECL_APEX_WINDOWS unsigned int       get_current_directory(string & str);
 //   CLASS_DECL_APEX_WINDOWS unsigned int       get_temp_path(string & str);
-//   CLASS_DECL_APEX_WINDOWS int        reg_query_value(HKEY hkey, const ::string & pszSubKey,string & str);
+//   CLASS_DECL_APEX_WINDOWS int        reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey,string & str);
 //
-//   CLASS_DECL_APEX_WINDOWS HICON       extract_icon(HINSTANCE hInst, const ::string & pszExeFileName,unsigned int nIconIndex);
+//   CLASS_DECL_APEX_WINDOWS HICON       extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName,unsigned int nIconIndex);
 //
 //   CLASS_DECL_APEX_WINDOWS bool        delete_file(const ::string & pFileName);
 //
@@ -138,7 +138,7 @@ int CLASS_DECL_APEX_WINDOWS __windows_main(::apex::system * psystem, ::create * 
 //
 //} // namespace windows
 //
-//CLASS_DECL_APEX_WINDOWS int delete_registry_tree_helper(HKEY hParentKey, const ::string & strKeyName);
+//CLASS_DECL_APEX_WINDOWS int delete_registry_tree_helper(HKEY hParentKey, const ::scoped_string & scopedstrKeyName);
 //
 //
 //CLASS_DECL_APEX_WINDOWS HINSTANCE __get_resource_handle();

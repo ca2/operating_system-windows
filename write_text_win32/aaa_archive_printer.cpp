@@ -32,7 +32,7 @@ namespace draw2d_gdiplus
 
       }
 
-      estatus = __construct_new(m_pdocumentproperties);
+      estatus = øconstruct_new(m_pdocumentproperties);
 
       if (!estatus)
       {
@@ -46,7 +46,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool printer::open(const ::string & pszDeviceName)
+   bool printer::open(const ::scoped_string & scopedstrDeviceName)
    {
 
       if (is_opened())
