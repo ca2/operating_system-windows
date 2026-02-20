@@ -45,7 +45,7 @@
 #include <Shldisp.h>
 #include <shellapi.h>
 #include <Shlobj.h>
-#include "remoting/common/remoting.h"
+#include "acme/platform/remoting.h"
 
 #pragma comment(lib, "Version.lib")
 
