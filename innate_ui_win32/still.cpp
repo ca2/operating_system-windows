@@ -84,7 +84,7 @@ namespace innate_ui_win32
 
          ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
 
-         pwindowing->m_windowmap[(::oswindow)m_hwnd] = this;
+         pwindowing->m_windowmap[m_hwnd] = this;
 
          SetWindowLongPtr(m_hwnd, GWLP_WNDPROC, (LPARAM)&::windows::window_procedure);
 

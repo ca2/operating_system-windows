@@ -8,7 +8,7 @@ imm_context::imm_context(::user::interaction * pinteraction) :
    m_pinteraction(pinteraction)
 {
 
-   HWND hwnd = as_hwnd(m_pinteraction->oswindow());
+   HWND hwnd = (HWND) HWND_from_acme_windowing_window(m_pinteraction->m_pacmewindowingwindow);
 
    m_himc = ImmGetContext(hwnd);
 
@@ -18,7 +18,7 @@ imm_context::imm_context(::user::interaction * pinteraction) :
 imm_context::~imm_context()
 {
 
-   HWND hwnd = as_hwnd(m_pinteraction->oswindow());
+   HWND hwnd = (HWND)HWND_from_acme_windowing_window(m_pinteraction->m_pacmewindowingwindow);
 
    ImmReleaseContext(hwnd, m_himc);
 

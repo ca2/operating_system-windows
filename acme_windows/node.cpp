@@ -45,7 +45,8 @@
 #include <Shldisp.h>
 #include <shellapi.h>
 #include <Shlobj.h>
-#include "remoting/common/remoting.h"
+#include <VersionHelpers.h>
+#include "acme/platform/remoting.h"
 
 #pragma comment(lib, "Version.lib")
 
@@ -5520,22 +5521,22 @@ namespace acme_windows
 
    bool node::_windows_isVistaOrLater()
    {
-      defer_init_os_version_info();
-      return m_osversioninfo.dwMajorVersion >= 6;
+      //defer_init_os_version_info();
+      return IsWindowsVistaOrGreater();
    }
 
 
-   void node::defer_init_os_version_info()
-   {
-      if (m_osversioninfo.dwOSVersionInfoSize == 0) {
-        m_osversioninfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+   //void node::defer_init_os_version_info()
+   //{
+   //   if (m_osversioninfo.dwOSVersionInfoSize == 0) {
+   //     m_osversioninfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
 
-        if (!GetVersionEx(&m_osversioninfo)) {
-          m_osversioninfo.dwOSVersionInfoSize = 0;
-        }
-      }
+   //     if (!GetVersionEx(&m_osversioninfo)) {
+   //       m_osversioninfo.dwOSVersionInfoSize = 0;
+   //     }
+   //   }
 
-   }
+   //}
 
 
 

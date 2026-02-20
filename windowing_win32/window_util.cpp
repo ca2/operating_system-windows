@@ -989,7 +989,11 @@ namespace windows
       for (int i = 0; i < a.interaction_count(); i++)
       {
 
-         hwnda.add(as_hwnd(((::user::interaction *)a.interaction_at(i))->oswindow()));
+          auto pacmewindowingwindow = ((::user::interaction*)a.interaction_at(i))->m_pacmewindowingwindow;
+
+          auto hwnd = (HWND)HWND_from_acme_windowing_window(pacmewindowingwindow);
+
+         hwnda.add(hwnd);
 
       }
 
@@ -1008,7 +1012,7 @@ namespace windows
       for (int i = 0; i < ptra.get_size(); i++)
       {
 
-         hwnda.add(as_hwnd(ptra.element_at(i)->oswindow()));
+         hwnda.add(ptra.element_at(i)->m_pacmewindowingwindow->_HWND());
 
       }
 

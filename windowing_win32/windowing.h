@@ -69,7 +69,7 @@ namespace windowing_win32
 
       virtual ::windows::hwnd_array _get_hwnda(const ::user::interaction_array& userinteractiona);
 
-      virtual ::acme::windowing::window * window(::acme::windowing::window * pacmewindowingwindow) override;
+      // virtual ::acme::windowing::window* window(::acme::windowing::window* pacmewindowingwindow) override;
 
       virtual ::windowing_win32::window * _window(HWND hwnd);
 
@@ -134,7 +134,7 @@ namespace windowing_win32
 
 
 
-      virtual int_bool point_is_window_origin(::int_point ptHitTest, oswindow oswindowExclude, int iMargin);
+      virtual int_bool point_is_window_origin(::int_point ptHitTest, HWND hwnd, int iMargin);
 
       //virtual void top_windows_by_z_order(hwnd_array & a);
 

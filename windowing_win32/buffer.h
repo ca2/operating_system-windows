@@ -51,7 +51,7 @@ namespace windowing_win32
       //layered_window_buffer         m_layeredwindowbuffera[2];
       HDC                           m_hdcScreen;
       bool                          m_bWindowDC;
-      oswindow                      m_hwndIpc;
+      HWND                          m_hwndIpc;
       ::int_rectangle               m_rectangleLast;
       ::task_pointer                m_ptaskUpdateScreen;
       ::manual_reset_happening          m_happeningUpdateScreen;

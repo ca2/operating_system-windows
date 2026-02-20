@@ -400,7 +400,7 @@ namespace innate_ui_win32
 
          ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
          
-         pwindowing->m_windowmap[(::oswindow) m_hwnd].release();
+         pwindowing->m_windowmap[m_hwnd].release();
 
          m_hwnd = nullptr;
 

@@ -107,7 +107,7 @@ namespace windowing_win32
 
 
 
-      m_nid.hWnd = as_hwnd(oswindow());
+      m_nid.hWnd = (HWND)HWND_from_acme_windowing_window(m_pacmewindowingwindow);
       m_nid.uID = as_hash32((const ::string &) atom).m_u;
       m_nid.hIcon = (HICON) picon->get_os_data(::int_size(16, 16));
       m_nid.uFlags = NIF_ICON | NIF_MESSAGE;
