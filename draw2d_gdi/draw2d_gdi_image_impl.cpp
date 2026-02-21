@@ -126,7 +126,7 @@ namespace draw2d_gdi
 
       }
 
-      m_spgraphics->CreateCompatibleDC(nullptr);
+      m_spgraphics->create_compatible_graphics(nullptr);
 
       m_spgraphics->m_pimage = this;
 
@@ -3104,7 +3104,7 @@ namespace draw2d_gdi
             return false;
          }
 
-         HDC hdc = ::CreateCompatibleDC(nullptr);
+         HDC hdc = ::create_compatible_graphics(nullptr);
 
          if(pbi->bmiHeader.biHeight != SetDIBits(
             hdc,

@@ -359,7 +359,7 @@ namespace windowing_win32
          if (playeredwindowbuffer->m_hdc == nullptr)
          {
 
-            playeredwindowbuffer->m_hdc = ::CreateCompatibleDC(nullptr);
+            playeredwindowbuffer->m_hdc = ::create_compatible_graphics(nullptr);
 
             bCreatedCompatibleDC = true;
 

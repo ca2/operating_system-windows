@@ -238,7 +238,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::CreateCompatibleDC(::draw2d::graphics * pgraphics)
+   void graphics::create_compatible_graphics(::draw2d::graphics * pgraphics)
    {
 
       close_graphics();
