@@ -21,7 +21,7 @@ namespace draw2d_gdi
    void path::get_bounding_rect(LPRECT lprect,::draw2d::path::string_path & p)
    {
 
-      HDC hdc = ::CreateCompatibleDC(nullptr);
+      HDC hdc = ::create_compatible_graphics(nullptr);
 
       ::SelectObject(hdc, p.m_pfont->get_os_data());
 

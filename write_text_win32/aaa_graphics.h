@@ -72,7 +72,7 @@ namespace draw2d_gdiplus
 
                     const scoped_string & strOutput, const void * lpInitData) override;
 
-      bool CreateCompatibleDC(::draw2d::graphics * pgraphics) override;
+      bool create_compatible_graphics(::draw2d::graphics * pgraphics) override;
 
       bool DeleteDC() override;
 

@@ -96,7 +96,7 @@ namespace draw2d_gdi
       // Constructors
       bool CreateDC(const ::scoped_string & scopedstrDriverName, const ::scoped_string & scopedstrDeviceName, const ::scoped_string & scopedstrOutput, const void * lpInitData) override;
       bool CreateIC(const ::scoped_string & scopedstrDriverName, const ::scoped_string & scopedstrDeviceName, const ::scoped_string & scopedstrOutput, const void * lpInitData) override;
-      bool CreateCompatibleDC(::draw2d::graphics_pointer & pgraphics) override;
+      bool create_compatible_graphics(::draw2d::graphics_pointer & pgraphics) override;
 
       bool DeleteDC() override;
 

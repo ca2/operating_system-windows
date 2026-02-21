@@ -31,7 +31,7 @@ namespace windows
          device::device()
          {
 
-            m_hdc = ::CreateCompatibleDC(nullptr);
+            m_hdc = ::create_compatible_graphics(nullptr);
             m_bDelete = true;
 
          }

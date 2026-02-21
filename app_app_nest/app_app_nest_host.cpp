@@ -426,7 +426,7 @@ namespace ca2plugin_container
 
                //::draw2d::graphics_pointer g(e_create);
 
-               //g->CreateCompatibleDC(nullptr);
+               //g->create_compatible_graphics(nullptr);
 
                //on_paint(g, rectangle);
 
@@ -447,7 +447,7 @@ namespace ca2plugin_container
 
                //::draw2d::graphics_pointer g(e_create);
 
-               //g->CreateCompatibleDC(nullptr);
+               //g->create_compatible_graphics(nullptr);
 
                //on_paint(g,m_rectangleX);
 

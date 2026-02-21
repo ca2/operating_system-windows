@@ -642,7 +642,7 @@ namespace windowing_win32
 
                pimage->fill_byte(0);
 
-               hdcMem = ::CreateCompatibleDC(nullptr);
+               hdcMem = ::create_compatible_graphics(nullptr);
 
                hbitmapOld = ::SelectObject(hdcMem, hbitmap);
 

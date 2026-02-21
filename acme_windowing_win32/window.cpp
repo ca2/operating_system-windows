@@ -1010,7 +1010,7 @@ namespace win32
 
                HDC hdcWindow = BeginPaint(m_hwnd, &paintstruct);
 
-               HDC hdc = ::CreateCompatibleDC(hdcWindow);
+               HDC hdc = ::create_compatible_graphics(hdcWindow);
 
                ::int_rectangle rectangleX;
 

@@ -111,7 +111,7 @@ bool IsDibSection(HBITMAP bmp)
 //   hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (unsigned int)0);
 //
 //
-//   HDC sourceHdc = ::CreateCompatibleDC(hdc);
+//   HDC sourceHdc = ::create_compatible_graphics(hdc);
 //   auto hOld  =::SelectObject(sourceHdc, hbitmap);
 //
 //   // This pixel has partial transparency, but ::GetPixel returns just RGB.
@@ -128,7 +128,7 @@ bool IsDibSection(HBITMAP bmp)
 //   ::SelectObject(sourceHdc, hOld);
 //   ::DeleteDC(sourceHdc);
 //
-//   //hMemDC = CreateCompatibleDC(hdc);
+//   //hMemDC = create_compatible_graphics(hdc);
 //   ReleaseDC(nullptr, hdc);
 //
 //   // Draw something on the DIB section.
@@ -213,7 +213,7 @@ bool IsDibSection(HBITMAP bmp)
    //bitmapinfo.bmiHeader.biClrUsed;
    //bitmapinfo.bmiHeader.biClrImportant;
    
-   HDC hdc = ::CreateCompatibleDC(NULL);
+   HDC hdc = ::create_compatible_graphics(NULL);
 
 
    if (!::GetDIBits(hdc, hbitmap, 0, bitmap.bmHeight, pimage->m_pimage32Raw, &bitmapinfo, DIB_RGB_COLORS))
