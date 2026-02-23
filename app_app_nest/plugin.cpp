@@ -128,7 +128,7 @@ install:
       rectangle.bottom       = cy;
 
       HBITMAP hbmp      = ::CreateCompatibleBitmap(hdcWindow, cx, cy);
-      HDC hdc           = ::create_compatible_graphics(hdcWindow);
+      HDC hdc           = ::CreateCompatibleDC(hdcWindow);
       HBITMAP hbmpOld   =  (HBITMAP) ::SelectObject(hdc, (HGDIOBJ) hbmp);
    
       ::BitBlt(hdc, 0, 0, cx, cy, hdcWindow, m_rectangle.left, m_rectangle.top, SRCCOPY);

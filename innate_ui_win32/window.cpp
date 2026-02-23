@@ -24,7 +24,6 @@ namespace innate_ui_win32
 
    window::window()
    {
-      m_hwnd = nullptr;
       m_hmenuSystem = nullptr;
       m_iChildIdSeed = 1000;
    }
@@ -46,7 +45,9 @@ namespace innate_ui_win32
       ()
          {
 
-            ::SetWindowTextW(m_hwnd, wstr);
+            auto hwnd = _HWND();
+
+            ::SetWindowTextW(hwnd, wstr);
 
 });
 
@@ -60,7 +61,9 @@ namespace innate_ui_win32
    LONG_PTR window::_get_style()
    {
 
-      return ::GetWindowLongPtr(m_hwnd, GWL_STYLE);
+      auto hwnd = _HWND();
+
+      return ::GetWindowLongPtr(hwnd, GWL_STYLE);
 
    }
 
@@ -136,16 +139,19 @@ namespace innate_ui_win32
    void window::_create()
    {
 
-      m_hwnd = CreateWindowW(_get_class_name(), L"", WS_OVERLAPPEDWINDOW,
+      HWND hwndResult =
+         CreateWindowW(_get_class_name(), L"", WS_OVERLAPPEDWINDOW,
           CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, (HINSTANCE) ::platform::get()->m_hinstanceThis,
           nullptr);
 
-      if (m_hwnd)
+      if (!hwndResult || !_HWND() || hwndResult != _HWND())
       {
 
-         system()->innate_ui()->add_top_level_window(this);
+         throw ::exception(error_failed);
 
       }
+
+      system()->innate_ui()->add_top_level_window(this);
 
    }
 
@@ -161,33 +167,36 @@ namespace innate_ui_win32
    {
 
       main_send([this]()
-         {
+      {
 
             _register_class();
             
             _create();
 
-            //innate_ui()->m_windowmap[m_hwnd] = this;
+            //innate_ui()->m_windowmap[hwnd] = this;
 
 
       });
 
-      if (!m_hwnd)
+      if (!_HWND())
       {
-         
+
          throw ::exception(error_failed);
 
       }
 
-
-
    }
+
+
    int window::_get_id()
    {
 
-      return GetWindowLong(m_hwnd, GWL_ID);
+      auto hwnd = _HWND();
+
+      return GetWindowLong(hwnd, GWL_ID);
 
    }
+
 
    ::pointer < window > window::_get_child_with_id(int iId)
    {
@@ -246,8 +255,11 @@ namespace innate_ui_win32
          {
             if (!m_hmenuSystem)
             {
-               //auto hmenu = GetSystemMenu(m_hwnd, true);
-               m_hmenuSystem = GetSystemMenu(m_hwnd, false);
+               //auto hmenu = GetSystemMenu(hwnd, true);
+
+               auto hwnd = _HWND();
+
+               m_hmenuSystem = GetSystemMenu(hwnd, false);
                WPARAM wparamHere = (WPARAM) m_hmenuSystem;
                LRESULT lresultHere = 1;
                if (_on_default_system_menu_init_menu(lresultHere, wparamHere))
@@ -273,7 +285,10 @@ namespace innate_ui_win32
             application()->show_about_box(system()->acme_windowing()->get_user_activation_token());
             return 0;
          }
-         return DefWindowProc(m_hwnd, message, wparam, lparam);
+         
+         auto hwnd = _HWND();
+
+         return DefWindowProc(hwnd, message, wparam, lparam);
       }
          break;
       case WM_COMMAND:
@@ -307,7 +322,10 @@ namespace innate_ui_win32
          //   DestroyWindow(hWnd);
          //   break;
          //default:
-         return DefWindowProc(m_hwnd, message, wparam, lparam);
+
+         auto hwnd = _HWND();
+
+         return DefWindowProc(hwnd, message, wparam, lparam);
          //}
       }
       break;
@@ -322,7 +340,10 @@ namespace innate_ui_win32
          //HDC hdc = BeginPaint(hWnd, &ps);
          //// TODO: Add any drawing code that uses hdc here...
          //EndPaint(hWnd, &ps);
-         return DefWindowProc(m_hwnd, message, wparam, lparam);
+
+         auto hwnd = _HWND();
+
+         return DefWindowProc(hwnd, message, wparam, lparam);
       }
       break;
       case WM_CLOSE:
@@ -331,7 +352,11 @@ namespace innate_ui_win32
       case WM_DESTROY:
          //PostQuitMessage(0);
       default:
-         return DefWindowProc(m_hwnd, message, wparam, lparam);
+      {
+         auto hwnd = _HWND();
+
+         return DefWindowProc(hwnd, message, wparam, lparam);
+      }
       }
       return lresult;
 
@@ -359,17 +384,20 @@ namespace innate_ui_win32
 
             pwindowImpl->m_childa.add(this);
             pwindowImpl->m_iChildIdSeed++;
-            ::SetWindowLong(m_hwnd, GWL_ID, pwindowImpl->m_iChildIdSeed);
+
+            auto hwnd = _HWND();
+
+            ::SetWindowLong(hwnd, GWL_ID, pwindowImpl->m_iChildIdSeed);
 
 
       });
 
-      if (!m_hwnd)
+      if (!_HWND())
       {
+
          throw ::exception(error_failed);
+
       }
-
-
 
    }
 
@@ -377,7 +405,9 @@ namespace innate_ui_win32
    void window::destroy_window()
    {
 
-      if (::IsWindow(m_hwnd))
+      auto hwnd = _HWND();
+
+      if (::IsWindow(hwnd))
       {
 
          for (auto pchild : m_childa)
@@ -389,20 +419,20 @@ namespace innate_ui_win32
 
          m_childa.clear();
 
-         if (!::GetParent(m_hwnd))
+         if (!::GetParent(hwnd))
          {
 
             innate_ui()->m_windowa.erase(this);
 
          }
 
-         ::DestroyWindow(m_hwnd);
+         ::DestroyWindow(hwnd);
 
          ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
          
-         pwindowing->m_windowmap[m_hwnd].release();
+         pwindowing->m_windowmap[hwnd].release();
 
-         m_hwnd = nullptr;
+         hwnd = nullptr;
 
       }
 
@@ -413,15 +443,15 @@ namespace innate_ui_win32
    {
 
       main_post([this]()
-         {
+      {
 
-            ShowWindow(m_hwnd, SW_SHOW);
-            UpdateWindow(m_hwnd);
+         auto hwnd = _HWND();
 
+         ShowWindow(hwnd, SW_SHOW);
+      
+         UpdateWindow(hwnd);
 
       });
-
-
 
    }
 
@@ -433,10 +463,13 @@ namespace innate_ui_win32
 
       
       main_post([this, puseractivationtoken]()
-        {
+      {
 
-          ShowWindow(m_hwnd, SW_SHOW);
-          UpdateWindow(m_hwnd);
+         auto hwnd = _HWND();
+
+         ShowWindow(hwnd, SW_SHOW);
+         
+         UpdateWindow(hwnd);
 
           ::cast < ::win32::acme::windowing::activation_token> pwin32activationtoken = puseractivationtoken;
 
@@ -447,12 +480,13 @@ namespace innate_ui_win32
              {
 
                 pwin32activationtoken->m_ptaskForeground->_post([this]()
-                   {
+                {
+                      
+                  auto hwnd = _HWND();
 
-                         ::SetForegroundWindow(m_hwnd);
+                  ::SetForegroundWindow(hwnd);
 
-                      });
-
+                });
 
              }
 
@@ -481,11 +515,14 @@ namespace innate_ui_win32
 
             if (p.x < 0 || p.y < 0)
             {
-               auto hwndParent  = GetParent(m_hwnd);
+
+               auto hwnd = _HWND();
+
+               auto hwndParent  = GetParent(hwnd);
                RECT rParentClient;
                GetClientRect(hwndParent, &rParentClient);
                RECT rThis;
-               GetClientRect(m_hwnd, &rParentClient);
+               GetClientRect(hwnd, &rParentClient);
                if (p.x < 0)
                {
                   p.x += ::width(rParentClient) - ::width(rThis);
@@ -497,7 +534,9 @@ namespace innate_ui_win32
                }
             }
 
-            ::SetWindowPos(m_hwnd, nullptr, p.x, p.y, 0, 0, SWP_NOSIZE);
+            auto hwnd = _HWND();
+
+            ::SetWindowPos(hwnd, nullptr, p.x, p.y, 0, 0, SWP_NOSIZE);
 
          });
 
@@ -511,10 +550,12 @@ namespace innate_ui_win32
       main_send([this, size]()
          {
 
-            ::SetWindowPos(m_hwnd, nullptr, 0, 0, size.cx, size.cy, SWP_NOMOVE);
+            auto hwnd = _HWND();
+
+            ::SetWindowPos(hwnd, nullptr, 0, 0, size.cx, size.cy, SWP_NOMOVE);
 
             RECT rThis2;
-            ::GetWindowRect(m_hwnd, &rThis2);
+            ::GetWindowRect(hwnd, &rThis2);
 
 
          });
@@ -538,10 +579,12 @@ namespace innate_ui_win32
 
             ::AdjustWindowRect(&r, (DWORD) _get_style(), FALSE);
 
-            ::SetWindowPos(m_hwnd, nullptr, 0, 0, width(r), height(r), SWP_NOMOVE);
+            auto hwnd = _HWND();
+
+            ::SetWindowPos(hwnd, nullptr, 0, 0, width(r), height(r), SWP_NOMOVE);
 
             RECT rThis2;
-            ::GetWindowRect(m_hwnd, &rThis2);
+            ::GetWindowRect(hwnd, &rThis2);
 
 
          });
@@ -555,21 +598,22 @@ namespace innate_ui_win32
       main_send([this]()
    {
 
+            auto hwnd = _HWND();
 
-      auto hwnd = ::GetParent(m_hwnd);
+      auto hwndParent = ::GetParent(hwnd);
 
-      if (hwnd == nullptr)
+      if (hwndParent == nullptr)
       {
 
-         hwnd = ::GetDesktopWindow();
+         hwndParent = ::GetDesktopWindow();
 
       }
 
       RECT r;
 
-      ::GetWindowRect(hwnd, &r);
+      ::GetWindowRect(hwndParent, &r);
       RECT rThis;
-      ::GetWindowRect(m_hwnd, &rThis);
+      ::GetWindowRect(hwnd, &rThis);
 
       int wThis = rThis.right - rThis.left;
       int hThis = rThis.bottom - rThis.top;
@@ -577,10 +621,10 @@ namespace innate_ui_win32
       int x = ((r.right - r.left) - (wThis)) / 2;
       int y = ((r.bottom - r.top) - (hThis)) / 2;
 
-      ::SetWindowPos(m_hwnd, nullptr, x, y, 0, 0, SWP_NOSIZE);
+      ::SetWindowPos(hwnd, nullptr, x, y, 0, 0, SWP_NOSIZE);
 
       RECT rThis2;
-      ::GetWindowRect(m_hwnd, &rThis2);
+      ::GetWindowRect(hwnd, &rThis2);
          });
 
 
@@ -601,7 +645,7 @@ namespace innate_ui_win32
 
       //::pointer < ::windows::micro::user >pnanouserWindows = system()->acme_windowing();
 
-      //pnanouserWindows->_defer_show_system_menu(m_hwnd, &m_hmenuSystem, pointAbsolute);
+      //pnanouserWindows->_defer_show_system_menu(hwnd, &m_hmenuSystem, pointAbsolute);
 
       _defer_show_system_menu(pmouse);
 

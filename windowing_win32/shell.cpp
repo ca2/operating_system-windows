@@ -111,7 +111,7 @@ bool IsDibSection(HBITMAP bmp)
 //   hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (unsigned int)0);
 //
 //
-//   HDC sourceHdc = ::create_compatible_graphics(hdc);
+//   HDC sourceHdc = ::CreateCompatibleDC(hdc);
 //   auto hOld  =::SelectObject(sourceHdc, hbitmap);
 //
 //   // This pixel has partial transparency, but ::GetPixel returns just RGB.
@@ -213,7 +213,7 @@ bool IsDibSection(HBITMAP bmp)
    //bitmapinfo.bmiHeader.biClrUsed;
    //bitmapinfo.bmiHeader.biClrImportant;
    
-   HDC hdc = ::create_compatible_graphics(NULL);
+   HDC hdc = ::CreateCompatibleDC(NULL);
 
 
    if (!::GetDIBits(hdc, hbitmap, 0, bitmap.bmHeight, pimage->m_pimage32Raw, &bitmapinfo, DIB_RGB_COLORS))
@@ -591,7 +591,7 @@ namespace windowing_win32
 
       auto psysteminteraction = pwindowing->system_interaction();
 
-      HWND hwnd = as_hwnd(psysteminteraction->oswindow());
+      auto hwnd = ::as_HWND(psysteminteraction->operating_system_window());
 
       comptr < IExtractIconW > piextracticon;
 

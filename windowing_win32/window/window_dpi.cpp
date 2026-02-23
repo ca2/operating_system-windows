@@ -47,7 +47,7 @@ void dpi_os_initialize()
 }
 
 
-unsigned int get_dpi_for_window(::acme::windowing::window * pacmewindowingwindow)
+unsigned int get_dpi_for_window(const ::operating_system::window & operatingsystemwindow)
 {
 
    static auto pfn_get_dpi_for_window = ::windows::function < FN_GetDpiForWindow * >::get_address("User32.dll", "GetDPiForWindow");
@@ -55,7 +55,11 @@ unsigned int get_dpi_for_window(::acme::windowing::window * pacmewindowingwindow
    if (pfn_get_dpi_for_window)
    {
 
-      return pfn_get_dpi_for_window(as_hwnd(oswindow));
+      auto hwnd = ::as_HWND(operatingsystemwindow);
+
+      return pfn_get_dpi_for_window(hwnd);
+
+      //return pfn_get_dpi_for_window(as_hwnd(oswindow));
 
    }
 

@@ -909,7 +909,7 @@ namespace windowing_win32
 
          pixmap.initialize(size, pimage32, iScan);
 
-         hdc = ::create_compatible_graphics(nullptr);
+         hdc = ::CreateCompatibleDC(nullptr);
 
          hbitmapOld = (HBITMAP) ::SelectObject(hdc, hbitmap);
 
@@ -938,7 +938,7 @@ namespace windowing_win32
          {
 
             // Step 3: Prepare compatible DCs and select bitmaps
-            HDC hMaskDC = create_compatible_graphics(nullptr);
+            HDC hMaskDC = ::CreateCompatibleDC(nullptr);
             HGDIOBJ oldMask = SelectObject(hMaskDC, iconInfo.hbmMask);
 
 

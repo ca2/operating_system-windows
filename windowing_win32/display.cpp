@@ -1062,7 +1062,7 @@ namespace windowing_win32
 
       {
 
-         auto hdc = create_compatible_graphics(NULL);
+         auto hdc = ::CreateCompatibleDC(NULL);
 
          m_dpi = (float)GetDeviceCaps(hdc, LOGPIXELSX);
 

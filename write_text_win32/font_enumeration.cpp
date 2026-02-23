@@ -32,7 +32,7 @@ namespace write_text_win32
       if (m_hdc == nullptr)
       {
 
-         m_hdc = ::create_compatible_graphics(nullptr);
+         m_hdc = ::CreateCompatibleDC(nullptr);
 
       }
 

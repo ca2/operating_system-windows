@@ -890,7 +890,7 @@ namespace windowing_win32
 
          pixmap.init(size, pimage32, iScan);
 
-         hdc = ::create_compatible_graphics(nullptr);
+         hdc = ::CreateCompatibleDC(nullptr);
 
          hbitmapOld = (HBITMAP) ::SelectObject(hdc, hbitmap);
 

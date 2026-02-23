@@ -117,21 +117,21 @@ namespace windowing_win32
       void _create_window() override;
 
 
-      inline HWND get_hwnd() const { return (HWND)oswindow(); }
-      inline void set_hwnd(HWND hwnd) { set_oswindow(as_oswindow(hwnd)); }
+      //virtual HWND get_hwnd() const;
+      virtual void set_HWND(HWND hwnd);
 
-      ::::acme::windowing::window * pacmewindowingwindow() const override;
-      void _set_oswindow(::::acme::windowing::window * pacmewindowingwindow) override;
+      //::::acme::windowing::window * pacmewindowingwindow() const override;
+      //void _set_oswindow(::::acme::windowing::window * pacmewindowingwindow) override;
 
-      bool operator== (const window& window) const
-      {
-         return oswindow() == window.oswindow();
-      }
+      //bool operator== (const window& window) const
+      //{
+      //   return oswindow() == window.oswindow();
+      //}
 
-      bool operator!= (const window& window) const
-      {
-         return !operator==(window);
-      }
+      //bool operator!= (const window& window) const
+      //{
+      //   return !operator==(window);
+      //}
 
 
       void destroy() override;
@@ -374,7 +374,7 @@ namespace windowing_win32
       //virtual void CalcWindowRect(::int_rectangle * pClientRect, unsigned int nAdjustType = adjustBorder);
 
 
-      void get_child_by_id(atom atom, ::oswindow * poswindow_) const;
+      //void get_child_by_id(atom atom, ::oswindow * poswindow_) const;
 
       //virtual bool _is_window() const override;
 
@@ -649,8 +649,9 @@ namespace windowing_win32
       virtual void set_parent(::windowing::window * pwindow) override;
 
       virtual ::windowing::window * window_get_owner() override;
-      virtual ::oswindow get_owner_oswindow() override;
+      virtual ::operating_system::window get_owner_operating_system_window() override;
       virtual void set_owner(::windowing::window * pwindow) override;
+      ::operating_system::window operating_system_window() const override;
 
       //virtual ::user::interaction * set_owner(::user::interaction * pWndNewParent);
       //virtual oswindow get_owner() const;

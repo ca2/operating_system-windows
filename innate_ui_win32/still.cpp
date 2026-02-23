@@ -64,9 +64,24 @@ namespace innate_ui_win32
    void still::_create_child(window * pwindowParent)
    {
 
-      HINSTANCE hinstanceParent = (HINSTANCE)GetWindowLongPtr(pwindowParent->m_hwnd, GWLP_HINSTANCE);
+      auto hwndParent = pwindowParent->_HWND();
 
-      m_hwnd = CreateWindow(
+      if (::is_null(hwndParent) || hwndParent == INVALID_HANDLE_VALUE)
+      {
+
+         throw ::exception(error_bad_argument, "Parent window handle is null or INVALID_HANDLE_VALUE");
+      }
+
+      auto hinstanceParent = (HINSTANCE)GetWindowLongPtr(hwndParent, GWLP_HINSTANCE);
+
+      if (::is_null(hinstanceParent))
+      {
+
+         throw ::exception(error_wrong_state, "Parent window hinstance is null");
+      }
+
+      auto hwndResult =
+         CreateWindow(
          L"STATIC",  // Predefined class; Unicode assumed 
          L"",      // Button text 
          m_iCreateStyle,  // Styles 
@@ -74,19 +89,28 @@ namespace innate_ui_win32
          10,         // y position 
          100,        // Button width
          100,        // Button height
-         pwindowParent->m_hwnd,     // Parent window
+         hwndParent, // Parent window
          NULL,       // No menu.
          (HINSTANCE)hinstanceParent,
          NULL);
+
+      if (!hwndResult || !_HWND() || hwndResult != _HWND())
+      {
+
+         throw ::exception(error_failed);
+
+      }
 
       if (m_bIcon)
       {
 
          ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
 
-         pwindowing->m_windowmap[m_hwnd] = this;
+         auto hwnd = _HWND();
 
-         SetWindowLongPtr(m_hwnd, GWLP_WNDPROC, (LPARAM)&::windows::window_procedure);
+         pwindowing->m_windowmap[hwnd] = this;
+
+         SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LPARAM) & ::windows::window_procedure);
 
       }
 
@@ -133,7 +157,9 @@ namespace innate_ui_win32
          
          PAINTSTRUCT ps;
 
-         HDC hdc = ::BeginPaint(m_hwnd, &ps);
+         auto hwnd = _HWND();
+
+         HDC hdc = ::BeginPaint(hwnd, &ps);
 
          ::Gdiplus::Graphics graphics(hdc);
 
@@ -142,7 +168,7 @@ namespace innate_ui_win32
 
             Gdiplus::Rect r;
             RECT rectClient;
-            ::GetClientRect(m_hwnd, &rectClient);
+            ::GetClientRect(hwnd, &rectClient);
             r.X = 0;
             r.Y = 0;
             r.Width = ::width(rectClient);
@@ -154,7 +180,7 @@ namespace innate_ui_win32
 
          }
 
-         ::EndPaint(m_hwnd, &ps);
+         ::EndPaint(hwnd, &ps);
 
       }
 

@@ -217,7 +217,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::create_compatible_graphics(::draw2d::graphics * pgraphics)
+   bool graphics::CreateCompatibleDC(::draw2d::graphics * pgraphics)
    {
 
       close_graphics();
@@ -227,19 +227,19 @@ namespace draw2d_gdiplus
       if(pgraphics == nullptr)
       {
 
-         hdc = ::create_compatible_graphics(nullptr);
+         hdc = ::CreateCompatibleDC(nullptr);
 
       }
       else if(__graphics(pgraphics)->m_hdc != nullptr)
       {
 
-         hdc = ::create_compatible_graphics(__graphics(pgraphics)->m_hdc);
+         hdc = ::CreateCompatibleDC(__graphics(pgraphics)->m_hdc);
 
       }
       else if(__graphics(pgraphics)->m_hdcGraphics != nullptr)
       {
 
-         hdc = ::create_compatible_graphics(__graphics(pgraphics)->m_hdcGraphics);
+         hdc = ::CreateCompatibleDC(__graphics(pgraphics)->m_hdcGraphics);
 
       }
       else
@@ -247,7 +247,7 @@ namespace draw2d_gdiplus
 
          HDC hdcTemplate = __graphics(pgraphics)->get_hdc();
 
-         hdc = ::create_compatible_graphics(hdcTemplate);
+         hdc = ::CreateCompatibleDC(hdcTemplate);
 
          __graphics(pgraphics)->release_hdc(hdcTemplate);
 

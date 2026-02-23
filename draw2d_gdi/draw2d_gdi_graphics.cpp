@@ -150,19 +150,19 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::create_compatible_graphics(::draw2d::graphics_pointer & pgraphics)
+   bool graphics::CreateCompatibleDC(::draw2d::graphics_pointer & pgraphics)
    {
 
       if(pgraphics == nullptr)
       {
 
-         return attach_hdc(::create_compatible_graphics(nullptr)) != false;
+         return attach_hdc(::CreateCompatibleDC(nullptr)) != false;
 
       }
       else
       {
 
-         return attach_hdc(::create_compatible_graphics((HDC)(dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle1())) != false;
+         return attach_hdc(::CreateCompatibleDC((HDC)(dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle1())) != false;
 
       }
 

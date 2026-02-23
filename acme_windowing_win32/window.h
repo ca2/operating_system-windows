@@ -22,10 +22,13 @@ namespace win32
 
 
          class CLASS_DECL_ACME_WINDOWING_WIN32 window :
-            virtual public ::acme::windowing::window,
             virtual public ::windows::window
          {
          public:
+
+
+            
+
 
             bool m_bNcActive;
             //CreatableFromBase(window, ::micro::window_implementation);
@@ -68,7 +71,7 @@ namespace win32
 
             virtual void _draw(HDC hdc);
 
-            void * __win32_HWND() override;
+            //void * __win32_HWND() override;
 
             //void on_draw(::nano::graphics::device * pnanodevice) override;
 
