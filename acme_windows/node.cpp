@@ -5501,7 +5501,19 @@ namespace acme_windows
             system()->set_finish();
          });
    }
+   ::string_array node::get_operating_system_information_box_lines()
+   {
 
+      ::string_array stra;
+
+
+      stra.add("Title: Display Resolution");
+      stra.add(::format("Width: {}",::GetSystemMetrics(SM_CXSCREEN)));
+      stra.add(::format("Height: {}", ::GetSystemMetrics(SM_CYSCREEN)));
+
+      return stra;
+
+   }
 
 
 } // namespace acme_windows
