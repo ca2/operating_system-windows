@@ -167,7 +167,7 @@ pacmedir->create(::file_path_folder(pszFileName));
          throw ::file::exception(error_file, _doserrno, m_path);
    }
 
-   void stdio_file::write_string(const ::string & psz)
+   void stdio_file::write_string(const ::scoped_string & scopedstr)
 
    {
       ASSERT(psz != nullptr);
@@ -260,7 +260,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
    }
 
-   /*void stdio_file::write_string(const ::string & psz)
+   /*void stdio_file::write_string(const ::scoped_string & scopedstr)
 
    {
    ASSERT(psz != nullptr);

@@ -2152,12 +2152,6 @@
     <ProjectReference Include="..\..\..\source\app\acme\acme.vcxproj">
       <Project>{638b242f-0f21-41c3-9f66-724660046133}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\source\app\apex\apex.vcxproj">
-      <Project>{e000ffaf-392f-4e32-bf51-777ca238991f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\source\app\aqua\aqua.vcxproj">
-      <Project>{1b06fe5f-f783-41a1-ac68-0e02880dbbac}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\acme_windows\acme_windows.vcxproj">
       <Project>{cc8e8200-00a9-414e-9829-7ca3f1091add}</Project>
     </ProjectReference>

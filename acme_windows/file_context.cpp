@@ -29,6 +29,126 @@ CLASS_DECL_ACME FILETIME & copy(FILETIME & filetime, const ::earth::time & time)
 namespace acme_windows
 {
 
+   void _win32_set_file_length(const ::file::path & path, ULONGLONG size, ::pointer < ::file::exception > * ppfileexception = nullptr)
+   {
+
+//#include <windows.h>
+
+  //    bool SetFileLength()
+    //  {
+         HANDLE hFile = CreateFileW(
+             path.windows_path(),
+             GENERIC_WRITE,
+             FILE_SHARE_READ,
+             nullptr,
+             OPEN_EXISTING,   // or CREATE_ALWAYS if you want to create/truncate
+             FILE_ATTRIBUTE_NORMAL,
+             nullptr);
+
+         if (hFile == INVALID_HANDLE_VALUE)
+         {
+            DWORD lasterror = ::GetLastError();
+
+            // if (!(eopen & ::file::e_open_no_share_violation_wait))
+            // {
+            //
+            //    if (lasterror == ERROR_SHARING_VIOLATION && ::task_get_run() && timeStart.elapsed() < m_timeErrorBlockTimeout)
+            //    {
+            //
+            //       preempt(maximum(m_timeErrorBlockTimeout / 10, 50_ms));
+            //
+            //       goto retry;
+            //
+            //    }
+            //
+            // }
+            //
+            // if (lasterror == ERROR_ACCESS_DENIED)
+            // {
+            //
+            //    if (eopen & ::file::e_open_write && !(eopen & ::file::e_open_read))
+            //    {
+            //
+            //       eopen += ::file::e_open_read;
+            //
+            //       goto retry;
+            //
+            //    }
+            //
+            // }
+
+            ::e_status estatus = ::windows::last_error_status(lasterror);
+
+            auto errorcode = ::windows::last_error_error_code(lasterror);
+
+            //m_estatus = estatus;
+
+            //set_nok();
+
+            // if (eopen & ::file::e_open_no_exception_on_open && m_estatus == error_file_access_denied)
+            // {
+            //
+            //    if (eopen & ::file::e_open_write)
+            //    {
+            //
+            //       auto pmessagebox = __initialize_new ::message_box("Couldn't write to file \"" + m_path + "\".\nAccess Denied!!\n(Is any anti-virus program blocking this program: \"" + file_system()->module() + "\"?", file_system()->module().title() + " - Access Denied!", ::user::e_message_box_ok);
+            //
+            //       pmessagebox->async();
+            //
+            //    }
+            //
+            // }
+
+            RETURN_OR_THROW(
+               //eopen & ::file::e_open_no_exception_on_open,
+               false,
+               ppfileexception,
+               ::file::exception,
+               estatus, errorcode, path, ::file::e_open_write, "Create File has failed.");
+
+         }
+
+         LARGE_INTEGER li;
+         li.QuadPart = size;
+
+         // Move file pointer
+         if (!SetFilePointerEx(hFile, li, nullptr, FILE_BEGIN))
+         {
+            CloseHandle(hFile);
+            DWORD lasterror = ::GetLastError();
+
+            ::e_status estatus = ::windows::last_error_status(lasterror);
+
+            auto errorcode = ::windows::last_error_error_code(lasterror);
+            RETURN_OR_THROW(
+               //eopen & ::file::e_open_no_exception_on_open,
+               false,
+               ppfileexception,
+               ::file::exception,
+               estatus, errorcode, path, ::file::e_open_write, "Create File has failed.");
+         }
+
+         // Set end of file
+         if (!SetEndOfFile(hFile))
+         {
+            CloseHandle(hFile);
+            DWORD lasterror = ::GetLastError();
+
+            ::e_status estatus = ::windows::last_error_status(lasterror);
+
+            auto errorcode = ::windows::last_error_error_code(lasterror);
+            RETURN_OR_THROW(
+               //eopen & ::file::e_open_no_exception_on_open,
+               false,
+               ppfileexception,
+               ::file::exception,
+               estatus, errorcode, path, ::file::e_open_write, "Create File has failed.");
+         }
+
+         CloseHandle(hFile);
+//         return true;
+
+   }
 
    file_context::file_context()
    {
@@ -259,6 +379,14 @@ namespace acme_windows
       // of this function. Maybe you should consider it in some case(s).
 
       return length(path);
+
+   }
+
+
+   void file_context::set_length(const ::file::path & path, filesize size)
+   {
+
+      _win32_set_file_length(path, size);
 
    }
 

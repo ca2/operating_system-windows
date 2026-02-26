@@ -60,17 +60,18 @@ namespace innate_ui_win32
    void dialog::_create()
    {
 
-      ::CreateWindowW(_get_class_name(), L"", WS_DLGFRAME | WS_CAPTION | WS_POPUPWINDOW,
+      auto hwndResult = ::CreateWindowW(_get_class_name(), L"", WS_DLGFRAME | WS_CAPTION | WS_POPUPWINDOW,
               CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, (HINSTANCE) ::windows::get_window_procedure_hinstance(),
               (::windows::window *)this);
 
-      if (m_hwnd)
+      if (!hwndResult || !_HWND() || hwndResult != _HWND())
       {
 
-         system()->innate_ui()->add_top_level_window(this);
+         throw ::exception(error_failed);
 
       }
 
+      system()->innate_ui()->add_top_level_window(this);
 
    }
 

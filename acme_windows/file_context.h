@@ -70,6 +70,7 @@ namespace acme_windows
       
       ::payload length(const ::file::path & path) override;
       ::payload length(const ::file::path & path, ::payload * pvarQuery) override;
+      void set_length(const ::file::path & path, filesize size) override;
 
       void transfer(const ::file::path & pathNew, const ::file::path & path) override;
 

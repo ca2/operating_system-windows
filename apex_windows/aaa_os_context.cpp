@@ -190,7 +190,7 @@ namespace apex_windows
    }
 
 
-   void os_context::terminate_processes_by_title(const ::string & lpszName)
+   void os_context::terminate_processes_by_title(const ::scoped_string & scopedstrName)
    {
 
       while (true)
@@ -444,7 +444,7 @@ namespace apex_windows
    }
 
 
-   void os_context::local_machine_set_run(const ::string & strKey, const ::file::path & pathExecutable, const ::string & strArguments, bool bSet)
+   void os_context::local_machine_set_run(const ::scoped_string & scopedstrKey, const ::file::path & pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet)
    {
 
       try
@@ -481,7 +481,7 @@ namespace apex_windows
    }
 
 
-   void os_context::local_machine_set_run_once(const ::string & pszKey, const ::file::path & pathExecutable, const ::string & pszArguments, bool bSet)
+   void os_context::local_machine_set_run_once(const ::scoped_string & scopedstrKey, const ::file::path & pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet)
    {
 
       try
@@ -517,7 +517,7 @@ namespace apex_windows
    }
 
 
-   void os_context::current_user_set_run(const ::string & pszKey, const ::file::path & pathExecutable, const ::string & strArguments, bool bSet)
+   void os_context::current_user_set_run(const ::scoped_string & scopedstrKey, const ::file::path & pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet)
    {
 
       try
@@ -559,7 +559,7 @@ namespace apex_windows
    }
 
 
-   void os_context::current_user_set_run_once(const ::string & pszKey, const ::file::path & pathExecutable, const ::string & pszArguments, bool bSet)
+   void os_context::current_user_set_run_once(const ::scoped_string & scopedstrKey, const ::file::path & pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet)
    {
 
       try
@@ -629,7 +629,7 @@ namespace apex_windows
    }
 
 
-   void os_context::file_extension_get_open_with_list_keys(string_array_base & straKey, const ::string & pszExtension)
+   void os_context::file_extension_get_open_with_list_keys(string_array_base & straKey, const ::scoped_string & scopedstrExtension)
    {
 
       //try
@@ -660,7 +660,7 @@ namespace apex_windows
    }
 
 
-   void os_context::file_extension_get_open_with_list_commands(string_array_base & straCommand, const ::string & pszExtension)
+   void os_context::file_extension_get_open_with_list_commands(string_array_base & straCommand, const ::scoped_string & scopedstrExtension)
    {
 
       string_array_base straKey;
@@ -677,7 +677,7 @@ namespace apex_windows
    }
 
 
-   void os_context::file_association_set_default_icon(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszIconPath)
+   void os_context::file_association_set_default_icon(const ::scoped_string & scopedstrExtension, const ::scoped_string & scopedstrExtensionNamingClass, const ::scoped_string & scopedstrIconPath)
    {
 
       //try
@@ -703,7 +703,7 @@ namespace apex_windows
    }
 
 
-   void os_context::file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszCommand, const ::string & pszParam)
+   void os_context::file_association_set_shell_open_command(const ::scoped_string & scopedstrExtension, const ::scoped_string & scopedstrExtensionNamingClass, const ::scoped_string & scopedstrCommand, const ::scoped_string & scopedstrParam)
    {
 
       //::e_status estatus = ::success;
@@ -806,7 +806,7 @@ namespace apex_windows
    }
 
 
-   void os_context::file_association_get_shell_open_command(const ::string & pszExtension, string & strExtensionNamingClass, string & strCommand, string & strParam)
+   void os_context::file_association_get_shell_open_command(const ::scoped_string & scopedstrExtension, string & strExtensionNamingClass, string & strCommand, string & strParam)
    {
 
       //try
@@ -862,7 +862,7 @@ namespace apex_windows
    }
 
 
-   void os_context::link_open(const string & strUrl, const string & strProfile)
+   void os_context::link_open(const ::scoped_string & scopedstrUrl, const ::scoped_string & scopedstrProfile)
    {
 
       string strBrowser = "chrome";
@@ -926,7 +926,7 @@ namespace apex_windows
    }
 
 
-   bool os_context::open_in_ie(const ::string & pcsz)
+   bool os_context::open_in_ie(const ::scoped_string & scopedstr)
    {
 
       try
@@ -1156,7 +1156,7 @@ namespace apex_windows
    }
 
 
-   void os_context::_getCredentialsForService(const ::string & strService, ::string & strUsername, ::string & strPassword)
+   void os_context::_getCredentialsForService(const ::scoped_string & scopedstrService, ::string & strUsername, ::string & strPassword)
    {
 
       HRESULT hr = S_OK;
@@ -1542,7 +1542,7 @@ namespace apex_windows
    }
 
 
-   void os_context::enable_service(const ::string & strServiceName, const ::string & strDisplayName, const ::string & strCommand, const ::string & strUser, const ::string & strPass)
+   void os_context::enable_service(const ::scoped_string & scopedstrServiceName, const ::scoped_string & scopedstrDisplayName, const ::scoped_string & scopedstrCommand, const ::scoped_string & scopedstrUser, const ::scoped_string & scopedstrPass)
    {
 
       if (strServiceName.is_empty())
@@ -1606,7 +1606,7 @@ namespace apex_windows
    }
 
 
-   void os_context::disable_service(const ::string & strServiceName)
+   void os_context::disable_service(const ::scoped_string & scopedstrServiceName)
    {
 
       if (strServiceName.is_empty())
@@ -1671,7 +1671,7 @@ namespace apex_windows
    }
 
 
-   void os_context::start_service(const ::string & strServiceName)
+   void os_context::start_service(const ::scoped_string & scopedstrServiceName)
    {
 
       if (strServiceName.is_empty())
@@ -1712,7 +1712,7 @@ namespace apex_windows
    }
 
 
-   void os_context::stop_service(const ::string & strServiceName)
+   void os_context::stop_service(const ::scoped_string & scopedstrServiceName)
    {
 
       if (strServiceName.is_empty())
@@ -2177,7 +2177,7 @@ namespace apex_windows
    //#else
 
 
-   void os_context::file_open(const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
+   void os_context::file_open(const ::file::path & pathParam, const ::scoped_string & scopedstrParams, const ::file::path & pathFolder)
    {
 
       auto path = m_papplication->defer_process_matter_path(pathParam);
@@ -2382,7 +2382,7 @@ namespace apex_windows
    //   }
    //
 
-   void os_context::hidden_start(const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
+   void os_context::hidden_start(const ::file::path & pathParam, const ::scoped_string & scopedstrParams, const ::file::path & pathFolder)
    {
 
       auto path = m_papplication->defer_process_matter_path(pathParam);
@@ -2454,7 +2454,7 @@ namespace apex_windows
    }
 
 
-   void os_context::hidden_run(const class time & timeWait, const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
+   void os_context::hidden_run(const class time & timeWait, const ::file::path & pathParam, const ::scoped_string & scopedstrParams, const ::file::path & pathFolder)
    {
 
       auto phappening = øallocate manual_reset_happening();
@@ -2565,7 +2565,7 @@ namespace apex_windows
    }
 
 
-   void os_context::register_user_auto_start(const string & strId, const ::file::path & pathExecutable, const string & strArguments, bool bRegister)
+   void os_context::register_user_auto_start(const ::scoped_string & scopedstrId, const ::file::path & pathExecutable, const ::scoped_string & scopedstrArguments, bool bRegister)
    {
 
       current_user_set_run(strId, pathExecutable, strArguments, bRegister);
@@ -2575,7 +2575,7 @@ namespace apex_windows
    }
 
 
-   bool os_context::is_user_auto_start(const string & strAppId)
+   bool os_context::is_user_auto_start(const ::scoped_string & scopedstrAppId)
    {
 
       ::acme_windows::registry::key keyKar;
@@ -2604,7 +2604,7 @@ namespace apex_windows
    }
 
 
-   ::file::path os_context::get_app_path(const ::string & strApp)
+   ::file::path os_context::get_app_path(const ::scoped_string & scopedstrApp)
    {
 
       string str(strApp);

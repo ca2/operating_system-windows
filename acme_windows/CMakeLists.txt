@@ -93,9 +93,6 @@ if (MSVC)
     target_link_libraries(${PROJECT_NAME} PRIVATE
        acme_windows_common
        acme
-       apex
-       aqua
-       aura
        Gdiplus
        Setupapi
        Credui)

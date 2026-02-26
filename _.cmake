@@ -82,7 +82,7 @@ link_directories(${WORKSPACE_FOLDER}/../operating_system/storage-${OPERATING_SYS
 link_directories(${WORKSPACE_FOLDER}/../operating_system/storage-${OPERATING_SYSTEM_NAME}/${PLATFORM_CONFIGURATION}/${CMAKE_BUILD_TYPE}/third/library)
 
 #include_directories(${WORKSPACE_FOLDER})
-#include_directories($ENV{HOME}/__config)
+###include_directories($HOME_AAA_DIR/__aaa_config)
 #include_directories(${WORKSPACE_FOLDER}/source)
 #include_directories(${WORKSPACE_FOLDER}/source/app)
 #include_directories(${WORKSPACE_FOLDER}/source/app/include)

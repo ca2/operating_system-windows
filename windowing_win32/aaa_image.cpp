@@ -518,7 +518,7 @@ namespace draw2d_gdiplus
       // White blend image
       ::image::image_pointer pimage1;
 
-      estatus = __øconstruct(pimage1);
+      estatus = øconstruct(pimage1);
 
       if (!estatus)
       {
@@ -545,7 +545,7 @@ namespace draw2d_gdiplus
       // Black blend image
       ::image::image_pointer pimage2;
 
-      estatus = __øconstruct(pimage2);
+      estatus = øconstruct(pimage2);
       
       if (!estatus)
       {
@@ -574,7 +574,7 @@ namespace draw2d_gdiplus
       // Mask image
       ::image::image_pointer pimageM;
 
-      estatus = __øconstruct(pimageM);
+      estatus = øconstruct(pimageM);
 
       if (!estatus)
       {
@@ -654,7 +654,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::_load_thumbnail(const ::string & psz)
+   bool image::_load_thumbnail(const ::scoped_string & scopedstr)
    {
 
       ::Gdiplus::Graphics * pgraphics = (::Gdiplus::Graphics *)get_graphics()->get_os_data();

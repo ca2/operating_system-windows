@@ -1,6 +1,7 @@
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "window_util.h"
+#include "acme/windowing/window.h"
 #include "aura/user/user/interaction_array.h"
 #include "aura/user/user/interaction.h"
 
@@ -989,7 +990,11 @@ namespace windows
       for (int i = 0; i < a.interaction_count(); i++)
       {
 
-         hwnda.add(as_hwnd(((::user::interaction *)a.interaction_at(i))->oswindow()));
+          auto pacmewindowingwindow = ((::user::interaction*)a.interaction_at(i))->m_pacmewindowingwindow;
+
+          auto hwnd = (HWND)::as_HWND(pacmewindowingwindow->operating_system_window());
+
+         hwnda.add(hwnd);
 
       }
 
@@ -1008,7 +1013,11 @@ namespace windows
       for (int i = 0; i < ptra.get_size(); i++)
       {
 
-         hwnda.add(as_hwnd(ptra.element_at(i)->oswindow()));
+         auto pacmewindowingwindow = ((::user::interaction *)ptra.element_at(i))->m_pacmewindowingwindow;
+
+         auto hwnd = ::as_HWND(pacmewindowingwindow->operating_system_window());
+
+         hwnda.add(hwnd);
 
       }
 

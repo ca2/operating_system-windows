@@ -21,10 +21,10 @@ namespace windowing_win32
       top_level_boolean_predicate(PRED pred, HWND hwndDefault = nullptr) : m_predicate(pred), m_hwnd(hwndDefault) {}
 
 
-      bool found(::acme::windowing::window * pacmewindowingwindow)
+      bool found(HWND hwnd)
       {
 
-         return m_predicate(oswindow);
+         return m_predicate(hwnd);
 
       }
 
@@ -36,7 +36,7 @@ namespace windowing_win32
 
          top_level_boolean_predicate * ppred = (top_level_boolean_predicate *)lParam;
 
-         if (ppred->found((oswindow) hwnd))
+         if (ppred->found(hwnd))
          {
 
             ppred->m_hwnd = hwnd;

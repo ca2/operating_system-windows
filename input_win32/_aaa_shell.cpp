@@ -128,7 +128,7 @@ bool IsDibSection(HBITMAP bmp)
 //   ::SelectObject(sourceHdc, hOld);
 //   ::DeleteDC(sourceHdc);
 //
-//   //hMemDC = CreateCompatibleDC(hdc);
+//   //hMemDC = create_compatible_graphics(hdc);
 //   ReleaseDC(nullptr, hdc);
 //
 //   // Draw something on the DIB section.

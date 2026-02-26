@@ -62,7 +62,7 @@ namespace windowing_win32
 
       auto psysteminteraction = pwin32windowing->system_interaction();
 
-      m_hwnd = (HWND) psysteminteraction->oswindow();
+      m_hwnd = ::as_HWND(psysteminteraction->operating_system_window());
 
    }
 

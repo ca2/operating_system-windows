@@ -19,6 +19,9 @@ CLASS_DECL_ACME void acme_set_main_hwnd(HWND hwnd);
 CLASS_DECL_ACME HWND acme_get_main_hwnd();
 
 
+CLASS_DECL_ACME HMODULE GetModuleFromFunction(void *pFunc);
+
+
 //CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
 
 
@@ -433,7 +436,9 @@ namespace windowing_win32
 
       wndcls.lpfnWndProc = &windows::window_procedure;
 
-      wndcls.hInstance = ::windows::get_window_procedure_hinstance();
+      //wndcls.hInstance = ::windows::get_window_procedure_hinstance();
+
+      wndcls.hInstance = (HINSTANCE)GetModuleFromFunction(wndcls.lpfnWndProc);
 
       wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
 
@@ -555,9 +560,10 @@ namespace windowing_win32
       // otherwise we need to register a ___new class
       wndcls.style = nClassStyle;
       wndcls.lpfnWndProc = &::windows::window_procedure;
-      auto hinstanceWindowProcedure = ::windows::get_window_procedure_hinstance();
+      //auto hinstanceWindowProcedure = ::windows::get_window_procedure_hinstance();
       wndcls.cbClsExtra = wndcls.cbWndExtra = 40;
-      wndcls.hInstance = hinstanceWindowProcedure;
+      //wndcls.hInstance = hinstanceWindowProcedure;
+      wndcls.hInstance = (HINSTANCE)GetModuleFromFunction(wndcls.lpfnWndProc);
       //wndcls.hIcon = hIcon;
       //wndcls.hCursor = hCursor;
       wndcls.hCursor = nullptr;

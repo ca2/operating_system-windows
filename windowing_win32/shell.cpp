@@ -128,7 +128,7 @@ bool IsDibSection(HBITMAP bmp)
 //   ::SelectObject(sourceHdc, hOld);
 //   ::DeleteDC(sourceHdc);
 //
-//   //hMemDC = CreateCompatibleDC(hdc);
+//   //hMemDC = create_compatible_graphics(hdc);
 //   ReleaseDC(nullptr, hdc);
 //
 //   // Draw something on the DIB section.
@@ -591,7 +591,7 @@ namespace windowing_win32
 
       auto psysteminteraction = pwindowing->system_interaction();
 
-      HWND hwnd = as_hwnd(psysteminteraction->oswindow());
+      auto hwnd = ::as_HWND(psysteminteraction->operating_system_window());
 
       comptr < IExtractIconW > piextracticon;
 

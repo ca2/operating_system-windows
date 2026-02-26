@@ -285,9 +285,11 @@ namespace windowing_win32
 
       critical_section_lock synchronouslock(&m_criticalsection);
 
-      auto& pwindow = m_windowmap[(::oswindow)hwnd];
+      auto operatingsystemwindow = ::as_operating_system_window(hwnd);
 
-      if (!pwindow)
+      auto pacmewindowingwindow = acme_windowing_window(operatingsystemwindow);
+
+      if (::is_null(pacmewindowingwindow))
       {
 
          ///pwindow = øallocate ::windowing_win32::window();
@@ -296,7 +298,7 @@ namespace windowing_win32
 
       }
 
-      ::cast < ::windowing_win32::window > p = pwindow;
+      ::cast < ::windowing_win32::window > p = pacmewindowingwindow;
 
       return p;
 
@@ -315,16 +317,16 @@ namespace windowing_win32
 
 
 
-   ::acme::windowing::window* windowing::window(::acme::windowing::window * pacmewindowingwindow)
-   {
+   //::acme::windowing::window* windowing::window(::acme::windowing::window * pacmewindowingwindow)
+   //{
 
-      HWND hwnd = as_hwnd(oswindow);
+   //   HWND hwnd = as_hwnd(oswindow);
 
-      auto pwindow = _window(hwnd);
+   //   auto pwindow = _window(hwnd);
 
-      return pwindow;
+   //   return pwindow;
 
-   }
+   //}
 
 
    HWND windowing::zorder_to_hwnd(const zorder& zorder)
@@ -658,7 +660,7 @@ namespace windowing_win32
    //}
 
 
-   void windowing::set(message::key* pkey, ::acme::windowing::window * pacmewindowingwindow, ::windowing::window* pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
+   void windowing::set(message::key* pkey, const ::operating_system::window & operatingsystemwindow, ::windowing::window* pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    {
 
       pkey->m_nChar = static_cast<unsigned int>(wparam);
@@ -673,12 +675,14 @@ namespace windowing_win32
 
       pkey->m_iVirtualKey = (int)MapLeftRightKeys(wparam, lparam);
 
-      ::windowing::windowing::set(pkey, oswindow, pwindow, eusermessage, wparam, lparam);
+      ::windowing::windowing::set(pkey, operatingsystemwindow, pwindow, eusermessage, wparam, lparam);
 
    }
 
 
-   void windowing::set(::message::mouse* pmouse, ::acme::windowing::window * pacmewindowingwindow, ::windowing::window* pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
+   void windowing::set(::message::mouse *pmouse, const ::operating_system::window &operatingsystemwindow,
+                       ::windowing::window *pwindow, ::user::enum_message eusermessage, ::wparam wparam,
+                       ::lparam lparam)
    {
 
       //pmouse->m_nFlags = wparam;
@@ -783,7 +787,7 @@ namespace windowing_win32
 
       }
 
-      auto hwndDeferRelease = (HWND)pwindowDeferRelease->oswindow();
+      auto hwndDeferRelease = ::as_HWND(pwindowDeferRelease->operating_system_window());
 
       if (hwndDeferRelease != hwndCapture)
       {
@@ -886,15 +890,17 @@ namespace windowing_win32
    //}
 
 
-   void windowing::erase_window(::windowing::window* pwindow)
+   void windowing::erase_window(::acme::windowing::window* pacmewindowingwindow)
    {
 
-      if (!m_windowmap.erase((::oswindow) as_hwnd(pwindow->oswindow())))
-      {
+      ::windows::windowing::erase_window(pacmewindowingwindow);
 
-         //return ::error_failed;
+      //if (!m_windowmap.erase((::oswindow) as_hwnd(pwindow->oswindow())))
+      //{
 
-      }
+      //   //return ::error_failed;
+
+      //}
 
       //return ::success;
 
@@ -953,10 +959,12 @@ namespace windowing_win32
    //   }
 
 
-   int_bool windowing::point_is_window_origin(::int_point ptHitTest, oswindow oswindowExclude, int iMargin)
+   int_bool windowing::point_is_window_origin(::int_point ptHitTest,
+                                              const ::operating_system::window &operatingsystemwindowExclude,
+                                              int iMargin)
    {
 
-      HWND hwndExclude = as_hwnd(oswindowExclude);
+      HWND hwndExclude = as_HWND(operatingsystemwindowExclude);
 
       auto phwnda = ::windows::get_top_level_windows();
 
@@ -1021,7 +1029,7 @@ namespace windowing_win32
 
          ::pointer<::user::interaction>puserinteraction = userinteractiona.interaction_at(i);
 
-         hwnda.add((HWND)puserinteraction->oswindow());
+         hwnda.add(::as_HWND(puserinteraction->operating_system_window()));
 
       }
 
@@ -1044,9 +1052,11 @@ namespace windowing_win32
       for (int i = 0; i < hwnda.get_count(); i++)
       {
 
-         auto puieWindow = uia.find_first(as_oswindow(hwnda[i]));
+         auto pacmewindowingwindow = acme_windowing_window(::as_operating_system_window(hwnda[i]));
 
-         auto puie = puieWindow->_001FromPoint(point);
+         //auto puieWindow = uia.find_first(pacmewindowingwindow->user_interaction());
+
+         auto puie = pacmewindowingwindow->_001FromPoint(point);
 
          if (puie != nullptr)
          {
@@ -1187,7 +1197,7 @@ namespace windowing_win32
    bool windowing::is_window(::acme::windowing::window * pacmewindowingwindow)
    {
 
-      HWND hwnd = (HWND)oswindow;
+      auto hwnd = ::as_HWND(pacmewindowingwindow->operating_system_window());
 
       if (::IsWindow(hwnd))
       {
@@ -1338,10 +1348,13 @@ namespace windowing_win32
 //   }
 
 
-   string windowing::_get_window_text_timeout(::acme::windowing::window * pacmewindowingwindow, const class time& timeSendMessageMax)
+   string windowing::_get_window_text_timeout(HWND hwnd,
+                                              const class time &timeSendMessageMax)
    {
 
-      return windows::get_window_text_timeout((HWND)oswindow, timeSendMessageMax);
+      //auto hwnd = ::as_HWND(hwnd);
+
+      return windows::get_window_text_timeout(hwnd, timeSendMessageMax);
 
    }
 
@@ -1366,12 +1379,16 @@ namespace windowing_win32
    bool windowing::_top_level_contains_name(const ::scoped_string & scopedstr)
    {
 
-      return _top_level_contains_predicate([this, scopedstr](::acme::windowing::window * pacmewindowingwindow)
+      return _top_level_contains_predicate([this, scopedstr](HWND hwnd)
          {
 
             //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
 
-            string strWindowText = _get_window_text_timeout(oswindow, 200_ms);
+            //auto operatingsystemwindow = pacmewindowingwindow->operating_system_window();
+
+            string strWindowText = _get_window_text_timeout(hwnd, 200_ms);
+
+            //string strWindowText = _get_window_text_timeout(operatingsystemwindow, 200_ms);
 
             return strWindowText.case_insensitive_contains(scopedstr);
 
@@ -1383,19 +1400,22 @@ namespace windowing_win32
    bool windowing::_visible_top_level_contains_name(const ::scoped_string & scopedstr)
    {
 
-      return _top_level_contains_predicate([this, scopedstr](::acme::windowing::window * pacmewindowingwindow)
+      return _top_level_contains_predicate([this, scopedstr](HWND hwnd)
          {
 
             //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
+            //auto operatingsystemwindow = pacmewindowingwindow->operating_system_window();
 
-            if (!::IsWindowVisible((HWND)oswindow))
+            //auto hwnd = ::as_HWND(operatingsystemwindow);
+
+            if (!::IsWindowVisible((HWND)hwnd))
             {
 
                return false;
 
             }
 
-            string strWindowText = _get_window_text_timeout(oswindow, 50_ms);
+            string strWindowText = _get_window_text_timeout(hwnd, 50_ms);
 
             return strWindowText.case_insensitive_contains(scopedstr);
 
@@ -1430,19 +1450,23 @@ namespace windowing_win32
    bool windowing::_visible_top_level_contains_all_names(const string_array_base& stra)
    {
 
-      return _top_level_contains_predicate([this, &stra](::acme::windowing::window * pacmewindowingwindow)
+      return _top_level_contains_predicate([this, &stra](HWND hwnd)
          {
 
             //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
 
-            if (!::IsWindowVisible((HWND)oswindow))
+            //auto operatingsystemwindow = pacmewindowingwindow->operating_system_window();
+
+            //auto hwnd = ::as_HWND(operatingsystemwindow);
+
+            if (!::IsWindowVisible(hwnd))
             {
 
                return false;
 
             }
 
-            string strWindowText = _get_window_text_timeout(oswindow, 50_ms);
+            string strWindowText = _get_window_text_timeout(hwnd, 50_ms);
 
             for (auto& str : stra)
             {

@@ -85,7 +85,7 @@ elseif(LINUX)
 endif()
 
 
-list(APPEND library_include_directories $ENV{HOME}/__config)
+##list(APPEND library_include_directories $HOME_AAA_DIR/__aaa_config)
 list(APPEND library_include_directories ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 list(APPEND library_include_directories ${CMAKE_CURRENT_SOURCE_DIR}/..)
 list(APPEND library_include_directories ${CMAKE_CURRENT_SOURCE_DIR})

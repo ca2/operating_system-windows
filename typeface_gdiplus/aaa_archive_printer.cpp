@@ -17,7 +17,7 @@ namespace typeface_gdiplus
    {
    }
 
-   bool printer::open(const ::string & pszDeviceName)
+   bool printer::open(const ::scoped_string & scopedstrDeviceName)
    {
       if (is_opened())
          close();

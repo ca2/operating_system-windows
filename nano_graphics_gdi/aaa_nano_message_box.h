@@ -18,8 +18,8 @@ public:
    ::micro::message_box();
    ~::micro::message_box();
 
-   virtual void display_synchronously(const ::string & strMessage, const ::string & strTitle, const ::e_message_box & emessagebox);
-   //pointer< ::sequence < ::conversation > > display(const ::string & strMessage, const ::string & strTitle, const ::e_message_box & emessagebox);
+   virtual void display_synchronously(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox);
+   //pointer< ::sequence < ::conversation > > display(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox);
 
    void on_draw(HDC hdc) override;
 

@@ -147,7 +147,7 @@ namespace windowing_win32
 
       //::SetWindowLongPtr(m_hwnd, GWLP_USERDATA, (LONG_PTR) this);
 
-      HWND hwnd = (HWND)oswindow();
+      auto hwnd = ::as_HWND(this->operating_system_window());
 
       if(!::AddClipboardFormatListener(hwnd))
       {
@@ -180,7 +180,9 @@ namespace windowing_win32
    void copydesk::on_message_destroy(::message::message * pmessage)
    {
 
-      bool bOk1 = ::RemoveClipboardFormatListener((HWND)oswindow());
+      auto hwnd = ::as_HWND(this->operating_system_window());
+
+      bool bOk1 = ::RemoveClipboardFormatListener(hwnd);
 
       //bool bOk2 = ::DestroyWindow(m_hwnd);
 
@@ -363,7 +365,9 @@ namespace windowing_win32
 
             _synchronous_lock synchronouslock(synchronization());
 
-            if (!::OpenClipboard(as_hwnd(oswindow())))
+            auto hwnd = ::as_HWND(this->operating_system_window());
+
+            if (!::OpenClipboard(hwnd))
             //if(!OpenClipboard())
             {
 
@@ -413,7 +417,9 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(as_hwnd(oswindow())))
+      auto hwnd = ::as_HWND(this->operating_system_window());
+
+      if (!::OpenClipboard(hwnd))
       {
 
          return false;
@@ -451,7 +457,9 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(as_hwnd(oswindow())))
+      auto hwnd = ::as_HWND(this->operating_system_window());
+
+      if (!::OpenClipboard(hwnd))
       {
 
          return false;
@@ -497,7 +505,9 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(as_hwnd(oswindow())))
+      auto hwnd = ::as_HWND(this->operating_system_window());
+
+      if (!::OpenClipboard(hwnd))
       {
 
          return false;
@@ -549,7 +559,9 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(as_hwnd(oswindow())))
+      auto hwnd = ::as_HWND(this->operating_system_window());
+
+      if (!::OpenClipboard(hwnd))
       {
 
          return false;
@@ -615,7 +627,9 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(as_hwnd(oswindow())))
+      auto hwnd = ::as_HWND(this->operating_system_window());
+
+      if (!::OpenClipboard(hwnd))
       {
 
          DWORD dwLastError = ::GetLastError();
@@ -715,7 +729,9 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(as_hwnd(oswindow())))
+      auto hwnd = ::as_HWND(this->operating_system_window());
+
+      if (!::OpenClipboard(hwnd))
       {
 
          return false;

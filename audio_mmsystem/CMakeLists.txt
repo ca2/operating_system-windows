@@ -74,7 +74,7 @@ target_link_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../..
 target_link_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/storage-${OPERATING_SYSTEM_NAME}/third/library/x64/basis)
 
 
-target_include_directories(audio_mmsystem PRIVATE $ENV{HOME}/__config)
+#target_include_directories(audio_mmsystem PRIVATE $HOME_ADIR/__aaa_config)
 target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source)

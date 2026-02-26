@@ -29,6 +29,7 @@ namespace windows
       namespace graphics
       {
 
+
          device::device()
          {
 

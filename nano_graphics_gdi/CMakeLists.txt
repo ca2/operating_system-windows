@@ -58,7 +58,7 @@ if (MSVC)
    target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
    target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
    target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-   target_link_libraries(${PROJECT_NAME} PRIVATE acme apex aqua aura Gdiplus windowscodecs)
+   target_link_libraries(${PROJECT_NAME} PRIVATE acme Gdiplus windowscodecs)
 elseif (${LINUX} OR ${__BSD__})
 
    pkg_check_modules(PKGCONFIG cairo xkbcommon wayland-client wayland-server wayland-cursor)
@@ -78,7 +78,7 @@ target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../.
 target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/storage-${OPERATING_SYSTEM_NAME}/third/library/x64/basis)
 
 
-target_include_directories(${PROJECT_NAME} PRIVATE $ENV{HOME}/__config)
+##target_include_directories(${PROJECT_NAME} PRIVATE $HOME_AAA_DIR/__aaa_config)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source)

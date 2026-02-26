@@ -69,7 +69,7 @@ namespace windowing_win32
 
       virtual ::windows::hwnd_array _get_hwnda(const ::user::interaction_array& userinteractiona);
 
-      virtual ::acme::windowing::window * window(::acme::windowing::window * pacmewindowingwindow) override;
+      // virtual ::acme::windowing::window* window(::acme::windowing::window* pacmewindowingwindow) override;
 
       virtual ::windowing_win32::window * _window(HWND hwnd);
 
@@ -115,7 +115,7 @@ namespace windowing_win32
       bool defer_release_mouse_capture(::thread* pthread, ::acme::windowing::window* pwindowDeferRelease) override;
       
 
-      virtual void erase_window(::windowing::window * pwindow);
+      void erase_window(::acme::windowing::window * pwindow) override;
     
 
       using windowing::windowing::get_cursor;
@@ -134,7 +134,8 @@ namespace windowing_win32
 
 
 
-      virtual int_bool point_is_window_origin(::int_point ptHitTest, oswindow oswindowExclude, int iMargin);
+      virtual int_bool point_is_window_origin(::int_point ptHitTest,
+                                              const ::operating_system::window &operatingsystemwindowExclude, int iMargin);
 
       //virtual void top_windows_by_z_order(hwnd_array & a);
 
@@ -155,8 +156,10 @@ namespace windowing_win32
       static BOOL CALLBACK GetAppsEnumWindowsProc(HWND hwnd, LPARAM lParam);
 
 
-      virtual void set(::message::key * pkey, ::acme::windowing::window * pacmewindowingwindow, ::windowing::window * pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam) override;
-      virtual void set(::message::mouse * pmouse, ::acme::windowing::window * pacmewindowingwindow, ::windowing::window * pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam) override;
+      void set(::message::key *pkey, const ::operating_system::window &operatingsystemwindow,
+                       ::windowing::window *pwindow, ::user::enum_message eusermessage, ::wparam wparam,
+                       ::lparam lparam) override;
+      void set(::message::mouse * pmouse, const ::operating_system::window & operatingsystemwindow, ::windowing::window * pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam) override;
 
 
       virtual void initialize_keyboard(::windowing::keyboard * pkeyboard) override;
@@ -189,7 +192,7 @@ namespace windowing_win32
       bool _visible_top_level_contains_all_names(const string_array_base& stra) override;
       bool _visible_top_level_contains_name(const ::scoped_string & scopedstr) override;
       virtual bool _top_level_contains_name(const ::scoped_string & scopedstr);
-      virtual string _get_window_text_timeout(::acme::windowing::window * pacmewindowingwindow, const class time & time = 1_s);
+      virtual string _get_window_text_timeout(HWND hwnd, const class time & time = 1_s);
 
 
       void windowing_application_main_loop() override;

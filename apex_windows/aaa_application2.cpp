@@ -54,7 +54,7 @@
 //
 //
 //
-//   //bool application::_001OnDDECommand(const ::string & pcsz)
+//   //bool application::_001OnDDECommand(const ::scoped_string & scopedstr)
 //
 //   //{
 //

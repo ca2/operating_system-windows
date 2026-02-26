@@ -48,7 +48,7 @@ namespace windowing_win32
       hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (unsigned int)0);
 
 
-      //hMemDC = CreateCompatibleDC(hdc);
+      //hMemDC = create_compatible_graphics(hdc);
       ReleaseDC(nullptr, hdc);
 
       // Draw something on the DIB section.

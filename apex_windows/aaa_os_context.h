@@ -27,7 +27,7 @@ namespace apex_windows
       void reboot() override;
       void shutdown(bool bPowerOff) override;
 
-      void terminate_processes_by_title(const ::string & lpszName) override;
+      void terminate_processes_by_title(const ::scoped_string & scopedstrName) override;
       //virtual ::file::path get_module_path(HMODULE hmodule) override;
       ::process_identifier_array module_path_processes_identifiers(const ::scoped_string & scopedstrName) override;
       ::process_identifier_array title_processes_identifiers(const ::scoped_string & scopedstrName) override;
@@ -41,27 +41,27 @@ namespace apex_windows
       ::payload connection_settings_get_auto_config_url() override;
 
 
-      void local_machine_set_run(const ::string & pszKey, const ::file::path & pathExecutable, const ::string& strArguments, bool bSet) override;
-      void local_machine_set_run_once(const ::string & pszKey, const ::file::path & pathExecutable, const ::string& strArguments, bool bSet) override;
-      void current_user_set_run(const ::string & pszKey, const ::file::path & pathExecutable, const ::string & strArguments, bool bSet) override;
-      void current_user_set_run_once(const ::string & pszKey, const ::file::path & pathExecutable, const ::string& strArguments, bool bSet) override;
+      void local_machine_set_run(const ::scoped_string & scopedstrKey, const ::file::path & pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet) override;
+      void local_machine_set_run_once(const ::scoped_string & scopedstrKey, const ::file::path & pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet) override;
+      void current_user_set_run(const ::scoped_string & scopedstrKey, const ::file::path & pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet) override;
+      void current_user_set_run_once(const ::scoped_string & scopedstrKey, const ::file::path & pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet) override;
       void defer_register_ca2_plugin_for_mozilla() override;
 
-      void file_extension_get_open_with_list_keys(string_array_base & straKey, const ::string & pszExtension) override;
-      void file_extension_get_open_with_list_commands(string_array_base & straCommand, const ::string & pszExtension) override;
+      void file_extension_get_open_with_list_keys(string_array_base & straKey, const ::scoped_string & scopedstrExtension) override;
+      void file_extension_get_open_with_list_commands(string_array_base & straCommand, const ::scoped_string & scopedstrExtension) override;
 
-      void file_association_set_default_icon(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszIconPath) override;
-      void file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszCommand, const ::string & pszParam) override;
-      void file_association_get_shell_open_command(const ::string & pszExtension, string & strExtensionNamingClass, string & strCommand, string & strParam) override;
+      void file_association_set_default_icon(const ::scoped_string & scopedstrExtension, const ::scoped_string & scopedstrExtensionNamingClass, const ::scoped_string & scopedstrIconPath) override;
+      void file_association_set_shell_open_command(const ::scoped_string & scopedstrExtension, const ::scoped_string & scopedstrExtensionNamingClass, const ::scoped_string & scopedstrCommand, const ::scoped_string & scopedstrParam) override;
+      void file_association_get_shell_open_command(const ::scoped_string & scopedstrExtension, string & strExtensionNamingClass, string & strCommand, string & strParam) override;
 
-      void link_open(const string& strUrl, const string& strProfile) override;
+      void link_open(const ::scoped_string & scopedstrUrl, const ::scoped_string & scopedstrProfile) override;
 
-      bool open_in_ie(const ::string & pcsz);
+      bool open_in_ie(const ::scoped_string & scopedstr);
 
 
-      void file_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = "") override;
-      void hidden_start(const ::file::path& path, const string& strParams = "", const ::file::path& pathFolder = "") override;
-      void hidden_run(const class time & timeWait, const ::file::path& path, const string& strParams = "", const ::file::path& pathFolder = "") override;
+      void file_open(const ::file::path & path, const ::scoped_string & scopedstrParams = "", const ::file::path & pathFolder = "") override;
+      void hidden_start(const ::file::path& path, const ::scoped_string & scopedstrParams = "", const ::file::path& pathFolder = "") override;
+      void hidden_run(const class time & timeWait, const ::file::path& path, const ::scoped_string & scopedstrParams = "", const ::file::path& pathFolder = "") override;
 
       //void browse_file_open(::property_set & set) override;
       //void browse_file_save(::property_set & set) override;
@@ -74,13 +74,13 @@ namespace apex_windows
       void start_service() override;
       void stop_service() override;
 
-      void _getCredentialsForService(const string& strService, ::string & strUsername, ::string & strPassword);
+      void _getCredentialsForService(const ::scoped_string & scopedstrService, ::string & strUsername, ::string & strPassword);
 
-      void enable_service(const ::string & strServiceName, const ::string & strDisplayName, const ::string & strCommand, const ::string & strUser = "", const ::string & strPass = "") override;
-      void disable_service(const ::string & strServiceName) override;
+      void enable_service(const ::scoped_string & scopedstrServiceName, const ::scoped_string & scopedstrDisplayName, const ::scoped_string & scopedstrCommand, const ::scoped_string & scopedstrUser = "", const ::scoped_string & scopedstrPass = "") override;
+      void disable_service(const ::scoped_string & scopedstrServiceName) override;
 
-      void start_service(const ::string & strServiceName) override;
-      void stop_service(const ::string & strServiceName) override;
+      void start_service(const ::scoped_string & scopedstrServiceName) override;
+      void stop_service(const ::scoped_string & scopedstrServiceName) override;
 
       string calc_service_name();
 
@@ -112,11 +112,11 @@ namespace apex_windows
 
       virtual void get_default_browser(string & strId, ::file::path & path, string & strParam) override;
 
-      void register_user_auto_start(const string & strAppId, const ::file::path & pathExecutable, const string & strArguments, bool bRegister) override;
+      void register_user_auto_start(const ::scoped_string & scopedstrAppId, const ::file::path & pathExecutable, const ::scoped_string & scopedstrArguments, bool bRegister) override;
 
-      bool is_user_auto_start(const ::string & strAppId) override;
+      bool is_user_auto_start(const ::scoped_string & scopedstrAppId) override;
 
-      ::file::path get_app_path(const ::string & strAppId) override;
+      ::file::path get_app_path(const ::scoped_string & scopedstrAppId) override;
 
       void set_default_browser() override;
 

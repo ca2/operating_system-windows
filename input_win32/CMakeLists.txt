@@ -61,7 +61,7 @@ target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../.
 target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/storage-${OPERATING_SYSTEM_NAME}/third/library/x64/basis)
 
 
-list(APPEND library_include_directories $ENV{HOME}/__config)
+##list(APPEND library_include_directories $HOME_AAA_DIR/__aaa_config)
 list(APPEND library_include_directories ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 list(APPEND library_include_directories ${CMAKE_CURRENT_SOURCE_DIR}/..)
 list(APPEND library_include_directories ${CMAKE_CURRENT_SOURCE_DIR}/../../../source)

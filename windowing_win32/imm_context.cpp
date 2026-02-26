@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "imm_context.h"
 #include "acme/prototype/prototype/memory.h"
+#include "acme/windowing/window.h"
 #include "aura/user/user/interaction.h"
 
 
@@ -8,7 +9,7 @@ imm_context::imm_context(::user::interaction * pinteraction) :
    m_pinteraction(pinteraction)
 {
 
-   HWND hwnd = as_hwnd(m_pinteraction->oswindow());
+   auto hwnd = ::as_HWND(m_pinteraction->m_pacmewindowingwindow->operating_system_window());
 
    m_himc = ImmGetContext(hwnd);
 
@@ -18,7 +19,7 @@ imm_context::imm_context(::user::interaction * pinteraction) :
 imm_context::~imm_context()
 {
 
-   HWND hwnd = as_hwnd(m_pinteraction->oswindow());
+   auto hwnd = ::as_HWND(m_pinteraction->m_pacmewindowingwindow->operating_system_window());
 
    ImmReleaseContext(hwnd, m_himc);
 

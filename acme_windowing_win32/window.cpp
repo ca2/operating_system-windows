@@ -5,7 +5,7 @@
 #include "acme/operating_system/windows/windowing.h"
 // #include "user.h"
 #include "acme/parallelization/task.h"
-#include "acme/parallelization/task.h"
+//#include "acme/parallelization/task.h"
 //#include "acme/nano/nano.h"
 //#include "acme/nano/user/button.h"
 //#include "acme/nano/user/message_box.h"
@@ -92,7 +92,7 @@ namespace win32
             
             m_bSizeMoveMode = false;
             //      m_bDestroy = false;
-            m_hwnd = nullptr;
+            //hwnd = nullptr;
             m_hmenuSystem = nullptr;
             m_bNcActive = false;
          }
@@ -231,7 +231,9 @@ namespace win32
                << [this]()
                {
 
-                  if (!::DestroyWindow(m_hwnd))
+                  auto hwnd = _HWND();
+
+                  if (!::DestroyWindow(hwnd))
                   {
 
                      informationf("window::destroy_window Failed to destroy window");
@@ -264,7 +266,9 @@ namespace win32
 
             ::int_rectangle r;
 
-            GetWindowRect(m_hwnd, (LPRECT)&r);
+            auto hwnd = _HWND();
+
+            GetWindowRect(hwnd, (LPRECT)&r);
 
             HGDIOBJ hbrushOld = ::GetCurrentObject(hdc, OBJ_BRUSH);
             HGDIOBJ hfontOld = ::GetCurrentObject(hdc, OBJ_FONT);
@@ -370,11 +374,11 @@ namespace win32
          //   //if (m_hfont == nullptr)
          //   //{
 
-         //   //   HDC hdc = ::GetDC(m_hwnd);
+         //   //   HDC hdc = ::GetDC(hwnd);
          //   //   int nHeight = -MulDiv(14, GetDeviceCaps(hdc, LOGPIXELSY), 72);
          //   //   m_hfont = ::CreateFontW(nHeight, 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
          //   //                           CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, FF_SWISS, L"Segoe UI");
-         //   //   ::ReleaseDC(m_hwnd, hdc);
+         //   //   ::ReleaseDC(hwnd, hdc);
 
          //   //}
 
@@ -436,7 +440,7 @@ namespace win32
          //void window::on_left_button_down(::user::mouse* pmouse)
          //{
 
-         //   //SetCapture(m_hwnd);
+         //   //SetCapture(hwnd);
 
          //   //m_atomLeftButtonDown = hit_test(x, y);
 
@@ -532,7 +536,7 @@ namespace win32
          //void window::on_right_button_down(::user::mouse* pmouse)
          //{
 
-         //   //SetCapture(m_hwnd);
+         //   //SetCapture(hwnd);
 
          //   //m_atomLeftButtonDown = hit_test(x, y);
 
@@ -631,12 +635,12 @@ namespace win32
       //}
 
 
-         void * window::__win32_HWND()
-         {
+         //void * window::__win32_HWND()
+         //{
 
-            return (void *) m_hwnd;
+         //   return (void *) hwnd;
 
-         }
+         //}
 
 
          bool window::_is_light_theme()
@@ -709,14 +713,16 @@ namespace win32
 
                 LRESULT lresult = 0;
 
-                if (pnanouser->_on_command(lresult, m_hwnd, wparam, lparam))
+                if (pnanouser->_on_command(lresult, hwnd, wparam, lparam))
                 {
 
                    return lresult;
 
                 }*/
 
-               return DefWindowProc(m_hwnd, message, wparam, lparam);
+               auto hwnd = _HWND();
+
+               return DefWindowProc(hwnd, message, wparam, lparam);
 
             }
 
@@ -724,14 +730,16 @@ namespace win32
             case WM_SYSCOMMAND:
             {
 
-               return DefWindowProc(m_hwnd, message, wparam, lparam);
+               auto hwnd = _HWND();
+
+               return DefWindowProc(hwnd, message, wparam, lparam);
 
             }
 
             break;
             case WM_CLOSE:
             {
-               //DestroyWindow(m_hwnd);
+               //DestroyWindow(hwnd);
 
                ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
@@ -753,7 +761,7 @@ namespace win32
 
                //   LRESULT lresult = 0;
 
-               //   if (pnanouser->_on_default_system_menu_init_menu(lresult, m_hwnd, m_hmenuSystem, wparam))
+               //   if (pnanouser->_on_default_system_menu_init_menu(lresult, hwnd, m_hmenuSystem, wparam))
                //   {
 
                //      return lresult;
@@ -764,7 +772,8 @@ namespace win32
                //   break;
             case WM_DESTROY:
                //PostQuitMessage(0);
-               system()->acme_windowing()->m_windowa.erase(this);
+               //system()->acme_windowing()->m_windowmap.erase(this->operating_system_window());
+               system()->acme_windowing()->erase_window(this); 
                break;
             case WM_CREATE:
             {
@@ -855,9 +864,11 @@ namespace win32
 
                   m_bMouseOn = true;
 
+                  auto hwnd = _HWND();
+
                   TRACKMOUSEEVENT trackmouseevent = { sizeof(TRACKMOUSEEVENT) };
                   trackmouseevent.dwFlags = TME_LEAVE;
-                  trackmouseevent.hwndTrack = m_hwnd;
+                  trackmouseevent.hwndTrack = hwnd;
                   ::TrackMouseEvent(&trackmouseevent);
 
                   on_mouse_enter();
@@ -1008,13 +1019,15 @@ namespace win32
 
                PAINTSTRUCT paintstruct{};
 
-               HDC hdcWindow = BeginPaint(m_hwnd, &paintstruct);
+               auto hwnd = _HWND();
+
+               HDC hdcWindow = BeginPaint(hwnd, &paintstruct);
 
                HDC hdc = ::CreateCompatibleDC(hdcWindow);
 
                ::int_rectangle rectangleX;
 
-               ::GetClientRect(m_hwnd, (LPRECT)&rectangleX);
+               ::GetClientRect(hwnd, (LPRECT)&rectangleX);
 
                HBITMAP hbitmap = ::CreateCompatibleBitmap(hdcWindow, rectangleX.width(), rectangleX.height());
 
@@ -1029,12 +1042,15 @@ namespace win32
                hbitmapOld = ::SelectObject(hdc, hbitmapOld);
 
                ::DeleteDC(hdc);
-               EndPaint(m_hwnd, &paintstruct);
+               EndPaint(hwnd, &paintstruct);
             }
             break;
             case WM_NCACTIVATE:
             {
-               LRESULT lresult = DefWindowProc(m_hwnd, message, wparam, lparam);
+
+               auto hwnd = _HWND();
+
+               LRESULT lresult = DefWindowProc(hwnd, message, wparam, lparam);
                m_bNcActive = wparam != 0;
                redraw();
 
@@ -1047,7 +1063,9 @@ namespace win32
                if (wparam > 0)
                {
 
-                  ::SetFocus(m_hwnd);
+                  auto hwnd = _HWND();
+
+                  ::SetFocus(hwnd);
 
                }
 
@@ -1096,7 +1114,9 @@ namespace win32
             default:
             {
 
-               return DefWindowProc(m_hwnd, message, wparam, lparam);
+               auto hwnd = _HWND();
+
+               return DefWindowProc(hwnd, message, wparam, lparam);
 
             }
 
@@ -1171,7 +1191,9 @@ namespace win32
             main_send([this]()
                {
 
-                  if (!::IsWindow(m_hwnd))
+                  auto hwnd = _HWND();
+
+                  if (!::IsWindow(hwnd))
                   {
 
                      create_window();
@@ -1187,15 +1209,15 @@ namespace win32
                   auto dwCurrentPid = GetCurrentProcessId();
                   warning() << "dwThread = " << dwThread;
                   warning() << "hwndForeground = " << (iptr) hwndForeground;
-                  warning() << "m_hwnd         = " << (iptr) m_hwnd;
+                  warning() << "hwnd         = " << (iptr) hwnd;
                   warning() << "dwPid          = " << dwPid;
                   warning() << "dwCurrentPid   = " << dwCurrentPid;
 
 
-                  if(dwThread && hwndForeground != m_hwnd && dwPid == dwCurrentPid)
+                  if(dwThread && hwndForeground != hwnd && dwPid == dwCurrentPid)
                   { 
 
-                     ::ShowWindow(m_hwnd, SW_SHOWNOACTIVATE);
+                     ::ShowWindow(hwnd, SW_SHOWNOACTIVATE);
 
                      warning() << "ShowWindow  SW_SHOWNOACTIVATE at thread " << ::GetCurrentThreadId();
 
@@ -1204,22 +1226,26 @@ namespace win32
 
                            warning() << "Before SetForegroundWindow  At thread " << ::GetCurrentThreadId();
 
-                           ::SetForegroundWindow(m_hwnd);
+                           auto hwnd = _HWND();
+
+                           ::SetForegroundWindow(hwnd);
 
                            warning() << "SetForegroundWindow  At thread " << ::GetCurrentThreadId();
 
-                           win32_post(m_hwnd, [this]()
+                           win32_post(hwnd, [this]()
                               {
 
                                  warning() << "SetActiveWindow  At thread " << ::GetCurrentThreadId();
 
-                                 ::SetActiveWindow(m_hwnd);
+                                 auto hwnd = _HWND();
 
-                                 ::SetFocus(m_hwnd);
+                                 ::SetActiveWindow(hwnd);
 
-                                 ::UpdateWindow(m_hwnd);
+                                 ::SetFocus(hwnd);
 
-                                 ::BringWindowToTop(m_hwnd);
+                                 ::UpdateWindow(hwnd);
+
+                                 ::BringWindowToTop(hwnd);
 
                                  debug() << "Show window";
 
@@ -1231,13 +1257,13 @@ namespace win32
                   }
                   else
                   {
-                     ::SetForegroundWindow(m_hwnd);
+                     ::SetForegroundWindow(hwnd);
 
-                     ::ShowWindow(m_hwnd, SW_SHOW);
+                     ::ShowWindow(hwnd, SW_SHOW);
 
-                     ::UpdateWindow(m_hwnd);
+                     ::UpdateWindow(hwnd);
 
-                     ::BringWindowToTop(m_hwnd);
+                     ::BringWindowToTop(hwnd);
                   }
 
 
@@ -1250,14 +1276,16 @@ namespace win32
          {
 
             main_send([this]()
+            {
+
+               auto hwnd = _HWND();
+
+               if (::IsWindow(hwnd))
                {
 
-                  if (::IsWindow(m_hwnd))
-                  {
+                  ::ShowWindow(hwnd, SW_HIDE);
 
-                     ::ShowWindow(m_hwnd, SW_HIDE);
-
-                  }
+               }
 
             });
 
@@ -1274,15 +1302,19 @@ namespace win32
          void window::redraw()
          {
 
-            ::RedrawWindow(m_hwnd, nullptr, nullptr, RDW_UPDATENOW | RDW_INVALIDATE);
+            auto hwnd = _HWND();
+
+            ::RedrawWindow(hwnd, nullptr, nullptr, RDW_UPDATENOW | RDW_INVALIDATE);
 
          }
 
 
          bool window::_is_window()
          {
+            
+            auto hwnd = _HWND();
 
-            return ::IsWindow(m_hwnd);
+            return ::IsWindow(hwnd);
 
          }
 
@@ -1292,7 +1324,9 @@ namespace win32
 
             POINT p{ point.x, point.y };
 
-            ::ClientToScreen(m_hwnd, &p);
+            auto hwnd = _HWND();
+
+            ::ClientToScreen(hwnd, &p);
 
             return { p.x, p.y };
 
@@ -1313,9 +1347,9 @@ namespace win32
             //user_post([this]()
             //   {
 
-            //      //::ShowWindow(m_hwnd, SW_HIDE);
+            //      //::ShowWindow(hwnd, SW_HIDE);
 
-            //      ::DestroyWindow(m_hwnd);
+            //      ::DestroyWindow(hwnd);
 
             //      system()->acme_windowing()->process_messages();
 
@@ -1330,7 +1364,7 @@ namespace win32
          //   switch (message)
          //   {
          //   case WM_CLOSE:
-         //      DestroyWindow(m_hwnd);
+         //      DestroyWindow(hwnd);
          //      break;
          //   case WM_DESTROY:
          //      PostQuitMessage(0);
@@ -1352,13 +1386,13 @@ namespace win32
          //   case WM_PAINT:
          //   {
          //      PAINTSTRUCT paintstruct{};
-         //      HDC hdc = BeginPaint(m_hwnd, &paintstruct);
+         //      HDC hdc = BeginPaint(hwnd, &paintstruct);
          //      draw(hdc);
-         //      EndPaint(m_hwnd, &paintstruct);
+         //      EndPaint(hwnd, &paintstruct);
          //   }
          //   break;
          //   default:
-         //      return DefWindowProc(m_hwnd, message, wparam, lparam);
+         //      return DefWindowProc(hwnd, message, wparam, lparam);
          //   }
          //   return 0;
          //}
@@ -1407,7 +1441,7 @@ namespace win32
 
                ::cast < ::win32::acme::windowing::window > pwindowOwner = pacmeuserinteractionOwner->m_pacmewindowingwindow;
 
-               hwndParent = pwindowOwner->m_hwnd;
+               hwndParent = pwindowOwner->_HWND();
 
             }
 
@@ -1428,7 +1462,9 @@ namespace win32
 
             }
 
-            ::SetWindowPos(m_hwnd, hwndParent, point.x, point.y, 0, 0, dwFlags);
+            auto hwnd = _HWND();
+
+            ::SetWindowPos(hwnd, hwndParent, point.x, point.y, 0, 0, dwFlags);
 
          }
 
@@ -1446,7 +1482,7 @@ namespace win32
 
          //   ::int_rectangle rectangle;
 
-         //   ::GetClientRect(m_hwnd, (LPRECT)&rectangle);
+         //   ::GetClientRect(hwnd, (LPRECT)&rectangle);
 
          //   return rectangle;
 
@@ -1458,7 +1494,9 @@ namespace win32
 
             ::int_rectangle rectangle;
 
-            ::GetWindowRect(m_hwnd, (LPRECT)&rectangle);
+            auto hwnd = _HWND();
+
+            ::GetWindowRect(hwnd, (LPRECT)&rectangle);
 
             return rectangle;
 
@@ -1468,7 +1506,7 @@ namespace win32
          //void window::set_mouse_capture()
          //{
 
-         //   SetCapture(m_hwnd);
+         //   SetCapture(hwnd);
 
          //}
 
@@ -1476,7 +1514,7 @@ namespace win32
          //bool window::has_mouse_capture()
          //{
 
-         //   return ::GetCapture() == m_hwnd;
+         //   return ::GetCapture() == hwnd;
 
          //}
 
@@ -1539,7 +1577,7 @@ namespace win32
 
             //::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
 
-            //pnanouser->_defer_show_system_menu(m_hwnd, &m_hmenuSystem, pointAbsolute);
+            //pnanouser->_defer_show_system_menu(hwnd, &m_hmenuSystem, pointAbsolute);
 
             _defer_show_system_menu(pmouse);
 
@@ -1589,7 +1627,7 @@ namespace win32
          void window::set_mouse_capture()
          {
 
-            HWND hwnd = m_hwnd;
+            auto hwnd = _HWND();
 
             HWND hwndPreviouslyCapturedIfAny = ::SetCapture(hwnd);
 
@@ -1614,7 +1652,7 @@ namespace win32
 
             HWND hwndCapture = ::windows::get_mouse_capture(itask);
 
-            HWND hwnd = m_hwnd;
+            auto hwnd = _HWND();
 
             if (hwndCapture == hwnd)
             {
@@ -1640,7 +1678,9 @@ namespace win32
 
             auto poswindowhandle = (::windows::os_window_handle *)p;
 
-            poswindowhandle->m_hwnd = m_hwnd;
+            auto hwnd = _HWND();
+
+            poswindowhandle->m_hwnd = hwnd;
 
          }
 

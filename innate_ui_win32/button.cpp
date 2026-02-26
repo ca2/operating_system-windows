@@ -2,6 +2,7 @@
 #include "framework.h"
 #include "button.h"
 #include "icon.h"
+#include "acme/_operating_system.h"
 
 
 namespace innate_ui_win32
@@ -36,7 +37,24 @@ namespace innate_ui_win32
    void button::_create_child(window * pwindowParent)
    {
 
-      m_hwnd = CreateWindow(
+      auto hwndParent = pwindowParent->_HWND();
+
+      if (::is_null(hwndParent) || hwndParent == INVALID_HANDLE_VALUE)
+      {
+
+         throw ::exception(error_bad_argument, "Parent window handle is null or INVALID_HANDLE_VALUE");
+      }
+
+      auto hinstanceParent = (HINSTANCE)GetWindowLongPtr(hwndParent, GWLP_HINSTANCE);
+
+      if (::is_null(hinstanceParent))
+      {
+
+         throw ::exception(error_wrong_state, "Parent window hinstance is null");
+      }
+
+      auto hwndResult =
+         ::CreateWindow(
          L"BUTTON",  // Predefined class; Unicode assumed 
          L"",      // Button text 
          WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
@@ -44,10 +62,17 @@ namespace innate_ui_win32
          10,         // y position 
          100,        // Button width
          100,        // Button height
-         pwindowParent->m_hwnd,     // Parent window
+         hwndParent, // Parent window
          NULL,       // No menu.
-         (HINSTANCE)GetWindowLongPtr(pwindowParent->m_hwnd, GWLP_HINSTANCE),
+         hinstanceParent,
          NULL);
+
+      if (!hwndResult || !_HWND() || hwndResult != _HWND())
+      {
+
+         throw ::exception(error_failed);
+
+      }
 
    }
 
