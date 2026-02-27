@@ -5502,11 +5502,12 @@ namespace acme_windows
             system()->set_finish();
          });
    }
-   ::string_array node::get_operating_system_information_box_lines()
+   
+   
+   ::string_array_base node::get_operating_system_information_lines()
    {
 
-      ::string_array stra;
-
+      ::string_array_base stra;
 
       stra.add("Title: Display Resolution");
       stra.add(::format("Width: {}",::GetSystemMetrics(SM_CXSCREEN)));
@@ -5515,6 +5516,7 @@ namespace acme_windows
       return stra;
 
    }
+
 
    memsize node::get_current_memory_usage()
    {

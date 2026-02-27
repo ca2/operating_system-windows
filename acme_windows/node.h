@@ -397,8 +397,8 @@ namespace acme_windows
 
       void restart_application() override;
 
-      ::string_array get_operating_system_information_box_lines() override;
-
+      
+      ::string_array_base get_operating_system_information_lines() override;
 
 
       memsize get_current_memory_usage() override;
