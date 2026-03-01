@@ -63,7 +63,7 @@
       void audio_mixer::set_new_device(unsigned int uiMixerId)
       {
 
-         m_paudiomixerdevice->open(uiMixerId, (UINT_PTR)m_pinteraction->oswindow(), 0, CALLBACK_WINDOW);
+         m_paudiomixerdevice->open(uiMixerId, (UINT_PTR)::as_HWND(m_pinteraction->operating_system_window()), 0, CALLBACK_WINDOW);
 
       }
 
