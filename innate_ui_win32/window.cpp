@@ -15,6 +15,10 @@
 #include "acme_windowing_win32/activation_token.h"
 
 
+#include <commctrl.h>
+#pragma comment(lib, "Comctl32.lib")
+
+
 namespace innate_ui_win32
 {
 
@@ -650,6 +654,74 @@ namespace innate_ui_win32
       _defer_show_system_menu(pmouse);
 
    }
+
+
+   HWND window::_create_subclassed_window(DWORD dwExStyle, LPCWSTR lpClassName, LPCWSTR lpWindowName, DWORD dwStyle,
+                                          int x, int y, int cx, int cy, HWND hwndParent, HMENU hmenu,
+                                          HINSTANCE hinstance, LPVOID lpParam)
+   {
+
+      auto hwnd = CreateWindowExW(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, cx, cy, hwndParent, hmenu,
+                                  (HINSTANCE)hinstance, lpParam);
+
+      m_windowswindow = hwnd;
+
+      SetWindowSubclass(hwnd, _static_subclass_procedure,
+                        1, // Subclass ID
+                        (DWORD_PTR) (void*)(innate_ui_win32::window * ) this); // Optional reference data
+
+      return hwnd;
+
+   }
+
+
+   LRESULT CALLBACK window::_static_subclass_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam,
+                                                       UINT_PTR uIdSubclass,
+                                       DWORD_PTR dwRefData)
+   {
+
+      auto p = (innate_ui_win32::window *)dwRefData;
+
+      ::lresult lresult;
+      
+      if (p->_subclass_procedure(lresult, msg, wParam, lParam))
+      {
+
+         return lresult;
+
+      }
+
+      switch (msg)
+      {
+         case WM_NCDESTROY:
+            RemoveWindowSubclass(hwnd, _static_subclass_procedure, uIdSubclass);
+            break;
+         default:
+            break;
+      }
+
+      return DefSubclassProc(hwnd, msg, wParam, lParam);
+
+   }
+
+
+   bool window::_subclass_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   {
+
+      switch (message)
+      {
+         case WM_PAINT:
+            // Do custom drawing here if desired
+            break;
+         default:
+            break;
+
+      }
+
+      return false;
+
+   }
+
 
 } // namespace innate_ui
 

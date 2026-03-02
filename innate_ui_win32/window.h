@@ -69,7 +69,16 @@ namespace innate_ui_win32
 
       void defer_show_system_menu(::user::mouse * pmouse) override;
 
+
+      HWND _create_subclassed_window(DWORD dwExStyle, LPCWSTR lpClassName, LPCWSTR lpWindowName, DWORD dwStyle, int X,
+                                     int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, HINSTANCE hInstance,
+                                     LPVOID lpParam);
+
       
+      static LRESULT CALLBACK _static_subclass_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam,
+                                                 UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
+
+      virtual bool _subclass_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
 
 
    };

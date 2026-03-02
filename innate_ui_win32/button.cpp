@@ -54,7 +54,8 @@ namespace innate_ui_win32
       }
 
       auto hwndResult =
-         ::CreateWindow(
+         _create_subclassed_window(
+            0, 
          L"BUTTON",  // Predefined class; Unicode assumed 
          L"",      // Button text 
          WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 

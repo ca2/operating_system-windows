@@ -81,7 +81,8 @@ namespace innate_ui_win32
       }
 
       auto hwndResult =
-         CreateWindow(
+         _create_subclassed_window(
+            0,
          L"STATIC",  // Predefined class; Unicode assumed 
          L"",      // Button text 
          m_iCreateStyle,  // Styles 
