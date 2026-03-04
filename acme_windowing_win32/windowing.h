@@ -33,8 +33,8 @@ namespace win32
             void initialize_windowing() override;
             //void * get_display() override;
             ::acme::windowing::display * acme_display() override;
-            void _main_send(const ::procedure & procedure) override;
-            void _main_post(const ::procedure & procedure) override;
+            void main_send(const ::procedure & procedure) override;
+            void main_post(const ::procedure & procedure) override;
             void display_error_trap_push(int i) override;
             void display_error_trap_pop_ignored(int i) override;
 

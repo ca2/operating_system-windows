@@ -102,7 +102,7 @@ namespace win32
          }
 
 
-         void windowing::_main_send(const ::procedure & procedure)
+         void windowing::main_send(const ::procedure & procedure)
          {
 
             if (::is_main_thread())
@@ -119,16 +119,16 @@ namespace win32
       //      CLASS_DECL_ACME bool main_synchronous(const class time & time, const ::procedure & function)
       //      {
 
-            auto phappening = øallocate manual_reset_happening();
+            auto phappening = allocateø manual_reset_happening();
 
-            _user_post([procedure, phappening]
+            user_postø()<<[procedure, phappening]
                       {
 
                          procedure();
 
                          phappening->set_happening();
 
-                      });
+                      };
 
 
             auto timeout = procedure.timeout();
@@ -151,12 +151,12 @@ namespace win32
          }
 
 
-         void windowing::_main_post(const ::procedure & procedure)
+         void windowing::main_post(const ::procedure & procedure)
          {
 
             //system()->_post(procedure);
 
-            _post(procedure);
+            post(procedure);
 
          }
 
@@ -504,7 +504,7 @@ namespace win32
 //
             //session()->get_application(strAppId, true);
 
-            //m_papplication->_post([this]()
+            //m_papplication->postø() << [this]()
             //   {
 
             //      m_papplication->m_bReadyToAttendRequests = true;
@@ -555,7 +555,7 @@ namespace win32
          ::pointer < ::user::activation_token > windowing::get_user_activation_token()
          {
 
-            auto puseractivationtoken = øallocate ::win32::acme::windowing::activation_token(::get_task());
+            auto puseractivationtoken = allocateø ::win32::acme::windowing::activation_token(::get_task());
 
             puseractivationtoken->initialize(this);
 

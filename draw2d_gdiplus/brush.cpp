@@ -147,7 +147,7 @@ namespace draw2d_gdiplus
 
             ::pointer<::draw2d::path>ppath;
 
-            pgraphics->øconstruct(ppath);
+            pgraphics->constructø(ppath);
 
             ::double_rectangle rectangleRoundRect(m_point, m_size);
 

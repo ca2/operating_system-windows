@@ -719,7 +719,7 @@ namespace draw2d_gdiplus
 
       //estatus = 
       
-      øconstruct(pimage1);
+      constructø(pimage1);
 
       //if (!estatus)
       //{
@@ -760,7 +760,7 @@ namespace draw2d_gdiplus
 
       //estatus = 
       
-      øconstruct(pimage2);
+      constructø(pimage2);
       
       //if (!estatus)
       //{
@@ -803,7 +803,7 @@ namespace draw2d_gdiplus
 
       //estatus = 
       
-      øconstruct(pimageM);
+      constructø(pimageM);
 
       //if (!estatus)
       //{

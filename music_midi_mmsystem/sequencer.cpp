@@ -44,7 +44,7 @@ namespace music
 
             initialize(psequence);
 
-            øconstruct_new(m_pbuffera);
+            construct_newø(m_pbuffera);
 
             m_pbuffera->m_psequencer = this;
 
@@ -1077,7 +1077,7 @@ namespace music
                   {
                      if (!plyriceventa)
                      {
-                        plyriceventa = øallocate ::ikaraoke::lyric_event_track1();
+                        plyriceventa = allocateø ::ikaraoke::lyric_event_track1();
                      }
                      ::memory_file memFile((LPBYTE)&lpdwParam[1], pheader->m_dwLength - sizeof(DWORD));
                      /* x2x                  CArchive ar(&memFile, CArchive::load);

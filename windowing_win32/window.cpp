@@ -512,7 +512,7 @@ namespace windowing_win32
       //if (!puserinteraction->m_pusersystem)
       //{
 
-      //   puserinteraction->m_pusersystem = øallocate ::user::system();
+      //   puserinteraction->m_pusersystem = allocateø ::user::system();
 
       //}
 
@@ -521,7 +521,7 @@ namespace windowing_win32
       if (user_interaction()->is_system_message_window())
       {
 
-         pusersystem = øallocate::user::system();
+         pusersystem = allocateø::user::system();
 
       }
       else
@@ -536,7 +536,7 @@ namespace windowing_win32
          else
          {
 
-            pusersystem = øallocate ::user::system();
+            pusersystem = allocateø ::user::system();
 
          }
 
@@ -2333,7 +2333,7 @@ namespace windowing_win32
 
       set_destroying_flag();
 
-      main_send()
+      main_sendø()
          << [this, strType]()
          {
 
@@ -8618,7 +8618,7 @@ namespace windowing_win32
                {
 
                   pmessage->m_actioncontext.m_puseractivationtoken =
-                     øallocate::win32::acme::windowing::activation_token(::get_task());
+                     allocateø::win32::acme::windowing::activation_token(::get_task());
 
                }
 
@@ -8661,7 +8661,7 @@ namespace windowing_win32
 
                str.formatf("Exception while handling message %d", message);
 
-               m_exceptiona.add(øallocate::exception(error_catch_all_exception, str));
+               m_exceptiona.add(allocateø::exception(error_catch_all_exception, str));
 
                if (message == WM_CREATE)
                {
@@ -8726,7 +8726,7 @@ namespace windowing_win32
    }
 
 
-   void window::_user_send(const ::procedure &procedure)
+   void window::user_send(const ::procedure &procedure)
    {
 
       //if (m_hwnd)
@@ -8739,20 +8739,20 @@ namespace windowing_win32
       if (m_puserthread)
       {
 
-         m_puserthread->_send(procedure);
+         m_puserthread->send(procedure);
 
       }
       else
       {
 
-         ::win32::acme::windowing::window::_user_send(procedure);
+         ::win32::acme::windowing::window::user_send(procedure);
 
       }
 
    }
 
 
-   void window::_user_post(const ::procedure &procedure)
+   void window::user_post(const ::procedure &procedure)
    {
 
       auto puserinteraction = user_interaction();
@@ -8760,29 +8760,29 @@ namespace windowing_win32
       if (!puserinteraction)
       {
 
-         ::windowing::window::_user_post(procedure);
+         ::windowing::window::user_post(procedure);
 
          return;
 
       }
 
-      user_interaction()->_user_post(procedure);
+      user_interaction()->user_post(procedure);
 
    }
 
 
-   void window::_main_send(const ::procedure &procedure)
+   void window::main_send(const ::procedure &procedure)
    {
 
-      _user_send(procedure);
+      user_send(procedure);
 
    }
 
 
-   void window::_main_post(const ::procedure &procedure)
+   void window::main_post(const ::procedure &procedure)
    {
 
-      _user_post(procedure);
+      user_post(procedure);
 
    }
 

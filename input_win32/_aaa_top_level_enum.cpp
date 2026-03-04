@@ -12,7 +12,7 @@ namespace windowing_win32
       m_bVisible(bVisible)
    {
 
-      m_phwnda = øallocate ::windows::hwnd_array();
+      m_phwnda = allocateø ::windows::hwnd_array();
 
       if (bDesktop)
       {

@@ -150,7 +150,7 @@ namespace win32
             //::int_size get_main_screen_size() override;
 
 
-            void _user_post(const ::procedure& procedure) override;
+            void user_post(const ::procedure& procedure) override;
 
 
             virtual void implementation_message_loop_step();

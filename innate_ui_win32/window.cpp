@@ -483,7 +483,7 @@ namespace innate_ui_win32
              if (pwin32activationtoken->m_ptaskForeground)
              {
 
-                pwin32activationtoken->m_ptaskForeground->_post([this]()
+                pwin32activationtoken->m_ptaskForeground->post([this]()
                 {
                       
                   auto hwnd = _HWND();

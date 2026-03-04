@@ -302,7 +302,7 @@ namespace windowing_win32
       if (!puserinteraction->m_pusersystem)
       {
 
-         puserinteraction->m_pusersystem = øallocate ::user::system();
+         puserinteraction->m_pusersystem = allocateø ::user::system();
 
       }
 

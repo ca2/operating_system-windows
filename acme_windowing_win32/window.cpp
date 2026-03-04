@@ -227,7 +227,7 @@ namespace win32
          void window::destroy_window()
          {
 
-            main_send()
+            main_sendø()
                << [this]()
                {
 
@@ -278,7 +278,7 @@ namespace win32
 
                //nano()->graphics();
 
-               øconstruct(m_pnanodevice);
+               constructø(m_pnanodevice);
 
                m_pnanodevice->attach(hdc, { ::width(r), ::height(r) });
 
@@ -1544,7 +1544,7 @@ namespace win32
 
 
 
-         void window::_user_post(const ::procedure & procedure)
+         void window::user_post(const ::procedure & procedure)
          {
 
             if (m_ptask)
@@ -1556,7 +1556,7 @@ namespace win32
             else
             {
 
-               ::acme::windowing::window::_user_post(procedure);
+               ::acme::windowing::window::user_post(procedure);
 
             }
 

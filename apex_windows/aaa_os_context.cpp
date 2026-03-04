@@ -2457,7 +2457,7 @@ namespace apex_windows
    void os_context::hidden_run(const class time & timeWait, const ::file::path & pathParam, const ::scoped_string & scopedstrParams, const ::file::path & pathFolder)
    {
 
-      auto phappening = øallocate manual_reset_happening();
+      auto phappening = allocateø manual_reset_happening();
 
       auto path = m_papplication->defer_process_matter_path(pathParam);
 

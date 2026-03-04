@@ -75,7 +75,7 @@ namespace windowing_win32
       if (!pmasterdevicelistener)
       {
 
-         øconstruct_new(pmasterdevicelistener);
+         construct_newø(pmasterdevicelistener);
 
          pmasterdevicelistener->m_edevice = edevice;
 

@@ -115,7 +115,7 @@ namespace acme_user_win32
 //      CLASS_DECL_ACME bool main_synchronous(const class time & time, const ::procedure & function)
 //      {
 
-      auto pevent = øallocate manual_reset_happening();
+      auto pevent = allocateø manual_reset_happening();
 
       user_post([ procedure, pevent ]
                 {

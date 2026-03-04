@@ -255,7 +255,7 @@ namespace windows
 
                nano()->graphics();
 
-               øconstruct(m_pnanodevice);
+               constructø(m_pnanodevice);
 
                m_pnanodevice->attach(hdc);
 

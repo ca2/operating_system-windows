@@ -1733,7 +1733,7 @@ namespace windowing_win32
 
       //}
 
-      //estatus = øconstruct_new(m_pmessagequeue);
+      //estatus = construct_newø(m_pmessagequeue);
 
 
       //if (!estatus)

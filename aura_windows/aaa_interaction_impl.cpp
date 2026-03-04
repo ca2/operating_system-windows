@@ -4227,7 +4227,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      //auto estatus = 
 //
-//      øconstruct(m_pwindow);
+//      constructø(m_pwindow);
 //
 //      //if (!estatus)
 //      //{

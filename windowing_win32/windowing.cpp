@@ -73,7 +73,7 @@ namespace windowing_win32
 
       //estatus = 
 
-      //øconstruct(m_pdisplay);
+      //constructø(m_pdisplay);
 
       //if (!estatus)
       //{
@@ -292,7 +292,7 @@ namespace windowing_win32
       if (::is_null(pacmewindowingwindow))
       {
 
-         ///pwindow = øallocate ::windowing_win32::window();
+         ///pwindow = allocateø ::windowing_win32::window();
 
          return nullptr;
 
@@ -644,7 +644,7 @@ namespace windowing_win32
 
    //   //}
 
-   //   auto pusermessage = øallocate ::user::message();
+   //   auto pusermessage = allocateø ::user::message();
 
    //   if (!pusermessage)
    //   {

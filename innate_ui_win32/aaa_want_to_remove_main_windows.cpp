@@ -84,11 +84,11 @@
 //      mainstruct.m_bUserEx = true;
 //      mainstruct.m_bShowApplicationInformation = false;
 //
-//      auto psystem = øallocate ::platform::system();
+//      auto psystem = allocateø ::platform::system();
 //
 //      psystem->system_construct(&mainstruct, hinstance, hPrevInstance, pCmdLine, nCmdShow);
 //
-//      //pmaindata->m_pappcore = øallocate app_core(pmaindata);
+//      //pmaindata->m_pappcore = allocateø app_core(pmaindata);
 //
 //      if (!psystem->system_beg())
 //      {

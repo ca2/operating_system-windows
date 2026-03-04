@@ -491,7 +491,7 @@ namespace windowing_win32
          if (!pbufferitem->m_pgraphicsBufferItem)
          {
 
-            øconstruct(pbufferitem->m_pgraphicsBufferItem);
+            constructø(pbufferitem->m_pgraphicsBufferItem);
 
             auto puserinteraction = dynamic_cast < ::user::interaction * >( m_pwindow->m_pacmeuserinteraction.m_p);
 
@@ -562,7 +562,7 @@ namespace windowing_win32
       //if (m_pwindow->m_ptaskUpdateScreen)
       //{
 
-      //   m_pwindow->m_ptaskUpdateScreen->_post([this]()
+      //   m_pwindow->m_ptaskUpdateScreen->postø() << [this]()
       //      {
 
       //         double_buffer::update_screen();
@@ -577,7 +577,7 @@ namespace windowing_win32
       if (m_ptaskUpdateScreen)
       {
 
-         m_ptaskUpdateScreen->main_post()
+         m_ptaskUpdateScreen->main_postø()
             << [this]()
             {
 
@@ -849,8 +849,8 @@ namespace windowing_win32
 
                      auto cx = rectangleRequest.width();
 
-                     pwindow->_main_send(
-                        [=]()
+                     pwindow->main_sendø()
+                        <<[=]()
                         {
                            // if (!(nFlags & SWP_NOMOVE))
                            //{
@@ -916,7 +916,7 @@ namespace windowing_win32
                            }
                            pwindow->m_uSetWindowPosLastFlags |= SWP_NOACTIVATE;
 
-                        });
+                        };
                   }
                }
             }

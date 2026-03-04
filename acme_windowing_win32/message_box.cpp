@@ -30,9 +30,9 @@ namespace win32
 
             {
 
-               auto pmessagebox = pparticle.cast < ::message_box>();
+               auto pmessageboxpayload = pparticle.cast < ::message_box_payload>();
 
-               if (pmessagebox)
+               if (pmessageboxpayload)
                {
 
 
@@ -51,13 +51,13 @@ namespace win32
                   //      ::enum_dialog_result m_edialogresult;
                   //      void run() override
                   //      {
-                  auto iType = message_box_to_windows_message_box(pmessagebox->m_emessagebox);
-                  ::wstring wstrMessage(pmessagebox->m_strMessage);
-                  ::wstring wstrTitle(pmessagebox->m_strTitle);
+                  auto iType = message_box_to_windows_message_box(pmessageboxpayload->m_emessagebox);
+                  ::wstring wstrMessage(pmessageboxpayload->m_strMessage);
+                  ::wstring wstrTitle(pmessageboxpayload->m_strTitle);
 
                   auto iRet = ::MessageBoxW(nullptr, wstrMessage, wstrTitle, iType);
 
-                  pmessagebox->m_payloadResult = windows_message_box_result_to_dialog_result(iRet);
+                  pmessageboxpayload->m_payloadResult = windows_message_box_result_to_dialog_result(iRet);
 
 
                }

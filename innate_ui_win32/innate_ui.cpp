@@ -51,10 +51,10 @@ namespace innate_ui_win32
    }
 
    
-   void innate_ui::_main_post(const ::procedure & procedure)
+   void innate_ui::main_post(const ::procedure & procedure)
    {
 
-      system()->acme_windowing()->_main_post(procedure);
+      system()->acme_windowing()->main_post(procedure);
 
 //      auto psubparticle = (::subparticle *)procedure.m_pbase;
 //

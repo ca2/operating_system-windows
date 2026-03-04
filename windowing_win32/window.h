@@ -1041,11 +1041,11 @@ namespace windowing_win32
 
       void set_opacity(double dOpacity) override;
 
-      void _user_send(const ::procedure & procedure) override;
-      void _user_post(const ::procedure & procedure) override;
+      void user_send(const ::procedure & procedure) override;
+      void user_post(const ::procedure & procedure) override;
 
-      void _main_send(const ::procedure & procedure) override;
-      void _main_post(const ::procedure & procedure) override;
+      void main_send(const ::procedure & procedure) override;
+      void main_post(const ::procedure & procedure) override;
       
 
       void _raw_client_to_screen(::int_point & point) override;

@@ -96,7 +96,7 @@ namespace apex_windows
       virtual string get_version();
       virtual void show_wait_cursor(bool bShow);
 
-      void _user_post(const ::procedure& procedure) override;
+      void user_post(const ::procedure& procedure) override;
 
       void create_app_shortcut(::platform::application* papp) override;
 
