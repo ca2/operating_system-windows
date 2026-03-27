@@ -133,7 +133,7 @@ namespace audio_mixer_mmsystem
 
       //::int_rectangle rectangle(0, 0, 0, 0);
 
-      auto pcontroldatavolume = øcreate_new <::audio_mixer::control_data_volume>();
+      auto pcontroldatavolume = create_newø <::audio_mixer::control_data_volume>();
 
       pcontroldatavolume->m_iType = ::audio_mixer::control_data::TypeStereoVolume;
       pcontroldatavolume->m_uiMixerID = source->get_device()->m_uiMixerID;
@@ -145,7 +145,7 @@ namespace audio_mixer_mmsystem
       create_volume_control(pcontroldatavolume, pParent);
 
 
-      auto pcontroldataLabel = øcreate_new <::audio_mixer::control_data>();
+      auto pcontroldataLabel = create_newø <::audio_mixer::control_data>();
       pcontroldataLabel->m_iType = ::audio_mixer::control_data::TypeStereoVolumeLabel;
       pcontroldataLabel->m_uiMixerID = m_pmixersource->get_device()->m_uiMixerID;
       pcontroldataLabel->m_uiLineID = source->m_mixerline.dwLineID;
@@ -163,7 +163,7 @@ namespace audio_mixer_mmsystem
 
          //pinteraction->create_control(pParent, nBalanceID);
          //::pointer<::audio_mixer::control_data_volume>mcdvBalance = pinteraction->get_data();
-         auto pvolumeBalance = øcreate_new <::audio_mixer::control_data_volume>();
+         auto pvolumeBalance = create_newø <::audio_mixer::control_data_volume>();
          pvolumeBalance->m_iType = ::audio_mixer::control_data::TypeStereoBalance;
          pvolumeBalance->m_uiMixerID = m_pmixersource->get_device()->m_uiMixerID;
          pvolumeBalance->m_uiLineID = source->m_mixerline.dwLineID;
@@ -190,7 +190,7 @@ namespace audio_mixer_mmsystem
          //add(plabel.m_p);
 
 
-         auto pcontroldataLabel = øcreate_new <::audio_mixer::control_data>();
+         auto pcontroldataLabel = create_newø <::audio_mixer::control_data>();
          pcontroldataLabel->m_iType = ::audio_mixer::control_data::TypeStereoBalanceLabel;
          pcontroldataLabel->m_uiMixerID = m_pmixersource->get_device()->m_uiMixerID;
          pcontroldataLabel->m_uiLineID = source->m_mixerline.dwLineID;
@@ -274,7 +274,7 @@ namespace audio_mixer_mmsystem
       {
          nMuteID = nID++;
 
-         auto pswitchMute = øcreate_new < ::audio_mixer::control_data_switch >();
+         auto pswitchMute = create_newø < ::audio_mixer::control_data_switch >();
          pswitchMute->m_iType = ::audio_mixer::control_data::TypeUniformMute;
          pswitchMute->m_uiMixerID = source->get_device()->m_uiMixerID;
          pswitchMute->m_uiControlID = m_mixercontrol.dwControlID;

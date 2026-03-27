@@ -1738,7 +1738,7 @@ namespace draw2d_gdiplus
 
                   auto & psizeimage = pextension->m_psizeimage;
 
-                  ødefer_construct_new(psizeimage);
+                  defer_construct_newø(psizeimage);
 
                   int_size size(imagedrawing.m_rectangleTarget.size());
 
@@ -4856,7 +4856,7 @@ namespace draw2d_gdiplus
    //   //if (!shaperegion.holdee())
    //   //{
 
-   //   //   auto pregion = øcreate < ::draw2d::region >();
+   //   //   auto pregion = createø < ::draw2d::region >();
 
    //   //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
@@ -4916,7 +4916,7 @@ namespace draw2d_gdiplus
    //   //if (!shaperegion.holdee())
    //   //{
 
-   //   //   auto pregion= øcreate < ::draw2d::region >();
+   //   //   auto pregion= createø < ::draw2d::region >();
 
    //   //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
@@ -4979,7 +4979,7 @@ namespace draw2d_gdiplus
    //   //if (!shaperegion.holdee())
    //   //{
 
-   //   //   auto pregion = øcreate < ::draw2d::region >();
+   //   //   auto pregion = createø < ::draw2d::region >();
 
    //   //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
@@ -5724,14 +5724,14 @@ namespace draw2d_gdiplus
       //         break;
       //      case META_SETBKCOLOR:
       //      {
-      //         auto pbrush = øcreate < ::draw2d::brush >();
+      //         auto pbrush = createø < ::draw2d::brush >();
       //         pbrush->create_solid(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
       //         set(pbrush);
       //      }
       //      break;
       //      case META_SETTEXTCOLOR:
       //      {
-      //         auto pbrush = øcreate < ::draw2d::brush >();
+      //         auto pbrush = createø < ::draw2d::brush >();
       //
       //         pbrush->create_solid(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
       //         set(pbrush);
@@ -6950,7 +6950,7 @@ namespace draw2d_gdiplus
          ::double_point p1(x, y+a);
          ::double_point p2(x + s.cx, y+a);
 
-         auto ppen = øcreate < ::draw2d::pen >();
+         auto ppen = createø < ::draw2d::pen >();
 
          ppen->m_color = ::color::red;
 
@@ -7581,7 +7581,7 @@ namespace draw2d_gdiplus
       if (!pgdiplusregion)
       {
 
-         pgdiplusregion = øcreate_new < region >();
+         pgdiplusregion = create_newø < region >();
 
          //pgdiplusregion->m_eregion = pregion->m_eregion;
 

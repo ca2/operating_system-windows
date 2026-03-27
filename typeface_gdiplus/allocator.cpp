@@ -22,7 +22,7 @@ namespace typeface_gdiplus
       if (scopedstrName == "gdiplus" || scopedstrName.is_empty())
       {
 
-         return øcreate_new<::typeface_gdiplus::typeface>();
+         return create_newø<::typeface_gdiplus::typeface>();
 
       }
       else
@@ -42,7 +42,7 @@ namespace typeface_gdiplus
       if (scopedstrName == "gdiplus" || scopedstrName.is_empty())
       {
 
-         return øcreate_new<::typeface_gdiplus::face>();
+         return create_newø<::typeface_gdiplus::face>();
 
       }
       else

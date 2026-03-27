@@ -1056,7 +1056,7 @@ namespace acme_windows
    void create_process::wait_process(const trace_function& tracefunction, bool bLineTrace)
    {
 
-      //auto phappeningEndOut = øcreate_new < manual_reset_happening >();
+      //auto phappeningEndOut = create_newø < manual_reset_happening >();
 
       //application()->fork([this, tracefunction, phappeningEndOut]()
 

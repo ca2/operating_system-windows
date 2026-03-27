@@ -701,7 +701,7 @@ namespace windows
 
                POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
-               auto pmouse = øcreate_new < ::user::mouse >();
+               auto pmouse = create_newø < ::user::mouse >();
 
                pmouse->m_pointHost = { point.x, point.y };
 
@@ -718,7 +718,7 @@ namespace windows
 
                POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
-               auto pmouse = øcreate_new < ::user::mouse >();
+               auto pmouse = create_newø < ::user::mouse >();
 
                pmouse->m_pointHost = { point.x, point.y };
 
@@ -735,7 +735,7 @@ namespace windows
 
                POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
-               auto pmouse = øcreate_new < ::user::mouse >();
+               auto pmouse = create_newø < ::user::mouse >();
 
                pmouse->m_pointHost = { point.x, point.y };
 
@@ -752,7 +752,7 @@ namespace windows
 
                POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
-               auto pmouse = øcreate_new < ::user::mouse >();
+               auto pmouse = create_newø < ::user::mouse >();
 
                pmouse->m_pointHost = { point.x, point.y };
 
@@ -769,7 +769,7 @@ namespace windows
 
                POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
-               auto pmouse = øcreate_new < ::user::mouse >();
+               auto pmouse = create_newø < ::user::mouse >();
 
                pmouse->m_pointHost = { point.x, point.y };
 

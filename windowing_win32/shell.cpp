@@ -1860,11 +1860,11 @@ namespace windowing_win32
    void shell::add_icon(int iSize, HICON hicon, _get_file_image_ & getfileimage)
    {
 
-      auto pwindowingicon = øcreate_new < ::windowing_win32::icon >();
+      auto pwindowingicon = create_newø < ::windowing_win32::icon >();
 
       pwindowingicon->add_icon(hicon);
 
-      auto pdrawicon = øcreate < ::image::icon >();
+      auto pdrawicon = createø < ::image::icon >();
      
       pdrawicon->initialize_with_windowing_icon(pwindowingicon);
 

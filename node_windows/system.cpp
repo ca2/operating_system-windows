@@ -13,7 +13,7 @@ namespace aura
 //
 //      auto puser = psession->m_puser;
 //
-//      auto pmessagebox = øcreate_new < ::user::message_box >();
+//      auto pmessagebox = create_newø < ::user::message_box >();
 //
 //      auto pfuture = pmessagebox->::extended::asynchronous<::conversation>::future();
 //

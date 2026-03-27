@@ -243,7 +243,7 @@ namespace acme_windows
       virtual int _command_system(const ::scoped_string& scopedstr, const ::scoped_string& scopedstrCommand, const trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay, bool bInteractive);
       int command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
       //int command_system(const ::scoped_string& scopedstr, const class ::time& timeOut = 15_min) override;
-      int interactive_command_system(const ::scoped_string& scopedstrPrompt, const ::scoped_string& scopedstrCommand, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
+      //int interactive_command_system(const ::scoped_string& scopedstrPrompt, const ::scoped_string& scopedstrCommand, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
       //void open_terminal_and_run(const ::scoped_string& scopedstr);
       void launch_command_system(const ::scoped_string& scopedstr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
       int synchronous_posix_terminal(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell = e_posix_shell_system_default, const trace_function& tracefunction = nullptr) override;

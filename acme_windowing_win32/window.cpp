@@ -800,7 +800,7 @@ namespace win32
             case WM_LBUTTONDOWN:
             {
 
-               auto pmouse = øcreate_new < ::user::mouse >();
+               auto pmouse = create_newø < ::user::mouse >();
 
                pmouse->m_pointHost = lparam.point();
 
@@ -875,7 +875,7 @@ namespace win32
 
                }
 
-               auto pmouse = øcreate_new < ::user::mouse >();
+               auto pmouse = create_newø < ::user::mouse >();
 
                pmouse->m_pointHost = lparam.point();
 
@@ -911,7 +911,7 @@ namespace win32
             case WM_LBUTTONUP:
             {
 
-               auto pmouse = øcreate_new < ::user::mouse >();
+               auto pmouse = create_newø < ::user::mouse >();
 
                pmouse->m_pointHost = lparam.point();
 
@@ -945,7 +945,7 @@ namespace win32
             case WM_RBUTTONDOWN:
             {
 
-               auto pmouse = øcreate_new < ::user::mouse >();
+               auto pmouse = create_newø < ::user::mouse >();
 
                pmouse->m_pointHost = lparam.point();
 
@@ -979,7 +979,7 @@ namespace win32
             case WM_RBUTTONUP:
             {
 
-               auto pmouse = øcreate_new < ::user::mouse >();
+               auto pmouse = create_newø < ::user::mouse >();
 
                pmouse->m_pointHost = lparam.point();
 

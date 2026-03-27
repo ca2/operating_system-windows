@@ -217,7 +217,7 @@ namespace input_win32
    void keyboard_hook::keyboard_proc(::user::enum_message eusermessage, int iVirtualKeyCode, int iScanCode)
    {
 
-      auto pkey = øcreate_new < ::message::key >();
+      auto pkey = create_newø < ::message::key >();
 
       pkey->m_eusermessage = eusermessage;
 

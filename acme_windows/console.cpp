@@ -27,7 +27,7 @@ namespace acme_windows
 
       SetConsoleOutputCP(437);
 
-      m_pfileOut = øcreate_new< std_out_buffer >();
+      m_pfileOut = create_newø< std_out_buffer >();
 
       m_cout.m_pfile = m_pfileOut;
 

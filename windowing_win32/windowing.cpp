@@ -145,7 +145,7 @@ namespace windowing_win32
    ::pointer<system_interaction>windowing::create_system_interaction()
    {
 
-      auto psysteminteraction = øcreate_new < ::windowing_win32::system_interaction >();
+      auto psysteminteraction = create_newø < ::windowing_win32::system_interaction >();
 
       //psysteminteraction->display(e_display_none);
 
@@ -1098,7 +1098,7 @@ namespace windowing_win32
    //::pointer<::user::interaction>windowing::create_system_window()
    //{
 
-   //   auto psysteminteraction = øcreate_new < system_interaction >();
+   //   auto psysteminteraction = create_newø < system_interaction >();
 
    //   psysteminteraction->display(e_display_none);
 
@@ -1551,7 +1551,7 @@ namespace windowing_win32
    ::pointer < ::user::interaction > windowing::create_message_window(const ::scoped_string & scopedstrName, ::user::interaction_listener* pinteractionlistener)
    {
 
-      auto pmessagewindow = øcreate_new < message_window >();
+      auto pmessagewindow = create_newø < message_window >();
 
       pmessagewindow->create_message_window(scopedstrName, pinteractionlistener);
 

@@ -1833,11 +1833,11 @@ namespace windowing_win32
 
       synchronous_lock slHover(m_pimagelistHover[iSize]->synchronization());
 
-      auto pwindowingicon = øcreate_new < ::windowing_win32::icon >();
+      auto pwindowingicon = create_newø < ::windowing_win32::icon >();
 
       pwindowingicon->add_icon(hicon);
 
-      auto pdrawicon = øcreate < ::image::icon >();
+      auto pdrawicon = createø < ::image::icon >();
      
       pdrawicon->initialize_with_windowing_icon(pwindowingicon);
 

@@ -3770,7 +3770,7 @@ namespace windowing_win32
 
       ASSERT(::IsWindow(get_hwnd()));
 
-      auto pgraphics = øcreate < ::draw2d::graphics >();
+      auto pgraphics = createø < ::draw2d::graphics >();
 
       throw ::exception(todo);
 

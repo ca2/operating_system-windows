@@ -2308,7 +2308,7 @@ namespace acme_windows
 
       bool bSetOk = false;
 
-      auto psecurityattributes = øcreate_new<::acme_windows_common::security_attributes>();
+      auto psecurityattributes = create_newø<::acme_windows_common::security_attributes>();
 
       psecurityattributes->m_memory.set_size(sizeof(SECURITY_ATTRIBUTES) + sizeof(SECURITY_DESCRIPTOR));
 
@@ -3143,7 +3143,7 @@ namespace acme_windows
    int node::_command_system(const ::scoped_string& scopedstrPrompt, const ::scoped_string& scopedstrCommand,  const ::trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay, bool bInteractive)
    {
 
-      auto pcreateprocess = øcreate_new < ::acme_windows::create_process>();
+      auto pcreateprocess = create_newø < ::acme_windows::create_process>();
 
       pcreateprocess->m_bInteractive = bInteractive;
 
@@ -3270,126 +3270,127 @@ namespace acme_windows
 
 
 
-   int node::interactive_command_system(const ::scoped_string& scopedstrPrompt, const ::scoped_string& scopedstrCommand,  const ::trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
-   {
+//   int node::interactive_command_system(const ::scoped_string& scopedstrPrompt, const ::scoped_string& scopedstrCommand,  const ::trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
+//   {
+//
+//      return _command_system(scopedstrPrompt, scopedstrCommand, tracefunction, pathWorkingDirectory, edisplay, true);
+////      auto pcreateprocess = create_newø < ::acme_windows::create_process>();
+////
+////      pcreateprocess->m_bInteractive = bInteractive;
+////
+////      if (pathWorkingDirectory.is_empty())
+////      {
+////
+////         pcreateprocess->m_pathWorkingDirectory = directory_system()->current();
+////
+////      }
+////      else
+////      {
+////
+////         pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
+////
+////      }
+////
+////      pcreateprocess->m_edisplay = edisplay;
+////
+////      pcreateprocess->initialize_stdout();
+////      if (!bInteractive)
+////      {
+////         pcreateprocess->initialize_stderr();
+////      }
+////      pcreateprocess->initialize_stdin();
+////
+////      pcreateprocess->prepare();
+////
+////      if (edisplay == e_display_up)
+////      {
+////
+////         pcreateprocess->set_create_new_console();
+////
+////      }
+////
+////      //pcreateprocess->set_create_new_console();
+////      pcreateprocess->call_create_process(scopedstr);
+////      //string str(scopedstr);
+////
+////
+////      //::string str1;
+////      //auto range = str();
+////      //range.m_erange = e_range_none;
+////      //try
+////      //{
+////      //   str1 = range.consume_quoted_value();
+////
+////      //}
+////      //catch (...)
+////      //{
+////
+////
+////      //}
+////      //::string str2;
+////      //if (str1.is_empty())
+////      //{
+////      //   ::string strCmd = this->get_environment_variable("ComSpec");
+////      //   str1 = strCmd;
+////      //   str2 = "\"" + strCmd + "\" /c \"" + scopedstr + "\"";
+////      //}
+////      //else
+////      //{
+////
+////      //   str2 = scopedstr;
+////      //   str2.trim();
+////      //}
+////
+////      //wstring wstr1;
+////      //wstring wstr2;
+////
+////      //wstr1 = str1;
+////      //wstr2 = str2;
+////
+////
+////
+////      //if (!CreateProcessW(
+////      //   (WCHAR *)wstr1.c_str(), (WCHAR*)wstr2.c_str(), 
+////      //   NULL, NULL, TRUE, EXTENDED_STARTUPINFO_PRESENT | CREATE_NEW_CONSOLE, NULL, NULL,
+////      //   &pcreateprocess->m_si.StartupInfo, &pcreateprocess->m_pi))
+////      //{
+////
+////      //   //::CloseHandle(hOutRd);
+////      //   //::CloseHandle(hOutWr);
+////      //   //::CloseHandle(hErrRd);
+////      //   //::CloseHandle(hErrWr);
+////      //   //::CloseHandle(hInRd);
+////      //   //::CloseHandle(hInWr);
+////
+////      //   DWORD dwLastError = ::GetLastError();
+////
+////      //   printf("Create Process failed with lasterror = %d\n", dwLastError);
+////      //   printf("Parameters: %s %s\n", str1.c_str(), str2.c_str());
+////
+////      //   auto estatus = ::windows::last_error_status(dwLastError);
+////
+////      //   throw ::exception(estatus);
+////
+////      //}
+////
+////
+//////      class ::time timeStart;
+////
+////  //    timeStart.Now();
+////
+////      pcreateprocess->wait_process(tracefunction, bLineTrace);
+////
+////      //      return iExitCode;
+////
+////      return pcreateprocess->m_iExitCode;
+//
+//   }
 
-      return _command_system(scopedstrPrompt, scopedstrCommand, tracefunction, pathWorkingDirectory, edisplay, true);
-//      auto pcreateprocess = øcreate_new < ::acme_windows::create_process>();
-//
-//      pcreateprocess->m_bInteractive = bInteractive;
-//
-//      if (pathWorkingDirectory.is_empty())
-//      {
-//
-//         pcreateprocess->m_pathWorkingDirectory = directory_system()->current();
-//
-//      }
-//      else
-//      {
-//
-//         pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
-//
-//      }
-//
-//      pcreateprocess->m_edisplay = edisplay;
-//
-//      pcreateprocess->initialize_stdout();
-//      if (!bInteractive)
-//      {
-//         pcreateprocess->initialize_stderr();
-//      }
-//      pcreateprocess->initialize_stdin();
-//
-//      pcreateprocess->prepare();
-//
-//      if (edisplay == e_display_up)
-//      {
-//
-//         pcreateprocess->set_create_new_console();
-//
-//      }
-//
-//      //pcreateprocess->set_create_new_console();
-//      pcreateprocess->call_create_process(scopedstr);
-//      //string str(scopedstr);
-//
-//
-//      //::string str1;
-//      //auto range = str();
-//      //range.m_erange = e_range_none;
-//      //try
-//      //{
-//      //   str1 = range.consume_quoted_value();
-//
-//      //}
-//      //catch (...)
-//      //{
-//
-//
-//      //}
-//      //::string str2;
-//      //if (str1.is_empty())
-//      //{
-//      //   ::string strCmd = this->get_environment_variable("ComSpec");
-//      //   str1 = strCmd;
-//      //   str2 = "\"" + strCmd + "\" /c \"" + scopedstr + "\"";
-//      //}
-//      //else
-//      //{
-//
-//      //   str2 = scopedstr;
-//      //   str2.trim();
-//      //}
-//
-//      //wstring wstr1;
-//      //wstring wstr2;
-//
-//      //wstr1 = str1;
-//      //wstr2 = str2;
-//
-//
-//
-//      //if (!CreateProcessW(
-//      //   (WCHAR *)wstr1.c_str(), (WCHAR*)wstr2.c_str(), 
-//      //   NULL, NULL, TRUE, EXTENDED_STARTUPINFO_PRESENT | CREATE_NEW_CONSOLE, NULL, NULL,
-//      //   &pcreateprocess->m_si.StartupInfo, &pcreateprocess->m_pi))
-//      //{
-//
-//      //   //::CloseHandle(hOutRd);
-//      //   //::CloseHandle(hOutWr);
-//      //   //::CloseHandle(hErrRd);
-//      //   //::CloseHandle(hErrWr);
-//      //   //::CloseHandle(hInRd);
-//      //   //::CloseHandle(hInWr);
-//
-//      //   DWORD dwLastError = ::GetLastError();
-//
-//      //   printf("Create Process failed with lasterror = %d\n", dwLastError);
-//      //   printf("Parameters: %s %s\n", str1.c_str(), str2.c_str());
-//
-//      //   auto estatus = ::windows::last_error_status(dwLastError);
-//
-//      //   throw ::exception(estatus);
-//
-//      //}
-//
-//
-////      class ::time timeStart;
-//
-//  //    timeStart.Now();
-//
-//      pcreateprocess->wait_process(tracefunction, bLineTrace);
-//
-//      //      return iExitCode;
-//
-//      return pcreateprocess->m_iExitCode;
-
-   }
 
    void node::launch_command_system(const ::scoped_string& scopedstr, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
    {
 
-      auto pcreateprocess = øcreate_new < ::acme_windows::create_process>();
+      auto pcreateprocess = create_newø < ::acme_windows::create_process>();
 
 
       pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
@@ -3432,13 +3433,15 @@ namespace acme_windows
    bool node::has_command(const ::scoped_string& scopedstrCommand)
    {
 
-      ::string strOutput;
+      ::string strStdOut;
 
-      int iExitCode = get_command_output(strOutput, "WHERE " + scopedstrCommand);
+      ::string strStdErr;
 
-      strOutput.trim();
+      int iExitCode = get_command_output(strStdOut, strStdErr, "WHERE " + scopedstrCommand);
 
-      if (!file_system()->exists(strOutput))
+      strStdOut.trim();
+
+      if (!file_system()->exists(strStdOut))
       {
 
          return false;
@@ -4433,11 +4436,13 @@ namespace acme_windows
 
          strCheckCommand.formatf("command -v %s", scopedstr.as_string().c_str());
 
-         ::string strOutput;
+         ::string strStdOut;
 
-         auto iExitCode = get_posix_shell_command_output(strOutput, strCheckCommand, eposixshell, 1_min);
+         ::string strStdErr;
 
-         return iExitCode == 0 || strOutput.has_character();
+         auto iExitCode = get_posix_shell_command_output(strStdOut, strStdErr, strCheckCommand, eposixshell, 1_min);
+
+         return iExitCode == 0 || strStdOut.has_character();
 
       }
       catch (...)
@@ -4782,7 +4787,7 @@ namespace acme_windows
       if (!m_poperatingsystemsummary)
       {
 
-         auto psummary = øcreate_new < ::operating_system::summary >();
+         auto psummary = create_newø < ::operating_system::summary >();
 
          m_poperatingsystemsummary = psummary;
 
@@ -4815,7 +4820,7 @@ namespace acme_windows
    ::pointer < ::operating_system::application > node::module_path_application(const ::scoped_string& scopedstr)
    {
 
-      auto papplication = øcreate < ::operating_system::application >();
+      auto papplication = createø < ::operating_system::application >();
 
       papplication->open_by_module_path(scopedstr);
 
@@ -5055,7 +5060,7 @@ namespace acme_windows
 
          }
 
-         auto plink = øcreate_new<::acme_windows::file_link>();
+         auto plink = create_newø<::acme_windows::file_link>();
 
          plink->open(pathVsLnk, ::file::e_link_target);
 

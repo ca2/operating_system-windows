@@ -44,7 +44,7 @@ namespace write_text_win32
       }
 
       //auto estatus = 
-      ødefer_construct_new(m_pfontenumerationitema);
+      defer_construct_newø(m_pfontenumerationitema);
 
       //if (!estatus)
       //{

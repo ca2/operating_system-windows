@@ -270,7 +270,7 @@ namespace windowing_win32
       if (!pparticleData)
       {
 
-         pparticleData = øcreate_new < layered_window_buffer >();
+         pparticleData = create_newø < layered_window_buffer >();
 
       }
 
