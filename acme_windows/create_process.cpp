@@ -777,15 +777,6 @@ namespace acme_windows
          str2 = "\"" + strPowerShell + "\" /c " + scopedstr;
 
       }
-      else if (file_system()->exists(str1))
-      {
-         //str1 = strCandidateFile;
-         str1.trim();
-
-         str2 = scopedstr;
-         str2.trim();
-
-      }
       else if (str1.is_empty() || str1.case_insensitive_ends(".cmd"))
       {
 
@@ -794,6 +785,15 @@ namespace acme_windows
          str1 = strCmd;
 
          str2 = "\"" + strCmd + "\" /c " + scopedstr;
+
+      }
+      else if (file_system()->exists(str1))
+      {
+         //str1 = strCandidateFile;
+         str1.trim();
+
+         str2 = scopedstr;
+         str2.trim();
 
       }
       else
