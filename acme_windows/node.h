@@ -396,7 +396,9 @@ namespace acme_windows
       virtual ::file::path __get_font_path_from_name(const ::scoped_string& scopedstrName, bool bTrueType);
 
       void restart_application() override;
+      ::int_size get_main_monitor_size() override;
       ::string get_current_operating_system_name() override;
+      ::string get_more_operating_system_version_information() override;
       ::string_array_base get_operating_system_information_lines() override;
 
 

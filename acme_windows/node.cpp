@@ -69,7 +69,7 @@ void GetWindowsVersion(RTL_OSVERSIONINFOW &os_version)
       rtl_get_version(&os_version);
    }
 }
-CLASS_DECL_ACME ::string friendly_byte_count(unsigned long long ul, const char *pszFormat = nullptr);
+
    //int main()
 //{
   
@@ -5528,37 +5528,23 @@ namespace acme_windows
    ::string_array_base node::get_operating_system_information_lines()
    {
 
-      ::string_array_base stra;
+      return ::acme_windows_common::node::get_operating_system_information_lines();
 
-      auto wDisplay = ::GetSystemMetrics(SM_CXSCREEN);
-      auto hDisplay = ::GetSystemMetrics(SM_CYSCREEN);
-
-      ::string strDisplayResolutionOptionalHelper;
-
-      if (wDisplay == 1920 && hDisplay == 1080)
-      {
-         strDisplayResolutionOptionalHelper = " (Full HD)";
-      }
-      else if (wDisplay == 2560 && hDisplay == 1440)
-      {
-         strDisplayResolutionOptionalHelper = " (2k - Quad HD)";
-      }
-      else if (wDisplay == 3840 && hDisplay == 2160)
-      {
-         strDisplayResolutionOptionalHelper = " (4K  -Ultra HD)";
-      }
-      else
-      {
-         strDisplayResolutionOptionalHelper.empty();
-      }
-
-      stra.add(::format("Operating System: {}", get_current_operating_system_name()));
-      stra.add(::format("Display Resolution: {}x{}{}", wDisplay, hDisplay, strDisplayResolutionOptionalHelper));
-      stra.add(::format("Application Memory Usage: {}", friendly_byte_count(get_current_memory_usage())));
-
-      return stra;
 
    }
+
+   
+   ::int_size node::get_main_monitor_size()
+   {
+   
+      auto wDisplay = ::GetSystemMetrics(SM_CXSCREEN);
+
+      auto hDisplay = ::GetSystemMetrics(SM_CYSCREEN);
+
+      return {wDisplay, hDisplay};
+
+   }
+
 
     ::string node::get_current_operating_system_name()
    {
@@ -5571,19 +5557,46 @@ namespace acme_windows
       {
          if (os_version.dwBuildNumber >= 22000)
          {
-            return ::format("Windows 11 (Build {})", os_version.dwBuildNumber );
+            return "Windows 11";
          }
          else
          {
-            return ::format("Windows 10 (Build {})", os_version.dwBuildNumber);
+            return "Windows 10";
          }
       }
       else
       {
-         return ::format( "Detected: Older Windows version or other (Version {}.{} Build {})", os_version.dwMajorVersion,
-            os_version.dwMinorVersion, os_version.dwBuildNumber);
+         
+         return "Detected: Older Windows version or other"; 
+
       }
    }
+
+    ::string node::get_more_operating_system_version_information()
+    {
+
+             RTL_OSVERSIONINFOW os_version = {0};
+       GetWindowsVersion(os_version);
+
+       // Windows 10 and 11 both have major version 10 and minor version 0
+       if (os_version.dwMajorVersion == 10 && os_version.dwMinorVersion == 0)
+       {
+          if (os_version.dwBuildNumber >= 22000)
+          {
+             return ::format("Build {}", os_version.dwBuildNumber);
+          }
+          else
+          {
+             return ::format("Build {}", os_version.dwBuildNumber);
+          }
+       }
+       else
+       {
+          return ::format("Version {}.{} Build {}",
+                          os_version.dwMajorVersion, os_version.dwMinorVersion, os_version.dwBuildNumber);
+       }
+
+    }
 
 
 
