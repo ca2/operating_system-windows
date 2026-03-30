@@ -56,8 +56,24 @@ CLASS_DECL_ACME HWND acme_get_main_hwnd();
 //CLASS_DECL_ACME void nano_graphics_win32_factory(::factory::factory * pfactory);
 //CLASS_DECL_ACME extern "C" void nano_user_win32_factory(::factory::factory * pfactory);
 
+// Manually declare RtlGetVersion
+typedef void(WINAPI *RtlGetVersionPtr)(PRTL_OSVERSIONINFOW);
 
-//
+void GetWindowsVersion(RTL_OSVERSIONINFOW &os_version)
+{
+   HMODULE h_ntdll = GetModuleHandle(L"ntdll.dll");
+   RtlGetVersionPtr rtl_get_version = (RtlGetVersionPtr)GetProcAddress(h_ntdll, "RtlGetVersion");
+   if (rtl_get_version != nullptr)
+   {
+      os_version.dwOSVersionInfoSize = sizeof(RTL_OSVERSIONINFOW);
+      rtl_get_version(&os_version);
+   }
+}
+CLASS_DECL_ACME ::string friendly_byte_count(unsigned long long ul, const char *pszFormat = nullptr);
+   //int main()
+//{
+  
+   //
 //#if defined(_WIN32)
 //#  ifndef NOMINMAX
 //#  define NOMINMAX 1
@@ -5514,13 +5530,61 @@ namespace acme_windows
 
       ::string_array_base stra;
 
-      stra.add("Title: Display Resolution");
-      stra.add(::format("Width: {}",::GetSystemMetrics(SM_CXSCREEN)));
-      stra.add(::format("Height: {}", ::GetSystemMetrics(SM_CYSCREEN)));
+      auto wDisplay = ::GetSystemMetrics(SM_CXSCREEN);
+      auto hDisplay = ::GetSystemMetrics(SM_CYSCREEN);
+
+      ::string strDisplayResolutionOptionalHelper;
+
+      if (wDisplay == 1920 && hDisplay == 1080)
+      {
+         strDisplayResolutionOptionalHelper = " (Full HD)";
+      }
+      else if (wDisplay == 2560 && hDisplay == 1440)
+      {
+         strDisplayResolutionOptionalHelper = " (2k - Quad HD)";
+      }
+      else if (wDisplay == 3840 && hDisplay == 2160)
+      {
+         strDisplayResolutionOptionalHelper = " (4K  -Ultra HD)";
+      }
+      else
+      {
+         strDisplayResolutionOptionalHelper.empty();
+      }
+
+      stra.add(::format("Operating System: {}", get_current_operating_system_name()));
+      stra.add(::format("Display Resolution: {}x{}{}", wDisplay, hDisplay, strDisplayResolutionOptionalHelper));
+      stra.add(::format("Application Memory Usage: {}", friendly_byte_count(get_current_memory_usage())));
 
       return stra;
 
    }
+
+    ::string node::get_current_operating_system_name()
+   {
+
+      RTL_OSVERSIONINFOW os_version = {0};
+      GetWindowsVersion(os_version);
+
+      // Windows 10 and 11 both have major version 10 and minor version 0
+      if (os_version.dwMajorVersion == 10 && os_version.dwMinorVersion == 0)
+      {
+         if (os_version.dwBuildNumber >= 22000)
+         {
+            return ::format("Windows 11 (Build {})", os_version.dwBuildNumber );
+         }
+         else
+         {
+            return ::format("Windows 10 (Build {})", os_version.dwBuildNumber);
+         }
+      }
+      else
+      {
+         return ::format( "Detected: Older Windows version or other (Version {}.{} Build {})", os_version.dwMajorVersion,
+            os_version.dwMinorVersion, os_version.dwBuildNumber);
+      }
+   }
+
 
 
    memsize node::get_current_memory_usage()
