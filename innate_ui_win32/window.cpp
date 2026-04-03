@@ -45,7 +45,7 @@ namespace innate_ui_win32
 
       ::wstring wstr(scopedstr);
 
-      main_post([this, wstr]
+      main_send([this, wstr]
       ()
          {
 

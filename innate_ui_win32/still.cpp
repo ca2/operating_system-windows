@@ -4,7 +4,30 @@
 #include "still.h"
 #include "acme/operating_system/windows/windowing.h"
 
+HFONT CreateScaledFont(HWND hWnd, int pointSize, int weight, const wchar_t *fontFamily)
+{
+   // 1. Get the current DPI for the window
+   UINT dpi = GetDpiForWindow(hWnd);
+   if (dpi == 0)
+      dpi = 96;
 
+   // 2. Convert point size to logical height (scaled for DPI)
+   // Formula: Height = -MulDiv(PointSize, DPI, 72)
+   int height = -MulDiv(pointSize, dpi, 72);
+
+   // 3. Create the font
+   return CreateFont(height, // Height (DPI scaled)
+                     0, 0, 0, // Width, Escapement, Orientation
+                     weight, // Font Weight (e.g., FW_BOLD, FW_NORMAL)
+                     FALSE, FALSE, FALSE, // Italic, Underline, Strikeout
+                     DEFAULT_CHARSET, // Character Set
+                     OUT_DEFAULT_PRECIS, // Output Precision
+                     CLIP_DEFAULT_PRECIS, // Clipping Precision
+                     DEFAULT_QUALITY, // Quality
+                     DEFAULT_PITCH | FF_DONTCARE, // Pitch and Family
+                     fontFamily // Typeface Name (e.g., L"Segoe UI", L"Arial")
+   );
+}
 
 ::Gdiplus::Image * LoadImageFromMemory(const void * imageData, memsize size)
 {
@@ -189,5 +212,72 @@ namespace innate_ui_win32
 
    }
 
+   
+   void still::layout()
+   {
+
+      auto hStatic = ::as_HWND(m_windowswindow.as_operating_system_window());
+
+      // Create a bold, 12pt Segoe UI font scaled for the current monitor
+      HFONT hNewFont = CreateScaledFont(hStatic, 12 *m_dFontSizeEm,m_iFontWeight, L"Segoe UI");
+
+
+      // Send the WM_SETFONT message to the control
+      // wParam: Handle to the new font
+      // lParam: TRUE to redraw the control immediately
+      SendMessage(hStatic, WM_SETFONT, (WPARAM)hNewFont, TRUE);
+
+
+      // 1. Get the current DPI for the specific window (Windows 10 1607+)
+      // For older versions, use GetDeviceCaps(hdc, LOGPIXELSX)
+      UINT dpi = GetDpiForWindow(hStatic);
+      if (dpi == 0)
+         dpi = 96; // Fallback to default
+      wstring wstr;
+
+      // 2. Get the text from the control
+      int len = GetWindowTextLength(hStatic);
+      if (len > 0)
+      {
+
+         auto buffer = wstr.get_buffer(len);
+         GetWindowText(hStatic, buffer, len + 1);
+         wstr.release_buffer();
+      }
+
+            if (wstr.is_empty())
+      {
+
+         wstr = L"THOMÁSØ";
+      }
+
+
+      // 3. Prepare the Device Context
+      HDC hdc = GetDC(hStatic);
+      HFONT hFont = (HFONT)SendMessage(hStatic, WM_GETFONT, 0, 0);
+      HFONT hOldFont = (HFONT)SelectObject(hdc, hFont);
+
+      // 4. Calculate dimensions
+      // We use a large initial width to simulate single-line or set a specific
+      // max width if you want word-wrapping.
+      RECT rect = {0, 0, 10000, 0};
+      DrawText(hdc, wstr.c_str(), -1, &rect, DT_CALCRECT | DT_LEFT | DT_NOPREFIX);
+
+      // 5. Account for Control Borders (DPI Scaled)
+      // If the static has WS_BORDER or SS_SUNKEN, add scaled padding.
+      int padding = MulDiv(2, dpi, 96); // Add 2 pixels of padding scaled to DPI
+      int newWidth = (rect.right - rect.left) + padding;
+      int newHeight = (rect.bottom - rect.top) + padding;
+
+      // 6. Cleanup and Apply
+      SelectObject(hdc, hOldFont);
+      ReleaseDC(hStatic, hdc);
+      //delete[] buffer;
+
+      //SetWindowPos(hStatic, NULL, 0, 0, newWidth, newHeight, SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);
+
+      m_iLayoutWidth = newWidth;
+      m_iLayoutHeight = newHeight;
+   }
 
 } // namespace innate_ui

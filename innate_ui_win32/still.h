@@ -31,6 +31,8 @@ namespace innate_ui_win32
 
       void set_icon(::innate_ui::icon * picon) override;
 
+      void layout() override;
+
       LRESULT _window_procedure(UINT message, WPARAM wparam, LPARAM lparam) override;
 
    };
