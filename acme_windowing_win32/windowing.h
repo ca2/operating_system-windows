@@ -70,7 +70,7 @@ namespace win32
             void windowing_post_quit() override;
 
 
-            void windowing_application_main_loop() override;
+            void run() override;
 
 
             void show(::particle_pointer pparticle) override;

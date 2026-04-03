@@ -195,7 +195,8 @@ namespace windowing_win32
       virtual string _get_window_text_timeout(HWND hwnd, const class time & time = 1_s);
 
 
-      void windowing_application_main_loop() override;
+      void run() override;
+      //void windowing_application_main_loop() override;
       void windowing_post_quit() override;
 
 

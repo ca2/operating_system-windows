@@ -1359,10 +1359,10 @@ namespace windowing_win32
    }
 
 
-   void windowing::windowing_application_main_loop()
+   void windowing::run()
    {
 
-      ::win32::acme::windowing::windowing::windowing_application_main_loop();
+      ::win32::acme::windowing::windowing::run();
 
    }
 

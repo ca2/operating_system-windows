@@ -475,13 +475,13 @@ namespace win32
          }
 
 
-         void windowing::windowing_application_main_loop()
+         void windowing::run()
          {
 
-            __task_init();
+            //__task_init();
 
 
-            init_task();
+            //init_task();
 
             //set_current_handles();
 
@@ -495,10 +495,13 @@ namespace win32
 
             //system()->defer_post_initial_request();
 
+            if (!system()->m_bSystemLoadedFromALibrary)
+            {
 
-            system()->post_application_start();
-            system()->defer_post_application_start_file_open_request();
-            system()->post_application_started();
+               system()->post_application_start();
+               system()->defer_post_application_start_file_open_request();
+               system()->post_application_started();
+            }
 
             ::string strAppId = m_papplication->m_strAppId;
 //
@@ -511,7 +514,7 @@ namespace win32
 
             //   });
 
-            main();
+            run_main_loop();
 
             //while (true)
             //{
@@ -531,6 +534,8 @@ namespace win32
             //   ::system()->m_pmanualresethappeningMainLoopEnd->set_happening();
 
             //}
+
+            information() << "windowing_win32::windowing::windowing::run ending!!";
 
          }
 
