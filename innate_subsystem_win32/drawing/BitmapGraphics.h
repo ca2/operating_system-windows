@@ -39,7 +39,7 @@ namespace innate_subsystem
    public:
       // Creates BitmapGraphics object with bitmap complatible with specified dc and
       // with specified size.
-      BitmapGraphics(DeviceContext *complatibleDC, int width, int height);
+      BitmapGraphics(DeviceContext *complatibleDC, const ::int_size & size);
       // Destroys bitmap and graphics object.
       virtual ~BitmapGraphics();
 

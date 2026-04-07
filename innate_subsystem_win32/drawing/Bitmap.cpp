@@ -25,7 +25,7 @@
 //
 #include "Bitmap.h"
 
-Bitmap::Bitmap(int width, int height)
+Bitmap::Bitmap(const ::int_size & size)
 : m_bitmap(NULL)
 {
   // Prepare buffer
@@ -39,7 +39,7 @@ Bitmap::Bitmap(int width, int height)
   }
 }
 
-Bitmap::Bitmap(HDC dc, int width, int height)
+Bitmap::Bitmap(HDC dc, const ::int_size & size)
 {
   m_bitmap = CreateCompatibleBitmap(dc, width, height);
 }

@@ -35,6 +35,8 @@ set(default_acme_windowing "acme_windowing_win32")
 set(default_nano_graphics "nano_graphics_gdi")
 set(default_apex "apex_windows")
 set(default_innate_ui "innate_ui_win32")
+set(default_subsystem "subsystem_win32")
+set(default_innate_subsystem "innate_subsystem_win32")
 
 
 add_compile_definitions(UNICODE)

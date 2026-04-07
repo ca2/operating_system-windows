@@ -52,7 +52,7 @@ namespace windows
       }
 
       bool Window::createWindow(const StringStorage *windowName, DWORD style, HWND hWndParent,
-                                    int xPos, int yPos, int width, int height)
+                                    int xPos, int yPos, const ::int_size & size)
       {
          if (m_hWnd) {
             return false;
@@ -117,7 +117,7 @@ namespace windows
          ShowWindow(m_hWnd, SW_HIDE);
       }
 
-      bool Window::setSize(int width, int height)
+      bool Window::setSize(const ::int_size & size)
       {
          _ASSERT(m_hWnd != 0);
          return !!SetWindowPos(m_hWnd, 0, 0, 0, width, height,

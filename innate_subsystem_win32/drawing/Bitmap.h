@@ -31,9 +31,9 @@ namespace innate_subsystem
    {
    public:
       // Creates empty bitmap with specified size.
-      Bitmap(int width, int height);
+      Bitmap(const ::int_size & size);
       // Creates compatible with dc bitmap with specified size.
-      Bitmap(HDC dc, int width, int height);
+      Bitmap(HDC dc, const ::int_size & size);
       // Creates bitmap from HBITMAP object.
       Bitmap(HBITMAP bitmap);
       // Destroys bitmap object.

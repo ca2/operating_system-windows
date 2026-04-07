@@ -157,7 +157,7 @@ namespace windows
          return !!result;
       }
 
-      bool ToolBar::setButtonsSize(int width, int height)
+      bool ToolBar::setButtonsSize(const ::int_size & size)
       {
          LRESULT result = SendMessage(m_hWndToolbar, TB_SETBUTTONSIZE,
                                       0, MAKELONG(width, height));

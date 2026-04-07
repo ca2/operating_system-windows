@@ -45,10 +45,6 @@ list(APPEND library_source
    DibFrameBuffer.h
    FilteredTextBox.cpp
    FilteredTextBox.h
-   /gui.vcproj
-   /gui.vcxproj
-   /gui.vcxproj.filters
-   /gui.vcxproj.user
    ImagedButton.cpp
    ImagedButton.h
    ImageList.cpp

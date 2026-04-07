@@ -25,7 +25,7 @@
 //
 #include "BitmapGraphics.h"
 
-BitmapGraphics::BitmapGraphics(DeviceContext *complatibleDC, int width, int height)
+BitmapGraphics::BitmapGraphics(DeviceContext *complatibleDC, const ::int_size & size)
 : Graphics(complatibleDC), m_isPainting(false)
 {
   m_bitmap = new Bitmap(complatibleDC->m_dc, width, height);
