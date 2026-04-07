@@ -21,33 +21,39 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//
 //#ifndef _TRACKBAR_H_
 //#define _TRACKBAR_H_
 
 #pragma once
 
-#include "apex/innate_subsystem/Control.h"
-
-
-namespace innate_subsystem
+#include "apex/innate_subsystem_win32/Control.h"
+namespace windows
 {
-    class Trackbar : public ::innate_subsystem::Control
-    {
-    public:
-        Trackbar();
-        virtual ~Trackbar();
+   namespace innate_subsystem_win32
+   {
+      class Trackbar : public ::innate_subsystem_win32::Control
+      {
+      public:
+         Trackbar();
+         virtual ~Trackbar();
 
-        // Sets the range of minimum and maximum logical positions for the slider.
-        void setRange(long min, long max);
+         // Sets the range of minimum and maximum logical positions for the slider.
+         void setRange(long min, long max);
 
-        // Sets the current logical position of the slider.
-        void setPos(long pos);
+         // Sets the current logical position of the slider.
+         void setPos(long pos);
 
-        // Returns the current logical position of the slider.
-        long getPos();
-    };
+         // Returns the current logical position of the slider.
+         long getPos();
+      };
 
-    //#endif
-} // namespace innate_subsystem
+      //#endif
+   } // namespace innate_subsystem_win32
+
+
+
+} // namespace windows
+
 

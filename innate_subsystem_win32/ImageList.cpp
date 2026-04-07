@@ -2,12 +2,12 @@
 // Created by camilo on 2026-04-06 14:24 <3ThomasBorregaardSørensen!!
 //
 #include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/ImageList.h"
-
+#include "ImageList.h"
+#include "innate_ui_win32/icon.h"
 
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
 
       ImageList::ImageList()
@@ -22,7 +22,7 @@ namespace windows
       ImageList::~ImageList()
       {
 
-         destroy_image_list();
+         destroyImageList();
 
       }
 
@@ -63,10 +63,12 @@ namespace windows
       void ImageList::addIcon(innate_ui::icon* pinnateuiicon)
       {
 
-         ::cast < ::window
+         ::cast < ::innate_ui_win32::icon > picon = pinnateuiicon;
+
+         auto hicon = picon->m_hicon;
 
       }
 
 
-   }// namespace innate_subsystem
+   }// namespace innate_subsystem_win32
 }// namnamespace  windows

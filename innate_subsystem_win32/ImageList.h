@@ -5,19 +5,19 @@
 #include <commctrl.h>
 
 #include "acme/subsystem/particle.h"
-#include "apex/innate_subsystem/ImageList.h"
+#include "apex/innate_subsystem_win32/ImageList.h"
 #include "acme/_operating_system.h"
 
 namespace windows
 {
 
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
 
 
    class CLASS_DECL_APEX ImageList :
-   virtual public ::subsystem::composite<::innate_subsystem::ImageListInterface>
+   virtual public ::subsystem::composite<::innate_subsystem_win32::ImageListInterface>
    {
    public:
 
@@ -38,7 +38,7 @@ namespace innate_subsystem
    };
 
 
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32
 
 
 } // namespace windows

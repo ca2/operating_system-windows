@@ -21,14 +21,15 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/NotifyIcon.h"
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//#include "framework.h"
+#include "NotifyIcon.h"
 
 #include <shellapi.h>
 
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       NotifyIcon::NotifyIcon(bool showAfterCreation)
       : NotifyIconWindow(), m_icon(0), m_visible(showAfterCreation)
@@ -112,5 +113,5 @@ namespace windows
          m_nid.uTimeout = timeoutMillis;
          Shell_NotifyIcon(NIM_MODIFY, &m_nid);
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

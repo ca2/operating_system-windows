@@ -21,13 +21,14 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/ProgressBar.h"
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//#include "framework.h"
+#include "ProgressBar.h"
 
 #include <commctrl.h>
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       ProgressBar::ProgressBar()
       {
@@ -46,6 +47,6 @@ namespace windows
       {
          SendMessage(m_hwnd, PBM_SETPOS, (::wparam)pos, 0);
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows
 

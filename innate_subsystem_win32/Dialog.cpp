@@ -31,7 +31,7 @@
 
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
 
       BaseDialog::BaseDialog()
@@ -281,5 +281,5 @@ namespace windows
 
       }
 
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

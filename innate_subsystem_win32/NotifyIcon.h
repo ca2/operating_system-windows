@@ -21,19 +21,20 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//
 #ifndef _NOTIFY_ICON_H_
 #define _NOTIFY_ICON_H_
 
 #include "acme/subsystem/_common_header.h"
 
-#include "apex/innate_subsystem/NotifyIconWindow.h"
+#include "apex/innate_subsystem_win32/NotifyIconWindow.h"
 
-#include "apex/innate_subsystem/drawing/Icon.h"
+#include "apex/innate_subsystem_win32/drawing/Icon.h"
 
 //#include <shellapi.h>
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
 
    // FIXME: Add documentation to class.
@@ -62,7 +63,7 @@ namespace innate_subsystem
       //bool m_visible;
    }
    ;
-}// namespace innate_subsystem
+}// namespace innate_subsystem_win32
 
 //#endif
 

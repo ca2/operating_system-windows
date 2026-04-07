@@ -22,7 +22,7 @@
 //-------------------------------------------------------------------------
 //
 
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/DibFrameBuffer.h"
+#include "DibFrameBuffer.h"
 #include "util/Exception.h"
 
 

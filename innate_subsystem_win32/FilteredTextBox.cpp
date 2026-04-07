@@ -21,11 +21,12 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/FilteredTextBox.h"
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//#include "framework.h"
+#include "FilteredTextBox.h"
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       FilteredTextBox::FilteredTextBox()
       : m_oldWindowProc(NULL), m_tip(NULL)
@@ -116,5 +117,5 @@ namespace windows
          }
          return CallWindowProc((WNDPROC)_this->m_oldWindowProc, hwnd, uMsg, ::wparam, ::lparam);
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

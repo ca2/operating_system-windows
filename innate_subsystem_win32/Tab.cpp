@@ -21,11 +21,12 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/Tab.h"
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//#include "framework.h"
+#include "Tab.h"
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       Tab::Tab()
       : m_dialog(NULL)
@@ -45,5 +46,5 @@ namespace windows
             m_dialog->getControl()->setVisible(visible);
          }
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

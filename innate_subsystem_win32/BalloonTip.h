@@ -21,7 +21,9 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//
 #ifndef _BALLOON_TIP_H_
 #define _BALLOON_TIP_H_
 
@@ -29,30 +31,34 @@
 #include "util/CommonHeader.h"
 #include <commctrl.h>
 
-/**
- * @deprecated, use ToolTip instead.
- */
-class BalloonTip : public Tooltip
+namespace windows
 {
-public:
-  BalloonTip(const TCHAR *text, const TCHAR *caption);
-  BalloonTip();
-  virtual ~BalloonTip();
+   /**
+    * @deprecated, use ToolTip instead.
+    */
+   class BalloonTip : public Tooltip
+   {
+   public:
+      BalloonTip(const TCHAR* text, const TCHAR* caption);
+      BalloonTip();
+      virtual ~BalloonTip();
 
-  void showTooltip(Control *control);
+      void showTooltip(Control* control);
 
-  void setText(const TCHAR *text);
-  void setTitle(const TCHAR *caption);
+      void setText(const TCHAR* text);
+      void setTitle(const TCHAR* caption);
 
-  void getText(StringStorage *text) const;
-  void getTitle(StringStorage *title) const;
+      void getText(StringStorage* text) const;
+      void getTitle(StringStorage* title) const;
 
-  void setIconType(int iconType);
-  int getIconType() const;
+      void setIconType(int iconType);
+      int getIconType() const;
 
-protected:
-  StringStorage m_text;
-  StringStorage m_title;
-};
+   protected:
+      StringStorage m_text;
+      StringStorage m_title;
+   };
 
-#endif
+
+
+} // namespace windows

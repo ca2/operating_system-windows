@@ -22,12 +22,12 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/MessageWindow.h"
+#include "MessageWindow.h"
 
 #define DEFAULT_WINDOW_CLASS_NAME "WindowClass"
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       MessageWindow::MessageWindow(const HINSTANCE hinst,
                                    const TCHAR *windowClassName,
@@ -124,5 +124,5 @@ namespace windows
 
          return RegisterClass(&wcWindowClass);
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

@@ -21,14 +21,15 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/SpinControl.h"
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//#include "framework.h"
+#include "SpinControl.h"
 #include <CommCtrl.h>
 #include "util/StringParser.h"
 
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       SpinControl::SpinControl()
       : m_buddy(NULL),
@@ -124,5 +125,5 @@ namespace windows
          m_deltas = *deltas;
          m_maxDelta = maxDelta;
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

@@ -2,13 +2,13 @@
 // Created by camilo on 2026-04-06 10:54 <3ThomasBorregaardSørensen!!
 //
 #include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/subsystem.h"
+#include "subsystem.h"
 
 
 namespace windows
 {
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
 
 

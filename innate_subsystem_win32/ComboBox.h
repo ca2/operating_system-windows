@@ -21,15 +21,16 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#pragma once
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//#pragma once
 //#ifndef _COMBOBOX_H_
 //#define _COMBOBOX_H_
 
 //#include "acCommonHeader.h"
-#include "apex/innate_subsystem/Control.h"
+#include "apex/innate_subsystem_win32/Control.h"
 
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
 
 
@@ -81,7 +82,7 @@ namespace innate_subsystem
     };
 
     //#endif
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32
 
 
 

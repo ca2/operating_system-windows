@@ -21,14 +21,15 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/TabContainer.h"
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//#include "framework.h"
+#include "TabContainer.h"
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
 
 
 
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/Control.h"
+#include "Control.h"
 
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
 
       Control::Control()
@@ -221,6 +221,6 @@ namespace windows
 
 
 
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows
 

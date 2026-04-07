@@ -21,19 +21,20 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//
 #pragma once
 
 
 #include "acme/subsystem/_common_header.h"
 //#include <commctrl.h>
-#include "apex/innate_subsystem/Control.h"
+#include "apex/innate_subsystem_win32/Control.h"
 
 //
 // TODO: Maybe use class for this?
 //
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
    typedef struct
    {
@@ -204,7 +205,7 @@ namespace innate_subsystem
    //    PFNLVCOMPARE m_compareItem;
    };
 
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32
 
 
 

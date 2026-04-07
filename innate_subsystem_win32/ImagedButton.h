@@ -21,16 +21,17 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//
 //#ifndef _IMAGED_BUTTON_H_
 //#define _IMAGED_BUTTON_H_
 
 #pragma once
 
-#include "apex/innate_subsystem/Control.h"
+#include "apex/innate_subsystem_win32/Control.h"
 //#include "ThemeLib.h"
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
     //
     // Owner draw button, that displays button with image and text.
@@ -93,6 +94,6 @@ namespace innate_subsystem
     };
 
 //#endif
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32
 
 

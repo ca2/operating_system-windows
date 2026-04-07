@@ -22,10 +22,10 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/ScrollBar.h"
+#include "ScrollBar.h"
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       ScrollBar::ScrollBar()
       : m_hwnd(0),
@@ -277,5 +277,5 @@ namespace windows
       {
          return GetSystemMetrics(SM_CXHSCROLL);
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

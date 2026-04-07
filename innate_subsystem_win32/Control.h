@@ -24,12 +24,12 @@
 
 #pragma once
 
-#include "apex/innate_subsystem/Control.h"
+#include "apex/innate_subsystem_win32/Control.h"
 
 
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       enum VerticalAlignment
       {
@@ -44,7 +44,7 @@ namespace windows
       //
 
       class Control :
-         virtual public ::subsystem::implementation<::innate_subsystem::Control
+         virtual public ::subsystem::implementation<::innate_subsystem_win32::Control
       {
       public:
 

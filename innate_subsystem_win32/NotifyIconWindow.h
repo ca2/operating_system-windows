@@ -21,16 +21,17 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//
 #pragma once
 
 
 #include "acme/subsystem/_common_header.h"
 
 
-#include "apex/innate_subsystem/WindowProcHolder.h"
+#include "apex/innate_subsystem_win32/WindowProcHolder.h"
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
    class NotifyIconWindowInterface :
    virtual public ::subsystem::particle_interface
@@ -70,4 +71,4 @@ namespace innate_subsystem
       //friend class NotifyIcon;
    };
 
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32

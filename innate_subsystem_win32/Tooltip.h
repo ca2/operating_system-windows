@@ -21,18 +21,19 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//
 #pragma once
 //#define _TOOLTIP_H_
 
 //#include "util/CommonHeader.h"
-#include "apex/innate_subsystem/Control.h"
+#include "apex/innate_subsystem_win32/Control.h"
 
 //
 // Abstract tooltip class
 //
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
 
 
@@ -57,7 +58,7 @@ namespace innate_subsystem
 
     //#endif
 
-}// namespace innate_subsystem
+}// namespace innate_subsystem_win32
 
 
 

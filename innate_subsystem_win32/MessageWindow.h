@@ -26,7 +26,7 @@
 #define __WINDOW_H__
 
 #include "util/CommonHeader.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/WindowMessageHandler.h"
+#include "../../../source/app/apex/operating_system/windows/innate_subsystem_win32/WindowMessageHandler.h"
 
 class MessageWindow
 {

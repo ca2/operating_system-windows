@@ -21,13 +21,14 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/ImagedButton.h"
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//#include "framework.h"
+#include "ImagedButton.h"
 #include "util/UnicodeStringStorage.h"
 #include <crtdbg.h>
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       ImagedButton::ImagedButton()
       : m_mouseOver(false),
@@ -260,5 +261,5 @@ namespace windows
          // Any messages we don't process must be passed onto the original window function
          return CallWindowProc((WNDPROC)_this->m_defWindowProc, hWnd, message, ::wparam, ::lparam);
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } //namespace windows

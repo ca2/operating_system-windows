@@ -6,17 +6,17 @@
 
 
 #include "acme/operating_system/windows/subsystem/subsystem.h"
-#include "apex/innate_subsystem/subsystem.h"
+#include "apex/innate_subsystem_win32/subsystem.h"
 
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
 
 
       class CLASS_DECL_APEX subsystem :
          virtual public ::windows::subsystem::subsystem,
-         virtual public ::innate_subsystem::subsystem
+         virtual public ::innate_subsystem_win32::subsystem
       {
       public:
 
@@ -41,7 +41,7 @@ namespace windows
 
 
 
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 
 
 

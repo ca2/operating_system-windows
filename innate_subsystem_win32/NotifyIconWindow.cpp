@@ -21,12 +21,13 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/NotifyIconWindow.h"
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//
+#include "NotifyIconWindow.h"
 
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       NotifyIconWindow::NotifyIconWindow()
       : m_wph(0)
@@ -82,5 +83,5 @@ namespace windows
 
          SetWindowLongPtr(m_window, GWLP_USERDATA, (LONG_PTR)m_wph);
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

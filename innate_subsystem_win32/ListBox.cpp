@@ -22,10 +22,10 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/ListBox.h"
+#include "ListBox.h"
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       ListBox::ListBox()
       {
@@ -146,5 +146,5 @@ namespace windows
       {
          SendMessage(m_hwnd, LB_SETCURSEL, index, NULL);
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

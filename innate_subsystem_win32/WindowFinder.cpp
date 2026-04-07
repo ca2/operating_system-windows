@@ -22,9 +22,9 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/WindowFinder.h"
+#include "WindowFinder.h"
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
    struct WindowsParam
    {
@@ -109,5 +109,5 @@ namespace innate_subsystem
          return 0;
       }
    }
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32
 

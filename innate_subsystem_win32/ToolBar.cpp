@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/ToolBar.h"
+#include "ToolBar.h"
 #include <CommCtrl.h>
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       ToolBar::ToolBar()
       {
@@ -281,5 +281,5 @@ namespace windows
          }
          return !!result;
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

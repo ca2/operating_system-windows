@@ -21,13 +21,14 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//
 #pragma once
 //#define _PROGRESS_BAR_H_
 
 #include "Control.h"
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
     class ProgressBar : public Control
     {
@@ -38,6 +39,6 @@ namespace innate_subsystem
         void setRange(unsigned short min, unsigned short max);
         void setPos(unsigned short pos);
     };
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32
 
 //#endif

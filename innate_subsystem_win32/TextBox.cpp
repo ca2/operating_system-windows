@@ -22,12 +22,12 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/TextBox.h"
+#include "TextBox.h"
 
 
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       TextBox::~TextBox()
       {
@@ -76,5 +76,5 @@ namespace windows
       {
          tip->showTooltip(this);
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows

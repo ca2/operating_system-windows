@@ -26,10 +26,10 @@
 //#define _BASE_DIALOG_H_
 
 #include "acme/subsystem/_common_header.h"
-#include "apex/innate_subsystem/Control.h"
+#include "apex/innate_subsystem_win32/Control.h"
 //#include "util/StringStorage.h"
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
 
 
@@ -74,7 +74,7 @@ namespace innate_subsystem
       // Return
       virtual Control *getControl() { return this; }
       // Setup control by ID
-      virtual void subclassControlById(::innate_subsystem::Control * pcontrol, unsigned int id);
+      virtual void subclassControlById(::innate_subsystem_win32::Control * pcontrol, unsigned int id);
       // Icon manipulation
       virtual void loadIcon(unsigned int id);
       virtual void updateIcon();
@@ -133,4 +133,4 @@ namespace innate_subsystem
    };
 
    //#endif
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32

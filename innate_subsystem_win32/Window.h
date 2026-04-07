@@ -21,24 +21,35 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
+// Changed by camilo on beginning of 2024-April <3ThomasBorregaardSørensen!!
 #pragma once
 
 
-//#include "util/CommonHeader.h"
+#include "apex/innate_subsystem_win32/Window.h"
 
 
 namespace  windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
 
-      class Window
+      class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Window :
+         virtual public ::subsystem::implementation< ::innate_subsystem_win32::WindowInterface >
       {
       public:
+         
+
+      ///protected:
+         //HWND m_hWnd;
+         HWND           m_hwnd;
+         ::string       m_strClassName;
+         ::string       m_strWindowName;
+         HICON          m_hicon;
+         bool           m_bWndCreated;
+
          Window();
 
-         virtual ~Window();
+         ~Window() override;
 
          // getWindow()
          // Get a handle of the window
@@ -76,8 +87,8 @@ namespace  windows
 
          // for changing registered class parameters of created window
          void setClassStyle(unsigned int style);
-         void setClassCursor(::innate_subsystem::Cursor * pcursor);
-         void setClassBackground(::innate_subsystem::Brush * pbrush);
+         void setClassCursor(::innate_subsystem_win32::Cursor * pcursor);
+         void setClassBackground(::innate_subsystem_win32::Brush * pbrush);
          void setClassMenu(long long menu);
 
          // for changing or get style and exstyle of window
@@ -120,16 +131,9 @@ namespace  windows
          virtual bool onMessage(unsigned int message, ::wparam wparam, ::lparam lparam);
          virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, POINT position);
 
-      protected:
-         HWND m_hWnd;
-         StringStorage m_className;
-         StringStorage m_windowName;
-         HICON m_hicon;
-
-         bool m_bWndCreated;
       };
 
       //#endif
-   } //  namespace innate_subsystem
+   } //  namespace innate_subsystem_win32
 } // namespace  windows
 

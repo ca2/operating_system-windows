@@ -25,11 +25,11 @@
 #pragma once
 //#define __TEXTBOX_H_
 
-#include "apex/innate_subsystem/Control.h"
-#include "apex/innate_subsystem/Tooltip.h"
+#include "apex/innate_subsystem_win32/Control.h"
+#include "apex/innate_subsystem_win32/Tooltip.h"
 
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
     class TextBox : public Control
     {
@@ -72,7 +72,7 @@ namespace innate_subsystem
     };
 
 
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32
 
 
 

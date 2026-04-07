@@ -21,14 +21,15 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framework.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem/TabControl.h"
+// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
+//#include "framework.h"
+#include "TabControl.h"
 #include "util/CommonHeader.h"
 #include <commctrl.h>
 
 namespace windows
 {
-   namespace innate_subsystem
+   namespace innate_subsystem_win32
    {
       TabControl::TabControl()
       {
@@ -120,5 +121,5 @@ namespace windows
          GetClientRect(m_hwnd, rect);
          TabCtrl_AdjustRect(m_hwnd, FALSE, rect);
       }
-   } // namespace innate_subsystem
+   } // namespace innate_subsystem_win32
 } // namespace windows
