@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "apex/innate_subsystem_win32/SystemMetrics.h"
+#include "apex/innate_subsystem/SystemMetrics.h"
 
 
 namespace windows

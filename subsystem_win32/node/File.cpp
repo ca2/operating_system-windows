@@ -63,7 +63,7 @@ namespace windows
 } // namespace windows
 
 
-CLASS_DECL_ACME HANDLE as_HANDLE(::subsystem::File * pfile)
+CLASS_DECL_SUBSYSTEM_WIN32 HANDLE as_HANDLE(::subsystem::File * pfile)
 {
 
    ::cast < ::windows::subsystem::File > pwindowssubsystemfile = pfile;
@@ -74,7 +74,7 @@ CLASS_DECL_ACME HANDLE as_HANDLE(::subsystem::File * pfile)
 
 }
 
-CLASS_DECL_ACME bool is_ok(const ::windows::subsystem::File * pfile)
+CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::windows::subsystem::File * pfile)
 {
 
    if (!::is_set(pfile))
@@ -103,7 +103,7 @@ CLASS_DECL_ACME bool is_ok(const ::windows::subsystem::File * pfile)
 }
 
 
-CLASS_DECL_ACME bool is_ok(const ::pointer < ::windows::subsystem::File > & pfile)
+CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::pointer < ::windows::subsystem::File > & pfile)
 {
 
    return ::is_ok(pfile.m_p);

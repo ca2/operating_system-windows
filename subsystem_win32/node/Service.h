@@ -43,7 +43,7 @@ namespace windows
        * @remark service is singleton (you can have only one service instance).
        * @author enikey.
        */
-      class CLASS_DECL_ACME Service :
+      class CLASS_DECL_SUBSYSTEM_WIN32 Service :
       virtual public ::subsystem::Service
       {
       public:

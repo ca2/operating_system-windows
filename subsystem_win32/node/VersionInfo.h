@@ -33,7 +33,7 @@ namespace windows
    /**
     * Contains information about executable file version info.
     */
-   class CLASS_DECL_ACME VersionInfo
+   class CLASS_DECL_SUBSYSTEM_WIN32 VersionInfo
    {
    public:
       /**

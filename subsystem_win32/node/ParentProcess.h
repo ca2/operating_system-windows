@@ -34,7 +34,7 @@ namespace windows
    namespace subsystem
    {
       // Retrieves information of the parent process.
-      class CLASS_DECL_ACME ParentProcess :
+      class CLASS_DECL_SUBSYSTEM_WIN32 ParentProcess :
       virtual public ::subsystem::ParentProcess
       {
       public:

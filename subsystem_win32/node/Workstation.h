@@ -38,7 +38,7 @@ namespace windows
       /**
        * Wrapper on WinAPI workstation functions.
        */
-      class CLASS_DECL_ACME Workstation:
+      class CLASS_DECL_SUBSYSTEM_WIN32 Workstation:
             virtual public ::subsystem::Workstation
       {
       public:

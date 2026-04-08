@@ -34,7 +34,7 @@ namespace windows
 namespace subsystem
    {
    // Class for intercepting keyboard on low level.
-   class CLASS_DECL_ACME OperatingSystemHook :
+   class CLASS_DECL_SUBSYSTEM_WIN32 OperatingSystemHook :
    virtual  public ::subsystem::implementation<::subsystem::OperatingSystemHookInterface>
    {
    public:

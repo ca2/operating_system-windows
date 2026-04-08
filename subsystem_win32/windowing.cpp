@@ -116,7 +116,7 @@ namespace win32
 
             //__matter_send_procedure(this, this, &node::node_post, procedure);
 
-      //      CLASS_DECL_ACME bool main_synchronous(const class time & time, const ::procedure & function)
+      //      CLASS_DECL_SUBSYSTEM_WIN32 bool main_synchronous(const class time & time, const ::procedure & function)
       //      {
 
             auto phappening = allocateø manual_reset_happening();

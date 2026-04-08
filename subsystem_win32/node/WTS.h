@@ -80,7 +80,7 @@ namespace windows
     *
     * @author enikey.
     */
-   class CLASS_DECL_ACME WTS :
+   class CLASS_DECL_SUBSYSTEM_WIN32 WTS :
     virtual public ::particle
    {
    public:

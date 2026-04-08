@@ -32,7 +32,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_ACME WindowsRegistryKey
+   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsRegistryKey
    {
    public:
       WindowsRegistryKey(HKEY rootKey, const ::scoped_string & scopedstrEntry, bool createIfNotExists = true, SECURITY_ATTRIBUTES *sa = 0);

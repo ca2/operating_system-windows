@@ -17,7 +17,7 @@ namespace windows
    {
 
 
-      class CLASS_DECL_ACME subsystem :
+      class CLASS_DECL_SUBSYSTEM_WIN32 subsystem :
          virtual public ::subsystem::subsystem
       {
       public:

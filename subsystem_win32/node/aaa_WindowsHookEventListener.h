@@ -27,7 +27,7 @@
 namespace windows
 {
    // Abstract class for next using in WinHooks class and as a base class in others.
-   class CLASS_DECL_ACME WindowsHookEventListener
+   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsHookEventListener
    {
    public:
       virtual LRESULT onHookProc(int code, WPARAM wParam, LPARAM lParam) = 0;

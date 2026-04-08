@@ -32,7 +32,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_ACME WindowsCommandLineArguments :
+   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsCommandLineArguments :
    virtual public ::subsystem::CommandLineArguments
    {
    public:

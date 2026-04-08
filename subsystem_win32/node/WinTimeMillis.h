@@ -29,7 +29,7 @@
 
 namespace windows
 {
-   class CLASS_DECL_ACME WinTimeMillis
+   class CLASS_DECL_SUBSYSTEM_WIN32 WinTimeMillis
    {
    public:
       WinTimeMillis(void);

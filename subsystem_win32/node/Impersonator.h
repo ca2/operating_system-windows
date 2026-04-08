@@ -41,7 +41,7 @@ namespace windows
       console session.
       @remark: can work only in XP and later cause it uses WTSQueryUserToken function.
       */
-      class CLASS_DECL_ACME Impersonator :
+      class CLASS_DECL_SUBSYSTEM_WIN32 Impersonator :
       virtual public ::subsystem::Impersonator
       {
       public:

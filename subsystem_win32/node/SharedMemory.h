@@ -30,7 +30,7 @@
 namespace windows
 {
 
-class CLASS_DECL_ACME SharedMemory
+class CLASS_DECL_SUBSYSTEM_WIN32 SharedMemory
 {
 public:
   // @throw ::remoting::Exception

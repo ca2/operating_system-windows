@@ -33,7 +33,7 @@ namespace windows
 {
    namespace subsystem
    {
-      class CLASS_DECL_ACME Cursor :
+      class CLASS_DECL_SUBSYSTEM_WIN32 Cursor :
       virtual public ::subsystem::implementation<::subsystem::CursorInterface >
       {
       public:
@@ -43,7 +43,7 @@ namespace windows
          virtual ::int_point getCursorPos() const = 0;
       };
 
-      // class CLASS_DECL_ACME Cursor :
+      // class CLASS_DECL_SUBSYSTEM_WIN32 Cursor :
       // virtual public ::subsystem::composite<Cursor
       // {
       // public:

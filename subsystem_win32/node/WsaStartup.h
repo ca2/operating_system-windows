@@ -32,7 +32,7 @@
 namespace windows
 {
    // Class that startup at constructor and cleanup at destructor Windows Sockets subsystem.
-   class CLASS_DECL_ACME WsaStartup
+   class CLASS_DECL_SUBSYSTEM_WIN32 WsaStartup
    {
    public:
       WsaStartup(BYTE minorVer, BYTE majorVer);

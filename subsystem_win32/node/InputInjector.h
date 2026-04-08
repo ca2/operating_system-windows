@@ -39,7 +39,7 @@ namespace windows
        * Wrapper of WinAPI methods that can inject input events into system
        * (mouse, keyboard etc) and get information about input device states.
        */
-      class CLASS_DECL_ACME InputInjector :
+      class CLASS_DECL_SUBSYSTEM_WIN32 InputInjector :
             virtual public ::subsystem::InputInjector
       {
       public:

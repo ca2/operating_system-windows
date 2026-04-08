@@ -41,7 +41,7 @@ namespace windows
        * Base Windows Application class.
        * Have hidden main window and main scopedstrMessage loop.
        */
-      class CLASS_DECL_ACME OperatingSystemApplication :
+      class CLASS_DECL_SUBSYSTEM_WIN32 OperatingSystemApplication :
       virtual public ::subsystem::OperatingSystemApplication
       {
       public:

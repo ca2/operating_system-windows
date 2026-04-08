@@ -33,7 +33,7 @@ namespace windows
 
    namespace subsystem
    {
-      class CLASS_DECL_ACME Clipboard :
+      class CLASS_DECL_SUBSYSTEM_WIN32 Clipboard :
          virtual public ::subsystem::implementation<::subsystem::ClipboardInterface>
       {
       public:

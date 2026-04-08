@@ -172,7 +172,7 @@ namespace win32
          };
 
 
-         //CLASS_DECL_ACME void process_messages(bool bWait = false);
+         //CLASS_DECL_SUBSYSTEM_WIN32 void process_messages(bool bWait = false);
 
 
       } // namespace windowing

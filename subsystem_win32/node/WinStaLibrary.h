@@ -32,7 +32,7 @@ namespace windows
 
    typedef BOOL (WINAPI* pWinStationConnectW)(HANDLE, ULONG, ULONG, PCWSTR, ULONG);
 
-   class CLASS_DECL_ACME WinStaLibrary :
+   class CLASS_DECL_SUBSYSTEM_WIN32 WinStaLibrary :
    virtual public ::particle
    {
    public:

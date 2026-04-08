@@ -35,7 +35,7 @@ namespace windows
    {
       // The AnonymousPipeFactory class generates the ::pair of the AnonymousPipe
       // objects that connected to each other.
-      class CLASS_DECL_ACME AnonymousPipeFactory :
+      class CLASS_DECL_SUBSYSTEM_WIN32 AnonymousPipeFactory :
       virtual public ::subsystem::implementation<::subsystem::AnonymousPipeFactoryInterface>
       {
       public:

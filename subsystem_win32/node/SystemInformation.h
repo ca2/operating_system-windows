@@ -32,7 +32,7 @@ namespace windows
 {
    namespace subsystem
    {
-      class CLASS_DECL_ACME SystemInformation :
+      class CLASS_DECL_SUBSYSTEM_WIN32 SystemInformation :
       virtual  public ::subsystem::SystemInformation
       {
       public:

@@ -31,7 +31,7 @@
 namespace windows
 {
    // This class allow to control the uipi for the current process.
-   class CLASS_DECL_ACME UipiControl
+   class CLASS_DECL_SUBSYSTEM_WIN32 UipiControl
    {
    public:
       UipiControl(::subsystem::LogWriter *log);

@@ -23,91 +23,97 @@
 //
 #include "framework.h"
 #include "subsystem_win32/_common_header.h"
-#include "WindowsProcessCommandLine.h"
+#include "ProcessCommandLine.h"
 #include "WindowsCommandLineArguments.h"
 
 namespace windows
 {
-   WindowsProcessCommandLine::WindowsProcessCommandLine()
-   {
-      ::string_array out;
 
-      construct_newø(m_pwindowscommandlinearguments);
-      m_pwindowscommandlinearguments->initialize_windows_command_line_arguments(GetCommandLine());
+    namespace subsystem
+    {
+        WindowsProcessCommandLine::WindowsProcessCommandLine()
+        {
+            ::string_array out;
 
-      out = m_pwindowscommandlinearguments->getArguments();
-      for (size_t i = 0; i < out.size(); i++) {
-         if (out[i][0] != _T('-')) {
-            m_strParam.add(out[i]);
-         } else {
-            optionParser(out[i]);
-         }
-      }
-   }
+            construct_newø(m_pwindowscommandlinearguments);
+            m_pwindowscommandlinearguments->initialize_windows_command_line_arguments(GetCommandLine());
 
-   void WindowsProcessCommandLine::optionParser(::string & out)
-   {
-      ::pair<::string, ::string> strPair;
+            out = m_pwindowscommandlinearguments->getArguments();
+            for (size_t i = 0; i < out.size(); i++) {
+                if (out[i][0] != _T('-')) {
+                    m_strParam.add(out[i]);
+                } else {
+                    optionParser(out[i]);
+                }
+            }
+        }
 
-      out.erase((character_count)0, (character_count)1);
-      auto ipos = out.find_first_character('=');
-      if (::is_null(ipos)) {
-         strPair.m_element1 = *out;
-         strPair.m_element2= "";
-      } else {
-         strPair.m_element1 = out.substr(0, ipos);
-         strPair.m_element2 = out.substr(ipos + 1);
-      }
-      strPair.m_element1.make_lower();
-      m_strParams.add(strPair);
-   }
+        void WindowsProcessCommandLine::optionParser(::string & out)
+        {
+            ::pair<::string, ::string> strPair;
 
-   size_t WindowsProcessCommandLine::getArgumentsCount()
-   {
-      return m_strParam.size();
-   }
+            out.erase((character_count)0, (character_count)1);
+            auto ipos = out.find_first_character('=');
+            if (::is_null(ipos)) {
+                strPair.m_element1 = *out;
+                strPair.m_element2= "";
+            } else {
+                strPair.m_element1 = out.substr(0, ipos);
+                strPair.m_element2 = out.substr(ipos + 1);
+            }
+            strPair.m_element1.make_lower();
+            m_strParams.add(strPair);
+        }
 
-   size_t WindowsProcessCommandLine::getOptionsCount()
-   {
-      return m_strParams.size();
-   }
+        size_t WindowsProcessCommandLine::getArgumentsCount()
+        {
+            return m_strParam.size();
+        }
 
-   bool WindowsProcessCommandLine::findOptionValue(const ::string valName, ::string &  strOut)
-   {
-      for (size_t i = 0; i < getOptionsCount(); i++) {
-         if (m_strParams[i].m_element2 == valName) {
-            strOut = m_strParams[i].m_element2;
+        size_t WindowsProcessCommandLine::getOptionsCount()
+        {
+            return m_strParams.size();
+        }
 
-            return true;
-         }
-      }
-      return false;
-   }
+        bool WindowsProcessCommandLine::findOptionValue(const ::string valName, ::string &  strOut)
+        {
+            for (size_t i = 0; i < getOptionsCount(); i++) {
+                if (m_strParams[i].m_element2 == valName) {
+                    strOut = m_strParams[i].m_element2;
 
-   bool WindowsProcessCommandLine::getArgument(size_t index, ::string &  strOut)
-   {
-      if (index < getArgumentsCount()) {
-         strOut = m_strParam[index];
+                    return true;
+                }
+            }
+            return false;
+        }
 
-         return true;
-      }
-      return false;
-   }
+        bool WindowsProcessCommandLine::getArgument(size_t index, ::string &  strOut)
+        {
+            if (index < getArgumentsCount()) {
+                strOut = m_strParam[index];
 
-   bool WindowsProcessCommandLine::getOption(size_t index, ::string &  strOut)
-   {
-      if (index < getOptionsCount()) {
-         strOut = m_strParams[index].m_element1;
+                return true;
+            }
+            return false;
+        }
 
-         return true;
-      }
-      return false;
-   }
+        bool WindowsProcessCommandLine::getOption(size_t index, ::string &  strOut)
+        {
+            if (index < getOptionsCount()) {
+                strOut = m_strParams[index].m_element1;
 
-   WindowsProcessCommandLine::~WindowsProcessCommandLine()
-   {
-      //if (m_wcla) {
-        // delete m_wcla;
-      //}
-   }
+                return true;
+            }
+            return false;
+        }
+
+        WindowsProcessCommandLine::~WindowsProcessCommandLine()
+        {
+            //if (m_wcla) {
+            // delete m_wcla;
+            //}
+        }
+    } // namespace subsystem
+
+
 } // namespace windows

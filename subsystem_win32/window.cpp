@@ -41,13 +41,13 @@ void win32_send(HWND hwnd, const ::procedure& procedure)
 
 }
 
-CLASS_DECL_ACME bool _c_simple_message_loop_step();
+CLASS_DECL_SUBSYSTEM_WIN32 bool _c_simple_message_loop_step();
 
-CLASS_DECL_ACME string task_get_name();
-CLASS_DECL_ACME void task_set_name(const ::scoped_string & scopedstrName);
+CLASS_DECL_SUBSYSTEM_WIN32 string task_get_name();
+CLASS_DECL_SUBSYSTEM_WIN32 void task_set_name(const ::scoped_string & scopedstrName);
 
 
-class CLASS_DECL_ACME scoped_task_name
+class CLASS_DECL_SUBSYSTEM_WIN32 scoped_task_name
 {
 public:
 

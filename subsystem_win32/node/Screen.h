@@ -36,7 +36,7 @@ namespace windows
    namespace subsystem
    {
       // This class get info for a windows desktop.
-      class CLASS_DECL_ACME Screen
+      class CLASS_DECL_SUBSYSTEM_WIN32 Screen
       {
       public:
          Screen();

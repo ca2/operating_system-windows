@@ -29,7 +29,7 @@
 
 namespace windows
 {
-      class CLASS_DECL_ACME WindowsEvent
+      class CLASS_DECL_SUBSYSTEM_WIN32 WindowsEvent
       {
       public:
          WindowsEvent(const ::scoped_string & scopedstrName = 0);

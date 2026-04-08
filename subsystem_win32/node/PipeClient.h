@@ -37,7 +37,7 @@ namespace windows
       /**
        * Pipe client factory.
        */
-      class CLASS_DECL_ACME PipeClient :
+      class CLASS_DECL_SUBSYSTEM_WIN32 PipeClient :
       virtual  public ::subsystem::PipeClient
       {
       public:

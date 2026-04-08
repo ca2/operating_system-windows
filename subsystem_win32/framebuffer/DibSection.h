@@ -38,7 +38,7 @@ namespace subsystem
 
 
       // This clas is a primitive wrapper to a DIB section.
-   class CLASS_DECL_ACME  DibSectionInterface :
+   class CLASS_DECL_SUBSYSTEM_WIN32  DibSectionInterface :
       virtual public ::subsystem::particle_interface
    {
    public:
@@ -117,7 +117,7 @@ namespace subsystem
 
 
    // This clas is a primitive wrapper to a DIB section.
-   class CLASS_DECL_ACME  DibSection :
+   class CLASS_DECL_SUBSYSTEM_WIN32  DibSection :
    virtual public ::subsystem::composite < DibSection
    {
    public:

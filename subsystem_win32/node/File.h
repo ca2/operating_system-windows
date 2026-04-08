@@ -33,7 +33,7 @@ namespace windows
    namespace subsystem
    {
 
-      class CLASS_DECL_ACME File :
+      class CLASS_DECL_SUBSYSTEM_WIN32 File :
          virtual public ::subsystem::File
       {
       public:
@@ -50,6 +50,6 @@ namespace windows
 } // namespace windows
 
 
-CLASS_DECL_ACME HANDLE as_HANDLE(::subsystem::FileInterface * pfile);
-CLASS_DECL_ACME bool is_ok(const ::windows::subsystem::File * pfile);
-CLASS_DECL_ACME bool is_ok(const ::pointer < ::windows::subsystem::File > & pfile);
+CLASS_DECL_SUBSYSTEM_WIN32 HANDLE as_HANDLE(::subsystem::FileInterface * pfile);
+CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::windows::subsystem::File * pfile);
+CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::pointer < ::windows::subsystem::File > & pfile);

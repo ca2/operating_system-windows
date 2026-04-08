@@ -33,7 +33,7 @@ namespace windows
 
 namespace subsystem
 {
-   class CLASS_DECL_ACME PipeImpersonatedThread :
+   class CLASS_DECL_SUBSYSTEM_WIN32 PipeImpersonatedThread :
 
       virtual public ::subsystem::PipeImpersonatedThread
    {

@@ -33,7 +33,7 @@ namespace windows
 {
    namespace subsystem
    {
-      class CLASS_DECL_ACME SecurityAttributes :
+      class CLASS_DECL_SUBSYSTEM_WIN32 SecurityAttributes :
       virtual  public ::subsystem::implementation<::subsystem::SecurityAttributesInterface>
       {
       public:

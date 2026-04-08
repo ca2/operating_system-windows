@@ -28,7 +28,7 @@ namespace subsystem
 {
 
 
-struct CLASS_DECL_ACME PixelFormat
+struct CLASS_DECL_SUBSYSTEM_WIN32 PixelFormat
 {
   PixelFormat();
   // Initializes the bigEndian field by native machine value.

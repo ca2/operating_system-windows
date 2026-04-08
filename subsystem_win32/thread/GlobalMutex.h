@@ -40,7 +40,7 @@ namespace windows
        *
        * @author yuri, enikey.
        */
-      class CLASS_DECL_ACME GlobalMutex :
+      class CLASS_DECL_SUBSYSTEM_WIN32 GlobalMutex :
          virtual public ::subsystem::implementation<::subsystem::GlobalMutexInterface>
       {
       public:

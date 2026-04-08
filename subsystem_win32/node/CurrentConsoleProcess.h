@@ -49,7 +49,7 @@ namespace windows
        *
        * @fixme rename it.
        */
-      class CLASS_DECL_ACME CurrentConsoleProcess : public Process
+      class CLASS_DECL_SUBSYSTEM_WIN32 CurrentConsoleProcess : public Process
       {
       public:
          /**

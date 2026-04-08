@@ -6,10 +6,10 @@
 #include "thread/GlobalMutex.h"
 #include "node/Shell.h"
 
-namespace subsystem
-{
+//namespace subsystem
+//{
 
-CLASS_DECL_ACME void subsystem_factory(::factory::factory * pfactory)
+CLASS_DECL_EXPORT void subsystem_win32_factory(::factory::factory * pfactory)
 {
 
    pfactory->add_factory_item<::windows::subsystem::GlobalMutex, ::subsystem::GlobalMutex>();
@@ -21,5 +21,5 @@ CLASS_DECL_ACME void subsystem_factory(::factory::factory * pfactory)
 }
 
 
-} // namespace subsystem
+//} // namespace subsystem
 

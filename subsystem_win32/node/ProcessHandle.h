@@ -25,7 +25,7 @@
 
 
 #include "acme/subsystem/node/ProcessHandle.h"
-#include "subsystem/node/security/SecurityIdentifier.h"
+#include "acme/subsystem/node/security/SecurityIdentifier.h"
 #include "subsystem_win32/_common_header.h"
 
 
@@ -36,7 +36,7 @@ namespace windows
    {
       // This class is a mere envelop for process handle that will automatically
       // closed at destructor calling.
-      class CLASS_DECL_ACME ProcessHandle :
+      class CLASS_DECL_SUBSYSTEM_WIN32 ProcessHandle :
       virtual public ::subsystem::ProcessHandle
       {
       public:

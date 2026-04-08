@@ -38,7 +38,7 @@ namespace windows
 {
    namespace subsystem
    {
-      class CLASS_DECL_ACME AnonymousPipe :
+      class CLASS_DECL_SUBSYSTEM_WIN32 AnonymousPipe :
       virtual public ::subsystem::implementation < ::subsystem::AnonymousPipeInterface >,
       virtual public Pipe
       {

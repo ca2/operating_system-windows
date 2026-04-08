@@ -30,7 +30,7 @@
 
 
 
-class CLASS_DECL_ACME GuiThread : public Thread
+class CLASS_DECL_SUBSYSTEM_WIN32 GuiThread : public Thread
 {
 public:
   GuiThread();

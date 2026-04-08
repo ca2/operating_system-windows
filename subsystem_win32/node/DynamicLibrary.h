@@ -37,7 +37,7 @@ namespace windows
       /**
       Dynamic library class.
       */
-      class CLASS_DECL_ACME DynamicLibrary :
+      class CLASS_DECL_SUBSYSTEM_WIN32 DynamicLibrary :
       virtual public ::subsystem::implementation<::subsystem::DynamicLibraryInterface>
       {
       public:

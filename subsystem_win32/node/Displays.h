@@ -35,7 +35,7 @@ namespace windows
    namespace subsystem
    {
 
-      class CLASS_DECL_ACME Displays :
+      class CLASS_DECL_SUBSYSTEM_WIN32 Displays :
          virtual public ::subsystem::implementation<::subsystem::DisplaysInterface >
       {
       public:
@@ -75,7 +75,7 @@ namespace windows
       };
 
 
-      // class CLASS_DECL_ACME Displays :
+      // class CLASS_DECL_SUBSYSTEM_WIN32 Displays :
       //    virtual public ::subsystem::composite<DisplaysInterface>
       // {
       // public:

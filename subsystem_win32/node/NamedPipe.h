@@ -40,7 +40,7 @@ namespace windows
        *
        * @author yuri, enikey.
        */
-      class CLASS_DECL_ACME NamedPipe :
+      class CLASS_DECL_SUBSYSTEM_WIN32 NamedPipe :
          virtual public ::subsystem::NamedPipe,
          virtual public Pipe
 

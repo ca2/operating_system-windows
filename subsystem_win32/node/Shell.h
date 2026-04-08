@@ -40,8 +40,8 @@ namespace windows
        *
        * @author enikey.
        */
-      class CLASS_DECL_ACME Shell :
-      virtual public ::subsystem::implementation< ShellInterface >
+      class CLASS_DECL_SUBSYSTEM_WIN32 Shell :
+      virtual public ::subsystem::implementation< ::subsystem::ShellInterface >
       {
       public:
 

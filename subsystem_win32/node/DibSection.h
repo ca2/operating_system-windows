@@ -39,7 +39,7 @@ namespace windows
    namespace subsystem
    {
       // This clas is a primitive wrapper to a DIB section.
-      class CLASS_DECL_ACME DibSection :
+      class CLASS_DECL_SUBSYSTEM_WIN32 DibSection :
          virtual public ::subsystem::implementation<::subsystem::DibSectionInterface >
       {
       public:

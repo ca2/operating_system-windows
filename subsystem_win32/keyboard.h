@@ -10,7 +10,7 @@
 // {
 //
 //
-//    //CLASS_DECL_ACME ::user::e_key keysym_to_userkey(KeySym keysym);
+//    //CLASS_DECL_SUBSYSTEM_WIN32 ::user::e_key keysym_to_userkey(KeySym keysym);
 //
 //
 // } // namespace wayland

@@ -36,7 +36,7 @@ namespace  windows
       /**
        * Enables you to start and stop local processes.
        */
-      class CLASS_DECL_ACME Process :
+      class CLASS_DECL_SUBSYSTEM_WIN32 Process :
       virtual public ::subsystem::Process
       {
       public:

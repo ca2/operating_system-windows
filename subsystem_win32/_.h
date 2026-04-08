@@ -5,6 +5,25 @@
 #pragma once
 
 
+#include "acme/_.h"
+
+
+#ifndef ACME_OPERATING_SYSTEM
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
+#include "acme/_operating_system.h"
+#endif
+
+
+
+#if defined(_subsystem_win32_project)
+#define CLASS_DECL_SUBSYSTEM_WIN32  CLASS_DECL_EXPORT
+#else
+#define CLASS_DECL_SUBSYSTEM_WIN32  CLASS_DECL_IMPORT
+#endif
+
+
+
+
 namespace windows
 {
 

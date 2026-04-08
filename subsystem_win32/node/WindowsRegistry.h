@@ -29,7 +29,7 @@
 
 namespace windows
 {
-   class CLASS_DECL_ACME WindowsRegistry
+   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsRegistry
    {
    public:
       const static int STRING_TYPE = REG_SZ;
