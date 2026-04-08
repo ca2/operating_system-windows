@@ -22,9 +22,9 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 #include "AnonymousPipeFactory.h"
-#include "acme/operating_system/windows/subsystem/node/security/SecurityAttributes.h"
+#include "subsystem_win32/node/security/SecurityAttributes.h"
 #include "AnonymousPipe.h"
 #include "File.h"
 

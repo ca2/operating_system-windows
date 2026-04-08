@@ -26,7 +26,7 @@
 
 
 #include "acme/subsystem/node/Pipe.h"
-#include "acme/operating_system/windows/subsystem/node/WindowsEvent.h"
+#include "subsystem_win32/node/WindowsEvent.h"
 //#include "remoting/remoting_common/thread/LocalMutex.h"
 
 namespace windows

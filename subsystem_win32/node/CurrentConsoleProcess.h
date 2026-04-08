@@ -27,7 +27,7 @@
 
 #include "acme/subsystem/node/Process.h"
 //#include "log_writer/LogWriter.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 
 
 namespace windows

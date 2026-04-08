@@ -28,9 +28,9 @@
 #include "acme/subsystem/io/Channel.h"
 #include "acme/subsystem/node/AnonymousPipe.h"
 #include "acme/subsystem/node/Pipe.h"
-#include "acme/operating_system/windows/subsystem/node/File.h"
-#include "acme/operating_system/windows/subsystem/node/Pipe.h"
-#include "acme/operating_system/windows/subsystem/node/WindowsEvent.h"
+#include "subsystem_win32/node/File.h"
+#include "subsystem_win32/node/Pipe.h"
+#include "subsystem_win32/node/WindowsEvent.h"
 //#include "remoting/remoting_common/thread/LocalMutex.h"
 //#include "log_writer/LogWriter.h"
 

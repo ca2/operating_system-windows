@@ -25,7 +25,7 @@
 #pragma once
 
 
-#include "acme/operating_system/windows/subsystem/node/WindowsRegistryKey.h"
+#include "subsystem_win32/node/WindowsRegistryKey.h"
 
 namespace windows
 {

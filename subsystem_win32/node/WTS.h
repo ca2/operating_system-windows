@@ -27,13 +27,13 @@
 
 
 //#include "remoting/remoting_common/util/winhdr.h"
-//#include "acme/operating_system/windows/subsystem/_common_header.h"
+//#include "subsystem_win32/_common_header.h"
 
 //#include "remoting/remoting_common/thread/LocalMutex.h"
-//#include "acme/operating_system/windows/subsystem/node/DynamicLibrary.h"
+//#include "subsystem_win32/node/DynamicLibrary.h"
 //#include "acme/SystemException.h"
 //#include "log_writer/LogWriter.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 #include <WtsApi32.h>
 
 namespace windows

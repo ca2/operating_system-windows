@@ -27,7 +27,7 @@
 
 //#include "remoting/remoting_common/region/::int_point.h"
 #include "acme/subsystem/node/Cursor.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 
 namespace windows
 {

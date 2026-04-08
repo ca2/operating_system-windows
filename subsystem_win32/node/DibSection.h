@@ -28,7 +28,7 @@
 #include "acme/subsystem/framebuffer/DibSection.h.h"
 #include "acme/subsystem/node/Screen.h"
 
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 
 #ifndef CAPTUREBLT
 #define CAPTUREBLT          (DWORD)0x40000000 /* Include layered windows */

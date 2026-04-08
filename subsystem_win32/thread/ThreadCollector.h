@@ -30,7 +30,7 @@
 //#include <list>
 
 #include "acme/prototype/collection/list.h"
-#include "acme/operating_system/windows/subsystem/thread/Thread.h"
+#include "subsystem_win32/thread/Thread.h"
 
 typedef ::list_base<Thread *> ThreadList;
 

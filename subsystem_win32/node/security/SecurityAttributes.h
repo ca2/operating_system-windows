@@ -25,8 +25,8 @@
 
 
 #include "acme/subsystem/node/security/SecurityAttributes.h"
-#include "acme/operating_system/windows/subsystem/node/security/SecurityIdentifier.h"
-#include "acme/operating_system/windows/subsystem/node/security/SecurityDescriptor.h"
+#include "subsystem_win32/node/security/SecurityIdentifier.h"
+#include "subsystem_win32/node/security/SecurityDescriptor.h"
 
 
 namespace windows

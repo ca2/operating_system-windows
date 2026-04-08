@@ -22,7 +22,7 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 #include "Screen.h"
 #include "acme/subsystem/Exception.h"
 //#include "remoting/remoting_common/win_system/Environment.h"

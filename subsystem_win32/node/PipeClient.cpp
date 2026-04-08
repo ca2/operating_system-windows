@@ -22,12 +22,12 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 #include "File.h"
 #include "PipeClient.h"
 #include "acme/subsystem/node/SystemException.h"
 
-#include "acme/operating_system/windows/subsystem/node/NamedPipe.h"
+#include "subsystem_win32/node/NamedPipe.h"
 
 namespace windows
 {

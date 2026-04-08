@@ -28,7 +28,7 @@
 //#include "remoting/remoting_common/util/winhdr.h"
 #include "acme/prototype/collection/comparable_list.h"
 #include "acme/subsystem/node/OperatingSystemApplication.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 
 //#include "remoting/remoting_common/thread/LocalMutex.h"
 //#include <list>

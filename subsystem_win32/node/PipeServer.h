@@ -31,9 +31,9 @@
 //#include "remoting/remoting_common/thread/LocalMutex.h"
 
 //#include "DynamicLibrary.h"
-//#include "acme/operating_system/windows/subsystem/_common_header.h"
-#include "acme/operating_system/windows/subsystem/node/WindowsEvent.h"
-#include "acme/operating_system/windows/subsystem/node/security/SecurityAttributes.h"
+//#include "subsystem_win32/_common_header.h"
+#include "subsystem_win32/node/WindowsEvent.h"
+#include "subsystem_win32/node/security/SecurityAttributes.h"
 
 typedef BOOL(WINAPI* pGetNamedPipeClientProcessId)(HANDLE Pipe, PULONG ClientProcessId);
 

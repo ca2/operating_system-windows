@@ -26,7 +26,7 @@
 
 
 #include "acme/subsystem/node/Shell.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 
 
 //#include "SystemException.h"
@@ -41,7 +41,7 @@ namespace windows
        * @author enikey.
        */
       class CLASS_DECL_ACME Shell :
-      virtual public ::subsystem::Shell
+      virtual public ::subsystem::implementation< ShellInterface >
       {
       public:
 

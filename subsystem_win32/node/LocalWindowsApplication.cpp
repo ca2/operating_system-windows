@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 #include "LocalWindowsApplication.h"
 
 //#include "remoting/remoting_common/util/winhdr.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 
 #include "remoting/remoting_common/thread/DesktopSelector.h"
 

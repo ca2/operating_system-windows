@@ -22,10 +22,10 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 #include "NamedPipe.h"
 #include "acme/subsystem/Exception.h"
-#include "acme/operating_system/windows/subsystem/node/File.h"
+#include "subsystem_win32/node/File.h"
 #include <crtdbg.h>
 //#include "remoting/remoting_common/win_system/Environment.h"
 //#include "remoting/remoting_common/thread/AutoLock.h"

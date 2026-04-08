@@ -26,7 +26,7 @@
 
 
 #include "acme/subsystem/node/SystemException.h"
-#include "acme/operating_system/windows/subsystem/node/OperatingSystemApplication.h"
+#include "subsystem_win32/node/OperatingSystemApplication.h"
 
 
 /**

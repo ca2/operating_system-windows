@@ -27,7 +27,7 @@
 
 #include "acme/subsystem/Exception.h"
 #include "acme/subsystem/thread/GlobalMutex.h"
-#include "acme/operating_system/windows/subsystem/_common_header.h"
+#include "subsystem_win32/_common_header.h"
 
 
 namespace windows
@@ -41,7 +41,7 @@ namespace windows
        * @author yuri, enikey.
        */
       class CLASS_DECL_ACME GlobalMutex :
-         virtual public ::subsystem::GlobalMutex
+         virtual public ::subsystem::implementation<::subsystem::GlobalMutexInterface>
       {
       public:
          /**
