@@ -686,7 +686,7 @@ int erase(HWND window) {
     }
 
     /* Confirm */
-    if (popup_message(window, MB_YESNO, NSSM_GUI_ASK_REMOVE_SERVICE, service->name) != IDYES) {
+    if (popup_message(window, MB_YESNO, NSSM_GUI_ASK_REMOVE_SERVICE, service->name) != ::innate_subsystem::IDYES) {
       cleanup_nssm_service(service);
       return 0;
     }

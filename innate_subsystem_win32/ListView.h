@@ -180,7 +180,7 @@ namespace innate_subsystem_win32
       // Sets selected list view index to output indexes array
       //
 
-      virtual void getSelectedItemsIndexes(int *indexes)override ;
+      virtual ::int_array getSelectedItemsIndexes()override ;
 
    //protected:
 

@@ -9,7 +9,7 @@
  {
 
 
-    class CLASS_DECL_APEX SystemMetrics :
+    class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 SystemMetrics :
          virtual public ::subsystem::implementation < ::innate_subsystem::SystemMetricsInterface>
     {
     public:
