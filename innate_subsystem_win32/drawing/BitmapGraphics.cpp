@@ -23,38 +23,80 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
+#include "framework.h"
 #include "BitmapGraphics.h"
+#include "Bitmap.h"
+#include "DeviceContext.h"
 
-BitmapGraphics::BitmapGraphics(DeviceContext *complatibleDC, const ::int_size & size)
-: Graphics(complatibleDC), m_isPainting(false)
+
+namespace innate_subsystem_win32
 {
-  m_bitmap = new Bitmap(complatibleDC->m_dc, width, height);
-  m_dc = new DeviceContext(complatibleDC);
-}
+   // BitmapGraphics::BitmapGraphics(DeviceContext *complatibleDC, const ::int_size & size)
+   // : Graphics(complatibleDC), m_isPainting(false)
+   // {
+   //    m_bitmap = new Bitmap(complatibleDC->m_dc, width, height);
+   //    m_dc = new DeviceContext(complatibleDC);
+   // }
 
-BitmapGraphics::~BitmapGraphics()
-{
-  delete m_bitmap;
-  delete m_dc;
-}
+   // BitmapGraphics::BitmapGraphics(DeviceContext* pdevicecontextCompatible, const int_size& size)
+   // {
+   //
+   //
+   // }
 
-Bitmap *BitmapGraphics::getBitmap()
-{
-  return m_bitmap;
-}
+   // BitmapGraphics::BitmapGraphics(DeviceContext* pdevicecontextCompatible, const int_size& size)
+   // {
+   //
+   //
+   // }
+   //
 
-void BitmapGraphics::beginPaint()
-{
-  _ASSERT(!m_isPainting);
+   BitmapGraphics::BitmapGraphics():
+   m_isPainting(false)
+   {
 
-  m_isPainting = true;
-  m_oldBitmap = m_dc->selectObject(m_bitmap->m_bitmap);
-}
 
-void BitmapGraphics::endPaint()
-{
-  _ASSERT(m_isPainting);
+   }
 
-  m_isPainting = false;
-  m_dc->selectObject(m_oldBitmap);
-}
+
+   BitmapGraphics::~BitmapGraphics()
+   {
+      //delete m_bitmap;
+      //delete m_dc;
+   }
+
+   void BitmapGraphics::initialize_bitmap_graphics(::innate_subsystem::DeviceContextInterface *pdevicecontextCompatible, const ::int_size & size)
+//   : Graphics(complatibleDC), m_isPainting(false)
+   {
+      constructø(m_pbitmap);
+      m_pbitmap->initialize_bitmap(pdevicecontextCompatible, size);
+      initialize_graphics(pdevicecontextCompatible);
+      //constructø(m_pdevice);
+      //m_pdevice->initialize_device(pdevicecontextCompatible);
+   }
+
+
+   ::innate_subsystem::BitmapInterface *BitmapGraphics::getBitmap()
+   {
+      return m_pbitmap;
+   }
+
+   void BitmapGraphics::beginPaint()
+   {
+      _ASSERT(!m_isPainting);
+
+      m_isPainting = true;
+      //auto pdevicecontextWin32 = this->impl< ::innate_subsystem_win32::DeviceContext>();
+      //auto pbitmapWin32 = m_pbitmap->impl< ::innate_subsystem_win32::Bitmap >();
+      m_pgraphicsobjectOldBitmap = device_context()->selectObject(m_pbitmap);
+   }
+
+   void BitmapGraphics::endPaint()
+   {
+      _ASSERT(m_isPainting);
+
+      m_isPainting = false;
+      //auto pdevicecontextWin32 = this->impl< ::innate_subsystem_win32::DeviceContext>();
+      device_context()->selectObject(m_pgraphicsobjectOldBitmap);
+   }
+} // namespace innate_subsystem_win32

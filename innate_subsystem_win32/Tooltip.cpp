@@ -22,11 +22,9 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//#include "framework.h"
+#include "framework.h"
 #include "Tooltip.h"
 
-namespace windows
-{
    namespace innate_subsystem_win32
    {
       Tooltip::Tooltip()
@@ -37,4 +35,3 @@ namespace windows
       {
       }
    } // namespace innate_subsystem_win32
-} // namespace windows

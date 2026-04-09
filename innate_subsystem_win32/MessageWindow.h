@@ -22,44 +22,45 @@
 //-------------------------------------------------------------------------
 //
 
-#ifndef __WINDOW_H__
-#define __WINDOW_H__
+#pragma once
 
-#include "util/CommonHeader.h"
-#include "../../../source/app/apex/operating_system/windows/innate_subsystem_win32/WindowMessageHandler.h"
+//#include "util/CommonHeader.h"
+//#include "../../../source/app/apex/operating_system/windows/innate_subsystem_win32/WindowMessageHandler.h"
 
-class MessageWindow
+namespace  innate_subsystem_win32
 {
-public:
-  // messageHandler is an external message handler that replace the
-  // wndProc() function on message processing. If
-  // messageHandler == 0 the wndProc() function will be used.
-  MessageWindow(const HINSTANCE hinst, const TCHAR *windowClassName,
-                WindowMessageHandler *messageHandler = 0);
-  virtual ~MessageWindow(void);
+   class MessageWindow
+   {
+   public:
+      // messageHandler is an external message handler that replace the
+      // wndProc() function on message processing. If
+      // messageHandler == 0 the wndProc() function will be used.
+      MessageWindow(const HINSTANCE hinst, const TCHAR *windowClassName,
+                    WindowMessageHandler *messageHandler = 0);
+      virtual ~MessageWindow(void);
 
-  virtual bool createWindow(WindowMessageHandler *messageHandler = 0);
-  virtual void destroyWindow();
+      virtual bool createWindow(WindowMessageHandler *messageHandler = 0);
+      virtual void destroyWindow();
 
-  HWND getHWND() const { return m_hwnd; }
+      HWND getHWND() const { return m_hwnd; }
 
-protected:
-  // Function must return true value if the message has been processed.
-  virtual bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam) { return true; }
+   //protected:
+      // Function must return true value if the message has been processed.
+      virtual bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam) { return true; }
 
-  HWND m_hwnd;
-  WindowMessageHandler *m_messageHandler;
+      HWND m_hwnd;
+      WindowMessageHandler *m_messageHandler;
 
-  HINSTANCE m_hinst;
-  TCHAR *m_windowClassName;
+      HINSTANCE m_hinst;
+      TCHAR *m_windowClassName;
 
-private:
-  ATOM regClass(HINSTANCE hinst, TCHAR *windowClassName);
+   private:
+      ATOM regClass(HINSTANCE hinst, TCHAR *windowClassName);
 
-  static LRESULT CALLBACK staticWndProc(HWND hwnd,
-                                        unsigned int message,
-                                        ::wparam wparam,
-                                        ::lparam lparam);
-};
+      static LRESULT CALLBACK staticWndProc(HWND hwnd,
+                                            unsigned int message,
+                                            WPARAM wparam,
+                                            LPARAM lparam);
+   };
+} // namespace  innate_subsystem_win32
 
-#endif // __WINDOW_H__

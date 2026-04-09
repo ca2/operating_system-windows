@@ -28,11 +28,9 @@
 #include "acme/subsystem/node/PipeImpersonatedThread.h"
 #include "subsystem_win32/node/WindowsEvent.h"
 
-namespace windows
+namespace subsystem_win32
 {
 
-namespace subsystem
-{
    class CLASS_DECL_SUBSYSTEM_WIN32 PipeImpersonatedThread :
 
       virtual public ::subsystem::PipeImpersonatedThread
@@ -60,8 +58,8 @@ namespace subsystem
       WindowsEvent m_threadSleeper;
    };
 
-   //// __PIPEIMPERSONATEDTHREAD_H__
-} // namespace subsystem
+
+} // namespace subsystem_win32
 
 
-} // namespace windows
+

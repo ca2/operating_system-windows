@@ -22,127 +22,126 @@
 //-------------------------------------------------------------------------
 //
 
-#ifndef _TOOL_BAR_H_
-#define _TOOL_BAR_H_
+#include "apex/innate_subsystem/Toolbar.h"
+#include "innate_subsystem_win32/_common_header.h"
 
-#include "util/CommonHeader.h"
-
-class ToolBar
+namespace innate_subsystem_win32
 {
-public:
-  ToolBar();
-  virtual ~ToolBar();
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Toolbar :
+virtual public window_implementation<innate_subsystem::ToolBarInterface>
+   {
+   public:
+      Toolbar();
+      virtual ~Toolbar();
 
-  static const int TB_Style_sep = 0;
-  static const int TB_Style_gap = 1;
+      static const int TB_Style_sep = 0;
+      static const int TB_Style_gap = 1;
 
-   ///////////////////////////////////////////////////////// 
-  // Auto mode procedures
-  /////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////
+      // Auto mode procedures
+      /////////////////////////////////////////////////////////
 
-  // setViewAutoButtons()
-  // It used only for auto buttons creation from
-  // bitmap and making gaps or separators.
-  void setViewAutoButtons(int iButton, int style);
+      // setViewAutoButtons()
+      // It used only for auto buttons creation from
+      // bitmap and making gaps or separators.
+      void setViewAutoButtons(int iButton, int style) override;
 
-  // loadToolBarfromRes()
-  // This procedure will load a toolbar image from resource
-  // id is a number of bitmap. It means that buttons are
-  // square(for example 16x16).
-  void loadToolBarfromRes(DWORD id);
+      // loadToolBarfromRes()
+      // This procedure will load a toolbar image from resource
+      // id is a number of bitmap. It means that buttons are
+      // square(for example 16x16).
+      void loadToolBarfromRes(unsigned int id) override;
 
-  // setButtonsRange()
-  // If we want to catch the message from toolbar that some buttons
-  // are pressed then we must set a range for message, we pass only
-  // first item, and next is id+1 and so on.
-  void setButtonsRange(DWORD id);
+      // setButtonsRange()
+      // If we want to catch the message from toolbar that some buttons
+      // are pressed then we must set a range for message, we pass only
+      // first item, and next is id+1 and so on.
+      void setButtonsRange(unsigned int id) override;
 
-  // attachToolBar()
-  // This one will create and attach toolbar window to 
-  // which handle is passed in hwnd. Only for toolbar from bitmap.
-  void attachToolBar(HWND hwnd);
+      // attachToolBar()
+      // This one will create and attach toolbar window to
+      // which handle is passed in hwnd. Only for toolbar from bitmap.
+      void attachToolBar(const ::operating_system::window & window) override;
 
-  ///////////////////////////////////////////////////////// 
-  // Manual mode procedures
-  /////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////
+      // Manual mode procedures
+      /////////////////////////////////////////////////////////
 
-  // create() creates a windows toolbar. dwStyle is a combination of 
-  // the toolbar control and button styles. It returns true if successful,
-  // or false otherwise.
-  bool create(int tbID, HWND parentHwnd, 
-       DWORD dwStyle = WS_CHILD | WS_VISIBLE | TBSTYLE_FLAT);
+      // create() creates a windows toolbar. dwStyle is a combination of
+      // the toolbar control and button styles. It returns true if successful,
+      // or false otherwise.
+      bool create(int tbID, const ::operating_system::window & windowParent,
+           unsigned int dwStyle = WS_CHILD | WS_VISIBLE | TBSTYLE_FLAT) override;
 
-  // addBitmap() adds one or more images from resources to
-  // the list of button images available for a toolbar.
-  // Returns the index of the first new image if successful,
-  // or -1 otherwise.
-  LRESULT addBitmap(int nButtons, unsigned int bitmapID);
+      // addBitmap() adds one or more images from resources to
+      // the list of button images available for a toolbar.
+      // Returns the index of the first new image if successful,
+      // or -1 otherwise.
+      LRESULT addBitmap(int nButtons, unsigned int bitmapID) override;
 
-  // addSystemBitmap() adds the system-defined button bitmaps to the list
-  // of the toolbar button specifying by stdBitmapID. Returns the index of 
-  // the first new image if successful, or -1 otherwise.
-  LRESULT addSystemBitmap(unsigned int stdBitmapID);
+      // addSystemBitmap() adds the system-defined button bitmaps to the list
+      // of the toolbar button specifying by stdBitmapID. Returns the index of
+      // the first new image if successful, or -1 otherwise.
+      LRESULT addSystemBitmap(unsigned int stdBitmapID) override;
 
-  // addNButton() adds nButtons buttons to a toolbar.
-  bool addNButton(int nButtons, LPTBBUTTON tbb);
+      // addNButton() adds nButtons buttons to a toolbar.
+      bool addNButton(int nButtons, ::innate_subsystem::toolbar_button_t * ptoolbarbutton) override;
 
-  // addButton() adds one button.
-  bool addButton(int iBitmap, int idCommand, BYTE state=TBSTATE_ENABLED, 
-                 BYTE style=TBSTYLE_BUTTON,  unsigned int dwData=0, int iString=0);
+      // addButton() adds one button.
+      bool addButton(int iBitmap, int idCommand, unsigned char state=TBSTATE_ENABLED,
+                     unsigned char style=TBSTYLE_BUTTON,  unsigned int dwData=0, int iString=0) override;
 
-  // checkButton() checks or unchecks a given button in a toolbar control.
-  bool checkButton(int idButton, bool check);
+      // checkButton() checks or unchecks a given button in a toolbar control.
+      bool checkButton(int idButton, bool check) override;
 
-  // enableButton() enables or disables the specified button 
-  // in the toolbar.
-  bool enableButton(int idButton, bool enable);
+      // enableButton() enables or disables the specified button
+      // in the toolbar.
+      bool enableButton(int idButton, bool enable) override;
 
-  // pressButton() presses or releases the specified button in the toolbar.
-  bool pressButton(int idButton, bool press);
+      // pressButton() presses or releases the specified button in the toolbar.
+      bool pressButton(int idButton, bool press) override;
 
-  // getButtonRect() gets the bounding rectangle of a button in a toolbar.
-  bool getButtonRect(int nIndex, LPRECT buttonRect);
+      // getButtonRect() gets the bounding rectangle of a button in a toolbar.
+      bool getButtonRect(int nIndex, ::int_rectangle & rectangle) override;
 
-  // setButtonSize() sets the size of the buttons to be added to a toolbar.
-  // Button size must be largen the button bitmap.
-  bool setButtonsSize(const ::int_size & size);
+      // setButtonSize() sets the size of the buttons to be added to a toolbar.
+      // Button size must be largen the button bitmap.
+      bool setButtonsSize(const ::int_size & size) override;
 
-  // autoSize() resizes the toolbar window.
-  void autoSize();
+      // autoSize() resizes the toolbar window.
+      void autoSize() override;
 
-  // getButtonsHeight() retrieves the height of the toolbar buttons.
-  int getButtonsHeight();
+      // getButtonsHeight() retrieves the height of the toolbar buttons.
+      int getButtonsHeight() override;
 
-  // getButtonsWidth() retrieves the width of the toolbar buttons.
-  int getButtonsWidth();
+      // getButtonsWidth() retrieves the width of the toolbar buttons.
+      int getButtonsWidth() override;
 
-  // isVisible() check the toolbar window on visible.
-  bool isVisible();
+      // isVisible() check the toolbar window on visible.
+      bool isVisible() override;
 
-  // hide() hides the toolbar window.
-  void hide();
+      // hide() hides the toolbar window.
+      void hide() override;
 
-  // show() displays the toolbar window.
-  void show();
+      // show() displays the toolbar window.
+      void show() override;
 
-  // getTotalWidth() returns the total size of all buttons and 
-  // separators in the toolbar.
-  int getTotalWidth();
+      // getTotalWidth() returns the total size of all buttons and
+      // separators in the toolbar.
+      int getTotalWidth() override;
 
-  // getHeight() returns the toolbar window height.
-  int getHeight();
+      // getHeight() returns the toolbar window height.
+      int getHeight() override;
 
-  // getState() gets button state
-  LRESULT getState(int idButton);
+      // getState() gets button state
+      LRESULT getState(int idButton) override;
 
-private:
-  int m_initialStr;
-  int m_numberTB;
-  DWORD m_id;
-  int m_width, m_height;
-  HWND m_hWndToolbar;
+      int m_initialStr;
+      int m_numberTB;
+      DWORD m_id;
+      int m_width, m_height;
+      HWND m_hWndToolbar;
 
-  std::map<int, int> m_autoButtons;
-};
-
-#endif
+      iptr_to_iptr m_autoButtons;
+   };
+} // namespace innate_subsystem_win32

@@ -27,9 +27,9 @@
 
 #include "subsystem_win32/node/WindowsEvent.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsEventEx : public ::windows::WindowsEvent
+   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsEventEx : public ::subsystem_win32::WindowsEvent
    {
    public:
       WindowsEventEx(const ::scoped_string & scopedstrName = 0);
@@ -39,6 +39,6 @@ namespace windows
    };
 
    //// __WINDOWSEVENT_H__
-} //  namespace windows
+} //  namespace subsystem_win32
 
 

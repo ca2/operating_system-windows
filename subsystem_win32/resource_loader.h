@@ -27,7 +27,7 @@
 //#include "winhdr.h"
 
 //#include "Singleton.h"
-namespace subsystem
+namespace subsystem_win32
 {
    /**
     * Loader of resources from resource files linked with application.
@@ -102,7 +102,7 @@ namespace subsystem
    };
 
    //#endif
-} // namespace subsystem
+} // namespace subsystem_win32
 
 
 

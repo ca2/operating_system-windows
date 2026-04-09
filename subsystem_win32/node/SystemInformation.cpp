@@ -26,45 +26,46 @@
 #include "SystemInformation.h"
 #include "acme/prototype/geometry2d/rectangle.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
-      void SystemInformation::getDesktopAllArea(int_rectangle & rectangle)
-      {
-         RECT rc;
-         if (GetClientRect(GetDesktopWindow(), &rc))
-         {
-            ::copy(rectangle, rc);
-         }
-      }
 
-      bool SystemInformation::getDesktopArea(int_rectangle & rectangle)
+   void SystemInformation::getDesktopAllArea(int_rectangle & rectangle)
+   {
+      RECT rc;
+      if (GetClientRect(GetDesktopWindow(), &rc))
       {
-         RECT rc;
-         bool bOk = !!SystemParametersInfo(SPI_GETWORKAREA, 0, &rc, 0);
+         ::copy(rectangle, rc);
+      }
+   }
+
+   bool SystemInformation::getDesktopArea(int_rectangle & rectangle)
+   {
+      RECT rc;
+      bool bOk = !!SystemParametersInfo(SPI_GETWORKAREA, 0, &rc, 0);
 if (bOk)
 {
-   ::copy(rectangle, rc);
+::copy(rectangle, rc);
 
 }
-         return bOk;
-      }
+      return bOk;
+   }
 
-      bool SystemInformation::_isSupportStretchBlt(HDC hdc)
-      {
-         int rasterCaps = GetDeviceCaps(hdc, RASTERCAPS);
-         return !!(rasterCaps & RC_STRETCHBLT);
-      }
+   bool SystemInformation::_isSupportStretchBlt(HDC hdc)
+   {
+      int rasterCaps = GetDeviceCaps(hdc, RASTERCAPS);
+      return !!(rasterCaps & RC_STRETCHBLT);
+   }
 
-      int SystemInformation::_getBitsPixel(HDC hdc)
-      {
-         return GetDeviceCaps(hdc, BITSPIXEL);
-      }
+   int SystemInformation::_getBitsPixel(HDC hdc)
+   {
+      return GetDeviceCaps(hdc, BITSPIXEL);
+   }
 
-      int SystemInformation::getMonitorCount()
-      {
-         return GetSystemMetrics(SM_CMONITORS);
-      }
-   } // namespace subsystem
-} //namespace  windows
+   int SystemInformation::getMonitorCount()
+   {
+      return GetSystemMetrics(SM_CMONITORS);
+   }
+
+
+} // namespace subsystem_win32
+

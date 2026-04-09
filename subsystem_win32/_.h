@@ -24,18 +24,12 @@
 
 
 
-namespace windows
+namespace subsystem_win32
 {
 
-   namespace subsystem
-   {
+   class File;
 
-      class File;
-
-      class DynamicLibrary;
-
-   } // namespace subsystem
-
+   class DynamicLibrary;
 
    class WindowsCommandLineArguments;
 
@@ -43,7 +37,9 @@ namespace windows
 
    class WTS;
 
-} // namespace windows
+   class PipeServer;
+
+} // namespace subsystem_win32
 
 
 

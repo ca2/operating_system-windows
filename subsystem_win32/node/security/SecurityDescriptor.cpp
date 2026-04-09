@@ -28,55 +28,52 @@
 #include <crtdbg.h>
 
 
-namespace  windows
+namespace subsystem_win32
 {
-   namespace subsystem
+   SecurityDescriptor::SecurityDescriptor()
    {
-      SecurityDescriptor::SecurityDescriptor()
-      {
-         InitializeSecurityDescriptor(&m_sd, SECURITY_DESCRIPTOR_REVISION);
+      InitializeSecurityDescriptor(&m_sd, SECURITY_DESCRIPTOR_REVISION);
+   }
+
+   SecurityDescriptor::~SecurityDescriptor()
+   {
+   }
+
+   void SecurityDescriptor::setRulesAsDacl(size_t count,
+                                           EXPLICIT_ACCESS *rules)
+   {
+      PACL acl = 0;
+
+      ULONG constrCount = (ULONG)count;
+      _ASSERT(constrCount == count);
+      DWORD ret = SetEntriesInAcl(constrCount, rules, NULL, &acl);
+
+      if (ret != ERROR_SUCCESS) {
+         throw ::subsystem::SystemException(ret);
       }
 
-      SecurityDescriptor::~SecurityDescriptor()
-      {
+      setUserDacl(acl);
+   }
+
+   void SecurityDescriptor::setUserDacl(ACL *acl)
+   {
+      if (SetSecurityDescriptorDacl(&m_sd, TRUE, acl,  FALSE) == FALSE) {
+         throw ::subsystem::SystemException();
       }
+   }
 
-      void SecurityDescriptor::setRulesAsDacl(size_t count,
-                                              EXPLICIT_ACCESS *rules)
-      {
-         PACL acl = 0;
+   void SecurityDescriptor::clearOwner()
+   {
+      SetSecurityDescriptorOwner(&m_sd, 0, TRUE);
+   }
 
-         ULONG constrCount = (ULONG)count;
-         _ASSERT(constrCount == count);
-         DWORD ret = SetEntriesInAcl(constrCount, rules, NULL, &acl);
+   bool SecurityDescriptor::isValid()
+   {
+      return IsValidSecurityDescriptor(&m_sd) == TRUE;
+   }
 
-         if (ret != ERROR_SUCCESS) {
-            throw ::subsystem::SystemException(ret);
-         }
-
-         setUserDacl(acl);
-      }
-
-      void SecurityDescriptor::setUserDacl(ACL *acl)
-      {
-         if (SetSecurityDescriptorDacl(&m_sd, TRUE, acl,  FALSE) == FALSE) {
-            throw ::subsystem::SystemException();
-         }
-      }
-
-      void SecurityDescriptor::clearOwner()
-      {
-         SetSecurityDescriptorOwner(&m_sd, 0, TRUE);
-      }
-
-      bool SecurityDescriptor::isValid()
-      {
-         return IsValidSecurityDescriptor(&m_sd) == TRUE;
-      }
-
-      SECURITY_DESCRIPTOR *SecurityDescriptor::getSD()
-      {
-         return &m_sd;
-      }
-   } // namespace subsystem
-} // namespace  windows
+   SECURITY_DESCRIPTOR *SecurityDescriptor::getSD()
+   {
+      return &m_sd;
+   }
+} // namespace subsystem_win32

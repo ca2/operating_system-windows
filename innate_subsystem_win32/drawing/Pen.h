@@ -26,32 +26,41 @@
 #pragma once
 
 
+#include "apex/innate_subsystem/drawing/Pen.h"
+#include "subsystem_win32/_common_header.h"
 
 
-//#include "util/CommonHeader.h"
-
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem
+
+   class Pen :
+      virtual public ::subsystem::implementation<::innate_subsystem::PenInterface>
    {
-      class Pen
-      {
-      public:
-         const static int SOLID_TYPE = PS_SOLID;
-         const static int DASH_TYPE = PS_DASH;
-         const static int NULL_TYPE = PS_NULL;
-
-      //public:
-         Pen(int type, int width, COLORREF color);
-         virtual ~Pen();
-
-      // protected:
-      //    HPEN m_pen;
+   public:
+      // const static int SOLID_TYPE = PS_SOLID;
+      // const static int DASH_TYPE = PS_DASH;
+      // const static int NULL_TYPE = PS_NULL;
       //
-      //    friend class Graphics;
-      };
+   //public:
+      ///Pen(int type, int width, COLORREF color);
+      Pen();
+      ~Pen() override;
+
+
+      void * _HGDIOBJ() override;
+
+
+      void initialize_pen(innate_subsystem::enum_pen epen, int width, const color::color& color) override;
+
+
+      void destroyGraphicsObject() override;
+
+   // protected:
+       HPEN m_hpen;
+   //
+   //    friend class Graphics;
+   };
 
 //#endi
-   } // namespace innate_subsystem
-}
+} // namespace innate_subsystem_win32
 

@@ -22,100 +22,104 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//#include "framework.h"
+#include "framework.h"
 #include "FilteredTextBox.h"
-namespace windows
+#include "apex/innate_subsystem/StringFilter.h"
+
+
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem_win32
+
+
+   FilteredTextBox::FilteredTextBox()
+   : m_wndprocOld(NULL)
    {
-      FilteredTextBox::FilteredTextBox()
-      : m_oldWindowProc(NULL), m_tip(NULL)
-      {
-         m_text.setString(_T(""));
-      }
+      //m_strText.setString(_T(""));
+   }
 
-      FilteredTextBox::~FilteredTextBox()
-      {
-      }
+   FilteredTextBox::~FilteredTextBox()
+   {
+   }
 
-      void FilteredTextBox::setWindow(HWND hwnd)
-      {
-         if (hwnd != NULL) {
-            m_oldWindowProc = SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)&windowProc);
-            SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)this);
+   void FilteredTextBox::setWindow(const ::operating_system::window & operatingsystemwindow)
+   {
+
+      auto hwnd = ::as_HWND(operatingsystemwindow);
+      if (hwnd != NULL) {
+         m_wndprocOld = (WNDPROC) SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)&windowProc);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)this);
+      } else {
+         m_wndprocOld = NULL;
+      }
+      _setHWND(hwnd);
+   }
+
+   void FilteredTextBox::setText(char *text)
+   {
+      m_strText = text;
+      TextBox::setText(text);
+   }
+
+   void FilteredTextBox::setErrorBalloonTip(innate_subsystem::TooltipInterface *tip)
+   {
+      m_ptooltip = tip;
+   }
+
+   void FilteredTextBox::setStringFilter(::innate_subsystem::StringFilter *filter)
+   {
+      m_pstringfilter = filter;
+   }
+
+   LRESULT FilteredTextBox::makeCheck()
+   {
+      ::string updatedText;
+      updatedText = TextBox::getText();
+      if (isStringValid(updatedText)) {
+         m_strText = updatedText;
+      } else {
+         if (m_ptooltip) {
+            showBalloonTip(m_ptooltip);
+            TextBox::setText(m_strText);
+            TextBox::selectText(m_strText.length(), m_strText.length());
          } else {
-            m_oldWindowProc = NULL;
+            //
+            // TODO: Play annoying sound this
+            //
          }
-         Control::setWindow(hwnd);
+         return -1;
       }
+      return 0;
+   }
 
-      void FilteredTextBox::setText(TCHAR *text)
-      {
-         m_text.setString(text);
-         TextBox::setText(text);
+   bool FilteredTextBox::isStringValid(const char *string)
+   {
+      if (m_pstringfilter != NULL) {
+         return m_pstringfilter->isStringCorrect(string);
       }
+      return true;
+   }
 
-      void FilteredTextBox::setErrorBalloonTip(BalloonTip *tip)
-      {
-         m_tip = tip;
+   //
+   // Return values: 0 - if window process this message
+   //      other value - otherwise
+   //
+
+   LRESULT  FilteredTextBox::onKeyDown(::wparam code, ::lparam params)
+   {
+      return makeCheck();
+   }
+
+   LRESULT FilteredTextBox::windowProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam)
+   {
+      FilteredTextBox *_this = (FilteredTextBox *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+      if (_this == NULL) {
+         return FALSE;
       }
-
-      void FilteredTextBox::setStringFilter(StringFilter *filter)
-      {
-         m_filter = filter;
+      switch (uMsg) {
+         case WM_CHAR:
+            LRESULT result = CallWindowProc((WNDPROC)_this->m_wndprocOld, hwnd, uMsg, wparam, lparam);
+            return _this->onKeyDown(wparam, lparam);
       }
-
-      LRESULT FilteredTextBox::makeCheck()
-      {
-         StringStorage updatedText;
-         TextBox::getText(&updatedText);
-         if (isStringValid(updatedText.getString())) {
-            m_text = updatedText;
-         } else {
-            if (m_tip != NULL) {
-               showBalloonTip(m_tip);
-               TextBox::setText(m_text.getString());
-               TextBox::selectText(m_text.getLength(), m_text.getLength());
-            } else {
-               //
-               // TODO: Play annoying sound this
-               //
-            }
-            return -1;
-         }
-         return 0;
-      }
-
-      bool FilteredTextBox::isStringValid(const TCHAR *string)
-      {
-         if (m_filter != NULL) {
-            return m_filter->isStringCorrect(string);
-         }
-         return true;
-      }
-
-      //
-      // Return values: 0 - if window process this message
-      //      other value - otherwise
-      //
-
-      LRESULT  FilteredTextBox::onKeyDown(::wparam code, ::lparam params)
-      {
-         return makeCheck();
-      }
-
-      LRESULT FilteredTextBox::windowProc(HWND hwnd, unsigned int uMsg, ::wparam wparam, ::lparam lparam)
-      {
-         FilteredTextBox *_this = (FilteredTextBox *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-         if (_this == NULL) {
-            return FALSE;
-         }
-         switch (uMsg) {
-            case WM_CHAR:
-               LRESULT result = CallWindowProc((WNDPROC)_this->m_oldWindowProc, hwnd, uMsg, ::wparam, ::lparam);
-               return _this->onKeyDown(::wparam, ::lparam);
-         }
-         return CallWindowProc((WNDPROC)_this->m_oldWindowProc, hwnd, uMsg, ::wparam, ::lparam);
-      }
-   } // namespace innate_subsystem_win32
-} // namespace windows
+      return CallWindowProc((WNDPROC)_this->m_wndprocOld, hwnd, uMsg,wparam, lparam);
+   }
+} // namespace innate_subsystem_win32

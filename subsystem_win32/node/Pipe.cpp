@@ -30,16 +30,14 @@
 //#include "remoting/remoting_common/win_system/Environment.h"
 //#include "remoting/remoting_common/thread/critical_section_lock.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
-      Pipe::Pipe(unsigned int maxPortionSize)
-      : m_totalRead(0),
-        m_totalWrote(0),
-        m_maxPortionSize(maxPortionSize)
-      {
-      }
+      // Pipe::Pipe(unsigned int maxPortionSize)
+      // : m_totalRead(0),
+      //   m_totalWrote(0),
+      //   m_maxPortionSize(maxPortionSize)
+      // {
+      // }
 
       Pipe::Pipe()
 : m_totalRead(0),
@@ -63,7 +61,7 @@ namespace windows
          return m_maxPortionSize;
       }
 
-      size_t Pipe::writeByFile(const void *buffer, size_t len, ::subsystem::File * pfilePipe)
+      size_t Pipe::writeByFile(const void *buffer, size_t len, ::subsystem::FileInterface * pfilePipe)
       {
 
          auto handlePipe = ::as_HANDLE(pfilePipe);
@@ -127,7 +125,7 @@ namespace windows
          return result;
       }
 
-      size_t Pipe::readByFile(void *buffer, size_t len, ::subsystem::File * pfilePipe)
+      size_t Pipe::readByFile(void *buffer, size_t len, ::subsystem::FileInterface * pfilePipe)
       {
          auto handlePipe = ::as_HANDLE(pfilePipe);
          DWORD result = 0;
@@ -188,13 +186,12 @@ namespace windows
          return result;
       }
 
-      void Pipe::checkPipeFile(::subsystem::File * pfilePipe)
+      void Pipe::checkPipeFile(::subsystem::FileInterface * pfilePipe)
       {
          auto handlePipe = ::as_HANDLE(pfilePipe);
          if (::is_set(pfilePipe) && handlePipe == INVALID_HANDLE_VALUE) {
             throw ::io_exception(error_io, "Invalid pipe handle");
          }
       }
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32
 

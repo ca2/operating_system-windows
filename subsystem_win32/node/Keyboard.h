@@ -29,10 +29,8 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       /**
        * Wrapper on base WinAPI keyboard functions.
        */
@@ -61,5 +59,4 @@ namespace windows
          static bool isKeyPressed(BYTE vkCode);
 
       };
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32

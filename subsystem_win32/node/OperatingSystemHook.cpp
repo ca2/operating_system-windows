@@ -27,12 +27,9 @@
 #include "OperatingSystemHook.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-
-   namespace subsystem
-   {
-      //HHOOK OperatingSystemHook::s_hooks = 0;
+          //HHOOK OperatingSystemHook::s_hooks = 0;
       //WindowsHookEventListener *OperatingSystemHook::s_pwindowshookeventlistener = nullptr;
 
       OperatingSystemHook::OperatingSystemHook()
@@ -155,8 +152,8 @@ namespace windows
          s_hhook = nullptr;
          s_poperatingsystemhook = nullptr;
       }
-   } // namespace subsystem
+   } // namespace subsystem_win32
 
-} // namespace windows
+} // namespace subsystem_win32
 
 

@@ -25,50 +25,56 @@
 #pragma once
 //#define __TEXTBOX_H_
 
-#include "apex/innate_subsystem_win32/Control.h"
-#include "apex/innate_subsystem_win32/Tooltip.h"
+#include "apex/innate_subsystem/TextBox.h"
+#include "innate_subsystem_win32/_common_header.h"
+
 
 
 namespace innate_subsystem_win32
 {
-    class TextBox : public Control
-    {
-    public:
-        ~TextBox();
+
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 TextBox : //public Control
+      virtual public window_implementation<::innate_subsystem::TextBoxInterface>
+   {
+   public:
+
+
+      TextBox();
+      ~TextBox();
     public:
 
         //
         // Text limit
         //
 
-        virtual character_count getTextLengthLimit();
-        virtual void setTextLengthLimit(character_count limit);
+      virtual character_count getTextLengthLimit() override;
+      virtual void setTextLengthLimit(character_count limit) override;
 
         //
         // Methods for multiline textboxes
         //
 
-        virtual int getCurrentLineIndex();
-        virtual int getLineCount();
+        virtual int getCurrentLineIndex() override;
+        virtual int getLineCount() override;
 
         //
         // Get / set caret position
         //
 
-        virtual int getCaretPos();
-        virtual void setCaretPos(int h, int v);
+        virtual int getCaretPos() override;
+        virtual void setCaretPos(int h, int v) override;
 
         //
         // Text selection
         //
 
-        virtual void selectText(size_t startPos, size_t endPos);
+        virtual void selectText(character_count startPos, character_count endPos) override;
 
         //
         // Tooltip methods
         //
 
-        virtual void showBalloonTip(Tooltip *tip);
+        virtual void showBalloonTip(innate_subsystem::TooltipInterface *tip) override;
     };
 
 

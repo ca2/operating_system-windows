@@ -31,9 +31,9 @@
 
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
+   namespace subsystem_win32
    {
 
       /**
@@ -81,7 +81,7 @@ namespace windows
       };
 
 
-   } // namespace subsystem
-}// namespace windows
+   } // namespace subsystem_win32
+}// namespace subsystem_win32
 
 

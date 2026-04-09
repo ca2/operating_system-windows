@@ -5,45 +5,95 @@
 #include "subsystem.h"
 #include "node/Shell.h"
 #include "node/WTS.h"
+#include "node/PipeServer.h"
+#include <wincrypt.h>
+
+#pragma comment (lib, "Crypt32.lib")
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
+
+subsystem::subsystem()
    {
 
 
-      subsystem::subsystem()
-      {
+
+   }
+
+
+   subsystem::~subsystem()
+   {
+
+
+   }
+
+    WTS* subsystem::wts()
+   {
+
+       if (!m_pwts)
+       {
+
+           construct_newø(m_pwts);
+
+       }
+
+       return m_pwts;
+
+
+   }
+
+
+    PipeServer * subsystem::pipe_server()
+   {
+
+       if (!m_ppipeserver)
+       {
+
+           construct_newø(m_ppipeserver);
+
+       }
+
+       return m_ppipeserver;
+
+
+   }
+
+
+   bool subsystem::EncryptData(const ::string& input, ::memory & output)
+{
+   DATA_BLOB inBlob;
+   DATA_BLOB outBlob;
+
+   inBlob.pbData = (unsigned char*)input.data();
+   inBlob.cbData = (DWORD)input.size();
+
+   if (!CryptProtectData(&inBlob, nullptr, nullptr, nullptr, nullptr, 0, &outBlob))
+      return false;
+
+   output.assign(outBlob.pbData, outBlob.cbData);
+   LocalFree(outBlob.pbData);
+   return true;
+}
+
+   bool subsystem::DecryptData(const memory & input, ::string& output)
+{
+   DATA_BLOB inBlob;
+   DATA_BLOB outBlob;
+
+   inBlob.pbData = (unsigned char*)input.data();
+   inBlob.cbData = (DWORD)input.size();
+
+   if (!CryptUnprotectData(&inBlob, nullptr, nullptr, nullptr, nullptr, 0, &outBlob))
+      return false;
+
+   output.assign((char*)outBlob.pbData, outBlob.cbData);
+   LocalFree(outBlob.pbData);
+   return true;
+}
 
 
 
-      }
+}//namespace subsystem_win32
 
-
-      subsystem::~subsystem()
-      {
-
-
-      }
-
-
-       ::windows::WTS* subsystem::wts()
-      {
-
-          if (!m_pwts)
-          {
-
-              construct_newø(m_pwts);
-
-          }
-
-          return m_pwts;
-
-
-      }
-
-
-   }//namespace subsystem
-} // namespace windows
 

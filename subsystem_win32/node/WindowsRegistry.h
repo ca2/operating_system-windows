@@ -27,7 +27,7 @@
 
 #include "subsystem_win32/node/WindowsRegistryKey.h"
 
-namespace windows
+namespace subsystem_win32
 {
    class CLASS_DECL_SUBSYSTEM_WIN32 WindowsRegistry
    {
@@ -46,4 +46,4 @@ namespace windows
       WindowsRegistry();
       ~WindowsRegistry();
    };
-} // namespace windows
+} // namespace subsystem_win32

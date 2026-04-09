@@ -29,9 +29,7 @@
 #include "subsystem_win32/node/ProcessHandle.h"
 
 
-namespace  windows
-{
-   namespace subsystem
+   namespace subsystem_win32
    {
       /**
        * Enables you to start and stop local processes.
@@ -127,7 +125,7 @@ namespace  windows
          ::string m_path;
          ::string m_args;
 
-         ::pointer < ::windows::subsystem::ProcessHandle > m_pprocesshandle;
+         ::pointer < ::subsystem_win32::ProcessHandle > m_pprocesshandle;
          HANDLE m_hThread;
 
          HANDLE m_hStopWait;
@@ -143,4 +141,3 @@ namespace  windows
 
       //// __PROCESSMANAGER_H__
    } // namespace  subsystem
-} // namespace windows

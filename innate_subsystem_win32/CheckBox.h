@@ -26,11 +26,15 @@
 #pragma once
 
 
-#include "apex/innate_subsystem_win32/Control.h"
+#include "apex/innate_subsystem/CheckBox.h"
+#include "innate_subsystem_win32/_common_header.h"
+
 
 namespace innate_subsystem_win32
 {
-    class CheckBox : public Control
+
+    class CheckBox :
+        virtual public window_implementation<::innate_subsystem::CheckBoxInterface >
     {
     public:
         virtual bool isChecked();

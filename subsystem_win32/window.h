@@ -22,7 +22,7 @@ namespace win32
 
 
          class CLASS_DECL_ACME_WINDOWING_WIN32 window :
-            virtual public ::windows::window
+            virtual public ::subsystem_win32::window
          {
          public:
 

@@ -29,12 +29,9 @@
 #include <AccCtrl.h>
 
 
-namespace windows
+namespace subsystem_win32
 {
-
-   namespace subsystem
-   {
-      /**
+          /**
        * Contains the security information associated with an object.
        */
       class SecurityDescriptor :
@@ -87,6 +84,5 @@ namespace windows
       //private:
          SECURITY_DESCRIPTOR m_sd;
       };
-   }//namespace subsystem
-   //#endif
-} // namespace windows
+
+} // namespace subsystem_win32

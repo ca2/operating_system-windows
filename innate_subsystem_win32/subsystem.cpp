@@ -3,115 +3,128 @@
 //
 #include "framework.h"
 #include "subsystem.h"
+#include "acme/platform/user_interaction_sink.h"
+#include "acme/operating_system/windows/user.h"
 
-
-namespace windows
-{
 
 namespace innate_subsystem_win32
 {
 
 
-   subsystem::subsystem()
-   {
+    subsystem::subsystem()
+    {
 
 
 
-   }
+    }
 
 
-   subsystem::~subsystem()
-   {
+    subsystem::~subsystem()
+    {
 
 
-   }
+    }
 
-   //
-   // ::subsystem::string_table * subsystem::string_table()
-   // {
-   //
-   //    if (!m_pstringtable)
-   //    {
-   //
-   //       constructø(m_pstringtable);
-   //
-   //    }
-   //
-   //    return m_pstringtable;
-   //
-   // }
-   //
-   //
-   //
-   // ::subsystem::resource_loader * subsystem::resource_loader()
-   // {
-   //
-   //    if (!m_presourceloader)
-   //    {
-   //
-   //       constructø(m_presourceloader);
-   //
-   //    }
-   //
-   //    return m_presourceloader;
-   //
-   // }
-   //
-   //
-   //
-   // ::subsystem::Registry * subsystem::registry()
-   // {
-   //
-   //    if (!m_pregistry)
-   //    {
-   //
-   //       construct_newø(m_pregistry);
-   //
-   //    }
-   //
-   //    return m_pregistry;
-   //
-   // }
-   //
-   //
-   // ::subsystem::Shell * subsystem::shell()
-   // {
-   //
-   //    if (!m_pshell)
-   //    {
-   //
-   //       constructø(m_pshell);
-   //
-   //    }
-   //
-   //    return m_pshell;
-   //
-   // }
-   //
-   // ::pointer < ::subsystem::SecurityIdentifier > subsystem::createSidFromString(const ::scoped_string & scopedstr)
-   // {
-   //
-   //    return nullptr;
-   //
-   // }
-
-
-   int subsystem::message_box(
-                   HWND hwnd,
-                   const ::scoped_string & scopedstrMessage,
-                   const ::scoped_string & scopedstrCaption,
-                   unsigned int uType)
-   {
-
-      auto iResult = ::MessageBox(hwnd, ::wstring(scopedstrMessage), ::wstring(scopedstrCaption), uType);
-
-      return iResult;
-
-   }
+    //
+    // ::subsystem::string_table * subsystem::string_table()
+    // {
+    //
+    //    if (!m_pstringtable)
+    //    {
+    //
+    //       constructø(m_pstringtable);
+    //
+    //    }
+    //
+    //    return m_pstringtable;
+    //
+    // }
+    //
+    //
+    //
+    // ::subsystem::resource_loader * subsystem::resource_loader()
+    // {
+    //
+    //    if (!m_presourceloader)
+    //    {
+    //
+    //       constructø(m_presourceloader);
+    //
+    //    }
+    //
+    //    return m_presourceloader;
+    //
+    // }
+    //
+    //
+    //
+    // ::subsystem::Registry * subsystem::registry()
+    // {
+    //
+    //    if (!m_pregistry)
+    //    {
+    //
+    //       construct_newø(m_pregistry);
+    //
+    //    }
+    //
+    //    return m_pregistry;
+    //
+    // }
+    //
+    //
+    // ::subsystem::Shell * subsystem::shell()
+    // {
+    //
+    //    if (!m_pshell)
+    //    {
+    //
+    //       constructø(m_pshell);
+    //
+    //    }
+    //
+    //    return m_pshell;
+    //
+    // }
+    //
+    // ::pointer < ::subsystem::SecurityIdentifier > subsystem::createSidFromString(const ::scoped_string & scopedstr)
+    // {
+    //
+    //    return nullptr;
+    //
+    // }
 
 
+    int subsystem::message_box(
+                    const ::user_interaction_sink & userinteractionsink,
+                    const ::scoped_string & scopedstrMessage,
+                    const ::scoped_string & scopedstrCaption,
+                    unsigned int uType)
+    {
+
+        auto operatingsystemwindow = userinteractionsink.best_effort_operating_system_window();
+
+        auto hwnd = ::as_HWND(operatingsystemwindow);
+
+        auto iResult = ::MessageBox(hwnd, ::wstring(scopedstrMessage), ::wstring(scopedstrCaption), uType);
+
+        return iResult;
+
+    }
+
+
+    ::user::enum_key subsystem::virtual_key_code_to_user_key(int iVirtualKeyCode)
+    {
+        return ::windows::virtual_key_code_to_user_key(iVirtualKeyCode);
+        //switch (iVirtualKeyCode)
+        //{
+          //  case VK_RETURN:
+
+
+        //}
+    }
 
 }//namespace subsystem
 
 
-} // namespace windows
+

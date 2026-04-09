@@ -29,10 +29,10 @@
 #include "File.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
+
+
       AnonymousPipeFactory::AnonymousPipeFactory()
       : m_bufferSize(0),
         m_plogwriter(nullptr)
@@ -66,10 +66,10 @@ namespace windows
                                                ::pointer < ::subsystem::AnonymousPipe >&secondSide,
                                                bool secondSideIsInheritable)
       {
-         ::pointer < ::windows::subsystem::File > pfileFirstSideWrite;
-         ::pointer < ::windows::subsystem::File > pfileFirstSideRead;
-         ::pointer < ::windows::subsystem::File > pfileSecondSideWrite;
-         ::pointer < ::windows::subsystem::File > pfileSecondSideRead;
+         ::pointer < ::subsystem_win32::File > pfileFirstSideWrite;
+         ::pointer < ::subsystem_win32::File > pfileFirstSideRead;
+         ::pointer < ::subsystem_win32::File > pfileSecondSideWrite;
+         ::pointer < ::subsystem_win32::File > pfileSecondSideRead;
 
          construct_newø(pfileFirstSideWrite);
          construct_newø(pfileFirstSideRead);
@@ -81,7 +81,7 @@ namespace windows
          pfileSecondSideWrite->m_bOwned = true;
          pfileSecondSideRead->m_bOwned = true;
 
-         ::windows::subsystem::SecurityAttributes secAttr;
+         ::subsystem_win32::SecurityAttributes secAttr;
          secAttr.setInheritable();
 
          try {
@@ -127,5 +127,5 @@ namespace windows
          secondSide = panonymouspipeSecond;
          secondSide->initialize(this);
       }
-   } // namespace subsystem
-} // namespace windows
+
+} // namespace subsystem_win32

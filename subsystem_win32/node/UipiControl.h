@@ -28,7 +28,7 @@
 #include "subsystem_win32/_common_header.h"
 //#include "log_writer/LogWriter.h"
 
-namespace windows
+namespace subsystem_win32
 {
    // This class allow to control the uipi for the current process.
    class CLASS_DECL_SUBSYSTEM_WIN32 UipiControl
@@ -50,4 +50,4 @@ namespace windows
    };
 
    //// __UIPICONTROL_H__
-} // namespace windows
+} // namespace subsystem_win32

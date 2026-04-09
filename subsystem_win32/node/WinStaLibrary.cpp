@@ -26,9 +26,9 @@
 #include "WinStaLibrary.h"
 #include "DynamicLibrary.h"
 
-
-namespace  windows
+namespace subsystem_win32
 {
+
    WinStaLibrary::WinStaLibrary()
    : m_winStationConnectW(NULL)
    {
@@ -75,6 +75,7 @@ namespace  windows
 
       return m_winStationConnectW(server, connectSessionId, activeSessionId, password, unknown);
    }
-} // namespace  windows
+
+} //namespace subsystem_win32
 
 

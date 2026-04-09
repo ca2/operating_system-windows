@@ -27,7 +27,7 @@
 #include "VersionInfo.h"
 //#include <vector>
 
-namespace windows
+namespace subsystem_win32
 {
    VersionInfo::VersionInfo(const ::file::path & pathToFile)
    {
@@ -86,5 +86,5 @@ namespace windows
    {
       return m_productVersionString;
    }
-} // namespace windows
+} // namespace subsystem_win32
 

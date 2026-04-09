@@ -4,71 +4,72 @@
 #include "framework.h"
 #include "ImageList.h"
 #include "innate_ui_win32/icon.h"
+#include "drawing/Icon.h"
 
-namespace windows
+
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem_win32
+
+   ImageList::ImageList()
    {
 
-      ImageList::ImageList()
+
+      m_himagelist = nullptr;
+
+   }
+
+
+   ImageList::~ImageList()
+   {
+
+      destroyImageList();
+
+   }
+
+
+   void ImageList::initializeImageList()
+   {
+
+
+
+   }
+
+
+   void ImageList::createImageList(const ::int_size & size, int flags, int iInitialSize, int iGrow)
+   {
+     m_himagelist = ImageList_Create(size.cx,
+                           size.cy,
+                                                  flags, iInitialSize,iGrow);
+
+
+   }
+
+
+   void ImageList::destroyImageList()
+   {
+
+      if (!m_himagelist)
       {
 
-
-         m_himagelist = nullptr;
-
-      }
-
-
-      ImageList::~ImageList()
-      {
-
-         destroyImageList();
+         return;
 
       }
+      ImageList_Destroy(m_himagelist);
+      m_himagelist = nullptr;
+
+   }
 
 
-      void ImageList::initializeImageList()
-      {
+   void ImageList::addIcon(innate_subsystem::IconInterface * picon)
+   {
+
+      auto piconWin32 = picon->impl<::innate_subsystem_win32::Icon>();
+
+      auto hicon = piconWin32->m_hicon;
+
+      ImageList_AddIcon(m_himagelist, hicon);
+
+   }
 
 
-
-      }
-
-
-      void ImageList::createImageList(const ::int_size & size, int flags, int iInitialSize, int iGrow)
-      {
-        m_himagelist = ImageList_Create(size.cx,
-                              size.cy,
-                                                     flags, iInitialSize,iGrow);
-
-
-      }
-
-
-      void ImageList::destroyImageList()
-      {
-
-         if (!m_himagelist)
-         {
-
-            return;
-
-         }
-         ImageList_Destroy(m_himagelist);
-         m_himagelist = nullptr;
-
-      }
-
-
-      void ImageList::addIcon(innate_ui::icon* pinnateuiicon)
-      {
-
-         ::cast < ::innate_ui_win32::icon > picon = pinnateuiicon;
-
-         auto hicon = picon->m_hicon;
-
-      }
-
-
-   }// namespace innate_subsystem_win32
-}// namnamespace  windows
+}// namespace innate_subsystem_win32

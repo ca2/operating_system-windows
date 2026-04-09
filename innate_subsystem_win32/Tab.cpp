@@ -22,29 +22,29 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//#include "framework.h"
+#include "framework.h"
 #include "Tab.h"
-namespace windows
-{
-   namespace innate_subsystem_win32
-   {
-      Tab::Tab()
-      : m_dialog(NULL)
-      {
-         m_caption.setString(_T(""));
-      }
-
-      Tab::Tab(BaseDialog *dialog, const TCHAR *caption)
-      : m_dialog(dialog)
-      {
-         m_caption.setString(caption);
-      }
-
-      void Tab::setVisible(bool visible)
-      {
-         if (m_dialog != NULL) {
-            m_dialog->getControl()->setVisible(visible);
-         }
-      }
-   } // namespace innate_subsystem_win32
-} // namespace windows
+// namespace windows
+// {
+//    namespace innate_subsystem_win32
+//    {
+//       Tab::Tab()
+//       : m_dialog(NULL)
+//       {
+//          m_caption.setString(_T(""));
+//       }
+//
+//       Tab::Tab(BaseDialog *dialog, const TCHAR *caption)
+//       : m_dialog(dialog)
+//       {
+//          m_caption.setString(caption);
+//       }
+//
+//       void Tab::setVisible(bool visible)
+//       {
+//          if (m_dialog != NULL) {
+//             m_dialog->getControl()->setVisible(visible);
+//          }
+//       }
+//    } // namespace innate_subsystem_win32
+// } // namespace windows

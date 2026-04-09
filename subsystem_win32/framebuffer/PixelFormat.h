@@ -24,7 +24,7 @@
 
 #pragma once
 
-namespace subsystem
+namespace subsystem_win32
 {
 
 
@@ -52,6 +52,6 @@ struct CLASS_DECL_SUBSYSTEM_WIN32 PixelFormat
 
 //// __PIXELFORMAT_H__
 ///
-} // namespace subsystem
+} // namespace subsystem_win32
 
 

@@ -23,18 +23,23 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-#ifndef _COMMON_CONTROLS_EX_H_
-#define _COMMON_CONTROLS_EX_H_
+#pragma once
+//#ifndef _COMMON_CONTROLS_EX_H_
+//#define _COMMON_CONTROLS_EX_H_
 
-#include "util/Exception.h"
+////#include "util/Exception.h"
+///
+#include "innate_subsystem_win32/_common_header.h"
 
-class CommonControlsEx
+namespace innate_subsystem_win32
 {
-public:
-  CommonControlsEx();
-  virtual ~CommonControlsEx();
+    class CommonControlsEx
+    {
+    public:
+        CommonControlsEx();
+        virtual ~CommonControlsEx();
 
-  static void init() throw(Exception);
-};
+        static void init();
 
-#endif
+    };
+} // namespace innate_subsystem_win32

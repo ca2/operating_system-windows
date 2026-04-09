@@ -22,34 +22,31 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//#include "framework.h"
+#include "framework.h"
 #include "Trackbar.h"
-namespace windows
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem_win32
+   Trackbar::Trackbar()
    {
-      Trackbar::Trackbar()
-      {
-      }
+   }
 
-      Trackbar::~Trackbar()
-      {
-      }
+   Trackbar::~Trackbar()
+   {
+   }
 
-      void Trackbar::setRange(long min, long max)
-      {
-         SendMessage(m_hwnd, TBM_SETRANGEMIN, FALSE, min);
-         SendMessage(m_hwnd, TBM_SETRANGEMAX, TRUE, max);
-      }
+   void Trackbar::setRange(long min, long max)
+   {
+      SendMessage(m_hwnd, TBM_SETRANGEMIN, FALSE, min);
+      SendMessage(m_hwnd, TBM_SETRANGEMAX, TRUE, max);
+   }
 
-      void Trackbar::setPos(long pos)
-      {
-         SendMessage(m_hwnd, TBM_SETPOS, TRUE, pos);
-      }
+   void Trackbar::setPos(long pos)
+   {
+      SendMessage(m_hwnd, TBM_SETPOS, TRUE, pos);
+   }
 
-      long Trackbar::getPos()
-      {
-         return (long)SendMessage(m_hwnd, TBM_GETPOS, 0, 0);
-      }
-   } // namespace innate_subsystem_win32
-} // namespace windows
+   long Trackbar::getPos()
+   {
+      return (long)SendMessage(m_hwnd, TBM_GETPOS, 0, 0);
+   }
+} // namespace innate_subsystem_win32

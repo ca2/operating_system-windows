@@ -31,9 +31,10 @@
 #include <crtdbg.h>
 
 #include "DynamicLibrary.h"
+#include "File.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
 
     WTS::WTS()
@@ -166,16 +167,16 @@ namespace windows
 
       if (m_WTSQueryUserToken != 0) {
          if (!m_WTSQueryUserToken(sessionId, &token)) {
-            throw SystemException("WTSQueryUserToken error:");
+            throw ::subsystem::SystemException("WTSQueryUserToken error:");
          }
       }
       else {
          if (m_userProcessToken == INVALID_HANDLE_VALUE) {
-            throw SystemException("No console user process id specified");
+            throw ::subsystem::SystemException("No console user process id specified");
          }
          if (!DuplicateTokenEx(m_userProcessToken, 0, NULL, SecurityImpersonation,
            TokenPrimary, &token)) {
-            throw SystemException("Could not duplicate token");
+            throw ::subsystem::SystemException("Could not duplicate token");
            }
       }
       return token;
@@ -275,7 +276,10 @@ namespace windows
 
    void WTS::duplicatePipeClientToken(HANDLE pipeHandle)
    {
-      ::subsystem::PipeImpersonatedThread impThread(pipeHandle);
+      ::subsystem::PipeImpersonatedThread impThread;
+       ::subsystem_win32::File filePipeHandle;
+       filePipeHandle.m_handle = pipeHandle;
+       impThread.initialize_pipe_impersonated_thread(&filePipeHandle);
       impThread.resume();
       impThread.waitUntilImpersonated();
       if (!impThread.getImpersonationSuccess()) {
@@ -287,7 +291,7 @@ namespace windows
       }
 
       HANDLE threadHandle = OpenThread(THREAD_QUERY_INFORMATION, FALSE,
-                                       impThread.getThreadId());
+                                       impThread.getThreadId().m_i);
       if (threadHandle == 0) {
          throw ::subsystem::SystemException("Can't open thread to duplicate"
                                " impersonate token");
@@ -321,7 +325,7 @@ namespace windows
       CloseHandle(threadHandle);
    }
 
-   void WTS::initialize(::subsystem::LogWriter *log)
+   void WTS::initialize_wts(::subsystem::LogWriter *log)
    {
       _ASSERT(!m_initialized);
 
@@ -476,4 +480,4 @@ namespace windows
    // WTS::WTS()
    // {
    // }
-}  // namespace windows
+}  // namespace subsystem_win32

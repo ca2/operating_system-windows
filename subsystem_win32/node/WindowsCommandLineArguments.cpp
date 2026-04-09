@@ -28,7 +28,7 @@
 
 #include <shellapi.h>
 
-namespace windows
+namespace subsystem_win32
 {
    WindowsCommandLineArguments::WindowsCommandLineArguments()
    {
@@ -79,6 +79,6 @@ namespace windows
    // WindowsCommandLineArguments::~WindowsCommandLineArguments()
    // {
    // }
-} // namespace windows
+} // namespace subsystem_win32
 
 

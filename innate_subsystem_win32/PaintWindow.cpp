@@ -23,8 +23,8 @@
 //
 #include "framework.h"
 #include "PaintWindow.h"
-namespace windows
-{
+#include "drawing/DeviceContext.h"
+
    namespace innate_subsystem_win32
    {
       PaintWindow::PaintWindow()
@@ -36,30 +36,30 @@ namespace windows
       {
       }
 
-      HDC PaintWindow::getHDCPaint()
+      ::pointer < innate_subsystem::DeviceContextInterface > PaintWindow::getPaintDeviceContext()
       {
          if (!m_bIsDraw) {
             return 0;
          }
-         return m_hdc;
+         return m_pdevicecontext;
       }
 
       void PaintWindow::onPaint(DeviceContext *dc, PAINTSTRUCT *paintStruct) {
       }
 
-      bool PaintWindow::wndProc(unsigned int message, ::wparam wparam, ::lparam lparam)
-      {
-         if (message == WM_PAINT) {
-            m_hdc = BeginPaint(m_hWnd, &m_paintStruct);
-            m_bIsDraw = true;
-            DeviceContext dc(this);
-            onPaint(&dc, &m_paintStruct);
-            EndPaint(m_hWnd, &m_paintStruct);
-            m_bIsDraw = false;
-            return true;
-         }
-         return BaseWindow::wndProc(message, ::wparam, ::lparam);
-      }
+      // bool PaintWindow::wndProc(unsigned int message, ::wparam wparam, ::lparam lparam)
+      // {
+      //    if (message == WM_PAINT) {
+      //       construct_newø(m_pdevicecontext);
+      //       auto hwnd = ::as_HWND(operating_system_window());
+      //       m_pdevicecontext->m_hdc = BeginPaint(hwnd, &m_paintStruct);
+      //       m_bIsDraw = true;
+      //       //DeviceContext dc(this);
+      //       onPaint(m_pdevicecontext, &m_paintStruct);
+      //       EndPaint(hwnd, &m_paintStruct);
+      //       m_bIsDraw = false;
+      //       return true;
+      //    }
+      //    return Window::wndProc(message, wparam, lparam);
+      // }
    } // namespace innate_subsystem_win32
-} // namespace windows
-

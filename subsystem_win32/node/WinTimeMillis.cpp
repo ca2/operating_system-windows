@@ -25,7 +25,7 @@
 #include "subsystem_win32/_common_header.h"
 #include "WinTimeMillis.h"
 
-namespace windows
+namespace subsystem_win32
 {
    WinTimeMillis::WinTimeMillis(void)
    {
@@ -50,4 +50,4 @@ namespace windows
 
       return newTime - olderTime;
    }
-} // namespace windows
+} // namespace subsystem_win32

@@ -30,10 +30,8 @@
 
 #include "subsystem_win32/_common_header.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       class CLASS_DECL_REMOTING_COMMON CtrlAltDelSimulator :
             virtual public ::subsystem::implementation< CtrlAltDelSimulatorInterface >
 
@@ -48,5 +46,4 @@ namespace windows
 
       //// __CTRLALTDELSIMULATOR_H__
       ///
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32

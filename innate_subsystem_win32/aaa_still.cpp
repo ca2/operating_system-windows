@@ -130,7 +130,7 @@ namespace innate_ui_win32
 
          ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
 
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          pwindowing->m_windowmap[hwnd] = this;
 
@@ -181,7 +181,7 @@ namespace innate_ui_win32
          
          PAINTSTRUCT ps;
 
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          HDC hdc = ::BeginPaint(hwnd, &ps);
 

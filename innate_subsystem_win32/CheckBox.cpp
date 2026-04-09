@@ -22,22 +22,23 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//#include "framework.h"
+#include "framework.h"
 #include "CheckBox.h"
-namespace windows
+#include "Window.h"
+
+
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem_win32
-   {
-      bool CheckBox::isChecked()
-      {
-         return (SendMessage(m_hwnd, BM_GETCHECK, NULL, NULL) != 0);
-      }
+  bool CheckBox::isChecked()
+  {
+      auto hwnd = ::as_HWND(operating_system_window());
 
-      void CheckBox::check(bool checked)
-      {
-         SendMessage(m_hwnd, BM_SETCHECK, (checked) ? 1 : 0, NULL);
-      }
-   } // namespace innate_subsystem_win32
-}
+     return (SendMessage(hwnd, BM_GETCHECK, NULL, NULL) != 0);
+  }
 
-namespace windows
+  void CheckBox::check(bool checked)
+  {
+     auto hwnd = ::as_HWND(operating_system_window());
+     SendMessage(hwnd, BM_SETCHECK, (checked) ? 1 : 0, NULL);
+  }
+} // namespace innate_subsystem_win32

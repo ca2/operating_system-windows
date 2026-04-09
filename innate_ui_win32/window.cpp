@@ -49,7 +49,7 @@ namespace innate_ui_win32
       ()
          {
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             ::SetWindowTextW(hwnd, wstr);
 
@@ -65,7 +65,7 @@ namespace innate_ui_win32
    LONG_PTR window::_get_style()
    {
 
-      auto hwnd = _HWND();
+      auto hwnd =(HWND)  _HWND();
 
       return ::GetWindowLongPtr(hwnd, GWL_STYLE);
 
@@ -120,10 +120,10 @@ namespace innate_ui_win32
    void window::_get_class(WNDCLASSEXW & wndclassex)
    {
 
-      auto hinstanceWndProc = ::windows::get_window_procedure_hinstance();
+      auto hinstanceWndProc = ::windows::window::s_window_procedure_hinstance();
 
       wndclassex.hInstance = (HINSTANCE)hinstanceWndProc;
-      wndclassex.lpfnWndProc = &::windows::window_procedure;
+      wndclassex.lpfnWndProc = &::windows::window::s_window_procedure;
       wndclassex.style = CS_HREDRAW | CS_VREDRAW;
       //wndclassex.lpfnWndProc = WndProc;
       wndclassex.cbClsExtra = 0;
@@ -195,7 +195,7 @@ namespace innate_ui_win32
    int window::_get_id()
    {
 
-      auto hwnd = _HWND();
+      auto hwnd = (HWND) _HWND();
 
       return GetWindowLong(hwnd, GWL_ID);
 
@@ -261,7 +261,7 @@ namespace innate_ui_win32
             {
                //auto hmenu = GetSystemMenu(hwnd, true);
 
-               auto hwnd = _HWND();
+               auto hwnd =(HWND)  _HWND();
 
                m_hmenuSystem = GetSystemMenu(hwnd, false);
                WPARAM wparamHere = (WPARAM) m_hmenuSystem;
@@ -290,7 +290,7 @@ namespace innate_ui_win32
             return 0;
          }
          
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          return DefWindowProc(hwnd, message, wparam, lparam);
       }
@@ -327,7 +327,7 @@ namespace innate_ui_win32
          //   break;
          //default:
 
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          return DefWindowProc(hwnd, message, wparam, lparam);
          //}
@@ -345,7 +345,7 @@ namespace innate_ui_win32
          //// TODO: Add any drawing code that uses hdc here...
          //EndPaint(hWnd, &ps);
 
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          return DefWindowProc(hwnd, message, wparam, lparam);
       }
@@ -357,7 +357,7 @@ namespace innate_ui_win32
          //PostQuitMessage(0);
       default:
       {
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          return DefWindowProc(hwnd, message, wparam, lparam);
       }
@@ -389,7 +389,7 @@ namespace innate_ui_win32
             pwindowImpl->m_childa.add(this);
             pwindowImpl->m_iChildIdSeed++;
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             ::SetWindowLong(hwnd, GWL_ID, pwindowImpl->m_iChildIdSeed);
 
@@ -409,7 +409,7 @@ namespace innate_ui_win32
    void window::destroy_window()
    {
 
-      auto hwnd = _HWND();
+      auto hwnd =(HWND)  _HWND();
 
       if (::IsWindow(hwnd))
       {
@@ -449,7 +449,7 @@ namespace innate_ui_win32
       main_post([this]()
       {
 
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          ShowWindow(hwnd, SW_SHOW);
       
@@ -469,7 +469,7 @@ namespace innate_ui_win32
       main_post([this, puseractivationtoken]()
       {
 
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          ShowWindow(hwnd, SW_SHOW);
          
@@ -486,7 +486,7 @@ namespace innate_ui_win32
                 pwin32activationtoken->m_ptaskForeground->post([this]()
                 {
                       
-                  auto hwnd = _HWND();
+                  auto hwnd = (HWND) _HWND();
 
                   ::SetForegroundWindow(hwnd);
 
@@ -520,7 +520,7 @@ namespace innate_ui_win32
             if (p.x < 0 || p.y < 0)
             {
 
-               auto hwnd = _HWND();
+               auto hwnd = (HWND) _HWND();
 
                auto hwndParent  = GetParent(hwnd);
                RECT rParentClient;
@@ -538,7 +538,7 @@ namespace innate_ui_win32
                }
             }
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             ::SetWindowPos(hwnd, nullptr, p.x, p.y, 0, 0, SWP_NOSIZE);
 
@@ -554,7 +554,7 @@ namespace innate_ui_win32
       main_send([this, size]()
          {
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             ::SetWindowPos(hwnd, nullptr, 0, 0, size.cx, size.cy, SWP_NOMOVE);
 
@@ -583,7 +583,7 @@ namespace innate_ui_win32
 
             ::AdjustWindowRect(&r, (DWORD) _get_style(), FALSE);
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             ::SetWindowPos(hwnd, nullptr, 0, 0, width(r), height(r), SWP_NOMOVE);
 
@@ -602,7 +602,7 @@ namespace innate_ui_win32
       main_send([this]()
    {
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
       auto hwndParent = ::GetParent(hwnd);
 

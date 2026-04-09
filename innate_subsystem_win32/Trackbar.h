@@ -28,32 +28,26 @@
 
 #pragma once
 
-#include "apex/innate_subsystem_win32/Control.h"
-namespace windows
+#include "apex/innate_subsystem/Trackbar.h"
+#include "innate_subsystem_win32/_common_header.h"
+
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem_win32
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Trackbar : public window_implementation<innate_subsystem::TrackbarInterface>
    {
-      class Trackbar : public ::innate_subsystem_win32::Control
-      {
-      public:
-         Trackbar();
-         virtual ~Trackbar();
+   public:
+      Trackbar();
+      virtual ~Trackbar();
 
-         // Sets the range of minimum and maximum logical positions for the slider.
-         void setRange(long min, long max);
+      // Sets the range of minimum and maximum logical positions for the slider.
+      void setRange(long min, long max);
 
-         // Sets the current logical position of the slider.
-         void setPos(long pos);
+      // Sets the current logical position of the slider.
+      void setPos(long pos);
 
-         // Returns the current logical position of the slider.
-         long getPos();
-      };
+      // Returns the current logical position of the slider.
+      long getPos();
+   };
 
-      //#endif
-   } // namespace innate_subsystem_win32
-
-
-
-} // namespace windows
-
+} // namespace innate_subsystem_win32
 

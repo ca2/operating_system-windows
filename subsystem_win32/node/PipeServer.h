@@ -38,7 +38,7 @@
 typedef BOOL(WINAPI* pGetNamedPipeClientProcessId)(HANDLE Pipe, PULONG ClientProcessId);
 
 
-namespace windows
+namespace subsystem_win32
 {
    /**
     * Server fabric of pipes.
@@ -50,6 +50,24 @@ namespace windows
    virtual public ::particle
    {
    public:
+
+
+
+      //private:
+      static ::pointer < ::subsystem_win32::DynamicLibrary >  s_pdynamiclibraryKernel32;
+      static pGetNamedPipeClientProcessId s_GetNamedPipeClientProcessId;
+      static bool s_bInitialized;
+
+
+      //private:
+      ::string m_pipeName;
+      WindowsEvent m_winEvent;
+      DWORD m_milliseconds;
+      ::pointer < ::subsystem_win32::SecurityAttributes > m_psecurityattributes;
+      ::pointer < ::subsystem_win32::File > m_pfileServerPipe;
+      //HANDLE m_serverPipe;
+      unsigned int m_bufferSize;
+
       /**
        * Creates new pipe server ready to accept connections.
        *
@@ -104,27 +122,16 @@ namespace windows
       void createServerPipe();
 
       // returns True on every error
-      bool checkOtherSideBinaryName(HANDLE hPipe);
+      bool checkOtherSideBinaryName(::subsystem::FileInterface * pfilePipe);
 
       // loads GetNamedPipeClientProcessId (Vista or later) from kernel32
-      static void initialize();
-      static volatile bool m_initialized;
+      //void initialize();
 
-   //private:
-      static ::pointer < ::windows::subsystem::DynamicLibrary >  m_pdynamiclibraryKernel32;
-      static pGetNamedPipeClientProcessId m_GetNamedPipeClientProcessId;
+      static void s_initialize();
 
-   //private:
-      ::string m_pipeName;
-      WindowsEvent m_winEvent;
-      DWORD m_milliseconds;
-      ::pointer < ::windows::subsystem::SecurityAttributes > m_psecurityattributes;
-      ::pointer < ::windows::subsystem::File > m_pfileServerPipe;
-      //HANDLE m_serverPipe;
-      unsigned int m_bufferSize;
    };
 
    //// __PIPESERVER_H__
-} // namespace windows
+} // namespace subsystem_win32
 
 

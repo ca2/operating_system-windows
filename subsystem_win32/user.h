@@ -9,7 +9,7 @@
 #include "acme/_operating_system.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
 
 
@@ -44,7 +44,7 @@ namespace windows
 
    } // namespace acme
 
-} // namespace windows
+} // namespace subsystem_win32
 
 
 

@@ -23,38 +23,134 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
+#include "framework.h"
 #include "DeviceContext.h"
+#include "PaintWindow.h"
+#include "apex/innate_subsystem/drawing/GraphicsObject.h"
 
-DeviceContext::DeviceContext(HWND window)
-: m_hasOwnDC(false), m_wnd(window)
-{
-  m_dc = GetDC(window);
-}
 
-DeviceContext::DeviceContext(DeviceContext* compatibleDevice)
-: m_hasOwnDC(true)
+namespace innate_subsystem_win32
 {
-  m_wnd = compatibleDevice->m_wnd;
-  m_dc = CreateCompatibleDC(compatibleDevice->m_dc);
-}
 
-DeviceContext::DeviceContext(PaintWindow* pntWnd)
-: m_wnd(0), m_hasOwnDC(false)
-{
-  m_dc = pntWnd->getHDCPaint();
-}
+   class CarrierGraphicsObject :
+      virtual public ::innate_subsystem::GraphicsObject
+   {
+   public:
 
-DeviceContext::~DeviceContext()
-{
-  if (m_wnd) {
-    ReleaseDC(m_wnd, m_dc);
-  }
-  if (m_hasOwnDC) {
-    DeleteDC(m_dc);
-  }
-}
+      HGDIOBJ m_hgdiobj = nullptr;
 
-HGDIOBJ DeviceContext::selectObject(HGDIOBJ object)
-{
-  return SelectObject(m_dc, object);
-}
+
+      bool is_temporary_graphics_object() const override
+      {
+
+         return true;
+
+      }
+
+      void * _HGDIOBJ() override
+   {
+
+      return m_hgdiobj;
+
+   }
+
+   };
+
+   // DeviceContext::DeviceContext(HWND window)
+   // : m_hasOwnDC(false), m_wnd(window)
+   // {
+   //    m_dc = GetDC(window);
+   // }
+   //
+   // DeviceContext::DeviceContext(DeviceContext* compatibleDevice)
+   // : m_hasOwnDC(true)
+   // {
+   //    m_wnd = compatibleDevice->m_wnd;
+   //    m_dc = CreateCompatibleDC(compatibleDevice->m_dc);
+   // }
+   //
+   // DeviceContext::DeviceContext(PaintWindow* pntWnd)
+   // : m_wnd(0), m_hasOwnDC(false)
+   // {
+   //    m_dc = pntWnd->getHDCPaint();
+   // }
+
+   DeviceContext::DeviceContext() :
+   m_bHasOwnDC(false),
+   m_hwnd(nullptr),
+   m_hdc(nullptr)
+   {
+
+
+   }
+
+   DeviceContext::~DeviceContext()
+   {
+
+      destroyDeviceContext();
+   }
+
+
+   void DeviceContext::destroyDeviceContext()
+   {
+
+      if (m_hwnd && m_hdc) {
+         ReleaseDC(m_hwnd, m_hdc);
+      }
+      if (m_bHasOwnDC) {
+         DeleteDC(m_hdc);
+      }
+      m_hwnd = nullptr;
+      m_bHasOwnDC = false;
+      m_hdc = nullptr;
+
+   }
+
+
+   void DeviceContext::initialize_device_context(const ::operating_system::window & operatingsystemwindow)
+   {
+
+      destroyDeviceContext();
+      m_hwnd = ::as_HWND(operatingsystemwindow);
+      m_hdc = ::GetDC(m_hwnd);
+   }
+
+
+   void DeviceContext::initialize_device_context(::innate_subsystem::DeviceContextInterface* pdevicecontext)
+   {
+      destroyDeviceContext();
+      m_bHasOwnDC = true;
+      ::cast < ::innate_subsystem_win32::DeviceContext > pdevicecontextWin32 = pdevicecontext;
+      m_hwnd = pdevicecontextWin32->m_hwnd;
+      m_hdc = ::CreateCompatibleDC(pdevicecontextWin32->m_hdc);
+   }
+
+
+   void DeviceContext::initialize_device_context(innate_subsystem::PaintWindowInterface* ppaintwindow)
+   {
+      destroyDeviceContext();
+      auto pdevicecontextPaint = ppaintwindow->getPaintDeviceContext();
+      auto pdevicecontextWin32 = pdevicecontextPaint-> impl<::innate_subsystem_win32::DeviceContext >() ;
+      m_hdc = pdevicecontextWin32->m_hdc;
+   }
+
+   HGDIOBJ DeviceContext::_selectObject2(HGDIOBJ object)
+   {
+      return SelectObject(m_hdc, object);
+   }
+
+   ::pointer < ::innate_subsystem::GraphicsObject>DeviceContext::selectObject(::innate_subsystem::GraphicsObject * pgraphicsobjectNew)
+   {
+
+      auto pgraphicsobjectOld = create_newø < ::innate_subsystem_win32::CarrierGraphicsObject >();
+
+      pgraphicsobjectOld->m_hgdiobj = _selectObject2((HGDIOBJ) pgraphicsobjectNew->_HGDIOBJ());
+
+      return pgraphicsobjectOld;
+
+   }
+
+} // namespace innate_subsystem_win32
+
+
+

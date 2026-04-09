@@ -23,48 +23,47 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-#ifndef _TAB_H_
-#define _TAB_H_
-
-#include "BaseDialog.h"
-#include "Control.h"
-#include "util/StringStorage.h"
-
-class Tab
-{
-public:
-  Tab();
-  Tab(BaseDialog *dialog, const TCHAR *caption);
-
-  //
-  // Access methods to protected members
-  //
-
-  void setCaption(const TCHAR *caption) { m_caption.setString(caption); }
-
-  const TCHAR *getCaption() {
-    return m_caption.getString();
-  }
-
-  void setDialog(BaseDialog *dialog) { m_dialog = dialog; }
-  BaseDialog *getDialog() { return m_dialog; }
-
-  //
-  // Method return true if tab has dialog
-  //
-
-  bool isOk() { return m_dialog != NULL; }
-
-  //
-  // Changes visible state of dialog donates by this tab
-  //
-
-  void setVisible(bool visible);
-
-protected:
-
-  BaseDialog *m_dialog;
-  StringStorage m_caption;
-};
-
-#endif
+#pragma once
+//
+// //#include "BaseDialog.h"
+// //#include "Control.h"
+// //#include "util/StringStorage.h"
+//
+// class Tab
+// {
+// public:
+//   Tab();
+//   Tab(BaseDialog *dialog, const TCHAR *caption);
+//
+//   //
+//   // Access methods to protected members
+//   //
+//
+//   void setCaption(const TCHAR *caption) { m_caption.setString(caption); }
+//
+//   const TCHAR *getCaption() {
+//     return m_caption.getString();
+//   }
+//
+//   void setDialog(BaseDialog *dialog) { m_dialog = dialog; }
+//   BaseDialog *getDialog() { return m_dialog; }
+//
+//   //
+//   // Method return true if tab has dialog
+//   //
+//
+//   bool isOk() { return m_dialog != NULL; }
+//
+//   //
+//   // Changes visible state of dialog donates by this tab
+//   //
+//
+//   void setVisible(bool visible);
+//
+// protected:
+//
+//   BaseDialog *m_dialog;
+//   StringStorage m_caption;
+// };
+//
+// #endif

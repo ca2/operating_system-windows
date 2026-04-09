@@ -26,7 +26,7 @@
 
 #include <string.h>
 
-namespace subsystem
+namespace subsystem_win32
 {
    PixelFormat::PixelFormat()
    {
@@ -54,4 +54,4 @@ namespace subsystem
              blueShift    == pf.blueShift &&
              bigEndian    == pf.bigEndian;
    }
-} // namespace subsystem
+} // namespace subsystem_win32

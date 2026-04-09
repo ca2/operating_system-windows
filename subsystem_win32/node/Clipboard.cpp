@@ -25,10 +25,8 @@
 #include "subsystem_win32/_common_header.h"
 #include "Clipboard.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       Clipboard::Clipboard()
         : m_hndClipboard(0), m_hwnd(nullptr)
       {
@@ -164,5 +162,5 @@ namespace windows
          return newChars;
 
       }
-   } // namespace  subsystem
-} // namespace windows
+
+} // namespace subsystem_win32

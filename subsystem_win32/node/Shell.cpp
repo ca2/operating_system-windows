@@ -28,11 +28,11 @@
 #include <shellapi.h>
 
 
-namespace windows
+namespace subsystem_win32
 {
 
-namespace subsystem
-{
+// namespace subsystem_win32
+// {
    Shell::Shell()
    {
    }
@@ -71,6 +71,6 @@ namespace subsystem
          throw ::subsystem::SystemException(ret);
       }
    }
-} // namespace subsystem
+// } // namespace subsystem_win32
 
-} // namespace windows
+} // namespace subsystem_win32

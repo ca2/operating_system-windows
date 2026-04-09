@@ -22,13 +22,13 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//#include "framework.h"
+#include "framework.h"
 #include "CommonControlsEx.h"
+#include "acme/subsystem/Exception.h"
+//#include "util/CommonHeader.h"
 
-#include "util/CommonHeader.h"
-
-namespace windows
-{
+//namespace windows
+//{
    namespace innate_subsystem_win32
    {
       CommonControlsEx::CommonControlsEx()
@@ -51,8 +51,8 @@ namespace windows
          iccsex.dwSize = sizeof(INITCOMMONCONTROLSEX);
 
          if (::InitCommonControlsEx(&iccsex) != TRUE) {
-            throw Exception(_T("Cannot initialize common controls ex."));
+            throw ::subsystem::Exception("Cannot initialize common controls ex.");
          }
       }
    } // namespace innate_subsystem_win32
-} // namespace windows
+//} // namespace windows

@@ -25,22 +25,27 @@
 //
 #pragma once
 
-#include "acme/_operating_system.h"
+#include "innate_subsystem_win32/_common_header.h"
 
-class WindowProcHolder
+namespace innate_subsystem_win32
 {
-public:
-  WindowProcHolder();
-  virtual ~WindowProcHolder();
+   class WindowProcHolder :
+   virtual public ::particle
+   {
+   public:
+      WindowProcHolder();
+      virtual ~WindowProcHolder();
 
-protected:
-  virtual LRESULT windowProc(HWND hWnd, unsigned int uMsg, ::wparam wparam, ::lparam lparam, bool *useDefWindowProc) = 0;
+   protected:
+      virtual LRESULT windowProc(HWND hWnd, unsigned int uMsg, ::wparam wparam, ::lparam lparam, bool *useDefWindowProc) = 0;
 
-  static LRESULT CALLBACK defWindowProc(HWND hWnd, unsigned int uMsg, ::wparam wparam, ::lparam lparam);
+      static LRESULT CALLBACK defWindowProc(HWND hWnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam);
 
-  friend class NotifyIconWindow;
-};
+      friend class NotifyIconWindow;
+   };
 
+
+} // namespace innate_subsystem_win32
 
 
 

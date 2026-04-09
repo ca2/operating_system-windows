@@ -27,52 +27,55 @@
 
 #include "acme/subsystem/node/Pipe.h"
 #include "subsystem_win32/node/WindowsEvent.h"
-//#include "remoting/remoting_common/thread/LocalMutex.h"
 
-namespace windows
+
+namespace subsystem_win32
 {
-   namespace subsystem
+   // This class is not an interface but is a class that contain common
+   // methods/source codes for derived classes to work with pipe handles.
+   class CLASS_DECL_SUBSYSTEM_WIN32 Pipe :
+   virtual public ::subsystem::implementation<::subsystem::PipeInterface>
    {
-      // This class is not an interface but is a class that contain common
-      // methods/source codes for derived classes to work with pipe handles.
-      class CLASS_DECL_SUBSYSTEM_WIN32 Pipe :
-      virtual public ::subsystem::Pipe
-      {
-      public:
-         unsigned int getMaxPortionSize();
-
-      //protected:
-         Pipe(unsigned int maxPortionSize);
-         Pipe();
-         ~Pipe() override;
+   public:
 
 
-         void initialize_pipe(unsigned int maxPortionSize) override;
+      // This mutex is to use for pipe handles that uses in the above functions.
+      // The mutex protect collision accesses to handle fields of derived classes.
+      critical_section m_criticalsectionPipe;
 
-         // This read and write functions is common way to read and write
-         // by pipe handles asynchronously.
-
-         // The pointer uses because the functions must have access to
-         // the same variable as in a derived class to rich a thread safe
-         // handle usage.
-         size_t readByFile(void *buffer, size_t len, ::subsystem::File * pfilePipe);
-         size_t writeByFile(const void *buffer, size_t len, ::subsystem::File * pfilePipe);
-
-         // This mutex is to use for pipe handles that uses in the above functions.
-         // The mutex protect collision accesses to handle fields of derived classes.
-         critical_section m_criticalsectionPipe;
-
-         WindowsEvent m_readEvent;
-         WindowsEvent m_writeEvent;
+      WindowsEvent m_readEvent;
+      WindowsEvent m_writeEvent;
 
       //private:
-         void checkPipeFile(::subsystem::File * pfilePipe);
 
-         unsigned long long m_totalWrote;
-         unsigned long long m_totalRead;
-         unsigned int m_maxPortionSize;
-      };
+      unsigned long long m_totalWrote;
+      unsigned long long m_totalRead;
+      unsigned int m_maxPortionSize;
 
-      //// __PIPE_H__
-   } // namespace subsystem
-} // namespace windows
+
+   //protected:
+//         Pipe(unsigned int maxPortionSize);
+      Pipe();
+      ~Pipe() override;
+
+
+      void initialize_pipe(unsigned int maxPortionSize) override;
+
+
+      unsigned int getMaxPortionSize() override;
+
+      // This read and write functions is common way to read and write
+      // by pipe handles asynchronously.
+
+      // The pointer uses because the functions must have access to
+      // the same variable as in a derived class to rich a thread safe
+      // handle usage.
+      size_t readByFile(void *buffer, size_t len, ::subsystem::FileInterface * pfilePipe) override;
+      size_t writeByFile(const void *buffer, size_t len, ::subsystem::FileInterface * pfilePipe) override;
+
+
+      void checkPipeFile(::subsystem::FileInterface * pfilePipe) override;
+
+   };
+
+} // namespace subsystem_win32

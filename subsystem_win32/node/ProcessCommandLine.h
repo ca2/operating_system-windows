@@ -24,55 +24,52 @@
 
 #pragma once
 
-#include "acme/subsystem/ProcessCommandLine.h"
+#include "acme/subsystem/node/ProcessCommandLine.h"
 #include "subsystem_win32/_common_header.h"
 //#include "subsystem_win32/node/WindowsCommandLineArguments.h"
 
-namespace windows
-{
+ namespace subsystem_win32
+ {
+     // This class is a primitive command line parser
+     class CLASS_DECL_SUBSYSTEM_WIN32 ProcessCommandLine :
+        virtual public ::subsystem::implementation < ::subsystem::ProcessCommandLineInterface >
+     {
+     public:
+
+        //protected:
+        ::pointer < WindowsCommandLineArguments > m_pwindowscommandlinearguments;
+
+        ::string_array m_strParam;
+        ::array_base<::pair<::string, ::string>> m_strParams;
 
 
-    namespace subsystem
-    {
-        // This class is a primitive command line parser
-        class CLASS_DECL_SUBSYSTEM_WIN32 ProcessCommandLine :
-           virtual public ::subsystem::implementation < ProcessCommandLineInterface >
-        {
-        public:
-            ProcessCommandLine();
-            virtual ~ProcessCommandLine();
+         ProcessCommandLine();
+          ~ProcessCommandLine() override;
 
-            // returns the number of arguments in command line
-            // for example, program: help
-            size_t getArgumentsCount();
+         // returns the number of arguments in command line
+         // for example, program: help
+         ::collection::count getArgumentsCount() override;
 
-            // returns the number of options in command line
-            // for example, -V=123456
-            size_t getOptionsCount();
+         // returns the number of options in command line
+         // for example, -V=123456
+         ::collection::count getOptionsCount() override;
 
-            // returns the value of parameter by valName
-            bool findOptionValue(const ::string valName, ::string &  strOut);
+         // returns the value of parameter by valName
+         bool findOptionValue(const ::scoped_string & valName, ::string &  strOut) override;
 
-            // returns the argument value with index
-            bool getArgument(size_t index, ::string &  strOut);
+         // returns the argument value with index
+         bool getArgument(::collection::index index, ::string &  strOut) override;
 
-            // returns the option value with index
-            bool getOption(size_t index, ::string &  strOut);
-
-            //protected:
-            ::pointer < WindowsCommandLineArguments > m_pwindowscommandlinearguments;
-
-            ::string_array m_strParam;
-            ::array_base<::pair<::string, ::string>> m_strParams;
-
-            //private:
-            void optionParser(::string & out);
-
-        };
-
-    } // namespace subsystem
+         // returns the option value with index
+         bool getOption(::collection::index index, ::string &  strOut) override;
 
 
-} // namespace windows
+         //private:
+         void optionParser(::string & out);
+
+     };
+
+} // namespace subsystem_win32
+
 
 

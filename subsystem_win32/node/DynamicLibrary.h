@@ -30,44 +30,41 @@
 
 //#include "acme/subsystem/Exception.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
+   /**
+   Dynamic library class.
+   */
+   class CLASS_DECL_SUBSYSTEM_WIN32 DynamicLibrary :
+   virtual public ::subsystem::implementation<::subsystem::DynamicLibraryInterface>
    {
+   public:
       /**
-      Dynamic library class.
+      Load dynamic library with specified filename.
+      @param filename path to library file.
+      @throws ::remoting::Exception on error.
       */
-      class CLASS_DECL_SUBSYSTEM_WIN32 DynamicLibrary :
-      virtual public ::subsystem::implementation<::subsystem::DynamicLibraryInterface>
-      {
-      public:
-         /**
-         Load dynamic library with specified filename.
-         @param filename path to library file.
-         @throws ::remoting::Exception on error.
-         */
-         //DynamicLibrary(const ::scoped_string & scopedstrFilename);
-         DynamicLibrary();
-         ~DynamicLibrary() override;
+      //DynamicLibrary(const ::scoped_string & scopedstrFilename);
+      DynamicLibrary();
+      ~DynamicLibrary() override;
 
 
-         void initialize_dynamic_library(const scoped_string& scopedstrFilename) override;
+      void initialize_dynamic_library(const scoped_string& scopedstrFilename) override;
 
-         // Use the init() function after default constructor calling to load
-         // a library before the getProcAddress() function calling.
-         void init(const ::scoped_string & scopedstrFilename) override;
+      // Use the init() function after default constructor calling to load
+      // a library before the getProcAddress() function calling.
+      void init(const ::scoped_string & scopedstrFilename) override;
 
-         /**
-         Gets procedure address.
-         @param procName procedure name.
-         @return address of procedure or 0 if failed.
-         */
-         void * getProcAddress(const char *procName) override;
+      /**
+      Gets procedure address.
+      @param procName procedure name.
+      @return address of procedure or 0 if failed.
+      */
+      void * getProcAddress(const char *procName) override;
 
-      //protected:
-         HMODULE m_module;
-      };
+   //protected:
+      HMODULE m_module;
+   };
 
-   } // namespace subsystem
+} // namespace subsystem_win32
 
-} // namespace windows

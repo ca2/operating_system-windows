@@ -25,38 +25,46 @@
 //
 #pragma once
 
-#include "apex/innate_subsystem/drawing/Graphics.h"
-#include "apex/innate_subsystem/drawing/Bitmap.h"
+
+#include "apex/innate_subsystem/drawing/BitmapGraphics.h"
 
 
-namespace innate_subsystem
+
+namespace innate_subsystem_win32
 {
    //
    // Object that creates bitmap with specified size and allow to
    // draw into in through Graphics class methods.
-   class BitmapGraphics : public Graphics
+   class BitmapGraphics :
+      virtual public ::subsystem::implementation<::innate_subsystem::BitmapGraphicsInterface>
    {
    public:
+
+
       // Creates BitmapGraphics object with bitmap complatible with specified dc and
       // with specified size.
-      BitmapGraphics(DeviceContext *complatibleDC, const ::int_size & size);
+      //BitmapGraphics(DeviceContext *pdevicecontextCompatible, const ::int_size & size);
+      BitmapGraphics();
       // Destroys bitmap and graphics object.
-      virtual ~BitmapGraphics();
+      ~BitmapGraphics() override;
+
+
+      void initialize_bitmap_graphics(innate_subsystem::DeviceContextInterface* pdevicecontextCompatible, const int_size& size) override;
 
       // Returns target bitmap that we paint.
-      Bitmap *getBitmap();
+      ::innate_subsystem::BitmapInterface *getBitmap() override;
 
-      void beginPaint();
-      void endPaint();
+      void beginPaint() override;
+      void endPaint() override;
 
    //protected:
-      // bool m_isPainting;
-      // Bitmap *m_bitmap;
-      // HGDIOBJ m_oldBitmap;
+      bool m_isPainting;
+      ::pointer < ::innate_subsystem_win32::Bitmap > m_pbitmap;
+      ::pointer < ::innate_subsystem::GraphicsObject > m_pgraphicsobjectOldBitmap;
    };
 
 
 
 
 
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32

@@ -25,8 +25,6 @@
 #include "TextBox.h"
 
 
-namespace windows
-{
    namespace innate_subsystem_win32
    {
       TextBox::~TextBox()
@@ -38,12 +36,12 @@ namespace windows
          SendMessage(m_hwnd, EM_LINESCROLL, h, v);
       }
 
-      size_t TextBox::getTextLengthLimit()
+      character_count TextBox::getTextLengthLimit()
       {
          return SendMessage(m_hwnd, EM_GETLIMITTEXT, 0, 0);
       }
 
-      void TextBox::setTextLengthLimit(size_t n)
+      void TextBox::setTextLengthLimit(character_count n)
       {
          SendMessage(m_hwnd, EM_SETLIMITTEXT, n, 0);
       }
@@ -67,14 +65,13 @@ namespace windows
          return 0;
       }
 
-      void TextBox::selectText(size_t startPos, size_t endPos)
+      void TextBox::selectText(character_count startPos, character_count endPos)
       {
-         SendMessage(getWindow(), EM_SETSEL, startPos, endPos);
+         SendMessage((HWND)_HWND(), EM_SETSEL, startPos, endPos);
       }
 
-      void TextBox::showBalloonTip(Tooltip *tip)
+      void TextBox::showBalloonTip(innate_subsystem::TooltipInterface *tip)
       {
          tip->showTooltip(this);
       }
    } // namespace innate_subsystem_win32
-} // namespace windows

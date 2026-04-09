@@ -30,10 +30,8 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       /**
        * Enables you to start and stop processes in interactive console session.
        *
@@ -77,5 +75,5 @@ namespace windows
          LogWriter *m_log;
          bool m_connectRdpSession;
       };
-   } // namespace subsystem
-}// namespace windows
+   } // namespace subsystem_win32
+}// namespace subsystem_win32

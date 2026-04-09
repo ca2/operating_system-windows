@@ -25,33 +25,52 @@
 //
 #pragma once
 
-namespace innate_subsystem
+
+#include "apex/innate_subsystem/drawing/Bitmap.h"
+#include "subsystem_win32/_common_header.h"
+
+namespace innate_subsystem_win32
 {
-   class Bitmap
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Bitmap :
+   virtual public ::subsystem::implementation<innate_subsystem::BitmapInterface>
+
    {
    public:
+      // // Creates empty bitmap with specified size.
+      // Bitmap(const ::int_size & size);
+      // // Creates compatible with dc bitmap with specified size.
+      // Bitmap(HDC dc, const ::int_size & size);
+      // // Creates bitmap from HBITMAP object.
+      // Bitmap(HBITMAP bitmap);
+      // // Destroys bitmap object.
+
+      Bitmap();
+      ~Bitmap() override;
+
+
       // Creates empty bitmap with specified size.
-      Bitmap(const ::int_size & size);
+      void initialize_bitmap(const int_size& size) override;
       // Creates compatible with dc bitmap with specified size.
-      Bitmap(HDC dc, const ::int_size & size);
+      void initialize_bitmap(innate_subsystem::DeviceContextInterface* pdevicecontext, const int_size& size) override;
       // Creates bitmap from HBITMAP object.
-      Bitmap(HBITMAP bitmap);
-      // Destroys bitmap object.
-      virtual ~Bitmap();
+      void initialize_bitmap(BitmapInterface* pbitmap) override;
 
       // Returns bitmap width.
-      int getWidth() const;
+      int_size getSize() const override;
       // Returns bitmap height.
-      int getHeight() const;
-   protected:
-      HBITMAP m_bitmap;
+      //int getHeight() const;
 
-      friend class Icon;
-      friend class Graphics;
-      friend class BitmapGraphics;
+      void destroyGraphicsObject() override;
+
+   //protected:
+      HBITMAP m_hbitmap;
+
+      // friend class Icon;
+      // friend class Graphics;
+      // friend class BitmapGraphics;
    };
 
 
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32
 
 

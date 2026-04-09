@@ -30,10 +30,8 @@
 
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       Service *Service::g_service = 0;
 
       void WINAPI Service::ServiceMain(DWORD dwArgc, LPTSTR *lpszArgv)
@@ -123,5 +121,4 @@ namespace windows
             throw ::subsystem::SystemException();
          }
       }
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32

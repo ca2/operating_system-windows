@@ -23,34 +23,52 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-#pragme once
+#pragma once
 
 
 //#include "util/CommonHeader.h"
 
-#include "apex/innate_subsystem/drawing/Bitmap.h"
+#include "apex/innate_subsystem/drawing/Icon.h"
+#include "subsystem_win32/_common_header.h"
 
-namespace innate_subsystem
+
+namespace innate_subsystem_win32
 {
-   class Icon
+
+
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Icon :
+      virtual public ::subsystem::implementation<::innate_subsystem::IconInterface>
    {
    public:
-      Icon();
-      Icon(HICON icon);
-      Icon(Bitmap *bitmap);
-      Icon(Bitmap *bitmap, Bitmap *mask);
-      Icon(DWORD icon);
-      virtual ~Icon();
 
-      HICON getHICON();
+      Icon();
+      // Icon(HICON icon);
+      // Icon(Bitmap *bitmap);
+      // Icon(Bitmap *bitmap, Bitmap *mask);
+      // Icon(DWORD icon);
+      ~Icon() override;
+
+      void * _HICON() override;
+
+      virtual void initialize_icon(::innate_subsystem::IconInterface * picon) override;
+      virtual void initialize_icon(::innate_subsystem::BitmapInterface *bitmap) override;
+      virtual void initialize_icon(::innate_subsystem::BitmapInterface *bitmap, ::innate_subsystem::BitmapInterface *mask) override;
+      virtual void initialize_icon(unsigned int icon) override;
+
+      //void initi(HICON icon);
+      //Icon(Bitmap *bitmap);
+      //Icon(Bitmap *bitmap, Bitmap *mask);
+      //Icon(DWORD icon);
 
    //protected:
-      void fromBitmap(Bitmap *bitmap, Bitmap *mask);
+      void fromBitmap(::innate_subsystem::BitmapInterface *bitmap, ::innate_subsystem::BitmapInterface *mask) override;
 
    // protected:
-   //    HICON m_icon;
-   //    bool m_hasOwnIcon;
+      HICON m_hicon;
+      bool m_bHasOwnIcon;
    };
-} // namespace innate_subsystem
+
+
+} // namespace innate_subsystem_win32
 
 

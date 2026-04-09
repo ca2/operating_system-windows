@@ -23,65 +23,64 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
+#include "framework.h"
 #include "NotifyIconWindow.h"
+#include "WindowProcHolder.h"
 
-namespace windows
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem_win32
+   NotifyIconWindow::NotifyIconWindow()
+   //: m_wph(0)
    {
-      NotifyIconWindow::NotifyIconWindow()
-      : m_wph(0)
-      {
-         //
-         // Register window class
-         //
+      //
+      // Register window class
+      //
 
-         WNDCLASS wc;
+      WNDCLASS wc;
 
-         wc.style = 0;
-         wc.lpfnWndProc = WindowProcHolder::defWindowProc;
-         wc.cbClsExtra = 0;
-         wc.cbWndExtra = 0;
-         wc.hInstance = GetModuleHandle(0);
-         wc.hIcon = NULL;
-         wc.hCursor = NULL;
-         wc.hbrBackground = NULL;
-         wc.lpszMenuName = NULL;
-         wc.lpszClassName = _T("NotifyIconWindowClass");
+      wc.style = 0;
+      wc.lpfnWndProc = WindowProcHolder::defWindowProc;
+      wc.cbClsExtra = 0;
+      wc.cbWndExtra = 0;
+      wc.hInstance = GetModuleHandle(0);
+      wc.hIcon = NULL;
+      wc.hCursor = NULL;
+      wc.hbrBackground = NULL;
+      wc.lpszMenuName = NULL;
+      wc.lpszClassName = _T("NotifyIconWindowClass");
 
-         ATOM atom = RegisterClass(&wc);
+      ATOM atom = RegisterClass(&wc);
 
-         //
-         // Create window
-         //
+      //
+      // Create window
+      //
 
-         m_window = CreateWindow((LPCTSTR)atom,
-                                 (LPCTSTR)_T("NotifyIconWindowTitle"),
-                                 WS_OVERLAPPED,
-                                 CW_USEDEFAULT, CW_USEDEFAULT,
-                                 CW_USEDEFAULT, CW_USEDEFAULT,
-                                 NULL, NULL, GetModuleHandle(0), NULL);
+      m_window = CreateWindow((LPCTSTR)atom,
+                              (LPCTSTR)_T("NotifyIconWindowTitle"),
+                              WS_OVERLAPPED,
+                              CW_USEDEFAULT, CW_USEDEFAULT,
+                              CW_USEDEFAULT, CW_USEDEFAULT,
+                              NULL, NULL, GetModuleHandle(0), NULL);
 
-         SetWindowLongPtr(m_window, GWLP_USERDATA, (LONG_PTR)m_wph);
-      }
+      SetWindowLongPtr(m_window, GWLP_USERDATA, (LONG_PTR)m_pwindowprocholder.m_p);
+   }
 
-      NotifyIconWindow::~NotifyIconWindow()
-      {
-         setWindowProcHolder(NULL);
+   NotifyIconWindow::~NotifyIconWindow()
+   {
+      setWindowProcHolder(NULL);
 
-         //DestroyWindow(m_window);
-      }
+      //DestroyWindow(m_window);
+   }
 
-      HWND NotifyIconWindow::getWindow()
-      {
-         return m_window;
-      }
+   ::operating_system::window NotifyIconWindow::getWindow()
+   {
+      return ::as_operating_system_window(m_window);
+   }
 
-      void NotifyIconWindow::setWindowProcHolder(WindowProcHolder *wph)
-      {
-         m_wph = wph;
+   void NotifyIconWindow::setWindowProcHolder(WindowProcHolder *wph)
+   {
+      m_pwindowprocholder = wph;
 
-         SetWindowLongPtr(m_window, GWLP_USERDATA, (LONG_PTR)m_wph);
-      }
-   } // namespace innate_subsystem_win32
-} // namespace windows
+      SetWindowLongPtr(m_window, GWLP_USERDATA, (LONG_PTR)m_pwindowprocholder.m_p);
+   }
+} // namespace innate_subsystem_win32

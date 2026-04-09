@@ -26,9 +26,8 @@
 #pragma once
 
 
-#include "acme/subsystem/_common_header.h"
-//#include <commctrl.h>
-#include "apex/innate_subsystem_win32/Control.h"
+#include "apex/innate_subsystem/ListView.h"
+#include "innate_subsystem_win32/_common_header.h"
 
 //
 // TODO: Maybe use class for this?
@@ -36,20 +35,40 @@
 
 namespace innate_subsystem_win32
 {
-   typedef struct
-   {
-      int index;
-      unsigned long long tag;
-   } ListViewItem;
+   // typedef struct
+   // {
+   //    int index;
+   //    unsigned long long tag;
+   // } ListViewItem;
 
    //
    // ListView class can be used only for listviews
    // that view data as report.
    //
 
-   class ListView : public Control
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 ListView :
+   virtual public window_implementation<innate_subsystem::ListViewInterface>
    {
    public:
+
+      // private:
+      //    // Kind of sorting: ascending or descending
+      bool m_sortAscending;
+      //
+      //    //
+      //    // Is list view not sorted, then m_sortClumnIndex is negative,
+      //    // else him contained index of column.
+      //    //
+      int m_sortColumnIndex;
+
+      LPARAM m_lparamSort;
+      //
+      //    //
+      //    // This pointer to compareFunction. By default is 0.
+      //    //
+      //PFNLVCOMPARE m_compareItem;
+
+      ::function < int(::lparam, ::lparam) > m_compare;
 
       ListView();
 
@@ -57,119 +76,119 @@ namespace innate_subsystem_win32
       // Adds new column to list view
       //
 
-      virtual void addColumn(int index, const char *caption, int width, int fmt);
-      virtual void addColumn(int index, const char *caption, int width);
+      virtual void addColumn(int index, const char *caption, int width, int fmt)override ;
+      virtual void addColumn(int index, const char *caption, int width)override ;
 
       //
       // Returns list view item structure with specified index
       //
 
-      virtual ListViewItem getItem(int index);
+      virtual ::innate_subsystem::ListViewItem getItem(int index)override ;
 
       //
       // Returns list view items count
       //
 
-      virtual int getCount();
+      virtual int getCount()override ;
 
       //
       // Inserts new item to list view with specified index and caption
       //
 
-      virtual void addItem(int index, const char *caption);
+      virtual void addItem(int index, const char *caption)override ;
 
       //
       // Inserts new item to list view with specified index, caption
       // and user data(tag)
       //
 
-      virtual void addItem(int index, const char *caption, ::lparam tag);
+      virtual void addItem(int index, const char *caption, ::lparam tag)override ;
 
       //
       // Inserts new item to list view
       //
 
-      virtual void addItem(int index, const char *caption, ::lparam tag, int imageIndex);
+      virtual void addItem(int index, const char *caption, ::lparam tag, int imageIndex)override ;
 
       //
       // Removes item with specified index from list view
       //
 
-      virtual void removeItem(int i);
+      virtual void removeItem(int i)override ;
 
       //
       // Removes all list view items from list view
       //
 
-      virtual void clear();
+      virtual void clear()override ;
 
       //
       // Changes text of list view item subitem
       //
 
-      virtual void setSubItemText(int index, int subIndex, const char *caption);
+      virtual void setSubItemText(int index, int subIndex, const char *caption)override ;
 
       //
       // Changes user data (tag) of list view item with specified index
       //
 
-      virtual void setItemData(int index, ::lparam tag);
+      virtual void setItemData(int index, ::lparam tag)override ;
 
       //
       // Returns user data of list view item with specified index
       //
 
-      virtual ::lparam getItemData(int index);
+      virtual ::lparam getItemData(int index)override ;
 
       //
       // Returns first selected list view item
       //
 
-      virtual ListViewItem getSelectedItem();
+      virtual ::innate_subsystem::ListViewItem getSelectedItem()override ;
 
       //
       // Returns index of first selected list view item
       //
 
-      virtual int getSelectedIndex();
+      virtual int getSelectedIndex()override ;
 
       //
       // Selectes list view item with specified index
       //
 
-      virtual void selectItem(int index);
+      virtual void selectItem(int index)override ;
 
       //
       // Changes full row select style of list view
       //
 
-      virtual void setFullRowSelectStyle(bool fullRowSelect);
+      virtual void setFullRowSelectStyle(bool fullRowSelect)override ;
 
       //
       // Enabled or disables multi selection on list view
       //
 
-      virtual void allowMultiSelection(bool allow);
+      virtual void allowMultiSelection(bool allow)override ;
 
       //
       // Returns count of selected items in list view
       //
 
-      virtual unsigned int getSelectedItemsCount();
+      virtual unsigned int getSelectedItemsCount()override ;
 
       //
       // Sets selected list view index to output indexes array
       //
 
-      virtual void getSelectedItemsIndexes(int *indexes);
+      virtual void getSelectedItemsIndexes(int *indexes)override ;
 
    //protected:
 
-      virtual void setExStyle(unsigned int style);
-      virtual unsigned int getExStyle();
+      virtual void setListViewExtendedStyle(unsigned int style)override ;
+      virtual unsigned int getListViewExtendedStyle()override ;
 
-      virtual void addExStyle(unsigned int style);
-      virtual void removeExStyle(unsigned int style);
+      virtual void addListViewExtendedStyle(unsigned int style)override ;
+      virtual void removeListViewExtendedStyle(unsigned int style)override ;
 
       //
       // This method sort list of item by column "columnIndex".
@@ -180,29 +199,25 @@ namespace innate_subsystem_win32
       //
       // For example, you need to call this method, if user changed parameters of sorting.
       //
-      //virtual void sort(int columnIndex, PFNLVCOMPARE compareItem);
+      void set_sort(int columnIndex,const ::function < int(::lparam, ::lparam) > & compare)override ;
 
+
+      //typedef int (CALLBACK *PFNLVCOMPARE)(LPARAM, LPARAM, LPARAM);
+
+
+      static int CALLBACK s_FNLVCOMPARE(LPARAM lparam1, LPARAM lparam2, LPARAM lparamSort);
       //
       // This method sort list of item by column m_sortColumIndex.
       // After add and removing elements, list may be not sorted.
       // For example, you need to call this method after add new element.
       //
-      virtual void sort();
+      void sort()override ;
 
-   // private:
-   //    // Kind of sorting: ascending or descending
-   //    bool m_sortAscending;
-   //
-   //    //
-   //    // Is list view not sorted, then m_sortClumnIndex is negative,
-   //    // else him contained index of column.
-   //    //
-   //    int m_sortColumnIndex;
-   //
-   //    //
-   //    // This pointer to compareFunction. By default is 0.
-   //    //
-   //    PFNLVCOMPARE m_compareItem;
+      bool _000OnNotify(windows_reflect_notify_t & notify) override;
+
+      void onAction() override;
+
+
    };
 
 } // namespace innate_subsystem_win32

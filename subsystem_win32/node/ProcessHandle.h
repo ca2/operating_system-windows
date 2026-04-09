@@ -29,12 +29,9 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-
-   namespace subsystem
-   {
-      // This class is a mere envelop for process handle that will automatically
+          // This class is a mere envelop for process handle that will automatically
       // closed at destructor calling.
       class CLASS_DECL_SUBSYSTEM_WIN32 ProcessHandle :
       virtual public ::subsystem::ProcessHandle
@@ -64,5 +61,4 @@ namespace windows
          //private:
          HANDLE m_hProcess;
       };
-   } // namespace subsystem
-} //namespace windows
+} //namespace subsystem_win32

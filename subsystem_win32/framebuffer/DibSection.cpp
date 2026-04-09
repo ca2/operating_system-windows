@@ -27,7 +27,7 @@
 #include "acme/subsystem/node/SystemException.h"
 
 
-namespace subsystem
+namespace subsystem_win32
 {
    DibSection::DibSection(const ::subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible)
    // : m_isOwnTargetDC(false),
@@ -238,5 +238,5 @@ namespace subsystem
       //    m_targetDC = 0;
       // }
    }
-} // namespace subsystem
+} // namespace subsystem_win32
 

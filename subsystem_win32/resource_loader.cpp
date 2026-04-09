@@ -27,7 +27,7 @@
 
 // #include aaa_<crtdbg.h>
 
-namespace subsystem
+namespace subsystem_win32
 {
 
    //resource_loader::resource_loader(HINSTANCE appInst)
@@ -111,7 +111,7 @@ namespace subsystem
    //}
 
 
-} // namespace subsystem
+} // namespace subsystem_win32
 
 
 

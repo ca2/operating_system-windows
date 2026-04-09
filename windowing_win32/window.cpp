@@ -407,7 +407,7 @@ namespace windowing_win32
    void window::destroy()
    {
 
-      auto hwnd = _HWND();
+      auto hwnd = (HWND) _HWND();
 
       WNDPROC pfnWndProc = WNDPROC(::GetWindowLongPtr(hwnd, GWLP_WNDPROC));
 
@@ -472,7 +472,7 @@ namespace windowing_win32
    //HWND window::_HWND() const 
    //{ 
 
-   //   auto hwnd = _HWND();
+   //   auto hwnd = (HWND) _HWND();
    //   
    //   return hwnd; 
    //
@@ -780,7 +780,7 @@ namespace windowing_win32
          if (puserinteraction->m_bEdgeGestureDisableTouchWhenFullscreen)
          {
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             SetTouchDisableProperty(hwnd, true);
 
@@ -790,7 +790,7 @@ namespace windowing_win32
 
       puserinteraction->m_ewindowflag += ::e_window_flag_is_window;
 
-      //auto hwnd = _HWND();
+      //auto hwnd = (HWND) _HWND();
 
       bool bUnicode = ::IsWindowUnicode(_HWND()) != false;
 
@@ -1734,7 +1734,7 @@ namespace windowing_win32
    //oswindow window::get_parent_oswindow() const
    //{
 
-   //   auto hwnd = _HWND();
+   //   auto hwnd = (HWND) _HWND();
 
    //   auto hwndParent = ::GetParent(hwnd);
 
@@ -1748,7 +1748,7 @@ namespace windowing_win32
    void window::set_parent(::windowing::window *pwindowParent)
    {
 
-      auto hwnd = _HWND();
+      auto hwnd = (HWND) _HWND();
 
       HWND hwndParent = nullptr;
 
@@ -2086,7 +2086,7 @@ namespace windowing_win32
 
       information() << "set_active_window";
 
-      auto hwnd = _HWND();
+      auto hwnd = (HWND) _HWND();
 
       if (!::SetActiveWindow(hwnd))
       {
@@ -2337,7 +2337,7 @@ namespace windowing_win32
          << [this, strType]()
          {
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             if (::IsWindowVisible(hwnd))
             {
@@ -2423,7 +2423,7 @@ namespace windowing_win32
 
       auto puserinteraction = user_interaction();
 
-      auto hwnd = _HWND();
+      auto hwnd = (HWND) _HWND();
       auto zorder = zorderParam;
       auto x = xParam;
       auto y = yParam;
@@ -4294,7 +4294,7 @@ namespace windowing_win32
    ::operating_system::window window::get_owner_operating_system_window()
    {
 
-      auto hwnd = _HWND();
+      auto hwnd = (HWND) _HWND();
 
       if (!::IsWindow(hwnd))
       {
@@ -4333,7 +4333,7 @@ namespace windowing_win32
    void window::set_owner(::windowing::window *pWndNewOwner)
    {
 
-      auto hwnd = _HWND();
+      auto hwnd = (HWND) _HWND();
 
       HWND hwndOwner = nullptr;
 
@@ -7951,7 +7951,7 @@ namespace windowing_win32
    float window::get_dpi_for_window()
    {
 
-      auto hwnd = _HWND();
+      auto hwnd = (HWND) _HWND();
 
       auto operatingsystemwindow = ::as_operating_system_window(hwnd);
 
@@ -8146,7 +8146,7 @@ namespace windowing_win32
          if (m_papplication->m_gpu.m_bUseSwapChainWindow)
          {
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             return ::DefWindowProc(hwnd, message, wparam, lparam);
 
@@ -8319,7 +8319,7 @@ namespace windowing_win32
          if (wparam > 0)
          {
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             information() << "activation window " << (iptr)hwnd;
 
@@ -8329,7 +8329,7 @@ namespace windowing_win32
          else
          {
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             information() << "(2) activation window " << (iptr)hwnd;
 
@@ -8355,7 +8355,7 @@ namespace windowing_win32
       //if (pimpl)
       {
 
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          if (__windows_message_bypass(hwnd, message, wparam, (iptr)lparam, lresult))
          {
@@ -8384,7 +8384,7 @@ namespace windowing_win32
 
             RECT r;
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             GetWindowRect(hwnd, &r);
 
@@ -8577,7 +8577,7 @@ namespace windowing_win32
             if (message == WM_GETTEXT)
             {
 
-               auto hwnd = _HWND();
+               auto hwnd = (HWND) _HWND();
 
                return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
@@ -8585,7 +8585,7 @@ namespace windowing_win32
             else if (message == WM_GETTEXTLENGTH)
             {
 
-               auto hwnd = _HWND();
+               auto hwnd = (HWND) _HWND();
 
                return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
@@ -8593,7 +8593,7 @@ namespace windowing_win32
             else if (message == WM_SETTEXT)
             {
 
-               auto hwnd = _HWND();
+               auto hwnd = (HWND) _HWND();
 
                return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
@@ -8685,7 +8685,7 @@ namespace windowing_win32
          else
          {
 
-            auto hwnd = _HWND();
+            auto hwnd = (HWND) _HWND();
 
             lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
 

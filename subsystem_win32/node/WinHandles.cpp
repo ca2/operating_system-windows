@@ -27,7 +27,7 @@
 //#include "Environment.h"
 #include "acme/subsystem/Exception.h"
 
-namespace windows
+namespace subsystem_win32
 {
    WinHandles::WinHandles()
    {
@@ -80,4 +80,4 @@ namespace windows
          throw;
       }
    }
-} // namespace windows
+} // namespace subsystem_win32

@@ -22,12 +22,10 @@ list(APPEND library_source
    _.cpp
    _.h
    _factory.cpp
-   button.cpp
-   button.h
-   dialog.cpp
-   dialog.h
-   framework.cpp
-   framework.h
+   #button.cpp
+   #button.h
+   #dialog.cpp
+   #dialog.h
    _factory.cpp
    BalloonTip.cpp
    BalloonTip.h
@@ -45,6 +43,8 @@ list(APPEND library_source
    DibFrameBuffer.h
    FilteredTextBox.cpp
    FilteredTextBox.h
+   framework.cpp
+   framework.h
    ImagedButton.cpp
    ImagedButton.h
    ImageList.cpp
@@ -101,7 +101,11 @@ list(APPEND library_source
    )
 
 
-add_library(${PROJECT_NAME} SHARED ${library_source})
+add_library(${PROJECT_NAME} SHARED ${library_source}
+   WindowCache.cpp
+   WindowCache.h
+   window_implementation.h
+   _common_header.h)
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
 

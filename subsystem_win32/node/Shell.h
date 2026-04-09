@@ -30,11 +30,8 @@
 
 
 //#include "SystemException.h"
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-
-   {
       /**
        * Wrapper over WinAPI shell functions.
        *
@@ -72,5 +69,5 @@ namespace windows
                           const ::scoped_string & scopedstrParameters,
                           const ::scoped_string & scopedstrworkDirectory) override;
       };
-   } // namespace windows
-} // namespace windows
+
+} // namespace subsystem_win32

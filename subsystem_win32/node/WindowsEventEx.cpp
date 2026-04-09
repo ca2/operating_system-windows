@@ -28,7 +28,7 @@
 #include <Aclapi.h>
 
 
-namespace windows
+namespace subsystem_win32
 {
    WindowsEventEx::WindowsEventEx(const ::scoped_string & scopedstrName)
    : WindowsEvent(scopedstrName)
@@ -54,6 +54,6 @@ namespace windows
          throw ::subsystem::Exception(errMess);
           }
    }
-} // namespace windows
+} // namespace subsystem_win32
 
 

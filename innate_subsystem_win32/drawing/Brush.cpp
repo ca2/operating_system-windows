@@ -23,22 +23,37 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
+#include "framework.h"
 #include "Brush.h"
 
-Brush::Brush()
-: m_brush(0)
+namespace innate_subsystem_win32
 {
-}
+   Brush::Brush()
+   : m_hbrush(nullptr)
+   {
+   }
 
-Brush::~Brush()
-{
-  release();
-}
+   Brush::~Brush()
+   {
 
-void Brush::release()
-{
-  if (m_brush != 0) {
-    DeleteObject(m_brush);
-    m_brush = 0;
-  }
-}
+      destroyGraphicsObject();
+
+   }
+
+
+   void *Brush::_HGDIOBJ()
+   {
+
+      return m_hbrush;
+
+   }
+
+
+   void Brush::destroyGraphicsObject()
+   {
+      if (m_hbrush) {
+         ::DeleteObject(m_hbrush);
+         m_hbrush = nullptr;
+      }
+   }
+} // namespace innate_subsystem_win32

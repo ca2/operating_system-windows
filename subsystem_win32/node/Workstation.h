@@ -31,31 +31,28 @@
 
 //#include "SystemException.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
+   /**
+    * Wrapper on WinAPI workstation functions.
+    */
+   class CLASS_DECL_SUBSYSTEM_WIN32 Workstation:
+         virtual public ::subsystem::Workstation
    {
-      /**
-       * Wrapper on WinAPI workstation functions.
-       */
-      class CLASS_DECL_SUBSYSTEM_WIN32 Workstation:
-            virtual public ::subsystem::Workstation
-      {
-      public:
+   public:
 
-         Workstation();
-         ~Workstation() override;
-         /**
-          * Locks workstation.
-          * @throws SystemException on fail.
-          */
-         void workstation_lock() override;
-         /**
-          * Logs off interactive user.
-          * @throws SystemException on fail.
-          * @remark caller must be run on interactive session.
-          */
-         void workstation_logOff()override;
-      };
-   } // namespace subsystem
-} // namespace windows
+      Workstation();
+      ~Workstation() override;
+      /**
+       * Locks workstation.
+       * @throws SystemException on fail.
+       */
+      void workstation_lock() override;
+      /**
+       * Logs off interactive user.
+       * @throws SystemException on fail.
+       * @remark caller must be run on interactive session.
+       */
+      void workstation_logOff()override;
+   };
+} // namespace subsystem_win32

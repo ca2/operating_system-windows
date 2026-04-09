@@ -26,7 +26,7 @@
 #include "WsaStartup.h"
 #include "acme/subsystem/Exception.h"
 
-namespace windows
+namespace subsystem_win32
 {
    WsaStartup::WsaStartup(BYTE minorVer, BYTE majorVer)
    {
@@ -40,5 +40,5 @@ namespace windows
    {
       WSACleanup();
    }
-} // namespace windows
+} // namespace subsystem_win32
 

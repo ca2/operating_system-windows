@@ -30,10 +30,8 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       /**
        * Pipe client factory.
        */
@@ -50,7 +48,6 @@ namespace windows
       };
 
       //// __PIPECLIENT_H__
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32
 
 

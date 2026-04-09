@@ -87,7 +87,7 @@ namespace innate_ui_win32
    void still::_create_child(window * pwindowParent)
    {
 
-      auto hwndParent = pwindowParent->_HWND();
+      auto hwndParent = (HWND) pwindowParent->_HWND();
 
       if (::is_null(hwndParent) || hwndParent == INVALID_HANDLE_VALUE)
       {
@@ -118,7 +118,7 @@ namespace innate_ui_win32
          (HINSTANCE)hinstanceParent,
          NULL);
 
-      if (!hwndResult || !_HWND() || hwndResult != _HWND())
+      if (!hwndResult || !_HWND() || hwndResult != (HWND) _HWND())
       {
 
          throw ::exception(error_failed);
@@ -130,11 +130,11 @@ namespace innate_ui_win32
 
          ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
 
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          pwindowing->m_windowmap[hwnd] = this;
 
-         SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LPARAM) & ::windows::window_procedure);
+         SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LPARAM) & ::windows::window::s_window_procedure);
 
       }
 
@@ -181,7 +181,7 @@ namespace innate_ui_win32
          
          PAINTSTRUCT ps;
 
-         auto hwnd = _HWND();
+         auto hwnd = (HWND) _HWND();
 
          HDC hdc = ::BeginPaint(hwnd, &ps);
 

@@ -19,3 +19,29 @@
 
 
 
+
+namespace innate_subsystem_win32
+{
+
+
+   class DeviceContext;
+   class Bitmap;
+   class BitmapGraphics;
+   class Brush;
+   class Graphics;
+   class Icon;
+   class Pen;
+   class SolidBrush;
+
+
+   class Window;
+
+   class Control;
+
+   class Dialog;
+
+
+   class WindowMessageHandler;
+
+
+} // namespace innate_subsystem_win32

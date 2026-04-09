@@ -22,31 +22,28 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//#include "framework.h"
+#include "framework.h"
 #include "ProgressBar.h"
 
 #include <commctrl.h>
-namespace windows
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem_win32
+   ProgressBar::ProgressBar()
    {
-      ProgressBar::ProgressBar()
-      {
-      }
+   }
 
-      ProgressBar::~ProgressBar()
-      {
-      }
+   ProgressBar::~ProgressBar()
+   {
+   }
 
-      void ProgressBar::setRange(WORD min, WORD max)
-      {
-         SendMessage(m_hwnd, PBM_SETRANGE, 0, MAKE::lparam(min, max));
-      }
+   void ProgressBar::setRange(WORD min, WORD max)
+   {
+      SendMessage(m_hwnd, PBM_SETRANGE, 0, MAKELPARAM(min, max));
+   }
 
-      void ProgressBar::setPos(WORD pos)
-      {
-         SendMessage(m_hwnd, PBM_SETPOS, (::wparam)pos, 0);
-      }
-   } // namespace innate_subsystem_win32
-} // namespace windows
+   void ProgressBar::setPos(WORD pos)
+   {
+      SendMessage(m_hwnd, PBM_SETPOS, (::wparam)pos, 0);
+   }
+} // namespace innate_subsystem_win32
 

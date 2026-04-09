@@ -31,95 +31,94 @@
 #include "subsystem_win32/node/WindowsEvent.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace  subsystem
+   /**
+    * NamedPipe transport.
+    *
+    * @author yuri, enikey.
+    */
+   class CLASS_DECL_SUBSYSTEM_WIN32 NamedPipe :
+      virtual public ::subsystem::NamedPipe
    {
+   public:
       /**
-       * NamedPipe transport.
-       *
-       * @author yuri, enikey.
+       * Creates pipe transport.
        */
-      class CLASS_DECL_SUBSYSTEM_WIN32 NamedPipe :
-         virtual public ::subsystem::NamedPipe,
-         virtual public Pipe
+      NamedPipe();
+      /**
+       * Destroys instance.
+       */
+      ~NamedPipe() override;
 
+      void initialize_pipe(unsigned int maxPortionSize) override;
+
+      void initialize_named_pipe(::subsystem::FileInterface* pfilePipe, unsigned int maxPortionSize, bool asServer) override;
+
+      // bool is_subsystem_implementation(void) const override
+      // {
+      //
+      //    return ::subsystem::NamedPipe::is_subsystem_implementation();
+      //
+      // }
+      // bool is_subsystem_composite(void) const override
+      // {
+      //
+      //    return ::subsystem::NamedPipe::is_subsystem_composite();
+      //
+      // }
+
+      unsigned int getMaxPortionSize() override
       {
-      public:
-         /**
-          * Creates pipe transport.
-          */
-         NamedPipe();
-         /**
-          * Destroys instance.
-          */
-         ~NamedPipe() override;
 
-         void initialize_pipe(unsigned int maxPortionSize) override;
+         return Pipe::getMaxPortionSize();
 
-         void initialize_named_pipe(::subsystem::FileInterface* pfilePipe, unsigned int maxPortionSize, bool asServer) override;
+      }
 
-         // bool is_subsystem_implementation(void) const override
-         // {
-         //
-         //    return ::subsystem::NamedPipe::is_subsystem_implementation();
-         //
-         // }
-         // bool is_subsystem_composite(void) const override
-         // {
-         //
-         //    return ::subsystem::NamedPipe::is_subsystem_composite();
-         //
-         // }
+      /**
+       * Closes transport.
+       *
+       * @throws ::remoting::Exception on fail.
+       */
+      void close() override;
 
-         unsigned int getMaxPortionSize() override
-         {
+      /**
+       * Reads data from pipe.
+       * Implemented from Channel interface.
+       * @param buffer buffer to receive data.
+       * @param len count of bytes to read.
+       * @throws ::io_exception on io error.
+       */
+      size_t read(void *buffer, size_t len) override;
 
-            return Pipe::getMaxPortionSize();
+      /**
+       * Writes data to pipe.
+       * Implemented from Channel interface.
+       * @param buffer buffer with data to write.
+       * @param len count of bytes to write.
+       * @throws ::io_exception on io error.
+       */
+      memsize defer_write(const void *buffer, memsize len) override;
 
-         }
+      size_t available() override;
 
-         /**
-          * Closes transport.
-          *
-          * @throws ::remoting::Exception on fail.
-          */
-         void close() override;
+      virtual ::subsystem::FileInterface * getFile() const override;
 
-         /**
-          * Reads data from pipe.
-          * Implemented from Channel interface.
-          * @param buffer buffer to receive data.
-          * @param len count of bytes to read.
-          * @throws ::io_exception on io error.
-          */
-         size_t read(void *buffer, size_t len) override;
+   //private:
+      void checkPipeFile() override;
 
-         /**
-          * Writes data to pipe.
-          * Implemented from Channel interface.
-          * @param buffer buffer with data to write.
-          * @param len count of bytes to write.
-          * @throws ::io_exception on io error.
-          */
-         memsize defer_write(const void *buffer, memsize len) override;
+      ::pointer < ::subsystem::File > m_pfilePipe;
+      critical_section m_criticalsectionPipe;
+      ::string m_pipeName;
 
-         size_t available() override;
+      WindowsEvent m_readEvent;
+      WindowsEvent m_writeEvent;
+      bool m_asServer;
+   };
 
-         virtual ::subsystem::FileInterface * getFile() const override;
 
-      //private:
-         void checkPipeFile() override;
+} // namespace subsystem_win32
 
-         ::pointer < ::subsystem::File > m_pfilePipe;
-         critical_section m_criticalsectionPipe;
-         ::string m_pipeName;
 
-         WindowsEvent m_readEvent;
-         WindowsEvent m_writeEvent;
-         bool m_asServer;
-      };
 
-      //// __NAMEDPIPE_H__
-   } // namespace subsystem
-} // namespace windows
+

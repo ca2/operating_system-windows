@@ -22,104 +22,106 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//#include "framework.h"
+#include "framework.h"
 #include "TabControl.h"
-#include "util/CommonHeader.h"
+#include "apex/innate_subsystem/Tab.h"
 #include <commctrl.h>
 
-namespace windows
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem_win32
+   TabControl::TabControl()
    {
-      TabControl::TabControl()
-      {
-      }
+   }
 
-      TabControl::~TabControl()
-      {
-         deleteAllTabs();
-      }
+   TabControl::~TabControl()
+   {
+      deleteAllTabs();
+   }
 
-      Tab *TabControl::getTab(int index)
-      {
-         if ((index < 0) || ((size_t)index > m_tabContainer.size() - 1)) {
-            return NULL;
-         }
-         return m_tabContainer.at(index);
+   innate_subsystem::TabInterface *TabControl::getTab(int index)
+   {
+      if ((index < 0) || ((size_t)index > m_tabContainer.size() - 1)) {
+         return NULL;
       }
+      return m_tabContainer[index];
+   }
 
-      void TabControl::addTab(BaseDialog *dialog, const TCHAR *caption)
-      {
-         Tab *tab = new Tab(dialog, caption);
-         m_tabContainer.push_back(tab);
-         TCITEM tcitem = {0};
-         tcitem.mask = TCIF_TEXT;
-         TCHAR fixedCaption[255];
-         _tcscpy(&fixedCaption[0], tab->getCaption());
-         tcitem.pszText = fixedCaption;
-         if (TabCtrl_InsertItem(getWindow(), m_tabContainer.size() - 1, &tcitem) == FALSE) {
-            //
-            // Handle error
-            // ...
-            //
-         }
+   void TabControl::addTab(innate_subsystem::DialogInterface *dialog, const char *caption)
+   {
+      auto ptab = create_newø<::innate_subsystem::Tab>();
+      ptab->initialize_tab(dialog, caption);
+      m_tabContainer.add(ptab);
+      TCITEM tcitem = {0};
+      tcitem.mask = TCIF_TEXT;
+      TCHAR fixedCaption[255];
+      ::wstring wstr(ptab->getCaption());
+      _tcscpy(&fixedCaption[0], wstr.c_str());
+      tcitem.pszText = fixedCaption;
+      if (TabCtrl_InsertItem((HWND) _HWND(), m_tabContainer.size() - 1, &tcitem) == FALSE) {
+         //
+         // Handle error
+         // ...
+         //
       }
+   }
 
-      void TabControl::showTab(int index)
-      {
-         int selectedIndex = getSelectedTabIndex();
-         if (selectedIndex >= 0) {
-            getTab(selectedIndex)->setVisible(false);
-         }
-         TabCtrl_SetCurSel(m_hwnd, index);
-         getTab(index)->setVisible(true);
+   void TabControl::showTab(int index)
+   {
+      int selectedIndex = getSelectedTabIndex();
+      if (selectedIndex >= 0) {
+         getTab(selectedIndex)->setVisible(false);
       }
+      TabCtrl_SetCurSel(m_hwnd, index);
+      getTab(index)->setVisible(true);
+   }
 
-      void TabControl::showTab(const BaseDialog *dialog)
-      {
-         for (size_t i = 0; i < m_tabContainer.size(); i++) {
-            if (m_tabContainer.at(i)->getDialog() == dialog) {
-               showTab((int)i);
-               return;
-            }
-         }
-         _ASSERT(FALSE);
-      }
-
-      void TabControl::deleteAllTabs()
-      {
-         for (size_t i = 0; i < m_tabContainer.size(); i++) {
-            Tab *tab = m_tabContainer.at(i);
-            delete tab;
-         }
-         m_tabContainer.clear();
-         TabCtrl_DeleteAllItems(getWindow());
-      }
-
-      void TabControl::removeTab(int index)
-      {
-         int i = 0;
-         for (TabContainer::iterator it = m_tabContainer.begin(); it != m_tabContainer.end(); it++) {
-            if (i == index) {
-               delete *it;
-               m_tabContainer.erase(it);
-               TabCtrl_DeleteItem(m_hwnd, index);
-               break;
-            }
-            i++;
+   void TabControl::showTab(innate_subsystem::DialogInterface *dialog)
+   {
+      for (size_t i = 0; i < m_tabContainer.size(); i++) {
+         if (m_tabContainer[i]->getDialog() == dialog) {
+            showTab((int)i);
+            return;
          }
       }
+      _ASSERT(FALSE);
+   }
 
-      int TabControl::getSelectedTabIndex()
-      {
-         int page = TabCtrl_GetCurSel(getWindow());
-         return page;
-      }
+   void TabControl::deleteAllTabs()
+   {
+      // for (size_t i = 0; i < m_tabContainer.size(); i++) {
+      //    Tab *tab = m_tabContainer.at(i);
+      //    delete tab;
+      // }
+      m_tabContainer.clear();
+      TabCtrl_DeleteAllItems(m_hwnd);
+   }
 
-      void TabControl::adjustRect(::int_rectangle &rect)
-      {
-         GetClientRect(m_hwnd, rect);
-         TabCtrl_AdjustRect(m_hwnd, FALSE, rect);
-      }
-   } // namespace innate_subsystem_win32
-} // namespace windows
+   void TabControl::removeTab(int index)
+   {
+      //int i = 0;
+      //for (TabContainer::iterator it = m_tabContainer.begin(); it != m_tabContainer.end(); it++) {
+        // if (i == index) {
+            //delete *it;
+            m_tabContainer.erase_at(index);
+            TabCtrl_DeleteItem(m_hwnd, index);
+        //    break;
+         //}
+         //i++;
+      //}
+   }
+
+   int TabControl::getSelectedTabIndex()
+   {
+      int page = TabCtrl_GetCurSel(m_hwnd);
+      return page;
+   }
+
+   void TabControl::adjustRect(::int_rectangle &rect)
+   {
+      RECT rc;
+      GetClientRect(m_hwnd, &rc);
+      TabCtrl_AdjustRect(m_hwnd, FALSE, &rc);
+      ::copy(&rect, &rc);
+
+   }
+} // namespace innate_subsystem_win32

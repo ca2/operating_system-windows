@@ -27,7 +27,7 @@
 
 #include "subsystem_win32/_common_header.h"
 
-namespace windows
+namespace subsystem_win32
 {
 
    typedef BOOL (WINAPI* pWinStationConnectW)(HANDLE, ULONG, ULONG, PCWSTR, ULONG);
@@ -38,7 +38,7 @@ namespace windows
    public:
 
 
-      ::pointer < ::windows::subsystem::DynamicLibrary > m_pdynamiclibraryWinSta;
+      ::pointer < ::subsystem_win32::DynamicLibrary > m_pdynamiclibraryWinSta;
 
       pWinStationConnectW m_winStationConnectW;
 
@@ -57,5 +57,5 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace subsystem_win32
 

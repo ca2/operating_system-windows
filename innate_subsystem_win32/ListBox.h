@@ -22,34 +22,38 @@
 //-------------------------------------------------------------------------
 //
 
-#ifndef _LIST_BOX_H_
-#define _LIST_BOX_H_
+#pragma once
 
-#include "Control.h"
-#include "util/StringStorage.h"
+#include "apex/innate_subsystem/ListBox.h"
+#include "innate_subsystem_win32/_common_header.h"
 
-class ListBox : public Control
+namespace innate_subsystem_win32
 {
-public:
-  ListBox();
-  ~ListBox();
-public:
-  void addString(const TCHAR *str);
-  void addString(const TCHAR *str, void *tag);
-  void getItemText(int index, StringStorage *storage);
-  void setItemText(int index, const TCHAR *str);
-  void insertString(int index, const TCHAR *str);
-  void insertString(int index, const TCHAR *str, ::lparam data);
-  void appendString(const TCHAR *str, ::lparam data);
-  void setItemData(int index, ::lparam data);
-  void removeString(int index);
-  int getSelectedIndex();
-  int getTopIndex();
-  void setTopIndex(int index);
-  void setSelectedIndex(int index);
-  ::lparam getItemData(int index);
-  int getCount();
-  void clear();
-};
 
-#endif
+
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 ListBox : public window_implementation<innate_subsystem::ListBoxInterface>
+   {
+   public:
+      ListBox();
+      ~ListBox()override ;
+      void addString(const char *str)override ;
+      void addString(const char *str, void *tag)override ;
+      ::string getItemText(int index)override ;
+      void setItemText(int index, const char *str)override ;
+      void insertString(int index, const char *str)override ;
+      void insertString(int index, const char *str, ::lparam data)override ;
+      void appendString(const char *str, ::lparam data)override ;
+      void setItemData(int index, ::lparam data)override ;
+      void removeString(int index)override ;
+      int getSelectedIndex()override ;
+      int getTopIndex()override ;
+      void setTopIndex(int index)override ;
+      void setSelectedIndex(int index)override ;
+      ::lparam getItemData(int index)override ;
+      int getCount()override ;
+      void clear()override ;
+   };
+} // innate_subsystem_win32
+
+   
+   

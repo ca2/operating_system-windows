@@ -28,28 +28,25 @@
 #include "acme/subsystem/node/File.h"
 #include "subsystem_win32/_common_header.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
+
+   class CLASS_DECL_SUBSYSTEM_WIN32 File :
+      virtual public ::subsystem::implementation<::subsystem::FileInterface>
    {
+   public:
+      File();
+      ~File() override;
 
-      class CLASS_DECL_SUBSYSTEM_WIN32 File :
-         virtual public ::subsystem::File
-      {
-      public:
-         File();
-         ~File() override;
+      HANDLE m_handle;
 
-         HANDLE m_handle;
+      bool m_bOwned;
 
-         bool m_bOwned;
+   };
 
-      };
-
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32
 
 
 CLASS_DECL_SUBSYSTEM_WIN32 HANDLE as_HANDLE(::subsystem::FileInterface * pfile);
-CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::windows::subsystem::File * pfile);
-CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::pointer < ::windows::subsystem::File > & pfile);
+CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::subsystem_win32::File * pfile);
+CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::pointer < ::subsystem_win32::File > & pfile);

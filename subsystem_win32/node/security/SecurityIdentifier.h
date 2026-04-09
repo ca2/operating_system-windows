@@ -31,10 +31,8 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       // /**
       //  * Top-level authority of a security identifier (SID).
       //  */
@@ -135,7 +133,5 @@ namespace windows
       //private:
          SID *m_sid;
       };
-   }// namespace subsystem
 
-   //#endif
-} // namespace windows
+} // namespace subsystem_win32

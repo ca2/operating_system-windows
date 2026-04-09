@@ -28,10 +28,8 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-
-
    class CLASS_DECL_SUBSYSTEM_WIN32 WindowsRegistryKey
    {
    public:
@@ -41,7 +39,7 @@ namespace windows
       // Default contructor for a defer initialization.
       WindowsRegistryKey();
 
-   //public:
+      //public:
 
       virtual ~WindowsRegistryKey();
 
@@ -152,4 +150,6 @@ namespace windows
 
       friend class Registry;
    };
-} // namespace windows
+
+
+}//  namespace subsystem_win332

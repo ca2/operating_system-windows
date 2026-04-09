@@ -36,7 +36,7 @@
 #include "subsystem_win32/_common_header.h"
 #include <WtsApi32.h>
 
-namespace windows
+namespace subsystem_win32
 {
    typedef DWORD (WINAPI *pWTSGetActiveConsoleSessionId)(void);
    typedef BOOL (WINAPI *pWTSQueryUserToken)(ULONG SessionId, PHANDLE phToken);
@@ -85,8 +85,8 @@ namespace windows
    {
    public:
 
-       ::pointer < ::windows::subsystem::DynamicLibrary > m_pdynamiclibraryKernel32;
-       ::pointer < ::windows::subsystem::DynamicLibrary > m_pdynamiclibraryWtsApi32;
+       ::pointer < ::subsystem_win32::DynamicLibrary > m_pdynamiclibraryKernel32;
+       ::pointer < ::subsystem_win32::DynamicLibrary > m_pdynamiclibraryWtsApi32;
        pWTSGetActiveConsoleSessionId m_WTSGetActiveConsoleSessionId;
        pWTSQueryUserToken m_WTSQueryUserToken;
        pWTSQuerySessionInformation m_WTSQuerySessionInformation;
@@ -195,6 +195,6 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace subsystem_win32
 
 

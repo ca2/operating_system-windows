@@ -24,41 +24,41 @@
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-#ifndef _BALLOON_TIP_H_
-#define _BALLOON_TIP_H_
-
-#include "Tooltip.h"
-#include "util/CommonHeader.h"
-#include <commctrl.h>
-
-namespace windows
-{
-   /**
-    * @deprecated, use ToolTip instead.
-    */
-   class BalloonTip : public Tooltip
-   {
-   public:
-      BalloonTip(const TCHAR* text, const TCHAR* caption);
-      BalloonTip();
-      virtual ~BalloonTip();
-
-      void showTooltip(Control* control);
-
-      void setText(const TCHAR* text);
-      void setTitle(const TCHAR* caption);
-
-      void getText(StringStorage* text) const;
-      void getTitle(StringStorage* title) const;
-
-      void setIconType(int iconType);
-      int getIconType() const;
-
-   protected:
-      StringStorage m_text;
-      StringStorage m_title;
-   };
-
-
-
-} // namespace windows
+// #ifndef _BALLOON_TIP_H_
+// #define _BALLOON_TIP_H_
+//
+// #include "Tooltip.h"
+// #include "util/CommonHeader.h"
+// #include <commctrl.h>
+//
+// namespace windows
+// {
+//    /**
+//     * @deprecated, use ToolTip instead.
+//     */
+//    class BalloonTip : public Tooltip
+//    {
+//    public:
+//       BalloonTip(const TCHAR* text, const TCHAR* caption);
+//       BalloonTip();
+//       virtual ~BalloonTip();
+//
+//       void showTooltip(Control* control);
+//
+//       void setText(const TCHAR* text);
+//       void setTitle(const TCHAR* caption);
+//
+//       void getText(StringStorage* text) const;
+//       void getTitle(StringStorage* title) const;
+//
+//       void setIconType(int iconType);
+//       int getIconType() const;
+//
+//    protected:
+//       StringStorage m_text;
+//       StringStorage m_title;
+//    };
+//
+//
+//
+// } // namespace windows

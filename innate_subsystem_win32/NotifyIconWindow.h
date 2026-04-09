@@ -29,12 +29,12 @@
 #include "acme/subsystem/_common_header.h"
 
 
-#include "apex/innate_subsystem_win32/WindowProcHolder.h"
+#include "innate_subsystem_win32/WindowProcHolder.h"
 
 namespace innate_subsystem_win32
 {
-   class NotifyIconWindowInterface :
-   virtual public ::subsystem::particle_interface
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 NotifyIconWindowInterface :
+   virtual public ::subsystem::particle_interface<NotifyIconWindowInterface>
    {
    public:
 
@@ -53,7 +53,7 @@ namespace innate_subsystem_win32
    };
 
    class NotifyIconWindow :
-      virtual public ::subsystem::composite<NotifyIconWindow
+      virtual public ::subsystem::composite<NotifyIconWindowInterface>
    {
    public:
 
@@ -65,8 +65,8 @@ namespace innate_subsystem_win32
       void setWindowProcHolder(WindowProcHolder *wph) override;
 
       //protected:
-      //  HWND m_window;
-      //WindowProcHolder *m_wph;
+       HWND m_window;
+      ::pointer < WindowProcHolder  > m_pwindowprocholder;
 
       //friend class NotifyIcon;
    };

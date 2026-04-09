@@ -28,33 +28,31 @@
 #include "acme/subsystem/node/SystemInformation.h"
 #include "subsystem_win32/_common_header.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
+   class CLASS_DECL_SUBSYSTEM_WIN32 SystemInformation :
+   virtual  public ::subsystem::SystemInformation
    {
-      class CLASS_DECL_SUBSYSTEM_WIN32 SystemInformation :
-      virtual  public ::subsystem::SystemInformation
-      {
-      public:
+   public:
 
-         // get rectangle of all desktop area
-         void getDesktopAllArea(int_rectangle & rectangle) override;
+      // get rectangle of all desktop area
+      void getDesktopAllArea(int_rectangle & rectangle) override;
 
-         // get rectangle of user desktop area
-         // without button 'Start' (only primary monitor).
-         bool getDesktopArea(int_rectangle & rectangle) override;
+      // get rectangle of user desktop area
+      // without button 'Start' (only primary monitor).
+      bool getDesktopArea(int_rectangle & rectangle) override;
 
-         // return true if StretchBlt is used
-         // in provided device
-         virtual bool _isSupportStretchBlt(HDC hdc);
+      // return true if StretchBlt is used
+      // in provided device
+      virtual bool _isSupportStretchBlt(HDC hdc);
 
-         // return how many bits per pixel
-         // for provided device
-         virtual int _getBitsPixel(HDC hdc);
+      // return how many bits per pixel
+      // for provided device
+      virtual int _getBitsPixel(HDC hdc);
 
-         // get the number of monitors that plugged
-         // into video card
-         int getMonitorCount() override;
-      };
-   } // namespace subsystem
-} // namespace  windows
+      // get the number of monitors that plugged
+      // into video card
+      int getMonitorCount() override;
+   };
+
+} // namespace subsystem_win32

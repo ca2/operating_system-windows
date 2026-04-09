@@ -29,10 +29,8 @@
 #include "subsystem_win32/_common_header.h"
 #include <Tlhelp32.h>
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       // Retrieves information of the parent process.
       class CLASS_DECL_SUBSYSTEM_WIN32 ParentProcess :
       virtual public ::subsystem::ParentProcess
@@ -60,6 +58,4 @@ namespace windows
 
       };
 
-      //// __PARENTPROCESS_H__
-   } // namespace  subsystem
-} // namespace windows
+} // namespace subsystem_win32

@@ -22,14 +22,22 @@
 //-------------------------------------------------------------------------
 //
 
-#ifndef __WINDOWMESSAGEHANDLER_H__
-#define __WINDOWMESSAGEHANDLER_H__
+#pragma once
 
-class WindowMessageHandler
+#include "innate_subsystem_win32/_common_header.h"
+
+namespace  innate_subsystem_win32
 {
-public:
-  // This function must return true if a message has been processed.
-  virtual bool processMessage(unsigned int message, ::wparam wparam, ::lparam lparam) = 0;
-};
 
-#endif // __WINDOWMESSAGEHANDLER_H__
+   class WindowMessageHandler :
+   virtual public ::particle
+   {
+   public:
+      // This function must return true if a message has been processed.
+      virtual bool processMessage(unsigned int message, ::wparam wparam, ::lparam lparam) = 0;
+
+   };
+
+}// namespace  innate_subsystem_win32
+
+

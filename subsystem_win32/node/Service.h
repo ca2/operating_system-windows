@@ -33,10 +33,8 @@
 //#include "acme/subsystem/Exception.h"
 //#include "remoting/remoting_common/thread/Thread.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       /**
        * Win32 service class (abstract).
        * @usage create service subclass, instanize subclass and call run() method.
@@ -125,5 +123,4 @@ namespace windows
           */
          static Service *g_service;
       };
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32

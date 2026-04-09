@@ -33,10 +33,8 @@
 //#include "remoting/remoting_common/thread/LocalMutex.h"
 //#include <list>
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       /**
        * Base Windows Application class.
        * Have hidden main window and main scopedstrMessage loop.
@@ -124,5 +122,4 @@ namespace windows
       };
 
       //// __WINDOWSAPPLICATION_H__
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32

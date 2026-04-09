@@ -29,10 +29,8 @@
 
 //#include <crtdbg.h>
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       InputInjector::InputInjector():
             m_controlIsPressed(false),
       m_menuIsPressed(false),
@@ -490,4 +488,4 @@ namespace windows
          injectKeyEvent(VK_DELETE, true);
       }
    } //namespace  subsystem
-}// namespace windows
+}// namespace subsystem_win32

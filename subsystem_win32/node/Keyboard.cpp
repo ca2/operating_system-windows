@@ -23,11 +23,7 @@
 //
 #include "framework.h"
 #include "Keyboard.h"
-namespace  windows
-{
-   namespace subsystem
-   {
-      void Keyboard::getState(BYTE state[256])
+namespace subsystem_win32      void Keyboard::getState(BYTE state[256])
       {
          if (!GetKeyboardState(state)) {
             throw SystemException();
@@ -46,4 +42,4 @@ namespace  windows
          return (GetAsyncKeyState(vkCode) & 0x8000) != 0;
       }
    } // namespace  subsystem
-} // namespace windows
+} // namespace subsystem_win32

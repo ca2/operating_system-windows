@@ -11,50 +11,52 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
+
+
+   class CLASS_DECL_SUBSYSTEM_WIN32 subsystem :
+      virtual public ::subsystem::subsystem
    {
+   public:
 
 
-      class CLASS_DECL_SUBSYSTEM_WIN32 subsystem :
-         virtual public ::subsystem::subsystem
-      {
-      public:
+      static ::subsystem_win32::subsystem *            s_p;
+      // ::pointer < ::subsystem::string_table >     m_pstringtable;
+      // ::pointer < ::subsystem::resource_loader >     m_presourceloader;
+      // ::pointer < ::subsystem::Registry >     m_pregistry;
+      // ::pointer < ::subsystem::Shell >     m_pshell;
+       ::pointer < PipeServer > m_ppipeserver;
 
+       ::pointer < WTS > m_pwts;
 
-         static ::windows::subsystem::subsystem *            s_p;
-         // ::pointer < ::subsystem::string_table >     m_pstringtable;
-         // ::pointer < ::subsystem::resource_loader >     m_presourceloader;
-         // ::pointer < ::subsystem::Registry >     m_pregistry;
-         // ::pointer < ::subsystem::Shell >     m_pshell;
+      subsystem();
+      ~subsystem() override;
 
-          ::pointer < ::windows::WTS > m_pwts;
+      //
+      // virtual ::subsystem::string_table * string_table();
+      // virtual ::subsystem::resource_loader* resource_loader();
+      // virtual ::subsystem::Registry* registry();
+      virtual WTS * wts();
+      virtual PipeServer * pipe_server();
 
-         subsystem();
-         ~subsystem() override;
+      ::pointer < ::subsystem::SecurityIdentifier > createSidFromString(const ::scoped_string & scopedstr) override;
 
-         //
-         // virtual ::subsystem::string_table * string_table();
-         // virtual ::subsystem::resource_loader* resource_loader();
-         // virtual ::subsystem::Registry* registry();
-         virtual ::windows::WTS* wts();
+      bool EncryptData(const ::string& input, ::memory & output) override;
+      bool DecryptData(const memory & input, ::string& output) override;
 
-         ::pointer < ::subsystem::SecurityIdentifier > createSidFromString(const ::scoped_string & scopedstr) override;
-
-      };
-
-
-
-   } // namespace subsystem
-} // namespace windows
+   };
 
 
 
-inline ::windows::subsystem::subsystem * windows_subsystem()
+} // namespace subsystem_win32
+
+
+
+inline ::subsystem_win32::subsystem * windows_subsystem()
 {
 
-   return ::windows::subsystem::subsystem::s_p;
+   return ::subsystem_win32::subsystem::s_p;
 
 }
 

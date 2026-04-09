@@ -22,25 +22,35 @@
 //-------------------------------------------------------------------------
 //
 
-#ifndef __WINDOWFINDER_H__
-#define __WINDOWFINDER_H__
+#pragma once
 
-#include "util/CommonHeader.h"
-#include <vector>
-#include "util/StringVector.h"
 
-class WindowFinder
+
+#include "innate_subsystem_win32/_common_header.h"
+
+namespace innate_subsystem_win32
 {
-public:
-  static std::vector<HWND> findWindowsByClass(StringVector classNames);
 
-  // Find first of windows that name contain the string.
-  // It is not case sensitive.
-  static HWND findFirstWindowByName(const StringStorage windowName);
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 WindowFinder :
+   virtual public ::particle
+   {
+   public:
+      static ::comparable_array_base<HWND> findWindowsByClass(const ::string_array_base & straClassNames);
 
-protected:
-  static BOOL CALLBACK findWindowsByClassFunc(HWND hwnd, ::lparam lparam);
-  static BOOL CALLBACK findWindowsByNameFunc(HWND hwnd, ::lparam lparam);
-};
+      // Find first of windows that name contain the string.
+      // It is not case sensitive.
+      static HWND findFirstWindowByName(const ::scoped_string & scopedstrWindowName);
 
-#endif // __WINDOWFINDER_H__
+   //protected:
+
+      static BOOL CALLBACK findWindowsByClassFunc(HWND hwnd, LPARAM lparam);
+      static BOOL CALLBACK findWindowsByNameFunc(HWND hwnd, LPARAM lparam);
+
+   };
+
+
+} //namespace innate_subsystem_win32
+
+
+
+

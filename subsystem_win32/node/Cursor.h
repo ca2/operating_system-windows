@@ -29,10 +29,8 @@
 #include "acme/subsystem/node/Cursor.h"
 #include "subsystem_win32/_common_header.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       class CLASS_DECL_SUBSYSTEM_WIN32 Cursor :
       virtual public ::subsystem::implementation<::subsystem::CursorInterface >
       {
@@ -53,8 +51,7 @@ namespace windows
       //    ::int_point getCursorPos() const override;
       // };
 
-      //// __WINCURSOR_H__
-   } // namespace subsystem
-} // namespace windows
+
+} // namespace subsystem_win32
 
 

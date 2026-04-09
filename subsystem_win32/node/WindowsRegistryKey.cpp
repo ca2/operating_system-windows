@@ -26,7 +26,7 @@
 #include "WindowsRegistryKey.h"
 //#include <vector>
 
-namespace windows
+namespace subsystem_win32
 {
    WindowsRegistryKey::WindowsRegistryKey(HKEY rootKey, const ::scoped_string & scopedstrEntry,
                             bool createIfNotExists, SECURITY_ATTRIBUTES *sa)
@@ -370,6 +370,6 @@ namespace windows
 
       return true;
    }
-} // namespace windows
+} // namespace subsystem_win32
 
 

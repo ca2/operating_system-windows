@@ -23,88 +23,161 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
+#include "framework.h"
 #include "Graphics.h"
+#include "DeviceContext.h"
+#include "Bitmap.h"
+#include "Brush.h"
+#include "Pen.h"
 
-Graphics::Graphics(DeviceContext *dc)
-: m_dc(dc)
+
+namespace innate_subsystem_win32
 {
-}
+   // Graphics::Graphics(DeviceContext *dc)
+   // : m_dc(dc)
+   // {
+   // }
 
-Graphics::~Graphics()
-{
-}
+   Graphics::Graphics()
+   {
 
-void Graphics::setBkMode(bool transparent)
-{
-  SetBkMode(m_dc->m_dc, transparent ? TRANSPARENT : OPAQUE);
-}
+   }
 
-void Graphics::setTextColor(COLORREF color)
-{
-  SetTextColor(m_dc->m_dc, color);
-}
 
-void Graphics::setBkColor(COLORREF color)
-{
-  SetBkColor(m_dc->m_dc, color);
-}
+   Graphics::~Graphics()
+   {
+   }
 
-void Graphics::setBrush(const Brush *brush)
-{
-  HGDIOBJ object = (brush != 0) ? brush->m_brush : 0;
-  m_dc->selectObject(object);
-}
 
-void Graphics::setPen(const Pen *pen)
-{
-  HGDIOBJ object = (pen != 0) ? pen->m_pen : 0;
-  m_dc->selectObject(object);
-}
+   innate_subsystem::DeviceContextInterface * Graphics::device_context()
+   {
 
-void Graphics::moveTo(int x, int y)
-{
-  MoveToEx(m_dc->m_dc, x, y, NULL);
-}
+return m_pdevicecontext;
 
-void Graphics::lineTo(int x, int y)
-{
-  LineTo(m_dc->m_dc, x, y);
-}
+   }
 
-void Graphics::fillRect(int l, int t, int r, int b, const Brush *brush)
-{
-  RECT rect;
 
-  rect.top = t;
-  rect.left = l;
-  rect.bottom = b;
-  rect.right = r;
+   void Graphics::initialize_graphics(innate_subsystem::DeviceContextInterface * pdevicecontext)
+   {
 
-  FillRect(m_dc->m_dc, &rect, brush->m_brush);
-}
+      m_pdevicecontext = pdevicecontext;
 
-void Graphics::ellipse(int l, int t, int r, int b)
-{
-  Ellipse(m_dc->m_dc, l, t, r, b);
-}
+   }
 
-void Graphics::rectangle(int l, int t, int r, int b)
-{
-  Rectangle(m_dc->m_dc, l, t, r, b);
-}
+   void Graphics::setBkMode(bool transparent)
+   {
+      SetBkMode(m_pdevicecontext->m_hdc, transparent ? TRANSPARENT : OPAQUE);
+   }
 
-void Graphics::drawBitmap(const Bitmap *bitmap, int x, int y, int w, int h)
-{
-  DeviceContext memDC(m_dc);
+   void Graphics::setTextColor(const ::color::color & color)
+   {
+      SetTextColor(m_pdevicecontext->m_hdc, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+   }
 
-  HGDIOBJ oldBitmap = memDC.selectObject(bitmap->m_bitmap);
+   void Graphics::setBkColor(const ::color::color & color)
+   {
+      SetBkColor(m_pdevicecontext->m_hdc, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+   }
 
-  BitBlt(m_dc->m_dc, x, y, w, h, memDC.m_dc, 0, 0, SRCCOPY);
+   void Graphics::setBrush(::innate_subsystem::BrushInterface *pbrush)
+   {
 
-  memDC.selectObject(oldBitmap);
-}
+      // auto pbrushWin32 = pbrush->impl<Brush>();
+      //
+      // HGDIOBJ object = pbrushWin32 ? pbrushWin32->m_hbrush : nullptr;
+      //
+      m_pdevicecontext->selectObject(pbrush);
 
-void Graphics::drawText(const TCHAR *text, int cchText, ::int_rectangle &rect, unsigned int format)
-{
-  DrawText(m_dc->m_dc, text, cchText, rect, format);
-}
+   }
+
+   void Graphics::setPen(::innate_subsystem::PenInterface *ppen)
+   {
+
+      // ::cast < ::innate_subsystem_win32::Pen > ppenWin32 = ::innate_subsystem::get_implementation(ppen);
+      //
+      // HGDIOBJ object = ppenWin32 ? ppenWin32->m_hpen : nullptr;
+      //
+      m_pdevicecontext->selectObject(ppen);
+
+   }
+
+   void Graphics::moveTo(int x, int y)
+   {
+      MoveToEx(m_pdevicecontext->m_hdc, x, y, NULL);
+   }
+
+   void Graphics::lineTo(int x, int y)
+   {
+      LineTo(m_pdevicecontext->m_hdc, x, y);
+   }
+
+   void Graphics::fillRect(int l, int t, int r, int b, ::innate_subsystem::BrushInterface *pbrush)
+   {
+      RECT rect;
+
+      rect.top = t;
+      rect.left = l;
+      rect.bottom = b;
+      rect.right = r;
+
+
+      auto hbrush = (HBRUSH) pbrush->_HGDIOBJ();
+
+
+      FillRect(m_pdevicecontext->m_hdc, &rect, hbrush);
+
+   }
+
+
+   void Graphics::ellipse(int l, int t, int r, int b)
+   {
+      Ellipse(m_pdevicecontext->m_hdc, l, t, r, b);
+   }
+
+   void Graphics::rectangle(int l, int t, int r, int b)
+   {
+      Rectangle(m_pdevicecontext->m_hdc, l, t, r, b);
+   }
+
+   void Graphics::drawBitmap(::innate_subsystem::BitmapInterface *pbitmap, int x, int y, int w, int h)
+   {
+      DeviceContext memDC;
+
+      memDC.initialize_device_context(m_pdevicecontext);
+
+      auto pobjOld = memDC.selectObject(pbitmap);
+
+      BitBlt(m_pdevicecontext->m_hdc, x, y, w, h, memDC.m_hdc, 0, 0, SRCCOPY);
+
+      memDC.selectObject(pobjOld);
+   }
+
+   void Graphics::drawText(const char *text, int cchText, ::int_rectangle &rect, unsigned int format)
+   {
+
+      ::string str;
+
+      if (cchText >= 0)
+      {
+
+         str.assign(text, cchText);
+
+      }
+      else
+      {
+
+         str = text;
+
+      }
+
+      ::wstring wstr(str);
+
+      RECT rc;
+      ::copy(rc, rect);
+      DrawText(m_pdevicecontext->m_hdc, wstr, wstr.length(), &rc, format);
+   }
+
+   
+} // namespace innate_subsystem_win32
+
+

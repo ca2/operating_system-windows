@@ -22,108 +22,107 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//#include "framework.h"
+#include "framework.h"
 #include "SpinControl.h"
 #include <CommCtrl.h>
-#include "util/StringParser.h"
+//#include "util/StringParser.h"
 
-namespace windows
+// namespace windows
+// {
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem_win32
+   SpinControl::SpinControl()
+ //  : m_buddy(NULL),
+   :  m_isAutoAccelerationEnabled(false), m_maxDelta(0)
    {
-      SpinControl::SpinControl()
-      : m_buddy(NULL),
-        m_isAutoAccelerationEnabled(false), m_maxDelta(0)
-      {
+   }
+
+   SpinControl::~SpinControl()
+   {
+   }
+
+   void SpinControl::setBuddy(ControlInterface *buddyControl)
+   {
+      SendMessage(m_hwnd, UDM_SETBUDDY, (WPARAM)buddyControl->_HWND(), NULL);
+      m_pcontrolBuddy = buddyControl;
+   }
+
+   void SpinControl::setRange(short lower, short upper)
+   {
+      SendMessage(m_hwnd, UDM_SETRANGE, NULL, (::lparam)MAKELONG(upper, lower));
+   }
+
+   void SpinControl::setRange32(int lower, int upper)
+   {
+      SendMessage(m_hwnd, UDM_SETRANGE32, lower, upper);
+   }
+
+   void SpinControl::setAccel(unsigned int nSec, unsigned int nInc)
+   {
+      UDACCEL accel = {0};
+      accel.nSec = nSec;
+      accel.nInc = nInc;
+
+      SendMessage(m_hwnd, UDM_SETACCEL, 1, (::lparam)&accel);
+   }
+
+   void SpinControl::autoAccelerationHandler(LPNMUPDOWN message)
+   {
+      if (m_limitters.size() == 0 ||
+          m_pcontrolBuddy == NULL || !m_isAutoAccelerationEnabled) {
+         return;
+          }
+
+      int currentValue = 0;
+      int delta = m_maxDelta;
+
+      // Get buddy textbox value
+      ::string  storage;
+      storage = m_pcontrolBuddy->getText();
+      if (!main_subsystem()->string_parser()->parseInt(storage, &currentValue)) {
+         return;
       }
 
-      SpinControl::~SpinControl()
-      {
+      size_t size = minimum(m_limitters.size(), m_deltas.size());
+
+      if (message->iDelta < 0) {
+         for (size_t i = 0; i < size; i++) {
+            if (currentValue <= m_limitters[i]) {
+               delta = m_deltas[i];
+               break;
+            } // if
+         } // for
+         delta = -delta;
+      } // if
+
+      if (message->iDelta > 0) {
+         for (size_t i = 0; i < size; i++) {
+            if (currentValue < m_limitters[i]) {
+               delta = m_deltas[i];
+               break;
+            } // if
+         } // for
+      } // if
+
+      int mod = (currentValue + delta) % delta;
+      if (mod != 0) {
+         delta -= mod;
       }
 
-      void SpinControl::setBuddy(Control *buddyControl)
-      {
-         SendMessage(m_hwnd, UDM_SETBUDDY, (::wparam)buddyControl->getWindow(), NULL);
-         m_buddy = buddyControl;
-      }
+      message->iDelta = delta;
+   }
 
-      void SpinControl::setRange(short lower, short upper)
-      {
-         SendMessage(m_hwnd, UDM_SETRANGE, NULL, (::lparam)MAKELONG(upper, lower));
-      }
+   void SpinControl::enableAutoAcceleration(bool enabled)
+   {
+      m_isAutoAccelerationEnabled = enabled;
+   }
 
-      void SpinControl::setRange32(int lower, int upper)
-      {
-         SendMessage(m_hwnd, UDM_SETRANGE32, lower, upper);
-      }
-
-      void SpinControl::setAccel(unsigned int nSec, unsigned int nInc)
-      {
-         UDACCEL accel = {0};
-         accel.nSec = nSec;
-         accel.nInc = nInc;
-
-         SendMessage(m_hwnd, UDM_SETACCEL, 1, (::lparam)&accel);
-      }
-
-      void SpinControl::autoAccelerationHandler(LPNMUPDOWN message)
-      {
-         if (m_limitters.size() == 0 ||
-             m_buddy == NULL || !m_isAutoAccelerationEnabled) {
-            return;
-             }
-
-         int currentValue;
-         int delta = m_maxDelta;
-
-         // Get buddy textbox value
-         StringStorage storage;
-         m_buddy->getText(&storage);
-         if (!StringParser::parseInt(storage.getString(), &currentValue)) {
-            return;
-         }
-
-         size_t size = min(m_limitters.size(), m_deltas.size());
-
-         if (message->iDelta < 0) {
-            for (size_t i = 0; i < size; i++) {
-               if (currentValue <= m_limitters[i]) {
-                  delta = m_deltas[i];
-                  break;
-               } // if
-            } // for
-            delta = -delta;
-         } // if
-
-         if (message->iDelta > 0) {
-            for (size_t i = 0; i < size; i++) {
-               if (currentValue < m_limitters[i]) {
-                  delta = m_deltas[i];
-                  break;
-               } // if
-            } // for
-         } // if
-
-         int mod = (currentValue + delta) % delta;
-         if (mod != 0) {
-            delta -= mod;
-         }
-
-         message->iDelta = delta;
-      }
-
-      void SpinControl::enableAutoAcceleration(bool enabled)
-      {
-         m_isAutoAccelerationEnabled = enabled;
-      }
-
-      void SpinControl::setAutoAccelerationParams(const std::vector<int> *limitters,
-                                                  const std::vector<int> *deltas,
-                                                  int maxDelta)
-      {
-         m_limitters = *limitters;
-         m_deltas = *deltas;
-         m_maxDelta = maxDelta;
-      }
-   } // namespace innate_subsystem_win32
-} // namespace windows
+   void SpinControl::setAutoAccelerationParams(const int_array & limitters,
+                                               const int_array & deltas,
+                                               int maxDelta)
+   {
+      m_limitters = limitters;
+      m_deltas = deltas;
+      m_maxDelta = maxDelta;
+   }
+} // namespace innate_subsystem_win32

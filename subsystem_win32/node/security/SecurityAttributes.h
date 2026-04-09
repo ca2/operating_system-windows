@@ -29,10 +29,8 @@
 #include "subsystem_win32/node/security/SecurityDescriptor.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       class CLASS_DECL_SUBSYSTEM_WIN32 SecurityAttributes :
       virtual  public ::subsystem::implementation<::subsystem::SecurityAttributesInterface>
       {
@@ -67,6 +65,5 @@ namespace windows
       };
 
       //// __SECURITYATTRIBUTES_H__
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32
 

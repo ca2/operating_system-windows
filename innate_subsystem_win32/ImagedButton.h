@@ -23,13 +23,13 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-//#ifndef _IMAGED_BUTTON_H_
-//#define _IMAGED_BUTTON_H_
-
 #pragma once
 
-#include "apex/innate_subsystem_win32/Control.h"
-//#include "ThemeLib.h"
+
+#include "apex/innate_subsystem/ImagedButton.h"
+#include "innate_subsystem_win32/_common_header.h"
+#include <uxtheme.h>
+
 
 namespace innate_subsystem_win32
 {
@@ -37,7 +37,8 @@ namespace innate_subsystem_win32
     // Owner draw button, that displays button with image and text.
     //
 
-    class ImagedButton : public Control
+    class ImagedButton : //public Control
+   virtual public ::subsystem::implementation<::innate_subsystem::ImagedButtonInterface>
     {
     public:
         ImagedButton();
@@ -48,12 +49,13 @@ namespace innate_subsystem_win32
         // This method must be called in WM_DRAWITEM message handler of parent control
         //
 
-        //virtual void drawItem(LPDRAWITEMSTRUCT dis);
+        virtual void drawItem(LPDRAWITEMSTRUCT dis);
 
-        virtual void setWindow(const ::operating_system::window & window);
+        virtual void setWindow(const ::operating_system::window & window) override;
 
-        //virtual void setIcon(HICON *icon, const ::int_size & size);
-        virtual void setIcon(::innate_ui::icon * picon, const ::int_size & size, int flags, int iInitialSize = 1, int iGrow = 1);
+        virtual void _setHICON(HICON hicon, const ::int_size & size);
+        //virtual void setIcon(::innate_subsystem::IconInterface * picon, const ::int_size & size, int flags, int iInitialSize = 1, int iGrow = 1) override;
+       virtual void setIcon(::innate_subsystem::IconInterface * picon, const ::int_size & size) override;
 
     //private:
 
@@ -70,28 +72,30 @@ namespace innate_subsystem_win32
         // OUT imageRect - output image rectangle
         //
 
-        //virtual void calcRect(RECT* buttonRect, bool isButtonPressed,
-        //              DWORD textWidth, DWORD textHeight,
-        //              DWORD imageWidth, DWORD imageHeight,
-        //              ::int_rectangle &textRect, RECT* imageRect);
+        virtual void calcRect(RECT* buttonRect, bool isButtonPressed,
+                      DWORD textWidth, DWORD textHeight,
+                      DWORD imageWidth, DWORD imageHeight,
+                      RECT * textRect, RECT* imageRect);
 
-        //virtual void drawIcon(HDC* dc, RECT* imageRect, bool isPressed, bool isDisabled);
+        virtual void drawIcon(HDC* dc, RECT* imageRect, bool isPressed, bool isDisabled);
     //protected:
-      //  bool m_isUsingTheme;
-        //bool m_mouseOver;
-        //HTHEME m_theme;
+      bool m_isUsingTheme;
+      bool m_mouseOver;
+      HTHEME m_theme;
 
-        //
-        // Icon to display
-        //
 
-        //HICON *m_icon;
+         //Icon to display
 
-        //int m_iconWidth;
-        //int m_iconHeight;
+
+      ::pointer < ::innate_subsystem_win32::Icon > m_picon;
+
+       ::int_size m_size;
+      //int m_iconWidth;
+      //int m_iconHeight;
   //  private:
-    //    static LRESULT CALLBACK wndProc(HWND hWnd, unsigned int message, ::wparam wparam, ::lparam lparam);
-    };
+      virtual bool window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
+
+   };
 
 //#endif
 } // namespace innate_subsystem_win32

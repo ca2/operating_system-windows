@@ -28,10 +28,10 @@ namespace innate_ui_win32
    {
 
 
-      auto hinstanceWndProc = ::windows::get_window_procedure_hinstance();
+      auto hinstanceWndProc = ::windows::window::s_window_procedure_hinstance();
 
       wndclassex.hInstance = (HINSTANCE)hinstanceWndProc;
-      wndclassex.lpfnWndProc = &::windows::window_procedure;
+      wndclassex.lpfnWndProc = &::windows::window::s_window_procedure;
       wndclassex.style = CS_HREDRAW | CS_VREDRAW;
       //wndclassex.lpfnWndProc = WndProc;
       wndclassex.cbClsExtra = 0;
@@ -61,7 +61,7 @@ namespace innate_ui_win32
    {
 
       auto hwndResult = ::CreateWindowW(_get_class_name(), L"", WS_DLGFRAME | WS_CAPTION | WS_POPUPWINDOW,
-              CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, (HINSTANCE) ::windows::get_window_procedure_hinstance(),
+              CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, (HINSTANCE) ::windows::window::s_window_procedure_hinstance(),
               (::windows::window *)this);
 
       if (!hwndResult || !_HWND() || hwndResult != _HWND())

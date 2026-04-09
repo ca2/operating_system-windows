@@ -28,21 +28,22 @@
 #include "subsystem_win32/thread/Thread.h"
 
 
-
-
-class CLASS_DECL_SUBSYSTEM_WIN32 GuiThread : public Thread
+namespace subsystem_win32
 {
-public:
-  GuiThread();
-  virtual ~GuiThread();
-private:
-   // Replacing the base function.
-  static DWORD WINAPI threadProc(LPVOID pThread);
+   class CLASS_DECL_SUBSYSTEM_WIN32 GuiThread : public Thread
+   {
+   public:
+      GuiThread();
+      virtual ~GuiThread();
+   private:
+      // Replacing the base function.
+      static DWORD WINAPI threadProc(LPVOID pThread);
 
-  virtual void initByDerived();
+      virtual void initByDerived();
 
-   // Desktop for current thread.
-  HDESK m_hDesk;
-};
+      // Desktop for current thread.
+      HDESK m_hDesk;
+   };
 
-//// __GUITHREAD_H__
+   //// __GUITHREAD_H__
+} // namespace subsystem_win32

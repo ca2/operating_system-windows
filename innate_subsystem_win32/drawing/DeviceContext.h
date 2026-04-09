@@ -24,40 +24,57 @@
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
 #pragma once
-#include "acme/subsystem/particle.h"
 
+
+#include "apex/innate_subsystem/drawing/DeviceContext.h"
+#include "subsystem_win32/_common_header.h"
 //#include "util/CommonHeader.h"
 //#include "gui/PaintWindow.h"
 
-namespace innate_subsystem
+namespace innate_subsystem_win32
 {
-   class CLASS_DECL_ACME DeviceContext :
-      virtual public ::subsystem::particle_interface
+
+
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 DeviceContext :
+      virtual public ::subsystem::implementation<::innate_subsystem::DeviceContextInterface>
    {
    public:
-      // Create device context linked to window DC.
-      DeviceContext(const ::operating_system::window & window);
-      // Create device context complatible with other DC.
-      DeviceContext(DeviceContext* compatibleDevice);
+      // // Create device context linked to window DC.
+      // DeviceContext(const ::operating_system::window & window);
+      // // Create device context complatible with other DC.
+      // DeviceContext(DeviceContext* compatibleDevice);
+      // //private:
+      // // Initialize class from PaintWindow
+      // DeviceContext(class PaintWindow * pntWnd);
+      DeviceContext();
       // Destroys device context.
-      virtual ~DeviceContext() = 0;
+       ~DeviceContext() override;
 
+
+      //friend class PaintWindow;
+
+
+      // Create device context linked to window DC.
+      void initialize_device_context(const operating_system::window& window) override;
+      // Create device context complatible with other DC.
+      void initialize_device_context(DeviceContextInterface* compatibleDevice) override;
       //private:
       // Initialize class from PaintWindow
-      DeviceContext(class PaintWindow * pntWnd);
-
-      friend class PaintWindow;
-
+      void initialize_device_context(innate_subsystem::PaintWindowInterface* pntWnd) override;
       //protected:
       // Selects an object into this device context.
-      //HGDIOBJ _selectObject(HGDIOBJ object);
+      virtual HGDIOBJ _selectObject2(HGDIOBJ object);
+::pointer < ::innate_subsystem::GraphicsObject>selectObject(::innate_subsystem::GraphicsObject * pgraphicsobjectNew);
+
+      void destroyDeviceContext() override;
 
       // protected:
-      //   HDC m_dc;
-      //   HWND m_wnd;
-      //   bool m_hasOwnDC;
-      //
-      //   friend class Graphics;
-      //   friend class BitmapGraphics;
+      HDC m_hdc;
+      HWND m_hwnd;
+      bool m_bHasOwnDC;
+
+      // friend class Graphics;
+      // friend class BitmapGraphics;
    };
-} // namespace innate_subsystem
+
+} // namespace innate_subsystem_win32

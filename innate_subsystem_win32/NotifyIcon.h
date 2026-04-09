@@ -23,48 +23,52 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-#ifndef _NOTIFY_ICON_H_
-#define _NOTIFY_ICON_H_
+#pragma once
+
 
 #include "acme/subsystem/_common_header.h"
 
-#include "apex/innate_subsystem_win32/NotifyIconWindow.h"
+#include "apex/innate_subsystem/NotifyIcon.h"
 
-#include "apex/innate_subsystem_win32/drawing/Icon.h"
+#include "apex/innate_subsystem/drawing/Icon.h"
 
-//#include <shellapi.h>
+#include <shellapi.h>
 
 namespace innate_subsystem_win32
 {
 
    // FIXME: Add documentation to class.
-   class NotifyIcon : public NotifyIconWindow
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 NotifyIcon :
+      virtual public ::subsystem::implementation< innate_subsystem::NotifyIconInterface>
    {
    public:
       NotifyIcon();
       virtual ~NotifyIcon();
 
-      void initialize_notify_icon(bool showAfterCreation = true);
+      void initialize_notify_icon(bool showAfterCreation = true) override;
 
-      const Icon *getIcon() const;
-      bool isVisible() const;
+      ::innate_subsystem::IconInterface *getIcon()override;
+      bool isVisible() const override;
 
-      void setIcon(Icon *icon);
-      void setText(const TCHAR *text);
+      void setIcon(::innate_subsystem::IconInterface *icon) override;
+      void setText(const char *text) override;
 
-      void showBalloon(const TCHAR *message, const TCHAR *caption, DWORD timeoutMillis);
+      void showBalloon(const char *message, const char *caption, unsigned int timeoutMillis) override;
 
-      void show();
-      void hide();
+      void show() override;
+      void hide() override;
 
 //   protected:
-  //    NOTIFYICONDATA m_nid;
-    //  Icon *m_icon;
-      //bool m_visible;
-   }
-   ;
+      NOTIFYICONDATA m_nid;
+      ::pointer < ::innate_subsystem_win32::Icon > m_picon;
+      bool m_visible;
+
+
+
+   };
+
 }// namespace innate_subsystem_win32
 
-//#endif
+
 
 

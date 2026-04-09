@@ -27,7 +27,7 @@
 //#define _TOOLTIP_H_
 
 //#include "util/CommonHeader.h"
-#include "apex/innate_subsystem_win32/Control.h"
+#include "apex/innate_subsystem/Control.h"
 
 //
 // Abstract tooltip class

@@ -6,20 +6,20 @@
 #include "thread/GlobalMutex.h"
 #include "node/Shell.h"
 
-//namespace subsystem
+//namespace subsystem_win32
 //{
 
 CLASS_DECL_EXPORT void subsystem_win32_factory(::factory::factory * pfactory)
 {
 
-   pfactory->add_factory_item<::windows::subsystem::GlobalMutex, ::subsystem::GlobalMutex>();
-   pfactory->add_factory_item<::windows::subsystem::Shell, ::subsystem::Shell>();
+   pfactory->add_factory_item<::subsystem_win32::GlobalMutex, ::subsystem::GlobalMutex>();
+   pfactory->add_factory_item<::subsystem_win32::Shell, ::subsystem::Shell>();
 
 
-   pfactory->add_factory_item<::windows::subsystem::subsystem, ::subsystem::subsystem>();
+   pfactory->add_factory_item<::subsystem_win32::subsystem, ::subsystem::subsystem>();
 
 }
 
 
-//} // namespace subsystem
+//} // namespace subsystem_win32
 

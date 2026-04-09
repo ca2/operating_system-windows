@@ -30,92 +30,88 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
+
+   class CLASS_DECL_SUBSYSTEM_WIN32 Displays :
+      virtual public ::subsystem::implementation<::subsystem::DisplaysInterface >
    {
-
-      class CLASS_DECL_SUBSYSTEM_WIN32 Displays :
-         virtual public ::subsystem::implementation<::subsystem::DisplaysInterface >
-      {
-      public:
+   public:
 
 
-         Displays();
-         ~Displays() override;
+      Displays();
+      ~Displays() override;
 
-         // If a display does not exist now the function return an empty rectangle.
-         virtual void getDisplayCoordinates(unsigned char displayNumber, ::int_rectangle *rect)override;
+      // If a display does not exist now the function return an empty rectangle.
+      virtual void getDisplayCoordinates(unsigned char displayNumber, ::int_rectangle *rect)override;
 
-         virtual ::array_base<::int_rectangle> getDisplaysCoords() override;
+      virtual ::array_base<::int_rectangle> getDisplaysCoords() override;
 
-         // Returns a ::array_base that contain dispalys coordinates at the current time.
-         virtual ::array_base<::int_rectangle> getDisplays() override;
+      // Returns a ::array_base that contain dispalys coordinates at the current time.
+      virtual ::array_base<::int_rectangle> getDisplays() override;
 
-         //private:
-         // Updates internal information to a current state.
-         virtual void update() override;
+      //private:
+      // Updates internal information to a current state.
+      virtual void update() override;
 
-         // static BOOL CALLBACK monitorEnumProc(HMONITOR hMonitor,
-         //                                      HDC hdcMonitor,
-         //                                      LPRECT lprcMonitor,
-         //                                      LPARAM dwData);
+      // static BOOL CALLBACK monitorEnumProc(HMONITOR hMonitor,
+      //                                      HDC hdcMonitor,
+      //                                      LPRECT lprcMonitor,
+      //                                      LPARAM dwData);
 
-         // Returns true if the update() function has been called lately.
-         virtual bool isAlreadyUpdated() override;
+      // Returns true if the update() function has been called lately.
+      virtual bool isAlreadyUpdated() override;
 
-         // int m_xVirtualScreen;
-         // int m_yVirtualScreen;
-         //
-         // ::array_base<::int_rectangle> m_displayRects;
-         // LocalMutex m_displayRectsMutex;
-         //
-         // static const unsigned int UPDATE_INTERVAL = 3000;
-         // class ::time m_latestUpdateTime;
-      };
-
-
-      // class CLASS_DECL_SUBSYSTEM_WIN32 Displays :
-      //    virtual public ::subsystem::composite<DisplaysInterface>
-      // {
-      // public:
+      // int m_xVirtualScreen;
+      // int m_yVirtualScreen;
       //
+      // ::array_base<::int_rectangle> m_displayRects;
+      // LocalMutex m_displayRectsMutex;
       //
-      //    Displays();
-      //    ~Displays() override;
-      //
-      //    // If a display does not exist now the function return an empty rectangle.
-      //    void getDisplayCoordinates(unsigned char displayNumber, ::int_rectangle *rect) override;
-      //
-      //    ::array_base<::int_rectangle> getDisplaysCoords() override;
-      //
-      //    // Returns a ::array_base that contain dispalys coordinates at the current time.
-      //    ::array_base<::int_rectangle> getDisplays() override;
-      //
-      //    //private:
-      //    // Updates internal information to a current state.
-      //    void update() override;
-      //
-      //    // static BOOL CALLBACK monitorEnumProc(HMONITOR hMonitor,
-      //    //                                      HDC hdcMonitor,
-      //    //                                      LPRECT lprcMonitor,
-      //    //                                      LPARAM dwData);
-      //
-      //    // Returns true if the update() function has been called lately.
-      //    bool isAlreadyUpdated() override;
-      //
-      //    // int m_xVirtualScreen;
-      //    // int m_yVirtualScreen;
-      //    //
-      //    // ::array_base<::int_rectangle> m_displayRects;
-      //    // LocalMutex m_displayRectsMutex;
-      //    //
-      //    // static const unsigned int UPDATE_INTERVAL = 3000;
-      //    // class ::time m_latestUpdateTime;
-      // };
+      // static const unsigned int UPDATE_INTERVAL = 3000;
+      // class ::time m_latestUpdateTime;
+   };
 
-      //// __WINDOWSDISPLAYS_H__
-      ///
-   }// namespace subsystem
-} // namespace windows
 
+   // class CLASS_DECL_SUBSYSTEM_WIN32 Displays :
+   //    virtual public ::subsystem::composite<DisplaysInterface>
+   // {
+   // public:
+   //
+   //
+   //    Displays();
+   //    ~Displays() override;
+   //
+   //    // If a display does not exist now the function return an empty rectangle.
+   //    void getDisplayCoordinates(unsigned char displayNumber, ::int_rectangle *rect) override;
+   //
+   //    ::array_base<::int_rectangle> getDisplaysCoords() override;
+   //
+   //    // Returns a ::array_base that contain dispalys coordinates at the current time.
+   //    ::array_base<::int_rectangle> getDisplays() override;
+   //
+   //    //private:
+   //    // Updates internal information to a current state.
+   //    void update() override;
+   //
+   //    // static BOOL CALLBACK monitorEnumProc(HMONITOR hMonitor,
+   //    //                                      HDC hdcMonitor,
+   //    //                                      LPRECT lprcMonitor,
+   //    //                                      LPARAM dwData);
+   //
+   //    // Returns true if the update() function has been called lately.
+   //    bool isAlreadyUpdated() override;
+   //
+   //    // int m_xVirtualScreen;
+   //    // int m_yVirtualScreen;
+   //    //
+   //    // ::array_base<::int_rectangle> m_displayRects;
+   //    // LocalMutex m_displayRectsMutex;
+   //    //
+   //    // static const unsigned int UPDATE_INTERVAL = 3000;
+   //    // class ::time m_latestUpdateTime;
+   // };
+
+   //// __WINDOWSDISPLAYS_H__
+   ///
+}// namespace subsystem_win32

@@ -26,7 +26,7 @@
 #include "WindowsEvent.h"
 #include "acme/subsystem/Exception.h"
 
-namespace windows
+namespace subsystem_win32
 {
       WindowsEvent::WindowsEvent(const ::scoped_string & scopedstrName)
       {
@@ -61,6 +61,6 @@ namespace windows
             WaitForSingleObject(m_hEvent, millis);
          }
       }
-} // namespace windows
+} // namespace subsystem_win32
 
 

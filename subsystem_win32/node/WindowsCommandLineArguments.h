@@ -28,7 +28,7 @@
 #include "acme/subsystem/CommandLineArguments.h"
 #include "subsystem_win32/_common_header.h"
 
-namespace windows
+namespace subsystem_win32
 {
 
 
@@ -50,4 +50,4 @@ namespace windows
    };
 
    //// __WINCOMMANDLINEARGS_H__
-} // namespace windows
+} // namespace subsystem_win32

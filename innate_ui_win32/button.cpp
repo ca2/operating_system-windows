@@ -37,7 +37,7 @@ namespace innate_ui_win32
    void button::_create_child(window * pwindowParent)
    {
 
-      auto hwndParent = pwindowParent->_HWND();
+      auto hwndParent = (HWND) pwindowParent->_HWND();
 
       if (::is_null(hwndParent) || hwndParent == INVALID_HANDLE_VALUE)
       {

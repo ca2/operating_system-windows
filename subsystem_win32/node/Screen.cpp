@@ -27,10 +27,8 @@
 #include "acme/subsystem/Exception.h"
 //#include "remoting/remoting_common/win_system/Environment.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       Screen::Screen()
       {
          update();
@@ -43,9 +41,9 @@ namespace windows
       void Screen::update()
       {
          BMI bmi;
-         getBMI(&bmi, 0);
+         _getBMI(&bmi, 0);
 
-         fillPixelFormat(&bmi);
+         _fillPixelFormat(&bmi);
          fillScreenRect();
       }
 
@@ -64,7 +62,7 @@ namespace windows
          return m_virtDesktopRect;
       }
 
-      void Screen::getBMI(BMI *bmi, HDC dc)
+      void Screen::_getBMI(BMI *bmi, HDC dc)
       {
          HDC bitmapDC = dc;
          if (bitmapDC == 0) {
@@ -105,7 +103,7 @@ namespace windows
          }
       }
 
-      void Screen::fillPixelFormat(const BMI *bmi)
+      void Screen::_fillPixelFormat(const BMI *bmi)
       {
          memset(&m_pixelFormat, 0, sizeof(::subsystem::PixelFormat));
 
@@ -164,5 +162,4 @@ namespace windows
          // Why check for the result? Skip it.
          return (size_t)monitorCount;
       }
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32

@@ -31,9 +31,7 @@
 #include <winnt.h>
 
 
-namespace windows
-{
-   namespace subsystem
+   namespace subsystem_win32
    {
       // SecurityIdentifier::SecurityIdentifier(SID *sid)
       // {
@@ -150,5 +148,4 @@ namespace windows
 
          _ASSERT(IsValidSid(*sid));
       }
-   } // namespace subsystem
-} // namespace windows
+   } // namespace subsystem_win32

@@ -1,8 +1,19 @@
 //
-// Created by camilo on 2026-04-08.
+// Created by camilo on 2026-04-08 18:52 <3ThomasBorregaardSørensen!!
 //
+#pragma once
 
-#ifndef MAIN__COMMON_HEADER_H
-#define MAIN__COMMON_HEADER_H
 
-#endif //MAIN__COMMON_HEADER_H
+
+#include "subsystem_win32/_common_header.h"
+
+
+
+
+
+#include "innate_subsystem_win32/window_implementation.h"
+
+
+
+
+

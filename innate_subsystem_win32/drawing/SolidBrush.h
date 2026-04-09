@@ -25,16 +25,29 @@
 //
 #pragma once
 
-#include "apex/innate_subsystem/drawing/Brush.h"
 
-namespace innate_subsystem
+#include "apex/innate_subsystem/drawing/SolidBrush.h"
+#include "subsystem_win32/_common_header.h"
+
+
+namespace innate_subsystem_win32
 {
-   class SolidBrush : public Brush
+
+
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 SolidBrush :
+      virtual public ::subsystem::implementation <::innate_subsystem::SolidBrushInterface>
+
    {
    public:
-      SolidBrush(COLORREF color);
-      virtual ~SolidBrush();
+
+
+      SolidBrush();
+      ~SolidBrush() override;
+
+      void initialize_solid_brush(const color::color& color) override;
+
+
    };
 
 
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32

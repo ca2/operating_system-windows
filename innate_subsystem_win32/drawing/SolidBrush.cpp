@@ -23,14 +23,28 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
+#include "framework.h"
 #include "SolidBrush.h"
+#include "Brush.h"
 
-SolidBrush::SolidBrush(COLORREF color)
-: Brush()
-{
-  m_brush = CreateSolidBrush(color);
-}
 
-SolidBrush::~SolidBrush()
+namespace innate_subsystem_win32
 {
-}
+   SolidBrush::SolidBrush()
+   {
+   }
+
+   SolidBrush::~SolidBrush()
+   {
+
+
+   }
+
+   void SolidBrush::initialize_solid_brush(const ::color::color & color)
+   {
+
+      ::cast < ::innate_subsystem_win32::Brush > pbrushWin32 = ::subsystem::get_implementation(this);
+      pbrushWin32->m_hbrush = CreateSolidBrush(RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+   }
+
+}// namespace innate_subsystem_win32

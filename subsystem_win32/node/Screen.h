@@ -31,70 +31,67 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
+   // This class get info for a windows desktop.
+   class CLASS_DECL_SUBSYSTEM_WIN32 Screen :
+   virtual public ::subsystem::implementation<::subsystem::ScreenInterface>
    {
-      // This class get info for a windows desktop.
-      class CLASS_DECL_SUBSYSTEM_WIN32 Screen
+   public:
+      Screen();
+      ~Screen() override;
+
+      void update() override;
+
+      // Returns a PixelFormat that was at latest call of the
+      // update() function.
+      ::subsystem::PixelFormat getPixelFormat() override;
+
+      // Returns a desktop dimension that was at latest call of the
+      // update() function.
+      // Desktop dimension is a dimension of windows virtual desktop including
+      // all monitors.
+      ::int_size getDesktopDimension() override;
+
+      // Returns a rectangle that was at latest call of the
+      // update() function.
+      // The rectangle is a rectangle of windows virtual desktop including
+      // all monitors (coordinates can be negative).
+      ::int_rectangle getDesktopRect() override;
+
+      // This structure can be used by user code.
+      struct BMI
       {
-      public:
-         Screen();
-         ~Screen();
-
-         void update();
-
-         // Returns a PixelFormat that was at latest call of the
-         // update() function.
-         ::subsystem::PixelFormat getPixelFormat();
-
-         // Returns a desktop dimension that was at latest call of the
-         // update() function.
-         // Desktop dimension is a dimension of windows virtual desktop including
-         // all monitors.
-         ::int_size getDesktopDimension();
-
-         // Returns a rectangle that was at latest call of the
-         // update() function.
-         // The rectangle is a rectangle of windows virtual desktop including
-         // all monitors (coordinates can be negative).
-         ::int_rectangle getDesktopRect();
-
-         // This structure can be used by user code.
-         struct BMI
-         {
-            BITMAPINFOHEADER bmiHeader;
-            unsigned int red;
-            unsigned int green;
-            unsigned int blue;
-         };
-
-         struct Palette8bitBMI
-         {
-            BITMAPINFOHEADER bmiHeader;
-            RGBQUAD rgbQuad[256];
-         };
-
-         // Fills the BMI structure. If dc == 0 the getBMI() function will
-         // use a current desktop dc.
-         void getBMI(BMI *bmi, HDC dc);
-
-         // Windows contain both visible and invisible pseudo-monitors
-         // that are associated with mirroring drivers.
-         // The function returns only visible monitor count.
-         size_t getVisibleMonitorCount();
-
-      private:
-         void fillPixelFormat(const BMI *bmi);
-         // Find position of first true bit
-         static inline int findFirstBit(const unsigned int bits);
-
-         void fillScreenRect();
-
-         ::subsystem::PixelFormat m_pixelFormat;
-         ::int_rectangle m_virtDesktopRect;
+         BITMAPINFOHEADER bmiHeader;
+         unsigned int red;
+         unsigned int green;
+         unsigned int blue;
       };
 
-      //// __SCREEN_H__
-   } // namespace  subsystem
-}// namespace windows
+      struct Palette8bitBMI
+      {
+         BITMAPINFOHEADER bmiHeader;
+         RGBQUAD rgbQuad[256];
+      };
+
+      // Fills the BMI structure. If dc == 0 the getBMI() function will
+      // use a current desktop dc.
+      virtual void _getBMI(BMI *bmi, HDC dc);
+
+      // Windows contain both visible and invisible pseudo-monitors
+      // that are associated with mirroring drivers.
+      // The function returns only visible monitor count.
+      size_t getVisibleMonitorCount() override;
+
+   //private:
+      virtual void _fillPixelFormat(const BMI *bmi);
+      // Find position of first true bit
+      int findFirstBit(const unsigned int bits) override;
+
+      void fillScreenRect();
+
+      ::subsystem::PixelFormat m_pixelFormat;
+      ::int_rectangle m_virtDesktopRect;
+   };
+
+}// namespace subsystem_win32

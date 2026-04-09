@@ -22,32 +22,47 @@
 //-------------------------------------------------------------------------
 //
 
-#ifndef _PAINT_WINDOW_H_
-#define _PAINT_WINDOW_H_
+#pragma once
 
-#include "BaseWindow.h"
-#include "drawing/DeviceContext.h"
 
-class PaintWindow: public BaseWindow
+#include "apex/innate_subsystem/PaintWindow.h"
+#include "innate_subsystem_win32/Window.h"
+
+
+namespace innate_subsystem_win32
 {
-public:
-  PaintWindow();
-  virtual ~PaintWindow();
 
-private:
-  HDC getHDCPaint();
 
-  friend class DeviceContext;
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 PaintWindow:
+   virtual public ::subsystem::implementation<::innate_subsystem::PaintWindowInterface>
+   //, public Window
+   {
+   public:
 
-protected:
-  virtual void onPaint(DeviceContext *dc, PAINTSTRUCT *paintStruct);
 
-  bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam);
+      PaintWindow();
+      ~PaintWindow() override;
 
-  bool m_bIsDraw;
-  PAINTSTRUCT m_paintStruct;
-  HDC m_hdc;
+   //private:
+      //HDC getHDCPaint();
+      ::pointer < ::innate_subsystem::DeviceContextInterface > getPaintDeviceContext() override;
 
-};
+      friend class DeviceContext;
 
-#endif
+   //protected:
+      virtual void onPaint(DeviceContext *dc, PAINTSTRUCT *paintStruct);
+
+      //bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam);
+
+      bool m_bIsDraw;
+      PAINTSTRUCT m_paintStruct;
+      //HDC m_hdc;
+      ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontext;
+
+   };
+
+
+} // namespace innate_subsystem_win32
+
+
+

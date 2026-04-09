@@ -28,28 +28,31 @@ namespace innate_subsystem_win32
 {
    struct WindowsParam
    {
-      std::vector<HWND> *hwndVector;
-      StringVector *classNames;
+      ::comparable_array_base<HWND> *hwndVector;
+      const ::string_array_base *classNames;
    };
 
-   BOOL CALLBACK WindowFinder::findWindowsByClassFunc(HWND hwnd, ::lparam lparam)
+   BOOL CALLBACK WindowFinder::findWindowsByClassFunc(HWND hwnd, LPARAM lparam)
    {
       if (IsWindowVisible(hwnd) != 0) {
-         WindowsParam *windowsParam = (WindowsParam *)::lparam;
-         StringVector::iterator classNameIter;
+         WindowsParam *windowsParam = (WindowsParam *)lparam;
+         //::sStringVector::iterator classNameIter;
 
          const size_t maxTcharCount = 256;
          TCHAR winName[maxTcharCount];
          if (GetClassName(hwnd, winName, maxTcharCount) != 0) {
-            StringStorage nextWinName(winName);
+            ::string nextWinName(winName);
 
-            if (nextWinName.getLength() > 0 && hwnd != 0) {
-               for (classNameIter = windowsParam->classNames->begin();
-                    classNameIter != windowsParam->classNames->end(); classNameIter++) {
-                  if (nextWinName.isEqualTo(&(*classNameIter))) {
-                     windowsParam->hwndVector->push_back(hwnd);
+            if (nextWinName.has_character() && hwnd != 0)
+               {
+               for (auto & str : *windowsParam->classNames)
+               {
+                  if (str == nextWinName)
+                  {
+                     windowsParam->hwndVector->add(hwnd);
                   }
-                    }
+               }
+
             }
 
             // Recursion
@@ -59,33 +62,33 @@ namespace innate_subsystem_win32
       return TRUE;
    }
 
-   std::vector<HWND> WindowFinder::findWindowsByClass(StringVector classNames)
+   ::comparable_array_base<HWND> WindowFinder::findWindowsByClass(const ::string_array_base & straClassNames)
    {
-      std::vector<HWND> hwndVector;
-      if (classNames.empty()) {
-         return hwndVector;
+      ::comparable_array_base<HWND> hwnda;
+      if (straClassNames.empty()) {
+         return hwnda;
       }
       WindowsParam windowsParam;
-      windowsParam.classNames = &classNames;
-      windowsParam.hwndVector = &hwndVector;
-      EnumWindows(findWindowsByClassFunc, (::lparam)&windowsParam);
-      return hwndVector;
+      windowsParam.classNames = &straClassNames;
+      windowsParam.hwndVector = &hwnda;
+      EnumWindows(findWindowsByClassFunc, (LPARAM)&windowsParam);
+      return hwnda;
    }
 
-   BOOL CALLBACK WindowFinder::findWindowsByNameFunc(HWND hwnd, ::lparam lparam)
+   BOOL CALLBACK WindowFinder::findWindowsByNameFunc(HWND hwnd, LPARAM lparam)
    {
       if (IsWindowVisible(hwnd) != 0) {
          const size_t maxTcharCount = 256;
          TCHAR nameChars[maxTcharCount];
          if (GetWindowText(hwnd, nameChars, maxTcharCount) != 0) {
-            StringStorage winName(nameChars);
-            winName.toLowerCase();
+            ::string winName(nameChars);
+            winName.make_lower();
 
-            if (winName.getLength() > 0 && hwnd != 0) {
-               WindowsParam *winParams = (WindowsParam *)::lparam;
-               StringStorage *substr = &(*(winParams->classNames)).front();
-               if (_tcsstr(winName.getString(), substr->getString()) != 0) {
-                  (*(winParams->hwndVector)).push_back(hwnd);
+            if (winName.has_character() && hwnd != 0) {
+               WindowsParam *winParams = (WindowsParam *)lparam;
+               auto substr = winParams->classNames->first();
+               if (winName.contains( substr)) {
+                  winParams->hwndVector->add(hwnd);
                   return FALSE;
                }
             }
@@ -94,17 +97,17 @@ namespace innate_subsystem_win32
       return TRUE;
    }
 
-   HWND WindowFinder::findFirstWindowByName(const StringStorage windowName)
+   HWND WindowFinder::findFirstWindowByName(const ::scoped_string & scopedstrWindowNamePart)
    {
-      std::vector<HWND> hwndVector;
-      StringVector winNameVector;
-      winNameVector.push_back(windowName);
-      winNameVector[0].toLowerCase();
-      WindowsParam winParams = { &hwndVector, &winNameVector };
+      ::comparable_array_base<HWND> hwnda;
+      ::string_array_base winNameVector;
+      winNameVector.add(scopedstrWindowNamePart);
+      winNameVector[0].make_lower();
+      WindowsParam winParams = { &hwnda, &winNameVector };
 
       EnumWindows(findWindowsByNameFunc, (::lparam)&winParams);
-      if (hwndVector.size() != 0) {
-         return hwndVector[0];
+      if (hwnda.has_element()) {
+         return hwnda.first();
       } else {
          return 0;
       }

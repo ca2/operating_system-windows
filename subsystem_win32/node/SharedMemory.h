@@ -27,7 +27,7 @@
 
 #include "subsystem_win32/_common_header.h"
 
-namespace windows
+namespace subsystem_win32
 {
 
 class CLASS_DECL_SUBSYSTEM_WIN32 SharedMemory
@@ -53,4 +53,4 @@ public:
 
 //// __SHAREDMEMORY_H__
 ///
-} // namespace windows
+} // namespace subsystem_win32

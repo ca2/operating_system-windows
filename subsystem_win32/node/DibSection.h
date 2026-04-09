@@ -34,10 +34,8 @@
 #define CAPTUREBLT          (DWORD)0x40000000 /* Include layered windows */
 #endif
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       // This clas is a primitive wrapper to a DIB section.
       class CLASS_DECL_SUBSYSTEM_WIN32 DibSection :
          virtual public ::subsystem::implementation<::subsystem::DibSectionInterface >
@@ -113,5 +111,4 @@ namespace windows
       };
 
       //// __DIBSECTION_H__
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32

@@ -23,60 +23,73 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-#ifndef _MENU_H_
-#define _MENU_H_
+#pragma once
 
-#include "util/CommonHeader.h"
-#include <crtdbg.h>
 
-class Menu
+
+#include "apex/innate_subsystem/Menu.h"
+#include "innate_subsystem_win32/_common_header.h"
+
+
+namespace innate_subsystem_win32
 {
-public:
-  Menu();
-  virtual ~Menu();
+   
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Menu :
+      virtual public ::subsystem::implementation<innate_subsystem::MenuInterface>
+   {
+      public:
+      Menu();
+      ~Menu() override;
 
-  HMENU getMenu();
-  void setMenu(HMENU hmenu);
-  bool getWindowMenu(HWND hwnd);
-  void getSystemMenu(HWND hwnd);
-  void create();
-  bool loadMenu(LPCTSTR lpMenuName);
-  void createPopupMenu();
-  bool getSubMenu(int nPos, Menu *menu);
-  void termMenu();
-  
-  int getMenuItemCount();
-  bool appendMenu(StringStorage strVal, unsigned int uID); 
-  bool appendSeparator();
-  bool appendSubMenu(StringStorage strVal, Menu *pMenu);
+      void * _HMENU() override;
+      void _setHMENU(void *pHMENU) override;
+      bool getWindowMenu(innate_subsystem::WindowInterface * pwindow) override;
+      void getSystemMenu(innate_subsystem::WindowInterface * pwindow) override;
+      void create() override;
+      bool loadMenu(const char * lpMenuName) override;
+      void createPopupMenu() override;
+      bool getSubMenu(int nPos, MenuInterface * pmenu) override;
+      void termMenu() override;
 
-  bool insertMenuItem(unsigned int uItem, StringStorage strVal, unsigned int uID);
-  bool insertCheckMenuItem(unsigned int uItem, StringStorage strVal, unsigned int uID);
-  bool insertSeparator(unsigned int uItem);
-  bool insertSubMenu(unsigned int uItem, StringStorage strVal, Menu *pMenu);
+      int getMenuItemCount() override;
+      bool appendMenu(const ::scoped_string & scopedstr, unsigned int uID) override;
+      bool appendSeparator() override;
+      bool appendSubMenu(const ::scoped_string & scopedstr, MenuInterface *pMenu) override;
 
-  bool enableMenuItem(unsigned int uID, unsigned int uEnable);
-  bool checkedMenuItem(unsigned int uID, bool bEnable);
-  bool deleteMenu(unsigned int uPosition);
+      bool insertMenuItem(unsigned int uItem, const ::scoped_string & scopedstr, unsigned int uID) override;
+      bool insertCheckMenuItem(unsigned int uItem, const ::scoped_string & scopedstr, unsigned int uID) override;
+      bool insertSeparator(unsigned int uItem) override;
+      bool insertSubMenu(unsigned int uItem, const ::scoped_string & scopedstr, MenuInterface *pMenu) override;
 
-  int findMenuItem(unsigned int uID);
+      bool enableMenuItem(unsigned int uID, unsigned int uEnable) override;
+      bool checkedMenuItem(unsigned int uID, bool bEnable) override;
+      bool deleteMenu(unsigned int uPosition) override;
 
-  bool setDefaultItem(unsigned int uID);
+      int findMenuItem(unsigned int uID) override;
 
-  void operator= (HMENU hmenu)
-  {
-    setMenu(hmenu);
-  }
+      bool setDefaultItem(unsigned int uID) override;
 
-private:
-  bool appendMenu(unsigned int uFlags, unsigned int_PTR uIDNewItem, LPCTSTR lpNewItem);
-  bool insertMenuItem(unsigned int uItem, BOOL fByPosition, LPCMENUITEMINFO lpmii);
-  bool modifyMenu(unsigned int uPosition, unsigned int uFlags, LONG_PTR uIDNewItem, LPCTSTR lpNewItem);
-  bool setMenuItem(unsigned int uItem, BOOL fByPosition, LPMENUITEMINFO lpmii);
+      // void operator= (HMENU hmenu)
+      // {
+      //    setMenu(hmenu) override;
+      // }
+      //
+      // private:
+      bool _appendMenu(unsigned int uFlags, ::uptr uptrNewItem, const char * lpNewItem);
+      bool _insertMenuItem(unsigned int uItem, BOOL fByPosition, LPCMENUITEMINFO lpmii);
+      bool _modifyMenu(unsigned int uPosition, unsigned int uFlags, LONG_PTR uIDNewItem, const char * lpNewItem);
+      bool _setMenuItem(unsigned int uItem, BOOL fByPosition, LPMENUITEMINFO lpmii);
 
-protected:
-  HMENU m_menu;
-  bool m_bCreated;
-};
+      //protected:
+      HMENU m_hmenu;
+      bool m_bCreated;
 
-#endif
+   };
+
+
+
+} //  namespace innate_subsystem_win32
+
+
+
+

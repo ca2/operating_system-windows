@@ -27,22 +27,26 @@
 
 #include "subsystem_win32/_common_header.h"
 
-namespace windows
+namespace subsystem_win32
 {
-      class CLASS_DECL_SUBSYSTEM_WIN32 WindowsEvent
-      {
-      public:
-         WindowsEvent(const ::scoped_string & scopedstrName = 0);
-         virtual ~WindowsEvent();
 
-         void notify();
-         void waitForEvent(const class ::time & time = ::time::infinity());
+   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsEvent
+   {
+   public:
+      WindowsEvent(const ::scoped_string & scopedstrName = 0);
+      virtual ~WindowsEvent();
 
-         HANDLE getHandle() const { return m_hEvent; }
+      void notify();
+      void waitForEvent(const class ::time & time = ::time::infinity());
 
-      //protected:
-         HANDLE m_hEvent;
-      };
+      HANDLE getHandle() const { return m_hEvent; }
 
-   //// __WINDOWSEVENT_H__
-} // namespace windows
+   //protected:
+      HANDLE m_hEvent;
+   };
+
+
+} // namespace subsystem_win32
+
+
+

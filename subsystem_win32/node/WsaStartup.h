@@ -29,7 +29,7 @@
 
 
 
-namespace windows
+namespace subsystem_win32
 {
    // Class that startup at constructor and cleanup at destructor Windows Sockets subsystem.
    class CLASS_DECL_SUBSYSTEM_WIN32 WsaStartup
@@ -42,6 +42,6 @@ namespace windows
    };
 
    //// __WSASTARTUP_H__
-} // namespace windows
+} // namespace subsystem_win32
 
 

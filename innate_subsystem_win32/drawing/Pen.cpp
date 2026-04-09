@@ -23,19 +23,75 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
+#include "framework.h"
 #include "Pen.h"
 
-#include <crtdbg.h>
+//#include <crtdbg.h>
 
-Pen::Pen(int type, int width, COLORREF color)
-: m_pen(NULL)
+
+namespace innate_subsystem_win32
 {
-  m_pen = CreatePen(type, width, color);
 
-  _ASSERT(m_pen != NULL);
-}
 
-Pen::~Pen()
-{
-  DeleteObject(m_pen);
-}
+   // Pen::Pen(::innate_subsystem::enum_pennt type, int width, COLORREF color)
+   // : m_pen(NULL)
+   // {
+   //    m_pen = CreatePen(type, width, color);
+   //
+   //    _ASSERT(m_pen != NULL);
+   // }
+
+   Pen::Pen():
+   m_hpen(nullptr)
+   {
+
+   }
+
+
+   Pen::~Pen()
+   {
+
+      destroyGraphicsObject();
+
+   }
+
+
+   void * Pen::_HGDIOBJ()
+   {
+
+      return m_hpen;
+
+   }
+
+   void Pen::initialize_pen(innate_subsystem::enum_pen epen, int width, const color::color& color)
+   {
+
+      destroyGraphicsObject();
+
+      m_hpen = CreatePen((int) epen, width, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+
+      if (!m_hpen)
+      {
+
+         throw ::exception(error_failed);
+
+      }
+
+   }
+
+
+   void Pen::destroyGraphicsObject()
+   {
+
+      if (m_hpen)
+      {
+         ::DeleteObject(m_hpen);
+         m_hpen= nullptr;
+      }
+
+   }
+
+
+} // namespace innate_subsystem_win32
+
+

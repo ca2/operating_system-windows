@@ -23,8 +23,6 @@
 //
 #include "framework.h"
 #include "ListBox.h"
-namespace windows
-{
    namespace innate_subsystem_win32
    {
       ListBox::ListBox()
@@ -35,14 +33,15 @@ namespace windows
       {
       }
 
-      void ListBox::addString(const TCHAR *str)
+      void ListBox::addString(const char *str)
       {
          addString(str, 0);
       }
 
-      void ListBox::addString(const TCHAR *str, void *tag)
+      void ListBox::addString(const char *str, void *tag)
       {
-         LRESULT lresult = SendMessage(m_hwnd, LB_ADDSTRING, 0, (::lparam)str);
+         ::wstring wstr(str);
+         LRESULT lresult = SendMessage(m_hwnd, LB_ADDSTRING, 0, (::lparam)(LPARAM) wstr.c_str());
          int i = (int)lresult;
          _ASSERT(i == lresult);
          setItemData(i, (::lparam)tag);
@@ -65,16 +64,18 @@ namespace windows
          SendMessage(m_hwnd, LB_SETTOPINDEX, index, NULL);
       }
 
-      void ListBox::getItemText(int index, StringStorage *storage)
+      ::string ListBox::getItemText(int index)
       {
          size_t length = SendMessage(m_hwnd, LB_GETTEXTLEN, index, NULL);
          _ASSERT(length <= 65536);
-         std::vector<TCHAR> buffer(length + 1);
-         SendMessage(m_hwnd, LB_GETTEXT, index, (::lparam)&buffer.front());
-         storage->setString(&buffer.front());
+         //std::vector<TCHAR> buffer(length + 1);
+         ::wstring wstr;
+         SendMessage(m_hwnd, LB_GETTEXT, index, (LPARAM) (const WCHAR *) wstr.auto_release_buffer(length));
+         ////storage->setString(&buffer.front());
+         return wstr;
       }
 
-      void ListBox::setItemText(int index, const TCHAR *str)
+      void ListBox::setItemText(int index, const char *str)
       {
          int si = getSelectedIndex();
          int top = getTopIndex();
@@ -90,22 +91,22 @@ namespace windows
          setTopIndex(top);
       }
 
-      void ListBox::appendString(const TCHAR *str, ::lparam data)
+      void ListBox::appendString(const char *str, ::lparam data)
       {
-         LRESULT lresult = SendMessage(m_hwnd, LB_ADDSTRING, 0, (::lparam)str);
+         LRESULT lresult = SendMessage(m_hwnd, LB_ADDSTRING, 0, (LPARAM)::wstring(str).c_str());
          int index = (int)lresult;
          _ASSERT(index == lresult);
          setItemData(index, data);
       }
 
-      void ListBox::insertString(int index, const TCHAR *str)
+      void ListBox::insertString(int index, const char *str)
       {
-         SendMessage(m_hwnd, LB_INSERTSTRING, index, (::lparam)str);
+         SendMessage(m_hwnd, LB_INSERTSTRING, index, (LPARAM)wstring(str).c_str());
       }
 
-      void ListBox::insertString(int index, const TCHAR *str, ::lparam data)
+      void ListBox::insertString(int index, const char *str, ::lparam data)
       {
-         LRESULT lresult = SendMessage(m_hwnd, LB_INSERTSTRING, index, (::lparam)str);
+         LRESULT lresult = SendMessage(m_hwnd, LB_INSERTSTRING, index, (LPARAM)::wstring(str).c_str());
          int i = (int)lresult;
          _ASSERT(i == lresult);
          setItemData(i, data);
@@ -147,4 +148,3 @@ namespace windows
          SendMessage(m_hwnd, LB_SETCURSEL, index, NULL);
       }
    } // namespace innate_subsystem_win32
-} // namespace windows

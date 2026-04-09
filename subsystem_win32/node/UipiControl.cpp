@@ -33,7 +33,7 @@
 #define MSGFLT_ADD 1
 #endif
 
-namespace windows
+namespace subsystem_win32
 {
    typedef BOOL (WINAPI *SetFilterEx)(HWND hWnd,
                                       UINT scopedstrMessage,
@@ -100,4 +100,4 @@ namespace windows
          m_plogwriter->information("The allowMessage() function call is ignored.");
       }
    }
-} // namespace windows
+} // namespace subsystem_win32

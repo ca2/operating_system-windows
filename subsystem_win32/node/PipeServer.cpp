@@ -24,17 +24,18 @@
 #include "framework.h"
 //#include "subsystem_win32/_common_header.h"
 #include "PipeServer.h"
-
+#include "DynamicLibrary.h"
+#include "File.h"
 #include "acme/platform/node.h"
 #include "acme/subsystem/Exception.h"
 //#include "Environment.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   pointer < ::windows::subsystem::DynamicLibrary> PipeServer::m_pdynamiclibraryKernel32;
+   //pointer < ::subsystem_win32::DynamicLibrary> PipeServer::m_pdynamiclibraryKernel32;
 
-   pGetNamedPipeClientProcessId PipeServer::m_GetNamedPipeClientProcessId = 0;
-   volatile bool PipeServer::m_initialized = false;
+   //pGetNamedPipeClientProcessId PipeServer::m_GetNamedPipeClientProcessId = 0;
+   //volatile bool PipeServer::m_initialized = false;
 
    PipeServer::PipeServer()
    : m_milliseconds(0),
@@ -60,8 +61,8 @@ namespace windows
      //m_serverPipe(INVALID_HANDLE_VALUE),
      m_bufferSize = bufferSize;
    //{
-      if (!m_initialized) {
-         initialize();
+      if (!s_bInitialized) {
+         s_initialize();
       }
 
       m_pipeName.format("\\\\.\\pipe\\{}", scopedstrName);
@@ -80,7 +81,8 @@ namespace windows
       if (::system()->node()->_windows_isVistaOrLater()) {
          pipeMode |= PIPE_REJECT_REMOTE_CLIENTS;     // local only
       }
-      m_serverPipe = CreateNamedPipe(::wstring(m_pipeName),   // pipe name
+      construct_newø(m_pfileServerPipe);
+      m_pfileServerPipe->m_handle = CreateNamedPipe(::wstring(m_pipeName),   // pipe name
                                      openMode,
                                      pipeMode,
                                      PIPE_UNLIMITED_INSTANCES, // max. instances
@@ -90,7 +92,7 @@ namespace windows
                                      m_psecurityattributes != 0 ?          // security attributes
                                      m_psecurityattributes->_getSecurityAttributes() : 0
                                      );
-      if (m_serverPipe == INVALID_HANDLE_VALUE) {
+      if (m_pfileServerPipe->m_handle == INVALID_HANDLE_VALUE) {
          ::string errMess;
          errMess.formatf("CreateNamedPipe failed, error code = {}", GetLastError());
          throw ::subsystem::Exception(errMess);
@@ -99,7 +101,7 @@ namespace windows
 
    ::pointer < ::subsystem::NamedPipeInterface > PipeServer::accept()
    {
-      if (m_serverPipe == INVALID_HANDLE_VALUE) {
+      if (!m_pfileServerPipe || m_pfileServerPipe->m_handle == INVALID_HANDLE_VALUE) {
          createServerPipe();
       }
 
@@ -107,7 +109,7 @@ namespace windows
       memset(&overlapped, 0, sizeof(OVERLAPPED));
       overlapped.hEvent = m_winEvent.getHandle();
 
-      if (ConnectNamedPipe(m_serverPipe, &overlapped)) {
+      if (::ConnectNamedPipe(m_pfileServerPipe->m_handle, &overlapped)) {
          // In success the overlapped ConnectNamedPipe() function must
          // return zero.
          int errCode = GetLastError();
@@ -122,7 +124,7 @@ namespace windows
             case ERROR_IO_PENDING:
                m_winEvent.waitForEvent(m_milliseconds);
                DWORD cbRet; // Fake
-               if (!GetOverlappedResult(m_serverPipe, &overlapped, &cbRet, FALSE)) {
+               if (!GetOverlappedResult(m_pfileServerPipe->m_handle, &overlapped, &cbRet, FALSE)) {
                   int errCode = GetLastError();
                   ::string errMess;
                   errMess.formatf("GetOverlappedResult() failed after the "
@@ -137,16 +139,16 @@ namespace windows
          }
       }
 
-      if (!checkOtherSideBinaryName(m_serverPipe)) {
+      if (!checkOtherSideBinaryName(m_pfileServerPipe)) {
          throw ::subsystem::Exception("Pipe client process filename differs from current process");
       }
 
       // delete is inside ~NamedPipeTransport()
       auto pnamedpipe = createø < ::subsystem::NamedPipeInterface>();
 
-      pnamedpipe->initialize_named_pipe(m_serverPipe, m_bufferSize, true);
+      pnamedpipe->initialize_named_pipe(m_pfileServerPipe, m_bufferSize, true);
 
-      m_serverPipe = INVALID_HANDLE_VALUE;
+      m_pfileServerPipe->m_handle = INVALID_HANDLE_VALUE;
 
       return pnamedpipe;
    }
@@ -179,30 +181,33 @@ namespace windows
    {
    }
 
-   void PipeServer::initialize()
+   void PipeServer::s_initialize()
    {
       if (!::system()->node()->_windows_isVistaOrLater()) {
          return;
       }
       try {
-         m_pdynamiclibraryKernel32 = new DynamicLibrary("Kernel32.dll");
-         m_GetNamedPipeClientProcessId = (pGetNamedPipeClientProcessId)m_pdynamiclibraryKernel32->getProcAddress("GetNamedPipeClientProcessId");
+         ::system()->m_papplication->construct_newø(s_pdynamiclibraryKernel32);
+         s_pdynamiclibraryKernel32->initialize_dynamic_library("Kernel32.dll");
+         s_GetNamedPipeClientProcessId = (pGetNamedPipeClientProcessId)s_pdynamiclibraryKernel32->getProcAddress("GetNamedPipeClientProcessId");
       }
       catch (...) {
          return;
       }
-      m_initialized = true;
+      s_bInitialized = true;
    }
 
-   bool PipeServer::checkOtherSideBinaryName(HANDLE hPipe)
+   bool PipeServer::checkOtherSideBinaryName(::subsystem::FileInterface * pfilePipe)
    {
-      if (!m_initialized)
+      if (!s_bInitialized)
          return true;
 
       ULONG pid;
 
+      auto pfilePipeWin32 = pfilePipe->impl<::subsystem_win32::File>();
+
       // Vista or higher
-      if (!m_GetNamedPipeClientProcessId(hPipe, &pid)) {
+      if (!s_GetNamedPipeClientProcessId(pfilePipeWin32->m_handle, &pid)) {
          return true;
       }
 
@@ -235,5 +240,5 @@ namespace windows
       }
       return false;
    }
-} // namespace windows
+} // namespace subsystem_win32
 

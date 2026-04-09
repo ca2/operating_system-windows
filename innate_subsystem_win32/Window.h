@@ -25,115 +25,237 @@
 #pragma once
 
 
-#include "apex/innate_subsystem_win32/Window.h"
+#include "acme/operating_system/windows/window.h"
+#include "apex/innate_subsystem/Window.h"
 
 
-namespace  windows
+#define WM_REFLECT_NOTIFY_EX (105 + 0x2000 + WM_NOTIFY)
+
+
+namespace innate_subsystem_win32
 {
-   namespace innate_subsystem_win32
+
+   struct windows_reflect_notify_t
    {
-
-      class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Window :
-         virtual public ::subsystem::implementation< ::innate_subsystem_win32::WindowInterface >
+      bool m_bHandled;
+      ::lresult m_lresult;
+      ::wparam m_wparam;
+      int m_iControl;
+      LPNMHDR m_lpnmhdr;
+      void set_wparam(::wparam wparam)
       {
-      public:
-         
+         m_wparam = wparam;
+         m_iControl = LOWORD(m_wparam);
+      }
+   };
 
-      ///protected:
-         //HWND m_hWnd;
-         HWND           m_hwnd;
-         ::string       m_strClassName;
-         ::string       m_strWindowName;
-         HICON          m_hicon;
-         bool           m_bWndCreated;
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 notification_handler :
+   virtual public ::innate_subsystem::notification_handler
+   {
+   public:
 
-         Window();
 
-         ~Window() override;
+      // virtual bool _001OnAction();
+      // virtual bool _001OnKeyDownNotification(::user::enum_key ekey);
+      // virtual bool _001OnColumnClick(int iColumn);
+      //
+      //
+      //
+      // virtual bool _002OnAction(int iControl);
+      // virtual bool _002OnKeyDownNotification(int iControl, ::user::enum_key ekey);
+      // virtual bool _002OnColumnClick(int iControl, int iColumn);
 
-         // getWindow()
-         // Get a handle of the window
-         ::operating_system::window get_operating_system_window() const;
-         void setHWnd(const ::operating_system::window & operatingsystemwindow);
+      virtual bool _000OnNotify(LRESULT & lresult, ::wparam wparam, ::lparam lparam);
+      virtual bool _000OnNotify(windows_reflect_notify_t & notify);
+      virtual bool _000OnNotifyReflect(windows_reflect_notify_t & notify);
 
-         // createWindow()
-         // Create window with windowName and setted style
-         // other parameters can by changed
-         bool createWindow(const ::scoped_string & scopedstrWindowName, unsigned int style, const ::operating_system::window & operatingsystemwindowParent = 0,
-                           int xPos = WINDOW_WIDTH_USE_DEFAULT, int yPos = WINDOW_WIDTH_USE_DEFAULT,
-                           int width = WINDOW_WIDTH_USE_DEFAULT, int height = WINDOW_WIDTH_USE_DEFAULT);
-         bool destroyWindow();
 
-         // setClass()
-         // Set a class name only to the new window created by createWindow
-         void setClass(const ::scoped_string  & scopedstrWindowClassName);
+      virtual bool onListViewNotification(windows_reflect_notify_t & notify);
 
-         // basic window manipulation procedures
-         void show();
-         void hide();
-         void enableWindow(bool bEnable);
-         void updateWindow();
-         bool setSize(const ::int_size & size);
-         bool setPosition(int xPos, int yPos);
-         void setWindowText(const ::scoped_string  & scopedstrText);
 
-         // loadIcon()
-         // Set the icon of application where id can be from resource or handle HICON
-         void loadIcon(unsigned int id);
 
-         // setParent()
-         // Making child window by changing parent of the window
-         void setParent(const ::operating_system::window & operatingsystemwindow);
+   };
 
-         // for changing registered class parameters of created window
-         void setClassStyle(unsigned int style);
-         void setClassCursor(::innate_subsystem_win32::Cursor * pcursor);
-         void setClassBackground(::innate_subsystem_win32::Brush * pbrush);
-         void setClassMenu(long long menu);
 
-         // for changing or get style and exstyle of window
-         long long getStyle();
-         void setStyle(unsigned int style);
-         long long getExStyle();
-         void setExStyle(unsigned int exstyle);
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Window :
+      virtual public ::subsystem::implementation< ::innate_subsystem::WindowInterface >,
+      virtual public ::windows::window,
+      virtual public notification_handler
+   {
+   public:
 
-         // full redraw of window area
-         void redraw(const ::int_rectangle &rcArea = 0);
 
-         // set or kill timer, with identifactor ident
-         // and time in milliseconds
-         void setTimer(::uptr ident, unsigned int time);
-         void killTimer(::uptr ident);
+   ///protected:
+      //HWND m_hWnd;
+      //HWND           m_hwnd;
+      ::string       m_strClassName;
+      ::string       m_strWindowName;
+      HICON          m_hicon;
+      bool           m_bWndCreated;
+      //WNDPROC        m_wndprocDefault;
 
-         // set foreground window
-         void setForegroundWindow();
-
-         // post message to this window
-         void postMessage(unsigned int Msg, ::wparam wparam = 0, ::lparam lparam = 0);
-
-         void getClientRect(::int_rectangle &rc);
-         void getBorderSize(int *width, int *height);
-
-         virtual bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam);
-
-         static const int MOUSE_LDOWN  = 1;
-         static const int MOUSE_MDOWN  = 2;
-         static const int MOUSE_RDOWN  = 4;
-         static const int MOUSE_WUP    = 8;
-         static const int MOUSE_WDOWN  = 16;
-
-         // private:
-         // This function may be implement in child class.
-         // Here is stub function, always returned false.
-         virtual bool onCommand(::wparam wparam, ::lparam lparam);
-         virtual bool onNotify(int idCtrl, LPNMHDR pnmh);
-         virtual bool onSysCommand(::wparam wparam, ::lparam lparam);
-         virtual bool onMessage(unsigned int message, ::wparam wparam, ::lparam lparam);
-         virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, POINT position);
-
+      struct notification
+      {
+         ::innate_subsystem::enum_control e_control = ::innate_subsystem::e_control_none;
+         int_array   m_iaNotification;
       };
 
-      //#endif
-   } //  namespace innate_subsystem_win32
-} // namespace  windows
+      ::int_map < notification > m_mapControlNotification;
+
+      Window();
+
+      ~Window() override;
+
+
+      void * _HWND() const override;
+       void _setHWND(void *) override;
+
+
+      void * _WNDPROC_default() const override;
+
+      // getWindow()
+      // Get a handle of the window
+      ::operating_system::window operating_system_window() const override;
+      void set_operating_system_window(const ::operating_system::window & operatingsystemwindow) override;
+
+      ::innate_subsystem::WindowInterface * get_window_implementation() override;
+
+      // createWindow()
+      // Create window with windowName and setted style
+      // other parameters can by changed
+      bool createWindow(const ::scoped_string & scopedstrWindowName, unsigned int style, const ::operating_system::window & operatingsystemwindowParent = 0,
+                        int xPos = WINDOW_WIDTH_USE_DEFAULT, int yPos = WINDOW_WIDTH_USE_DEFAULT,
+                        int width = WINDOW_WIDTH_USE_DEFAULT, int height = WINDOW_WIDTH_USE_DEFAULT) override;
+      bool destroyWindow() override;
+
+      // setClass()
+      // Set a class name only to the new window created by createWindow
+      void setClass(const ::scoped_string  & scopedstrWindowClassName) override;
+
+      // basic window manipulation procedures
+      void show() override;
+      void hide() override;
+      void enableWindow(bool bEnable) override;
+      void setEnabled(bool bEnable) override;
+      void updateWindow() override;
+      bool setSize(const ::int_size & size) override;
+      bool setPosition(int xPos, int yPos) override;
+      void setWindowText(const ::scoped_string  & scopedstrText) override;
+
+
+      //
+      // Sets input focus to this control
+      //
+
+      void setFocus() override;
+
+      //
+      // Return true if window has input focus
+      //
+
+      bool hasFocus() override;
+
+      //
+      // Puts this control foreground and activates it
+      //
+
+      bool setForeground() override;
+
+      //
+      // Changes visible state of this control
+      //
+
+      void setVisible(bool visible) override;
+
+      //
+      // Checks if this control is active (not disabled)
+      //
+
+      bool isEnabled() override;
+
+      //
+      // Invalidates control
+      //
+
+      void invalidate() override;
+
+      //
+      // Gets text associated with window
+      //
+
+      ::string getText() override;
+
+      // loadIcon()
+      // Set the icon of application where id can be from resource or handle HICON
+      void loadIcon(unsigned int id) override;
+
+      // setParent()
+      // Making child window by changing parent of the window
+      void setParent(const ::operating_system::window & operatingsystemwindow) override;
+
+
+      ::operating_system::window dialog_item_operating_system_window(int iDlgItem) override;
+
+      // for changing registered class parameters of created window
+      void setClassStyle(unsigned int style) override;
+      void setClassCursor(::innate_subsystem::CursorInterface * pcursor) override;
+      void setClassBackground(::innate_subsystem::BrushInterface * pbrush) override;
+      void setClassMenu(::innate_subsystem::MenuInterface * pmenu) override;
+
+      bool we_want_WM_KEYDOWN_when_enter_is_pressed() const override;
+
+      // for changing or get style and exstyle of window
+      long long getStyle() override;
+      void setStyle(unsigned int style) override;
+      void addStyle(unsigned int styleFlag) override;
+      void removeStyle(unsigned int styleFlag) override;
+      bool isStyleEnabled(unsigned int styleFlags) override;
+
+
+      long long getExStyle() override;
+      void setExStyle(unsigned int exstyle) override;
+      void addExStyle(unsigned int styleFlag) override;
+      void removeExStyle(unsigned int styleFlag) override;
+      bool isExStyleEnabled(unsigned int styleFlag) override;
+
+      // full redraw of window area
+      void redraw(const ::int_rectangle &rcArea ={}) override;
+
+      // set or kill timer, with identifactor ident
+      // and time in milliseconds
+      void setTimer(::uptr ident, unsigned int time) override;
+      void killTimer(::uptr ident) override;
+
+      // set foreground window
+      void setForegroundWindow() override;
+
+      // post message to this window
+      void postMessage(unsigned int Msg, ::wparam wparam = 0, ::lparam lparam = 0) override;
+
+      void getClientRect(::int_rectangle &rc) override;
+      ::int_size getBorderSize() override;
+
+      //static LRESULT CALLBACK s_window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
+      virtual bool on_window_procedure(LRESULT &lresult, UINT message, WPARAM wparam, LPARAM lparam) override;
+
+      static const int MOUSE_LDOWN  = 1;
+      static const int MOUSE_MDOWN  = 2;
+      static const int MOUSE_RDOWN  = 4;
+      static const int MOUSE_WUP    = 8;
+      static const int MOUSE_WDOWN  = 16;
+
+      // private:
+      // This function may be implement in child class.
+      // Here is stub function, always returned false.
+      virtual bool onCommand(::wparam wparam, ::lparam lparam) override;
+      virtual bool onSysCommand(::wparam wparam, ::lparam lparam) override;
+      virtual bool onMessage(unsigned int message, ::wparam wparam, ::lparam lparam) override;
+      virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, const ::int_point & position) override;
+
+   };
+
+
+
+} //  namespace innate_subsystem_win32
+
 

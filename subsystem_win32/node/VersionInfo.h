@@ -28,7 +28,7 @@
 #include "subsystem_win32/_common_header.h"
 //#include "SystemException.h"
 
-namespace windows
+namespace subsystem_win32
 {
    /**
     * Contains information about executable file version info.
@@ -55,4 +55,4 @@ namespace windows
        */
       ::string m_productVersionString;
    };
-} // namespace windows
+} // namespace subsystem_win32

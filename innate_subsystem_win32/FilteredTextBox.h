@@ -23,38 +23,49 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-#ifndef _FILTERED_TEXT_BOX_H_
-#define _FILTERED_TEXT_BOX_H_
+//#ifndef _FILTERED_TEXT_BOX_H_
+//#define _FILTERED_TEXT_BOX_H_
 
-#include "TextBox.h"
-#include "BalloonTip.h"
-#include "StringFilter.h"
-#include "util/StringStorage.h"
+#pragma once
 
-class FilteredTextBox : public TextBox
+
+#include "apex/innate_subsystem/FilteredTextBox.h"
+#include "innate_subsystem_win32/_common_header.h"
+//#include "BalloonTip.h"
+//#include "StringFilter.h"
+//#include "util/StringStorage.h"
+
+namespace innate_subsystem_win32
 {
-public:
-  FilteredTextBox();
-  ~FilteredTextBox();
 
-  // Override Control::setWindow method
-  void setWindow(HWND hwnd);
-  void setText(TCHAR *text);
-  void setErrorBalloonTip(BalloonTip *tip);
-  void setStringFilter(StringFilter *filter);
-  LRESULT makeCheck();
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 FilteredTextBox : 
+   virtual public window_implementation<innate_subsystem::FilteredTextBoxInterface>
+   {
+   public:
+      FilteredTextBox();
+      ~FilteredTextBox() override;
 
-protected:
-  virtual bool isStringValid(const TCHAR *string);
-  virtual LRESULT onKeyDown(::wparam code, ::lparam params);
+      // Override Control::setWindow method
+      void setWindow(const ::operating_system::window & operatingsystemwindow) override;
+      void setText(char *text) override;
+      void setErrorBalloonTip(innate_subsystem::TooltipInterface *tip) override;
+      void setStringFilter(::innate_subsystem::StringFilter *filter) override;
+      LRESULT makeCheck() override;
 
-  static LRESULT CALLBACK windowProc(HWND hwnd, unsigned int uMsg, ::wparam wparam, ::lparam lparam);
+   //protected:
+      bool isStringValid(const char *string) override;
+      ::lresult onKeyDown(::wparam code, ::lparam params) override;
 
-protected:
-  LONG_PTR m_oldWindowProc;
-  StringStorage m_text;
-  BalloonTip *m_tip;
-  StringFilter *m_filter;
-};
+      static LRESULT CALLBACK windowProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam);
 
-#endif
+      virtual bool window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
+
+   //protected:
+      WNDPROC  m_wndprocOld;
+      ::string  m_strText;
+      ::pointer < ::innate_subsystem::TooltipInterface > m_ptooltip;
+      ::pointer < ::innate_subsystem::StringFilter >m_pstringfilter;
+   };
+
+   //#endif
+} //   namespace innate_subsystem_win32

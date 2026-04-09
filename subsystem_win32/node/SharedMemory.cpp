@@ -27,7 +27,7 @@
 #include "acme/subsystem/Exception.h"
 #include <Aclapi.h>
 
-namespace windows
+namespace subsystem_win32
 {
    SharedMemory::SharedMemory(const ::scoped_string & scopedstrName, size_t size)
    : m_hToMap(0),
@@ -119,6 +119,6 @@ namespace windows
          throw ::subsystem::Exception(errMess);
       }
    }
-} // namespace windows
+} // namespace subsystem_win32
 
 

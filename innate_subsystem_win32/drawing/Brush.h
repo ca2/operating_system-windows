@@ -24,26 +24,36 @@
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
 #pragma once
-#include "acme/subsystem/particle.h"
 
 
-namespace innate_subsystem
+#include "apex/innate_subsystem/drawing/Brush.h"
+#include "subsystem_win32/_common_header.h"
+
+
+namespace innate_subsystem_win32
 {
 
-   class CLASS_DECL_ACME BrushInterface :
-   virtual public ::subsystem::particle_interface
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Brush :
+      virtual public ::subsystem::implementation<::innate_subsystem::BrushInterface>
    {
    public:
-      //Brush();
-      virtual ~Brush() = 0;
+
+      Brush();
+      ~Brush() override;
+
+
+      void * _HGDIOBJ() override;
 
    //protected:
-      virtual void release() = 0;
+      //void on_release() override;
+
+
+      void destroyGraphicsObject() override;
 
    // protected:
-   //    HBRUSH m_brush;
+     HBRUSH m_hbrush;
    //
    //    friend class Graphics;
    };
 
-} // namespace innate_subsystem
+} // namespace innate_subsystem_win32

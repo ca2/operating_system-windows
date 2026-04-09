@@ -23,60 +23,60 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //#include "framework.h"
-#include "BalloonTip.h"
-
-namespace windows
-{
-   namespace innate_subsystem_win32
-   {
-      BalloonTip::BalloonTip(const TCHAR *text, const TCHAR *caption)
-      {
-         setText(text);
-         setTitle(caption);
-      }
-
-      BalloonTip::BalloonTip()
-      {
-         setText(_T(""));
-         setTitle(_T(""));
-      }
-
-      BalloonTip::~BalloonTip()
-      {
-      }
-
-      void BalloonTip::showTooltip(Control *control)
-      {
-         MessageBox(control->getWindow(), m_text.getString(), m_title.getString(), MB_OK | MB_ICONWARNING);
-      }
-
-      void BalloonTip::setText(const TCHAR *text)
-      {
-         m_text.setString(text);
-      }
-
-      void BalloonTip::setTitle(const TCHAR *title)
-      {
-         m_title.setString(title);
-      }
-
-      void BalloonTip::getText(StringStorage *text) const
-      {
-         text->setString(m_text.getString());
-      }
-
-      void BalloonTip::getTitle(StringStorage *title) const
-      {
-         title->setString(m_title.getString());
-      }
-
-      void BalloonTip::setIconType(int iconType)
-      {
-      }
-
-      int BalloonTip::getIconType() const
-      {
-         return 0;
-      }
-   } // namespace innate_subsystem_win32
-} //namespace windows
+// #include "BalloonTip.h"
+//
+// namespace windows
+// {
+//    namespace innate_subsystem_win32
+//    {
+//       BalloonTip::BalloonTip(const TCHAR *text, const TCHAR *caption)
+//       {
+//          setText(text);
+//          setTitle(caption);
+//       }
+//
+//       BalloonTip::BalloonTip()
+//       {
+//          setText(_T(""));
+//          setTitle(_T(""));
+//       }
+//
+//       BalloonTip::~BalloonTip()
+//       {
+//       }
+//
+//       void BalloonTip::showTooltip(Control *control)
+//       {
+//          MessageBox(control->getWindow(), m_text.getString(), m_title.getString(), MB_OK | MB_ICONWARNING);
+//       }
+//
+//       void BalloonTip::setText(const TCHAR *text)
+//       {
+//          m_text.setString(text);
+//       }
+//
+//       void BalloonTip::setTitle(const TCHAR *title)
+//       {
+//          m_title.setString(title);
+//       }
+//
+//       void BalloonTip::getText(StringStorage *text) const
+//       {
+//          text->setString(m_text.getString());
+//       }
+//
+//       void BalloonTip::getTitle(StringStorage *title) const
+//       {
+//          title->setString(m_title.getString());
+//       }
+//
+//       void BalloonTip::setIconType(int iconType)
+//       {
+//       }
+//
+//       int BalloonTip::getIconType() const
+//       {
+//          return 0;
+//       }
+//    } // namespace innate_subsystem_win32
+// } //namespace windows

@@ -29,55 +29,53 @@
 
 #include "subsystem_win32/node/NamedPipe.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
+   PipeClient::PipeClient()
    {
-      PipeClient::PipeClient()
-      {
+   }
+
+   ::pointer < ::subsystem::NamedPipe >PipeClient::connect(const ::scoped_string & scopedstrName, unsigned int maxPortionSize)
+   {
+      ::string pipeName;
+      pipeName.formatf("\\\\.\\pipe\\{}", ::string(scopedstrName).c_str());
+
+      auto pfilePipe = create_newø< ::subsystem_win32::File>();
+      HANDLE hPipe;
+      hPipe = CreateFile(::wstring(pipeName),  // pipe name
+                         GENERIC_READ |         // read and write access
+                         GENERIC_WRITE,
+                         0,                     // no sharing
+                         NULL,                  // default security attributes
+                         OPEN_EXISTING,         // opens existing pipe
+                         FILE_FLAG_OVERLAPPED,  // asynchronous mode
+                         NULL);                 // no template file
+
+      if (hPipe == INVALID_HANDLE_VALUE) {
+         int errCode = GetLastError();
+         ::string errMess;
+         errMess.formatf("Connect to pipe server failed, error code = {}", errCode);
+         throw ::subsystem::Exception(errMess);
       }
+      pfilePipe->m_handle = hPipe;
+      DWORD dwMode = PIPE_READMODE_BYTE;
+      if (!SetNamedPipeHandleState(hPipe,   // pipe handle
+                                   &dwMode,   // new pipe mode
+                                   NULL,      // don't set maximum bytes
+                                   NULL)      // don't set maximum time
+                                   ) {
+         int errCode = GetLastError();
+         ::string errMess;
+         errMess.formatf("SetNamedPipeHandleState failed, error code = {}", errCode);
+         throw ::subsystem::Exception(errMess);
+                                   }
 
-      ::pointer < ::subsystem::NamedPipe >PipeClient::connect(const ::scoped_string & scopedstrName, unsigned int maxPortionSize)
-      {
-         ::string pipeName;
-         pipeName.formatf("\\\\.\\pipe\\{}", ::string(scopedstrName).c_str());
+      auto pnamedpipe = create_newø< ::subsystem_win32::NamedPipe>();
 
-         auto pfilePipe = create_newø< ::windows::subsystem::File>();
-         HANDLE hPipe;
-         hPipe = CreateFile(::wstring(pipeName),  // pipe name
-                            GENERIC_READ |         // read and write access
-                            GENERIC_WRITE,
-                            0,                     // no sharing
-                            NULL,                  // default security attributes
-                            OPEN_EXISTING,         // opens existing pipe
-                            FILE_FLAG_OVERLAPPED,  // asynchronous mode
-                            NULL);                 // no template file
-
-         if (hPipe == INVALID_HANDLE_VALUE) {
-            int errCode = GetLastError();
-            ::string errMess;
-            errMess.formatf("Connect to pipe server failed, error code = {}", errCode);
-            throw ::subsystem::Exception(errMess);
-         }
-         pfilePipe->m_handle = hPipe;
-         DWORD dwMode = PIPE_READMODE_BYTE;
-         if (!SetNamedPipeHandleState(hPipe,   // pipe handle
-                                      &dwMode,   // new pipe mode
-                                      NULL,      // don't set maximum bytes
-                                      NULL)      // don't set maximum time
-                                      ) {
-            int errCode = GetLastError();
-            ::string errMess;
-            errMess.formatf("SetNamedPipeHandleState failed, error code = {}", errCode);
-            throw ::subsystem::Exception(errMess);
-                                      }
-
-         auto pnamedpipe = create_newø< ::windows::subsystem::NamedPipe>();
-
-         pnamedpipe->initialize_named_pipe(pfilePipe, maxPortionSize, false);
+      pnamedpipe->initialize_named_pipe(pfilePipe, maxPortionSize, false);
 
 
-         return pnamedpipe;
-      }
-   } // namespace subsystem
-} // namespace  windows
+      return pnamedpipe;
+   }
+
+} // namespace subsystem_win32

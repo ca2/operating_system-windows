@@ -31,10 +31,8 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       /**
        * Wrapper of WinAPI methods that can inject input events into system
        * (mouse, keyboard etc) and get information about input device states.
@@ -136,5 +134,5 @@ namespace windows
 
          ::subsystem::LogWriter *m_log;
       };
-   }// namespace subsystem
-} // namespace windows
+   }// namespace subsystem_win32
+} // namespace subsystem_win32

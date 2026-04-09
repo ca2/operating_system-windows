@@ -34,13 +34,11 @@
 //#include "remoting/remoting_common/thread/LocalMutex.h"
 //#include "log_writer/LogWriter.h"
 
-namespace windows
+namespace subsystem_win32
 {
-   namespace subsystem
-   {
       class CLASS_DECL_SUBSYSTEM_WIN32 AnonymousPipe :
-      virtual public ::subsystem::implementation < ::subsystem::AnonymousPipeInterface >,
-      virtual public Pipe
+      virtual public ::subsystem::implementation < ::subsystem::AnonymousPipeInterface >
+          //,  virtual public Pipe
       {
       public:
          // @param hWrite is a write handle getting by the CreatePipe()
@@ -114,8 +112,8 @@ namespace windows
       //private:
          void checkPipeFile(::subsystem::FileInterface * pfile);
 
-         ::pointer< ::windows::subsystem::File > m_pfileWrite;
-         ::pointer< ::windows::subsystem::File > m_pfileRead;
+         ::pointer< ::subsystem_win32::File > m_pfileWrite;
+         ::pointer< ::subsystem_win32::File > m_pfileRead;
          bool m_neededToClose;
          unsigned int m_timeOut;
 
@@ -127,5 +125,4 @@ namespace windows
       };
 
       //// __ANONYMOUSPIPE_H__
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32

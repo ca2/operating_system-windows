@@ -28,10 +28,10 @@
 #include "subsystem_win32/_common_header.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
 
-namespace subsystem
+namespace subsystem_win32
    {
    // Class for intercepting keyboard on low level.
    class CLASS_DECL_SUBSYSTEM_WIN32 OperatingSystemHook :
@@ -70,5 +70,4 @@ namespace subsystem
    };
 
 
-   } // namespace subsystem
-} // namespace windows
+} // namespace subsystem_win32

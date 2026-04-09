@@ -22,19 +22,21 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//#pragma once
+#pragma once
 //#ifndef _COMBOBOX_H_
 //#define _COMBOBOX_H_
 
 //#include "acCommonHeader.h"
-#include "apex/innate_subsystem_win32/Control.h"
+#include "apex/innate_subsystem/ComboBox.h"
+#include "innate_subsystem_win32/_common_header.h"
 
 
 namespace innate_subsystem_win32
 {
 
 
-    class ComboBox : public Control
+    class ComboBox :// public Control
+   virtual public window_implementation<::innate_subsystem::ComboBoxInterface>
     {
     public:
 
@@ -55,16 +57,16 @@ namespace innate_subsystem_win32
         virtual void insertItem(int index, const char *text, void *tag);
 
         // Returns count of combo box items
-        virtual int getItemsCount() const;
+        virtual int getItemsCount();
 
         // Sets user data (tag) associated with combo box item with specified index
         virtual void setItemData(int index, void *tag);
 
         // Returns user data associated with combo box item with specified index
-        virtual void *getItemData(int index) const;
+        virtual void *getItemData(int index);
 
         // Sets text associated with combo box item with specified index
-        virtual ::string getItemText(int index) const;
+        virtual ::string getItemText(int index);
 
         // Returns current selected item index
         virtual int getSelectedItemIndex();

@@ -26,22 +26,22 @@
 #pragma once
 //#define _SPIN_CONTROL_H_
 
-#include "apex/innate_subsystem_win32/Control.h"
-//#include <commctrl.h>
+#include "apex/innate_subsystem/SpinControl.h"
+#include "innate_subsystem_win32/_common_header.h"
 
 namespace innate_subsystem_win32
 {
 
-class SpinControl : public Control
+class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 SpinControl : public window_implementation<innate_subsystem::SpinControlInterface>
 {
 public:
   SpinControl();
-  ~SpinControl();
+  ~SpinControl() override;
 
-  void setBuddy(Control *buddyControl);
-  void setRange(short lower, short upper);
-  void setRange32(int lower, int upper);
-  void setAccel(unsigned int nSec, unsigned int nInc);
+  void setBuddy(ControlInterface *buddyControl) override;
+  void setRange(short lower, short upper) override;
+  void setRange32(int lower, int upper) override;
+  void setAccel(unsigned int nSec, unsigned int nInc) override;
 
   //
   // Auto acceleration methods
@@ -51,22 +51,22 @@ public:
   // Handler, call it on UDN_DELTAPOS notification
   //
 
-  //void autoAccelerationHandler(LPNMUPDOWN message);
-  void enableAutoAcceleration(bool enabled);
+  virtual void autoAccelerationHandler(LPNMUPDOWN message);
+  void enableAutoAcceleration(bool enabled) override;
   void setAutoAccelerationParams(const int_array & limitters,
                                  const int_array & deltas,
-                                 int maxDelta);
+                                 int maxDelta) override;
 // protected:
-//   Control *m_buddy;
+   ::pointer < ::innate_subsystem::ControlInterface> m_pcontrolBuddy;
 //
 //   //
 //   // Members needed for auto acceleration
 //   //
 //
-//   bool m_isAutoAccelerationEnabled;
-//   std::vector<int> m_limitters;
-//   std::vector<int> m_deltas;
-//   int m_maxDelta;
+   bool m_isAutoAccelerationEnabled;
+   int_array m_limitters;
+   int_array m_deltas;
+   int m_maxDelta;
 };
 
 } // namespace innate_subsystem_win32

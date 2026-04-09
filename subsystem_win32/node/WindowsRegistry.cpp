@@ -26,7 +26,7 @@
 #include "WindowsRegistry.h"
 
 
-namespace windows
+namespace subsystem_win32
 {
    WindowsRegistry::WindowsRegistry()
    {
@@ -45,4 +45,4 @@ namespace windows
    {
       return HKEY_LOCAL_MACHINE;
    }
-} // namespace windows
+} // namespace subsystem_win32

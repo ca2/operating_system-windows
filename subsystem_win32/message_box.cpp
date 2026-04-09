@@ -36,7 +36,7 @@ namespace win32
                {
 
 
-                  //namespace windows
+                  //namespace subsystem_win32
                   //{
 
 
@@ -73,7 +73,7 @@ namespace win32
             };
 
 
-         } // namespace windows
+         } // namespace subsystem_win32
 
       //}
 

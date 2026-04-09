@@ -23,47 +23,50 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-#ifndef _TAB_CONTROL_H_
-#define _TAB_CONTROL_H_
+#pragma once
+//#define _TAB_CONTROL_H_
 
-#include "Control.h"
-#include "Tab.h"
-#include "TabContainer.h"
+//#include "Control.h"
+//#include "Tab.h"
+//#include "TabContainer.h"
 
-using namespace std;
+#include "apex/innate_subsystem/TabControl.h"
+#include "innate_subsystem_win32/_common_header.h"
 
-class TabControl : public Control
+
+namespace innate_subsystem_win32
 {
-public:
-  TabControl();
-  ~TabControl();
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 TabControl : public window_implementation<innate_subsystem::TabControlInterface>
+   {
+   public:
+      TabControl();
+      ~TabControl() override;
 
-  //
-  // Tab access members
-  //
+      //
+      // Tab access members
+      //
 
-  TabContainer &getTabs() { return m_tabContainer; }
-  Tab *getTab(int index);
-  void addTab(BaseDialog *dialog, const TCHAR *caption);
-  void showTab(int index);
-  void showTab(const BaseDialog *dialog);
-  void deleteAllTabs();
-  void removeTab(int index);
+      innate_subsystem::TabContainer &getTabs() override;
+      ::innate_subsystem::TabInterface *getTab(int index) override;
+      void addTab(innate_subsystem::DialogInterface *dialog, const char *caption) override;
+      void showTab(int index) override;
+      void showTab(innate_subsystem::DialogInterface *dialog) override;
+      void deleteAllTabs() override;
+      void removeTab(int index) override;
 
-  //
-  // Return selected tab number
-  //
+      //
+      // Return selected tab number
+      //
 
-  int getSelectedTabIndex();
+      int getSelectedTabIndex() override;
 
-  //
-  // Tab work rect methods
-  //
+      //
+      // Tab work rect methods
+      //
 
-  void adjustRect(::int_rectangle &rect);
+      void adjustRect(::int_rectangle &rect) override;
 
-protected:
-  TabContainer m_tabContainer;
-};
-
-#endif
+   //protected:
+      ::innate_subsystem::TabContainer m_tabContainer;
+   };
+} // namespace innate_subsystem_win32
