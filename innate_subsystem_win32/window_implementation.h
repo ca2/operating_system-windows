@@ -1,0 +1,8 @@
+//
+// Created by camilo on 2026-04-08.
+//
+
+#ifndef MAIN_WINDOW_IMPLEMENTATION_H
+#define MAIN_WINDOW_IMPLEMENTATION_H
+
+#endif //MAIN_WINDOW_IMPLEMENTATION_H
