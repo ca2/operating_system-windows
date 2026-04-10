@@ -33,7 +33,7 @@ namespace subsystem_win32
 //}
    //
    // ServiceControlManagerClientException::ServiceControlManagerClientException(int scmErrCode)
-   // : SystemException("[::remoting::Exception description is not avaliable]")
+   // : SystemException("[::subsystem::Exception description is not avaliable]")
    // {
    //   switch (scmErrCode) {
    //   case ERROR_ALREADY_STOPPED:

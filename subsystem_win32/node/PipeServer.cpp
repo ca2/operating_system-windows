@@ -162,7 +162,7 @@ namespace subsystem_win32
           int errCode = GetLastError();
           ::string errMess;
           errMess.formatf("DisconnectNamedPipe failed, error code = {}", errCode);
-          throw ::remoting::Exception(errMess);
+          throw ::subsystem::Exception(errMess);
         }
       }*/
       m_winEvent.notify();

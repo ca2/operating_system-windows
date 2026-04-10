@@ -7,18 +7,6 @@
     <ClInclude Include="_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="windowing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="display.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="activation_token.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -44,28 +32,10 @@
     <ClCompile Include="_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="activation_token.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="display.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="message_box.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="subsystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="windowing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="xkb_input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="node\_.cpp">

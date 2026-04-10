@@ -2095,18 +2095,11 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="activation_token.h" />
-    <ClInclude Include="display.h" />
-    <ClInclude Include="window.h" />
     <ClInclude Include="_.h" />
-    <ClInclude Include="windowing.h" />
     <ClInclude Include="framework.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="activation_token.cpp" />
-    <ClCompile Include="display.cpp" />
     <ClCompile Include="keyboard.cpp" />
-    <ClCompile Include="message_box.cpp" />
     <ClCompile Include="node\AnonymousPipe.cpp" />
     <ClCompile Include="node\AnonymousPipeFactory.cpp" />
     <ClCompile Include="node\AutoImpersonator.cpp" />
@@ -2157,9 +2150,6 @@
     <ClCompile Include="node\_.cpp" />
     <ClCompile Include="resource_loader.cpp" />
     <ClCompile Include="subsystem.cpp" />
-    <ClCompile Include="window.cpp" />
-    <ClCompile Include="windowing.cpp" />
-    <ClCompile Include="xkb_input.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

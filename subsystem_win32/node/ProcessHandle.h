@@ -42,7 +42,7 @@ namespace subsystem_win32
          ProcessHandle(HANDLE handle, bool bOwn = false);
          ~ProcessHandle() override;
 
-         // @throws ::remoting::Exception on an error.
+         // @throws ::subsystem::Exception on an error.
          void openProcess(unsigned int dwDesiredAccess,
                           bool bInheritHandle,
                           ::process_identifier processidentifier) override;
@@ -55,7 +55,7 @@ namespace subsystem_win32
          ::pointer < ::subsystem::SecurityIdentifier > getProcessOwner() override;
 
          // Returns process module path. Call the openProcess() function before.
-         // @throws ::remoting::Exception on an error.
+         // @throws ::subsystem::Exception on an error.
          ::string getProcessModulePath() override;
 
          //private:

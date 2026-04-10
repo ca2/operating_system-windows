@@ -78,7 +78,7 @@ namespace subsystem_win32
       /**
        * Closes transport.
        *
-       * @throws ::remoting::Exception on fail.
+       * @throws ::subsystem::Exception on fail.
        */
       void close() override;
 

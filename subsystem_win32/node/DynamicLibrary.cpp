@@ -54,7 +54,7 @@ void DynamicLibrary::init(const ::scoped_string & scopedstrFilename)
 
     errMsg.format("{} library not found", scopedstrFilename);
 
-    throw ::remoting::Exception(errMsg);
+    throw ::subsystem::Exception(errMsg);
   }
 }
 

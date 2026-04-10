@@ -109,7 +109,7 @@ namespace subsystem_win32
       // if (BitBlt(m_memDC, rect.left, rect.top, rect.width(), rect.height(),
       //            m_targetDC, rect.left + m_srcOffsetX,
       //            rect.top + m_srcOffsetY, flags) == 0) {
-      //    throw ::remoting::Exception("Can't blit to DIB section.");
+      //    throw ::subsystem::Exception("Can't blit to DIB section.");
       //            }
    }
 
@@ -119,7 +119,7 @@ namespace subsystem_win32
       // if (BitBlt(m_targetDC, rect.left + m_srcOffsetX, rect.top + m_srcOffsetY,
       //            rect.width(), rect.height(),
       //            m_memDC, rect.left, rect.top, flags) == 0) {
-      //    throw ::remoting::Exception("Can't blit from DIB section.");
+      //    throw ::subsystem::Exception("Can't blit from DIB section.");
       //            }
    }
 
@@ -131,7 +131,7 @@ namespace subsystem_win32
       //                   srcRect.width(), srcRect.height(),
       //                   m_memDC, dstRect.left, dstRect.top, dstRect.width(), dstRect.height(),
       //                   flags) == 0) {
-      //       throw ::remoting::Exception("Can't strech blit from DIB section.");
+      //       throw ::subsystem::Exception("Can't strech blit from DIB section.");
       //                   }
       // }
    }

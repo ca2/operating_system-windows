@@ -28,25 +28,25 @@
 #include <crtdbg.h>
 
 SystemException::SystemException()
-: ::remoting::Exception(), m_errcode(GetLastError())
+: ::subsystem::Exception(), m_errcode(GetLastError())
 {
   createMessage(0, m_errcode);
 }
 
 SystemException::SystemException(int errcode)
-: ::remoting::Exception(), m_errcode(errcode)
+: ::subsystem::Exception(), m_errcode(errcode)
 {
   createMessage(0, m_errcode);
 }
 
 SystemException::SystemException(const ::scoped_string & scopedstrUserMessage)
-: ::remoting::Exception(), m_errcode(GetLastError())
+: ::subsystem::Exception(), m_errcode(GetLastError())
 {
   createMessage(scopedstrUserMessage, m_errcode);
 }
 
 SystemException::SystemException(const ::scoped_string & scopedstrUserMessage, int errcode)
-: ::remoting::Exception(), m_errcode(errcode)
+: ::subsystem::Exception(), m_errcode(errcode)
 {
   createMessage(scopedstrUserMessage, m_errcode);
 }

@@ -33,7 +33,7 @@ namespace subsystem_win32
 class CLASS_DECL_SUBSYSTEM_WIN32 SharedMemory
 {
 public:
-  // @throw ::remoting::Exception
+  // @throw ::subsystem::Exception
   SharedMemory(const ::scoped_string & scopedstrName, size_t size);
   virtual ~SharedMemory();
 

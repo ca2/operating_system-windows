@@ -160,7 +160,7 @@ namespace subsystem_win32
                    } else {
                       // Under Vista or later the SendInput() function doesn't return error
                       // code if inputs blocked by UIPI.
-                      throw ::remoting::Exception("SendInput() function failed");
+                      throw ::subsystem::Exception("SendInput() function failed");
                    }
                 }
              }
