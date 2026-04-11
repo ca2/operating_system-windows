@@ -28,6 +28,7 @@ namespace innate_subsystem_win32
    class Bitmap;
    class BitmapGraphics;
    class Brush;
+   class Font;
    class Graphics;
    class Icon;
    class Pen;

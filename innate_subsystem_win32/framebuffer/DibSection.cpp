@@ -25,28 +25,38 @@
 #include "subsystem_win32/_common_header.h"
 #include "DibSection.h"
 #include "acme/subsystem/node/SystemException.h"
+#include "drawing/Bitmap.h"
 
 
-namespace subsystem_win32
+namespace innate_subsystem_win32
 {
-   DibSection::DibSection(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible)
-   // : m_isOwnTargetDC(false),
-   //   m_targetDC(0),
-   //   m_memDC(0),
-   //   m_hbmOld(0),
-   //   m_hbmDIB(0),
-   //   m_srcOffsetX(0),
-   //   m_srcOffsetY(0),
-   //   m_buffer(0)
+
+
+   DibSection::DibSection()
    {
-      initialize_dib_section(pf, dim, operatingsystemwindowCompatible);
-      // try {
-      //    openDIBSection(pf, dim, compatibleWin);
-      // } catch (...) {
-      //    closeDIBSection();
-      //    throw;
-      // }
+
+
    }
+
+
+   // DibSection::DibSection(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible)
+   // // : m_isOwnTargetDC(false),
+   // //   m_targetDC(0),
+   // //   m_memDC(0),
+   // //   m_hbmOld(0),
+   // //   m_hbmDIB(0),
+   // //   m_srcOffsetX(0),
+   // //   m_srcOffsetY(0),
+   // //   m_buffer(0)
+   // {
+   //    initialize_dib_section(pf, dim, operatingsystemwindowCompatible);
+   //    // try {
+   //    //    openDIBSection(pf, dim, compatibleWin);
+   //    // } catch (...) {
+   //    //    closeDIBSection();
+   //    //    throw;
+   //    // }
+   // }
 
    DibSection::~DibSection()
    {
@@ -60,7 +70,9 @@ namespace subsystem_win32
    void DibSection::initialize_dib_section(const ::innate_subsystem::PixelFormat& pf, const int_size& dim, const operating_system::window& operatingsystemwindowCompatible)
    {
 
-      m_pparticleThis->initialize_dib_section(pf, dim, operatingsystemwindowCompatible);
+      //m_pparticleThis->initialize_dib_section(pf, dim, operatingsystemwindowCompatible);
+      constructø(m_pbitmapDib);
+      m_pbitmapDib->initialize_bitmap(dim);
 
    }
 
@@ -74,66 +86,66 @@ namespace subsystem_win32
 
    void *DibSection::getBuffer()
    {
-//      return m_buffer;
-      return m_pparticleThis->getBuffer();
+      return m_buffer;
+      //return m_pparticleThis->getBuffer();
    }
 
    void DibSection::blitToDibSection(const ::int_rectangle &  rect)
    {
-      //blitToDibSection(rect, SRCCOPY);
-      m_pparticleThis->blitToDibSection(rect);
+      blitToDibSection(rect, SRCCOPY);
+      //m_pparticleThis->blitToDibSection(rect);
    }
 
    void DibSection::blitTransparentToDibSection(const ::int_rectangle &  rect)
    {
-      //blitToDibSection(rect, SRCCOPY | CAPTUREBLT);
-      m_pparticleThis->blitTransparentToDibSection(rect);
+      blitToDibSection(rect, SRCCOPY | CAPTUREBLT);
+      //m_pparticleThis->blitTransparentToDibSection(rect);
    }
 
    void DibSection::blitFromDibSection(const ::int_rectangle &  rect)
    {
-      //blitFromDibSection(rect, SRCCOPY);
-      m_pparticleThis->blitFromDibSection(rect);
+      blitFromDibSection(rect, SRCCOPY);
+      //m_pparticleThis->blitFromDibSection(rect);
    }
 
    void DibSection::stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & dstRect)
    {
-      //stretchFromDibSection(srcRect, dstRect, SRCCOPY);
+      stretchFromDibSection(srcRect, dstRect, SRCCOPY);
 
-      m_pparticleThis->stretchFromDibSection(srcRect, dstRect);
+      //m_pparticleThis->stretchFromDibSection(srcRect, dstRect);
    }
 
    void DibSection::blitToDibSection(const ::int_rectangle &  rect, unsigned int flags)
    {
-      m_pparticleThis->blitToDibSection(rect, flags);
-      // if (BitBlt(m_memDC, rect.left, rect.top, rect.width(), rect.height(),
-      //            m_targetDC, rect.left + m_srcOffsetX,
-      //            rect.top + m_srcOffsetY, flags) == 0) {
-      //    throw ::subsystem::Exception("Can't blit to DIB section.");
-      //            }
+      // m_pparticleThis->blitToDibSection(rect, flags);
+      //  if (BitBlt(m_memDC, rect.left, rect.top, rect.width(), rect.height(),
+      //             m_targetDC, rect.left + m_srcOffsetX,
+      //             rect.top + m_srcOffsetY, flags) == 0) {
+      // //    throw ::subsystem::Exception("Can't blit to DIB section.");
+      // //            }
    }
 
    void DibSection::blitFromDibSection(const ::int_rectangle &  rect, unsigned int flags)
    {
-      m_pparticleThis->blitFromDibSection(rect, flags);
-      // if (BitBlt(m_targetDC, rect.left + m_srcOffsetX, rect.top + m_srcOffsetY,
-      //            rect.width(), rect.height(),
-      //            m_memDC, rect.left, rect.top, flags) == 0) {
-      //    throw ::subsystem::Exception("Can't blit from DIB section.");
-      //            }
+      // m_pparticleThis->blitFromDibSection(rect, flags);
+      // // if (BitBlt(m_targetDC, rect.left + m_srcOffsetX, rect.top + m_srcOffsetY,
+      // //            rect.width(), rect.height(),
+      // //            m_memDC, rect.left, rect.top, flags) == 0) {
+      // //    throw ::subsystem::Exception("Can't blit from DIB section.");
+      // //            }
    }
 
    void DibSection::stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & dstRect, unsigned int flags)
    {
-      m_pparticleThis->stretchFromDibSection(srcRect, dstRect, flags);
-      //    SetStretchBltMode(m_targetDC, HALFTONE);
-      //    if (StretchBlt(m_targetDC, srcRect.left + m_srcOffsetX, srcRect.top + m_srcOffsetY,
-      //                   srcRect.width(), srcRect.height(),
-      //                   m_memDC, dstRect.left, dstRect.top, dstRect.width(), dstRect.height(),
-      //                   flags) == 0) {
-      //       throw ::subsystem::Exception("Can't strech blit from DIB section.");
-      //                   }
-      // }
+      // m_pparticleThis->stretchFromDibSection(srcRect, dstRect, flags);
+      // //    SetStretchBltMode(m_targetDC, HALFTONE);
+      // //    if (StretchBlt(m_targetDC, srcRect.left + m_srcOffsetX, srcRect.top + m_srcOffsetY,
+      // //                   srcRect.width(), srcRect.height(),
+      // //                   m_memDC, dstRect.left, dstRect.top, dstRect.width(), dstRect.height(),
+      // //                   flags) == 0) {
+      // //       throw ::subsystem::Exception("Can't strech blit from DIB section.");
+      // //                   }
+      // // }
    }
    //
    // void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const PixelFormat & pf, const ::int_size & dim)
@@ -211,7 +223,7 @@ namespace subsystem_win32
 
    void DibSection::closeDIBSection()
    {
-      m_pparticleThis->closeDIBSection();
+      //m_pparticleThis->closeDIBSection();
       // if (m_hbmOld != 0) {
       //    SelectObject(m_memDC, m_hbmOld);
       //    m_hbmOld = 0;
@@ -232,11 +244,11 @@ namespace subsystem_win32
 
    void DibSection::releaseTargetDC()
    {
-      m_pparticleThis->releaseTargetDC();
+      //m_pparticleThis->releaseTargetDC();
       // if (m_targetDC != 0 && m_isOwnTargetDC) {
       //    ReleaseDC(0, m_targetDC);
       //    m_targetDC = 0;
       // }
    }
-} // namespace subsystem_win32
+} // namespace innate_subsystem_win32
 

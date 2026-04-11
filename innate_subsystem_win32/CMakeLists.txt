@@ -19,8 +19,17 @@ list(APPEND library_source
    drawing/Icon.cpp
    drawing/Graphics.h
    drawing/BitmapGraphics.cpp
+   #framebuffer/DibFrameBuffer.cpp
+   #framebuffer/DibFrameBuffer.h
+   framebuffer/DibSection.cpp
+   framebuffer/DibSection.h
+   #framebuffer/FrameBuffer.cpp
+   #framebuffer/FrameBuffer.h
+   #framebuffer/PixelFormat.cpp
+   #framebuffer/PixelFormat.h
    _.cpp
    _.h
+   _common_header.h
    _factory.cpp
    #button.cpp
    #button.h
@@ -39,8 +48,8 @@ list(APPEND library_source
    Control.h
    Dialog.cpp
    Dialog.h
-   DibFrameBuffer.cpp
-   DibFrameBuffer.h
+   #DibFrameBuffer.cpp
+   #DibFrameBuffer.h
    FilteredTextBox.cpp
    FilteredTextBox.h
    framework.cpp
@@ -65,6 +74,8 @@ list(APPEND library_source
    PaintWindow.h
    ProgressBar.cpp
    ProgressBar.h
+   resource_loader.cpp
+   resource_loader.h
    ScrollBar.cpp
    ScrollBar.h
    SpinControl.cpp
@@ -91,8 +102,11 @@ list(APPEND library_source
    Tooltip.h
    Trackbar.cpp
    Trackbar.h
+   window_implementation.h
    Window.cpp
    Window.h
+   WindowCache.cpp
+   WindowCache.h
    WindowFinder.cpp
    WindowFinder.h
    WindowMessageHandler.h
@@ -101,11 +115,7 @@ list(APPEND library_source
    )
 
 
-add_library(${PROJECT_NAME} SHARED ${library_source}
-   WindowCache.cpp
-   WindowCache.h
-   window_implementation.h
-   _common_header.h)
+add_library(${PROJECT_NAME} SHARED ${library_source})
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
 

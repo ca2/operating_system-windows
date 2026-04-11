@@ -40,7 +40,7 @@ namespace subsystem_win32
        * Have hidden main window and main scopedstrMessage loop.
        */
       class CLASS_DECL_SUBSYSTEM_WIN32 OperatingSystemApplication :
-      virtual public ::subsystem::OperatingSystemApplication
+      virtual public ::subsystem::implementation< ::subsystem::OperatingSystemApplicationInterface >
       {
       public:
 
@@ -92,19 +92,28 @@ namespace subsystem_win32
 
          //protected:
          // Creates a window to receive messages.
-         virtual void createWindow(const ::scoped_string & scopedstrClassName);
+         //virtual void createWindow(const ::scoped_string & scopedstrClassName);
+
+         //protected:
+         // Creates a window to receive messages.
+         //virtual void createWindow(const ::scoped_string & scopedstrClassName) = 0;
+         virtual void createApplicationMainTask() override;
+
+
+         virtual void postMainThreadMessage(int iMainThreadMessage) override;
+
 
          // Fills the wndClass argument and registers new class name in the Windows.
-         virtual void registerWindowClass(WNDCLASS *wndClass);
+         //virtual void registerWindowClass(WNDCLASS *wndClass);
 
          // Runs main messages process cycle. The run() function returns
          // value returned by this function.
-         virtual int processMessages();
+         //virtual int processMessages();
 
          /**
           * Windows prodecure for main application window.
           */
-         static LRESULT CALLBACK wndProc(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam);
+         //static LRESULT CALLBACK wndProc(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
          HINSTANCE m_appInstance;
          HWND m_mainWindow;
@@ -119,6 +128,9 @@ namespace subsystem_win32
          //private:
          static critical_section m_MDLMutex; // Modeless dialog ::list_base mutex.
          static ::comparable_list_base<HWND> m_modelessDialogList;
+
+         void onMainThreadMessage(int iMainThreadMessage) override;
+
       };
 
       //// __WINDOWSAPPLICATION_H__

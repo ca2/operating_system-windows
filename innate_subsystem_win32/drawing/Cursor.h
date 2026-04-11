@@ -30,7 +30,7 @@ namespace innate_subsystem_win32
       virtual void initialize_cursor(::innate_subsystem::CursorInterface * picon) override;
       virtual void initialize_cursor(::innate_subsystem::BitmapInterface * bitmap) override;
       virtual void initialize_cursor(::innate_subsystem::BitmapInterface * bitmap, ::innate_subsystem::BitmapInterface *mask) override;
-      virtual void initialize_cursor(unsigned int icon) override;
+      virtual void initialize_with_system_cursor(enum_cursor ecursor) override;
 
       //void initi(HICON icon);
       //Icon(Bitmap *bitmap);

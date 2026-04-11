@@ -213,6 +213,9 @@ namespace innate_subsystem_win32
 
       bool isEnabled() override;
 
+      bool isWindow() override;
+
+      bool isVisible() override;
 
       bool isIconic() override;
 
@@ -275,7 +278,7 @@ namespace innate_subsystem_win32
       // post message to this window
       void postMessage(unsigned int Msg, ::wparam wparam = 0, ::lparam lparam = 0) override;
 
-      void getClientRect(::int_rectangle &rc) override;
+      ::int_rectangle getClientRect() override;
       ::int_size getBorderSize() override;
 
       //static LRESULT CALLBACK s_window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);

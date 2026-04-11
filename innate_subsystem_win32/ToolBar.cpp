@@ -120,11 +120,11 @@ namespace innate_subsystem_win32
             // TODO: paste here all your variants of possible
             // toolbar buttons
             switch(m_autoButtons[i]) {
-               case TB_Style_sep:
+               case ::innate_subsystem::TB_Style_sep:
                   tbutton.fsStyle = TBSTYLE_SEP;
                   tbuttons.add(tbutton);
                   break;
-               case TB_Style_gap:
+               case ::innate_subsystem::TB_Style_gap:
                   tbutton.iBitmap = I_IMAGENONE;
                   tbuttons.add(tbutton);
                   break;

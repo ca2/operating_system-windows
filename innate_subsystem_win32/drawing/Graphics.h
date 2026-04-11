@@ -45,11 +45,12 @@ namespace innate_subsystem_win32
       ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontext;
       ::pointer<::innate_subsystem_win32::Brush > m_pbrush;
       ::pointer<::innate_subsystem_win32::Pen>m_ppen;
+      ::pointer<::innate_subsystem_win32::Font>m_pfont;
       int m_iBkMode;
       ::color::color m_colorText;
       ::color::color m_colorBk;
       ::int_point m_pointCurrent;
-      Gdiplus::Font * m_pfont;
+      //Gdiplus::Font * m_pfont;
       Gdiplus::Brush * m_pbrushText;
       ::color::color m_colorBrushText;
 
@@ -81,29 +82,35 @@ namespace innate_subsystem_win32
 
       // Sets text color.
       void setTextColor(const ::color::color & color) override;
+
+      void setTextRenderingHintClearType() override;
+
+
       // Sets current brush.
       void setBrush(::innate_subsystem::BrushInterface * pbrush) override;
       // Sets current pen.
       void setPen(::innate_subsystem::PenInterface * ppen) override;
+      // Sets current font.
+      void setFont(::innate_subsystem::FontInterface * pfont) override;
 
       // Moves cursor to specified position.
-      void moveTo(int x, int y) override;
+      void moveTo(const ::int_point & point) override;
       // Draws line from current position to specified line.
-      void lineTo(int x, int y) override;
+      void lineTo(const ::int_point & point) override;
 
       // Draws filled rect.
-      void fillRect(int l, int t, int r, int b, ::innate_subsystem::BrushInterface * pbrush) override;
+      void fillRect(const ::int_rectangle & rectangle, ::innate_subsystem::BrushInterface * pbrush) override;
       void fillRect(const ::int_rectangle & rectangle, const ::color::color & color) override;
       // Draws ellipse.
-      void ellipse(int l, int t, int r, int b) override;
+      void ellipse(const ::int_rectangle & rectangle) override;
       // Draws rectance.
-      void rectangle(int l, int t, int r, int b) override;
+      void rectangle(const ::int_rectangle & rectangle) override;
 
       // Draws bitmap.
-      void drawBitmap(::innate_subsystem::BitmapInterface * pbitmap, int x, int y, int w, int h) override;
-      void drawBitmap(::innate_subsystem::BitmapInterface *bitmap, int x, int y, int srcx, int srcy, int srcW, int srcH) override;
+      void drawBitmap(::innate_subsystem::BitmapInterface * pbitmap, const ::int_rectangle & rectangle) override;
+      void drawBitmap(::innate_subsystem::BitmapInterface *bitmap, const ::int_point & point, const ::int_rectangle & rectangle) override;
       // Draws text.
-      void drawText(const char *text, int cchText, ::int_rectangle &rect, unsigned int format) override;
+      void drawText(const char *text, int cchText, ::int_rectangle &rect, unsigned int format, enum_align ealign) override;
 
    ///protected:
 

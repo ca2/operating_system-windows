@@ -452,6 +452,11 @@ namespace innate_subsystem_win32
       return (!isStyleEnabled(WS_DISABLED));
    }
 
+   bool Window::isVisible()
+   {
+      return ::IsWindowVisible(m_windowswindow.as_HWND()) != FALSE;
+   }
+
    bool Window::isIconic()
    {
       return ::IsIconic(m_windowswindow.as_HWND()) != FALSE;
@@ -486,7 +491,7 @@ namespace innate_subsystem_win32
    }
 
 
-   void Window::getClientRect(::int_rectangle & rectangle)
+   ::int_rectangle Window::getClientRect()
    {
 
       _ASSERT(m_windowswindow.as_HWND() != 0);
@@ -495,7 +500,11 @@ namespace innate_subsystem_win32
 
       GetClientRect(m_windowswindow.as_HWND(), &rect);
 
+      ::int_rectangle rectangle;
+
       ::copy(rectangle, rect);
+
+      return rectangle;
 
    }
 

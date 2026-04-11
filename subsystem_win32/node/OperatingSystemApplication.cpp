@@ -24,7 +24,8 @@
 #include "framework.h"
 #include "subsystem_win32/_common_header.h"
 #include "OperatingSystemApplication.h"
-
+#include "acme/platform/system.h"
+#include "acme/windowing/windowing.h"
 #include "subsystem_win32/_common_header.h"
 //#include "remoting/remoting_common/thread/critical_section_lock.h"
 
@@ -58,54 +59,66 @@ namespace subsystem_win32
    }
    void OperatingSystemApplication::run()
    {
-      WNDCLASS wndClass;
-      registerWindowClass(&wndClass);
-      createWindow(wndClass.lpszClassName);
-      try {
-         m_iExitCode = processMessages();
-      } catch (...) {
-         m_iExitCode = 1;
-      }
+      // WNDCLASS wndClass;
+      // registerWindowClass(&wndClass);
+      // createWindow(wndClass.lpszClassName);
+      // try {
+      //    m_iExitCode = processMessages();
+      // } catch (...) {
+      //    m_iExitCode = 1;
+      // }
    }
 
-   int OperatingSystemApplication::processMessages()
+   // int OperatingSystemApplication::processMessages()
+   // {
+   //    MSG msg;
+   //    BOOL ret;
+   //    while ((ret = GetMessage(&msg, NULL, 0, 0)) != 0) {
+   //       if (ret < 0) {
+   //          return 1;
+   //       }
+   //       if (!processDialogMessage(&msg)) {
+   //          TranslateMessage(&msg);
+   //          DispatchMessage(&msg);
+   //       }
+   //    }
+   //
+   //    return (int)msg.wParam;
+   // }
+
+
+   void OperatingSystemApplication::postMainThreadMessage(int iMainThreadMessage)
    {
-      MSG msg;
-      BOOL ret;
-      while ((ret = GetMessage(&msg, NULL, 0, 0)) != 0) {
-         if (ret < 0) {
-            return 1;
-         }
-         if (!processDialogMessage(&msg)) {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-         }
-      }
+      system()->acme_windowing()->post([this, iMainThreadMessage]()
+      {
 
-      return (int)msg.wParam;
+         onMainThreadMessage(iMainThreadMessage);
+
+      });
    }
 
-   void OperatingSystemApplication::createWindow(const ::scoped_string & scopedstrClassName)
-   {
-      m_mainWindow = CreateWindow(::wstring(scopedstrClassName),
-                                  0, 0,
-                                  0, 0, 0, 0,
-                                  HWND_MESSAGE, 0,
-                                  m_appInstance,
-                                  0);
-   }
 
-   void OperatingSystemApplication::registerWindowClass(WNDCLASS *wndClass)
-   {
-      memset(wndClass, 0, sizeof(WNDCLASS));
-
-      // Set default values. Derived classes can redefine this fields
-      wndClass->lpfnWndProc = wndProc;
-      wndClass->hInstance = m_appInstance;
-      wndClass->lpszClassName = m_wstrWindowClassName;
-
-      RegisterClass(wndClass);
-   }
+   // void OperatingSystemApplication::createWindow(const ::scoped_string & scopedstrClassName)
+   // {
+   //    m_mainWindow = CreateWindow(::wstring(scopedstrClassName),
+   //                                0, 0,
+   //                                0, 0, 0, 0,
+   //                                HWND_MESSAGE, 0,
+   //                                m_appInstance,
+   //                                0);
+   // }
+   //
+   // void OperatingSystemApplication::registerWindowClass(WNDCLASS *wndClass)
+   // {
+   //    memset(wndClass, 0, sizeof(WNDCLASS));
+   //
+   //    // Set default values. Derived classes can redefine this fields
+   //    wndClass->lpfnWndProc = wndProc;
+   //    wndClass->hInstance = m_appInstance;
+   //    wndClass->lpszClassName = m_wstrWindowClassName;
+   //
+   //    RegisterClass(wndClass);
+   // }
 
    void OperatingSystemApplication::shutdown()
    {
@@ -143,18 +156,25 @@ namespace subsystem_win32
       return false;
    }
 
-   LRESULT CALLBACK OperatingSystemApplication::wndProc(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam)
+   // LRESULT CALLBACK OperatingSystemApplication::wndProc(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam)
+   // {
+   //    switch (msg) {
+   //       case WM_CLOSE:
+   //          DestroyWindow(hWnd);
+   //          return 0;
+   //       case WM_DESTROY:
+   //          PostQuitMessage(0);
+   //          return 0;
+   //    }
+   //    return DefWindowProc(hWnd, msg, wparam, lparam);
+   // }
+   void OperatingSystemApplication::onMainThreadMessage(int iMainThreadMessage)
    {
-      switch (msg) {
-         case WM_CLOSE:
-            DestroyWindow(hWnd);
-            return 0;
-         case WM_DESTROY:
-            PostQuitMessage(0);
-            return 0;
-      }
-      return DefWindowProc(hWnd, msg, wparam, lparam);
+
+      m_pcomposite->onMainThreadMessage(iMainThreadMessage);
    }
+
+
 
 
 } //namespace subsystem_win32

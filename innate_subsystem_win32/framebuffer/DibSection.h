@@ -25,7 +25,7 @@
 #pragma once
 
 
-#include "acme/subsystem/framebuffer/DibSection.h"
+#include "apex/innate_subsystem/framebuffer/DibSection.h"
 #include "apex/innate_subsystem/drawing/GraphicsObject.h"
 #include "subsystem_win32/_common_header.h"
 #ifndef CAPTUREBLT
@@ -35,13 +35,13 @@
 
 //#include "acme/subsystem/Screen.h"
 
-namespace subsystem_win32
+namespace innate_subsystem_win32
 {
 
 
       // This clas is a primitive wrapper to a DIB section.
-   class CLASS_DECL_SUBSYSTEM_WIN32  DibSection :
-      virtual public ::subsystem::implementation<::subsystem::DibSectionInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32  DibSection :
+      virtual public ::subsystem::implementation<::innate_subsystem::DibSectionInterface>
    {
    public:
       // Note that if the compatibleWin doesn't specify or is zero the class will create an
@@ -55,7 +55,7 @@ namespace subsystem_win32
       ~DibSection() override;
 
 
-      virtual void initialize_dib_section(const ::subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindow = {}) override;
+      virtual void initialize_dib_section(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindow = {}) override;
 
       // This function changes the target DC. In default target DC is a DC that has been
       // got from a compatible window on object creation. This function can be call many times.
@@ -132,11 +132,11 @@ namespace subsystem_win32
    //    // In default the created DC will used as a target DC for the blitting operations.
    //    // It may be changed many times later. Note that changed DC must be compatible with
    //    // the DIB section.
-   //    DibSection(const ::subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible = {});
+   //    DibSection(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible = {});
    //    ~DibSection() override;
    //
    //
-   //    void initialize_dib_section(const ::subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible = {}) override;
+   //    void initialize_dib_section(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible = {}) override;
    //
    //    // This function changes the target DC. In default target DC is a DC that has been
    //    // got from a compatible window on object creation. This function can be call many times.
@@ -182,7 +182,7 @@ namespace subsystem_win32
    //    void blitFromDibSection(const ::int_rectangle &  rect, unsigned int flags) override;
    //    void stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & dstRect, unsigned int flags);
    //
-   //    void setupBMIStruct(BITMAPINFO *pBmi, const ::subsystem::PixelFormat & pf, const ::int_size & dim);
+   //    void setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim);
    //
    //    //
    //    // bool m_isOwnTargetDC;
@@ -200,4 +200,4 @@ namespace subsystem_win32
    // };
 
    //// __DIBSECTION_H__
-} // namespace subsystem_win32
+} // namespace innate_subsystem_win32

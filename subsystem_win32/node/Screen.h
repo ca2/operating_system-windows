@@ -45,7 +45,7 @@ namespace subsystem_win32
 
       // Returns a PixelFormat that was at latest call of the
       // update() function.
-      ::subsystem::PixelFormat getPixelFormat() override;
+      ::innate_subsystem::PixelFormat getPixelFormat() override;
 
       // Returns a desktop dimension that was at latest call of the
       // update() function.
@@ -90,7 +90,7 @@ namespace subsystem_win32
 
       void fillScreenRect();
 
-      ::subsystem::PixelFormat m_pixelFormat;
+      ::innate_subsystem::PixelFormat m_pixelFormat;
       ::int_rectangle m_virtDesktopRect;
    };
 
