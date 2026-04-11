@@ -56,7 +56,7 @@ namespace innate_subsystem_win32
    // }
 
    Bitmap::Bitmap() :
-   m_hbitmap(nullptr)
+   m_pbitmap(nullptr)
    {
 
 
@@ -65,49 +65,73 @@ namespace innate_subsystem_win32
 
    Bitmap::~Bitmap()
    {
-      if (m_hbitmap != NULL) {
-         ::DeleteObject(m_hbitmap);
-      }
+      destroyGraphicsObject();
+      // if (m_hbitmap != NULL) {
+      //    ::DeleteObject(m_hbitmap);
+      // }
    }
 
    void Bitmap::initialize_bitmap(const ::int_size & size)
    {
-      //;mm_bitmap(NULL)
-      // Prepare buffer
-      int bpp = 32;
-      size_t s = size.area() * (bpp / 8);
-      ::memory bits;
-      bits.set_size(s);
-      if (size > 0)
-      {
-         memset(bits.data(), 0, bits.size());
-         // Create bitmap handle
-         m_hbitmap = CreateBitmap(size.cx, size.cy, 1, bpp, bits.data());
-      }
+      destroyGraphicsObject();
+      // //;mm_bitmap(NULL)
+      // // Prepare buffer
+      // int bpp = 32;
+      // size_t s = size.area() * (bpp / 8);
+      // ::memory bits;
+      // bits.set_size(s);
+      // if (size > 0)
+      // {
+      //    memset(bits.data(), 0, bits.size());
+      //    // Create bitmap handle
+      //    m_hbitmap = CreateBitmap(size.cx, size.cy, 1, bpp, bits.data());
+      // }
+      //
+      m_pbitmap= new  Gdiplus::Bitmap(size.cx, size.cy, PixelFormat32bppARGB);
    }
 
    void Bitmap::initialize_bitmap(::innate_subsystem::DeviceContextInterface * pdevicecontext, const ::int_size & size)
    {
+      destroyGraphicsObject();
       ::cast < ::innate_subsystem_win32::DeviceContext > pdevicecontextWin32 = ::subsystem::get_implementation(pdevicecontext);
-      m_hbitmap = CreateCompatibleBitmap(pdevicecontextWin32->m_hdc, size.cx, size.cy);
+      //m_hbitmap = CreateCompatibleBitmap(pdevicecontextWin32->m_hdc, size.cx, size.cy);
+      m_pbitmap = new Gdiplus::Bitmap(size.cx, size.cy, pdevicecontextWin32->m_pgraphics);
    }
 
    void Bitmap::initialize_bitmap(::innate_subsystem::BitmapInterface * pbitmap)
    //: m_bitmap(bitmap)
    {
+
+      destroyGraphicsObject();
       ::cast < ::innate_subsystem_win32::Bitmap > pbitmapWin32 = ::subsystem::get_implementation(pbitmap);
-      m_hbitmap = pbitmapWin32->m_hbitmap;
+      //m_hbitmap = pbitmapWin32->m_hbitmap;
+      m_pbitmap = pbitmapWin32->m_pbitmap->Clone(0, 0,
+         pbitmapWin32->m_pbitmap->GetWidth(), pbitmapWin32->m_pbitmap->GetHeight(),
+         PixelFormat32bppARGB);
 
    }
 
 
+   void Bitmap::_initialize_bitmap(HBITMAP hbitmap, HPALETTE hpalette)
+   {
+
+      destroyGraphicsObject();
+      m_pbitmap = new Gdiplus::Bitmap(hbitmap, hpalette);
+
+   }
+
    ::int_size Bitmap::getSize() const
    {
-      BITMAP bitmap;
-      if (GetObject(m_hbitmap, sizeof(BITMAP), &bitmap) == 0) {
-         return 0;
-      }
-      return {bitmap.bmWidth, bitmap.bmHeight};
+
+      auto w = m_pbitmap->GetWidth();
+      auto h = m_pbitmap->GetHeight();
+
+      return {w, h};
+      // BITMAP bitmap;
+      // if (GetObject(m_hbitmap, sizeof(BITMAP), &bitmap) == 0) {
+      //    return 0;
+      // }
+      // return {bitmap.bmWidth, bitmap.bmHeight};
    }
 
    // int Bitmap::getHeight() const
@@ -118,6 +142,19 @@ namespace innate_subsystem_win32
    //    }
    //    return bitmap.bmHeight;
    // }
+   void Bitmap::destroyGraphicsObject()
+   {
+
+      if (m_pbitmap)
+      {
+
+         delete m_pbitmap;
+
+         m_pbitmap = nullptr;
+
+      }
+
+   }
 } // namespace innate_subsystem_win32
 
 

@@ -213,7 +213,7 @@ namespace innate_subsystem_win32
       //
       void sort()override ;
 
-      bool _000OnNotify(windows_reflect_notify_t & notify) override;
+      void _000OnNotify(windows_reflect_notify_t & notify) override;
 
       void onAction() override;
 

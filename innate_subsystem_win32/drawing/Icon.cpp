@@ -121,8 +121,10 @@ namespace innate_subsystem_win32
       auto pbitmapWin32 = pbitmap->impl<innate_subsystem_win32::Bitmap>();
       auto pbitmapMaskWin32 = pbitmapMask->impl<innate_subsystem_win32::Bitmap>();
 
-      ii.hbmColor = (pbitmapWin32 != 0) ? pbitmapWin32->m_hbitmap : 0;
-      ii.hbmMask = (pbitmapMaskWin32 != 0) ? pbitmapMaskWin32->m_hbitmap : 0;
+      pbitmapWin32->m_pbitmap->GetHBITMAP(Gdiplus::Color(0, 0, 0, 0), &ii.hbmColor);
+      pbitmapMaskWin32->m_pbitmap->GetHBITMAP(Gdiplus::Color(0, 0, 0, 0), &ii.hbmMask);
+      //ii.hbmColor = (pbitmapWin32 != 0) ?  pbitmapWin32->m_hbitmap: 0;
+      //ii.hbmMask = (pbitmapMaskWin32 != 0) ? pbitmapMaskWin32->m_hbitmap : 0;
 
       m_hicon = CreateIconIndirect(&ii);
    }

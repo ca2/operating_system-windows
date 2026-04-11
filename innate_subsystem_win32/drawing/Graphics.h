@@ -28,7 +28,7 @@
 
 #include "apex/innate_subsystem/drawing/Graphics.h"
 //#include "util/CommonHeader.h"
-
+#include <Gdiplus.h>
 // #include "apex/innate_subsystem/drawing/DeviceContext.h"
 // #include "apex/innate_subsystem/drawing/Bitmap.h"
 // #include "apex/innate_subsystem/drawing/Brush.h"
@@ -40,6 +40,21 @@ namespace innate_subsystem_win32
    virtual public ::subsystem::implementation<::innate_subsystem::GraphicsInterface>
    {
    public:
+
+
+      ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontext;
+      ::pointer<::innate_subsystem_win32::Brush > m_pbrush;
+      ::pointer<::innate_subsystem_win32::Pen>m_ppen;
+      int m_iBkMode;
+      ::color::color m_colorText;
+      ::color::color m_colorBk;
+      ::int_point m_pointCurrent;
+      Gdiplus::Font * m_pfont;
+      Gdiplus::Brush * m_pbrushText;
+      ::color::color m_colorBrushText;
+
+
+
       // Creates graphics object with specified device context.
       //Graphics(DeviceContext *dc);
       Graphics();
@@ -47,12 +62,20 @@ namespace innate_subsystem_win32
       ~Graphics() override;
 
 
+      virtual void _defer_text_tools();
+
       innate_subsystem::DeviceContextInterface * device_context() override;
 
       void initialize_graphics(::innate_subsystem::DeviceContextInterface * pdevicecontext) override;
+      void initialize_graphics(::innate_subsystem::BitmapInterface * pbitmap) override;
 
       // Sets background colors mix mode.
       void setBkMode(bool transparent) override;
+
+      void setBlendModeOn(bool bSet) override;
+
+      void setAntiAliasOn(bool bOn) override;
+
       // Sets background color.
       void setBkColor(const ::color::color & color) override;
 
@@ -70,6 +93,7 @@ namespace innate_subsystem_win32
 
       // Draws filled rect.
       void fillRect(int l, int t, int r, int b, ::innate_subsystem::BrushInterface * pbrush) override;
+      void fillRect(const ::int_rectangle & rectangle, const ::color::color & color) override;
       // Draws ellipse.
       void ellipse(int l, int t, int r, int b) override;
       // Draws rectance.
@@ -77,11 +101,11 @@ namespace innate_subsystem_win32
 
       // Draws bitmap.
       void drawBitmap(::innate_subsystem::BitmapInterface * pbitmap, int x, int y, int w, int h) override;
+      void drawBitmap(::innate_subsystem::BitmapInterface *bitmap, int x, int y, int srcx, int srcy, int srcW, int srcH) override;
       // Draws text.
       void drawText(const char *text, int cchText, ::int_rectangle &rect, unsigned int format) override;
 
    ///protected:
-      ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontext;
 
 
    };

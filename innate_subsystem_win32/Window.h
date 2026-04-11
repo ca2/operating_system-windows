@@ -37,15 +37,25 @@ namespace innate_subsystem_win32
 
    struct windows_reflect_notify_t
    {
+      ::lresult &m_lresult;
       bool m_bHandled;
-      ::lresult m_lresult;
       ::wparam m_wparam;
       int m_iControl;
+      ::lparam m_lparam;
       LPNMHDR m_lpnmhdr;
-      void set_wparam(::wparam wparam)
+      windows_reflect_notify_t(::lresult & lresult, ::wparam wparam, ::lparam lparam):
+      m_lresult(lresult)
       {
+         m_bHandled = false;
          m_wparam = wparam;
          m_iControl = LOWORD(m_wparam);
+         m_lparam = lparam;
+         m_lpnmhdr = lparam.raw_cast<LPNMHDR>();
+      }
+      template < typename WINDOWS_NOTIFICATION_STRUCT_POINTER >
+      WINDOWS_NOTIFICATION_STRUCT_POINTER * raw_cast()
+      {
+         return m_lparam.raw_cast<WINDOWS_NOTIFICATION_STRUCT_POINTER>();
       }
    };
 
@@ -65,9 +75,9 @@ namespace innate_subsystem_win32
       // virtual bool _002OnKeyDownNotification(int iControl, ::user::enum_key ekey);
       // virtual bool _002OnColumnClick(int iControl, int iColumn);
 
-      virtual bool _000OnNotify(LRESULT & lresult, ::wparam wparam, ::lparam lparam);
-      virtual bool _000OnNotify(windows_reflect_notify_t & notify);
-      virtual bool _000OnNotifyReflect(windows_reflect_notify_t & notify);
+      virtual bool _000OnNotify(::lresult & lresult, ::wparam wparam, ::lparam lparam);
+      virtual void _000OnNotify(windows_reflect_notify_t & notify);
+      virtual void _000OnNotifyReflect(windows_reflect_notify_t & notify);
 
 
       virtual bool onListViewNotification(windows_reflect_notify_t & notify);
@@ -93,10 +103,30 @@ namespace innate_subsystem_win32
       HICON          m_hicon;
       bool           m_bWndCreated;
       //WNDPROC        m_wndprocDefault;
+      bool           m_bShowCursor;
+      bool m_bHasClipboardViewerInterest = false;
+      HWND m_hwndNextViewer = nullptr;
+      bool m_bDoubleBuffering = false;
+
+      ::int_rectangle m_clientArea;
+
+      ::int_size m_sizeBuffer = {};
+      HDC m_hdcBuffer = nullptr;
+      HBITMAP m_hbitmapOld = nullptr;
+      HBITMAP m_hbitmapBuffer = nullptr;
+      ::pointer < ::innate_subsystem_win32::Bitmap > m_pbitmapBuffer;
+      ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontextBuffer;
+
+      bool m_bIsDraw;
+      PAINTSTRUCT m_paintStruct;
+      //HDC m_hdc;
+
+      ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontext;
+
 
       struct notification
       {
-         ::innate_subsystem::enum_control e_control = ::innate_subsystem::e_control_none;
+         ::innate_subsystem::enum_control m_econtrol = ::innate_subsystem::e_control_none;
          int_array   m_iaNotification;
       };
 
@@ -108,7 +138,7 @@ namespace innate_subsystem_win32
 
 
       void * _HWND() const override;
-       void _setHWND(void *) override;
+      void _setHWND(void *) override;
 
 
       void * _WNDPROC_default() const override;
@@ -128,9 +158,19 @@ namespace innate_subsystem_win32
                         int width = WINDOW_WIDTH_USE_DEFAULT, int height = WINDOW_WIDTH_USE_DEFAULT) override;
       bool destroyWindow() override;
 
+
+      void setClipboardViewerInterest() override;
+      bool onDrawClipboard() override;
       // setClass()
       // Set a class name only to the new window created by createWindow
       void setClass(const ::scoped_string  & scopedstrWindowClassName) override;
+
+
+      void setShowCursor(bool bShowCursor) override;
+      bool shouldShowCursor() override;
+
+      void setDoubleBuffering(bool bDoubleBuffering) override;
+      bool isDoubleBuffering() override;
 
       // basic window manipulation procedures
       void show() override;
@@ -161,17 +201,20 @@ namespace innate_subsystem_win32
 
       bool setForeground() override;
 
+      // //
+      // // Changes visible state of this control
+      // //
       //
-      // Changes visible state of this control
+      // void setVisible(bool visible) override;
       //
-
-      void setVisible(bool visible) override;
-
       //
       // Checks if this control is active (not disabled)
       //
 
       bool isEnabled() override;
+
+
+      bool isIconic() override;
 
       //
       // Invalidates control
@@ -236,13 +279,13 @@ namespace innate_subsystem_win32
       ::int_size getBorderSize() override;
 
       //static LRESULT CALLBACK s_window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
-      virtual bool on_window_procedure(LRESULT &lresult, UINT message, WPARAM wparam, LPARAM lparam) override;
+      //virtual bool on_window_procedure(LRESULT &lresult, UINT message, WPARAM wparam, LPARAM lparam) override;
 
-      static const int MOUSE_LDOWN  = 1;
-      static const int MOUSE_MDOWN  = 2;
-      static const int MOUSE_RDOWN  = 4;
-      static const int MOUSE_WUP    = 8;
-      static const int MOUSE_WDOWN  = 16;
+      // static const int MOUSE_LDOWN  = 1;
+      // static const int MOUSE_MDOWN  = 2;
+      // static const int MOUSE_RDOWN  = 4;
+      // static const int MOUSE_WUP    = 8;
+      // static const int MOUSE_WDOWN  = 16;
 
       // private:
       // This function may be implement in child class.
@@ -251,6 +294,19 @@ namespace innate_subsystem_win32
       virtual bool onSysCommand(::wparam wparam, ::lparam lparam) override;
       virtual bool onMessage(unsigned int message, ::wparam wparam, ::lparam lparam) override;
       virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, const ::int_point & position) override;
+
+      virtual bool onCreate(void * pCreateStruct) override;
+
+      virtual bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) override;
+
+
+      virtual void _defer_update_double_buffering();
+
+
+      void onDraw(::innate_subsystem::GraphicsInterface * pgraphics, const ::int_rectangle & rectangle) override;
+
+
+      virtual void doPaint();
 
    };
 

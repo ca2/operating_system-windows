@@ -1,4 +1,4 @@
-// Copyright (C) 2010,2011,2012 GlavSoft LLC.
+// Copyright (C) 2008,2009,2010,2011,2012 GlavSoft LLC.
 // All rights reserved.
 //
 //-------------------------------------------------------------------------
@@ -22,32 +22,42 @@
 //-------------------------------------------------------------------------
 //
 
+//#ifndef SOCKET_STREAM_H
 #pragma once
+//#define SOCKET_STREAM_H
 
+#include "acme/subsystem/io/Channel.h"
 
-#include "acme/subsystem/CommandLineArguments.h"
-#include "subsystem_win32/_common_header.h"
+#include "remoting/remoting_common/network/socket/SocketAddressIPv4.h"
+//#include "remoting/remoting_common/network/socket/SocketIPv4.h"
+#include "remoting/remoting_common/network/socket/SocketAddressIPv4.h"
 
-namespace subsystem_win32
+#include "acme/exception/io.h"
+
+class CLASS_DECL_REMOTING_COMMON SocketStream : public Channel
 {
+public:
+  SocketStream(SocketIPv4 *);
+  virtual ~SocketStream();
+
+  //
+  // Inherited from Channel.
+  //
+
+  virtual size_t read(void *, size_t);
+
+  virtual memsize defer_write(const void *, memsize);
+
+  // Closes connection and break all blocked operation.
+  // @throw ::subsystem::Exception on error.
+  virtual void close();
+
+  virtual size_t available();
+
+protected:
+  SocketIPv4 *m_socket;
+
+  friend class SocketIPv4;
+};
 
 
-   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsCommandLineArguments :
-   virtual public ::subsystem::CommandLineArguments
-   {
-   public:
-
-      //WindowsCommandLineArguments(const ::scoped_string & scopedstrCmdLineInWinFormat);
-
-      WindowsCommandLineArguments();
-      ~WindowsCommandLineArguments() override;
-
-      virtual void initialize_windows_command_line_arguments(const ::scoped_string & scopedstrCommandLineInWindowsFormat);
-
-      virtual void parse_windows_commnad_line_arguments(const ::scoped_string & scopedstrCommandLineInWindowsFormat);
-
-
-   };
-
-   //// __WINCOMMANDLINEARGS_H__
-} // namespace subsystem_win32

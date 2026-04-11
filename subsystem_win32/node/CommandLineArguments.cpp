@@ -23,14 +23,14 @@
 //
 #include "framework.h"
 #include "subsystem_win32/_common_header.h"
-#include "WindowsCommandLineArguments.h"
+#include "CommandLineArguments.h"
 #include "acme/subsystem/Exception.h"
 
 #include <shellapi.h>
 
 namespace subsystem_win32
 {
-   WindowsCommandLineArguments::WindowsCommandLineArguments()
+   CommandLineArguments::CommandLineArguments()
    {
 
 
@@ -38,21 +38,21 @@ namespace subsystem_win32
    }
 
 
-   WindowsCommandLineArguments::~WindowsCommandLineArguments()
+   CommandLineArguments::~CommandLineArguments()
    {}
 
 
 
 
 
-   void WindowsCommandLineArguments::initialize_windows_command_line_arguments(const scoped_string& scopedstrCommandLineInWindowsFormat)
+   void CommandLineArguments::initialize_command_line_arguments(const scoped_string& scopedstrCommandLineInWindowsFormat)
    {
 
-      parse_windows_commnad_line_arguments(scopedstrCommandLineInWindowsFormat);
+      _parse_windows_command_line_arguments(scopedstrCommandLineInWindowsFormat);
 
    }
 
-   void WindowsCommandLineArguments::parse_windows_commnad_line_arguments(const scoped_string& scopedstrCommandLineInWindowsFormat)
+   void CommandLineArguments::_parse_windows_command_line_arguments(const scoped_string& scopedstrCommandLineInWindowsFormat)
    {
       ::string strstorage(scopedstrCommandLineInWindowsFormat);
       ::wstring uniCmdLine(strstorage);
@@ -74,6 +74,13 @@ namespace subsystem_win32
 
          LocalFree(argList);
       }
+   }
+
+   ::string_array_base CommandLineArguments::getArguments() const
+   {
+
+      return m_straArguments;
+
    }
 
    // WindowsCommandLineArguments::~WindowsCommandLineArguments()

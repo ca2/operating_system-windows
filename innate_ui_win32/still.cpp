@@ -173,7 +173,7 @@ namespace innate_ui_win32
    }
 
    
-   LRESULT still::_window_procedure(UINT message, WPARAM wparam, LPARAM lparam)
+   bool still::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
    {
 
       if (message == WM_PAINT && m_bIcon)
@@ -206,9 +206,13 @@ namespace innate_ui_win32
 
          ::EndPaint(hwnd, &ps);
 
+         lresult = 0;
+
+         return true;
+
       }
 
-      return ::innate_ui_win32::window::_window_procedure(message, wparam, lparam);
+      return ::innate_ui_win32::window::on_window_procedure(lresult, message, wparam, lparam);
 
    }
 

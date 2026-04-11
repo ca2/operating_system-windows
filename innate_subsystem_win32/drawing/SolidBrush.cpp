@@ -43,8 +43,14 @@ namespace innate_subsystem_win32
    void SolidBrush::initialize_solid_brush(const ::color::color & color)
    {
 
+      destroyGraphicsObject();
+
       ::cast < ::innate_subsystem_win32::Brush > pbrushWin32 = ::subsystem::get_implementation(this);
-      pbrushWin32->m_hbrush = CreateSolidBrush(RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+      //pbrushWin32->m_hbrush = CreateSolidBrush(RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+
+      Gdiplus::Color gdipluscolor(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue());
+      pbrushWin32->m_pbrush = new Gdiplus::SolidBrush(gdipluscolor);
+
    }
 
 }// namespace innate_subsystem_win32

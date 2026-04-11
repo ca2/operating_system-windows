@@ -28,6 +28,7 @@
 
 #include "apex/innate_subsystem/drawing/Bitmap.h"
 #include "subsystem_win32/_common_header.h"
+#include <Gdiplus.h>
 
 namespace innate_subsystem_win32
 {
@@ -44,6 +45,10 @@ namespace innate_subsystem_win32
       // Bitmap(HBITMAP bitmap);
       // // Destroys bitmap object.
 
+
+      Gdiplus::Bitmap * m_pbitmap;
+
+
       Bitmap();
       ~Bitmap() override;
 
@@ -54,6 +59,7 @@ namespace innate_subsystem_win32
       void initialize_bitmap(innate_subsystem::DeviceContextInterface* pdevicecontext, const int_size& size) override;
       // Creates bitmap from HBITMAP object.
       void initialize_bitmap(BitmapInterface* pbitmap) override;
+      virtual void _initialize_bitmap(HBITMAP hbitmap, HPALETTE hpalette);
 
       // Returns bitmap width.
       int_size getSize() const override;
@@ -63,7 +69,7 @@ namespace innate_subsystem_win32
       void destroyGraphicsObject() override;
 
    //protected:
-      HBITMAP m_hbitmap;
+      //HBITMAP m_hbitmap;
 
       // friend class Icon;
       // friend class Graphics;

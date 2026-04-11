@@ -1,4 +1,4 @@
-// Copyright (C) 2009,2010,2011,2012 GlavSoft LLC.
+// Copyright (C) 2008,2009,2010,2011,2012 GlavSoft LLC.
 // All rights reserved.
 //
 //-------------------------------------------------------------------------
@@ -17,50 +17,56 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along
-// with this program; if not, write to the Free Software Foundation, Inc.,
+// with this program; if not, w_rite to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//
 #include "framework.h"
-#include "Brush.h"
+// #include aaa_<stdlib.h>
+#include "SocketStream.h"
 
-namespace innate_subsystem_win32
+#include "../socket/sockdefs.h"
+
+//#include aaa_<crtdbg.h>
+
+SocketStream::SocketStream(SocketIPv4 *sock)
+: m_socket(sock)
 {
-   Brush::Brush()
-//   : m_hbrush(nullptr)
-   : m_pbrush(nullptr)
-   {
+  _ASSERT(m_socket != NULL);
+}
+
+SocketStream::~SocketStream()
+{
+}
+
+size_t SocketStream::read(void *buf, size_t wanted)
+{
+  if ((int)wanted < 0) {
+    throw ::io_exception(error_io, "Wanted size too big.");
+  }
+
+  return (size_t)m_socket->recv((char *)buf, (int)wanted);
+}
+
+memsize SocketStream::defer_write(const void *buf, memsize size)
+{
+   if ((int)size < 0) {
+      throw ::io_exception(error_io, _T("Size of buffer is too big."));
    }
 
-   Brush::~Brush()
-   {
+   return (size_t)m_socket->send((char *)buf, (int)size);
 
-      destroyGraphicsObject();
+}
 
-   }
+void SocketStream::close()
+{
+  try {
+    m_socket->shutdown(SD_BOTH);
+  } catch (...) {
+  }
+  m_socket->close();
+}
 
-
-   // void *Brush::_HGDIOBJ()
-   // {
-   //
-   //    return m_hbrush;
-   //
-   // }
-
-
-   void Brush::destroyGraphicsObject()
-   {
-      // if (m_hbrush) {
-      //    ::DeleteObject(m_hbrush);
-      //    m_hbrush = nullptr;
-      // }
-      if (m_pbrush)
-      {
-         delete m_pbrush;
-         m_pbrush = nullptr;
-
-      }
-   }
-} // namespace innate_subsystem_win32
+size_t SocketStream::available() {
+  return m_socket->available();
+}

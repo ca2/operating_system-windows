@@ -40,12 +40,27 @@ namespace innate_subsystem_win32
 
    Graphics::Graphics()
    {
-
+m_iBkMode = TRANSPARENT;
+      m_pfont = nullptr;
+      m_pbrushText = nullptr;
    }
 
 
    Graphics::~Graphics()
    {
+
+      if (m_pfont)
+      {
+
+         delete m_pfont;
+         m_pfont = nullptr;
+      }
+      if (m_pbrushText)
+      {
+
+         delete m_pbrushText;
+         m_pbrushText = nullptr;
+      }
    }
 
 
@@ -64,19 +79,66 @@ return m_pdevicecontext;
 
    }
 
+   void Graphics::initialize_graphics(innate_subsystem::BitmapInterface * pbitmap)
+   {
+
+      constructø(m_pdevicecontext);
+
+      m_pdevicecontext->initialize_device_context(pbitmap);
+
+   }
+
    void Graphics::setBkMode(bool transparent)
    {
-      SetBkMode(m_pdevicecontext->m_hdc, transparent ? TRANSPARENT : OPAQUE);
+      m_iBkMode = transparent ? TRANSPARENT : OPAQUE;
+//      SetBkMode(m_pdevicecontext->m_hdc, transparent ? TRANSPARENT : OPAQUE);
+
    }
+
+
+   void Graphics::setBlendModeOn(bool bSet)
+   {
+
+      if (bSet)
+      {
+         m_pdevicecontext->m_pgraphics->SetCompositingMode(Gdiplus::CompositingModeSourceOver);
+
+      }
+      else
+      {
+         m_pdevicecontext->m_pgraphics->SetCompositingMode(Gdiplus::CompositingModeSourceCopy);
+
+      }
+
+   }
+
+   void Graphics::setAntiAliasOn(bool bOn)
+   {
+
+      if (bOn)
+      {
+         m_pdevicecontext->m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
+
+      }
+      else
+      {
+         m_pdevicecontext->m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeNone);
+
+      }
+
+   }
+
 
    void Graphics::setTextColor(const ::color::color & color)
    {
-      SetTextColor(m_pdevicecontext->m_hdc, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+      m_colorText= color;
+      //SetTextColor(m_pdevicecontext->m_hdc, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
    }
 
    void Graphics::setBkColor(const ::color::color & color)
    {
-      SetBkColor(m_pdevicecontext->m_hdc, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+      //SetBkColor(m_pdevicecontext->m_hdc, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+      m_colorBk = color;
    }
 
    void Graphics::setBrush(::innate_subsystem::BrushInterface *pbrush)
@@ -86,7 +148,8 @@ return m_pdevicecontext;
       //
       // HGDIOBJ object = pbrushWin32 ? pbrushWin32->m_hbrush : nullptr;
       //
-      m_pdevicecontext->selectObject(pbrush);
+      //m_pdevicecontext->selectObject(pbrush);
+      m_pbrush = pbrush;
 
    }
 
@@ -97,62 +160,141 @@ return m_pdevicecontext;
       //
       // HGDIOBJ object = ppenWin32 ? ppenWin32->m_hpen : nullptr;
       //
-      m_pdevicecontext->selectObject(ppen);
+      //m_pdevicecontext->selectObject(ppen);
+      m_ppen = ppen;
 
    }
 
    void Graphics::moveTo(int x, int y)
    {
-      MoveToEx(m_pdevicecontext->m_hdc, x, y, NULL);
+      //MoveToEx(m_pdevicecontext->m_hdc, x, y, NULL);
+      m_pointCurrent.x = x;
+      m_pointCurrent.y = y;
    }
 
    void Graphics::lineTo(int x, int y)
    {
-      LineTo(m_pdevicecontext->m_hdc, x, y);
+      //LineTo(m_pdevicecontext->m_hdc, x, y);
+      m_pdevicecontext->m_pgraphics->DrawLine(m_ppen->m_ppen, m_pointCurrent.x, m_pointCurrent.y, x, y);
+      m_pointCurrent.x = x;
+      m_pointCurrent.y = y;
+
    }
 
    void Graphics::fillRect(int l, int t, int r, int b, ::innate_subsystem::BrushInterface *pbrush)
    {
-      RECT rect;
+      Gdiplus::Rect gdiplusrect;
 
-      rect.top = t;
-      rect.left = l;
-      rect.bottom = b;
-      rect.right = r;
+      gdiplusrect.X = t;
+      gdiplusrect.Y = l;
+      gdiplusrect.Width = r-l;
+      gdiplusrect.Height = b-t;
 
+      auto pbrushWin32 = pbrush->impl<::innate_subsystem_win32::Brush>();
 
-      auto hbrush = (HBRUSH) pbrush->_HGDIOBJ();
+      //auto hbrush = (HBRUSH) pbrush->_HGDIOBJ();
 
-
-      FillRect(m_pdevicecontext->m_hdc, &rect, hbrush);
+m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect);
+      //FillRect(m_pdevicecontext->m_hdc, &rect, hbrush);
 
    }
 
 
+   void Graphics::fillRect(const ::int_rectangle & rectangle, const ::color::color & color)
+   {
+      Gdiplus::Rect gdiplusrect;
+
+      ::copy(gdiplusrect, rectangle);
+
+      //auto pbrushWin32 = pbrush->impl<::innate_subsystem_win32::Brush>();
+      Gdiplus::Color gdipluscolor(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue());
+      Gdiplus::SolidBrush solidbrush(gdipluscolor);
+
+      //auto hbrush = (HBRUSH) pbrush->_HGDIOBJ();
+
+      m_pdevicecontext->m_pgraphics->FillRectangle(&solidbrush, gdiplusrect);
+      //FillRect(m_pdevicecontext->m_hdc, &rect, hbrush);
+
+   }
+
    void Graphics::ellipse(int l, int t, int r, int b)
    {
-      Ellipse(m_pdevicecontext->m_hdc, l, t, r, b);
+      //Ellipse(m_pdevicecontext->m_hdc, l, t, r, b);
+      Gdiplus::Rect gdiplusrect;
+
+      gdiplusrect.X = t;
+      gdiplusrect.Y = l;
+      gdiplusrect.Width = r-l;
+      m_pdevicecontext->m_pgraphics->FillEllipse(m_pbrush->m_pbrush, gdiplusrect);
+      m_pdevicecontext->m_pgraphics->DrawEllipse(m_ppen->m_ppen, gdiplusrect);
    }
 
    void Graphics::rectangle(int l, int t, int r, int b)
    {
-      Rectangle(m_pdevicecontext->m_hdc, l, t, r, b);
+      //Rectangle(m_pdevicecontext->m_hdc, l, t, r, b);
+      Gdiplus::Rect gdiplusrect;
+
+      gdiplusrect.X = t;
+      gdiplusrect.Y = l;
+      gdiplusrect.Width = r-l;
+      m_pdevicecontext->m_pgraphics->FillRectangle(m_pbrush->m_pbrush, gdiplusrect);
+      m_pdevicecontext->m_pgraphics->DrawRectangle(m_ppen->m_ppen, gdiplusrect);
+
    }
 
    void Graphics::drawBitmap(::innate_subsystem::BitmapInterface *pbitmap, int x, int y, int w, int h)
    {
-      DeviceContext memDC;
 
-      memDC.initialize_device_context(m_pdevicecontext);
+      auto pbitmapWin32 = pbitmap->impl<::innate_subsystem_win32::Bitmap>();
+      //DeviceContext memDC;
 
-      auto pobjOld = memDC.selectObject(pbitmap);
+      //memDC.initialize_device_context(m_pdevicecontext);
 
-      BitBlt(m_pdevicecontext->m_hdc, x, y, w, h, memDC.m_hdc, 0, 0, SRCCOPY);
+      //auto pobjOld = memDC.selectObject(pbitmap);
+      m_pdevicecontext->m_pgraphics->DrawImage(pbitmapWin32->m_pbitmap, x, y, w, h);
 
-      memDC.selectObject(pobjOld);
+      //BitBlt(m_pdevicecontext->m_hdc, x, y, w, h, memDC.m_hdc, 0, 0, SRCCOPY);
+
+      //memDC.selectObject(pobjOld);
    }
 
-   void Graphics::drawText(const char *text, int cchText, ::int_rectangle &rect, unsigned int format)
+
+   void Graphics::drawBitmap(::innate_subsystem::BitmapInterface *pbitmap, int x, int y, int srcx, int srcy, int srcW, int srcH)
+   {
+
+      auto pbitmapWin32 = pbitmap->impl<::innate_subsystem_win32::Bitmap>();
+
+      m_pdevicecontext->m_pgraphics->DrawImage(pbitmapWin32->m_pbitmap, x, y, srcx, srcy, srcW, srcH, Gdiplus::UnitPixel);
+
+   }
+
+   void Graphics::_defer_text_tools()
+   {
+
+      if (!m_pfont)
+      {
+
+         m_pfont = new Gdiplus::Font(L"Arial", 14.0f);
+
+      }
+      if (!m_pbrushText || m_colorBrushText != m_colorText)
+      {
+         if (m_pbrushText)
+         {
+
+            delete m_pbrushText;
+            m_pbrushText = nullptr;
+         }
+         auto color = m_colorText;
+         m_colorBrushText = color;
+         Gdiplus::Color gdipluscolor(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue());
+         m_pbrushText = new Gdiplus::SolidBrush(gdipluscolor);
+
+      }
+
+   }
+
+   void Graphics::drawText(const char *text, int cchText, ::int_rectangle &rectangle, unsigned int format)
    {
 
       ::string str;
@@ -172,9 +314,17 @@ return m_pdevicecontext;
 
       ::wstring wstr(str);
 
-      RECT rc;
-      ::copy(rc, rect);
-      DrawText(m_pdevicecontext->m_hdc, wstr, wstr.length(), &rc, format);
+      Gdiplus::RectF gdiplusrect;
+
+      ::copy(gdiplusrect, rectangle);
+
+      _defer_text_tools();
+
+      auto pstringformat = Gdiplus::StringFormat::GenericTypographic();
+      // RECT rc;
+      // ::copy(rc, rect);
+      // DrawText(m_pdevicecontext->m_hdc, wstr, wstr.length(), &rc, format);
+      m_pdevicecontext->m_pgraphics->DrawString(wstr, wstr.length(), m_pfont, gdiplusrect, pstringformat, m_pbrushText);
    }
 
    

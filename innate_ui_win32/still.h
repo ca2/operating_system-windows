@@ -33,7 +33,7 @@ namespace innate_ui_win32
 
       void layout() override;
 
-      LRESULT _window_procedure(UINT message, WPARAM wparam, LPARAM lparam) override;
+      bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) override;
 
    };
 

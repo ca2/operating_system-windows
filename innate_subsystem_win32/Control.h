@@ -82,6 +82,8 @@ namespace innate_subsystem_win32
       void setTextVerticalAlignment(::innate_subsystem::VerticalAlignment align) override;
 
 
+      void setVisible(bool bVisible) override;
+
       //
       // Returns text vertical alignment
       //

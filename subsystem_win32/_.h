@@ -32,7 +32,7 @@ namespace subsystem_win32
 
    class DynamicLibrary;
 
-   class WindowsCommandLineArguments;
+   class CommandLineArguments;
 
    class WindowsHookEventListener;
 

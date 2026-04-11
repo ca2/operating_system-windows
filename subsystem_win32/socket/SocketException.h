@@ -17,45 +17,44 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along
-// with this program; if not, write to the Free Software Foundation, Inc.,
+// with this program; if not, w_rite to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//
+
+//#ifndef SOCKET_EXCEPTION_H
 #pragma once
+//#define SOCKET_EXCEPTION_H
 
+#include "acme/subsystem/Exception.h"
 
-#include "apex/innate_subsystem/drawing/Brush.h"
-#include "subsystem_win32/_common_header.h"
-#include <Gdiplus.h>
+#include "sockdefs.h"
 
-
-namespace innate_subsystem_win32
+class CLASS_DECL_REMOTING_COMMON SocketException : public ::subsystem::Exception
 {
+public:
+  // Creates socket exception object with error value eq to current value
+  // of WSAGetLastError().
+  // Error string generates automaticly;
+  SocketException();
+  // Creates socket exception object with specified error numner.
+  // Error string generates automaticly;
+  SocketException(int error);
+  // Creates socket exception object with specified scopedstrMessage.
+  // Error number is sets to zero.
+  SocketException(const ::scoped_string & scopedstrMessage);
+  // Destructor.
+  virtual ~SocketException();
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Brush :
-      virtual public ::subsystem::implementation<::innate_subsystem::BrushInterface>
-   {
-   public:
+  // Returns error number.
+  int errno();
 
-      Brush();
-      ~Brush() override;
+//protected:
+  // Sets m_errno and generates error description string.
+  void setErrno(int error);
 
-
-      //void * _HGDIOBJ() override;
-
-   //protected:
-      //void on_release() override;
+//protected:
+  int m_errno;
+};
 
 
-      void destroyGraphicsObject() override;
-
-   // protected:
-     //HBRUSH m_hbrush;
-      Gdiplus::Brush * m_pbrush;
-   //
-   //    friend class Graphics;
-   };
-
-} // namespace innate_subsystem_win32

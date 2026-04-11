@@ -74,7 +74,7 @@ namespace subsystem_win32
          m_args= scopedstrArgs;
       }
 
-      void Process::setStandardIoHandles(::subsystem::File * pfileStdIn, ::subsystem::File * pfileStdOut, ::subsystem::File * pfileStdErr)
+      void Process::setStandardIoHandles(::subsystem::FileInterface * pfileStdIn, ::subsystem::FileInterface * pfileStdOut, ::subsystem::FileInterface * pfileStdErr)
       {
          m_stdIn = pfileStdIn;
          m_stdOut = pfileStdOut;

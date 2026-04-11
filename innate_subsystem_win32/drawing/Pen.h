@@ -28,7 +28,7 @@
 
 #include "apex/innate_subsystem/drawing/Pen.h"
 #include "subsystem_win32/_common_header.h"
-
+#include <Gdiplus.h>
 
 namespace innate_subsystem_win32
 {
@@ -47,7 +47,7 @@ namespace innate_subsystem_win32
       ~Pen() override;
 
 
-      void * _HGDIOBJ() override;
+      //void * _HGDIOBJ() override;
 
 
       void initialize_pen(innate_subsystem::enum_pen epen, int width, const color::color& color) override;
@@ -56,7 +56,8 @@ namespace innate_subsystem_win32
       void destroyGraphicsObject() override;
 
    // protected:
-       HPEN m_hpen;
+       //HPEN m_hpen;
+      Gdiplus::Pen * m_ppen;
    //
    //    friend class Graphics;
    };

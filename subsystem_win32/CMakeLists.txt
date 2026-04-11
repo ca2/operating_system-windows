@@ -39,6 +39,8 @@ list(APPEND library_source
    node/AutoImpersonator.h
    node/Clipboard.cpp
    node/Clipboard.h
+   node/CommandLineArguments.cpp
+   node/CommandLineArguments.h
    node/Cursor.cpp
    node/Cursor.h
    #node/CMakeLists.txt
@@ -95,8 +97,6 @@ list(APPEND library_source
    node/VersionInfo.cpp
    node/VersionInfo.h
    #node/win_system.vcproj
-   node/WindowsCommandLineArguments.cpp
-   node/WindowsCommandLineArguments.h
    node/WindowsEvent.cpp
    node/WindowsEvent.h
    node/WindowsEventEx.cpp

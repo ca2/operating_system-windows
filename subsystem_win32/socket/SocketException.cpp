@@ -17,45 +17,51 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along
-// with this program; if not, write to the Free Software Foundation, Inc.,
+// with this program; if not, w_rite to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//
-#pragma once
+#include "framework.h"
+#include "SocketException.h"
+
+SocketException::SocketException()
+: ::subsystem::Exception()
+{
+  setErrno(WSAGetLastError());
+}
+
+SocketException::SocketException(int error)
+: ::subsystem::Exception()
+{
+  setErrno(error);
+}
+
+SocketException::SocketException(const ::scoped_string & scopedstrMessage)
+: ::subsystem::Exception(scopedstrMessage), m_errno(0)
+{
+}
+
+SocketException::~SocketException()
+{
+}
 
 
-#include "apex/innate_subsystem/drawing/Brush.h"
-#include "subsystem_win32/_common_header.h"
-#include <Gdiplus.h>
-
-
-namespace innate_subsystem_win32
+void SocketException::setErrno(int error)
 {
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Brush :
-      virtual public ::subsystem::implementation<::innate_subsystem::BrushInterface>
-   {
-   public:
+  m_errno = error;
 
-      Brush();
-      ~Brush() override;
+  TCHAR buffer[1024];
+
+  FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                NULL, m_errno,
+                MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+                (LPTSTR)&buffer[0],
+                sizeof(buffer), NULL);
+
+  m_strMessage= &buffer[0];
+
+}
 
 
-      //void * _HGDIOBJ() override;
 
-   //protected:
-      //void on_release() override;
-
-
-      void destroyGraphicsObject() override;
-
-   // protected:
-     //HBRUSH m_hbrush;
-      Gdiplus::Brush * m_pbrush;
-   //
-   //    friend class Graphics;
-   };
-
-} // namespace innate_subsystem_win32

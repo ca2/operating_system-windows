@@ -28,14 +28,14 @@
 namespace innate_subsystem_win32
 {
    class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Toolbar :
-virtual public window_implementation<innate_subsystem::ToolBarInterface>
+virtual public window_implementation<innate_subsystem::ToolbarInterface>
    {
    public:
       Toolbar();
       virtual ~Toolbar();
 
-      static const int TB_Style_sep = 0;
-      static const int TB_Style_gap = 1;
+      //static const int TB_Style_sep = 0;
+      //static const int TB_Style_gap = 1;
 
       /////////////////////////////////////////////////////////
       // Auto mode procedures
@@ -46,11 +46,11 @@ virtual public window_implementation<innate_subsystem::ToolBarInterface>
       // bitmap and making gaps or separators.
       void setViewAutoButtons(int iButton, int style) override;
 
-      // loadToolBarfromRes()
+      // loadToolbarfromRes()
       // This procedure will load a toolbar image from resource
       // id is a number of bitmap. It means that buttons are
       // square(for example 16x16).
-      void loadToolBarfromRes(unsigned int id) override;
+      void loadToolbarfromRes(unsigned int id) override;
 
       // setButtonsRange()
       // If we want to catch the message from toolbar that some buttons
@@ -58,10 +58,10 @@ virtual public window_implementation<innate_subsystem::ToolBarInterface>
       // first item, and next is id+1 and so on.
       void setButtonsRange(unsigned int id) override;
 
-      // attachToolBar()
+      // attachToolbar()
       // This one will create and attach toolbar window to
       // which handle is passed in hwnd. Only for toolbar from bitmap.
-      void attachToolBar(const ::operating_system::window & window) override;
+      void attachToolbar(const ::operating_system::window & window) override;
 
       /////////////////////////////////////////////////////////
       // Manual mode procedures

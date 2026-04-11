@@ -30,6 +30,7 @@
 #include "subsystem_win32/_common_header.h"
 //#include "util/CommonHeader.h"
 //#include "gui/PaintWindow.h"
+#include <Gdiplus.h>
 
 namespace innate_subsystem_win32
 {
@@ -58,18 +59,22 @@ namespace innate_subsystem_win32
       void initialize_device_context(const operating_system::window& window) override;
       // Create device context complatible with other DC.
       void initialize_device_context(DeviceContextInterface* compatibleDevice) override;
+      virtual void initialize_device_context(::innate_subsystem::BitmapInterface * pbitmap);
+      virtual void _initialize_device_context(HDC hdc);
+      virtual void _attach_HDC(HDC hdc);
       //private:
       // Initialize class from PaintWindow
       void initialize_device_context(innate_subsystem::PaintWindowInterface* pntWnd) override;
       //protected:
       // Selects an object into this device context.
-      virtual HGDIOBJ _selectObject2(HGDIOBJ object);
-::pointer < ::innate_subsystem::GraphicsObject>selectObject(::innate_subsystem::GraphicsObject * pgraphicsobjectNew);
+      //virtual HGDIOBJ _selectObject2(HGDIOBJ object);
+//::pointer < ::innate_subsystem::GraphicsObject>selectObject(::innate_subsystem::GraphicsObject * pgraphicsobjectNew);
 
       void destroyDeviceContext() override;
 
       // protected:
-      HDC m_hdc;
+      HDC m_hdc2;
+      ::Gdiplus::Graphics * m_pgraphics;
       HWND m_hwnd;
       bool m_bHasOwnDC;
 

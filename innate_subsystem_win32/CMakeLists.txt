@@ -85,8 +85,8 @@ list(APPEND library_source
    TextBox.h
    ThemeLib.cpp
    ThemeLib.h
-   ToolBar.cpp
-   ToolBar.h
+   Toolbar.cpp
+   Toolbar.h
    Tooltip.cpp
    Tooltip.h
    Trackbar.cpp

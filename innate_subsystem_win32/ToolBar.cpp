@@ -71,7 +71,7 @@ namespace innate_subsystem_win32
       m_hWndToolbar = CreateWindowEx(0, TOOLBARCLASSNAME, 0, dwStyle,
                                      0, 0, 0, 0,
                                      ::as_HWND(windowParent),
-                                     reinterpret_cast<HMENU>(_tbID),
+                                     (HMENU)(::iptr)_tbID,
                                      GetModuleHandle(0),
                                      0);
       if (m_hWndToolbar) {
@@ -89,7 +89,7 @@ namespace innate_subsystem_win32
       m_autoButtons[iButton] = style;
    }
 
-   void Toolbar::loadToolBarfromRes(unsigned int id)
+   void Toolbar::loadToolbarfromRes(unsigned int id)
    {
       BITMAP bmp;
 
@@ -108,7 +108,7 @@ namespace innate_subsystem_win32
       m_initialStr = id;
    }
 
-   void Toolbar::attachToolBar(const ::operating_system::window & window)
+   void Toolbar::attachToolbar(const ::operating_system::window & window)
    {
       ::raw_array_base<TBBUTTON> tbuttons;
 

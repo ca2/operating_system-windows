@@ -91,7 +91,23 @@ namespace innate_subsystem_win32
 
 
 
+   void Control::setVisible(bool visible)
+   {
 
+      if (visible)
+      {
+
+         show();
+
+      }
+      else
+      {
+
+         hide();
+
+      }
+      //ShowWindow(m_hwnd, visible ? SW_SHOW : SW_HIDE);
+   }
 
 
   //

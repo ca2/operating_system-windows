@@ -37,7 +37,7 @@
      public:
 
         //protected:
-        ::pointer < WindowsCommandLineArguments > m_pwindowscommandlinearguments;
+        ::pointer < CommandLineArguments > m_pcommandlinearguments;
 
         ::string_array m_strParam;
         ::array_base<::pair<::string, ::string>> m_strParams;
@@ -45,6 +45,9 @@
 
          ProcessCommandLine();
           ~ProcessCommandLine() override;
+
+
+        void initialize_process_command_line() override;
 
          // returns the number of arguments in command line
          // for example, program: help

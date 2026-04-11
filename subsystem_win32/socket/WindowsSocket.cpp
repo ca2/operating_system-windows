@@ -17,45 +17,39 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along
-// with this program; if not, write to the Free Software Foundation, Inc.,
+// with this program; if not, w_rite to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//
-#pragma once
+#include "framework.h"
+#include "WindowsSocket.h"
 
+bool WindowsSocket::m_isStarted = false;
 
-#include "apex/innate_subsystem/drawing/Brush.h"
-#include "subsystem_win32/_common_header.h"
-#include <Gdiplus.h>
-
-
-namespace innate_subsystem_win32
+void WindowsSocket::startup(unsigned char loVer, unsigned char hiVer)
 {
+  if (m_isStarted) {
+    throw ::subsystem::Exception("WindowsSocket already initialized.");
+  }
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Brush :
-      virtual public ::subsystem::implementation<::innate_subsystem::BrushInterface>
-   {
-   public:
+  WSAData wsaData;
 
-      Brush();
-      ~Brush() override;
+  if (WSAStartup(MAKEWORD(loVer, hiVer), &wsaData) != 0) {
+    throw ::subsystem::Exception("Failed to initialize WindowsSocket.");
+  }
 
+  m_isStarted = true;
+}
 
-      //void * _HGDIOBJ() override;
+void WindowsSocket::cleanup()
+{
+  if (!m_isStarted) {
+    throw ::subsystem::Exception("WindowsSocket don't initialized.");
+  }
 
-   //protected:
-      //void on_release() override;
+  m_isStarted = false;
 
-
-      void destroyGraphicsObject() override;
-
-   // protected:
-     //HBRUSH m_hbrush;
-      Gdiplus::Brush * m_pbrush;
-   //
-   //    friend class Graphics;
-   };
-
-} // namespace innate_subsystem_win32
+  if (WSACleanup() == SOCKET_ERROR) {
+    throw ::subsystem::Exception("Failed to deinitialize WindowsSocket.");
+  }
+}

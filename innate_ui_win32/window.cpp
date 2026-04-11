@@ -228,7 +228,7 @@ namespace innate_ui_win32
    }
 
 
-   bool window::on_window_procedure(LRESULT & lresult, UINT message, WPARAM wparam, LPARAM lparam)
+   bool window::on_window_procedure(::lresult & lresult, unsigned message, ::wparam wparam, ::lparam lparam)
    {
 
       if (::windows::window::on_window_procedure(lresult, message, wparam, lparam))
@@ -238,17 +238,17 @@ namespace innate_ui_win32
 
       }
 
-      lresult = _window_procedure(message, wparam, lparam);
-
-      return true;
-
-   }
-
-
-   LRESULT window::_window_procedure(UINT message, WPARAM wparam, LPARAM lparam)
-   {
-
-      LRESULT lresult = 0;
+   //    lresult = _window_procedure(message, wparam, lparam);
+   //
+   //    return true;
+   //
+   // }
+   //
+   //
+   // LRESULT window::_window_procedure(UINT message, WPARAM wparam, LPARAM lparam)
+   // {
+   //
+   //    LRESULT lresult = 0;
 
       switch (message)
 
@@ -279,8 +279,10 @@ namespace innate_ui_win32
       }
       break;
       case WM_APP + 124:
+      {
          PostQuitMessage(0);
          break;
+      }
       case WM_SYSCOMMAND:
       {
          int wmId = LOWORD(wparam);
@@ -292,7 +294,9 @@ namespace innate_ui_win32
          
          auto hwnd = (HWND) _HWND();
 
-         return DefWindowProc(hwnd, message, wparam, lparam);
+         lresult = DefWindowProc(hwnd, message, wparam, lparam);
+
+         return true;
       }
          break;
       case WM_COMMAND:
@@ -329,7 +333,8 @@ namespace innate_ui_win32
 
          auto hwnd = (HWND) _HWND();
 
-         return DefWindowProc(hwnd, message, wparam, lparam);
+         lresult = DefWindowProc(hwnd, message, wparam, lparam);
+         return true;
          //}
       }
       break;
@@ -346,8 +351,8 @@ namespace innate_ui_win32
          //EndPaint(hWnd, &ps);
 
          auto hwnd = (HWND) _HWND();
-
-         return DefWindowProc(hwnd, message, wparam, lparam);
+         lresult = DefWindowProc(hwnd, message, wparam, lparam);
+         return true;
       }
       break;
       case WM_CLOSE:
@@ -357,13 +362,13 @@ namespace innate_ui_win32
          //PostQuitMessage(0);
       default:
       {
-         auto hwnd = (HWND) _HWND();
+         //auto hwnd = (HWND) _HWND();
 
-         return DefWindowProc(hwnd, message, wparam, lparam);
+         //return DefWindowProc(hwnd, message, wparam, lparam);
       }
       }
-      return lresult;
-
+      //return lresult;
+return false;
 
    }
 

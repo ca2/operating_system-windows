@@ -24,26 +24,13 @@
 #include "framework.h"
 #include "subsystem_win32/_common_header.h"
 #include "ProcessCommandLine.h"
-#include "WindowsCommandLineArguments.h"
+#include "CommandLineArguments.h"
 
  namespace subsystem_win32
  {
 
     ProcessCommandLine::ProcessCommandLine()
     {
-         ::string_array out;
-
-         construct_newø(m_pwindowscommandlinearguments);
-         m_pwindowscommandlinearguments->initialize_windows_command_line_arguments(GetCommandLine());
-
-         out = m_pwindowscommandlinearguments->getArguments();
-         for (size_t i = 0; i < out.size(); i++) {
-             if (out[i][0] != _T('-')) {
-                 m_strParam.add(out[i]);
-             } else {
-                 optionParser(out[i]);
-             }
-         }
      }
 
     ProcessCommandLine::~ProcessCommandLine()
@@ -51,6 +38,26 @@
        //if (m_wcla) {
        // delete m_wcla;
        //}
+    }
+
+
+    void ProcessCommandLine::initialize_process_command_line()
+    {
+
+       ::string_array out;
+
+       constructø(m_pcommandlinearguments);
+       m_pcommandlinearguments->initialize_command_line_arguments(::GetCommandLineW());
+
+       out = m_pcommandlinearguments->getArguments();
+       for (size_t i = 0; i < out.size(); i++) {
+          if (out[i][0] != _T('-')) {
+             m_strParam.add(out[i]);
+          } else {
+             optionParser(out[i]);
+          }
+       }
+
     }
 
 

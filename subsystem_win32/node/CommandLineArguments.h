@@ -1,4 +1,4 @@
-// Copyright (C) 2009,2010,2011,2012 GlavSoft LLC.
+// Copyright (C) 2010,2011,2012 GlavSoft LLC.
 // All rights reserved.
 //
 //-------------------------------------------------------------------------
@@ -17,45 +17,40 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along
-// with this program; if not, write to the Free Software Foundation, Inc.,
+// with this program; if not, w_rite to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//
+
 #pragma once
 
 
-#include "apex/innate_subsystem/drawing/Brush.h"
+#include "acme/subsystem/CommandLineArguments.h"
 #include "subsystem_win32/_common_header.h"
-#include <Gdiplus.h>
 
-
-namespace innate_subsystem_win32
+namespace subsystem_win32
 {
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Brush :
-      virtual public ::subsystem::implementation<::innate_subsystem::BrushInterface>
+
+   class CLASS_DECL_SUBSYSTEM_WIN32 CommandLineArguments :
+   virtual public ::subsystem::CommandLineArguments
    {
    public:
 
-      Brush();
-      ~Brush() override;
+      ::string_array_base m_straArguments;
 
+      //WindowsCommandLineArguments(const ::scoped_string & scopedstrCmdLineInWinFormat);
 
-      //void * _HGDIOBJ() override;
+      CommandLineArguments();
+      ~CommandLineArguments() override;
 
-   //protected:
-      //void on_release() override;
+      void initialize_command_line_arguments(const ::scoped_string & scopedstrCommandLineInOperatingSystemFormat) override;
 
+      virtual void _parse_windows_command_line_arguments(const ::scoped_string & scopedstrCommandLineInWindowsFormat);
 
-      void destroyGraphicsObject() override;
+      ::string_array_base getArguments() const override;
 
-   // protected:
-     //HBRUSH m_hbrush;
-      Gdiplus::Brush * m_pbrush;
-   //
-   //    friend class Graphics;
    };
 
-} // namespace innate_subsystem_win32
+   //// __WINCOMMANDLINEARGS_H__
+} // namespace subsystem_win32

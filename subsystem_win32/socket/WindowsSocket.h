@@ -17,45 +17,35 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along
-// with this program; if not, write to the Free Software Foundation, Inc.,
+// with this program; if not, w_rite to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-//
+
 #pragma once
 
 
-#include "apex/innate_subsystem/drawing/Brush.h"
-#include "subsystem_win32/_common_header.h"
-#include <Gdiplus.h>
+#include "acme/subsystem/_common_header.h"
+#include "acme/subsystem/Exception.h"
 
-
-namespace innate_subsystem_win32
+//
+// Class that startup and cleanup Windows Sockets subsystem.
+//
+class CLASS_DECL_REMOTING_COMMON WindowsSocket
 {
+public:
+  // Initializes Windows sockets subsystem.
+  // Throws exception if winsock already initialized or
+  // if was error during winsock startup.
+  static void startup(unsigned char loVer, unsigned char hiVer);
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Brush :
-      virtual public ::subsystem::implementation<::innate_subsystem::BrushInterface>
-   {
-   public:
+  //  Deinitializes Windows sockets subsystem.
+  // Throws exception if winsock does not initialized or
+  // if was error during winsock cleanup.
+  static void cleanup();
 
-      Brush();
-      ~Brush() override;
-
-
-      //void * _HGDIOBJ() override;
-
-   //protected:
-      //void on_release() override;
+protected:
+  static bool m_isStarted;
+};
 
 
-      void destroyGraphicsObject() override;
-
-   // protected:
-     //HBRUSH m_hbrush;
-      Gdiplus::Brush * m_pbrush;
-   //
-   //    friend class Graphics;
-   };
-
-} // namespace innate_subsystem_win32

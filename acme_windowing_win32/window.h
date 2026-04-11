@@ -109,9 +109,9 @@ namespace win32
 
             //void on_right_click(const ::payload& payload, ::user::mouse* pmouse) override;
 
-            bool on_window_procedure(LRESULT & lresult, UINT message, WPARAM wparam, LPARAM lparam) override;
+            bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) override;
 
-            virtual LRESULT window_procedure(unsigned int message, wparam wparam, lparam lparam);
+            //virtual LRESULT window_procedure(unsigned int message, wparam wparam, lparam lparam);
 
             void set_position(const ::int_point& point) override;
 

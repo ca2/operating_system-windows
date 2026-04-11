@@ -1,4 +1,4 @@
-// Copyright (C) 2009,2010,2011,2012 GlavSoft LLC.
+// Copyright (C) 2008,2009,2010,2011,2012 GlavSoft LLC.
 // All rights reserved.
 //
 //-------------------------------------------------------------------------
@@ -17,45 +17,18 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along
-// with this program; if not, write to the Free Software Foundation, Inc.,
+// with this program; if not, w_rite to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-// Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
+// #ifndef	SOCKDEFS_H
+// //#define SOCKDEFS_H
 #pragma once
 
 
-#include "apex/innate_subsystem/drawing/Brush.h"
-#include "subsystem_win32/_common_header.h"
-#include <Gdiplus.h>
+#include "acme/subsystem/_common_header.h"
+
+#define socklen_t int
 
 
-namespace innate_subsystem_win32
-{
-
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Brush :
-      virtual public ::subsystem::implementation<::innate_subsystem::BrushInterface>
-   {
-   public:
-
-      Brush();
-      ~Brush() override;
-
-
-      //void * _HGDIOBJ() override;
-
-   //protected:
-      //void on_release() override;
-
-
-      void destroyGraphicsObject() override;
-
-   // protected:
-     //HBRUSH m_hbrush;
-      Gdiplus::Brush * m_pbrush;
-   //
-   //    friend class Graphics;
-   };
-
-} // namespace innate_subsystem_win32

@@ -42,7 +42,8 @@ namespace innate_subsystem_win32
    // }
 
    Pen::Pen():
-   m_hpen(nullptr)
+//   m_hpen(nullptr)
+   m_ppen(nullptr)
    {
 
    }
@@ -56,21 +57,25 @@ namespace innate_subsystem_win32
    }
 
 
-   void * Pen::_HGDIOBJ()
-   {
-
-      return m_hpen;
-
-   }
+   // void * Pen::_HGDIOBJ()
+   // {
+   //
+   //    return m_hpen;
+   //
+   // }
 
    void Pen::initialize_pen(innate_subsystem::enum_pen epen, int width, const color::color& color)
    {
 
       destroyGraphicsObject();
 
-      m_hpen = CreatePen((int) epen, width, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+      //m_hpen = CreatePen((int) epen, width, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
 
-      if (!m_hpen)
+      Gdiplus::Color gdipluscolor(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue());
+
+      m_ppen = new Gdiplus::Pen(gdipluscolor, width);
+
+      if (!m_ppen || m_ppen->GetLastStatus() != Gdiplus::Ok)
       {
 
          throw ::exception(error_failed);
@@ -83,11 +88,20 @@ namespace innate_subsystem_win32
    void Pen::destroyGraphicsObject()
    {
 
-      if (m_hpen)
+      if (m_ppen)
       {
-         ::DeleteObject(m_hpen);
-         m_hpen= nullptr;
+
+         delete m_ppen;
+
+         m_ppen = nullptr;
+
       }
+
+      // if (m_hpen)
+      // {
+      //    ::DeleteObject(m_hpen);
+      //    m_hpen= nullptr;
+      // }
 
    }
 

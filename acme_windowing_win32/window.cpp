@@ -671,7 +671,7 @@ namespace win32
          }
 
 
-         bool window::on_window_procedure(LRESULT & lresult, UINT message, WPARAM wparam, LPARAM lparam)
+         bool window::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
          {
 
             if (::windows::window::on_window_procedure(lresult, message, wparam, lparam))
@@ -680,30 +680,6 @@ namespace win32
                return true;
 
             }
-
-            lresult = window_procedure(message, wparam, lparam);
-
-            return true;
-
-         }
-
-
-
-         LRESULT window::window_procedure(unsigned int message, wparam wparam, lparam lparam)
-         {
-
-            //{
-
-            //   LRESULT lresult = 0;
-
-            //   if (on_window_procedure(lresult, message, wparam, lparam))
-            //   {
-
-            //      return lresult;
-
-            //   }
-
-            //}
 
             switch (message)
             {
@@ -722,21 +698,19 @@ namespace win32
 
                auto hwnd = (HWND) _HWND();
 
-               return DefWindowProc(hwnd, message, wparam, lparam);
+               lresult= DefWindowProc(hwnd, message, wparam, lparam);
+               return true;
 
             }
-
-            break;
             case WM_SYSCOMMAND:
             {
 
                auto hwnd = (HWND) _HWND();
 
-               return DefWindowProc(hwnd, message, wparam, lparam);
+               lresult= DefWindowProc(hwnd, message, wparam, lparam);
+               return true;
 
             }
-
-            break;
             case WM_CLOSE:
             {
                //DestroyWindow(hwnd);
@@ -751,7 +725,7 @@ namespace win32
                }
 
             }
-            return 0;
+            //return return false;
             break;
             case WM_NCDESTROY:
                break;
@@ -771,10 +745,12 @@ namespace win32
                //   }
                //   break;
             case WM_DESTROY:
+            {
                //PostQuitMessage(0);
                //system()->acme_windowing()->m_windowmap.erase(this->operating_system_window());
                system()->acme_windowing()->erase_window(this); 
                break;
+            }
             case WM_CREATE:
             {
                //update_drawing_objects();
@@ -794,7 +770,8 @@ namespace win32
                   pelemental->on_char((int)wparam);
 
                }
-               return 0;
+               lresult = 0;
+               return true;
             }
             break;
             case WM_LBUTTONDOWN:
@@ -1011,9 +988,15 @@ namespace win32
             }
             break;
             case WM_ERASEBKGND:
-               return 1;
-            case WM_MOUSEACTIVATE:
-               return MA_ACTIVATE;
+            {
+               lresult = 1;
+               return true;
+            }
+               case WM_MOUSEACTIVATE:
+               {
+                  lresult= MA_ACTIVATE;
+                  return true;
+               }
             case WM_PAINT:
             {
 
@@ -1043,18 +1026,19 @@ namespace win32
 
                ::DeleteDC(hdc);
                EndPaint(hwnd, &paintstruct);
+               lresult = 0;
+               return true;
             }
-            break;
-            case WM_NCACTIVATE:
+               case WM_NCACTIVATE:
             {
 
                auto hwnd = (HWND) _HWND();
 
-               LRESULT lresult = DefWindowProc(hwnd, message, wparam, lparam);
+               lresult = DefWindowProc(hwnd, message, wparam, lparam);
                m_bNcActive = wparam != 0;
                redraw();
 
-               return lresult;
+               return true;
 
             }
             case WM_ACTIVATE:
@@ -1069,7 +1053,8 @@ namespace win32
 
                }
 
-               return 0;
+                  lresult = 0;
+                  return true;
 
             }
             case WM_FONTCHANGE:
@@ -1112,17 +1097,18 @@ namespace win32
             break;
 
             default:
-            {
+                  break;
+            //{
+            //
+            //    auto hwnd = (HWND) _HWND();
+            //
+            //    return DefWindowProc(hwnd, message, wparam, lparam);
+            //
+            // }
 
-               auto hwnd = (HWND) _HWND();
+            };
 
-               return DefWindowProc(hwnd, message, wparam, lparam);
-
-            }
-
-            }
-
-            return 0;
+            return false;
 
          }
 

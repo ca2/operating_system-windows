@@ -66,7 +66,7 @@
          void setArguments(const ::scoped_string & scopedstrArgs) override;
 
          // Sets standard in/out/error handles for the child process.
-         void setStandardIoHandles(::subsystem::File * stdIn, ::subsystem::File * stdOut, ::subsystem::File * stdErr) override;
+         void setStandardIoHandles(::subsystem::FileInterface * stdIn, ::subsystem::FileInterface * stdOut, ::subsystem::FileInterface * stdErr) override;
 
          // If handlesIsInerited is true the handles of the parent process can
          // be used by the child process.

@@ -251,13 +251,17 @@ namespace innate_subsystem_win32
       return ListView_GetSelectedCount(m_hwnd);
    }
 
-   void ListView::getSelectedItemsIndexes(int *indexes)
+   ::int_array ListView::getSelectedItemsIndexes()
    {
       int i = -1;
-      for (unsigned int j = 0; j < getSelectedItemsCount(); j++) {
+      ::int_array ia;
+      ia.set_size(getSelectedItemsCount());
+      for (auto & iItem : ia)
+      {
          i = ListView_GetNextItem(m_hwnd, i, LVNI_SELECTED);
-         indexes[j] = i;
+         iItem = i;
       }
+      return ia;
    }
 
    int CALLBACK ListView::s_FNLVCOMPARE(LPARAM lparam1, LPARAM lparam2, LPARAM lparamSort)
@@ -356,7 +360,7 @@ namespace innate_subsystem_win32
    }
 
 
-   bool ListView::_000OnNotify(windows_reflect_notify_t & notify)
+   void ListView::_000OnNotify(windows_reflect_notify_t & notify)
    {
 
       switch (notify.m_lpnmhdr->code)
@@ -364,25 +368,26 @@ namespace innate_subsystem_win32
          case NM_DBLCLK:
          {
             //onAction();
-            return _001OnAction();
+            notify.m_bHandled= _001OnAction();
             //onRemoteListViewDoubleClick();
-            //break;
+            break;
          }
          case LVN_KEYDOWN:
          {
             auto lpnmlvkeydown = (LPNMLVKEYDOWN)notify.m_lpnmhdr;
             auto euserkey = main_innate_subsystem()->virtual_key_code_to_user_key(lpnmlvkeydown->wVKey);
-            return _001OnKeyDownNotification(euserkey);
+            notify.m_bHandled = _001OnKeyDownNotification(euserkey);
             //onKeyDownNotification(euserkey);
             //onRemoteListViewKeyDown(nmlvkd->wVKey);
+            break;
          }
          break;
          case LVN_COLUMNCLICK:
          {
             auto lpdi = (LPNMLISTVIEW)notify.m_lpnmhdr;
-            return _001OnColumnClick(lpdi->iSubItem);
+            notify.m_bHandled = _001OnColumnClick(lpdi->iSubItem);
          } // switch notification code
-
+break;
          //
          // FIXME: Not better way to call this method at every notification
          // for ::list_base view control, but windows have no notification for ::list_base view
@@ -419,7 +424,7 @@ namespace innate_subsystem_win32
         //         checkLocalListViewSelection();
         //         break;
         }
-        return false;
+        //return false;
 
    }
 

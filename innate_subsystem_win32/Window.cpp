@@ -29,6 +29,10 @@
 #include "Menu.h"
 
 #include "apex/innate_subsystem/drawing/Brush.h"
+#include "drawing/Bitmap.h"
+#include "drawing/Brush.h"
+#include "drawing/DeviceContext.h"
+#include "drawing/Graphics.h"
 
 // namespace windows
 // {
@@ -97,11 +101,27 @@ namespace innate_subsystem_win32
 
    }
 
+   void Window::setClipboardViewerInterest()
+   {
+
+      m_bHasClipboardViewerInterest = true;
+
+   }
+
+
+   bool Window::onDrawClipboard()
+   {
+
+
+      return m_pcomposite->onDrawClipboard();
+
+   }
 
    void Window::setClass(const ::scoped_string  & scopedstrWindowClassName)
    {
       m_strClassName = scopedstrWindowClassName;
    }
+
 
    bool Window::createWindow(const ::scoped_string & scopedstrWindowName, unsigned int style, const ::operating_system::window & operatingsystemwindowParent,
                                  int xPos, int yPos, int width, int height)
@@ -176,6 +196,38 @@ namespace innate_subsystem_win32
       return false;
    }
 
+
+   void Window::setShowCursor(bool bShowCursor)
+   {
+
+      m_bShowCursor = bShowCursor;
+
+   }
+
+
+   bool Window::shouldShowCursor()
+   {
+
+      return m_bShowCursor;
+
+   }
+
+
+   void Window::setDoubleBuffering(bool bDoubleBuffering)
+   {
+
+      m_bDoubleBuffering = bDoubleBuffering;
+
+   }
+
+
+   bool Window::isDoubleBuffering()
+   {
+
+      return m_bDoubleBuffering;
+
+   }
+
    void Window::show()
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
@@ -227,30 +279,35 @@ namespace innate_subsystem_win32
    {
       auto hcursor = pcursor->_HCURSOR();
       _ASSERT(m_windowswindow.as_HWND() != 0);
-      SetClassLongPtr(m_windowswindow.as_HWND(), GCLP_HCURSOR, reinterpret_cast<LONG_PTR>(hcursor));
+      SetClassLongPtr(m_windowswindow.as_HWND(), GCLP_HCURSOR, (LONG_PTR)hcursor);
    }
 
-   void Window::setClassBackground(::innate_subsystem::BrushInterface * pbrush)
+   void Window::setClassBackground(::innate_subsystem::BrushInterface *)
    {
-      auto hbrush = (HBRUSH) (HGDIOBJ) pbrush->_HGDIOBJ();
+      //auto pbrushWin32 = pbrush->impl<::innate_subsystem_win32::Brush>();
+      //auto hbrush = (HBRUSH) (HGDIOBJ) pbrush->_HGDIOBJ();
+      //auto hbrush = pbrushWin32->m_pbrush->Get
+      auto hbrush = (HBRUSH) ::CreateSolidBrush(::GetSysColor(COLOR_WINDOW));
       _ASSERT(m_windowswindow.as_HWND() != 0);
-      SetClassLongPtr(m_windowswindow.as_HWND(), GCLP_HBRBACKGROUND, reinterpret_cast<LONG_PTR>(hbrush));
+      SetClassLongPtr(m_windowswindow.as_HWND(), GCLP_HBRBACKGROUND, (LONG_PTR) hbrush);
    }
 
    void Window::setClassMenu(::innate_subsystem::MenuInterface * pmenu)
    {
-      auto hbrush = (HBRUSH) (HGDIOBJ) pmenu->_HGDIOBJ();
+      auto hmenu = (HMENU) pmenu->_HMENU();
       _ASSERT(m_windowswindow.as_HWND() != 0);
-      SetClassLongPtr(m_windowswindow.as_HWND(), GCLP_MENUNAME, menu);
+      SetClassLongPtr(m_windowswindow.as_HWND(), GCLP_MENUNAME,(LONG_PTR) hmenu);
    }
 
-   LONG Window::getStyle()
+
+   long long Window::getStyle()
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       return GetWindowLong(m_windowswindow.as_HWND(), GWL_STYLE);
    }
 
-   void Window::setStyle(DWORD style)
+
+   void Window::setStyle(unsigned int style)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       SetWindowLong(m_windowswindow.as_HWND(), GWL_STYLE, style);
@@ -265,13 +322,13 @@ namespace innate_subsystem_win32
    }
 
 
-   LONG Window::getExStyle()
+   long long Window::getExStyle()
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       return GetWindowLong(m_windowswindow.as_HWND(), GWL_EXSTYLE);
    }
 
-   void Window::setExStyle(DWORD exstyle)
+   void Window::setExStyle(unsigned int exstyle)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       SetWindowLong(m_windowswindow.as_HWND(), GWL_EXSTYLE, exstyle);
@@ -283,13 +340,13 @@ namespace innate_subsystem_win32
       UpdateWindow(m_windowswindow.as_HWND());
    }
 
-   void Window::setTimer(unsigned int_PTR ident, unsigned int time)
+   void Window::setTimer(::uptr ident, unsigned int time)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       SetTimer(m_windowswindow.as_HWND(), ident, time, 0);
    }
 
-   void Window::killTimer(unsigned int_PTR ident)
+   void Window::killTimer(::uptr ident)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       KillTimer(m_windowswindow.as_HWND(), ident);
@@ -300,11 +357,11 @@ namespace innate_subsystem_win32
       return false;
    }
 
-   bool Window::onNotify(int idCtrl, LPNMHDR pnmh)
-   {
-      return false;
-   }
-
+   // bool Window::onNotify(int idCtrl, LPNMHDR pnmh)
+   // {
+   //    return false;
+   // }
+   //
    bool Window::onSysCommand(::wparam wparam, ::lparam lparam)
    {
       return false;
@@ -315,20 +372,37 @@ namespace innate_subsystem_win32
       return false;
    }
 
-   void Window::setHWnd(HWND hwnd)
-   {
-      m_windowswindow.as_HWND() = hwnd;
-   }
+   // void * Window::_HWND() const
+   // {
+   //
+   //    return m_windowswindow.as_HWND();
+   //
+   // }
+   //
+   //
+   // void Window::_setHWND(void * p)
+   // {
+   //
+   //    m_windowswindow = (HWND) p;
+   //
+   // }
+   //
+   //
+   // void Window::_setHen(HWND hwnd)
+   // {
+   //    m_windowswindow.as_HWND() = hwnd;
+   // }
+   //
+   // HWND Window::getHWnd() const
+   // {
+   //    return m_windowswindow.as_HWND();
+   // }
 
-   HWND Window::getHWnd() const
+   void Window::setWindowText(const ::scoped_string & scopedstr)
    {
-      return m_windowswindow.as_HWND();
-   }
-
-   void Window::setWindowText(const StringStorage *text)
-   {
+      ::wstring wstr(scopedstr);
       _ASSERT(m_windowswindow.as_HWND() != 0);
-      SetWindowText(m_windowswindow.as_HWND(), text->getString());
+      SetWindowText(m_windowswindow.as_HWND(), wstr);
    }
 
    void Window::redraw(const ::int_rectangle &rcArea)
@@ -338,11 +412,14 @@ namespace innate_subsystem_win32
       if (rcArea == 0) {
          InvalidateRect(m_windowswindow.as_HWND(), NULL, TRUE);
       } else {
-         InvalidateRect(m_windowswindow.as_HWND(), rcArea, FALSE);
+
+         RECT rc;
+         ::copy(rc, rcArea);
+         InvalidateRect(m_windowswindow.as_HWND(), &rc, FALSE);
       }
    }
 
-   bool Window::onMouse(unsigned char msg, unsigned short wspeed, POINT pt)
+   bool Window::onMouse(unsigned char msg, unsigned short wspeed, const ::int_point & point)
    {
       return false;
    }
@@ -355,141 +432,344 @@ namespace innate_subsystem_win32
    }
 
 
-   void Control::setFocus()
+   void Window::setFocus()
    {
       ::SetFocus(m_windowswindow.as_HWND());
    }
 
-   bool Control::hasFocus()
+   bool Window::hasFocus()
    {
       return (::GetFocus() == m_windowswindow.as_HWND()) || (GetForegroundWindow() == m_windowswindow.as_HWND());
    }
 
-   bool Control::setForeground()
+   bool Window::setForeground()
    {
-      return SetForegroundWindow(getWindow()) != 0;
+      return SetForegroundWindow(m_windowswindow.as_HWND()) != 0;
    }
-   bool Control::isEnabled()
+
+   bool Window::isEnabled()
    {
       return (!isStyleEnabled(WS_DISABLED));
    }
 
-   void Control::invalidate()
+   bool Window::isIconic()
+   {
+      return ::IsIconic(m_windowswindow.as_HWND()) != FALSE;
+   }
+
+   void Window::invalidate()
    {
       InvalidateRect(m_windowswindow.as_HWND(), NULL, TRUE);
    }
 
-   void Control::getText(StringStorage *storage)
+   ::string Window::getText()
    {
+
       int length = (int)SendMessage(m_windowswindow.as_HWND(), WM_GETTEXTLENGTH, 0, 0);
-      std::vector<TCHAR> buf(length + 1);
-      GetWindowText(m_windowswindow.as_HWND(), &buf.front(), length + 1);
-      storage->setString(&buf.front());
+
+      ::wstring wstr;
+
+      GetWindowText(m_windowswindow.as_HWND(), wstr.auto_release_buffer(length), length + 1);
+
+      return wstr;
+
    }
+
 
    void Window::postMessage(unsigned int Msg, ::wparam wparam, ::lparam lparam)
    {
+
       _ASSERT(m_windowswindow.as_HWND() != 0);
 
-      PostMessage(m_windowswindow.as_HWND(), Msg, ::wparam, ::lparam);
+      PostMessage(m_windowswindow.as_HWND(), Msg, wparam, lparam);
+
    }
 
-   void Window::getClientRect(::int_rectangle &rc)
-   {
-      _ASSERT(m_windowswindow.as_HWND() != 0 && rc);
 
-      GetClientRect(m_windowswindow.as_HWND(), rc);
-   }
-
-   void Window::getBorderSize(int *width, int *height)
+   void Window::getClientRect(::int_rectangle & rectangle)
    {
+
       _ASSERT(m_windowswindow.as_HWND() != 0);
 
-      *width = 2 * GetSystemMetrics(SM_CXSIZEFRAME);
-      *height = GetSystemMetrics(SM_CYSIZE) +
+      RECT rect{};
+
+      GetClientRect(m_windowswindow.as_HWND(), &rect);
+
+      ::copy(rectangle, rect);
+
+   }
+
+
+   ::int_size Window::getBorderSize()
+   {
+
+      _ASSERT(m_windowswindow.as_HWND() != 0);
+
+      auto width = 2 * GetSystemMetrics(SM_CXSIZEFRAME);
+
+      auto height = GetSystemMetrics(SM_CYSIZE) +
                 2 * GetSystemMetrics(SM_CYSIZEFRAME);
+
+      return {width, height};
+
    }
 
 
-   LRESULT Window::s_window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
+   bool Window::onCreate(void * pCreateStruct)
    {
 
-      if (messag)
+      return m_pcomposite->onCreate(pCreateStruct);;
+
+   }
+
+
+
+   void Window::_defer_update_double_buffering()
+   {
+
+      if (!m_bDoubleBuffering)
+      {
+
+         return;
+
+      }
+
+      if (m_pdevicecontextBuffer && m_sizeBuffer == m_clientArea.size())
+      {
+
+          return;
+      }
+
+      if (m_pdevicecontextBuffer && m_pdevicecontextBuffer->m_pgraphics)
+      {
+         m_pdevicecontextBuffer->destroyDeviceContext();
+          if (m_hbitmapOld)
+          {
+              SelectObject(m_hdcBuffer, m_hbitmapOld);
+          }
+          ::DeleteDC(m_hdcBuffer);
+      }
+
+      m_sizeBuffer = m_clientArea.size();
+
+      m_hdcBuffer = CreateCompatibleDC(m_paintStruct.hdc);
+      void *pBits = nullptr;
+
+      // 2️⃣ Create 32-bit DIB section (alpha preserved)
+      BITMAPINFO bi = {};
+      bi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+      bi.bmiHeader.biWidth = m_sizeBuffer.cx;
+      bi.bmiHeader.biHeight = -m_sizeBuffer.cy; // top-down
+      bi.bmiHeader.biPlanes = 1;
+      bi.bmiHeader.biBitCount = 32;
+      bi.bmiHeader.biCompression = BI_RGB;
+      m_hbitmapBuffer = CreateDIBSection(m_paintStruct.hdc, &bi, DIB_RGB_COLORS, &pBits, nullptr, 0);
+      m_hbitmapOld = (HBITMAP)SelectObject(m_hdcBuffer, m_hbitmapBuffer);
+
+      // 1️⃣ Create memory DC
+      defer_constructø(m_pbitmapBuffer);
+      m_pbitmapBuffer->_initialize_bitmap(m_hbitmapBuffer, nullptr);
+
+      defer_constructø(m_pdevicecontextBuffer);
+      m_pdevicecontextBuffer->initialize_device_context(m_pbitmapBuffer);
+
+      // 3️⃣ Clear buffer (transparent black)
+    //  ZeroMemory(pBits, m_sizeBuffer.area() * 4);
+   }
+
+
+   void Window::onDraw(::innate_subsystem::GraphicsInterface * pgraphics, const ::int_rectangle & rectangle)
+   {
+
+      m_pcomposite->onDraw(pgraphics, rectangle);
+
+
+   }
+
+   // void DesktopWindow::onPaint(DeviceContext *dc, PAINTSTRUCT *paintStruct)
+   void Window::doPaint()
+   {
+
+      ::int_rectangle paintRect(m_paintStruct.rcPaint);
+
+
+      // 5️⃣ Blit to screen (alpha ignored in normal window)
+
+
+      // Cleanup
+      // SelectObject(hdcMem, hOld);
+      // DeleteObject(hBmp);
+      // DeleteDC(hdcMem);
+
+      // EndPaint(hwnd, &ps);
+      if (paintRect.is_empty())
+      {
+
+         return;
+      }
+
+      if (m_clientArea.is_empty())
+      {
+         return;
+      }
+
+
+      _defer_update_double_buffering();
+
+
+      //onDraw(m_hdcBuffer, m_paintStruct.rcPaint);
+
+      ::int_rectangle r;
+
+      copy(r, m_paintStruct.rcPaint);
+
+      ::innate_subsystem_win32::Graphics g;
+
+      g.m_pdevicecontext = m_pdevicecontextBuffer;
+
+      onDraw(&g, r);
+
+      ::BitBlt(
+         m_paintStruct.hdc,
+         m_paintStruct.rcPaint.left,
+         m_paintStruct.rcPaint.top,
+         ::width(m_paintStruct.rcPaint),
+         ::height(m_paintStruct.rcPaint),
+         m_hdcBuffer,
+         m_paintStruct.rcPaint.left,
+         m_paintStruct.rcPaint.top,
+         SRCCOPY);
+
+   }
+
+
+
+   //bool Window::on_window_procedure(LRESULT & lresult, HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
+   bool Window::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   {
 
       if (m_pcomposite)
       {
 
-         if (m_pcomposite->window_procedure)
-
-      }
-
-
-   }
-
-
-   bool Window::on_window_procedure(LRESULT &lresult, UINT message, WPARAM wparam, LPARAM lparam)
-   {
-
-
-      switch (message) {
-      case WM_GETDLGCODE:
-      {
-
-         bool bWeWantWMKEYDOWNWhenEnterIsPressed = this->we_want_WM_KEYDOWN_when_enter_is_pressed();
-
-         if (bWeWantWMKEYDOWNWhenEnterIsPressed)
+         if (m_pcomposite->on_window_procedure(lresult, message, wparam, lparam))
          {
 
-            lresult = CallWindowProc(m_defWindowProc, m_windowswindow.as_HWND(), uMsg, wparam.m_number, lparam.m_lparam);
-            // We want WM_KEYDOWN scopedstrMessage when enter is pressed
-            if (lparam.m_lparam &&
-               ((MSG*)lparam.m_lparam)->message == WM_KEYDOWN &&
-               ((MSG*)lparam.m_lparam)->wParam == VK_RETURN) {
-               lresult = DLGC_WANTMESSAGE;
-            }
-         return true;
+            return true;
 
          }
-         return false;
 
       }
+
+      switch (message)
+      {
+         case WM_CREATE:
+         {
+
+            if (m_bHasClipboardViewerInterest)
+            {
+
+               m_hwndNextViewer = SetClipboardViewer((HWND)_HWND());
+
+            }
+
+         }
+            break;
+         case WM_CHANGECBCHAIN:
+            {
+            if (m_bHasClipboardViewerInterest)
+            {
+               if ((HWND)wparam.m_number == m_hwndNextViewer)
+               {
+                  m_hwndNextViewer = (HWND)lparam.m_lparam;
+               }
+               else if (m_hwndNextViewer != NULL)
+               {
+                  SendMessage(m_hwndNextViewer, message, wparam, lparam);
+               }
+            }
+            return true;
+      }
+         case WM_DRAWCLIPBOARD:
+         {
+            if (m_bHasClipboardViewerInterest)
+            {
+               bool ok = onDrawClipboard();
+               SendMessage(m_hwndNextViewer, message, wparam, lparam);
+               return ok;
+            }
+         }
+break;
+      case WM_GETDLGCODE:
+         {
+
+            bool bWeWantWMKEYDOWNWhenEnterIsPressed = this->we_want_WM_KEYDOWN_when_enter_is_pressed();
+
+            if (bWeWantWMKEYDOWNWhenEnterIsPressed)
+            {
+
+               lresult = CallWindowProc(m_wndprocDefault, m_windowswindow.as_HWND(), message, wparam, lparam);
+
+               auto pmsg = lparam.raw_cast<MSG*>();
+               // We want WM_KEYDOWN scopedstrMessage when enter is pressed
+               if (pmsg &&
+                  pmsg->message == WM_KEYDOWN &&
+                  pmsg->wParam == VK_RETURN)
+               {
+                  lresult = DLGC_WANTMESSAGE;
+               }
+               return true;
+
+            }
+            return false;
+
+         }
+            case WM_SETCURSOR:
+                //if (m_bShowCursor || m_timeStartDesktopWindow.elapsed() < 8_s)
+               if (m_bShowCursor)
+                {
+                    ::SetCursor(LoadCursor(nullptr, IDC_ARROW));
+                }
+                else
+                {
+                    ::SetCursor(nullptr);
+                }
+                return true;
+
       case WM_COMMAND:
          return onCommand(wparam, lparam);
       case WM_NOTIFY:
       {
-         auto lpnmhdr = (LPNMHDR)lparam;
-         if (onNotify((int)wparam, lpnmhdr))
+         if (_000OnNotify(lresult, wparam, lparam))
          {
 
-            lresult = 0;
             return true;
 
          }
-         auto hwndFrom = lpnmhdr->hwndFrom;
-
-         if (hwndFrom)
-         {
-            lresult = ::SendMessage(hwndFrom, WM_REFLECT_NOTIFY, wparam, lparam);
-            return true;
-         }
+         // auto hwndFrom = lpnmhdr->hwndFrom;
+         //
+         // if (hwndFrom)
+         // {
+         //    lresult = ::SendMessage(hwndFrom, WM_REFLECT_NOTIFY, wparam, lparam);
+         //    return true;
+         // }
 
       }
       case WM_SYSCOMMAND:
          return onSysCommand(wparam, lparam);
-         case WM_REFLECT_NOTIFY:
+      case WM_REFLECT_NOTIFY_EX:
          {
 
-            if (_onNotifyReflect(wparam, lparam))
-            {
+            auto pnotify = lparam.raw_cast<windows_reflect_notify_t *>();
 
-               lresult = 0;
-               return true;
+            _000OnNotifyReflect(*pnotify);
 
-            }
+            lresult = 0;
+
+            return true;
 
          }
-
-         case WM_LBUTTONDOWN:
+         break;
+      case WM_LBUTTONDOWN:
       case WM_LBUTTONUP:
       case WM_MBUTTONDOWN:
       case WM_MBUTTONUP:
@@ -500,13 +780,13 @@ namespace innate_subsystem_win32
       {
          unsigned char mouseButtons = 0;
 
-         mouseButtons |= LOWORD(wparam) & MK_RBUTTON ? MOUSE_RDOWN : 0;
-         mouseButtons |= LOWORD(wparam) & MK_MBUTTON ? MOUSE_MDOWN : 0;
-         mouseButtons |= LOWORD(wparam) & MK_LBUTTON ? MOUSE_LDOWN : 0;
+         mouseButtons |= LOWORD(wparam) & MK_RBUTTON ? innate_subsystem::e_mouse_right : 0;
+         mouseButtons |= LOWORD(wparam) & MK_MBUTTON ? innate_subsystem::e_mouse_middle : 0;
+         mouseButtons |= LOWORD(wparam) & MK_LBUTTON ? innate_subsystem::e_mouse_left : 0;
 
          // Translate position from ::lparam to POINT.
          POINTS points = MAKEPOINTS(lparam);
-         POINT point;
+         ::int_point point;
          point.x = points.x;
          point.y = points.y;
 
@@ -515,11 +795,11 @@ namespace innate_subsystem_win32
             // Get speed wheel and set mouse button.
             signed short wheelSignedSpeed = static_cast<signed short>(HIWORD(wparam));
             if (wheelSignedSpeed < 0) {
-               mouseButtons |= MOUSE_WDOWN;
+               mouseButtons |= ::innate_subsystem::e_mouse_wheel_down;
                wheelSpeed = -wheelSignedSpeed / WHEEL_DELTA;
             }
             else {
-               mouseButtons |= MOUSE_WUP;
+               mouseButtons |= ::innate_subsystem::e_mouse_wheel_up;
                wheelSpeed = wheelSignedSpeed / WHEEL_DELTA;
             }
 
@@ -530,10 +810,13 @@ namespace innate_subsystem_win32
             }
 
             // If windows-message is WHEEL, then need to translate screen coordinate to client.
-            if (!ScreenToClient(::as_HWND(m_operatingsystemwindow), &point)) {
-               point.x = -1;
-               point.y = -1;
+            POINT p;
+            ::copy(p, point);
+            if (!ScreenToClient(m_windowswindow.as_HWND(), &p)) {
+               p.x = -1;
+               p.y = -1;
             }
+            ::copy(point, p);
          }
 
          // Notify window about mouse-event.
@@ -544,14 +827,14 @@ namespace innate_subsystem_win32
    }
 
 
-   bool notification_handler::_000OnNotify(LRESULT &lresult, wparam wparam, lparam lparam)
+   bool notification_handler::_000OnNotify(::lresult &lresult, wparam wparam, lparam lparam)
    {
 
       auto iControl = LOWORD(wparam);
 
       auto lpnmhdr = (LPNMHDR) lparam.m_lparam;
 
-      ::cast < ::innate_subsystem_win32::Window > pwindowWin32 = _this->get_window_implementation();
+      ::cast < ::innate_subsystem_win32::Window > pwindowWin32 = this->get_window_implementation();
 
       auto &notification = pwindowWin32->m_mapControlNotification[iControl];
 
@@ -563,38 +846,47 @@ namespace innate_subsystem_win32
          if (notification.m_iaNotification.contains(iOperatingSystemNotificationCode))
          {
 
-            bool bHandled = _000OnNotify(notification.m_econtrol, iControl, lpnmhdr);
+            windows_reflect_notify_t notify(lresult, wparam, lparam);
+
+            _000OnNotify(notify);
 
          // }
          //
          //    bool bHandled = _this->_onNotify(iControl, lpnmhdr);
-            if (!bHandled)
+            if (!notify.m_bHandled)
             {
-               windows_reflect_notify_t notify;
-               notify.m_bHandled = false;
-               notify.set_wparam(wparam);
-               notify.m_lresult = 0;
-               notify.m_lpnmhdr = lpnmhdr;
-               bHandled = SendMessage(lpnmhdr->hwndFrom, WM_REFLECT_NOTIFY_EX, 0,(LPARAM) &notify);
-               if (bHandled && notify.m_bHandled)
-               {
-                  bResult = notify.m_lresult;
-               }
+               // windows_reflect_notify_t notify;
+               // notify.m_bHandled = false;
+               // notify.set_wparam(wparam);
+               // notify.m_lresult = 0;
+               // notify.m_lpnmhdr = lpnmhdr;
+               SendMessage(lpnmhdr->hwndFrom, WM_REFLECT_NOTIFY_EX, 0,(LPARAM) &notify);
+               //if (bHandled && notify.m_bHandled)
+               //{
+                  //bResult = notify.m_lresult;
+               //}
                //bResult = true;
+            }
+
+            if (notify.m_bHandled)
+            {
+
+               return true;
+
             }
 
          }
 
       }
 
-
+      return false;
 
    }
 
 
-   bool notification_handler::_000OnNotify(int idCtrl, LPNMHDR lpnmhdr)
+   void notification_handler::_000OnNotify(windows_reflect_notify_t & notify)
    {
-      return false;
+      //return false;
    }
 
 } // namespace innate_subsystem_win32
