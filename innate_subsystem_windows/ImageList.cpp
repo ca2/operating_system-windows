@@ -7,7 +7,7 @@
 #include "drawing/Icon.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
    ImageList::ImageList()
@@ -60,10 +60,10 @@ namespace innate_subsystem_win32
    }
 
 
-   void ImageList::addIcon(subsystem_apex::IconInterface * picon)
+   void ImageList::addIcon(innate_subsystem::IconInterface * picon)
    {
 
-      auto piconWin32 = picon->impl<::innate_subsystem_win32::Icon>();
+      auto piconWin32 = picon->impl<::innate_subsystem_windows::Icon>();
 
       auto hicon = piconWin32->m_hicon;
 
@@ -72,4 +72,4 @@ namespace innate_subsystem_win32
    }
 
 
-}// namespace innate_subsystem_win32
+}// namespace innate_subsystem_windows

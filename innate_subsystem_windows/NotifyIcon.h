@@ -34,12 +34,12 @@
 
 #include <shellapi.h>
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
    // FIXME: Add documentation to class.
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 NotifyIcon :
-      virtual public ::subsystem::implementation< subsystem_apex::NotifyIconInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS NotifyIcon :
+      virtual public ::subsystem::implementation< innate_subsystem::NotifyIconInterface>
    {
    public:
       NotifyIcon();
@@ -47,10 +47,10 @@ namespace innate_subsystem_win32
 
       void initialize_notify_icon(bool showAfterCreation = true) override;
 
-      ::subsystem_apex::IconInterface *getIcon()override;
+      ::innate_subsystem::IconInterface *getIcon()override;
       bool isVisible() const override;
 
-      void setIcon(::subsystem_apex::IconInterface *icon) override;
+      void setIcon(::innate_subsystem::IconInterface *icon) override;
       void setText(const char *text) override;
 
       void showBalloon(const char *message, const char *caption, unsigned int timeoutMillis) override;
@@ -60,14 +60,14 @@ namespace innate_subsystem_win32
 
 //   protected:
       NOTIFYICONDATA m_nid;
-      ::pointer < ::innate_subsystem_win32::Icon > m_picon;
+      ::pointer < ::innate_subsystem_windows::Icon > m_picon;
       bool m_visible;
 
 
 
    };
 
-}// namespace innate_subsystem_win32
+}// namespace innate_subsystem_windows
 
 
 

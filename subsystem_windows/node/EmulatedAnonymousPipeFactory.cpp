@@ -22,7 +22,7 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "EmulatedAnonymousPipeFactory.h"
 #include "security/SecurityAttributes.h"
 #include "File.h"
@@ -31,7 +31,7 @@
 #include <time.h>
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    // EmulatedAnonymousPipeFactory::EmulatedAnonymousPipeFactory(unsigned int bufferSize, LogWriter *log)
    // : m_bufferSize(bufferSize),
@@ -91,4 +91,4 @@ namespace subsystem_win32
       }
       return result;
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows

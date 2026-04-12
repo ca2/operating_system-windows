@@ -33,60 +33,60 @@
 //
 // // FIXME: Move implementation to the .cpp file.
 //
-// namespace innate_subsystem_win32
+// namespace innate_subsystem_windows
 // {
-//    class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 FrameBuffer :
-//       virtual public ::subsystem_apex::FrameBuffer
+//    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS FrameBuffer :
+//       virtual public ::innate_subsystem::FrameBuffer
 //    {
 //    public:
 //       //int m_iDivisor = 1;
 //       FrameBuffer(void);
 //       virtual ~FrameBuffer(void);
 //
-//       virtual bool assignProperties(const ::subsystem_apex::FrameBuffer &srcFrameBuffer);
-//       virtual bool clone(const ::subsystem_apex::FrameBuffer &srcFrameBuffer);
+//       virtual bool assignProperties(const ::innate_subsystem::FrameBuffer &srcFrameBuffer);
+//       virtual bool clone(const ::innate_subsystem::FrameBuffer &srcFrameBuffer);
 //       virtual void setColor(unsigned char red, unsigned char green, unsigned char blue);
 //       virtual void fillRect(const ::int_rectangle &  dstRect, unsigned int color);
 //
 //       // Return value: true - if equal
 //       //               false - if PixelFormats or size differs
-//       virtual bool isEqualTo(const ::subsystem_apex::FrameBuffer &frameBuffer);
+//       virtual bool isEqualTo(const ::innate_subsystem::FrameBuffer &frameBuffer);
 //
 //       // Copy to self by specified destination rectangle from the specified
 //       // coordinates of srcFrameBuffer
-//       virtual bool copyFrom(const ::int_rectangle &  dstRect, const ::subsystem_apex::FrameBuffer &srcFrameBuffer,
+//       virtual bool copyFrom(const ::int_rectangle &  dstRect, const ::innate_subsystem::FrameBuffer &srcFrameBuffer,
 //                     int srcX, int srcY);
 //       // The same as above but destination rect is m_dimension
-//       virtual bool copyFrom(const ::subsystem_apex::FrameBuffer &srcFrameBuffer,
+//       virtual bool copyFrom(const ::innate_subsystem::FrameBuffer &srcFrameBuffer,
 //                     int srcX, int srcY);
 //
 //       // Copy to self by specified destination rectangle from the specified
 //       // coordinates of srcFrameBuffer. When source farmebuffer and source coordinates are
 //       // rotated with 90 degree.
-//       virtual bool copyFromRotated90(const ::int_rectangle &  dstRect, const ::subsystem_apex::FrameBuffer &srcFrameBuffer,
+//       virtual bool copyFromRotated90(const ::int_rectangle &  dstRect, const ::innate_subsystem::FrameBuffer &srcFrameBuffer,
 //                                      int srcX, int srcY);
 //
 //       // Copy to self by specified destination rectangle from the specified
 //       // coordinates of srcFrameBuffer. When source farmebuffer and source coordinates are
 //       // rotated with 180 degree.
-//       virtual bool copyFromRotated180(const ::int_rectangle &  dstRect, const ::subsystem_apex::FrameBuffer &srcFrameBuffer,
+//       virtual bool copyFromRotated180(const ::int_rectangle &  dstRect, const ::innate_subsystem::FrameBuffer &srcFrameBuffer,
 //                                       int srcX, int srcY);
 //
 //       // Copy to self by specified destination rectangle from the specified
 //       // coordinates of srcFrameBuffer. When source farmebuffer and source coordinates are
 //       // rotated with 270 degree.
-//       virtual bool copyFromRotated270(const ::int_rectangle &  dstRect, const ::subsystem_apex::FrameBuffer &srcFrameBuffer,
+//       virtual bool copyFromRotated270(const ::int_rectangle &  dstRect, const ::innate_subsystem::FrameBuffer &srcFrameBuffer,
 //                                       int srcX, int srcY);
 //
 //       // Overlays the source image to this with by the AND mask
 //       virtual bool overlay(const ::int_rectangle &  dstRect,
-//                    const ::subsystem_apex::FrameBuffer &srcFrameBuffer,
+//                    const ::innate_subsystem::FrameBuffer &srcFrameBuffer,
 //                    int srcX, int srcY,
 //                    const char *andMask);
 //       virtual void move(const ::int_rectangle &  dstRect, const int srcX, const int srcY);
 //       // Return value: true - if equal
 //       //               false - if PixelFormats or data differs
-//       virtual bool cmpFrom(const ::int_rectangle &  dstRect, const ::subsystem_apex::FrameBuffer &srcFrameBuffer,
+//       virtual bool cmpFrom(const ::int_rectangle &  dstRect, const ::innate_subsystem::FrameBuffer &srcFrameBuffer,
 //                    const int srcX, const int srcY);
 //
 //       virtual bool setDimension(const ::int_size & newDim);
@@ -100,18 +100,18 @@
 //       virtual void setEmptyDimension(const ::int_rectangle &  dimByRect);
 //
 //       // Sets pixel format to the frame buffer without buffer resizing
-//       virtual void setEmptyPixelFmt(const ::subsystem_apex::PixelFormat & pf);
+//       virtual void setEmptyPixelFmt(const ::innate_subsystem::PixelFormat & pf);
 //
-//       virtual void setPropertiesWithoutResize(const ::int_size & newDim, const ::subsystem_apex::PixelFormat & pf);
+//       virtual void setPropertiesWithoutResize(const ::int_size & newDim, const ::innate_subsystem::PixelFormat & pf);
 //
 //       virtual inline ::int_size getDimension() const { return m_dimension; }
 //
-//       virtual bool setPixelFormat(const ::subsystem_apex::PixelFormat & pixelFormat);
-//       virtual inline ::subsystem_apex::PixelFormat getPixelFormat() const { return m_pixelFormat; }
+//       virtual bool setPixelFormat(const ::innate_subsystem::PixelFormat & pixelFormat);
+//       virtual inline ::innate_subsystem::PixelFormat getPixelFormat() const { return m_pixelFormat; }
 //
 //       // This function set both PixelFormat and ::int_size
-//       virtual bool setProperties(const ::int_size & newDim, const ::subsystem_apex::PixelFormat & pixelFormat);
-//       virtual bool setProperties(const ::int_rectangle &  dimByRect, const ::subsystem_apex::PixelFormat & pixelFormat);
+//       virtual bool setProperties(const ::int_size & newDim, const ::innate_subsystem::PixelFormat & pixelFormat);
+//       virtual bool setProperties(const ::int_rectangle &  dimByRect, const ::innate_subsystem::PixelFormat & pixelFormat);
 //
 //       // Return the number of bits occupied by one pixel (can be 8, 16 or 32).
 //       virtual unsigned char getBitsPerPixel() const;
@@ -150,7 +150,7 @@
 //
 //       //protected:
 //       bool resizeBuffer();
-//       void clipRect(const ::int_rectangle &  dstRect, const ::subsystem_apex::FrameBuffer &srcFrameBuffer,
+//       void clipRect(const ::int_rectangle &  dstRect, const ::innate_subsystem::FrameBuffer &srcFrameBuffer,
 //                     const int srcX, const int srcY,
 //                     ::int_rectangle *dstClippedRect, ::int_rectangle *srcClippedRect);
 //       void clipRect(const ::int_rectangle &  dstRect,const ::int_rectangle & srcBufferRect,
@@ -158,19 +158,19 @@
 //                     ::int_rectangle *dstClippedRect, ::int_rectangle *srcClippedRect);
 //
 //       template<class PIXEL_T> bool overlayT(const ::int_rectangle &  dstRect,
-//                                             const ::subsystem_apex::FrameBuffer &srcFrameBuffer,
+//                                             const ::innate_subsystem::FrameBuffer &srcFrameBuffer,
 //                                             int srcX, int srcY,
 //                                             const char *andMask);
 //
 //       ::int_size m_dimension;
 //
-//       ::subsystem_apex::PixelFormat m_pixelFormat;
+//       ::innate_subsystem::PixelFormat m_pixelFormat;
 //       void *m_buffer;
 //
 //    };
 //
 //
 //    //// __FRAMEBUFFER_H__
-// } // namespace innate_subsystem_win32
+// } // namespace innate_subsystem_windows
 //
 //

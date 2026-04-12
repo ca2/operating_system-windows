@@ -5,16 +5,16 @@
 #pragma once
 
 
-#include "subsystem_win32/subsystem.h"
+#include "subsystem_windows/subsystem.h"
 #include "innate_subsystem/subsystem.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 subsystem :
-      virtual public ::subsystem_win32::subsystem,
-      virtual public ::subsystem_apex::subsystem
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS subsystem :
+      virtual public ::subsystem_windows::subsystem,
+      virtual public ::innate_subsystem::subsystem
    {
    public:
 
@@ -39,7 +39,7 @@ namespace innate_subsystem_win32
 
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 
 

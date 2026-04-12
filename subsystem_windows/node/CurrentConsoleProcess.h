@@ -27,10 +27,10 @@
 
 #include "subsystem/node/Process.h"
 //#include "log_writer/LogWriter.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       /**
        * Enables you to start and stop processes in interactive console session.
@@ -47,7 +47,8 @@ namespace subsystem_win32
        *
        * @fixme rename it.
        */
-      class CLASS_DECL_SUBSYSTEM_WIN32 CurrentConsoleProcess : public Process
+      class CLASS_DECL_SUBSYSTEM_WINDOWS CurrentConsoleProcess : 
+         virtual public ::subsystem::Process
       {
       public:
          /**
@@ -55,7 +56,7 @@ namespace subsystem_win32
           *
           * See description of Process constructor.
           */
-         CurrentConsoleProcess(LogWriter *log, bool connectRdpSession, const ::scoped_string & scopedstrPath = 0, const ::scoped_string & scopedstrArgs = 0);
+         CurrentConsoleProcess(::subsystem::LogWriter *log, bool connectRdpSession, const ::scoped_string & scopedstrPath = 0, const ::scoped_string & scopedstrArgs = 0);
          /**
           * Destoys instance of class.
           */
@@ -72,8 +73,9 @@ namespace subsystem_win32
          virtual void start();
 
       private:
-         LogWriter *m_log;
+         ::subsystem::LogWriter *m_log;
          bool m_connectRdpSession;
       };
-   } // namespace subsystem_win32
-}// namespace subsystem_win32
+
+
+}// namespace subsystem_windows

@@ -25,7 +25,7 @@
 #include "SecurityAttributes.h"
 #include "SecurityIdentifier.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       SecurityAttributes::SecurityAttributes()
       //: m_isDefaultAttributes(true)
@@ -89,6 +89,6 @@ namespace subsystem_win32
           m_isDefaultAttributes = false;
           m_securityAttributes.bInheritHandle = TRUE;
       }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

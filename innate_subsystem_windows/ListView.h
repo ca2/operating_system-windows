@@ -27,13 +27,13 @@
 
 
 #include "innate_subsystem/ListView.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 
 //
 // TODO: Maybe use class for this?
 //
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    // typedef struct
    // {
@@ -46,8 +46,8 @@ namespace innate_subsystem_win32
    // that view data as report.
    //
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 ListView :
-   virtual public window_implementation<subsystem_apex::ListViewInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ListView :
+   virtual public window_implementation<innate_subsystem::ListViewInterface>
    {
    public:
 
@@ -83,7 +83,7 @@ namespace innate_subsystem_win32
       // Returns list view item structure with specified index
       //
 
-      virtual ::subsystem_apex::ListViewItem getItem(int index)override ;
+      virtual ::innate_subsystem::ListViewItem getItem(int index)override ;
 
       //
       // Returns list view items count
@@ -144,7 +144,7 @@ namespace innate_subsystem_win32
       // Returns first selected list view item
       //
 
-      virtual ::subsystem_apex::ListViewItem getSelectedItem()override ;
+      virtual ::innate_subsystem::ListViewItem getSelectedItem()override ;
 
       //
       // Returns index of first selected list view item
@@ -220,7 +220,7 @@ namespace innate_subsystem_win32
 
    };
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 
 

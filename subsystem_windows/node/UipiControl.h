@@ -25,13 +25,13 @@
 #pragma once
 
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 //#include "log_writer/LogWriter.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    // This class allow to control the uipi for the current process.
-   class CLASS_DECL_SUBSYSTEM_WIN32 UipiControl
+   class CLASS_DECL_SUBSYSTEM_WINDOWS UipiControl
    {
    public:
       UipiControl(::subsystem::LogWriter *log);
@@ -50,4 +50,4 @@ namespace subsystem_win32
    };
 
    //// __UIPICONTROL_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows

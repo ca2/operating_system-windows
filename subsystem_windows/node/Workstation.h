@@ -26,17 +26,17 @@
 
 
 #include "subsystem/node/Workstation.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
 //#include "SystemException.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    /**
     * Wrapper on WinAPI workstation functions.
     */
-   class CLASS_DECL_SUBSYSTEM_WIN32 Workstation:
+   class CLASS_DECL_SUBSYSTEM_WINDOWS Workstation:
          virtual public ::subsystem::implementation<subsystem::WorkstationInterface>
    {
    public:
@@ -55,4 +55,4 @@ namespace subsystem_win32
        */
       void workstation_logOff()override;
    };
-} // namespace subsystem_win32
+} // namespace subsystem_windows

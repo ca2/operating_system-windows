@@ -3,7 +3,7 @@
 #include "SystemMetrics.h"
 
 
- namespace innate_subsystem_win32
+ namespace innate_subsystem_windows
  {
 
      SystemMetrics::SystemMetrics()
@@ -29,4 +29,4 @@
 
 
 
- } // namespace innate_subsystem_win32
+ } // namespace innate_subsystem_windows

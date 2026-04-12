@@ -29,7 +29,7 @@
 
 // namespace windows
 // {
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    SpinControl::SpinControl()
  //  : m_buddy(NULL),
@@ -125,4 +125,4 @@ namespace innate_subsystem_win32
       m_deltas = deltas;
       m_maxDelta = maxDelta;
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

@@ -28,22 +28,22 @@
 
 #include "subsystem/thread/Thread.h"
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
-      class CLASS_DECL_REMOTING_COMMON CtrlAltDelSimulator :
-            virtual public ::subsystem::implementation< CtrlAltDelSimulatorInterface >
-
+   class CLASS_DECL_SUBSYSTEM_WINDOWS CtrlAltDelSimulator :
+       // virtual public ::subsystem::implementation< ::subsystem::CtrlAltDelSimulatorInterface >
+       virtual public ::subsystem::Thread
       {
       public:
          CtrlAltDelSimulator();
-         ~CtrlAltDelSimulator() =0;
+         ~CtrlAltDelSimulator() override;
 
          //protected:
-         void run() override;
+         int execute() override;
       };
 
       //// __CTRLALTDELSIMULATOR_H__
       ///
-} // namespace subsystem_win32
+} // namespace subsystem_windows

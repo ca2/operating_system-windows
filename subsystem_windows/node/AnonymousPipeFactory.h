@@ -26,14 +26,14 @@
 
 
 #include "subsystem/node/AnonymousPipeFactory.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 //#include "log_writer/LogWriter.h"
-namespace subsystem_win32
+namespace subsystem_windows
 {
    // The AnonymousPipeFactory class generates the ::pair of the AnonymousPipe
    // objects that connected to each other.
-   class CLASS_DECL_SUBSYSTEM_WIN32 AnonymousPipeFactory :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS AnonymousPipeFactory :
    virtual public ::subsystem::implementation<::subsystem::AnonymousPipeFactoryInterface>
    {
    public:
@@ -66,4 +66,4 @@ namespace subsystem_win32
    };
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

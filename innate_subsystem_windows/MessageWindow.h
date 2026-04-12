@@ -25,9 +25,9 @@
 #pragma once
 
 //#include "util/CommonHeader.h"
-//#include "../../../source/app/apex/operating_system/windows/innate_subsystem_win32/WindowMessageHandler.h"
+//#include "../../../source/app/apex/operating_system/windows/innate_subsystem_windows/WindowMessageHandler.h"
 
-namespace  innate_subsystem_win32
+namespace  innate_subsystem_windows
 {
    class MessageWindow
    {
@@ -62,5 +62,5 @@ namespace  innate_subsystem_win32
                                             WPARAM wparam,
                                             LPARAM lparam);
    };
-} // namespace  innate_subsystem_win32
+} // namespace  innate_subsystem_windows
 

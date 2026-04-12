@@ -5,8 +5,9 @@
 #pragma once
 
 
-#include "acme/_.h"
 #include "acme_windows/_.h"
+#include "subsystem_bsd_sockets/_.h"
+
 
 
 #ifndef ACME_OPERATING_SYSTEM
@@ -16,16 +17,16 @@
 
 
 
-#if defined(_subsystem_win32_project)
-#define CLASS_DECL_SUBSYSTEM_WIN32  CLASS_DECL_EXPORT
+#if defined(_subsystem_windows_project)
+#define CLASS_DECL_SUBSYSTEM_WINDOWS  CLASS_DECL_EXPORT
 #else
-#define CLASS_DECL_SUBSYSTEM_WIN32  CLASS_DECL_IMPORT
+#define CLASS_DECL_SUBSYSTEM_WINDOWS  CLASS_DECL_IMPORT
 #endif
 
 
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
    class File;
@@ -40,7 +41,7 @@ namespace subsystem_win32
 
    class PipeServer;
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 

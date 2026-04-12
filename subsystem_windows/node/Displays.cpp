@@ -26,7 +26,7 @@
 #include "Displays.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    Displays::Displays()
    {
@@ -105,7 +105,7 @@ namespace subsystem_win32
        update();
        return m_displayRects;
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 

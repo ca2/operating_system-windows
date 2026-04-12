@@ -27,18 +27,18 @@
 
 #include "subsystem/io/Channel.h"
 #include "subsystem/node/NamedPipe.h"
-#include "subsystem_win32/node/Pipe.h"
-#include "subsystem_win32/node/WindowsEvent.h"
+#include "subsystem_windows/node/Pipe.h"
+#include "subsystem_windows/node/WindowsEvent.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    /**
     * NamedPipe transport.
     *
     * @author yuri, enikey.
     */
-   class CLASS_DECL_SUBSYSTEM_WIN32 NamedPipe :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS NamedPipe :
       virtual public ::subsystem::NamedPipe
    {
    public:
@@ -117,7 +117,7 @@ namespace subsystem_win32
    };
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 

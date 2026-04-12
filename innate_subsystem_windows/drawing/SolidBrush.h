@@ -27,15 +27,15 @@
 
 
 #include "innate_subsystem/drawing/SolidBrush.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 SolidBrush :
-      virtual public ::subsystem::implementation <::subsystem_apex::SolidBrushInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS SolidBrush :
+      virtual public ::subsystem::implementation <::innate_subsystem::SolidBrushInterface>
 
    {
    public:
@@ -50,4 +50,4 @@ namespace innate_subsystem_win32
    };
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

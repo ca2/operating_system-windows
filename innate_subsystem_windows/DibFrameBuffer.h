@@ -27,11 +27,11 @@
 // //#define __DIBFRAMEBUFFER_H__
 //
 // #include "subsystem/framebuffer/DibFrameBuffer.h"
-// #include "subsystem_win32/framebuffer/DibSection.h"
+// #include "subsystem_windows/framebuffer/DibSection.h"
 // //#include "win-system/DibSection.h"
 //
 //
-// namespace subsystem_win32
+// namespace subsystem_windows
 // {
 //     // This class is a wrapper for a FramBuffer and a DIB section.
 //     // It changes DIB section proerties by oneself according to FrameBuffer
@@ -142,4 +142,4 @@
 //     };
 //
 //     //#endif // __DIBFRAMEBUFFER_H__
-// } // namespace subsystem_win32
+// } // namespace subsystem_windows

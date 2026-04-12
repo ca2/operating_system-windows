@@ -26,11 +26,11 @@
 
 
 #include "subsystem/node/SystemInformation.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
-   class CLASS_DECL_SUBSYSTEM_WIN32 SystemInformation :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS SystemInformation :
    virtual  public ::subsystem::SystemInformation
    {
    public:
@@ -55,4 +55,4 @@ namespace subsystem_win32
       int getMonitorCount() override;
    };
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

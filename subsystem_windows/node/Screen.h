@@ -28,13 +28,13 @@
 #include "subsystem/node/Screen.h"
 #include "subsystem/framebuffer/PixelFormat.h"
 #include "acme/prototype/geometry2d/rectangle.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    // This class get info for a windows desktop.
-   class CLASS_DECL_SUBSYSTEM_WIN32 Screen :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS Screen :
    virtual public ::subsystem::implementation<::subsystem::ScreenInterface>
    {
    public:
@@ -45,7 +45,7 @@ namespace subsystem_win32
 
       // Returns a PixelFormat that was at latest call of the
       // update() function.
-      ::subsystem_apex::PixelFormat getPixelFormat() override;
+      ::innate_subsystem::PixelFormat getPixelFormat() override;
 
       // Returns a desktop dimension that was at latest call of the
       // update() function.
@@ -90,8 +90,8 @@ namespace subsystem_win32
 
       void fillScreenRect();
 
-      ::subsystem_apex::PixelFormat m_pixelFormat;
+      ::innate_subsystem::PixelFormat m_pixelFormat;
       ::int_rectangle m_virtDesktopRect;
    };
 
-}// namespace subsystem_win32
+}// namespace subsystem_windows

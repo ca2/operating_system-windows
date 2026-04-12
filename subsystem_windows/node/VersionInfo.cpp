@@ -23,11 +23,11 @@
 //
 #include "framework.h"
 #include "subsystem/node/SystemException.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "VersionInfo.h"
 //#include <vector>
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    VersionInfo::VersionInfo(const ::file::path & pathToFile)
    {
@@ -86,5 +86,5 @@ namespace subsystem_win32
    {
       return m_productVersionString;
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 

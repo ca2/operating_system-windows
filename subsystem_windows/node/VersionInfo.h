@@ -25,15 +25,15 @@
 #pragma once
 
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 //#include "SystemException.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    /**
     * Contains information about executable file version info.
     */
-   class CLASS_DECL_SUBSYSTEM_WIN32 VersionInfo
+   class CLASS_DECL_SUBSYSTEM_WINDOWS VersionInfo
    {
    public:
       /**
@@ -55,4 +55,4 @@ namespace subsystem_win32
        */
       ::string m_productVersionString;
    };
-} // namespace subsystem_win32
+} // namespace subsystem_windows

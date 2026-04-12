@@ -27,13 +27,13 @@
 
 
 #include "subsystem/node/Displays.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
-   class CLASS_DECL_SUBSYSTEM_WIN32 Displays :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS Displays :
       virtual public ::subsystem::implementation<::subsystem::DisplaysInterface >
    {
    public:
@@ -75,7 +75,7 @@ namespace subsystem_win32
    };
 
 
-   // class CLASS_DECL_SUBSYSTEM_WIN32 Displays :
+   // class CLASS_DECL_SUBSYSTEM_WINDOWS Displays :
    //    virtual public ::subsystem::composite<DisplaysInterface>
    // {
    // public:
@@ -116,4 +116,4 @@ namespace subsystem_win32
 
    //// __WINDOWSDISPLAYS_H__
    ///
-}// namespace subsystem_win32
+}// namespace subsystem_windows

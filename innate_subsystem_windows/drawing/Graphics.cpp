@@ -32,7 +32,7 @@
 #include "Pen.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    // Graphics::Graphics(DeviceContext *dc)
    // : m_dc(dc)
@@ -65,7 +65,7 @@ m_iBkMode = TRANSPARENT;
    }
 
 
-   subsystem_apex::DeviceContextInterface * Graphics::device_context()
+   innate_subsystem::DeviceContextInterface * Graphics::device_context()
    {
 
 return m_pdevicecontext;
@@ -73,14 +73,14 @@ return m_pdevicecontext;
    }
 
 
-   void Graphics::initialize_graphics(subsystem_apex::DeviceContextInterface * pdevicecontext)
+   void Graphics::initialize_graphics(innate_subsystem::DeviceContextInterface * pdevicecontext)
    {
 
       m_pdevicecontext = pdevicecontext;
 
    }
 
-   void Graphics::initialize_graphics(subsystem_apex::BitmapInterface * pbitmap)
+   void Graphics::initialize_graphics(innate_subsystem::BitmapInterface * pbitmap)
    {
 
       constructø(m_pdevicecontext);
@@ -150,7 +150,7 @@ return m_pdevicecontext;
       m_colorBk = color;
    }
 
-   void Graphics::setBrush(::subsystem_apex::BrushInterface *pbrush)
+   void Graphics::setBrush(::innate_subsystem::BrushInterface *pbrush)
    {
 
       // auto pbrushWin32 = pbrush->impl<Brush>();
@@ -162,10 +162,10 @@ return m_pdevicecontext;
 
    }
 
-   void Graphics::setPen(::subsystem_apex::PenInterface *ppen)
+   void Graphics::setPen(::innate_subsystem::PenInterface *ppen)
    {
 
-      // ::cast < ::innate_subsystem_win32::Pen > ppenWin32 = ::subsystem_apex::get_implementation(ppen);
+      // ::cast < ::innate_subsystem_windows::Pen > ppenWin32 = ::innate_subsystem::get_implementation(ppen);
       //
       // HGDIOBJ object = ppenWin32 ? ppenWin32->m_hpen : nullptr;
       //
@@ -174,10 +174,10 @@ return m_pdevicecontext;
 
    }
 
-   void Graphics::setFont(::subsystem_apex::FontInterface *pfont)
+   void Graphics::setFont(::innate_subsystem::FontInterface *pfont)
    {
 
-      // ::cast < ::innate_subsystem_win32::Pen > ppenWin32 = ::subsystem_apex::get_implementation(ppen);
+      // ::cast < ::innate_subsystem_windows::Pen > ppenWin32 = ::innate_subsystem::get_implementation(ppen);
       //
       // HGDIOBJ object = ppenWin32 ? ppenWin32->m_hpen : nullptr;
       //
@@ -203,13 +203,13 @@ return m_pdevicecontext;
 
    }
 
-   void Graphics::fillRect(const ::int_rectangle & rectangle, ::subsystem_apex::BrushInterface *pbrush)
+   void Graphics::fillRect(const ::int_rectangle & rectangle, ::innate_subsystem::BrushInterface *pbrush)
    {
       Gdiplus::Rect gdiplusrect;
 
       ::copy(gdiplusrect, rectangle);
 
-      auto pbrushWin32 = pbrush->impl<::innate_subsystem_win32::Brush>();
+      auto pbrushWin32 = pbrush->impl<::innate_subsystem_windows::Brush>();
 
       //auto hbrush = (HBRUSH) pbrush->_HGDIOBJ();
 
@@ -225,7 +225,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
 
       ::copy(gdiplusrect, rectangle);
 
-      //auto pbrushWin32 = pbrush->impl<::innate_subsystem_win32::Brush>();
+      //auto pbrushWin32 = pbrush->impl<::innate_subsystem_windows::Brush>();
       Gdiplus::Color gdipluscolor(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue());
       Gdiplus::SolidBrush solidbrush(gdipluscolor);
 
@@ -263,10 +263,10 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
 
    }
 
-   void Graphics::drawBitmap(::subsystem_apex::BitmapInterface *pbitmap, const ::int_rectangle & rectangle)
+   void Graphics::drawBitmap(::innate_subsystem::BitmapInterface *pbitmap, const ::int_rectangle & rectangle)
    {
 
-      auto pbitmapWin32 = pbitmap->impl<::innate_subsystem_win32::Bitmap>();
+      auto pbitmapWin32 = pbitmap->impl<::innate_subsystem_windows::Bitmap>();
       //DeviceContext memDC;
 
       //memDC.initialize_device_context(m_pdevicecontext);
@@ -285,10 +285,10 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
    }
 
 
-   void Graphics::drawBitmap(::subsystem_apex::BitmapInterface *pbitmap, const ::int_point & point, const ::int_rectangle & rectangle)
+   void Graphics::drawBitmap(::innate_subsystem::BitmapInterface *pbitmap, const ::int_point & point, const ::int_rectangle & rectangle)
    {
 
-      auto pbitmapWin32 = pbitmap->impl<::innate_subsystem_win32::Bitmap>();
+      auto pbitmapWin32 = pbitmap->impl<::innate_subsystem_windows::Bitmap>();
 
       m_pdevicecontext->m_pgraphics->DrawImage(pbitmapWin32->m_pbitmap,
          point.x, point.y,
@@ -397,6 +397,6 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
    }
 
    
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 

@@ -7,7 +7,7 @@
 #include "acme/operating_system/windows/user.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 

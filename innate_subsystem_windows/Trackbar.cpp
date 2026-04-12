@@ -24,7 +24,7 @@
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "Trackbar.h"
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    Trackbar::Trackbar()
    {
@@ -49,4 +49,4 @@ namespace innate_subsystem_win32
    {
       return (long)SendMessage(m_hwnd, TBM_GETPOS, 0, 0);
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

@@ -25,7 +25,7 @@
 #include "ScrollBar.h"
 // namespace windows
 // {
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    ScrollBar::ScrollBar()
    : //m_hwnd(0),
@@ -277,5 +277,5 @@ namespace innate_subsystem_win32
    {
       return GetSystemMetrics(SM_CXHSCROLL);
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 //} // namespace windows

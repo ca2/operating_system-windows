@@ -30,7 +30,7 @@
 
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       Service *Service::g_service = 0;
 
@@ -159,4 +159,4 @@ namespace subsystem_win32
          return SetServiceStatus(m_statusHandle, &m_status) == TRUE;
       }
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

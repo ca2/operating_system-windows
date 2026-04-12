@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "WindowsRegistry.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    WindowsRegistry::WindowsRegistry()
    {
@@ -45,4 +45,4 @@ namespace subsystem_win32
    {
       return HKEY_LOCAL_MACHINE;
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows

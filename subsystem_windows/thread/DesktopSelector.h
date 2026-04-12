@@ -25,14 +25,14 @@
 #pragma once
 
 #include "subsystem/thread/DesktopSelector.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
 
-   class CLASS_DECL_SUBSYSTEM_WIN32 DesktopSelector :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS DesktopSelector :
    virtual public ::subsystem::implementation<::subsystem::DesktopSelectorInterface>
    {
    public:
@@ -101,4 +101,4 @@ namespace subsystem_win32
    };
 
    ////__DESKTOPSELECTOR_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows

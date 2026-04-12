@@ -10,6 +10,156 @@
     <ClInclude Include="_common_header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="subsystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="node\_.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\AnonymousPipe.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\AnonymousPipeFactory.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\ApplicationCrashEvents.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\AutoImpersonator.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Clipboard.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\CommandLineArguments.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\CtrlAltDelSimulator.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\CurrentConsoleProcess.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Cursor.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Displays.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\DynamicLibrary.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\EmulatedAnonymousPipeFactory.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\File.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Impersonator.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\InputInjector.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Keyboard.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\LocalOperatingAmbientApplication.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\NamedPipe.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\OperatingSystemApplication.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\OperatingSystemHook.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\ParentProcess.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Pipe.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\PipeClient.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\PipeImpersonatedThread.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\PipeServer.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Process.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\ProcessCommandLine.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\ProcessHandle.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\resource.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Screen.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Service.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\ServiceControlManagerClient.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\SharedMemory.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Shell.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\SystemInformation.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\ThemeLib.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\UipiControl.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\VersionInfo.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\WindowsEvent.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\WindowsEventEx.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\WindowsRegistry.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\WindowsRegistryKey.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\WinHandles.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\WinStaLibrary.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\WinTimeMillis.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Workstation.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\WsaStartup.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\WTS.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -23,6 +173,9 @@
     </Filter>
     <Filter Include="Source Files\node">
       <UniqueIdentifier>{812e37d0-2220-477e-b0f6-c3e736b01d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\node">
+      <UniqueIdentifier>{a02884bb-2992-41b4-834b-313502bf876d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +194,9 @@
     <ClCompile Include="subsystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="resource_loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="node\_.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
@@ -56,6 +212,9 @@
     <ClCompile Include="node\Clipboard.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
+    <ClCompile Include="node\CommandLineArguments.cpp">
+      <Filter>Source Files\node</Filter>
+    </ClCompile>
     <ClCompile Include="node\CtrlAltDelSimulator.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
@@ -63,9 +222,6 @@
       <Filter>Source Files\node</Filter>
     </ClCompile>
     <ClCompile Include="node\Cursor.cpp">
-      <Filter>Source Files\node</Filter>
-    </ClCompile>
-    <ClCompile Include="node\DibSection.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
     <ClCompile Include="node\Displays.cpp">
@@ -89,7 +245,7 @@
     <ClCompile Include="node\Keyboard.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
-    <ClCompile Include="node\LocalWindowsApplication.cpp">
+    <ClCompile Include="node\LocalOperatingSystemApplication.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
     <ClCompile Include="node\NamedPipe.cpp">
@@ -152,9 +308,6 @@
     <ClCompile Include="node\VersionInfo.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
-    <ClCompile Include="node\WindowsCommandLineArguments.cpp">
-      <Filter>Source Files\node</Filter>
-    </ClCompile>
     <ClCompile Include="node\WindowsEvent.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
@@ -184,9 +337,6 @@
     </ClCompile>
     <ClCompile Include="node\WTS.cpp">
       <Filter>Source Files\node</Filter>
-    </ClCompile>
-    <ClCompile Include="resource_loader.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

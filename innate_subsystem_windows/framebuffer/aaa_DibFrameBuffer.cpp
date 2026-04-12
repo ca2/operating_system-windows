@@ -25,7 +25,7 @@
 #include "DibFrameBuffer.h"
 //#include "util/Exception.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    DibFrameBuffer::DibFrameBuffer()
    : m_dibSection(0)
@@ -43,12 +43,12 @@ namespace innate_subsystem_win32
       m_dibSection->setTargetDC(targetDC);
    }
 
-   bool DibFrameBuffer::assignProperties(const ::subsystem_apex::PixelFormat &srcFrameBuffer)
+   bool DibFrameBuffer::assignProperties(const ::innate_subsystem::PixelFormat &srcFrameBuffer)
    {
       throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::assignProperties() function."));
    }
 
-   bool DibFrameBuffer::clone(const ::subsystem_apex::PixelFormat &srcFrameBuffer)
+   bool DibFrameBuffer::clone(const ::innate_subsystem::PixelFormat &srcFrameBuffer)
    {
       throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::clone() function."));
    }
@@ -63,23 +63,23 @@ namespace innate_subsystem_win32
       m_fb.fillRect(dstRect, color);
    }
 
-   bool DibFrameBuffer::isEqualTo(const ::subsystem_apex::PixelFormat &frameBuffer)
+   bool DibFrameBuffer::isEqualTo(const ::innate_subsystem::PixelFormat &frameBuffer)
    {
       return m_fb.isEqualTo(frameBuffer);
    }
 
-   bool DibFrameBuffer::copyFrom(const ::int_rectangle &dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+   bool DibFrameBuffer::copyFrom(const ::int_rectangle &dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                                  int srcX, int srcY)
    {
       return m_fb.copyFrom(dstRect, srcFrameBuffer, srcX, srcY);
    }
 
-   bool DibFrameBuffer::copyFrom(const ::subsystem_apex::PixelFormat &srcFrameBuffer, int srcX, int srcY)
+   bool DibFrameBuffer::copyFrom(const ::innate_subsystem::PixelFormat &srcFrameBuffer, int srcX, int srcY)
    {
       return m_fb.copyFrom(srcFrameBuffer, srcX, srcY);
    }
 
-   bool DibFrameBuffer::overlay(const ::int_rectangle &dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+   bool DibFrameBuffer::overlay(const ::int_rectangle &dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                                 int srcX, int srcY, const char *andMask)
    {
       return m_fb.overlay(dstRect, srcFrameBuffer, srcX, srcY, andMask);
@@ -90,7 +90,7 @@ namespace innate_subsystem_win32
       m_fb.move(dstRect, srcX, srcY);
    }
 
-   bool DibFrameBuffer::cmpFrom(const ::int_rectangle &dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+   bool DibFrameBuffer::cmpFrom(const ::int_rectangle &dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                                 const int srcX, const int srcY)
    {
       return m_fb.cmpFrom(dstRect, srcFrameBuffer, srcX, srcY);
@@ -111,12 +111,12 @@ namespace innate_subsystem_win32
       throw Exception(_T("This function is deprecated"));
    }
 
-   void DibFrameBuffer::setEmptyPixelFmt(const ::subsystem_apex::PixelFormat &pf)
+   void DibFrameBuffer::setEmptyPixelFmt(const ::innate_subsystem::PixelFormat &pf)
    {
       throw Exception(_T("This function is deprecated"));
    }
 
-   void DibFrameBuffer::setPropertiesWithoutResize(const ::int_size &newDim, const ::subsystem_apex::PixelFormat &pf)
+   void DibFrameBuffer::setPropertiesWithoutResize(const ::int_size &newDim, const ::innate_subsystem::PixelFormat &pf)
    {
       throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::setPropertiesWithoutResize() function."));
    }
@@ -126,7 +126,7 @@ namespace innate_subsystem_win32
       return m_fb.getDimension();
    }
 
-   bool DibFrameBuffer::setPixelFormat(const ::subsystem_apex::PixelFormat &pixelFormat)
+   bool DibFrameBuffer::setPixelFormat(const ::innate_subsystem::PixelFormat &pixelFormat)
    {
       throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::setPixelFormat() function."));
    }
@@ -136,12 +136,12 @@ namespace innate_subsystem_win32
       return m_fb.getPixelFormat();
    }
 
-   bool DibFrameBuffer::setProperties(const ::int_size &newDim, const ::subsystem_apex::PixelFormat &pixelFormat)
+   bool DibFrameBuffer::setProperties(const ::int_size &newDim, const ::innate_subsystem::PixelFormat &pixelFormat)
    {
       throw Exception(_T("Wrong: You shouln't use this variant of the DibFrameBuffer::setProperties() function."));
    }
 
-   bool DibFrameBuffer::setProperties(const ::int_rectangle &dimByRect, const ::subsystem_apex::PixelFormat &pixelFormat)
+   bool DibFrameBuffer::setProperties(const ::int_rectangle &dimByRect, const ::innate_subsystem::PixelFormat &pixelFormat)
    {
       throw Exception(_T("Wrong: You shouln't use this variant of the DibFrameBuffer::setProperties() function."));
    }
@@ -206,7 +206,7 @@ namespace innate_subsystem_win32
    }
 
    void DibFrameBuffer::setProperties(const ::int_size &newDim,
-                                      const ::subsystem_apex::PixelFormat &pixelFormat,
+                                      const ::innate_subsystem::PixelFormat &pixelFormat,
                                       HWND compatibleWindow)
    {
       m_fb.setPropertiesWithoutResize(newDim, pixelFormat);
@@ -215,7 +215,7 @@ namespace innate_subsystem_win32
    }
 
    void *DibFrameBuffer::updateDibSection(const ::int_size &newDim,
-                                         const ::subsystem_apex::PixelFormat &pixelFormat,
+                                         const ::innate_subsystem::PixelFormat &pixelFormat,
                                          HWND compatibleWindow)
    {
       releaseDibSection();
@@ -238,4 +238,4 @@ namespace innate_subsystem_win32
          throw Exception(_T("Can't set target DC because it is not initialized a DIB section yet"));
       }
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

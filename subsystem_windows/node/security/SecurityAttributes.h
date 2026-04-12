@@ -25,13 +25,13 @@
 
 
 #include "subsystem/node/security/SecurityAttributes.h"
-#include "subsystem_win32/node/security/SecurityIdentifier.h"
-#include "subsystem_win32/node/security/SecurityDescriptor.h"
+#include "subsystem_windows/node/security/SecurityIdentifier.h"
+#include "subsystem_windows/node/security/SecurityDescriptor.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
-      class CLASS_DECL_SUBSYSTEM_WIN32 SecurityAttributes :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS SecurityAttributes :
       virtual  public ::subsystem::implementation<::subsystem::SecurityAttributesInterface>
       {
       public:
@@ -65,5 +65,5 @@ namespace subsystem_win32
       };
 
       //// __SECURITYATTRIBUTES_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 

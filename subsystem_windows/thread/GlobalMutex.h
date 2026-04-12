@@ -27,17 +27,17 @@
 
 #include "subsystem/Exception.h"
 #include "subsystem/thread/GlobalMutex.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    /**
     * Global mutex (allows to use mutex between separate processes).
     *
     * @author yuri, enikey.
     */
-   class CLASS_DECL_SUBSYSTEM_WIN32 GlobalMutex :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS GlobalMutex :
       virtual public ::subsystem::implementation<::subsystem::GlobalMutexInterface>
    {
    public:
@@ -77,4 +77,4 @@ namespace subsystem_win32
    };
 
    //// __GLOBALMUTEX_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows

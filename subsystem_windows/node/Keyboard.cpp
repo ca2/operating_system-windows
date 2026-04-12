@@ -25,7 +25,7 @@
 #include "Keyboard.h"
 #include "subsystem/node/SystemException.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    void Keyboard::getState(BYTE state[256])
       {
@@ -46,7 +46,7 @@ namespace subsystem_win32
          return (GetAsyncKeyState(vkCode) & 0x8000) != 0;
       }
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 

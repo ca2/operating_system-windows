@@ -33,7 +33,7 @@
 // Abstract tooltip class
 //
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
@@ -58,7 +58,7 @@ namespace innate_subsystem_win32
 
     //#endif
 
-}// namespace innate_subsystem_win32
+}// namespace innate_subsystem_windows
 
 
 

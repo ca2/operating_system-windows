@@ -26,11 +26,11 @@
 // #include "StringFilter.h"
 // namespace windows
 // {
-//    namespace innate_subsystem_win32
+//    namespace innate_subsystem_windows
 //    {
 //       bool StringFilter::isStringCorrect(const TCHAR *string)
 //       {
 //          return true;
 //       }
-//    } // namespace innate_subsystem_win32
+//    } // namespace innate_subsystem_windows
 // } // namespace windows

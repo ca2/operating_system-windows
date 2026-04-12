@@ -22,13 +22,13 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "WindowsEventEx.h"
 #include "subsystem/Exception.h"
 #include <Aclapi.h>
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    WindowsEventEx::WindowsEventEx(const ::scoped_string & scopedstrName)
    : WindowsEvent(scopedstrName)
@@ -54,6 +54,6 @@ namespace subsystem_win32
          throw ::subsystem::Exception(errMess);
           }
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

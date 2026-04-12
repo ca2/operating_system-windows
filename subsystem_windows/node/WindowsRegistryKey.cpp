@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "WindowsRegistryKey.h"
 //#include <vector>
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    WindowsRegistryKey::WindowsRegistryKey(HKEY rootKey, const ::scoped_string & scopedstrEntry,
                             bool createIfNotExists, SECURITY_ATTRIBUTES *sa)
@@ -370,6 +370,6 @@ namespace subsystem_win32
 
       return true;
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

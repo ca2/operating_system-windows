@@ -31,12 +31,12 @@
 //#include "TabContainer.h"
 
 #include "innate_subsystem/TabControl.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 TabControl : public window_implementation<subsystem_apex::TabControlInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS TabControl : public window_implementation<innate_subsystem::TabControlInterface>
    {
    public:
       TabControl();
@@ -46,11 +46,11 @@ namespace innate_subsystem_win32
       // Tab access members
       //
 
-      subsystem_apex::TabContainer &getTabs() override;
-      ::subsystem_apex::TabInterface *getTab(int index) override;
-      void addTab(subsystem_apex::DialogInterface *dialog, const char *caption) override;
+      innate_subsystem::TabContainer &getTabs() override;
+      ::innate_subsystem::TabInterface *getTab(int index) override;
+      void addTab(innate_subsystem::DialogInterface *dialog, const char *caption) override;
       void showTab(int index) override;
-      void showTab(subsystem_apex::DialogInterface *dialog) override;
+      void showTab(innate_subsystem::DialogInterface *dialog) override;
       void deleteAllTabs() override;
       void removeTab(int index) override;
 
@@ -67,6 +67,6 @@ namespace innate_subsystem_win32
       void adjustRect(::int_rectangle &rect) override;
 
    //protected:
-      ::subsystem_apex::TabContainer m_tabContainer;
+      ::innate_subsystem::TabContainer m_tabContainer;
    };
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

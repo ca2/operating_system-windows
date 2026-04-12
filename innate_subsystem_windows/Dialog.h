@@ -24,15 +24,15 @@
 #pragma once
 
 #include "innate_subsystem/Dialog.h"
-#include "innate_subsystem_win32/Control.h"
+#include "innate_subsystem_windows/Control.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
    class Dialog :
-      virtual public window_implementation<::subsystem_apex::DialogInterface>
+      virtual public window_implementation<::innate_subsystem::DialogInterface>
       //, public Control
    {
    public:
@@ -81,7 +81,7 @@ namespace innate_subsystem_win32
 
 
       // Method sets parent window
-      void setParent(::subsystem_apex::ControlInterface *ctrlParent) override;
+      void setParent(::innate_subsystem::ControlInterface *ctrlParent) override;
 
 
       // Set resource name for dialog
@@ -93,9 +93,9 @@ namespace innate_subsystem_win32
 
 
       // Return
-      ::subsystem_apex::ControlInterface *getControl() override; // { return this; }
+      ::innate_subsystem::ControlInterface *getControl() override; // { return this; }
       // Setup control by ID
-      void subclassControlById(::subsystem_apex::ControlInterface *pcontrol, unsigned int id) override;
+      void subclassControlById(::innate_subsystem::ControlInterface *pcontrol, unsigned int id) override;
 
 
       // Icon manipulation
@@ -144,7 +144,7 @@ namespace innate_subsystem_win32
       //#ifdef WINDOWS
 
 
-      bool onDrawItem(::wparam controlID, ::subsystem_apex::draw_item_t * pdrawitem) override;
+      bool onDrawItem(::wparam controlID, ::innate_subsystem::draw_item_t * pdrawitem) override;
 
 
       virtual bool _onDrawItem(::wparam controlID, LPDRAWITEMSTRUCT pdrawitem);
@@ -172,7 +172,7 @@ namespace innate_subsystem_win32
       char *m_resourceName; // Name of dialog resource
       DWORD m_resourceId; // Id of dialog resouce
       //Control m_ctrlThis;           // This dialog control
-      ::pointer<::innate_subsystem_win32::Control> m_pcontrolParent; // Parent dialog or NULL if no parent
+      ::pointer<::innate_subsystem_windows::Control> m_pcontrolParent; // Parent dialog or NULL if no parent
 
       bool m_isModal;
       bool m_isCreated;
@@ -183,7 +183,7 @@ namespace innate_subsystem_win32
 
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 
 

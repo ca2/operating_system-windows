@@ -21,7 +21,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-// From apex/subsystem_apex/resource_loader.h by
+// From apex/innate_subsystem/resource_loader.h by
 // camilo on 2026-04-11 04:43 <3ThomasBorregaardSørensen!!
 #pragma once
 
@@ -32,7 +32,7 @@
 //#include "winhdr.h"
 
 //#include "Singleton.h"
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    /**
     * Loader of resources from resource files linked with application.
@@ -40,8 +40,8 @@ namespace innate_subsystem_win32
     * Singleton without support of "lazy" initialization.
     */
    //class ResourceLoader : public Singleton<ResourceLoader>
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 resource_loader :
-      virtual public ::subsystem_apex::resource_loader
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS resource_loader :
+      virtual public ::innate_subsystem::resource_loader
    {
    public:
       /**
@@ -60,16 +60,16 @@ namespace innate_subsystem_win32
        * @param iconName icon name.
        * @return icon handle of 0 if cannot load icon.
        */
-      ::pointer < ::subsystem_apex::IconInterface >  loadStandardIcon(enum_cursor ecursor) override;
+      ::pointer < ::innate_subsystem::IconInterface >  loadStandardIcon(enum_cursor ecursor) override;
 
       /**
        * Loads icon from resources.
        * @param iconName icon name.
        * @return icon handle of 0 if cannot load icon.
        */
-      ::pointer < ::subsystem_apex::IconInterface > loadIconByIntResource(int iId) override;
+      ::pointer < ::innate_subsystem::IconInterface > loadIconByIntResource(int iId) override;
 
-      ::pointer < ::subsystem_apex::IconInterface > loadIcon(const char* iconName) override;
+      ::pointer < ::innate_subsystem::IconInterface > loadIcon(const char* iconName) override;
 
       // /**
       //  * Loads string from resources.
@@ -100,7 +100,7 @@ namespace innate_subsystem_win32
        * @return handle of cursor if it's loaded.
        */
       //HCURSOR loadCursor(unsigned int id);
-      virtual ::pointer < ::subsystem_apex::CursorInterface > loadCursor(unsigned int id) override;
+      virtual ::pointer < ::innate_subsystem::CursorInterface > loadCursor(unsigned int id) override;
 
    //protected:
       /**
@@ -110,7 +110,7 @@ namespace innate_subsystem_win32
    };
 
    //#endif
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 
 

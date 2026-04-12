@@ -22,12 +22,12 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "ServiceControlManagerClient.h"
 
 //#include "remoting/remoting_common/thread/Thread.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
 //}
@@ -253,4 +253,4 @@ namespace subsystem_win32
 
       return status.dwCurrentState;
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows

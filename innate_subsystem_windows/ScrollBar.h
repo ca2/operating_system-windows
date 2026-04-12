@@ -26,17 +26,17 @@
 //#define _SCROLL_BAR_H_
 
 #include "innate_subsystem/ScrollBar.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 
 
-namespace  innate_subsystem_win32
+namespace  innate_subsystem_windows
 {
    // ScrollBar class
    // This class doesn't create any window, it only show/hide that is already
    // contained in existed window.
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 ScrollBar :
-   virtual public window_implementation<subsystem_apex::ScrollBarInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ScrollBar :
+   virtual public window_implementation<innate_subsystem::ScrollBarInterface>
    {
    public:
       ScrollBar();

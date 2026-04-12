@@ -27,11 +27,11 @@
 
 #include "subsystem/node/Impersonator.h"
 #include "subsystem/node/SystemException.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
       /**
@@ -39,7 +39,7 @@ namespace subsystem_win32
       console session.
       @remark: can work only in XP and later cause it uses WTSQueryUserToken function.
       */
-      class CLASS_DECL_SUBSYSTEM_WIN32 Impersonator :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS Impersonator :
       virtual public ::subsystem::Impersonator
       {
       public:
@@ -78,6 +78,6 @@ namespace subsystem_win32
          ::pointer < ::subsystem::LogWriter > m_plogwriter;
       };
 
-}// namespace subsystem_win32
+}// namespace subsystem_windows
 
 

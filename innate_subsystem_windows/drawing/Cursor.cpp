@@ -28,7 +28,7 @@
 #include "DeviceContext.h"
 #include "Bitmap.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    Icon::Icon()
    : m_bHasOwnIcon(true), m_hicon(NULL)
@@ -70,15 +70,15 @@ namespace innate_subsystem_win32
    }
 
 
-   void Icon::initialize_icon(::subsystem_apex::IconInterface * picon)
+   void Icon::initialize_icon(::innate_subsystem::IconInterface * picon)
 
    {
       m_bHasOwnIcon = true;
-      ::cast < ::innate_subsystem_win32::Icon > piconWin32 = ::subsystem::get_implementation(picon);
+      ::cast < ::innate_subsystem_windows::Icon > piconWin32 = ::subsystem::get_implementation(picon);
       m_hicon = piconWin32->m_hicon;
    }
 
-   void Icon::initialize_icon(subsystem_apex::BitmapInterface *pbitmap)
+   void Icon::initialize_icon(innate_subsystem::BitmapInterface *pbitmap)
 
    {
       m_bHasOwnIcon = true;
@@ -90,7 +90,7 @@ namespace innate_subsystem_win32
       fromBitmap(pbitmap, &mask);
    }
 
-   void Icon::initialize_icon(::subsystem_apex::BitmapInterface *bitmap, ::subsystem_apex::BitmapInterface *mask)
+   void Icon::initialize_icon(::innate_subsystem::BitmapInterface *bitmap, ::innate_subsystem::BitmapInterface *mask)
    //:
    {
       m_bHasOwnIcon = true;
@@ -112,19 +112,19 @@ namespace innate_subsystem_win32
    //    return m_hicon;
    // }
 
-   void Icon::fromBitmap(::subsystem_apex::BitmapInterface *pbitmap, ::subsystem_apex::BitmapInterface *pbitmapMask)
+   void Icon::fromBitmap(::innate_subsystem::BitmapInterface *pbitmap, ::innate_subsystem::BitmapInterface *pbitmapMask)
    {
       ICONINFO ii;
 
       memset(&ii, 0, sizeof(ICONINFO));
 
-      auto pbitmapWin32 = pbitmap->impl<innate_subsystem_win32::Bitmap>();
-      auto pbitmapMaskWin32 = pbitmapMask->impl<innate_subsystem_win32::Bitmap>();
+      auto pbitmapWin32 = pbitmap->impl<innate_subsystem_windows::Bitmap>();
+      auto pbitmapMaskWin32 = pbitmapMask->impl<innate_subsystem_windows::Bitmap>();
 
       ii.hbmColor = (pbitmapWin32 != 0) ? pbitmapWin32->m_hbitmap : 0;
       ii.hbmMask = (pbitmapMaskWin32 != 0) ? pbitmapMaskWin32->m_hbitmap : 0;
 
       m_hicon = CreateIconIndirect(&ii);
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 

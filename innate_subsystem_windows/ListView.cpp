@@ -28,7 +28,7 @@
 #include "innate_subsystem/subsystem.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
    ListView::ListView() :
@@ -62,10 +62,10 @@ namespace innate_subsystem_win32
       addColumn(index, caption, width, LVCFMT_LEFT);
    }
 
-   subsystem_apex::ListViewItem ListView::getItem(int index)
+   innate_subsystem::ListViewItem ListView::getItem(int index)
    {
       // Output structure
-      subsystem_apex::ListViewItem item;
+      innate_subsystem::ListViewItem item;
       // Windows list view item concept
       LVITEM lvI;
       // Buffer for text data
@@ -199,9 +199,9 @@ namespace innate_subsystem_win32
       return getItem(index).tag;
    }
 
-   ::subsystem_apex::ListViewItem ListView::getSelectedItem()
+   ::innate_subsystem::ListViewItem ListView::getSelectedItem()
    {
-      ::subsystem_apex::ListViewItem item;
+      ::innate_subsystem::ListViewItem item;
       int index = getSelectedIndex();
       if (index == -1) {
          item.index = -1;
@@ -428,4 +428,4 @@ break;
 
    }
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

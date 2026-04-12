@@ -25,7 +25,7 @@
 #include "framework.h"
 #include "Tooltip.h"
 
-   namespace innate_subsystem_win32
+   namespace innate_subsystem_windows
    {
       Tooltip::Tooltip()
       {
@@ -34,4 +34,4 @@
       Tooltip::~Tooltip()
       {
       }
-   } // namespace innate_subsystem_win32
+   } // namespace innate_subsystem_windows

@@ -25,11 +25,11 @@
 #pragma once
 
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
-   class CLASS_DECL_SUBSYSTEM_WIN32 WinHandles
+   class CLASS_DECL_SUBSYSTEM_WINDOWS WinHandles
    {
    public:
       // This function allows to assign a handle for another process.
@@ -66,6 +66,6 @@ namespace subsystem_win32
    };
 
    //// __WINHANDLES_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

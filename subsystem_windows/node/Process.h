@@ -26,15 +26,15 @@
 
 
 #include "subsystem/node/Process.h"
-#include "subsystem_win32/node/ProcessHandle.h"
+#include "subsystem_windows/node/ProcessHandle.h"
 
 
-   namespace subsystem_win32
+   namespace subsystem_windows
    {
       /**
        * Enables you to start and stop local processes.
        */
-      class CLASS_DECL_SUBSYSTEM_WIN32 Process :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS Process :
       virtual public ::subsystem::Process
       {
       public:
@@ -125,7 +125,7 @@
          ::string m_path;
          ::string m_args;
 
-         ::pointer < ::subsystem_win32::ProcessHandle > m_pprocesshandle;
+         ::pointer < ::subsystem_windows::ProcessHandle > m_pprocesshandle;
          HANDLE m_hThread;
 
          HANDLE m_hStopWait;

@@ -28,7 +28,7 @@
 #include <string.h>
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    FrameBuffer::FrameBuffer(void)
    : m_buffer(0)
@@ -43,14 +43,14 @@ namespace innate_subsystem_win32
       }
    }
 
-   bool FrameBuffer::assignProperties(const ::subsystem_apex::FrameBuffer &srcFrameBuffer)
+   bool FrameBuffer::assignProperties(const ::innate_subsystem::FrameBuffer &srcFrameBuffer)
    {
       setProperties(srcFrameBuffer->getDimension(),
                     srcFrameBuffer->getPixelFormat());
       return resizeBuffer();
    }
 
-   bool FrameBuffer::clone(const ::subsystem_apex::FrameBuffer &srcFrameBuffer)
+   bool FrameBuffer::clone(const ::innate_subsystem::FrameBuffer &srcFrameBuffer)
    {
       if (!assignProperties(srcFrameBuffer)) {
          return false;
@@ -103,13 +103,13 @@ namespace innate_subsystem_win32
          memcpy(dstLinePtr, srcLinePtr, sizeLineRect);
    }
 
-   bool FrameBuffer::isEqualTo(const ::subsystem_apex::PixelFormat &frameBuffer)
+   bool FrameBuffer::isEqualTo(const ::innate_subsystem::PixelFormat &frameBuffer)
    {
       return m_dimension == frameBuffer->getDimension() &&
              m_pixelFormat == frameBuffer->getPixelFormat();
    }
 
-   void FrameBuffer::clipRect(const ::int_rectangle & dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+   void FrameBuffer::clipRect(const ::int_rectangle & dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                               const int srcX, const int srcY,
                               ::int_rectangle *dstClippedRect, ::int_rectangle *srcClippedRect)
    {
@@ -148,7 +148,7 @@ namespace innate_subsystem_win32
    }
 
    bool FrameBuffer::overlay(const ::int_rectangle & dstRect,
-                             const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+                             const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                              int srcX, int srcY,
                              const char *andMask)
    {
@@ -168,7 +168,7 @@ namespace innate_subsystem_win32
    }
 
    template<class PIXEL_T> bool FrameBuffer::overlayT(const ::int_rectangle & dstRect,
-                                                      const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+                                                      const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                                                       int srcX, int srcY,
                                                       const char *andMask)
    {
@@ -198,7 +198,7 @@ namespace innate_subsystem_win32
       return true;
    }
 
-   bool FrameBuffer::copyFrom(const ::int_rectangle & dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+   bool FrameBuffer::copyFrom(const ::int_rectangle & dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                               int srcX, int srcY)
    {
       if (m_pixelFormat != srcFrameBuffer->getPixelFormat()) {
@@ -235,13 +235,13 @@ namespace innate_subsystem_win32
       return true;
    }
 
-   bool FrameBuffer::copyFrom(const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+   bool FrameBuffer::copyFrom(const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                               int srcX, int srcY)
    {
       return copyFrom(m_dimension, srcFrameBuffer, srcX, srcY);
    }
 
-   bool FrameBuffer::copyFromRotated90(const ::int_rectangle & dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+   bool FrameBuffer::copyFromRotated90(const ::int_rectangle & dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                                        int srcX, int srcY)
    {
       if (m_pixelFormat.bitsPerPixel != 32 || m_pixelFormat != srcFrameBuffer->getPixelFormat())
@@ -291,7 +291,7 @@ namespace innate_subsystem_win32
       return true;
    }
 
-   bool FrameBuffer::copyFromRotated180(const ::int_rectangle & dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+   bool FrameBuffer::copyFromRotated180(const ::int_rectangle & dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                                        int srcX, int srcY)
    {
       if (m_pixelFormat.bitsPerPixel != 32 || m_pixelFormat != srcFrameBuffer->getPixelFormat())
@@ -343,7 +343,7 @@ namespace innate_subsystem_win32
       return true;
    }
 
-   bool FrameBuffer::copyFromRotated270(const ::int_rectangle & dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+   bool FrameBuffer::copyFromRotated270(const ::int_rectangle & dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                                        int srcX, int srcY)
    {
       if (m_pixelFormat.bitsPerPixel != 32 || m_pixelFormat != srcFrameBuffer->getPixelFormat())
@@ -393,7 +393,7 @@ namespace innate_subsystem_win32
       return true;
    }
 
-   bool FrameBuffer::cmpFrom(const ::int_rectangle & dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+   bool FrameBuffer::cmpFrom(const ::int_rectangle & dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                              const int srcX, const int srcY)
    {
       if (m_pixelFormat != srcFrameBuffer->getPixelFormat())
@@ -540,4 +540,4 @@ namespace innate_subsystem_win32
       }
       return true;
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

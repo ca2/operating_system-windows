@@ -27,18 +27,18 @@
 
 
 #include "innate_subsystem/ImagedButton.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 #include <uxtheme.h>
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
     //
     // Owner draw button, that displays button with image and text.
     //
 
     class ImagedButton : //public Control
-   virtual public ::subsystem::implementation<::subsystem_apex::ImagedButtonInterface>
+   virtual public ::subsystem::implementation<::innate_subsystem::ImagedButtonInterface>
     {
     public:
         ImagedButton();
@@ -54,8 +54,8 @@ namespace innate_subsystem_win32
         virtual void setWindow(const ::operating_system::window & window) override;
 
         virtual void _setHICON(HICON hicon, const ::int_size & size);
-        //virtual void setIcon(::subsystem_apex::IconInterface * picon, const ::int_size & size, int flags, int iInitialSize = 1, int iGrow = 1) override;
-       virtual void setIcon(::subsystem_apex::IconInterface * picon, const ::int_size & size) override;
+        //virtual void setIcon(::innate_subsystem::IconInterface * picon, const ::int_size & size, int flags, int iInitialSize = 1, int iGrow = 1) override;
+       virtual void setIcon(::innate_subsystem::IconInterface * picon, const ::int_size & size) override;
 
     //private:
 
@@ -87,7 +87,7 @@ namespace innate_subsystem_win32
          //Icon to display
 
 
-      ::pointer < ::innate_subsystem_win32::Icon > m_picon;
+      ::pointer < ::innate_subsystem_windows::Icon > m_picon;
 
        ::int_size m_size;
       //int m_iconWidth;
@@ -98,6 +98,6 @@ namespace innate_subsystem_win32
    };
 
 //#endif
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 

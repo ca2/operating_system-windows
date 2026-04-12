@@ -27,7 +27,7 @@
 
 
 
-   namespace subsystem_win32
+   namespace subsystem_windows
    {
 
       File::File()
@@ -65,13 +65,13 @@
       }
 
 
-   } // namespace subsystem_win32
+   } // namespace subsystem_windows
 
 
-CLASS_DECL_SUBSYSTEM_WIN32 HANDLE as_HANDLE(::subsystem::FileInterface * pfile)
+CLASS_DECL_SUBSYSTEM_WINDOWS HANDLE as_HANDLE(::subsystem::FileInterface * pfile)
 {
 
-   ::cast < ::subsystem_win32::File > pwindowssubsystemfile = pfile;
+   ::cast < ::subsystem_windows::File > pwindowssubsystemfile = pfile;
 
    auto handle = pwindowssubsystemfile->m_handle;
 
@@ -79,7 +79,7 @@ CLASS_DECL_SUBSYSTEM_WIN32 HANDLE as_HANDLE(::subsystem::FileInterface * pfile)
 
 }
 
-CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::subsystem_win32::File * pfile)
+CLASS_DECL_SUBSYSTEM_WINDOWS bool is_ok(const ::subsystem_windows::File * pfile)
 {
 
    if (!::is_set(pfile))
@@ -108,7 +108,7 @@ CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::subsystem_win32::File * pfile)
 }
 
 
-CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::pointer < ::subsystem_win32::File > & pfile)
+CLASS_DECL_SUBSYSTEM_WINDOWS bool is_ok(const ::pointer < ::subsystem_windows::File > & pfile)
 {
 
    return ::is_ok(pfile.m_p);

@@ -22,15 +22,15 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "Pipe.h"
 #include "subsystem/Exception.h"
-#include "subsystem_win32/node/File.h"
+#include "subsystem_windows/node/File.h"
 #include <crtdbg.h>
 //#include "remoting/remoting_common/win_system/Environment.h"
 //#include "remoting/remoting_common/thread/critical_section_lock.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       // Pipe::Pipe(unsigned int maxPortionSize)
       // : m_totalRead(0),
@@ -193,5 +193,5 @@ namespace subsystem_win32
             throw ::io_exception(error_io, "Invalid pipe handle");
          }
       }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 

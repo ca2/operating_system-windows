@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "WindowsEvent.h"
 #include "subsystem/Exception.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       WindowsEvent::WindowsEvent(const ::scoped_string & scopedstrName)
       {
@@ -61,6 +61,6 @@ namespace subsystem_win32
             WaitForSingleObject(m_hEvent, millis);
          }
       }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "WsaStartup.h"
 #include "subsystem/Exception.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    WsaStartup::WsaStartup(BYTE minorVer, BYTE majorVer)
    {
@@ -40,5 +40,5 @@ namespace subsystem_win32
    {
       WSACleanup();
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 

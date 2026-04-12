@@ -21,7 +21,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-// From apex/subsystem_apex/resource_loader.cpp by
+// From apex/innate_subsystem/resource_loader.cpp by
 // camilo on 2026-04-11 04:44 <3ThomasBorregaardSørensen!!
 
 #include "framework.h"
@@ -33,7 +33,7 @@
 
 // #include aaa_<crtdbg.h>
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
    //resource_loader::resource_loader(HINSTANCE appInst)
@@ -44,10 +44,10 @@ namespace innate_subsystem_win32
    resource_loader::~resource_loader()
    {}//h
 
-   ::pointer < subsystem_apex::IconInterface > resource_loader::loadStandardIcon(enum_cursor ecursor)
+   ::pointer < innate_subsystem::IconInterface > resource_loader::loadStandardIcon(enum_cursor ecursor)
    {
 
-      auto picon = create_newø<::innate_subsystem_win32::Icon>();
+      auto picon = create_newø<::innate_subsystem_windows::Icon>();
 
       auto lpcwsz = (LPCWSTR)::windows::get_system_cursor(ecursor);
       //return LoadIcon(NULL, iconName);
@@ -66,10 +66,10 @@ namespace innate_subsystem_win32
       return picon;
    }
 
-   ::pointer < subsystem_apex::IconInterface > resource_loader::loadIcon(const char* iconName)
+   ::pointer < innate_subsystem::IconInterface > resource_loader::loadIcon(const char* iconName)
    {
       //return LoadIcon(m_appInstance, iconName);
-      auto picon = create_newø<::innate_subsystem_win32::Icon>();
+      auto picon = create_newø<::innate_subsystem_windows::Icon>();
       //return LoadIcon(NULL, iconName);
       if ((::iptr)iconName < 65536)
       {
@@ -147,10 +147,10 @@ namespace innate_subsystem_win32
    //   return LoadCursor(0, id);
    //}
 
-   ::pointer <subsystem_apex::CursorInterface> resource_loader::loadCursor(unsigned int id)
+   ::pointer <innate_subsystem::CursorInterface> resource_loader::loadCursor(unsigned int id)
    {
       //return LoadCursor(m_appInstance, iconName);
-      auto pcursor = create_newø<::innate_subsystem_win32::Cursor>();
+      auto pcursor = create_newø<::innate_subsystem_windows::Cursor>();
       //return LoadCursor(NULL, iconName);
       //if ((::iptr)id < 65536)
       //{
@@ -168,7 +168,7 @@ namespace innate_subsystem_win32
    }
 
 
-} // namespace subsystem_apex
+} // namespace innate_subsystem
 
 
 

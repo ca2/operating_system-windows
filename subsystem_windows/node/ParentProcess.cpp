@@ -25,7 +25,7 @@
 #include "ParentProcess.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       ParentProcess::ParentProcess()
       : m_isInitialized(false)
@@ -85,4 +85,4 @@ namespace subsystem_win32
          }
          return result;
       }
-} // namespace subsystem_win32
+} // namespace subsystem_windows

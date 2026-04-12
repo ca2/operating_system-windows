@@ -27,7 +27,7 @@
 //#include "remoting/remoting_common/win_system/Environment.h"
 //#include "remoting/remoting_common/thread/critical_section_lock.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    AnonymousPipe::AnonymousPipe()  :
      m_neededToClose(true),
@@ -179,7 +179,7 @@ namespace subsystem_win32
    }
 
 
-}// namespace subsystem_win32
+}// namespace subsystem_windows
 
 
 

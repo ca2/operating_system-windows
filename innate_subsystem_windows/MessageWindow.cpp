@@ -27,7 +27,7 @@
 
 
 #define DEFAULT_WINDOW_CLASS_NAME "WindowClass"
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    MessageWindow::MessageWindow(const HINSTANCE hinst,
                                 const TCHAR *windowClassName,
@@ -124,4 +124,4 @@ namespace innate_subsystem_win32
 
       return RegisterClass(&wcWindowClass);
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

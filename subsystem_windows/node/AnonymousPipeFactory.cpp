@@ -22,14 +22,14 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "AnonymousPipeFactory.h"
-#include "subsystem_win32/node/security/SecurityAttributes.h"
+#include "subsystem_windows/node/security/SecurityAttributes.h"
 #include "AnonymousPipe.h"
 #include "File.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
 
@@ -66,10 +66,10 @@ namespace subsystem_win32
                                                ::pointer < ::subsystem::AnonymousPipe >&secondSide,
                                                bool secondSideIsInheritable)
       {
-         ::pointer < ::subsystem_win32::File > pfileFirstSideWrite;
-         ::pointer < ::subsystem_win32::File > pfileFirstSideRead;
-         ::pointer < ::subsystem_win32::File > pfileSecondSideWrite;
-         ::pointer < ::subsystem_win32::File > pfileSecondSideRead;
+         ::pointer < ::subsystem_windows::File > pfileFirstSideWrite;
+         ::pointer < ::subsystem_windows::File > pfileFirstSideRead;
+         ::pointer < ::subsystem_windows::File > pfileSecondSideWrite;
+         ::pointer < ::subsystem_windows::File > pfileSecondSideRead;
 
          construct_newø(pfileFirstSideWrite);
          construct_newø(pfileFirstSideRead);
@@ -81,7 +81,7 @@ namespace subsystem_win32
          pfileSecondSideWrite->m_bOwned = true;
          pfileSecondSideRead->m_bOwned = true;
 
-         ::subsystem_win32::SecurityAttributes secAttr;
+         ::subsystem_windows::SecurityAttributes secAttr;
          secAttr.setInheritable();
 
          try {
@@ -128,4 +128,4 @@ namespace subsystem_win32
          secondSide->initialize(this);
       }
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

@@ -22,13 +22,13 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "DynamicLibrary.h"
 
 //#include <crtdbg.h>
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    // DynamicLibrary::DynamicLibrary(const ::scoped_string & scopedstrFilename)
    // : m_module(null)
@@ -74,5 +74,5 @@ namespace subsystem_win32
 
       return ::GetProcAddress(m_module, procName);
    }
-}  // namespace subsystem_win32
+}  // namespace subsystem_windows
 

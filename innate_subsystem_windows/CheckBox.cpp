@@ -27,7 +27,7 @@
 #include "Window.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
   bool CheckBox::isChecked()
   {
@@ -41,4 +41,4 @@ namespace innate_subsystem_win32
      auto hwnd = ::as_HWND(operating_system_window());
      SendMessage(hwnd, BM_SETCHECK, (checked) ? 1 : 0, NULL);
   }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

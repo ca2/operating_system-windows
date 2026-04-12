@@ -26,14 +26,14 @@
 
 #include "subsystem/node/ProcessHandle.h"
 #include "subsystem/node/security/SecurityIdentifier.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
           // This class is a mere envelop for process handle that will automatically
       // closed at destructor calling.
-      class CLASS_DECL_SUBSYSTEM_WIN32 ProcessHandle :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS ProcessHandle :
       virtual public ::subsystem::ProcessHandle
       {
       public:
@@ -61,4 +61,4 @@ namespace subsystem_win32
          //private:
          HANDLE m_hProcess;
       };
-} //namespace subsystem_win32
+} //namespace subsystem_windows

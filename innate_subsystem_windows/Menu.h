@@ -28,14 +28,14 @@
 
 
 #include "innate_subsystem/Menu.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Menu :
-      virtual public ::subsystem::implementation<subsystem_apex::MenuInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Menu :
+      virtual public ::subsystem::implementation<innate_subsystem::MenuInterface>
    {
       public:
       Menu();
@@ -43,8 +43,8 @@ namespace innate_subsystem_win32
 
       void * _HMENU() override;
       void _setHMENU(void *pHMENU) override;
-      bool getWindowMenu(subsystem_apex::WindowInterface * pwindow) override;
-      void getSystemMenu(subsystem_apex::WindowInterface * pwindow) override;
+      bool getWindowMenu(innate_subsystem::WindowInterface * pwindow) override;
+      void getSystemMenu(innate_subsystem::WindowInterface * pwindow) override;
       void create() override;
       bool loadMenu(const char * lpMenuName) override;
       void createPopupMenu() override;
@@ -88,7 +88,7 @@ namespace innate_subsystem_win32
 
 
 
-} //  namespace innate_subsystem_win32
+} //  namespace innate_subsystem_windows
 
 
 

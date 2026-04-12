@@ -7,21 +7,21 @@
 #pragma once
 
 
-#include "subsystem/subsystem.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_bsd_sockets/subsystem.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
 
-   class CLASS_DECL_SUBSYSTEM_WIN32 subsystem :
-      virtual public ::subsystem_sockets_bsd::subsystem
+   class CLASS_DECL_SUBSYSTEM_WINDOWS subsystem :
+      virtual public ::subsystem_bsd_sockets::subsystem
    {
    public:
 
 
-      static ::subsystem_win32::subsystem *            s_p;
+      static ::subsystem_windows::subsystem *            s_p;
       // ::pointer < ::subsystem::string_table >     m_pstringtable;
       // ::pointer < ::subsystem::resource_loader >     m_presourceloader;
       // ::pointer < ::subsystem::Registry >     m_pregistry;
@@ -46,25 +46,20 @@ namespace subsystem_win32
       bool EncryptData(const ::string& input, ::memory & output) override;
       bool DecryptData(const memory & input, ::string& output) override;
 
-      int get_last_socket_error() override;
-
-      ::string get_socket_error_message_text(int iError) override;
-
-      ::pointer < ::subsystem::SocketAddressIPv4Interface > resolve_ip4_address(const ::scoped_string & scopedstrHost, unsigned short port) override;
 
 
    };
 
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 
-inline ::subsystem_win32::subsystem * windows_subsystem()
+inline ::subsystem_windows::subsystem * windows_subsystem()
 {
 
-   return ::subsystem_win32::subsystem::s_p;
+   return ::subsystem_windows::subsystem::s_p;
 
 }
 

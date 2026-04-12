@@ -25,11 +25,11 @@
 
 
 #include "subsystem/node/security/SecurityDescriptor.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include <AccCtrl.h>
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
           /**
        * Contains the security information associated with an object.
@@ -85,4 +85,4 @@ namespace subsystem_win32
          SECURITY_DESCRIPTOR m_sd;
       };
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

@@ -28,10 +28,10 @@
 
 
 #include "subsystem/node/security/SecurityIdentifier.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       // /**
       //  * Top-level authority of a security identifier (SID).
@@ -134,4 +134,4 @@ namespace subsystem_win32
          SID *m_sid;
       };
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

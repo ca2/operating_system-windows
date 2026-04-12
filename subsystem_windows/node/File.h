@@ -26,12 +26,12 @@
 
 
 #include "subsystem/node/File.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
-   class CLASS_DECL_SUBSYSTEM_WIN32 File :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS File :
       virtual public ::subsystem::implementation<::subsystem::FileInterface>
    {
    public:
@@ -52,9 +52,9 @@ namespace subsystem_win32
 
    };
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
-CLASS_DECL_SUBSYSTEM_WIN32 HANDLE as_HANDLE(::subsystem::FileInterface * pfile);
-CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::subsystem_win32::File * pfile);
-CLASS_DECL_SUBSYSTEM_WIN32 bool is_ok(const ::pointer < ::subsystem_win32::File > & pfile);
+CLASS_DECL_SUBSYSTEM_WINDOWS HANDLE as_HANDLE(::subsystem::FileInterface * pfile);
+CLASS_DECL_SUBSYSTEM_WINDOWS bool is_ok(const ::subsystem_windows::File * pfile);
+CLASS_DECL_SUBSYSTEM_WINDOWS bool is_ok(const ::pointer < ::subsystem_windows::File > & pfile);

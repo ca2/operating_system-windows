@@ -22,12 +22,12 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "SharedMemory.h"
 #include "subsystem/Exception.h"
 #include <Aclapi.h>
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    SharedMemory::SharedMemory(const ::scoped_string & scopedstrName, size_t size)
    : m_hToMap(0),
@@ -119,6 +119,6 @@ namespace subsystem_win32
          throw ::subsystem::Exception(errMess);
       }
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

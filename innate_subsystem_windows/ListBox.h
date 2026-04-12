@@ -25,13 +25,13 @@
 #pragma once
 
 #include "innate_subsystem/ListBox.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 ListBox : public window_implementation<subsystem_apex::ListBoxInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ListBox : public window_implementation<innate_subsystem::ListBoxInterface>
    {
    public:
       ListBox();
@@ -53,7 +53,7 @@ namespace innate_subsystem_win32
       int getCount()override ;
       void clear()override ;
    };
-} // innate_subsystem_win32
+} // innate_subsystem_windows
 
    
    

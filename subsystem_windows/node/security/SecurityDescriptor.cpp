@@ -28,7 +28,7 @@
 #include <crtdbg.h>
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    SecurityDescriptor::SecurityDescriptor()
    {
@@ -76,4 +76,4 @@ namespace subsystem_win32
    {
       return &m_sd;
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows

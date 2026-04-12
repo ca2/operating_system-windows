@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(subsystem_win32 CXX)
+project(subsystem_windows CXX)
 
 
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
@@ -95,7 +95,8 @@ list(APPEND library_source
    node/InputInjector.h
    node/Keyboard.cpp
    node/Keyboard.h
-   node/LocalWindowsApplication.h
+   node/LocalOperatingSystemApplication.cpp
+   node/LocalOperatingSystemApplication.h
    #node/matter.txt
    node/NamedPipe.cpp
    node/NamedPipe.h

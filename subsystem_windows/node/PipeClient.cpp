@@ -22,14 +22,14 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "File.h"
 #include "PipeClient.h"
 #include "subsystem/node/SystemException.h"
 
-#include "subsystem_win32/node/NamedPipe.h"
+#include "subsystem_windows/node/NamedPipe.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    PipeClient::PipeClient()
    {
@@ -40,7 +40,7 @@ namespace subsystem_win32
       ::string pipeName;
       pipeName.formatf("\\\\.\\pipe\\{}", ::string(scopedstrName).c_str());
 
-      auto pfilePipe = create_newø< ::subsystem_win32::File>();
+      auto pfilePipe = create_newø< ::subsystem_windows::File>();
       HANDLE hPipe;
       hPipe = CreateFile(::wstring(pipeName),  // pipe name
                          GENERIC_READ |         // read and write access
@@ -70,7 +70,7 @@ namespace subsystem_win32
          throw ::subsystem::Exception(errMess);
                                    }
 
-      auto pnamedpipe = create_newø< ::subsystem_win32::NamedPipe>();
+      auto pnamedpipe = create_newø< ::subsystem_windows::NamedPipe>();
 
       pnamedpipe->initialize_named_pipe(pfilePipe, maxPortionSize, false);
 
@@ -78,4 +78,4 @@ namespace subsystem_win32
       return pnamedpipe;
    }
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

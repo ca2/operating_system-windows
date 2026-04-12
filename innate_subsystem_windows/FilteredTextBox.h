@@ -30,16 +30,16 @@
 
 
 #include "innate_subsystem/FilteredTextBox.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 //#include "BalloonTip.h"
 //#include "StringFilter.h"
 //#include "util/StringStorage.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 FilteredTextBox : 
-   virtual public window_implementation<subsystem_apex::FilteredTextBoxInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS FilteredTextBox : 
+   virtual public window_implementation<innate_subsystem::FilteredTextBoxInterface>
    {
    public:
       FilteredTextBox();
@@ -48,8 +48,8 @@ namespace innate_subsystem_win32
       // Override Control::setWindow method
       void setWindow(const ::operating_system::window & operatingsystemwindow) override;
       void setText(char *text) override;
-      void setErrorBalloonTip(subsystem_apex::TooltipInterface *tip) override;
-      void setStringFilter(::subsystem_apex::StringFilter *filter) override;
+      void setErrorBalloonTip(innate_subsystem::TooltipInterface *tip) override;
+      void setStringFilter(::innate_subsystem::StringFilter *filter) override;
       LRESULT makeCheck() override;
 
    //protected:
@@ -63,9 +63,9 @@ namespace innate_subsystem_win32
    //protected:
       WNDPROC  m_wndprocOld;
       ::string  m_strText;
-      ::pointer < ::subsystem_apex::TooltipInterface > m_ptooltip;
-      ::pointer < ::subsystem_apex::StringFilter >m_pstringfilter;
+      ::pointer < ::innate_subsystem::TooltipInterface > m_ptooltip;
+      ::pointer < ::innate_subsystem::StringFilter >m_pstringfilter;
    };
 
    //#endif
-} //   namespace innate_subsystem_win32
+} //   namespace innate_subsystem_windows

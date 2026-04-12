@@ -22,7 +22,7 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "Impersonator.h"
 #include "WTS.h"
 #include "../subsystem.h"
@@ -33,7 +33,7 @@
 
 //#include "remoting/remoting_common/win_system/WTS.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
    // Impersonator::Impersonator(LogWriter *log)
@@ -126,4 +126,4 @@ namespace subsystem_win32
    }
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

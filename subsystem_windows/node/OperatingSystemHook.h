@@ -25,16 +25,16 @@
 
 
 #include "subsystem/node/OperatingSystemHook.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
-namespace subsystem_win32
+namespace subsystem_windows
    {
    // Class for intercepting keyboard on low level.
-   class CLASS_DECL_SUBSYSTEM_WIN32 OperatingSystemHook :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS OperatingSystemHook :
    virtual  public ::subsystem::implementation<::subsystem::OperatingSystemHookInterface>
    {
    public:
@@ -70,4 +70,4 @@ namespace subsystem_win32
    };
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

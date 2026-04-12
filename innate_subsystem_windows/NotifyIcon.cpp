@@ -30,7 +30,7 @@
 
 // namespace windows
 // {
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    NotifyIcon::NotifyIcon()
    //: NotifyIconWindow(), m_icon(0), m_visible(false)
@@ -99,7 +99,7 @@ namespace innate_subsystem_win32
       return m_visible;
    }
 
-   void NotifyIcon::setIcon(::subsystem_apex::IconInterface *picon)
+   void NotifyIcon::setIcon(::innate_subsystem::IconInterface *picon)
    {
       m_nid.uFlags = NIF_ICON;
       if (picon != 0) {
@@ -134,5 +134,5 @@ namespace innate_subsystem_win32
       m_nid.uTimeout = timeoutMillis;
       Shell_NotifyIcon(NIM_MODIFY, &m_nid);
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 //} // namespace windows

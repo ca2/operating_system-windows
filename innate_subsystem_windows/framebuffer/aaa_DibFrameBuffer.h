@@ -30,7 +30,7 @@
 #include "innate_subsystem/framebuffer/DibSection.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
    // This class is a wrapper for a FramBuffer and a DIB section.
@@ -45,16 +45,16 @@ namespace innate_subsystem_win32
       virtual void setColor(UINT8 reg, UINT8 green, UINT8 blue);
       virtual void fillRect(const ::int_rectangle &dstRect, UINT32 color);
 
-      virtual bool isEqualTo(const ::subsystem_apex::PixelFormat &frameBuffer);
+      virtual bool isEqualTo(const ::innate_subsystem::PixelFormat &frameBuffer);
 
-      virtual bool copyFrom(const ::int_rectangle &dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+      virtual bool copyFrom(const ::int_rectangle &dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                             int srcX, int srcY);
-      virtual bool copyFrom(const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+      virtual bool copyFrom(const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                             int srcX, int srcY);
-      virtual bool overlay(const ::int_rectangle &dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+      virtual bool overlay(const ::int_rectangle &dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                            int srcX, int srcY, const char *andMask);
       virtual void move(const ::int_rectangle &dstRect, const int srcX, const int srcY);
-      virtual bool cmpFrom(const ::int_rectangle &dstRect, const ::subsystem_apex::PixelFormat &srcFrameBuffer,
+      virtual bool cmpFrom(const ::int_rectangle &dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
                            const int srcX, const int srcY);
 
       virtual inline ::int_size getDimension() const;
@@ -69,7 +69,7 @@ namespace innate_subsystem_win32
       // The compatibleWindow handle can be zero then the function will take a DC of entire desktop.
       // Note that other function that can change properties will throw Exception().
       virtual void setProperties(const ::int_size &newDim,
-        const ::subsystem_apex::PixelFormat &pixelFormat, HWND compatibleWindow);
+        const ::innate_subsystem::PixelFormat &pixelFormat, HWND compatibleWindow);
 
       // This function changes the target DC. In default target DC is a DC that has been
       // got from a compatible window on object creation. This function can be call many times.
@@ -114,22 +114,22 @@ namespace innate_subsystem_win32
       // This section to reduce access to some function that have been inherited from the
       // FrameBuffer class and can't to be use in here. Also, if user code will to try
       // use this functions from a base class its will throw Exception.
-      virtual bool assignProperties(const ::subsystem_apex::PixelFormat &srcFrameBuffer);
-      virtual bool clone(const ::subsystem_apex::PixelFormat &srcFrameBuffer);
+      virtual bool assignProperties(const ::innate_subsystem::PixelFormat &srcFrameBuffer);
+      virtual bool clone(const ::innate_subsystem::PixelFormat &srcFrameBuffer);
       virtual bool setDimension(const ::int_size &newDim);
       virtual bool setDimension(const ::int_rectangle &rect);
       virtual void setEmptyDimension(const ::int_rectangle &dimByRect);
-      virtual bool setPixelFormat(const ::subsystem_apex::PixelFormat &pixelFormat);
-      virtual void setEmptyPixelFmt(const ::subsystem_apex::PixelFormat &pf);
-      virtual bool setProperties(const ::int_size &newDim, const ::subsystem_apex::PixelFormat &pixelFormat);
-      virtual bool setProperties(const ::int_rectangle &dimByRect, const ::subsystem_apex::PixelFormat &pixelFormat);
-      virtual void setPropertiesWithoutResize(const ::int_size &newDim, const ::subsystem_apex::PixelFormat &pf);
+      virtual bool setPixelFormat(const ::innate_subsystem::PixelFormat &pixelFormat);
+      virtual void setEmptyPixelFmt(const ::innate_subsystem::PixelFormat &pf);
+      virtual bool setProperties(const ::int_size &newDim, const ::innate_subsystem::PixelFormat &pixelFormat);
+      virtual bool setProperties(const ::int_rectangle &dimByRect, const ::innate_subsystem::PixelFormat &pixelFormat);
+      virtual void setPropertiesWithoutResize(const ::int_size &newDim, const ::innate_subsystem::PixelFormat &pf);
       virtual void setBuffer(void *newBuffer);
 
    private:
       // This function updates a DIB section in accord with the FrameBuffer
       void *updateDibSection(const ::int_size &newDim,
-        const ::subsystem_apex::PixelFormat &pixelFormat,
+        const ::innate_subsystem::PixelFormat &pixelFormat,
         HWND compatibleWindow);
       void releaseDibSection();
 
@@ -140,6 +140,6 @@ namespace innate_subsystem_win32
       DibSection *m_dibSection;
    };
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 //#endif // __DIBFRAMEBUFFER_H__

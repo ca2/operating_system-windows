@@ -25,11 +25,11 @@
 #pragma once
 
 #include "subsystem/thread/Thread.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 //#include "critical_section.h"
 //#include "DesktopSelector.h"
 
-namespace  subsystem_win32
+namespace  subsystem_windows
 {
    // /**
    //  * Thread priority enumeration.
@@ -52,7 +52,7 @@ namespace  subsystem_win32
     * @fixme some methods seems to be not thread-safe (that uses m_active member).
     * @fixme member of HDESK type in THREAD class???
     */
-   class CLASS_DECL_SUBSYSTEM_WIN32 Thread :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS Thread :
    virtual public ::subsystem::implementation<::subsystem::ThreadInterface>
    {
    public:
@@ -165,4 +165,4 @@ namespace  subsystem_win32
    };
 
    //// __THREAD_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows

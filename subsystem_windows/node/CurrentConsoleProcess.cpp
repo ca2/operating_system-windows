@@ -22,71 +22,73 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "CurrentConsoleProcess.h"
 
-#include "remoting/remoting_common/win_system/WinStaLibrary.h"
+#include "subsystem_windows/node/WinStaLibrary.h"
 //#include "remoting/remoting_common/win_system/Environment.h"
 #include "subsystem/node/SystemException.h"
-#include "remoting/remoting_common/win_system/Workstation.h"
-#include "remoting/remoting_common/win_system/WTS.h"
+#include "subsystem_windows/node/Workstation.h"
+#include "subsystem/windows/node/WTS.h"
 
-CurrentConsoleProcess::CurrentConsoleProcess(LogWriter *log, bool connectRdpSession, const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrArgs)
-: Process(scopedstrPath, scopedstrArgs),
-  m_log(log),
-  m_connectRdpSession(connectRdpSession)
+
+namespace subsystem_windows
 {
-}
 
-CurrentConsoleProcess::~CurrentConsoleProcess()
-{
-}
+   CurrentConsoleProcess::CurrentConsoleProcess(LogWriter *log, bool connectRdpSession,
+                                                const ::scoped_string &scopedstrPath,
+                                                const ::scoped_string &scopedstrArgs) :
+       Process(scopedstrPath, scopedstrArgs), m_log(log), m_connectRdpSession(connectRdpSession)
+   {
+   }
 
-void CurrentConsoleProcess::start()
-{
-  cleanup();
+   CurrentConsoleProcess::~CurrentConsoleProcess() {}
 
-  m_log->information("Try to start \"{} {}\" process",
-    m_path,
-    m_args);
+   void CurrentConsoleProcess::start()
+   {
+      cleanup();
 
-  DWORD uiAccess  = 1; // Nonzero enables UI control
-  PROCESS_INFORMATION pi;
-  STARTUPINFO sti;
-  getStartupInfo(&sti);
+      m_log->information("Try to start \"{} {}\" process", m_path, m_args);
 
-  m_log->debug("sti: cb = {}, hStdError = %p, hStdInput = %p,"
-             " hStdOutput = %p, dwFlags = %u",
-             (unsigned int)sti.cb,
-             (void *)sti.hStdError,
-             (void *)sti.hStdInput,
-             (void *)sti.hStdOutput,
-             (unsigned int)sti.dwFlags);
+      DWORD uiAccess = 1; // Nonzero enables UI control
+      PROCESS_INFORMATION pi;
+      STARTUPINFO sti;
+      getStartupInfo(&sti);
 
-  try {
-    HANDLE userToken = WTS::duplicateCurrentProcessUserToken(m_connectRdpSession, m_log);
+      m_log->debug("sti: cb = {}, hStdError = %p, hStdInput = %p,"
+                   " hStdOutput = %p, dwFlags = %u",
+                   (unsigned int)sti.cb, (void *)sti.hStdError, (void *)sti.hStdInput, (void *)sti.hStdOutput,
+                   (unsigned int)sti.dwFlags);
 
-    ::string commandLine = getCommandLineString();
+      try
+      {
+         HANDLE userToken = WTS::duplicateCurrentProcessUserToken(m_connectRdpSession, m_log);
 
-    m_log->debug("Try CreateProcessAsUser({} 0, {}, 0, 0, {}, NORMAL_PRIORITY_CLASS, 0, 0,"
-               " sti, pi)",
-               (void *)userToken, commandLine,
-               (int)m_handlesIsInherited);
-    if (CreateProcessAsUser(userToken, 0, (LPTSTR)::wstring(commandLine).c_str(),
-      0, 0, m_handlesIsInherited, NORMAL_PRIORITY_CLASS, 0, 0, &sti,
-      &pi) == 0) {
-        throw SystemException();
-    }
-    m_log->information("Created \"{}\" process", commandLine);
-    //
-    // FIXME: Leak.
-    //
-    CloseHandle(userToken);
-  } catch (SystemException &sysEx) {
-    m_log->error("Failed to start process with {} error", sysEx.getErrorCode());
-    throw;
-  }
+         ::string commandLine = getCommandLineString();
 
-  m_hThread = pi.hThread;
-  m_hProcess = pi.hProcess;
-}
+         m_log->debug("Try CreateProcessAsUser({} 0, {}, 0, 0, {}, NORMAL_PRIORITY_CLASS, 0, 0,"
+                      " sti, pi)",
+                      (void *)userToken, commandLine, (int)m_handlesIsInherited);
+         if (CreateProcessAsUser(userToken, 0, (LPTSTR)::wstring(commandLine).c_str(), 0, 0, m_handlesIsInherited,
+                                 NORMAL_PRIORITY_CLASS, 0, 0, &sti, &pi) == 0)
+         {
+            throw SystemException();
+         }
+         m_log->information("Created \"{}\" process", commandLine);
+         //
+         // FIXME: Leak.
+         //
+         CloseHandle(userToken);
+      }
+      catch (SystemException &sysEx)
+      {
+         m_log->error("Failed to start process with {} error", sysEx.getErrorCode());
+         throw;
+      }
+
+      m_hThread = pi.hThread;
+      m_hProcess = pi.hProcess;
+   }
+
+
+} // namespace subsystem_windows

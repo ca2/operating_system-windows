@@ -26,7 +26,7 @@
 #include "Tab.h"
 // namespace windows
 // {
-//    namespace innate_subsystem_win32
+//    namespace innate_subsystem_windows
 //    {
 //       Tab::Tab()
 //       : m_dialog(NULL)
@@ -46,5 +46,5 @@
 //             m_dialog->getControl()->setVisible(visible);
 //          }
 //       }
-//    } // namespace innate_subsystem_win32
+//    } // namespace innate_subsystem_windows
 // } // namespace windows

@@ -29,7 +29,7 @@
 #include "innate_subsystem/drawing/DeviceContext.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    // Bitmap::Bitmap(const ::int_size & size)
    // : m_bitmap(NULL)
@@ -90,20 +90,20 @@ namespace innate_subsystem_win32
       m_pbitmap= new  Gdiplus::Bitmap(size.cx, size.cy, PixelFormat32bppARGB);
    }
 
-   void Bitmap::initialize_bitmap(::subsystem_apex::DeviceContextInterface * pdevicecontext, const ::int_size & size)
+   void Bitmap::initialize_bitmap(::innate_subsystem::DeviceContextInterface * pdevicecontext, const ::int_size & size)
    {
       destroyGraphicsObject();
-      ::cast < ::innate_subsystem_win32::DeviceContext > pdevicecontextWin32 = ::subsystem::get_implementation(pdevicecontext);
+      ::cast < ::innate_subsystem_windows::DeviceContext > pdevicecontextWin32 = ::subsystem::get_implementation(pdevicecontext);
       //m_hbitmap = CreateCompatibleBitmap(pdevicecontextWin32->m_hdc, size.cx, size.cy);
       m_pbitmap = new Gdiplus::Bitmap(size.cx, size.cy, pdevicecontextWin32->m_pgraphics);
    }
 
-   void Bitmap::initialize_bitmap(::subsystem_apex::BitmapInterface * pbitmap)
+   void Bitmap::initialize_bitmap(::innate_subsystem::BitmapInterface * pbitmap)
    //: m_bitmap(bitmap)
    {
 
       destroyGraphicsObject();
-      ::cast < ::innate_subsystem_win32::Bitmap > pbitmapWin32 = ::subsystem::get_implementation(pbitmap);
+      ::cast < ::innate_subsystem_windows::Bitmap > pbitmapWin32 = ::subsystem::get_implementation(pbitmap);
       //m_hbitmap = pbitmapWin32->m_hbitmap;
       m_pbitmap = pbitmapWin32->m_pbitmap->Clone(0, 0,
          pbitmapWin32->m_pbitmap->GetWidth(), pbitmapWin32->m_pbitmap->GetHeight(),
@@ -155,6 +155,6 @@ namespace innate_subsystem_win32
       }
 
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 

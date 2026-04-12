@@ -25,10 +25,10 @@
 #pragma once
 
 #include "innate_subsystem/Control.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
@@ -37,7 +37,7 @@ namespace innate_subsystem_win32
    //
 
    class Control :
-      virtual public window_implementation<::subsystem_apex::ControlInterface>
+      virtual public window_implementation<::innate_subsystem::ControlInterface>
    {
    public:
 
@@ -79,7 +79,7 @@ namespace innate_subsystem_win32
       // Sets text vertical alignment
       //
 
-      void setTextVerticalAlignment(::subsystem_apex::VerticalAlignment align) override;
+      void setTextVerticalAlignment(::innate_subsystem::VerticalAlignment align) override;
 
 
       void setVisible(bool bVisible) override;
@@ -88,7 +88,7 @@ namespace innate_subsystem_win32
       // Returns text vertical alignment
       //
 
-      ::subsystem_apex::VerticalAlignment getTextVerticalAlignment() override;
+      ::innate_subsystem::VerticalAlignment getTextVerticalAlignment() override;
 
       //
       // Gets HWND associated with this control
@@ -173,7 +173,7 @@ namespace innate_subsystem_win32
    };
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 
 

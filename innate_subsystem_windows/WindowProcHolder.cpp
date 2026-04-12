@@ -24,7 +24,7 @@
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "WindowProcHolder.h"
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    WindowProcHolder::WindowProcHolder()
    {
@@ -52,4 +52,4 @@ namespace innate_subsystem_win32
 
       return r;
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

@@ -32,7 +32,7 @@
 #include "Window.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
    Dialog::Dialog()
@@ -178,7 +178,7 @@ void
       return !!IsWindow(m_hwnd);
    }
 
-   bool Dialog::onDrawItem(::wparam controlID, subsystem_apex::draw_item_t * pdrawitem)
+   bool Dialog::onDrawItem(::wparam controlID, innate_subsystem::draw_item_t * pdrawitem)
    {
       return TRUE;
    }
@@ -314,4 +314,4 @@ void
 
    }
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

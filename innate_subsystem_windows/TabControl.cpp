@@ -27,7 +27,7 @@
 #include "innate_subsystem/Tab.h"
 #include <commctrl.h>
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    TabControl::TabControl()
    {
@@ -38,7 +38,7 @@ namespace innate_subsystem_win32
       deleteAllTabs();
    }
 
-   subsystem_apex::TabInterface *TabControl::getTab(int index)
+   innate_subsystem::TabInterface *TabControl::getTab(int index)
    {
       if ((index < 0) || ((size_t)index > m_tabContainer.size() - 1)) {
          return NULL;
@@ -46,9 +46,9 @@ namespace innate_subsystem_win32
       return m_tabContainer[index];
    }
 
-   void TabControl::addTab(subsystem_apex::DialogInterface *dialog, const char *caption)
+   void TabControl::addTab(innate_subsystem::DialogInterface *dialog, const char *caption)
    {
-      auto ptab = create_newø<::subsystem_apex::Tab>();
+      auto ptab = create_newø<::innate_subsystem::Tab>();
       ptab->initialize_tab(dialog, caption);
       m_tabContainer.add(ptab);
       TCITEM tcitem = {0};
@@ -75,7 +75,7 @@ namespace innate_subsystem_win32
       getTab(index)->setVisible(true);
    }
 
-   void TabControl::showTab(subsystem_apex::DialogInterface *dialog)
+   void TabControl::showTab(innate_subsystem::DialogInterface *dialog)
    {
       for (size_t i = 0; i < m_tabContainer.size(); i++) {
          if (m_tabContainer[i]->getDialog() == dialog) {
@@ -124,4 +124,4 @@ namespace innate_subsystem_win32
       ::copy(&rect, &rc);
 
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

@@ -20,7 +20,7 @@ namespace win32
 
 
          class CLASS_DECL_ACME_WINDOWING_WIN32 windowing :
-            virtual public ::subsystem_win32::windowing
+            virtual public ::subsystem_windows::windowing
          {
          public:
 

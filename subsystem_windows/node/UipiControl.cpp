@@ -22,7 +22,7 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "UipiControl.h"
 //#include "Environment.h"
 #include "DynamicLibrary.h"
@@ -33,7 +33,7 @@
 #define MSGFLT_ADD 1
 #endif
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    typedef BOOL (WINAPI *SetFilterEx)(HWND hWnd,
                                       UINT scopedstrMessage,
@@ -100,4 +100,4 @@ namespace subsystem_win32
          m_plogwriter->information("The allowMessage() function call is ignored.");
       }
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows

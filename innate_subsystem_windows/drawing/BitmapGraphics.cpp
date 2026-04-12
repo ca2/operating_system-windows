@@ -29,7 +29,7 @@
 #include "DeviceContext.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    // BitmapGraphics::BitmapGraphics(DeviceContext *complatibleDC, const ::int_size & size)
    // : Graphics(complatibleDC), m_isPainting(false)
@@ -65,7 +65,7 @@ namespace innate_subsystem_win32
       //delete m_dc;
    }
 
-   void BitmapGraphics::initialize_bitmap_graphics(::subsystem_apex::DeviceContextInterface *pdevicecontextCompatible, const ::int_size & size)
+   void BitmapGraphics::initialize_bitmap_graphics(::innate_subsystem::DeviceContextInterface *pdevicecontextCompatible, const ::int_size & size)
 //   : Graphics(complatibleDC), m_isPainting(false)
    {
       constructø(m_pbitmap);
@@ -76,7 +76,7 @@ namespace innate_subsystem_win32
    }
 
 
-   ::subsystem_apex::BitmapInterface *BitmapGraphics::getBitmap()
+   ::innate_subsystem::BitmapInterface *BitmapGraphics::getBitmap()
    {
       return m_pbitmap;
    }
@@ -86,8 +86,8 @@ namespace innate_subsystem_win32
       _ASSERT(!m_isPainting);
 
       m_isPainting = true;
-      //auto pdevicecontextWin32 = this->impl< ::innate_subsystem_win32::DeviceContext>();
-      //auto pbitmapWin32 = m_pbitmap->impl< ::innate_subsystem_win32::Bitmap >();
+      //auto pdevicecontextWin32 = this->impl< ::innate_subsystem_windows::DeviceContext>();
+      //auto pbitmapWin32 = m_pbitmap->impl< ::innate_subsystem_windows::Bitmap >();
       m_pgraphicsobjectOldBitmap = device_context()->selectObject(m_pbitmap);
    }
 
@@ -96,7 +96,7 @@ namespace innate_subsystem_win32
       _ASSERT(m_isPainting);
 
       m_isPainting = false;
-      //auto pdevicecontextWin32 = this->impl< ::innate_subsystem_win32::DeviceContext>();
+      //auto pdevicecontextWin32 = this->impl< ::innate_subsystem_windows::DeviceContext>();
       device_context()->selectObject(m_pgraphicsobjectOldBitmap);
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

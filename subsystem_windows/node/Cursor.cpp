@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "Cursor.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       Cursor::Cursor()
       {
@@ -43,4 +43,4 @@ namespace subsystem_win32
          curPoint.y -= GetSystemMetrics(SM_YVIRTUALSCREEN);
          return ::int_point(curPoint.x, curPoint.y);
       }
-} // namespace subsystem_win32
+} // namespace subsystem_windows

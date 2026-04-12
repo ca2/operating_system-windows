@@ -28,15 +28,15 @@
 #include "subsystem/io/Channel.h"
 #include "subsystem/node/AnonymousPipe.h"
 #include "subsystem/node/Pipe.h"
-#include "subsystem_win32/node/File.h"
-#include "subsystem_win32/node/Pipe.h"
-#include "subsystem_win32/node/WindowsEvent.h"
+#include "subsystem_windows/node/File.h"
+#include "subsystem_windows/node/Pipe.h"
+#include "subsystem_windows/node/WindowsEvent.h"
 //#include "remoting/remoting_common/thread/LocalMutex.h"
 //#include "log_writer/LogWriter.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
-      class CLASS_DECL_SUBSYSTEM_WIN32 AnonymousPipe :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS AnonymousPipe :
       virtual public ::subsystem::implementation < ::subsystem::AnonymousPipeInterface >
           //,  virtual public Pipe
       {
@@ -112,8 +112,8 @@ namespace subsystem_win32
       //private:
          void checkPipeFile(::subsystem::FileInterface * pfile);
 
-         ::pointer< ::subsystem_win32::File > m_pfileWrite;
-         ::pointer< ::subsystem_win32::File > m_pfileRead;
+         ::pointer< ::subsystem_windows::File > m_pfileWrite;
+         ::pointer< ::subsystem_windows::File > m_pfileRead;
          bool m_neededToClose;
          unsigned int m_timeOut;
 
@@ -125,4 +125,4 @@ namespace subsystem_win32
       };
 
       //// __ANONYMOUSPIPE_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows

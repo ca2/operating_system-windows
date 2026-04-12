@@ -26,16 +26,16 @@
 
 
 #include "subsystem/node/DynamicLibrary.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 //#include "subsystem/Exception.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    /**
    Dynamic library class.
    */
-   class CLASS_DECL_SUBSYSTEM_WIN32 DynamicLibrary :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS DynamicLibrary :
    virtual public ::subsystem::implementation<::subsystem::DynamicLibraryInterface>
    {
    public:
@@ -66,5 +66,5 @@ namespace subsystem_win32
       HMODULE m_module;
    };
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 

@@ -28,18 +28,18 @@
 //#include "remoting/remoting_common/util/winhdr.h"
 #include "acme/prototype/collection/comparable_list.h"
 #include "subsystem/node/OperatingSystemApplication.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 //#include "remoting/remoting_common/thread/LocalMutex.h"
 //#include <list>
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       /**
        * Base Windows Application class.
        * Have hidden main window and main scopedstrMessage loop.
        */
-      class CLASS_DECL_SUBSYSTEM_WIN32 OperatingSystemApplication :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS OperatingSystemApplication :
       virtual public ::subsystem::implementation< ::subsystem::OperatingSystemApplicationInterface >
       {
       public:
@@ -134,4 +134,4 @@ namespace subsystem_win32
       };
 
       //// __WINDOWSAPPLICATION_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows

@@ -26,7 +26,7 @@
 
 //namespace windows
 //{
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
   Control::Control()
@@ -85,7 +85,7 @@ namespace innate_subsystem_win32
   // FIXME: Stub
   //
 
-  void Control::setTextVerticalAlignment(::subsystem_apex::VerticalAlignment align)
+  void Control::setTextVerticalAlignment(::innate_subsystem::VerticalAlignment align)
   {
   }
 
@@ -114,9 +114,9 @@ namespace innate_subsystem_win32
   // FIXME: Stub
   //
 
-  subsystem_apex::VerticalAlignment Control::getTextVerticalAlignment()
+  innate_subsystem::VerticalAlignment Control::getTextVerticalAlignment()
   {
-     return subsystem_apex::Left;
+     return innate_subsystem::Left;
   }
 
   // HWND Control::getWindow()
@@ -200,7 +200,7 @@ namespace innate_subsystem_win32
   //
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 
 //} // namespace windows

@@ -26,18 +26,18 @@
 
 
 #include "subsystem/node/Shell.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
 //#include "SystemException.h"
-namespace subsystem_win32
+namespace subsystem_windows
 {
       /**
        * Wrapper over WinAPI shell functions.
        *
        * @author enikey.
        */
-      class CLASS_DECL_SUBSYSTEM_WIN32 Shell :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS Shell :
       virtual public ::subsystem::implementation< ::subsystem::ShellInterface >
       {
       public:
@@ -70,4 +70,4 @@ namespace subsystem_win32
                           const ::scoped_string & scopedstrworkDirectory) override;
       };
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

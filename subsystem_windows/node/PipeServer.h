@@ -31,14 +31,14 @@
 //#include "remoting/remoting_common/thread/LocalMutex.h"
 
 //#include "DynamicLibrary.h"
-//#include "subsystem_win32/_common_header.h"
-#include "subsystem_win32/node/WindowsEvent.h"
-#include "subsystem_win32/node/security/SecurityAttributes.h"
+//#include "subsystem_windows/_common_header.h"
+#include "subsystem_windows/node/WindowsEvent.h"
+#include "subsystem_windows/node/security/SecurityAttributes.h"
 
 typedef BOOL(WINAPI* pGetNamedPipeClientProcessId)(HANDLE Pipe, PULONG ClientProcessId);
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    /**
     * Server fabric of pipes.
@@ -46,7 +46,7 @@ namespace subsystem_win32
     * @author yuri, enikey.
     * @fixme not thread-safe, undone, strange code inside.
     */
-   class CLASS_DECL_SUBSYSTEM_WIN32 PipeServer :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS PipeServer :
    virtual public ::particle
    {
    public:
@@ -54,7 +54,7 @@ namespace subsystem_win32
 
 
       //private:
-      static ::pointer < ::subsystem_win32::DynamicLibrary >  s_pdynamiclibraryKernel32;
+      static ::pointer < ::subsystem_windows::DynamicLibrary >  s_pdynamiclibraryKernel32;
       static pGetNamedPipeClientProcessId s_GetNamedPipeClientProcessId;
       static bool s_bInitialized;
 
@@ -63,8 +63,8 @@ namespace subsystem_win32
       ::string m_pipeName;
       WindowsEvent m_winEvent;
       DWORD m_milliseconds;
-      ::pointer < ::subsystem_win32::SecurityAttributes > m_psecurityattributes;
-      ::pointer < ::subsystem_win32::File > m_pfileServerPipe;
+      ::pointer < ::subsystem_windows::SecurityAttributes > m_psecurityattributes;
+      ::pointer < ::subsystem_windows::File > m_pfileServerPipe;
       //HANDLE m_serverPipe;
       unsigned int m_bufferSize;
 
@@ -132,6 +132,6 @@ namespace subsystem_win32
    };
 
    //// __PIPESERVER_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

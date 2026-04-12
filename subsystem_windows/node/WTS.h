@@ -27,16 +27,16 @@
 
 
 //#include "remoting/remoting_common/util/winhdr.h"
-//#include "subsystem_win32/_common_header.h"
+//#include "subsystem_windows/_common_header.h"
 
 //#include "remoting/remoting_common/thread/LocalMutex.h"
-//#include "subsystem_win32/node/DynamicLibrary.h"
+//#include "subsystem_windows/node/DynamicLibrary.h"
 //#include "acme/SystemException.h"
 //#include "log_writer/LogWriter.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include <WtsApi32.h>
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    typedef DWORD (WINAPI *pWTSGetActiveConsoleSessionId)(void);
    typedef BOOL (WINAPI *pWTSQueryUserToken)(ULONG SessionId, PHANDLE phToken);
@@ -80,13 +80,13 @@ namespace subsystem_win32
     *
     * @author enikey.
     */
-   class CLASS_DECL_SUBSYSTEM_WIN32 WTS :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS WTS :
     virtual public ::particle
    {
    public:
 
-       ::pointer < ::subsystem_win32::DynamicLibrary > m_pdynamiclibraryKernel32;
-       ::pointer < ::subsystem_win32::DynamicLibrary > m_pdynamiclibraryWtsApi32;
+       ::pointer < ::subsystem_windows::DynamicLibrary > m_pdynamiclibraryKernel32;
+       ::pointer < ::subsystem_windows::DynamicLibrary > m_pdynamiclibraryWtsApi32;
        pWTSGetActiveConsoleSessionId m_WTSGetActiveConsoleSessionId;
        pWTSQueryUserToken m_WTSQueryUserToken;
        pWTSQuerySessionInformation m_WTSQuerySessionInformation;
@@ -195,6 +195,6 @@ namespace subsystem_win32
    };
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

@@ -3,8 +3,8 @@
 #include "acme/_operating_system.h"
 
 
-CLASS_DECL_SUBSYSTEM_WIN32 int message_box_to_windows_message_box(::user::enum_message_box emessagebox);
-CLASS_DECL_SUBSYSTEM_WIN32 enum_dialog_result windows_message_box_result_to_dialog_result(int iResult);
+CLASS_DECL_SUBSYSTEM_WINDOWS int message_box_to_windows_message_box(::user::enum_message_box emessagebox);
+CLASS_DECL_SUBSYSTEM_WINDOWS enum_dialog_result windows_message_box_result_to_dialog_result(int iResult);
 
 
 namespace win32
@@ -36,7 +36,7 @@ namespace win32
                {
 
 
-                  //namespace subsystem_win32
+                  //namespace subsystem_windows
                   //{
 
 
@@ -73,7 +73,7 @@ namespace win32
             };
 
 
-         } // namespace subsystem_win32
+         } // namespace subsystem_windows
 
       //}
 

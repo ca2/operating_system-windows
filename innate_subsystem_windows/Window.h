@@ -32,7 +32,7 @@
 #define WM_REFLECT_NOTIFY_EX (105 + 0x2000 + WM_NOTIFY)
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
    struct windows_reflect_notify_t
@@ -59,8 +59,8 @@ namespace innate_subsystem_win32
       }
    };
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 notification_handler :
-   virtual public ::subsystem_apex::notification_handler
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS notification_handler :
+   virtual public ::innate_subsystem::notification_handler
    {
    public:
 
@@ -87,8 +87,8 @@ namespace innate_subsystem_win32
    };
 
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Window :
-      virtual public ::subsystem::implementation< ::subsystem_apex::WindowInterface >,
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Window :
+      virtual public ::subsystem::implementation< ::innate_subsystem::WindowInterface >,
       virtual public ::windows::window,
       virtual public notification_handler
    {
@@ -126,19 +126,19 @@ namespace innate_subsystem_win32
       HDC m_hdcBuffer = nullptr;
       HBITMAP m_hbitmapOld = nullptr;
       HBITMAP m_hbitmapBuffer = nullptr;
-      ::pointer < ::innate_subsystem_win32::Bitmap > m_pbitmapBuffer;
-      ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontextBuffer;
+      ::pointer < ::innate_subsystem_windows::Bitmap > m_pbitmapBuffer;
+      ::pointer < ::innate_subsystem_windows::DeviceContext > m_pdevicecontextBuffer;
 
       bool m_bIsDraw;
       PAINTSTRUCT m_paintStruct;
       //HDC m_hdc;
 
-      ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontext;
+      ::pointer < ::innate_subsystem_windows::DeviceContext > m_pdevicecontext;
 
 
       struct notification
       {
-         ::subsystem_apex::enum_control m_econtrol = ::subsystem_apex::e_control_none;
+         ::innate_subsystem::enum_control m_econtrol = ::innate_subsystem::e_control_none;
          int_array   m_iaNotification;
       };
 
@@ -160,7 +160,7 @@ namespace innate_subsystem_win32
       ::operating_system::window operating_system_window() const override;
       void set_operating_system_window(const ::operating_system::window & operatingsystemwindow) override;
 
-      ::subsystem_apex::WindowInterface * get_window_implementation() override;
+      ::innate_subsystem::WindowInterface * get_window_implementation() override;
 
       // createWindow()
       // Create window with windowName and setted style
@@ -261,9 +261,9 @@ namespace innate_subsystem_win32
 
       // for changing registered class parameters of created window
       void setClassStyle(unsigned int style) override;
-      void setClassCursor(::subsystem_apex::CursorInterface * pcursor) override;
-      void setClassBackground(::subsystem_apex::BrushInterface * pbrush) override;
-      void setClassMenu(::subsystem_apex::MenuInterface * pmenu) override;
+      void setClassCursor(::innate_subsystem::CursorInterface * pcursor) override;
+      void setClassBackground(::innate_subsystem::BrushInterface * pbrush) override;
+      void setClassMenu(::innate_subsystem::MenuInterface * pmenu) override;
 
       bool we_want_WM_KEYDOWN_when_enter_is_pressed() const override;
 
@@ -339,7 +339,7 @@ namespace innate_subsystem_win32
       virtual void _defer_update_double_buffering();
 
 
-      void onDraw(::subsystem_apex::GraphicsInterface * pgraphics, const ::int_rectangle & rectangle) override;
+      void onDraw(::innate_subsystem::GraphicsInterface * pgraphics, const ::int_rectangle & rectangle) override;
 
 
       virtual void doPaint();
@@ -355,6 +355,6 @@ namespace innate_subsystem_win32
 
 
 
-} //  namespace innate_subsystem_win32
+} //  namespace innate_subsystem_windows
 
 

@@ -22,12 +22,12 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "Screen.h"
 #include "subsystem/Exception.h"
 //#include "remoting/remoting_common/win_system/Environment.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       Screen::Screen()
       {
@@ -47,7 +47,7 @@ namespace subsystem_win32
          fillScreenRect();
       }
 
-      ::subsystem_apex::PixelFormat Screen::getPixelFormat()
+      ::innate_subsystem::PixelFormat Screen::getPixelFormat()
       {
          return m_pixelFormat;
       }
@@ -105,7 +105,7 @@ namespace subsystem_win32
 
       void Screen::_fillPixelFormat(const BMI *bmi)
       {
-         memset(&m_pixelFormat, 0, sizeof(::subsystem_apex::PixelFormat));
+         memset(&m_pixelFormat, 0, sizeof(::innate_subsystem::PixelFormat));
 
          m_pixelFormat.initBigEndianByNative();
 
@@ -162,4 +162,4 @@ namespace subsystem_win32
          // Why check for the result? Skip it.
          return (size_t)monitorCount;
       }
-} // namespace subsystem_win32
+} // namespace subsystem_windows

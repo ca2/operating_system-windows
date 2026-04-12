@@ -22,12 +22,12 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "PipeImpersonatedThread.h"
 #include "File.h"
 //#include "Environment.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
    PipeImpersonatedThread::PipeImpersonatedThread()
@@ -85,7 +85,7 @@ namespace subsystem_win32
    }
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 

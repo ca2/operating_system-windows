@@ -25,7 +25,7 @@
 #pragma once
 //#define _THEME_LIB_H_
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 // XP specific stuff
 

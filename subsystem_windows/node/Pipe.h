@@ -26,14 +26,14 @@
 
 
 #include "subsystem/node/Pipe.h"
-#include "subsystem_win32/node/WindowsEvent.h"
+#include "subsystem_windows/node/WindowsEvent.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    // This class is not an interface but is a class that contain common
    // methods/source codes for derived classes to work with pipe handles.
-   class CLASS_DECL_SUBSYSTEM_WIN32 Pipe :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS Pipe :
    virtual public ::subsystem::implementation<::subsystem::PipeInterface>
    {
    public:
@@ -78,4 +78,4 @@ namespace subsystem_win32
 
    };
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

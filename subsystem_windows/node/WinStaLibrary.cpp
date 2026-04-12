@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "WinStaLibrary.h"
 #include "DynamicLibrary.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
    WinStaLibrary::WinStaLibrary()
@@ -76,6 +76,6 @@ namespace subsystem_win32
       return m_winStationConnectW(server, connectSessionId, activeSessionId, password, unknown);
    }
 
-} //namespace subsystem_win32
+} //namespace subsystem_windows
 
 

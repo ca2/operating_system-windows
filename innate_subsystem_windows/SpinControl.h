@@ -27,12 +27,12 @@
 //#define _SPIN_CONTROL_H_
 
 #include "innate_subsystem/SpinControl.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
-class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 SpinControl : public window_implementation<subsystem_apex::SpinControlInterface>
+class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS SpinControl : public window_implementation<innate_subsystem::SpinControlInterface>
 {
 public:
   SpinControl();
@@ -57,7 +57,7 @@ public:
                                  const int_array & deltas,
                                  int maxDelta) override;
 // protected:
-   ::pointer < ::subsystem_apex::ControlInterface> m_pcontrolBuddy;
+   ::pointer < ::innate_subsystem::ControlInterface> m_pcontrolBuddy;
 //
 //   //
 //   // Members needed for auto acceleration
@@ -69,7 +69,7 @@ public:
    int m_maxDelta;
 };
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 //#endif
 

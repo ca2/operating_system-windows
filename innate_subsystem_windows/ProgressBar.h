@@ -27,13 +27,13 @@
 //#define _PROGRESS_BAR_H_
 
 #include "innate_subsystem/ProgressBar.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
-    class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 ProgressBar :
+    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ProgressBar :
 
-   virtual public  window_implementation<subsystem_apex::ProgressBarInterface >
+   virtual public  window_implementation<innate_subsystem::ProgressBarInterface >
     {
     public:
         ProgressBar();
@@ -44,6 +44,6 @@ namespace innate_subsystem_win32
     };
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 

@@ -37,7 +37,7 @@
 
 // namespace windows
 // {
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    Window::Window()
       : // m_windowswindow.as_HWND()(0),
@@ -96,7 +96,7 @@ namespace innate_subsystem_win32
    }
 
 
-   subsystem_apex::WindowInterface *Window::get_window_implementation()
+   innate_subsystem::WindowInterface *Window::get_window_implementation()
    {
 
       return this;
@@ -286,16 +286,16 @@ namespace innate_subsystem_win32
       SetClassLong(m_windowswindow.as_HWND(), GCL_STYLE, style);
    }
 
-   void Window::setClassCursor(::subsystem_apex::CursorInterface * pcursor)
+   void Window::setClassCursor(::innate_subsystem::CursorInterface * pcursor)
    {
       auto hcursor = pcursor->_HCURSOR();
       _ASSERT(m_windowswindow.as_HWND() != 0);
       SetClassLongPtr(m_windowswindow.as_HWND(), GCLP_HCURSOR, (LONG_PTR)hcursor);
    }
 
-   void Window::setClassBackground(::subsystem_apex::BrushInterface *)
+   void Window::setClassBackground(::innate_subsystem::BrushInterface *)
    {
-      //auto pbrushWin32 = pbrush->impl<::innate_subsystem_win32::Brush>();
+      //auto pbrushWin32 = pbrush->impl<::innate_subsystem_windows::Brush>();
       //auto hbrush = (HBRUSH) (HGDIOBJ) pbrush->_HGDIOBJ();
       //auto hbrush = pbrushWin32->m_pbrush->Get
       auto hbrush = (HBRUSH) ::CreateSolidBrush(::GetSysColor(COLOR_WINDOW));
@@ -303,7 +303,7 @@ namespace innate_subsystem_win32
       SetClassLongPtr(m_windowswindow.as_HWND(), GCLP_HBRBACKGROUND, (LONG_PTR) hbrush);
    }
 
-   void Window::setClassMenu(::subsystem_apex::MenuInterface * pmenu)
+   void Window::setClassMenu(::innate_subsystem::MenuInterface * pmenu)
    {
       auto hmenu = (HMENU) pmenu->_HMENU();
       _ASSERT(m_windowswindow.as_HWND() != 0);
@@ -904,7 +904,7 @@ namespace innate_subsystem_win32
    }
 
 
-   void Window::onDraw(::subsystem_apex::GraphicsInterface * pgraphics, const ::int_rectangle & rectangle)
+   void Window::onDraw(::innate_subsystem::GraphicsInterface * pgraphics, const ::int_rectangle & rectangle)
    {
 
       m_pcomposite->onDraw(pgraphics, rectangle);
@@ -949,7 +949,7 @@ namespace innate_subsystem_win32
 
       copy(r, m_paintStruct.rcPaint);
 
-      ::innate_subsystem_win32::Graphics g;
+      ::innate_subsystem_windows::Graphics g;
 
       g.m_pdevicecontext = m_pdevicecontextBuffer;
 
@@ -1123,9 +1123,9 @@ break;
       {
          unsigned char mouseButtons = 0;
 
-         mouseButtons |= LOWORD(wparam) & MK_RBUTTON ? subsystem_apex::e_mouse_right : 0;
-         mouseButtons |= LOWORD(wparam) & MK_MBUTTON ? subsystem_apex::e_mouse_middle : 0;
-         mouseButtons |= LOWORD(wparam) & MK_LBUTTON ? subsystem_apex::e_mouse_left : 0;
+         mouseButtons |= LOWORD(wparam) & MK_RBUTTON ? innate_subsystem::e_mouse_right : 0;
+         mouseButtons |= LOWORD(wparam) & MK_MBUTTON ? innate_subsystem::e_mouse_middle : 0;
+         mouseButtons |= LOWORD(wparam) & MK_LBUTTON ? innate_subsystem::e_mouse_left : 0;
 
          // Translate position from ::lparam to POINT.
          POINTS points = MAKEPOINTS(lparam);
@@ -1138,11 +1138,11 @@ break;
             // Get speed wheel and set mouse button.
             signed short wheelSignedSpeed = static_cast<signed short>(HIWORD(wparam));
             if (wheelSignedSpeed < 0) {
-               mouseButtons |= ::subsystem_apex::e_mouse_wheel_down;
+               mouseButtons |= ::innate_subsystem::e_mouse_wheel_down;
                wheelSpeed = -wheelSignedSpeed / WHEEL_DELTA;
             }
             else {
-               mouseButtons |= ::subsystem_apex::e_mouse_wheel_up;
+               mouseButtons |= ::innate_subsystem::e_mouse_wheel_up;
                wheelSpeed = wheelSignedSpeed / WHEEL_DELTA;
             }
 
@@ -1177,11 +1177,11 @@ break;
 
       auto lpnmhdr = (LPNMHDR) lparam.m_lparam;
 
-      ::cast < ::innate_subsystem_win32::Window > pwindowWin32 = this->get_window_implementation();
+      ::cast < ::innate_subsystem_windows::Window > pwindowWin32 = this->get_window_implementation();
 
       auto &notification = pwindowWin32->m_mapControlNotification[iControl];
 
-      if (notification.m_econtrol != ::subsystem_apex::e_control_none)
+      if (notification.m_econtrol != ::innate_subsystem::e_control_none)
       {
 
          int iOperatingSystemNotificationCode = lpnmhdr->code;
@@ -1286,6 +1286,6 @@ break;
    }
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 // } // namespace windows
 //

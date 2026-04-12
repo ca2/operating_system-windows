@@ -26,17 +26,17 @@
 
 
 #include "subsystem/node/EmulatedAnonymousPipeFactory.h"
-//#include "subsystem_win32/node/NamedPipe.h"
-#include "subsystem_win32/_common_header.h"
+//#include "subsystem_windows/node/NamedPipe.h"
+#include "subsystem_windows/_common_header.h"
 //#include "log_writer/LogWriter.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
    // The EmulatedAnonymousPipeFactory class generates a chanel based on named pipe.
    // This is similar to anonymous pipe generation.
-   class CLASS_DECL_SUBSYSTEM_WIN32 EmulatedAnonymousPipeFactory :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS EmulatedAnonymousPipeFactory :
    virtual public ::subsystem::implementation<subsystem::EmulatedAnonymousPipeFactoryInterface>
    {
    public:
@@ -60,4 +60,4 @@ namespace subsystem_win32
    };
 
    //// __EMULATEDANONYMOUSPIPEFACTORY_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows

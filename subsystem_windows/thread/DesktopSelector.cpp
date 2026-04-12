@@ -26,7 +26,7 @@
 //#include <vector>
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    ::subsystem::desk_t DesktopSelector::getInputDesktop()
    {
@@ -118,6 +118,6 @@ namespace subsystem_win32
    }
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

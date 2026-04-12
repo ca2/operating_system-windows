@@ -30,7 +30,7 @@
 
 //#include <crtdbg.h>
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       InputInjector::InputInjector():
             m_controlIsPressed(false),
@@ -489,7 +489,7 @@ namespace subsystem_win32
          injectKeyEvent(VK_DELETE, true);
       }
 
-}// namespace subsystem_win32
+}// namespace subsystem_windows
 
 
 

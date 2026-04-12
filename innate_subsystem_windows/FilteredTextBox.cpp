@@ -27,7 +27,7 @@
 #include "innate_subsystem/StringFilter.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
@@ -60,12 +60,12 @@ namespace innate_subsystem_win32
       TextBox::setText(text);
    }
 
-   void FilteredTextBox::setErrorBalloonTip(subsystem_apex::TooltipInterface *tip)
+   void FilteredTextBox::setErrorBalloonTip(innate_subsystem::TooltipInterface *tip)
    {
       m_ptooltip = tip;
    }
 
-   void FilteredTextBox::setStringFilter(::subsystem_apex::StringFilter *filter)
+   void FilteredTextBox::setStringFilter(::innate_subsystem::StringFilter *filter)
    {
       m_pstringfilter = filter;
    }
@@ -122,4 +122,4 @@ namespace innate_subsystem_win32
       }
       return CallWindowProc((WNDPROC)_this->m_wndprocOld, hwnd, uMsg,wparam, lparam);
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

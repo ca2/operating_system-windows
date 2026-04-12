@@ -34,18 +34,18 @@
 // #include "innate_subsystem/drawing/Brush.h"
 // #include "innate_subsystem/drawing/Pen.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    class Graphics :
-   virtual public ::subsystem::implementation<::subsystem_apex::GraphicsInterface>
+   virtual public ::subsystem::implementation<::innate_subsystem::GraphicsInterface>
    {
    public:
 
 
-      ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontext;
-      ::pointer<::innate_subsystem_win32::Brush > m_pbrush;
-      ::pointer<::innate_subsystem_win32::Pen>m_ppen;
-      ::pointer<::innate_subsystem_win32::Font>m_pfont;
+      ::pointer < ::innate_subsystem_windows::DeviceContext > m_pdevicecontext;
+      ::pointer<::innate_subsystem_windows::Brush > m_pbrush;
+      ::pointer<::innate_subsystem_windows::Pen>m_ppen;
+      ::pointer<::innate_subsystem_windows::Font>m_pfont;
       int m_iBkMode;
       ::color::color m_colorText;
       ::color::color m_colorBk;
@@ -65,10 +65,10 @@ namespace innate_subsystem_win32
 
       virtual void _defer_text_tools();
 
-      subsystem_apex::DeviceContextInterface * device_context() override;
+      innate_subsystem::DeviceContextInterface * device_context() override;
 
-      void initialize_graphics(::subsystem_apex::DeviceContextInterface * pdevicecontext) override;
-      void initialize_graphics(::subsystem_apex::BitmapInterface * pbitmap) override;
+      void initialize_graphics(::innate_subsystem::DeviceContextInterface * pdevicecontext) override;
+      void initialize_graphics(::innate_subsystem::BitmapInterface * pbitmap) override;
 
       // Sets background colors mix mode.
       void setBkMode(bool transparent) override;
@@ -87,11 +87,11 @@ namespace innate_subsystem_win32
 
 
       // Sets current brush.
-      void setBrush(::subsystem_apex::BrushInterface * pbrush) override;
+      void setBrush(::innate_subsystem::BrushInterface * pbrush) override;
       // Sets current pen.
-      void setPen(::subsystem_apex::PenInterface * ppen) override;
+      void setPen(::innate_subsystem::PenInterface * ppen) override;
       // Sets current font.
-      void setFont(::subsystem_apex::FontInterface * pfont) override;
+      void setFont(::innate_subsystem::FontInterface * pfont) override;
 
       // Moves cursor to specified position.
       void moveTo(const ::int_point & point) override;
@@ -99,7 +99,7 @@ namespace innate_subsystem_win32
       void lineTo(const ::int_point & point) override;
 
       // Draws filled rect.
-      void fillRect(const ::int_rectangle & rectangle, ::subsystem_apex::BrushInterface * pbrush) override;
+      void fillRect(const ::int_rectangle & rectangle, ::innate_subsystem::BrushInterface * pbrush) override;
       void fillRect(const ::int_rectangle & rectangle, const ::color::color & color) override;
       // Draws ellipse.
       void ellipse(const ::int_rectangle & rectangle) override;
@@ -107,8 +107,8 @@ namespace innate_subsystem_win32
       void rectangle(const ::int_rectangle & rectangle) override;
 
       // Draws bitmap.
-      void drawBitmap(::subsystem_apex::BitmapInterface * pbitmap, const ::int_rectangle & rectangle) override;
-      void drawBitmap(::subsystem_apex::BitmapInterface *bitmap, const ::int_point & point, const ::int_rectangle & rectangle) override;
+      void drawBitmap(::innate_subsystem::BitmapInterface * pbitmap, const ::int_rectangle & rectangle) override;
+      void drawBitmap(::innate_subsystem::BitmapInterface *bitmap, const ::int_point & point, const ::int_rectangle & rectangle) override;
       // Draws text.
       void drawText(const char *text, int cchText, ::int_rectangle &rect, unsigned int format, enum_align ealign) override;
 
@@ -118,4 +118,4 @@ namespace innate_subsystem_win32
    };
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

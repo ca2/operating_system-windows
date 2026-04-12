@@ -28,7 +28,7 @@
 #include "Brush.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    SolidBrush::SolidBrush()
    {
@@ -45,7 +45,7 @@ namespace innate_subsystem_win32
 
       destroyGraphicsObject();
 
-      ::cast < ::innate_subsystem_win32::Brush > pbrushWin32 = ::subsystem::get_implementation(this);
+      ::cast < ::innate_subsystem_windows::Brush > pbrushWin32 = ::subsystem::get_implementation(this);
       //pbrushWin32->m_hbrush = CreateSolidBrush(RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
 
       Gdiplus::Color gdipluscolor(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue());
@@ -53,4 +53,4 @@ namespace innate_subsystem_win32
 
    }
 
-}// namespace innate_subsystem_win32
+}// namespace innate_subsystem_windows

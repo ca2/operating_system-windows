@@ -25,12 +25,12 @@
 #pragma once
 
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
-   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsRegistryKey
+   class CLASS_DECL_SUBSYSTEM_WINDOWS WindowsRegistryKey
    {
    public:
       WindowsRegistryKey(HKEY rootKey, const ::scoped_string & scopedstrEntry, bool createIfNotExists = true, SECURITY_ATTRIBUTES *sa = 0);

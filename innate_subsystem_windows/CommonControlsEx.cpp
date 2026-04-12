@@ -29,7 +29,7 @@
 
 //namespace windows
 //{
-   namespace innate_subsystem_win32
+   namespace innate_subsystem_windows
    {
       CommonControlsEx::CommonControlsEx()
       {
@@ -54,5 +54,5 @@
             throw ::subsystem::Exception("Cannot initialize common controls ex.");
          }
       }
-   } // namespace innate_subsystem_win32
+   } // namespace innate_subsystem_windows
 //} // namespace windows

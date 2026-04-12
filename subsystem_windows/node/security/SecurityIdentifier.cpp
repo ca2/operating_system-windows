@@ -23,7 +23,7 @@
 //
 #include "framework.h"
 #include "subsystem/node/SystemException.h"
-#include "subsystem_win32/subsystem.h"
+#include "subsystem_windows/subsystem.h"
 #include "SecurityIdentifier.h"
 #include "../ProcessHandle.h"
 #include <Sddl.h>
@@ -31,7 +31,7 @@
 #include <winnt.h>
 
 
-   namespace subsystem_win32
+   namespace subsystem_windows
    {
       // SecurityIdentifier::SecurityIdentifier(SID *sid)
       // {
@@ -148,4 +148,4 @@
 
          _ASSERT(IsValidSid(*sid));
       }
-   } // namespace subsystem_win32
+   } // namespace subsystem_windows

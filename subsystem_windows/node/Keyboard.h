@@ -26,15 +26,15 @@
 
 #include "subsystem/node/Keyboard.h"
 //#include "remoting/remoting_common/util/winhdr.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       /**
        * Wrapper on base WinAPI keyboard functions.
        */
-      class CLASS_DECL_SUBSYSTEM_WIN32 Keyboard :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS Keyboard :
    virtual public ::subsystem::implementation<subsystem::KeyboardInterface>
       {
       public:
@@ -60,4 +60,4 @@ namespace subsystem_win32
          bool isKeyPressed(BYTE vkCode) override;
 
       };
-} // namespace subsystem_win32
+} // namespace subsystem_windows

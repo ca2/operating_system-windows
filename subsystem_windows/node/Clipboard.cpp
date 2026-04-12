@@ -22,10 +22,10 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "Clipboard.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       Clipboard::Clipboard()
         : m_hndClipboard(0), m_hwnd(nullptr)
@@ -163,4 +163,4 @@ namespace subsystem_win32
 
       }
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

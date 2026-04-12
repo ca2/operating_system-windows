@@ -28,16 +28,16 @@
 #include "subsystem/node/SystemException.h"
 #include "subsystem/io/InputStream.h"
 #include "subsystem/node/InputInjector.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       /**
        * Wrapper of WinAPI methods that can inject input events into system
        * (mouse, keyboard etc) and get information about input device states.
        */
-      class CLASS_DECL_SUBSYSTEM_WIN32 InputInjector :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS InputInjector :
             virtual public ::subsystem::InputInjector
       {
       public:
@@ -134,5 +134,5 @@ namespace subsystem_win32
 
          ::subsystem::LogWriter *m_plogwriter;
       };
-   //}// namespace subsystem_win32
-} // namespace subsystem_win32
+   //}// namespace subsystem_windows
+} // namespace subsystem_windows

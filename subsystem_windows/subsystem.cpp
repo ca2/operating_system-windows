@@ -11,7 +11,7 @@
 #pragma comment (lib, "Crypt32.lib")
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
 subsystem::subsystem()
@@ -93,53 +93,53 @@ subsystem::subsystem()
 }
 
 
-   int subsystem::get_last_socket_error()
-   {
+   //int subsystem::get_last_socket_error()
+   //{
 
-   return WSAGetLastError();
+   //   return WSAGetLastError();
 
-   }
+   //}
 
 
-   string subsystem::get_socket_error_message_text(int iError)
-   {
+   //string subsystem::get_socket_error_message_text(int iError)
+   //{
 
-      if (iError <= 0)
-      {
+   //   if (iError <= 0)
+   //   {
 
-         return {};
+   //      return {};
 
-      }
+   //   }
 
-      LPWSTR buffer = nullptr;
+   //   LPWSTR buffer = nullptr;
 
-      DWORD size = FormatMessageW(
-          FORMAT_MESSAGE_FROM_SYSTEM |
-          FORMAT_MESSAGE_ALLOCATE_BUFFER |
-          FORMAT_MESSAGE_IGNORE_INSERTS,
-          nullptr,
-          iError,
-          MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-          (LPWSTR)&buffer,
-          0,
-          nullptr
-      );
+   //   DWORD size = FormatMessageW(
+   //       FORMAT_MESSAGE_FROM_SYSTEM |
+   //       FORMAT_MESSAGE_ALLOCATE_BUFFER |
+   //       FORMAT_MESSAGE_IGNORE_INSERTS,
+   //       nullptr,
+   //       iError,
+   //       MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+   //       (LPWSTR)&buffer,
+   //       0,
+   //       nullptr
+   //   );
 
-      ::wstring wstr;
+   //   ::wstring wstr;
 
-      if (size && buffer)
-      {
+   //   if (size && buffer)
+   //   {
 
-         wstr.assign(buffer, size);
+   //      wstr.assign(buffer, size);
 
-      }
+   //   }
 
-      LocalFree(buffer);  // always safe (even if buffer == nullptr)
+   //   LocalFree(buffer);  // always safe (even if buffer == nullptr)
 
-      return wstr;
+   //   return wstr;
 
-   }
+   //}
 
-}//namespace subsystem_win32
+}//namespace subsystem_windows
 
 

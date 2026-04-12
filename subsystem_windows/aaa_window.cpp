@@ -41,13 +41,13 @@ void win32_send(HWND hwnd, const ::procedure& procedure)
 
 }
 
-CLASS_DECL_SUBSYSTEM_WIN32 bool _c_simple_message_loop_step();
+CLASS_DECL_SUBSYSTEM_WINDOWS bool _c_simple_message_loop_step();
 
-CLASS_DECL_SUBSYSTEM_WIN32 string task_get_name();
-CLASS_DECL_SUBSYSTEM_WIN32 void task_set_name(const ::scoped_string & scopedstrName);
+CLASS_DECL_SUBSYSTEM_WINDOWS string task_get_name();
+CLASS_DECL_SUBSYSTEM_WINDOWS void task_set_name(const ::scoped_string & scopedstrName);
 
 
-class CLASS_DECL_SUBSYSTEM_WIN32 scoped_task_name
+class CLASS_DECL_SUBSYSTEM_WINDOWS scoped_task_name
 {
 public:
 
@@ -129,7 +129,7 @@ namespace win32
 
             }
 
-            auto hinstanceWndProc = ::subsystem_win32::get_window_procedure_hinstance();
+            auto hinstanceWndProc = ::subsystem_windows::get_window_procedure_hinstance();
 
             WNDCLASSEX wndclassex{};
 
@@ -182,7 +182,7 @@ namespace win32
 
             wstring wstrTitle(m_pacmeuserinteraction->get_title());
 
-            auto hinstanceWndProc = ::subsystem_win32::get_window_procedure_hinstance();
+            auto hinstanceWndProc = ::subsystem_windows::get_window_procedure_hinstance();
 
             m_ptask = ::get_task();
 
@@ -209,7 +209,7 @@ namespace win32
                r.width(),
                r.height(),
                NULL, NULL, hinstanceWndProc,
-               (::subsystem_win32::window *)this);
+               (::subsystem_windows::window *)this);
 
             if (hwnd == NULL)
             {
@@ -674,7 +674,7 @@ namespace win32
          bool window::on_window_procedure(LRESULT & lresult, UINT message, WPARAM wparam, LPARAM lparam)
          {
 
-            if (::subsystem_win32::window::on_window_procedure(lresult, message, wparam, lparam))
+            if (::subsystem_windows::window::on_window_procedure(lresult, message, wparam, lparam))
             {
 
                return true;
@@ -709,7 +709,7 @@ namespace win32
             {
             case WM_COMMAND:
             {
-               /* ::pointer < ::subsystem_win32::micro::user > pnanouser = system()->acme_windowing();
+               /* ::pointer < ::subsystem_windows::micro::user > pnanouser = system()->acme_windowing();
 
                 LRESULT lresult = 0;
 
@@ -757,7 +757,7 @@ namespace win32
                break;
                //case WM_INITMENU:
                //   {
-               //   ::pointer < ::subsystem_win32::micro::user > pnanouser = system()->acme_windowing();
+               //   ::pointer < ::subsystem_windows::micro::user > pnanouser = system()->acme_windowing();
 
                //   LRESULT lresult = 0;
 
@@ -1343,7 +1343,7 @@ namespace win32
          {
 
             ::acme::windowing::window::destroy();
-            ::subsystem_win32::window::destroy();
+            ::subsystem_windows::window::destroy();
             //user_post([this]()
             //   {
 
@@ -1575,7 +1575,7 @@ namespace win32
          void window::defer_show_system_menu(::user::mouse * pmouse)
          {
 
-            //::pointer < ::subsystem_win32::micro::user > pnanouser = system()->acme_windowing();
+            //::pointer < ::subsystem_windows::micro::user > pnanouser = system()->acme_windowing();
 
             //pnanouser->_defer_show_system_menu(hwnd, &m_hmenuSystem, pointAbsolute);
 
@@ -1650,7 +1650,7 @@ namespace win32
 
             itask itask = get_itask();
 
-            HWND hwndCapture = ::subsystem_win32::get_mouse_capture(itask);
+            HWND hwndCapture = ::subsystem_windows::get_mouse_capture(itask);
 
             auto hwnd = (HWND) _HWND();
 
@@ -1669,14 +1669,14 @@ namespace win32
          void window::get_os_window_handle(void * p, int iSize)
          {
 
-            if (iSize != sizeof(::subsystem_win32::os_window_handle))
+            if (iSize != sizeof(::subsystem_windows::os_window_handle))
             {
 
                throw ::exception(error_bad_argument);
 
             }
 
-            auto poswindowhandle = (::subsystem_win32::os_window_handle *)p;
+            auto poswindowhandle = (::subsystem_windows::os_window_handle *)p;
 
             auto hwnd = (HWND) _HWND();
 

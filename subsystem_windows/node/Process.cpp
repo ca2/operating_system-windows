@@ -27,7 +27,7 @@
 //#include "port/base/iconv/lib/stringprep.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
       Process::Process()
@@ -180,4 +180,4 @@ namespace subsystem_win32
          }
       }
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

@@ -25,11 +25,11 @@
 #pragma once
 
 
-#include "subsystem_win32/node/WindowsRegistryKey.h"
+#include "subsystem_windows/node/WindowsRegistryKey.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
-   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsRegistry
+   class CLASS_DECL_SUBSYSTEM_WINDOWS WindowsRegistry
    {
    public:
       const static int STRING_TYPE = REG_SZ;
@@ -46,4 +46,4 @@ namespace subsystem_win32
       WindowsRegistry();
       ~WindowsRegistry();
    };
-} // namespace subsystem_win32
+} // namespace subsystem_windows

@@ -22,14 +22,14 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "OperatingSystemApplication.h"
 #include "acme/platform/system.h"
 #include "acme/windowing/windowing.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 //#include "remoting/remoting_common/thread/critical_section_lock.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    critical_section OperatingSystemApplication::m_MDLMutex;
 
@@ -180,5 +180,5 @@ namespace subsystem_win32
 
 
 
-} //namespace subsystem_win32
+} //namespace subsystem_windows
 

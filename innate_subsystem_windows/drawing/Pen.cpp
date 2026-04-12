@@ -29,11 +29,11 @@
 //#include <crtdbg.h>
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
-   // Pen::Pen(::subsystem_apex::enum_pennt type, int width, COLORREF color)
+   // Pen::Pen(::innate_subsystem::enum_pennt type, int width, COLORREF color)
    // : m_pen(NULL)
    // {
    //    m_pen = CreatePen(type, width, color);
@@ -64,7 +64,7 @@ namespace innate_subsystem_win32
    //
    // }
 
-   void Pen::initialize_pen(subsystem_apex::enum_pen epen, int width, const color::color& color)
+   void Pen::initialize_pen(innate_subsystem::enum_pen epen, int width, const color::color& color)
    {
 
       destroyGraphicsObject();
@@ -106,6 +106,6 @@ namespace innate_subsystem_win32
    }
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 

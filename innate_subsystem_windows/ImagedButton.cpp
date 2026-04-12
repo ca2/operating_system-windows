@@ -30,7 +30,7 @@
 //#include <crtdbg.h>
 //namespace windows
 //{
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    ImagedButton::ImagedButton()
    : m_mouseOver(false),
@@ -270,7 +270,7 @@ namespace innate_subsystem_win32
       // Any messages we don't process must be passed onto the original window function
       return CallWindowProc((WNDPROC)_this->_WNDPROC_default(), hwnd, message, wparam, lparam);
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 
 //} //namespace windows

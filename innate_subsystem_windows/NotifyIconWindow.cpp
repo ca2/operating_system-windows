@@ -27,7 +27,7 @@
 #include "NotifyIconWindow.h"
 #include "WindowProcHolder.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    NotifyIconWindow::NotifyIconWindow()
    //: m_wph(0)
@@ -83,4 +83,4 @@ namespace innate_subsystem_win32
 
       SetWindowLongPtr(m_window, GWLP_USERDATA, (LONG_PTR)m_pwindowprocholder.m_p);
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

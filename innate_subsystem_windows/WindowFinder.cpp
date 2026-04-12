@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "WindowFinder.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    struct WindowsParam
    {
@@ -112,5 +112,5 @@ namespace innate_subsystem_win32
          return 0;
       }
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 

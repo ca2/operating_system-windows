@@ -25,20 +25,20 @@
 #pragma once
 
 #include "innate_subsystem/drawing/Font.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include <Gdiplus.h>
 
 //#include "util/CommonHeader.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
 
 
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Font :
-virtual public ::subsystem::implementation<::subsystem_apex::FontInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Font :
+virtual public ::subsystem::implementation<::innate_subsystem::FontInterface>
    {
    public:
 
@@ -63,6 +63,6 @@ virtual public ::subsystem::implementation<::subsystem_apex::FontInterface>
 
 
 //#endi
-//   } // namespace subsystem_apex
-} // namespace subsystem_apex
+//   } // namespace innate_subsystem
+} // namespace innate_subsystem
 

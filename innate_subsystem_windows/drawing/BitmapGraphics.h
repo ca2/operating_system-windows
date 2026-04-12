@@ -30,13 +30,13 @@
 
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    //
    // Object that creates bitmap with specified size and allow to
    // draw into in through Graphics class methods.
    class BitmapGraphics :
-      virtual public ::subsystem::implementation<::subsystem_apex::BitmapGraphicsInterface>
+      virtual public ::subsystem::implementation<::innate_subsystem::BitmapGraphicsInterface>
    {
    public:
 
@@ -49,22 +49,22 @@ namespace innate_subsystem_win32
       ~BitmapGraphics() override;
 
 
-      void initialize_bitmap_graphics(subsystem_apex::DeviceContextInterface* pdevicecontextCompatible, const int_size& size) override;
+      void initialize_bitmap_graphics(innate_subsystem::DeviceContextInterface* pdevicecontextCompatible, const int_size& size) override;
 
       // Returns target bitmap that we paint.
-      ::subsystem_apex::BitmapInterface *getBitmap() override;
+      ::innate_subsystem::BitmapInterface *getBitmap() override;
 
       void beginPaint() override;
       void endPaint() override;
 
    //protected:
       bool m_isPainting;
-      ::pointer < ::innate_subsystem_win32::Bitmap > m_pbitmap;
-      ::pointer < ::subsystem_apex::GraphicsObject > m_pgraphicsobjectOldBitmap;
+      ::pointer < ::innate_subsystem_windows::Bitmap > m_pbitmap;
+      ::pointer < ::innate_subsystem::GraphicsObject > m_pgraphicsobjectOldBitmap;
    };
 
 
 
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

@@ -25,7 +25,7 @@
 #include "GuiThread.h"
 #include "DesktopSelector.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    GuiThread::GuiThread()
    : m_desk(0)
@@ -48,7 +48,7 @@ namespace subsystem_win32
          m_desk = 0;
       }
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 

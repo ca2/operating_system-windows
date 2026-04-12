@@ -26,12 +26,12 @@
 
 
 #include "subsystem/node/PipeImpersonatedThread.h"
-#include "subsystem_win32/node/WindowsEvent.h"
+#include "subsystem_windows/node/WindowsEvent.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
-   class CLASS_DECL_SUBSYSTEM_WIN32 PipeImpersonatedThread :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS PipeImpersonatedThread :
 
       virtual public ::subsystem::PipeImpersonatedThread
    {
@@ -59,7 +59,7 @@ namespace subsystem_win32
    };
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 

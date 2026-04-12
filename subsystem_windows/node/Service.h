@@ -27,13 +27,13 @@
 
 //#include "remoting/remoting_common/util/winhdr.h"
 #include "subsystem/node/Service.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 //////#include "remoting/remoting_common/util/::string.h"
 //#include "subsystem/Exception.h"
 //#include "remoting/remoting_common/thread/Thread.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       /**
        * Win32 service class (abstract).
@@ -41,7 +41,7 @@ namespace subsystem_win32
        * @remark service is singleton (you can have only one service instance).
        * @author enikey.
        */
-      class CLASS_DECL_SUBSYSTEM_WIN32 Service :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS Service :
       virtual public ::subsystem::implementation<subsystem::ServiceInterface>
       {
       public:
@@ -123,4 +123,4 @@ namespace subsystem_win32
           */
          static Service *g_service;
       };
-} // namespace subsystem_win32
+} // namespace subsystem_windows

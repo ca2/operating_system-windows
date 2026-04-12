@@ -24,11 +24,11 @@
 
 #pragma once
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
-struct CLASS_DECL_INNATE_SUBSYSTEM_WIN32 PixelFormat
+struct CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS PixelFormat
 {
   PixelFormat();
   // Initializes the bigEndian field by native machine value.
@@ -52,6 +52,6 @@ struct CLASS_DECL_INNATE_SUBSYSTEM_WIN32 PixelFormat
 
 //// __PIXELFORMAT_H__
 ///
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 

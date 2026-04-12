@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(innate_subsystem_win32 CXX)
+project(innate_subsystem_windows CXX)
 
 
 list(APPEND library_source

@@ -27,17 +27,17 @@
 
 
 #include "innate_subsystem/drawing/DeviceContext.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 //#include "util/CommonHeader.h"
 //#include "gui/PaintWindow.h"
 #include <Gdiplus.h>
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 DeviceContext :
-      virtual public ::subsystem::implementation<::subsystem_apex::DeviceContextInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS DeviceContext :
+      virtual public ::subsystem::implementation<::innate_subsystem::DeviceContextInterface>
    {
    public:
       // // Create device context linked to window DC.
@@ -59,16 +59,16 @@ namespace innate_subsystem_win32
       void initialize_device_context(const operating_system::window& window) override;
       // Create device context complatible with other DC.
       void initialize_device_context(DeviceContextInterface* compatibleDevice) override;
-      virtual void initialize_device_context(::subsystem_apex::BitmapInterface * pbitmap);
+      virtual void initialize_device_context(::innate_subsystem::BitmapInterface * pbitmap);
       virtual void _initialize_device_context(HDC hdc);
       virtual void _attach_HDC(HDC hdc);
       //private:
       // Initialize class from PaintWindow
-      void initialize_device_context(subsystem_apex::PaintWindowInterface* pntWnd) override;
+      void initialize_device_context(innate_subsystem::PaintWindowInterface* pntWnd) override;
       //protected:
       // Selects an object into this device context.
       //virtual HGDIOBJ _selectObject2(HGDIOBJ object);
-//::pointer < ::subsystem_apex::GraphicsObject>selectObject(::subsystem_apex::GraphicsObject * pgraphicsobjectNew);
+//::pointer < ::innate_subsystem::GraphicsObject>selectObject(::innate_subsystem::GraphicsObject * pgraphicsobjectNew);
 
       void destroyDeviceContext() override;
 
@@ -82,4 +82,4 @@ namespace innate_subsystem_win32
       // friend class BitmapGraphics;
    };
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

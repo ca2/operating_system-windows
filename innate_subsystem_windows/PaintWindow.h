@@ -26,15 +26,15 @@
 
 
 #include "innate_subsystem/PaintWindow.h"
-#include "innate_subsystem_win32/Window.h"
+#include "innate_subsystem_windows/Window.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 PaintWindow:
-   virtual public ::subsystem::implementation<::subsystem_apex::PaintWindowInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS PaintWindow:
+   virtual public ::subsystem::implementation<::innate_subsystem::PaintWindowInterface>
    //, public Window
    {
    public:
@@ -45,7 +45,7 @@ namespace innate_subsystem_win32
 
    //private:
       //HDC getHDCPaint();
-      ::pointer < ::subsystem_apex::DeviceContextInterface > getPaintDeviceContext() override;
+      ::pointer < ::innate_subsystem::DeviceContextInterface > getPaintDeviceContext() override;
 
       friend class DeviceContext;
 
@@ -57,12 +57,12 @@ namespace innate_subsystem_win32
       bool m_bIsDraw;
       PAINTSTRUCT m_paintStruct;
       //HDC m_hdc;
-      ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontext;
+      ::pointer < ::innate_subsystem_windows::DeviceContext > m_pdevicecontext;
 
    };
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 
 

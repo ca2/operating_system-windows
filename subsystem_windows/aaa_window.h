@@ -22,7 +22,7 @@ namespace win32
 
 
          class CLASS_DECL_ACME_WINDOWING_WIN32 window :
-            virtual public ::subsystem_win32::window
+            virtual public ::subsystem_windows::window
          {
          public:
 
@@ -172,7 +172,7 @@ namespace win32
          };
 
 
-         //CLASS_DECL_SUBSYSTEM_WIN32 void process_messages(bool bWait = false);
+         //CLASS_DECL_SUBSYSTEM_WINDOWS void process_messages(bool bWait = false);
 
 
       } // namespace windowing

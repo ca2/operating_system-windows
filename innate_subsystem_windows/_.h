@@ -12,15 +12,15 @@
 
 
 #if defined(_innate_subsystem_win32_project)
-#define CLASS_DECL_INNATE_SUBSYSTEM_WIN32  CLASS_DECL_EXPORT
+#define CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS  CLASS_DECL_EXPORT
 #else
-#define CLASS_DECL_INNATE_SUBSYSTEM_WIN32  CLASS_DECL_IMPORT
+#define CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS  CLASS_DECL_IMPORT
 #endif
 
 
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
@@ -45,4 +45,4 @@ namespace innate_subsystem_win32
    class WindowMessageHandler;
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

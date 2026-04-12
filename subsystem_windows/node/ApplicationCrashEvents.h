@@ -25,7 +25,7 @@
 #pragma once
 
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 class CLASS_DECL_REMOTING_COMMON ApplicationCrashEvents
 {

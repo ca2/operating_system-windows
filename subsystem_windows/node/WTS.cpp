@@ -34,7 +34,7 @@
 #include "File.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
     WTS::WTS()
@@ -277,7 +277,7 @@ namespace subsystem_win32
    void WTS::duplicatePipeClientToken(HANDLE pipeHandle)
    {
       ::subsystem::PipeImpersonatedThread impThread;
-       ::subsystem_win32::File filePipeHandle;
+       ::subsystem_windows::File filePipeHandle;
        filePipeHandle.m_handle = pipeHandle;
        impThread.initialize_pipe_impersonated_thread(&filePipeHandle);
       impThread.resume();
@@ -480,4 +480,4 @@ namespace subsystem_win32
    // WTS::WTS()
    // {
    // }
-}  // namespace subsystem_win32
+}  // namespace subsystem_windows

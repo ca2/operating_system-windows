@@ -25,7 +25,7 @@
 #include "PaintWindow.h"
 #include "drawing/DeviceContext.h"
 
-   namespace innate_subsystem_win32
+   namespace innate_subsystem_windows
    {
       PaintWindow::PaintWindow()
        : m_bIsDraw(false)
@@ -36,7 +36,7 @@
       {
       }
 
-      ::pointer < subsystem_apex::DeviceContextInterface > PaintWindow::getPaintDeviceContext()
+      ::pointer < innate_subsystem::DeviceContextInterface > PaintWindow::getPaintDeviceContext()
       {
          if (!m_bIsDraw) {
             return 0;
@@ -62,4 +62,4 @@
       //    }
       //    return Window::wndProc(message, wparam, lparam);
       // }
-   } // namespace innate_subsystem_win32
+   } // namespace innate_subsystem_windows

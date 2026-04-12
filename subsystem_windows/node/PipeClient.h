@@ -25,17 +25,17 @@
 #pragma once
 
 
-//#include "subsystem_win32/_common_header.h"
+//#include "subsystem_windows/_common_header.h"
 #include "subsystem/node/PipeClient.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       /**
        * Pipe client factory.
        */
-      class CLASS_DECL_SUBSYSTEM_WIN32 PipeClient :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS PipeClient :
       virtual  public ::subsystem::PipeClient
       {
       public:
@@ -48,6 +48,6 @@ namespace subsystem_win32
       };
 
       //// __PIPECLIENT_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

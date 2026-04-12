@@ -25,13 +25,13 @@
 #pragma once
 
 #include "subsystem/node/ProcessCommandLine.h"
-#include "subsystem_win32/_common_header.h"
-//#include "subsystem_win32/node/WindowsCommandLineArguments.h"
+#include "subsystem_windows/_common_header.h"
+//#include "subsystem_windows/node/WindowsCommandLineArguments.h"
 
- namespace subsystem_win32
+ namespace subsystem_windows
  {
      // This class is a primitive command line parser
-     class CLASS_DECL_SUBSYSTEM_WIN32 ProcessCommandLine :
+     class CLASS_DECL_SUBSYSTEM_WINDOWS ProcessCommandLine :
         virtual public ::subsystem::implementation < ::subsystem::ProcessCommandLineInterface >
      {
      public:
@@ -72,7 +72,7 @@
 
      };
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 

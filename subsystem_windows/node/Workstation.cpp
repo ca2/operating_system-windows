@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "Workstation.h"
 #include "subsystem/node/SystemException.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    Workstation::Workstation()
    {
@@ -55,4 +55,4 @@ namespace subsystem_win32
          throw ::subsystem::SystemException();
       }
    }
-}// namespace subsystem_win32
+}// namespace subsystem_windows

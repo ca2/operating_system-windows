@@ -6,7 +6,7 @@
 #include "acme/platform/application.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
 
@@ -55,7 +55,7 @@ namespace subsystem_win32
    } // namespace acme
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 

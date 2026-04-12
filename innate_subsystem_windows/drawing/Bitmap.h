@@ -27,13 +27,13 @@
 
 
 #include "innate_subsystem/drawing/Bitmap.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include <Gdiplus.h>
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Bitmap :
-   virtual public ::subsystem::implementation<subsystem_apex::BitmapInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Bitmap :
+   virtual public ::subsystem::implementation<innate_subsystem::BitmapInterface>
 
    {
    public:
@@ -56,7 +56,7 @@ namespace innate_subsystem_win32
       // Creates empty bitmap with specified size.
       void initialize_bitmap(const int_size& size) override;
       // Creates compatible with dc bitmap with specified size.
-      void initialize_bitmap(subsystem_apex::DeviceContextInterface* pdevicecontext, const int_size& size) override;
+      void initialize_bitmap(innate_subsystem::DeviceContextInterface* pdevicecontext, const int_size& size) override;
       // Creates bitmap from HBITMAP object.
       void initialize_bitmap(BitmapInterface* pbitmap) override;
       virtual void _initialize_bitmap(HBITMAP hbitmap, HPALETTE hpalette);
@@ -77,6 +77,6 @@ namespace innate_subsystem_win32
    };
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 

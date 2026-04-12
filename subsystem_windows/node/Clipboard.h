@@ -25,12 +25,12 @@
 
 
 #include "subsystem/node/Clipboard.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
-          class CLASS_DECL_SUBSYSTEM_WIN32 Clipboard :
+          class CLASS_DECL_SUBSYSTEM_WINDOWS Clipboard :
          virtual public ::subsystem::implementation<::subsystem::ClipboardInterface>
       {
       public:
@@ -65,4 +65,4 @@ namespace subsystem_win32
          HANDLE m_hndClipboard;
          HWND m_hwnd;
       };
-} // namespace subsystem_win32
+} // namespace subsystem_windows

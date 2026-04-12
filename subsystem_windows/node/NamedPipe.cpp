@@ -22,17 +22,17 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "NamedPipe.h"
 #include "subsystem/Exception.h"
-#include "subsystem_win32/node/File.h"
+#include "subsystem_windows/node/File.h"
 //#include <crtdbg.h>
 //#include "remoting/remoting_common/win_system/Environment.h"
 //#include "remoting/remoting_common/thread/AutoLock.h"
 
 #define MAX_PORTION_SIZE 512 * 1024
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 //      NamedPipe::NamedPipe(::subsystem::File * pfilePipe, unsigned int maxPortionSize, bool asServer):
 //      m_asServer(false)
@@ -115,7 +115,7 @@ namespace subsystem_win32
       }
    }
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 

@@ -22,14 +22,14 @@
 //-------------------------------------------------------------------------
 //
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    // Abstract class for next using in WinHooks class and as a base class in others.
-   class CLASS_DECL_SUBSYSTEM_WIN32 WindowsHookEventListener
+   class CLASS_DECL_SUBSYSTEM_WINDOWS WindowsHookEventListener
    {
    public:
       virtual LRESULT onHookProc(int code, WPARAM wParam, LPARAM lParam) = 0;
    };
-} // namespace subsystem_win32
+} // namespace subsystem_windows

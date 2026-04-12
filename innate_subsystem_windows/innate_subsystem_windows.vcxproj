@@ -2659,10 +2659,10 @@
     <ProjectReference Include="..\..\..\source\app\apex\apex.vcxproj">
       <Project>{e000ffaf-392f-4e32-bf51-777ca238991f}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\source\app\subsystem_acme\subsystem_acme.vcxproj">
+    <ProjectReference Include="..\..\..\source\app\subsystem\subsystem.vcxproj">
       <Project>{8cc36574-7cff-438f-ae5c-51fd5c6b2823}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\source\app\subsystem_apex\subsystem_apex.vcxproj">
+    <ProjectReference Include="..\..\..\source\app\innate_subsystem\innate_subsystem.vcxproj">
       <Project>{97d4f12a-916c-4cb2-b4d9-f0d35128065a}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\operating_system-windows_common\acme_windows_common\acme_windows_common.vcxproj">

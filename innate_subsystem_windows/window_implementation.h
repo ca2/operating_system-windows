@@ -5,17 +5,17 @@
 
 
 #include "Window.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 #include "WindowCache.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    template < typename PARTICLE_INTERFACE >
    class window_implementation :
       virtual public ::subsystem::implementation<PARTICLE_INTERFACE >,
       virtual public WindowCache,
-      virtual public ::innate_subsystem_win32::notification_handler
+      virtual public ::innate_subsystem_windows::notification_handler
    {
    public:
 

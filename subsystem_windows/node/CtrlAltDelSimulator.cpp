@@ -22,7 +22,7 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "CtrlAltDelSimulator.h"
 #include "remoting/remoting_common/thread/DesktopSelector.h"
 

@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "ProcessHandle.h"
 #include "subsystem/node/SystemException.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    ProcessHandle::ProcessHandle()
    : m_hProcess(0)
@@ -78,4 +78,4 @@ namespace subsystem_win32
    }
 
 
-}// namespace subsystem_win32
+}// namespace subsystem_windows

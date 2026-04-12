@@ -23,12 +23,12 @@
 //
 
 #include "innate_subsystem/Toolbar.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem_windows/_common_header.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Toolbar :
-virtual public window_implementation<subsystem_apex::ToolbarInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Toolbar :
+virtual public window_implementation<innate_subsystem::ToolbarInterface>
    {
    public:
       Toolbar();
@@ -85,7 +85,7 @@ virtual public window_implementation<subsystem_apex::ToolbarInterface>
       LRESULT addSystemBitmap(unsigned int stdBitmapID) override;
 
       // addNButton() adds nButtons buttons to a toolbar.
-      bool addNButton(int nButtons, ::subsystem_apex::toolbar_button_t * ptoolbarbutton) override;
+      bool addNButton(int nButtons, ::innate_subsystem::toolbar_button_t * ptoolbarbutton) override;
 
       // addButton() adds one button.
       bool addButton(int iBitmap, int idCommand, unsigned char state=TBSTATE_ENABLED,
@@ -144,4 +144,4 @@ virtual public window_implementation<subsystem_apex::ToolbarInterface>
 
       iptr_to_iptr m_autoButtons;
    };
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

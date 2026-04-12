@@ -26,10 +26,10 @@
 #include "TabContainer.h"
 namespace windows
 {
-   namespace innate_subsystem_win32
+   namespace innate_subsystem_windows
    {
 
 
 
-   } // namespace innate_subsystem_win32
+   } // namespace innate_subsystem_windows
 } // namespace windows

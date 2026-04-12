@@ -26,13 +26,13 @@
 
 
 #include "subsystem/CommandLineArguments.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
 
-   class CLASS_DECL_SUBSYSTEM_WIN32 CommandLineArguments :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS CommandLineArguments :
    virtual public ::subsystem::CommandLineArguments
    {
    public:
@@ -53,4 +53,4 @@ namespace subsystem_win32
    };
 
    //// __WINCOMMANDLINEARGS_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows

@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "ProcessCommandLine.h"
 #include "CommandLineArguments.h"
 
- namespace subsystem_win32
+ namespace subsystem_windows
  {
 
     ProcessCommandLine::ProcessCommandLine()
@@ -121,6 +121,6 @@
      }
 
 
- } // namespace subsystem_win32
+ } // namespace subsystem_windows
 
 

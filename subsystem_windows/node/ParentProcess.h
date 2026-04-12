@@ -26,13 +26,13 @@
 
 
 #include "subsystem/node/ParentProcess.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include <Tlhelp32.h>
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       // Retrieves information of the parent process.
-      class CLASS_DECL_SUBSYSTEM_WIN32 ParentProcess :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS ParentProcess :
       virtual public ::subsystem::ParentProcess
       {
       public:
@@ -58,4 +58,4 @@ namespace subsystem_win32
 
       };
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

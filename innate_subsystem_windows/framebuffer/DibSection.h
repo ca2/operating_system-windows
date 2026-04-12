@@ -27,7 +27,7 @@
 
 #include "innate_subsystem/framebuffer/DibSection.h"
 #include "innate_subsystem/drawing/GraphicsObject.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #ifndef CAPTUREBLT
 #define CAPTUREBLT          (DWORD)0x40000000 /* Include layered windows */
 #endif
@@ -35,13 +35,13 @@
 
 //#include "subsystem/Screen.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
       // This clas is a primitive wrapper to a DIB section.
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32  DibSection :
-      virtual public ::subsystem::implementation<::subsystem_apex::DibSectionInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS  DibSection :
+      virtual public ::subsystem::implementation<::innate_subsystem::DibSectionInterface>
    {
    public:
       // Note that if the compatibleWin doesn't specify or is zero the class will create an
@@ -55,7 +55,7 @@ namespace innate_subsystem_win32
       ~DibSection() override;
 
 
-      virtual void initialize_dib_section(const ::subsystem_apex::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindow = {}) override;
+      virtual void initialize_dib_section(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindow = {}) override;
 
       // This function changes the target DC. In default target DC is a DC that has been
       // got from a compatible window on object creation. This function can be call many times.
@@ -104,10 +104,10 @@ namespace innate_subsystem_win32
       //void setupBMIStruct(BITMAPINFO *pBmi, const PixelFormat & pf, const ::int_size & dim);
 
        bool m_isOwnTargetDC;
-       ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontextTarget;
-      ::pointer < ::innate_subsystem_win32::DeviceContext > m_pdevicecontextMemory;
-      ::pointer < ::innate_subsystem_win32::Bitmap > m_pbitmapDib;
-      ::pointer < ::subsystem_apex::GraphicsObject > m_pgraphicsobjectDibOld;
+       ::pointer < ::innate_subsystem_windows::DeviceContext > m_pdevicecontextTarget;
+      ::pointer < ::innate_subsystem_windows::DeviceContext > m_pdevicecontextMemory;
+      ::pointer < ::innate_subsystem_windows::Bitmap > m_pbitmapDib;
+      ::pointer < ::innate_subsystem::GraphicsObject > m_pgraphicsobjectDibOld;
        //HBITMAP m_hbmOld;
        //HBITMAP m_hbmDIB;
        // Coordinates of the source dc can be negative.
@@ -132,11 +132,11 @@ namespace innate_subsystem_win32
    //    // In default the created DC will used as a target DC for the blitting operations.
    //    // It may be changed many times later. Note that changed DC must be compatible with
    //    // the DIB section.
-   //    DibSection(const ::subsystem_apex::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible = {});
+   //    DibSection(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible = {});
    //    ~DibSection() override;
    //
    //
-   //    void initialize_dib_section(const ::subsystem_apex::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible = {}) override;
+   //    void initialize_dib_section(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible = {}) override;
    //
    //    // This function changes the target DC. In default target DC is a DC that has been
    //    // got from a compatible window on object creation. This function can be call many times.
@@ -182,7 +182,7 @@ namespace innate_subsystem_win32
    //    void blitFromDibSection(const ::int_rectangle &  rect, unsigned int flags) override;
    //    void stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & dstRect, unsigned int flags);
    //
-   //    void setupBMIStruct(BITMAPINFO *pBmi, const ::subsystem_apex::PixelFormat & pf, const ::int_size & dim);
+   //    void setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim);
    //
    //    //
    //    // bool m_isOwnTargetDC;
@@ -200,4 +200,4 @@ namespace innate_subsystem_win32
    // };
 
    //// __DIBSECTION_H__
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

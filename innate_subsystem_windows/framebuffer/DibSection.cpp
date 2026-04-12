@@ -22,13 +22,13 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "DibSection.h"
 #include "subsystem/node/SystemException.h"
 #include "drawing/Bitmap.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
@@ -39,7 +39,7 @@ namespace innate_subsystem_win32
    }
 
 
-   // DibSection::DibSection(const ::subsystem_apex::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible)
+   // DibSection::DibSection(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible)
    // // : m_isOwnTargetDC(false),
    // //   m_targetDC(0),
    // //   m_memDC(0),
@@ -67,7 +67,7 @@ namespace innate_subsystem_win32
    }
 
 
-   void DibSection::initialize_dib_section(const ::subsystem_apex::PixelFormat& pf, const int_size& dim, const operating_system::window& operatingsystemwindowCompatible)
+   void DibSection::initialize_dib_section(const ::innate_subsystem::PixelFormat& pf, const int_size& dim, const operating_system::window& operatingsystemwindowCompatible)
    {
 
       //m_pparticleThis->initialize_dib_section(pf, dim, operatingsystemwindowCompatible);
@@ -250,5 +250,5 @@ namespace innate_subsystem_win32
       //    m_targetDC = 0;
       // }
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 

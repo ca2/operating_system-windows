@@ -28,7 +28,7 @@
 #include "innate_subsystem/Window.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    Menu::Menu()
    : m_hmenu(0),
@@ -48,7 +48,7 @@ namespace innate_subsystem_win32
       m_hmenu = (HMENU) pHMENU;
    }
 
-   bool Menu::getWindowMenu(subsystem_apex::WindowInterface * pwindow)
+   bool Menu::getWindowMenu(innate_subsystem::WindowInterface * pwindow)
    {
       _ASSERT(m_hmenu == 0);
 
@@ -59,7 +59,7 @@ namespace innate_subsystem_win32
       return (m_hmenu == 0 ? false : true);
    }
 
-   void Menu::getSystemMenu(subsystem_apex::WindowInterface * pwindow)
+   void Menu::getSystemMenu(innate_subsystem::WindowInterface * pwindow)
    {
       _ASSERT(m_hmenu == 0);
 
@@ -128,7 +128,7 @@ namespace innate_subsystem_win32
       return !!DeleteMenu(m_hmenu, uPosition, MF_BYPOSITION);
    }
 
-   bool Menu::getSubMenu(int nPos, ::subsystem_apex::MenuInterface *pmenu)
+   bool Menu::getSubMenu(int nPos, ::innate_subsystem::MenuInterface *pmenu)
    {
       HMENU tmenu;
 
@@ -192,7 +192,7 @@ namespace innate_subsystem_win32
       return _appendMenu(MF_MENUBREAK, 0, nullptr);
    }
 
-   bool Menu::appendSubMenu(const ::scoped_string & scopedstr, ::subsystem_apex::MenuInterface *pMenu)
+   bool Menu::appendSubMenu(const ::scoped_string & scopedstr, ::innate_subsystem::MenuInterface *pMenu)
    {
       return _appendMenu(MF_POPUP, (::uptr)pMenu->_HMENU(),::string(scopedstr));
    }
@@ -246,7 +246,7 @@ namespace innate_subsystem_win32
       return _insertMenuItem(uItem, TRUE, (LPMENUITEMINFO)&mii);
    }
 
-   bool Menu::insertSubMenu(unsigned int uItem, const ::scoped_string & scopedstr, ::subsystem_apex::MenuInterface *pMenu)
+   bool Menu::insertSubMenu(unsigned int uItem, const ::scoped_string & scopedstr, ::innate_subsystem::MenuInterface *pMenu)
    {
       MENUITEMINFO mii;
 
@@ -266,7 +266,7 @@ namespace innate_subsystem_win32
 
 
    
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 
 

@@ -29,11 +29,11 @@
 #include "subsystem/_common_header.h"
 
 
-#include "innate_subsystem_win32/WindowProcHolder.h"
+#include "innate_subsystem_windows/WindowProcHolder.h"
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 NotifyIconWindowInterface :
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS NotifyIconWindowInterface :
    virtual public ::subsystem::particle_interface<NotifyIconWindowInterface>
    {
    public:
@@ -71,4 +71,4 @@ namespace innate_subsystem_win32
       //friend class NotifyIcon;
    };
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

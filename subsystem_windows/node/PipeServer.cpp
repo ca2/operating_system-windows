@@ -22,7 +22,7 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-//#include "subsystem_win32/_common_header.h"
+//#include "subsystem_windows/_common_header.h"
 #include "PipeServer.h"
 #include "DynamicLibrary.h"
 #include "File.h"
@@ -30,9 +30,9 @@
 #include "subsystem/Exception.h"
 //#include "Environment.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
-   //pointer < ::subsystem_win32::DynamicLibrary> PipeServer::m_pdynamiclibraryKernel32;
+   //pointer < ::subsystem_windows::DynamicLibrary> PipeServer::m_pdynamiclibraryKernel32;
 
    //pGetNamedPipeClientProcessId PipeServer::m_GetNamedPipeClientProcessId = 0;
    //volatile bool PipeServer::m_initialized = false;
@@ -204,7 +204,7 @@ namespace subsystem_win32
 
       ULONG pid;
 
-      auto pfilePipeWin32 = pfilePipe->impl<::subsystem_win32::File>();
+      auto pfilePipeWin32 = pfilePipe->impl<::subsystem_windows::File>();
 
       // Vista or higher
       if (!s_GetNamedPipeClientProcessId(pfilePipeWin32->m_handle, &pid)) {
@@ -240,5 +240,5 @@ namespace subsystem_win32
       }
       return false;
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 

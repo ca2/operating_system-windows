@@ -233,7 +233,7 @@ void     removal::run()
          return error_failed;
       }
 
-      if(i == ::subsystem_apex::IDYES)
+      if(i == ::innate_subsystem::IDYES)
       {
          string strLink= get_known_folder_dir(FOLDERID_Desktop,"ca2 app.removal Tool.lnk");
          wstring wstrLink(strLink);

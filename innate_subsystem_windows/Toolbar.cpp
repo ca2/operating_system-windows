@@ -25,7 +25,7 @@
 #include "Toolbar.h"
 #include <CommCtrl.h>
 
-TBBUTTON * copy(TBBUTTON * ptbb, ::subsystem_apex::toolbar_button_t * ptoolbarbutton)
+TBBUTTON * copy(TBBUTTON * ptbb, ::innate_subsystem::toolbar_button_t * ptoolbarbutton)
 {
 
    ptbb->dwData = ptoolbarbutton->dwData;
@@ -40,7 +40,7 @@ TBBUTTON * copy(TBBUTTON * ptbb, ::subsystem_apex::toolbar_button_t * ptoolbarbu
 }
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
    
    Toolbar::Toolbar()
@@ -120,11 +120,11 @@ namespace innate_subsystem_win32
             // TODO: paste here all your variants of possible
             // toolbar buttons
             switch(m_autoButtons[i]) {
-               case ::subsystem_apex::TB_Style_sep:
+               case ::innate_subsystem::TB_Style_sep:
                   tbutton.fsStyle = TBSTYLE_SEP;
                   tbuttons.add(tbutton);
                   break;
-               case ::subsystem_apex::TB_Style_gap:
+               case ::innate_subsystem::TB_Style_gap:
                   tbutton.iBitmap = I_IMAGENONE;
                   tbuttons.add(tbutton);
                   break;
@@ -291,7 +291,7 @@ namespace innate_subsystem_win32
       return !!result;
    }
 
-   bool Toolbar::addNButton(int nButtons, ::subsystem_apex::toolbar_button_t * ptoolbarbutton)
+   bool Toolbar::addNButton(int nButtons, ::innate_subsystem::toolbar_button_t * ptoolbarbutton)
    {
       TBBUTTON tbb{};
       copy(&tbb, ptoolbarbutton);
@@ -301,4 +301,4 @@ namespace innate_subsystem_win32
       }
       return !!result;
    }
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

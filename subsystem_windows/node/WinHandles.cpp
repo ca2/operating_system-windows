@@ -22,12 +22,12 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "WinHandles.h"
 //#include "Environment.h"
 #include "subsystem/Exception.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    WinHandles::WinHandles()
    {
@@ -80,4 +80,4 @@ namespace subsystem_win32
          throw;
       }
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows

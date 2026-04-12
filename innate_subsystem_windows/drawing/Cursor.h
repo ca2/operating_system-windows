@@ -5,15 +5,15 @@
 
 
 #include "innate_subsystem/drawing/Cursor.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 Cursor :
-      virtual public ::subsystem::implementation<::subsystem_apex::CursorInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Cursor :
+      virtual public ::subsystem::implementation<::innate_subsystem::CursorInterface>
    {
    public:
 
@@ -27,9 +27,9 @@ namespace innate_subsystem_win32
       void * _HCURSOR() override;
       void _setHCURSOR(void * p) override;
 
-      virtual void initialize_cursor(::subsystem_apex::CursorInterface * picon) override;
-      virtual void initialize_cursor(::subsystem_apex::BitmapInterface * bitmap) override;
-      virtual void initialize_cursor(::subsystem_apex::BitmapInterface * bitmap, ::subsystem_apex::BitmapInterface *mask) override;
+      virtual void initialize_cursor(::innate_subsystem::CursorInterface * picon) override;
+      virtual void initialize_cursor(::innate_subsystem::BitmapInterface * bitmap) override;
+      virtual void initialize_cursor(::innate_subsystem::BitmapInterface * bitmap, ::innate_subsystem::BitmapInterface *mask) override;
       virtual void initialize_with_system_cursor(enum_cursor ecursor) override;
 
       //void initi(HICON icon);
@@ -38,7 +38,7 @@ namespace innate_subsystem_win32
       //Icon(DWORD icon);
 
    //protected:
-      void fromBitmap(::subsystem_apex::BitmapInterface *bitmap, ::subsystem_apex::BitmapInterface *mask) override;
+      void fromBitmap(::innate_subsystem::BitmapInterface *bitmap, ::innate_subsystem::BitmapInterface *mask) override;
 
    // protected:
       HCURSOR m_hcursor;
@@ -46,6 +46,6 @@ namespace innate_subsystem_win32
    };
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 

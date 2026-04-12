@@ -25,7 +25,7 @@
 #include "TextBox.h"
 
 
-   namespace innate_subsystem_win32
+   namespace innate_subsystem_windows
    {
       TextBox::~TextBox()
       {
@@ -70,8 +70,8 @@
          SendMessage((HWND)_HWND(), EM_SETSEL, startPos, endPos);
       }
 
-      void TextBox::showBalloonTip(subsystem_apex::TooltipInterface *tip)
+      void TextBox::showBalloonTip(innate_subsystem::TooltipInterface *tip)
       {
          tip->showTooltip(this);
       }
-   } // namespace innate_subsystem_win32
+   } // namespace innate_subsystem_windows

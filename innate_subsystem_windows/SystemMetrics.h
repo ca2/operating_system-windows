@@ -5,12 +5,12 @@
 #include "innate_subsystem/SystemMetrics.h"
 
 
- namespace innate_subsystem_win32
+ namespace innate_subsystem_windows
  {
 
 
-    class CLASS_DECL_INNATE_SUBSYSTEM_WIN32 SystemMetrics :
-         virtual public ::subsystem::implementation < ::subsystem_apex::SystemMetricsInterface>
+    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS SystemMetrics :
+         virtual public ::subsystem::implementation < ::innate_subsystem::SystemMetricsInterface>
     {
     public:
 
@@ -23,4 +23,4 @@
     };
 
 
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows

@@ -25,20 +25,20 @@
 #pragma once
 
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
    typedef BOOL (WINAPI* pWinStationConnectW)(HANDLE, ULONG, ULONG, PCWSTR, ULONG);
 
-   class CLASS_DECL_SUBSYSTEM_WIN32 WinStaLibrary :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS WinStaLibrary :
    virtual public ::particle
    {
    public:
 
 
-      ::pointer < ::subsystem_win32::DynamicLibrary > m_pdynamiclibraryWinSta;
+      ::pointer < ::subsystem_windows::DynamicLibrary > m_pdynamiclibraryWinSta;
 
       pWinStationConnectW m_winStationConnectW;
 
@@ -57,5 +57,5 @@ namespace subsystem_win32
    };
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 

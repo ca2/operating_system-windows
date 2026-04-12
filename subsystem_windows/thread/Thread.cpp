@@ -26,7 +26,7 @@
 //#include "critical_section_lock.h"
 #include "subsystem/Exception.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    Thread::Thread()
    : m_terminated(false), m_active(false)
@@ -156,4 +156,4 @@ namespace subsystem_win32
    void Thread::onTerminate()
    {
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows

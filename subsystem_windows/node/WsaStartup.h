@@ -25,14 +25,14 @@
 #pragma once
 
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
    // Class that startup at constructor and cleanup at destructor Windows Sockets subsystem.
-   class CLASS_DECL_SUBSYSTEM_WIN32 WsaStartup
+   class CLASS_DECL_SUBSYSTEM_WINDOWS WsaStartup
    {
    public:
       WsaStartup(BYTE minorVer, BYTE majorVer);
@@ -42,6 +42,6 @@ namespace subsystem_win32
    };
 
    //// __WSASTARTUP_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

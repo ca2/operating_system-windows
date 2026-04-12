@@ -27,16 +27,16 @@
 //#define _COMBOBOX_H_
 
 //#include "acCommonHeader.h"
-#include "innate_subsystem/ComboBox.h"
-#include "innate_subsystem_win32/_common_header.h"
+#include "innate_subsystem/gui/ComboBox.h"
+#include "innate_subsystem_windows/_common_header.h"
 
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
 
     class ComboBox :// public Control
-   virtual public window_implementation<::subsystem_apex::ComboBoxInterface>
+   virtual public window_implementation<::innate_subsystem::ComboBoxInterface>
     {
     public:
 
@@ -84,7 +84,7 @@ namespace innate_subsystem_win32
     };
 
     //#endif
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 
 
 

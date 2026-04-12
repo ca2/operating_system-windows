@@ -23,15 +23,15 @@
 //
 #include "framework.h"
 #include "subsystem/node/SystemException.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include "Shell.h"
 #include <shellapi.h>
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
-// namespace subsystem_win32
+// namespace subsystem_windows
 // {
    Shell::Shell()
    {
@@ -77,6 +77,6 @@ namespace subsystem_win32
          throw ::subsystem::SystemException(ret);
       }
    }
-// } // namespace subsystem_win32
+// } // namespace subsystem_windows
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows

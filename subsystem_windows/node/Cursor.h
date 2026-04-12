@@ -27,11 +27,11 @@
 
 //#include "remoting/remoting_common/region/::int_point.h"
 #include "subsystem/node/Cursor.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
-      class CLASS_DECL_SUBSYSTEM_WIN32 Cursor :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS Cursor :
       virtual public ::subsystem::implementation<::subsystem::CursorInterface >
       {
       public:
@@ -41,7 +41,7 @@ namespace subsystem_win32
          virtual ::int_point getCursorPos() const = 0;
       };
 
-      // class CLASS_DECL_SUBSYSTEM_WIN32 Cursor :
+      // class CLASS_DECL_SUBSYSTEM_WINDOWS Cursor :
       // virtual public ::subsystem::composite<Cursor
       // {
       // public:
@@ -52,6 +52,6 @@ namespace subsystem_win32
       // };
 
 
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

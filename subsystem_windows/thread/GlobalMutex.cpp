@@ -27,7 +27,7 @@
 #include <Aclapi.h>
 
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
 
    GlobalMutex::GlobalMutex() :
@@ -97,6 +97,6 @@ namespace subsystem_win32
          throw ::subsystem::SystemException(errorCode);
       }
    }
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 

@@ -27,14 +27,14 @@
 
 
 #include "innate_subsystem/drawing/Pen.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 #include <Gdiplus.h>
 
-namespace innate_subsystem_win32
+namespace innate_subsystem_windows
 {
 
    class Pen :
-      virtual public ::subsystem::implementation<::subsystem_apex::PenInterface>
+      virtual public ::subsystem::implementation<::innate_subsystem::PenInterface>
    {
    public:
       // const static int SOLID_TYPE = PS_SOLID;
@@ -50,7 +50,7 @@ namespace innate_subsystem_win32
       //void * _HGDIOBJ() override;
 
 
-      void initialize_pen(subsystem_apex::enum_pen epen, int width, const color::color& color) override;
+      void initialize_pen(innate_subsystem::enum_pen epen, int width, const color::color& color) override;
 
 
       void destroyGraphicsObject() override;
@@ -63,5 +63,5 @@ namespace innate_subsystem_win32
    };
 
 //#endi
-} // namespace innate_subsystem_win32
+} // namespace innate_subsystem_windows
 

@@ -27,7 +27,7 @@
 //#include "winhdr.h"
 
 //#include "Singleton.h"
-namespace subsystem_win32
+namespace subsystem_windows
 {
    /**
     * Loader of resources from resource files linked with application.
@@ -35,7 +35,7 @@ namespace subsystem_win32
     * Singleton without support of "lazy" initialization.
     */
    //class ResourceLoader : public Singleton<ResourceLoader>
-   class CLASS_DECL_SUBSYSTEM_WIN32 resource_loader :
+   class CLASS_DECL_SUBSYSTEM_WINDOWS resource_loader :
       virtual public ::particle
    {
    public:
@@ -102,7 +102,7 @@ namespace subsystem_win32
    };
 
    //#endif
-} // namespace subsystem_win32
+} // namespace subsystem_windows
 
 
 
