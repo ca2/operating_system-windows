@@ -37,6 +37,12 @@ namespace subsystem_win32
    {
    }
 
+   Shell::~Shell()
+   {
+
+
+   }
+
    void Shell::runAsAdmin(const ::file::path & pathToFile, const ::scoped_string & scopedstrParameters)
    {
       SHELLEXECUTEINFO sei;

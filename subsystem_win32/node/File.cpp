@@ -68,7 +68,7 @@
    } // namespace subsystem_win32
 
 
-CLASS_DECL_SUBSYSTEM_WIN32 HANDLE as_HANDLE(::subsystem::File * pfile)
+CLASS_DECL_SUBSYSTEM_WIN32 HANDLE as_HANDLE(::subsystem::FileInterface * pfile)
 {
 
    ::cast < ::subsystem_win32::File > pwindowssubsystemfile = pfile;

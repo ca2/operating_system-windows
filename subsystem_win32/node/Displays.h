@@ -39,6 +39,15 @@ namespace subsystem_win32
    public:
 
 
+      int m_xVirtualScreen;
+      int m_yVirtualScreen;
+
+      ::array_base<::int_rectangle> m_displayRects;
+      critical_section m_displayRectsMutex;
+
+      static const unsigned int UPDATE_INTERVAL = 3000;
+      class ::time m_latestUpdateTime;
+
       Displays();
       ~Displays() override;
 
@@ -54,22 +63,15 @@ namespace subsystem_win32
       // Updates internal information to a current state.
       virtual void update() override;
 
-      // static BOOL CALLBACK monitorEnumProc(HMONITOR hMonitor,
-      //                                      HDC hdcMonitor,
-      //                                      LPRECT lprcMonitor,
-      //                                      LPARAM dwData);
+      static BOOL CALLBACK monitorEnumProc(HMONITOR hMonitor,
+                                           HDC hdcMonitor,
+                                           LPRECT lprcMonitor,
+                                           LPARAM dwData);
 
       // Returns true if the update() function has been called lately.
       virtual bool isAlreadyUpdated() override;
 
-      // int m_xVirtualScreen;
-      // int m_yVirtualScreen;
-      //
-      // ::array_base<::int_rectangle> m_displayRects;
-      // LocalMutex m_displayRectsMutex;
-      //
-      // static const unsigned int UPDATE_INTERVAL = 3000;
-      // class ::time m_latestUpdateTime;
+
    };
 
 
