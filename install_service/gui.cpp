@@ -686,7 +686,7 @@ int erase(HWND window) {
     }
 
     /* Confirm */
-    if (popup_message(window, MB_YESNO, NSSM_GUI_ASK_REMOVE_SERVICE, service->name) != ::innate_subsystem::IDYES) {
+    if (popup_message(window, MB_YESNO, NSSM_GUI_ASK_REMOVE_SERVICE, service->name) != ::subsystem_apex::IDYES) {
       cleanup_nssm_service(service);
       return 0;
     }
