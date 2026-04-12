@@ -24,26 +24,26 @@
 
 #pragma once
 
-//
+#include "acme/subsystem/thread/Thread.h"
 #include "subsystem_win32/_common_header.h"
 //#include "critical_section.h"
 //#include "DesktopSelector.h"
 
-namespace  subsystem
+namespace  subsystem_win32
 {
-   /**
-    * Thread priority enumeration.
-    */
-   enum THREAD_PRIORITY
-   {
-      PRIORITY_IDLE,
-      PRIORITY_LOWEST,
-      PRIORITY_BELOW_NORMAL,
-      PRIORITY_NORMAL,
-      PRIORITY_ABOVE_NORMAL,
-      PRIORITY_HIGHEST,
-      PRIORITY_TIME_CRITICAL
-    };
+   // /**
+   //  * Thread priority enumeration.
+   //  */
+   // enum THREAD_PRIORITY
+   // {
+   //    PRIORITY_IDLE,
+   //    PRIORITY_LOWEST,
+   //    PRIORITY_BELOW_NORMAL,
+   //    PRIORITY_NORMAL,
+   //    PRIORITY_ABOVE_NORMAL,
+   //    PRIORITY_HIGHEST,
+   //    PRIORITY_TIME_CRITICAL
+   //  };
 
    /**
     * Thread class.
@@ -52,7 +52,8 @@ namespace  subsystem
     * @fixme some methods seems to be not thread-safe (that uses m_active member).
     * @fixme member of HDESK type in THREAD class???
     */
-   class CLASS_DECL_REMOTING_COMMON Thread
+   class CLASS_DECL_SUBSYSTEM_WIN32 Thread :
+   virtual public ::subsystem::implementation<::subsystem::ThreadInterface>
    {
    public:
       /**
@@ -70,71 +71,71 @@ namespace  subsystem
        * Waits until thread stops.
        * @return false on error.
        */
-      bool wait();
+      ::e_status wait() override;
       /**
        * Suspends thread execution.
        * @return false on error.
        */
-      bool suspend();
+      bool suspend() override;
       /**
        * Resume thread execution.
        * @return false on error.
        */
-      bool resume();
+      bool resume() override;
       /**
        * Terminates thread execution.
        * @remark thread-safe.
        */
-      virtual void terminate();
+      virtual void terminate() override;
 
       /**
        * Checks if thread is not dead.
        * @return true if thread is not dead (still running or suspended).
        */
-      bool isActive() const;
+      bool isActive() const override;
 
       /**
        * Returns thread id.
        */
-      DWORD getThreadId() const;
+      ::itask getThreadId() const override;
 
       /**
        * Sets thread priority.
        * @param value thread priority.
        */
-      bool setPriority(THREAD_PRIORITY value);
+      bool setPriority(subsystem::THREAD_PRIORITY value) override;
 
       /**
        * Suspends the execution of the current thread until the time-out interval elapses.
        * @param millis time to sleep.
        */
-      static void sleep(DWORD millis);
+      //static void sleep(DWORD millis);
 
       /**
        * Yield execution to the next ready thread.
        */
-      static void yield();
+      void yield() override;
 
-   protected:
+   //protected:
       /**
        * Returns true if terminate() method was called.
        * @remark thread-safe.
        */
-      bool isTerminating();
+      bool isTerminating() override;
 
       /**
        * Slot of terminate() signal.
        * Method called from terminate() method.
        * Can be overrided by subclasses to gracefully shutdown thread.
        */
-      virtual void onTerminate();
+      virtual void onTerminate() override;
 
       /**
        * Thread's runnable body.
        */
-      virtual void execute() = 0;
+      virtual void execute() override;
 
-   private:
+   ////private:
       /**
        * WinApi thread func.
        */
@@ -142,9 +143,9 @@ namespace  subsystem
 
       // This function calling before call a derived execute() function to
       // perform any additional action.
-      virtual void initByDerived();
+      virtual void initByDerived() override;
 
-   private:
+   //private:
       /**
        * Win32 thread handle.
        */

@@ -103,10 +103,22 @@ namespace innate_subsystem_win32
       HICON          m_hicon;
       bool           m_bWndCreated;
       //WNDPROC        m_wndprocDefault;
+      bool m_sizeIsChanged;
+      ::string m_strTooltip;
+      ::wstring m_wstrToolTip;
       bool           m_bShowCursor;
       bool m_bHasClipboardViewerInterest = false;
       HWND m_hwndNextViewer = nullptr;
       bool m_bDoubleBuffering = false;
+      bool m_bMinimized = false;
+      bool m_isFullScr = false;
+      bool m_isMinimizedFromFullScreen = false;
+      // It's size of work-area in windowed mode. It is necessary for restore size of window.
+      WINDOWPLACEMENT   m_windowplacementWorkArea;
+      //WINDOWPLACEMENT m_workArea;
+      // It's size of optimal size of work-area in windowed mode.
+      ::int_rectangle m_rectangleNormal;
+
 
       ::int_rectangle m_clientArea;
 
@@ -179,7 +191,8 @@ namespace innate_subsystem_win32
       void setEnabled(bool bEnable) override;
       void updateWindow() override;
       bool setSize(const ::int_size & size) override;
-      bool setPosition(int xPos, int yPos) override;
+      bool setPosition(const ::int_point & point) override;
+      bool setPlacement(const ::int_rectangle & rectangle) override;
       void setWindowText(const ::scoped_string  & scopedstrText) override;
 
 
@@ -218,6 +231,10 @@ namespace innate_subsystem_win32
       bool isVisible() override;
 
       bool isIconic() override;
+
+      bool isMinimized() override;
+
+      bool isFullScreen() override;
 
       //
       // Invalidates control
@@ -279,7 +296,23 @@ namespace innate_subsystem_win32
       void postMessage(unsigned int Msg, ::wparam wparam = 0, ::lparam lparam = 0) override;
 
       ::int_rectangle getClientRect() override;
+      ::int_rectangle getFullScreenRect() override;
       ::int_size getBorderSize() override;
+      ::int_rectangle getScreenWorkArea() override;
+
+
+      //void doRestoreFromFullScreen() override;
+      void minimizeWindow() override;
+      void restoreWindow() override;
+      void doFullScreen() override;
+      void doUnFullScreen() override;
+      void adjustWindowSize() override;
+
+      virtual void _doRestoreFromFullScreen();
+      virtual void _setSizeFullScreenWindow();
+      virtual void _doMinimizeFromFullScreen();
+      virtual void _doRestoreToFullScreen();
+      virtual bool _applyScreenChanges(int fullscreen);
 
       //static LRESULT CALLBACK s_window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
       //virtual bool on_window_procedure(LRESULT &lresult, UINT message, WPARAM wparam, LPARAM lparam) override;
@@ -310,6 +343,13 @@ namespace innate_subsystem_win32
 
 
       virtual void doPaint();
+      void onBeforeFullScreen(bool bRestore) override;
+      void onAfterFullScreen(bool bRestore) override;
+      void onBeforeUnFullScreen(bool bMinimizing) override;
+      void onAfterUnFullScreen(bool bMinimizing) override;
+      bool onGetTooltip(int iControl, string &strTooltip) override;
+      bool onCalculateDefaultSize(int_rectangle &rectangleDefaultSize) override;
+      void onAdjustWindowSize() override;
 
    };
 

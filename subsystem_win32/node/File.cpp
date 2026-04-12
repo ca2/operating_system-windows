@@ -22,13 +22,11 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
-#include "Cursor.h"
+#include "File.h"
 
 
 
-namespace subsystem_win32
-{
+
    namespace subsystem_win32
    {
 
@@ -59,7 +57,15 @@ namespace subsystem_win32
       }
 
 
-} // namespace subsystem_win32
+      void *File::_HANDLE()
+      {
+
+         return m_handle;
+
+      }
+
+
+   } // namespace subsystem_win32
 
 
 CLASS_DECL_SUBSYSTEM_WIN32 HANDLE as_HANDLE(::subsystem::File * pfile)

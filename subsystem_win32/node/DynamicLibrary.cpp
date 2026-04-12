@@ -25,42 +25,54 @@
 #include "subsystem_win32/_common_header.h"
 #include "DynamicLibrary.h"
 
-#include <crtdbg.h>
+//#include <crtdbg.h>
 
-DynamicLibrary::DynamicLibrary(const ::scoped_string & scopedstrFilename)
-: m_module(0)
+
+namespace subsystem_win32
 {
-  init(scopedstrFilename);
-}
+   // DynamicLibrary::DynamicLibrary(const ::scoped_string & scopedstrFilename)
+   // : m_module(null)
+   // {
+   //    init(scopedstrFilename);
+   // }
 
-DynamicLibrary::DynamicLibrary()
-: m_module(0)
-{
-}
+   DynamicLibrary::DynamicLibrary()
+   : m_module(0)
+   {
+   }
 
-DynamicLibrary::~DynamicLibrary()
-{
-  if (m_module != 0) {
-    FreeLibrary(m_module);
-  }
-}
+   DynamicLibrary::~DynamicLibrary()
+   {
+      if (m_module != 0) {
+         FreeLibrary(m_module);
+      }
+   }
 
-void DynamicLibrary::init(const ::scoped_string & scopedstrFilename)
-{
-  m_module = LoadLibrary(::wstring(scopedstrFilename));
 
-  if (m_module == 0) {
-    ::string errMsg;
+   void DynamicLibrary::initialize_dynamic_library(const ::scoped_string & scopedstrFilename)
+///: m_module(0)
+   {
+      init(scopedstrFilename);
+   }
 
-    errMsg.format("{} library not found", scopedstrFilename);
+   void DynamicLibrary::init(const ::scoped_string & scopedstrFilename)
+   {
+      m_module = LoadLibrary(::wstring(scopedstrFilename));
 
-    throw ::subsystem::Exception(errMsg);
-  }
-}
+      if (m_module == 0) {
+         ::string errMsg;
 
-FARPROC DynamicLibrary::getProcAddress(const char *procName)
-{
-  _ASSERT(m_module != 0);
+         errMsg.format("{} library not found", scopedstrFilename);
 
-  return ::GetProcAddress(m_module, procName);
-}
+         throw ::subsystem::Exception(errMsg);
+      }
+   }
+
+   void * DynamicLibrary::getProcAddress(const char *procName)
+   {
+      _ASSERT(m_module != 0);
+
+      return ::GetProcAddress(m_module, procName);
+   }
+}  // namespace subsystem_win32
+

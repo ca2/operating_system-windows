@@ -35,12 +35,20 @@ namespace subsystem_win32
       virtual public ::subsystem::implementation<::subsystem::FileInterface>
    {
    public:
-      File();
-      ~File() override;
+
+
 
       HANDLE m_handle;
 
       bool m_bOwned;
+
+
+      File();
+      ~File() override;
+
+
+      void * _HANDLE() override;
+
 
    };
 

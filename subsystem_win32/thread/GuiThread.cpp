@@ -23,25 +23,32 @@
 //
 #include "framework.h"
 #include "GuiThread.h"
+#include "DesktopSelector.h"
 
-GuiThread::GuiThread()
-: m_hDesk(0)
+namespace subsystem_win32
 {
-  m_hDesk = DesktopSelector::getInputDesktop();
-}
+   GuiThread::GuiThread()
+   : m_desk(0)
+   {
+      m_desk = main_subsystem()->desktop_selector()->getInputDesktop();
+   }
 
-GuiThread::~GuiThread()
-{
-  if (m_hDesk) {
-    DesktopSelector::closeDesktop(m_hDesk);
-  }
-}
+   GuiThread::~GuiThread()
+   {
+      if (m_desk.m_u) {
+          main_subsystem()->desktop_selector()->closeDesktop(m_desk);
+      }
+   }
 
-void GuiThread::initByDerived()
-{
-  DesktopSelector::setDesktopToCurrentThread(m_hDesk);
-  // If unsuccessful, desktop will be closed in destructor
-  if (DesktopSelector::closeDesktop(m_hDesk)) {
-    m_hDesk = 0;
-  }
-}
+   void GuiThread::initByDerived()
+   {
+       main_subsystem()->desktop_selector()->setDesktopToCurrentThread(m_desk);
+      // If unsuccessful, desktop will be closed in destructor
+      if ( main_subsystem()->desktop_selector()->closeDesktop(m_desk)) {
+         m_desk = 0;
+      }
+   }
+} // namespace subsystem_win32
+
+
+

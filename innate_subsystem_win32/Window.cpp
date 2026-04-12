@@ -27,7 +27,8 @@
 #include "drawing/Cursor.h"
 #include "drawing/Icon.h"
 #include "Menu.h"
-
+#include "acme/subsystem/node/SystemInformation.h"
+#include "acme/subsystem/subsystem.h"
 #include "apex/innate_subsystem/drawing/Brush.h"
 #include "drawing/Bitmap.h"
 #include "drawing/Brush.h"
@@ -41,7 +42,8 @@ namespace innate_subsystem_win32
    Window::Window()
       : // m_windowswindow.as_HWND()(0),
    //   m_hicon(0),
-      m_bWndCreated(false)
+      m_bWndCreated(false),
+   m_sizeIsChanged(false)
    {
    }
 
@@ -247,11 +249,20 @@ namespace innate_subsystem_win32
                             SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);
    }
 
-   bool Window::setPosition(int xPos, int yPos)
+   bool Window::setPosition(const ::int_point & point)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
-      return !!SetWindowPos(m_windowswindow.as_HWND(), 0, xPos, yPos, 0, 0,
+      return !!SetWindowPos(m_windowswindow.as_HWND(), 0, point.x, point.y, 0, 0,
                             SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+   }
+
+   bool Window::setPlacement(const ::int_rectangle & rectangle)
+   {
+      _ASSERT(m_windowswindow.as_HWND() != 0);
+      return !!SetWindowPos(m_windowswindow.as_HWND(), 0,
+         rectangle.left, rectangle.top,
+         rectangle.width(), rectangle.height(),
+                            SWP_NOZORDER | SWP_NOACTIVATE);
    }
 
    void Window::setParent(const ::operating_system::window & operatingsystemwindow)
@@ -462,6 +473,16 @@ namespace innate_subsystem_win32
       return ::IsIconic(m_windowswindow.as_HWND()) != FALSE;
    }
 
+   bool Window::isMinimized()
+   {
+      return m_bMinimized;
+   }
+
+   bool Window::isFullScreen()
+   {
+      return m_isFullScr;
+   }
+
    void Window::invalidate()
    {
       InvalidateRect(m_windowswindow.as_HWND(), NULL, TRUE);
@@ -505,6 +526,302 @@ namespace innate_subsystem_win32
       ::copy(rectangle, rect);
 
       return rectangle;
+
+   }
+
+
+   ::int_rectangle Window::getFullScreenRect()
+   {
+
+
+      // Get size of desktop.
+      HMONITOR hmon = MonitorFromWindow(m_windowswindow.as_HWND(), MONITOR_DEFAULTTONEAREST);
+      MONITORINFO mi;
+      mi.cbSize = sizeof(mi);
+
+      RECT fullScreenWindowsRect;
+      if (!!GetMonitorInfo(hmon, &mi)) {
+         fullScreenWindowsRect = mi.rcMonitor;
+      }
+      else {
+         warning("Get monitor info is failed. Use second method (no multi-screen).");
+         GetWindowRect(GetDesktopWindow(), &fullScreenWindowsRect);
+      }
+      ::int_rectangle fullScreenRect;
+      fullScreenRect = fullScreenWindowsRect;
+
+
+      return fullScreenRect;
+   }
+
+
+   ::int_rectangle Window::getScreenWorkArea()
+   {
+
+      // Get work area.
+      ::int_rectangle rectangleScreenWorkArea;
+
+      HMONITOR hmon = MonitorFromWindow(m_windowswindow.as_HWND(), MONITOR_DEFAULTTONEAREST);
+      MONITORINFO mi;
+      mi.cbSize = sizeof(mi);
+
+      if (!!GetMonitorInfo(hmon, &mi)) {
+         rectangleScreenWorkArea = mi.rcWork;
+      } else {
+         debug("Get monitor info is failed. Use second method (no multi-screen).");
+         ::int_rectangle desktopRc;
+         if (!main_subsystem()->system_information()->getDesktopArea(desktopRc)) {
+            main_subsystem()->system_information()->getDesktopAllArea(desktopRc);
+         }
+         rectangleScreenWorkArea  = desktopRc;
+      }
+
+
+      return rectangleScreenWorkArea;
+
+   }
+
+   void Window::_setSizeFullScreenWindow()
+   {
+      // Save position of window.
+      GetWindowPlacement(m_windowswindow.as_HWND(), &m_windowplacementWorkArea);
+
+      auto fullScreenRect = getFullScreenRect();
+
+      setStyle((getStyle() | WS_MAXIMIZE) & ~(WS_CAPTION | WS_BORDER | WS_THICKFRAME  | WS_MAXIMIZEBOX));
+      setExStyle(getExStyle() | WS_EX_TOPMOST);
+
+      SetWindowPos(m_windowswindow.as_HWND(), 0,
+                   fullScreenRect.left, fullScreenRect.top,
+                   fullScreenRect.width(), fullScreenRect.height(),
+                   SWP_SHOWWINDOW);
+   }
+
+
+   void Window::_doRestoreFromFullScreen()
+   {
+      // Restore position, style and exstyle of windowed window.
+      setStyle(getStyle() | WS_CAPTION | WS_BORDER | WS_THICKFRAME | WS_MAXIMIZEBOX);
+      setExStyle(getExStyle() & ~WS_EX_TOPMOST);
+      ::int_rectangle workArea;
+      workArea = m_windowplacementWorkArea.rcNormalPosition;
+      if (m_rectangleNormal.height() == workArea.height() ||
+          m_rectangleNormal.width() == workArea.width()) {
+         SetWindowPlacement(m_windowswindow.as_HWND(), &m_windowplacementWorkArea);
+          } else {
+             setStyle(getStyle() & ~WS_MAXIMIZE);
+             setPlacement(m_rectangleNormal);
+          }
+
+
+   }
+
+
+   void Window::_doRestoreToFullScreen()
+   {
+      if (m_isFullScr) {
+         return;
+      }
+
+
+      onBeforeFullScreen(true);
+
+      // m_pconnectionconfig->enableFullscreen(true);
+      // m_pconnectionconfig->saveToStorage(&m_ccsm);
+      //
+      // //auto config = ::remoting::ViewerConfig::getInstance();
+      // //m_bToolBar = m_toolbar.isVisible();
+      // //m_toolbar.hide();
+      //
+      // //m_menu.checkedMenuItem(IDS_TB_FULLSCREEN, true);
+      // //m_menu.checkedMenuItem(IDS_TB_TOOLBAR, false);
+      // //m_menu.enableMenuItem(IDS_TB_TOOLBAR, 1);
+
+      _setSizeFullScreenWindow();
+
+      //SetFocus(m_desktopwindow.getHWnd());
+      //m_desktopwindow.setFocus();
+      _applyScreenChanges(true);
+
+
+      onAfterFullScreen(true);
+      // try {
+      //    // Registration of keyboard hook.
+      //    m_operatingsystemhook.registerKeyboardHook(this);
+      //    // Switching off ignoring win key.
+      //    m_desktopwindow.setWinKeyIgnore(false);
+      // }
+      // catch (::exception& e) {
+      //    m_plogwriter->error("{}", e.get_message());
+      // }
+   }
+
+
+   void Window::doUnFullScreen()
+    {
+        if (!m_isFullScr) {
+            return;
+        }
+
+      onBeforeUnFullScreen(false);
+
+       _doRestoreFromFullScreen();
+
+//        m_desktopwindow.setScale(m_scale);
+        _applyScreenChanges(false);
+
+      onAfterUnFullScreen(false);
+
+    }
+
+
+   void Window::adjustWindowSize()
+   {
+      // If size isn't changed by user, then adjust size.
+      if (!m_sizeIsChanged) {
+         ::int_rectangle defaultSize;
+         bool bHasDefaultSize = onCalculateDefaultSize(defaultSize);
+
+         bool bDefaultSizeIsChanged = false;
+
+         if (bHasDefaultSize)
+         {
+            bDefaultSizeIsChanged = defaultSize.width() != m_rectangleNormal.width() ||
+                                     defaultSize.height() != m_rectangleNormal.height();
+         }
+         // If size is changed, isn't full screen, if window isn't maximized,
+         // then set new position and size.
+         if (!m_isFullScr && bDefaultSizeIsChanged) {
+            m_rectangleNormal = defaultSize;
+            setPlacement(m_rectangleNormal);
+//            setSize(m_rcNormal.width(), m_rcNormal.height());
+         }
+
+         onAdjustWindowSize();
+      }
+   }
+
+
+    void Window::_doMinimizeFromFullScreen()
+    {
+        if (!m_isFullScr) {
+            return;
+        }
+
+      onBeforeFullScreen(true);
+        // m_pconnectionconfig->enableFullscreen(false);
+        // m_pconnectionconfig->saveToStorage(&m_ccsm);
+
+        //m_menu.checkedMenuItem(IDS_TB_FULLSCREEN, false);
+        //m_menu.checkedMenuItem(IDS_TB_TOOLBAR, m_bToolBar);
+
+        //if (m_bToolBar) {
+        //    m_toolbar.show();
+        //}
+        //else {
+        //    m_toolbar.hide();
+        //}
+
+        //unsigned int isEnable = static_cast<unsigned int>(m_pconnectionconfig->isViewOnly());
+        //m_menu.enableMenuItem(IDS_TB_TOOLBAR, isEnable);
+
+        //// Restore position, style and exstyle of windowed window.
+        //set_style(get_style() | WS_CAPTION | WS_BORDER | WS_THICKFRAME | WS_MAXIMIZEBOX);
+        setExStyle(getExStyle() & ~WS_EX_TOPMOST);
+        //::int_rectangle workArea;
+        //workArea = m_workArea.rcNormalPosition;
+        //if (m_rcNormal.height() == workArea.height() ||
+        //    m_rcNormal.width() == workArea.width()) {
+        //    SetWindowPlacement(m_hwnd, &m_workArea);
+        //}
+        //else {
+        //    set_style(get_style() & ~WS_MAXIMIZE);
+        //    setPosition(m_rcNormal.left, m_rcNormal.top);
+        //    setSize(m_rcNormal.width(), m_rcNormal.height());
+        //}
+
+        //    m_desktopwindow.setScale(m_scale);
+        _applyScreenChanges(false);
+
+      onAfterUnFullScreen(true);
+        //// Unregistration of keyboard hook.
+        //m_winHooks.unregisterKeyboardHook(this);
+        //// Switching on ignoring win key.
+        //m_desktopwindow.setWinKeyIgnore(true);
+    }
+
+
+   void Window::minimizeWindow()
+   {
+
+      //m_pdesktopwindow->m_viewerCore->ge
+      m_bMinimized = true;
+      if (m_isFullScr)
+      {
+         m_isMinimizedFromFullScreen = true;
+         _doMinimizeFromFullScreen();
+
+      }
+      ::ShowWindow(m_windowswindow.as_HWND(), SW_MINIMIZE);
+
+
+   }
+
+
+   void Window::restoreWindow()
+   {
+
+      //ShowWindow(m_hwnd, SW_RESTORE);
+      show();
+      if (m_isMinimizedFromFullScreen)
+      {
+
+         _doRestoreToFullScreen();
+
+      }
+
+
+      m_bMinimized = false;
+
+
+   }
+
+
+   void Window::doFullScreen()
+   {
+
+      //void ViewerWindow::doFullScr()
+      //{
+         if (m_isFullScr) {
+            return;
+         }
+
+         onBeforeFullScreen(false);
+
+         _setSizeFullScreenWindow();
+
+         _applyScreenChanges(true);
+
+
+      onAfterFullScreen(false);
+      //
+      //    //SetFocus(m_desktopwindow.getHWnd());
+      //    m_desktopwindow.setFocus();
+      //
+      //    if (config->isPromptOnFullscreenEnabled()) {
+      //       postMessage(WM_USER_FS_WARNING);
+      //    }
+      //
+      //    try {
+      //       // Registration of keyboard hook.
+      //       m_operatingsystemhook.registerKeyboardHook(this);
+      //       // Switching off ignoring win key.
+      //       m_desktopwindow.setWinKeyIgnore(false);
+      //    } catch (::exception &e) {
+      //       m_plogwriter->error("{}", e.get_message());
+      //    }
+      // }
+
 
    }
 
@@ -671,6 +988,10 @@ namespace innate_subsystem_win32
 
       switch (message)
       {
+
+         case WM_SIZING:
+            m_sizeIsChanged = true;
+            return false;
          case WM_CREATE:
          {
 
@@ -748,6 +1069,19 @@ break;
          return onCommand(wparam, lparam);
       case WM_NOTIFY:
       {
+
+         LPTOOLTIPTEXT toolTipText = reinterpret_cast<LPTOOLTIPTEXT>(lparam.m_lparam);
+         if (toolTipText->hdr.code == TTN_NEEDTEXT)
+         {
+///            ::string strTooltip;
+            if (onGetTooltip(toolTipText->hdr.idFrom, m_strTooltip))
+            {
+               m_wstrToolTip = m_strTooltip;
+               toolTipText->lpszText = const_cast<TCHAR *>(m_wstrToolTip.c_str());
+               return true;
+            }
+         }
+
          if (_000OnNotify(lresult, wparam, lparam))
          {
 
@@ -897,6 +1231,60 @@ break;
    {
       //return false;
    }
+
+   void Window::onBeforeFullScreen(bool bRestore)
+   {
+
+      m_pcomposite->onBeforeFullScreen(bRestore);
+
+   }
+
+   void Window::onAfterFullScreen(bool bRestore)
+   {
+
+      m_pcomposite->onAfterFullScreen(bRestore);
+
+   }
+
+   void Window::onBeforeUnFullScreen(bool bMinimizing)
+   {
+
+      m_pcomposite->onBeforeUnFullScreen(bMinimizing);
+
+   }
+
+   void Window::onAfterUnFullScreen(bool bMinimizing)
+   {
+
+      m_pcomposite->onAfterUnFullScreen(bMinimizing);
+
+   }
+
+
+   bool Window::onGetTooltip(int iControl, ::string & strTooltip)
+   {
+
+      return m_pcomposite->onGetTooltip(iControl, strTooltip);
+
+   }
+
+
+
+   bool Window::onCalculateDefaultSize(::int_rectangle & rectangleDefaultSize)
+   {
+
+      return m_pcomposite->onCalculateDefaultSize(rectangleDefaultSize);
+
+   }
+
+
+   void Window::onAdjustWindowSize()
+   {
+
+      return m_pcomposite->onAdjustWindowSize();
+
+   }
+
 
 } // namespace innate_subsystem_win32
 // } // namespace windows

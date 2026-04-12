@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include "acme/subsystem/node/SystemException.h"
+#include "acme/subsystem/node/Keyboard.h"
 //#include "remoting/remoting_common/util/winhdr.h"
 #include "subsystem_win32/_common_header.h"
 
@@ -34,7 +34,8 @@ namespace subsystem_win32
       /**
        * Wrapper on base WinAPI keyboard functions.
        */
-      class CLASS_DECL_REMOTING_COMMON Keyboard
+      class CLASS_DECL_SUBSYSTEM_WIN32 Keyboard :
+   virtual public ::subsystem::implementation<subsystem::KeyboardInterface>
       {
       public:
          /**
@@ -42,21 +43,21 @@ namespace subsystem_win32
           * @param state [out] array of 256 virtual key states.
           * @throws SystemException on error.
           */
-         static void getState(BYTE state[256]);
+         void getState(BYTE state[256]) override;
 
          /**
           * Sets current keyboard state.
           * @param state array of 256 virtual key states.
           * @throws SystemException on error.
           */
-         static void setState(BYTE state[256]);
+         void setState(BYTE state[256]) override;
 
          /**
           * Check if specified key is in pressed state.
           * @param vkCode virtual code of key.
           * @return true if key is pressed, false if released.
           */
-         static bool isKeyPressed(BYTE vkCode);
+         bool isKeyPressed(BYTE vkCode) override;
 
       };
 } // namespace subsystem_win32

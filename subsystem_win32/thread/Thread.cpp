@@ -23,7 +23,7 @@
 //
 #include "framework.h"
 #include "Thread.h"
-#include "critical_section_lock.h"
+//#include "critical_section_lock.h"
 #include "acme/subsystem/Exception.h"
 
 namespace subsystem_win32
@@ -62,12 +62,12 @@ namespace subsystem_win32
       // If is needed this function will be inherited by a derived class.
    }
 
-   bool Thread::wait()
+   ::e_status Thread::wait()
    {
       if (m_active) {
-         return (WaitForSingleObject(m_hThread, INFINITE) != WAIT_FAILED);
+         return (WaitForSingleObject(m_hThread, INFINITE) != WAIT_FAILED) ? ::success : error_failed;
       } else {
-         return true;
+         return ::success;
       }
    }
 
@@ -99,36 +99,36 @@ namespace subsystem_win32
       return m_active;
    }
 
-   DWORD Thread::getThreadId() const
+   ::itask Thread::getThreadId() const
    {
       return m_threadID;
    }
 
-   bool Thread::setPriority(THREAD_PRIORITY value)
+   bool Thread::setPriority(::subsystem::THREAD_PRIORITY value)
    {
       int priority;
 
       switch(value)
       {
-         case PRIORITY_IDLE:
+         case ::subsystem::PRIORITY_IDLE:
             priority = THREAD_PRIORITY_IDLE;
             break;
-         case PRIORITY_LOWEST:
+         case ::subsystem::PRIORITY_LOWEST:
             priority = THREAD_PRIORITY_LOWEST;
             break;
-         case PRIORITY_BELOW_NORMAL:
+         case ::subsystem::PRIORITY_BELOW_NORMAL:
             priority = THREAD_PRIORITY_BELOW_NORMAL;
             break;
-         case PRIORITY_NORMAL:
+         case ::subsystem::PRIORITY_NORMAL:
             priority = THREAD_PRIORITY_NORMAL;
             break;
-         case PRIORITY_ABOVE_NORMAL:
+         case ::subsystem::PRIORITY_ABOVE_NORMAL:
             priority = THREAD_PRIORITY_ABOVE_NORMAL;
             break;
-         case PRIORITY_HIGHEST:
+         case ::subsystem::PRIORITY_HIGHEST:
             priority = THREAD_PRIORITY_HIGHEST;
             break;
-         case PRIORITY_TIME_CRITICAL:
+         case ::subsystem::PRIORITY_TIME_CRITICAL:
             priority = THREAD_PRIORITY_TIME_CRITICAL;
             break;
          default:
@@ -138,10 +138,10 @@ namespace subsystem_win32
       return SetThreadPriority(m_hThread, priority) != 0;
    }
 
-   void Thread::sleep(DWORD millis)
-   {
-      Sleep(millis);
-   }
+   // void Thread::sleep(DWORD millis)
+   // {
+   //    Sleep(millis);
+   // }
 
    void Thread::yield()
    {

@@ -28,6 +28,7 @@
 #include "resource_loader.h"
 #include "drawing/Icon.h"
 #include "drawing/Cursor.h"
+#include "acme/operating_system/windows/user.h"
 //#include "util/UnicodeStringStorage.h"
 
 // #include aaa_<crtdbg.h>
@@ -43,21 +44,23 @@ namespace innate_subsystem_win32
    resource_loader::~resource_loader()
    {}//h
 
-   ::pointer < innate_subsystem::IconInterface > resource_loader::loadStandartIcon(const char* iconName)
+   ::pointer < innate_subsystem::IconInterface > resource_loader::loadStandardIcon(enum_cursor ecursor)
    {
 
       auto picon = create_newø<::innate_subsystem_win32::Icon>();
-      //return LoadIcon(NULL, iconName);
-      if ((::iptr)iconName < 65536)
-      {
-         picon->m_hicon = ::LoadIcon(NULL, (LPCWSTR) iconName);
 
-      }
-      else
-      {
-         ::wstring wstrIconName(iconName);
-         picon->m_hicon = ::LoadIcon(NULL, wstrIconName);
-      }
+      auto lpcwsz = (LPCWSTR)::windows::get_system_cursor(ecursor);
+      //return LoadIcon(NULL, iconName);
+      // if ((::iptr)iconName < 65536)
+      // {
+         picon->m_hicon = ::LoadIcon(NULL, lpcwsz);
+      //
+      // }
+      // else
+      // {
+      //    ::wstring wstrIconName(iconName);
+      //    picon->m_hicon = ::LoadIcon(NULL, wstrIconName);
+      // }
 
       //throw ::interface_only();
       return picon;

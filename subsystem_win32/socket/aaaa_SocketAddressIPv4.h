@@ -28,40 +28,45 @@
 
 #include "acme/subsystem/_common_header.h"
 //#include "acme/subsystem/thread/critical_section.h"
-#include "SocketException.h"
+#include "acme/subsystem/socket/SocketException.h"
 #include "sockdefs.h"
-#include "remoting/remoting_common/win_system/WsaStartup.h"
+//#include "remoting/remoting_common/win_system/WsaStartup.h"
 
-// FIXME: Deprecated method, only for testing of old code.
-void getLocalIPAddrString(char *buffer, int buflen);
 
-class CLASS_DECL_REMOTING_COMMON SocketAddressIPv4
+namespace  subsystem_win32
 {
-public:
-  SocketAddressIPv4();
-  SocketAddressIPv4(struct sockaddr_in);
-  SocketAddressIPv4(const ::scoped_string & scopedstrHost, unsigned short port);
-
-  SocketAddressIPv4(const SocketAddressIPv4 &socketAddressIPv4);
-  SocketAddressIPv4 &operator=(const SocketAddressIPv4 &socketAddressIPv4);
-
-  socklen_t getAddrLen() const;
-  struct sockaddr_in getSockAddr() const;
-
-  // Converts socket address to it's string value (ip address as string).
-  ::string toString() const;
-
-  // Returns socket port number 
-  unsigned short getPort() const;
-
-  static SocketAddressIPv4 resolve(const ::scoped_string & scopedstrHost, unsigned short port);
-
-protected:
-  WsaStartup m_wsaStartup;
-  unsigned short m_port;
-  struct in_addr m_addr;
-
-  static critical_section s_resolveMutex;
-};
+   // FIXME: Deprecated method, only for testing of old code.
+   void getLocalIPAddrString(char *buffer, int buflen);
 
 
+
+   class CLASS_DECL_REMOTING_COMMON SocketAddressIPv4 :
+   v
+   {
+   public:
+      SocketAddressIPv4();
+      SocketAddressIPv4(struct sockaddr_in);
+      SocketAddressIPv4(const ::scoped_string & scopedstrHost, unsigned short port);
+
+      SocketAddressIPv4(const SocketAddressIPv4 &socketAddressIPv4);
+      SocketAddressIPv4 &operator=(const SocketAddressIPv4 &socketAddressIPv4);
+
+      socklen_t getAddrLen() const;
+      struct sockaddr_in getSockAddr() const;
+
+      // Converts socket address to it's string value (ip address as string).
+      ::string toString() const;
+
+      // Returns socket port number
+      unsigned short getPort() const;
+
+      static SocketAddressIPv4 resolve(const ::scoped_string & scopedstrHost, unsigned short port);
+
+   //protected:
+     // WsaStartup m_wsaStartup;
+      unsigned short m_port;
+      struct in_addr m_addr;
+
+      static critical_section s_resolveMutex;
+   };
+} // namespace  subsystem_win32

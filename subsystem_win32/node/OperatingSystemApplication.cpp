@@ -57,6 +57,9 @@ namespace subsystem_win32
 //          HINSTANCE appInstance,
  //                                         const ::scoped_string & scopedstrwindowClassName
    }
+
+
+
    void OperatingSystemApplication::run()
    {
       // WNDCLASS wndClass;

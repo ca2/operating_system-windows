@@ -24,57 +24,71 @@
 #include "framework.h"
 #include "subsystem_win32/_common_header.h"
 #include "EmulatedAnonymousPipeFactory.h"
-#include "remoting/remoting_common/win_system/SecurityAttributes.h"
-#include "remoting/remoting_common/win_system/PipeServer.h"
-#include "remoting/remoting_common/win_system/PipeClient.h"
+#include "security/SecurityAttributes.h"
+#include "File.h"
+#include "PipeServer.h"
+#include "PipeClient.h"
 #include <time.h>
 
 
-
-EmulatedAnonymousPipeFactory::EmulatedAnonymousPipeFactory(unsigned int bufferSize, LogWriter *log)
-: m_bufferSize(bufferSize),
-  m_log(log)
+namespace subsystem_win32
 {
-}
-
-EmulatedAnonymousPipeFactory::~EmulatedAnonymousPipeFactory()
-{
-}
-
-void EmulatedAnonymousPipeFactory::generatePipes(NamedPipe **serverPipe, bool serverInheritable,
-                                                 NamedPipe **clientPipe, bool clientInheritable)
-{
-  SecurityAttributes secAttr;
-  secAttr.setInheritable();
-
-  ::string randomName;
-  randomName = getUniqPipeName();
-  PipeServer pipeServer(randomName, m_bufferSize, 0, 1000);
-  *clientPipe = PipeClient::connect(randomName, m_bufferSize);
-  *serverPipe = pipeServer.accept();
-
-  HANDLE hThisSideWrite = (*serverPipe)->getHandle();
-  HANDLE hOtherSideRead = (*clientPipe)->getHandle();
-
-  const ::scoped_string & scopedstrErrMess = "Cannot disable inheritance for named pipe";
-  if (!serverInheritable) {
-    if (SetHandleInformation(hThisSideWrite, HANDLE_FLAG_INHERIT, 0) == 0) {
-      SystemException(errMess);
+   // EmulatedAnonymousPipeFactory::EmulatedAnonymousPipeFactory(unsigned int bufferSize, LogWriter *log)
+   // : m_bufferSize(bufferSize),
+   //   m_log(log)
+   // {
+   // }
+    EmulatedAnonymousPipeFactory::EmulatedAnonymousPipeFactory()
+    : m_bufferSize(0)
+    {
     }
-  }
-  if (!clientInheritable) {
-    if (SetHandleInformation(hOtherSideRead, HANDLE_FLAG_INHERIT, 0) == 0) {
-      SystemException(errMess);
-    }
-  }
-}
+   EmulatedAnonymousPipeFactory::~EmulatedAnonymousPipeFactory()
+   {
+   }
 
-::string EmulatedAnonymousPipeFactory::getUniqPipeName()
-{
-   ::string result;
-  srand((unsigned)::time(0));
-  for (int i = 0; i < 20; i++) {
-    result += (char) ('a' + rand() % ('z' - 'a'));
-  }
-   return result;
-}
+   void EmulatedAnonymousPipeFactory::initialize_emulated_anonymous_pipe_factory(unsigned int bufferSize, ::subsystem::LogWriter *log)
+   {
+      m_bufferSize = bufferSize;
+        m_log = log;
+   }
+
+   void EmulatedAnonymousPipeFactory::generatePipes(::pointer < ::subsystem::NamedPipeInterface > & serverPipe, bool serverInheritable,
+                                                    ::pointer < ::subsystem::NamedPipeInterface > & clientPipe, bool clientInheritable)
+   {
+      SecurityAttributes secAttr;
+      secAttr.setInheritable();
+
+      ::string randomName;
+      randomName = getUniqPipeName();
+      PipeServer pipeServer;
+       pipeServer.initialize_pipe_server(randomName, m_bufferSize, 0, 1000);
+      clientPipe = main_subsystem()->pipe_client()->connect(randomName, m_bufferSize);
+      serverPipe = pipeServer.accept();
+
+      HANDLE hThisSideWrite = serverPipe->getFile()->_HANDLE();
+      HANDLE hOtherSideRead = clientPipe->getFile()->_HANDLE();
+
+      if (!serverInheritable) {
+         if (SetHandleInformation(hThisSideWrite, HANDLE_FLAG_INHERIT, 0) == 0) {
+            ::string strErrorMessage1 = "Cannot disable inheritance for named pipe(1)";
+            throw ::subsystem::SystemException(strErrorMessage1);
+         }
+      }
+      if (!clientInheritable) {
+         if (SetHandleInformation(hOtherSideRead, HANDLE_FLAG_INHERIT, 0) == 0) {
+            ::string strErrorMessage2 = "Cannot disable inheritance for named pipe(2)";
+            throw ::subsystem::SystemException(strErrorMessage2);
+         }
+      }
+   }
+
+   ::string EmulatedAnonymousPipeFactory::getUniqPipeName()
+   {
+      ::string result;
+      srand((unsigned)::time(0));
+      for (int i = 0; i < 20; i++) {
+         result += (char) ('a' + rand() % ('z' - 'a'));
+      }
+      return result;
+   }
+} // namespace subsystem_win32

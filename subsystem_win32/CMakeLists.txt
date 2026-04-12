@@ -16,6 +16,41 @@ list(APPEND library_source
    _.cpp
    _.h
    _factory.cpp
+   #io/_.cpp
+   #io/_.h
+   #io/_____debug.xcconfig
+   #io/_____release.xcconfig
+   #io/aaa_framework.cpp
+   #io/aaa_framework.h
+   #io/aaa_io_exception.h
+   #io/BufferedInputStream.cpp
+   #io/BufferedInputStream.h
+   #io/BufferedOutputStream.cpp
+   #io/BufferedOutputStream.h
+   #io/ByteArrayInputStream.cpp
+   #io/ByteArrayInputStream.h
+   #io/ByteArrayOutputStream.cpp
+   #io/ByteArrayOutputStream.h
+   #io/Channel.cpp
+   #io/Channel.h
+   #io/CMakeLists.txt
+   #io/DataCopy.cpp
+   #io/DataCopy.h
+   #io/DataInputStream.cpp
+   #io/DataInputStream.h
+   #io/DataOutputStream.cpp
+   #io/DataOutputStream.h
+   #io/InputStream.cpp
+   #io/InputStream.h
+   #io/io_exception.cpp
+   #io/io_lib.vcproj
+   #io/matter.txt
+   #io/OutputStream.cpp
+   #io/OutputStream.h
+   #io/remoting_io.vcxproj
+   #io/remoting_io.vcxproj.filters
+   #io/remoting_io.vcxproj.user
+   #io/resource.h
    node/security/SecurityDescriptor.cpp
    node/security/SecurityDescriptor.h
    node/security/SecurityIdentifier.cpp
@@ -46,6 +81,18 @@ list(APPEND library_source
    #node/CMakeLists.txt
    node/Displays.cpp
    node/Displays.h
+   node/DynamicLibrary.cpp
+   node/DynamicLibrary.h
+   node/EmulatedAnonymousPipeFactory.cpp
+   node/EmulatedAnonymousPipeFactory.h
+   node/File.cpp
+   node/File.h
+   node/Impersonator.cpp
+   node/Impersonator.h
+   node/InputInjector.cpp
+   node/InputInjector.h
+   node/Keyboard.cpp
+   node/Keyboard.h
    node/LocalWindowsApplication.h
    #node/matter.txt
    node/NamedPipe.cpp
@@ -117,6 +164,47 @@ list(APPEND library_source
    node/WsaStartup.h
    node/WTS.cpp
    node/WTS.h
+   socket/sockdefs.h
+   #socket/SocketAddressIPv4.cpp
+   #socket/SocketAddressIPv4.h
+   #socket/SocketException.cpp
+   #socket/SocketException.h
+   socket/SocketIPv4.cpp
+   socket/SocketIPv4.h
+   #socket/SocketStream.cpp
+   #socket/SocketStream.h
+   #socket/WindowsSocket.cpp
+   #socket/WindowsSocket.h
+   thread/_.cpp
+   thread/_.h
+   #thread/_____debug.xcconfig
+   #thread/_____release.xcconfig
+   #thread/aaa_framework.cpp
+   #thread/aaa_framework.h
+   #thread/aaa_ZombieKiller.cpp
+   #thread/aaa_ZombieKiller.h
+   thread/AutoLock.cpp
+   thread/AutoLock.h
+   #thread/CMakeLists.txt
+   thread/DesktopSelector.cpp
+   thread/DesktopSelector.h
+   thread/GlobalMutex.cpp
+   thread/GlobalMutex.h
+   thread/GuiThread.cpp
+   thread/GuiThread.h
+   thread/LocalMutex.cpp
+   thread/LocalMutex.h
+   thread/Lockable.h
+   #thread/matter.txt
+   #thread/remoting_thread.vcxproj
+   #thread/remoting_thread.vcxproj.filters
+   #thread/remoting_thread.vcxproj.user
+   thread/resource.h
+   thread/Thread.cpp
+   thread/Thread.h
+   #thread/thread.vcproj
+   thread/ThreadCollector.cpp
+   thread/ThreadCollector.h
    _.h
    _factory.cpp
    framework.cpp
@@ -140,7 +228,7 @@ if (MSVC)
    target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
    target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
    target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-   target_link_libraries(${PROJECT_NAME} PRIVATE acme acme_windows Gdiplus)
+   target_link_libraries(${PROJECT_NAME} PRIVATE acme acme_windows Gdiplus ws2_32 Version)
 elseif (${LINUX} OR ${__BSD__})
 
    pkg_check_modules(PKGCONFIG cairo xkbcommon wayland-client wayland-server wayland-cursor)

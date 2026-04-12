@@ -25,91 +25,99 @@
 #include "DesktopSelector.h"
 //#include <vector>
 
-HDESK DesktopSelector::getInputDesktop()
+
+namespace subsystem_win32
 {
-  return OpenInputDesktop(0, TRUE,
-                          DESKTOP_CREATEMENU |
-                          DESKTOP_CREATEWINDOW |
-                          DESKTOP_ENUMERATE |
-                          DESKTOP_HOOKCONTROL |
-                          DESKTOP_WRITEOBJECTS |
-                          DESKTOP_READOBJECTS |
-                          DESKTOP_SWITCHDESKTOP |
-                          GENERIC_WRITE);
-}
+   ::subsystem::desk_t DesktopSelector::getInputDesktop()
+   {
+      return {(::uptr) OpenInputDesktop(0, TRUE,
+                              DESKTOP_CREATEMENU |
+                              DESKTOP_CREATEWINDOW |
+                              DESKTOP_ENUMERATE |
+                              DESKTOP_HOOKCONTROL |
+                              DESKTOP_WRITEOBJECTS |
+                              DESKTOP_READOBJECTS |
+                              DESKTOP_SWITCHDESKTOP |
+                              GENERIC_WRITE)};
+   }
 
-HDESK DesktopSelector::getDesktop(const ::scoped_string & scopedstrName)
-{
-  return OpenDesktop(::wstring(scopedstrName), 0, TRUE,
-                     DESKTOP_CREATEMENU |
-                     DESKTOP_CREATEWINDOW |
-                     DESKTOP_ENUMERATE |
-                     DESKTOP_HOOKCONTROL |
-                     DESKTOP_WRITEOBJECTS |
-                     DESKTOP_READOBJECTS |
-                     DESKTOP_SWITCHDESKTOP |
-                     GENERIC_WRITE);
-}
+   ::subsystem::desk_t DesktopSelector::getDesktop(const ::scoped_string & scopedstrName)
+   {
+      return {(::uptr) OpenDesktop(::wstring(scopedstrName), 0, TRUE,
+                         DESKTOP_CREATEMENU |
+                         DESKTOP_CREATEWINDOW |
+                         DESKTOP_ENUMERATE |
+                         DESKTOP_HOOKCONTROL |
+                         DESKTOP_WRITEOBJECTS |
+                         DESKTOP_READOBJECTS |
+                         DESKTOP_SWITCHDESKTOP |
+                         GENERIC_WRITE)};
+   }
 
-bool DesktopSelector::closeDesktop(HDESK hdesk)
-{
-  return CloseDesktop(hdesk) != 0;
-}
+   bool DesktopSelector::closeDesktop(::subsystem::desk_t hdesk)
+   {
+      return CloseDesktop((HDESK) hdesk.m_u) != 0;
+   }
 
-bool DesktopSelector::setDesktopToCurrentThread(HDESK newDesktop)
-{
-  return SetThreadDesktop(newDesktop) != 0;
-}
+   bool DesktopSelector::setDesktopToCurrentThread(::subsystem::desk_t newDesktop)
+   {
+      return SetThreadDesktop((HDESK)newDesktop.m_u) != 0;
+   }
 
-bool DesktopSelector::selectDesktop(const ::scoped_string & name)
-{
-  HDESK desktop;
-  if (name.is_empty()) {
-    desktop = getDesktop(name);
-  } else {
-    desktop = getInputDesktop();
-  }
+   bool DesktopSelector::selectDesktop(const ::scoped_string & name)
+   {
+      ::subsystem::desk_t desktop(0);
+      if (name.has_character()) {
+         desktop = getDesktop(name);
+      } else {
+         desktop = getInputDesktop();
+      }
 
-  bool result = setDesktopToCurrentThread(desktop) != 0;
-  closeDesktop(desktop);
+      bool result = setDesktopToCurrentThread(desktop) != 0;
+      closeDesktop(desktop);
 
-  return result;
-}
+      return result;
+   }
 
 
-::string DesktopSelector::getDesktopName(HDESK desktop)
-{
-//  desktopName-= "";
+   ::string DesktopSelector::getDesktopName(::subsystem::desk_t desktop)
+   {
+      //  desktopName-= "";
 
-  DWORD nameLength = 0;
-  // Do not check returned value because the function will return FALSE always.
-  GetUserObjectInformation(desktop, UOI_NAME, 0, 0, &nameLength);
+      DWORD nameLength = 0;
+      // Do not check returned value because the function will return FALSE always.
+      GetUserObjectInformation((HDESK) desktop.m_u, UOI_NAME, 0, 0, &nameLength);
 
-  if (nameLength != 0) {
-    ::array_base<TCHAR> name(nameLength);
-    bool result = !!GetUserObjectInformation(desktop,
-                                             UOI_NAME,
-                                             &name[0],
-                                             nameLength,
-                                             0);
-    if (result) {
-      return name.data();
-      //return true;
-    }
-  }
-   throw ::exception(error_io);
-  //return false;
-}
+      if (nameLength != 0) {
+         ::array_base<TCHAR> name(nameLength);
+         bool result = !!GetUserObjectInformation((HDESK) desktop.m_u,
+                                                  UOI_NAME,
+                                                  &name[0],
+                                                  nameLength,
+                                                  0);
+         if (result) {
+            return name.data();
+            //return true;
+         }
+      }
+      throw ::exception(error_io);
+      //return false;
+   }
 
-::string DesktopSelector::getCurrentDesktopName()
-{
-  HDESK inputDesktop = getInputDesktop();
-  auto str = getDesktopName(inputDesktop);
-  closeDesktop(inputDesktop);
-  return str;
-}
+   ::string DesktopSelector::getCurrentDesktopName()
+   {
+      ::subsystem::desk_t inputDesktop = getInputDesktop();
+      auto str = getDesktopName(inputDesktop);
+      closeDesktop(inputDesktop);
+      return str;
+   }
 
-::string DesktopSelector::getThreadDesktopName()
-{
-  return getDesktopName(GetThreadDesktop(GetCurrentThreadId()));
-}
+   ::string DesktopSelector::getThreadDesktopName()
+   {
+      return getDesktopName((::subsystem::desk_t) (::uptr) ::GetThreadDesktop(GetCurrentThreadId()));
+   }
+
+
+} // namespace subsystem_win32
+
+

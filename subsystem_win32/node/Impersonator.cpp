@@ -24,80 +24,106 @@
 #include "framework.h"
 #include "subsystem_win32/_common_header.h"
 #include "Impersonator.h"
+#include "WTS.h"
+#include "../subsystem.h"
+#include "acme/subsystem/node/SystemException.h"
+#include "acme/subsystem/node/SystemInformation.h"
 
-#include <crtdbg.h>
+//#include <crtdbg.h>
 
-#include "remoting/remoting_common/win_system/WTS.h"
+//#include "remoting/remoting_common/win_system/WTS.h"
 
-Impersonator::Impersonator(LogWriter *log)
-: m_token(INVALID_HANDLE_VALUE),
-  m_dupToken(INVALID_HANDLE_VALUE),
-  m_log(log)
+namespace subsystem_win32
 {
-}
 
-Impersonator::~Impersonator()
-{
-}
-
-void Impersonator::impersonateAsLoggedUser()
-{
-  HANDLE token = WTS::queryConsoleUserToken(m_log);
-  impersonateAsUser(token);
-}
-
-void Impersonator::impersonateAsUser(HANDLE token)
-{
-  if (m_token != INVALID_HANDLE_VALUE) {
-    CloseHandle(m_token);
-  }
-  m_token = token;
-
-  ::string name = WTS::getTokenUserName(m_token);
-  m_log->debug("impersonate as user: {}", name);
-
-  if ((!DuplicateToken(m_token, SecurityImpersonation, &m_dupToken))) {
-    throw SystemException("could not DuplicateToken");
-  }
-  if (!ImpersonateLoggedOnUser(m_dupToken)) {
-    throw SystemException("could not ImpersonateLoggedOnUser");
-  }
-
-}
-
-void Impersonator::impersonateAsCurrentProcessUser(bool rdpEnabled)
-{
-  HANDLE token = WTS::duplicateCurrentProcessUserToken(rdpEnabled, m_log);
-  impersonateAsUser(token);
-}
+   // Impersonator::Impersonator(LogWriter *log)
+   // : m_token(INVALID_HANDLE_VALUE),
+   //   m_dupToken(INVALID_HANDLE_VALUE),
+   //   m_log(log)
+   // {
+   // }
+   //
+   Impersonator::Impersonator()
+   : m_token(INVALID_HANDLE_VALUE),
+     m_dupToken(INVALID_HANDLE_VALUE)
+   {
+   }
 
 
-void Impersonator::revertToSelf()
-{
-  if (m_dupToken != INVALID_HANDLE_VALUE) {
-    CloseHandle(m_dupToken);
-  }
+   Impersonator::~Impersonator()
+   {
+   }
 
-  if (m_token != INVALID_HANDLE_VALUE) {
-    CloseHandle(m_token);
-  }
+   void Impersonator::initialize_impersonator(::subsystem::LogWriter *plogwriter)
+   {
+     m_plogwriter = plogwriter;
+   }
 
-  m_dupToken = INVALID_HANDLE_VALUE;
-  m_token = INVALID_HANDLE_VALUE;
 
-  if (!RevertToSelf()) {
-    throw SystemException("could not RevertToSelf");
-  }
-}
+   void Impersonator::impersonateAsLoggedUser()
+   {
+      HANDLE token = windows_subsystem()->wts()->queryConsoleUserToken(m_plogwriter);
+      impersonateAsUser(token);
+   }
 
-bool Impersonator::sessionIsLocked(bool rdpEnabled)
-{
-  DWORD id = 0;
-  if (rdpEnabled) {
-    id = WTS::getRdpSessionId(m_log);
-  }
-  if (id == 0) {
-    id = WTS::getActiveConsoleSessionId(m_log);
-  }
-  return WTS::sessionIsLocked(id, m_log);
-}
+
+   void Impersonator::impersonateAsUser(HANDLE token)
+   {
+      if (m_token != INVALID_HANDLE_VALUE) {
+         CloseHandle(m_token);
+      }
+      m_token = token;
+
+      ::string name = windows_subsystem()->wts()->getTokenUserName(m_token);
+      m_plogwriter->debug("impersonate as user: {}", name);
+
+      if ((!DuplicateToken(m_token, SecurityImpersonation, &m_dupToken))) {
+         throw ::subsystem::SystemException("could not DuplicateToken");
+      }
+      if (!ImpersonateLoggedOnUser(m_dupToken)) {
+         throw ::subsystem::SystemException("could not ImpersonateLoggedOnUser");
+      }
+
+   }
+
+
+   void Impersonator::impersonateAsCurrentProcessUser(bool rdpEnabled)
+   {
+      HANDLE token = windows_subsystem()->wts()->duplicateCurrentProcessUserToken(rdpEnabled, m_plogwriter);
+      impersonateAsUser(token);
+   }
+
+
+   void Impersonator::revertToSelf()
+   {
+      if (m_dupToken != INVALID_HANDLE_VALUE) {
+         CloseHandle(m_dupToken);
+      }
+
+      if (m_token != INVALID_HANDLE_VALUE) {
+         CloseHandle(m_token);
+      }
+
+      m_dupToken = INVALID_HANDLE_VALUE;
+      m_token = INVALID_HANDLE_VALUE;
+
+      if (!RevertToSelf()) {
+         throw ::subsystem::SystemException("could not RevertToSelf");
+      }
+   }
+
+
+   bool Impersonator::sessionIsLocked(bool rdpEnabled)
+   {
+      DWORD id = 0;
+      if (rdpEnabled) {
+         id = windows_subsystem()->wts()->getRdpSessionId(m_plogwriter);
+      }
+      if (id == 0) {
+         id = windows_subsystem()->wts()->getActiveConsoleSessionId(m_plogwriter);
+      }
+      return windows_subsystem()->wts()->sessionIsLocked(id, m_plogwriter);
+   }
+
+
+} // namespace subsystem_win32

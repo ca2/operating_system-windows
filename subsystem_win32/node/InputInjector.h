@@ -113,7 +113,7 @@ namespace subsystem_win32
 
          // Returns current kbd layout of an active window.
          // Throws ::subsystem::Exception on an error.
-         virtual HKL getCurrentKbdLayout();
+         virtual HKL _getCurrentKbdLayout();
 
          // Searches virtual code in available keyboard layouts and returns the code
          // if found. If virtual code has not been found throws an ::subsystem::Exception.
@@ -132,7 +132,7 @@ namespace subsystem_win32
          bool m_winIsPressed;
          bool m_ctrlAltDelEnabled;
 
-         ::subsystem::LogWriter *m_log;
+         ::subsystem::LogWriter *m_plogwriter;
       };
-   }// namespace subsystem_win32
+   //}// namespace subsystem_win32
 } // namespace subsystem_win32

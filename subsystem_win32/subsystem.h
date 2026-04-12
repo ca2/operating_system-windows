@@ -28,6 +28,7 @@ namespace subsystem_win32
       // ::pointer < ::subsystem::Shell >     m_pshell;
        ::pointer < PipeServer > m_ppipeserver;
 
+
        ::pointer < WTS > m_pwts;
 
       subsystem();

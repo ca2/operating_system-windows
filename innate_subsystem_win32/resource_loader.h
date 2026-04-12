@@ -60,7 +60,7 @@ namespace innate_subsystem_win32
        * @param iconName icon name.
        * @return icon handle of 0 if cannot load icon.
        */
-      ::pointer < ::innate_subsystem::IconInterface >  loadStandartIcon(const char *iconName) override;
+      ::pointer < ::innate_subsystem::IconInterface >  loadStandardIcon(enum_cursor ecursor) override;
 
       /**
        * Loads icon from resources.

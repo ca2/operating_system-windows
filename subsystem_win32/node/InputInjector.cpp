@@ -24,6 +24,7 @@
 #include "framework.h"
 #include "InputInjector.h"
 #include "Keyboard.h"
+#include "acme/subsystem/node/SystemException.h"
 //#include "remoting/remoting_common/win_system/Environment.h"
 //#include <vector>
 
@@ -38,7 +39,7 @@ namespace subsystem_win32
       m_shiftIsPressed(false),
       m_winIsPressed(false),
       m_ctrlAltDelEnabled(false),
-      m_log(nullptr)
+      m_plogwriter(nullptr)
       {
       }
 
@@ -51,11 +52,11 @@ namespace subsystem_win32
          }
       }
 
-      void InputInjector::initialize_input_injector(bool ctrlAltDelEnabled, ::subsystem::LogWriter *log)
+      void InputInjector::initialize_input_injector(bool ctrlAltDelEnabled, ::subsystem::LogWriter *plogwriter)
      //:
      {
          m_ctrlAltDelEnabled =ctrlAltDelEnabled;
-         m_log = log;
+         m_plogwriter = plogwriter;
          // FIXME: Better to call this function from an owner (Now, its
          // possible only from trunk code because in the stable hive the owner is
          // the deprecated KeyEvent class)
@@ -63,7 +64,7 @@ namespace subsystem_win32
             resetModifiers();
          }
          catch (::exception &e) {
-            m_log->error("InputInjector: error occurred while reseting modifiers: {}",
+            m_plogwriter->error("InputInjector: error occurred while reseting modifiers: {}",
               e.get_message());
          }
      }
@@ -80,12 +81,12 @@ namespace subsystem_win32
 
       void InputInjector::injectKeyEvent(unsigned char vkCode, bool release, bool extended)
       {
-         m_log->debug("Prepare to inject the key event:"
+         m_plogwriter->debug("Prepare to inject the key event:"
                     " vkCode = {}, release = {}, extended = {}",
                     (int)vkCode,
                     (int)release,
                     (int)extended);
-         m_log->debug("The modifier states before:"
+         m_plogwriter->debug("The modifier states before:"
                     " m_controlIsPressed = {};"
                     " m_menuIsPressed = {};"
                     " m_deleteIsPressed = {};"
@@ -112,7 +113,7 @@ namespace subsystem_win32
          if (vkCode == VK_LWIN || vkCode == VK_RWIN) {
             m_winIsPressed = !release;
          }
-         m_log->debug("The modifier states after:"
+         m_plogwriter->debug("The modifier states after:"
                     " m_controlIsPressed = {};"
                     " m_menuIsPressed = {};"
                     " m_deleteIsPressed = {};"
@@ -127,7 +128,7 @@ namespace subsystem_win32
          if (m_controlIsPressed && m_menuIsPressed && m_deleteIsPressed &&
              !m_winIsPressed && !m_shiftIsPressed) {
             if (m_ctrlAltDelEnabled) {
-               m_log->debug("Try simulate the Ctrl+Alt+Del combination");
+               m_plogwriter->debug("Try simulate the Ctrl+Alt+Del combination");
                throw todo;
                // if (node()->_windows_isVistaOrLater()) {
                //   Environment::simulateCtrlAltDelUnderVista(m_log);
@@ -136,7 +137,7 @@ namespace subsystem_win32
                //   Environment::simulateCtrlAltDel(m_log);
                // }
             } else {
-               m_log->debug("The Ctrl+Alt+Del combination is disabled. Ignore the Del key pressing");
+               m_plogwriter->debug("The Ctrl+Alt+Del combination is disabled. Ignore the Del key pressing");
             }
              } else {
                 INPUT keyEvent = {0};
@@ -156,7 +157,7 @@ namespace subsystem_win32
                 if (SendInput(1, &keyEvent, sizeof(keyEvent)) == 0) {
                    DWORD errCode = GetLastError();
                    if (errCode != ERROR_SUCCESS) {
-                      throw SystemException("SendInput() function failed:", errCode);
+                      throw ::subsystem::SystemException("SendInput() function failed:", errCode);
                    } else {
                       // Under Vista or later the SendInput() function doesn't return error
                       // code if inputs blocked by UIPI.
@@ -166,24 +167,24 @@ namespace subsystem_win32
              }
       }
 
-      void InputInjector::injectCharEvent(WCHAR ch, bool release)
+      void InputInjector::injectCharEvent(int ch, bool release)
       {
-         m_log->debug("Try insert a char event: char = {}, release = {}",
+         m_plogwriter->debug("Try insert a char event: char = {}, release = {}",
                     (int)ch, (int)release);
 
          bool ctrlOrAltPressed = m_controlIsPressed || m_menuIsPressed;
          SHORT vkKeyScanResult = 0;
          HKL hklCurrent = (HKL)0x04090409;
          try {
-            hklCurrent = getCurrentKbdLayout();
-            m_log->debug("Current keyboard layout = {:#08x}", (int)hklCurrent);
-            vkKeyScanResult = searchVirtKey(ch, hklCurrent);
-            m_log->debug("The virtual code scan result = {}", (int)vkKeyScanResult);
+            hklCurrent = _getCurrentKbdLayout();
+            m_plogwriter->debug("Current keyboard layout = {:#08x}", (int)hklCurrent);
+            vkKeyScanResult = _searchVirtKey(ch, hklCurrent);
+            m_plogwriter->debug("The virtual code scan result = {}", (int)vkKeyScanResult);
          } catch (...) {
-            m_log->debug("Can't insert the char by simulating a key press event,"
+            m_plogwriter->debug("Can't insert the char by simulating a key press event,"
                       " therefore try insert it as an unicode symbol");
             if (ctrlOrAltPressed) {
-               m_log->warning("Can't insert the char by an unicode symbol because"
+               m_plogwriter->warning("Can't insert the char by an unicode symbol because"
                             " a modifier is pressed");
                throw;
             }
@@ -230,11 +231,11 @@ namespace subsystem_win32
                                !release;
          if ((ctrlPressNeeded || altPressNeeded) &&
              (m_controlIsPressed || m_menuIsPressed)) {
-            m_log->error("Received a control combination that we doesn't know how it can be made");
+            m_plogwriter->error("Received a control combination that we doesn't know how it can be made");
             return;
              }
 
-         m_log->debug("Variable states before generate key events to get the char:"
+         m_plogwriter->debug("Variable states before generate key events to get the char:"
                     " controlSym = {};"
                     " resistantToCaps = {};"
                     " invariantToShift = {};"
@@ -487,5 +488,8 @@ namespace subsystem_win32
          // The Delete key.
          injectKeyEvent(VK_DELETE, true);
       }
-   } //namespace  subsystem
+
 }// namespace subsystem_win32
+
+
+

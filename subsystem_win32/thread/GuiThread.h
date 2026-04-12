@@ -35,14 +35,15 @@ namespace subsystem_win32
    public:
       GuiThread();
       virtual ~GuiThread();
-   private:
+   ///private:
       // Replacing the base function.
-      static DWORD WINAPI threadProc(LPVOID pThread);
+      //static DWORD WINAPI threadProc(LPVOID pThread);
 
       virtual void initByDerived();
 
       // Desktop for current thread.
-      HDESK m_hDesk;
+      //HDESK m_hDesk;
+      ::subsystem::desk_t m_desk;
    };
 
    //// __GUITHREAD_H__

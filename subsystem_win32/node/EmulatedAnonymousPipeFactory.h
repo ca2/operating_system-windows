@@ -25,25 +25,39 @@
 #pragma once
 
 
-#include "subsystem_win32/node/NamedPipe.h"
+#include "acme/subsystem/node/EmulatedAnonymousPipeFactory.h"
+//#include "subsystem_win32/node/NamedPipe.h"
+#include "subsystem_win32/_common_header.h"
 //#include "log_writer/LogWriter.h"
 
-// The EmulatedAnonymousPipeFactory class generates a chanel based on named pipe.
-// This is similar to anonymous pipe generation.
-class CLASS_DECL_REMOTING_COMMON EmulatedAnonymousPipeFactory
+
+namespace subsystem_win32
 {
-public:
-  EmulatedAnonymousPipeFactory(unsigned int bufferSize, LogWriter *log);
-  virtual ~EmulatedAnonymousPipeFactory();
 
-  void generatePipes(NamedPipe **serverPipe, bool serverInheritable,
-                     NamedPipe **clientPipe, bool clientInheritable);
+   // The EmulatedAnonymousPipeFactory class generates a chanel based on named pipe.
+   // This is similar to anonymous pipe generation.
+   class CLASS_DECL_SUBSYSTEM_WIN32 EmulatedAnonymousPipeFactory :
+   virtual public ::subsystem::implementation<subsystem::EmulatedAnonymousPipeFactoryInterface>
+   {
+   public:
 
-//private:
-  ::string getUniqPipeName();
 
-  LogWriter *m_log;
-  unsigned int m_bufferSize;
-};
+      //EmulatedAnonymousPipeFactory(unsigned int bufferSize, LogWriter *log);
+      EmulatedAnonymousPipeFactory();
+      ~EmulatedAnonymousPipeFactory() override;
 
-//// __EMULATEDANONYMOUSPIPEFACTORY_H__
+
+      void initialize_emulated_anonymous_pipe_factory(unsigned int bufferSize, ::subsystem::LogWriter *log) override;
+
+      void generatePipes(::pointer < ::subsystem::NamedPipeInterface > & serverPipe, bool serverInheritable,
+                         ::pointer < ::subsystem::NamedPipeInterface > & clientPipe, bool clientInheritable) override;
+
+      //private:
+      ::string getUniqPipeName() override;
+
+      ::pointer < ::subsystem::LogWriter  > m_log;
+      unsigned int m_bufferSize = 0;
+   };
+
+   //// __EMULATEDANONYMOUSPIPEFACTORY_H__
+} // namespace subsystem_win32

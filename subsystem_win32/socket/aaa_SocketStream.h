@@ -28,36 +28,40 @@
 
 #include "acme/subsystem/io/Channel.h"
 
-#include "remoting/remoting_common/network/socket/SocketAddressIPv4.h"
+#include "acme/subsystem/socket/SocketAddressIPv4.h"
 //#include "remoting/remoting_common/network/socket/SocketIPv4.h"
-#include "remoting/remoting_common/network/socket/SocketAddressIPv4.h"
+//#include "remoting/remoting_common/network/socket/SocketAddressIPv4.h"
 
 #include "acme/exception/io.h"
 
-class CLASS_DECL_REMOTING_COMMON SocketStream : public Channel
+
+namespace subsystem_win32
 {
-public:
-  SocketStream(SocketIPv4 *);
-  virtual ~SocketStream();
+   class CLASS_DECL_REMOTING_COMMON SocketStream : public Channel
+   {
+   public:
+      SocketStream(SocketIPv4 *);
+      virtual ~SocketStream();
 
-  //
-  // Inherited from Channel.
-  //
+      //
+      // Inherited from Channel.
+      //
 
-  virtual size_t read(void *, size_t);
+      virtual size_t read(void *, size_t);
 
-  virtual memsize defer_write(const void *, memsize);
+      virtual memsize defer_write(const void *, memsize);
 
-  // Closes connection and break all blocked operation.
-  // @throw ::subsystem::Exception on error.
-  virtual void close();
+      // Closes connection and break all blocked operation.
+      // @throw ::subsystem::Exception on error.
+      virtual void close();
 
-  virtual size_t available();
+      virtual size_t available();
 
-protected:
-  SocketIPv4 *m_socket;
+   protected:
+      SocketIPv4 *m_socket;
 
-  friend class SocketIPv4;
-};
+      friend class SocketIPv4;
+   };
+} // namespace subsystem_win32
 
 

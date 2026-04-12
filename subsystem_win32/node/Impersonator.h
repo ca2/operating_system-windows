@@ -33,8 +33,6 @@
 
 namespace subsystem_win32
 {
-   namespace subsystem_win32
-   {
 
       /**
       Class for impersonating current process as user that logged on current
@@ -80,8 +78,6 @@ namespace subsystem_win32
          ::pointer < ::subsystem::LogWriter > m_plogwriter;
       };
 
-
-   } // namespace subsystem_win32
 }// namespace subsystem_win32
 
 
