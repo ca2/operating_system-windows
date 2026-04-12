@@ -25,19 +25,19 @@
 #pragma once
 
 
-#include "subsystem/framebuffer/DibSection.h.h"
+#include "subsystem/framebuffer/DibSection.h"
 #include "subsystem/node/Screen.h"
 
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
 #ifndef CAPTUREBLT
 #define CAPTUREBLT          (DWORD)0x40000000 /* Include layered windows */
 #endif
 
-namespace subsystem_win32
+namespace subsystem_windows
 {
       // This clas is a primitive wrapper to a DIB section.
-      class CLASS_DECL_SUBSYSTEM_WIN32 DibSection :
+      class CLASS_DECL_SUBSYSTEM_WINDOWS DibSection :
          virtual public ::subsystem::implementation<::subsystem::DibSectionInterface >
       {
       public:
@@ -111,4 +111,4 @@ namespace subsystem_win32
       };
 
       //// __DIBSECTION_H__
-} // namespace subsystem_win32
+} // namespace subsystem_windows

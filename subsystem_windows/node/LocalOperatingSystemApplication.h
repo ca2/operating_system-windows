@@ -26,24 +26,32 @@
 
 
 #include "subsystem/node/SystemException.h"
-#include "subsystem_win32/node/OperatingSystemApplication.h"
+#include "subsystem_windows/node/OperatingSystemApplication.h"
 
 
-/**
- * Windows application that runs on WinSta0 and current active desktop.
- * @fixme move functionality to WindowsApplication class.
- */
-class CLASS_DECL_REMOTING_COMMON LocalWindowsApplication : public WindowsApplication
+namespace subsystem_windows
 {
-public:
-  /**
-   * Creates class instance and prepare environment for application
-   * (selects needed window station and desktop).
-   * @throws SystemException if error occured.
-   */
-  LocalWindowsApplication(HINSTANCE hInstance,
-                          const ::scoped_string & scopedstrwindowClassName);
-  virtual ~LocalWindowsApplication();
-};
+
+   /**
+    * Windows application that runs on WinSta0 and current active desktop.
+    * @fixme move functionality to WindowsApplication class.
+    */
+   class CLASS_DECL_SUBSYSTEM_WINDOWS LocalOperatingSystemApplication : 
+      virtual public ::subsystem::OperatingSystemApplication
+   {
+   public:
+      /**
+       * Creates class instance and prepare environment for application
+       * (selects needed window station and desktop).
+       * @throws SystemException if error occured.
+       */
+      LocalOperatingSystemApplication(HINSTANCE hInstance, const ::scoped_string &scopedstrwindowClassName);
+      virtual ~LocalOperatingSystemApplication();
+   };
+
+
+} // namespace subsystem_windows
+ 
+
 
 

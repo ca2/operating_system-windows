@@ -22,37 +22,48 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-#include "subsystem_win32/_common_header.h"
-#include "LocalWindowsApplication.h"
+#include "subsystem_windows/_common_header.h"
+#include "LocalOperatingSystemApplication.h"
 
 //#include "remoting/remoting_common/util/winhdr.h"
-#include "subsystem_win32/_common_header.h"
+#include "subsystem_windows/_common_header.h"
 
-#include "remoting/remoting_common/thread/DesktopSelector.h"
+#include "subsystem/thread/DesktopSelector.h"
 
-LocalWindowsApplication::LocalWindowsApplication(HINSTANCE hInstance,
-                                                 const ::scoped_string & scopedstrwindowClassName)
- : WindowsApplication(hInstance, scopedstrwindowClassName)
+namespace subsystem_windows
 {
-  HWINSTA winSta = 0;
 
-  winSta = OpenWindowStation(L"WinSta0", TRUE, GENERIC_ALL);
+   LocalOperatingSystemApplication::LocalOperatingSystemApplication(HINSTANCE hInstance,
+                                                    const ::scoped_string &scopedstrwindowClassName)
+   {
 
-  if (winSta== 0) {
-    throw SystemException();
-  }
+      initialize_operating_system_application(hInstance, scopedstrwindowClassName);
+      HWINSTA winSta = 0;
 
-  if (SetProcessWindowStation(winSta) == 0) {
-    CloseWindowStation(winSta);
-    throw SystemException();
-  }
+      winSta = OpenWindowStation(L"WinSta0", TRUE, GENERIC_ALL);
 
-  CloseWindowStation(winSta);
+      if (winSta == 0)
+      {
+         throw SystemException();
+      }
 
-  // FIXME: why we don't check returning values?
-  DesktopSelector::selectDesktop();
-}
+      if (SetProcessWindowStation(winSta) == 0)
+      {
+         CloseWindowStation(winSta);
+         throw SystemException();
+      }
 
-LocalWindowsApplication::~LocalWindowsApplication()
-{
-}
+      CloseWindowStation(winSta);
+
+      // FIXME: why we don't check returning values?
+      DesktopSelector::selectDesktop();
+   }
+
+   LocalOperatingSystemApplication::~LocalOperatingSystemApplication() {}
+
+
+} // namespace subsystem_windows
+
+
+
+
