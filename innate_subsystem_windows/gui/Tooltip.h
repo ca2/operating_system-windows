@@ -44,7 +44,7 @@ namespace innate_subsystem_windows
         Tooltip();
         ~Tooltip() override;
 
-        virtual void showTooltip(Control *control);
+        virtual void showTooltip(::innate_subsystem::ControlInterface * pcontrol);
 
         virtual void setText(const char *text);
         virtual void setTitle(const char *caption);

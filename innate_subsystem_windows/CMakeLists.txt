@@ -13,6 +13,8 @@ list(APPEND library_source
    drawing/Cursor.h
    drawing/DeviceContext.cpp
    drawing/DeviceContext.h
+   drawing/Font.cpp
+   drawing/Font.h
    drawing/Graphics.cpp
    drawing/Graphics.h
    drawing/Icon.cpp
@@ -119,6 +121,8 @@ add_library(${PROJECT_NAME} SHARED ${library_source})
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
 
+
+
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
 if (MSVC)
@@ -126,7 +130,7 @@ if (MSVC)
     target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
     target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
     target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-    target_link_libraries(${PROJECT_NAME} PRIVATE acme  subsystem subsystem_windows apex innate_subsystem Gdiplus)
+    target_link_libraries(${PROJECT_NAME} PRIVATE acme  subsystem subsystem_bsd_sockets subsystem_windows apex innate_subsystem Gdiplus)
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)

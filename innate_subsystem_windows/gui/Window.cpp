@@ -311,6 +311,14 @@ namespace innate_subsystem_windows
    }
 
 
+   bool Window::we_want_WM_KEYDOWN_when_enter_is_pressed() const
+   {
+
+      return m_pcomposite->we_want_WM_KEYDOWN_when_enter_is_pressed();
+
+   }
+
+
    long long Window::getStyle()
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
@@ -333,6 +341,22 @@ namespace innate_subsystem_windows
    }
 
 
+
+   void Window::removeStyle(unsigned int  styleFlag)
+   {
+      DWORD flags = getStyle();
+      flags &= ~styleFlag;
+      setStyle(flags);
+   }
+
+   bool Window::isStyleEnabled(unsigned int  styleFlag)
+   {
+      unsigned int  flags = getStyle();
+      return (flags & styleFlag) == styleFlag;
+   }
+
+
+
    long long Window::getExStyle()
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
@@ -344,6 +368,31 @@ namespace innate_subsystem_windows
       _ASSERT(m_windowswindow.as_HWND() != 0);
       SetWindowLong(m_windowswindow.as_HWND(), GWL_EXSTYLE, exstyle);
    }
+
+
+
+   void Window::addExStyle(unsigned int styleFlag)
+   {
+      DWORD flags = getExStyle();
+      flags |= styleFlag;
+      setExStyle(flags);
+   }
+
+
+
+   void Window::removeExStyle(unsigned int  styleFlag)
+   {
+      DWORD flags = getExStyle();
+      flags &= ~styleFlag;
+      setExStyle(flags);
+   }
+
+   bool Window::isExStyleEnabled(unsigned int  styleFlag)
+   {
+      unsigned int  flags = getExStyle();
+      return (flags & styleFlag) == styleFlag;
+   }
+
 
    void Window::updateWindow()
    {
@@ -466,6 +515,13 @@ namespace innate_subsystem_windows
    bool Window::isVisible()
    {
       return ::IsWindowVisible(m_windowswindow.as_HWND()) != FALSE;
+   }
+
+   bool Window::isWindow()
+   {
+      return (m_windowswindow.as_HWND() != nullptr)
+      && (m_windowswindow.as_HWND() != INVALID_HANDLE_VALUE)
+      && (::IsWindow(m_windowswindow.as_HWND()) != FALSE);
    }
 
    bool Window::isIconic()
@@ -656,6 +712,14 @@ namespace innate_subsystem_windows
       // }
    }
 
+
+   bool Window::_applyScreenChanges(int isFullScreen)
+   {
+       m_isFullScr = isFullScreen;
+       onSize();
+       redraw();
+      return true;
+   }
 
    void Window::doUnFullScreen()
     {
@@ -1306,6 +1370,13 @@ break;
 
    }
 
+
+   void Window::onSize()
+   {
+
+      return m_pcomposite->onSize();
+
+   }
 
 } // namespace innate_subsystem_windows
 // } // namespace windows

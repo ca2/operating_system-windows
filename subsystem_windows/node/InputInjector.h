@@ -26,7 +26,7 @@
 
 
 #include "subsystem/node/SystemException.h"
-#include "input_output/InputStream.h"
+#include "acme/input_output/InputStream.h"
 #include "subsystem/node/InputInjector.h"
 #include "subsystem_windows/_common_header.h"
 

@@ -34,4 +34,44 @@ namespace innate_subsystem_windows
       Tooltip::~Tooltip()
       {
       }
+
+   void Tooltip::showTooltip(::innate_subsystem::ControlInterface * pcontrol)
+      {
+
+      }
+
+   void Tooltip::setText(const char *text)
+   {
+
+
+   }
+   void Tooltip::setTitle(const char *caption)
+   {
+
+
+   }
+   ::string Tooltip::getText() const
+   {
+
+      return {};
+
+   }
+   ::string Tooltip::getTitle() const
+   {
+
+      return {};
+
+   }
+
+   void Tooltip::setIconType(int iconType)
+   {
+
+
+   }
+   int Tooltip::getIconType() const
+   {
+
+      return 0;
+
+   }
    } // namespace innate_subsystem_windows

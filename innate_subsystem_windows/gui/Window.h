@@ -351,6 +351,7 @@ namespace innate_subsystem_windows
       bool onGetTooltip(int iControl, string &strTooltip) override;
       bool onCalculateDefaultSize(int_rectangle &rectangleDefaultSize) override;
       void onAdjustWindowSize() override;
+      void onSize() override;
 
    };
 
