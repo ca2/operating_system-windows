@@ -434,7 +434,7 @@ namespace windowing_win32
 
       memory_set(&wndcls, 0, sizeof(WNDCLASSEXW));   // start with nullptr defaults
 
-      wndcls.lpfnWndProc = &windows::s_window_procedure;
+      wndcls.lpfnWndProc = &::windows::window::s_window_procedure;
 
       //wndcls.hInstance = ::windows::get_window_procedure_hinstance();
 
@@ -559,7 +559,7 @@ namespace windowing_win32
       wndcls.cbSize = sizeof(wndcls);
       // otherwise we need to register a ___new class
       wndcls.style = nClassStyle;
-      wndcls.lpfnWndProc = &::windows::window_procedure;
+      wndcls.lpfnWndProc = &::windows::window::s_window_procedure;
       //auto hinstanceWindowProcedure = ::windows::get_window_procedure_hinstance();
       wndcls.cbClsExtra = wndcls.cbWndExtra = 40;
       //wndcls.hInstance = hinstanceWindowProcedure;

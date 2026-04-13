@@ -6,7 +6,12 @@
 #include "acme/exception/exception.h"
 
 
-TCHAR * windows_get_system_cursor(enum_cursor ecursor);
+namespace windows
+{
+
+   CLASS_DECL_ACME const wchar_t *get_system_cursor(enum_cursor ecursor);
+
+} // namespace windows
 
 
 namespace windowing_win32
@@ -98,7 +103,7 @@ namespace windowing_win32
    void cursor::_load_default_cursor(enum_cursor ecursor)
    {
 
-      auto pcursor = windows_get_system_cursor(ecursor);
+      auto pcursor = ::windows::get_system_cursor(ecursor);
 
       if (pcursor == nullptr)
       {
