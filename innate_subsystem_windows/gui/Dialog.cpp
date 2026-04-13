@@ -21,15 +21,15 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "../framework.h"
-#include "../Dialog.h"
+#include "framework.h"
+#include "Dialog.h"
 
 //#include "util/CommonHeader.h"
 
 #include <commctrl.h>
 #include <crtdbg.h>
 
-#include "../Window.h"
+#include "Window.h"
 
 
 namespace innate_subsystem_windows

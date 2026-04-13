@@ -21,9 +21,9 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "../framework.h"
-#include "../MessageWindow.h"
-#include "../WindowMessageHandler.h"
+#include "framework.h"
+#include "MessageWindow.h"
+#include "WindowMessageHandler.h"
 
 
 #define DEFAULT_WINDOW_CLASS_NAME "WindowClass"

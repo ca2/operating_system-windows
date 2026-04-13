@@ -22,8 +22,10 @@
 //-------------------------------------------------------------------------
 //
 
-#include "innate_subsystem/Toolbar.h"
+#include "innate_subsystem/gui/Toolbar.h"
 #include "innate_subsystem_windows/_common_header.h"
+
+#include <commctrl.h>
 
 namespace innate_subsystem_windows
 {

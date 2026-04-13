@@ -25,7 +25,7 @@
 //#ifndef _SCROLL_BAR_H_
 //#define _SCROLL_BAR_H_
 
-#include "innate_subsystem/ScrollBar.h"
+#include "innate_subsystem/gui/ScrollBar.h"
 #include "innate_subsystem_windows/_common_header.h"
 
 

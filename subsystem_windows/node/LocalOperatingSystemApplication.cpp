@@ -44,19 +44,20 @@ namespace subsystem_windows
 
       if (winSta == 0)
       {
-         throw SystemException();
+         throw ::subsystem::SystemException();
       }
 
       if (SetProcessWindowStation(winSta) == 0)
       {
          CloseWindowStation(winSta);
-         throw SystemException();
+         throw ::subsystem::SystemException();
       }
 
       CloseWindowStation(winSta);
 
       // FIXME: why we don't check returning values?
-      DesktopSelector::selectDesktop();
+      //DesktopSelector::selectDesktop();
+      main_subsystem()->desktop_selector()->selectDesktop();
    }
 
    LocalOperatingSystemApplication::~LocalOperatingSystemApplication() {}

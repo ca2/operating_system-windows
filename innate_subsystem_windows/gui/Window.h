@@ -26,7 +26,7 @@
 
 
 #include "acme/operating_system/windows/window.h"
-#include "innate_subsystem/Window.h"
+#include "innate_subsystem/gui/Window.h"
 
 
 #define WM_REFLECT_NOTIFY_EX (105 + 0x2000 + WM_NOTIFY)
@@ -40,6 +40,7 @@ namespace innate_subsystem_windows
       ::lresult &m_lresult;
       bool m_bHandled;
       ::wparam m_wparam;
+      ::innate_subsystem::enum_control m_econtrol;
       int m_iControl;
       ::lparam m_lparam;
       LPNMHDR m_lpnmhdr;

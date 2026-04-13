@@ -156,4 +156,13 @@ namespace subsystem_windows
    void Thread::onTerminate()
    {
    }
+
+
+   void Thread::execute()
+   {
+
+      m_pcomposite->execute();
+
+   }
+
 } // namespace subsystem_windows

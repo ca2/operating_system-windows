@@ -2,7 +2,7 @@
 #pragma once
 //#define BUFFEREDINPUTSTREAM_H
 
-#include "subsystem/io/DataInputStream.h"
+#include "input_output/DataInputStream.h"
 //#include <vector>
 
 namespace remoting

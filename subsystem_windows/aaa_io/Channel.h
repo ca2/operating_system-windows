@@ -27,8 +27,8 @@
 
 #include "subsystem/Exception.h"
 
-#include "subsystem/io/InputStream.h"
-#include "subsystem/io/OutputStream.h"
+#include "input_output/InputStream.h"
+#include "input_output/OutputStream.h"
 
 namespace remoting
 {

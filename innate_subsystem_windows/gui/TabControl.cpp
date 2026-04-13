@@ -22,9 +22,9 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-#include "../framework.h"
-#include "../TabControl.h"
-#include "innate_subsystem/Tab.h"
+#include "framework.h"
+#include "TabControl.h"
+#include "innate_subsystem/gui/Tab.h"
 #include <commctrl.h>
 
 namespace innate_subsystem_windows

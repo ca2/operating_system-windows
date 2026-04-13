@@ -27,7 +27,7 @@
 #include "DeviceContext.h"
 
 #include "Bitmap.h"
-#include "PaintWindow.h"
+#include "../gui/PaintWindow.h"
 #include "innate_subsystem/drawing/GraphicsObject.h"
 
 

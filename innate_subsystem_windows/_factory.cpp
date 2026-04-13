@@ -3,8 +3,8 @@
 //
 #include "framework.h"
 #include "subsystem.h"
-#include "SystemMetrics.h"
-#include "Window.h"
+#include "gui/SystemMetrics.h"
+#include "gui/Window.h"
 #include "resource_loader.h"
 
 CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS void innate_subsystem_win32_factory(::factory::factory * pfactory)

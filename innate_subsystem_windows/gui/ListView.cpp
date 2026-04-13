@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-#include "../framework.h"
-#include "../ListView.h"
+#include "framework.h"
+#include "ListView.h"
 
 #include "innate_subsystem/subsystem.h"
-
+#include <commctrl.h>
 
 namespace innate_subsystem_windows
 {

@@ -14,6 +14,8 @@
 namespace subsystem_windows
 {
 
+   ::subsystem_windows::subsystem * subsystem::s_p = nullptr;
+
 subsystem::subsystem()
    {
 

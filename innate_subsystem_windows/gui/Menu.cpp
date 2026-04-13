@@ -22,10 +22,10 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-#include "../framework.h"
-#include "../Menu.h"
+#include "framework.h"
+#include "Menu.h"
 
-#include "innate_subsystem/Window.h"
+#include "innate_subsystem/gui/Window.h"
 
 
 namespace innate_subsystem_windows

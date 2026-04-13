@@ -28,7 +28,7 @@
 
 #pragma once
 
-#include "innate_subsystem/Trackbar.h"
+#include "innate_subsystem/gui/Trackbar.h"
 #include "innate_subsystem_windows/_common_header.h"
 
 namespace innate_subsystem_windows

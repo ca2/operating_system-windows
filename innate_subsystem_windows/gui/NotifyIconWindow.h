@@ -29,7 +29,7 @@
 #include "subsystem/_common_header.h"
 
 
-#include "innate_subsystem_windows/WindowProcHolder.h"
+#include "WindowProcHolder.h"
 
 namespace innate_subsystem_windows
 {

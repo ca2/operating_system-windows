@@ -22,10 +22,10 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-#include "../framework.h"
-#include "../ImagedButton.h"
-#include "../ThemeLib.h"
-#include "../drawing/Icon.h"
+#include "framework.h"
+#include "ImagedButton.h"
+#include "ThemeLib.h"
+#include "drawing/Icon.h"
 //#include "util/UnicodeStringStorage.h"
 //#include <crtdbg.h>
 //namespace windows

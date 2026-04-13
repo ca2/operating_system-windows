@@ -26,7 +26,7 @@
 
 
 #include "remoting/remoting_common/util/inttypes.h"
-#include "subsystem/io/OutputStream.h"
+#include "input_output/OutputStream.h"
 #include "acme/exception/io.h"
 namespace remoting
 {

@@ -21,8 +21,8 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "../framework.h"
-#include "../Toolbar.h"
+#include "framework.h"
+#include "Toolbar.h"
 #include <CommCtrl.h>
 
 TBBUTTON * copy(TBBUTTON * ptbb, ::innate_subsystem::toolbar_button_t * ptoolbarbutton)

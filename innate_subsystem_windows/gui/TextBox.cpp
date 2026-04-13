@@ -21,8 +21,8 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "../framework.h"
-#include "../TextBox.h"
+#include "framework.h"
+#include "TextBox.h"
 
 
 namespace innate_subsystem_windows

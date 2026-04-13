@@ -1,7 +1,8 @@
 #pragma once
 
 
-#include "innate_ui_win32/_.h"
+#include "innate_subsystem/_.h"
+#include "subsystem_windows/_.h"
 
 
 #ifndef ACME_OPERATING_SYSTEM
@@ -11,12 +12,11 @@
 
 
 
-#if defined(_innate_subsystem_win32_project)
+#if defined(_innate_subsystem_windows_project)
 #define CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS  CLASS_DECL_EXPORT
 #else
 #define CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS  CLASS_DECL_IMPORT
 #endif
-
 
 
 

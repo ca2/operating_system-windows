@@ -25,7 +25,7 @@
 #pragma once
 //#define __TEXTBOX_H_
 
-#include "innate_subsystem/TextBox.h"
+#include "innate_subsystem/gui/TextBox.h"
 #include "innate_subsystem_windows/_common_header.h"
 
 

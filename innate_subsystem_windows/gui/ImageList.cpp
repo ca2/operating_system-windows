@@ -1,10 +1,9 @@
 //
 // Created by camilo on 2026-04-06 14:24 <3ThomasBorregaardSørensen!!
 //
-#include "../framework.h"
-#include "../ImageList.h"
-#include "innate_ui_win32/icon.h"
-#include "../drawing/Icon.h"
+#include "framework.h"
+#include "ImageList.h"
+#include "drawing/Icon.h"
 
 
 namespace innate_subsystem_windows

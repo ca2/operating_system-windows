@@ -22,8 +22,13 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-#include "../framework.h"
-#include "../Trackbar.h"
+#include "framework.h"
+#include "Trackbar.h"
+
+
+#include <commctrl.h>
+
+
 namespace innate_subsystem_windows
 {
    Trackbar::Trackbar()

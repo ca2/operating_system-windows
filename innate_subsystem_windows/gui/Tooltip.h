@@ -27,7 +27,7 @@
 //#define _TOOLTIP_H_
 
 //#include "util/CommonHeader.h"
-#include "innate_subsystem/Control.h"
+#include "innate_subsystem/gui/Control.h"
 
 //
 // Abstract tooltip class
@@ -37,7 +37,7 @@ namespace innate_subsystem_windows
 {
 
 
-    class Tooltip :
+    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Tooltip :
     virtual public ::particle
     {
     public:

@@ -21,20 +21,20 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "../framework.h"
+#include "framework.h"
 //#include "util/CommonHeader.h"
-#include "../Window.h"
-#include "../drawing/Cursor.h"
-#include "../drawing/Icon.h"
+#include "Window.h"
+#include "drawing/Cursor.h"
+#include "drawing/Icon.h"
 #include "Menu.h"
 #include "subsystem/node/SystemInformation.h"
 #include "subsystem/subsystem.h"
 #include "innate_subsystem/drawing/Brush.h"
-#include "../drawing/Bitmap.h"
-#include "../drawing/Brush.h"
-#include "../drawing/DeviceContext.h"
-#include "../drawing/Graphics.h"
-
+#include "drawing/Bitmap.h"
+#include "drawing/Brush.h"
+#include "drawing/DeviceContext.h"
+#include "drawing/Graphics.h"
+#include <commctrl.h>
 // namespace windows
 // {
 namespace innate_subsystem_windows
@@ -1229,7 +1229,28 @@ break;
 
    void notification_handler::_000OnNotify(windows_reflect_notify_t & notify)
    {
+
+      if (notify.m_econtrol == innate_subsystem::e_control_list_view)
+      {
+
+         onListViewNotification(notify);
+
+      }
+
+   }
+
+
+   void notification_handler::_000OnNotifyReflect(windows_reflect_notify_t & notify)
+   {
       //return false;
+   }
+
+
+   bool notification_handler::onListViewNotification(windows_reflect_notify_t & notify)
+   {
+
+      return false;
+
    }
 
    void Window::onBeforeFullScreen(bool bRestore)

@@ -32,10 +32,10 @@
 
 namespace subsystem_windows
 {
-   //pointer < ::subsystem_windows::DynamicLibrary> PipeServer::m_pdynamiclibraryKernel32;
+   pointer < ::subsystem_windows::DynamicLibrary> PipeServer::s_pdynamiclibraryKernel32;
 
-   //pGetNamedPipeClientProcessId PipeServer::m_GetNamedPipeClientProcessId = 0;
-   //volatile bool PipeServer::m_initialized = false;
+   pGetNamedPipeClientProcessId PipeServer::s_GetNamedPipeClientProcessId = 0;
+   bool PipeServer::s_bInitialized = false;
 
    PipeServer::PipeServer()
    : m_milliseconds(0),

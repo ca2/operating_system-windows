@@ -21,9 +21,9 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "../framework.h"
-#include "../PaintWindow.h"
-#include "../drawing/DeviceContext.h"
+#include "framework.h"
+#include "PaintWindow.h"
+#include "drawing/DeviceContext.h"
 
 namespace innate_subsystem_windows
    {

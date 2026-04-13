@@ -23,9 +23,9 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-#include "../framework.h"
-#include "../NotifyIconWindow.h"
-#include "../WindowProcHolder.h"
+#include "framework.h"
+#include "NotifyIconWindow.h"
+#include "WindowProcHolder.h"
 
 namespace innate_subsystem_windows
 {

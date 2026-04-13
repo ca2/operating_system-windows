@@ -1,8 +1,8 @@
 //
 // Created by camilo on 2026-04-08 18:45 <3ThomasBorregaardSørensen!!
 //
-#include "../framework.h"
-#include "../WindowCache.h"
+#include "framework.h"
+#include "WindowCache.h"
 #include "Window.h"
 
 

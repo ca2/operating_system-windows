@@ -1,6 +1,6 @@
 // Created by camilo on 2026-04-07 08:42 <3ThomasBorregaardSørensen!!
-#include "../framework.h"
-#include "../SystemMetrics.h"
+#include "framework.h"
+#include "SystemMetrics.h"
 
 
 namespace innate_subsystem_windows

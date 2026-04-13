@@ -22,9 +22,9 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-#include "../framework.h"
-#include "../FilteredTextBox.h"
-#include "innate_subsystem/StringFilter.h"
+#include "framework.h"
+#include "FilteredTextBox.h"
+#include "innate_subsystem/gui/StringFilter.h"
 
 
 namespace innate_subsystem_windows

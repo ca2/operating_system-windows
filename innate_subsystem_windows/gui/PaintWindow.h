@@ -25,8 +25,8 @@
 #pragma once
 
 
-#include "innate_subsystem/PaintWindow.h"
-#include "innate_subsystem_windows/Window.h"
+#include "innate_subsystem/gui/PaintWindow.h"
+#include "Window.h"
 
 
 namespace innate_subsystem_windows

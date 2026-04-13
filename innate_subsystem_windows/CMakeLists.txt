@@ -4,21 +4,23 @@ project(innate_subsystem_windows CXX)
 
 list(APPEND library_source
    drawing/Bitmap.cpp
-   drawing/DeviceContext.h
    drawing/Bitmap.h
-   drawing/Graphics.cpp
-   drawing/Brush.h
+   drawing/BitmapGraphics.cpp
    drawing/BitmapGraphics.h
-   drawing/Icon.h
-   drawing/SolidBrush.h
-   drawing/DeviceContext.cpp
    drawing/Brush.cpp
+   drawing/Brush.h
+   drawing/Cursor.cpp
+   drawing/Cursor.h
+   drawing/DeviceContext.cpp
+   drawing/DeviceContext.h
+   drawing/Graphics.cpp
+   drawing/Graphics.h
+   drawing/Icon.cpp
+   drawing/Icon.h
+   drawing/Pen.cpp
    drawing/Pen.h
    drawing/SolidBrush.cpp
-   drawing/Pen.cpp
-   drawing/Icon.cpp
-   drawing/Graphics.h
-   drawing/BitmapGraphics.cpp
+   drawing/SolidBrush.h
    #framebuffer/DibFrameBuffer.cpp
    #framebuffer/DibFrameBuffer.h
    framebuffer/DibSection.cpp
@@ -27,6 +29,72 @@ list(APPEND library_source
    #framebuffer/FrameBuffer.h
    #framebuffer/PixelFormat.cpp
    #framebuffer/PixelFormat.h
+   gui/CheckBox.cpp
+   gui/CheckBox.h
+   gui/ComboBox.cpp
+   gui/ComboBox.h
+   gui/CommonControlsEx.cpp
+   gui/CommonControlsEx.h
+   gui/Control.cpp
+   gui/Control.h
+   gui/Dialog.cpp
+   gui/Dialog.h
+   gui/FilteredTextBox.cpp
+   gui/FilteredTextBox.h
+   gui/ImagedButton.cpp
+   gui/ImagedButton.h
+   gui/ImageList.cpp
+   gui/ImageList.h
+   gui/ListBox.cpp
+   gui/ListBox.h
+   gui/ListView.cpp
+   gui/ListView.h
+   gui/Menu.cpp
+   gui/Menu.h
+   gui/MessageWindow.cpp
+   gui/MessageWindow.h
+   gui/NotifyIcon.cpp
+   gui/NotifyIcon.h
+   gui/NotifyIconWindow.cpp
+   gui/NotifyIconWindow.h
+   gui/PaintWindow.cpp
+   gui/PaintWindow.h
+   gui/ProgressBar.cpp
+   gui/ProgressBar.h
+   gui/ScrollBar.cpp
+   gui/ScrollBar.h
+   gui/SpinControl.cpp
+   gui/SpinControl.h
+   gui/StringFilter.cpp
+   gui/StringFilter.h
+   gui/SystemMetrics.cpp
+   gui/SystemMetrics.h
+   gui/Tab.cpp
+   gui/Tab.h
+   gui/TabContainer.cpp
+   gui/TabContainer.h
+   gui/TabControl.cpp
+   gui/TabControl.h
+   gui/TextBox.cpp
+   gui/TextBox.h
+   gui/ThemeLib.cpp
+   gui/ThemeLib.h
+   gui/Toolbar.cpp
+   gui/Toolbar.h
+   gui/Tooltip.cpp
+   gui/Tooltip.h
+   gui/Trackbar.cpp
+   gui/Trackbar.h
+   gui/Window.cpp
+   gui/Window.h
+   gui/window_implementation.h
+   gui/WindowCache.cpp
+   gui/WindowCache.h
+   gui/WindowFinder.cpp
+   gui/WindowFinder.h
+   gui/WindowMessageHandler.h
+   gui/WindowProcHolder.cpp
+   gui/WindowProcHolder.h
    _.cpp
    _.h
    _common_header.h
@@ -36,82 +104,14 @@ list(APPEND library_source
    #dialog.cpp
    #dialog.h
    _factory.cpp
-   BalloonTip.cpp
-   BalloonTip.h
-   CheckBox.cpp
-   CheckBox.h
-   ComboBox.cpp
-   ComboBox.h
-   CommonControlsEx.cpp
-   CommonControlsEx.h
-   Control.cpp
-   Control.h
-   Dialog.cpp
-   Dialog.h
-   #DibFrameBuffer.cpp
-   #DibFrameBuffer.h
-   FilteredTextBox.cpp
-   FilteredTextBox.h
+   #BalloonTip.cpp
+   #BalloonTip.h
    framework.cpp
    framework.h
-   ImagedButton.cpp
-   ImagedButton.h
-   ImageList.cpp
-   ImageList.h
-   ListBox.cpp
-   ListBox.h
-   ListView.cpp
-   ListView.h
-   Menu.cpp
-   Menu.h
-   MessageWindow.cpp
-   MessageWindow.h
-   NotifyIcon.cpp
-   NotifyIcon.h
-   NotifyIconWindow.cpp
-   NotifyIconWindow.h
-   PaintWindow.cpp
-   PaintWindow.h
-   ProgressBar.cpp
-   ProgressBar.h
    resource_loader.cpp
    resource_loader.h
-   ScrollBar.cpp
-   ScrollBar.h
-   SpinControl.cpp
-   SpinControl.h
-   StringFilter.cpp
-   StringFilter.h
    subsystem.cpp
    subsystem.h
-   SystemMetrics.cpp
-   SystemMetrics.h
-   Tab.cpp
-   Tab.h
-   TabContainer.cpp
-   TabContainer.h
-   TabControl.cpp
-   TabControl.h
-   TextBox.cpp
-   TextBox.h
-   ThemeLib.cpp
-   ThemeLib.h
-   Toolbar.cpp
-   Toolbar.h
-   Tooltip.cpp
-   Tooltip.h
-   Trackbar.cpp
-   Trackbar.h
-   window_implementation.h
-   Window.cpp
-   Window.h
-   WindowCache.cpp
-   WindowCache.h
-   WindowFinder.cpp
-   WindowFinder.h
-   WindowMessageHandler.h
-   WindowProcHolder.cpp
-   WindowProcHolder.h
    )
 
 
@@ -126,7 +126,7 @@ if (MSVC)
     target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
     target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
     target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-    target_link_libraries(${PROJECT_NAME} PRIVATE acme apex innate_ui_win32 Gdiplus)
+    target_link_libraries(${PROJECT_NAME} PRIVATE acme  subsystem subsystem_windows apex innate_subsystem Gdiplus)
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)

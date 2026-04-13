@@ -23,9 +23,9 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
-#include "../framework.h"
-#include "../NotifyIcon.h"
-#include "../drawing/Icon.h"
+#include "framework.h"
+#include "NotifyIcon.h"
+#include "drawing/Icon.h"
 #include <shellapi.h>
 
 // namespace windows

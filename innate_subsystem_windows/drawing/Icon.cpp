@@ -70,6 +70,14 @@ namespace innate_subsystem_windows
    }
 
 
+   void *Icon::_HICON()
+   {
+
+      return m_hicon;
+
+   }
+
+
    void Icon::initialize_icon(::innate_subsystem::IconInterface * picon)
 
    {

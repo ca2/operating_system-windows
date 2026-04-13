@@ -22,8 +22,8 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-#include "../framework.h"
-#include "../ComboBox.h"
+#include "framework.h"
+#include "ComboBox.h"
 
 #include <Windowsx.h>
 

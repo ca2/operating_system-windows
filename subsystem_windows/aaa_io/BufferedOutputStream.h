@@ -25,8 +25,8 @@
 #pragma once
 
 
-#include "subsystem/io/OutputStream.h"
-#include "subsystem/io/DataOutputStream.h"
+#include "input_output/OutputStream.h"
+#include "input_output/DataOutputStream.h"
 
 namespace remoting
 {

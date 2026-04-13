@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "innate_subsystem/SystemMetrics.h"
+#include "innate_subsystem/gui/SystemMetrics.h"
 
 
  namespace innate_subsystem_windows

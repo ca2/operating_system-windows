@@ -29,8 +29,8 @@
 
 namespace subsystem_windows
 {
-          //HHOOK OperatingSystemHook::s_hooks = 0;
-      //WindowsHookEventListener *OperatingSystemHook::s_pwindowshookeventlistener = nullptr;
+          HHOOK OperatingSystemHook::s_hhook = 0;
+      OperatingSystemHook *OperatingSystemHook::s_poperatingsystemhook = nullptr;
 
       OperatingSystemHook::OperatingSystemHook()
       {

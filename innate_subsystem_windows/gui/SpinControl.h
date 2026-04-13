@@ -26,8 +26,11 @@
 #pragma once
 //#define _SPIN_CONTROL_H_
 
-#include "innate_subsystem/SpinControl.h"
+#include "innate_subsystem/gui/SpinControl.h"
 #include "innate_subsystem_windows/_common_header.h"
+
+
+#include <commctrl.h>
 
 namespace innate_subsystem_windows
 {

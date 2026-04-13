@@ -26,7 +26,7 @@
 #pragma once
 //#define _PROGRESS_BAR_H_
 
-#include "innate_subsystem/ProgressBar.h"
+#include "innate_subsystem/gui/ProgressBar.h"
 #include "innate_subsystem_windows/_common_header.h"
 
 namespace innate_subsystem_windows

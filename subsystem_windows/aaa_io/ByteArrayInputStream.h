@@ -25,7 +25,7 @@
 #pragma once
 
 
-#include "subsystem/io/InputStream.h"
+#include "input_output/InputStream.h"
 #include "acme/exception/io.h"
 
 namespace remoting

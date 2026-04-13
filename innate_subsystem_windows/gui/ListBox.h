@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include "innate_subsystem/ListBox.h"
+#include "innate_subsystem/gui/ListBox.h"
 #include "innate_subsystem_windows/_common_header.h"
 
 namespace innate_subsystem_windows

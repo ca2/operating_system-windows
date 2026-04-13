@@ -22,11 +22,11 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-#include "../framework.h"
+#include "framework.h"
 #include "CommonControlsEx.h"
 #include "subsystem/Exception.h"
 //#include "util/CommonHeader.h"
-
+#include <commctrl.h>
 //namespace windows
 //{
    namespace innate_subsystem_windows

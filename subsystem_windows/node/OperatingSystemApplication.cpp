@@ -59,6 +59,13 @@ namespace subsystem_windows
    }
 
 
+   void OperatingSystemApplication::createApplicationMainTask()
+   {
+
+
+
+   }
+
 
    void OperatingSystemApplication::run()
    {
