@@ -651,7 +651,7 @@ namespace windowing_win32
 
       HMENU hmenu = nullptr;
 
-      HINSTANCE hinstance = windows::get_window_procedure_hinstance();
+      auto hinstance = ::windows::hinstance_from_function();
 
       void *lpCreateParams = (::windows::window *)this;
 

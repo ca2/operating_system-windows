@@ -793,7 +793,7 @@ namespace windowing_win32
                      if (pwindow2)
                      {
 
-                        hwndInsertAfter = pwindow2->_HWND();
+                        hwndInsertAfter = (HWND) pwindow2->_HWND();
 
                         hwndInsertAfter = HWND_TOPMOST;
 
@@ -801,10 +801,10 @@ namespace windowing_win32
                   }
                }
 
-               bool bWindowVisible = ::IsWindowVisible(pwindow->_HWND()) ? true : false;
+               bool bWindowVisible = ::IsWindowVisible((HWND) pwindow->_HWND()) ? true : false;
 
                bool bExTopMost =
-                  (::GetWindowLongPtr(pwindow->_HWND(), GWL_EXSTYLE) & WS_EX_TOPMOST) != 0;
+                  (::GetWindowLongPtr((HWND) pwindow->_HWND(), GWL_EXSTYLE) & WS_EX_TOPMOST) != 0;
 
                bool bSwpShowWindow = (pwindow->m_uSetWindowPosLastFlags & SWP_SHOWWINDOW) != 0;
 
@@ -1398,8 +1398,8 @@ namespace windowing_win32
             _on_configure_window(pbufferitem);
 
                      //GdiFlush();
-            if (::IsWindowVisible(pwindow->_HWND()) &&
-                !::IsIconic(pwindow->_HWND())
+            if (::IsWindowVisible((HWND) pwindow->_HWND()) &&
+                !::IsIconic((HWND) pwindow->_HWND())
                         && pointBufferItemWindow.x >-16384
                         && pointBufferItemWindow.y >-16384)
                      {
