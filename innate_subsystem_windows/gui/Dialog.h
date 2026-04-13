@@ -81,7 +81,7 @@ namespace innate_subsystem_windows
 
 
       // Method sets parent window
-      void setParent(::innate_subsystem::ControlInterface *ctrlParent) override;
+      //void setParent(::innate_subsystem::ControlInterface *ctrlParent) override;
 
 
       // Set resource name for dialog
@@ -93,7 +93,7 @@ namespace innate_subsystem_windows
 
 
       // Return
-      ::innate_subsystem::ControlInterface *getControl() override; // { return this; }
+      //::innate_subsystem::ControlInterface *getControl() override; // { return this; }
       // Setup control by ID
       void subclassControlById(::innate_subsystem::ControlInterface *pcontrol, unsigned int id) override;
 

@@ -26,6 +26,7 @@
 #pragma once
 
 
+#include "innate_subsystem/gui/NotifyIconWindow.h"
 #include "subsystem/_common_header.h"
 
 
@@ -33,40 +34,51 @@
 
 namespace innate_subsystem_windows
 {
-   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS NotifyIconWindowInterface :
-   virtual public ::subsystem::particle_interface<NotifyIconWindowInterface>
-   {
-   public:
-
-      //NotifyIconWindow();
-      virtual ~NotifyIconWindowInterface() = 0;
-
-      virtual ::operating_system::window getWindow() = 0;
-
-      virtual void setWindowProcHolder(WindowProcHolder *wph) = 0;
-
-      //protected:
-      //  HWND m_window;
-      //WindowProcHolder *m_wph;
-
-      //friend class NotifyIcon;
-   };
+   // class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS NotifyIconWindowInterface :
+   // virtual public ::subsystem::partinterface<NotifyIconWindowInterface>
+   // {
+   // public:
+   //
+   //    //NotifyIconWindow();
+   //    virtual ~NotifyIconWindowInterface() = 0;
+   //
+   //    virtual ::operating_system::window getWindow() = 0;
+   //
+   //    virtual void setWindowProcHolder(WindowProcHolder *wph) = 0;
+   //
+   //    //protected:
+   //    //  HWND m_window;
+   //    //WindowProcHolder *m_wph;
+   //
+   //    //friend class NotifyIcon;
+   // };
 
    class NotifyIconWindow :
-      virtual public ::subsystem::composite<NotifyIconWindowInterface>
+      virtual public ::subsystem::implementation<::innate_subsystem::NotifyIconWindowInterface>
    {
    public:
+
+
+      //protected:
+      //HWND m_window;
+      ///::pointer < WindowProcHolder  > m_pwindowprocholder;
+
+      const int WM_USER_TASKBAR;
 
       NotifyIconWindow();
        ~NotifyIconWindow() override;
 
-      ::operating_system::window getWindow() override;
+ //     ::operating_system::window getWindow() override;
 
-      void setWindowProcHolder(WindowProcHolder *wph) override;
+      //virtual void _setWindowProcHolder(WindowProcHolder *wph);
 
-      //protected:
-       HWND m_window;
-      ::pointer < WindowProcHolder  > m_pwindowprocholder;
+
+      bool on_window_procedure(lresult &lresult, unsigned int message, wparam wparam, lparam lparam) override;
+
+
+      virtual void onNotifyIconRightButtonUp() override;
+      virtual void onNotifyIconLeftButtonDown() override;
+      virtual void onTaskBarCreated() override;
 
       //friend class NotifyIcon;
    };

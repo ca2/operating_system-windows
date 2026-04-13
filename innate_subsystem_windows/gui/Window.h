@@ -255,7 +255,7 @@ namespace innate_subsystem_windows
 
       // setParent()
       // Making child window by changing parent of the window
-      void setParent(const ::operating_system::window & operatingsystemwindow) override;
+      void setParent(::innate_subsystem::WindowInterface * pwindow) override;
 
 
       ::operating_system::window dialog_item_operating_system_window(int iDlgItem) override;

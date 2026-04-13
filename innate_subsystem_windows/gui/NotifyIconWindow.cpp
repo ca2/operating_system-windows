@@ -29,58 +29,126 @@
 
 namespace innate_subsystem_windows
 {
-   NotifyIconWindow::NotifyIconWindow()
+   NotifyIconWindow::NotifyIconWindow() :
+   WM_USER_TASKBAR(RegisterWindowMessage(L"TaskbarCreated"))
    //: m_wph(0)
    {
       //
       // Register window class
       //
 
-      WNDCLASS wc;
-
-      wc.style = 0;
-      wc.lpfnWndProc = WindowProcHolder::defWindowProc;
-      wc.cbClsExtra = 0;
-      wc.cbWndExtra = 0;
-      wc.hInstance = GetModuleHandle(0);
-      wc.hIcon = NULL;
-      wc.hCursor = NULL;
-      wc.hbrBackground = NULL;
-      wc.lpszMenuName = NULL;
-      wc.lpszClassName = _T("NotifyIconWindowClass");
-
-      ATOM atom = RegisterClass(&wc);
+      // WNDCLASS wc;
+      //
+      // wc.style = 0;
+      // wc.lpfnWndProc = WindowProcHolder::defWindowProc;
+      // wc.cbClsExtra = 0;
+      // wc.cbWndExtra = 0;
+      // wc.hInstance = GetModuleHandle(0);
+      // wc.hIcon = NULL;
+      // wc.hCursor = NULL;
+      // wc.hbrBackground = NULL;
+      // wc.lpszMenuName = NULL;
+      // wc.lpszClassName = _T("NotifyIconWindowClass");
+      //
+      // ATOM atom = RegisterClass(&wc);
 
       //
       // Create window
       //
 
-      m_window = CreateWindow((LPCTSTR)atom,
-                              (LPCTSTR)_T("NotifyIconWindowTitle"),
-                              WS_OVERLAPPED,
-                              CW_USEDEFAULT, CW_USEDEFAULT,
-                              CW_USEDEFAULT, CW_USEDEFAULT,
-                              NULL, NULL, GetModuleHandle(0), NULL);
+      // m_window = CreateWindow((LPCTSTR)atom,
+      //                         (LPCTSTR)_T("NotifyIconWindowTitle"),
+      //                         WS_OVERLAPPED,
+      //                         CW_USEDEFAULT, CW_USEDEFAULT,
+      //                         CW_USEDEFAULT, CW_USEDEFAULT,
+      //                         NULL, NULL, GetModuleHandle(0), NULL);
 
-      SetWindowLongPtr(m_window, GWLP_USERDATA, (LONG_PTR)m_pwindowprocholder.m_p);
+
+      createWindow("NotifyIconWindowTitle", WS_OVERLAPPED, {},
+      CW_USEDEFAULT, CW_USEDEFAULT,
+      CW_USEDEFAULT, CW_USEDEFAULT);
+
+
+      //SetWindowLongPtr(m_window, GWLP_USERDATA, (LONG_PTR)m_pwindowprocholder.m_p);
+
+
+
    }
 
    NotifyIconWindow::~NotifyIconWindow()
    {
-      setWindowProcHolder(NULL);
-
+  //;;    _setWindowProcHolder(NULL);
+//
       //DestroyWindow(m_window);
    }
 
-   ::operating_system::window NotifyIconWindow::getWindow()
-   {
-      return ::as_operating_system_window(m_window);
-   }
+   // ::operating_system::window NotifyIconWindow::getWindow()
+   // {
+   //    return ::as_operating_system_window(m_window);
+   // }
+   //
+   // void NotifyIconWindow::_setWindowProcHolder(WindowProcHolder *wph)
+   // {
+   //    m_pwindowprocholder = wph;
+   //
+   //    SetWindowLongPtr(m_window, GWLP_USERDATA, (LONG_PTR)m_pwindowprocholder.m_p);
+   // }
 
-   void NotifyIconWindow::setWindowProcHolder(WindowProcHolder *wph)
-   {
-      m_pwindowprocholder = wph;
 
-      SetWindowLongPtr(m_window, GWLP_USERDATA, (LONG_PTR)m_pwindowprocholder.m_p);
-   }
+   bool NotifyIconWindow::on_window_procedure(lresult &lresult, unsigned int message, wparam wparam, lparam lparam)
+   {
+
+      // Make sure to reset it back to false before leaving this function for any
+      // reason (check all return statements, exceptions should not happen here).
+      //m_inWindowProc = true;
+
+      switch (message)
+      {
+         case WM_USER + 1:
+            switch (lparam.m_lparam) {
+            case ::user::e_message_right_button_up:
+                  onNotifyIconRightButtonUp();
+                  lresult = 0;
+                  return true;
+                  break;
+            case ::user::e_message_left_button_down:
+                  onNotifyIconLeftButtonDown();
+                  lresult = 0;
+                  return true;
+                  break;
+            } // switch (lParam)
+            break;
+         default:
+            if (message == WM_USER_TASKBAR) {
+               onTaskBarCreated();
+               lresult = 0;
+               return true;
+            }
+      }
+
+            return false;
+      }
+
+
+      void NotifyIconWindow::onNotifyIconRightButtonUp()
+      {
+
+         m_pcomposite->onNotifyIconRightButtonUp();
+
+      }
+      void NotifyIconWindow::onNotifyIconLeftButtonDown()
+      {
+
+         m_pcomposite->onNotifyIconLeftButtonDown();
+
+      }
+
+      void NotifyIconWindow::onTaskBarCreated()
+      {
+
+         m_pcomposite->onTaskBarCreated();
+
+      }
+
+
 } // namespace innate_subsystem_windows

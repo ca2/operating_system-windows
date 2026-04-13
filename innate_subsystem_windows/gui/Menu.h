@@ -69,6 +69,8 @@ namespace innate_subsystem_windows
 
       bool setDefaultItem(unsigned int uID) override;
 
+      void trackPopupMenuOnCursorPosition(::innate_subsystem::WindowInterface * pwindowNotify, const function<void(int)> &onCommand) override;
+
       // void operator= (HMENU hmenu)
       // {
       //    setMenu(hmenu) override;

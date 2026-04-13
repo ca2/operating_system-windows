@@ -265,7 +265,50 @@ namespace innate_subsystem_windows
    }
 
 
-   
+   void Menu::trackPopupMenuOnCursorPosition(::innate_subsystem::WindowInterface * pwindowNotify, const function<void(int)> &onCommand)
+   {
+
+      m_papplication->fork([this, onCommand, pwindowNotify]()
+         {
+
+      POINT pos;
+
+      if (!GetCursorPos(&pos)) {
+         pos.x = pos.y = 0;
+      }
+
+      HWND notifyWnd = (HWND) pwindowNotify->_HWND();
+      SetForegroundWindow(notifyWnd);
+
+       int action = TrackPopupMenu(this->m_hmenu,
+                                   TPM_NONOTIFY | TPM_RETURNCMD | TPM_RIGHTBUTTON,
+                                   pos.x, pos.y, 0, notifyWnd, NULL);
+         onCommand(action);
+         });
+
+      // switch (action) {
+      //     case IDS_NEW_CONN:
+      //         onNewConnection();
+      //         break;
+      //     case IDS_LISTENING_OPTIONS:
+      //         onListeningOptions();
+      //         break;
+      //     case IDS_CONFIG:
+      //         onConfiguration();
+      //         break;
+      //     case IDS_ABOUT_VIEWER:
+      //         onAboutViewer();
+      //         break;
+      //     case IDS_CLOSE:
+      //         onCloseListeningDaemon();
+      //         break;
+      //     default:
+      //         _ASSERT(true);
+      // }
+
+
+   }
+
 } // namespace innate_subsystem_windows
 
 

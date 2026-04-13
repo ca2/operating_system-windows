@@ -23,33 +23,33 @@
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 #include "framework.h"
-#include "WindowProcHolder.h"
-namespace innate_subsystem_windows
-{
-   WindowProcHolder::WindowProcHolder()
-   {
-   }
-
-   WindowProcHolder::~WindowProcHolder()
-   {
-   }
-
-   LRESULT CALLBACK WindowProcHolder::defWindowProc(HWND hWnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam)
-   {
-      WindowProcHolder *wph = (WindowProcHolder *)GetWindowLongPtr(hWnd, GWLP_USERDATA);
-
-      if (wph == 0) {
-         return DefWindowProc(hWnd, uMsg, wparam, lparam);
-      }
-
-      bool useDefWndProc = false;
-
-      LRESULT r = wph->windowProc(hWnd, uMsg, wparam, lparam, &useDefWndProc);
-
-      if (useDefWndProc) {
-         return DefWindowProc(hWnd, uMsg, wparam, lparam);
-      }
-
-      return r;
-   }
-} // namespace innate_subsystem_windows
+// #include "WindowProcHolder.h"
+// namespace innate_subsystem_windows
+// {
+//    WindowProcHolder::WindowProcHolder()
+//    {
+//    }
+//
+//    WindowProcHolder::~WindowProcHolder()
+//    {
+//    }
+//
+//    LRESULT CALLBACK WindowProcHolder::defWindowProc(HWND hWnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam)
+//    {
+//       WindowProcHolder *wph = (WindowProcHolder *)GetWindowLongPtr(hWnd, GWLP_USERDATA);
+//
+//       if (wph == 0) {
+//          return DefWindowProc(hWnd, uMsg, wparam, lparam);
+//       }
+//
+//       bool useDefWndProc = false;
+//
+//       LRESULT r = wph->windowProc(hWnd, uMsg, wparam, lparam, &useDefWndProc);
+//
+//       if (useDefWndProc) {
+//          return DefWindowProc(hWnd, uMsg, wparam, lparam);
+//       }
+//
+//       return r;
+//    }
+// } // namespace innate_subsystem_windows

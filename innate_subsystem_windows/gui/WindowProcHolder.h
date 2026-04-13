@@ -24,28 +24,28 @@
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
 #pragma once
-
-#include "innate_subsystem_windows/_common_header.h"
-
-namespace innate_subsystem_windows
-{
-   class WindowProcHolder :
-   virtual public ::particle
-   {
-   public:
-      WindowProcHolder();
-      virtual ~WindowProcHolder();
-
-   protected:
-      virtual LRESULT windowProc(HWND hWnd, unsigned int uMsg, ::wparam wparam, ::lparam lparam, bool *useDefWindowProc) = 0;
-
-      static LRESULT CALLBACK defWindowProc(HWND hWnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam);
-
-      friend class NotifyIconWindow;
-   };
-
-
-} // namespace innate_subsystem_windows
-
+//
+// #include "innate_subsystem_windows/_common_header.h"
+//
+// namespace innate_subsystem_windows
+// {
+//    class WindowProcHolder :
+//    virtual public ::particle
+//    {
+//    public:
+//       WindowProcHolder();
+//       virtual ~WindowProcHolder();
+//
+//    protected:
+//       virtual LRESULT windowProc(HWND hWnd, unsigned int uMsg, ::wparam wparam, ::lparam lparam, bool *useDefWindowProc) = 0;
+//
+//       static LRESULT CALLBACK defWindowProc(HWND hWnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam);
+//
+//       friend class NotifyIconWindow;
+//    };
+//
+//
+// } // namespace innate_subsystem_windows
+//
 
 

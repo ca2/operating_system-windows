@@ -265,10 +265,16 @@ namespace innate_subsystem_windows
                             SWP_NOZORDER | SWP_NOACTIVATE);
    }
 
-   void Window::setParent(const ::operating_system::window & operatingsystemwindow)
+   void Window::setParent(::innate_subsystem::WindowInterface * pwindow)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
-      SetParent(m_windowswindow.as_HWND(), as_HWND(operatingsystemwindow));
+      if (::is_null(pwindow))
+         SetParent(m_windowswindow.as_HWND(), nullptr);
+      else
+      {
+         auto hwndParent = (HWND) pwindow->_HWND();
+         SetParent(m_windowswindow.as_HWND(), hwndParent);
+      }
    }
 
 
