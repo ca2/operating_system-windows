@@ -2607,41 +2607,58 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BalloonTip.cpp" />
-    <ClCompile Include="CheckBox.cpp" />
-    <ClCompile Include="ComboBox.cpp" />
-    <ClCompile Include="CommonControlsEx.cpp" />
-    <ClCompile Include="Control.cpp" />
-    <ClCompile Include="Dialog.cpp" />
-    <ClCompile Include="DibFrameBuffer.cpp" />
-    <ClCompile Include="FilteredTextBox.cpp" />
-    <ClCompile Include="framework.cpp" />
-    <ClCompile Include="ImagedButton.cpp" />
-    <ClCompile Include="ImageList.cpp" />
-    <ClCompile Include="ListBox.cpp" />
-    <ClCompile Include="ListView.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="MessageWindow.cpp" />
-    <ClCompile Include="NotifyIcon.cpp" />
-    <ClCompile Include="NotifyIconWindow.cpp" />
-    <ClCompile Include="PaintWindow.cpp" />
-    <ClCompile Include="ProgressBar.cpp" />
-    <ClCompile Include="ScrollBar.cpp" />
-    <ClCompile Include="SpinControl.cpp" />
-    <ClCompile Include="StringFilter.cpp" />
+    <ClCompile Include="drawing\Bitmap.cpp" />
+    <ClCompile Include="drawing\BitmapGraphics.cpp" />
+    <ClCompile Include="drawing\Brush.cpp" />
+    <ClCompile Include="drawing\Cursor.cpp" />
+    <ClCompile Include="drawing\DeviceContext.cpp" />
+    <ClCompile Include="drawing\Font.cpp" />
+    <ClCompile Include="drawing\Graphics.cpp" />
+    <ClCompile Include="drawing\Icon.cpp" />
+    <ClCompile Include="drawing\Pen.cpp" />
+    <ClCompile Include="drawing\SolidBrush.cpp" />
+    <ClCompile Include="framework.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="gui\CheckBox.cpp" />
+    <ClCompile Include="gui\ComboBox.cpp" />
+    <ClCompile Include="gui\CommonControlsEx.cpp" />
+    <ClCompile Include="gui\Control.cpp" />
+    <ClCompile Include="gui\Dialog.cpp" />
+    <ClCompile Include="gui\FilteredTextBox.cpp" />
+    <ClCompile Include="gui\ImagedButton.cpp" />
+    <ClCompile Include="gui\ImageList.cpp" />
+    <ClCompile Include="gui\ListBox.cpp" />
+    <ClCompile Include="gui\ListView.cpp" />
+    <ClCompile Include="gui\Menu.cpp" />
+    <ClCompile Include="gui\MessageWindow.cpp" />
+    <ClCompile Include="gui\NotifyIcon.cpp" />
+    <ClCompile Include="gui\NotifyIconWindow.cpp" />
+    <ClCompile Include="gui\PaintWindow.cpp" />
+    <ClCompile Include="gui\ProgressBar.cpp" />
+    <ClCompile Include="gui\ScrollBar.cpp" />
+    <ClCompile Include="gui\SpinControl.cpp" />
+    <ClCompile Include="gui\StringFilter.cpp" />
+    <ClCompile Include="gui\SystemMetrics.cpp" />
+    <ClCompile Include="gui\Tab.cpp" />
+    <ClCompile Include="gui\TabContainer.cpp" />
+    <ClCompile Include="gui\TabControl.cpp" />
+    <ClCompile Include="gui\TextBox.cpp" />
+    <ClCompile Include="gui\ThemeLib.cpp" />
+    <ClCompile Include="gui\Toolbar.cpp" />
+    <ClCompile Include="gui\Tooltip.cpp" />
+    <ClCompile Include="gui\Trackbar.cpp" />
+    <ClCompile Include="gui\Window.cpp" />
+    <ClCompile Include="gui\WindowCache.cpp" />
+    <ClCompile Include="gui\WindowFinder.cpp" />
+    <ClCompile Include="gui\WindowProcHolder.cpp" />
+    <ClCompile Include="resource_loader.cpp" />
     <ClCompile Include="subsystem.cpp" />
-    <ClCompile Include="SystemMetrics.cpp" />
-    <ClCompile Include="Tab.cpp" />
-    <ClCompile Include="TabContainer.cpp" />
-    <ClCompile Include="TabControl.cpp" />
-    <ClCompile Include="TextBox.cpp" />
-    <ClCompile Include="ThemeLib.cpp" />
-    <ClCompile Include="ToolBar.cpp" />
-    <ClCompile Include="Tooltip.cpp" />
-    <ClCompile Include="Trackbar.cpp" />
-    <ClCompile Include="Window.cpp" />
-    <ClCompile Include="WindowFinder.cpp" />
-    <ClCompile Include="WindowProcHolder.cpp" />
     <ClCompile Include="_.cpp" />
     <ClCompile Include="_factory.cpp" />
   </ItemGroup>
@@ -2665,10 +2682,13 @@
     <ProjectReference Include="..\..\..\source\app\innate_subsystem\innate_subsystem.vcxproj">
       <Project>{97d4f12a-916c-4cb2-b4d9-f0d35128065a}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\source\app\subsystem_bsd_sockets\subsystem_bsd_sockets.vcxproj">
+      <Project>{40f49b85-a888-4a1d-a7f5-7631f14a3d4a}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\operating_system-windows_common\acme_windows_common\acme_windows_common.vcxproj">
       <Project>{eb9dc9c0-0573-4da0-8700-4dbb371773f1}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\subsystem_acme_windows\subsystem_acme_windows.vcxproj">
+    <ProjectReference Include="..\subsystem_windows\subsystem_windows.vcxproj">
       <Project>{f46e1b15-7a8a-4bbd-8dfa-85c7074e2daa}</Project>
     </ProjectReference>
   </ItemGroup>

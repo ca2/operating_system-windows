@@ -31,15 +31,22 @@
 namespace subsystem_windows
 {
 
-namespace subsystem_windows
-   {
    // Class for intercepting keyboard on low level.
    class CLASS_DECL_SUBSYSTEM_WINDOWS OperatingSystemHook :
    virtual  public ::subsystem::implementation<::subsystem::OperatingSystemHookInterface>
    {
    public:
+
+      ::pointer_array<::subsystem::OperatingSystemHookListener> m_listenera;
+
       OperatingSystemHook();
       ~OperatingSystemHook() override;
+
+
+ /*              bool operating_system_hook_on_keyboard_message(::lresult &lresult,
+                                                                          ::user::enum_message emessage, int iVkCode,
+                                                                          ::lparam lparam) override;
+*/
 
 
       virtual bool lowLevelKeyboardHook(::lresult & lresult, int nCode,
@@ -60,6 +67,16 @@ namespace subsystem_windows
       void startKeyboardHook() override;
 
       void stopKeyboardHook() override;
+
+
+      void registerKeyboardHook(::subsystem::OperatingSystemHookListener *phooklistener) override;
+
+      void unregisterKeyboardHook(::subsystem::OperatingSystemHookListener *phooklistener) override;
+
+
+         bool operating_system_hook_on_keyboard_message(::lresult &lresult, ::user::enum_message emessage, int iVkCode,
+                                                     ::lparam lparam) override;
+
 
       //private:
       // Hook object.

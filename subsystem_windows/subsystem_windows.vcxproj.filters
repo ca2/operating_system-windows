@@ -160,6 +160,9 @@
     <ClInclude Include="node\WTS.h">
       <Filter>Header Files\node</Filter>
     </ClInclude>
+    <ClInclude Include="resource_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -176,6 +179,12 @@
     </Filter>
     <Filter Include="Header Files\node">
       <UniqueIdentifier>{a02884bb-2992-41b4-834b-313502bf876d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\node\security">
+      <UniqueIdentifier>{5d8bc066-2e11-4d89-b561-3fd867521407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\thread">
+      <UniqueIdentifier>{a1a2d7b0-472c-4c77-8f03-b7488e40bed6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +346,39 @@
     </ClCompile>
     <ClCompile Include="node\WTS.cpp">
       <Filter>Source Files\node</Filter>
+    </ClCompile>
+    <ClCompile Include="node\security\SecurityAttributes.cpp">
+      <Filter>Source Files\node\security</Filter>
+    </ClCompile>
+    <ClCompile Include="node\security\SecurityDescriptor.cpp">
+      <Filter>Source Files\node\security</Filter>
+    </ClCompile>
+    <ClCompile Include="node\security\SecurityIdentifier.cpp">
+      <Filter>Source Files\node\security</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\_.cpp">
+      <Filter>Source Files\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\AutoLock.cpp">
+      <Filter>Source Files\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\DesktopSelector.cpp">
+      <Filter>Source Files\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\GlobalMutex.cpp">
+      <Filter>Source Files\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\GuiThread.cpp">
+      <Filter>Source Files\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\LocalMutex.cpp">
+      <Filter>Source Files\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\Thread.cpp">
+      <Filter>Source Files\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\ThreadCollector.cpp">
+      <Filter>Source Files\thread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

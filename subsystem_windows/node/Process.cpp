@@ -86,7 +86,7 @@ namespace subsystem_windows
          m_handlesIsInherited = handlesIsInerited;
       }
 
-      void Process::getStartupInfo(STARTUPINFO *sti)
+      void Process::_getStartupInfo(STARTUPINFO *sti)
       {
          ZeroMemory(sti, sizeof(STARTUPINFO));
          sti->cb = sizeof(STARTUPINFO);
@@ -103,7 +103,7 @@ namespace subsystem_windows
          cleanup();
 
          STARTUPINFO sti;
-         getStartupInfo(&sti);
+         _getStartupInfo(&sti);
          PROCESS_INFORMATION pi;
 
          ::string commandLine = getCommandLineString();

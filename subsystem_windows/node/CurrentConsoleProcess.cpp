@@ -28,18 +28,22 @@
 #include "subsystem_windows/node/WinStaLibrary.h"
 //#include "remoting/remoting_common/win_system/Environment.h"
 #include "subsystem/node/SystemException.h"
+#include "subsystem_windows/node/Process.h"
 #include "subsystem_windows/node/Workstation.h"
-#include "subsystem/windows/node/WTS.h"
+#include "subsystem_windows/node/WTS.h"
+#include "subsystem_windows/subsystem.h"
+
 
 
 namespace subsystem_windows
 {
 
-   CurrentConsoleProcess::CurrentConsoleProcess(LogWriter *log, bool connectRdpSession,
+   CurrentConsoleProcess::CurrentConsoleProcess(::subsystem::LogWriter *log, bool connectRdpSession,
                                                 const ::scoped_string &scopedstrPath,
                                                 const ::scoped_string &scopedstrArgs) :
-       Process(scopedstrPath, scopedstrArgs), m_log(log), m_connectRdpSession(connectRdpSession)
+       m_log(log), m_connectRdpSession(connectRdpSession)
    {
+      initialize_process(scopedstrPath, scopedstrArgs);
    }
 
    CurrentConsoleProcess::~CurrentConsoleProcess() {}
@@ -48,12 +52,14 @@ namespace subsystem_windows
    {
       cleanup();
 
-      m_log->information("Try to start \"{} {}\" process", m_path, m_args);
+      auto pprocessWindows = impl<::subsystem_windows::Process>();
+
+      m_log->information("Try to start \"{} {}\" process", pprocessWindows->m_path, pprocessWindows->m_args);
 
       DWORD uiAccess = 1; // Nonzero enables UI control
       PROCESS_INFORMATION pi;
       STARTUPINFO sti;
-      getStartupInfo(&sti);
+      pprocessWindows->_getStartupInfo(&sti);
 
       m_log->debug("sti: cb = {}, hStdError = %p, hStdInput = %p,"
                    " hStdOutput = %p, dwFlags = %u",
@@ -62,17 +68,18 @@ namespace subsystem_windows
 
       try
       {
-         HANDLE userToken = WTS::duplicateCurrentProcessUserToken(m_connectRdpSession, m_log);
+         HANDLE userToken = windows_subsystem()->wts()->duplicateCurrentProcessUserToken(m_connectRdpSession, m_log);
 
          ::string commandLine = getCommandLineString();
 
          m_log->debug("Try CreateProcessAsUser({} 0, {}, 0, 0, {}, NORMAL_PRIORITY_CLASS, 0, 0,"
                       " sti, pi)",
-                      (void *)userToken, commandLine, (int)m_handlesIsInherited);
-         if (CreateProcessAsUser(userToken, 0, (LPTSTR)::wstring(commandLine).c_str(), 0, 0, m_handlesIsInherited,
+                      (void *)userToken, commandLine, (int)pprocessWindows->m_handlesIsInherited);
+         if (CreateProcessAsUser(userToken, 0, (LPTSTR)::wstring(commandLine).c_str(), 0, 0,
+                                 pprocessWindows->m_handlesIsInherited,
                                  NORMAL_PRIORITY_CLASS, 0, 0, &sti, &pi) == 0)
          {
-            throw SystemException();
+            throw ::subsystem::SystemException();
          }
          m_log->information("Created \"{}\" process", commandLine);
          //
@@ -80,14 +87,14 @@ namespace subsystem_windows
          //
          CloseHandle(userToken);
       }
-      catch (SystemException &sysEx)
+      catch (::subsystem::SystemException &sysEx)
       {
          m_log->error("Failed to start process with {} error", sysEx.getErrorCode());
          throw;
       }
 
-      m_hThread = pi.hThread;
-      m_hProcess = pi.hProcess;
+      pprocessWindows->m_hThread = pi.hThread;
+      pprocessWindows->m_pprocesshandle->m_hProcess      = pi.hProcess;
    }
 
 

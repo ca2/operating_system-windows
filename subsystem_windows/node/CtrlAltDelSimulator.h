@@ -41,7 +41,7 @@ namespace subsystem_windows
          ~CtrlAltDelSimulator() override;
 
          //protected:
-         int execute() override;
+         void execute() override;
       };
 
       //// __CTRLALTDELSIMULATOR_H__

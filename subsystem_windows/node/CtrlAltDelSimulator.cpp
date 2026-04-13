@@ -24,28 +24,35 @@
 #include "framework.h"
 #include "subsystem_windows/_common_header.h"
 #include "CtrlAltDelSimulator.h"
-#include "remoting/remoting_common/thread/DesktopSelector.h"
+#include "subsystem/thread/DesktopSelector.h"
+#include "subsystem_windows/subsystem.h"
 
-CtrlAltDelSimulator::CtrlAltDelSimulator()
+namespace subsystem_windows
 {
-  resume();
-}
 
-CtrlAltDelSimulator::~CtrlAltDelSimulator()
-{
-  terminate();
-  wait();
-}
+   CtrlAltDelSimulator::CtrlAltDelSimulator() { resume(); }
 
-void CtrlAltDelSimulator::execute()
-{
-  // Switch thread desktop to "Winlogon".
-  if (DesktopSelector::selectDesktop(::string("Winlogon"))) {
-    HWND hwndCtrlAltDel = FindWindow(L"SAS window class", L"SAS window");
-    if (hwndCtrlAltDel == NULL) {
-      hwndCtrlAltDel = HWND_BROADCAST;
-    }
-    PostMessage(hwndCtrlAltDel, WM_HOTKEY, 0, MAKELONG(MOD_ALT | MOD_CONTROL, VK_DELETE));
-  }
-  // Do not restore previous desktop.
-}
+   CtrlAltDelSimulator::~CtrlAltDelSimulator()
+   {
+      terminate();
+      wait();
+   }
+
+   void CtrlAltDelSimulator::execute()
+   {
+      // Switch thread desktop to "Winlogon".
+      if (windows_subsystem()->desktop_selector()->selectDesktop(::string("Winlogon")))
+      {
+         HWND hwndCtrlAltDel = FindWindow(L"SAS window class", L"SAS window");
+         if (hwndCtrlAltDel == NULL)
+         {
+            hwndCtrlAltDel = HWND_BROADCAST;
+         }
+         PostMessage(hwndCtrlAltDel, WM_HOTKEY, 0, MAKELONG(MOD_ALT | MOD_CONTROL, VK_DELETE));
+      }
+      // Do not restore previous desktop.
+   }
+
+
+} // namespace subsystem_windows
+ 

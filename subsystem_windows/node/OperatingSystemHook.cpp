@@ -120,6 +120,14 @@ namespace subsystem_windows
       }
 
 
+      //   bool OperatingSystemHook::operating_system_hook_on_keyboard_message(::lresult &lresult,
+      //                                                                             ::user::enum_message emessage,
+      //                                                                             int iVkCode, ::lparam lparam)
+      //{
+
+
+      //}
+
       void OperatingSystemHook::startKeyboardHook()
       {
          //stopKeyboardHook();
@@ -152,7 +160,65 @@ namespace subsystem_windows
          s_hhook = nullptr;
          s_poperatingsystemhook = nullptr;
       }
-   } // namespace subsystem_windows
+   
+
+
+         //    // Registration of keyboard hook.
+      void OperatingSystemHook::registerKeyboardHook(::subsystem::OperatingSystemHookListener *phooklistener)
+      {
+
+         if (::is_null(phooklistener))
+         {
+
+            throw ::exception(error_bad_argument);
+         }
+
+         if (m_listenera.is_empty())
+         {
+
+            startKeyboardHook();
+         }
+
+         m_listenera.add_unique(phooklistener);
+      }
+      //
+      //    // Unregistration of keyboard hook.
+      void OperatingSystemHook::unregisterKeyboardHook(::subsystem::OperatingSystemHookListener *phooklistener)
+      {
+
+         if (::is_null(phooklistener))
+         {
+
+            throw ::exception(error_bad_argument);
+         }
+
+
+         m_listenera.add_unique(phooklistener);
+
+         if (m_listenera.is_empty())
+         {
+
+            stopKeyboardHook();
+         }
+      }
+
+
+      bool OperatingSystemHook::operating_system_hook_on_keyboard_message(::lresult& lresult, ::user::enum_message emessage,
+         int iVkCode, ::lparam lparam)
+
+      {
+         for (auto plistener: m_listenera)
+         {
+
+            if (plistener->operating_system_hook_on_keyboard_message(lresult, emessage, iVkCode, lparam))
+            {
+
+               return true;
+            }
+         }
+
+         return false;
+      }
 
 } // namespace subsystem_windows
 

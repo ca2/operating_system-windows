@@ -71,7 +71,7 @@ namespace subsystem_windows
        * @return true if string is loaded, false otherwise.
        */
       virtual bool loadString(unsigned int id, ::string & str);
-      virtual ::string loadString(unsigned int id);
+      //virtual ::string loadString(unsigned int id);
 
       /**
        * Loads accelerator from resources.

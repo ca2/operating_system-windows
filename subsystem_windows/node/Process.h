@@ -115,7 +115,7 @@
          // Fills the STARTUPINFO structure.
          // Before to use the STARTUPINFO structure in this class a function
          // must to call this function.
-         virtual void getStartupInfo(STARTUPINFO *sti);
+         virtual void _getStartupInfo(STARTUPINFO *sti);
 
          /**
           * Closes WinAPI handles if their are open.

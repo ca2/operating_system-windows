@@ -2144,6 +2144,7 @@
     <ClInclude Include="node\WsaStartup.h" />
     <ClInclude Include="node\WTS.h" />
     <ClInclude Include="node\_.h" />
+    <ClInclude Include="resource_loader.h" />
     <ClInclude Include="subsystem.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="framework.h" />
@@ -2179,6 +2180,9 @@
     <ClCompile Include="node\ProcessCommandLine.cpp" />
     <ClCompile Include="node\ProcessHandle.cpp" />
     <ClCompile Include="node\Screen.cpp" />
+    <ClCompile Include="node\security\SecurityAttributes.cpp" />
+    <ClCompile Include="node\security\SecurityDescriptor.cpp" />
+    <ClCompile Include="node\security\SecurityIdentifier.cpp" />
     <ClCompile Include="node\Service.cpp" />
     <ClCompile Include="node\ServiceControlManagerClient.cpp" />
     <ClCompile Include="node\SharedMemory.cpp" />
@@ -2200,6 +2204,14 @@
     <ClCompile Include="node\_.cpp" />
     <ClCompile Include="resource_loader.cpp" />
     <ClCompile Include="subsystem.cpp" />
+    <ClCompile Include="thread\AutoLock.cpp" />
+    <ClCompile Include="thread\DesktopSelector.cpp" />
+    <ClCompile Include="thread\GlobalMutex.cpp" />
+    <ClCompile Include="thread\GuiThread.cpp" />
+    <ClCompile Include="thread\LocalMutex.cpp" />
+    <ClCompile Include="thread\Thread.cpp" />
+    <ClCompile Include="thread\ThreadCollector.cpp" />
+    <ClCompile Include="thread\_.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -2238,6 +2250,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\source\app\acme\acme.vcxproj">
       <Project>{638b242f-0f21-41c3-9f66-724660046133}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\source\app\subsystem\subsystem.vcxproj">
+      <Project>{8cc36574-7cff-438f-ae5c-51fd5c6b2823}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\source\app\subsystem_bsd_sockets\subsystem_bsd_sockets.vcxproj">
+      <Project>{40f49b85-a888-4a1d-a7f5-7631f14a3d4a}</Project>
     </ProjectReference>
     <ProjectReference Include="..\acme_windows\acme_windows.vcxproj">
       <Project>{cc8e8200-00a9-414e-9829-7ca3f1091add}</Project>
