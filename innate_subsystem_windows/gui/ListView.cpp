@@ -251,6 +251,12 @@ namespace innate_subsystem_windows
       return ListView_GetSelectedCount(m_hwnd);
    }
 
+
+   int ListView::getCount()
+   {
+      return (int) ListView_GetItemCount(m_hwnd);
+   }
+
    ::int_array ListView::getSelectedItemsIndexes()
    {
       int i = -1;

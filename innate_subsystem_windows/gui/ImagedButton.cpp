@@ -197,6 +197,18 @@ namespace innate_subsystem_windows
       m_size = size;
    }
 
+
+
+   void ImagedButton::setIcon(::innate_subsystem::IconInterface * picon, const ::int_size & size)
+   {
+
+      //auto piconImpl = picon->impl < ::innate_subsystem_windows::Icon >();
+
+      m_picon = picon;
+      m_size = size;
+
+   }
+
    void ImagedButton::calcRect(RECT* buttonRect, bool isButtonPressed,
                                DWORD textWidth, DWORD textHeight,
                                DWORD imageWidth, DWORD imageHeight,
