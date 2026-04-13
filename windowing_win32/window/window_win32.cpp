@@ -434,7 +434,7 @@ namespace windowing_win32
 
       memory_set(&wndcls, 0, sizeof(WNDCLASSEXW));   // start with nullptr defaults
 
-      wndcls.lpfnWndProc = &windows::window_procedure;
+      wndcls.lpfnWndProc = &windows::s_window_procedure;
 
       //wndcls.hInstance = ::windows::get_window_procedure_hinstance();
 

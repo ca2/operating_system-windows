@@ -1036,7 +1036,9 @@ namespace windowing_win32
 
       //void default_set(::message::message * pmessage, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam);
 
-      LRESULT window_procedure(unsigned int message, wparam wparam, lparam lparam) override;
+      //LRESULT window_procedure(unsigned int message, wparam wparam, lparam lparam) override;
+
+      bool on_window_procedure(::lresult &lresult, unsigned int message, ::wparam wparam, ::lparam lparam) override;
 
 
       void set_opacity(double dOpacity) override;
