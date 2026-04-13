@@ -86,6 +86,30 @@ namespace innate_subsystem_windows
       return picon;
    }
 
+   ::pointer < ::innate_subsystem::IconInterface > resource_loader::loadIconByIntResource(int iId)
+   {
+      //return LoadIcon(m_appInstance, iconName);
+      auto picon = create_newø<::innate_subsystem_windows::Icon>();
+      //return LoadIcon(NULL, iconName);
+      if ((::iptr)iId < 65536)
+      {
+         picon->m_hicon = ::LoadIcon((HINSTANCE) main_subsystem()->m_hinstanceResource, (LPCWSTR) iId);
+
+      }
+      // else
+      // {
+      //    ::wstring wstrIconName(iconName);
+      //    picon->m_hicon = ::LoadIcon((HINSTANCE) main_subsystem()->m_hinstanceResource,  wstrIconName);
+      // }
+
+      //throw ::interface_only();
+      return picon;
+
+
+   }
+
+
+
    // bool resource_loader::loadString(unsigned int id, ::string & str)
    // {
    //    //_ASSERT(string != 0);

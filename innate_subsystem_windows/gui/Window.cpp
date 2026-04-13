@@ -286,6 +286,45 @@ namespace innate_subsystem_windows
       return ::as_operating_system_window(hwndChild);
    }
 
+   void Window::subclassControlById(WindowInterface * pwindowControl, unsigned int id)
+   {
+
+      auto operatingsystemwindow = dialog_item_operating_system_window(id);
+
+      pwindowControl->subclassWindow(operatingsystemwindow);
+
+   }
+
+
+   void Window::subclassWindow(const ::operating_system::window & operatingsystemwindow)
+   {
+
+      HWND hwnd = ::as_HWND(operatingsystemwindow);
+       m_windowswindow = hwnd;
+      m_wndprocDefault = (WNDPROC) ::GetWindowLongPtr(hwnd, GWLP_WNDPROC);
+      ::SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)(::uptr) this);
+      ::SetWindowLongPtr(hwnd, GWLP_WNDPROC, reinterpret_cast<iptr>(s_window_procedure));
+
+   }
+
+
+
+   void Window::unsubclassWindow()
+   {
+
+      auto hwnd = m_windowswindow.as_HWND();
+      _ASSERT(hwnd != 0);
+
+
+      ::SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM) (::uptr) nullptr);
+      ::SetWindowLongPtr(hwnd, GWLP_WNDPROC, reinterpret_cast<iptr>(m_wndprocDefault));
+
+      m_wndprocDefault = nullptr;
+      m_windowswindow = nullptr;
+
+   }
+
+
    void Window::setClassStyle(unsigned int style)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);

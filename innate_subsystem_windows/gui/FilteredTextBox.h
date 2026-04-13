@@ -56,7 +56,7 @@ namespace innate_subsystem_windows
       bool isStringValid(const char *string) override;
       ::lresult onKeyDown(::wparam code, ::lparam params) override;
 
-      static LRESULT CALLBACK windowProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam);
+      //static LRESULT CALLBACK windowProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam);
 
       virtual bool window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
 

@@ -191,13 +191,13 @@ namespace innate_subsystem_windows
   // }
 
 
-  // void Control::postUserMessage(unsigned int uMessage, ::wparam wparam, ::lparam lparam)
-  // {
-  //
-  //    m_pparticleThis->po
-  //
-  // }
-  //
+   // void Control::postUserMessage(unsigned int uMessage, ::wparam wparam, ::lparam lparam)
+   // {
+   //
+   //    ::PostMessage()
+   //
+   // }
+   //
 
 
 } // namespace innate_subsystem_windows

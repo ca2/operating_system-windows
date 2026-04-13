@@ -113,6 +113,15 @@ namespace innate_subsystem_windows
       m_picon->m_hicon = (HICON) picon->_HICON();
    }
 
+
+   innate_subsystem::IconInterface *NotifyIcon::getIcon()
+   {
+
+      return m_picon;
+
+   }
+
+
    void NotifyIcon::setText(const char *text)
    {
       m_nid.uFlags = NIF_TIP;

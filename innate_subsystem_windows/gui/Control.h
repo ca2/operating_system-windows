@@ -57,7 +57,7 @@ namespace innate_subsystem_windows
 
 
 
-      void initialize_control(const ::operating_system::window & window) override;
+      //void initialize_control(const ::operating_system::window & window) override;
 
       //void setWindow(const ::operating_system::window & window) override;
 
@@ -167,7 +167,7 @@ namespace innate_subsystem_windows
       //    //
       //
       //    WNDPROC m_defWindowProc;
-      void postUserMessage(unsigned int uMessage, ::wparam wparam, ::lparam lparam) override;
+      //void postUserMessage(unsigned int uMessage, ::wparam wparam, ::lparam lparam) override;
 
 
    };

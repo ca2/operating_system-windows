@@ -95,7 +95,7 @@ namespace innate_subsystem_windows
       // Return
       //::innate_subsystem::ControlInterface *getControl() override; // { return this; }
       // Setup control by ID
-      void subclassControlById(::innate_subsystem::ControlInterface *pcontrol, unsigned int id) override;
+      //void subclassControlById(::innate_subsystem::ControlInterface *pcontrol, unsigned int id) override;
 
 
       // Icon manipulation

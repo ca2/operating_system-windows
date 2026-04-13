@@ -45,12 +45,12 @@ namespace innate_subsystem_windows
    {
 
       auto hwnd = ::as_HWND(operatingsystemwindow);
-      if (hwnd != NULL) {
-         m_wndprocOld = (WNDPROC) SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)&windowProc);
-         SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)this);
-      } else {
-         m_wndprocOld = NULL;
-      }
+      // if (hwnd != NULL) {
+      //    m_wndprocOld = (WNDPROC) SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)&windowProc);
+      //    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)this);
+      // } else {
+      //    m_wndprocOld = NULL;
+      // }
       _setHWND(hwnd);
    }
 
@@ -109,17 +109,35 @@ namespace innate_subsystem_windows
       return makeCheck();
    }
 
-   LRESULT FilteredTextBox::windowProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam)
+
+   bool FilteredTextBox::window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
    {
-      FilteredTextBox *_this = (FilteredTextBox *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-      if (_this == NULL) {
-         return FALSE;
+
+      if (message == WM_CHAR)
+      {
+
+
+         lresult = onKeyDown(wparam, lparam);
+
+         return true;
+
       }
-      switch (uMsg) {
-         case WM_CHAR:
-            LRESULT result = CallWindowProc((WNDPROC)_this->m_wndprocOld, hwnd, uMsg, wparam, lparam);
-            return _this->onKeyDown(wparam, lparam);
-      }
-      return CallWindowProc((WNDPROC)_this->m_wndprocOld, hwnd, uMsg,wparam, lparam);
+
+
+      return false;
+
    }
+   // LRESULT FilteredTextBox::windowProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam)
+   // {
+   //    FilteredTextBox *_this = (FilteredTextBox *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+   //    if (_this == NULL) {
+   //       return FALSE;
+   //    }
+   //    switch (uMsg) {
+   //       case WM_CHAR:
+   //          LRESULT result = CallWindowProc((WNDPROC)_this->m_wndprocOld, hwnd, uMsg, wparam, lparam);
+   //          return _this->onKeyDown(wparam, lparam);
+   //    }
+   //    return CallWindowProc((WNDPROC)_this->m_wndprocOld, hwnd, uMsg,wparam, lparam);
+   // }
 } // namespace innate_subsystem_windows

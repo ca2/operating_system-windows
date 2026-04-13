@@ -38,6 +38,13 @@ namespace innate_subsystem_windows
       deleteAllTabs();
    }
 
+   innate_subsystem::TabContainer &TabControl::getTabs()
+   {
+
+      return m_tabContainer;
+
+   }
+
    innate_subsystem::TabInterface *TabControl::getTab(int index)
    {
       if ((index < 0) || ((size_t)index > m_tabContainer.size() - 1)) {

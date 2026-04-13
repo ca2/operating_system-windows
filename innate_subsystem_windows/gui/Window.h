@@ -260,6 +260,12 @@ namespace innate_subsystem_windows
 
       ::operating_system::window dialog_item_operating_system_window(int iDlgItem) override;
 
+
+      void subclassControlById(WindowInterface * pwindowControl, unsigned int id) override;
+      void subclassWindow(const ::operating_system::window & operatingsystemwindow) override;
+      void unsubclassWindow() override;
+
+
       // for changing registered class parameters of created window
       void setClassStyle(unsigned int style) override;
       void setClassCursor(::innate_subsystem::CursorInterface * pcursor) override;
