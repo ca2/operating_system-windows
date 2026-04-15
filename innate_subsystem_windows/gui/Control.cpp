@@ -58,6 +58,15 @@ namespace innate_subsystem_windows
      setWindowText(text);
   }
 
+
+  /*::string Control::getText()
+  {
+     
+     return getWindowText();
+
+  }*/
+
+
   void Control::setSignedInt(int value)
   {
 

@@ -27,21 +27,22 @@
 
 #include "innate_subsystem/gui/TextBox.h"
 #include "innate_subsystem_windows/_common_header.h"
-
+#include "innate_subsystem_windows/gui/Control.h"
 
 
 namespace innate_subsystem_windows
 {
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS TextBox : //public Control
-      virtual public window_implementation<::innate_subsystem::TextBoxInterface>
+      virtual public window_implementation<::innate_subsystem::TextBoxInterface>,
+    virtual public Control
    {
    public:
 
 
       TextBox();
       ~TextBox();
-    public:
+    //public:
 
         //
         // Text limit

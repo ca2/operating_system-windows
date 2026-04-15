@@ -28,17 +28,19 @@
 
 #include "innate_subsystem/gui/CheckBox.h"
 #include "innate_subsystem_windows/_common_header.h"
+#include "innate_subsystem_windows/gui/Control.h"
 
 
 namespace innate_subsystem_windows
 {
 
     class CheckBox :
-        virtual public window_implementation<::innate_subsystem::CheckBoxInterface >
+        virtual public window_implementation<::innate_subsystem::CheckBoxInterface >,
+   virtual public Control
     {
     public:
-        virtual bool isChecked();
-        virtual void check(bool checked);
+        bool isChecked() override;
+        void setChecked(bool checked) override;
     };
 
     //#endif

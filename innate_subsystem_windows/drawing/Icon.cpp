@@ -82,7 +82,7 @@ namespace innate_subsystem_windows
 
    {
       m_bHasOwnIcon = true;
-      ::cast < ::innate_subsystem_windows::Icon > piconWin32 = ::subsystem::get_implementation(picon);
+      auto piconWin32 = picon->impl<::innate_subsystem_windows::Icon>();
       m_hicon = piconWin32->m_hicon;
    }
 

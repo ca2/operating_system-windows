@@ -36,7 +36,7 @@ namespace subsystem_windows
    Dynamic library class.
    */
    class CLASS_DECL_SUBSYSTEM_WINDOWS DynamicLibrary :
-   virtual public ::subsystem::implementation<::subsystem::DynamicLibraryInterface>
+   virtual public implementation<::subsystem::DynamicLibraryInterface>
    {
    public:
       /**

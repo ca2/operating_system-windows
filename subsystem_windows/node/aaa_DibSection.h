@@ -38,7 +38,7 @@ namespace subsystem_windows
 {
       // This clas is a primitive wrapper to a DIB section.
       class CLASS_DECL_SUBSYSTEM_WINDOWS DibSection :
-         virtual public ::subsystem::implementation<::subsystem::DibSectionInterface >
+         virtual public implementation<::subsystem::DibSectionInterface >
       {
       public:
          // Note that if the compatibleWin doesn't specify or is zero the class will create an

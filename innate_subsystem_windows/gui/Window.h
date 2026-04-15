@@ -89,7 +89,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Window :
-      virtual public ::subsystem::implementation< ::innate_subsystem::WindowInterface >,
+      virtual public implementation< ::innate_subsystem::WindowInterface >,
       virtual public ::windows::window,
       virtual public notification_handler
    {

@@ -53,7 +53,7 @@ namespace  subsystem_windows
     * @fixme member of HDESK type in THREAD class???
     */
    class CLASS_DECL_SUBSYSTEM_WINDOWS Thread :
-   virtual public ::subsystem::implementation<::subsystem::ThreadInterface>
+   virtual public implementation<::subsystem::ThreadInterface>
    {
    public:
       /**

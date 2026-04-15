@@ -45,7 +45,8 @@ namespace subsystem_windows
        * (selects needed window station and desktop).
        * @throws SystemException if error occured.
        */
-      LocalOperatingSystemApplication(HINSTANCE hInstance, const ::scoped_string &scopedstrwindowClassName);
+      LocalOperatingSystemApplication();
+      //LocalOperatingSystemApplication(HINSTANCE hInstance, const ::scoped_string &scopedstrwindowClassName);
       virtual ~LocalOperatingSystemApplication();
    };
 

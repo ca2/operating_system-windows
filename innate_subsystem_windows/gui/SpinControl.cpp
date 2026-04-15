@@ -43,7 +43,8 @@ namespace innate_subsystem_windows
 
    void SpinControl::setBuddy(ControlInterface *buddyControl)
    {
-      SendMessage(m_hwnd, UDM_SETBUDDY, (WPARAM)buddyControl->_HWND(), NULL);
+       ::cast < WindowInterface > pwindow = buddyControl;
+      SendMessage(m_hwnd, UDM_SETBUDDY, (WPARAM)pwindow->_HWND(), NULL);
       m_pcontrolBuddy = buddyControl;
    }
 
@@ -78,7 +79,8 @@ namespace innate_subsystem_windows
 
       // Get buddy textbox value
       ::string  storage;
-      storage = m_pcontrolBuddy->getText();
+      ::cast < ::innate_subsystem::Window > pwindowBuddy = m_pcontrolBuddy;
+      storage = pwindowBuddy->getText();
       if (!main_subsystem()->string_parser()->parseInt(storage, &currentValue)) {
          return;
       }

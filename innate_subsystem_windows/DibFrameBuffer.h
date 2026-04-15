@@ -37,7 +37,7 @@
 //     // It changes DIB section proerties by oneself according to FrameBuffer
 //     // properties (such as width, height and PixelFormat)
 //     class DibFrameBuffer : //public FrameBuffer
-//     virtual public ::subsystem::implementation<::subsystem::DibFrameBufferInterface >
+//     virtual public implementation<::subsystem::DibFrameBufferInterface >
 //     {
 //     public:
 //         DibFrameBuffer();

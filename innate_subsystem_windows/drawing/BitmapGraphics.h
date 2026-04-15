@@ -25,8 +25,8 @@
 //
 #pragma once
 
-
 #include "innate_subsystem/drawing/BitmapGraphics.h"
+#include "innate_subsystem_windows/drawing/Graphics.h"
 
 
 
@@ -36,7 +36,8 @@ namespace innate_subsystem_windows
    // Object that creates bitmap with specified size and allow to
    // draw into in through Graphics class methods.
    class BitmapGraphics :
-      virtual public ::subsystem::implementation<::innate_subsystem::BitmapGraphicsInterface>
+      virtual public implementation<::innate_subsystem::BitmapGraphicsInterface>,
+    virtual public Graphics
    {
    public:
 

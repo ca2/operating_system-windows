@@ -34,7 +34,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS PaintWindow:
-   virtual public ::subsystem::implementation<::innate_subsystem::PaintWindowInterface>
+   virtual public implementation<::innate_subsystem::PaintWindowInterface>
    //, public Window
    {
    public:

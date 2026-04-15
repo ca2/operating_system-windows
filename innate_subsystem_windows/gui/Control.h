@@ -26,6 +26,7 @@
 
 #include "innate_subsystem/gui/Control.h"
 #include "innate_subsystem_windows/_common_header.h"
+#include "innate_subsystem_windows/gui/Window.h"
 
 
 namespace innate_subsystem_windows
@@ -37,7 +38,8 @@ namespace innate_subsystem_windows
    //
 
    class Control :
-      virtual public window_implementation<::innate_subsystem::ControlInterface>
+      virtual public window_implementation<::innate_subsystem::ControlInterface>,
+   virtual public ::innate_subsystem_windows::Window
    {
    public:
 
@@ -75,6 +77,9 @@ namespace innate_subsystem_windows
       void setSignedInt(int value) override;
       void setUnsignedInt(unsigned int value) override;
 
+
+
+      //::string getText() override;
       //
       // Sets text vertical alignment
       //

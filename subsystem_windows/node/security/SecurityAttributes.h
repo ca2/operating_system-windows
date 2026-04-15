@@ -32,7 +32,7 @@
 namespace subsystem_windows
 {
       class CLASS_DECL_SUBSYSTEM_WINDOWS SecurityAttributes :
-      virtual  public ::subsystem::implementation<::subsystem::SecurityAttributesInterface>
+      virtual  public implementation<::subsystem::SecurityAttributesInterface>
       {
       public:
          SecurityAttributes();

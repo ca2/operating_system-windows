@@ -34,7 +34,7 @@ namespace subsystem_windows
    // This class is not an interface but is a class that contain common
    // methods/source codes for derived classes to work with pipe handles.
    class CLASS_DECL_SUBSYSTEM_WINDOWS Pipe :
-   virtual public ::subsystem::implementation<::subsystem::PipeInterface>
+   virtual public implementation<::subsystem::PipeInterface>
    {
    public:
 

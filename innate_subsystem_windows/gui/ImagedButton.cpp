@@ -26,6 +26,7 @@
 #include "ImagedButton.h"
 #include "ThemeLib.h"
 #include "drawing/Icon.h"
+#include "Control.h"
 //#include "util/UnicodeStringStorage.h"
 //#include <crtdbg.h>
 //namespace windows
@@ -170,12 +171,15 @@ namespace innate_subsystem_windows
       } // if
    } // void
 
-   void ImagedButton::setWindow(const ::operating_system::window & window)
+   void ImagedButton::subclassWindow(const ::operating_system::window & window)
    {
-      auto hwnd = ::as_HWND(window);
-      Control::_setHWND(hwnd);
+
+      ::innate_subsystem::ImagedButtonInterface::subclassWindow(window);
+
+      //auto hwnd = ::as_HWND(window);
+      //Control::_setHWND(hwnd);
       // Replace window event handler
-      subclassWindow();
+      
       //replaceWindowProc(ImagedButton::wndProc);
       // Add owner draw style to button
       Control::addStyle(BS_OWNERDRAW);
@@ -184,7 +188,7 @@ namespace innate_subsystem_windows
          if (m_theme) {
             ThemeLib::CloseThemeData(m_theme);
          }
-         m_theme = ThemeLib::OpenThemeData(hwnd, L"Button");
+         m_theme = ThemeLib::OpenThemeData(::as_HWND(window), L"Button");
          if (m_theme) {
             m_isUsingTheme = true;
          }

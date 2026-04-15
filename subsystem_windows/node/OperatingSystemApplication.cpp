@@ -31,9 +31,9 @@
 
 namespace subsystem_windows
 {
-   critical_section OperatingSystemApplication::m_MDLMutex;
+   //critical_section OperatingSystemApplication::m_MDLMutex;
 
-   ::comparable_list_base<HWND> OperatingSystemApplication::m_modelessDialogList;
+   //::comparable_list_base<HWND> OperatingSystemApplication::m_modelessDialogList;
 
    OperatingSystemApplication::OperatingSystemApplication()
    :
@@ -46,17 +46,24 @@ namespace subsystem_windows
    {
    }
 
-   void OperatingSystemApplication::initialize_operating_system_application(const ::scoped_string & scopedstrWindowClassName)
+   void OperatingSystemApplication::initialize_operating_system_application()
    {
-      //::particle::initialize(pparticle);
 
-      m_appInstance =(HINSTANCE)system()->m_hinstanceThis;
+      m_appInstance = (HINSTANCE)system()->m_hinstanceThis;
 
-
-//           m_wstrWindowClassName(scopedstrwindowClassName)
-//          HINSTANCE appInstance,
- //                                         const ::scoped_string & scopedstrwindowClassName
    }
+
+//   void OperatingSystemApplication::initialize_operating_system_application(const ::scoped_string & scopedstrWindowClassName)
+//   {
+//      //::particle::initialize(pparticle);
+//
+//      m_appInstance =(HINSTANCE)system()->m_hinstanceThis;
+//
+//
+////           m_wstrWindowClassName(scopedstrwindowClassName)
+////          HINSTANCE appInstance,
+// //                                         const ::scoped_string & scopedstrwindowClassName
+//   }
 
 
    void OperatingSystemApplication::createApplicationMainTask()
@@ -97,12 +104,12 @@ namespace subsystem_windows
    // }
 
 
-   void OperatingSystemApplication::postMainThreadMessage(int iMainThreadMessage)
+   void OperatingSystemApplication::postMessage(unsigned int uMessage, ::wparam wparam, ::lparam lparam)
    {
-      system()->acme_windowing()->post([this, iMainThreadMessage]()
+      system()->acme_windowing()->post([this, uMessage, wparam, lparam]()
       {
 
-         onMainThreadMessage(iMainThreadMessage);
+         onMainThreadMessage(uMessage, wparam, lparam);
 
       });
    }
@@ -135,23 +142,30 @@ namespace subsystem_windows
       PostMessage(m_mainWindow, WM_CLOSE, 0, 0);
    }
 
-   void OperatingSystemApplication::postMessage(UINT scopedstrMessage, WPARAM wParam, LPARAM lParam)
-   {
-      PostMessage(m_mainWindow, scopedstrMessage, wParam, lParam);
-   }
+   //void OperatingSystemApplication::postMessage(UINT scopedstrMessage, WPARAM wParam, LPARAM lParam)
+   //{
+   //   PostMessage(m_mainWindow, scopedstrMessage, wParam, lParam);
+   //}
 
-   void OperatingSystemApplication::addModelessDialog(HWND dialogWindow)
-   {
-      critical_section_lock l(&m_MDLMutex);
-
-      m_modelessDialogList.add(dialogWindow);
-   }
-
-   void OperatingSystemApplication::removeModelessDialog(HWND dialogWindow)
+   void OperatingSystemApplication::addModelessDialog(const ::operating_system::window & operatingsystemwindow)
    {
       critical_section_lock l(&m_MDLMutex);
 
-      m_modelessDialogList.erase(dialogWindow);
+      m_modelessDialogList.add(::as_HWND(operatingsystemwindow));
+   }
+
+   void OperatingSystemApplication::removeModelessDialog(const ::operating_system::window &operatingsystemwindow)
+   {
+      critical_section_lock l(&m_MDLMutex);
+
+      m_modelessDialogList.erase(::as_HWND(operatingsystemwindow));
+   }
+
+   int OperatingSystemApplication::getExitCode()
+   {
+
+      return 0;
+
    }
 
    bool OperatingSystemApplication::processDialogMessage(MSG *msg)
@@ -178,10 +192,10 @@ namespace subsystem_windows
    //    }
    //    return DefWindowProc(hWnd, msg, wparam, lparam);
    // }
-   void OperatingSystemApplication::onMainThreadMessage(int iMainThreadMessage)
+   void OperatingSystemApplication::onMainThreadMessage(unsigned int message, ::wparam wparam, ::lparam lparam)
    {
 
-      m_pcomposite->onMainThreadMessage(iMainThreadMessage);
+      m_pcomposite->onMainThreadMessage(message, wparam, lparam);
    }
 
 

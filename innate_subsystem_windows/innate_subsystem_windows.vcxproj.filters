@@ -18,6 +18,9 @@
     <Filter Include="Source Files\drawing">
       <UniqueIdentifier>{5efd690a-2128-4c9e-8fd2-af5611b2e95a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui">
+      <UniqueIdentifier>{247bc91f-fdb6-4a8c-a37f-bdbea9535ac9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_factory.cpp">
@@ -174,125 +177,115 @@
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BalloonTip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComboBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CommonControlsEx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Control.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DibFrameBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FilteredTextBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="icon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImagedButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="innate_ui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ListBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ListView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MessageWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NotifyIcon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NotifyIconWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PaintWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProgressBar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ScrollBar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpinControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="still.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StringFilter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="subsystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SystemMetrics.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\CheckBox.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="Tab.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\ComboBox.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="TabContainer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\CommonControlsEx.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="TabControl.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\Control.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="TextBox.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\Dialog.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="ThemeLib.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\FilteredTextBox.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="ToolBar.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\ImagedButton.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="Tooltip.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\ImageList.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="Trackbar.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\ListBox.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\ListView.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="WindowFinder.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\Menu.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="WindowMessageHandler.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\MessageWindow.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="WindowProcHolder.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gui\NotifyIcon.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
+    <ClInclude Include="gui\NotifyIconWindow.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\PaintWindow.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ProgressBar.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ScrollBar.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\SpinControl.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\StringFilter.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\SystemMetrics.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Tab.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\TabContainer.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\TabControl.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\TextBox.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ThemeLib.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Toolbar.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Tooltip.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Trackbar.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Window.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\window_implementation.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\WindowCache.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\WindowFinder.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\WindowMessageHandler.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\WindowProcHolder.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="innate_subsystem_windows.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

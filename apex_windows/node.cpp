@@ -1239,6 +1239,12 @@ namespace apex_windows
    void node::on_start_application(::apex::application * papplication)
    {
 
+      system()->post_application_start();
+
+      system()->defer_post_application_start_file_open_request();
+
+      system()->post_application_started();
+
       ////if (!::is_debugger_attached())
       //{
 

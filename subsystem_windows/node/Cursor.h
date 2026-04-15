@@ -32,7 +32,7 @@
 namespace subsystem_windows
 {
       class CLASS_DECL_SUBSYSTEM_WINDOWS Cursor :
-      virtual public ::subsystem::implementation<::subsystem::CursorInterface >
+      virtual public implementation<::subsystem::CursorInterface >
       {
       public:
          Cursor();
@@ -42,7 +42,7 @@ namespace subsystem_windows
       };
 
       // class CLASS_DECL_SUBSYSTEM_WINDOWS Cursor :
-      // virtual public ::subsystem::composite<Cursor
+      // virtual public composite<Cursor
       // {
       // public:
       //    Cursor();

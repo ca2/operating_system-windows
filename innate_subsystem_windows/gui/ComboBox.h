@@ -29,6 +29,7 @@
 //#include "acCommonHeader.h"
 #include "innate_subsystem/gui/ComboBox.h"
 #include "innate_subsystem_windows/_common_header.h"
+#include "innate_subsystem_windows/gui/Control.h"
 
 
 namespace innate_subsystem_windows
@@ -36,7 +37,8 @@ namespace innate_subsystem_windows
 
 
     class ComboBox :// public Control
-   virtual public window_implementation<::innate_subsystem::ComboBoxInterface>
+   virtual public window_implementation<::innate_subsystem::ComboBoxInterface>,
+    virtual public Control
     {
     public:
 

@@ -31,7 +31,7 @@
 namespace subsystem_windows
 {
           class CLASS_DECL_SUBSYSTEM_WINDOWS Clipboard :
-         virtual public ::subsystem::implementation<::subsystem::ClipboardInterface>
+         virtual public implementation<::subsystem::ClipboardInterface>
       {
       public:
 

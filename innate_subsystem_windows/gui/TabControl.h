@@ -36,7 +36,9 @@
 
 namespace innate_subsystem_windows
 {
-   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS TabControl : public window_implementation<innate_subsystem::TabControlInterface>
+
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS TabControl :
+    public window_implementation<innate_subsystem::TabControlInterface>
    {
    public:
       TabControl();
