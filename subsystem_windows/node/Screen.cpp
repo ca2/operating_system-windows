@@ -156,7 +156,7 @@ namespace subsystem_windows
          m_virtDesktopRect.set_height(GetSystemMetrics(SM_CYVIRTUALSCREEN));
       }
 
-      size_t Screen::getVisibleMonitorCount()
+      int Screen::getVisibleMonitorCount()
       {
          int monitorCount = GetSystemMetrics(SM_CMONITORS);
          // Why check for the result? Skip it.

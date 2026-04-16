@@ -280,7 +280,7 @@ void
    bool Dialog::setForeground()
    {
       //return m_ctrlThis.setForeground();
-      return m_pparticleThis->setForeground();
+      return Control::setForeground();
    }
 
    bool Dialog::onInitDialog()

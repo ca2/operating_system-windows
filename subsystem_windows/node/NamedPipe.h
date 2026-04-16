@@ -89,7 +89,7 @@ namespace subsystem_windows
        * @param len count of bytes to read.
        * @throws ::io_exception on io error.
        */
-      size_t read(void *buffer, size_t len);
+      memsize read(void *buffer, memsize len);
 
       /**
        * Writes data to pipe.
@@ -100,7 +100,7 @@ namespace subsystem_windows
        */
       memsize defer_write(const void *buffer, memsize len);
 
-      size_t available();
+      memsize available();
 
       virtual ::subsystem::FileInterface * getFile() const;
 

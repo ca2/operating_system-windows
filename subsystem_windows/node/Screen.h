@@ -81,7 +81,7 @@ namespace subsystem_windows
       // Windows contain both visible and invisible pseudo-monitors
       // that are associated with mirroring drivers.
       // The function returns only visible monitor count.
-      size_t getVisibleMonitorCount() override;
+      int getVisibleMonitorCount() override;
 
    //private:
       virtual void _fillPixelFormat(const BMI *bmi);

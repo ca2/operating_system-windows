@@ -261,7 +261,7 @@ namespace innate_subsystem_windows
       ::operating_system::window dialog_item_operating_system_window(int iDlgItem) override;
 
 
-      void subclassControlById(WindowInterface * pwindowControl, unsigned int id) override;
+      void subclassControlById(::particle_base * pWindowControl, unsigned int id) override;
       void subclassWindow(const ::operating_system::window & operatingsystemwindow) override;
       void unsubclassWindow() override;
 

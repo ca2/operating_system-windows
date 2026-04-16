@@ -70,8 +70,8 @@ namespace subsystem_windows
       // The pointer uses because the functions must have access to
       // the same variable as in a derived class to rich a thread safe
       // handle usage.
-      size_t readByFile(void *buffer, size_t len, ::subsystem::FileInterface * pfilePipe) override;
-      size_t writeByFile(const void *buffer, size_t len, ::subsystem::FileInterface * pfilePipe) override;
+      memsize readByFile(void *buffer, memsize len, ::subsystem::FileInterface * pfilePipe) override;
+      memsize writeByFile(const void *buffer, memsize len, ::subsystem::FileInterface * pfilePipe) override;
 
 
       void checkPipeFile(::subsystem::FileInterface * pfilePipe) override;

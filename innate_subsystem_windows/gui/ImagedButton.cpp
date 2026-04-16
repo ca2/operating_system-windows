@@ -174,7 +174,7 @@ namespace innate_subsystem_windows
    void ImagedButton::subclassWindow(const ::operating_system::window & window)
    {
 
-      ::innate_subsystem::ImagedButtonInterface::subclassWindow(window);
+      Control::subclassWindow(window);
 
       //auto hwnd = ::as_HWND(window);
       //Control::_setHWND(hwnd);

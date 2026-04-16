@@ -61,7 +61,7 @@ namespace subsystem_windows
          return m_maxPortionSize;
       }
 
-      size_t Pipe::writeByFile(const void *buffer, size_t len, ::subsystem::FileInterface * pfilePipe)
+      memsize Pipe::writeByFile(const void *buffer, memsize len, ::subsystem::FileInterface * pfilePipe)
       {
 
          auto handlePipe = ::as_HANDLE(pfilePipe);
@@ -125,7 +125,7 @@ namespace subsystem_windows
          return result;
       }
 
-      size_t Pipe::readByFile(void *buffer, size_t len, ::subsystem::FileInterface * pfilePipe)
+      memsize Pipe::readByFile(void *buffer, memsize len, ::subsystem::FileInterface * pfilePipe)
       {
          auto handlePipe = ::as_HANDLE(pfilePipe);
          DWORD result = 0;
