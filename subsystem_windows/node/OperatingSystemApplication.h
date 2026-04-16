@@ -40,7 +40,7 @@ namespace subsystem_windows
        * Have hidden main window and main scopedstrMessage loop.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS OperatingSystemApplication :
-      virtual public ::subsystem::implementation< ::subsystem::OperatingSystemApplicationInterface >
+      virtual public implementation< ::subsystem::OperatingSystemApplicationInterface >
       {
       public:
 
@@ -58,37 +58,40 @@ namespace subsystem_windows
           */
          ~OperatingSystemApplication() override;
 
-         virtual void initialize_operating_system_application(const ::scoped_string & scopedstrwindowClassName);
+
+         void initialize_operating_system_application() override;
+
+         //virtual void initialize_operating_system_application(const ::scoped_string & scopedstrwindowClassName);
 
          /**
           * Runs windows application.
           * @remark really it creates main window and starts windows scopedstrMessage loop.
           * @return application exit code.
           */
-         virtual void run() override;
+         void run() override;
 
          /**
           * Posts close and destroy scopedstrMessage to main window.
           */
-         virtual void shutdown();
+         void shutdown() override;
 
          /**
           * Posts scopedstrMessage to main window.
           */
-         virtual void postMessage(UINT scopedstrMessage, WPARAM wParam = 0, LPARAM lParam = 0);
+         void postMessage(unsigned int message, ::wparam wparam = 0, ::lparam lparam = 0) override;
 
          /**
           * Adds modeless dialog to application modeless dialog ::list_base to
           * enable switching between controls by pressing tab button.
           * @param dialogWindow HWND of modeless dialog.
           */
-         static void addModelessDialog(HWND dialogWindow);
+         void addModelessDialog(const ::operating_system::window &operatingsystemwindow) override;
 
          /**
           * Removes dialog from application modeless dialog ::list_base.
           * @param dialogWindow HWND of modeless dialog.
           */
-         static void removeModelessDialog(HWND dialogWindow);
+         void removeModelessDialog(const ::operating_system::window &operatingsystemwindow) override;
 
          //protected:
          // Creates a window to receive messages.
@@ -97,11 +100,13 @@ namespace subsystem_windows
          //protected:
          // Creates a window to receive messages.
          //virtual void createWindow(const ::scoped_string & scopedstrClassName) = 0;
-         virtual void createApplicationMainTask() override;
+         void createApplicationMainTask() override;
 
 
-         virtual void postMainThreadMessage(int iMainThreadMessage) override;
+         //virtual void postMainThreadMessage(int iMainThreadMessage) override;
 
+
+         int getExitCode() override;
 
          // Fills the wndClass argument and registers new class name in the Windows.
          //virtual void registerWindowClass(WNDCLASS *wndClass);
@@ -124,12 +129,12 @@ namespace subsystem_windows
           * @param msg scopedstrMessage to process.
           * @return true if don't need to translate and dispatch scopedstrMessage in main scopedstrMessage loop.
           */
-         static bool processDialogMessage(MSG *msg);
+         bool processDialogMessage(MSG *msg);
          //private:
-         static critical_section m_MDLMutex; // Modeless dialog ::list_base mutex.
-         static ::comparable_list_base<HWND> m_modelessDialogList;
+         critical_section m_MDLMutex; // Modeless dialog ::list_base mutex.
+         ::comparable_list_base<HWND> m_modelessDialogList;
 
-         void onMainThreadMessage(int iMainThreadMessage) override;
+         void onMainThreadMessage(unsigned int message, ::wparam wparam, ::lparam lparam) override;
 
       };
 

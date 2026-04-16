@@ -32,7 +32,7 @@
  {
      // This class is a primitive command line parser
      class CLASS_DECL_SUBSYSTEM_WINDOWS ProcessCommandLine :
-        virtual public ::subsystem::implementation < ::subsystem::ProcessCommandLineInterface >
+        virtual public implementation < ::subsystem::ProcessCommandLineInterface >
      {
      public:
 

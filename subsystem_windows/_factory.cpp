@@ -4,15 +4,16 @@
 #include "framework.h"
 #include "subsystem.h"
 #include "thread/GlobalMutex.h"
+#include "node/OperatingSystemApplication.h"
 #include "node/Shell.h"
 #include "node/SystemInformation.h"
 #include "thread/DesktopSelector.h"
 
 
-CLASS_DECL_IMPORT void subsystem_bsd_sockets_factory(::factory::factory *pfactory);
+DECLARE_FACTORY(subsystem_bsd_sockets);
    
 
-CLASS_DECL_EXPORT void subsystem_win32_factory(::factory::factory * pfactory)
+IMPLEMENT_FACTORY(subsystem_windows)
 {
 
    subsystem_bsd_sockets_factory(pfactory);
@@ -23,6 +24,7 @@ CLASS_DECL_EXPORT void subsystem_win32_factory(::factory::factory * pfactory)
 
    pfactory->add_factory_item<::subsystem_windows::subsystem, ::subsystem::subsystem>();
    pfactory->add_factory_item<::subsystem_windows::SystemInformation, ::subsystem::SystemInformationInterface>();
+   pfactory->add_factory_item<::subsystem_windows::OperatingSystemApplication, ::subsystem::OperatingSystemApplicationInterface>();
 
    pfactory->add_factory_item<::subsystem_windows::DesktopSelector, ::subsystem::DesktopSelector>();
 

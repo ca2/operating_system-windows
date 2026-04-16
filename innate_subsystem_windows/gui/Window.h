@@ -89,7 +89,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Window :
-      virtual public ::subsystem::implementation< ::innate_subsystem::WindowInterface >,
+      virtual public implementation< ::innate_subsystem::WindowInterface >,
       virtual public ::windows::window,
       virtual public notification_handler
    {
@@ -261,7 +261,7 @@ namespace innate_subsystem_windows
       ::operating_system::window dialog_item_operating_system_window(int iDlgItem) override;
 
 
-      void subclassControlById(WindowInterface * pwindowControl, unsigned int id) override;
+      void subclassControlById(::particle_base * pWindowControl, unsigned int id) override;
       void subclassWindow(const ::operating_system::window & operatingsystemwindow) override;
       void unsubclassWindow() override;
 

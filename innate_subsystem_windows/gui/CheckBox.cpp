@@ -36,7 +36,7 @@ namespace innate_subsystem_windows
      return (SendMessage(hwnd, BM_GETCHECK, NULL, NULL) != 0);
   }
 
-  void CheckBox::check(bool checked)
+  void CheckBox::setChecked(bool checked)
   {
      auto hwnd = ::as_HWND(operating_system_window());
      SendMessage(hwnd, BM_SETCHECK, (checked) ? 1 : 0, NULL);

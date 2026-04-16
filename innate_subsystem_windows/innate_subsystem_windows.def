@@ -1,4 +1,4 @@
-LIBRARY "innate_ui_win32"
+LIBRARY "innate_subsystem_windows"
 
 EXPORTS
 ;acme_windows_factory

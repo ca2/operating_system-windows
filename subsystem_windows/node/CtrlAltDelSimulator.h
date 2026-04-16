@@ -33,7 +33,7 @@
 namespace subsystem_windows
 {
    class CLASS_DECL_SUBSYSTEM_WINDOWS CtrlAltDelSimulator :
-       // virtual public ::subsystem::implementation< ::subsystem::CtrlAltDelSimulatorInterface >
+       // virtual public implementation< ::subsystem::CtrlAltDelSimulatorInterface >
        virtual public ::subsystem::Thread
       {
       public:

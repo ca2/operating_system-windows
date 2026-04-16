@@ -45,7 +45,7 @@ namespace innate_subsystem_windows
 
       destroyGraphicsObject();
 
-      ::cast < ::innate_subsystem_windows::Brush > pbrushWin32 = ::subsystem::get_implementation(this);
+      auto pbrushWin32 =    this->impl < ::innate_subsystem_windows::Brush >();
       //pbrushWin32->m_hbrush = CreateSolidBrush(RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
 
       Gdiplus::Color gdipluscolor(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue());

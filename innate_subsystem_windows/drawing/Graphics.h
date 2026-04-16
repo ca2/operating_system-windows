@@ -37,7 +37,7 @@
 namespace innate_subsystem_windows
 {
    class Graphics :
-   virtual public ::subsystem::implementation<::innate_subsystem::GraphicsInterface>
+   virtual public implementation<::innate_subsystem::GraphicsInterface>
    {
    public:
 

@@ -135,8 +135,9 @@ void
          parentWindow = ::as_HWND(m_pcontrolParent->operating_system_window());
       }
 
-      window = CreateDialogParam(GetModuleHandle(NULL), ::wstring(getResouceName()),
-                                 parentWindow, dialogProc, (::lparam)this);
+      //window = CreateDialogParam(GetModuleHandle(NULL), (LPCWSTR) getResouceName(),
+      window = CreateDialogParam((HINSTANCE)::system()->m_hinstanceMain, (LPCWSTR)getResouceName(),
+                                 parentWindow, dialogProc, (::lparam)(::uptr) (Dialog *) this);
 
       m_isModal = false;
 
@@ -149,7 +150,8 @@ void
       if (m_hwnd == NULL) {
          m_isModal = true;
          HWND parentWindow = (m_pcontrolParent != NULL) ?(HWND)m_pcontrolParent->_HWND() : (HWND) nullptr;
-         result = (int)DialogBoxParam(GetModuleHandle(NULL),
+         //result = (int)DialogBoxParam(GetModuleHandle(NULL),
+         result = (int)DialogBoxParam((HINSTANCE) system()->m_hinstanceMain,
                                       ::wstring(getResouceName()),
                                       parentWindow, dialogProc, (::lparam)this);
       } else {
@@ -278,12 +280,12 @@ void
    bool Dialog::setForeground()
    {
       //return m_ctrlThis.setForeground();
-      return Window::setForeground();
+      return Control::setForeground();
    }
 
    bool Dialog::onInitDialog()
    {
-      return FALSE;
+      return m_pcomposite->onInitDialog();
    }
 
    // bool Dialog::_onNotify(int iControl, LPNMHDR lpnmhdr)

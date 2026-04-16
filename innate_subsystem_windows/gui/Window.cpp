@@ -286,12 +286,14 @@ namespace innate_subsystem_windows
       return ::as_operating_system_window(hwndChild);
    }
 
-   void Window::subclassControlById(WindowInterface * pwindowControl, unsigned int id)
+   void Window::subclassControlById(::particle_base * pWindowControl, unsigned int id)
    {
+
+       auto pwindow = pWindowControl->impl<innate_subsystem_windows::Window>();
 
       auto operatingsystemwindow = dialog_item_operating_system_window(id);
 
-      pwindowControl->subclassWindow(operatingsystemwindow);
+      pwindow->subclassWindow(operatingsystemwindow);
 
    }
 

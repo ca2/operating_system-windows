@@ -33,8 +33,9 @@
 namespace subsystem_windows
 {
 
+
    class CLASS_DECL_SUBSYSTEM_WINDOWS Displays :
-      virtual public ::subsystem::implementation<::subsystem::DisplaysInterface >
+      virtual public implementation<::subsystem::DisplaysInterface >
    {
    public:
 
@@ -76,7 +77,7 @@ namespace subsystem_windows
 
 
    // class CLASS_DECL_SUBSYSTEM_WINDOWS Displays :
-   //    virtual public ::subsystem::composite<DisplaysInterface>
+   //    virtual public composite<DisplaysInterface>
    // {
    // public:
    //

@@ -39,7 +39,7 @@ namespace subsystem_windows
     * @author yuri, enikey.
     */
    class CLASS_DECL_SUBSYSTEM_WINDOWS NamedPipe :
-      virtual public ::subsystem::NamedPipe
+      virtual public implementation < ::subsystem::NamedPipeInterface, ::subsystem::Pipe >
    {
    public:
       /**
@@ -49,11 +49,11 @@ namespace subsystem_windows
       /**
        * Destroys instance.
        */
-      ~NamedPipe() override;
+      ~NamedPipe();
 
-      void initialize_pipe(unsigned int maxPortionSize) override;
+      void initialize_pipe(unsigned int maxPortionSize);
 
-      void initialize_named_pipe(::subsystem::FileInterface* pfilePipe, unsigned int maxPortionSize, bool asServer) override;
+      void initialize_named_pipe(::subsystem::FileInterface* pfilePipe, unsigned int maxPortionSize, bool asServer);
 
       // bool is_subsystem_implementation(void) const override
       // {
@@ -80,7 +80,7 @@ namespace subsystem_windows
        *
        * @throws ::subsystem::Exception on fail.
        */
-      void close() override;
+      void close();
 
       /**
        * Reads data from pipe.
@@ -89,7 +89,7 @@ namespace subsystem_windows
        * @param len count of bytes to read.
        * @throws ::io_exception on io error.
        */
-      size_t read(void *buffer, size_t len) override;
+      memsize read(void *buffer, memsize len);
 
       /**
        * Writes data to pipe.
@@ -98,14 +98,14 @@ namespace subsystem_windows
        * @param len count of bytes to write.
        * @throws ::io_exception on io error.
        */
-      memsize defer_write(const void *buffer, memsize len) override;
+      memsize defer_write(const void *buffer, memsize len);
 
-      size_t available() override;
+      memsize available();
 
-      virtual ::subsystem::FileInterface * getFile() const override;
+      virtual ::subsystem::FileInterface * getFile() const;
 
    //private:
-      void checkPipeFile() override;
+      void checkPipeFile();
 
       ::pointer < ::subsystem::File > m_pfilePipe;
       critical_section m_criticalsectionPipe;

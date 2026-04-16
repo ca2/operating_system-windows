@@ -25,8 +25,10 @@
 #pragma once
 
 
+#include "subsystem/node/AnonymousPipe.h"
 #include "subsystem/node/AnonymousPipeFactory.h"
 #include "subsystem_windows/_common_header.h"
+
 
 //#include "log_writer/LogWriter.h"
 namespace subsystem_windows
@@ -34,7 +36,7 @@ namespace subsystem_windows
    // The AnonymousPipeFactory class generates the ::pair of the AnonymousPipe
    // objects that connected to each other.
    class CLASS_DECL_SUBSYSTEM_WINDOWS AnonymousPipeFactory :
-   virtual public ::subsystem::implementation<::subsystem::AnonymousPipeFactoryInterface>
+   virtual public implementation<::subsystem::AnonymousPipeFactoryInterface>
    {
    public:
       //AnonymousPipeFactory(unsigned int bufferSize, ::subsystem::LogWriter *log);

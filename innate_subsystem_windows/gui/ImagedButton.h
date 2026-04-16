@@ -28,6 +28,7 @@
 
 #include "innate_subsystem/gui/ImagedButton.h"
 #include "innate_subsystem_windows/_common_header.h"
+#include "innate_subsystem_windows/gui/Control.h"
 #include <uxtheme.h>
 
 
@@ -38,7 +39,8 @@ namespace innate_subsystem_windows
     //
 
     class ImagedButton : //public Control
-   virtual public ::subsystem::implementation<::innate_subsystem::ImagedButtonInterface>
+   virtual public implementation<::innate_subsystem::ImagedButtonInterface>,
+    virtual public Control
     {
     public:
         ImagedButton();
@@ -51,7 +53,7 @@ namespace innate_subsystem_windows
 
         virtual void drawItem(LPDRAWITEMSTRUCT dis);
 
-        virtual void setWindow(const ::operating_system::window & window) override;
+        virtual void subclassWindow(const ::operating_system::window & window) override;
 
         virtual void _setHICON(HICON hicon, const ::int_size & size);
         //virtual void setIcon(::innate_subsystem::IconInterface * picon, const ::int_size & size, int flags, int iInitialSize = 1, int iGrow = 1) override;

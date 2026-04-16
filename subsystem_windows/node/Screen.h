@@ -35,7 +35,7 @@ namespace subsystem_windows
 {
    // This class get info for a windows desktop.
    class CLASS_DECL_SUBSYSTEM_WINDOWS Screen :
-   virtual public ::subsystem::implementation<::subsystem::ScreenInterface>
+   virtual public implementation<::subsystem::ScreenInterface>
    {
    public:
       Screen();
@@ -81,7 +81,7 @@ namespace subsystem_windows
       // Windows contain both visible and invisible pseudo-monitors
       // that are associated with mirroring drivers.
       // The function returns only visible monitor count.
-      size_t getVisibleMonitorCount() override;
+      int getVisibleMonitorCount() override;
 
    //private:
       virtual void _fillPixelFormat(const BMI *bmi);

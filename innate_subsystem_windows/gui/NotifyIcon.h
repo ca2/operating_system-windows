@@ -39,7 +39,8 @@ namespace innate_subsystem_windows
 
    // FIXME: Add documentation to class.
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS NotifyIcon :
-      virtual public ::subsystem::implementation< innate_subsystem::NotifyIconInterface>
+      virtual public implementation< innate_subsystem::NotifyIconInterface>,
+   virtual  public ::innate_subsystem::NotifyIconWindow
    {
    public:
       NotifyIcon();

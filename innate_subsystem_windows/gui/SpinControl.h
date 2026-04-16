@@ -28,14 +28,16 @@
 
 #include "innate_subsystem/gui/SpinControl.h"
 #include "innate_subsystem_windows/_common_header.h"
-
+#include "innate_subsystem_windows/gui/Control.h"
 
 #include <commctrl.h>
 
 namespace innate_subsystem_windows
 {
 
-class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS SpinControl : public window_implementation<innate_subsystem::SpinControlInterface>
+class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS SpinControl :
+    virtual public window_implementation<innate_subsystem::SpinControlInterface>,
+    virtual public Control
 {
 public:
   SpinControl();

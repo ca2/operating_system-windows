@@ -89,7 +89,7 @@ namespace subsystem_windows
       }
    }
 
-   size_t AnonymousPipe::read(void *buffer, size_t len)
+   memsize AnonymousPipe::read(void *buffer, memsize len)
    {
       try {
          return readByFile(buffer, len, m_pfileRead);

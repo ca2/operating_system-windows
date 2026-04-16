@@ -13,7 +13,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Cursor :
-      virtual public ::subsystem::implementation<::innate_subsystem::CursorInterface>
+      virtual public implementation<::innate_subsystem::CursorInterface>
    {
    public:
 

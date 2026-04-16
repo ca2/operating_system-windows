@@ -34,7 +34,7 @@ namespace subsystem_windows
    // This class is not an interface but is a class that contain common
    // methods/source codes for derived classes to work with pipe handles.
    class CLASS_DECL_SUBSYSTEM_WINDOWS Pipe :
-   virtual public ::subsystem::implementation<::subsystem::PipeInterface>
+   virtual public implementation<::subsystem::PipeInterface>
    {
    public:
 
@@ -70,8 +70,8 @@ namespace subsystem_windows
       // The pointer uses because the functions must have access to
       // the same variable as in a derived class to rich a thread safe
       // handle usage.
-      size_t readByFile(void *buffer, size_t len, ::subsystem::FileInterface * pfilePipe) override;
-      size_t writeByFile(const void *buffer, size_t len, ::subsystem::FileInterface * pfilePipe) override;
+      memsize readByFile(void *buffer, memsize len, ::subsystem::FileInterface * pfilePipe) override;
+      memsize writeByFile(const void *buffer, memsize len, ::subsystem::FileInterface * pfilePipe) override;
 
 
       void checkPipeFile(::subsystem::FileInterface * pfilePipe) override;

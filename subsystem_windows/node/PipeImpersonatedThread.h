@@ -33,7 +33,8 @@ namespace subsystem_windows
 
    class CLASS_DECL_SUBSYSTEM_WINDOWS PipeImpersonatedThread :
 
-      virtual public ::subsystem::PipeImpersonatedThread
+      virtual public ::subsystem::PipeImpersonatedThread,
+      virtual public ::subsystem::Thread
    {
    public:
       //PipeImpersonatedThread(HANDLE pipeHandle);

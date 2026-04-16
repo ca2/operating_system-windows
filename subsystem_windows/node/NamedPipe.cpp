@@ -90,13 +90,13 @@ namespace subsystem_windows
       return writeByFile(buffer, len, m_pfilePipe);
    }
 
-   size_t NamedPipe::read(void *buffer, size_t len)
+   memsize NamedPipe::read(void *buffer, memsize len)
    {
       return readByFile(buffer, len, m_pfilePipe);
    }
 
 
-   size_t NamedPipe::available()
+   memsize NamedPipe::available()
    {
       return 0;
    }

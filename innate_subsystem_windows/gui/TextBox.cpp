@@ -27,6 +27,13 @@
 
 namespace innate_subsystem_windows
    {
+
+   TextBox::TextBox()
+   {
+
+
+   }
+
       TextBox::~TextBox()
       {
       }

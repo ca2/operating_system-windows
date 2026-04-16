@@ -33,11 +33,13 @@
 namespace subsystem_windows
 {
 
-   LocalOperatingSystemApplication::LocalOperatingSystemApplication(HINSTANCE hInstance,
-                                                    const ::scoped_string &scopedstrwindowClassName)
+   //LocalOperatingSystemApplication::LocalOperatingSystemApplication(HINSTANCE hInstance,
+     //                                               const ::scoped_string &scopedstrwindowClassName)
+   LocalOperatingSystemApplication::LocalOperatingSystemApplication()
    {
 
-      initialize_operating_system_application(hInstance, scopedstrwindowClassName);
+      initialize_operating_system_application();
+      //initialize_operating_system_application(hInstance, scopedstrwindowClassName);
       HWINSTA winSta = 0;
 
       winSta = OpenWindowStation(L"WinSta0", TRUE, GENERIC_ALL);

@@ -54,7 +54,8 @@ namespace innate_subsystem_windows
    // };
 
    class NotifyIconWindow :
-      virtual public ::subsystem::implementation<::innate_subsystem::NotifyIconWindowInterface>
+      virtual public implementation<::innate_subsystem::NotifyIconWindowInterface>,
+      virtual public innate_subsystem::Window
    {
    public:
 
