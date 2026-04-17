@@ -138,10 +138,8 @@ namespace subsystem_windows
       return SetThreadPriority(m_hThread, priority) != 0;
    }
 
-   // void Thread::sleep(DWORD millis)
-   // {
-   //    Sleep(millis);
-   // }
+    void Thread::sleep(const class ::time & time) { preempt(time);
+    }
 
    void Thread::yield()
    {

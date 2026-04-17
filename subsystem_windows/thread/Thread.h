@@ -109,7 +109,7 @@ namespace  subsystem_windows
        * Suspends the execution of the current thread until the time-out interval elapses.
        * @param millis time to sleep.
        */
-      //static void sleep(DWORD millis);
+      void sleep(const class ::time & time) override;
 
       /**
        * Yield execution to the next ready thread.

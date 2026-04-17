@@ -156,6 +156,9 @@ namespace innate_subsystem_windows
 
       void * _WNDPROC_default() const override;
 
+      virtual void _setWindowClassGeneric();
+      virtual void _setWindowClassViewer();
+
       // getWindow()
       // Get a handle of the window
       ::operating_system::window operating_system_window() const override;
@@ -176,7 +179,8 @@ namespace innate_subsystem_windows
       bool onDrawClipboard() override;
       // setClass()
       // Set a class name only to the new window created by createWindow
-      void setClass(const ::scoped_string  & scopedstrWindowClassName) override;
+      //void setClass(const ::scoped_string  & scopedstrWindowClassName) override;
+      void setClass(::innate_subsystem::enum_window_class ewindowclass) override;
 
 
       void setShowCursor(bool bShowCursor) override;

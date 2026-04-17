@@ -3,7 +3,9 @@
 //
 #include "framework.h"
 #include "subsystem.h"
+#include "drawing/Cursor.h"
 #include "drawing/Icon.h"
+#include "drawing/Pen.h"
 #include "drawing/SolidBrush.h"
 #include "gui/SystemMetrics.h"
 #include "gui/Window.h"
@@ -18,6 +20,8 @@
 #include "gui/NotifyIcon.h"
 #include "gui/Menu.h"
 #include "gui/PaintWindow.h"
+#include "gui/Scrollbar.h"
+#include "gui/Toolbar.h"
 //#include "gui/OperatingSystemApplication.h"
 #include "resource_loader.h"
 #include "subsystem.h"
@@ -57,7 +61,15 @@ IMPLEMENT_FACTORY(innate_subsystem_windows)
 
    pfactory->add_factory_item<::innate_subsystem_windows::Menu, ::innate_subsystem::MenuInterface>();
 
+   pfactory->add_factory_item<::innate_subsystem_windows::Toolbar, ::innate_subsystem::ToolbarInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::ScrollBar, ::innate_subsystem::ScrollBarInterface>();
+
    pfactory->add_factory_item<::innate_subsystem_windows::Icon, ::innate_subsystem::IconInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::Cursor, ::innate_subsystem::CursorInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::Pen, ::innate_subsystem::PenInterface>();
 
    pfactory->add_factory_item<::innate_subsystem_windows::SolidBrush, ::innate_subsystem::SolidBrushInterface>();
 

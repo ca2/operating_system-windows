@@ -138,6 +138,8 @@ virtual public window_implementation<innate_subsystem::ToolbarInterface, Window>
       // getState() gets button state
       LRESULT getState(int idButton) override;
 
+      void loadToolbarFromMatter(const ::file::path &pathMatter) override;
+
       int m_initialStr;
       int m_numberTB;
       DWORD m_id;

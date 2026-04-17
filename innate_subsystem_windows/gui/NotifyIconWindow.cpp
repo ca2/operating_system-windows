@@ -62,7 +62,7 @@ namespace innate_subsystem_windows
       //                         CW_USEDEFAULT, CW_USEDEFAULT,
       //                         CW_USEDEFAULT, CW_USEDEFAULT,
       //                         NULL, NULL, GetModuleHandle(0), NULL);
-
+      setClass(::innate_subsystem::e_window_class_none);
 
       createWindow("NotifyIconWindowTitle", WS_OVERLAPPED, {},
       CW_USEDEFAULT, CW_USEDEFAULT,

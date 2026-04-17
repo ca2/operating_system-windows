@@ -255,6 +255,13 @@ namespace innate_subsystem_windows
       return result;
    }
 
+   void Toolbar::loadToolbarFromMatter(const ::file::path& pathMatter)
+   {
+
+
+   }
+
+
    LRESULT Toolbar::addBitmap(int nButtons, unsigned int bitmapID)
    {
       TBADDBITMAP resBitmap;

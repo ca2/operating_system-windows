@@ -27,6 +27,7 @@
 
 #include "innate_subsystem/gui/ScrollBar.h"
 #include "innate_subsystem_windows/_common_header.h"
+#include "innate_subsystem_windows/gui/Window.h"
 
 
 namespace  innate_subsystem_windows
@@ -36,7 +37,7 @@ namespace  innate_subsystem_windows
    // contained in existed window.
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ScrollBar :
-   virtual public window_implementation<innate_subsystem::ScrollBarInterface>
+   virtual public window_implementation<innate_subsystem::ScrollBarInterface, Window>
    {
    public:
       ScrollBar();

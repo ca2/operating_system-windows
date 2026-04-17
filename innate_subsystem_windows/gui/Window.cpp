@@ -119,9 +119,73 @@ namespace innate_subsystem_windows
 
    }
 
-   void Window::setClass(const ::scoped_string  & scopedstrWindowClassName)
+   //void Window::setClass(const ::scoped_string  & scopedstrWindowClassName)
+   void Window::setClass(::innate_subsystem::enum_window_class ewindowclass)
    {
-      m_strClassName = scopedstrWindowClassName;
+
+      if (ewindowclass == innate_subsystem::e_window_class_viewer)
+      {
+         _setWindowClassViewer();
+      }
+      else
+      {
+         _setWindowClassGeneric();
+
+      }
+      //;
+      //m_strClassName = scopedstrWindowClassName;
+   }
+
+   void Window::_setWindowClassViewer()
+   {
+
+      static bool s_bRegistered = false;
+      static WNDCLASSW s_wndclass{};
+
+      m_strClassName = "innate_subsystem_viewer_window";
+
+      if (!s_bRegistered)
+      {
+
+         s_bRegistered = true;
+
+         ::wstring wstrClassName(m_strClassName);
+         
+         s_wndclass.lpfnWndProc = ::windows::window::s_window_procedure;
+         s_wndclass.hInstance = (HINSTANCE) ::windows::hinstance_from_function(::windows::window::s_window_procedure);
+         s_wndclass.lpszClassName = wstrClassName.c_str();
+         s_wndclass.style = CS_HREDRAW | CS_VREDRAW;
+         s_wndclass.hbrBackground = GetSysColorBrush(COLOR_WINDOW);
+         
+         RegisterClass(&s_wndclass);
+          
+      }
+
+   }
+
+   void Window::_setWindowClassGeneric()
+   {
+
+      static bool s_bRegistered = false;
+      static WNDCLASSW s_wndclass{};
+
+      m_strClassName = "innate_subsystem_window";
+
+      if (!s_bRegistered)
+      {
+
+         s_bRegistered = true;
+
+         ::wstring wstrClassName(m_strClassName);
+
+         s_wndclass.lpfnWndProc = ::windows::window::s_window_procedure;
+         s_wndclass.hInstance = (HINSTANCE)::windows::hinstance_from_function(::windows::window::s_window_procedure);
+         s_wndclass.lpszClassName = wstrClassName.c_str();
+         s_wndclass.style = CS_HREDRAW | CS_VREDRAW;
+         s_wndclass.hbrBackground = GetSysColorBrush(COLOR_WINDOW);
+
+         RegisterClass(&s_wndclass);
+      }
    }
 
 
@@ -138,9 +202,7 @@ namespace innate_subsystem_windows
                             style,
                             xPos, yPos,
                             width, height,
-                            hwndParent,
-                            0,
-                            GetModuleHandle(0),
+                            hwndParent, 0, (HINSTANCE) ::windows::hinstance_from_function(::windows::window::s_window_procedure),
                             reinterpret_cast<LPVOID>((::windows::window *)this));
       m_bWndCreated = (hwnd == 0 ? false : true);
       if (m_bWndCreated) {
@@ -1112,6 +1174,16 @@ namespace innate_subsystem_windows
                m_hwndNextViewer = SetClipboardViewer((HWND)_HWND());
 
             }
+
+            if (!onCreate((void*)lparam.m_lparam))
+            {
+
+               lresult = -1;
+               return true;
+
+            }
+
+            lresult = 0;
 
          }
             break;
