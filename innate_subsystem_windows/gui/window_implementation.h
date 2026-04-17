@@ -11,9 +11,9 @@
 
 namespace innate_subsystem_windows
 {
-   template < typename PARTICLE_INTERFACE, typename BASE = particle_base >
+   template < typename PARTICLE_INTERFACE, typename BASE = Particle >
    class window_implementation :
-      virtual public implementation<PARTICLE_INTERFACE, BASE >,
+      virtual public Implementation<PARTICLE_INTERFACE, BASE >,
       virtual public WindowCache,
       virtual public ::innate_subsystem_windows::notification_handler
    {

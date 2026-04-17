@@ -53,6 +53,16 @@ namespace subsystem_windows
 
    }
 
+
+   void OperatingSystemApplication::doDefaultMainLoop()
+   {
+
+      auto ptask = ::get_task();
+
+      ptask->run_loop();
+
+   }
+
 //   void OperatingSystemApplication::initialize_operating_system_application(const ::scoped_string & scopedstrWindowClassName)
 //   {
 //      //::particle::initialize(pparticle);
@@ -76,14 +86,14 @@ namespace subsystem_windows
 
    void OperatingSystemApplication::run()
    {
-      // WNDCLASS wndClass;
-      // registerWindowClass(&wndClass);
-      // createWindow(wndClass.lpszClassName);
-      // try {
-      //    m_iExitCode = processMessages();
-      // } catch (...) {
-      //    m_iExitCode = 1;
-      // }
+       //WNDCLASS wndClass;
+       ///registerWindowClass(&wndClass);
+       //createWindow(wndClass.lpszClassName);
+       //try {
+          //m_iExitCode = processMessages();
+       //} catch (...) {
+         // m_iExitCode = 1;
+       //}
    }
 
    // int OperatingSystemApplication::processMessages()
@@ -195,7 +205,7 @@ namespace subsystem_windows
    void OperatingSystemApplication::onMainThreadMessage(unsigned int message, ::wparam wparam, ::lparam lparam)
    {
 
-      m_pcomposite->onMainThreadMessage(message, wparam, lparam);
+      m_poperatingsystemapplicationCallback->onMainThreadMessage(message, wparam, lparam);
    }
 
 

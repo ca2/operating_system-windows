@@ -33,7 +33,7 @@
 namespace innate_subsystem_windows
 {
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Bitmap :
-   virtual public implementation<innate_subsystem::BitmapInterface>
+   virtual public Implementation<innate_subsystem::BitmapInterface>
 
    {
    public:

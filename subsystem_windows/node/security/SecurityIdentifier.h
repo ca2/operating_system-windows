@@ -67,7 +67,7 @@ namespace subsystem_windows
        * identify the trustee relative to the authority that issued the SID.
        */
       class SecurityIdentifier :
-         virtual public implementation< ::subsystem::SecurityIdentifierInterface >
+         virtual public Implementation< ::subsystem::SecurityIdentifierInterface >
       {
       public:
          /**

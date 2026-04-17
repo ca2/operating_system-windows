@@ -36,7 +36,7 @@ namespace subsystem_windows
    // The AnonymousPipeFactory class generates the ::pair of the AnonymousPipe
    // objects that connected to each other.
    class CLASS_DECL_SUBSYSTEM_WINDOWS AnonymousPipeFactory :
-   virtual public implementation<::subsystem::AnonymousPipeFactoryInterface>
+   virtual public Implementation<::subsystem::AnonymousPipeFactoryInterface>
    {
    public:
       //AnonymousPipeFactory(unsigned int bufferSize, ::subsystem::LogWriter *log);

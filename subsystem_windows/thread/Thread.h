@@ -53,7 +53,7 @@ namespace  subsystem_windows
     * @fixme member of HDESK type in THREAD class???
     */
    class CLASS_DECL_SUBSYSTEM_WINDOWS Thread :
-   virtual public implementation<::subsystem::ThreadInterface>
+   virtual public Implementation<::subsystem::ThreadCallback>
    {
    public:
       /**
@@ -103,7 +103,7 @@ namespace  subsystem_windows
        * Sets thread priority.
        * @param value thread priority.
        */
-      bool setPriority(subsystem::THREAD_PRIORITY value) override;
+      bool setPriority(::subsystem::THREAD_PRIORITY value) override;
 
       /**
        * Suspends the execution of the current thread until the time-out interval elapses.

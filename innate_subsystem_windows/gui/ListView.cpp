@@ -361,7 +361,7 @@ namespace innate_subsystem_windows
    void ListView::onAction()
    {
 
-      m_pcomposite->onAction();
+      m_plistviewCallback->onAction();
 
    }
 

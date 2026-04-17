@@ -47,7 +47,7 @@ namespace innate_subsystem_windows
    //
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ListView :
-   virtual public window_implementation<innate_subsystem::ListViewInterface, ::innate_subsystem::Control>
+   virtual public window_implementation<innate_subsystem::ListViewCallback, ::innate_subsystem::Control>
    {
    public:
 

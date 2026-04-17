@@ -35,7 +35,7 @@ namespace subsystem_windows
 
 
    class CLASS_DECL_SUBSYSTEM_WINDOWS Displays :
-      virtual public implementation<::subsystem::DisplaysInterface >
+      virtual public Implementation<::subsystem::DisplaysInterface >
    {
    public:
 

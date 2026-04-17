@@ -136,8 +136,8 @@ void
       }
 
       //window = CreateDialogParam(GetModuleHandle(NULL), (LPCWSTR) getResouceName(),
-      window = CreateDialogParam((HINSTANCE)::system()->m_hinstanceMain, (LPCWSTR)getResouceName(),
-                                 parentWindow, dialogProc, (::lparam)(::uptr) (Dialog *) this);
+      window = CreateDialogParam((HINSTANCE)::system()->m_hinstanceMain, (LPCWSTR)getResouceName(), parentWindow,
+                                 dialogProc, (::lparam)(::uptr)(::innate_subsystem_windows::Dialog *)this);
 
       m_isModal = false;
 
@@ -152,8 +152,8 @@ void
          HWND parentWindow = (m_pcontrolParent != NULL) ?(HWND)m_pcontrolParent->_HWND() : (HWND) nullptr;
          //result = (int)DialogBoxParam(GetModuleHandle(NULL),
          result = (int)DialogBoxParam((HINSTANCE) system()->m_hinstanceMain,
-                                      ::wstring(getResouceName()),
-                                      parentWindow, dialogProc, (::lparam)this);
+                                      ::wstring(getResouceName()), parentWindow,
+                                      dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
       } else {
          setVisible(true);
          setForeground();
@@ -199,17 +199,17 @@ void
 
    INT_PTR CALLBACK Dialog::dialogProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam)
    {
-      Dialog *_this;
+      ::innate_subsystem_windows::Dialog * _this = nullptr;
       BOOL bResult;
 
       bResult = FALSE;
       if (uMsg == WM_INITDIALOG) {
-         _this = (Dialog *)lparam;
+         _this = (::innate_subsystem_windows::Dialog *)lparam;
          SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)_this);
          _this->_setHWND(hwnd);
          _this->updateIcon();
       } else {
-         _this = (Dialog *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+         _this = (::innate_subsystem_windows::Dialog *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
          if (_this == 0) {
             return FALSE;
          }
@@ -285,7 +285,10 @@ void
 
    bool Dialog::onInitDialog()
    {
-      return m_pcomposite->onInitDialog();
+
+      auto pcomposite = m_pdialogCallback.m_p;
+
+      return pcomposite->onInitDialog();
    }
 
    // bool Dialog::_onNotify(int iControl, LPNMHDR lpnmhdr)
@@ -295,7 +298,8 @@ void
 
    bool Dialog::onCommand(unsigned int controlID, unsigned int notificationID)
    {
-      return FALSE;
+      return m_pwindowCallback->onCommand(controlID, notificationID);
+      //return FALSE;
    }
 
    bool Dialog::onDestroy()

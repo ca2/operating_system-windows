@@ -37,7 +37,7 @@ namespace subsystem_windows
    // The EmulatedAnonymousPipeFactory class generates a chanel based on named pipe.
    // This is similar to anonymous pipe generation.
    class CLASS_DECL_SUBSYSTEM_WINDOWS EmulatedAnonymousPipeFactory :
-   virtual public implementation<subsystem::EmulatedAnonymousPipeFactoryInterface>
+   virtual public Implementation<subsystem::EmulatedAnonymousPipeFactoryInterface>
    {
    public:
 

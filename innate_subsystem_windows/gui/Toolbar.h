@@ -30,7 +30,7 @@
 namespace innate_subsystem_windows
 {
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Toolbar :
-virtual public window_implementation<innate_subsystem::ToolbarInterface>
+virtual public window_implementation<innate_subsystem::ToolbarInterface, Window>
    {
    public:
       Toolbar();

@@ -133,20 +133,20 @@ namespace innate_subsystem_windows
       void NotifyIconWindow::onNotifyIconRightButtonUp()
       {
 
-         m_pcomposite->onNotifyIconRightButtonUp();
+         m_pnotifyiconwindowCallback->onNotifyIconRightButtonUp();
 
       }
       void NotifyIconWindow::onNotifyIconLeftButtonDown()
       {
 
-         m_pcomposite->onNotifyIconLeftButtonDown();
+         m_pnotifyiconwindowCallback->onNotifyIconLeftButtonDown();
 
       }
 
       void NotifyIconWindow::onTaskBarCreated()
       {
 
-         m_pcomposite->onTaskBarCreated();
+         m_pnotifyiconwindowCallback->onTaskBarCreated();
 
       }
 

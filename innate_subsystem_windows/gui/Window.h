@@ -89,7 +89,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Window :
-      virtual public implementation< ::innate_subsystem::WindowInterface >,
+      virtual public Implementation< ::innate_subsystem::WindowCallback >,
       virtual public ::windows::window,
       virtual public notification_handler
    {
@@ -261,7 +261,7 @@ namespace innate_subsystem_windows
       ::operating_system::window dialog_item_operating_system_window(int iDlgItem) override;
 
 
-      void subclassControlById(::particle_base * pWindowControl, unsigned int id) override;
+      void subclassControlById(::Particle * pWindowControl, unsigned int id) override;
       void subclassWindow(const ::operating_system::window & operatingsystemwindow) override;
       void unsubclassWindow() override;
 
@@ -333,7 +333,7 @@ namespace innate_subsystem_windows
       // private:
       // This function may be implement in child class.
       // Here is stub function, always returned false.
-      virtual bool onCommand(::wparam wparam, ::lparam lparam) override;
+      virtual bool onCommand(unsigned int controlID, unsigned int notificationID) override;
       virtual bool onSysCommand(::wparam wparam, ::lparam lparam) override;
       virtual bool onMessage(unsigned int message, ::wparam wparam, ::lparam lparam) override;
       virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, const ::int_point & position) override;

@@ -34,7 +34,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS PaintWindow:
-   virtual public implementation<::innate_subsystem::PaintWindowInterface>
+   virtual public Implementation<::innate_subsystem::PaintWindowCallback, Window>
    //, public Window
    {
    public:
@@ -50,7 +50,7 @@ namespace innate_subsystem_windows
       friend class DeviceContext;
 
    //protected:
-      virtual void onPaint(DeviceContext *dc, PAINTSTRUCT *paintStruct);
+      void onPaint(::innate_subsystem::DeviceContextInterface *pdevicecontext, const ::int_rectangle &rectangle) override;
 
       //bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam);
 

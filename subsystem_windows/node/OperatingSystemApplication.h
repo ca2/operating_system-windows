@@ -40,7 +40,7 @@ namespace subsystem_windows
        * Have hidden main window and main scopedstrMessage loop.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS OperatingSystemApplication :
-      virtual public implementation< ::subsystem::OperatingSystemApplicationInterface >
+      virtual public Implementation< ::subsystem::OperatingSystemApplicationCallback >
       {
       public:
 
@@ -61,6 +61,8 @@ namespace subsystem_windows
 
          void initialize_operating_system_application() override;
 
+
+         void doDefaultMainLoop() override;
          //virtual void initialize_operating_system_application(const ::scoped_string & scopedstrwindowClassName);
 
          /**

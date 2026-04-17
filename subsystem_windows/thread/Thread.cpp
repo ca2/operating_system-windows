@@ -161,7 +161,7 @@ namespace subsystem_windows
    void Thread::execute()
    {
 
-      m_pcomposite->execute();
+      m_pthreadCallback->execute();
 
    }
 

@@ -35,7 +35,7 @@ namespace subsystem_windows
        * Wrapper on base WinAPI keyboard functions.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS Keyboard :
-   virtual public implementation<subsystem::KeyboardInterface>
+   virtual public Implementation<subsystem::KeyboardInterface>
       {
       public:
          /**

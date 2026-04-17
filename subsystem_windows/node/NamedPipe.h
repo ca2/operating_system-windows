@@ -39,7 +39,7 @@ namespace subsystem_windows
     * @author yuri, enikey.
     */
    class CLASS_DECL_SUBSYSTEM_WINDOWS NamedPipe :
-      virtual public implementation < ::subsystem::NamedPipeInterface, ::subsystem::Pipe >
+      virtual public Implementation < ::subsystem::NamedPipeInterface, ::subsystem::Pipe >
    {
    public:
       /**

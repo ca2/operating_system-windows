@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "subsystem.h"
 #include "drawing/Icon.h"
+#include "drawing/SolidBrush.h"
 #include "gui/SystemMetrics.h"
 #include "gui/Window.h"
 #include "gui/Control.h"
@@ -16,6 +17,8 @@
 #include "gui/NotifyIconWindow.h"
 #include "gui/NotifyIcon.h"
 #include "gui/Menu.h"
+#include "gui/PaintWindow.h"
+//#include "gui/OperatingSystemApplication.h"
 #include "resource_loader.h"
 #include "subsystem.h"
 
@@ -56,6 +59,13 @@ IMPLEMENT_FACTORY(innate_subsystem_windows)
 
    pfactory->add_factory_item<::innate_subsystem_windows::Icon, ::innate_subsystem::IconInterface>();
 
+   pfactory->add_factory_item<::innate_subsystem_windows::SolidBrush, ::innate_subsystem::SolidBrushInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::PaintWindow, ::innate_subsystem::PaintWindowInterface>();
+
    pfactory->add_factory_item<::innate_subsystem_windows::resource_loader, ::subsystem::resource_loader>();
+
+   //pfactory->add_factory_item<::innate_subsystem_windows::OperatingSystemApplication,
+     //                         ::subsystem::OperatingSystemApplicationInterface>();
 
 }

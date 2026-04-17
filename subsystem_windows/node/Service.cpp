@@ -75,7 +75,7 @@ namespace subsystem_windows
    void Service::onStart()
       {
 
-         m_pcomposite->onStart();
+         m_pserviceCallback->onStart();
 
       }
    /**
@@ -84,7 +84,7 @@ namespace subsystem_windows
    void Service::main()
       {
 
-         m_pcomposite->main();
+         m_pserviceCallback->main();
 
       }
    /**
@@ -93,7 +93,7 @@ namespace subsystem_windows
    void Service::onStop()
       {
 
-         m_pcomposite->onStop();
+         m_pserviceCallback->onStop();
 
       }
 

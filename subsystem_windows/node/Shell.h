@@ -38,7 +38,7 @@ namespace subsystem_windows
        * @author enikey.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS Shell :
-      virtual public implementation< ::subsystem::ShellInterface >
+      virtual public Implementation< ::subsystem::ShellInterface >
       {
       public:
 

@@ -36,7 +36,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS SolidBrush :
-      virtual public implementation <::innate_subsystem::SolidBrushInterface>,
+      virtual public Implementation <::innate_subsystem::SolidBrushInterface>,
       virtual public Brush
    {
    public:

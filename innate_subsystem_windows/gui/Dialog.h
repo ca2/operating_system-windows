@@ -32,7 +32,7 @@ namespace innate_subsystem_windows
 
 
    class Dialog :
-      virtual public window_implementation<::innate_subsystem::DialogInterface, Control>
+      virtual public window_implementation<::innate_subsystem::DialogCallback, Control>
       //, public Control
    {
    public:

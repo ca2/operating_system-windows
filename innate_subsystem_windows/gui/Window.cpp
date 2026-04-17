@@ -115,7 +115,7 @@ namespace innate_subsystem_windows
    {
 
 
-      return m_pcomposite->onDrawClipboard();
+      return m_pwindowCallback->onDrawClipboard();
 
    }
 
@@ -286,7 +286,7 @@ namespace innate_subsystem_windows
       return ::as_operating_system_window(hwndChild);
    }
 
-   void Window::subclassControlById(::particle_base * pWindowControl, unsigned int id)
+   void Window::subclassControlById(::Particle * pWindowControl, unsigned int id)
    {
 
        auto pwindow = pWindowControl->impl<innate_subsystem_windows::Window>();
@@ -361,7 +361,7 @@ namespace innate_subsystem_windows
    bool Window::we_want_WM_KEYDOWN_when_enter_is_pressed() const
    {
 
-      return m_pcomposite->we_want_WM_KEYDOWN_when_enter_is_pressed();
+      return m_pwindowCallback->we_want_WM_KEYDOWN_when_enter_is_pressed();
 
    }
 
@@ -459,7 +459,7 @@ namespace innate_subsystem_windows
       KillTimer(m_windowswindow.as_HWND(), ident);
    }
 
-   bool Window::onCommand(::wparam wparam, ::lparam lparam)
+   bool Window::onCommand(unsigned int controlID, unsigned int notificationID)
    {
       return false;
    }
@@ -955,7 +955,7 @@ namespace innate_subsystem_windows
    bool Window::onCreate(void * pCreateStruct)
    {
 
-      return m_pcomposite->onCreate(pCreateStruct);;
+      return m_pwindowCallback->onCreate(pCreateStruct);;
 
    }
 
@@ -1018,7 +1018,7 @@ namespace innate_subsystem_windows
    void Window::onDraw(::innate_subsystem::GraphicsInterface * pgraphics, const ::int_rectangle & rectangle)
    {
 
-      m_pcomposite->onDraw(pgraphics, rectangle);
+      m_pwindowCallback->onDraw(pgraphics, rectangle);
 
 
    }
@@ -1085,10 +1085,10 @@ namespace innate_subsystem_windows
    bool Window::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
    {
 
-      if (m_pcomposite)
+      if (m_pwindowCallback)
       {
 
-         if (m_pcomposite->on_window_procedure(lresult, message, wparam, lparam))
+         if (m_pwindowCallback->on_window_procedure(lresult, message, wparam, lparam))
          {
 
             return true;
@@ -1367,28 +1367,28 @@ break;
    void Window::onBeforeFullScreen(bool bRestore)
    {
 
-      m_pcomposite->onBeforeFullScreen(bRestore);
+      m_pwindowCallback->onBeforeFullScreen(bRestore);
 
    }
 
    void Window::onAfterFullScreen(bool bRestore)
    {
 
-      m_pcomposite->onAfterFullScreen(bRestore);
+      m_pwindowCallback->onAfterFullScreen(bRestore);
 
    }
 
    void Window::onBeforeUnFullScreen(bool bMinimizing)
    {
 
-      m_pcomposite->onBeforeUnFullScreen(bMinimizing);
+      m_pwindowCallback->onBeforeUnFullScreen(bMinimizing);
 
    }
 
    void Window::onAfterUnFullScreen(bool bMinimizing)
    {
 
-      m_pcomposite->onAfterUnFullScreen(bMinimizing);
+      m_pwindowCallback->onAfterUnFullScreen(bMinimizing);
 
    }
 
@@ -1396,7 +1396,7 @@ break;
    bool Window::onGetTooltip(int iControl, ::string & strTooltip)
    {
 
-      return m_pcomposite->onGetTooltip(iControl, strTooltip);
+      return m_pwindowCallback->onGetTooltip(iControl, strTooltip);
 
    }
 
@@ -1405,7 +1405,7 @@ break;
    bool Window::onCalculateDefaultSize(::int_rectangle & rectangleDefaultSize)
    {
 
-      return m_pcomposite->onCalculateDefaultSize(rectangleDefaultSize);
+      return m_pwindowCallback->onCalculateDefaultSize(rectangleDefaultSize);
 
    }
 
@@ -1413,7 +1413,7 @@ break;
    void Window::onAdjustWindowSize()
    {
 
-      return m_pcomposite->onAdjustWindowSize();
+      return m_pwindowCallback->onAdjustWindowSize();
 
    }
 
@@ -1421,7 +1421,7 @@ break;
    void Window::onSize()
    {
 
-      return m_pcomposite->onSize();
+      return m_pwindowCallback->onSize();
 
    }
 

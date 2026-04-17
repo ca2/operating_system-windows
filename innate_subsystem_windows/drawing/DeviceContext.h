@@ -37,7 +37,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS DeviceContext :
-      virtual public implementation<::innate_subsystem::DeviceContextInterface>
+      virtual public Implementation<::innate_subsystem::DeviceContextInterface>
    {
    public:
       // // Create device context linked to window DC.

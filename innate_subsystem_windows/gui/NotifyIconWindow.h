@@ -28,7 +28,7 @@
 
 #include "innate_subsystem/gui/NotifyIconWindow.h"
 #include "subsystem/_common_header.h"
-
+#include "innate_subsystem_windows/gui/Window.h"
 
 #include "WindowProcHolder.h"
 
@@ -54,8 +54,7 @@ namespace innate_subsystem_windows
    // };
 
    class NotifyIconWindow :
-      virtual public implementation<::innate_subsystem::NotifyIconWindowInterface>,
-      virtual public innate_subsystem::Window
+      virtual public Implementation<innate_subsystem::NotifyIconWindowCallback, Window>
    {
    public:
 

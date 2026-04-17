@@ -32,7 +32,7 @@
 namespace subsystem_windows
 {
       class CLASS_DECL_SUBSYSTEM_WINDOWS Cursor :
-      virtual public implementation<::subsystem::CursorInterface >
+      virtual public Implementation<::subsystem::CursorInterface >
       {
       public:
          Cursor();

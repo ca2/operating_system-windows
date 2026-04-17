@@ -33,7 +33,7 @@ namespace subsystem_windows
 
 
    class CLASS_DECL_SUBSYSTEM_WINDOWS DesktopSelector :
-   virtual public implementation<::subsystem::DesktopSelectorInterface>
+   virtual public Implementation<::subsystem::DesktopSelectorInterface>
    {
    public:
 

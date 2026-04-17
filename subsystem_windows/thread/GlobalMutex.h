@@ -38,7 +38,7 @@ namespace subsystem_windows
     * @author yuri, enikey.
     */
    class CLASS_DECL_SUBSYSTEM_WINDOWS GlobalMutex :
-      virtual public implementation<::subsystem::GlobalMutexInterface>
+      virtual public Implementation<::subsystem::GlobalMutexInterface>
    {
    public:
       /**

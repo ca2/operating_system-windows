@@ -34,7 +34,7 @@ namespace innate_subsystem_windows
 {
 
    class Pen :
-      virtual public implementation<::innate_subsystem::PenInterface>
+      virtual public Implementation<::innate_subsystem::PenInterface>
    {
    public:
       // const static int SOLID_TYPE = PS_SOLID;

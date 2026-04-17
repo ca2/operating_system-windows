@@ -44,7 +44,10 @@ namespace innate_subsystem_windows
          return m_pdevicecontext;
       }
 
-      void PaintWindow::onPaint(DeviceContext *dc, PAINTSTRUCT *paintStruct) {
+      void PaintWindow::onPaint(::innate_subsystem::DeviceContextInterface *pdevicecontext,
+                                const ::int_rectangle &rectangle)
+         {
+      m_ppaintwindowCallback->onPaint(pdevicecontext, rectangle);
       }
 
       // bool PaintWindow::wndProc(unsigned int message, ::wparam wparam, ::lparam lparam)

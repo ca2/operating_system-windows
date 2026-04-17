@@ -41,7 +41,7 @@ namespace innate_subsystem_windows
 
       // This clas is a primitive wrapper to a DIB section.
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS  DibSection :
-      virtual public implementation<::innate_subsystem::DibSectionInterface>
+      virtual public Implementation<::innate_subsystem::DibSectionInterface>
    {
    public:
       // Note that if the compatibleWin doesn't specify or is zero the class will create an

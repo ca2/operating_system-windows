@@ -42,7 +42,7 @@ namespace subsystem_windows
        * @author enikey.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS Service :
-      virtual public implementation<subsystem::ServiceInterface>
+      virtual public Implementation<subsystem::ServiceCallback>
       {
       public:
          /**

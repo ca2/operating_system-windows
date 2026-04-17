@@ -32,6 +32,8 @@
 
 #include "innate_subsystem/drawing/Icon.h"
 
+#include "innate_subsystem_windows/gui/NotifyIconWindow.h"
+
 #include <shellapi.h>
 
 namespace innate_subsystem_windows
@@ -39,8 +41,7 @@ namespace innate_subsystem_windows
 
    // FIXME: Add documentation to class.
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS NotifyIcon :
-      virtual public implementation< innate_subsystem::NotifyIconInterface>,
-   virtual  public ::innate_subsystem::NotifyIconWindow
+      virtual public Implementation< innate_subsystem::NotifyIconInterface, NotifyIconWindow>
    {
    public:
       NotifyIcon();
@@ -49,7 +50,7 @@ namespace innate_subsystem_windows
       void initialize_notify_icon(bool showAfterCreation = true) override;
 
       ::innate_subsystem::IconInterface *getIcon()override;
-      bool isVisible() const override;
+      bool isVisible() override;
 
       void setIcon(::innate_subsystem::IconInterface *icon) override;
       void setText(const char *text) override;

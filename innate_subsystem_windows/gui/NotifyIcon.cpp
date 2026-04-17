@@ -94,7 +94,7 @@ namespace innate_subsystem_windows
    //    return m_icon;
    // }
 
-   bool NotifyIcon::isVisible() const
+   bool NotifyIcon::isVisible()
    {
       return m_visible;
    }

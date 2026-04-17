@@ -32,7 +32,7 @@ namespace subsystem_windows
 {
 
    class CLASS_DECL_SUBSYSTEM_WINDOWS File :
-      virtual public implementation<::subsystem::FileInterface>
+      virtual public Implementation<::subsystem::FileInterface>
    {
    public:
 
