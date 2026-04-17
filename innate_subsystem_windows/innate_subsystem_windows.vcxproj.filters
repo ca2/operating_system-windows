@@ -21,6 +21,9 @@
     <Filter Include="Header Files\gui">
       <UniqueIdentifier>{247bc91f-fdb6-4a8c-a37f-bdbea9535ac9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\framebuffer">
+      <UniqueIdentifier>{41183d68-3b46-4653-8e3c-6ebde003f418}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_factory.cpp">
@@ -163,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="drawing\SolidBrush.cpp">
       <Filter>Source Files\drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="framebuffer\DibSection.cpp">
+      <Filter>Source Files\framebuffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

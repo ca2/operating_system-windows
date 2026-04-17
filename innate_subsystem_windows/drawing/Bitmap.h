@@ -44,7 +44,7 @@ namespace innate_subsystem_windows
       // // Creates bitmap from HBITMAP object.
       // Bitmap(HBITMAP bitmap);
       // // Destroys bitmap object.
-
+      HBITMAP m_hbitmap;
 
       Gdiplus::Bitmap * m_pbitmap;
 

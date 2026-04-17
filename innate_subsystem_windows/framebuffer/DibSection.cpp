@@ -24,7 +24,10 @@
 #include "framework.h"
 #include "subsystem_windows/_common_header.h"
 #include "DibSection.h"
+#include "innate_subsystem_windows/drawing/DeviceContext.h"
+#include "subsystem_windows/node/Screen.h"
 #include "subsystem/node/SystemException.h"
+#include "subsystem/node/Screen.h"
 #include "drawing/Bitmap.h"
 
 
@@ -32,7 +35,7 @@ namespace innate_subsystem_windows
 {
 
 
-   DibSection::DibSection()
+   DibSection::DibSection() : m_memDC(nullptr), m_hbmOld(nullptr), m_targetDC(nullptr), m_hbmDIB(nullptr)
    {
 
 
@@ -71,18 +74,26 @@ namespace innate_subsystem_windows
    {
 
       //m_pparticleThis->initialize_dib_section(pf, dim, operatingsystemwindowCompatible);
-      constructø(m_pbitmapDib);
-      m_pbitmapDib->initialize_bitmap(dim);
+      //construct_newø(m_pbitmapDib);
+      //m_pbitmapDib->initialize_bitmap(dim);
+
+               try {
+                  _openDIBSection(pf, dim, ::as_HWND(operatingsystemwindowCompatible));
+           } catch (...) {
+              closeDIBSection();
+              throw;
+           }
+
 
    }
 
 
-   // void DibSection::setTargetDC(HDC targetDC)
-   // {
-   //    releaseTargetDC();
-   //    m_isOwnTargetDC = false;
-   //    m_targetDC = targetDC;
-   // }
+    void DibSection::setTargetDeviceContext(::innate_subsystem::DeviceContextInterface * pdevicecontextTarget)
+    {
+       releaseTargetDC();
+       m_isOwnTargetDC = false;
+       m_pdevicecontextTarget = pdevicecontextTarget;
+    }
 
    void *DibSection::getBuffer()
    {
@@ -147,79 +158,81 @@ namespace innate_subsystem_windows
       // //                   }
       // // }
    }
-   //
-   // void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const PixelFormat & pf, const ::int_size & dim)
-   // {
-   //    if (pf.bitsPerPixel == 8) {
-   //       Screen::Palette8bitBMI *paletteBMI = reinterpret_cast<Screen::Palette8bitBMI *>(pBmi);
-   //       memset(paletteBMI, 0, sizeof(Screen::Palette8bitBMI));
-   //       pBmi->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-   //       unsigned char index = 0;
-   //       for (int i = 0; i < 256; i++, index++) {
-   //          unsigned int red = (index >> pf.redShift) & pf.redMax;
-   //          red = red * 0xFF / pf.redMax;
-   //          paletteBMI->rgbQuad[index].rgbRed = (BYTE)red;
-   //          unsigned int green = (index >> pf.greenShift) & pf.greenMax;
-   //          green = green * 0xFF / pf.greenMax;
-   //          paletteBMI->rgbQuad[index].rgbGreen = (BYTE)(green);
-   //          unsigned int blue = (index >> pf.blueShift) & pf.blueMax;
-   //          blue = blue * 0xFF / pf.blueMax;
-   //          paletteBMI->rgbQuad[index].rgbBlue  = (BYTE)blue;
-   //       }
-   //    } else {
-   //       Screen::BMI *bitFieldBmi = reinterpret_cast<Screen::BMI *>(pBmi);
-   //       memset(bitFieldBmi, 0, sizeof(Screen::BMI));
-   //       bitFieldBmi->bmiHeader.biCompression = BI_BITFIELDS;
-   //       bitFieldBmi->red   = pf.redMax   << pf.redShift;
-   //       bitFieldBmi->green = pf.greenMax << pf.greenShift;
-   //       bitFieldBmi->blue  = pf.blueMax  << pf.blueShift;
-   //    }
-   //    pBmi->bmiHeader.biPlanes = 1;
-   //    pBmi->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-   //    pBmi->bmiHeader.biBitCount = pf.bitsPerPixel;
-   //    pBmi->bmiHeader.biWidth = dim.cx;
-   //    pBmi->bmiHeader.biHeight = -dim.cy;
-   // }
+   
+    void DibSection::_setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim)
+    {
+       if (pf.bitsPerPixel == 8) {
+          subsystem_windows::Screen::Palette8bitBMI *paletteBMI =
+             reinterpret_cast<subsystem_windows::Screen::Palette8bitBMI *>(pBmi);
+          memset(paletteBMI, 0, sizeof(subsystem_windows::Screen::Palette8bitBMI));
+          pBmi->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+          unsigned char index = 0;
+          for (int i = 0; i < 256; i++, index++) {
+             unsigned int red = (index >> pf.redShift) & pf.redMax;
+             red = red * 0xFF / pf.redMax;
+             paletteBMI->rgbQuad[index].rgbRed = (BYTE)red;
+             unsigned int green = (index >> pf.greenShift) & pf.greenMax;
+             green = green * 0xFF / pf.greenMax;
+             paletteBMI->rgbQuad[index].rgbGreen = (BYTE)(green);
+             unsigned int blue = (index >> pf.blueShift) & pf.blueMax;
+             blue = blue * 0xFF / pf.blueMax;
+             paletteBMI->rgbQuad[index].rgbBlue  = (BYTE)blue;
+          }
+       } else {
+          ::subsystem_windows::Screen::BMI *bitFieldBmi = reinterpret_cast<::subsystem_windows::Screen::BMI *>(pBmi);
+          memset(bitFieldBmi, 0, sizeof(::subsystem_windows::Screen::BMI));
+          bitFieldBmi->bmiHeader.biCompression = BI_BITFIELDS;
+          bitFieldBmi->red   = pf.redMax   << pf.redShift;
+          bitFieldBmi->green = pf.greenMax << pf.greenShift;
+          bitFieldBmi->blue  = pf.blueMax  << pf.blueShift;
+       }
+       pBmi->bmiHeader.biPlanes = 1;
+       pBmi->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+       pBmi->bmiHeader.biBitCount = pf.bitsPerPixel;
+       pBmi->bmiHeader.biWidth = dim.cx;
+       pBmi->bmiHeader.biHeight = -dim.cy;
+    }
 
-   // void DibSection::openDIBSection(const PixelFormat & pf, const ::int_size & dim, HWND compatibleWin)
-   // {
-   //    m_targetDC = GetDC(compatibleWin);
-   //    m_isOwnTargetDC = true;
-   //    if (m_targetDC == 0) {
-   //       throw SystemException("Can't get DC to create a DIB section");
-   //    }
-   //    if (compatibleWin == 0) {
-   //       // In this special case is needed to store offset of the desktop, because coordinates
-   //       // of the top level corner may be non zero.
-   //       m_screen.update();
-   //       ::int_rectangle deskRect = m_screen.getDesktopRect();
-   //       m_srcOffsetX = deskRect.left;
-   //       m_srcOffsetY = deskRect.top;
-   //    }
-   //
-   //    Screen::BMI bitFieldBmi;
-   //    Screen::Palette8bitBMI paletteBMI;
-   //    BITMAPINFO *pBmi = 0;
-   //
-   //    if (pf.bitsPerPixel == 8) {
-   //       pBmi = reinterpret_cast<BITMAPINFO *>(&paletteBMI);
-   //    } else {
-   //       pBmi = reinterpret_cast<BITMAPINFO *>(&bitFieldBmi);
-   //    }
-   //    setupBMIStruct(pBmi, pf, dim);
-   //
-   //    m_memDC = CreateCompatibleDC(m_targetDC);
-   //    if (m_memDC == NULL) {
-   //       throw SystemException("Can't create a compatible DC to open a dib section");
-   //    }
-   //
-   //    m_hbmDIB = CreateDIBSection(m_memDC, (BITMAPINFO *)pBmi, DIB_RGB_COLORS, &m_buffer, NULL, NULL);
-   //    if (m_hbmDIB == 0) {
-   //       throw SystemException("Can't create a dib section");
-   //    }
-   //
-   //    m_hbmOld = (HBITMAP)SelectObject(m_memDC, m_hbmDIB);
-   // }
+    void DibSection::_openDIBSection(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, HWND compatibleWin)
+    {
+       m_targetDC = GetDC(compatibleWin);
+       m_isOwnTargetDC = true;
+       if (m_targetDC == 0) {
+          throw ::subsystem::SystemException("Can't get DC to create a DIB section");
+       }
+       if (compatibleWin == 0) {
+          // In this special case is needed to store offset of the desktop, because coordinates
+          // of the top level corner may be non zero.
+          defer_constructø(m_pscreen);
+          m_pscreen->update();
+          ::int_rectangle deskRect = m_pscreen->getDesktopRect();
+          m_srcOffsetX = deskRect.left;
+          m_srcOffsetY = deskRect.top;
+       }
+   
+       ::subsystem_windows::Screen::BMI bitFieldBmi;
+       ::subsystem_windows::Screen::Palette8bitBMI paletteBMI;
+       BITMAPINFO *pBmi = 0;
+   
+       if (pf.bitsPerPixel == 8) {
+          pBmi = reinterpret_cast<BITMAPINFO *>(&paletteBMI);
+       } else {
+          pBmi = reinterpret_cast<BITMAPINFO *>(&bitFieldBmi);
+       }
+       _setupBMIStruct(pBmi, pf, dim);
+   
+       m_memDC = CreateCompatibleDC(m_targetDC);
+       if (m_memDC == NULL) {
+          throw ::subsystem::SystemException("Can't create a compatible DC to open a dib section");
+       }
+   
+       m_hbmDIB = CreateDIBSection(m_memDC, (BITMAPINFO *)pBmi, DIB_RGB_COLORS, &m_buffer, NULL, NULL);
+       if (m_hbmDIB == 0) {
+          throw ::subsystem::SystemException("Can't create a dib section");
+       }
+   
+       m_hbmOld = (HBITMAP)SelectObject(m_memDC, m_hbmDIB);
+    }
 
    void DibSection::closeDIBSection()
    {

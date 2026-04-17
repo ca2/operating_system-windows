@@ -112,7 +112,7 @@ void
 
    void Dialog::hide()
    {
-      setVisible(false);
+      Window::hide();
    }
 
    void Dialog::closeDialog(int code)

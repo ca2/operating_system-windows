@@ -300,8 +300,10 @@ namespace innate_subsystem_windows
 
    void Window::hide()
    {
-      _ASSERT(m_windowswindow.as_HWND() != 0);
-      ShowWindow(m_windowswindow.as_HWND(), SW_HIDE);
+      if (m_windowswindow.as_HWND() != 0)
+      {
+         ShowWindow(m_windowswindow.as_HWND(), SW_HIDE);
+      }
    }
 
    bool Window::setSize(const ::int_size & size)

@@ -59,7 +59,7 @@ namespace innate_subsystem_windows
 
       // This function changes the target DC. In default target DC is a DC that has been
       // got from a compatible window on object creation. This function can be call many times.
-      //void setTargetDC(HDC targetDC);
+      void setTargetDeviceContext(::innate_subsystem::DeviceContextInterface * pdevicecontext) override;
 
       virtual void *getBuffer() override;
 
@@ -90,7 +90,8 @@ namespace innate_subsystem_windows
    //private:
       // Opens a new DIB section.
       // If targetDC == 0 the function will use a current desktop DC.
-      //virtual void openDIBSection(const PixelFormat & pf, const ::int_size & dim, HWND compatibleWin) override;
+      virtual void _openDIBSection(const ::innate_subsystem::PixelFormat &pf, const ::int_size &dim,
+                                   HWND compatibleWin);
       virtual void closeDIBSection() override;
       virtual void releaseTargetDC() override;
 
@@ -101,15 +102,17 @@ namespace innate_subsystem_windows
       virtual void blitFromDibSection(const ::int_rectangle &  rect, unsigned int flags) override;
       virtual void stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & dstRect, unsigned int flags) override;
 
-      //void setupBMIStruct(BITMAPINFO *pBmi, const PixelFormat & pf, const ::int_size & dim);
+      void _setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim);
 
        bool m_isOwnTargetDC;
        ::pointer < ::innate_subsystem_windows::DeviceContext > m_pdevicecontextTarget;
       ::pointer < ::innate_subsystem_windows::DeviceContext > m_pdevicecontextMemory;
       ::pointer < ::innate_subsystem_windows::Bitmap > m_pbitmapDib;
       ::pointer < ::innate_subsystem::GraphicsObject > m_pgraphicsobjectDibOld;
-       //HBITMAP m_hbmOld;
-       //HBITMAP m_hbmDIB;
+       HBITMAP m_hbmOld;
+       HBITMAP m_hbmDIB;
+       HDC m_memDC;
+       HDC m_targetDC;
        // Coordinates of the source dc can be negative.
        int m_srcOffsetX;
        int m_srcOffsetY;

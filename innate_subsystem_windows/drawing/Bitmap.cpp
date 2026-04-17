@@ -56,7 +56,7 @@ namespace innate_subsystem_windows
    // }
 
    Bitmap::Bitmap() :
-   m_pbitmap(nullptr)
+   m_pbitmap(nullptr), m_hbitmap(nullptr)
    {
 
 
@@ -76,26 +76,28 @@ namespace innate_subsystem_windows
       destroyGraphicsObject();
       // //;mm_bitmap(NULL)
       // // Prepare buffer
-      // int bpp = 32;
-      // size_t s = size.area() * (bpp / 8);
-      // ::memory bits;
-      // bits.set_size(s);
-      // if (size > 0)
-      // {
-      //    memset(bits.data(), 0, bits.size());
-      //    // Create bitmap handle
-      //    m_hbitmap = CreateBitmap(size.cx, size.cy, 1, bpp, bits.data());
-      // }
-      //
-      m_pbitmap= new  Gdiplus::Bitmap(size.cx, size.cy, PixelFormat32bppARGB);
+       int bpp = 32;
+       size_t s = size.area() * (bpp / 8);
+       ::memory bits;
+       bits.set_size(s);
+       if (size > 0)
+       {
+          memset(bits.data(), 0, bits.size());
+          // Create bitmap handle
+          m_hbitmap = CreateBitmap(size.cx, size.cy, 1, bpp, bits.data());
+       }
+      
+      //m_pbitmap= new  Gdiplus::Bitmap(size.cx, size.cy, PixelFormat32bppARGB);
+       m_pbitmap = new Gdiplus::Bitmap(m_hbitmap, nullptr);
    }
 
    void Bitmap::initialize_bitmap(::innate_subsystem::DeviceContextInterface * pdevicecontext, const ::int_size & size)
    {
       destroyGraphicsObject();
       auto pdevicecontextWin32 = pdevicecontext->impl<::innate_subsystem_windows::DeviceContext>();
-      //m_hbitmap = CreateCompatibleBitmap(pdevicecontextWin32->m_hdc, size.cx, size.cy);
-      m_pbitmap = new Gdiplus::Bitmap(size.cx, size.cy, pdevicecontextWin32->m_pgraphics);
+      m_hbitmap = CreateCompatibleBitmap(pdevicecontextWin32->m_hdc2, size.cx, size.cy);
+      //m_pbitmap = new Gdiplus::Bitmap(size.cx, size.cy, pdevicecontextWin32->m_pgraphics);
+      m_pbitmap = new Gdiplus::Bitmap(m_hbitmap, nullptr);
    }
 
    void Bitmap::initialize_bitmap(::innate_subsystem::BitmapInterface * pbitmap)
@@ -105,10 +107,13 @@ namespace innate_subsystem_windows
       destroyGraphicsObject();
       auto ppbitmapWin32 = pbitmap->impl<::innate_subsystem_windows::DeviceContext>();
       auto pbitmapWin32 = pbitmap->impl < ::innate_subsystem_windows::Bitmap>();
-      //m_hbitmap = pbitmapWin32->m_hbitmap;
-      m_pbitmap = pbitmapWin32->m_pbitmap->Clone(0, 0,
-         pbitmapWin32->m_pbitmap->GetWidth(), pbitmapWin32->m_pbitmap->GetHeight(),
-         PixelFormat32bppARGB);
+      m_hbitmap = pbitmapWin32->m_hbitmap;
+      m_pbitmap = new Gdiplus::Bitmap(m_hbitmap, nullptr);
+      // pbitmapWin32->m_pbitmap->GetWidth(), pbitmapWin32->m_pbitmap->GetHeight(),
+      // PixelFormat32bppARGB);
+      //m_pbitmap = pbitmapWin32->m_pbitmap->Clone(0, 0,
+        // pbitmapWin32->m_pbitmap->GetWidth(), pbitmapWin32->m_pbitmap->GetHeight(),
+         //PixelFormat32bppARGB);
 
    }
 

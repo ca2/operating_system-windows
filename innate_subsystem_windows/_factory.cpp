@@ -7,6 +7,7 @@
 #include "drawing/Icon.h"
 #include "drawing/Pen.h"
 #include "drawing/SolidBrush.h"
+#include "framebuffer/DibSection.h"
 #include "gui/SystemMetrics.h"
 #include "gui/Window.h"
 #include "gui/Control.h"
@@ -72,6 +73,8 @@ IMPLEMENT_FACTORY(innate_subsystem_windows)
    pfactory->add_factory_item<::innate_subsystem_windows::Pen, ::innate_subsystem::PenInterface>();
 
    pfactory->add_factory_item<::innate_subsystem_windows::SolidBrush, ::innate_subsystem::SolidBrushInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::DibSection, ::innate_subsystem::DibSectionInterface>();
 
    pfactory->add_factory_item<::innate_subsystem_windows::PaintWindow, ::innate_subsystem::PaintWindowInterface>();
 
