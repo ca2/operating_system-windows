@@ -93,6 +93,8 @@ namespace innate_subsystem_windows
        releaseTargetDC();
        m_isOwnTargetDC = false;
        m_pdevicecontextTarget = pdevicecontextTarget;
+       m_targetDC = m_pdevicecontextTarget->m_hdc2;
+       ASSERT(m_targetDC != nullptr);
     }
 
    void *DibSection::getBuffer()
@@ -129,34 +131,35 @@ namespace innate_subsystem_windows
    void DibSection::blitToDibSection(const ::int_rectangle &  rect, unsigned int flags)
    {
       // m_pparticleThis->blitToDibSection(rect, flags);
-      //  if (BitBlt(m_memDC, rect.left, rect.top, rect.width(), rect.height(),
-      //             m_targetDC, rect.left + m_srcOffsetX,
-      //             rect.top + m_srcOffsetY, flags) == 0) {
-      // //    throw ::subsystem::Exception("Can't blit to DIB section.");
-      // //            }
+        if (BitBlt(m_memDC, rect.left, rect.top, rect.width(), rect.height(),
+                   m_targetDC, rect.left + m_srcOffsetX,
+                   rect.top + m_srcOffsetY, flags) == 0) {
+          throw ::subsystem::Exception("Can't blit to DIB section.");
+                  }
    }
 
    void DibSection::blitFromDibSection(const ::int_rectangle &  rect, unsigned int flags)
    {
       // m_pparticleThis->blitFromDibSection(rect, flags);
-      // // if (BitBlt(m_targetDC, rect.left + m_srcOffsetX, rect.top + m_srcOffsetY,
-      // //            rect.width(), rect.height(),
-      // //            m_memDC, rect.left, rect.top, flags) == 0) {
-      // //    throw ::subsystem::Exception("Can't blit from DIB section.");
-      // //            }
+       if (BitBlt(m_targetDC, rect.left + m_srcOffsetX, rect.top + m_srcOffsetY,
+                  rect.width(), rect.height(),
+                 m_memDC, rect.left, rect.top, flags) == 0) {
+          throw ::subsystem::Exception("Can't blit from DIB section.");
+                 }
    }
 
    void DibSection::stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & dstRect, unsigned int flags)
    {
       // m_pparticleThis->stretchFromDibSection(srcRect, dstRect, flags);
-      // //    SetStretchBltMode(m_targetDC, HALFTONE);
-      // //    if (StretchBlt(m_targetDC, srcRect.left + m_srcOffsetX, srcRect.top + m_srcOffsetY,
-      // //                   srcRect.width(), srcRect.height(),
-      // //                   m_memDC, dstRect.left, dstRect.top, dstRect.width(), dstRect.height(),
-      // //                   flags) == 0) {
-      // //       throw ::subsystem::Exception("Can't strech blit from DIB section.");
-      // //                   }
-      // // }
+           SetStretchBltMode(m_targetDC, HALFTONE);
+           if (StretchBlt(m_targetDC, srcRect.left + m_srcOffsetX, srcRect.top + m_srcOffsetY,
+                          srcRect.width(), srcRect.height(),
+                          m_memDC, dstRect.left, dstRect.top, dstRect.width(), dstRect.height(),
+                          flags) == 0) 
+           {
+              throw ::subsystem::Exception("Can't strech blit from DIB section.");
+                          }
+        //}
    }
    
     void DibSection::_setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim)
@@ -237,31 +240,31 @@ namespace innate_subsystem_windows
    void DibSection::closeDIBSection()
    {
       //m_pparticleThis->closeDIBSection();
-      // if (m_hbmOld != 0) {
-      //    SelectObject(m_memDC, m_hbmOld);
-      //    m_hbmOld = 0;
-      // }
-      //
-      // if (m_hbmDIB != 0) {
-      //    DeleteObject(m_hbmDIB);
-      //    m_hbmDIB = 0;
-      // }
-      //
-      // if (m_memDC != 0) {
-      //    DeleteDC(m_memDC);
-      //    m_memDC = 0;
-      // }
-      //
-      // releaseTargetDC();
+       if (m_hbmOld != 0) {
+          SelectObject(m_memDC, m_hbmOld);
+          m_hbmOld = 0;
+       }
+      
+       if (m_hbmDIB != 0) {
+          DeleteObject(m_hbmDIB);
+          m_hbmDIB = 0;
+       }
+      
+       if (m_memDC != 0) {
+          DeleteDC(m_memDC);
+          m_memDC = 0;
+       }
+      
+       releaseTargetDC();
    }
 
    void DibSection::releaseTargetDC()
    {
       //m_pparticleThis->releaseTargetDC();
-      // if (m_targetDC != 0 && m_isOwnTargetDC) {
-      //    ReleaseDC(0, m_targetDC);
-      //    m_targetDC = 0;
-      // }
+       if (m_targetDC != 0 && m_isOwnTargetDC) {
+          ReleaseDC(0, m_targetDC);
+          m_targetDC = 0;
+       }
    }
 } // namespace innate_subsystem_windows
 

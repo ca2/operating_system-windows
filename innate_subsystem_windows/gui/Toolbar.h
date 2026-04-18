@@ -24,13 +24,14 @@
 
 #include "innate_subsystem/gui/Toolbar.h"
 #include "innate_subsystem_windows/_common_header.h"
+#include "innate_subsystem_windows/gui/Control.h"
 
 #include <commctrl.h>
 
 namespace innate_subsystem_windows
 {
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Toolbar :
-virtual public window_implementation<innate_subsystem::ToolbarInterface, Window>
+virtual public window_implementation<innate_subsystem::ToolbarInterface, Control>
    {
    public:
       Toolbar();
@@ -144,7 +145,7 @@ virtual public window_implementation<innate_subsystem::ToolbarInterface, Window>
       int m_numberTB;
       DWORD m_id;
       int m_width, m_height;
-      HWND m_hWndToolbar;
+      //HWND m_hWndToolbar;
 
       iptr_to_iptr m_autoButtons;
    };

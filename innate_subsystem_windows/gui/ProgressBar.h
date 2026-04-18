@@ -28,12 +28,13 @@
 
 #include "innate_subsystem/gui/ProgressBar.h"
 #include "innate_subsystem_windows/_common_header.h"
+#include "innate_subsystem_windows/gui/Control.h"
 
 namespace innate_subsystem_windows
 {
     class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ProgressBar :
 
-   virtual public  window_implementation<innate_subsystem::ProgressBarInterface >
+   virtual public  window_implementation<innate_subsystem::ProgressBarInterface, Control >
     {
     public:
         ProgressBar();

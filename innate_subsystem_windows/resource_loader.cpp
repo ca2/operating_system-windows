@@ -158,7 +158,7 @@ namespace innate_subsystem_windows
    //
    void * resource_loader::loadAccelerator(unsigned int id)
    {
-      return (void *) (HACCEL) ::LoadAcceleratorsW((HINSTANCE) main_subsystem()->m_hinstanceResource, (LPCWSTR) MAKEINTRESOURCEW(id));
+      return (void *) (HACCEL) ::LoadAcceleratorsW((HINSTANCE) system()->m_hinstanceMain, (LPCWSTR) MAKEINTRESOURCEW(id));
 
    //      MAKEINTRESOURCE(id));
       //throw ::interface_only();

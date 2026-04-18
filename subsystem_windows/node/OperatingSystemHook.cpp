@@ -58,7 +58,7 @@ namespace subsystem_windows
 
          ::lresult lresult = 0;
 
-         if (!s_poperatingsystemhook->lowLevelKeyboardHook(lresult, nCode, wParam, lParam))
+         if (s_poperatingsystemhook->lowLevelKeyboardHook(lresult, nCode, wParam, lParam))
          {
             return lresult;
          }
@@ -193,7 +193,7 @@ namespace subsystem_windows
          }
 
 
-         m_listenera.add_unique(phooklistener);
+         m_listenera.erase(phooklistener);
 
          if (m_listenera.is_empty())
          {

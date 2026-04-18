@@ -80,10 +80,11 @@ return m_pdevicecontext;
 
    }
 
+
    void Graphics::initialize_graphics(innate_subsystem::BitmapInterface * pbitmap)
    {
 
-      constructø(m_pdevicecontext);
+      construct_newø(m_pdevicecontext);
 
       m_pdevicecontext->initialize_device_context(pbitmap);
 

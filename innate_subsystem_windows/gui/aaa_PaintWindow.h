@@ -59,6 +59,8 @@ namespace innate_subsystem_windows
       //HDC m_hdc;
       ::pointer < ::innate_subsystem_windows::DeviceContext > m_pdevicecontext;
 
+      bool on_window_procedure(::lresult &lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
+
    };
 
 

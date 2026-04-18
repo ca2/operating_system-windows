@@ -45,6 +45,7 @@ namespace innate_subsystem_windows
       m_bWndCreated(false),
    m_sizeIsChanged(false)
    {
+      m_ecursor = e_cursor_unmodified;
    }
 
    Window::~Window()
@@ -109,6 +110,9 @@ namespace innate_subsystem_windows
       m_bHasClipboardViewerInterest = true;
 
    }
+
+
+   void Window::setOnDrawInterest() { m_bHasOnDrawInterest = true; }
 
 
    bool Window::onDrawClipboard()
@@ -261,18 +265,23 @@ namespace innate_subsystem_windows
    }
 
 
-   void Window::setShowCursor(bool bShowCursor)
+   void Window::setCursor(enum_cursor ecursor)
    {
 
-      m_bShowCursor = bShowCursor;
+      if (is_different(ecursor, m_ecursor))
+      {
+
+         m_ecursor = ecursor;
+
+      }
 
    }
 
 
-   bool Window::shouldShowCursor()
+   enum_cursor Window::getCursor()
    {
 
-      return m_bShowCursor;
+      return m_ecursor;
 
    }
 
@@ -331,14 +340,21 @@ namespace innate_subsystem_windows
 
    void Window::setParent(::innate_subsystem::WindowInterface * pwindow)
    {
-      _ASSERT(m_windowswindow.as_HWND() != 0);
-      if (::is_null(pwindow))
-         SetParent(m_windowswindow.as_HWND(), nullptr);
-      else
-      {
-         auto hwndParent = (HWND) pwindow->_HWND();
-         SetParent(m_windowswindow.as_HWND(), hwndParent);
+       if (m_windowswindow.as_HWND() == nullptr)
+       {
+
+           m_pwindowDeferredParent = pwindow;
       }
+       else
+       {
+          if (::is_null(pwindow))
+             SetParent(m_windowswindow.as_HWND(), nullptr);
+          else
+          {
+             auto hwndParent = (HWND)pwindow->_HWND();
+             SetParent(m_windowswindow.as_HWND(), hwndParent);
+          }
+       }
    }
 
 
@@ -523,8 +539,27 @@ namespace innate_subsystem_windows
       KillTimer(m_windowswindow.as_HWND(), ident);
    }
 
-   bool Window::onCommand(unsigned int controlID, unsigned int notificationID)
+   bool Window::_onWmCommand(::wparam wparam, ::lparam lparam)
    {
+
+      return onCommand(LOWORD(wparam), HIWORD(wparam), lparam);
+     
+
+   }
+
+   bool Window::onCommand(unsigned int controlID, bool bAccelerator, unsigned int notificationID)
+   {
+       if (m_pwindowCallback)
+       {
+
+           if (m_pwindowCallback->onCommand(controlID, bAccelerator, notificationID))
+           {
+
+               return true;
+
+           }
+
+      }
       return false;
    }
 
@@ -540,6 +575,19 @@ namespace innate_subsystem_windows
 
    bool Window::onMessage(unsigned int message, ::wparam wparam, ::lparam lparam)
    {
+
+       if (m_pwindowCallback)
+       {
+
+           if (m_pwindowCallback->onMessage(message, wparam, lparam))
+           {
+
+               return true;
+
+           }
+
+       }
+
       return false;
    }
 
@@ -590,8 +638,32 @@ namespace innate_subsystem_windows
       }
    }
 
-   bool Window::onMouse(unsigned char msg, unsigned short wspeed, const ::int_point & point)
+   bool Window::onMouseEx(unsigned int uMessage, int mouseButtons, unsigned short wspeed, const ::int_point &point,
+                          bool &bDoDefaultProcessing)
    {
+      if (m_pwindowCallback)
+      {
+         if (m_pwindowCallback->onMouseEx(uMessage,  mouseButtons, wspeed, point, bDoDefaultProcessing))
+         {
+
+            return true;
+         }
+      }
+      return false;
+   }
+
+   bool Window::onMouse(unsigned char mouseButtons, unsigned short wspeed, const ::int_point &point)
+   {
+       if (m_pwindowCallback)
+       {
+          if (m_pwindowCallback->onMouse(mouseButtons, wspeed, point))
+           {
+
+               return true;
+
+          }
+
+       }
       return false;
    }
 
@@ -883,7 +955,7 @@ namespace innate_subsystem_windows
             return;
         }
 
-      onBeforeFullScreen(true);
+      onBeforeUnFullScreen(true);
         // m_pconnectionconfig->enableFullscreen(false);
         // m_pconnectionconfig->saveToStorage(&m_ccsm);
 
@@ -1068,12 +1140,14 @@ namespace innate_subsystem_windows
       m_hbitmapOld = (HBITMAP)SelectObject(m_hdcBuffer, m_hbitmapBuffer);
 
       // 1️⃣ Create memory DC
-      defer_constructø(m_pbitmapBuffer);
+      defer_construct_newø(m_pbitmapBuffer);
       m_pbitmapBuffer->_initialize_bitmap(m_hbitmapBuffer, nullptr);
 
-      defer_constructø(m_pdevicecontextBuffer);
+      defer_construct_newø(m_pdevicecontextBuffer);
       m_pdevicecontextBuffer->initialize_device_context(m_pbitmapBuffer);
-
+      auto p = m_pdevicecontextBuffer->impl<::innate_subsystem_windows::DeviceContext>();
+      p->m_hdc2 = m_hdcBuffer;
+      p->m_pgraphics = new Gdiplus::Graphics(p->m_hdc2);
       // 3️⃣ Clear buffer (transparent black)
     //  ZeroMemory(pBits, m_sizeBuffer.area() * 4);
    }
@@ -1088,9 +1162,15 @@ namespace innate_subsystem_windows
    }
 
    // void DesktopWindow::onPaint(DeviceContext *dc, PAINTSTRUCT *paintStruct)
-   void Window::doPaint()
+   void Window::_doPaint(HDC hdc)
    {
 
+      //m_bIsDraw = true;
+      //DeviceContext dc(this);
+      //onPaint(&dc, &m_paintStruct);
+      //EndPaint(m_hWnd, &m_paintStruct);
+      //m_bIsDraw = false;
+      //return true;
       ::int_rectangle paintRect(m_paintStruct.rcPaint);
 
 
@@ -1109,6 +1189,8 @@ namespace innate_subsystem_windows
          return;
       }
 
+      m_clientArea = getClientRect();
+
       if (m_clientArea.is_empty())
       {
          return;
@@ -1118,17 +1200,30 @@ namespace innate_subsystem_windows
       _defer_update_double_buffering();
 
 
-      //onDraw(m_hdcBuffer, m_paintStruct.rcPaint);
+      if (m_pdevicecontextBuffer)
+      {
+         // onDraw(m_hdcBuffer, m_paintStruct.rcPaint);
 
-      ::int_rectangle r;
+         ::int_rectangle r;
 
-      copy(r, m_paintStruct.rcPaint);
+         copy(r, m_paintStruct.rcPaint);
 
-      ::innate_subsystem_windows::Graphics g;
+         ::innate_subsystem_windows::Graphics g;
 
-      g.m_pdevicecontext = m_pdevicecontextBuffer;
+         // defer_construct_newø(m_pdevicecontextBuffer);
 
-      onDraw(&g, r);
+         g.initialize_graphics(m_pdevicecontextBuffer);
+
+
+         // g.m_pdevicecontext->_attachHDC(hdc);
+
+
+         onDraw(&g, r);
+
+         // g.m_pdevicecontext->_attachHDC(nullptr);
+
+         g.m_pdevicecontext = nullptr;
+      }
 
       ::BitBlt(
          m_paintStruct.hdc,
@@ -1140,7 +1235,7 @@ namespace innate_subsystem_windows
          m_paintStruct.rcPaint.left,
          m_paintStruct.rcPaint.top,
          SRCCOPY);
-
+      
    }
 
 
@@ -1186,7 +1281,7 @@ namespace innate_subsystem_windows
             }
 
             lresult = 0;
-
+            //return true;
          }
             break;
          case WM_CHANGECBCHAIN:
@@ -1214,6 +1309,34 @@ namespace innate_subsystem_windows
             }
          }
 break;
+         case WM_PAINT:
+         {
+
+             if (m_bHasOnDrawInterest)
+             {
+
+                auto hwnd = ::as_HWND(operating_system_window());
+                
+                auto hdc = BeginPaint(hwnd, &m_paintStruct);
+                
+                m_bIsDraw = true;
+                // DeviceContext dc(this);
+                
+                //::int_rectangle r;
+                
+                //copy(r, m_paintStruct.rcPaint);
+                
+                _doPaint(hdc);
+
+                EndPaint(hwnd, &m_paintStruct);
+
+                m_bIsDraw = false;
+                lresult = 0;
+                return true;
+             }
+
+         }
+         break;
       case WM_GETDLGCODE:
          {
 
@@ -1240,18 +1363,40 @@ break;
          }
             case WM_SETCURSOR:
                 //if (m_bShowCursor || m_timeStartDesktopWindow.elapsed() < 8_s)
-               if (m_bShowCursor)
+                if (m_ecursor == e_cursor_arrow)
                 {
-                    ::SetCursor(LoadCursor(nullptr, IDC_ARROW));
-                }
-                else
-                {
-                    ::SetCursor(nullptr);
-                }
-                return true;
+                    
+                    if (!m_hcursorArrow)
+                    {
+                    
+                        m_hcursorArrow = LoadCursor(nullptr, IDC_ARROW);
 
+                    }
+
+                    ::SetCursor(m_hcursorArrow);
+
+                    lresult = 1;
+
+                    return true;
+
+                }
+                else if (m_ecursor == e_cursor_none)
+                {
+
+                    ::SetCursor(nullptr);
+
+                    lresult = 1;
+
+                    return true;
+
+                }
+
+                lresult = 0;
+
+                break;
       case WM_COMMAND:
-         return onCommand(wparam, lparam);
+        return  _onWmCommand(wparam, lparam);
+         
       case WM_NOTIFY:
       {
 
@@ -1284,6 +1429,9 @@ break;
       }
       case WM_SYSCOMMAND:
          return onSysCommand(wparam, lparam);
+      case WM_SIZE:
+         onSize();
+         return false;
       case WM_REFLECT_NOTIFY_EX:
          {
 
@@ -1319,7 +1467,8 @@ break;
          point.y = points.y;
 
          unsigned short wheelSpeed = 0;
-         if (message == WM_MOUSEWHEEL) {
+         if (message == WM_MOUSEWHEEL) 
+         {
             // Get speed wheel and set mouse button.
             signed short wheelSignedSpeed = static_cast<signed short>(HIWORD(wparam));
             if (wheelSignedSpeed < 0) {
@@ -1345,6 +1494,15 @@ break;
                p.y = -1;
             }
             ::copy(point, p);
+         }
+
+         bool bDoDefaultProcessing = false;
+
+         if (onMouseEx(message, mouseButtons, wheelSpeed, point, bDoDefaultProcessing))
+         {
+
+             return !bDoDefaultProcessing;
+
          }
 
          // Notify window about mouse-event.

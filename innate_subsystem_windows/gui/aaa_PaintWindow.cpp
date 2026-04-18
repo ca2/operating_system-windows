@@ -50,19 +50,22 @@ namespace innate_subsystem_windows
       m_ppaintwindowCallback->onPaint(pdevicecontext, rectangle);
       }
 
+      bool PaintWindow::on_window_procedure(::lresult &lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
       // bool PaintWindow::wndProc(unsigned int message, ::wparam wparam, ::lparam lparam)
-      // {
-      //    if (message == WM_PAINT) {
-      //       construct_newø(m_pdevicecontext);
-      //       auto hwnd = ::as_HWND(operating_system_window());
-      //       m_pdevicecontext->m_hdc = BeginPaint(hwnd, &m_paintStruct);
-      //       m_bIsDraw = true;
-      //       //DeviceContext dc(this);
-      //       onPaint(m_pdevicecontext, &m_paintStruct);
-      //       EndPaint(hwnd, &m_paintStruct);
-      //       m_bIsDraw = false;
-      //       return true;
-      //    }
-      //    return Window::wndProc(message, wparam, lparam);
-      // }
+       {
+          if (message == WM_PAINT) {
+             construct_newø(m_pdevicecontext);
+             auto hwnd = ::as_HWND(operating_system_window());
+             m_pdevicecontext->m_hdc2 = BeginPaint(hwnd, &m_paintStruct);
+             m_bIsDraw = true;
+             //DeviceContext dc(this);
+             ::int_rectangle r;
+             copy(r, m_paintStruct.rcPaint);
+             onPaint(m_pdevicecontext, r);
+             EndPaint(hwnd, &m_paintStruct);
+             m_bIsDraw = false;
+             return true;
+          }
+          return Window::on_window_procedure(lresult, message, wparam, lparam);
+       }
    } // namespace innate_subsystem_windows

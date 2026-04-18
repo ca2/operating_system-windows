@@ -27,7 +27,7 @@
 #include "DeviceContext.h"
 
 #include "Bitmap.h"
-#include "../gui/PaintWindow.h"
+//#include "../gui/PaintWindow.h"
 #include "innate_subsystem/drawing/GraphicsObject.h"
 
 
@@ -134,7 +134,7 @@ namespace innate_subsystem_windows
    {
       destroyDeviceContext();
       m_bHasOwnDC = true;
-      ::cast < ::innate_subsystem_windows::DeviceContext > pdevicecontextWin32 = pdevicecontext;
+      auto pdevicecontextWin32 = pdevicecontext->impl<DeviceContext>();
       m_hwnd = nullptr;
       m_hdc2 = ::CreateCompatibleDC(pdevicecontextWin32->m_hdc2);
       m_pgraphics = new ::Gdiplus::Graphics(m_hdc2);
@@ -161,40 +161,52 @@ namespace innate_subsystem_windows
       m_pgraphics = new ::Gdiplus::Graphics(m_hdc2);
    }
 
-   void DeviceContext::_attach_HDC(HDC hdc)
+   void DeviceContext::_attachHDC(void * pHDC)
    {
+      HDC hdc = (HDC)pHDC;
       destroyDeviceContext();
       m_bHasOwnDC = false;
       m_hwnd = nullptr;
-      m_hdc2 = hdc;
-      m_pgraphics = new ::Gdiplus::Graphics(m_hdc2);
+      if (hdc != nullptr)
+      {
+         m_hdc2 = hdc;
+         m_pgraphics = new ::Gdiplus::Graphics(m_hdc2);
+      }
+      else
+      {
+         m_hdc2 = nullptr;
+         m_pgraphics = nullptr;
+
+
+      }
    }
 
-   void DeviceContext::initialize_device_context(innate_subsystem::PaintWindowInterface* ppaintwindow)
-   {
-      destroyDeviceContext();
-      m_bHasOwnDC = true;
-      auto pdevicecontextPaint = ppaintwindow->getPaintDeviceContext();
-      auto pdevicecontextWin32 = pdevicecontextPaint-> impl<::innate_subsystem_windows::DeviceContext >() ;
-      m_hdc2 = ::CreateCompatibleDC(pdevicecontextWin32->m_hdc2);
-      m_pgraphics = new ::Gdiplus::Graphics(m_hdc2);
-   }
+   //void DeviceContext::initialize_device_context(innate_subsystem::PaintWindowInterface* ppaintwindow)
+   //{
+   //   destroyDeviceContext();
+   //   m_bHasOwnDC = true;
+   //   auto pdevicecontextPaint = ppaintwindow->getPaintDeviceContext();
+   //   auto pdevicecontextWin32 = pdevicecontextPaint-> impl<::innate_subsystem_windows::DeviceContext >() ;
+   //   m_hdc2 = ::CreateCompatibleDC(pdevicecontextWin32->m_hdc2);
+   //   m_pgraphics = new ::Gdiplus::Graphics(m_hdc2);
+   //}
 
    // HGDIOBJ DeviceContext::_selectObject2(HGDIOBJ object)
    // {
    //    return SelectObject(m_hdc, object);
    // }
    //
-   // ::pointer < ::innate_subsystem::GraphicsObject>DeviceContext::selectObject(::innate_subsystem::GraphicsObject * pgraphicsobjectNew)
-   // {
+    ::pointer < ::innate_subsystem::GraphicsObject>DeviceContext::selectObject(::innate_subsystem::GraphicsObject * pgraphicsobjectNew)
+    {
+   
+       //auto pgraphicsobjectOld = create_newø < ::innate_subsystem_windows::CarrierGraphicsObject >();
+//   
+  //     pgraphicsobjectOld->m_hgdiobj = _selectObject2((HGDIOBJ) pgraphicsobjectNew->_HGDIOBJ());
    //
-   //    auto pgraphicsobjectOld = create_newø < ::innate_subsystem_windows::CarrierGraphicsObject >();
-   //
-   //    pgraphicsobjectOld->m_hgdiobj = _selectObject2((HGDIOBJ) pgraphicsobjectNew->_HGDIOBJ());
-   //
-   //    return pgraphicsobjectOld;
-   //
-   // }
+     //  return pgraphicsobjectOld;
+       return nullptr;
+   
+    }
 
 } // namespace innate_subsystem_windows
 

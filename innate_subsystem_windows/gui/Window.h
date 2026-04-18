@@ -104,11 +104,14 @@ namespace innate_subsystem_windows
       HICON          m_hicon;
       bool           m_bWndCreated;
       //WNDPROC        m_wndprocDefault;
+      ::pointer<::innate_subsystem::WindowInterface> m_pwindowDeferredParent;
       bool m_sizeIsChanged;
       ::string m_strTooltip;
+      HCURSOR m_hcursorArrow = nullptr;
       ::wstring m_wstrToolTip;
-      bool           m_bShowCursor;
+      enum_cursor       m_ecursor;
       bool m_bHasClipboardViewerInterest = false;
+      bool m_bHasOnDrawInterest = false;
       HWND m_hwndNextViewer = nullptr;
       bool m_bDoubleBuffering = false;
       bool m_bMinimized = false;
@@ -176,6 +179,7 @@ namespace innate_subsystem_windows
 
 
       void setClipboardViewerInterest() override;
+      void setOnDrawInterest() override;
       bool onDrawClipboard() override;
       // setClass()
       // Set a class name only to the new window created by createWindow
@@ -183,8 +187,8 @@ namespace innate_subsystem_windows
       void setClass(::innate_subsystem::enum_window_class ewindowclass) override;
 
 
-      void setShowCursor(bool bShowCursor) override;
-      bool shouldShowCursor() override;
+      void setCursor(enum_cursor ecursor) override;
+      enum_cursor getCursor() override;
 
       void setDoubleBuffering(bool bDoubleBuffering) override;
       bool isDoubleBuffering() override;
@@ -337,9 +341,12 @@ namespace innate_subsystem_windows
       // private:
       // This function may be implement in child class.
       // Here is stub function, always returned false.
-      virtual bool onCommand(unsigned int controlID, unsigned int notificationID) override;
+      virtual bool _onWmCommand(::wparam wparam, ::lparam lparam);
+      virtual bool onCommand(unsigned int controlID, bool bAccelerator, unsigned int notificationID) override;
       virtual bool onSysCommand(::wparam wparam, ::lparam lparam) override;
       virtual bool onMessage(unsigned int message, ::wparam wparam, ::lparam lparam) override;
+      virtual bool onMouseEx(unsigned int uMessage, int iButtonMask, unsigned short wheelSpeed,
+                             const ::int_point &point, bool &bDoDefaultProcessing) override;
       virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, const ::int_point & position) override;
 
       virtual bool onCreate(void * pCreateStruct) override;
@@ -353,7 +360,7 @@ namespace innate_subsystem_windows
       void onDraw(::innate_subsystem::GraphicsInterface * pgraphics, const ::int_rectangle & rectangle) override;
 
 
-      virtual void doPaint();
+      virtual void _doPaint(HDC hdc);
       void onBeforeFullScreen(bool bRestore) override;
       void onAfterFullScreen(bool bRestore) override;
       void onBeforeUnFullScreen(bool bMinimizing) override;

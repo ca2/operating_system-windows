@@ -131,8 +131,10 @@ void
    {
       HWND window, parentWindow = NULL;
 
-      if (m_pcontrolParent != NULL) {
-         parentWindow = ::as_HWND(m_pcontrolParent->operating_system_window());
+      auto pwindow = this->impl<Window>();
+
+      if (pwindow->m_pwindowDeferredParent != NULL) {
+         parentWindow = ::as_HWND(pwindow->m_pwindowDeferredParent->operating_system_window());
       }
 
       //window = CreateDialogParam(GetModuleHandle(NULL), (LPCWSTR) getResouceName(),
@@ -149,10 +151,14 @@ void
       int result = 0;
       if (m_hwnd == NULL) {
          m_isModal = true;
-         HWND parentWindow = (m_pcontrolParent != NULL) ?(HWND)m_pcontrolParent->_HWND() : (HWND) nullptr;
+         auto pwindow = this->impl<Window>();
+
+         HWND parentWindow = (pwindow->m_pwindowDeferredParent != NULL)
+                                ? (HWND)pwindow->m_pwindowDeferredParent->_HWND()
+                                : (HWND) nullptr;
          //result = (int)DialogBoxParam(GetModuleHandle(NULL),
          result = (int)DialogBoxParam((HINSTANCE) system()->m_hinstanceMain,
-                                      ::wstring(getResouceName()), parentWindow,
+                                      (LPCWSTR) getResouceName(), parentWindow,
                                       dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
       } else {
          setVisible(true);
@@ -233,7 +239,7 @@ void
          }
             break;
          case WM_COMMAND:
-            bResult =_this->onCommand(LOWORD(wparam), HIWORD(wparam));
+               bResult = _this->onCommand(LOWORD(wparam), HIWORD(wparam), lparam);
             break;
          case WM_CLOSE:
             bResult = _this->onClose();
@@ -296,9 +302,9 @@ void
    //    return FALSE;
    // }
 
-   bool Dialog::onCommand(unsigned int controlID, unsigned int notificationID)
+   bool Dialog::onCommand(unsigned int controlID, bool bAccelerator, unsigned int notificationID)
    {
-      return m_pwindowCallback->onCommand(controlID, notificationID);
+      return m_pwindowCallback->onCommand(controlID, bAccelerator, notificationID);
       //return FALSE;
    }
 

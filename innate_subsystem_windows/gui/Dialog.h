@@ -129,7 +129,7 @@ namespace innate_subsystem_windows
       //bool onNotify(unsigned int controlID, ::lparam data) override;
 
 
-      bool onCommand(unsigned int controlID, unsigned int notificationID) override;
+      bool onCommand(unsigned int controlID, bool bAccelerator, unsigned int notificationID) override;
 
 
       bool onClose() override;
@@ -172,7 +172,7 @@ namespace innate_subsystem_windows
       char *m_resourceName; // Name of dialog resource
       DWORD m_resourceId; // Id of dialog resouce
       //Control m_ctrlThis;           // This dialog control
-      ::pointer<::innate_subsystem_windows::Control> m_pcontrolParent; // Parent dialog or NULL if no parent
+      //::pointer<::innate_subsystem_windows::Control> m_pcontrolParent; // Parent dialog or NULL if no parent
 
       bool m_isModal;
       bool m_isCreated;

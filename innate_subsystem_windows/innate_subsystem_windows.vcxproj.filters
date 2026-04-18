@@ -80,9 +80,6 @@
     <ClCompile Include="gui\NotifyIconWindow.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
-    <ClCompile Include="gui\PaintWindow.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
     <ClCompile Include="gui\ProgressBar.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
@@ -170,6 +167,9 @@
     <ClCompile Include="framebuffer\DibSection.cpp">
       <Filter>Source Files\framebuffer</Filter>
     </ClCompile>
+    <ClCompile Include="gui\KeyboardLayout.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
@@ -228,7 +228,7 @@
     <ClInclude Include="gui\NotifyIconWindow.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="gui\PaintWindow.h">
+    <ClInclude Include="gui\aaa_PaintWindow.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\ProgressBar.h">
@@ -286,6 +286,9 @@
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\WindowProcHolder.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\KeyboardLayout.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
   </ItemGroup>

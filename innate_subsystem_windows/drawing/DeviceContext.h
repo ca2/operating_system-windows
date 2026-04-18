@@ -61,14 +61,14 @@ namespace innate_subsystem_windows
       void initialize_device_context(DeviceContextInterface* compatibleDevice) override;
       virtual void initialize_device_context(::innate_subsystem::BitmapInterface * pbitmap);
       virtual void _initialize_device_context(HDC hdc);
-      virtual void _attach_HDC(HDC hdc);
+      void _attachHDC(void * pHDC) override;
       //private:
       // Initialize class from PaintWindow
-      void initialize_device_context(innate_subsystem::PaintWindowInterface* pntWnd) override;
+      //void initialize_device_context(innate_subsystem::PaintWindowInterface* pntWnd) override;
       //protected:
       // Selects an object into this device context.
       //virtual HGDIOBJ _selectObject2(HGDIOBJ object);
-//::pointer < ::innate_subsystem::GraphicsObject>selectObject(::innate_subsystem::GraphicsObject * pgraphicsobjectNew);
+::pointer < ::innate_subsystem::GraphicsObject>selectObject(::innate_subsystem::GraphicsObject * pgraphicsobjectNew)override;
 
       void destroyDeviceContext() override;
 
