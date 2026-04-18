@@ -57,7 +57,7 @@ namespace windowing_win32
       //TCHAR strBuff[256];
 
 
-      if (wparam.m_number == DBT_DEVICEARRIVAL)
+      if (wparam.m_wparam == DBT_DEVICEARRIVAL)
       {
 
          DEV_BROADCAST_HDR * phdr = (DEV_BROADCAST_HDR * ) lparam.m_lparam;
@@ -65,7 +65,7 @@ namespace windowing_win32
          on_device_arrival(phdr);
 
       }
-      else if (wparam.m_number == DBT_DEVICEREMOVECOMPLETE)
+      else if (wparam.m_wparam == DBT_DEVICEREMOVECOMPLETE)
       {
 
          DEV_BROADCAST_HDR * phdr = (DEV_BROADCAST_HDR *)lparam.m_lparam;
@@ -73,7 +73,7 @@ namespace windowing_win32
          on_device_remove_complete(phdr);
 
       }
-      else if (wparam.m_number == DBT_DEVNODES_CHANGED)
+      else if (wparam.m_wparam == DBT_DEVNODES_CHANGED)
       {
 
          on_device_nodes_changed();

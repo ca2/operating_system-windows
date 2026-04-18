@@ -92,7 +92,7 @@ void
 
    void Dialog::setDefaultPushButton(unsigned int buttonId)
    {
-      SendMessage(m_hwnd, DM_SETDEFID, buttonId, 0);
+      SendMessage((HWND) _HWND(), DM_SETDEFID, buttonId, 0);
    }
 
    // void Dialog::setParent(Control *ctrlParent)
@@ -102,7 +102,7 @@ void
 
    void Dialog::show()
    {
-      if (m_hwnd == NULL) {
+      if ((HWND) _HWND() == NULL) {
          create();
       } else {
          setForeground();
@@ -119,9 +119,9 @@ void
    {
       // Destroy dialog
       if (!m_isModal) {
-         DestroyWindow(m_hwnd);
+         DestroyWindow((HWND) _HWND());
       } else {
-         EndDialog(m_hwnd, code);
+         EndDialog((HWND) _HWND(), code);
       }
       // We have no valid hwnd, so forse set hwnd to NULL
       _setHWND(NULL);
@@ -149,7 +149,7 @@ void
    int Dialog::showModal()
    {
       int result = 0;
-      if (m_hwnd == NULL) {
+      if ((HWND) _HWND() == NULL) {
          m_isModal = true;
          auto pwindow = this->impl<Window>();
 
@@ -160,30 +160,32 @@ void
          result = (int)DialogBoxParam((HINSTANCE) system()->m_hinstanceMain,
                                       (LPCWSTR) getResouceName(), parentWindow,
                                       dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
-      } else {
+
+         information("Dialog box result is {}", result);
+
+      } 
+      else
+      {
+         
          setVisible(true);
+         
          setForeground();
-      }
 
-      //
-      // TODO: Place error notification here
-      //
-
-      if (result == -1) {
       }
 
       return result;
+
    }
 
    bool Dialog::isCreated()
    {
-      bool isInit = m_hwnd != 0;
+      bool isInit = (HWND) _HWND() != 0;
 
       if (!isInit) {
          return false;
       }
 
-      return !!IsWindow(m_hwnd);
+      return !!IsWindow((HWND) _HWND());
    }
 
    bool Dialog::onDrawItem(::wparam controlID, innate_subsystem::draw_item_t * pdrawitem)
@@ -265,13 +267,13 @@ void
 
    // void Dialog::subControlById(ControlInterface *control, unsigned int id)
    // {
-   //    control = GetDlgItem(m_hwnd, id);
+   //    control = GetDlgItem((HWND) _HWND(), id);
    // }
 
    void Dialog::updateIcon()
    {
       if (m_hicon) {
-         SetClassLongPtr(m_hwnd, GCLP_HICON, (LONG_PTR)m_hicon);
+         SetClassLongPtr((HWND) _HWND(), GCLP_HICON, (LONG_PTR)m_hicon);
       }
    }
 

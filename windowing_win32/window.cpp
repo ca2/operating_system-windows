@@ -8343,7 +8343,7 @@ namespace windowing_win32
 
          }
 
-         information() << "::user::e_message_activate wparam : " << wparam.m_number;
+         information() << "::user::e_message_activate wparam : " << wparam.m_wparam;
 
       }
 
@@ -8495,7 +8495,7 @@ namespace windowing_win32
 
             m_lparamLastMouseMove = lparam;
 
-            ::int_point pointMouseMove(lparam_int_x(lparam), lparam_int_y(lparam));
+            auto pointMouseMove = lparam.point();
 
             if (m_pointMouseMove == pointMouseMove)
             {

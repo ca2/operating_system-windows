@@ -54,7 +54,7 @@ namespace innate_subsystem_windows
       // Add column to list view
       //
 
-      ListView_InsertColumn(m_hwnd, index, &lvColumn);
+      ListView_InsertColumn((HWND) _HWND(), index, &lvColumn);
    }
 
    void ListView::addColumn(int index, const char *caption, int width)
@@ -87,7 +87,7 @@ namespace innate_subsystem_windows
       lvI.cchTextMax = 256 * sizeof(WCHAR);
 
       // Trying to get data from window
-      ListView_GetItem(m_hwnd, &lvI);
+      ListView_GetItem((HWND) _HWND(), &lvI);
 
       //
       // Copying data to our list view item structure
@@ -121,7 +121,7 @@ namespace innate_subsystem_windows
       // Send message to window
       //
 
-      ListView_InsertItem(m_hwnd, &lvI);
+      ListView_InsertItem((HWND) _HWND(), &lvI);
    }
 
    void ListView::addItem(int index, const char *caption, ::lparam tag, int imageIndex)
@@ -142,17 +142,17 @@ namespace innate_subsystem_windows
       // Send message to window
       //
 
-      ListView_InsertItem(m_hwnd, &lvI);
+      ListView_InsertItem((HWND) _HWND(), &lvI);
    }
 
    void ListView::removeItem(int i)
    {
-      ListView_DeleteItem(m_hwnd, i);
+      ListView_DeleteItem((HWND) _HWND(), i);
    }
 
    void ListView::clear()
    {
-      ListView_DeleteAllItems(m_hwnd);
+      ListView_DeleteAllItems((HWND) _HWND());
    }
 
    void ListView::setSubItemText(int index, int subIndex, const char  *caption)
@@ -171,7 +171,7 @@ namespace innate_subsystem_windows
       // Send message to window
       //
 
-      SendMessage(m_hwnd, LVM_SETITEM, 0, (LPARAM)&lvI);
+      SendMessage((HWND) _HWND(), LVM_SETITEM, 0, (LPARAM)&lvI);
    }
 
    void ListView::setItemData(int index, ::lparam tag)
@@ -191,7 +191,7 @@ namespace innate_subsystem_windows
       // Send message to window
       //
 
-      SendMessage(m_hwnd, LVM_SETITEM, 0, (LPARAM)&lvI);
+      SendMessage((HWND) _HWND(), LVM_SETITEM, 0, (LPARAM)&lvI);
    }
 
    ::lparam ListView::getItemData(int index)
@@ -214,17 +214,17 @@ namespace innate_subsystem_windows
 
    int ListView::getSelectedIndex()
    {
-      int iSelect = ListView_GetNextItem(m_hwnd, -1, LVNI_SELECTED);
+      int iSelect = ListView_GetNextItem((HWND) _HWND(), -1, LVNI_SELECTED);
       return iSelect;
    }
 
    void ListView::selectItem(int index)
    {
       ::wparam itemIndex = (::wparam)index;
-      ListView_SetItemState(m_hwnd, -1, 0, LVIS_SELECTED);
-      SendMessage(m_hwnd, LVM_ENSUREVISIBLE , itemIndex, FALSE);
-      ListView_SetItemState(m_hwnd, itemIndex, LVIS_SELECTED, LVIS_SELECTED);
-      ListView_SetItemState(m_hwnd, itemIndex, LVIS_FOCUSED, LVIS_FOCUSED);
+      ListView_SetItemState((HWND) _HWND(), -1, 0, LVIS_SELECTED);
+      SendMessage((HWND) _HWND(), LVM_ENSUREVISIBLE , itemIndex, FALSE);
+      ListView_SetItemState((HWND) _HWND(), itemIndex, LVIS_SELECTED, LVIS_SELECTED);
+      ListView_SetItemState((HWND) _HWND(), itemIndex, LVIS_FOCUSED, LVIS_FOCUSED);
       setFocus();
    }
 
@@ -248,13 +248,13 @@ namespace innate_subsystem_windows
 
    unsigned int ListView::getSelectedItemsCount()
    {
-      return ListView_GetSelectedCount(m_hwnd);
+      return ListView_GetSelectedCount((HWND) _HWND());
    }
 
 
    int ListView::getCount()
    {
-      return (int) ListView_GetItemCount(m_hwnd);
+      return (int) ListView_GetItemCount((HWND) _HWND());
    }
 
    ::int_array ListView::getSelectedItemsIndexes()
@@ -264,7 +264,7 @@ namespace innate_subsystem_windows
       ia.set_size(getSelectedItemsCount());
       for (auto & iItem : ia)
       {
-         i = ListView_GetNextItem(m_hwnd, i, LVNI_SELECTED);
+         i = ListView_GetNextItem((HWND) _HWND(), i, LVNI_SELECTED);
          iItem = i;
       }
       return ia;
@@ -296,7 +296,7 @@ namespace innate_subsystem_windows
       m_compare = compare;
 
       // Update arrow in header.
-      HWND hHeader = ListView_GetHeader(m_hwnd);
+      HWND hHeader = ListView_GetHeader((HWND) _HWND());
       if (hHeader != 0) {
          HDITEM hdrItem = { 0 };
          hdrItem.mask = HDI_FORMAT;
@@ -328,19 +328,19 @@ namespace innate_subsystem_windows
             sortColumnIndex = -sortColumnIndex;
          }
          m_lparamSort = sortColumnIndex;
-         //ListView_SortItems(m_hwnd, s_LVNCOMPARE, sortColumnIndex);
-         ListView_SortItems(m_hwnd, s_FNLVCOMPARE, m_compare.m_p);
+         //ListView_SortItems((HWND) _HWND(), s_LVNCOMPARE, sortColumnIndex);
+         ListView_SortItems((HWND) _HWND(), s_FNLVCOMPARE, m_compare.m_p);
       }
    }
 
    void ListView::setListViewExtendedStyle(unsigned int style)
    {
-      ::SendMessage(m_hwnd, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, (::lparam)style);
+      ::SendMessage((HWND) _HWND(), LVM_SETEXTENDEDLISTVIEWSTYLE, 0, (::lparam)style);
    }
 
    unsigned int ListView::getListViewExtendedStyle()
    {
-      return ListView_GetExtendedListViewStyle(m_hwnd);
+      return ListView_GetExtendedListViewStyle((HWND) _HWND());
    }
 
    void ListView::addListViewExtendedStyle(unsigned int styleFlag)

@@ -41,17 +41,17 @@ namespace innate_subsystem_windows
 
    void Trackbar::setRange(long min, long max)
    {
-      SendMessage(m_hwnd, TBM_SETRANGEMIN, FALSE, min);
-      SendMessage(m_hwnd, TBM_SETRANGEMAX, TRUE, max);
+      SendMessage((HWND) _HWND(), TBM_SETRANGEMIN, FALSE, min);
+      SendMessage((HWND) _HWND(), TBM_SETRANGEMAX, TRUE, max);
    }
 
    void Trackbar::setPos(long pos)
    {
-      SendMessage(m_hwnd, TBM_SETPOS, TRUE, pos);
+      SendMessage((HWND) _HWND(), TBM_SETPOS, TRUE, pos);
    }
 
    long Trackbar::getPos()
    {
-      return (long)SendMessage(m_hwnd, TBM_GETPOS, 0, 0);
+      return (long)SendMessage((HWND) _HWND(), TBM_GETPOS, 0, 0);
    }
 } // namespace innate_subsystem_windows

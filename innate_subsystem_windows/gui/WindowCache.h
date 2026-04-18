@@ -13,8 +13,7 @@ namespace innate_subsystem_windows
    {
    public:
 
-      HWND m_hwnd;
-
+      //HWND m_hwnd;
 
       virtual void initialize_window_cache(Window * pwindow);
 

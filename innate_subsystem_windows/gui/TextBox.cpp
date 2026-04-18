@@ -40,27 +40,27 @@ namespace innate_subsystem_windows
 
       void TextBox::setCaretPos(int h, int v)
       {
-         SendMessage(m_hwnd, EM_LINESCROLL, h, v);
+         SendMessage((HWND) _HWND(), EM_LINESCROLL, h, v);
       }
 
       character_count TextBox::getTextLengthLimit()
       {
-         return SendMessage(m_hwnd, EM_GETLIMITTEXT, 0, 0);
+         return SendMessage((HWND) _HWND(), EM_GETLIMITTEXT, 0, 0);
       }
 
       void TextBox::setTextLengthLimit(character_count n)
       {
-         SendMessage(m_hwnd, EM_SETLIMITTEXT, n, 0);
+         SendMessage((HWND) _HWND(), EM_SETLIMITTEXT, n, 0);
       }
 
       int TextBox::getCurrentLineIndex()
       {
-         return (int)SendMessage(m_hwnd, EM_LINEINDEX, -1, 0);
+         return (int)SendMessage((HWND) _HWND(), EM_LINEINDEX, -1, 0);
       }
 
       int TextBox::getLineCount()
       {
-         return (int)SendMessage(m_hwnd, EM_GETLINECOUNT, 0, 0);
+         return (int)SendMessage((HWND) _HWND(), EM_GETLINECOUNT, 0, 0);
       }
 
       //

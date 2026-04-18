@@ -78,7 +78,7 @@ namespace innate_subsystem_windows
       if (selectedIndex >= 0) {
          getTab(selectedIndex)->setVisible(false);
       }
-      TabCtrl_SetCurSel(m_hwnd, index);
+      TabCtrl_SetCurSel((HWND) _HWND(), index);
       getTab(index)->setVisible(true);
    }
 
@@ -100,7 +100,7 @@ namespace innate_subsystem_windows
       //    delete tab;
       // }
       m_tabContainer.clear();
-      TabCtrl_DeleteAllItems(m_hwnd);
+      TabCtrl_DeleteAllItems((HWND) _HWND());
    }
 
    void TabControl::removeTab(int index)
@@ -110,7 +110,7 @@ namespace innate_subsystem_windows
         // if (i == index) {
             //delete *it;
             m_tabContainer.erase_at(index);
-            TabCtrl_DeleteItem(m_hwnd, index);
+            TabCtrl_DeleteItem((HWND) _HWND(), index);
         //    break;
          //}
          //i++;
@@ -119,15 +119,15 @@ namespace innate_subsystem_windows
 
    int TabControl::getSelectedTabIndex()
    {
-      int page = TabCtrl_GetCurSel(m_hwnd);
+      int page = TabCtrl_GetCurSel((HWND) _HWND());
       return page;
    }
 
    void TabControl::adjustRect(::int_rectangle &rect)
    {
       RECT rc;
-      GetClientRect(m_hwnd, &rc);
-      TabCtrl_AdjustRect(m_hwnd, FALSE, &rc);
+      GetClientRect((HWND) _HWND(), &rc);
+      TabCtrl_AdjustRect((HWND) _HWND(), FALSE, &rc);
       ::copy(&rect, &rc);
 
    }

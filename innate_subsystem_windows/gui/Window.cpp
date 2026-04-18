@@ -1288,7 +1288,7 @@ namespace innate_subsystem_windows
             {
             if (m_bHasClipboardViewerInterest)
             {
-               if ((HWND)wparam.m_number == m_hwndNextViewer)
+               if (wparam == m_hwndNextViewer)
                {
                   m_hwndNextViewer = (HWND)lparam.m_lparam;
                }

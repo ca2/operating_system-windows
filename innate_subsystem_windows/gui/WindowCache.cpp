@@ -13,7 +13,7 @@ namespace innate_subsystem_windows
    void WindowCache::initialize_window_cache(Window * pwindow)
    {
 
-      m_hwnd = ::as_HWND(pwindow->operating_system_window());
+      //m_hwnd = ::as_HWND(pwindow->operating_system_window());
 
    }
 

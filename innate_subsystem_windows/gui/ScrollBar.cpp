@@ -28,7 +28,7 @@
 namespace innate_subsystem_windows
 {
    ScrollBar::ScrollBar()
-   : //m_hwnd(0),
+   : //(HWND) _HWND()(0),
      m_vPos(0), m_hPos(0),
      m_vMax(0), m_hMax(0),
      m_vMin(0), m_hMin(0),
@@ -72,7 +72,7 @@ namespace innate_subsystem_windows
    }
 
    // void ScrollBar::setWindow(HWND hwnd) {
-   //    m_hwnd = hwnd;
+   //    (HWND) _HWND() = hwnd;
    // }
 
    bool ScrollBar::showVertScroll(bool show)
@@ -87,15 +87,15 @@ namespace innate_subsystem_windows
 
    bool ScrollBar::_showVertScroll(bool show)
    {
-      LONG style = GetWindowLong(m_hwnd, GWL_STYLE);
+      LONG style = GetWindowLong((HWND) _HWND(), GWL_STYLE);
       if (show) {
          style |= WS_VSCROLL;
       } else {
          style &= ~WS_VSCROLL;
       }
-      bool result = !!ShowScrollBar(m_hwnd, SB_VERT, show ? TRUE : FALSE);
+      bool result = !!ShowScrollBar((HWND) _HWND(), SB_VERT, show ? TRUE : FALSE);
       if (result) {
-         SetWindowLongPtr(m_hwnd, GWL_STYLE, style);
+         SetWindowLongPtr((HWND) _HWND(), GWL_STYLE, style);
          m_isVert = show;
       }
       return result;
@@ -113,15 +113,15 @@ namespace innate_subsystem_windows
 
    bool ScrollBar::_showHorzScroll(bool show)
    {
-      LONG style = GetWindowLong(m_hwnd, GWL_STYLE);
+      LONG style = GetWindowLong((HWND) _HWND(), GWL_STYLE);
       if (show) {
          style |=  WS_HSCROLL;
       } else {
          style &= ~WS_HSCROLL;
       }
-      bool result = !!ShowScrollBar(m_hwnd, SB_HORZ, show ? TRUE : FALSE);
+      bool result = !!ShowScrollBar((HWND) _HWND(), SB_HORZ, show ? TRUE : FALSE);
       if (result) {
-         SetWindowLong(m_hwnd, GWL_STYLE, style);
+         SetWindowLong((HWND) _HWND(), GWL_STYLE, style);
          m_isHorz = show;
       }
       return result;
@@ -142,7 +142,7 @@ namespace innate_subsystem_windows
          si.nMax   = imax;
          si.fMask  = SIF_RANGE | SIF_PAGE;
          si.nPage  = istep;
-         SetScrollInfo(m_hwnd, SB_HORZ, &si, TRUE);
+         SetScrollInfo((HWND) _HWND(), SB_HORZ, &si, TRUE);
       }
    }
 
@@ -160,7 +160,7 @@ namespace innate_subsystem_windows
          si.nMax   = imax;
          si.fMask  = SIF_RANGE | SIF_PAGE;
          si.nPage  = istep;
-         SetScrollInfo(m_hwnd, SB_VERT, &si, TRUE);
+         SetScrollInfo((HWND) _HWND(), SB_VERT, &si, TRUE);
       }
    }
 
@@ -172,7 +172,7 @@ namespace innate_subsystem_windows
          si.cbSize = sizeof(SCROLLINFO);
          si.fMask  = SIF_POS;
          si.nPos   = iPos;
-         m_vPos    = SetScrollInfo(m_hwnd, SB_VERT, &si, TRUE);
+         m_vPos    = SetScrollInfo((HWND) _HWND(), SB_VERT, &si, TRUE);
       } else {
          m_vPos    = iPos;
       }
@@ -186,7 +186,7 @@ namespace innate_subsystem_windows
          si.cbSize = sizeof(SCROLLINFO);
          si.fMask  = SIF_POS;
          si.nPos   = iPos;
-         m_hPos    = SetScrollInfo(m_hwnd, SB_HORZ, &si, TRUE);
+         m_hPos    = SetScrollInfo((HWND) _HWND(), SB_HORZ, &si, TRUE);
       } else {
          m_hPos    = iPos;
       }

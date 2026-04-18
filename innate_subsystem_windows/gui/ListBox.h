@@ -21,17 +21,19 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
 #pragma once
+
 
 #include "innate_subsystem/gui/ListBox.h"
 #include "innate_subsystem_windows/_common_header.h"
+#include "innate_subsystem_windows/gui/Control.h"
+
 
 namespace innate_subsystem_windows
 {
 
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ListBox : public window_implementation<innate_subsystem::ListBoxInterface>
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ListBox : public window_implementation<innate_subsystem::ListBoxInterface, Control>
    {
    public:
       ListBox();

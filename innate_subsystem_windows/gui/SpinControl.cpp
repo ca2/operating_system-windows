@@ -44,18 +44,18 @@ namespace innate_subsystem_windows
    void SpinControl::setBuddy(ControlInterface *buddyControl)
    {
        ::cast < WindowInterface > pwindow = buddyControl;
-      SendMessage(m_hwnd, UDM_SETBUDDY, (WPARAM)pwindow->_HWND(), NULL);
+      SendMessage((HWND) _HWND(), UDM_SETBUDDY, (WPARAM)pwindow->_HWND(), NULL);
       m_pcontrolBuddy = buddyControl;
    }
 
    void SpinControl::setRange(short lower, short upper)
    {
-      SendMessage(m_hwnd, UDM_SETRANGE, NULL, (::lparam)MAKELONG(upper, lower));
+      SendMessage((HWND) _HWND(), UDM_SETRANGE, NULL, (::lparam)MAKELONG(upper, lower));
    }
 
    void SpinControl::setRange32(int lower, int upper)
    {
-      SendMessage(m_hwnd, UDM_SETRANGE32, lower, upper);
+      SendMessage((HWND) _HWND(), UDM_SETRANGE32, lower, upper);
    }
 
    void SpinControl::setAccel(unsigned int nSec, unsigned int nInc)
@@ -64,7 +64,7 @@ namespace innate_subsystem_windows
       accel.nSec = nSec;
       accel.nInc = nInc;
 
-      SendMessage(m_hwnd, UDM_SETACCEL, 1, (::lparam)&accel);
+      SendMessage((HWND) _HWND(), UDM_SETACCEL, 1, (::lparam)&accel);
    }
 
    void SpinControl::autoAccelerationHandler(LPNMUPDOWN message)
