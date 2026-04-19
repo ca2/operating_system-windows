@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "subsystem.h"
 #include "subsystem/CommandLineArguments.h"
+#include "node/OperatingSystem.h"
 #include "node/Shell.h"
 #include "node/WTS.h"
 #include "node/PipeServer.h"

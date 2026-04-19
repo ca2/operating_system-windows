@@ -30,7 +30,7 @@
 #include "gui/ProgressBar.h"
 #include "gui/KeyboardLayout.h"
 //#include "gui/OperatingSystemApplication.h"
-#include "resource_loader.h"
+#include "ResourceLoader.h"
 #include "subsystem.h"
 
 
@@ -96,7 +96,7 @@ IMPLEMENT_FACTORY(innate_subsystem_windows)
 
    pfactory->add_factory_item<::innate_subsystem_windows::KeyboardLayout, ::innate_subsystem::KeyboardLayoutInterface>();
 
-   pfactory->add_factory_item<::innate_subsystem_windows::resource_loader, ::subsystem::resource_loader>();
+   pfactory->add_factory_item<::innate_subsystem_windows::ResourceLoader, ::subsystem::ResourceLoader>();
 
    //pfactory->add_factory_item<::innate_subsystem_windows::OperatingSystemApplication,
      //                         ::subsystem::OperatingSystemApplicationInterface>();

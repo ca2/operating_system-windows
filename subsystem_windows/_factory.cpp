@@ -5,6 +5,7 @@
 #include "subsystem.h"
 #include "thread/GlobalMutex.h"
 #include "thread/Thread.h"
+#include "node/OperatingSystem.h"
 #include "node/OperatingSystemApplication.h"
 #include "node/OperatingSystemHook.h"
 #include "node/Shell.h"
@@ -29,6 +30,8 @@ IMPLEMENT_FACTORY(subsystem_windows)
 
    pfactory->add_factory_item<::subsystem_windows::subsystem, ::subsystem::subsystem>();
    pfactory->add_factory_item<::subsystem_windows::SystemInformation, ::subsystem::SystemInformationInterface>();
+   pfactory->add_factory_item<::subsystem_windows::OperatingSystem,
+                              ::subsystem::OperatingSystem>();
    pfactory->add_factory_item<::subsystem_windows::OperatingSystemApplication, ::subsystem::OperatingSystemApplicationInterface>();
    pfactory->add_factory_item<::subsystem_windows::OperatingSystemHook,
                               ::subsystem::OperatingSystemHookInterface>();

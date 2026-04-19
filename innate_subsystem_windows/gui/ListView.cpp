@@ -381,7 +381,7 @@ namespace innate_subsystem_windows
          case LVN_KEYDOWN:
          {
             auto lpnmlvkeydown = (LPNMLVKEYDOWN)notify.m_lpnmhdr;
-            auto euserkey = main_innate_subsystem()->virtual_key_code_to_user_key(lpnmlvkeydown->wVKey);
+            auto euserkey = MainInnateSubsystem().virtual_key_code_to_user_key(lpnmlvkeydown->wVKey);
             notify.m_bHandled = _001OnKeyDownNotification(euserkey);
             //onKeyDownNotification(euserkey);
             //onRemoteListViewKeyDown(nmlvkd->wVKey);

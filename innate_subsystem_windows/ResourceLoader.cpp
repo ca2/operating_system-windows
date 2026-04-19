@@ -21,11 +21,11 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-// From apex/innate_subsystem/resource_loader.cpp by
+// From apex/innate_subsystem/ResourceLoader.cpp by
 // camilo on 2026-04-11 04:44 <3ThomasBorregaardSørensen!!
 
 #include "framework.h"
-#include "resource_loader.h"
+#include "ResourceLoader.h"
 #include "drawing/Icon.h"
 #include "drawing/Cursor.h"
 #include "acme/operating_system/windows/user.h"
@@ -36,15 +36,15 @@
 namespace innate_subsystem_windows
 {
 
-   //resource_loader::resource_loader(HINSTANCE appInst)
-   resource_loader::resource_loader()
+   //ResourceLoader::ResourceLoader(HINSTANCE appInst)
+   ResourceLoader::ResourceLoader()
       //: m_appInstance(appInst)
    {}
 
-   resource_loader::~resource_loader()
+   ResourceLoader::~ResourceLoader()
    {}//h
 
-   ::pointer < innate_subsystem::IconInterface > resource_loader::loadStandardIcon(enum_cursor ecursor)
+   ::pointer < innate_subsystem::IconInterface > ResourceLoader::loadStandardIcon(enum_cursor ecursor)
    {
 
       auto picon = create_newø<::innate_subsystem_windows::Icon>();
@@ -66,7 +66,7 @@ namespace innate_subsystem_windows
       return picon;
    }
 
-   ::pointer < innate_subsystem::IconInterface > resource_loader::loadIcon(const char* iconName)
+   ::pointer < innate_subsystem::IconInterface > ResourceLoader::loadIcon(const char* iconName)
    {
       //return LoadIcon(m_appInstance, iconName);
       auto picon = create_newø<::innate_subsystem_windows::Icon>();
@@ -86,7 +86,7 @@ namespace innate_subsystem_windows
       return picon;
    }
 
-   ::pointer < ::innate_subsystem::IconInterface > resource_loader::loadIconByIntResource(int iId)
+   ::pointer < ::innate_subsystem::IconInterface > ResourceLoader::loadIconByIntResource(int iId)
    {
       //return LoadIcon(m_appInstance, iconName);
       auto picon = create_newø<::innate_subsystem_windows::Icon>();
@@ -110,7 +110,7 @@ namespace innate_subsystem_windows
 
 
 
-   // bool resource_loader::loadString(unsigned int id, ::string & str)
+   // bool ResourceLoader::loadString(unsigned int id, ::string & str)
    // {
    //    //_ASSERT(string != 0);
    //    str = "(Undef)";
@@ -156,7 +156,7 @@ namespace innate_subsystem_windows
    //    return true;
    // }
    //
-   void * resource_loader::loadAccelerator(unsigned int id)
+   void * ResourceLoader::loadAccelerator(unsigned int id)
    {
       return (void *) (HACCEL) ::LoadAcceleratorsW((HINSTANCE) system()->m_hinstanceMain, (LPCWSTR) MAKEINTRESOURCEW(id));
 
@@ -166,12 +166,12 @@ namespace innate_subsystem_windows
 
    }
 
-   //HCURSOR resource_loader::loadStandardCursor(const char* id)
+   //HCURSOR ResourceLoader::loadStandardCursor(const char* id)
    //{
    //   return LoadCursor(0, id);
    //}
 
-   ::pointer <innate_subsystem::CursorInterface> resource_loader::loadCursor(unsigned int id)
+   ::pointer <innate_subsystem::CursorInterface> ResourceLoader::loadCursor(unsigned int id)
    {
       //return LoadCursor(m_appInstance, iconName);
       auto pcursor = create_newø<::innate_subsystem_windows::Cursor>();
