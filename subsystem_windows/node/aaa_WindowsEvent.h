@@ -30,6 +30,9 @@
 namespace subsystem_windows
 {
 
+   /// <summary>
+   ///  comment by camilo : This WindowsEvent in TightVNC is an Win32 Auto-Reset Event Wrapper
+   /// </summary>
    class CLASS_DECL_SUBSYSTEM_WINDOWS WindowsEvent
    {
    public:

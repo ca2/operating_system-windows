@@ -68,7 +68,7 @@ namespace subsystem_windows
          DWORD result;
          OVERLAPPED overlapped;
          memset(&overlapped, 0, sizeof(OVERLAPPED));
-         overlapped.hEvent = m_writeEvent.getHandle();
+         overlapped.hEvent = m_writeEvent.m_handle;
 
          bool success;
          DWORD length = (DWORD)len;
@@ -92,7 +92,7 @@ namespace subsystem_windows
             int errCode = GetLastError();
 
             if (errCode == ERROR_IO_PENDING) {
-               m_writeEvent.waitForEvent();
+               m_writeEvent.wait();
                DWORD cbRet;
                critical_section_lock al(&m_criticalsectionPipe);
                checkPipeFile(pfilePipe);
@@ -131,7 +131,7 @@ namespace subsystem_windows
          DWORD result = 0;
          OVERLAPPED overlapped;
          memset(&overlapped, 0, sizeof(OVERLAPPED));
-         overlapped.hEvent = m_readEvent.getHandle();
+         overlapped.hEvent = m_readEvent.m_handle;
 
          bool success;
          DWORD length = (DWORD)len;

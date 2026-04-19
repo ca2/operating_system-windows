@@ -28,7 +28,7 @@
 #include "acme/input_output/Channel.h"
 #include "subsystem/node/NamedPipe.h"
 #include "subsystem_windows/node/Pipe.h"
-#include "subsystem_windows/node/WindowsEvent.h"
+#include "acme/parallelization/happening.h"
 
 
 namespace subsystem_windows
@@ -111,8 +111,8 @@ namespace subsystem_windows
       critical_section m_criticalsectionPipe;
       ::string m_pipeName;
 
-      WindowsEvent m_readEvent;
-      WindowsEvent m_writeEvent;
+      ::happening m_readEvent;
+      ::happening m_writeEvent;
       bool m_asServer;
    };
 

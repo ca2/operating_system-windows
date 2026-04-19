@@ -3,12 +3,15 @@
 //
 #include "framework.h"
 #include "subsystem.h"
+#include "subsystem/CommandLineArguments.h"
 #include "node/Shell.h"
 #include "node/WTS.h"
 #include "node/PipeServer.h"
 #include <wincrypt.h>
-
+#include <shellapi.h>
 #pragma comment (lib, "Crypt32.lib")
+
+
 
 
 namespace subsystem_windows
@@ -60,6 +63,50 @@ subsystem::subsystem()
 
 
    }
+
+
+       void subsystem::_parse_windows_command_line_arguments(
+      ::subsystem::CommandLineArguments *pcommandlinearguments, const scoped_string &scopedstrCommandLineInWindowsFormat)
+   {
+      ::string strstorage(scopedstrCommandLineInWindowsFormat);
+      ::wstring uniCmdLine(strstorage);
+      size_t cmdLen = uniCmdLine.length();
+      if (cmdLen > 0)
+      {
+         int nArgs;
+         LPWSTR *argList = CommandLineToArgvW(uniCmdLine, &nArgs);
+         if (argList == 0)
+         {
+            throw ::subsystem::Exception("Invalid command line");
+         }
+         for (int i = 0; i < nArgs; i++)
+         {
+            ::wstring uniArg(argList[i]);
+            ::string arg;
+            arg = uniArg;
+            if (arg.length() > 0)
+            {
+               pcommandlinearguments->m_args.add(arg);
+            }
+         }
+
+         LocalFree(argList);
+      }
+   }
+
+
+    void subsystem::initializeCommandLineArguments(::subsystem::CommandLineArguments* pcommandlinearguments)
+    {
+
+
+       ::string strCommandLine;
+
+       strCommandLine = ::GetCommandLineW();
+
+      _parse_windows_command_line_arguments(pcommandlinearguments,     strCommandLine);
+
+
+    }
 
 
    bool subsystem::EncryptData(const ::string& input, ::memory & output)

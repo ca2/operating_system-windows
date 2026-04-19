@@ -26,7 +26,8 @@
 
 
 #include "subsystem/node/PipeImpersonatedThread.h"
-#include "subsystem_windows/node/WindowsEvent.h"
+//#include "subsystem_windows/node/WindowsEvent.h"
+#include "acme/parallelization/happening.h"
 
 namespace subsystem_windows
 {
@@ -55,8 +56,10 @@ namespace subsystem_windows
       ::pointer < ::subsystem::File > m_pfilePipe;
       bool m_success;
       ::string m_faultReason;
-      WindowsEvent m_impersonationReadyEvent;
-      WindowsEvent m_threadSleeper;
+      //WindowsEvent m_impersonationReadyEvent;
+      //WindowsEvent m_threadSleeper;
+       ::happening m_impersonationReadyEvent;
+      ::happening m_threadSleeper;
    };
 
 

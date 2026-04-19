@@ -130,10 +130,10 @@
     <ClInclude Include="node\VersionInfo.h">
       <Filter>Header Files\node</Filter>
     </ClInclude>
-    <ClInclude Include="node\WindowsEvent.h">
+    <ClInclude Include="node\aaa_WindowsEvent.h">
       <Filter>Header Files\node</Filter>
     </ClInclude>
-    <ClInclude Include="node\WindowsEventEx.h">
+    <ClInclude Include="node\aaa_WindowsEventEx.h">
       <Filter>Header Files\node</Filter>
     </ClInclude>
     <ClInclude Include="node\WindowsRegistry.h">
@@ -199,6 +199,9 @@
     <ClInclude Include="thread\ThreadCollector.h">
       <Filter>Header Files\thread</Filter>
     </ClInclude>
+    <ClInclude Include="node\OperatingSystem.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -261,9 +264,6 @@
       <Filter>Source Files\node</Filter>
     </ClCompile>
     <ClCompile Include="node\Clipboard.cpp">
-      <Filter>Source Files\node</Filter>
-    </ClCompile>
-    <ClCompile Include="node\CommandLineArguments.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
     <ClCompile Include="node\CtrlAltDelSimulator.cpp">
@@ -359,10 +359,10 @@
     <ClCompile Include="node\VersionInfo.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
-    <ClCompile Include="node\WindowsEvent.cpp">
+    <ClCompile Include="node\aaa_WindowsEvent.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
-    <ClCompile Include="node\WindowsEventEx.cpp">
+    <ClCompile Include="node\aaa_WindowsEventEx.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
     <ClCompile Include="node\WindowsRegistry.cpp">
@@ -421,6 +421,9 @@
     </ClCompile>
     <ClCompile Include="thread\ThreadCollector.cpp">
       <Filter>Source Files\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="node\OperatingSystem.cpp">
+      <Filter>Source Files\node</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

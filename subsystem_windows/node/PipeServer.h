@@ -32,7 +32,9 @@
 
 //#include "DynamicLibrary.h"
 //#include "subsystem_windows/_common_header.h"
-#include "subsystem_windows/node/WindowsEvent.h"
+//#include "subsystem_windows/node/WindowsEvent.h"
+#include "acme/parallelization/happening.h"
+//#include "subsystem/node/security/SecurityAttributes.h"
 #include "subsystem_windows/node/security/SecurityAttributes.h"
 
 typedef BOOL(WINAPI* pGetNamedPipeClientProcessId)(HANDLE Pipe, PULONG ClientProcessId);
@@ -61,7 +63,8 @@ namespace subsystem_windows
 
       //private:
       ::string m_pipeName;
-      WindowsEvent m_winEvent;
+      //WindowsEvent m_winEvent;
+      ::happening m_happening;
       DWORD m_milliseconds;
       ::pointer < ::subsystem_windows::SecurityAttributes > m_psecurityattributes;
       ::pointer < ::subsystem_windows::File > m_pfileServerPipe;

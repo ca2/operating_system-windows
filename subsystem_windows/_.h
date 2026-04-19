@@ -33,7 +33,7 @@ namespace subsystem_windows
 
    class DynamicLibrary;
 
-   class CommandLineArguments;
+   //class CommandLineArguments;
 
    class WindowsHookEventListener;
 

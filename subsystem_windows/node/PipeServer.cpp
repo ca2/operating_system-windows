@@ -107,7 +107,7 @@ namespace subsystem_windows
 
       OVERLAPPED overlapped;
       memset(&overlapped, 0, sizeof(OVERLAPPED));
-      overlapped.hEvent = m_winEvent.getHandle();
+      overlapped.hEvent = m_happening.getHandle();
 
       if (::ConnectNamedPipe(m_pfileServerPipe->m_handle, &overlapped)) {
          // In success the overlapped ConnectNamedPipe() function must
@@ -122,7 +122,7 @@ namespace subsystem_windows
             case ERROR_PIPE_CONNECTED:
                break;
             case ERROR_IO_PENDING:
-               m_winEvent.waitForEvent(m_milliseconds);
+               m_happening.waitForEvent(m_milliseconds);
                DWORD cbRet; // Fake
                if (!GetOverlappedResult(m_pfileServerPipe->m_handle, &overlapped, &cbRet, FALSE)) {
                   int errCode = GetLastError();
@@ -165,7 +165,7 @@ namespace subsystem_windows
           throw ::subsystem::Exception(errMess);
         }
       }*/
-      m_winEvent.notify();
+      m_happening.notify();
    }
 
    PipeServer::~PipeServer()

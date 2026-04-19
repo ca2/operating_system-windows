@@ -37,7 +37,7 @@
      public:
 
         //protected:
-        ::pointer < CommandLineArguments > m_pcommandlinearguments;
+        ::pointer < ::subsystem::CommandLineArguments > m_pcommandlinearguments;
 
         ::string_array m_strParam;
         ::array_base<::pair<::string, ::string>> m_strParams;

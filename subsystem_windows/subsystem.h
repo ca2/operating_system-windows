@@ -41,6 +41,11 @@ namespace subsystem_windows
       virtual WTS * wts();
       virtual PipeServer * pipe_server();
 
+             virtual void _parse_windows_command_line_arguments(::subsystem::CommandLineArguments *pcommandlinearguments,
+                                                         const scoped_string &scopedstrCommandLineInWindowsFormat);
+
+         void initializeCommandLineArguments(::subsystem::CommandLineArguments *pcommandlinearguments) override;
+
       ::pointer < ::subsystem::SecurityIdentifier > createSidFromString(const ::scoped_string & scopedstr) override;
 
       bool EncryptData(const ::string& input, ::memory & output) override;

@@ -30,7 +30,7 @@
 #include "subsystem/node/Pipe.h"
 #include "subsystem_windows/node/File.h"
 #include "subsystem_windows/node/Pipe.h"
-#include "subsystem_windows/node/WindowsEvent.h"
+#include "acme/parallelization/happening.h"
 //#include "remoting/remoting_common/thread/LocalMutex.h"
 //#include "log_writer/LogWriter.h"
 
@@ -119,8 +119,8 @@ namespace subsystem_windows
          unsigned int m_timeOut;
 
          critical_section m_criticalsectionPipe;
-         WindowsEvent m_readEvent;
-         WindowsEvent m_writeEvent;
+         ::happening m_readEvent;
+         ::happening m_writeEvent;
 
          ::subsystem::LogWriter *m_plogwriter;
       };

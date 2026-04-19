@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "subsystem_windows/_common_header.h"
 #include "ProcessCommandLine.h"
-#include "CommandLineArguments.h"
+#include "subsystem/CommandLineArguments.h"
 
  namespace subsystem_windows
  {
@@ -46,10 +46,11 @@
 
        ::string_array out;
 
-       constructø(m_pcommandlinearguments);
-       m_pcommandlinearguments->initialize_command_line_arguments(::GetCommandLineW());
+       construct_newø(m_pcommandlinearguments);
 
-       out = m_pcommandlinearguments->getArguments();
+       MainSubsystem()->initializeCommandLineArguments(m_pcommandlinearguments);
+
+       out = m_pcommandlinearguments->getArgs();
        for (size_t i = 0; i < out.size(); i++) {
           if (out[i][0] != _T('-')) {
              m_strParam.add(out[i]);
@@ -65,7 +66,7 @@
      {
          ::pair<::string, ::string> strPair;
 
-         out.erase((character_count)0, (character_count)1);
+         out.index_erase((character_count)0, (character_count)1);
          auto ipos = out.find_first_character('=');
          if (::is_null(ipos)) {
              strPair.m_element1 = *out;

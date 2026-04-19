@@ -81,7 +81,7 @@ namespace innate_subsystem_windows
       ::string  storage;
       ::cast < ::innate_subsystem::Window > pwindowBuddy = m_pcontrolBuddy;
       storage = pwindowBuddy->getText();
-      if (!main_subsystem()->string_parser()->parseInt(storage, &currentValue)) {
+      if (!MainSubsystem()->string_parser()->parseInt(storage, &currentValue)) {
          return;
       }
 
