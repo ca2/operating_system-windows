@@ -751,6 +751,14 @@ namespace innate_subsystem_windows
    }
 
 
+   void Window::post(const ::procedure& procedure)
+   {
+
+       postMessage(WM_APP + 876, 0, procedure);
+
+   }
+
+
    ::int_rectangle Window::getClientRect()
    {
 
@@ -1258,7 +1266,6 @@ namespace innate_subsystem_windows
 
       switch (message)
       {
-
          case WM_SIZING:
             m_sizeIsChanged = true;
             return false;

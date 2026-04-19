@@ -309,6 +309,7 @@ namespace innate_subsystem_windows
 
       // post message to this window
       void postMessage(unsigned int Msg, ::wparam wparam = 0, ::lparam lparam = 0) override;
+      void post(const ::procedure & procedure) override;
 
       ::int_rectangle getClientRect() override;
       ::int_rectangle getFullScreenRect() override;
