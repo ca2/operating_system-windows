@@ -68,7 +68,7 @@ namespace subsystem_windows
 
       try
       {
-         HANDLE userToken = windows_subsystem()->wts()->duplicateCurrentProcessUserToken(m_connectRdpSession, m_log);
+         HANDLE userToken = WindowsSubsystem().WTS().duplicateCurrentProcessUserToken(m_connectRdpSession, m_log);
 
          ::string commandLine = getCommandLineString();
 

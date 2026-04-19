@@ -2201,7 +2201,7 @@
     <ClInclude Include="node\WsaStartup.h" />
     <ClInclude Include="node\WTS.h" />
     <ClInclude Include="node\_.h" />
-    <ClInclude Include="resource_loader.h" />
+    <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="subsystem.h" />
     <ClInclude Include="thread\aaa_framework.h" />
     <ClInclude Include="thread\aaa_ZombieKiller.h" />
@@ -2327,7 +2327,7 @@
     <ClCompile Include="node\WsaStartup.cpp" />
     <ClCompile Include="node\WTS.cpp" />
     <ClCompile Include="node\_.cpp" />
-    <ClCompile Include="resource_loader.cpp" />
+    <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="subsystem.cpp" />
     <ClCompile Include="thread\AutoLock.cpp" />
     <ClCompile Include="thread\DesktopSelector.cpp" />

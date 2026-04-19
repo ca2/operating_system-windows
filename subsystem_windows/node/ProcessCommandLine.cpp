@@ -48,7 +48,7 @@
 
        construct_newø(m_pcommandlinearguments);
 
-       MainSubsystem()->initializeCommandLineArguments(m_pcommandlinearguments);
+       MainSubsystem().initializeCommandLineArguments(m_pcommandlinearguments);
 
        out = m_pcommandlinearguments->getArgs();
        for (size_t i = 0; i < out.size(); i++) {

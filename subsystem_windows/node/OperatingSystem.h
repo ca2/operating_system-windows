@@ -110,7 +110,7 @@
        bool isAeroOn(::subsystem::LogWriter *log) override;
 
     //private:
-       void init() override;
+       //void init() override;
        // Operation system version info.
        //OSVERSIONINFO m_osVerInfo;
     };

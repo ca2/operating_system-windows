@@ -29,7 +29,7 @@ namespace subsystem_windows
        ::pointer < PipeServer > m_ppipeserver;
       static critical_section s_criticalsectionResolveIp4;
 
-       ::pointer < WTS > m_pwts;
+       ::pointer<::subsystem_windows::WTS> m_pwts;
 
       subsystem();
       ~subsystem() override;
@@ -38,7 +38,7 @@ namespace subsystem_windows
       // virtual ::subsystem::string_table * string_table();
       // virtual ::subsystem::resource_loader* resource_loader();
       // virtual ::subsystem::Registry* registry();
-      virtual WTS * wts();
+      virtual ::subsystem_windows::WTS & WTS();
       virtual PipeServer * pipe_server();
 
              virtual void _parse_windows_command_line_arguments(::subsystem::CommandLineArguments *pcommandlinearguments,
@@ -61,10 +61,17 @@ namespace subsystem_windows
 
 
 
-inline ::subsystem_windows::subsystem * windows_subsystem()
+inline ::subsystem_windows::subsystem & WindowsSubsystem()
 {
 
-   return ::subsystem_windows::subsystem::s_p;
+   if (!::subsystem::subsystem::s_p)
+   {
+
+      MainSubsystem();
+
+   }
+
+   return *::subsystem_windows::subsystem::s_p;
 
 }
 

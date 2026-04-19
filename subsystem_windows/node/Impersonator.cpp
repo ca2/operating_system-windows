@@ -62,7 +62,7 @@ namespace subsystem_windows
 
    void Impersonator::impersonateAsLoggedUser()
    {
-      HANDLE token = windows_subsystem()->wts()->queryConsoleUserToken(m_plogwriter);
+      HANDLE token = WindowsSubsystem().WTS().queryConsoleUserToken(m_plogwriter);
       impersonateAsUser(token);
    }
 
@@ -74,7 +74,7 @@ namespace subsystem_windows
       }
       m_token = token;
 
-      ::string name = windows_subsystem()->wts()->getTokenUserName(m_token);
+      ::string name = WindowsSubsystem().WTS().getTokenUserName(m_token);
       m_plogwriter->debug("impersonate as user: {}", name);
 
       if ((!DuplicateToken(m_token, SecurityImpersonation, &m_dupToken))) {
@@ -89,7 +89,7 @@ namespace subsystem_windows
 
    void Impersonator::impersonateAsCurrentProcessUser(bool rdpEnabled)
    {
-      HANDLE token = windows_subsystem()->wts()->duplicateCurrentProcessUserToken(rdpEnabled, m_plogwriter);
+      HANDLE token = WindowsSubsystem().WTS().duplicateCurrentProcessUserToken(rdpEnabled, m_plogwriter);
       impersonateAsUser(token);
    }
 
@@ -117,12 +117,12 @@ namespace subsystem_windows
    {
       DWORD id = 0;
       if (rdpEnabled) {
-         id = windows_subsystem()->wts()->getRdpSessionId(m_plogwriter);
+         id = WindowsSubsystem().WTS().getRdpSessionId(m_plogwriter);
       }
       if (id == 0) {
-         id = windows_subsystem()->wts()->getActiveConsoleSessionId(m_plogwriter);
+         id = WindowsSubsystem().WTS().getActiveConsoleSessionId(m_plogwriter);
       }
-      return windows_subsystem()->wts()->sessionIsLocked(id, m_plogwriter);
+      return WindowsSubsystem().WTS().sessionIsLocked(id, m_plogwriter);
    }
 
 

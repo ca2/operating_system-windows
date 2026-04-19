@@ -33,7 +33,7 @@ subsystem::subsystem()
 
    }
 
-    WTS* subsystem::wts()
+    ::subsystem_windows::WTS &subsystem::WTS()
    {
 
        if (!m_pwts)
@@ -43,7 +43,7 @@ subsystem::subsystem()
 
        }
 
-       return m_pwts;
+       return *m_pwts;
 
 
    }

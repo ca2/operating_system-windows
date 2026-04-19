@@ -153,7 +153,7 @@ namespace subsystem_windows
             DWORD errCode = GetLastError();
 
             if (errCode == ERROR_IO_PENDING) {
-               m_readEvent.waitForEvent();
+               m_readEvent.wait();
                DWORD cbRet = 0;
                critical_section_lock al(&m_criticalsectionPipe);
                checkPipeFile(pfilePipe);

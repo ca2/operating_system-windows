@@ -26,7 +26,7 @@
 #pragma once
 
 
-#include "innate_subsystem/resource_loader.h"
+#include "innate_subsystem/ResourceLoader.h"
 //#include "drawing/Icon.h"
 
 //#include "winhdr.h"
@@ -40,7 +40,7 @@ namespace innate_subsystem_windows
     * Singleton without support of "lazy" initialization.
     */
    //class ResourceLoader : public Singleton<ResourceLoader>
-   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS resource_loader :
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ResourceLoader :
       virtual public ::innate_subsystem::resource_loader
    {
    public:
@@ -49,11 +49,11 @@ namespace innate_subsystem_windows
        * @param appInst windwos application instance.
        */
       //resource_loader(HINSTANCE appInst);
-      resource_loader();
+      ResourceLoader();
       /**
        * Frees resource loader singleton.
        */
-      ~resource_loader() override;
+      ~ResourceLoader() override;
 
       /**
        * Loads standart icon from resources.

@@ -131,7 +131,7 @@
     <ClCompile Include="gui\WindowProcHolder.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
-    <ClCompile Include="resource_loader.cpp">
+    <ClCompile Include="ResourceLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="drawing\Bitmap.cpp">
@@ -290,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="gui\KeyboardLayout.h">
       <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceLoader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

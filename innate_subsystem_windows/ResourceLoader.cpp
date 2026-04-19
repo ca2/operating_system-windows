@@ -73,13 +73,13 @@ namespace innate_subsystem_windows
       //return LoadIcon(NULL, iconName);
       if ((::iptr)iconName < 65536)
       {
-         picon->m_hicon = ::LoadIcon((HINSTANCE) MainSubsystem()->m_hinstanceResource, (LPCWSTR) iconName);
+         picon->m_hicon = ::LoadIcon((HINSTANCE) MainSubsystem().m_hinstanceResource, (LPCWSTR) iconName);
 
       }
       else
       {
          ::wstring wstrIconName(iconName);
-         picon->m_hicon = ::LoadIcon((HINSTANCE) MainSubsystem()->m_hinstanceResource,  wstrIconName);
+         picon->m_hicon = ::LoadIcon((HINSTANCE) MainSubsystem().m_hinstanceResource,  wstrIconName);
       }
 
       //throw ::interface_only();
@@ -93,13 +93,13 @@ namespace innate_subsystem_windows
       //return LoadIcon(NULL, iconName);
       if ((::iptr)iId < 65536)
       {
-         picon->m_hicon = ::LoadIcon((HINSTANCE) MainSubsystem()->m_hinstanceResource, (LPCWSTR) iId);
+         picon->m_hicon = ::LoadIcon((HINSTANCE) MainSubsystem().m_hinstanceResource, (LPCWSTR) iId);
 
       }
       // else
       // {
       //    ::wstring wstrIconName(iconName);
-      //    picon->m_hicon = ::LoadIcon((HINSTANCE) MainSubsystem()->m_hinstanceResource,  wstrIconName);
+      //    picon->m_hicon = ::LoadIcon((HINSTANCE) MainSubsystem().m_hinstanceResource,  wstrIconName);
       // }
 
       //throw ::interface_only();
@@ -178,13 +178,13 @@ namespace innate_subsystem_windows
       //return LoadCursor(NULL, iconName);
       //if ((::iptr)id < 65536)
       //{
-         pcursor->m_hcursor = ::LoadCursor((HINSTANCE) MainSubsystem()->m_hinstanceResource, (LPCWSTR) MAKEINTRESOURCEW(id));
+         pcursor->m_hcursor = ::LoadCursor((HINSTANCE) MainSubsystem().m_hinstanceResource, (LPCWSTR) MAKEINTRESOURCEW(id));
 
       // }
       // else
       // {
       //    ::wstring wstrCursorName(iconName);
-      //    picon->m_hicon = ::LoadCursor((HINSTANCE) MainSubsystem()->m_hinstanceResource,  wstrCursorName);
+      //    picon->m_hicon = ::LoadCursor((HINSTANCE) MainSubsystem().m_hinstanceResource,  wstrCursorName);
       // }
 
       //throw ::interface_only();

@@ -59,7 +59,7 @@ namespace subsystem_windows
 
       // FIXME: why we don't check returning values?
       //DesktopSelector::selectDesktop();
-      MainSubsystem()->desktop_selector()->selectDesktop();
+      MainSubsystem().desktop_selector()->selectDesktop();
    }
 
    LocalOperatingSystemApplication::~LocalOperatingSystemApplication() {}

@@ -24,8 +24,9 @@
 #include "framework.h"
 #include "OperatingSystem.h"
 #include "CtrlAltDelSimulator.h"
-
-// #include aaa_<shlobj.h>
+#include "subsystem_windows/subsystem.h"
+#include <shlobj.h>
+#include <VersionHelpers.h>
 // #include aaa_<crtdbg.h>
 //#include "remoting/win_system/AutoImpersonator.h"
 //#include "remoting/win_system/WTS.h"
@@ -37,10 +38,10 @@
 #include "DynamicLibrary.h"
 //// #include aaa_<vector>
 // #include aaa_<algorithm>
-
+#pragma warning(suppress : 4996)
 // OSVERSIONINFO OperatingSystem::m_osVerInfo = { 0 };
-// typedef VOID (WINAPI *SendSas)(BOOL asUser);
-// typedef HRESULT (WINAPI *DwmIsCompositionEnabled)(BOOL *pfEnabled);
+typedef VOID (WINAPI *SendSas)(BOOL asUser);
+typedef HRESULT (WINAPI *DwmIsCompositionEnabled)(BOOL *pfEnabled);
 namespace subsystem_windows
 {
 
@@ -53,18 +54,40 @@ namespace subsystem_windows
    {
       ::string out;
       DWORD errCode = GetLastError();
-      TCHAR buffer[1024];
 
-      // FIXME: Remove "new line" character from buffer.
-      if (FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, errCode,
-                        MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US), (LPTSTR)&buffer[0], sizeof(buffer), NULL) == 0)
+      LPWSTR pBuffer = NULL;
+
+      // 1. Use FORMAT_MESSAGE_ALLOCATE_BUFFER for a dynamic buffer.
+      // 2. Use FORMAT_MESSAGE_MAX_WIDTH_MASK to ignore hard-coded line breaks.
+      DWORD length = FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
+                                      FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK,
+                                   NULL, errCode, MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US),
+                                   (LPTSTR)&pBuffer, // Cast the address of your pointer
+                                   0, NULL);
+
+      if (length == 0 || pBuffer == NULL)
       {
-         out.format("<<Cannot get text error describing>> (%u)", errCode);
+         out.format("<<Cannot get text error describing>> ({})", errCode);
       }
       else
       {
-         out.format("{} (%u)", buffer, errCode);
+         // Remove trailing newlines or whitespace manually if still present
+         while (length > 0 &&
+                (pBuffer[length - 1] == _T('\n') || pBuffer[length - 1] == _T('\r') || pBuffer[length - 1] == _T(' ')))
+         {
+            pBuffer[--length] = _T('\0');
+         }
+
+         ::string strMessage;
+
+         strMessage = pBuffer;
+
+         out.format("{} ({})", strMessage, errCode);
+
+         // Crucial: You must free the system-allocated buffer
+         LocalFree(pBuffer);
       }
+
       return out;
    }
 
@@ -77,9 +100,10 @@ namespace subsystem_windows
       return out;
    }
 
-   bool OperatingSystem::getSpecialFolderPath(int specialFolderId, ::string &out)
+   ::string OperatingSystem::getSpecialFolderPath(int specialFolderId)
    {
-      _ASSERT(out != NULL);
+      ::string out;
+      //_ASSERT(out != NULL);
 
       int csidl = 0;
 
@@ -98,31 +122,32 @@ namespace subsystem_windows
 
       bool returnVal = false;
 
-      TCHAR path[MAX_PATH + 1];
-      if (SHGetSpecialFolderPath(NULL, &path[0], csidl, TRUE) == TRUE)
+      WCHAR path[MAX_PATH + 1];
+      if (SHGetSpecialFolderPathW(NULL, path, csidl, TRUE) == TRUE)
       {
-         out -= &path[0];
+         out = path;
          returnVal = true;
       }
 
       return returnVal;
    }
 
-   bool OperatingSystem::getCurrentModulePath(::string &out)
+   ::string OperatingSystem::getCurrentModulePath()
    {
-      ::array_base<TCHAR> buffer;
+      ::wstring buffer;
       DWORD size = MAX_PATH;
 
       while (true)
       {
          // Allocate buffer
-         buffer.resize(size + 1);
+         auto p = buffer.get_buffer(size);
          // Try to get file name
-         DWORD ret = GetModuleFileName(NULL, &buffer[0], size);
+         DWORD ret = GetModuleFileName(NULL, p, size);
+         buffer.release_buffer();
 
          if (ret == 0)
          {
-            return false;
+            throw ::exception(error_failed);
          }
          else if (ret == size || GetLastError() == ERROR_INSUFFICIENT_BUFFER)
          {
@@ -134,9 +159,9 @@ namespace subsystem_windows
          }
       } // while
 
-      out -= &buffer[0];
+      //out -= &buffer[0];
 
-      return true;
+      return buffer;
    } // void
 
    bool OperatingSystem::isItTheSamePathAsCurrent(unsigned int pId)
@@ -145,99 +170,147 @@ namespace subsystem_windows
       ProcessHandle pHandle;
 
       pHandle.openProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, 0, pId);
-      pHandle.getProcessModulePath(&testedModulePath);
-      getCurrentModulePath(&currModulePath);
+      testedModulePath = pHandle.getProcessModulePath();
+      currModulePath = getCurrentModulePath();
 
-      return currModulePath.isEqualTo(testedModulePath);
+      return currModulePath == testedModulePath;
    }
 
-   bool OperatingSystem::getCurrentModuleFolderPath(::string &out)
+   ::string OperatingSystem::getCurrentModuleFolderPath()
    {
-      if (!getCurrentModulePath(out))
+      ::string out;
+
+      out = getCurrentModuleFolderPath();
+
+      /*if (!getCurrentModulePath(out))
       {
          return false;
-      }
+      }*/
 
-      memsize lastPos = out->findLast(_T('\\'));
+      auto strFolder = file_path_folder(out);
+      //memsize lastPos = out->findLast(_T('\\'));
 
-      if (lastPos != (memsize)-1)
-      {
-         out->getSubstring(out, 0, ::maximum(lastPos - 1, (memsize)0));
-      }
+      //if (lastPos != (memsize)-1)
+      //{
+      //   out->getSubstring(out, 0, ::maximum(lastPos - 1, (memsize)0));
+      //}
 
-      return true;
+      return strFolder;
    }
 
-   bool OperatingSystem::getCurrentUserName(::string &out, LogWriter *log)
+   //bool OperatingSystem::getCurrentUserName(::string &out, ::subsystem::LogWriter *log)
+   ::string OperatingSystem::getCurrentUserName()
    {
-      *out = WTS::getCurrentUserName(log);
-      return !out->is_empty();
+
+      ::string out;
+      out = WindowsSubsystem().WTS().getCurrentUserName(system()->m_papplication);
+      //return !out->is_empty();
+      return out;
    }
 
-   bool OperatingSystem::getComputerName(::string &out)
+   ::string OperatingSystem::getComputerName()
    {
-      TCHAR compName[MAX_COMPUTERNAME_LENGTH + 1];
+      ::string out;
+      WCHAR compName[MAX_COMPUTERNAME_LENGTH + 1];
       DWORD length = MAX_COMPUTERNAME_LENGTH + 1;
-      if (GetComputerName(compName, &length) == 0)
+      if (GetComputerNameW(compName, &length) == 0)
       {
-         return false;
+         return {};
       }
-      out -= compName;
-      out->make_lower();
-      return true;
+      out = compName;
+      out.make_lower();
+      //return true;
+      return out;
    }
 
 
-   void OperatingSystem::init()
-   {
-      if (m_osVerInfo.dwOSVersionInfoSize == 0)
-      {
-         m_osVerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+   //void OperatingSystem::init()
+   //{
+   //   if (m_osVerInfo.dwOSVersionInfoSize == 0)
+   //   {
+   //      m_osVerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
 
-         if (!GetVersionEx(&m_osVerInfo))
-         {
-            m_osVerInfo.dwOSVersionInfoSize = 0;
-         }
-      }
-   }
+   //      if (!GetVersionEx(&m_osVerInfo))
+   //      {
+   //         m_osVerInfo.dwOSVersionInfoSize = 0;
+   //      }
+   //   }
+   //}
+
+   //bool OperatingSystem::isWinNTFamily()
+   //{
+   //   init();
+   //   return m_osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT;
+   //}
+
+   //bool OperatingSystem::isWin2000()
+   //{
+   //   init();
+   //   return m_osVerInfo.dwMajorVersion == 5 && m_osVerInfo.dwMinorVersion == 0;
+   //}
+
+   //bool OperatingSystem::isWinXP()
+   //{
+   //   init();
+   //   return ((m_osVerInfo.dwMajorVersion == 5) && (m_osVerInfo.dwMinorVersion == 1) && isWinNTFamily());
+   //}
+
+   //bool OperatingSystem::isWin2003Server()
+   //{
+   //   init();
+   //   return ((m_osVerInfo.dwMajorVersion == 5) && (m_osVerInfo.dwMinorVersion == 2) && isWinNTFamily());
+   //}
+
+   //bool OperatingSystem::isVistaOrLater()
+   //{
+   //   init();
+   //   return m_osVerInfo.dwMajorVersion >= 6;
+   //}
+
+   //bool OperatingSystem::isWin7()
+   //{
+   //   init();
+   //   return ((m_osVerInfo.dwMajorVersion == 6) && (m_osVerInfo.dwMinorVersion == 1) && isWinNTFamily());
+   //}
 
    bool OperatingSystem::isWinNTFamily()
    {
-      init();
-      return m_osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT;
+      // All modern Windows versions (XP and later) are part of the NT family.
+      // VersionHelpers only support XP and later, so this is effectively always true.
+      return IsWindowsXPOrGreater();
    }
 
    bool OperatingSystem::isWin2000()
    {
-      init();
-      return m_osVerInfo.dwMajorVersion == 5 && m_osVerInfo.dwMinorVersion == 0;
+      // Windows 2000 is Version 5.0.
+      // VersionHelpers don't have a named function for 2000, so use the generic helper.
+      return IsWindowsVersionOrGreater(5, 0, 0) && !IsWindowsXPOrGreater();
    }
 
    bool OperatingSystem::isWinXP()
    {
-      init();
-      return ((m_osVerInfo.dwMajorVersion == 5) && (m_osVerInfo.dwMinorVersion == 1) && isWinNTFamily());
+      // Windows XP is Version 5.1.
+      return IsWindowsVersionOrGreater(5, 1, 0) && !IsWindowsVersionOrGreater(5, 2, 0);
    }
 
    bool OperatingSystem::isWin2003Server()
    {
-      init();
-      return ((m_osVerInfo.dwMajorVersion == 5) && (m_osVerInfo.dwMinorVersion == 2) && isWinNTFamily());
+      // Windows Server 2003 is Version 5.2 and is a Server OS.
+      return IsWindowsVersionOrGreater(5, 2, 0) && IsWindowsServer();
    }
 
    bool OperatingSystem::isVistaOrLater()
    {
-      init();
-      return m_osVerInfo.dwMajorVersion >= 6;
+      // Direct replacement using the named helper function.
+      return IsWindowsVistaOrGreater();
    }
 
    bool OperatingSystem::isWin7()
    {
-      init();
-      return ((m_osVerInfo.dwMajorVersion == 6) && (m_osVerInfo.dwMinorVersion == 1) && isWinNTFamily());
+      // Windows 7 is Version 6.1.
+      return IsWindows7OrGreater() && !IsWindows8OrGreater();
    }
-
-   void OperatingSystem::simulateCtrlAltDel(LogWriter *log)
+   void OperatingSystem::simulateCtrlAltDel(::subsystem::LogWriter *log)
    {
       // FIXME: Do not use log here.
       log->information("Requested Ctrl+Alt+Del simulation");
@@ -250,14 +323,16 @@ namespace subsystem_windows
       }
    }
 
-   void OperatingSystem::simulateCtrlAltDelUnderVista(LogWriter *log)
+   void OperatingSystem::simulateCtrlAltDelUnderVista(::subsystem::LogWriter *log)
    {
       // FIXME: Do not use log here.
       log->information("Requested Ctrl+Alt+Del simulation under Vista or later");
 
       try
       {
-         DynamicLibrary sasLib("sas.dll");
+         DynamicLibrary sasLib;
+         
+         sasLib.initialize_dynamic_library("sas.dll");
          SendSas sendSas = (SendSas)sasLib.getProcAddress("SendSAS");
          if (sendSas == 0)
          {
@@ -271,11 +346,13 @@ namespace subsystem_windows
       }
    }
 
-   bool OperatingSystem::isAeroOn(LogWriter *log)
+   bool OperatingSystem::isAeroOn(::subsystem::LogWriter *log)
    {
       try
       {
-         DynamicLibrary dwmLib("Dwmapi.dll");
+         DynamicLibrary dwmLib;
+         
+         dwmLib.initialize_dynamic_library("Dwmapi.dll");
          DwmIsCompositionEnabled dwmIsEnabled =
             (DwmIsCompositionEnabled)dwmLib.getProcAddress("DwmIsCompositionEnabled");
          if (dwmIsEnabled == 0)
