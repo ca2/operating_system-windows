@@ -44,13 +44,10 @@
     void ProcessCommandLine::initialize_process_command_line()
     {
 
-       ::string_array out;
+       auto pcommandlinearguments = MainSubsystem().getCurrentProcessCommandLineArguments();
 
-       construct_newø(m_pcommandlinearguments);
+       auto out = m_pcommandlinearguments->getArgs();
 
-       MainSubsystem().initializeCommandLineArguments(m_pcommandlinearguments);
-
-       out = m_pcommandlinearguments->getArgs();
        for (size_t i = 0; i < out.size(); i++) {
           if (out[i][0] != _T('-')) {
              m_strParam.add(out[i]);

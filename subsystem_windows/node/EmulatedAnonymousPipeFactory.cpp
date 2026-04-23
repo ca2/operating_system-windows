@@ -62,7 +62,7 @@ namespace subsystem_windows
       randomName = getUniqPipeName();
       PipeServer pipeServer;
        pipeServer.initialize_pipe_server(randomName, m_bufferSize, 0, 1000);
-      clientPipe = MainSubsystem().pipe_client()->connect(randomName, m_bufferSize);
+      clientPipe = MainSubsystem().PipeClient().connect(randomName, m_bufferSize);
       serverPipe = pipeServer.accept();
 
       HANDLE hThisSideWrite = serverPipe->getFile()->_HANDLE();

@@ -25,12 +25,12 @@
 #pragma once
 
 
-//#include "remoting/remoting_common/util/winhdr.h"
+//#include "subsystem/winhdr.h"
 #include "acme/prototype/collection/comparable_list.h"
 #include "subsystem/node/OperatingSystemApplication.h"
 #include "subsystem_windows/_common_header.h"
 
-//#include "remoting/remoting_common/thread/LocalMutex.h"
+//#include "remoting/remoting/thread/LocalMutex.h"
 //#include <list>
 
 namespace subsystem_windows

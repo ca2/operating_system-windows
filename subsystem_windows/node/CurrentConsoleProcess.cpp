@@ -26,7 +26,7 @@
 #include "CurrentConsoleProcess.h"
 
 #include "subsystem_windows/node/WinStaLibrary.h"
-//#include "remoting/remoting_common/win_system/Environment.h"
+//#include "remoting/remoting/win_system/Environment.h"
 #include "subsystem/node/SystemException.h"
 #include "subsystem_windows/node/Process.h"
 #include "subsystem_windows/node/Workstation.h"

@@ -28,7 +28,7 @@
 //#include "subsystem/node/PipeServer.h"
 
 #include "subsystem/node/NamedPipe.h"
-//#include "remoting/remoting_common/thread/LocalMutex.h"
+//#include "remoting/remoting/thread/LocalMutex.h"
 
 //#include "DynamicLibrary.h"
 //#include "subsystem_windows/_common_header.h"

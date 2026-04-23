@@ -2100,6 +2100,7 @@
     <ClInclude Include="node\ApplicationCrashEvents.h" />
     <ClInclude Include="node\AutoImpersonator.h" />
     <ClInclude Include="node\Clipboard.h" />
+    <ClInclude Include="node\Clipboard2.h" />
     <ClInclude Include="node\CommandLineArguments.h" />
     <ClInclude Include="node\CtrlAltDelSimulator.h" />
     <ClInclude Include="node\CurrentConsoleProcess.h" />
@@ -2112,6 +2113,7 @@
     <ClInclude Include="node\InputInjector.h" />
     <ClInclude Include="node\Keyboard.h" />
     <ClInclude Include="node\LocalOperatingAmbientApplication.h" />
+    <ClInclude Include="node\MessageWindow.h" />
     <ClInclude Include="node\NamedPipe.h" />
     <ClInclude Include="node\OperatingSystem.h" />
     <ClInclude Include="node\OperatingSystemApplication.h" />
@@ -2192,6 +2194,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="node\WindowMessageHandler.h" />
     <ClInclude Include="node\WindowsRegistry.h" />
     <ClInclude Include="node\WindowsRegistryKey.h" />
     <ClInclude Include="node\WinHandles.h" />
@@ -2212,6 +2215,7 @@
     <ClInclude Include="thread\LocalMutex.h" />
     <ClInclude Include="thread\Lockable.h" />
     <ClInclude Include="thread\resource.h" />
+    <ClInclude Include="thread\SessionChangesWatcher.h" />
     <ClInclude Include="thread\Thread.h" />
     <ClInclude Include="thread\ThreadCollector.h" />
     <ClInclude Include="thread\_.h" />
@@ -2225,6 +2229,7 @@
     <ClCompile Include="node\AnonymousPipeFactory.cpp" />
     <ClCompile Include="node\AutoImpersonator.cpp" />
     <ClCompile Include="node\Clipboard.cpp" />
+    <ClCompile Include="node\Clipboard2.cpp" />
     <ClCompile Include="node\CtrlAltDelSimulator.cpp" />
     <ClCompile Include="node\CurrentConsoleProcess.cpp" />
     <ClCompile Include="node\Cursor.cpp" />
@@ -2236,6 +2241,7 @@
     <ClCompile Include="node\InputInjector.cpp" />
     <ClCompile Include="node\Keyboard.cpp" />
     <ClCompile Include="node\LocalOperatingSystemApplication.cpp" />
+    <ClCompile Include="node\MessageWindow.cpp" />
     <ClCompile Include="node\NamedPipe.cpp" />
     <ClCompile Include="node\OperatingSystem.cpp" />
     <ClCompile Include="node\OperatingSystemApplication.cpp" />
@@ -2334,6 +2340,7 @@
     <ClCompile Include="thread\GlobalMutex.cpp" />
     <ClCompile Include="thread\GuiThread.cpp" />
     <ClCompile Include="thread\LocalMutex.cpp" />
+    <ClCompile Include="thread\SessionChangesWatcher.cpp" />
     <ClCompile Include="thread\Thread.cpp" />
     <ClCompile Include="thread\ThreadCollector.cpp" />
     <ClCompile Include="thread\_.cpp" />

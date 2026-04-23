@@ -817,8 +817,8 @@ namespace innate_subsystem_windows
       } else {
          debug("Get monitor info is failed. Use second method (no multi-screen).");
          ::int_rectangle desktopRc;
-         if (!MainSubsystem().system_information()->getDesktopArea(desktopRc)) {
-            MainSubsystem().system_information()->getDesktopAllArea(desktopRc);
+         if (!MainSubsystem().SystemInformation().getDesktopArea(desktopRc)) {
+            MainSubsystem().SystemInformation().getDesktopAllArea(desktopRc);
          }
          rectangleScreenWorkArea  = desktopRc;
       }

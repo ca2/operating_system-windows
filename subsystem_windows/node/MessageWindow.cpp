@@ -27,20 +27,23 @@
 
 
 #define DEFAULT_WINDOW_CLASS_NAME "WindowClass"
-namespace innate_subsystem_windows
+
+
+namespace subsystem_windows
 {
+
+
    MessageWindow::MessageWindow(const HINSTANCE hinst,
-                                const TCHAR *windowClassName,
+                                const char *windowClassName,
                                 WindowMessageHandler *messageHandler)
    : m_hwnd(0),
      m_hinst(hinst),
-     m_windowClassName(0),
      m_messageHandler(messageHandler)
    {
       if (windowClassName != 0) {
-         m_windowClassName = _tcsdup(windowClassName);
+         m_strWindowClassName = windowClassName;
       } else {
-         m_windowClassName = _tcsdup(_T(DEFAULT_WINDOW_CLASS_NAME));
+         m_strWindowClassName = DEFAULT_WINDOW_CLASS_NAME;
       }
 
    }
@@ -49,9 +52,11 @@ namespace innate_subsystem_windows
    {
       destroyWindow();
 
-      if (m_windowClassName != 0) {
-         UnregisterClass(m_windowClassName, m_hinst);
-         free(m_windowClassName);
+      if (m_strWindowClassName.has_character()) {
+         ::wstring wstrWindowClassName;
+         wstrWindowClassName = m_strWindowClassName;
+         UnregisterClass(wstrWindowClassName, m_hinst);
+         m_strWindowClassName.clear();
       }
    }
 
@@ -61,11 +66,19 @@ namespace innate_subsystem_windows
          m_messageHandler = messageHandler;
       }
 
-      if (regClass(m_hinst, m_windowClassName) == 0) {
+      ::wstring wstrWindowClassName;
+
+      wstrWindowClassName = m_strWindowClassName;
+
+      if (regClass(m_hinst, m_strWindowClassName) == 0) {
          return false;
       }
 
-      m_hwnd = ::CreateWindow(m_windowClassName, _T("MessageWindow"),
+      //::wstring wstrWindowClassName;
+
+      wstrWindowClassName = m_strWindowClassName;
+
+      m_hwnd = ::CreateWindow(wstrWindowClassName, _T("MessageWindow"),
                               WS_OVERLAPPEDWINDOW, 0, 0, 1, 1,
                               0, NULL, m_hinst, this);
 
@@ -112,16 +125,26 @@ namespace innate_subsystem_windows
       return DefWindowProc(hwnd, message, wparam, lparam);
    }
 
-   ATOM MessageWindow::regClass(HINSTANCE hinst, TCHAR *windowClassName)
+   ATOM MessageWindow::regClass(HINSTANCE hinst, const char *windowClassName)
    {
+
+      ::wstring wstrWindowClassName;
+
+      wstrWindowClassName = windowClassName;
+
       WNDCLASS wcWindowClass = {0};
       wcWindowClass.lpfnWndProc = staticWndProc;
       wcWindowClass.style = NULL;
       wcWindowClass.hInstance = m_hinst;
-      wcWindowClass.lpszClassName = windowClassName;
+      wcWindowClass.lpszClassName = wstrWindowClassName;
       wcWindowClass.hCursor = NULL;
       wcWindowClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
 
       return RegisterClass(&wcWindowClass);
    }
-} // namespace innate_subsystem_windows
+
+
+} // namespace subsystem_windows
+
+
+

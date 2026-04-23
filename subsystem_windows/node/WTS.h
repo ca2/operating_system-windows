@@ -26,10 +26,10 @@
 #pragma once
 
 
-//#include "remoting/remoting_common/util/winhdr.h"
+//#include "subsystem/winhdr.h"
 //#include "subsystem_windows/_common_header.h"
 
-//#include "remoting/remoting_common/thread/LocalMutex.h"
+//#include "remoting/remoting/thread/LocalMutex.h"
 //#include "subsystem_windows/node/DynamicLibrary.h"
 //#include "acme/SystemException.h"
 //#include "log_writer/LogWriter.h"

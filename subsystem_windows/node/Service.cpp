@@ -32,7 +32,8 @@
 
 namespace subsystem_windows
 {
-      Service *Service::g_service = 0;
+      
+   Service *Service::g_service = 0;
 
 
       Service::Service()

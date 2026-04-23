@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "WTS.h"
 #include "subsystem/node/SystemException.h"
-//#include "remoting/remoting_common/thread/critical_section_lock.h"
+//#include "remoting/remoting/thread/critical_section_lock.h"
 //#include "Environment.h"
 #include "PipeImpersonatedThread.h"
 #include "acme/platform/node.h"

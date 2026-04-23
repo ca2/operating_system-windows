@@ -76,11 +76,13 @@ list(APPEND library_source
    node/AutoImpersonator.h
    node/Clipboard.cpp
    node/Clipboard.h
-   node/CommandLineArguments.cpp
-   node/CommandLineArguments.h
    node/Cursor.cpp
    node/Cursor.h
    #node/CMakeLists.txt
+   node/CtrlAltDelSimulator.cpp
+   node/CtrlAltDelSimulator.h
+   node/CurrentConsoleProcess.cpp
+   node/CurrentConsoleProcess.h
    node/Displays.cpp
    node/Displays.h
    node/DynamicLibrary.cpp
@@ -97,9 +99,13 @@ list(APPEND library_source
    node/Keyboard.h
    node/LocalOperatingSystemApplication.cpp
    node/LocalOperatingSystemApplication.h
+   node/MessageWindow.cpp
+   node/MessageWindow.h
    #node/matter.txt
    node/NamedPipe.cpp
    node/NamedPipe.h
+   node/OperatingSystem.cpp
+   node/OperatingSystem.h
    node/OperatingSystemApplication.cpp
    node/OperatingSystemApplication.h
    node/OperatingSystemHook.cpp
@@ -147,10 +153,11 @@ list(APPEND library_source
    node/VersionInfo.cpp
    node/VersionInfo.h
    #node/win_system.vcproj
-   node/WindowsEvent.cpp
-   node/WindowsEvent.h
-   node/WindowsEventEx.cpp
-   node/WindowsEventEx.h
+   #node/WindowsEvent.cpp
+   #node/WindowsEvent.h
+   #node/WindowsEventEx.cpp
+   #node/WindowsEventEx.h
+   node/WindowMessageHandler.h
    node/WindowsRegistry.cpp
    node/WindowsRegistry.h
    node/WindowsRegistryKey.cpp
@@ -197,8 +204,12 @@ list(APPEND library_source
    #thread/thread.vcproj
    thread/ThreadCollector.cpp
    thread/ThreadCollector.h
+   thread/ZombieKiller.cpp
+   thread/ZombieKiller.h
    _.h
    _factory.cpp
+   #node/CommandLineArguments.cpp
+   #node/CommandLineArguments.h
    framework.cpp
    framework.h
    subsystem.cpp

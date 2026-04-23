@@ -27,8 +27,8 @@
 #include "subsystem/Exception.h"
 #include "subsystem_windows/node/File.h"
 #include <crtdbg.h>
-//#include "remoting/remoting_common/win_system/Environment.h"
-//#include "remoting/remoting_common/thread/critical_section_lock.h"
+//#include "remoting/remoting/win_system/Environment.h"
+//#include "remoting/remoting/thread/critical_section_lock.h"
 
 namespace subsystem_windows
 {

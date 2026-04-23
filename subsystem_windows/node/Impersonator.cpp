@@ -31,7 +31,7 @@
 
 //#include <crtdbg.h>
 
-//#include "remoting/remoting_common/win_system/WTS.h"
+//#include "remoting/remoting/win_system/WTS.h"
 
 namespace subsystem_windows
 {

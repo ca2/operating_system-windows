@@ -31,7 +31,7 @@
 #include "subsystem_windows/node/File.h"
 #include "subsystem_windows/node/Pipe.h"
 #include "acme/parallelization/happening.h"
-//#include "remoting/remoting_common/thread/LocalMutex.h"
+//#include "remoting/remoting/thread/LocalMutex.h"
 //#include "log_writer/LogWriter.h"
 
 namespace subsystem_windows

@@ -25,7 +25,7 @@
 // #pragma once
 //
 //
-// //////#include "remoting/remoting_common/util/::string.h"
+// //////#include "subsystem/::string.h"
 // //#include "log_writer/LogWriter.h"
 //
 // #include <winnt.h>

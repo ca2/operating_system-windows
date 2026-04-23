@@ -30,21 +30,22 @@ namespace subsystem_windows
    GuiThread::GuiThread()
    : m_desk(0)
    {
-      m_desk = MainSubsystem().desktop_selector()->getInputDesktop();
+      m_desk = MainSubsystem().DesktopSelector().getInputDesktop();
    }
 
    GuiThread::~GuiThread()
    {
       if (m_desk.m_u) {
-          MainSubsystem().desktop_selector()->closeDesktop(m_desk);
+         MainSubsystem().DesktopSelector().closeDesktop(m_desk);
       }
    }
 
    void GuiThread::initByDerived()
    {
-       MainSubsystem().desktop_selector()->setDesktopToCurrentThread(m_desk);
+      MainSubsystem().DesktopSelector().setDesktopToCurrentThread(m_desk);
       // If unsuccessful, desktop will be closed in destructor
-      if ( MainSubsystem().desktop_selector()->closeDesktop(m_desk)) {
+      if (MainSubsystem().DesktopSelector().closeDesktop(m_desk))
+      {
          m_desk = 0;
       }
    }

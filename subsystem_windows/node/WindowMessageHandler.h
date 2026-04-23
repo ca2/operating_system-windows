@@ -17,41 +17,31 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along
-// with this program; if not, w_rite to the Free Software Foundation, Inc.,
+// with this program; if not, write to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-
 #pragma once
 
 
-//#include "remoting/remoting/region/::int_point.h"
-#include "subsystem/node/Cursor.h"
-#include "subsystem_windows/_common_header.h"
-
 namespace subsystem_windows
 {
-      class CLASS_DECL_SUBSYSTEM_WINDOWS Cursor :
-      virtual public Implementation<::subsystem::CursorInterface >
-      {
-      public:
-         Cursor();
-         ~Cursor() override;
-
-         virtual ::int_point getCursorPos() const = 0;
-      };
-
-      // class CLASS_DECL_SUBSYSTEM_WINDOWS Cursor :
-      // virtual public composite<Cursor
-      // {
-      // public:
-      //    Cursor();
-      //    ~Cursor() override;
-      //
-      //    ::int_point getCursorPos() const override;
-      // };
 
 
-} // namespace subsystem_windows
+   class WindowMessageHandler
+   {
+   public:
+      
+      
+      // This function must return true if a message has been processed.
+      virtual bool processMessage(unsigned int message, ::wparam wparam, ::lparam lparam) = 0;
+
+
+   };
+
+
+} // namespace subsystem_windows 
+
+
 
 

@@ -27,8 +27,8 @@
 #include "subsystem/Exception.h"
 #include "subsystem_windows/node/File.h"
 //#include <crtdbg.h>
-//#include "remoting/remoting_common/win_system/Environment.h"
-//#include "remoting/remoting_common/thread/AutoLock.h"
+//#include "remoting/remoting/win_system/Environment.h"
+//#include "remoting/remoting/thread/AutoLock.h"
 
 #define MAX_PORTION_SIZE 512 * 1024
 

@@ -27,7 +27,7 @@
 //#include "util/CommonHeader.h"
 //#include "../../source/app/apex/operating_system/windows/innate_subsystem_windows/WindowMessageHandler.h"
 
-namespace  innate_subsystem_windows
+namespace subsystem_windows
 {
    class MessageWindow
    {
@@ -35,7 +35,7 @@ namespace  innate_subsystem_windows
       // messageHandler is an external message handler that replace the
       // wndProc() function on message processing. If
       // messageHandler == 0 the wndProc() function will be used.
-      MessageWindow(const HINSTANCE hinst, const TCHAR *windowClassName,
+      MessageWindow(const HINSTANCE hinst, const char *windowClassName,
                     WindowMessageHandler *messageHandler = 0);
       virtual ~MessageWindow(void);
 
@@ -52,15 +52,20 @@ namespace  innate_subsystem_windows
       WindowMessageHandler *m_messageHandler;
 
       HINSTANCE m_hinst;
-      TCHAR *m_windowClassName;
+      ::string m_strWindowClassName;
 
    private:
-      ATOM regClass(HINSTANCE hinst, TCHAR *windowClassName);
+      ATOM regClass(HINSTANCE hinst, const char * pszWindowClassName);
 
       static LRESULT CALLBACK staticWndProc(HWND hwnd,
                                             unsigned int message,
                                             WPARAM wparam,
                                             LPARAM lparam);
    };
-} // namespace  innate_subsystem_windows
+
+
+} // namespace subsystem_windows
+
+
+
 

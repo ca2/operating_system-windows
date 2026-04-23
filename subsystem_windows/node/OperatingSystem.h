@@ -26,7 +26,7 @@
 
 
 #include "subsystem/node/OperatingSystem.h"
- //////#include "remoting/remoting_common/util/::string.h"
+ //////#include "subsystem/::string.h"
  //#include "log_writer/LogWriter.h"
 
  // #include aaa_<winnt.h>

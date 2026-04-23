@@ -202,6 +202,18 @@
     <ClInclude Include="node\OperatingSystem.h">
       <Filter>Header Files\node</Filter>
     </ClInclude>
+    <ClInclude Include="thread\SessionChangesWatcher.h">
+      <Filter>Header Files\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="node\Clipboard2.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\MessageWindow.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
+    <ClInclude Include="node\WindowMessageHandler.h">
+      <Filter>Header Files\node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -423,6 +435,15 @@
       <Filter>Source Files\thread</Filter>
     </ClCompile>
     <ClCompile Include="node\OperatingSystem.cpp">
+      <Filter>Source Files\node</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\SessionChangesWatcher.cpp">
+      <Filter>Source Files\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="node\Clipboard2.cpp">
+      <Filter>Source Files\node</Filter>
+    </ClCompile>
+    <ClCompile Include="node\MessageWindow.cpp">
       <Filter>Source Files\node</Filter>
     </ClCompile>
   </ItemGroup>

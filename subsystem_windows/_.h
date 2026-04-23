@@ -29,6 +29,7 @@
 namespace subsystem_windows
 {
 
+
    class File;
 
    class DynamicLibrary;
@@ -40,6 +41,9 @@ namespace subsystem_windows
    class WTS;
 
    class PipeServer;
+
+   class WindowMessageHandler;
+
 
 } // namespace subsystem_windows
 

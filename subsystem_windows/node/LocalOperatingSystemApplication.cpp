@@ -25,7 +25,7 @@
 #include "subsystem_windows/_common_header.h"
 #include "LocalOperatingSystemApplication.h"
 
-//#include "remoting/remoting_common/util/winhdr.h"
+//#include "subsystem/winhdr.h"
 #include "subsystem_windows/_common_header.h"
 
 #include "subsystem/thread/DesktopSelector.h"
@@ -59,7 +59,7 @@ namespace subsystem_windows
 
       // FIXME: why we don't check returning values?
       //DesktopSelector::selectDesktop();
-      MainSubsystem().desktop_selector()->selectDesktop();
+      MainSubsystem().DesktopSelector().selectDesktop();
    }
 
    LocalOperatingSystemApplication::~LocalOperatingSystemApplication() {}

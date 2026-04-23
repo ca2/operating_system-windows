@@ -47,20 +47,22 @@ list(APPEND library_source
    gui/ImagedButton.h
    gui/ImageList.cpp
    gui/ImageList.h
+   gui/KeyboardLayout.cpp
+   gui/KeyboardLayout.h
    gui/ListBox.cpp
    gui/ListBox.h
    gui/ListView.cpp
    gui/ListView.h
    gui/Menu.cpp
    gui/Menu.h
-   gui/MessageWindow.cpp
-   gui/MessageWindow.h
+   #gui/MessageWindow.cpp
+   #gui/MessageWindow.h
    gui/NotifyIcon.cpp
    gui/NotifyIcon.h
    gui/NotifyIconWindow.cpp
    gui/NotifyIconWindow.h
-   gui/PaintWindow.cpp
-   gui/PaintWindow.h
+   #gui/PaintWindow.cpp
+   #gui/PaintWindow.h
    gui/ProgressBar.cpp
    gui/ProgressBar.h
    gui/ScrollBar.cpp
@@ -110,8 +112,8 @@ list(APPEND library_source
    #BalloonTip.h
    framework.cpp
    framework.h
-   resource_loader.cpp
-   resource_loader.h
+   ResourceLoader.cpp
+   ResourceLoader.h
    subsystem.cpp
    subsystem.h
    )

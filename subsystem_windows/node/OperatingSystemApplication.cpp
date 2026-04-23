@@ -27,7 +27,7 @@
 #include "acme/platform/system.h"
 #include "acme/windowing/windowing.h"
 #include "subsystem_windows/_common_header.h"
-//#include "remoting/remoting_common/thread/critical_section_lock.h"
+//#include "remoting/remoting/thread/critical_section_lock.h"
 
 namespace subsystem_windows
 {

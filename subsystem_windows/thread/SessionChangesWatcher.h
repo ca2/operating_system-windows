@@ -24,40 +24,35 @@
 
 #pragma once
 
-#include "subsystem/node/Keyboard.h"
-//#include "subsystem/winhdr.h"
-#include "subsystem_windows/_common_header.h"
 
-
+#include "subsystem/thread/GuiThread.h"
+#include "subsystem/thread/SessionChangesWatcher.h"
+////#include "subsystem/AnEventListener.h"
+//#include "log_writer/LogWriter.h"
 namespace subsystem_windows
 {
-      /**
-       * Wrapper on base WinAPI keyboard functions.
-       */
-      class CLASS_DECL_SUBSYSTEM_WINDOWS Keyboard :
-   virtual public Implementation<subsystem::KeyboardInterface>
-      {
-      public:
-         /**
-          * Copied current keyboard state (256 virtual keys state) to state array.
-          * @param state [out] array of 256 virtual key states.
-          * @throws SystemException on error.
-          */
-         void getState(BYTE state[256]) override;
 
-         /**
-          * Sets current keyboard state.
-          * @param state array of 256 virtual key states.
-          * @throws SystemException on error.
-          */
-         void setState(BYTE state[256]) override;
+   class SessionChangesWatcher : public ::subsystem::GuiThread, virtual public ::subsystem::SessionChangesWatcher
+   {
+   public:
+      // SessionChangesWatcher(AnEventListener *extSessionChangesListener, ::subsystem::LogWriter *log);
+      SessionChangesWatcher();
+      ~SessionChangesWatcher() override;
 
-         /**
-          * Check if specified key is in pressed state.
-          * @param vkCode virtual code of key.
-          * @return true if key is pressed, false if released.
-          */
-         bool isKeyPressed(BYTE vkCode) override;
 
-      };
+      void start_SessionChangesWatcher(const ::procedure &procedureSessionChanged, ::subsystem::LogWriter *plogwriter) override;
+
+      //   protected:
+      virtual void execute();
+
+
+
+      DWORD m_baseSessionId;
+      /// AnEventListener *m_extSessionChangesListener;
+
+      ::procedure m_procedureSessionChanged;
+
+      ::subsystem::LogWriter *m_plogwriter;
+   };
+
 } // namespace subsystem_windows

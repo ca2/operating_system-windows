@@ -41,7 +41,7 @@ namespace subsystem_windows
    void CtrlAltDelSimulator::execute()
    {
       // Switch thread desktop to "Winlogon".
-      if (WindowsSubsystem().desktop_selector()->selectDesktop(::string("Winlogon")))
+      if (WindowsSubsystem().DesktopSelector().selectDesktop("Winlogon"))
       {
          HWND hwndCtrlAltDel = FindWindow(L"SAS window class", L"SAS window");
          if (hwndCtrlAltDel == NULL)

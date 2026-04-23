@@ -44,12 +44,26 @@ namespace subsystem_windows
              virtual void _parse_windows_command_line_arguments(::subsystem::CommandLineArguments *pcommandlinearguments,
                                                          const scoped_string &scopedstrCommandLineInWindowsFormat);
 
-         void initializeCommandLineArguments(::subsystem::CommandLineArguments *pcommandlinearguments) override;
+//         void initializeCommandLineArguments(::subsystem::CommandLineArguments *pcommandlinearguments,
+//                                                 const scoped_string &scopedstrCommandLineInWindowsFormat) override;
+
+      virtual pointer<::subsystem::CommandLineArguments>
+         getCurrentProcessCommandLineArguments() override;
+
+      virtual pointer<::subsystem::CommandLineArguments>
+      getCommandLineArguments(const ::scoped_string &scopedstrCommandLine) override;
 
       ::pointer < ::subsystem::SecurityIdentifier > createSidFromString(const ::scoped_string & scopedstr) override;
 
       bool EncryptData(const ::string& input, ::memory & output) override;
       bool DecryptData(const memory & input, ::string& output) override;
+
+      pointer<::subsystem::FileInterface> fileFrom_HANDLE(void *pHANDLE) override;
+
+
+      virtual void toString(::string &str, const ::earth::time &time);
+
+      memsize getCurrentMemoryUsage() override;
 
 
 

@@ -25,7 +25,7 @@
 #include "subsystem_windows/_common_header.h"
 #include "ServiceControlManagerClient.h"
 
-//#include "remoting/remoting_common/thread/Thread.h"
+//#include "remoting/remoting/thread/Thread.h"
 
 namespace subsystem_windows
 {

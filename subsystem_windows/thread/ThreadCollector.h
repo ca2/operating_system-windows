@@ -26,7 +26,7 @@
 
 //
 // //#include "critical_section.h"
-// //#include "remoting/remoting_common/win_system/WindowsEvent.h"
+// //#include "remoting/remoting/win_system/WindowsEvent.h"
 // //#include <list>
 //
 // #include "acme/prototype/collection/list.h"

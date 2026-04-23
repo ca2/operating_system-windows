@@ -25,7 +25,7 @@
 #include "InputInjector.h"
 #include "Keyboard.h"
 #include "subsystem/node/SystemException.h"
-//#include "remoting/remoting_common/win_system/Environment.h"
+//#include "remoting/remoting/win_system/Environment.h"
 //#include <vector>
 
 //#include <crtdbg.h>

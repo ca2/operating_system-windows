@@ -25,13 +25,13 @@
 #pragma once
 
 
-//#include "remoting/remoting_common/util/winhdr.h"
+//#include "subsystem/winhdr.h"
 #include "subsystem/node/Service.h"
 #include "subsystem_windows/_common_header.h"
 
-//////#include "remoting/remoting_common/util/::string.h"
+//////#include "subsystem/::string.h"
 //#include "subsystem/Exception.h"
-//#include "remoting/remoting_common/thread/Thread.h"
+//#include "remoting/remoting/thread/Thread.h"
 
 namespace subsystem_windows
 {

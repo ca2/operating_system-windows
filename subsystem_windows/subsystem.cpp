@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "subsystem.h"
 #include "subsystem/CommandLineArguments.h"
+#include "node/File.h"
 #include "node/OperatingSystem.h"
 #include "node/Shell.h"
 #include "node/WTS.h"
@@ -96,22 +97,39 @@ subsystem::subsystem()
    }
 
 
-    void subsystem::initializeCommandLineArguments(::subsystem::CommandLineArguments* pcommandlinearguments)
-    {
+   pointer<::subsystem::CommandLineArguments> subsystem::getCurrentProcessCommandLineArguments()
+   {
 
+      ::string strCommandLine;
+
+      strCommandLine = ::GetCommandLineW();
+
+      auto pcommandlinearguments = getCommandLineArguments(strCommandLine);
+
+      return pcommandlinearguments;
+
+   }
+
+
+   pointer<::subsystem::CommandLineArguments> subsystem::getCommandLineArguments(const scoped_string &scopedstrCommandLineInWindowsFormat)
+   {
+
+       auto pcommandlinearguments = create_newø<::subsystem::CommandLineArguments>();
 
        ::string strCommandLine;
 
-       strCommandLine = ::GetCommandLineW();
+       strCommandLine = scopedstrCommandLineInWindowsFormat;
 
-      _parse_windows_command_line_arguments(pcommandlinearguments,     strCommandLine);
+       _parse_windows_command_line_arguments(pcommandlinearguments, strCommandLine);
 
+       return pcommandlinearguments;
 
-    }
+   }
 
 
    bool subsystem::EncryptData(const ::string& input, ::memory & output)
-{
+   {
+
    DATA_BLOB inBlob;
    DATA_BLOB outBlob;
 
@@ -189,6 +207,69 @@ subsystem::subsystem()
    //   return wstr;
 
    //}
+
+      pointer<::subsystem::FileInterface> subsystem::fileFrom_HANDLE(void *pHANDLE)
+{
+
+   auto pfile = create_newø<::subsystem_windows::File>();
+
+   pfile->m_handle = (HANDLE)pHANDLE;
+
+   return pfile;
+}
+
+
+   memsize subsystem::getCurrentMemoryUsage()
+   {
+   
+      if (!OperatingSystem().isVistaOrLater())
+      {
+      
+         return 0;
+
+      }
+
+      PROCESS_MEMORY_COUNTERS pmc;
+
+      GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+
+      return pmc.WorkingSetSize;
+
+    }
+
+
+   void subsystem::toString(::string & str, const ::earth::time & time)
+   {
+
+      auto systemTime = as_SYSTEMTIME(time);
+
+      toLocal_SYSTEMTIME(systemTime);
+
+      const size_t dateStringMaxLength = 255;
+
+      TCHAR dateString[dateStringMaxLength + 1];
+
+      if (GetDateFormat(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &systemTime, 0, dateString, dateStringMaxLength) == 0)
+      {
+         // TODO: Process this error.
+      }
+
+      str = dateString;
+      str += ' ';
+
+      const size_t timeStringMaxLength = 255;
+
+      TCHAR timeString[timeStringMaxLength + 1];
+
+      if (GetTimeFormat(LOCALE_USER_DEFAULT, 0, &systemTime, 0, timeString, timeStringMaxLength) == 0)
+      {
+         // TODO: Process this error.
+      }
+
+      str += timeString;
+
+   }
+
 
 }//namespace subsystem_windows
 
