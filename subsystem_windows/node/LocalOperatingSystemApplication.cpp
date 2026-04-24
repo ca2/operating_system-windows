@@ -25,7 +25,7 @@
 #include "subsystem_windows/_common_header.h"
 #include "LocalOperatingSystemApplication.h"
 
-//#include "subsystem/winhdr.h"
+//#include "subsystem/platform/winhdr.h"
 #include "subsystem_windows/_common_header.h"
 
 #include "subsystem/thread/DesktopSelector.h"

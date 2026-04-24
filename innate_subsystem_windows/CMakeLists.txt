@@ -99,6 +99,10 @@ list(APPEND library_source
    gui/WindowMessageHandler.h
    gui/WindowProcHolder.cpp
    gui/WindowProcHolder.h
+   platform/ResourceLoader.cpp
+   platform/ResourceLoader.h
+   platform/subsystem.cpp
+   platform/subsystem.h
    _.cpp
    _.h
    _common_header.h
@@ -112,10 +116,6 @@ list(APPEND library_source
    #BalloonTip.h
    framework.cpp
    framework.h
-   ResourceLoader.cpp
-   ResourceLoader.h
-   subsystem.cpp
-   subsystem.h
    )
 
 

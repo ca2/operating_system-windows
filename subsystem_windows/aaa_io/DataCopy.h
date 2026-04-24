@@ -5,7 +5,7 @@
 #include "OutputStream.h"
 
 
-//#include "subsystem/inttypes.h"
+//#include "subsystem/platform/inttypes.h"
 namespace remoting
 {
    class CLASS_DECL_REMOTING_COMMON DataCopy : public InputStream, public OutputStream

@@ -78,7 +78,7 @@ namespace subsystem_windows
       // object will not change. If the function succeeds, the name of a current
       // input desktop stores in the desktopName object.
       // @return If success the function return true else false.
-      ::string getCurrentDesktopName() override;
+      bool getCurrentDesktopName(::string & str) override;
 
       // @param desktopName - is a pointer to a ::string object that will be
       // used to store the desktop name. If function has failed then the desktopName

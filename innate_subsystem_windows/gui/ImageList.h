@@ -4,7 +4,7 @@
 #pragma once
 #include <commctrl.h>
 
-#include "subsystem/particle.h"
+#include "subsystem/platform/particle.h"
 #include "innate_subsystem/gui/ImageList.h"
 #include "acme/_operating_system.h"
 

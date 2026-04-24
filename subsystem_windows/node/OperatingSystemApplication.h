@@ -25,7 +25,7 @@
 #pragma once
 
 
-//#include "subsystem/winhdr.h"
+//#include "subsystem/platform/winhdr.h"
 #include "acme/prototype/collection/comparable_list.h"
 #include "subsystem/node/OperatingSystemApplication.h"
 #include "subsystem_windows/_common_header.h"
@@ -109,6 +109,8 @@ namespace subsystem_windows
 
 
          int getExitCode() override;
+
+         void setExitCode(int iExitCode) override;
 
          // Fills the wndClass argument and registers new class name in the Windows.
          //virtual void registerWindowClass(WNDCLASS *wndClass);

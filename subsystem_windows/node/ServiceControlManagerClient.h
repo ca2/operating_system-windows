@@ -28,7 +28,7 @@
 #include "subsystem/node/ServiceControlManagerClient.h"
 #include "subsystem_windows/_common_header.h"
 //#include "subsystem_windows/_common_header.h"
-//#include "subsystem/Exception.h"
+//#include "subsystem/platform/Exception.h"
 
 //#include "SystemException.h"
 

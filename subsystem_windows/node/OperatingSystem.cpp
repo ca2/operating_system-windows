@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "OperatingSystem.h"
 #include "CtrlAltDelSimulator.h"
-#include "subsystem_windows/subsystem.h"
+#include "subsystem_windows/platform/subsystem.h"
 #include <shlobj.h>
 #include <VersionHelpers.h>
 // #include aaa_<crtdbg.h>
@@ -374,6 +374,16 @@ namespace subsystem_windows
          log->error("The DwmIsCompositionEnabled() function failed: {}", e.get_message());
          throw;
       }
+   }
+
+
+   bool OperatingSystem::isUserAnAdmin()
+   {
+
+      auto bIsUserAndAdmin = ::IsUserAnAdmin();
+
+      return bIsUserAndAdmin != FALSE;
+
    }
 
 

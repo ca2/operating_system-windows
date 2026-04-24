@@ -27,7 +27,7 @@
 
 #include "subsystem/thread/GuiThread.h"
 #include "subsystem/thread/SessionChangesWatcher.h"
-////#include "subsystem/AnEventListener.h"
+////#include "subsystem/platform/AnEventListener.h"
 //#include "log_writer/LogWriter.h"
 namespace subsystem_windows
 {

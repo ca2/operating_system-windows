@@ -26,7 +26,7 @@
 
 
 #include "subsystem/node/OperatingSystem.h"
- //////#include "subsystem/::string.h"
+ //////#include "subsystem/platform/::string.h"
  //#include "log_writer/LogWriter.h"
 
  // #include aaa_<winnt.h>
@@ -108,6 +108,8 @@
 
        // Returns true if the Aero is On.
        bool isAeroOn(::subsystem::LogWriter *log) override;
+
+       bool isUserAnAdmin() override;
 
     //private:
        //void init() override;

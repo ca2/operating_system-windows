@@ -25,7 +25,7 @@
 #include "subsystem_windows/_common_header.h"
 #include "CtrlAltDelSimulator.h"
 #include "subsystem/thread/DesktopSelector.h"
-#include "subsystem_windows/subsystem.h"
+#include "subsystem_windows/platform/subsystem.h"
 
 namespace subsystem_windows
 {

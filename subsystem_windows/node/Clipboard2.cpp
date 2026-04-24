@@ -98,151 +98,215 @@ namespace subsystem_windows
       const unsigned int CF_TCTEXT = CF_TEXT;
 #endif
 
-      clipDest -= "";
+      clipDest.clear();
+
       if (!IsClipboardFormatAvailable(CF_TCTEXT) || !OpenClipboard(m_hwnd))
       {
+
          return;
+
       }
 
       HANDLE hglb = GetClipboardData(CF_TCTEXT);
+
       if (hglb != NULL)
       {
-         const ::scoped_string &scopedstrLpstr = (const ::scoped_string &scopedstr)GlobalLock(hglb);
-         if (lpstr != 0)
+         
+         auto psz = (char *)GlobalLock(hglb);
+
+         if (psz != 0)
          {
-            clipDest -= lpstr;
-            GlobalUnlock(hglb);
+            
+            clipDest = psz;
+            
+            GlobalUnlock(psz);
+
          }
+
       }
+
       CloseClipboard();
+
    }
 
-   bool WindowsClipboard::wndProc(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam)
+
+   bool WindowsClipboard::wndProc(unsigned int message, ::wparam wparam, ::lparam lparam)
    {
+      
       int fake = 3;
-      switch (scopedstrMessage)
+
+      switch (message)
       {
          case WM_CREATE:
-            m_hwndNextViewer = SetClipboardViewer((HWND)wParam);
-            break;
+         {
 
+            m_hwndNextViewer = SetClipboardViewer(wparam.raw_cast < HWND> ());
+
+         }
+         break;
          case WM_CHANGECBCHAIN:
-            if ((HWND)wParam == m_hwndNextViewer)
+         {
+
+            if (m_hwndNextViewer == wparam.raw_cast < HWND >())
             {
-               m_hwndNextViewer = (HWND)lParam;
+
+               m_hwndNextViewer = wparam.raw_cast<HWND>();
+
             }
             else if (m_hwndNextViewer != NULL)
             {
-               SendMessage(m_hwndNextViewer, scopedstrMessage, wParam, lParam);
+
+               SendMessage(m_hwndNextViewer, message, wparam, lparam);
+
             }
 
-            break;
+         }
+         break;
 
          case WM_DESTROY:
+         {
+   
             ChangeClipboardChain(m_hwnd, m_hwndNextViewer);
-            break;
+
+         }
+         break;
 
          case WM_DRAWCLIPBOARD: // clipboard contents changed.
          {
+
             ::string winClip, rfbClip;
-            readFromClipBoard(&winClip);
-            convertToRfbFormat(&winClip, &rfbClip);
 
-            m_clipboardListener->onClipboardUpdate(&rfbClip);
+            readFromClipBoard(winClip);
+
+            convertToRfbFormat(winClip, rfbClip);
+
+            m_clipboardListener->onClipboardUpdate(rfbClip);
+
+            SendMessage(m_hwndNextViewer, message, wparam, lparam);
+
          }
-            SendMessage(m_hwndNextViewer, scopedstrMessage, wParam, lParam);
-            break;
-
+         break;
          default:
             return false; // Message not processing
       }
 
       return true;
+
    }
+
 
    void WindowsClipboard::onTerminate()
    {
+
       if (m_hwnd != 0)
       {
+
          PostMessage(m_hwnd, WM_QUIT, 0, 0);
+
       }
+
    }
+
 
    void WindowsClipboard::execute()
    {
-      m_plogwriter->information("clipboard thread id = {}", getThreadId());
+
+      m_plogwriter->information("clipboard thread id = {}", (::iptr) getThreadId());
 
       if (!createWindow())
       {
+
          return;
+
       }
 
       MSG msg;
+
       while (!isTerminating())
       {
+
          if (GetMessage(&msg, m_hwnd, 0, 0))
          {
+
             DispatchMessage(&msg);
+
          }
          else
          {
+
             break;
+
          }
+
       }
 
       destroyWindow();
+
    }
 
-   void WindowsClipboard::convertToRfbFormat(const ::scoped_string &source, ::string &dest)
+
+   void WindowsClipboard::convertToRfbFormat(const ::scoped_string &scopedstrSource, ::string & strDst)
    {
-      const ::scoped_string &scopedstrSrcText = source->getString();
-      size_t length = source->length();
-      TCHAR *rfbText = new TCHAR[length + 1];
 
-      size_t j = 0;
-      for (size_t i = 0; i < length; i++)
+      ::string strSrcText = scopedstrSource;
+
+      auto length = strSrcText.length();
+
+      auto rfbText = strDst.get_buffer(length);
+
+      character_count j = 0;
+
+      for (character_count i = 0; i < length; i++)
       {
-         if (!(srcText[i] == 0x0d && srcText[i + 1] == 0x0a))
+
+         if (!(strSrcText[i] == 0x0d && strSrcText[i + 1] == 0x0a))
          {
-            rfbText[j] = srcText[i];
+
+            rfbText[j] = strSrcText[i];
+
             j++;
+
          }
+
       }
+      
       rfbText[j] = 0;
-      dest -= rfbText;
-      delete[] rfbText;
+      
+      strDst.release_buffer();
+      
    }
+
 
    void WindowsClipboard::convertFromRfbFormat(const ::scoped_string &scopedstrSource, ::string &dest)
    {
       // Count of 'LF' symbols.
-      size_t lfCount = 0;
-      size_t sourceLen = _tcslen(source);
-      for (size_t i = 0; i < sourceLen; i++)
+      character_count lfCount = 0;
+      auto sourceLen = scopedstrSource.length();
+      for (character_count i = 0; i < sourceLen; i++)
       {
-         if (source[i] == 0x0a)
+         if (scopedstrSource[i] == 0x0a)
          {
             lfCount++;
          }
       }
 
-      size_t destLen = sourceLen + lfCount;
-      TCHAR *destText = new TCHAR[destLen + 1];
+      auto destLen = sourceLen + lfCount;
+      auto destText = dest.get_buffer(destLen);
       int j = 0;
-      for (size_t i = 0; i < sourceLen; i++)
+      for (character_count i = 0; i < sourceLen; i++)
       {
-         if (source[i] == 0x0a)
+         if (scopedstrSource[i] == 0x0a)
          {
             destText[j] = 0x0d;
             j++;
          }
-         destText[j] = source[i];
+         destText[j] = scopedstrSource[i];
          j++;
       }
       destText[j] = 0;
 
-      dest -= destText;
-      delete[] destText;
+      dest.release_buffer();
+
    }
 
 

@@ -171,12 +171,22 @@ namespace subsystem_windows
       m_modelessDialogList.erase(::as_HWND(operatingsystemwindow));
    }
 
+   
    int OperatingSystemApplication::getExitCode()
    {
 
-      return 0;
+      return m_iExitCode;
 
    }
+
+   
+   void OperatingSystemApplication::setExitCode(int iExitCode)
+   {
+
+      m_iExitCode = iExitCode; 
+   
+   }
+
 
    bool OperatingSystemApplication::processDialogMessage(MSG *msg)
    {

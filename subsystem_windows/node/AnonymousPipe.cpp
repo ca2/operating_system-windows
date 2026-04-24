@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "AnonymousPipe.h"
 #include "File.h"
-#include "subsystem/Exception.h"
+#include "subsystem/platform/Exception.h"
 //#include "remoting/remoting/win_system/Environment.h"
 //#include "remoting/remoting/thread/critical_section_lock.h"
 

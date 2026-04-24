@@ -2,7 +2,7 @@
 // Created by camilo on 2026-04-06 10:57 <3ThomasBorregaardSørensen!!
 //
 #include "framework.h"
-#include "subsystem.h"
+#include "platform/subsystem.h"
 #include "drawing/Cursor.h"
 #include "drawing/Icon.h"
 #include "drawing/Pen.h"
@@ -30,8 +30,8 @@
 #include "gui/ProgressBar.h"
 #include "gui/KeyboardLayout.h"
 //#include "gui/OperatingSystemApplication.h"
-#include "ResourceLoader.h"
-#include "subsystem.h"
+#include "platform/ResourceLoader.h"
+#include "platform/subsystem.h"
 
 
 DECLARE_FACTORY(subsystem_windows);

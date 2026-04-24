@@ -104,13 +104,31 @@ namespace subsystem_windows
       //return false;
    }
 
-   ::string DesktopSelector::getCurrentDesktopName()
+   
+   bool DesktopSelector::getCurrentDesktopName(::string & str)
    {
-      ::subsystem::desk_t inputDesktop = getInputDesktop();
-      auto str = getDesktopName(inputDesktop);
-      closeDesktop(inputDesktop);
-      return str;
+
+      try
+      {
+
+         ::subsystem::desk_t inputDesktop = getInputDesktop();
+         
+         str = getDesktopName(inputDesktop);
+         
+         closeDesktop(inputDesktop);
+         
+         return true;
+
+      }
+      catch (...)
+      {
+
+         return false;
+
+      }
+
    }
+
 
    ::string DesktopSelector::getThreadDesktopName()
    {

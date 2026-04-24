@@ -5,8 +5,8 @@
 #pragma once
 
 
-#include "subsystem_windows/subsystem.h"
-#include "innate_subsystem/subsystem.h"
+#include "subsystem_windows/platform/subsystem.h"
+#include "innate_subsystem/platform/subsystem.h"
 
 namespace innate_subsystem_windows
 {

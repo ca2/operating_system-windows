@@ -24,6 +24,12 @@
     <Filter Include="Source Files\framebuffer">
       <UniqueIdentifier>{41183d68-3b46-4653-8e3c-6ebde003f418}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\platform">
+      <UniqueIdentifier>{9e9fb504-cc1a-496c-b7f6-dc97fc974873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\platform">
+      <UniqueIdentifier>{26f1a3bf-ab9c-4928-9175-026e408795bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_factory.cpp">
@@ -33,9 +39,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="framework.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="subsystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\CheckBox.cpp">
@@ -69,9 +72,6 @@
       <Filter>Source Files\gui</Filter>
     </ClCompile>
     <ClCompile Include="gui\Menu.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\MessageWindow.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
     <ClCompile Include="gui\NotifyIcon.cpp">
@@ -131,9 +131,6 @@
     <ClCompile Include="gui\WindowProcHolder.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="drawing\Bitmap.cpp">
       <Filter>Source Files\drawing</Filter>
     </ClCompile>
@@ -170,6 +167,15 @@
     <ClCompile Include="gui\KeyboardLayout.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
+    <ClCompile Include="platform\DibFrameBuffer.cpp">
+      <Filter>Source Files\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="platform\ResourceLoader.cpp">
+      <Filter>Source Files\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="platform\subsystem.cpp">
+      <Filter>Source Files\platform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
@@ -181,9 +187,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="subsystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gui\CheckBox.h">
@@ -217,9 +220,6 @@
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\Menu.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\MessageWindow.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\NotifyIcon.h">
@@ -291,7 +291,19 @@
     <ClInclude Include="gui\KeyboardLayout.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceLoader.h">
+    <ClInclude Include="platform\DibFrameBuffer.h">
+      <Filter>Header Files\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="platform\resource.h">
+      <Filter>Header Files\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="platform\ResourceLoader.h">
+      <Filter>Header Files\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="platform\subsystem.h">
+      <Filter>Header Files\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

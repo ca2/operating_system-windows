@@ -23,7 +23,7 @@
 //
 #include "framework.h"
 #include "subsystem/node/SystemException.h"
-#include "subsystem_windows/subsystem.h"
+#include "subsystem_windows/platform/subsystem.h"
 #include "SecurityIdentifier.h"
 #include "../ProcessHandle.h"
 #include <Sddl.h>

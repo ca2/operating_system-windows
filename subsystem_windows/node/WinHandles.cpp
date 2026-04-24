@@ -25,7 +25,7 @@
 #include "subsystem_windows/_common_header.h"
 #include "WinHandles.h"
 //#include "Environment.h"
-#include "subsystem/Exception.h"
+#include "subsystem/platform/Exception.h"
 
 namespace subsystem_windows
 {

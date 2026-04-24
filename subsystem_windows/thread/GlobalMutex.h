@@ -25,7 +25,7 @@
 #pragma once
 
 
-#include "subsystem/Exception.h"
+#include "subsystem/platform/Exception.h"
 #include "subsystem/thread/GlobalMutex.h"
 #include "subsystem_windows/_common_header.h"
 

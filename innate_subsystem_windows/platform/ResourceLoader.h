@@ -26,7 +26,7 @@
 #pragma once
 
 
-#include "innate_subsystem/ResourceLoader.h"
+#include "innate_subsystem/platform/ResourceLoader.h"
 //#include "drawing/Icon.h"
 
 //#include "winhdr.h"

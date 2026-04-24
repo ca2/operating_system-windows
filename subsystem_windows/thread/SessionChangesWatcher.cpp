@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "SessionChangesWatcher.h"
 #include "subsystem_windows/node/WTS.h"
-#include "subsystem_windows/subsystem.h"
+#include "subsystem_windows/platform/subsystem.h"
 
 namespace subsystem_windows
 {
@@ -66,18 +66,18 @@ namespace subsystem_windows
       DWORD prevSession = m_baseSessionId;
       bool isRdp = WindowsSubsystem().WTS().SessionIsRdpSession(prevSession, m_plogwriter);
       ::string prevDeskName, currDeskName;
-      MainSubsystem().DesktopSelector().getThreadDesktopName(&prevDeskName);
+      prevDeskName = MainSubsystem().DesktopSelector().getThreadDesktopName();
 
       while (!isTerminating())
       {
          DWORD currSessionId = prevSession;
          if (!isRdp)
          {
-            currSessionId = WTS::getActiveConsoleSessionId(m_plogwriter);
+            currSessionId = WindowsSubsystem().WTS().getActiveConsoleSessionId(m_plogwriter);
          }
          bool sessionChanged = prevSession != currSessionId;
-         bool desktopInfoIsAvailable = DesktopSelector::getCurrentDesktopName(&currDeskName);
-         bool desktopChanged = !currDeskName.isEqualTo(&prevDeskName);
+         bool desktopInfoIsAvailable = MainSubsystem().DesktopSelector().getCurrentDesktopName(currDeskName);
+         bool desktopChanged = currDeskName != prevDeskName;
          if (sessionChanged || desktopChanged || !desktopInfoIsAvailable)
          {
             m_plogwriter->debug("Session or desktop has been changed."
@@ -86,13 +86,13 @@ namespace subsystem_windows
                                 (unsigned int)prevSession, (unsigned int)currSessionId, prevDeskName, currDeskName);
             prevSession = currSessionId;
             prevDeskName = currDeskName;
-            m_extSessionChangesListener->onAnObjectEvent();
+            m_procedureSessionChanged();
             terminate();
          }
          else
          {
             // FIXME: Use WindowsEvent instead of Sleep().
-            Sleep(100);
+            preempt(100_ms);
          }
       }
    }

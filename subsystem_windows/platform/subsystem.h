@@ -7,7 +7,7 @@
 #pragma once
 
 
-#include "subsystem_bsd_sockets/subsystem.h"
+#include "subsystem_bsd_sockets/platform/subsystem.h"
 #include "subsystem_windows/_common_header.h"
 
 

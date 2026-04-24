@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "subsystem_windows/_common_header.h"
 #include "NamedPipe.h"
-#include "subsystem/Exception.h"
+#include "subsystem/platform/Exception.h"
 #include "subsystem_windows/node/File.h"
 //#include <crtdbg.h>
 //#include "remoting/remoting/win_system/Environment.h"

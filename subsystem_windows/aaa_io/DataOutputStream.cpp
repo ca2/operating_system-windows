@@ -23,8 +23,8 @@
 //
 #include "framework.h"
 #include "DataOutputStream.h"
-//////#include "subsystem/::string.h"
-////#include "subsystem/::string.h"
+//////#include "subsystem/platform/::string.h"
+////#include "subsystem/platform/::string.h"
 //#include <vector>
 
 #define GETBYTE(x, n) (((x) >> ((n) * 8)) & 0xFF)

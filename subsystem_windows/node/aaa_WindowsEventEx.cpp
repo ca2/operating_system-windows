@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "subsystem_windows/_common_header.h"
 #include "WindowsEventEx.h"
-#include "subsystem/Exception.h"
+#include "subsystem/platform/Exception.h"
 #include <Aclapi.h>
 
 

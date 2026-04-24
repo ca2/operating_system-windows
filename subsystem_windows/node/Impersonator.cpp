@@ -25,7 +25,7 @@
 #include "subsystem_windows/_common_header.h"
 #include "Impersonator.h"
 #include "WTS.h"
-#include "../subsystem.h"
+#include "subsystem_windows/platform/subsystem.h"
 #include "subsystem/node/SystemException.h"
 #include "subsystem/node/SystemInformation.h"
 

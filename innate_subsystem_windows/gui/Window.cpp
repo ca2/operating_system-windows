@@ -28,7 +28,7 @@
 #include "drawing/Icon.h"
 #include "Menu.h"
 #include "subsystem/node/SystemInformation.h"
-#include "subsystem/subsystem.h"
+#include "subsystem/platform/subsystem.h"
 #include "innate_subsystem/drawing/Brush.h"
 #include "drawing/Bitmap.h"
 #include "drawing/Brush.h"

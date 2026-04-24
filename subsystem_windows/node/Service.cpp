@@ -73,28 +73,28 @@ namespace subsystem_windows
    /**
 * Called from service control manager when service needs to start.
 */
-   void Service::onStart()
+   void Service::task_start()
       {
 
-         m_pserviceCallback->onStart();
+         m_pserviceCallback->task_start();
 
       }
    /**
     * Service main.
     */
-   void Service::main()
+   void Service::maintain_task_running_wait_stop_task_signal_and_stop()
       {
 
-         m_pserviceCallback->main();
+         m_pserviceCallback->maintain_task_running_wait_stop_task_signal_and_stop();
 
       }
    /**
     * Called from service control manager when service needs to stop/
     */
-   void Service::onStop()
+   void Service::signal_task_stop()
       {
 
-         m_pserviceCallback->onStop();
+         m_pserviceCallback->signal_task_stop();
 
       }
 
@@ -112,7 +112,7 @@ namespace subsystem_windows
       g_service->m_status.dwServiceSpecificExitCode = 0;
 
       try {
-         g_service->onStart();
+         g_service->task_start();
       } catch (::subsystem::Exception &) {
          g_service->reportStatus(SERVICE_STOPPED, NO_ERROR, 0);
          // TODO: Report to ServiceControlManageranager about critical error.
@@ -121,7 +121,7 @@ namespace subsystem_windows
       g_service->reportStatus(SERVICE_RUNNING, NO_ERROR, 0);
 
       try {
-         g_service->main();
+         g_service->maintain_task_running_wait_stop_task_signal_and_stop();
       } catch (::subsystem::Exception &) {
          g_service->reportStatus(SERVICE_STOPPED, NO_ERROR, 0);
          // TODO: Report to ServiceControlManageranager about critical error.
@@ -135,7 +135,7 @@ namespace subsystem_windows
       if (dwCtrlCode == SERVICE_CONTROL_STOP) {
          Service::g_service->reportStatus(SERVICE_STOP_PENDING, NO_ERROR, 0);
 
-         Service::g_service->onStop();
+         Service::g_service->signal_task_stop();
       }
    }
 

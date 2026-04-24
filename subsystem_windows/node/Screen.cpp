@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "subsystem_windows/_common_header.h"
 #include "Screen.h"
-#include "subsystem/Exception.h"
+#include "subsystem/platform/Exception.h"
 //#include "remoting/remoting/win_system/Environment.h"
 
 namespace subsystem_windows

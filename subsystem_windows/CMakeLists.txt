@@ -174,6 +174,8 @@ list(APPEND library_source
    node/WsaStartup.h
    node/WTS.cpp
    node/WTS.h
+   platform/subsystem.cpp
+   platform/subsystem.h
    thread/_.cpp
    thread/_.h
    #thread/_____debug.xcconfig
@@ -212,8 +214,6 @@ list(APPEND library_source
    #node/CommandLineArguments.h
    framework.cpp
    framework.h
-   subsystem.cpp
-   subsystem.h
 )
 
 if (MSVC)

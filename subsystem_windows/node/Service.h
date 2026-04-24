@@ -25,12 +25,12 @@
 #pragma once
 
 
-//#include "subsystem/winhdr.h"
+//#include "subsystem/platform/winhdr.h"
 #include "subsystem/node/Service.h"
 #include "subsystem_windows/_common_header.h"
 
-//////#include "subsystem/::string.h"
-//#include "subsystem/Exception.h"
+//////#include "subsystem/platform/::string.h"
+//#include "subsystem/platform/Exception.h"
 //#include "remoting/remoting/thread/Thread.h"
 
 namespace subsystem_windows
@@ -70,15 +70,15 @@ namespace subsystem_windows
          /**
           * Called from service control manager when service needs to start.
           */
-         void onStart() override;
+         void task_start() override;
          /**
           * Service main.
           */
-         void main() override;
+         void maintain_task_running_wait_stop_task_signal_and_stop() override;
          /**
           * Called from service control manager when service needs to stop/
           */
-         void onStop()  override;
+         void signal_task_stop()  override;
 
          /**
           * Win32 API service main function.

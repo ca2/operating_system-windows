@@ -2638,7 +2638,6 @@
     <ClCompile Include="gui\ListBox.cpp" />
     <ClCompile Include="gui\ListView.cpp" />
     <ClCompile Include="gui\Menu.cpp" />
-    <ClCompile Include="gui\MessageWindow.cpp" />
     <ClCompile Include="gui\NotifyIcon.cpp" />
     <ClCompile Include="gui\NotifyIconWindow.cpp" />
     <ClCompile Include="gui\ProgressBar.cpp" />
@@ -2658,8 +2657,9 @@
     <ClCompile Include="gui\WindowCache.cpp" />
     <ClCompile Include="gui\WindowFinder.cpp" />
     <ClCompile Include="gui\WindowProcHolder.cpp" />
-    <ClCompile Include="ResourceLoader.cpp" />
-    <ClCompile Include="subsystem.cpp" />
+    <ClCompile Include="platform\DibFrameBuffer.cpp" />
+    <ClCompile Include="platform\ResourceLoader.cpp" />
+    <ClCompile Include="platform\subsystem.cpp" />
     <ClCompile Include="_.cpp" />
     <ClCompile Include="_factory.cpp" />
   </ItemGroup>
@@ -2707,7 +2707,6 @@
     <ClInclude Include="gui\ListBox.h" />
     <ClInclude Include="gui\ListView.h" />
     <ClInclude Include="gui\Menu.h" />
-    <ClInclude Include="gui\MessageWindow.h" />
     <ClInclude Include="gui\NotifyIcon.h" />
     <ClInclude Include="gui\NotifyIconWindow.h" />
     <ClInclude Include="gui\aaa_PaintWindow.h" />
@@ -2730,8 +2729,11 @@
     <ClInclude Include="gui\WindowMessageHandler.h" />
     <ClInclude Include="gui\WindowProcHolder.h" />
     <ClInclude Include="gui\window_implementation.h" />
-    <ClInclude Include="ResourceLoader.h" />
-    <ClInclude Include="subsystem.h" />
+    <ClInclude Include="platform\DibFrameBuffer.h" />
+    <ClInclude Include="platform\resource.h" />
+    <ClInclude Include="platform\ResourceLoader.h" />
+    <ClInclude Include="platform\subsystem.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="_.h" />
   </ItemGroup>
   <ItemGroup>

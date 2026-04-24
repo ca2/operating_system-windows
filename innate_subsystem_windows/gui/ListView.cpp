@@ -25,7 +25,7 @@
 #include "framework.h"
 #include "ListView.h"
 
-#include "innate_subsystem/subsystem.h"
+#include "innate_subsystem/platform/subsystem.h"
 #include <commctrl.h>
 
 namespace innate_subsystem_windows

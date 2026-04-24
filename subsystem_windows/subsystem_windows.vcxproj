@@ -2204,6 +2204,14 @@
     <ClInclude Include="node\WsaStartup.h" />
     <ClInclude Include="node\WTS.h" />
     <ClInclude Include="node\_.h" />
+    <ClInclude Include="platform\keyboard.h" />
+    <ClInclude Include="platform\resource.h" />
+    <ClInclude Include="platform\ResourceLoader.h" />
+    <ClInclude Include="platform\subsystem.h" />
+    <ClInclude Include="platform\user.h" />
+    <ClInclude Include="platform\xfree86_key.h" />
+    <ClInclude Include="platform\xkb_input.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="subsystem.h" />
     <ClInclude Include="thread\aaa_framework.h" />
@@ -2224,7 +2232,6 @@
     <ClInclude Include="_common_header.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="node\AnonymousPipe.cpp" />
     <ClCompile Include="node\AnonymousPipeFactory.cpp" />
     <ClCompile Include="node\AutoImpersonator.cpp" />
@@ -2333,8 +2340,9 @@
     <ClCompile Include="node\WsaStartup.cpp" />
     <ClCompile Include="node\WTS.cpp" />
     <ClCompile Include="node\_.cpp" />
-    <ClCompile Include="ResourceLoader.cpp" />
-    <ClCompile Include="subsystem.cpp" />
+    <ClCompile Include="platform\keyboard.cpp" />
+    <ClCompile Include="platform\ResourceLoader.cpp" />
+    <ClCompile Include="platform\subsystem.cpp" />
     <ClCompile Include="thread\AutoLock.cpp" />
     <ClCompile Include="thread\DesktopSelector.cpp" />
     <ClCompile Include="thread\GlobalMutex.cpp" />

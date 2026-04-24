@@ -31,7 +31,7 @@
 #include "subsystem_windows/node/Process.h"
 #include "subsystem_windows/node/Workstation.h"
 #include "subsystem_windows/node/WTS.h"
-#include "subsystem_windows/subsystem.h"
+#include "subsystem_windows/platform/subsystem.h"
 
 
 

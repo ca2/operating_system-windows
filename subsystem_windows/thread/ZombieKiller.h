@@ -28,7 +28,7 @@
 //#include "Thread.h"
 //#include "critical_section.h"
 
-//#include "subsystem/Singleton.h"
+//#include "subsystem/platform/Singleton.h"
 
 //#include <list>
 
@@ -56,6 +56,8 @@ namespace  subsystem_windows
        * Deletes zombie killer.
        */
       ~ZombieKiller() override;
+
+
 
       /**
        * Adds thread to zombie list.
