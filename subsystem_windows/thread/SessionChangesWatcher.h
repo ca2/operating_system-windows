@@ -32,7 +32,9 @@
 namespace subsystem_windows
 {
 
-   class SessionChangesWatcher : public ::subsystem::GuiThread, virtual public ::subsystem::SessionChangesWatcher
+   class CLASS_DECL_SUBSYSTEM_WINDOWS SessionChangesWatcher :
+   virtual public ::subsystem::GuiThread,
+   virtual public ::subsystem::SessionChangesWatcher
    {
    public:
       // SessionChangesWatcher(AnEventListener *extSessionChangesListener, ::subsystem::LogWriter *log);
