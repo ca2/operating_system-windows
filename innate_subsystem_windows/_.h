@@ -42,7 +42,7 @@ namespace innate_subsystem_windows
    class Dialog;
 
 
-   class WindowMessageHandler;
+   //class WindowMessageHandler;
 
 
 } // namespace innate_subsystem_windows

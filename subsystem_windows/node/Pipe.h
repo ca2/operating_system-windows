@@ -26,7 +26,7 @@
 
 
 #include "subsystem/node/Pipe.h"
-//#include "subsystem_windows/node/WindowsEvent.h"
+//#include "subsystem_windows/node/::happening.h"
 #include "acme/parallelization/happening.h"
 
 
@@ -44,8 +44,8 @@ namespace subsystem_windows
       // The mutex protect collision accesses to handle fields of derived classes.
       critical_section m_criticalsectionPipe;
 
-      //WindowsEvent m_readEvent;
-      //WindowsEvent m_writeEvent;
+      //::happening m_readEvent;
+      //::happening m_writeEvent;
 
       ::happening m_readEvent;
       ::happening m_writeEvent;

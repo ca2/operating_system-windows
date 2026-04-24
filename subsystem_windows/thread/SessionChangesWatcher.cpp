@@ -91,7 +91,7 @@ namespace subsystem_windows
          }
          else
          {
-            // FIXME: Use WindowsEvent instead of Sleep().
+            // FIXME: Use ::happening instead of Sleep().
             preempt(100_ms);
          }
       }

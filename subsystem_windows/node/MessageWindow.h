@@ -26,41 +26,47 @@
 
 //#include "util/CommonHeader.h"
 //#include "../../source/app/apex/operating_system/windows/innate_subsystem_windows/WindowMessageHandler.h"
+#include "acme/operating_system/windows/window.h"
+
 
 namespace subsystem_windows
 {
-   class MessageWindow
+   class MessageWindow :
+      virtual public ::windows::window
    {
    public:
       // messageHandler is an external message handler that replace the
       // wndProc() function on message processing. If
       // messageHandler == 0 the wndProc() function will be used.
-      MessageWindow(const HINSTANCE hinst, const char *windowClassName,
+      //MessageWindow(const HINSTANCE hinst, const char *windowClassName,
+        //            WindowMessageHandler *messageHandler = 0);
+      MessageWindow(const char *windowClassName,
                     WindowMessageHandler *messageHandler = 0);
-      virtual ~MessageWindow(void);
+      ~MessageWindow() override;
 
       virtual bool createWindow(WindowMessageHandler *messageHandler = 0);
       virtual void destroyWindow();
 
-      HWND getHWND() const { return m_hwnd; }
+      //HWND getHWND() const { return m_hwnd; }
 
    //protected:
       // Function must return true value if the message has been processed.
-      virtual bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam) { return true; }
+      //virtual bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam) { return true; }
+      virtual bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
 
-      HWND m_hwnd;
+      //HWND m_hwnd;
       WindowMessageHandler *m_messageHandler;
 
-      HINSTANCE m_hinst;
+      //HINSTANCE m_hinst;
       ::string m_strWindowClassName;
 
-   private:
-      ATOM regClass(HINSTANCE hinst, const char * pszWindowClassName);
+   //private:
+     // ATOM regClass(HINSTANCE hinst, const char * pszWindowClassName);
 
-      static LRESULT CALLBACK staticWndProc(HWND hwnd,
-                                            unsigned int message,
-                                            WPARAM wparam,
-                                            LPARAM lparam);
+      //static LRESULT CALLBACK staticWndProc(HWND hwnd,
+        //                                    unsigned int message,
+          //                                  WPARAM wparam,
+            //                                LPARAM lparam);
    };
 
 

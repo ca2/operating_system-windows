@@ -31,13 +31,13 @@ namespace subsystem_windows
 {
 
    /// <summary>
-   ///  comment by camilo : This WindowsEvent in TightVNC is an Win32 Auto-Reset Event Wrapper
+   ///  comment by camilo : This ::happening in TightVNC is an Win32 Auto-Reset Event Wrapper
    /// </summary>
-   class CLASS_DECL_SUBSYSTEM_WINDOWS WindowsEvent
+   class CLASS_DECL_SUBSYSTEM_WINDOWS ::happening
    {
    public:
-      WindowsEvent(const ::scoped_string & scopedstrName = 0);
-      virtual ~WindowsEvent();
+      ::happening(const ::scoped_string & scopedstrName = 0);
+      virtual ~::happening();
 
       void notify();
       void waitForEvent(const class ::time & time = ::time::infinity());

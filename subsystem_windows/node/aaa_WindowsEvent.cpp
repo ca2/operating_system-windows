@@ -23,12 +23,12 @@
 //
 #include "framework.h"
 #include "subsystem_windows/_common_header.h"
-#include "WindowsEvent.h"
+#include "::happening.h"
 #include "subsystem/platform/Exception.h"
 
 namespace subsystem_windows
 {
-      WindowsEvent::WindowsEvent(const ::scoped_string & scopedstrName)
+      ::happening::::happening(const ::scoped_string & scopedstrName)
       {
          m_hEvent = CreateEvent(0, FALSE, FALSE, ::wstring(scopedstrName));
          if (m_hEvent == 0) {
@@ -39,21 +39,21 @@ namespace subsystem_windows
          }
       }
 
-      WindowsEvent::~WindowsEvent()
+      ::happening::~::happening()
       {
          if (m_hEvent) {
             CloseHandle(m_hEvent);
          }
       }
 
-      void WindowsEvent::notify()
+      void ::happening::notify()
       {
          if (m_hEvent) {
             SetEvent(m_hEvent);
          }
       }
 
-      void WindowsEvent::waitForEvent(const class ::time & time)
+      void ::happening::waitForEvent(const class ::time & time)
       {
          auto millis = time.integral_millisecond();
          // FIXME: Check WaitForSingleObject result to an error

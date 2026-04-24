@@ -156,7 +156,7 @@ list(APPEND library_source
    #node/WindowsEvent.h
    #node/WindowsEventEx.cpp
    #node/WindowsEventEx.h
-   node/WindowMessageHandler.h
+   #node/WindowMessageHandler.h
    node/WindowsRegistry.cpp
    node/WindowsRegistry.h
    node/WindowsRegistryKey.cpp

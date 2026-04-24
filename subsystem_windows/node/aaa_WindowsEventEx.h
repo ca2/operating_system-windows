@@ -25,11 +25,11 @@
 #pragma once
 
 
-#include "subsystem_windows/node/WindowsEvent.h"
+#include "subsystem_windows/node/::happening.h"
 
 namespace subsystem_windows
 {
-   class CLASS_DECL_SUBSYSTEM_WINDOWS WindowsEventEx : public ::subsystem_windows::WindowsEvent
+   class CLASS_DECL_SUBSYSTEM_WINDOWS WindowsEventEx : public ::subsystem_windows::::happening
    {
    public:
       WindowsEventEx(const ::scoped_string & scopedstrName = 0);

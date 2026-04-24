@@ -42,7 +42,7 @@ namespace subsystem_windows
 
    class PipeServer;
 
-   class WindowMessageHandler;
+   //class WindowMessageHandler;
 
 
 } // namespace subsystem_windows

@@ -31,7 +31,7 @@
 namespace subsystem_windows
 {
    WindowsEventEx::WindowsEventEx(const ::scoped_string & scopedstrName)
-   : WindowsEvent(scopedstrName)
+   : ::happening(scopedstrName)
    {
       bool needToInit = GetLastError() != ERROR_ALREADY_EXISTS;
       if (needToInit) {
