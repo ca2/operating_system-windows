@@ -27,6 +27,7 @@
 
 #include "subsystem/_common_header.h"
 //#include "innate_subsystem/gui/MessageWindow.h"
+#include "subsystem/node/Clipboard2.h"
 #include "subsystem/node/ClipboardListener.h"
 //#include "log_writer/LogWriter.h"
 #include "subsystem/thread/GuiThread.h"
@@ -38,27 +39,33 @@ namespace subsystem_windows
 {
 
 
-   class WindowsClipboard : protected MessageWindow, subsystem::GuiThread
+   class Clipboard2 : 
+      virtual public ::subsystem::Clipboard2,
+      virtual public ::subsystem::GuiThread,
+      virtual public MessageWindow
    {
    public:
 
 
-      WindowsClipboard(::subsystem::ClipboardListener *clipboardListener, ::subsystem::LogWriter *log);
-      ~WindowsClipboard(void);
+      Clipboard2();
+      ~Clipboard2(void);
+
+
+      void initialize_clipboard2(::subsystem::ClipboardListener *clipboardListener, ::subsystem::LogWriter *log) override;
 
       // This function replaces clipboard content by the text
-      virtual bool writeToClipBoard(const ::scoped_string &scopedstrText);
+      bool _writeToClipBoard(const ::scoped_string &scopedstrText) override;
 
-      virtual void readFromClipBoard(::string &clipDest) const;
+      void readFromClipBoard(::string &clipDest) override;
 
-   protected:
-      virtual bool wndProc(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam);
+   //protected:
+      bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam) override;
 
-      virtual void execute();
-      virtual void onTerminate();
+      void execute() override;
+      void onTerminate() override;
 
-      void convertToRfbFormat(const ::scoped_string &source, ::string &dest);
-      void convertFromRfbFormat(const ::scoped_string &scopedstrSource, ::string &dest);
+      //void convertToRfbFormat(const ::scoped_string &source, ::string &dest);
+      //void convertFromRfbFormat(const ::scoped_string &scopedstrSource, ::string &dest);
 
       HWND m_hwndNextViewer;
 

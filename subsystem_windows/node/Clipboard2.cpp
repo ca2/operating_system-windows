@@ -23,33 +23,55 @@
 //
 #include "framework.h"
 #include "Clipboard2.h"
-#include "remoting/node_desktop/NamingDefs.h"
+#include "acme/operating_system/windows/window.h"
+//#include "remoting/node_desktop/NamingDefs.h"
 
 
 namespace subsystem_windows
 {
 
 
-   const HINSTANCE WindowsClipboard::m_hinst = GetModuleHandle(0);
+   ///const HINSTANCE Clipboard2::m_hinst = GetModuleHandle(0);
 
 
-   WindowsClipboard::WindowsClipboard(::subsystem::ClipboardListener *clipboardListener, ::subsystem::LogWriter *log) :
-       MessageWindow(m_hinst, ClipboardNames::CLIPBOARD_WIN_CLASS_NAME), m_hwndNextViewer(0),
-       m_clipboardListener(clipboardListener), m_plogwriter(log)
+   Clipboard2::Clipboard2() :
+       MessageWindow((HINSTANCE) ::windows::hinstance_from_function(::windows::window::s_window_procedure),
+          "subsystem::Clipboard2::MessageWindow"), 
+      m_hwndNextViewer(0),
+       m_clipboardListener(nullptr), m_plogwriter(nullptr)
    {
-      resume();
+   //   resume();
    }
+   
+   //Clipboard2::Clipboard2()
+   //{
+   ////   resume();
+   //}
 
-   WindowsClipboard::~WindowsClipboard()
+   Clipboard2::~Clipboard2()
    {
       terminate();
       wait();
    }
 
-   bool WindowsClipboard::writeToClipBoard(const ::scoped_string &scopedstrText)
+
+   void Clipboard2::initialize_clipboard2(::subsystem::ClipboardListener *clipboardListener, ::subsystem::LogWriter * plogwriter)
    {
-      ::string clipboard;
-      convertFromRfbFormat(scopedstrText, clipboard);
+
+      //initialize_message_window(m_hinst, "subsystem::Clipboard2::MessageWindow");
+      
+      m_hwndNextViewer = nullptr;
+      m_clipboardListener = clipboardListener;
+      m_plogwriter = plogwriter;
+
+      resume();
+
+   }
+
+
+   bool Clipboard2::_writeToClipBoard(const ::scoped_string &scopedstrText)
+   {
+      ::string clipboard(scopedstrText);
       if (OpenClipboard(m_hwnd))
       {
          EmptyClipboard();
@@ -88,7 +110,7 @@ namespace subsystem_windows
       return false;
    }
 
-   void WindowsClipboard::readFromClipBoard(::string &clipDest) const
+   void Clipboard2::readFromClipBoard(::string &clipDest)
    {
 // NOTE: In non-Unicode version, conversion correctness may depend on current
 //       input language. We should always use Unicode in all programs.
@@ -130,7 +152,7 @@ namespace subsystem_windows
    }
 
 
-   bool WindowsClipboard::wndProc(unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool Clipboard2::wndProc(unsigned int message, ::wparam wparam, ::lparam lparam)
    {
       
       int fake = 3;
@@ -195,7 +217,7 @@ namespace subsystem_windows
    }
 
 
-   void WindowsClipboard::onTerminate()
+   void Clipboard2::onTerminate()
    {
 
       if (m_hwnd != 0)
@@ -208,7 +230,7 @@ namespace subsystem_windows
    }
 
 
-   void WindowsClipboard::execute()
+   void Clipboard2::execute()
    {
 
       m_plogwriter->information("clipboard thread id = {}", (::iptr) getThreadId());
@@ -245,69 +267,69 @@ namespace subsystem_windows
    }
 
 
-   void WindowsClipboard::convertToRfbFormat(const ::scoped_string &scopedstrSource, ::string & strDst)
-   {
+   //void Clipboard2::convertToRfbFormat(const ::scoped_string &scopedstrSource, ::string & strDst)
+   //{
 
-      ::string strSrcText = scopedstrSource;
+   //   ::string strSrcText = scopedstrSource;
 
-      auto length = strSrcText.length();
+   //   auto length = strSrcText.length();
 
-      auto rfbText = strDst.get_buffer(length);
+   //   auto rfbText = strDst.get_buffer(length);
 
-      character_count j = 0;
+   //   character_count j = 0;
 
-      for (character_count i = 0; i < length; i++)
-      {
+   //   for (character_count i = 0; i < length; i++)
+   //   {
 
-         if (!(strSrcText[i] == 0x0d && strSrcText[i + 1] == 0x0a))
-         {
+   //      if (!(strSrcText[i] == 0x0d && strSrcText[i + 1] == 0x0a))
+   //      {
 
-            rfbText[j] = strSrcText[i];
+   //         rfbText[j] = strSrcText[i];
 
-            j++;
+   //         j++;
 
-         }
+   //      }
 
-      }
-      
-      rfbText[j] = 0;
-      
-      strDst.release_buffer();
-      
-   }
+   //   }
+   //   
+   //   rfbText[j] = 0;
+   //   
+   //   strDst.release_buffer();
+   //   
+   //}
 
 
-   void WindowsClipboard::convertFromRfbFormat(const ::scoped_string &scopedstrSource, ::string &dest)
-   {
-      // Count of 'LF' symbols.
-      character_count lfCount = 0;
-      auto sourceLen = scopedstrSource.length();
-      for (character_count i = 0; i < sourceLen; i++)
-      {
-         if (scopedstrSource[i] == 0x0a)
-         {
-            lfCount++;
-         }
-      }
+   //void Clipboard2::convertFromRfbFormat(const ::scoped_string &scopedstrSource, ::string &dest)
+   //{
+   //   // Count of 'LF' symbols.
+   //   character_count lfCount = 0;
+   //   auto sourceLen = scopedstrSource.length();
+   //   for (character_count i = 0; i < sourceLen; i++)
+   //   {
+   //      if (scopedstrSource[i] == 0x0a)
+   //      {
+   //         lfCount++;
+   //      }
+   //   }
 
-      auto destLen = sourceLen + lfCount;
-      auto destText = dest.get_buffer(destLen);
-      int j = 0;
-      for (character_count i = 0; i < sourceLen; i++)
-      {
-         if (scopedstrSource[i] == 0x0a)
-         {
-            destText[j] = 0x0d;
-            j++;
-         }
-         destText[j] = scopedstrSource[i];
-         j++;
-      }
-      destText[j] = 0;
+   //   auto destLen = sourceLen + lfCount;
+   //   auto destText = dest.get_buffer(destLen);
+   //   int j = 0;
+   //   for (character_count i = 0; i < sourceLen; i++)
+   //   {
+   //      if (scopedstrSource[i] == 0x0a)
+   //      {
+   //         destText[j] = 0x0d;
+   //         j++;
+   //      }
+   //      destText[j] = scopedstrSource[i];
+   //      j++;
+   //   }
+   //   destText[j] = 0;
 
-      dest.release_buffer();
+   //   dest.release_buffer();
 
-   }
+   //}
 
 
 } // namespace subsystem_windows

@@ -129,7 +129,6 @@ list(APPEND library_source
    #       node/remoting_win_system.vcxproj
    #       node/remoting_win_system.vcxproj.filters
    #       node/remoting_win_system.vcxproj.user
-   node/resource.h
    node/Screen.cpp
    node/Screen.h
    #node/SecurityDescriptor.cpp
@@ -214,6 +213,8 @@ list(APPEND library_source
    #node/CommandLineArguments.h
    framework.cpp
    framework.h
+   resource.h
+
 )
 
 if (MSVC)
