@@ -49,7 +49,7 @@ namespace subsystem_windows
 
       ::innate_subsystem::PixelFormat Screen::getPixelFormat()
       {
-         return m_pixelFormat;
+         return m_pixelformat;
       }
 
       ::int_size Screen::getDesktopDimension()
@@ -105,34 +105,34 @@ namespace subsystem_windows
 
       void Screen::_fillPixelFormat(const BMI *bmi)
       {
-         memset(&m_pixelFormat, 0, sizeof(::innate_subsystem::PixelFormat));
+         memset(&m_pixelformat, 0, sizeof(::innate_subsystem::PixelFormat));
 
-         m_pixelFormat.initBigEndianByNative();
+         m_pixelformat.initBigEndianByNative();
 
-         m_pixelFormat.bitsPerPixel = bmi->bmiHeader.biBitCount;
+         m_pixelformat.bitsPerPixel = bmi->bmiHeader.biBitCount;
 
          if (bmi->bmiHeader.biCompression == BI_BITFIELDS) {
-            m_pixelFormat.redShift   = findFirstBit(bmi->red);
-            m_pixelFormat.greenShift = findFirstBit(bmi->green);
-            m_pixelFormat.blueShift  = findFirstBit(bmi->blue);
+            m_pixelformat.redShift   = findFirstBit(bmi->red);
+            m_pixelformat.greenShift = findFirstBit(bmi->green);
+            m_pixelformat.blueShift  = findFirstBit(bmi->blue);
 
-            m_pixelFormat.redMax   = bmi->red    >> m_pixelFormat.redShift;
-            m_pixelFormat.greenMax = bmi->green  >> m_pixelFormat.greenShift;
-            m_pixelFormat.blueMax  = bmi->blue   >> m_pixelFormat.blueShift;
+            m_pixelformat.redMax   = bmi->red    >> m_pixelformat.redShift;
+            m_pixelformat.greenMax = bmi->green  >> m_pixelformat.greenShift;
+            m_pixelformat.blueMax  = bmi->blue   >> m_pixelformat.blueShift;
 
          } else {
-            m_pixelFormat.bitsPerPixel = 32;
-            m_pixelFormat.colorDepth = 24;
-            m_pixelFormat.redMax = m_pixelFormat.greenMax = m_pixelFormat.blueMax = 0xff;
-            m_pixelFormat.redShift   = 16;
-            m_pixelFormat.greenShift = 8;
-            m_pixelFormat.blueShift  = 0;
+            m_pixelformat.bitsPerPixel = 32;
+            m_pixelformat.colorDepth = 24;
+            m_pixelformat.redMax = m_pixelformat.greenMax = m_pixelformat.blueMax = 0xff;
+            m_pixelformat.redShift   = 16;
+            m_pixelformat.greenShift = 8;
+            m_pixelformat.blueShift  = 0;
          }
 
-         if (m_pixelFormat.bitsPerPixel == 32) {
-            m_pixelFormat.colorDepth = 24;
+         if (m_pixelformat.bitsPerPixel == 32) {
+            m_pixelformat.colorDepth = 24;
          } else {
-            m_pixelFormat.colorDepth = 16;
+            m_pixelformat.colorDepth = 16;
          }
       }
 

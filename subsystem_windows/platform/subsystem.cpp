@@ -21,10 +21,11 @@ namespace subsystem_windows
 
    ::subsystem_windows::subsystem * subsystem::s_p = nullptr;
 
-subsystem::subsystem()
+   subsystem::subsystem()
    {
 
-
+      m_i_LOADER_CLOSE_CODE = -1;
+      m_i_SPEC_IPC_CODE = -1;
 
    }
 
@@ -271,6 +272,41 @@ subsystem::subsystem()
    }
 
 
+   int subsystem::get_LOADER_CLOSE_CODE()
+   {
+
+      if (m_i_LOADER_CLOSE_CODE < 0)
+      {
+
+         m_i_LOADER_CLOSE_CODE = RegisterWindowMessageW(L"TVN.HOOK.LOADER.CLOSE.CODE");
+
+      }
+
+      return m_i_LOADER_CLOSE_CODE;
+
+   }
+
+
+   int subsystem::get_SPEC_IPC_CODE()
+   {
+
+      if (m_i_SPEC_IPC_CODE < 0)
+      {
+
+         m_i_SPEC_IPC_CODE = RegisterWindowMessageW(L"TVN.HOOK.MESSAGE.CODE");
+
+      }
+
+      return m_i_LOADER_CLOSE_CODE;
+
+   }
+
+   // RegisterWindowMessage("TVN.HOOK.LOADER.CLOSE.CODE");
+   // const unsigned int HookDefinitions::SPEC_IPC_CODE =
+   // RegisterWindowMessage("TVN.HOOK.MESSAGE.CODE");
+
+
 }//namespace subsystem_windows
+
 
 

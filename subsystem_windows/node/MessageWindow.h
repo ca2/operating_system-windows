@@ -45,7 +45,7 @@ namespace subsystem_windows
       MessageWindow();
       ~MessageWindow() override;
 
-      virtual bool createMessageWindow(const ::scoped_string & scopedstrWindowClassName, ::subsystem::WindowMessageHandler *messageHandler = nullptr);
+      virtual bool createMessageWindow(const ::scoped_string & scopedstrWindowClassName = {}, ::subsystem::WindowMessageHandler *messageHandler = nullptr);
       virtual void destroyWindow();
 
       //HWND getHWND() const { return m_hwnd; }

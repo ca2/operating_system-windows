@@ -25,9 +25,10 @@
 #pragma once
 
 
-#include "subsystem/node/Process.h"
+#include "subsystem/node/CurrentConsoleProcess.h"
 //#include "log_writer/LogWriter.h"
 #include "subsystem_windows/_common_header.h"
+#include "subsystem_windows/node/Process.h"
 
 
 namespace subsystem_windows
@@ -48,7 +49,7 @@ namespace subsystem_windows
        * @fixme rename it.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS CurrentConsoleProcess : 
-         virtual public ::subsystem::Process
+         virtual public Implementation<::subsystem::CurrentConsoleProcessInterface, Process>
       {
       public:
          /**
@@ -56,11 +57,14 @@ namespace subsystem_windows
           *
           * See description of Process constructor.
           */
-         CurrentConsoleProcess(::subsystem::LogWriter *log, bool connectRdpSession, const ::scoped_string & scopedstrPath = 0, const ::scoped_string & scopedstrArgs = 0);
+         //CurrentConsoleProcess(::subsystem::LogWriter *log, bool connectRdpSession, const ::scoped_string & scopedstrPath = 0, const ::scoped_string & scopedstrArgs = 0);
          /**
           * Destoys instance of class.
           */
          virtual ~CurrentConsoleProcess();
+
+
+         void initialize_current_console_process(::subsystem::LogWriter *log, bool connectRdpSession, const ::scoped_string & scopedstrPath = 0, const ::scoped_string & scopedstrArgs = 0) override;
 
          /**
           * Starts process in interactive console session.
@@ -70,9 +74,9 @@ namespace subsystem_windows
           * @remark to detect WinXP bug it uses loop, so before XP trick will be tried,
           * it will try to start process for some times.
           */
-         virtual void start();
+         virtual void start() override;
 
-      private:
+      //private:
          ::subsystem::LogWriter *m_log;
          bool m_connectRdpSession;
       };

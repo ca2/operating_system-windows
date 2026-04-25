@@ -78,7 +78,7 @@ namespace subsystem_windows
          // (that has been used to create the compatible DIB section).
          // Note that this function does not copy any transparent windows.
          // This function throwing an exception on a failure.
-         void stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & dstRect);
+         void stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & rectangleTarget);
 
       private:
          // Opens a new DIB section.
@@ -92,7 +92,7 @@ namespace subsystem_windows
 
          // This function throwing an exception on a failure.
          void blitFromDibSection(const ::int_rectangle &  rect, DWORD flags);
-         void stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & dstRect, DWORD flags);
+         void stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & rectangleTarget, DWORD flags);
 
          void setupBMIStruct(BITMAPINFO *pBmi, const PixelFormat & pf, const ::int_size & dim);
 

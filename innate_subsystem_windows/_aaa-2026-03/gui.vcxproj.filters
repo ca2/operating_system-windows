@@ -123,7 +123,7 @@
     <ClCompile Include="ScrollBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DibFrameBuffer.cpp">
+    <ClCompile Include="DibFramebuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PaintWindow.cpp">
@@ -242,7 +242,7 @@
     <ClInclude Include="ScrollBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DibFrameBuffer.h">
+    <ClInclude Include="DibFramebuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PaintWindow.h">

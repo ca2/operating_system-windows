@@ -23,12 +23,12 @@ list(APPEND library_source
    drawing/Pen.h
    drawing/SolidBrush.cpp
    drawing/SolidBrush.h
-   #framebuffer/DibFrameBuffer.cpp
-   #framebuffer/DibFrameBuffer.h
+   #framebuffer/DibFramebuffer.cpp
+   #framebuffer/DibFramebuffer.h
    framebuffer/DibSection.cpp
    framebuffer/DibSection.h
-   #framebuffer/FrameBuffer.cpp
-   #framebuffer/FrameBuffer.h
+   #framebuffer/Framebuffer.cpp
+   #framebuffer/Framebuffer.h
    #framebuffer/PixelFormat.cpp
    #framebuffer/PixelFormat.h
    gui/CheckBox.cpp

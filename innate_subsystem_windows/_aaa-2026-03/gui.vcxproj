@@ -276,7 +276,7 @@
     <ClCompile Include="BalloonTip.cpp" />
     <ClCompile Include="BaseDialog.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
-    <ClCompile Include="DibFrameBuffer.cpp" />
+    <ClCompile Include="DibFramebuffer.cpp" />
     <ClCompile Include="drawing\Bitmap.cpp" />
     <ClCompile Include="drawing\BitmapGraphics.cpp" />
     <ClCompile Include="drawing\Brush.cpp" />
@@ -316,7 +316,7 @@
     <ClInclude Include="BalloonTip.h" />
     <ClInclude Include="BaseDialog.h" />
     <ClInclude Include="BaseWindow.h" />
-    <ClInclude Include="DibFrameBuffer.h" />
+    <ClInclude Include="DibFramebuffer.h" />
     <ClInclude Include="drawing\Bitmap.h" />
     <ClInclude Include="drawing\BitmapGraphics.h" />
     <ClInclude Include="drawing\Brush.h" />

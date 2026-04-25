@@ -22,7 +22,7 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-// #include "DibFrameBuffer.h"
+// #include "DibFramebuffer.h"
 // #include "util/Exception.h"
 //
 //
@@ -30,185 +30,185 @@
 // {
 //    namespace subsystem
 //    {
-//       DibFrameBuffer::DibFrameBuffer()
+//       DibFramebuffer::DibFramebuffer()
 //       : m_dibSection(0)
 //       {
 //       }
 //
-//       DibFrameBuffer::~DibFrameBuffer()
+//       DibFramebuffer::~DibFramebuffer()
 //       {
 //          releaseDibSection();
 //       }
 //
-//       void DibFrameBuffer::setTargetDC(HDC targetDC)
+//       void DibFramebuffer::setTargetDC(HDC targetDC)
 //       {
 //          checkDibValid();
 //          m_dibSection->setTargetDC(targetDC);
 //       }
 //
-//       bool DibFrameBuffer::assignProperties(const FrameBuffer *srcFrameBuffer)
+//       bool DibFramebuffer::assignProperties(const Framebuffer * pframebufferSource)
 //       {
-//          throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::assignProperties() function."));
+//          throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::assignProperties() function."));
 //       }
 //
-//       bool DibFrameBuffer::clone(const FrameBuffer *srcFrameBuffer)
+//       bool DibFramebuffer::clone(const Framebuffer * pframebufferSource)
 //       {
-//          throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::clone() function."));
+//          throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::clone() function."));
 //       }
 //
-//       void DibFrameBuffer::setColor(unsigned int8 reg, unsigned int8 green, unsigned int8 blue)
+//       void DibFramebuffer::setColor(unsigned int8 reg, unsigned int8 green, unsigned int8 blue)
 //       {
 //          m_fb.setColor(reg, green, blue);
 //       }
 //
-//       void DibFrameBuffer::fillRect(const ::int_rectangle &dstRect, unsigned int32 color)
+//       void DibFramebuffer::fillRect(const ::int_rectangle &rectangleTarget, unsigned int32 color)
 //       {
-//          m_fb.fillRect(dstRect, color);
+//          m_fb.fillRect(rectangleTarget, color);
 //       }
 //
-//       bool DibFrameBuffer::isEqualTo(const FrameBuffer *frameBuffer)
+//       bool DibFramebuffer::isEqualTo(const Framebuffer * pframebuffer)
 //       {
-//          return m_fb.isEqualTo(frameBuffer);
+//          return m_fb.isEqualTo(pframebuffer);
 //       }
 //
-//       bool DibFrameBuffer::copyFrom(const ::int_rectangle &dstRect, const FrameBuffer *srcFrameBuffer,
+//       bool DibFramebuffer::copyFrom(const ::int_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
 //                                     int srcX, int srcY)
 //       {
-//          return m_fb.copyFrom(dstRect, srcFrameBuffer, srcX, srcY);
+//          return m_fb.copyFrom(rectangleTarget, pframebufferSource, srcX, srcY);
 //       }
 //
-//       bool DibFrameBuffer::copyFrom(const FrameBuffer *srcFrameBuffer, int srcX, int srcY)
+//       bool DibFramebuffer::copyFrom(const Framebuffer * pframebufferSource, int srcX, int srcY)
 //       {
-//          return m_fb.copyFrom(srcFrameBuffer, srcX, srcY);
+//          return m_fb.copyFrom(pframebufferSource, srcX, srcY);
 //       }
 //
-//       bool DibFrameBuffer::overlay(const ::int_rectangle &dstRect, const FrameBuffer *srcFrameBuffer,
+//       bool DibFramebuffer::overlay(const ::int_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
 //                                    int srcX, int srcY, const char *andMask)
 //       {
-//          return m_fb.overlay(dstRect, srcFrameBuffer, srcX, srcY, andMask);
+//          return m_fb.overlay(rectangleTarget, pframebufferSource, srcX, srcY, andMask);
 //       }
 //
-//       void DibFrameBuffer::move(const ::int_rectangle &dstRect, const int srcX, const int srcY)
+//       void DibFramebuffer::move(const ::int_rectangle &rectangleTarget, const int srcX, const int srcY)
 //       {
-//          m_fb.move(dstRect, srcX, srcY);
+//          m_fb.move(rectangleTarget, srcX, srcY);
 //       }
 //
-//       bool DibFrameBuffer::cmpFrom(const ::int_rectangle &dstRect, const FrameBuffer *srcFrameBuffer,
+//       bool DibFramebuffer::cmpFrom(const ::int_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
 //                                    const int srcX, const int srcY)
 //       {
-//          return m_fb.cmpFrom(dstRect, srcFrameBuffer, srcX, srcY);
+//          return m_fb.cmpFrom(rectangleTarget, pframebufferSource, srcX, srcY);
 //       }
 //
-//       bool DibFrameBuffer::setDimension(const Dimension *newDim)
+//       bool DibFramebuffer::setDimension(const Dimension *newDim)
 //       {
-//          throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::clone() function."));
+//          throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::clone() function."));
 //       }
 //
-//       bool DibFrameBuffer::setDimension(const ::int_rectangle &rect)
+//       bool DibFramebuffer::setDimension(const ::int_rectangle &rect)
 //       {
-//          throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::clone() function."));
+//          throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::clone() function."));
 //       }
 //
-//       void DibFrameBuffer::setEmptyDimension(const ::int_rectangle &dimByRect)
-//       {
-//          throw Exception(_T("This function is deprecated"));
-//       }
-//
-//       void DibFrameBuffer::setEmptyPixelFmt(const PixelFormat *pf)
+//       void DibFramebuffer::setEmptyDimension(const ::int_rectangle &dimByRect)
 //       {
 //          throw Exception(_T("This function is deprecated"));
 //       }
 //
-//       void DibFrameBuffer::setPropertiesWithoutResize(const Dimension *newDim, const PixelFormat *pf)
+//       void DibFramebuffer::setEmptyPixelFmt(const PixelFormat *pf)
 //       {
-//          throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::setPropertiesWithoutResize() function."));
+//          throw Exception(_T("This function is deprecated"));
 //       }
 //
-//       inline Dimension DibFrameBuffer::getDimension() const
+//       void DibFramebuffer::setPropertiesWithoutResize(const Dimension *newDim, const PixelFormat *pf)
+//       {
+//          throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::setPropertiesWithoutResize() function."));
+//       }
+//
+//       inline Dimension DibFramebuffer::getDimension() const
 //       {
 //          return m_fb.getDimension();
 //       }
 //
-//       bool DibFrameBuffer::setPixelFormat(const PixelFormat *pixelFormat)
+//       bool DibFramebuffer::setPixelFormat(const PixelFormat *pixelFormat)
 //       {
-//          throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::setPixelFormat() function."));
+//          throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::setPixelFormat() function."));
 //       }
 //
-//       inline PixelFormat DibFrameBuffer::getPixelFormat() const
+//       inline PixelFormat DibFramebuffer::getPixelFormat() const
 //       {
 //          return m_fb.getPixelFormat();
 //       }
 //
-//       bool DibFrameBuffer::setProperties(const Dimension *newDim, const PixelFormat *pixelFormat)
+//       bool DibFramebuffer::setProperties(const Dimension *newDim, const PixelFormat *pixelFormat)
 //       {
-//          throw Exception(_T("Wrong: You shouln't use this variant of the DibFrameBuffer::setProperties() function."));
+//          throw Exception(_T("Wrong: You shouln't use this variant of the DibFramebuffer::setProperties() function."));
 //       }
 //
-//       bool DibFrameBuffer::setProperties(const ::int_rectangle &dimByRect, const PixelFormat *pixelFormat)
+//       bool DibFramebuffer::setProperties(const ::int_rectangle &dimByRect, const PixelFormat *pixelFormat)
 //       {
-//          throw Exception(_T("Wrong: You shouln't use this variant of the DibFrameBuffer::setProperties() function."));
+//          throw Exception(_T("Wrong: You shouln't use this variant of the DibFramebuffer::setProperties() function."));
 //       }
 //
-//       unsigned int8 DibFrameBuffer::getBitsPerPixel() const
+//       unsigned int8 DibFramebuffer::getBitsPerPixel() const
 //       {
 //          return m_fb.getBitsPerPixel();
 //       }
 //
-//       unsigned int8 DibFrameBuffer::getBytesPerPixel() const
+//       unsigned int8 DibFramebuffer::getBytesPerPixel() const
 //       {
 //          return m_fb.getBytesPerPixel();
 //       }
 //
-//       void DibFrameBuffer::setBuffer(void *newBuffer)
+//       void DibFramebuffer::setBuffer(void *newBuffer)
 //       {
-//          throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::setBuffer() function."));
+//          throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::setBuffer() function."));
 //       }
 //
-//       inline void *DibFrameBuffer::getBuffer() const
+//       inline void *DibFramebuffer::getBuffer() const
 //       {
 //          return m_fb.getBuffer();
 //       }
 //
-//       void *DibFrameBuffer::getBufferPtr(int x, int y) const
+//       void *DibFramebuffer::getBufferPtr(int x, int y) const
 //       {
 //          return m_fb.getBufferPtr(x, y);
 //       }
 //
-//       inline int DibFrameBuffer::getBufferSize() const
+//       inline int DibFramebuffer::getBufferSize() const
 //       {
 //          return m_fb.getBufferSize();
 //       }
 //
-//       inline int DibFrameBuffer::getBytesPerRow() const
+//       inline int DibFramebuffer::getBytesPerRow() const
 //       {
 //          return m_fb.getBytesPerRow();
 //       }
 //
-//       void DibFrameBuffer::blitToDibSection(const ::int_rectangle &rect)
+//       void DibFramebuffer::blitToDibSection(const ::int_rectangle &rect)
 //       {
 //          checkDibValid();
 //          m_dibSection->blitToDibSection(rect);
 //       }
 //
-//       void DibFrameBuffer::blitTransparentToDibSection(const ::int_rectangle &rect)
+//       void DibFramebuffer::blitTransparentToDibSection(const ::int_rectangle &rect)
 //       {
 //          checkDibValid();
 //          m_dibSection->blitTransparentToDibSection(rect);
 //       }
 //
-//       void DibFrameBuffer::blitFromDibSection(const ::int_rectangle &rect)
+//       void DibFramebuffer::blitFromDibSection(const ::int_rectangle &rect)
 //       {
 //          checkDibValid();
 //          m_dibSection->blitFromDibSection(rect);
 //       }
 //
-//       void DibFrameBuffer::stretchFromDibSection(const ::int_rectangle &srcRect, const ::int_rectangle &dstRect)
+//       void DibFramebuffer::stretchFromDibSection(const ::int_rectangle &srcRect, const ::int_rectangle &rectangleTarget)
 //       {
 //          checkDibValid();
-//          m_dibSection->stretchFromDibSection(srcRect, dstRect);
+//          m_dibSection->stretchFromDibSection(srcRect, rectangleTarget);
 //       }
 //
-//       void DibFrameBuffer::setProperties(const Dimension *newDim,
+//       void DibFramebuffer::setProperties(const Dimension *newDim,
 //                                          const PixelFormat *pixelFormat,
 //                                          HWND compatibleWindow)
 //       {
@@ -217,7 +217,7 @@
 //          m_fb.setBuffer(buffer);
 //       }
 //
-//       void *DibFrameBuffer::updateDibSection(const Dimension *newDim,
+//       void *DibFramebuffer::updateDibSection(const Dimension *newDim,
 //                                             const PixelFormat *pixelFormat,
 //                                             HWND compatibleWindow)
 //       {
@@ -226,7 +226,7 @@
 //          return m_dibSection->getBuffer();
 //       }
 //
-//       void DibFrameBuffer::releaseDibSection()
+//       void DibFramebuffer::releaseDibSection()
 //       {
 //          if (m_dibSection) {
 //             delete m_dibSection;
@@ -235,7 +235,7 @@
 //          }
 //       }
 //
-//       void DibFrameBuffer::checkDibValid()
+//       void DibFramebuffer::checkDibValid()
 //       {
 //          if (m_dibSection == 0) {
 //             throw Exception(_T("Can't set target DC because it is not initialized a DIB section yet"));

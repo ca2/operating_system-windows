@@ -11,7 +11,7 @@
 #include "drawing/DeviceContext.h"
 #include "drawing/Graphics.h"
 #include "drawing/Bitmap.h"
-#include "framebuffer/DibSection.h"
+#include "pframebuffer/DibSection.h"
 #include "gui/SystemMetrics.h"
 #include "gui/Window.h"
 #include "gui/Control.h"

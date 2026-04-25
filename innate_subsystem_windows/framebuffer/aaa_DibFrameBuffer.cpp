@@ -21,191 +21,191 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framebuffer.h"
-#include "DibFrameBuffer.h"
+#include "pframebuffer->h"
+#include "DibFramebuffer.h"
 //#include "util/Exception.h"
 
 namespace innate_subsystem_windows
 {
-   DibFrameBuffer::DibFrameBuffer()
+   DibFramebuffer::DibFramebuffer()
    : m_dibSection(0)
    {
    }
 
-   DibFrameBuffer::~DibFrameBuffer()
+   DibFramebuffer::~DibFramebuffer()
    {
       releaseDibSection();
    }
 
-   void DibFrameBuffer::setTargetDC(HDC targetDC)
+   void DibFramebuffer::setTargetDC(HDC targetDC)
    {
       checkDibValid();
       m_dibSection->setTargetDC(targetDC);
    }
 
-   bool DibFrameBuffer::assignProperties(const ::innate_subsystem::PixelFormat &srcFrameBuffer)
+   bool DibFramebuffer::assignProperties(const ::innate_subsystem::PixelFormat &pframebufferSource)
    {
-      throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::assignProperties() function."));
+      throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::assignProperties() function."));
    }
 
-   bool DibFrameBuffer::clone(const ::innate_subsystem::PixelFormat &srcFrameBuffer)
+   bool DibFramebuffer::clone(const ::innate_subsystem::PixelFormat &pframebufferSource)
    {
-      throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::clone() function."));
+      throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::clone() function."));
    }
 
-   void DibFrameBuffer::setColor(UINT8 reg, UINT8 green, UINT8 blue)
+   void DibFramebuffer::setColor(UINT8 reg, UINT8 green, UINT8 blue)
    {
       m_fb.setColor(reg, green, blue);
    }
 
-   void DibFrameBuffer::fillRect(const ::int_rectangle &dstRect, UINT32 color)
+   void DibFramebuffer::fillRect(const ::int_rectangle &rectangleTarget, UINT32 color)
    {
-      m_fb.fillRect(dstRect, color);
+      m_fb.fillRect(rectangleTarget, color);
    }
 
-   bool DibFrameBuffer::isEqualTo(const ::innate_subsystem::PixelFormat &frameBuffer)
+   bool DibFramebuffer::isEqualTo(const ::innate_subsystem::PixelFormat &pframebuffer)
    {
-      return m_fb.isEqualTo(frameBuffer);
+      return m_fb.isEqualTo(pframebuffer);
    }
 
-   bool DibFrameBuffer::copyFrom(const ::int_rectangle &dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
+   bool DibFramebuffer::copyFrom(const ::int_rectangle &rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
                                  int srcX, int srcY)
    {
-      return m_fb.copyFrom(dstRect, srcFrameBuffer, srcX, srcY);
+      return m_fb.copyFrom(rectangleTarget, pframebufferSource, srcX, srcY);
    }
 
-   bool DibFrameBuffer::copyFrom(const ::innate_subsystem::PixelFormat &srcFrameBuffer, int srcX, int srcY)
+   bool DibFramebuffer::copyFrom(const ::innate_subsystem::PixelFormat &pframebufferSource, int srcX, int srcY)
    {
-      return m_fb.copyFrom(srcFrameBuffer, srcX, srcY);
+      return m_fb.copyFrom(pframebufferSource, srcX, srcY);
    }
 
-   bool DibFrameBuffer::overlay(const ::int_rectangle &dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
+   bool DibFramebuffer::overlay(const ::int_rectangle &rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
                                 int srcX, int srcY, const char *andMask)
    {
-      return m_fb.overlay(dstRect, srcFrameBuffer, srcX, srcY, andMask);
+      return m_fb.overlay(rectangleTarget, pframebufferSource, srcX, srcY, andMask);
    }
 
-   void DibFrameBuffer::move(const ::int_rectangle &dstRect, const int srcX, const int srcY)
+   void DibFramebuffer::move(const ::int_rectangle &rectangleTarget, const int srcX, const int srcY)
    {
-      m_fb.move(dstRect, srcX, srcY);
+      m_fb.move(rectangleTarget, srcX, srcY);
    }
 
-   bool DibFrameBuffer::cmpFrom(const ::int_rectangle &dstRect, const ::innate_subsystem::PixelFormat &srcFrameBuffer,
+   bool DibFramebuffer::cmpFrom(const ::int_rectangle &rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
                                 const int srcX, const int srcY)
    {
-      return m_fb.cmpFrom(dstRect, srcFrameBuffer, srcX, srcY);
+      return m_fb.cmpFrom(rectangleTarget, pframebufferSource, srcX, srcY);
    }
 
-   bool DibFrameBuffer::setDimension(const ::int_size &newDim)
+   bool DibFramebuffer::setDimension(const ::int_size &newDim)
    {
-      throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::clone() function."));
+      throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::clone() function."));
    }
 
-   bool DibFrameBuffer::setDimension(const ::int_rectangle &rect)
+   bool DibFramebuffer::setDimension(const ::int_rectangle &rect)
    {
-      throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::clone() function."));
+      throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::clone() function."));
    }
 
-   void DibFrameBuffer::setEmptyDimension(const ::int_rectangle &dimByRect)
-   {
-      throw Exception(_T("This function is deprecated"));
-   }
-
-   void DibFrameBuffer::setEmptyPixelFmt(const ::innate_subsystem::PixelFormat &pf)
+   void DibFramebuffer::setEmptyDimension(const ::int_rectangle &dimByRect)
    {
       throw Exception(_T("This function is deprecated"));
    }
 
-   void DibFrameBuffer::setPropertiesWithoutResize(const ::int_size &newDim, const ::innate_subsystem::PixelFormat &pf)
+   void DibFramebuffer::setEmptyPixelFmt(const ::innate_subsystem::PixelFormat &pf)
    {
-      throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::setPropertiesWithoutResize() function."));
+      throw Exception(_T("This function is deprecated"));
    }
 
-   inline ::int_size DibFrameBuffer::getDimension() const
+   void DibFramebuffer::setPropertiesWithoutResize(const ::int_size &newDim, const ::innate_subsystem::PixelFormat &pf)
+   {
+      throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::setPropertiesWithoutResize() function."));
+   }
+
+   inline ::int_size DibFramebuffer::getDimension() const
    {
       return m_fb.getDimension();
    }
 
-   bool DibFrameBuffer::setPixelFormat(const ::innate_subsystem::PixelFormat &pixelFormat)
+   bool DibFramebuffer::setPixelFormat(const ::innate_subsystem::PixelFormat &pixelFormat)
    {
-      throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::setPixelFormat() function."));
+      throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::setPixelFormat() function."));
    }
 
-   inline PixelFormat DibFrameBuffer::getPixelFormat() const
+   inline PixelFormat DibFramebuffer::getPixelFormat() const
    {
       return m_fb.getPixelFormat();
    }
 
-   bool DibFrameBuffer::setProperties(const ::int_size &newDim, const ::innate_subsystem::PixelFormat &pixelFormat)
+   bool DibFramebuffer::setProperties(const ::int_size &newDim, const ::innate_subsystem::PixelFormat &pixelFormat)
    {
-      throw Exception(_T("Wrong: You shouln't use this variant of the DibFrameBuffer::setProperties() function."));
+      throw Exception(_T("Wrong: You shouln't use this variant of the DibFramebuffer::setProperties() function."));
    }
 
-   bool DibFrameBuffer::setProperties(const ::int_rectangle &dimByRect, const ::innate_subsystem::PixelFormat &pixelFormat)
+   bool DibFramebuffer::setProperties(const ::int_rectangle &dimByRect, const ::innate_subsystem::PixelFormat &pixelFormat)
    {
-      throw Exception(_T("Wrong: You shouln't use this variant of the DibFrameBuffer::setProperties() function."));
+      throw Exception(_T("Wrong: You shouln't use this variant of the DibFramebuffer::setProperties() function."));
    }
 
-   UINT8 DibFrameBuffer::getBitsPerPixel() const
+   UINT8 DibFramebuffer::getBitsPerPixel() const
    {
       return m_fb.getBitsPerPixel();
    }
 
-   UINT8 DibFrameBuffer::getBytesPerPixel() const
+   UINT8 DibFramebuffer::getBytesPerPixel() const
    {
       return m_fb.getBytesPerPixel();
    }
 
-   void DibFrameBuffer::setBuffer(void *newBuffer)
+   void DibFramebuffer::setBuffer(void *newBuffer)
    {
-      throw Exception(_T("Wrong: You shouln't use the DibFrameBuffer::setBuffer() function."));
+      throw Exception(_T("Wrong: You shouln't use the DibFramebuffer::setBuffer() function."));
    }
 
-   inline void *DibFrameBuffer::getBuffer() const
+   inline void *DibFramebuffer::getBuffer() const
    {
       return m_fb.getBuffer();
    }
 
-   void *DibFrameBuffer::getBufferPtr(int x, int y) const
+   void *DibFramebuffer::getBufferPtr(int x, int y) const
    {
       return m_fb.getBufferPtr(x, y);
    }
 
-   inline int DibFrameBuffer::getBufferSize() const
+   inline int DibFramebuffer::getBufferSize() const
    {
       return m_fb.getBufferSize();
    }
 
-   inline int DibFrameBuffer::getBytesPerRow() const
+   inline int DibFramebuffer::getBytesPerRow() const
    {
       return m_fb.getBytesPerRow();
    }
 
-   void DibFrameBuffer::blitToDibSection(const ::int_rectangle &rect)
+   void DibFramebuffer::blitToDibSection(const ::int_rectangle &rect)
    {
       checkDibValid();
       m_dibSection->blitToDibSection(rect);
    }
 
-   void DibFrameBuffer::blitTransparentToDibSection(const ::int_rectangle &rect)
+   void DibFramebuffer::blitTransparentToDibSection(const ::int_rectangle &rect)
    {
       checkDibValid();
       m_dibSection->blitTransparentToDibSection(rect);
    }
 
-   void DibFrameBuffer::blitFromDibSection(const ::int_rectangle &rect)
+   void DibFramebuffer::blitFromDibSection(const ::int_rectangle &rect)
    {
       checkDibValid();
       m_dibSection->blitFromDibSection(rect);
    }
 
-   void DibFrameBuffer::stretchFromDibSection(const ::int_rectangle &srcRect, const ::int_rectangle &dstRect)
+   void DibFramebuffer::stretchFromDibSection(const ::int_rectangle &srcRect, const ::int_rectangle &rectangleTarget)
    {
       checkDibValid();
-      m_dibSection->stretchFromDibSection(srcRect, dstRect);
+      m_dibSection->stretchFromDibSection(srcRect, rectangleTarget);
    }
 
-   void DibFrameBuffer::setProperties(const ::int_size &newDim,
+   void DibFramebuffer::setProperties(const ::int_size &newDim,
                                       const ::innate_subsystem::PixelFormat &pixelFormat,
                                       HWND compatibleWindow)
    {
@@ -214,7 +214,7 @@ namespace innate_subsystem_windows
       m_fb.setBuffer(buffer);
    }
 
-   void *DibFrameBuffer::updateDibSection(const ::int_size &newDim,
+   void *DibFramebuffer::updateDibSection(const ::int_size &newDim,
                                          const ::innate_subsystem::PixelFormat &pixelFormat,
                                          HWND compatibleWindow)
    {
@@ -223,7 +223,7 @@ namespace innate_subsystem_windows
       return m_dibSection->getBuffer();
    }
 
-   void DibFrameBuffer::releaseDibSection()
+   void DibFramebuffer::releaseDibSection()
    {
       if (m_dibSection) {
          delete m_dibSection;
@@ -232,7 +232,7 @@ namespace innate_subsystem_windows
       }
    }
 
-   void DibFrameBuffer::checkDibValid()
+   void DibFramebuffer::checkDibValid()
    {
       if (m_dibSection == 0) {
          throw Exception(_T("Can't set target DC because it is not initialized a DIB section yet"));

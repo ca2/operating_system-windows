@@ -2617,7 +2617,7 @@
     <ClCompile Include="drawing\Icon.cpp" />
     <ClCompile Include="drawing\Pen.cpp" />
     <ClCompile Include="drawing\SolidBrush.cpp" />
-    <ClCompile Include="framebuffer\DibSection.cpp" />
+    <ClCompile Include="pframebuffer\DibSection.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -2657,7 +2657,7 @@
     <ClCompile Include="gui\WindowCache.cpp" />
     <ClCompile Include="gui\WindowFinder.cpp" />
     <ClCompile Include="gui\WindowProcHolder.cpp" />
-    <ClCompile Include="platform\DibFrameBuffer.cpp" />
+    <ClCompile Include="platform\DibFramebuffer.cpp" />
     <ClCompile Include="platform\ResourceLoader.cpp" />
     <ClCompile Include="platform\subsystem.cpp" />
     <ClCompile Include="_.cpp" />
@@ -2729,7 +2729,7 @@
     <ClInclude Include="gui\WindowMessageHandler.h" />
     <ClInclude Include="gui\WindowProcHolder.h" />
     <ClInclude Include="gui\window_implementation.h" />
-    <ClInclude Include="platform\DibFrameBuffer.h" />
+    <ClInclude Include="platform\DibFramebuffer.h" />
     <ClInclude Include="platform\resource.h" />
     <ClInclude Include="platform\ResourceLoader.h" />
     <ClInclude Include="platform\subsystem.h" />
