@@ -40,11 +40,12 @@ namespace subsystem_windows
       // messageHandler == 0 the wndProc() function will be used.
       //MessageWindow(const HINSTANCE hinst, const char *windowClassName,
         //            WindowMessageHandler *messageHandler = 0);
-      MessageWindow(const char *windowClassName,
-                    WindowMessageHandler *messageHandler = 0);
+      //MessageWindow(const char *windowClassName,
+        //            WindowMessageHandler *messageHandler = 0);
+      MessageWindow();
       ~MessageWindow() override;
 
-      virtual bool createWindow(WindowMessageHandler *messageHandler = 0);
+      virtual bool createWindow(const ::scoped_string & scopedstrWindowClassName, WindowMessageHandler *messageHandler = 0);
       virtual void destroyWindow();
 
       //HWND getHWND() const { return m_hwnd; }
@@ -55,7 +56,7 @@ namespace subsystem_windows
       virtual bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
 
       //HWND m_hwnd;
-      WindowMessageHandler *m_messageHandler;
+      ::pointer < WindowMessageHandler > m_pwindowmessagehandler;
 
       //HINSTANCE m_hinst;
       ::string m_strWindowClassName;

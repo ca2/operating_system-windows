@@ -38,7 +38,7 @@ namespace subsystem_windows
                                 WindowMessageHandler *messageHandler)
    : m_hwnd(0),
      m_hinst(hinst),
-     m_messageHandler(messageHandler)
+     m_pwindowmessagehandler(messageHandler)
    {
       if (windowClassName != 0) {
          m_strWindowClassName = windowClassName;
@@ -63,7 +63,7 @@ namespace subsystem_windows
    bool MessageWindow::createWindow(WindowMessageHandler *messageHandler)
    {
       if (messageHandler != 0) {
-         m_messageHandler = messageHandler;
+         m_pwindowmessagehandler = messageHandler;
       }
 
       ::wstring wstrWindowClassName;
@@ -110,8 +110,8 @@ namespace subsystem_windows
       }
       if (_this != NULL) {
          bool result;
-         if (_this->m_messageHandler != 0) {
-            result = _this->m_messageHandler->processMessage(message,
+         if (_this->m_pwindowmessagehandler != 0) {
+            result = _this->m_pwindowmessagehandler->processMessage(message,
                                                              wparam,
                                                              lparam);
          } else {
