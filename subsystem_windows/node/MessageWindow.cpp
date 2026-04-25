@@ -23,7 +23,7 @@
 //
 #include "framework.h"
 #include "MessageWindow.h"
-#include "WindowMessageHandler.h"
+#include "subsystem/platform/WindowMessageHandler.h"
 
 
 #define DEFAULT_WINDOW_CLASS_NAME "WindowClass"
@@ -33,19 +33,32 @@ namespace subsystem_windows
 {
 
 
-   MessageWindow::MessageWindow(const HINSTANCE hinst,
-                                const char *windowClassName,
-                                WindowMessageHandler *messageHandler)
-   : m_hwnd(0),
-     m_hinst(hinst),
-     m_pwindowmessagehandler(messageHandler)
-   {
-      if (windowClassName != 0) {
-         m_strWindowClassName = windowClassName;
-      } else {
-         m_strWindowClassName = DEFAULT_WINDOW_CLASS_NAME;
-      }
+   //MessageWindow::MessageWindow(const HINSTANCE hinst,
+   //                             const char *windowClassName,
+   //                             WindowMessageHandler *messageHandler)
+   //: m_hwnd(0),
+   //  m_hinst(hinst),
+   //  m_pwindowmessagehandler(messageHandler)
+   //{
+   //   if (windowClassName != 0) {
+   //      m_strWindowClassName = windowClassName;
+   //   } else {
+   //      m_strWindowClassName = DEFAULT_WINDOW_CLASS_NAME;
+   //   }
 
+   //}
+   MessageWindow::MessageWindow() :
+       //m_hwnd(nullptr), m_hinst(nullptr), m_pwindowmessagehandler(nullptr)
+       m_pwindowmessagehandler(nullptr)
+   {
+      //if (windowClassName != 0)
+      //{
+        // m_strWindowClassName = windowClassName;
+      //}
+      //else
+      //{
+         m_strWindowClassName = DEFAULT_WINDOW_CLASS_NAME;
+      //}
    }
 
    MessageWindow::~MessageWindow(void)
@@ -55,12 +68,13 @@ namespace subsystem_windows
       if (m_strWindowClassName.has_character()) {
          ::wstring wstrWindowClassName;
          wstrWindowClassName = m_strWindowClassName;
-         UnregisterClass(wstrWindowClassName, m_hinst);
+         UnregisterClass(wstrWindowClassName,
+                         (HINSTANCE)::windows::hinstance_from_function(::windows::window::s_window_procedure));
          m_strWindowClassName.clear();
       }
    }
 
-   bool MessageWindow::createWindow(WindowMessageHandler *messageHandler)
+   bool MessageWindow::createMessageWindow(const ::scoped_string & scopedstrWindowClassName, ::subsystem::WindowMessageHandler *messageHandler)
    {
       if (messageHandler != 0) {
          m_pwindowmessagehandler = messageHandler;
@@ -69,6 +83,8 @@ namespace subsystem_windows
       ::wstring wstrWindowClassName;
 
       wstrWindowClassName = m_strWindowClassName;
+
+      auto hinstance = ::windows::window::hinstance_from_function(::windows::window::s_window_procedure);
 
       if (regClass(m_hinst, m_strWindowClassName) == 0) {
          return false;

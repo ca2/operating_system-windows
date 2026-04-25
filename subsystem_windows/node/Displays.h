@@ -43,7 +43,7 @@ namespace subsystem_windows
       int m_xVirtualScreen;
       int m_yVirtualScreen;
 
-      ::array_base<::int_rectangle> m_displayRects;
+      ::int_rectangle_array_base m_displayRects;
       critical_section m_displayRectsMutex;
 
       static const unsigned int UPDATE_INTERVAL = 3000;
@@ -55,10 +55,10 @@ namespace subsystem_windows
       // If a display does not exist now the function return an empty rectangle.
       virtual void getDisplayCoordinates(unsigned char displayNumber, ::int_rectangle *rect)override;
 
-      virtual ::array_base<::int_rectangle> getDisplaysCoords() override;
+      virtual ::int_rectangle_array_base getDisplaysCoords() override;
 
       // Returns a ::array_base that contain dispalys coordinates at the current time.
-      virtual ::array_base<::int_rectangle> getDisplays() override;
+      virtual ::int_rectangle_array_base getDisplays() override;
 
       //private:
       // Updates internal information to a current state.
@@ -88,10 +88,10 @@ namespace subsystem_windows
    //    // If a display does not exist now the function return an empty rectangle.
    //    void getDisplayCoordinates(unsigned char displayNumber, ::int_rectangle *rect) override;
    //
-   //    ::array_base<::int_rectangle> getDisplaysCoords() override;
+   //    ::int_rectangle_array_base getDisplaysCoords() override;
    //
    //    // Returns a ::array_base that contain dispalys coordinates at the current time.
-   //    ::array_base<::int_rectangle> getDisplays() override;
+   //    ::int_rectangle_array_base getDisplays() override;
    //
    //    //private:
    //    // Updates internal information to a current state.
@@ -108,7 +108,7 @@ namespace subsystem_windows
    //    // int m_xVirtualScreen;
    //    // int m_yVirtualScreen;
    //    //
-   //    // ::array_base<::int_rectangle> m_displayRects;
+   //    // ::int_rectangle_array_base m_displayRects;
    //    // LocalMutex m_displayRectsMutex;
    //    //
    //    // static const unsigned int UPDATE_INTERVAL = 3000;
