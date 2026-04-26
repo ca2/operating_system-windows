@@ -61,7 +61,8 @@ namespace subsystem_windows
          /**
           * Destoys instance of class.
           */
-         virtual ~CurrentConsoleProcess();
+         CurrentConsoleProcess();
+         ~CurrentConsoleProcess() override;
 
 
          void initialize_current_console_process(::subsystem::LogWriter *log, bool connectRdpSession, const ::scoped_string & scopedstrPath = 0, const ::scoped_string & scopedstrArgs = 0) override;
@@ -77,7 +78,7 @@ namespace subsystem_windows
          virtual void start() override;
 
       //private:
-         ::subsystem::LogWriter *m_log;
+         ::pointer < ::subsystem::LogWriter > m_plogwriter;
          bool m_connectRdpSession;
       };
 

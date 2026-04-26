@@ -97,7 +97,7 @@ namespace  subsystem_windows
       /**
        * Returns thread id.
        */
-      ::itask getThreadId() const override;
+      ::iptr getThreadId() const override;
 
       /**
        * Sets thread priority.

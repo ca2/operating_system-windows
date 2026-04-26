@@ -52,7 +52,8 @@ namespace subsystem_windows
 
    //protected:
       // Function must return true value if the message has been processed.
-      //virtual bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam) { return true; }
+      virtual bool wndProc(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) { return false; }
+
       virtual bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
 
       //HWND m_hwnd;

@@ -272,7 +272,7 @@ namespace subsystem_windows
 
          if (ret == ERROR_SUCCESS) {
             //if (subKeyNames != NULL) {
-            straKeyNames.ø(i)= keyName;
+            straKeyNames.atø(i)= keyName;
             //}
             i++;
          } else if (ret == ERROR_NO_MORE_ITEMS) {

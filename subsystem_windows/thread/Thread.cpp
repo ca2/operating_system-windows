@@ -99,7 +99,7 @@ namespace subsystem_windows
       return m_active;
    }
 
-   ::itask Thread::getThreadId() const
+   ::iptr Thread::getThreadId() const
    {
       return m_threadID;
    }

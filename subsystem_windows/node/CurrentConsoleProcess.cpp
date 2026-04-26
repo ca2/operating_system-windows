@@ -38,15 +38,23 @@
 namespace subsystem_windows
 {
 
-   CurrentConsoleProcess::CurrentConsoleProcess(::subsystem::LogWriter *log, bool connectRdpSession,
-                                                const ::scoped_string &scopedstrPath,
-                                                const ::scoped_string &scopedstrArgs) :
-       m_log(log), m_connectRdpSession(connectRdpSession)
+   CurrentConsoleProcess::CurrentConsoleProcess() :
+       m_connectRdpSession(false)
    {
-      initialize_process(scopedstrPath, scopedstrArgs);
+      //initialize_process(scopedstrPath, scopedstrArgs);
    }
 
    CurrentConsoleProcess::~CurrentConsoleProcess() {}
+
+   void CurrentConsoleProcess::initialize_current_console_process(::subsystem::LogWriter *plogwriter, bool connectRdpSession,
+                                             const ::scoped_string &scopedstrPath,
+                                             const ::scoped_string &scopedstrArgs) //:
+    //m_plogwriter(log), m_connectRdpSession(connectRdpSession)
+   {
+      m_plogwriter = plogwriter;
+      m_connectRdpSession = connectRdpSession;
+      initialize_process(scopedstrPath, scopedstrArgs);
+   }
 
    void CurrentConsoleProcess::start()
    {
@@ -54,25 +62,25 @@ namespace subsystem_windows
 
       auto pprocessWindows = impl<::subsystem_windows::Process>();
 
-      m_log->information("Try to start \"{} {}\" process", pprocessWindows->m_path, pprocessWindows->m_args);
+      m_plogwriter->information("Try to start \"{} {}\" process", pprocessWindows->m_path, pprocessWindows->m_args);
 
       DWORD uiAccess = 1; // Nonzero enables UI control
       PROCESS_INFORMATION pi;
       STARTUPINFO sti;
       pprocessWindows->_getStartupInfo(&sti);
 
-      m_log->debug("sti: cb = {}, hStdError = %p, hStdInput = %p,"
+      m_plogwriter->debug("sti: cb = {}, hStdError = %p, hStdInput = %p,"
                    " hStdOutput = %p, dwFlags = %u",
                    (unsigned int)sti.cb, (void *)sti.hStdError, (void *)sti.hStdInput, (void *)sti.hStdOutput,
                    (unsigned int)sti.dwFlags);
 
       try
       {
-         HANDLE userToken = WindowsSubsystem().WTS().duplicateCurrentProcessUserToken(m_connectRdpSession, m_log);
+         HANDLE userToken = WindowsSubsystem().WTS().duplicateCurrentProcessUserToken(m_connectRdpSession, m_plogwriter);
 
          ::string commandLine = getCommandLineString();
 
-         m_log->debug("Try CreateProcessAsUser({} 0, {}, 0, 0, {}, NORMAL_PRIORITY_CLASS, 0, 0,"
+         m_plogwriter->debug("Try CreateProcessAsUser({} 0, {}, 0, 0, {}, NORMAL_PRIORITY_CLASS, 0, 0,"
                       " sti, pi)",
                       (void *)userToken, commandLine, (int)pprocessWindows->m_handlesIsInherited);
          if (CreateProcessAsUser(userToken, 0, (LPTSTR)::wstring(commandLine).c_str(), 0, 0,
@@ -81,7 +89,7 @@ namespace subsystem_windows
          {
             throw ::subsystem::SystemException();
          }
-         m_log->information("Created \"{}\" process", commandLine);
+         m_plogwriter->information("Created \"{}\" process", commandLine);
          //
          // FIXME: Leak.
          //
@@ -89,7 +97,7 @@ namespace subsystem_windows
       }
       catch (::subsystem::SystemException &sysEx)
       {
-         m_log->error("Failed to start process with {} error", sysEx.getErrorCode());
+         m_plogwriter->error("Failed to start process with {} error", sysEx.getErrorCode());
          throw;
       }
 

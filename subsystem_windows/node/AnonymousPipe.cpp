@@ -24,6 +24,7 @@
 #include "framework.h"
 #include "AnonymousPipe.h"
 #include "File.h"
+#include "ProcessHandle.h"
 #include "subsystem/platform/Exception.h"
 //#include "remoting/remoting/win_system/Environment.h"
 //#include "remoting/remoting/thread/critical_section_lock.h"
@@ -128,9 +129,11 @@ namespace subsystem_windows
       return m_pfileRead;
    }
 
-   void AnonymousPipe::assignHandlesFor(HANDLE hTargetProc, bool neededToClose,
+   void AnonymousPipe::assignHandlesFor(::subsystem::ProcessHandleInterface * pprocesshandleTarget, bool neededToClose,
                                         bool keepCloseRight)
    {
+      ::cast < ::subsystem_windows::ProcessHandle> pprocesshandleTargetWindows = pprocesshandleTarget;
+      auto hTargetProc = pprocesshandleTargetWindows->m_hProcess;
       HANDLE hSrcProc = GetCurrentProcess();
       HANDLE hWrite = 0, hRead = 0;
       if (DuplicateHandle(hSrcProc, m_pfileWrite->m_handle, hTargetProc, &hWrite, 0, FALSE,

@@ -105,8 +105,8 @@ namespace subsystem_windows
          // If keepCloseRight is true then source process keeps the right to close
          // the new handles.
          // @throw ::subsystem::Exception on a fail.
-         void assignHandlesFor(HANDLE hTargetProc, bool neededToClose,
-                               bool keepCloseRight = false);
+         void assignHandlesFor(::subsystem::ProcessHandleInterface * pprocesshandleTarget, bool neededToClose,
+                               bool keepCloseRight = false) override;
 
          void setTimeOut(unsigned int timeOut);
 

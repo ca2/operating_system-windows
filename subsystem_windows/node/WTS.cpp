@@ -291,7 +291,7 @@ namespace subsystem_windows
       }
 
       HANDLE threadHandle = OpenThread(THREAD_QUERY_INFORMATION, FALSE,
-                                       impThread.getThreadId().m_i);
+                                       impThread.getThreadId());
       if (threadHandle == 0) {
          throw ::subsystem::SystemException("Can't open thread to duplicate"
                                " impersonate token");

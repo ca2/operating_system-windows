@@ -80,84 +80,113 @@ namespace subsystem_windows
          m_pwindowmessagehandler = messageHandler;
       }
 
-      ::wstring wstrWindowClassName;
+      //::wstring wstrWindowClassName;
 
-      wstrWindowClassName = m_strWindowClassName;
+      //wstrWindowClassName = m_strWindowClassName;
 
-      auto hinstance = ::windows::window::hinstance_from_function(::windows::window::s_window_procedure);
+      if (scopedstrWindowClassName.has_character())
+      {
 
-      if (regClass(m_hinst, m_strWindowClassName) == 0) {
+         m_strWindowClassName = scopedstrWindowClassName;
+
+      }
+
+      //auto hinstance = ::windows::hinstance_from_function(::windows::window::s_window_procedure);
+
+      if (!register_window_class(m_strWindowClassName)) {
          return false;
       }
 
       //::wstring wstrWindowClassName;
 
-      wstrWindowClassName = m_strWindowClassName;
+      //wstrWindowClassName = m_strWindowClassName;
 
-      m_hwnd = ::CreateWindow(wstrWindowClassName, _T("MessageWindow"),
-                              WS_OVERLAPPEDWINDOW, 0, 0, 1, 1,
-                              0, NULL, m_hinst, this);
+      auto hinstance = ::windows::hinstance_from_function(::windows::window::s_window_procedure);
 
-      if (m_hwnd == 0) {
+      create_window(m_strWindowClassName, "MessageWindow",
+                              WS_OVERLAPPEDWINDOW, {-32768, -32768, 0, 0});
+
+      if (m_windowswindow.is_null()) {
          return false;
       }
 
-      SetWindowLongPtr(m_hwnd, GWLP_USERDATA, (LONG_PTR) this);
+      SetWindowLongPtr(m_windowswindow.as_HWND(), GWLP_USERDATA, (LONG_PTR) this);
       return true;
    }
 
    void MessageWindow::destroyWindow()
    {
-      if (m_hwnd) {
-         DestroyWindow(m_hwnd);
-         m_hwnd = 0;
+      if (m_windowswindow.as_HWND()) {
+         DestroyWindow(m_windowswindow.as_HWND());
+         m_windowswindow = nullptr;
       }
    }
 
-   LRESULT CALLBACK MessageWindow::staticWndProc(HWND hwnd, unsigned int message,
-                                          WPARAM wparam, LPARAM lparam)
-   {
-      MessageWindow *_this;
-      if (message == WM_CREATE) {
-         _this = (MessageWindow *)((CREATESTRUCT *)lparam)->lpCreateParams;
-         wparam = (WPARAM)hwnd; // Pass hwnd throw ::wparam
-      } else {
-         _this = (MessageWindow *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-      }
-      if (_this != NULL) {
-         bool result;
-         if (_this->m_pwindowmessagehandler != 0) {
-            result = _this->m_pwindowmessagehandler->processMessage(message,
-                                                             wparam,
-                                                             lparam);
-         } else {
-            result = _this->wndProc(message, wparam, lparam);
-         }
-         if (result) {
-            return 0;
-         }
-      }
 
-      return DefWindowProc(hwnd, message, wparam, lparam);
-   }
-
-   ATOM MessageWindow::regClass(HINSTANCE hinst, const char *windowClassName)
+   bool MessageWindow::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
    {
 
-      ::wstring wstrWindowClassName;
+      if (m_pwindowmessagehandler)
+      {
 
-      wstrWindowClassName = windowClassName;
+         lresult = m_pwindowmessagehandler->processMessage((::user::enum_message) message, wparam,  lparam);
 
-      WNDCLASS wcWindowClass = {0};
-      wcWindowClass.lpfnWndProc = staticWndProc;
-      wcWindowClass.style = NULL;
-      wcWindowClass.hInstance = m_hinst;
-      wcWindowClass.lpszClassName = wstrWindowClassName;
-      wcWindowClass.hCursor = NULL;
-      wcWindowClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
+         return false;
 
-      return RegisterClass(&wcWindowClass);
+      }
+      else
+      {
+
+         return this->wndProc(lresult, message, wparam, lparam);
+
+      }
+
    }
+
+   // LRESULT CALLBACK MessageWindow::staticWndProc(HWND hwnd, unsigned int message,
+   //                                        WPARAM wparam, LPARAM lparam)
+   // {
+   //    MessageWindow *_this;
+   //    if (message == WM_CREATE) {
+   //       _this = (MessageWindow *)((CREATESTRUCT *)lparam)->lpCreateParams;
+   //       wparam = (WPARAM)hwnd; // Pass hwnd throw ::wparam
+   //    } else {
+   //       _this = (MessageWindow *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+   //    }
+   //    if (_this != NULL) {
+   //       bool result;
+   //       if (_this->m_pwindowmessagehandler != 0) {
+   //          result = _this->m_pwindowmessagehandler->processMessage(message,
+   //                                                           wparam,
+   //                                                           lparam);
+   //       } else {
+   //          result = _this->wndProc(message, wparam, lparam);
+   //       }
+   //       if (result) {
+   //          return 0;
+   //       }
+   //    }
+   //
+   //    return DefWindowProc(hwnd, message, wparam, lparam);
+   // }
+
+   // ATOM MessageWindow::regClass(HINSTANCE hinst, const char *windowClassName)
+   // {
+   //
+   //    ::wstring wstrWindowClassName;
+   //
+   //    wstrWindowClassName = windowClassName;
+   //
+   //    WNDCLASS wcWindowClass = {0};
+   //    wcWindowClass.lpfnWndProc = staticWndProc;
+   //    wcWindowClass.style = NULL;
+   //    wcWindowClass.hInstance = m_hinst;
+   //    wcWindowClass.lpszClassName = wstrWindowClassName;
+   //    wcWindowClass.hCursor = NULL;
+   //    wcWindowClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
+   //
+   //    return RegisterClass(&wcWindowClass);
+   // }
 
 
 } // namespace subsystem_windows

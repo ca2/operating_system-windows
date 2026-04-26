@@ -45,7 +45,7 @@ namespace  subsystem_windows
     * active zombie threads.
     * @remark ZombieKiller is singleton without "lazy" initialization.
     */
-   class ZombieKiller : virtual public subsystem::ZombieKiller
+   class CLASS_DECL_SUBSYSTEM_WINDOWS ZombieKiller : virtual public subsystem::ZombieKiller
    {
    public:
       /**
