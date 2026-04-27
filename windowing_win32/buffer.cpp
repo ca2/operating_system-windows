@@ -92,7 +92,7 @@ namespace windowing_win32
    buffer::buffer()
    {
 
-      m_rectangleLast.Null();
+      m_rectangleLast.clear();
 
       m_bSingleBufferMode = true;
 

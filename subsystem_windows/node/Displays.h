@@ -53,7 +53,7 @@ namespace subsystem_windows
       ~Displays() override;
 
       // If a display does not exist now the function return an empty rectangle.
-      virtual void getDisplayCoordinates(unsigned char displayNumber, ::int_rectangle *rect)override;
+      virtual void getDisplayCoordinates(unsigned char displayNumber, ::int_rectangle & rectangle)override;
 
       virtual ::int_rectangle_array_base getDisplaysCoords() override;
 

@@ -199,7 +199,7 @@ namespace subsystem_windows
    }
 
    //bool OperatingSystem::getCurrentUserName(::string &out, ::subsystem::LogWriter *log)
-   ::string OperatingSystem::getCurrentUserName()
+   bool OperatingSystem::getCurrentUserName(::string & strUsername, ::subsystem::LogWriter * plogwriter)
    {
 
       ::string out;

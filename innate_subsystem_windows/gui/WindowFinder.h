@@ -28,29 +28,31 @@
 
 #include "innate_subsystem_windows/_common_header.h"
 
-namespace innate_subsystem_windows
-{
+#include "acme/operating_system/windows/_.h"
 
-   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS WindowFinder :
-   virtual public ::particle
-   {
-   public:
-      static ::comparable_array_base<HWND> findWindowsByClass(const ::string_array_base & straClassNames);
-
-      // Find first of windows that name contain the string.
-      // It is not case sensitive.
-      static HWND findFirstWindowByName(const ::scoped_string & scopedstrWindowName);
-
-   //protected:
-
-      static BOOL CALLBACK findWindowsByClassFunc(HWND hwnd, LPARAM lparam);
-      static BOOL CALLBACK findWindowsByNameFunc(HWND hwnd, LPARAM lparam);
-
-   };
-
-
-} //namespace innate_subsystem_windows
-
-
-
-
+// namespace innate_subsystem_windows
+// {
+//
+//    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS WindowFinder :
+//    virtual public ::particle
+//    {
+//    public:
+//       static ::comparable_array_base<HWND> findWindowsByClass(const ::string_array_base & straClassNames);
+//
+//       // Find first of windows that name contain the string.
+//       // It is not case sensitive.
+//       static HWND findFirstWindowByName(const ::scoped_string & scopedstrWindowName);
+//
+//    //protected:
+//
+//       static BOOL CALLBACK findWindowsByClassFunc(HWND hwnd, LPARAM lparam);
+//       static BOOL CALLBACK findWindowsByNameFunc(HWND hwnd, LPARAM lparam);
+//
+//    };
+//
+//
+// } //namespace innate_subsystem_windows
+//
+//
+//
+//

@@ -81,7 +81,7 @@
 
        // Returns user name of the current desktop
        //bool getCurrentUserName(::string & out, LogWriter *log) override;
-       ::string getCurrentUserName() override;
+       bool getCurrentUserName(::string & strUsername, ::subsystem::LogWriter * plogwriter) override;
 
       // Fills "out" by computer name string.
       // Returns true if success.

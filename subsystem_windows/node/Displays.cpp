@@ -68,16 +68,16 @@ namespace subsystem_windows
    }
 
    void Displays::getDisplayCoordinates(unsigned char displayNumber,
-                                               ::int_rectangle *prectangle)
+                                               ::int_rectangle & rectangle)
    {
      // m_pparticleThis->getDisplayCoordinates(displayNumber, prectangle);
       critical_section_lock al(&m_displayRectsMutex);
       update();
       displayNumber--;
       if (displayNumber < m_displayRects.size()) {
-         *prectangle = m_displayRects[displayNumber];
+         rectangle = m_displayRects[displayNumber];
       } else {
-         ::null(*prectangle);
+         rectangle.clear();
       }
    }
 
