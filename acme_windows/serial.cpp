@@ -117,7 +117,7 @@ namespace acme_windows
       if (m_hFile == INVALID_HANDLE_VALUE)
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          string str;
 
@@ -434,7 +434,7 @@ namespace acme_windows
                output_debug_string("\nSerial::serialimpl::close failed");
                string str;
 
-               DWORD dwLastError = ::GetLastError();
+               auto lasterror = ::windows::get_last_error();
 
                str.formatf("Error while closing serial port: %d", dwLastError);
                throw ::exception(error_io, str);
@@ -476,7 +476,7 @@ namespace acme_windows
 
          string str;
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          str.formatf("Error while checking status of the serial port: %d", dwLastError);
 
@@ -532,7 +532,7 @@ namespace acme_windows
 
          string ss;
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          ss.formatf("Error while reading from the serial port: %d", dwLastError);
 
@@ -562,7 +562,7 @@ namespace acme_windows
 
          string str;
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          str.formatf("Error while writing to the serial port: %d", dwLastError);
 

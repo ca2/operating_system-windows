@@ -386,7 +386,7 @@ bool read_resource_as_file(
                        CREATE_ALWAYS,             // create ___new file only
                        FILE_ATTRIBUTE_NORMAL,  // normal file
                        nullptr);  
-      DWORD dwLastError = ::GetLastError();
+      auto lasterror = ::windows::get_last_error();
       if(hfile != INVALID_HANDLE_VALUE)
       {
          DWORD dwWritten = 0;

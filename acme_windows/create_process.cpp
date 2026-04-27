@@ -396,9 +396,9 @@ namespace acme_windows
       {
 
          // log error
-         DWORD dwLastError = GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 
@@ -415,9 +415,9 @@ namespace acme_windows
          //m_hOutWr = nullptr;
 
          // log error
-         DWORD dwLastError = GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 
@@ -432,9 +432,9 @@ namespace acme_windows
          //::CloseHandle(m_hOutWr);
 
          // log error
-         DWORD dwLastError = GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 
@@ -468,9 +468,9 @@ namespace acme_windows
          //::CloseHandle(hOutWr);
 
          // log error
-         DWORD dwLastError = GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 
@@ -487,9 +487,9 @@ namespace acme_windows
          //::CloseHandle(hErrWr);
 
          // log error
-         DWORD dwLastError = GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 
@@ -506,9 +506,9 @@ namespace acme_windows
          //::CloseHandle(hErrWr);
 
          // log error
-         DWORD dwLastError = GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 
@@ -543,9 +543,9 @@ namespace acme_windows
          //::CloseHandle(hErrWr);
 
          // log error
-         DWORD dwLastError = GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 
@@ -564,9 +564,9 @@ namespace acme_windows
                     ::CloseHandle(hInWr);*/
 
                     // log error
-         DWORD dwLastError = GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 
@@ -582,9 +582,9 @@ namespace acme_windows
          //::CloseHandle(hInWr);
 
          // log error
-         DWORD dwLastError = GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 
@@ -844,12 +844,12 @@ namespace acme_windows
          &m_pi))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          printf("Create Process(2) failed with lasterror = %d\n", dwLastError);
          printf("Parameters(2): %s %s\n", str1.c_str(), str2.c_str());
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 

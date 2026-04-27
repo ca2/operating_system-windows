@@ -141,7 +141,7 @@ namespace apex_windows
    //   // convert system time to local file time
    //   FILETIME localTime;
 
-   //   DWORD dwLastError = ::GetLastError();
+   //   auto lasterror = ::windows::get_last_error();
 
    //   if (!SystemTimeToFileTime((LPSYSTEMTIME)&sysTime, &localTime))
    //      ::file::throw_os_error(dwLastError);

@@ -512,16 +512,16 @@ namespace acme_windows
          FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_DELETE_ON_CLOSE, nullptr))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         throw_last_error_exception(path, ::file::e_open_read | ::file::e_open_write, dwLastError, "apex_windows::file_context::erase safe_create_file failed");
+         ::windows::throw_file_last_error_exception(path, ::file::e_open_read | ::file::e_open_write, lasterror, "apex_windows::file_context::erase safe_create_file failed");
 
       }
 
       //if (h == INVALID_HANDLE_VALUE)
       //{
 
-      //   DWORD dwLastError = ::GetLastError();
+      //   auto lasterror = ::windows::get_last_error();
 
       //   if (dwLastError == 2) // the file does not exist, so delete "failed"
       //   {
@@ -530,9 +530,9 @@ namespace acme_windows
 
       //   }
 
-      //   auto estatus = ::windows::last_error_status(dwLastError);
+      //   auto estatus = ::windows::last_error_status(lasterror);
 
-      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+      //   auto errorcode = ::windows::last_error_error_code(lasterror);
 
       //   //string strError;
 

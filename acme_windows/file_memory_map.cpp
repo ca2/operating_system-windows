@@ -72,9 +72,9 @@ namespace acme_windows
          if (!m_fileinstance.safe_create_file(path, (m_bRead || m_bWrite ? FILE_READ_DATA : 0) | (m_bWrite ? FILE_WRITE_DATA : 0), FILE_SHARE_WRITE | FILE_SHARE_READ, nullptr, iOpen, FILE_ATTRIBUTE_NORMAL, nullptr))
          {
 
-            DWORD dwLastError = ::GetLastError();
+            auto lasterror = ::windows::get_last_error();
 
-            throw_last_error_exception(
+            ::windows::throw_file_last_error_exception(
                path,
                (m_bRead ? ::file::e_open_write : ::file::e_open_none) |
                (m_bWrite ? ::file::e_open_write : ::file::e_open_none),

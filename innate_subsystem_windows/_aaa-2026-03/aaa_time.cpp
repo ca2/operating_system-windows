@@ -166,7 +166,7 @@
 //      if (!SystemTimeToFileTime((LPSYSTEMTIME)&sysTime, &localTime))
 //      {
 //
-//         DWORD dwLastError = ::GetLastError();
+//         auto lasterror = ::windows::get_last_error();
 //
 //         ::file::throw_os_error(dwLastError);
 //
@@ -176,7 +176,7 @@
 //      if (!LocalFileTimeToFileTime(&localTime, pFileTime))
 //      {
 //
-//         DWORD dwLastError = ::GetLastError();
+//         auto lasterror = ::windows::get_last_error();
 //
 //         ::file::throw_os_error(dwLastError);
 //

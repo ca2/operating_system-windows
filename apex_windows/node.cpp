@@ -2737,7 +2737,7 @@ namespace apex_windows
 
          unsigned int lasterror = ::GetLastError();
 
-         ::windows::throw_last_error(lasterror);
+         ::windows::throw_last_error_exception(lasterror);
 
       }
 
@@ -2871,7 +2871,7 @@ namespace apex_windows
 
          CloseServiceHandle(hdlSCM);
 
-         ::windows::throw_last_error(lasterror);
+         ::windows::throw_last_error_exception(lasterror);
 
       }
 
@@ -2916,7 +2916,7 @@ namespace apex_windows
          CloseServiceHandle(hdlSCM);
          if (lasterror == 1060) // Service already doesn't exist.
             return; // do self-healing
-         ::windows::throw_last_error(lasterror);
+         ::windows::throw_last_error_exception(lasterror);
       }
 
       if (!::DeleteService(hdlServ))
@@ -2924,7 +2924,7 @@ namespace apex_windows
          unsigned int lasterror = ::GetLastError();
          CloseServiceHandle(hdlServ);
          CloseServiceHandle(hdlSCM);
-         ::windows::throw_last_error(lasterror);
+         ::windows::throw_last_error_exception(lasterror);
       }
 
       CloseServiceHandle(hdlServ);
@@ -3071,11 +3071,11 @@ namespace apex_windows
       wAttr = ::windows::get_file_attributes(path);
       //{
 
-      //   DWORD dwLastError = ::GetLastError();
+      //   auto lasterror = ::windows::get_last_error();
 
-      //   auto estatus = ::windows::last_error_status(dwLastError);
+      //   auto estatus = ::windows::last_error_status(lasterror);
 
-      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+      //   auto errorcode = ::windows::last_error_error_code(lasterror);
 
       //   throw ::file::exception(estatus, errorcode, path, ::file::e_open_none, "!windows_get_file_attributes");
 
@@ -3096,11 +3096,11 @@ namespace apex_windows
 
       //{
 
-      //   DWORD dwLastError = ::GetLastError();
+      //   auto lasterror = ::windows::get_last_error();
 
-      //   auto estatus = ::windows::last_error_status(dwLastError);
+      //   auto estatus = ::windows::last_error_status(lasterror);
 
-      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+      //   auto errorcode = ::windows::last_error_error_code(lasterror);
 
       //   throw ::file::exception(estatus, errorcode, ::string(wstr), ::file::e_open_none, "!SetFileAttributesW");
 
@@ -3149,7 +3149,7 @@ namespace apex_windows
       if (!fileinstance.safe_create_file(path, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          throw_last_error_exception(path, ::file::e_open_read | ::file::e_open_write, dwLastError, "apex_windows::node::set_file_status safe_create_file failed");
 
@@ -3159,11 +3159,11 @@ namespace apex_windows
       //if(hFile == INVALID_HANDLE_VALUE)
       //{
 
-      //   DWORD dwLastError = ::GetLastError();
+      //   auto lasterror = ::windows::get_last_error();
 
-      //   auto estatus = ::windows::last_error_status(dwLastError);
+      //   auto estatus = ::windows::last_error_status(lasterror);
 
-      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+      //   auto errorcode = ::windows::last_error_error_code(lasterror);
 
       //   throw ::file::exception(estatus, errorcode, wstr, "!CreateFileW");
 
@@ -3172,11 +3172,11 @@ namespace apex_windows
       fileinstance.set_file_time(pCreationTime, pLastAccessTime, pLastWriteTime);
       //{
 
-      //   DWORD dwLastError = ::GetLastError();
+      //   auto lasterror = ::windows::get_last_error();
 
-      //   auto estatus = ::windows::last_error_status(dwLastError);
+      //   auto estatus = ::windows::last_error_status(lasterror);
 
-      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+      //   auto errorcode = ::windows::last_error_error_code(lasterror);
 
       //   throw ::file::exception(estatus, errorcode, wstr, "!SetFileTime");
 
@@ -3185,11 +3185,11 @@ namespace apex_windows
       //if(!::CloseHandle(hFile))
       //{
 
-      //   DWORD dwLastError = ::GetLastError();
+      //   auto lasterror = ::windows::get_last_error();
 
-      //   auto estatus = ::windows::last_error_status(dwLastError);
+      //   auto estatus = ::windows::last_error_status(lasterror);
 
-      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+      //   auto errorcode = ::windows::last_error_error_code(lasterror);
 
       //   throw ::file::exception(estatus, errorcode, wstr, "!CloseHandle");
 
@@ -3201,11 +3201,11 @@ namespace apex_windows
          ::windows::set_file_attributes(path, status.m_attribute);
          //{
 
-         //   DWORD dwLastError = ::GetLastError();
+         //   auto lasterror = ::windows::get_last_error();
 
-         //   auto estatus = ::windows::last_error_status(dwLastError);
+         //   auto estatus = ::windows::last_error_status(lasterror);
 
-         //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+         //   auto errorcode = ::windows::last_error_error_code(lasterror);
 
          //   throw ::file::exception(estatus, errorcode, wstr, "!SetFileAttributesW");
 
@@ -3607,7 +3607,7 @@ namespace apex_windows
 
          strMessage.formatf("apex_windows::node::file_open ShellExecuteExW failed with error (%d, %d) \"%s\"", iShellExecuteExitCode, dwLastError, pszShellExecuteError);
 
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
+         auto errorcode = ::windows::last_error_error_code(lasterror);
 
          throw exception(estatusFileOpen, { errorcode }, strMessage);
 

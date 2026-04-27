@@ -154,9 +154,9 @@ namespace apex_windows
       if (!bSuccess)
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         string strMessage = ::windows::last_error_message(dwLastError);
+         string strMessage = ::windows::last_error_message(lasterror);
 
          output_debug_string("command line: \"" + string(pwszCommandLine) + "\"");
          output_debug_string("\r\n");

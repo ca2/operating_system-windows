@@ -65,9 +65,9 @@ namespace acme_windows
       if (!fileinstance.safe_create_file(path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::file_system::modification_time safe_create_file failed");
+         ::windows::throw_file_last_error_exception(path, ::file::e_open_read, lasterror, "acme_windows::file_system::modification_time safe_create_file failed");
 
       }
 
@@ -90,9 +90,9 @@ namespace acme_windows
       if (!fileinstance.safe_create_file(path, GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
-         throw_last_error_exception(path, ::file::e_open_write, dwLastError, "acme_windows::file_system::set_modification_time safe_create_file failed");
+         ::windows::throw_file_last_error_exception(path, ::file::e_open_write, lasterror, "acme_windows::file_system::set_modification_time safe_create_file failed");
 
       }
 
@@ -161,11 +161,11 @@ namespace acme_windows
       if (dwRetVal > sizeof(pPathBuffer) || (dwRetVal == 0))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          //debug_print("GetTempPath failed (%d)\n", ::GetLastError());
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 

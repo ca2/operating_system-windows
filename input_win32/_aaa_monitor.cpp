@@ -202,7 +202,7 @@ namespace windowing_win32
       if (!GetMonitorRedGreenOrBlueGain(monitor.hPhysicalMonitor, MC_RED_GAIN, &dwMinGainR, &dwCurGainR, &dwMaxGainR))
       {
 
-         DWORD dwLastError = GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          TRACELASTERROR();
 

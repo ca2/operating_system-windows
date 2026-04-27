@@ -73,9 +73,9 @@ namespace acme_windows
             nullptr))              // no ext. properties
          {
 
-            DWORD dwLastError = ::GetLastError();
+            auto lasterror = ::windows::get_last_error();
 
-            throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::path_system::_real_path safe_create_file failed (e_type_directory)");
+            ::windows::throw_file_last_error_exception(path, ::file::e_open_read, lasterror, "acme_windows::path_system::_real_path safe_create_file failed (e_type_directory)");
 
             return {};
 
@@ -96,9 +96,9 @@ namespace acme_windows
             nullptr))             // no ext. properties
          {
 
-            DWORD dwLastError = ::GetLastError();
+            auto lasterror = ::windows::get_last_error();
 
-            throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::path_system::_real_path safe_create_file failed (e_type_file)");
+            ::windows::throw_file_last_error_exception(path, ::file::e_open_read, lasterror, "acme_windows::path_system::_real_path safe_create_file failed (e_type_file)");
 
             return {};
 
@@ -319,7 +319,7 @@ namespace acme_windows
       if (!::MoveFileW(wstrOld, wstrNew))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          throw ::exception(error_failed);
 

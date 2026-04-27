@@ -443,7 +443,7 @@ namespace windowing_win32
 
          unsigned int dwLastError = ::GetLastError();
 
-         string strLastError = ::windows::last_error_message(dwLastError);
+         string strLastError = ::windows::last_error_message(lasterror);
 
          string strMessage;
 
@@ -717,7 +717,7 @@ namespace windowing_win32
    //   {
    //      //HWND hwnd = get_hwnd();
    //      m_pwindow->m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
-   //      //DWORD dwLastError = ::GetLastError();
+   //      //auto lasterror = ::windows::get_last_error();
    //      //information() << "ICON_BIT_SMALLER" << dwLastError;
    //   }
    //   //SetLastError(0);
@@ -725,7 +725,7 @@ namespace windowing_win32
    //     // HWND hwnd = get_hwnd();
    //      m_pwindow->m_puserinteraction->post_message(WM_SETICON, ICON_BIG, (LPARAM)hicon);
    //      //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
-   //      //DWORD dwLastError = ::GetLastError();
+   //      //auto lasterror = ::windows::get_last_error();
 
    //      //information() << "ICON_LARGER" << dwLastError;
    //   }
@@ -5841,7 +5841,7 @@ namespace windowing_win32
          {
             //HWND hwnd = get_hwnd();
             m_pwindow->m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
-            //DWORD dwLastError = ::GetLastError();
+            //auto lasterror = ::windows::get_last_error();
             //information() << "ICON_BIT_SMALLER" << dwLastError;
          }
 
@@ -5857,7 +5857,7 @@ namespace windowing_win32
             // HWND hwnd = get_hwnd();
             //m_pwindow->m_puserinteraction->post_message(WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
             //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
-            //DWORD dwLastError = ::GetLastError();
+            //auto lasterror = ::windows::get_last_error();
 
             //information() << "ICON_LARGER" << dwLastError;
          }

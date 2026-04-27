@@ -100,7 +100,7 @@ namespace windows
       if (!::SetServiceStatus(m_handle, &m_status))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          throw ::exception(::exception());
 
@@ -271,7 +271,7 @@ namespace windows
       if (s_pservice->m_handle == nullptr)
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
          
          throw ::exception(::exception());
 

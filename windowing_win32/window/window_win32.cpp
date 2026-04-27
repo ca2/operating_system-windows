@@ -636,7 +636,7 @@ namespace windowing_win32
 
       }
 
-      auto dwLastError = ::GetLastError();
+      auto lasterror = ::windows::get_last_error();
 
       if (dwLastError == ERROR_CLASS_DOES_NOT_EXIST)
       {

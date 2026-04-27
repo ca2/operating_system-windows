@@ -609,7 +609,7 @@ namespace windowing_win32
       if (!::OpenClipboard(as_hwnd(oswindow())))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          TRACELASTERROR();
 
