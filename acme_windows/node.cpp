@@ -6,7 +6,7 @@
 #include "registry.h"
 #include "process.h"
 #include "exclusive.h"
-#include "application.h"
+//#include "application.h"
 #include "create_process.h"
 #include "file_link.h"
 #include "acme/exception/exception.h"
@@ -4833,16 +4833,16 @@ namespace acme_windows
    }
 
 
-   ::pointer < ::operating_system::application > node::module_path_application(const ::scoped_string& scopedstr)
-   {
-
-      auto papplication = createø < ::operating_system::application >();
-
-      papplication->open_by_module_path(scopedstr);
-
-      return papplication;
-
-   }
+   // ::pointer < ::operating_system::application > node::module_path_application(const ::scoped_string& scopedstr)
+   // {
+   //
+   //    auto papplication = createø < ::operating_system::application >();
+   //
+   //    papplication->open_by_module_path(scopedstr);
+   //
+   //    return papplication;
+   //
+   // }
 
 
    ::string node::default_component_implementation(const ::scoped_string& scopedstrComponentName)

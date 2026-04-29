@@ -16,8 +16,8 @@ list(APPEND library_source
    file_system.h
    path_system.cpp
    path_system.h
-   application.cpp
-   application.h
+   #application.cpp
+   #application.h
    console.cpp
    console.h
    directory_context.cpp
@@ -50,8 +50,8 @@ list(APPEND library_source
    known_folder_struct.h
    language.cpp
    list_serial_ports.cpp
-   main_window.cpp
-   main_window.h
+   #main_window.cpp
+   #main_window.h
    #message_loop.cpp
    mmresult.cpp
    mmresult.h

@@ -121,14 +121,14 @@ namespace acme_windows
 
          string str;
 
-         switch (dwLastError)
+         switch (lasterror.m_uLastError)
          {
          case ERROR_FILE_NOT_FOUND:
             // Use this->getPort to convert to a std::string
             str.formatf("Specified port, %d, does not exist.", this->getPort());
             throw ::exception(error_serial, str);
          default:
-            str.formatf("Unknown error opening the serial port: %d", dwLastError);
+            str.formatf("Unknown error opening the serial port: %d", lasterror.m_uLastError);
             throw ::exception(error_serial, str);
          }
       }
@@ -386,10 +386,10 @@ namespace acme_windows
 
             // Setup timeouts
             COMMTIMEOUTS timeouts = { 0 };
-            timeouts.ReadIntervalTimeout = ::windows::wait(m_timeout.m_timeInterByteTimeout);
-            timeouts.ReadTotalTimeoutConstant = ::windows::wait(m_timeout.m_timeReadTimeoutConstant);
+            timeouts.ReadIntervalTimeout = ::windows::wait_millis(m_timeout.m_timeInterByteTimeout);
+            timeouts.ReadTotalTimeoutConstant = ::windows::wait_millis(m_timeout.m_timeReadTimeoutConstant);
             timeouts.ReadTotalTimeoutMultiplier = m_timeout.m_uReadTimeoutMultiplier;
-            timeouts.WriteTotalTimeoutConstant = ::windows::wait(m_timeout.m_timeWriteTimeoutConstant);
+            timeouts.WriteTotalTimeoutConstant = ::windows::wait_millis(m_timeout.m_timeWriteTimeoutConstant);
             timeouts.WriteTotalTimeoutMultiplier = m_timeout.m_uWriteTimeoutMultiplier;
             if (!SetCommTimeouts(m_hFile, &timeouts))
             {
@@ -436,7 +436,7 @@ namespace acme_windows
 
                auto lasterror = ::windows::get_last_error();
 
-               str.formatf("Error while closing serial port: %d", dwLastError);
+               str.formatf("Error while closing serial port: %d", lasterror.m_uLastError);
                throw ::exception(error_io, str);
             }
             else
@@ -478,7 +478,7 @@ namespace acme_windows
 
          auto lasterror = ::windows::get_last_error();
 
-         str.formatf("Error while checking status of the serial port: %d", dwLastError);
+         str.formatf("Error while checking status of the serial port: %d", lasterror.m_uLastError);
 
          throw ::exception(error_io, str);
 
@@ -534,7 +534,7 @@ namespace acme_windows
 
          auto lasterror = ::windows::get_last_error();
 
-         ss.formatf("Error while reading from the serial port: %d", dwLastError);
+         ss.formatf("Error while reading from the serial port: %d", lasterror.m_uLastError);
 
          throw ::exception(error_io, ss);
 
@@ -564,7 +564,7 @@ namespace acme_windows
 
          auto lasterror = ::windows::get_last_error();
 
-         str.formatf("Error while writing to the serial port: %d", dwLastError);
+         str.formatf("Error while writing to the serial port: %d", lasterror.m_uLastError);
 
          throw ::exception(error_io, str);
 

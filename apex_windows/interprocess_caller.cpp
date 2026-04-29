@@ -188,7 +188,7 @@ namespace apex_windows
 
          DWORD_PTR dwptr;
 
-         if (!::SendMessageTimeout(hwnd, WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, ::windows::wait(timeTimeout), &dwptr))
+         if (!::SendMessageTimeout(hwnd, WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, ::windows::wait_millis(timeTimeout), &dwptr))
          {
 
             throw ::exception(error_failed);

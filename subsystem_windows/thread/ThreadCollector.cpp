@@ -22,71 +22,76 @@
 //-------------------------------------------------------------------------
 //
 #include "framework.h"
-// #include "ThreadCollector.h"
-//
-// #include "critical_section_lock.h"
-//
-// ThreadCollector::ThreadCollector()
-// {
-//   resume();
-// }
-//
-// ThreadCollector::~ThreadCollector()
-// {
-//   if (isActive()) {
-//     terminate();
-//     m_timer.notify();
-//     wait();
-//   }
-//   destroyAllThreads();
-// }
-//
-// void ThreadCollector::execute()
-// {
-//   while (!isTerminating()) {
-//     deleteDeadThreads();
-//     m_timer.waitForEvent(50);
-//   }
-// }
-//
-// void ThreadCollector::addThread(Thread *thread)
-// {
-//   critical_section_lock l(&m_lockObj);
-//   m_threads.add(thread);
-// }
-//
-// void ThreadCollector::deleteDeadThreads()
-// {
-//   critical_section_lock l(&m_lockObj);
-//
-//   ThreadList::iterator iter = m_threads.begin();
-//   while (iter != m_threads.end()) {
-//      auto it= iter;
-//      iter++;
-//     Thread *thread = *it;
-//     if (!thread->isActive()) {
-//       delete thread;
-//       m_threads.erase(it);
-//     }
-//   }
-// }
-//
-// void ThreadCollector::destroyAllThreads()
-// {
-//   critical_section_lock l(&m_lockObj);
-//
-//   ThreadList::iterator iter;
-//   for (iter = m_threads.begin(); iter != m_threads.end(); iter++) {
-//     (*iter)->terminate();
-//   }
-//   for (iter = m_threads.begin(); iter != m_threads.end(); iter++) {
-//     (*iter)->wait();
-//   }
-//
-//   deleteDeadThreads();
-// }
-//
-// const size_t ThreadCollector::Size()
-// {
-//   return m_threads.size();
-// }
+#include "ThreadCollector.h"
+
+//#include "critical_section_lock.h"
+
+namespace subsystem_windows
+{
+   ThreadCollector::ThreadCollector()
+   {
+      resume();
+   }
+
+   ThreadCollector::~ThreadCollector()
+   {
+      if (isActive()) {
+         terminate();
+         m_timer.set_happening() ;
+         wait();
+      }
+      destroyAllThreads();
+   }
+
+   void ThreadCollector::execute()
+   {
+      while (!isTerminating()) {
+         deleteDeadThreads();
+         m_timer.wait(50_ms);
+      }
+   }
+
+   void ThreadCollector::addThread(::subsystem::ThreadInterface *pthread)
+   {
+      critical_section_lock l(&m_lockObj);
+      m_threada.add(pthread);
+   }
+
+   void ThreadCollector::deleteDeadThreads()
+   {
+      critical_section_lock l(&m_lockObj);
+
+      auto iter = m_threada.begin();
+      while ( iter != m_threada.end()) {
+         auto it= iter;
+         iter++;
+         auto pthread = *it;
+         if (!pthread->isActive()) {
+            //delete thread;
+            m_threada.erase_at(it - m_threada.data());
+         }
+      }
+   }
+
+   void ThreadCollector::destroyAllThreads()
+   {
+      critical_section_lock l(&m_lockObj);
+
+      auto iter = m_threada.begin();
+      for (; iter != m_threada.end(); iter++) {
+         (*iter)->terminate();
+      }
+      for (iter = m_threada.begin(); iter != m_threada.end(); iter++) {
+         (*iter)->wait();
+      }
+
+      deleteDeadThreads();
+   }
+
+   const memsize ThreadCollector::Size()
+   {
+      return m_threada.size();
+   }
+} // namespace subsystem_windows
+
+

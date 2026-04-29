@@ -103,7 +103,7 @@ namespace subsystem_windows
 
       auto hinstance = ::windows::hinstance_from_function(::windows::window::s_window_procedure);
 
-      create_window(m_strWindowClassName, "MessageWindow",
+      createWindow(m_strWindowClassName, "MessageWindow",
                               WS_OVERLAPPEDWINDOW, {-32768, -32768, 0, 0});
 
       if (m_windowswindow.is_null()) {

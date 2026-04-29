@@ -31,7 +31,9 @@
 
 namespace subsystem_windows
 {
-   class MessageWindow :
+
+
+   class CLASS_DECL_SUBSYSTEM_WINDOWS MessageWindow :
       virtual public ::windows::window
    {
    public:

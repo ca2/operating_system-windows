@@ -162,7 +162,7 @@ namespace apex_windows
          output_debug_string("\r\n");
          output_debug_string("CreateProcessW Error!!");
          output_debug_string("\r\n");
-         output_debug_string(strMessage + " (" + ::as_string((unsigned int) dwLastError) + ")");
+         output_debug_string(strMessage + " (" + ::as_string((unsigned int) lasterror.m_uLastError) + ")");
          output_debug_string("\r\n");
 
          return false;

@@ -3151,7 +3151,7 @@ namespace apex_windows
 
          auto lasterror = ::windows::get_last_error();
 
-         throw_last_error_exception(path, ::file::e_open_read | ::file::e_open_write, dwLastError, "apex_windows::node::set_file_status safe_create_file failed");
+         ::windows::throw_file_last_error_exception(path, ::file::e_open_read | ::file::e_open_write, lasterror, "apex_windows::node::set_file_status safe_create_file failed");
 
       }
 
@@ -3454,11 +3454,11 @@ namespace apex_windows
 
       ::e_status estatusFileOpen = ::success;
       int iShellExecuteExitCode = 33;
-      DWORD dwLastError = 0;
+      ::windows::last_error lasterror;
       const_char_pointer pszShellExecuteError = nullptr;
 
       fork([=, &manualresetevent, &estatusFileOpen,
-         &dwLastError, &iShellExecuteExitCode, &pszShellExecuteError]()
+         &lasterror, &iShellExecuteExitCode, &pszShellExecuteError]()
          {
 
             ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -3539,7 +3539,7 @@ namespace apex_windows
             }
             else
             {
-               dwLastError = ::GetLastError();
+               lasterror = ::GetLastError();
                switch (iShellExecuteExitCode)
                {
                case 0:
@@ -3605,7 +3605,7 @@ namespace apex_windows
 
          ::string strMessage;
 
-         strMessage.formatf("apex_windows::node::file_open ShellExecuteExW failed with error (%d, %d) \"%s\"", iShellExecuteExitCode, dwLastError, pszShellExecuteError);
+         strMessage.formatf("apex_windows::node::file_open ShellExecuteExW failed with error (%d, %d) \"%s\"", iShellExecuteExitCode, lasterror.m_uLastError, pszShellExecuteError);
 
          auto errorcode = ::windows::last_error_error_code(lasterror);
 
@@ -3790,11 +3790,11 @@ namespace apex_windows
 
             ShellExecuteExW(&si);
 
-            auto dwWait = ::windows::wait(timeWait);
+            auto dwWait = ::windows::wait_millis(timeWait);
 
             auto timeElapsed(timeStart.elapsed());
 
-            auto dwElapsed = ::windows::wait(timeElapsed);
+            auto dwElapsed = ::windows::wait_millis(timeElapsed);
 
             auto i = dwWait - dwElapsed;
 

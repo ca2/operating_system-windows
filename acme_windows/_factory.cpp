@@ -7,8 +7,8 @@
 #include "file_context.h"
 #include "file_system.h"
 #include "file_watcher.h"
-#include "application.h"
-#include "main_window.h"
+//#include "application.h"
+//#include "main_window.h"
 #include "directory_system.h"
 #include "path_system.h"
 #include "file_system.h"
@@ -106,8 +106,8 @@ IMPLEMENT_FACTORY(acme_windows)
    //pfactory->add_factory_item < ::windows::file, ::file::file >();
    pfactory->add_factory_item < ::acme_windows::console, ::console::console >();
 
-   pfactory->add_factory_item < ::acme_windows::application, ::operating_system::application >();
-   pfactory->add_factory_item < ::acme_windows::main_window, ::operating_system::main_window >();
+   //pfactory->add_factory_item < ::acme_windows::application, ::operating_system::application >();
+   //pfactory->add_factory_item < ::acme_windows::main_window, ::operating_system::main_window >();
 
    //pfactory->add_factory_item < ::windows::directory_system, ::directory_system >();
    //pfactory->add_factory_item < ::windows::file_system, ::file_system >();
