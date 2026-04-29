@@ -37,8 +37,8 @@ namespace innate_subsystem_windows
 
 
     class ComboBox :// public Control
-   virtual public window_implementation<::innate_subsystem::ComboBoxInterface>,
-    virtual public Control
+   virtual public window_implementation<::innate_subsystem::ComboBoxInterface, Control>
+       //, virtual public Control
     {
     public:
 

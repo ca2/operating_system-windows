@@ -300,6 +300,7 @@ namespace subsystem_windows
       return m_i_LOADER_CLOSE_CODE;
 
    }
+   
 
    // RegisterWindowMessage("TVN.HOOK.LOADER.CLOSE.CODE");
    // const unsigned int HookDefinitions::SPEC_IPC_CODE =

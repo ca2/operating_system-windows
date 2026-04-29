@@ -36,10 +36,27 @@ namespace innate_subsystem_windows
 {
 
 class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS SpinControl :
-    virtual public window_implementation<innate_subsystem::SpinControlInterface>,
-    virtual public Control
+    virtual public window_implementation<innate_subsystem::SpinControlInterface, Control>
+    //,    virtual public Control
 {
 public:
+
+
+
+   // protected:
+   ::pointer < ::innate_subsystem::ControlInterface> m_pcontrolBuddy;
+   //
+   //   //
+   //   // Members needed for auto acceleration
+   //   //
+   //
+   bool m_isAutoAccelerationEnabled;
+   int_array m_limitters;
+   int_array m_deltas;
+   int m_maxDelta;
+
+
+
   SpinControl();
   ~SpinControl() override;
 
@@ -61,18 +78,14 @@ public:
   void setAutoAccelerationParams(const int_array & limitters,
                                  const int_array & deltas,
                                  int maxDelta) override;
-// protected:
-   ::pointer < ::innate_subsystem::ControlInterface> m_pcontrolBuddy;
-//
-//   //
-//   // Members needed for auto acceleration
-//   //
-//
-   bool m_isAutoAccelerationEnabled;
-   int_array m_limitters;
-   int_array m_deltas;
-   int m_maxDelta;
-};
+
+
+
+
+   void _000OnNotify(windows_reflect_notify_t & notify) override;
+
+
+   };
 
 } // namespace innate_subsystem_windows
 

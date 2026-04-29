@@ -35,8 +35,8 @@ namespace innate_subsystem_windows
 {
 
     class CheckBox :
-        virtual public window_implementation<::innate_subsystem::CheckBoxInterface >,
-   virtual public Control
+        virtual public window_implementation<::innate_subsystem::CheckBoxInterface, Control >
+       //, virtual public Control
     {
     public:
         bool isChecked() override;

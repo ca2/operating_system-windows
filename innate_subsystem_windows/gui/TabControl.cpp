@@ -93,6 +93,32 @@ namespace innate_subsystem_windows
       _ASSERT(FALSE);
    }
 
+
+   void TabControl::moveWindowToTabControl(innate_subsystem::WindowInterface *pwindow)
+   {
+
+      ::int_rectangle rectangle;
+      POINT first, last;
+
+      this->adjustRect(rectangle);
+
+      first.x = rectangle.left;
+      first.y = rectangle.top;
+      last.x = rectangle.right;
+      last.y = rectangle.bottom;
+
+      HWND hwndFrom = ::as_HWND(this->operating_system_window());
+      HWND hwndTo = ::as_HWND(pwindow->operating_system_window());
+
+      MapWindowPoints(hwndFrom, hwndTo, &first, 1);
+      MapWindowPoints(hwndFrom, hwndTo, &last, 1);
+
+      MoveWindow(hwndTo,
+                 first.x, first.y, last.x - first.x, last.y - first.y, true);
+
+   }
+
+
    void TabControl::deleteAllTabs()
    {
       // for (size_t i = 0; i < m_tabContainer.size(); i++) {

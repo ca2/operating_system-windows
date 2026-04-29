@@ -387,6 +387,46 @@ namespace subsystem_windows
    }
 
 
+
+
+   bool OperatingSystem::file_canRead(const ::file::path & path)
+   {
+      return _tryCreateFile(path, GENERIC_READ, OPEN_EXISTING);
+   }
+
+   bool OperatingSystem::file_canWrite(const ::file::path & path)
+   {
+      return _tryCreateFile(path, GENERIC_WRITE, OPEN_EXISTING);
+   }
+
+   bool OperatingSystem::file_createNewFile(const ::file::path & path)
+   {
+      return _tryCreateFile(path, GENERIC_READ | GENERIC_WRITE, CREATE_NEW);
+   }
+
+   bool OperatingSystem::_tryCreateFile(const ::file::path & path, DWORD desiredAccess, DWORD creationDisposition)
+   {
+
+      auto windowspath = path.windows_path();
+      HANDLE hfile = CreateFileW(windowspath,
+                                desiredAccess,
+                                FILE_SHARE_READ,
+                                NULL,
+                                creationDisposition,
+                                FILE_ATTRIBUTE_NORMAL | FILE_FLAG_BACKUP_SEMANTICS,
+                                NULL);
+
+      if (hfile == INVALID_HANDLE_VALUE) {
+         return false;
+      }
+
+      ::CloseHandle(hfile);
+
+      return true;
+   }
+
+
+
 } // namespace subsystem_windows
 
 

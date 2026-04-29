@@ -57,6 +57,9 @@ namespace innate_subsystem_windows
       void deleteAllTabs() override;
       void removeTab(int index) override;
 
+
+      void moveWindowToTabControl(innate_subsystem::WindowInterface *pwindow) override;
+
       //
       // Return selected tab number
       //

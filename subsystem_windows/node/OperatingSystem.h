@@ -111,6 +111,14 @@
 
        bool isUserAnAdmin() override;
 
+
+       bool file_canRead(const ::file::path & path) override;
+       bool file_canWrite(const ::file::path & path) override;
+       bool file_createNewFile(const ::file::path & path) override;
+
+       virtual bool _tryCreateFile(const ::file::path & path, DWORD desiredAccess, DWORD creationDisposition);
+
+
     //private:
        //void init() override;
        // Operation system version info.

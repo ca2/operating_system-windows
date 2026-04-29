@@ -127,4 +127,31 @@ namespace innate_subsystem_windows
       m_deltas = deltas;
       m_maxDelta = maxDelta;
    }
+
+
+
+   void SpinControl::_000OnNotify(windows_reflect_notify_t & notify)
+   {
+
+      switch (notify.m_lpnmhdr->code)
+      {
+         case NM_DBLCLK:
+         {
+            //onAction();
+            notify.m_bHandled= _001OnAction();
+            //onRemoteListViewDoubleClick();
+            break;
+         }
+         case UDN_DELTAPOS:
+         {
+            LPNMUPDOWN lpnmupdown = (LPNMUPDOWN)notify.m_lpnmhdr;
+            notify.m_bHandled = _001OnUpDown(lpnmupdown->iPos, lpnmupdown->iDelta);
+
+         }
+            break;
+      }
+
+
+   }
+
 } // namespace innate_subsystem_windows

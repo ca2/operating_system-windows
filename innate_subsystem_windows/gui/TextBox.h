@@ -34,8 +34,8 @@ namespace innate_subsystem_windows
 {
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS TextBox : //public Control
-      virtual public window_implementation<::innate_subsystem::TextBoxInterface>,
-    virtual public Control
+      virtual public window_implementation<::innate_subsystem::TextBoxInterface, Control>
+      //, virtual public Control
    {
    public:
 

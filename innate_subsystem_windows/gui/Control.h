@@ -38,8 +38,8 @@ namespace innate_subsystem_windows
    //
 
    class Control :
-      virtual public window_implementation<::innate_subsystem::ControlInterface>,
-   virtual public ::innate_subsystem_windows::Window
+      virtual public window_implementation<::innate_subsystem::ControlInterface, Window>
+      //, virtual public ::innate_subsystem_windows::Window
    {
    public:
 

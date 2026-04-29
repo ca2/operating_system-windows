@@ -74,6 +74,7 @@ namespace subsystem_windows
       // RegisterWindowMessage("TVN.HOOK.LOADER.CLOSE.CODE");
       // const unsigned int HookDefinitions::SPEC_IPC_CODE =
       // RegisterWindowMessage("TVN.HOOK.MESSAGE.CODE");
+      
 
 
    };

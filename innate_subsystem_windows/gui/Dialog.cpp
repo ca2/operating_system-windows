@@ -287,7 +287,7 @@ void
 
    bool Dialog::setForeground()
    {
-      //return m_ctrlThis.setForeground();
+      //return this->setForeground();
       return Control::setForeground();
    }
 

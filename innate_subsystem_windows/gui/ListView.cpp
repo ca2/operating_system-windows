@@ -388,6 +388,12 @@ namespace innate_subsystem_windows
             break;
          }
          break;
+         case LVN_ITEMCHANGED:
+         {
+            notify.m_bHandled = _001OnSelectionChange();
+            break;
+         }
+         break;
          case LVN_COLUMNCLICK:
          {
             auto lpdi = (LPNMLISTVIEW)notify.m_lpnmhdr;
