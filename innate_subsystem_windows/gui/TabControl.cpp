@@ -131,4 +131,39 @@ namespace innate_subsystem_windows
       ::copy(&rect, &rc);
 
    }
+
+
+   void TabControl::_000OnNotify(windows_reflect_notify_t & notify)
+   {
+
+      switch (notify.m_lpnmhdr->code)
+      {
+         case TCN_SELCHANGE:
+         {
+            _001OnTabChanged();
+            break;
+         }
+         case TCN_SELCHANGING:
+         {
+
+            bool bOk = true;
+
+            bool bHandled = _001OnTabChanging(bOk);
+
+            if (bHandled)
+            {
+
+               notify.m_lresult = bOk ? TRUE : FALSE;
+
+               notify.m_bHandled = true;
+
+            }
+
+            break;
+         }
+         break;
+        }
+
+   }
+
 } // namespace innate_subsystem_windows
