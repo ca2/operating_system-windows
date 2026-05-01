@@ -25,6 +25,7 @@
 #pragma once
 
 
+#include "subsystem/node/VersionInfo.h"
 #include "subsystem_windows/_common_header.h"
 //#include "SystemException.h"
 
@@ -33,7 +34,8 @@ namespace subsystem_windows
    /**
     * Contains information about executable file version info.
     */
-   class CLASS_DECL_SUBSYSTEM_WINDOWS VersionInfo
+   class CLASS_DECL_SUBSYSTEM_WINDOWS VersionInfo :
+   virtual public Implementation<::subsystem::VersionInfoInterface>
    {
    public:
       /**
@@ -41,7 +43,10 @@ namespace subsystem_windows
        * @param pathToFile path to executable file to get version info from.
        * @throws SystemException on fail.
        */
-      VersionInfo(const ::file::path & pathToFile);
+      VersionInfo();
+
+
+      void initialize_version_info(const ::file::path & pathToFile) override;
 
       /**
        * Returns product version info string.

@@ -31,6 +31,7 @@
 
 #include "Window.h"
 #include "acme/windowing/windowing.h"
+#include "acme/operating_system/windows/windowing.h"
 
 
 namespace innate_subsystem_windows
@@ -166,7 +167,7 @@ void
                                    ? (HWND)pwindow->m_pwindowDeferredParent->_HWND()
                                    : (HWND) nullptr;
             //result = (int)DialogBoxParam(GetModuleHandle(NULL),
-            result = (int)DialogBoxParam((HINSTANCE) system()->m_hinstanceMain,
+            result = (int)DialogBoxParam((HINSTANCE) MainSubsystem().m_hinstanceResource,
                                          (LPCWSTR) getResouceName(), parentWindow,
                                          dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
 
@@ -223,11 +224,17 @@ void
       bResult = FALSE;
       if (uMsg == WM_INITDIALOG) {
          _this = (::innate_subsystem_windows::Dialog *)lparam;
-         SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)_this);
+         //SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)_this);
+         ::cast < ::windows::windowing > pwindowing = ::system()->acme_windowing();
+
+         pwindowing->m_windowmap[hwnd] = _this;
          _this->_setHWND(hwnd);
          _this->updateIcon();
       } else {
-         _this = (::innate_subsystem_windows::Dialog *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+         //_this = (::innate_subsystem_windows::Dialog *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+         ::cast < ::windows::windowing > pwindowing = ::system()->acme_windowing();
+         ::cast < ::innate_subsystem_windows::Dialog > pdialog = pwindowing->m_windowmap[hwnd];
+         _this = pdialog;
          if (_this == 0) {
             return FALSE;
          }
@@ -251,7 +258,7 @@ void
          }
             break;
          case WM_COMMAND:
-               bResult = _this->onCommand(LOWORD(wparam), HIWORD(wparam), lparam);
+               bResult = _this->onCommand(LOWORD(wparam), HIWORD(wparam));
             break;
          case WM_CLOSE:
             bResult = _this->onClose();
@@ -314,9 +321,9 @@ void
    //    return FALSE;
    // }
 
-   bool Dialog::onCommand(unsigned int controlID, bool bAccelerator, unsigned int notificationID)
+   bool Dialog::onCommand(unsigned int controlID, unsigned int notificationID)
    {
-      return m_pwindowCallback->onCommand(controlID, bAccelerator, notificationID);
+      return m_pwindowCallback->onCommand(controlID, notificationID);
       //return FALSE;
    }
 

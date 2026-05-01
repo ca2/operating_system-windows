@@ -5,6 +5,7 @@
 #include "platform/subsystem.h"
 #include "thread/GlobalMutex.h"
 #include "thread/Thread.h"
+#include "node/DynamicLibrary.h"
 #include "node/NamedPipe.h"
 #include "node/OperatingSystem.h"
 #include "node/OperatingSystemApplication.h"
@@ -13,11 +14,18 @@
 #include "node/Shell.h"
 #include "node/SystemInformation.h"
 #include "node/Clipboard.h"
+#include "node/Clipboard2.h"
+#include "node/Displays.h"
+#include "node/Impersonator.h"
+#include "node/InputInjector.h"
 #include "node/PipeClient.h"
+#include "node/Screen.h"
 #include "node/PipeImpersonatedThread.h"
 #include "node/security/SecurityAttributes.h"
 #include "node/PipeServer.h"
 #include "node/Process.h"
+#include "node/VersionInfo.h"
+#include "subsystem/node/VersionInfo.h"
 #include "thread/DesktopSelector.h"
 #include "thread/ZombieKiller.h"
 #include "thread/ThreadCollector.h"
@@ -43,6 +51,13 @@ IMPLEMENT_FACTORY(subsystem_windows)
    pfactory->add_factory_item<::subsystem_windows::Pipe, ::subsystem::PipeInterface>();
    pfactory->add_factory_item<::subsystem_windows::ThreadCollector, ::subsystem::ThreadCollector>();
    pfactory->add_factory_item<::subsystem_windows::PipeImpersonatedThread, ::subsystem::PipeImpersonatedThreadInterface>();
+   pfactory->add_factory_item<::subsystem_windows::VersionInfo, ::subsystem::VersionInfoInterface>();
+   pfactory->add_factory_item<::subsystem_windows::Displays, ::subsystem::DisplaysInterface>();
+   pfactory->add_factory_item<::subsystem_windows::DynamicLibrary, ::subsystem::DynamicLibraryInterface>();
+   pfactory->add_factory_item<::subsystem_windows::Screen, ::subsystem::ScreenInterface>();
+   pfactory->add_factory_item<::subsystem_windows::InputInjector, ::subsystem::InputInjectorInterface>();
+   pfactory->add_factory_item<::subsystem_windows::Clipboard2, ::subsystem::Clipboard2>();
+   pfactory->add_factory_item<::subsystem_windows::Impersonator, ::subsystem::ImpersonatorInterface>();
 
 
    pfactory->add_factory_item<::subsystem_windows::subsystem, ::subsystem::subsystem>();

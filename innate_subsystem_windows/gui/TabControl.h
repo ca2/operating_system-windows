@@ -70,9 +70,13 @@ namespace innate_subsystem_windows
       //
       // Tab work rect methods
       //
+      bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) override;
 
+      bool onTabNotification(windows_reflect_notify_t & notify) override;
 
-      void _000OnNotify(windows_reflect_notify_t & notify) override;
+      void _000OnNotifyReflect(windows_reflect_notify_t & notify) override;
+
+      //void _000OnNotify(windows_reflect_notify_t & notify) override;
 
       void adjustRect(::int_rectangle &rect) override;
 

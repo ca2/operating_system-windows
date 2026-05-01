@@ -48,6 +48,8 @@ namespace subsystem_windows
 
            construct_newø(m_pwts);
 
+          m_pwts->initialize_wts(::system());
+
        }
 
        return *m_pwts;

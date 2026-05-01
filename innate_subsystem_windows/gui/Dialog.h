@@ -129,7 +129,7 @@ namespace innate_subsystem_windows
       //bool onNotify(unsigned int controlID, ::lparam data) override;
 
 
-      bool onCommand(unsigned int controlID, bool bAccelerator, unsigned int notificationID) override;
+      bool onCommand(unsigned int controlID, unsigned int notificationID) override;
 
 
       bool onClose() override;
