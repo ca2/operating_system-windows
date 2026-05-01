@@ -71,10 +71,16 @@ namespace subsystem_windows
 
    void PipeImpersonatedThread::execute()
    {
-      m_success = ImpersonateNamedPipeClient(::as_HANDLE(m_pfilePipe)) != 0;
+      auto handle = ::as_HANDLE(m_pfilePipe);
+
+      auto bOk =ImpersonateNamedPipeClient(handle);
+
+      m_success = bOk != FALSE;
       if (!m_success) {
+
+         auto dwLastError = ::windows::get_last_error();
          // Store fault reason
-         m_faultReason = ::windows::last_error_message(::windows::last_error());
+         m_faultReason = ::windows::last_error_message();
       }
       m_impersonationReadyEvent.set_happening();
 

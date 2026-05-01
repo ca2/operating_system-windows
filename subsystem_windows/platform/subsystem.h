@@ -25,13 +25,11 @@ namespace subsystem_windows
       int m_i_SPEC_IPC_CODE;
 
 
-      static ::subsystem_windows::subsystem *            s_p;
       // ::pointer < ::subsystem::string_table >     m_pstringtable;
       // ::pointer < ::subsystem::resource_loader >     m_presourceloader;
       // ::pointer < ::subsystem::Registry >     m_pregistry;
       // ::pointer < ::subsystem::Shell >     m_pshell;
        ::pointer < PipeServer > m_ppipeserver;
-      static critical_section s_criticalsectionResolveIp4;
 
        ::pointer<::subsystem_windows::WTS> m_pwts;
 
@@ -85,17 +83,7 @@ namespace subsystem_windows
 
 
 
-inline ::subsystem_windows::subsystem & WindowsSubsystem()
-{
+CLASS_DECL_SUBSYSTEM_WINDOWS ::subsystem_windows::subsystem & WindowsSubsystem();
 
-   if (!::subsystem::subsystem::s_p)
-   {
 
-      MainSubsystem();
-
-   }
-
-   return *::subsystem_windows::subsystem::s_p;
-
-}
 

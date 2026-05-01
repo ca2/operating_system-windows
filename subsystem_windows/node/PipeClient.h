@@ -36,13 +36,14 @@ namespace subsystem_windows
        * Pipe client factory.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS PipeClient :
-      virtual  public ::subsystem::PipeClient
+      virtual  public Implementation<::subsystem::PipeClientInterface>
       {
       public:
-         ::pointer< ::subsystem::NamedPipe > connect(const ::scoped_string & scopedstrName, unsigned int maxPortionSize) override;
+         ::pointer< ::subsystem::NamedPipeInterface > connect(const ::scoped_string & scopedstrName, unsigned int maxPortionSize) override;
 
       //private:
          PipeClient();
+         ~PipeClient();
 
          unsigned int m_maxPortionSize;
       };

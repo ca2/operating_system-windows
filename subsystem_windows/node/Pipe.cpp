@@ -174,7 +174,7 @@ namespace subsystem_windows
                               "(pipe handle is %p, total read %llu, try to read %u)",
                               handlePipe, m_totalRead, length);
                ::string errMess;
-               errMess = ::windows::last_error_message(errText, ::windows::last_error());
+               errMess = ::windows::last_error_message(errText, errCode);
                throw ::io_exception(error_io,errMess);
             }
          } // else operation already successful has been completed

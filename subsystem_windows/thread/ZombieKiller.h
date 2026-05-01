@@ -45,7 +45,7 @@ namespace  subsystem_windows
     * active zombie threads.
     * @remark ZombieKiller is singleton without "lazy" initialization.
     */
-   class CLASS_DECL_SUBSYSTEM_WINDOWS ZombieKiller : virtual public subsystem::ZombieKiller
+   class CLASS_DECL_SUBSYSTEM_WINDOWS ZombieKiller : virtual public ::subsystem::ZombieKiller
    {
    public:
       /**
@@ -68,7 +68,7 @@ namespace  subsystem_windows
        * Forces terminates all threads, waits until they dies and than
        * delete them from memory and thread ::list_base.
        */
-      //  void killAllZombies() override;
+      void killAllZombies() override;
 
       //protected:
       /**

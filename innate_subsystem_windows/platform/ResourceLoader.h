@@ -76,7 +76,7 @@ namespace innate_subsystem_windows
       //  * @param [out] string storage for string from resources.
       //  * @return true if string is loaded, false otherwise.
       //  */
-      // virtual bool loadString(unsigned int id, ::string & str);
+      bool loadString(unsigned int id, ::string & str) override;
       // virtual ::string loadString(unsigned int id);
 
       /**

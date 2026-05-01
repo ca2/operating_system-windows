@@ -19,11 +19,15 @@
 namespace subsystem_windows
 {
 
-   ::subsystem_windows::subsystem * subsystem::s_p = nullptr;
+   static ::subsystem_windows::subsystem *            g_p;
+   static critical_section g_criticalsectionResolveIp4;
+
+   //::subsystem_windows::subsystem * subsystem::s_p = nullptr;
 
    subsystem::subsystem()
    {
 
+      g_p = this;
       m_i_LOADER_CLOSE_CODE = -1;
       m_i_SPEC_IPC_CODE = -1;
 
@@ -58,7 +62,7 @@ namespace subsystem_windows
        if (!m_ppipeserver)
        {
 
-           construct_newø(m_ppipeserver);
+           constructø(m_ppipeserver);
 
        }
 
@@ -103,7 +107,9 @@ namespace subsystem_windows
 
       ::string strCommandLine;
 
-      strCommandLine = ::GetCommandLineW();
+      //strCommandLine = ::GetCommandLineW();
+
+      strCommandLine =::system()->command_line();
 
       auto pcommandlinearguments = getCommandLineArguments(strCommandLine);
 
@@ -310,4 +316,17 @@ namespace subsystem_windows
 }//namespace subsystem_windows
 
 
+CLASS_DECL_SUBSYSTEM_WINDOWS ::subsystem_windows::subsystem & WindowsSubsystem()
+{
+
+   if (!::subsystem_windows::g_p)
+   {
+
+      MainSubsystem();
+
+   }
+
+   return *::subsystem_windows::g_p;
+
+}
 

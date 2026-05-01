@@ -27,7 +27,8 @@
 //#define _TOOLTIP_H_
 
 //#include "util/CommonHeader.h"
-#include "innate_subsystem/gui/Control.h"
+#include "innate_subsystem/gui/Tooltip.h"
+#include "innate_subsystem_windows/gui/Control.h"
 
 //
 // Abstract tooltip class
@@ -38,22 +39,22 @@ namespace innate_subsystem_windows
 
 
     class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Tooltip :
-    virtual public ::particle
+    virtual public Implementation<::innate_subsystem::TooltipInterface, Control>
     {
     public:
         Tooltip();
         ~Tooltip() override;
 
-        virtual void showTooltip(::innate_subsystem::ControlInterface * pcontrol);
+        virtual void showTooltip(::innate_subsystem::ControlInterface * pcontrol) override;
 
-        virtual void setText(const char *text);
-        virtual void setTitle(const char *caption);
+        virtual void setText(const char *text) override;
+        virtual void setTitle(const char *caption) override;
 
-        virtual ::string getText() const;
-        virtual ::string getTitle() const;
+        virtual ::string getText() override;
+        virtual ::string getTitle() const override;
 
-        virtual void setIconType(int iconType);
-        virtual int getIconType() const;
+        virtual void setIconType(::innate_subsystem::enum_tooltip_icon etooltipicon) override;
+        virtual ::innate_subsystem::enum_tooltip_icon getIconType() const override;
     };
 
     //#endif

@@ -44,6 +44,12 @@ namespace innate_subsystem_windows
       return m_tabContainer;
 
    }
+   int TabControl::getTabCount()
+   {
+
+      return m_tabContainer.size();
+
+   }
 
    innate_subsystem::TabInterface *TabControl::getTab(int index)
    {
@@ -53,10 +59,10 @@ namespace innate_subsystem_windows
       return m_tabContainer[index];
    }
 
-   void TabControl::addTab(innate_subsystem::DialogInterface *dialog, const char *caption)
+   void TabControl::addTab(innate_subsystem::WindowInterface *pwindow, const char *caption)
    {
-      auto ptab = create_newø<::innate_subsystem::Tab>();
-      ptab->initialize_tab(dialog, caption);
+      auto ptab = createø<::innate_subsystem::TabInterface>();
+      ptab->initialize_tab(pwindow, caption);
       m_tabContainer.add(ptab);
       TCITEM tcitem = {0};
       tcitem.mask = TCIF_TEXT;
@@ -82,10 +88,10 @@ namespace innate_subsystem_windows
       getTab(index)->setVisible(true);
    }
 
-   void TabControl::showTab(innate_subsystem::DialogInterface *dialog)
+   void TabControl::showTab(innate_subsystem::WindowInterface *pwindow)
    {
       for (size_t i = 0; i < m_tabContainer.size(); i++) {
-         if (m_tabContainer[i]->getDialog() == dialog) {
+         if (m_tabContainer[i]->getWindow() == pwindow) {
             showTab((int)i);
             return;
          }

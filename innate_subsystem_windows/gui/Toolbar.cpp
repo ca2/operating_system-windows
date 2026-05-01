@@ -92,7 +92,7 @@ namespace innate_subsystem_windows
    {
       BITMAP bmp;
 
-      HBITMAP hbmp = LoadBitmap((HINSTANCE) ::system()->m_hinstanceMain,
+      HBITMAP hbmp = LoadBitmap((HINSTANCE)MainSubsystem().m_hinstanceResource,
                                 MAKEINTRESOURCE(id));
       GetObject(hbmp, sizeof(BITMAP), &bmp);
       m_width = bmp.bmWidth;

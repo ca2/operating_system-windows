@@ -73,7 +73,8 @@ public:
   // Handler, call it on UDN_DELTAPOS notification
   //
 
-  virtual void autoAccelerationHandler(LPNMUPDOWN message);
+  //virtual void autoAccelerationHandler(LPNMUPDOWN message);
+   void autoAccelerationHandler(int & iPos, int & iDelta) override;
   void enableAutoAcceleration(bool enabled) override;
   void setAutoAccelerationParams(const int_array & limitters,
                                  const int_array & deltas,

@@ -163,13 +163,14 @@ namespace subsystem_windows
             return m_path;
          }
 
-         result.formatf("{} {}", m_path, m_args);
+         result.format("{} {}", m_path, m_args);
 
          return result;
       }
 
       void Process::cleanup()
       {
+         defer_construct_newø(m_pprocesshandle);
          if (m_pprocesshandle->m_hProcess) {
             CloseHandle(m_pprocesshandle->m_hProcess);
             m_pprocesshandle->m_hProcess = 0;

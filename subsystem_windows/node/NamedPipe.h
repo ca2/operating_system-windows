@@ -39,9 +39,17 @@ namespace subsystem_windows
     * @author yuri, enikey.
     */
    class CLASS_DECL_SUBSYSTEM_WINDOWS NamedPipe :
-      virtual public Implementation < ::subsystem::NamedPipeInterface, ::subsystem::Pipe >
+      virtual public Implementation < ::subsystem::NamedPipeInterface,::subsystem_windows::Pipe >
    {
    public:
+
+      ::pointer < ::subsystem::FileInterface> m_pfilePipe;
+      critical_section m_criticalsectionPipe;
+      ::string m_pipeName;
+
+      ::happening m_readEvent;
+      ::happening m_writeEvent;
+      bool m_asServer;
       /**
        * Creates pipe transport.
        */
@@ -107,13 +115,7 @@ namespace subsystem_windows
    //private:
       void checkPipeFile();
 
-      ::pointer < ::subsystem::File > m_pfilePipe;
-      critical_section m_criticalsectionPipe;
-      ::string m_pipeName;
 
-      ::happening m_readEvent;
-      ::happening m_writeEvent;
-      bool m_asServer;
    };
 
 

@@ -30,6 +30,11 @@
 #include "gui/ProgressBar.h"
 #include "gui/KeyboardLayout.h"
 //#include "gui/OperatingSystemApplication.h"
+#include "gui/ListBox.h"
+#include "gui/ListView.h"
+#include "gui/TabControl.h"
+#include "gui/Tab.h"
+#include "gui/Tooltip.h"
 #include "platform/ResourceLoader.h"
 #include "platform/subsystem.h"
 
@@ -69,6 +74,16 @@ IMPLEMENT_FACTORY(innate_subsystem_windows)
    pfactory->add_factory_item<::innate_subsystem_windows::Menu, ::innate_subsystem::MenuInterface>();
 
    pfactory->add_factory_item<::innate_subsystem_windows::Toolbar, ::innate_subsystem::ToolbarInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::TabControl, ::innate_subsystem::TabControlInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::Tab, ::innate_subsystem::TabInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::Tooltip, ::innate_subsystem::TooltipInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::ListView, ::innate_subsystem::ListViewInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::ListBox, ::innate_subsystem::ListBoxInterface>();
 
    pfactory->add_factory_item<::innate_subsystem_windows::ScrollBar, ::innate_subsystem::ScrollBarInterface>();
 

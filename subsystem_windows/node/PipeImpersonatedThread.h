@@ -28,13 +28,14 @@
 #include "subsystem/node/PipeImpersonatedThread.h"
 //#include "subsystem_windows/node/::happening.h"
 #include "acme/parallelization/happening.h"
+#include "subsystem_windows/thread/Thread.h"
 
 namespace subsystem_windows
 {
 
    class CLASS_DECL_SUBSYSTEM_WINDOWS PipeImpersonatedThread :
 
-      virtual public ::subsystem::PipeImpersonatedThread//,
+      virtual public Implementation<::subsystem::PipeImpersonatedThreadInterface, Thread >
       //virtual public ::subsystem::Thread
    {
    public:
@@ -53,7 +54,7 @@ namespace subsystem_windows
       void execute() override;
       void onTerminate() override;
 
-      ::pointer < ::subsystem::File > m_pfilePipe;
+      ::pointer < ::subsystem::FileInterface > m_pfilePipe;
       bool m_success;
       ::string m_faultReason;
       //::happening m_impersonationReadyEvent;

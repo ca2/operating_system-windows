@@ -118,7 +118,10 @@
 
        virtual bool _tryCreateFile(const ::file::path & path, DWORD desiredAccess, DWORD creationDisposition);
 
+       ::memory getSharedMemorySnapshot(const ::scoped_string &scopedstrShareMemoryName, memsize size, const class ::time & timeWaitMax) override;
 
+       unsigned int getActiveConsoleSessionId(::subsystem::LogWriter *plogwriter) override;
+       void duplicatePipeClientToken(::subsystem::FileInterface * pfile) override;
     //private:
        //void init() override;
        // Operation system version info.

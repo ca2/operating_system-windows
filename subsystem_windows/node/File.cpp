@@ -32,7 +32,7 @@
 
       File::File()
       {
-         m_handle=nullptr;
+         m_handle=INVALID_HANDLE_VALUE;
          m_bOwned = false;
       }
 

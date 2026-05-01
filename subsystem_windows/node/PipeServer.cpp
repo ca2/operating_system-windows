@@ -122,15 +122,25 @@ namespace subsystem_windows
             case ERROR_PIPE_CONNECTED:
                break;
             case ERROR_IO_PENDING:
-               m_happening.wait(m_milliseconds * 1_ms);
-               DWORD cbRet; // Fake
-               if (!GetOverlappedResult(m_pfileServerPipe->m_handle, &overlapped, &cbRet, FALSE)) {
+            {
+               if (m_milliseconds == INFINITE)
+               {
+                  m_happening._wait();
+               }
+               else
+               {
+                  m_happening._wait(m_milliseconds * 1_ms);
+               }
+               DWORD cbRet = 0; // Fake
+               auto h = m_pfileServerPipe->m_handle;
+               if (!GetOverlappedResult(h, &overlapped, &cbRet, FALSE)) {
                   int errCode = GetLastError();
                   ::string errMess;
                   errMess.formatf("GetOverlappedResult() failed after the "
                                  "ConnectNamedPipe() call, error code = {}", errCode);
                   throw ::subsystem::Exception(errMess);
                }
+            }
                break;
             default:
                ::string errMess;
@@ -148,7 +158,7 @@ namespace subsystem_windows
 
       pnamedpipe->initialize_named_pipe(m_pfileServerPipe, m_bufferSize, true);
 
-      m_pfileServerPipe->m_handle = INVALID_HANDLE_VALUE;
+      m_pfileServerPipe.release();
 
       return pnamedpipe;
    }

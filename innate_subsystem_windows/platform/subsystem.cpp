@@ -5,6 +5,7 @@
 #include "subsystem.h"
 #include "acme/platform/user_interaction_sink.h"
 #include "acme/operating_system/windows/user.h"
+#include "innate_subsystem_windows/gui/CommonControlsEx.h"
 
 
 namespace innate_subsystem_windows
@@ -122,6 +123,13 @@ namespace innate_subsystem_windows
 
 
         //}
+    }
+
+
+   void subsystem::initializeInnateSubsystemControls()
+    {
+
+       CommonControlsEx::init();
     }
 
 

@@ -36,6 +36,8 @@
 #include "ProcessHandle.h"
 #include "Shell.h"
 #include "DynamicLibrary.h"
+#include "File.h"
+#include "SharedMemory.h"
 //// #include aaa_<vector>
 // #include aaa_<algorithm>
 #pragma warning(suppress : 4996)
@@ -44,8 +46,6 @@ typedef VOID (WINAPI *SendSas)(BOOL asUser);
 typedef HRESULT (WINAPI *DwmIsCompositionEnabled)(BOOL *pfEnabled);
 namespace subsystem_windows
 {
-
-
    OperatingSystem::OperatingSystem() {}
 
    OperatingSystem::~OperatingSystem() {}
@@ -425,7 +425,46 @@ namespace subsystem_windows
       return true;
    }
 
+   ::memory OperatingSystem::getSharedMemorySnapshot(const ::scoped_string &scopedstrShareMemoryName, memsize size, const class ::time & timeWaitMax)
+   {
+      ::memory memory;
+      memory.set_size(size);
+   ::subsystem_windows::SharedMemory shMem(scopedstrShareMemoryName, size);
+   unsigned long long *mem = (unsigned long long *)shMem.getMemPointer();
 
+   class ::time timeStart = ::time::now();
+
+   // ::happening m_sleepInterval;
+   //::happening m_sleepInterval;
+   while (mem[0] == 0)
+   {
+      unsigned int timeForWait = maximum(timeWaitMax - timeStart.elapsed(), 0_s).integral_millisecond();
+      if (timeForWait == 0)
+      {
+         throw ::subsystem::Exception("The desktop server time out expired");
+      }
+      // m_sleepInterval.waitForEvent(10);
+      preempt(10_ms);
+   }
+      memcpy(memory.data(), mem, size);
+      return memory;
+}
+
+
+   unsigned int OperatingSystem::getActiveConsoleSessionId(::subsystem::LogWriter *plogwriter)
+   {
+
+      return WindowsSubsystem().WTS().getActiveConsoleSessionId(plogwriter);
+   }
+
+
+   void OperatingSystem::duplicatePipeClientToken(::subsystem::FileInterface *pfile)
+   {
+
+      ::cast < ::subsystem_windows::File > pfileWindows = pfile;
+
+      return WindowsSubsystem().WTS().duplicatePipeClientToken(pfileWindows->m_handle);
+   }
 
 } // namespace subsystem_windows
 

@@ -30,6 +30,7 @@
 #include <crtdbg.h>
 
 #include "Window.h"
+#include "acme/windowing/windowing.h"
 
 
 namespace innate_subsystem_windows
@@ -105,6 +106,7 @@ void
       if ((HWND) _HWND() == NULL) {
          create();
       } else {
+         ShowWindow((HWND) _HWND(), SW_SHOW);
          setForeground();
       }
       //return 0;
@@ -129,39 +131,47 @@ void
 
    void Dialog::create()
    {
-      HWND window, parentWindow = NULL;
 
-      auto pwindow = this->impl<Window>();
+      ::system()->acme_windowing()->send([&]()
+      {
+         HWND window, parentWindow = NULL;
 
-      if (pwindow->m_pwindowDeferredParent != NULL) {
-         parentWindow = ::as_HWND(pwindow->m_pwindowDeferredParent->operating_system_window());
-      }
+         auto pwindow = this->impl<Window>();
 
-      //window = CreateDialogParam(GetModuleHandle(NULL), (LPCWSTR) getResouceName(),
-      window = CreateDialogParam((HINSTANCE)::system()->m_hinstanceMain, (LPCWSTR)getResouceName(), parentWindow,
-                                 dialogProc, (::lparam)(::uptr)(::innate_subsystem_windows::Dialog *)this);
+         if (pwindow->m_pwindowDeferredParent != NULL) {
+            parentWindow = ::as_HWND(pwindow->m_pwindowDeferredParent->operating_system_window());
+         }
 
-      m_isModal = false;
+         //window = CreateDialogParam(GetModuleHandle(NULL), (LPCWSTR) getResouceName(),
+         window = CreateDialogParam((HINSTANCE)MainSubsystem().m_hinstanceResource, (LPCWSTR)getResouceName(), parentWindow,
+                                    dialogProc, (::lparam)(::uptr)(::innate_subsystem_windows::Dialog *)this);
 
-      _ASSERT(window != NULL);
+         m_isModal = false;
+
+         _ASSERT(window != NULL);
+      });
    }
 
    int Dialog::showModal()
    {
       int result = 0;
       if ((HWND) _HWND() == NULL) {
-         m_isModal = true;
-         auto pwindow = this->impl<Window>();
 
-         HWND parentWindow = (pwindow->m_pwindowDeferredParent != NULL)
-                                ? (HWND)pwindow->m_pwindowDeferredParent->_HWND()
-                                : (HWND) nullptr;
-         //result = (int)DialogBoxParam(GetModuleHandle(NULL),
-         result = (int)DialogBoxParam((HINSTANCE) system()->m_hinstanceMain,
-                                      (LPCWSTR) getResouceName(), parentWindow,
-                                      dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
+         ::system()->acme_windowing()->send([&]()
+         {
+            m_isModal = true;
+            auto pwindow = this->impl<Window>();
 
-         information("Dialog box result is {}", result);
+            HWND parentWindow = (pwindow->m_pwindowDeferredParent != NULL)
+                                   ? (HWND)pwindow->m_pwindowDeferredParent->_HWND()
+                                   : (HWND) nullptr;
+            //result = (int)DialogBoxParam(GetModuleHandle(NULL),
+            result = (int)DialogBoxParam((HINSTANCE) system()->m_hinstanceMain,
+                                         (LPCWSTR) getResouceName(), parentWindow,
+                                         dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
+
+            information("Dialog box result is {}", result);
+         });
 
       } 
       else

@@ -67,7 +67,7 @@ namespace innate_subsystem_windows
       SendMessage((HWND) _HWND(), UDM_SETACCEL, 1, (::lparam)&accel);
    }
 
-   void SpinControl::autoAccelerationHandler(LPNMUPDOWN message)
+   void SpinControl::autoAccelerationHandler(int & iPos, int & iDelta)
    {
       if (m_limitters.size() == 0 ||
           m_pcontrolBuddy == NULL || !m_isAutoAccelerationEnabled) {
@@ -87,7 +87,7 @@ namespace innate_subsystem_windows
 
       size_t size = minimum(m_limitters.size(), m_deltas.size());
 
-      if (message->iDelta < 0) {
+      if (iDelta < 0) {
          for (size_t i = 0; i < size; i++) {
             if (currentValue <= m_limitters[i]) {
                delta = m_deltas[i];
@@ -97,7 +97,7 @@ namespace innate_subsystem_windows
          delta = -delta;
       } // if
 
-      if (message->iDelta > 0) {
+      if (iDelta > 0) {
          for (size_t i = 0; i < size; i++) {
             if (currentValue < m_limitters[i]) {
                delta = m_deltas[i];
@@ -111,7 +111,7 @@ namespace innate_subsystem_windows
          delta -= mod;
       }
 
-      message->iDelta = delta;
+      iDelta = delta;
    }
 
    void SpinControl::enableAutoAcceleration(bool enabled)

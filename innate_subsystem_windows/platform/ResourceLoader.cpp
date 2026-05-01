@@ -93,7 +93,9 @@ namespace innate_subsystem_windows
       //return LoadIcon(NULL, iconName);
       if ((::iptr)iId < 65536)
       {
-         picon->m_hicon = ::LoadIcon((HINSTANCE) MainSubsystem().m_hinstanceResource, (LPCWSTR) iId);
+         auto hinstance = (HINSTANCE) MainSubsystem().m_hinstanceResource;
+         auto hicon = (HICON) ::LoadIconW(hinstance, MAKEINTRESOURCEW(iId));
+         picon->m_hicon = hicon;
 
       }
       // else
@@ -110,52 +112,54 @@ namespace innate_subsystem_windows
 
 
 
-   // bool ResourceLoader::loadString(unsigned int id, ::string & str)
-   // {
-   //    //_ASSERT(string != 0);
-   //    str = "(Undef)";
-   //
-   //    //
-   //    // Format of string table:
-   //    // Strings are stored in groups of 16 strings.
-   //    // Group format is:
-   //    // | length  |     string     | length  | string  | ...
-   //    // | 2 unsigned chars | len * 2 unsigned chars  | 2 unsigned chars | len * 2 | ...
-   //    // Strings stored in the UTF16-encoding.
-   //    //
-   //
-   //
-   //    //// Id of string-group, based from 0.
-   //    //int resId = (id / 16) + 1;
-   //    //HRSRC resHnd = FindResource(m_appInstance,
-   //    //   MAKEINTRESOURCE(resId),
-   //    //   RT_STRING);
-   //    //if (resHnd != 0) {
-   //    //   HGLOBAL hGlobal = LoadResource(m_appInstance, resHnd);
-   //    //   LPVOID lockRes = LockResource(hGlobal);
-   //
-   //    //   WCHAR* lpStr = reinterpret_cast<WCHAR*>(lockRes);
-   //    //   for (unsigned int i = 0; i < (id % 16); i++) {
-   //    //      lpStr += 1 + static_cast<UINT16>(lpStr[0]);
-   //    //   }
-   //
-   //    //   UINT16 strLen = static_cast<UINT16>(lpStr[0]);
-   //
-   //    //   std::vector<WCHAR> strBuff;
-   //    //   strBuff.resize(strLen + 1);
-   //    //   memcpy(&strBuff.front(), lpStr + 1, strLen * sizeof(WCHAR));
-   //    //   strBuff[strLen] = L'\0';
-   //
-   //    //   UnlockResource(lockRes);
-   //    //   FreeResource(hGlobal);
-   //
-   //    //   UnicodeStringStorage unicodeString;
-   //    //   unicodeString.setString(&strBuff.front());
-   //    //   unicodeString.toStringStorage(string);
-   //    //}
-   //    return true;
-   // }
-   //
+   bool ResourceLoader::loadString(unsigned int id, ::string & str)
+   {
+      //_ASSERT(string != 0);
+      str = "(Undef)";
+
+      //
+      // Format of string table:
+      // Strings are stored in groups of 16 strings.
+      // Group format is:
+      // | length  |     string     | length  | string  | ...
+      // | 2 unsigned chars | len * 2 unsigned chars  | 2 unsigned chars | len * 2 | ...
+      // Strings stored in the UTF16-encoding.
+      //
+
+
+      // Id of string-group, based from 0.
+      int resId = (id / 16) + 1;
+      HRSRC resHnd = FindResource((HMODULE) MainSubsystem().m_hinstanceResource,
+         MAKEINTRESOURCE(resId),
+         RT_STRING);
+      if (resHnd != 0) {
+         HGLOBAL hGlobal = LoadResource((HMODULE) MainSubsystem().m_hinstanceResource, resHnd);
+         LPVOID lockRes = LockResource(hGlobal);
+
+         WCHAR* lpStr = reinterpret_cast<WCHAR*>(lockRes);
+         for (unsigned int i = 0; i < (id % 16); i++) {
+            lpStr += 1 + static_cast<UINT16>(lpStr[0]);
+         }
+
+         UINT16 strLen = static_cast<UINT16>(lpStr[0]);
+
+         ::wstring wstr;
+         auto pwsz = wstr.get_buffer(strLen);
+         memcpy(pwsz, lpStr + 1, strLen * sizeof(WCHAR));
+         pwsz[strLen] = L'\0';
+         wstr.release_buffer();
+
+         UnlockResource(lockRes);
+         FreeResource(hGlobal);
+
+         str = wstr;
+         // UnicodeStringStorage unicodeString;
+         // unicodeString.setString(&strBuff.front());
+         // unicodeString.toStringStorage(string);
+      }
+      return true;
+   }
+
    void * ResourceLoader::loadAccelerator(unsigned int id)
    {
       return (void *) (HACCEL) ::LoadAcceleratorsW((HINSTANCE) system()->m_hinstanceMain, (LPCWSTR) MAKEINTRESOURCEW(id));

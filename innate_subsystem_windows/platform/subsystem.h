@@ -35,6 +35,10 @@ namespace innate_subsystem_windows
 
         ::user::enum_key virtual_key_code_to_user_key(int iVirtualKeyCode) override;
 
+      void initializeInnateSubsystemControls() override;
+
+
+
    };
 
 

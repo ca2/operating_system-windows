@@ -135,6 +135,12 @@ namespace innate_subsystem_windows
 
       bool m_bIsDraw;
       PAINTSTRUCT m_paintStruct;
+
+      ::string m_strWindowTextOffline;
+      unsigned int m_uAddStyleOffline = 0;
+      unsigned int m_uEraseStyleOffline = 0xffffffffu;
+      unsigned int m_uAddStyleExOffline = 0;
+      unsigned int m_uEraseStyleExOffline = 0xffffffffu;
       //HDC m_hdc;
 
       ::pointer < ::innate_subsystem_windows::DeviceContext > m_pdevicecontext;

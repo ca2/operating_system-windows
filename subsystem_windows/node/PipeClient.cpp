@@ -35,10 +35,16 @@ namespace subsystem_windows
    {
    }
 
-   ::pointer < ::subsystem::NamedPipe >PipeClient::connect(const ::scoped_string & scopedstrName, unsigned int maxPortionSize)
+   PipeClient::~PipeClient()
+   {
+
+
+   }
+
+   ::pointer < ::subsystem::NamedPipeInterface >PipeClient::connect(const ::scoped_string & scopedstrName, unsigned int maxPortionSize)
    {
       ::string pipeName;
-      pipeName.formatf("\\\\.\\pipe\\{}", ::string(scopedstrName).c_str());
+      pipeName.format("\\\\.\\pipe\\{}", ::string(scopedstrName).c_str());
 
       auto pfilePipe = create_newø< ::subsystem_windows::File>();
       HANDLE hPipe;
@@ -54,7 +60,7 @@ namespace subsystem_windows
       if (hPipe == INVALID_HANDLE_VALUE) {
          int errCode = GetLastError();
          ::string errMess;
-         errMess.formatf("Connect to pipe server failed, error code = {}", errCode);
+         errMess.format("Connect to pipe server failed, error code = {}", errCode);
          throw ::subsystem::Exception(errMess);
       }
       pfilePipe->m_handle = hPipe;

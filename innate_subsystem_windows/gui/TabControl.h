@@ -50,10 +50,11 @@ namespace innate_subsystem_windows
       //
 
       innate_subsystem::TabContainer &getTabs() override;
+      int getTabCount() override;
       ::innate_subsystem::TabInterface *getTab(int index) override;
-      void addTab(innate_subsystem::DialogInterface *dialog, const char *caption) override;
+      void addTab(innate_subsystem::WindowInterface *pwindow, const char *caption) override;
       void showTab(int index) override;
-      void showTab(innate_subsystem::DialogInterface *dialog) override;
+      void showTab(innate_subsystem::WindowInterface *pwindow) override;
       void deleteAllTabs() override;
       void removeTab(int index) override;
 

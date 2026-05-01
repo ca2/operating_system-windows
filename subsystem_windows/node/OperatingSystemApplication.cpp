@@ -51,6 +51,10 @@ namespace subsystem_windows
 
       m_appInstance = (HINSTANCE)system()->m_hinstanceThis;
 
+      MainSubsystem().m_hinstanceResource = m_appInstance;
+
+      MainSubsystem().m_papplicationSubsystem = this;
+
    }
 
 
@@ -86,6 +90,8 @@ namespace subsystem_windows
 
    void OperatingSystemApplication::run()
    {
+
+::get_task()->run();
        //WNDCLASS wndClass;
        ///registerWindowClass(&wndClass);
        //createWindow(wndClass.lpszClassName);

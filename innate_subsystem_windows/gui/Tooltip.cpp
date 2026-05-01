@@ -50,12 +50,12 @@ namespace innate_subsystem_windows
 
 
    }
-   ::string Tooltip::getText() const
-   {
+    ::string Tooltip::getText()
+    {
 
-      return {};
+       return {};
 
-   }
+    }
    ::string Tooltip::getTitle() const
    {
 
@@ -63,15 +63,15 @@ namespace innate_subsystem_windows
 
    }
 
-   void Tooltip::setIconType(int iconType)
+   void Tooltip::setIconType(::innate_subsystem::enum_tooltip_icon etooltipicon)
    {
 
 
    }
-   int Tooltip::getIconType() const
+   ::innate_subsystem::enum_tooltip_icon Tooltip::getIconType() const
    {
 
-      return 0;
+      return ::innate_subsystem::e_tooltip_icon_none;
 
    }
    } // namespace innate_subsystem_windows

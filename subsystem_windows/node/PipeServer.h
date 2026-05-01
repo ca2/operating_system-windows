@@ -35,6 +35,7 @@
 //#include "subsystem_windows/node/::happening.h"
 #include "acme/parallelization/happening.h"
 //#include "subsystem/node/security/SecurityAttributes.h"
+#include "subsystem/node/PipeServer.h"
 #include "subsystem_windows/node/security/SecurityAttributes.h"
 
 typedef BOOL(WINAPI* pGetNamedPipeClientProcessId)(HANDLE Pipe, PULONG ClientProcessId);
@@ -49,7 +50,7 @@ namespace subsystem_windows
     * @fixme not thread-safe, undone, strange code inside.
     */
    class CLASS_DECL_SUBSYSTEM_WINDOWS PipeServer :
-   virtual public ::particle
+   virtual public ::subsystem::PipeServer
    {
    public:
 

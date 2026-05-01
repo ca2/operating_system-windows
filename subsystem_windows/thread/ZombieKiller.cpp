@@ -93,19 +93,19 @@ namespace subsystem_windows
    //     // }
    //   }
    // }
-   //
-   // void ZombieKiller::killAllZombies()
-   // {
-   //   critical_section_lock l(&m_lockObj);
-   //
-   //   ThreadList::iterator iter;
-   //   for (iter = m_zombies.begin(); iter != m_zombies.end(); iter++) {
-   //     (*iter)->terminate();
-   //   }
-   //   for (iter = m_zombies.begin(); iter != m_zombies.end(); iter++) {
-   //     (*iter)->wait();
-   //   }
-   //
-   //   deleteDeadZombies();
-   // }
+
+   void ZombieKiller::killAllZombies()
+   {
+     critical_section_lock l(&m_lockObj);
+
+     //ThreadList::iterator iter;
+     for (auto iter = m_zombies.begin(); iter != m_zombies.end(); iter++) {
+       (*iter)->terminate();
+     }
+     for (auto iter = m_zombies.begin(); iter != m_zombies.end(); iter++) {
+       (*iter)->wait();
+     }
+
+     deleteDeadZombies();
+   }
 } // namespace subsystem_windows

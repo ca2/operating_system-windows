@@ -24,46 +24,48 @@
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
 //
 #pragma once
-//
-// //#include "BaseDialog.h"
-// //#include "Control.h"
-// //#include "util/StringStorage.h"
-//
-// class Tab
-// {
-// public:
-//   Tab();
-//   Tab(BaseDialog *dialog, const TCHAR *caption);
-//
-//   //
-//   // Access methods to protected members
-//   //
-//
-//   void setCaption(const TCHAR *caption) { m_caption.setString(caption); }
-//
-//   const TCHAR *getCaption() {
-//     return m_caption.getString();
-//   }
-//
-//   void setDialog(BaseDialog *dialog) { m_dialog = dialog; }
-//   BaseDialog *getDialog() { return m_dialog; }
-//
-//   //
-//   // Method return true if tab has dialog
-//   //
-//
-//   bool isOk() { return m_dialog != NULL; }
-//
-//   //
-//   // Changes visible state of dialog donates by this tab
-//   //
-//
-//   void setVisible(bool visible);
-//
-// protected:
-//
-//   BaseDialog *m_dialog;
-//   StringStorage m_caption;
-// };
-//
-// #endif
+
+#include "innate_subsystem/gui/Tab.h"
+//#include "Control.h"
+//#include "util/StringStorage.h"
+
+namespace innate_subsystem_windows
+{
+   class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Tab :
+   virtual public ::Implementation<::innate_subsystem::TabInterface>
+   {
+   public:
+      Tab();
+      void initialize_tab(::innate_subsystem::WindowInterface *dialog, const char *caption) override;
+
+      //
+      // Access methods to protected members
+      //
+
+      void setCaption(const char *caption) override { m_caption = caption; }
+
+      const char *getCaption() override;
+
+      void setWindow(::innate_subsystem::WindowInterface  *pdialog) override;
+      ::innate_subsystem::WindowInterface *getWindow() override;
+
+      //
+      // Method return true if tab has dialog
+      //
+
+      bool isOk();
+
+      //
+      // Changes visible state of dialog donates by this tab
+      //
+
+      void setVisible(bool visible);
+
+   //protected:
+
+      ::pointer < ::innate_subsystem::WindowInterface > m_pwindow;
+      ::string m_caption;
+   };
+
+
+} // namespace innate_subsystem_windows

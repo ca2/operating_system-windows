@@ -34,6 +34,8 @@
 #include "drawing/Brush.h"
 #include "drawing/DeviceContext.h"
 #include "drawing/Graphics.h"
+#include "acme/windowing/windowing.h"
+#include "acme/operating_system/windows/windowing.h"
 #include <commctrl.h>
 // namespace windows
 // {
@@ -199,6 +201,8 @@ namespace innate_subsystem_windows
       if (m_windowswindow.is_set()) {
          return false;
       }
+      ::system()->acme_windowing()->send([&]()
+         {
       m_strWindowName = scopedstrWindowName;
       auto hwndParent = ::as_HWND(operatingsystemwindowParent);
       HWND hwnd = CreateWindow(::wstring(m_strClassName),
@@ -211,11 +215,12 @@ namespace innate_subsystem_windows
       m_bWndCreated = (hwnd == 0 ? false : true);
       if (m_bWndCreated) {
 
-         m_wndprocDefault = (WNDPROC)GetWindowLongPtr(hwnd, GWLP_WNDPROC);
+         //m_wndprocDefault = (WNDPROC)GetWindowLongPtr(hwnd, GWLP_WNDPROC);
          SetWindowLongPtr(hwnd,
                           GWLP_USERDATA,
                           reinterpret_cast<LONG_PTR>(this));
       }
+         });
       return true;
    }
 
@@ -384,8 +389,10 @@ namespace innate_subsystem_windows
       HWND hwnd = ::as_HWND(operatingsystemwindow);
        m_windowswindow = hwnd;
       m_wndprocDefault = (WNDPROC) ::GetWindowLongPtr(hwnd, GWLP_WNDPROC);
-      ::SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)(::uptr) this);
-      ::SetWindowLongPtr(hwnd, GWLP_WNDPROC, reinterpret_cast<iptr>(s_window_procedure));
+      //::SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)(::uptr) (::windows::window *) this);
+      ::cast < ::windows::windowing > pwindowing = ::system()->acme_windowing();
+      pwindowing->m_windowmap[hwnd] = this;
+      ::SetWindowLongPtr(hwnd, GWLP_WNDPROC,(LPARAM)(::uptr)(::windows::window::s_window_procedure));
 
    }
 
@@ -462,6 +469,13 @@ namespace innate_subsystem_windows
 
    void Window::addStyle(unsigned int styleFlag)
    {
+      if (!isWindow())
+      {
+         m_uAddStyleOffline |= styleFlag;
+         m_uEraseStyleOffline &= ~styleFlag;
+          return;
+
+      }
       DWORD flags = getStyle();
       flags |= styleFlag;
       setStyle(flags);
@@ -500,6 +514,14 @@ namespace innate_subsystem_windows
 
    void Window::addExStyle(unsigned int styleFlag)
    {
+      if (!isWindow())
+      {
+         m_uAddStyleExOffline |= styleFlag;
+         m_uEraseStyleExOffline &= styleFlag;
+
+         return;
+
+      }
       DWORD flags = getExStyle();
       flags |= styleFlag;
       setExStyle(flags);
@@ -619,8 +641,17 @@ namespace innate_subsystem_windows
 
    void Window::setWindowText(const ::scoped_string & scopedstr)
    {
+      if (m_windowswindow.is_null())
+      {
+
+         m_strWindowTextOffline = scopedstr;
+
+         return;
+
+      }
       ::wstring wstr(scopedstr);
       _ASSERT(m_windowswindow.as_HWND() != 0);
+
       SetWindowText(m_windowswindow.as_HWND(), wstr);
    }
 
@@ -1341,6 +1372,12 @@ break;
                 lresult = 0;
                 return true;
              }
+            else
+            {
+
+               return false;
+
+            }
 
          }
          break;

@@ -72,6 +72,8 @@ namespace innate_subsystem_windows
 
       ListView();
 
+
+      ::lparam lparam_sort() override;
       //
       // Adds new column to list view
       //
