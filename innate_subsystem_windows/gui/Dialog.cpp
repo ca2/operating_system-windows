@@ -33,7 +33,6 @@
 #include "acme/windowing/windowing.h"
 #include "acme/operating_system/windows/windowing.h"
 
-
 namespace innate_subsystem_windows
 {
 
@@ -219,9 +218,17 @@ void
    INT_PTR CALLBACK Dialog::dialogProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam)
    {
       ::innate_subsystem_windows::Dialog * _this = nullptr;
-      BOOL bResult;
 
-      bResult = FALSE;
+      ::lresult lresult = 0;
+
+      if (::windows::pre_process_window_procedure(lresult, hwnd, uMsg, wparam, lparam))
+      {
+
+          return lresult;
+
+      }
+      BOOL bResult = FALSE;
+
       if (uMsg == WM_INITDIALOG) {
          _this = (::innate_subsystem_windows::Dialog *)lparam;
          //SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)_this);
@@ -239,6 +246,15 @@ void
             return FALSE;
          }
       }
+
+      //if (uMsg == WM_APP + 876)
+      //{
+
+      //    ::windows::handle_procedure_message(uMsg, wparam, lparam);
+
+      //    return TRUE;
+
+      //}
 
       _this->onMessageReceived(uMsg, wparam, lparam);
 

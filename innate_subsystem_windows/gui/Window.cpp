@@ -1583,6 +1583,8 @@ break;
                wheelSpeed = 1;
             }
 
+            wheelSpeed *= 36;
+
             // If windows-message is WHEEL, then need to translate screen coordinate to client.
             POINT p;
             ::copy(p, point);
