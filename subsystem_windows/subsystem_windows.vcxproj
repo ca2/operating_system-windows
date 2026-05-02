@@ -2226,6 +2226,7 @@
     <ClInclude Include="thread\SessionChangesWatcher.h" />
     <ClInclude Include="thread\Thread.h" />
     <ClInclude Include="thread\ThreadCollector.h" />
+    <ClInclude Include="thread\ZombieKiller.h" />
     <ClInclude Include="thread\_.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="framework.h" />
@@ -2351,6 +2352,7 @@
     <ClCompile Include="thread\SessionChangesWatcher.cpp" />
     <ClCompile Include="thread\Thread.cpp" />
     <ClCompile Include="thread\ThreadCollector.cpp" />
+    <ClCompile Include="thread\ZombieKiller.cpp" />
     <ClCompile Include="thread\_.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="framework.cpp">

@@ -29,7 +29,16 @@
 
 namespace subsystem_windows
 {
-   VersionInfo::VersionInfo(const ::file::path & pathToFile)
+
+
+   VersionInfo::VersionInfo()
+   {
+
+
+   }
+
+
+   void VersionInfo::initialize_version_info(const ::file::path & pathToFile)
    {
       DWORD handle = 0;
       DWORD verInfoSize = GetFileVersionInfoSize(pathToFile.windows_path(), &handle);

@@ -82,6 +82,7 @@ namespace innate_subsystem_windows
 
 
       virtual bool onListViewNotification(windows_reflect_notify_t & notify);
+      virtual bool onTabNotification(windows_reflect_notify_t & notify);
 
 
 
@@ -122,7 +123,7 @@ namespace innate_subsystem_windows
       //WINDOWPLACEMENT m_workArea;
       // It's size of optimal size of work-area in windowed mode.
       ::int_rectangle m_rectangleNormal;
-
+      ::innate_subsystem::enum_control m_econtrol = innate_subsystem::e_control_none;
 
       ::int_rectangle m_clientArea;
 
@@ -182,6 +183,10 @@ namespace innate_subsystem_windows
                         int xPos = WINDOW_WIDTH_USE_DEFAULT, int yPos = WINDOW_WIDTH_USE_DEFAULT,
                         int width = WINDOW_WIDTH_USE_DEFAULT, int height = WINDOW_WIDTH_USE_DEFAULT) override;
       bool destroyWindow() override;
+
+
+      virtual void _addChildNotification(int iControl, int iNotification);
+      virtual void _setChildControlType(int iControl, innate_subsystem::enum_control econtrol);
 
 
       void setClipboardViewerInterest() override;
@@ -270,6 +275,7 @@ namespace innate_subsystem_windows
       // setParent()
       // Making child window by changing parent of the window
       void setParent(::innate_subsystem::WindowInterface * pwindow) override;
+      ::innate_subsystem::WindowInterface * getParent() override;
 
 
       ::operating_system::window dialog_item_operating_system_window(int iDlgItem) override;
@@ -349,7 +355,7 @@ namespace innate_subsystem_windows
       // This function may be implement in child class.
       // Here is stub function, always returned false.
       virtual bool _onWmCommand(::wparam wparam, ::lparam lparam);
-      virtual bool onCommand(unsigned int controlID, bool bAccelerator, unsigned int notificationID) override;
+      virtual bool onCommand(unsigned int controlID, unsigned int notificationID) override;
       virtual bool onSysCommand(::wparam wparam, ::lparam lparam) override;
       virtual bool onMessage(unsigned int message, ::wparam wparam, ::lparam lparam) override;
       virtual bool onMouseEx(unsigned int uMessage, int iButtonMask, unsigned short wheelSpeed,

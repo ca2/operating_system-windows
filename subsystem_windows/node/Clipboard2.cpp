@@ -35,11 +35,11 @@ namespace subsystem_windows
 
 
    Clipboard2::Clipboard2() :
-       MessageWindow((HINSTANCE) ::windows::hinstance_from_function(::windows::window::s_window_procedure),
-          "subsystem::Clipboard2::MessageWindow"), 
+
       m_hwndNextViewer(0),
        m_clipboardListener(nullptr), m_plogwriter(nullptr)
    {
+      createMessageWindow(    "subsystem::Clipboard2::MessageWindow");
    //   resume();
    }
    
@@ -72,7 +72,7 @@ namespace subsystem_windows
    bool Clipboard2::_writeToClipBoard(const ::scoped_string &scopedstrText)
    {
       ::string clipboard(scopedstrText);
-      if (OpenClipboard(m_hwnd))
+      if (OpenClipboard((HWND)_HWND()))
       {
          EmptyClipboard();
 
@@ -122,7 +122,7 @@ namespace subsystem_windows
 
       clipDest.clear();
 
-      if (!IsClipboardFormatAvailable(CF_TCTEXT) || !OpenClipboard(m_hwnd))
+      if (!IsClipboardFormatAvailable(CF_TCTEXT) || !OpenClipboard((HWND) _HWND()))
       {
 
          return;
@@ -152,7 +152,7 @@ namespace subsystem_windows
    }
 
 
-   bool Clipboard2::wndProc(unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool Clipboard2::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
    {
       
       int fake = 3;
@@ -188,7 +188,7 @@ namespace subsystem_windows
          case WM_DESTROY:
          {
    
-            ChangeClipboardChain(m_hwnd, m_hwndNextViewer);
+            ChangeClipboardChain((HWND) _HWND(), m_hwndNextViewer);
 
          }
          break;
@@ -220,10 +220,10 @@ namespace subsystem_windows
    void Clipboard2::onTerminate()
    {
 
-      if (m_hwnd != 0)
+      if ((HWND) _HWND() != 0)
       {
 
-         PostMessage(m_hwnd, WM_QUIT, 0, 0);
+         PostMessage((HWND) _HWND(), WM_QUIT, 0, 0);
 
       }
 
@@ -235,19 +235,19 @@ namespace subsystem_windows
 
       m_plogwriter->information("clipboard thread id = {}", (::iptr) getThreadId());
 
-      if (!createWindow())
-      {
-
-         return;
-
-      }
-
+      // if (!createMessageWindow())
+      // {
+      //
+      //    return;
+      //
+      // }
+      //
       MSG msg;
 
       while (!isTerminating())
       {
 
-         if (GetMessage(&msg, m_hwnd, 0, 0))
+         if (GetMessage(&msg, (HWND) _HWND(), 0, 0))
          {
 
             DispatchMessage(&msg);

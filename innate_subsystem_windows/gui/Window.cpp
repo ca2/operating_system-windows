@@ -393,9 +393,61 @@ namespace innate_subsystem_windows
       ::cast < ::windows::windowing > pwindowing = ::system()->acme_windowing();
       pwindowing->m_windowmap[hwnd] = this;
       ::SetWindowLongPtr(hwnd, GWLP_WNDPROC,(LPARAM)(::uptr)(::windows::window::s_window_procedure));
+      ::SendMessage(hwnd, WM_APP + 125, 0, 0);
+   }
+
+
+   ::innate_subsystem::WindowInterface * Window::getParent()
+   {
+
+      auto hwnd = m_windowswindow.as_HWND();
+
+      auto hwndParent = ::GetParent(hwnd);
+
+      if (!hwndParent)
+      {
+
+         return nullptr;
+
+      }
+
+      ::cast < ::windows::windowing > pwindowing = ::system()->acme_windowing();
+      auto pwindow=pwindowing->m_windowmap[hwndParent];
+
+      ::cast < Window > pwindowSubsystem = pwindow;
+
+      if (!pwindowSubsystem)
+      {
+
+         return nullptr;
+
+      }
+
+      return pwindowSubsystem;
+
 
    }
 
+
+   void Window::_addChildNotification(int iControl, int iNotification)
+   {
+
+      auto & notification = m_mapControlNotification[iControl];
+
+      notification.m_iaNotification.add(iNotification);
+
+
+   }
+
+
+   void Window::_setChildControlType(int iControl, innate_subsystem::enum_control econtrol)
+   {
+
+      auto & notification = m_mapControlNotification[iControl];
+
+      notification.m_econtrol = econtrol;
+
+   }
 
 
    void Window::unsubclassWindow()
@@ -410,6 +462,7 @@ namespace innate_subsystem_windows
 
       m_wndprocDefault = nullptr;
       m_windowswindow = nullptr;
+
 
    }
 
@@ -564,17 +617,17 @@ namespace innate_subsystem_windows
    bool Window::_onWmCommand(::wparam wparam, ::lparam lparam)
    {
 
-      return onCommand(LOWORD(wparam), HIWORD(wparam), lparam);
+      return onCommand(LOWORD(wparam), HIWORD(wparam));
      
 
    }
 
-   bool Window::onCommand(unsigned int controlID, bool bAccelerator, unsigned int notificationID)
+   bool Window::onCommand(unsigned int controlID, unsigned int notificationID)
    {
        if (m_pwindowCallback)
        {
 
-           if (m_pwindowCallback->onCommand(controlID, bAccelerator, notificationID))
+           if (m_pwindowCallback->onCommand(controlID, notificationID))
            {
 
                return true;
@@ -1530,6 +1583,8 @@ break;
                wheelSpeed = 1;
             }
 
+            wheelSpeed *= 36;
+
             // If windows-message is WHEEL, then need to translate screen coordinate to client.
             POINT p;
             ::copy(p, point);
@@ -1552,6 +1607,16 @@ break;
          // Notify window about mouse-event.
          return onMouse(mouseButtons, static_cast<unsigned short>(wheelSpeed), point);
       }
+         case WM_CLOSE:
+      {
+         information("received WM_CLOSE");
+         break;
+      }
+         case WM_DESTROY:
+      {
+
+m_windowswindow = nullptr;
+      }break;
       }
       return onMessage(message, wparam, lparam);
    }
@@ -1577,6 +1642,8 @@ break;
          {
 
             windows_reflect_notify_t notify(lresult, wparam, lparam);
+
+            notify.m_econtrol = notification.m_econtrol;
 
             _000OnNotify(notify);
 
@@ -1623,6 +1690,12 @@ break;
          onListViewNotification(notify);
 
       }
+      else if (notify.m_econtrol == innate_subsystem::e_control_tab)
+      {
+
+         onTabNotification(notify);
+
+      }
 
    }
 
@@ -1635,6 +1708,61 @@ break;
 
    bool notification_handler::onListViewNotification(windows_reflect_notify_t & notify)
    {
+
+      return false;
+
+   }
+
+
+   bool notification_handler::onTabNotification(windows_reflect_notify_t & notify)
+   {
+
+      ::innate_subsystem::notification_handler * pcallback = nullptr;
+
+      auto pwindow =  get_window_implementation();
+
+      if (pwindow)
+      {
+
+         pcallback = pwindow->get_callback<::innate_subsystem::notification_handler>();
+
+      }
+
+      if (!pcallback)
+      {
+
+         return false;
+
+      }
+
+      switch (notify.m_lpnmhdr->code)
+      {
+         case TCN_SELCHANGE:
+         {
+
+            return pcallback->_002OnTabChanged(notify.m_iControl);
+
+         }
+         case TCN_SELCHANGING:
+         {
+
+            bool bOk = true;
+
+            bool bHandled = pcallback->_002OnTabChanging(notify.m_iControl, bOk);
+
+            if (bHandled)
+            {
+
+               notify.m_lresult = bOk ? TRUE : FALSE;
+
+               notify.m_bHandled = true;
+
+            }
+
+            break;
+         }
+            break;
+      }
 
       return false;
 

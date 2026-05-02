@@ -38,7 +38,7 @@ namespace subsystem_windows
        * (mouse, keyboard etc) and get information about input device states.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS InputInjector :
-            virtual public ::subsystem::InputInjector
+            virtual public Implementation<::subsystem::InputInjectorInterface>
       {
       public:
 

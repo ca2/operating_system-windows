@@ -76,6 +76,8 @@ list(APPEND library_source
    node/AutoImpersonator.h
    node/Clipboard.cpp
    node/Clipboard.h
+   node/Clipboard2.cpp
+   node/Clipboard2.h
    node/Cursor.cpp
    node/Cursor.h
    #node/CMakeLists.txt

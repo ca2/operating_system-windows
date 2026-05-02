@@ -31,7 +31,7 @@
 
 #include "Window.h"
 #include "acme/windowing/windowing.h"
-
+#include "acme/operating_system/windows/windowing.h"
 
 namespace innate_subsystem_windows
 {
@@ -142,8 +142,10 @@ void
             parentWindow = ::as_HWND(pwindow->m_pwindowDeferredParent->operating_system_window());
          }
 
+         auto hinstanceResource = (HINSTANCE)MainSubsystem().m_hinstanceResource;
+
          //window = CreateDialogParam(GetModuleHandle(NULL), (LPCWSTR) getResouceName(),
-         window = CreateDialogParam((HINSTANCE)MainSubsystem().m_hinstanceResource, (LPCWSTR)getResouceName(), parentWindow,
+         window = CreateDialogParam(hinstanceResource, (LPCWSTR)getResouceName(), parentWindow,
                                     dialogProc, (::lparam)(::uptr)(::innate_subsystem_windows::Dialog *)this);
 
          m_isModal = false;
@@ -166,7 +168,7 @@ void
                                    ? (HWND)pwindow->m_pwindowDeferredParent->_HWND()
                                    : (HWND) nullptr;
             //result = (int)DialogBoxParam(GetModuleHandle(NULL),
-            result = (int)DialogBoxParam((HINSTANCE) system()->m_hinstanceMain,
+            result = (int)DialogBoxParam((HINSTANCE) MainSubsystem().m_hinstanceResource,
                                          (LPCWSTR) getResouceName(), parentWindow,
                                          dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
 
@@ -218,20 +220,43 @@ void
    INT_PTR CALLBACK Dialog::dialogProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam)
    {
       ::innate_subsystem_windows::Dialog * _this = nullptr;
-      BOOL bResult;
 
-      bResult = FALSE;
+      ::lresult lresult = 0;
+
+      if (::windows::pre_process_window_procedure(lresult, hwnd, uMsg, wparam, lparam))
+      {
+
+          return lresult;
+
+      }
+      BOOL bResult = FALSE;
+
       if (uMsg == WM_INITDIALOG) {
          _this = (::innate_subsystem_windows::Dialog *)lparam;
-         SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)_this);
+         //SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)_this);
+         ::cast < ::windows::windowing > pwindowing = ::system()->acme_windowing();
+
+         pwindowing->m_windowmap[hwnd] = _this;
          _this->_setHWND(hwnd);
          _this->updateIcon();
       } else {
-         _this = (::innate_subsystem_windows::Dialog *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+         //_this = (::innate_subsystem_windows::Dialog *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+         ::cast < ::windows::windowing > pwindowing = ::system()->acme_windowing();
+         ::cast < ::innate_subsystem_windows::Dialog > pdialog = pwindowing->m_windowmap[hwnd];
+         _this = pdialog;
          if (_this == 0) {
             return FALSE;
          }
       }
+
+      //if (uMsg == WM_APP + 876)
+      //{
+
+      //    ::windows::handle_procedure_message(uMsg, wparam, lparam);
+
+      //    return TRUE;
+
+      //}
 
       _this->onMessageReceived(uMsg, wparam, lparam);
 
@@ -251,7 +276,7 @@ void
          }
             break;
          case WM_COMMAND:
-               bResult = _this->onCommand(LOWORD(wparam), HIWORD(wparam), lparam);
+               bResult = _this->onCommand(LOWORD(wparam), HIWORD(wparam));
             break;
          case WM_CLOSE:
             bResult = _this->onClose();
@@ -314,9 +339,9 @@ void
    //    return FALSE;
    // }
 
-   bool Dialog::onCommand(unsigned int controlID, bool bAccelerator, unsigned int notificationID)
+   bool Dialog::onCommand(unsigned int controlID, unsigned int notificationID)
    {
-      return m_pwindowCallback->onCommand(controlID, bAccelerator, notificationID);
+      return m_pwindowCallback->onCommand(controlID, notificationID);
       //return FALSE;
    }
 

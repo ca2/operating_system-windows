@@ -21,14 +21,14 @@
     <Filter Include="Header Files\gui">
       <UniqueIdentifier>{247bc91f-fdb6-4a8c-a37f-bdbea9535ac9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\pframebuffer">
-      <UniqueIdentifier>{41183d68-3b46-4653-8e3c-6ebde003f418}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\platform">
       <UniqueIdentifier>{9e9fb504-cc1a-496c-b7f6-dc97fc974873}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\platform">
       <UniqueIdentifier>{26f1a3bf-ab9c-4928-9175-026e408795bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\framebuffer">
+      <UniqueIdentifier>{41183d68-3b46-4653-8e3c-6ebde003f418}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +161,6 @@
     <ClCompile Include="drawing\SolidBrush.cpp">
       <Filter>Source Files\drawing</Filter>
     </ClCompile>
-    <ClCompile Include="pframebuffer\DibSection.cpp">
-      <Filter>Source Files\pframebuffer</Filter>
-    </ClCompile>
     <ClCompile Include="gui\KeyboardLayout.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
@@ -175,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="platform\subsystem.cpp">
       <Filter>Source Files\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="framebuffer\DibSection.cpp">
+      <Filter>Source Files\framebuffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -164,8 +164,72 @@ namespace innate_subsystem_windows
 
    }
 
+   bool TabControl::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   {
 
-   void TabControl::_000OnNotify(windows_reflect_notify_t & notify)
+      if (message == WM_APP + 125)
+      {
+
+         int iId = (int) ::GetWindowLongPtr((HWND) this->_HWND(), GWLP_ID);
+
+         ::cast < ::innate_subsystem_windows::Window > pwindowParent = getParent();
+
+         pwindowParent->_setChildControlType(iId, ::innate_subsystem::e_control_tab);
+         pwindowParent->_addChildNotification(iId, TCN_SELCHANGE);
+         pwindowParent->_addChildNotification(iId, TCN_SELCHANGING);
+
+         lresult = 0;
+         return true;
+
+      }
+      else if (message == WM_DESTROY)
+      {
+
+         m_tabContainer.clear();
+
+      }
+
+      return Control::on_window_procedure(lresult, message, wparam, lparam);
+
+   }
+
+
+   bool TabControl::onTabNotification(windows_reflect_notify_t & notify)
+   {
+
+      switch (notify.m_lpnmhdr->code)
+   {
+      case TCN_SELCHANGE:
+      {
+         _001OnTabChanged();
+         break;
+      }
+      case TCN_SELCHANGING:
+      {
+
+         bool bOk = true;
+
+         bool bHandled = _001OnTabChanging(bOk);
+
+         if (bHandled)
+         {
+
+            notify.m_lresult = bOk ? TRUE : FALSE;
+
+            notify.m_bHandled = true;
+
+         }
+
+         break;
+      }
+         break;
+   }
+
+
+      return false;
+   }
+
+   void TabControl::_000OnNotifyReflect(windows_reflect_notify_t & notify)
    {
 
       switch (notify.m_lpnmhdr->code)
