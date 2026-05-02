@@ -2617,7 +2617,7 @@
     <ClCompile Include="drawing\Icon.cpp" />
     <ClCompile Include="drawing\Pen.cpp" />
     <ClCompile Include="drawing\SolidBrush.cpp" />
-    <ClCompile Include="pframebuffer\DibSection.cpp" />
+    <ClCompile Include="framebuffer\DibSection.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

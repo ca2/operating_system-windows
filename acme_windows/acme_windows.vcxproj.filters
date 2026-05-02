@@ -83,9 +83,6 @@
     <ClCompile Include="_wd32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -105,9 +102,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mmresult.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main_window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="file_dialog.cpp">
@@ -262,12 +256,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mmresult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="main_window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="integration_context.h">

@@ -238,6 +238,9 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="thread\ZombieKiller.h">
+      <Filter>Header Files\thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -475,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="platform\subsystem.cpp">
       <Filter>Source Files\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\ZombieKiller.cpp">
+      <Filter>Source Files\thread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

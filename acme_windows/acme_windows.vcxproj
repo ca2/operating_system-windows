@@ -2685,7 +2685,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="directory_system.cpp" />
-    <ClCompile Include="application.cpp" />
     <ClCompile Include="create_process.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="directory_context.cpp" />
@@ -2702,7 +2701,6 @@
     <ClCompile Include="known_folder_struct.cpp" />
     <ClCompile Include="language.cpp" />
     <ClCompile Include="list_serial_ports.cpp" />
-    <ClCompile Include="main_window.cpp" />
     <ClCompile Include="mmresult.cpp" />
     <ClCompile Include="mmsystem.cpp" />
     <ClCompile Include="node.cpp" />
@@ -2814,7 +2812,6 @@
     <ClInclude Include="acme_directory.h" />
     <ClInclude Include="acme_file.h" />
     <ClInclude Include="acme_path.h" />
-    <ClInclude Include="application.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="d2d1_1.h" />
     <ClInclude Include="directory_context.h" />
@@ -2835,7 +2832,6 @@
     <ClInclude Include="integration_context.h" />
     <ClInclude Include="itemidlist.h" />
     <ClInclude Include="known_folder_struct.h" />
-    <ClInclude Include="main_window.h" />
     <ClInclude Include="mmresult.h" />
     <ClInclude Include="nano_timer.h" />
     <ClInclude Include="node.h" />

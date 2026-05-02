@@ -142,8 +142,10 @@ void
             parentWindow = ::as_HWND(pwindow->m_pwindowDeferredParent->operating_system_window());
          }
 
+         auto hinstanceResource = (HINSTANCE)MainSubsystem().m_hinstanceResource;
+
          //window = CreateDialogParam(GetModuleHandle(NULL), (LPCWSTR) getResouceName(),
-         window = CreateDialogParam((HINSTANCE)MainSubsystem().m_hinstanceResource, (LPCWSTR)getResouceName(), parentWindow,
+         window = CreateDialogParam(hinstanceResource, (LPCWSTR)getResouceName(), parentWindow,
                                     dialogProc, (::lparam)(::uptr)(::innate_subsystem_windows::Dialog *)this);
 
          m_isModal = false;
