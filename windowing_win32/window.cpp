@@ -725,19 +725,19 @@ namespace windowing_win32
       if (!hwndResult || !_HWND() || hwndResult != _HWND())
       {
 
-         unsigned int dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
 
          string strLastError = ::windows::last_error_message(lasterror);
 
          string strMessage;
 
-         strMessage.formatf("%s\n\nSystem Error Code: %d", strLastError.c_str(), dwLastError);
+         strMessage.formatf("%s\n\nSystem Error Code: %d", strLastError.c_str(), lasterror.m_uLastError);
 
          warning()(e_trace_category_appmsg) << "Warning: Window creation failed: get_last_error returned:";
 
          warning()(e_trace_category_appmsg) << strMessage;
 
-         if (dwLastError == 0x0000057e)
+         if (lasterror == 0x0000057e)
          {
 
             informationf("Cannot create a top-level child window.");

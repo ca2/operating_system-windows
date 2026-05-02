@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "acme/_.h"
-#include "acme_windows_common/_.h"
+#include "axis/_.h"
+#include "acme_windows/_.h"
 
 
 #if defined(_accessibility_windows_project)
@@ -14,6 +14,9 @@
 
 namespace accessibility_windows
 {
+
+
+   class accessibility;
 
 
    class application;

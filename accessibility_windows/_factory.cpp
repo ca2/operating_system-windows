@@ -40,8 +40,6 @@
 ////void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall();
 //
 //
-__F
-
 
 
 IMPLEMENT_FACTORY(accessibility_windows)

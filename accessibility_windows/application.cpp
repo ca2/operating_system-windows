@@ -981,7 +981,7 @@ bool is_good_active_w(HWND w)
 //
 
 
-namespace acme_windows
+namespace accessibility_windows
 {
 
 
@@ -1048,7 +1048,7 @@ namespace acme_windows
    }
 
 
-} // namespace acme_windows
+} // namespace accessibility_windows
 
 
 

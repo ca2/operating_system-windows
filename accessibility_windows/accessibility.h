@@ -17,7 +17,7 @@ namespace accessibility_windows
 
 
       accessibility();
-      ~accessibility()() override;
+      ~accessibility() override;
 
 
       //::pointer < ::accessibility::application > process_identifier_application(::process_identifier processidentifier) override;

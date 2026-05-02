@@ -84,7 +84,7 @@ namespace accessibility_windows
    }
 
 
-   void main_window::from_application(::operating_system::application * papplication)
+   void main_window::from_application(::accessibility::application * papplication)
    {
 
       auto processidentifier = papplication->m_processidentifier;
@@ -142,7 +142,9 @@ namespace accessibility_windows
 
       }
 
-      return ::windows::get_window_text_timeout(hwnd);
+      auto operatingsystemwindow = ::as_operating_system_window(hwnd);
+
+      return ::windows::get_window_text_timeout(operatingsystemwindow);
 
    }
 
@@ -154,12 +156,14 @@ namespace accessibility_windows
 
       HWND hwnd = m_hwnd;
 
+      auto operatingsystemwindow = ::as_operating_system_window(hwnd);
+
       while (i < idPath.size())
       {
 
-         hwnd = ::windows::child_at(hwnd, idPath[i]);
+         operatingsystemwindow = ::windows::child_at(operatingsystemwindow, idPath[i]);
 
-         if (!hwnd)
+         if (operatingsystemwindow.is_null())
          {
 
             throw ::exception(error_not_found);
@@ -170,7 +174,7 @@ namespace accessibility_windows
 
       }
 
-      return ::windows::get_window_text_timeout(hwnd);
+      return ::windows::get_window_text_timeout(operatingsystemwindow);
 
    }
 

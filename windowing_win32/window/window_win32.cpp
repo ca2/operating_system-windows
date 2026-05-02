@@ -638,7 +638,7 @@ namespace windowing_win32
 
       auto lasterror = ::windows::get_last_error();
 
-      if (dwLastError == ERROR_CLASS_DOES_NOT_EXIST)
+      if (lasterror == ERROR_CLASS_DOES_NOT_EXIST)
       {
 
          ::SetLastError(0);
@@ -647,7 +647,7 @@ namespace windowing_win32
       else
       {
 
-         output_debug_string("GetClassInfoExW failed with error number '" + ::as_string(dwLastError) + "'");
+         output_debug_string("GetClassInfoExW failed with error number '" + ::as_string(lasterror.m_uLastError) + "'");
 
       }
 

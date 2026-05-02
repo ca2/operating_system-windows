@@ -19,7 +19,13 @@ namespace accessibility_windows
    }
 
 
+   ::pointer<::accessibility::application>
+      accessibility::module_path_application(const ::scoped_string & scopedstr)
+   {
 
+      return ::accessibility::accessibility::module_path_application(scopedstr);
+
+   }
 
 
 } // namespace accessibility_windows

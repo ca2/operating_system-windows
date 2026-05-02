@@ -637,7 +637,7 @@ pacmedir->roaming();
 //      else
 //      {
 //
-//         unsigned int dwLastError = ::GetLastError();
+//         auto lasterror = ::windows::get_last_error();
 //
 //         string strPrefix;
 //

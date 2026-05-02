@@ -1801,7 +1801,7 @@ namespace windowing_win32
             if (hicon == nullptr)
             {
 
-               unsigned int dwLastError = ::GetLastError();
+               auto lasterror = ::windows::get_last_error();
 
                output_debug_string("LastError = " + ::as_string(dwLastError));
 

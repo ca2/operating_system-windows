@@ -22,7 +22,7 @@ namespace accessibility_windows
       ~main_window() override;
 
 
-      void from_application(::operating_system::application * papplication) override;
+      void from_application(::accessibility::application * papplication) override;
 
       bool is_window() override;
 

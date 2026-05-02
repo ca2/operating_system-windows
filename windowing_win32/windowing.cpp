@@ -1354,7 +1354,7 @@ namespace windowing_win32
 
       //auto hwnd = ::as_HWND(hwnd);
 
-      return windows::get_window_text_timeout(hwnd, timeSendMessageMax);
+      return windows::get_window_text_timeout(::as_operating_system_window(hwnd), timeSendMessageMax);
 
    }
 

@@ -358,7 +358,7 @@ namespace apex_windows
       if (get_hwnd() == nullptr)
       {
          
-         unsigned int dwLastError = ::GetLastError();
+         auto lasterror = ::windows::get_last_error();
          
          throw ::exception(error_failed);
 

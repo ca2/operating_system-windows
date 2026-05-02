@@ -337,7 +337,7 @@ namespace acme_windows
       void launch_app(const ::scoped_string & scopedstr, const_char_pointer *argv, int iFlags) override;
 
 
-      ::pointer < ::operating_system::application > module_path_application(const ::scoped_string & scopestr) override;
+      //::pointer < ::operating_system::application > module_path_application(const ::scoped_string & scopestr) override;
 
 
       void integration_factory() override;
