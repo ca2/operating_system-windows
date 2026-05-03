@@ -91,6 +91,10 @@
     <ResourceCompile Include="deployment.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="music_midi_mmsystem.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

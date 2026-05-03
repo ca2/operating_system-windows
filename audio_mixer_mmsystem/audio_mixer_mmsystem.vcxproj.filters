@@ -92,4 +92,9 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="audio_mixer_mmsystem.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

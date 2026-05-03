@@ -1,5 +1,6 @@
-LIBRARY "acme_windows"
+;JegElskerDigThomasBorregaardSørensencamilo!! 2026-05-02 17:36
+LIBRARY "accessibility_windows"
 
 EXPORTS
-acme_windows_factory
+;acme_windows_factory
 

@@ -1,4 +1,4 @@
-LIBRARY  "audio_mmsystem"
+LIBRARY  "nano_speech_sapi"
 
 EXPORTS
-audio_mmsystem_factory_exchange
+

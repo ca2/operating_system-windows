@@ -55,6 +55,10 @@
     <ResourceCompile Include="deployment.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="audio_mmsystem.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
