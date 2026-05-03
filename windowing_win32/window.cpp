@@ -8681,6 +8681,17 @@ namespace windowing_win32
             if (!pmessage->m_bRet)
             {
 
+               pmessage->m_bRet = ::win32::acme::windowing::window::on_window_procedure(
+                  pmessage->m_lresult, 
+                  pmessage->m_eusermessage, 
+                  pmessage->m_wparam, 
+                  pmessage->m_lparam);
+
+            }
+
+            if (!pmessage->m_bRet)
+            {
+
                puserinteraction->default_message_handler(pmessage);
 
             }

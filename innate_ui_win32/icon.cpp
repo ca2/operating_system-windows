@@ -19,7 +19,9 @@ namespace innate_ui_win32
    }
 
 
-
+   void icon::_create()
+   {
+   }
 
 
 

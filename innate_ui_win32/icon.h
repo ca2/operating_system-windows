@@ -21,6 +21,9 @@ namespace innate_ui_win32
       ~icon() override;
 
 
+      void _create() override;
+
+
 
    };
 
