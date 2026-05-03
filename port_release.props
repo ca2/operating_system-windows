@@ -36,6 +36,7 @@
     <Link>
       <AdditionalLibraryDirectories>$(RootParentDirOperatingSystem)storage-windows\$(PlatformName)\$(Configuration)\library\;$(RootParentDirOperatingSystem)storage-windows\$(PlatformName)\library\;$(RootParentDirOperatingSystem)storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
       <ImportLibrary>$(RootParentDirOperatingSystem)storage-windows\$(PlatformName)\$(Configuration)\third\library\$(TargetName).lib</ImportLibrary>
+      <ModuleDefinitionFile>$(ProjectName).def</ModuleDefinitionFile>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>$(__operating_system)operating_system-windows\windows10.manifest</AdditionalManifestFiles>
