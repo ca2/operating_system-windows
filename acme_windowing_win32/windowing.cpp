@@ -495,16 +495,7 @@ namespace win32
 
             //system()->defer_post_initial_request();
 
-            if (!system()->m_bSystemLoadedFromALibrary)
-            {
-
-               system()->defer_start_system();
-               //system()->post_application_start();
-            //   system()->defer_post_application_start_file_open_request();
-            //  system()->post_application_started();
-            }
-
-            ::string strAppId = m_papplication->m_strAppId;
+//            ::string strAppId = m_papplication->m_strAppId;
 //
             //session()->get_application(strAppId, true);
 

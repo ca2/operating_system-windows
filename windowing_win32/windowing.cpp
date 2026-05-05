@@ -62,60 +62,11 @@ namespace windowing_win32
    void windowing::on_activate()
    {
 
-      fetch_system_background_color();
+      auto pdisplay = dynamic_cast<class display *>(display());
 
-      //if (!estatus)
-      //{
+      pdisplay -> register_device_listener(::hardware::e_device_monitor);
 
-      //   return estatus;
-
-      //}
-
-      //estatus = 
-
-      //constructø(m_pdisplay);
-
-      //if (!estatus)
-      //{
-
-      //   return estatus;
-
-      //}
-
-      //estatus =
-
-      //m_pdisplay->initialize_display(this);
-
-      //if (!estatus)
-      //{
-
-      //   return estatus;
-
-      //}
-
-      // bool bCreateSessionWindow = initialize_system_interaction();
-      //
-      // if (!bCreateSessionWindow)
-      // {
-      //
-      //    warning() << "Could not create session window";
-      //
-      // }
-
-//#if 000
-
-      //initialize_system_interaction();
-      auto pdisplay = dynamic_cast <class display *>(display());
-
-      pdisplay->register_device_listener(::hardware::e_device_monitor);
-
-      //#endif
-
-
-
-
-            //return estatus;
-
+      ::windowing::windowing::on_activate();
 
    }
 
