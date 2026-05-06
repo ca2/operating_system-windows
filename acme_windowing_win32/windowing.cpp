@@ -478,6 +478,14 @@ namespace win32
          void windowing::run()
          {
 
+            m_papplication->send([this]()
+            {
+
+                  m_papplication->on_application_system_start();
+
+            });
+
+
             //__task_init();
 
 
@@ -491,7 +499,15 @@ namespace win32
 
             //run();
 
-            on_activate();
+            
+            
+            
+            
+            //on_activate();
+
+
+
+
 
             //system()->defer_post_initial_request();
 
