@@ -1236,41 +1236,41 @@ namespace apex_windows
    }
 
 
-   void node::on_start_application(::apex::application * papplication)
-   {
+   //void node::on_start_application(::apex::application * papplication)
+   //{
 
-      system()->post_application_start();
+   //   system()->post_application_start();
 
-      system()->defer_post_application_start_file_open_request();
+   //   system()->defer_post_application_start_file_open_request();
 
-      system()->post_application_started();
+   //   system()->post_application_started();
 
-      ////if (!::is_debugger_attached())
-      //{
+   //   ////if (!::is_debugger_attached())
+   //   //{
 
-      //   ::file::path pathObj;
+   //   //   ::file::path pathObj;
 
-      //   ::file::path pathLnk;
+   //   //   ::file::path pathLnk;
 
-      //   pathObj = file()->module();
+   //   //   pathObj = file()->module();
 
-      //   string strLinkTitle;
+   //   //   string strLinkTitle;
 
-      //   strLinkTitle = papplication->m_strAppName;
+   //   //   strLinkTitle = papplication->m_strAppName;
 
-      //   strLinkTitle.replace_with("_", "/");
-      //   strLinkTitle.replace_with("_", "\\");
-      //   strLinkTitle.replace_with("_", "-");
+   //   //   strLinkTitle.replace_with("_", "/");
+   //   //   strLinkTitle.replace_with("_", "\\");
+   //   //   strLinkTitle.replace_with("_", "-");
 
-      //   pathLnk = directory_system()->localconfig() / "desk/monitor-0/2desk" / strLinkTitle + ".lnk";
+   //   //   pathLnk = directory_system()->localconfig() / "desk/monitor-0/2desk" / strLinkTitle + ".lnk";
 
-      //   directory_system()->create(pathLnk.folder());
+   //   //   directory_system()->create(pathLnk.folder());
 
-      //   system()->m_pnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
+   //   //   system()->m_pnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
 
-      //}
+   //   //}
 
-   }
+   //}
 
    
    void node::on_create_app_shortcut(::platform::application * papplication)

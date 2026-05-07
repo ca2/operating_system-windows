@@ -478,13 +478,9 @@ namespace win32
          void windowing::run()
          {
 
-            m_papplication->send([this]()
-            {
+            system()->prepare_application();
 
-                  m_papplication->on_application_system_start();
-
-            });
-
+            //m_papplication->prepare_application();
 
             //__task_init();
 
@@ -506,6 +502,17 @@ namespace win32
             //on_activate();
 
 
+
+
+            //system()->defer_post_application_start_file_open_request
+
+            m_papplication->send(
+               [this]()
+               {
+                  
+                  m_papplication->process_command_line_options();
+
+               });
 
 
 

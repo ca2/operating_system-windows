@@ -101,7 +101,7 @@ namespace apex_windows
       void create_app_shortcut(::platform::application* papp) override;
 
 
-      void on_start_application(::apex::application * papplication) override;
+      //void on_start_application(::apex::application * papplication) override;
 
 
       virtual error_code _windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, int iIcon);
