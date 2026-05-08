@@ -117,7 +117,7 @@ namespace acme_windows
       if (m_hFile == INVALID_HANDLE_VALUE)
       {
 
-         auto lasterror = ::windows::get_last_error();
+         auto lasterror = ::windows::last_error();
 
          string str;
 

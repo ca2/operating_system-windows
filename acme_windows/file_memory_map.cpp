@@ -72,7 +72,7 @@ namespace acme_windows
          if (!m_fileinstance.safe_create_file(path, (m_bRead || m_bWrite ? FILE_READ_DATA : 0) | (m_bWrite ? FILE_WRITE_DATA : 0), FILE_SHARE_WRITE | FILE_SHARE_READ, nullptr, iOpen, FILE_ATTRIBUTE_NORMAL, nullptr))
          {
 
-            auto lasterror = ::windows::get_last_error();
+            auto lasterror = ::windows::last_error();
 
             ::windows::throw_file_last_error_exception(
                path,
