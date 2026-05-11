@@ -1,10 +1,10 @@
 #include "framework.h"
 #include "windowing.h"
 #include "acme/_operating_system.h"
+#include "acme/operating_system/windows/windows.h"
 
-
-CLASS_DECL_ACME int message_box_to_windows_message_box(::user::enum_message_box emessagebox);
-CLASS_DECL_ACME enum_dialog_result windows_message_box_result_to_dialog_result(int iResult);
+//CLASS_DECL_ACME int message_box_to_windows_message_box(::user::enum_message_box emessagebox);
+//CLASS_DECL_ACME enum_dialog_result windows_message_box_result_to_dialog_result(int iResult);
 
 
 namespace win32
@@ -51,13 +51,13 @@ namespace win32
                   //      ::enum_dialog_result m_edialogresult;
                   //      void run() override
                   //      {
-                  auto iType = message_box_to_windows_message_box(pmessageboxpayload->m_emessagebox);
+                  auto iType = ::windows::message_box_to_windows_message_box(pmessageboxpayload->m_emessagebox);
                   ::wstring wstrMessage(pmessageboxpayload->m_strMessage);
                   ::wstring wstrTitle(pmessageboxpayload->m_strTitle);
 
                   auto iRet = ::MessageBoxW(nullptr, wstrMessage, wstrTitle, iType);
 
-                  pmessageboxpayload->m_payloadResult = windows_message_box_result_to_dialog_result(iRet);
+                  pmessageboxpayload->m_payloadResult = ::windows::windows_message_box_result_to_dialog_result(iRet);
 
 
                }
