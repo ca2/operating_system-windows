@@ -112,13 +112,13 @@ namespace subsystem_windows
       if (::ConnectNamedPipe(m_pfileServerPipe->m_handle, &overlapped)) {
          // In success the overlapped ConnectNamedPipe() function must
          // return zero.
-         int errCode = GetLastError();
+         auto lasterror = ::windows::last_error();
          ::string errMess;
-         errMess.formatf("ConnectNamedPipe failed, error code = {}", errCode);
+         errMess.format("ConnectNamedPipe failed, error code = {}", lasterror.m_uLastError);
          throw ::subsystem::Exception(errMess);
       } else {
-         int errCode = GetLastError();
-         switch(errCode) {
+         auto lasterror = ::windows::last_error();
+         switch(lasterror.m_uLastError) {
             case ERROR_PIPE_CONNECTED:
                break;
             case ERROR_IO_PENDING:
@@ -134,17 +134,17 @@ namespace subsystem_windows
                DWORD cbRet = 0; // Fake
                auto h = m_pfileServerPipe->m_handle;
                if (!GetOverlappedResult(h, &overlapped, &cbRet, FALSE)) {
-                  int errCode = GetLastError();
+                  auto lasterror = ::windows::last_error();
                   ::string errMess;
-                  errMess.formatf("GetOverlappedResult() failed after the "
-                                 "ConnectNamedPipe() call, error code = {}", errCode);
+                  errMess.format("GetOverlappedResult() failed after the "
+                                 "ConnectNamedPipe() call, error code = {}", lasterror.m_uLastError);
                   throw ::subsystem::Exception(errMess);
                }
             }
                break;
             default:
                ::string errMess;
-               errMess.formatf("ConnectNamedPipe failed, error code = {}", errCode);
+               errMess.format("ConnectNamedPipe failed, error code = {}", lasterror.m_uLastError);
                throw ::subsystem::Exception(errMess);
          }
       }
@@ -169,7 +169,7 @@ namespace subsystem_windows
         if (DisconnectNamedPipe(hPipe)) {
           m_isConnected = false;
         } else {
-          int errCode = GetLastError();
+          auto lasterror = ::windows::last_error();
           ::string errMess;
           errMess.formatf("DisconnectNamedPipe failed, error code = {}", errCode);
           throw ::subsystem::Exception(errMess);

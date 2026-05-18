@@ -49,7 +49,7 @@ namespace innate_ui_win32
       ()
          {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             ::SetWindowTextW(hwnd, wstr);
 
@@ -195,7 +195,7 @@ namespace innate_ui_win32
    int window::_get_id()
    {
 
-      auto hwnd = (HWND) _HWND();
+      auto hwnd = ::as_HWND(this->operating_system_window());
 
       return GetWindowLong(hwnd, GWL_ID);
 
@@ -292,7 +292,7 @@ namespace innate_ui_win32
             return 0;
          }
          
-         auto hwnd = (HWND) _HWND();
+         auto hwnd = ::as_HWND(this->operating_system_window());
 
          lresult = DefWindowProc(hwnd, message, wparam, lparam);
 
@@ -331,7 +331,7 @@ namespace innate_ui_win32
          //   break;
          //default:
 
-         auto hwnd = (HWND) _HWND();
+         auto hwnd = ::as_HWND(this->operating_system_window());
 
          lresult = DefWindowProc(hwnd, message, wparam, lparam);
          return true;
@@ -350,7 +350,7 @@ namespace innate_ui_win32
          //// TODO: Add any drawing code that uses hdc here...
          //EndPaint(hWnd, &ps);
 
-         auto hwnd = (HWND) _HWND();
+         auto hwnd = ::as_HWND(this->operating_system_window());
          lresult = DefWindowProc(hwnd, message, wparam, lparam);
          return true;
       }
@@ -362,7 +362,7 @@ namespace innate_ui_win32
          //PostQuitMessage(0);
       default:
       {
-         //auto hwnd = (HWND) _HWND();
+         //auto hwnd = ::as_HWND(this->operating_system_window());
 
          //return DefWindowProc(hwnd, message, wparam, lparam);
       }
@@ -394,7 +394,7 @@ return false;
             pwindowImpl->m_childa.add(this);
             pwindowImpl->m_iChildIdSeed++;
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             ::SetWindowLong(hwnd, GWL_ID, pwindowImpl->m_iChildIdSeed);
 
@@ -454,7 +454,7 @@ return false;
       main_post([this]()
       {
 
-         auto hwnd = (HWND) _HWND();
+         auto hwnd = ::as_HWND(this->operating_system_window());
 
          ShowWindow(hwnd, SW_SHOW);
       
@@ -474,7 +474,7 @@ return false;
       main_post([this, puseractivationtoken]()
       {
 
-         auto hwnd = (HWND) _HWND();
+         auto hwnd = ::as_HWND(this->operating_system_window());
 
          ShowWindow(hwnd, SW_SHOW);
          
@@ -491,7 +491,7 @@ return false;
                 pwin32activationtoken->m_ptaskForeground->post([this]()
                 {
                       
-                  auto hwnd = (HWND) _HWND();
+                  auto hwnd = ::as_HWND(this->operating_system_window());
 
                   ::SetForegroundWindow(hwnd);
 
@@ -525,7 +525,7 @@ return false;
             if (p.x < 0 || p.y < 0)
             {
 
-               auto hwnd = (HWND) _HWND();
+               auto hwnd = ::as_HWND(this->operating_system_window());
 
                auto hwndParent  = GetParent(hwnd);
                RECT rParentClient;
@@ -543,7 +543,7 @@ return false;
                }
             }
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             ::SetWindowPos(hwnd, nullptr, p.x, p.y, 0, 0, SWP_NOSIZE);
 
@@ -559,7 +559,7 @@ return false;
       main_send([this, size]()
          {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             ::SetWindowPos(hwnd, nullptr, 0, 0, size.cx, size.cy, SWP_NOMOVE);
 
@@ -588,7 +588,7 @@ return false;
 
             ::AdjustWindowRect(&r, (DWORD) _get_style(), FALSE);
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             ::SetWindowPos(hwnd, nullptr, 0, 0, width(r), height(r), SWP_NOMOVE);
 
@@ -607,7 +607,7 @@ return false;
       main_send([this]()
    {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
       auto hwndParent = ::GetParent(hwnd);
 

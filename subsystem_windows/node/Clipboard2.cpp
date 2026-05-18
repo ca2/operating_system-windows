@@ -70,9 +70,9 @@ namespace subsystem_windows
       setThreadToFinish();
       waitThreadToFinish();
 
-      // if ((HWND) _HWND() != 0)
+      // if (::as_HWND(this->operating_system_window()) != 0)
       //{
-      //    PostMessage((HWND) _HWND(), WM_QUIT, 0, 0);
+      //    PostMessage(::as_HWND(this->operating_system_window()), WM_QUIT, 0, 0);
       // })
 
    }
@@ -155,7 +155,7 @@ namespace subsystem_windows
 
       clipDest.clear();
 
-      if (!IsClipboardFormatAvailable(CF_TCTEXT) || !OpenClipboard((HWND) _HWND()))
+      if (!IsClipboardFormatAvailable(CF_TCTEXT) || !OpenClipboard(::as_HWND(this->operating_system_window())))
       {
 
          return;
@@ -221,7 +221,7 @@ namespace subsystem_windows
          case WM_DESTROY:
          {
    
-            ChangeClipboardChain((HWND) _HWND(), m_hwndNextViewer);
+            ChangeClipboardChain(::as_HWND(this->operating_system_window()), m_hwndNextViewer);
 
          }
          break;
@@ -253,10 +253,10 @@ namespace subsystem_windows
    void Clipboard2::onTermThread()
    {
 
-      if ((HWND) _HWND() != 0)
+      if (::as_HWND(this->operating_system_window()) != 0)
       {
 
-         PostMessage((HWND) _HWND(), WM_QUIT, 0, 0);
+         PostMessage(::as_HWND(this->operating_system_window()), WM_QUIT, 0, 0);
 
       }
 
@@ -280,7 +280,7 @@ namespace subsystem_windows
       while (!isThreadTerminating())
       {
 
-         if (GetMessage(&msg, (HWND) _HWND(), 0, 0))
+         if (GetMessage(&msg, ::as_HWND(this->operating_system_window()), 0, 0))
          {
 
             DispatchMessage(&msg);

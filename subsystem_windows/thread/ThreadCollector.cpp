@@ -43,7 +43,7 @@ namespace subsystem_windows
       destroyAllThreads();
    }
 
-   void ThreadCollector::execute()
+   void ThreadCollector::onThreadMain()
    {
       while (!isThreadTerminating()) {
          deleteDeadThreads();

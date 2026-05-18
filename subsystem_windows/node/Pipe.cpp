@@ -89,9 +89,9 @@ namespace subsystem_windows
          }
 
          if (!success) {
-            int errCode = GetLastError();
+            auto lasterror = ::windows::last_error();
 
-            if (errCode == ERROR_IO_PENDING) {
+            if (lasterror == ERROR_IO_PENDING) {
                m_writeEvent.wait();
                DWORD cbRet;
                critical_section_lock al(&m_criticalsectionPipe);
@@ -150,9 +150,9 @@ namespace subsystem_windows
                                != 0;
          }
          if (!success) {
-            DWORD errCode = GetLastError();
+            auto lasterror = ::windows::last_error();
 
-            if (errCode == ERROR_IO_PENDING) {
+            if (lasterror == ERROR_IO_PENDING) {
                m_readEvent.wait();
                DWORD cbRet = 0;
                critical_section_lock al(&m_criticalsectionPipe);
@@ -174,7 +174,7 @@ namespace subsystem_windows
                               "(pipe handle is %p, total read %llu, try to read %u)",
                               handlePipe, m_totalRead, length);
                ::string errMess;
-               errMess = ::windows::last_error_message(errText, errCode);
+               errMess = ::windows::last_error_message(errText, lasterror);
                throw ::io_exception(error_io,errMess);
             }
          } // else operation already successful has been completed

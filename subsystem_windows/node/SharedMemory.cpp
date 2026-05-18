@@ -74,9 +74,9 @@ namespace subsystem_windows
                                    lowSize,               // size: low 32-bits
                                    ::wstring(scopedstrName));                 // name of ::map object
       if (m_hToMap == NULL) {
-         int errCode = GetLastError();
+         auto lasterror = ::windows::last_error();
          ::string errMess;
-         errMess.formatf("Cannot create file mapping with error = {}", errCode);
+         errMess.formatf("Cannot create file mapping with error = {}", lasterror.m_uLastError);
          throw ::subsystem::Exception(errMess);
       }
       // The first process to attach initializes memory
@@ -98,9 +98,9 @@ namespace subsystem_windows
                                0,              // low offset:   beginning
                                0);             // default: ::map entire file
       if (m_memory == NULL) {
-         int errCode = GetLastError();
+         auto lasterror = ::windows::last_error();
          ::string errMess;
-         errMess.formatf("Cannot ::map view of file with error = {}", errCode);
+         errMess.formatf("Cannot ::map view of file with error = {}", lasterror.m_uLastError);
          throw ::subsystem::Exception(errMess);
       }
    }

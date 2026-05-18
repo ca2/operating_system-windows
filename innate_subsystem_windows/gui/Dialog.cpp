@@ -33,6 +33,14 @@
 #include "acme/windowing/windowing.h"
 #include "acme/operating_system/windows/windowing.h"
 
+
+namespace windows
+{
+   CLASS_DECL_ACME bool pre_process_window_procedure(::lresult &lresult,
+                                                  HWND hwnd,
+                                                  ::u32 message, ::wparam wparam, ::lparam lparam);
+} // namespace windows
+
 namespace innate_subsystem_windows
 {
 
@@ -93,7 +101,7 @@ void
 
    void Dialog::setDefaultPushButton(unsigned int buttonId)
    {
-      SendMessage((HWND) _HWND(), DM_SETDEFID, buttonId, 0);
+      SendMessage(::as_HWND(this->operating_system_window()), DM_SETDEFID, buttonId, 0);
    }
 
    // void Dialog::setParent(Control *ctrlParent)
@@ -103,10 +111,10 @@ void
 
    void Dialog::show()
    {
-      if ((HWND) _HWND() == NULL) {
+      if (::as_HWND(this->operating_system_window()) == NULL) {
          create();
       } else {
-         ShowWindow((HWND) _HWND(), SW_SHOW);
+         ShowWindow(::as_HWND(this->operating_system_window()), SW_SHOW);
          setForeground();
       }
       //return 0;
@@ -121,13 +129,15 @@ void
    {
       // Destroy dialog
       if (!m_isModal) {
-         DestroyWindow((HWND) _HWND());
+         DestroyWindow(::as_HWND(this->operating_system_window()));
       } else {
-         EndDialog((HWND) _HWND(), code);
+         EndDialog(::as_HWND(this->operating_system_window()), code);
       }
       // We have no valid hwnd, so forse set hwnd to NULL
-      _setHWND(NULL);
+      set_operating_system_window({});
    }
+
+
 
    void Dialog::create()
    {
@@ -145,7 +155,7 @@ void
          auto hinstanceResource = (HINSTANCE)MainSubsystem().m_hinstanceResource;
 
          //window = CreateDialogParam(GetModuleHandle(NULL), (LPCWSTR) getResouceName(),
-         window = CreateDialogParam(hinstanceResource, (LPCWSTR)getResouceName(), parentWindow,
+         window = CreateDialogParam(hinstanceResource, (LPCWSTR)MAKEINTRESOURCEW(m_resourceId), parentWindow,
                                     dialogProc, (::lparam)(::uptr)(::innate_subsystem_windows::Dialog *)this);
 
          m_isModal = false;
@@ -154,10 +164,51 @@ void
       });
    }
 
+
+   void Dialog::doAttachedModal(const ::function < void(int) > & callback)
+   {
+
+      if (::as_HWND(this->operating_system_window()) == NULL) {
+
+
+         auto callbackHold = callback;
+         ::system()->acme_windowing()->post([&, callbackHold]()
+         {
+            m_isModal = true;
+            auto pwindow = this->impl<Window>();
+
+            HWND parentWindow = (pwindow->m_pwindowDeferredParent != NULL)
+                                   ? ::as_HWND(pwindow->m_pwindowDeferredParent->operating_system_window())
+                                   : (HWND) nullptr;
+            //result = (int)DialogBoxParam(GetModuleHandle(NULL),
+            auto result = (int)DialogBoxParam((HINSTANCE) MainSubsystem().m_hinstanceResource,
+                                         (LPCWSTR) MAKEINTRESOURCEW(m_resourceId), parentWindow,
+                                         dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
+
+            information("Dialog box result is {}", result);
+
+            callbackHold(result);
+         });
+
+      }
+      else
+      {
+
+         setVisible(true);
+
+         setForeground();
+
+         callback(::e_dialog_result_ok);
+
+      }
+
+
+   }
+
    int Dialog::showModal()
    {
       int result = 0;
-      if ((HWND) _HWND() == NULL) {
+      if (::as_HWND(this->operating_system_window()) == NULL) {
 
          ::system()->acme_windowing()->send([&]()
          {
@@ -165,11 +216,11 @@ void
             auto pwindow = this->impl<Window>();
 
             HWND parentWindow = (pwindow->m_pwindowDeferredParent != NULL)
-                                   ? (HWND)pwindow->m_pwindowDeferredParent->_HWND()
+                                   ? ::as_HWND(pwindow->m_pwindowDeferredParent->operating_system_window())
                                    : (HWND) nullptr;
             //result = (int)DialogBoxParam(GetModuleHandle(NULL),
             result = (int)DialogBoxParam((HINSTANCE) MainSubsystem().m_hinstanceResource,
-                                         (LPCWSTR) getResouceName(), parentWindow,
+                                         (LPCWSTR) MAKEINTRESOURCEW(m_resourceId), parentWindow,
                                          dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
 
             information("Dialog box result is {}", result);
@@ -191,13 +242,13 @@ void
 
    bool Dialog::isCreated()
    {
-      bool isInit = (HWND) _HWND() != 0;
+      bool isInit = ::as_HWND(this->operating_system_window()) != 0;
 
       if (!isInit) {
          return false;
       }
 
-      return !!IsWindow((HWND) _HWND());
+      return !!IsWindow(::as_HWND(this->operating_system_window()));
    }
 
    bool Dialog::onDrawItem(::wparam controlID, innate_subsystem::draw_item_t * pdrawitem)
@@ -237,7 +288,7 @@ void
          ::cast < ::windows::windowing > pwindowing = ::system()->acme_windowing();
 
          pwindowing->m_windowmap[hwnd] = _this;
-         _this->_setHWND(hwnd);
+         _this->set_operating_system_window(::as_operating_system_window(hwnd));
          _this->updateIcon();
       } else {
          //_this = (::innate_subsystem_windows::Dialog *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
@@ -292,23 +343,23 @@ void
       return bResult;
    }
 
-   char *Dialog::getResouceName()
-   {
-      if (m_resourceId != 0) {
-         return (char *)MAKEINTRESOURCE(m_resourceId);
-      }
-      return m_resourceName;
-   }
+   // char *Dialog::getResouceName()
+   // {
+   //    if (m_resourceId != 0) {
+   //       return (char *)MAKEINTRESOURCE(m_resourceId);
+   //    }
+   //    return m_resourceName;
+   // }
 
    // void Dialog::subControlById(ControlInterface *control, unsigned int id)
    // {
-   //    control = GetDlgItem((HWND) _HWND(), id);
+   //    control = GetDlgItem(::as_HWND(this->operating_system_window()), id);
    // }
 
    void Dialog::updateIcon()
    {
       if (m_hicon) {
-         SetClassLongPtr((HWND) _HWND(), GCLP_HICON, (LONG_PTR)m_hicon);
+         SetClassLongPtr(::as_HWND(this->operating_system_window()), GCLP_HICON, (LONG_PTR)m_hicon);
       }
    }
 

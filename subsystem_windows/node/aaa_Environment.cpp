@@ -48,7 +48,7 @@
 //
 // void Environment::getErrStr(::string & out)
 // {
-//   DWORD errCode = GetLastError();
+//   auto lasterror = ::windows::last_error();
 //   TCHAR buffer[1024];
 //
 //   // FIXME: Remove "new line" character from buffer.

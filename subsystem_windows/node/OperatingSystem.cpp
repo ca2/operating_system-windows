@@ -53,21 +53,21 @@ namespace subsystem_windows
    ::string OperatingSystem::getErrStr()
    {
       ::string out;
-      DWORD errCode = GetLastError();
+      auto dwLastError = ::GetLastError();
 
       LPWSTR pBuffer = NULL;
 
       // 1. Use FORMAT_MESSAGE_ALLOCATE_BUFFER for a dynamic buffer.
       // 2. Use FORMAT_MESSAGE_MAX_WIDTH_MASK to ignore hard-coded line breaks.
-      DWORD length = FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
+      DWORD length = ::FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
                                       FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK,
-                                   NULL, errCode, MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US),
+                                   NULL, dwLastError, MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US),
                                    (LPTSTR)&pBuffer, // Cast the address of your pointer
                                    0, NULL);
 
       if (length == 0 || pBuffer == NULL)
       {
-         out.format("<<Cannot get text error describing>> ({})", errCode);
+         out.format("<<Cannot get text error describing>> ({})", dwLastError);
       }
       else
       {
@@ -82,7 +82,7 @@ namespace subsystem_windows
 
          strMessage = pBuffer;
 
-         out.format("{} ({})", strMessage, errCode);
+         out.format("{} ({})", strMessage, dwLastError);
 
          // Crucial: You must free the system-allocated buffer
          LocalFree(pBuffer);

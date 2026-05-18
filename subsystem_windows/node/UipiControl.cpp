@@ -74,11 +74,11 @@ namespace subsystem_windows
             m_plogwriter->information("The ChangeWindowMessageFilter() function "
                       "successfully found.");
             if (setFilter(uMessage, MSGFLT_ADD) != TRUE) {
-               DWORD errCode = GetLastError();
+               auto lasterror = ::windows::last_error();
                ::string errMess;
                errMess.formatf("Can't allow to receive the {} windows uMessage by "
                               "the ChangeWindowMessageFilter() function.");
-               throw ::subsystem::SystemException(errMess, errCode);
+               throw ::subsystem::SystemException(errMess, lasterror);
             }
             m_plogwriter->information("The ChangeWindowMessageFilter() function "
                       "successfully executed.");
@@ -87,11 +87,11 @@ namespace subsystem_windows
             m_plogwriter->information("The ChangeWindowMessageFilterEx() function "
                       "successfully found.");
             if (setFilterEx(hwnd, uMessage, MSGFLT_ADD, 0) != TRUE) {
-               DWORD errCode = GetLastError();
+               auto lasterror = ::windows::last_error();
                ::string errMess;
                errMess.formatf("Can't allow to receive the {} windows uMessage by "
                               "the ChangeWindowMessageFilterEx() function.");
-               throw ::subsystem::SystemException(errMess, errCode);
+               throw ::subsystem::SystemException(errMess, lasterror);
             }
             m_plogwriter->information("The ChangeWindowMessageFilterEx() function "
                       "successfully executed.");

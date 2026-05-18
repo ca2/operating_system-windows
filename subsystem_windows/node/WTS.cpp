@@ -276,7 +276,7 @@ namespace subsystem_windows
 
    void WTS::duplicatePipeClientToken(HANDLE pipeHandle)
    {
-      ::subsystem::PipeImpersonatedThread impThread;
+      ::subsystem_windows::PipeImpersonatedThread impThread;
        ::subsystem_windows::File filePipeHandle;
        filePipeHandle.m_handle = pipeHandle;
        impThread.initialize_pipe_impersonated_thread(&filePipeHandle);

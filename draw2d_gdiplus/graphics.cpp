@@ -147,7 +147,7 @@ void trilinearImageScaling(
             ((H.byte_opacity())) * (w2_diff) * (h2_diff) * (h3_diff);
 
 
-         lineRet->m_ui =
+         lineRet->m_u32 =
             (int)(blue) |
             ((int)(green)) << 8 |
             ((int)(red)) << 16 |

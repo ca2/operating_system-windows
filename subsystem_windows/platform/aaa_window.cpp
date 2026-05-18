@@ -231,7 +231,7 @@ namespace win32
                << [this]()
                {
 
-                  auto hwnd = (HWND) _HWND();
+                  auto hwnd = ::as_HWND(this->operating_system_window());
 
                   if (!::DestroyWindow(hwnd))
                   {
@@ -266,7 +266,7 @@ namespace win32
 
             ::i32_rectangle r;
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             GetWindowRect(hwnd, (LPRECT)&r);
 
@@ -720,7 +720,7 @@ namespace win32
 
                 }*/
 
-               auto hwnd = (HWND) _HWND();
+               auto hwnd = ::as_HWND(this->operating_system_window());
 
                return DefWindowProc(hwnd, message, wparam, lparam);
 
@@ -730,7 +730,7 @@ namespace win32
             case WM_SYSCOMMAND:
             {
 
-               auto hwnd = (HWND) _HWND();
+               auto hwnd = ::as_HWND(this->operating_system_window());
 
                return DefWindowProc(hwnd, message, wparam, lparam);
 
@@ -864,7 +864,7 @@ namespace win32
 
                   m_bMouseOn = true;
 
-                  auto hwnd = (HWND) _HWND();
+                  auto hwnd = ::as_HWND(this->operating_system_window());
 
                   TRACKMOUSEEVENT trackmouseevent = { sizeof(TRACKMOUSEEVENT) };
                   trackmouseevent.dwFlags = TME_LEAVE;
@@ -1019,7 +1019,7 @@ namespace win32
 
                PAINTSTRUCT paintstruct{};
 
-               auto hwnd = (HWND) _HWND();
+               auto hwnd = ::as_HWND(this->operating_system_window());
 
                HDC hdcWindow = BeginPaint(hwnd, &paintstruct);
 
@@ -1048,7 +1048,7 @@ namespace win32
             case WM_NCACTIVATE:
             {
 
-               auto hwnd = (HWND) _HWND();
+               auto hwnd = ::as_HWND(this->operating_system_window());
 
                LRESULT lresult = DefWindowProc(hwnd, message, wparam, lparam);
                m_bNcActive = wparam != 0;
@@ -1063,7 +1063,7 @@ namespace win32
                if (wparam > 0)
                {
 
-                  auto hwnd = (HWND) _HWND();
+                  auto hwnd = ::as_HWND(this->operating_system_window());
 
                   ::SetFocus(hwnd);
 
@@ -1114,7 +1114,7 @@ namespace win32
             default:
             {
 
-               auto hwnd = (HWND) _HWND();
+               auto hwnd = ::as_HWND(this->operating_system_window());
 
                return DefWindowProc(hwnd, message, wparam, lparam);
 
@@ -1191,7 +1191,7 @@ namespace win32
             main_send([this]()
                {
 
-                  auto hwnd = (HWND) _HWND();
+                  auto hwnd = ::as_HWND(this->operating_system_window());
 
                   if (!::IsWindow(hwnd))
                   {
@@ -1226,7 +1226,7 @@ namespace win32
 
                            warning() << "Before SetForegroundWindow  At thread " << ::GetCurrentThreadId();
 
-                           auto hwnd = (HWND) _HWND();
+                           auto hwnd = ::as_HWND(this->operating_system_window());
 
                            ::SetForegroundWindow(hwnd);
 
@@ -1237,7 +1237,7 @@ namespace win32
 
                                  warning() << "SetActiveWindow  At thread " << ::GetCurrentThreadId();
 
-                                 auto hwnd = (HWND) _HWND();
+                                 auto hwnd = ::as_HWND(this->operating_system_window());
 
                                  ::SetActiveWindow(hwnd);
 
@@ -1278,7 +1278,7 @@ namespace win32
             main_send([this]()
             {
 
-               auto hwnd = (HWND) _HWND();
+               auto hwnd = ::as_HWND(this->operating_system_window());
 
                if (::IsWindow(hwnd))
                {
@@ -1302,7 +1302,7 @@ namespace win32
          void window::redraw()
          {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             ::RedrawWindow(hwnd, nullptr, nullptr, RDW_UPDATENOW | RDW_INVALIDATE);
 
@@ -1312,7 +1312,7 @@ namespace win32
          bool window::_is_window()
          {
             
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             return ::IsWindow(hwnd);
 
@@ -1324,7 +1324,7 @@ namespace win32
 
             POINT p{ point.x, point.y };
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             ::ClientToScreen(hwnd, &p);
 
@@ -1462,7 +1462,7 @@ namespace win32
 
             }
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             ::SetWindowPos(hwnd, hwndParent, point.x, point.y, 0, 0, dwFlags);
 
@@ -1494,7 +1494,7 @@ namespace win32
 
             ::i32_rectangle rectangle;
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             ::GetWindowRect(hwnd, (LPRECT)&rectangle);
 
@@ -1627,7 +1627,7 @@ namespace win32
          void window::set_mouse_capture()
          {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             HWND hwndPreviouslyCapturedIfAny = ::SetCapture(hwnd);
 
@@ -1652,7 +1652,7 @@ namespace win32
 
             HWND hwndCapture = ::subsystem_windows::get_mouse_capture(itask);
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             if (hwndCapture == hwnd)
             {
@@ -1678,7 +1678,7 @@ namespace win32
 
             auto poswindowhandle = (::subsystem_windows::os_window_handle *)p;
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             poswindowhandle->m_hwnd = hwnd;
 

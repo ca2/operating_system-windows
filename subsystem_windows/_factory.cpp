@@ -40,7 +40,7 @@ IMPLEMENT_FACTORY(subsystem_windows)
    subsystem_bsd_sockets_factory(pfactory);
 
    pfactory->add_factory_item<::subsystem_windows::GlobalMutex, ::subsystem::GlobalMutexInterface>();
-   pfactory->add_factory_item<::subsystem_windows::Thread, ::subsystem::ThreadInterface>();
+   //pfactory->add_factory_item<::subsystem_windows::Thread, ::subsystem::ThreadInterface>();
    pfactory->add_factory_item<::subsystem_windows::Shell, ::subsystem::Shell>();
    pfactory->add_factory_item<::subsystem_windows::SecurityAttributes, ::subsystem::SecurityAttributesInterface>();
    pfactory->add_factory_item<::subsystem_windows::PipeServer, ::subsystem::PipeServer>();

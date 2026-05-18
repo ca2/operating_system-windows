@@ -37,6 +37,8 @@
 #include "acme/windowing/windowing.h"
 #include "acme/operating_system/windows/windowing.h"
 #include <commctrl.h>
+
+#include "acme/operating_system/windows/user.h"
 // namespace windows
 // {
 namespace innate_subsystem_windows
@@ -67,10 +69,48 @@ namespace innate_subsystem_windows
       return m_windowswindow.as_HWND();
 
    }
-   void Window::_setHWND(void * p)
+
+
+   void Window::set_operating_system_window(const ::operating_system::window & operatingsystemwindow)
    {
 
-      m_windowswindow = (HWND) p;
+      m_windowswindow = operatingsystemwindow;
+
+   }
+
+   ::operating_system::window Window::operating_system_window() const
+   {
+
+      return m_windowswindow.as_operating_system_window();
+
+   }
+
+   void Window::setMouseCursor(enum_cursor ecursor)
+   {
+
+      auto pszCursor = ::windows::get_system_cursor(ecursor);
+
+      if (::is_null(pszCursor))
+      {
+
+         ::SetCursor(nullptr);
+
+         return;
+
+      }
+
+      HCURSOR hcursor = ::LoadCursor(nullptr, pszCursor);
+
+      if (::is_null(hcursor))
+      {
+
+         ::SetCursor(nullptr);
+
+         return;
+
+      }
+
+      ::SetCursor(hcursor);
 
    }
 
@@ -83,20 +123,20 @@ namespace innate_subsystem_windows
    }
 
 
-   operating_system::window Window::operating_system_window() const
-   {
+   // operating_system::window Window::operating_system_window() const
+   // {
+   //
+   //    return m_windowswindow.as_operating_system_window();
+   //
+   // }
 
-      return m_windowswindow.as_operating_system_window();
 
-   }
-
-
-   void Window::set_operating_system_window(const operating_system::window &operatingsystemwindow)
-   {
-
-      m_windowswindow = operatingsystemwindow;
-
-   }
+   // void Window::set_operating_system_window(const operating_system::window &operatingsystemwindow)
+   // {
+   //
+   //    m_windowswindow = operatingsystemwindow;
+   //
+   // }
 
 
    innate_subsystem::WindowInterface *Window::get_window_implementation()
@@ -105,6 +145,38 @@ namespace innate_subsystem_windows
       return this;
 
    }
+
+
+   // Set resource name for the window
+   void Window::setResourceName(const ::scoped_string & scopedstr)
+   {
+
+      m_strResourceName = scopedstr;
+
+   }
+   // Set resource id for the window
+   void Window::setResourceId(::u32 uId)
+   {
+
+      m_iResourceId = uId;
+
+   }
+   // Get resource name for the window
+   ::string Window::getResourceName()
+   {
+
+      return m_strResourceName;
+
+   }
+   // Get resource id for the window
+   ::u32 Window::getResourceId()
+   {
+
+
+      return m_iResourceId;
+
+   }
+
 
    void Window::setClipboardViewerInterest()
    {
@@ -356,7 +428,7 @@ namespace innate_subsystem_windows
              SetParent(m_windowswindow.as_HWND(), nullptr);
           else
           {
-             auto hwndParent = (HWND)pwindow->_HWND();
+             auto hwndParent = ::as_HWND(pwindow->operating_system_window());
              SetParent(m_windowswindow.as_HWND(), hwndParent);
           }
        }
@@ -643,18 +715,18 @@ namespace innate_subsystem_windows
    //    return false;
    // }
    //
-   bool Window::onSysCommand(::wparam wparam, ::lparam lparam)
+   bool Window::on_user_system_command(::user::enum_system_command esystemcommand)
    {
       return false;
    }
 
-   bool Window::onMessage(unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool Window::onMessage(::user::enum_message emessage, ::wparam wparam, ::lparam lparam)
    {
 
        if (m_pwindowCallback)
        {
 
-           if (m_pwindowCallback->onMessage(message, wparam, lparam))
+           if (m_pwindowCallback->onMessage(emessage, wparam, lparam))
            {
 
                return true;
@@ -720,6 +792,20 @@ namespace innate_subsystem_windows
          ::copy(rc, rcArea);
          InvalidateRect(m_windowswindow.as_HWND(), &rc, FALSE);
       }
+   }
+
+
+   bool Window::onKey(user::enum_message eusermessage, user::enum_key euserkey)
+   {
+      if (m_pwindowCallback)
+      {
+         if (m_pwindowCallback->onKey(eusermessage, euserkey))
+         {
+
+            return true;
+         }
+      }
+      return false;
    }
 
    bool Window::onMouseEx(unsigned int uMessage, int mouseButtons, unsigned short wspeed, const ::i32_point &point,
@@ -1525,7 +1611,7 @@ break;
 
       }
       case WM_SYSCOMMAND:
-         return onSysCommand(wparam, lparam);
+         return on_user_system_command((::user::enum_system_command)wparam.m_wparam);
       case WM_SIZE:
          onSize();
          return false;
@@ -1618,7 +1704,7 @@ break;
 m_windowswindow = nullptr;
       }break;
       }
-      return onMessage(message, wparam, lparam);
+      return onMessage((::user::enum_message)message, wparam, lparam);
    }
 
 
