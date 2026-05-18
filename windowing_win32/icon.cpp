@@ -755,7 +755,7 @@ namespace windowing_win32
 
       }
 
-      //::int_array_base ia;
+      //::i32_array_base ia;
 
       //ia.add(16);
       //ia.add(24);

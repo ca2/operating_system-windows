@@ -7770,7 +7770,7 @@ namespace windowing_win32
 
       ::i32_rectangle rectangleX;
 
-      while (ptask->task_get_run())
+      while (ptask->should_run())
       {
 
          if (m_timeLastMouseMove.elapsed() < 20_ms)

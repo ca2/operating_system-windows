@@ -95,7 +95,7 @@ namespace windows
       static bool IsAscendant(HWND hwndAscendant, HWND hwndDescendant);
 
       static int GetZOrder(HWND hwnd);
-      static void GetZOrder(HWND hwnd, ::int_array_base & ia);
+      static void GetZOrder(HWND hwnd, ::i32_array_base & ia);
 
       //      static HRGN GetAClipRgn(hwnd hwnd, const i32_point & pointOffset, bool bExludeChilren);
       //      static void ExcludeChildren(hwnd hwnd, HRGN hrgn, const i32_point & pointOffset);
