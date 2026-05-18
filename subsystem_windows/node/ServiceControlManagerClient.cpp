@@ -156,7 +156,7 @@ namespace subsystem_windows
             preempt(1_s);
             // FIXME: Magic number.
             if (triesCount++ > 10) {
-               throw ::subsystem::SystemException(1070);
+               throw ::subsystem::SystemException({c_errno_t{}, 1070});
             }
          }
       }

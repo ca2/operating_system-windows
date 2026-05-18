@@ -280,7 +280,7 @@ namespace subsystem_windows
        ::subsystem_windows::File filePipeHandle;
        filePipeHandle.m_handle = pipeHandle;
        impThread.initialize_pipe_impersonated_thread(&filePipeHandle);
-      impThread.resume();
+      impThread.resumeThread();
       impThread.waitUntilImpersonated();
       if (!impThread.getImpersonationSuccess()) {
          ::string faultReason, errMessage;

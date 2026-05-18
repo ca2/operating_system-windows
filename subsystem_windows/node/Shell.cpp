@@ -74,7 +74,7 @@ namespace subsystem_windows
       int ret = (int)ShellExecute(0, L"open", ::wstring(scopedstrFile), ::wstring(scopedstrParameters), ::wstring(scopedstrworkDirectory), SW_SHOW);
 
       if (ret <= 32) {
-         throw ::subsystem::SystemException(ret);
+         throw ::subsystem::SystemException({e_error_code_type_last_error, ret});
       }
    }
 // } // namespace subsystem_windows
