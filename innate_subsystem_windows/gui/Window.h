@@ -150,10 +150,10 @@ namespace innate_subsystem_windows
       struct notification
       {
          ::innate_subsystem::enum_control m_econtrol = ::innate_subsystem::e_control_none;
-         int_array   m_iaNotification;
+         i32_array   m_iaNotification;
       };
 
-      ::int_map < notification > m_mapControlNotification;
+      ::i32_map < notification > m_mapControlNotification;
 
       Window();
 
@@ -161,7 +161,10 @@ namespace innate_subsystem_windows
 
 
       void * _HWND() const override;
-      void _setHWND(void *) override;
+      //void _setHWND(void *) override;
+      operating_ambient_window_t operating_ambient_window() const override;
+      void set_operating_ambient_window(operating_ambient_window_t operatingambientwindow) override;
+
 
 
       void * _WNDPROC_default() const override;
@@ -356,8 +359,9 @@ namespace innate_subsystem_windows
       // Here is stub function, always returned false.
       virtual bool _onWmCommand(::wparam wparam, ::lparam lparam);
       virtual bool onCommand(unsigned int controlID, unsigned int notificationID) override;
-      virtual bool onSysCommand(::wparam wparam, ::lparam lparam) override;
-      virtual bool onMessage(unsigned int message, ::wparam wparam, ::lparam lparam) override;
+      //virtual bool onSysCommand(::wparam wparam, ::lparam lparam) override;
+      bool on_user_system_command(::user::enum_system_command esystemcommand) override { return false;}
+      virtual bool onMessage(::user::enum_message emessage, ::wparam wparam, ::lparam lparam) override;
       virtual bool onMouseEx(unsigned int uMessage, int iButtonMask, unsigned short wheelSpeed,
                              const ::i32_point &point, bool &bDoDefaultProcessing) override;
       virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, const ::i32_point & position) override;

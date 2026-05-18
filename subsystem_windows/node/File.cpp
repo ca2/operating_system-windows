@@ -64,6 +64,16 @@
 
       }
 
+      int File::_fd()
+      {
+
+         throw ::not_implemented();
+
+         return -1;
+
+      }
+
+
 
    } // namespace subsystem_windows
 

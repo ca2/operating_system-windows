@@ -27,11 +27,11 @@ namespace innate_subsystem_windows
 
 
 
-       int message_box(
+       ::enum_dialog_result message_box(
        const ::user_interaction_sink & userinteractionsink,
          const ::scoped_string & scopedstrMessage,
          const ::scoped_string & scopedstrCaption,
-         unsigned int uType) override;
+         ::user::enum_message_box emessagebox) override;
 
         ::user::enum_key virtual_key_code_to_user_key(int iVirtualKeyCode) override;
 

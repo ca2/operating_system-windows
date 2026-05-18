@@ -5,6 +5,7 @@
 #include "subsystem.h"
 #include "acme/platform/user_interaction_sink.h"
 #include "acme/operating_system/windows/user.h"
+#include "acme/operating_system/windows/windows.h"
 #include "innate_subsystem_windows/gui/CommonControlsEx.h"
 
 
@@ -96,20 +97,22 @@ namespace innate_subsystem_windows
     // }
 
 
-    int subsystem::message_box(
+    ::enum_dialog_result subsystem::message_box(
                     const ::user_interaction_sink & userinteractionsink,
                     const ::scoped_string & scopedstrMessage,
                     const ::scoped_string & scopedstrCaption,
-                    unsigned int uType)
+                    ::user::enum_message_box emessagebox)
     {
 
         auto operatingsystemwindow = userinteractionsink.best_effort_operating_system_window();
 
         auto hwnd = ::as_HWND(operatingsystemwindow);
 
-        auto iResult = ::MessageBox(hwnd, ::wstring(scopedstrMessage), ::wstring(scopedstrCaption), uType);
+        auto iResult = ::MessageBox(hwnd, ::wstring(scopedstrMessage), ::wstring(scopedstrCaption), windows::message_box_to_windows_message_box(emessagebox));
 
-        return iResult;
+       auto edialogresult = windows::windows_message_box_result_to_dialog_result(iResult);
+
+        return edialogresult;
 
     }
 

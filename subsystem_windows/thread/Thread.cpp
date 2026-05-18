@@ -24,143 +24,143 @@
 #include "framework.h"
 #include "Thread.h"
 //#include "critical_section_lock.h"
-#include "subsystem/platform/Exception.h"
-
-namespace subsystem_windows
-{
-   Thread::Thread()
-   : m_terminated(false), m_active(false)
-   {
-      m_hThread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE) threadProc,
-                               (LPVOID) this, CREATE_SUSPENDED, (LPDWORD) &m_threadID);
-   }
-
-   Thread::~Thread()
-   {
-      CloseHandle(m_hThread);
-   }
-
-   DWORD WINAPI Thread::threadProc(LPVOID pThread)
-   {
-      Thread *_this = ((Thread *)pThread);
-      try {
-         _this->initByDerived();
-         _this->execute();
-      } catch (const ::exception & e) {
-         /*Log::error("Abnormal thread termination."
-                    " ThreadId = %u, scopedstrMessage = \"{}\" \n",
-                    (unsigned int)_this->m_threadID, e.get_message());
-
-         */
-      }
-      _this->m_active = false;
-      return 0;
-   }
-
-   void Thread::initByDerived()
-   {
-      // If is needed this function will be inherited by a derived class.
-   }
-
-   ::e_status Thread::wait()
-   {
-      if (m_active) {
-         return (WaitForSingleObject(m_hThread, INFINITE) != WAIT_FAILED) ? ::success : error_failed;
-      } else {
-         return ::success;
-      }
-   }
-
-   // FIXME: not thread-safe (m_active).
-   bool Thread::suspend()
-   {
-      m_active = !(SuspendThread(m_hThread) != -1);
-
-      return !m_active;
-   }
-
-   // FIXME: not thread-safe (m_active).
-   bool Thread::resume()
-   {
-      m_active = ResumeThread(m_hThread) != -1;
-
-      return m_active;
-   }
-
-   void Thread::terminate()
-   {
-      m_terminated = true;
-
-      onTerminate();
-   }
-
-   bool Thread::isActive() const
-   {
-      return m_active;
-   }
-
-   ::iptr Thread::getThreadId() const
-   {
-      return m_threadID;
-   }
-
-   bool Thread::setPriority(::subsystem::THREAD_PRIORITY value)
-   {
-      int priority;
-
-      switch(value)
-      {
-         case ::subsystem::PRIORITY_IDLE:
-            priority = THREAD_PRIORITY_IDLE;
-            break;
-         case ::subsystem::PRIORITY_LOWEST:
-            priority = THREAD_PRIORITY_LOWEST;
-            break;
-         case ::subsystem::PRIORITY_BELOW_NORMAL:
-            priority = THREAD_PRIORITY_BELOW_NORMAL;
-            break;
-         case ::subsystem::PRIORITY_NORMAL:
-            priority = THREAD_PRIORITY_NORMAL;
-            break;
-         case ::subsystem::PRIORITY_ABOVE_NORMAL:
-            priority = THREAD_PRIORITY_ABOVE_NORMAL;
-            break;
-         case ::subsystem::PRIORITY_HIGHEST:
-            priority = THREAD_PRIORITY_HIGHEST;
-            break;
-         case ::subsystem::PRIORITY_TIME_CRITICAL:
-            priority = THREAD_PRIORITY_TIME_CRITICAL;
-            break;
-         default:
-            priority = THREAD_PRIORITY_NORMAL;
-      }
-
-      return SetThreadPriority(m_hThread, priority) != 0;
-   }
-
-    void Thread::sleep(const class ::time & time) { preempt(time);
-    }
-
-   void Thread::yield()
-   {
-      SwitchToThread();
-   }
-
-   bool Thread::isTerminating()
-   {
-      return m_terminated;
-   }
-
-   void Thread::onTerminate()
-   {
-   }
-
-
-   void Thread::execute()
-   {
-
-      m_pthreadCallback->execute();
-
-   }
-
-} // namespace subsystem_windows
+// #include "subsystem/platform/Exception.h"
+//
+// namespace subsystem_windows
+// {
+//    Thread::Thread()
+//    : m_terminated(false), m_active(false)
+//    {
+//       m_hThread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE) threadProc,
+//                                (LPVOID) this, CREATE_SUSPENDED, (LPDWORD) &m_threadID);
+//    }
+//
+//    Thread::~Thread()
+//    {
+//       CloseHandle(m_hThread);
+//    }
+//
+//    DWORD WINAPI Thread::threadProc(LPVOID pThread)
+//    {
+//       Thread *_this = ((Thread *)pThread);
+//       try {
+//          _this->initByDerived();
+//          _this->execute();
+//       } catch (const ::exception & e) {
+//          /*Log::error("Abnormal thread termination."
+//                     " ThreadId = %u, scopedstrMessage = \"{}\" \n",
+//                     (unsigned int)_this->m_threadID, e.get_message());
+//
+//          */
+//       }
+//       _this->m_active = false;
+//       return 0;
+//    }
+//
+//    void Thread::initByDerived()
+//    {
+//       // If is needed this function will be inherited by a derived class.
+//    }
+//
+//    ::e_status Thread::wait()
+//    {
+//       if (m_active) {
+//          return (WaitForSingleObject(m_hThread, INFINITE) != WAIT_FAILED) ? ::success : error_failed;
+//       } else {
+//          return ::success;
+//       }
+//    }
+//
+//    // FIXME: not thread-safe (m_active).
+//    bool Thread::suspend()
+//    {
+//       m_active = !(SuspendThread(m_hThread) != -1);
+//
+//       return !m_active;
+//    }
+//
+//    // FIXME: not thread-safe (m_active).
+//    bool Thread::resume()
+//    {
+//       m_active = ResumeThread(m_hThread) != -1;
+//
+//       return m_active;
+//    }
+//
+//    void Thread::terminate()
+//    {
+//       m_terminated = true;
+//
+//       onTerminate();
+//    }
+//
+//    bool Thread::isActive() const
+//    {
+//       return m_active;
+//    }
+//
+//    ::iptr Thread::getThreadId() const
+//    {
+//       return m_threadID;
+//    }
+//
+//    bool Thread::setPriority(::subsystem::THREAD_PRIORITY value)
+//    {
+//       int priority;
+//
+//       switch(value)
+//       {
+//          case ::subsystem::PRIORITY_IDLE:
+//             priority = THREAD_PRIORITY_IDLE;
+//             break;
+//          case ::subsystem::PRIORITY_LOWEST:
+//             priority = THREAD_PRIORITY_LOWEST;
+//             break;
+//          case ::subsystem::PRIORITY_BELOW_NORMAL:
+//             priority = THREAD_PRIORITY_BELOW_NORMAL;
+//             break;
+//          case ::subsystem::PRIORITY_NORMAL:
+//             priority = THREAD_PRIORITY_NORMAL;
+//             break;
+//          case ::subsystem::PRIORITY_ABOVE_NORMAL:
+//             priority = THREAD_PRIORITY_ABOVE_NORMAL;
+//             break;
+//          case ::subsystem::PRIORITY_HIGHEST:
+//             priority = THREAD_PRIORITY_HIGHEST;
+//             break;
+//          case ::subsystem::PRIORITY_TIME_CRITICAL:
+//             priority = THREAD_PRIORITY_TIME_CRITICAL;
+//             break;
+//          default:
+//             priority = THREAD_PRIORITY_NORMAL;
+//       }
+//
+//       return SetThreadPriority(m_hThread, priority) != 0;
+//    }
+//
+//     void Thread::sleep(const class ::time & time) { preempt(time);
+//     }
+//
+//    void Thread::yield()
+//    {
+//       SwitchToThread();
+//    }
+//
+//    bool Thread::isTerminating()
+//    {
+//       return m_terminated;
+//    }
+//
+//    void Thread::onTerminate()
+//    {
+//    }
+//
+//
+//    void Thread::execute()
+//    {
+//
+//       m_pthreadCallback->execute();
+//
+//    }
+//
+// } // namespace subsystem_windows

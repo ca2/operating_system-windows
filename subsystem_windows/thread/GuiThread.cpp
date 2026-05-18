@@ -40,7 +40,7 @@ namespace subsystem_windows
       }
    }
 
-   void GuiThread::initByDerived()
+   void GuiThread::onInitThread()
    {
       MainSubsystem().DesktopSelector().setDesktopToCurrentThread(m_desk);
       // If unsuccessful, desktop will be closed in destructor

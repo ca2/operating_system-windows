@@ -48,6 +48,7 @@ namespace subsystem_windows
 
 
       void * _HANDLE() override;
+      int _fd() override;
 
 
    };

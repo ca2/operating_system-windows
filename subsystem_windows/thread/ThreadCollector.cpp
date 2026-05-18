@@ -30,12 +30,12 @@ namespace subsystem_windows
 {
    ThreadCollector::ThreadCollector()
    {
-      resume();
+      resumeThread();
    }
 
    ThreadCollector::~ThreadCollector()
    {
-      if (isActive()) {
+      if (isThreadActive()) {
          terminate();
          m_timer.set_happening() ;
          wait();
@@ -45,13 +45,13 @@ namespace subsystem_windows
 
    void ThreadCollector::execute()
    {
-      while (!isTerminating()) {
+      while (!isThreadTerminating()) {
          deleteDeadThreads();
          m_timer.wait(50_ms);
       }
    }
 
-   void ThreadCollector::addThread(::subsystem::ThreadInterface *pthread)
+   void ThreadCollector::addThread(::subsystem::Thread *pthread)
    {
       critical_section_lock l(&m_lockObj);
       m_threada.add(pthread);
@@ -66,7 +66,7 @@ namespace subsystem_windows
          auto it= iter;
          iter++;
          auto pthread = *it;
-         if (!pthread->isActive()) {
+         if (!pthread->isThreadActive()) {
             //delete thread;
             m_threada.erase_at(it - m_threada.data());
          }
@@ -79,10 +79,10 @@ namespace subsystem_windows
 
       auto iter = m_threada.begin();
       for (; iter != m_threada.end(); iter++) {
-         (*iter)->terminate();
+         (*iter)->setThreadToFinish();
       }
       for (iter = m_threada.begin(); iter != m_threada.end(); iter++) {
-         (*iter)->wait();
+         (*iter)->waitThreadToFinish();
       }
 
       deleteDeadThreads();

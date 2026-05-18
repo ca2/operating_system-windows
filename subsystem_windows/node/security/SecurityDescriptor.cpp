@@ -49,7 +49,7 @@ namespace subsystem_windows
       DWORD ret = SetEntriesInAcl(constrCount, rules, NULL, &acl);
 
       if (ret != ERROR_SUCCESS) {
-         throw ::subsystem::SystemException(ret);
+         throw ::subsystem::SystemException({e_error_code_type_last_error, ret});
       }
 
       setUserDacl(acl);

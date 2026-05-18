@@ -100,10 +100,10 @@ namespace subsystem_windows
 
      //ThreadList::iterator iter;
      for (auto iter = m_zombies.begin(); iter != m_zombies.end(); iter++) {
-       (*iter)->terminate();
+       (*iter)->setThreadToFinish();
      }
      for (auto iter = m_zombies.begin(); iter != m_zombies.end(); iter++) {
-       (*iter)->wait();
+       (*iter)->waitThreadToFinish();
      }
 
      deleteDeadZombies();

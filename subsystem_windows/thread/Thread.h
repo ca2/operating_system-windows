@@ -22,9 +22,9 @@
 ////-------------------------------------------------------------------------
 ////
 //
-//#pragma once
+#pragma once
 //
-//#include "subsystem/thread/Thread.h"
+#include "subsystem/thread/Thread.h"
 //#include "subsystem_windows/_common_header.h"
 ////#include "critical_section.h"
 ////#include "DesktopSelector.h"

@@ -51,8 +51,8 @@ public:
    //   //
    //
    bool m_isAutoAccelerationEnabled;
-   int_array m_limitters;
-   int_array m_deltas;
+   i32_array m_limitters;
+   i32_array m_deltas;
    int m_maxDelta;
 
 
@@ -76,8 +76,8 @@ public:
   //virtual void autoAccelerationHandler(LPNMUPDOWN message);
    void autoAccelerationHandler(int & iPos, int & iDelta) override;
   void enableAutoAcceleration(bool enabled) override;
-  void setAutoAccelerationParams(const int_array & limitters,
-                                 const int_array & deltas,
+  void setAutoAccelerationParams(const i32_array & limitters,
+                                 const i32_array & deltas,
                                  int maxDelta) override;
 
 

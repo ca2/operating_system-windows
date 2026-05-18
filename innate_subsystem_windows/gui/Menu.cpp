@@ -277,7 +277,7 @@ namespace innate_subsystem_windows
          pos.x = pos.y = 0;
       }
 
-      HWND notifyWnd = (HWND) pwindowNotify->_HWND();
+      HWND notifyWnd = (HWND) ::as_HWND(pwindowNotify->operating_system_window());
       SetForegroundWindow(notifyWnd);
 
        int action = TrackPopupMenu(this->m_hmenu,

@@ -48,10 +48,10 @@ namespace subsystem_windows
    {
    public:
       ThreadCollector();
-      virtual ~ThreadCollector();
+      ~ThreadCollector() override;
 
       // Adds thread to a self ::list_base.
-      virtual void addThread(::subsystem::ThreadInterface *thread);
+      void addThread(::subsystem::Thread *thread);
 
       // Forces terminates all threads, waits until they dies and than
       // delete them from memory and thread ::list_base.
@@ -66,7 +66,7 @@ namespace subsystem_windows
       void deleteDeadThreads();
 
    //protected:
-      ::pointer_array < ::subsystem::ThreadInterface >  m_threada;
+      ::pointer_array < ::subsystem::Thread >  m_threada;
       critical_section m_lockObj;
 
       ::happening m_timer;

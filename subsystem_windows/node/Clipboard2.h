@@ -51,8 +51,12 @@ namespace subsystem_windows
       ~Clipboard2(void);
 
 
+
+      void on_initialize_particle() override;
+
       void destroy() override;
 
+      void handle(topic * ptopic, handler_context * phandlercontext);
 
       void initialize_clipboard2(::subsystem::ClipboardListener *clipboardListener, ::subsystem::LogWriter *log) override;
 

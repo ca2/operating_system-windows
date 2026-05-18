@@ -143,7 +143,7 @@ namespace subsystem_windows
              } else {
                 INPUT keyEvent = {0};
 
-                auto vkCode = e_user_key_to_vk_code(euserkey);
+                auto vkCode = e_user_key_to_vkcode(euserkey);
                 keyEvent.type = INPUT_KEYBOARD;
                 keyEvent.ki.wVk = vkCode;
                 keyEvent.ki.wScan = MapVirtualKey(vkCode, 0);
@@ -157,9 +157,9 @@ namespace subsystem_windows
                 }
 
                 if (SendInput(1, &keyEvent, sizeof(keyEvent)) == 0) {
-                   DWORD errCode = GetLastError();
-                   if (errCode != ERROR_SUCCESS) {
-                      throw ::subsystem::SystemException("SendInput() function failed:", errCode);
+                   auto lasterror = ::windows::last_error();
+                   if (lasterror != ERROR_SUCCESS) {
+                      throw ::subsystem::SystemException("SendInput() function failed:", lasterror.m_uLastError);
                    } else {
                       // Under Vista or later the SendInput() function doesn't return error
                       // code if inputs blocked by UIPI.

@@ -77,19 +77,19 @@ void
    }
 
 
-   void Dialog::setResourceName(const char * resourceName)
-   {
-      if (m_resourceName != 0) {
-         free(m_resourceName);
-      }
-
-      m_resourceName = _strdup(resourceName);
-   }
-
-   void Dialog::setResourceId(unsigned int id)
-   {
-      m_resourceId = id;
-   }
+   // void Dialog::setResourceName(const char * resourceName)
+   // {
+   //    if (m_resourceName != 0) {
+   //       free(m_resourceName);
+   //    }
+   //
+   //    m_resourceName = _strdup(resourceName);
+   // }
+   //
+   // void Dialog::setResourceId(unsigned int id)
+   // {
+   //    m_resourceId = id;
+   // }
 
    void Dialog::setDefaultPushButton(unsigned int buttonId)
    {

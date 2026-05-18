@@ -26,11 +26,12 @@
 
 
 #include "subsystem_windows/thread/Thread.h"
+#include "subsystem_windows/thread/DesktopSelector.h"
 
 
 namespace subsystem_windows
 {
-   class CLASS_DECL_SUBSYSTEM_WINDOWS GuiThread : public Thread
+   class CLASS_DECL_SUBSYSTEM_WINDOWS GuiThread : public ::subsystem::Thread
    {
    public:
       GuiThread();
@@ -39,7 +40,7 @@ namespace subsystem_windows
       // Replacing the base function.
       //static DWORD WINAPI threadProc(LPVOID pThread);
 
-      virtual void initByDerived();
+      void onInitThread() override;
 
       // Desktop for current thread.
       //HDESK m_hDesk;

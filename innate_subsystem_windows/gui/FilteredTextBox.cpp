@@ -51,7 +51,7 @@ namespace innate_subsystem_windows
       // } else {
       //    m_wndprocOld = NULL;
       // }
-      _setHWND(hwnd);
+      set_operating_system_window(operatingsystemwindow);
    }
 
    void FilteredTextBox::setText(char *text)

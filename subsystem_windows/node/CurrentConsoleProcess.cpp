@@ -97,7 +97,7 @@ namespace subsystem_windows
       }
       catch (::subsystem::SystemException &sysEx)
       {
-         m_plogwriter->error("Failed to start process with {} error", sysEx.getErrorCode());
+         m_plogwriter->error("Failed to start process with {} error", sysEx.getErrorCode().m_iOsError);
          throw;
       }
 

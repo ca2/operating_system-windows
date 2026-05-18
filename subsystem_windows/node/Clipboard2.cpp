@@ -55,6 +55,14 @@ namespace subsystem_windows
    }
 
 
+   void Clipboard2::on_initialize_particle()
+   {
+
+      ::subsystem::GuiThread::on_initialize_particle();
+
+   }
+
+
    void Clipboard2::destroy()
    {
 
@@ -69,6 +77,17 @@ namespace subsystem_windows
 
    }
 
+   void Clipboard2::handle(topic * ptopic, handler_context * phandlercontext)
+   {
+
+      GuiThread::handle(ptopic, phandlercontext);
+
+
+   }
+
+
+
+
    void Clipboard2::initialize_clipboard2(::subsystem::ClipboardListener *clipboardListener, ::subsystem::LogWriter * plogwriter)
    {
 
@@ -78,7 +97,7 @@ namespace subsystem_windows
       m_clipboardListener = clipboardListener;
       m_plogwriter = plogwriter;
 
-      resume();
+      resumeThread();
 
    }
 
@@ -231,7 +250,7 @@ namespace subsystem_windows
    }
 
 
-   void Clipboard2::onTerminate()
+   void Clipboard2::onTermThread()
    {
 
       if ((HWND) _HWND() != 0)
@@ -244,7 +263,7 @@ namespace subsystem_windows
    }
 
 
-   void Clipboard2::execute()
+   void Clipboard2::onThreadMain()
    {
 
       m_plogwriter->information("clipboard thread id = {}", (::iptr) getThreadId());
@@ -258,7 +277,7 @@ namespace subsystem_windows
       //
       MSG msg;
 
-      while (!isTerminating())
+      while (!isThreadTerminating())
       {
 
          if (GetMessage(&msg, (HWND) _HWND(), 0, 0))

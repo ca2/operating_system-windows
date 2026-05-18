@@ -94,7 +94,7 @@ namespace subsystem_windows
                                         0, // Pointer to DACL (0 = access to all)
                                         0);
       if (errorCode != ERROR_SUCCESS) {
-         throw ::subsystem::SystemException(errorCode);
+         throw ::subsystem::SystemException({e_error_code_type_last_error, errorCode});
       }
    }
 } // namespace subsystem_windows

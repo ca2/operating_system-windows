@@ -327,23 +327,23 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
 
    }
 
-   void Graphics::drawText(const char *text, int cchText, ::i32_rectangle &rectangle, unsigned int format, enum_align ealign)
+   void Graphics::drawText(const ::scoped_string & scopedstr, ::i32_rectangle &rectangle, unsigned int format, enum_align ealign)
    {
 
-      ::string str;
+      ::string str(scopedstr);
 
-      if (cchText >= 0)
-      {
-
-         str.assign(text, cchText);
-
-      }
-      else
-      {
-
-         str = text;
-
-      }
+      // if (cchText >= 0)
+      // {
+      //
+      //    str.assign(text, cchText);
+      //
+      // }
+      // else
+      // {
+      //
+      //    str = text;
+      //
+      // }
 
       ::wstring wstr(str);
 
