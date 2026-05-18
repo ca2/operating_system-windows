@@ -49,7 +49,7 @@ namespace subsystem_windows
 
    }
 
-   void PipeImpersonatedThread::onTerminate()
+   void PipeImpersonatedThread::onTermThread()
    {
       m_threadSleeper.set_happening();
    }
@@ -69,7 +69,7 @@ namespace subsystem_windows
       return m_faultReason;
    }
 
-   void PipeImpersonatedThread::execute()
+   void PipeImpersonatedThread::onThreadMain()
    {
       auto handle = ::as_HANDLE(m_pfilePipe);
 
@@ -84,7 +84,7 @@ namespace subsystem_windows
       }
       m_impersonationReadyEvent.set_happening();
 
-      while (!isTerminating()) {
+      while (!isThreadTerminating()) {
          m_threadSleeper.wait();
       }
       RevertToSelf();

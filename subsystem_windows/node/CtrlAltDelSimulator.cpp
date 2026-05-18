@@ -30,7 +30,7 @@
 namespace subsystem_windows
 {
 
-   CtrlAltDelSimulator::CtrlAltDelSimulator() { resume(); }
+   CtrlAltDelSimulator::CtrlAltDelSimulator() { resumeThread(); }
 
    CtrlAltDelSimulator::~CtrlAltDelSimulator()
    {
@@ -38,7 +38,7 @@ namespace subsystem_windows
       wait();
    }
 
-   void CtrlAltDelSimulator::execute()
+   void CtrlAltDelSimulator::onThreadMain()
    {
       // Switch thread desktop to "Winlogon".
       if (WindowsSubsystem().DesktopSelector().selectDesktop("Winlogon"))

@@ -25,6 +25,7 @@
 #include "subsystem_windows/_common_header.h"
 #include "ServiceControlManagerClient.h"
 
+
 //#include "remoting/remoting/thread/Thread.h"
 
 namespace subsystem_windows
@@ -156,7 +157,7 @@ namespace subsystem_windows
             preempt(1_s);
             // FIXME: Magic number.
             if (triesCount++ > 10) {
-               throw ::subsystem::SystemException({c_errno_t{}, 1070});
+               throw ::subsystem::SystemException({e_error_code_type_last_error, 1070});
             }
          }
       }

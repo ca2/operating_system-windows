@@ -71,7 +71,7 @@ namespace subsystem_windows
           * @param release if true then sybtezises release event, otherwise, press.
           * @throws SystemException on fail.
           */
-         void injectKeyEvent(unsigned char vkCode, bool release, bool extended = false) override;
+         void injectKeyEvent(::user::enum_key euserkey, bool release, bool extended = false) override;
 
          /**
           * Syntezises char press or release event.

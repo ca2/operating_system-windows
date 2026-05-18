@@ -50,10 +50,24 @@ namespace subsystem_windows
 
    Clipboard2::~Clipboard2()
    {
-      terminate();
-      wait();
+      //terminate();
+      //wait();
    }
 
+
+   void Clipboard2::destroy()
+   {
+
+      ::subsystem::GuiThread::destroy();
+      setThreadToFinish();
+      waitThreadToFinish();
+
+      // if ((HWND) _HWND() != 0)
+      //{
+      //    PostMessage((HWND) _HWND(), WM_QUIT, 0, 0);
+      // })
+
+   }
 
    void Clipboard2::initialize_clipboard2(::subsystem::ClipboardListener *clipboardListener, ::subsystem::LogWriter * plogwriter)
    {

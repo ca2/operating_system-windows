@@ -51,6 +51,9 @@ namespace subsystem_windows
       ~Clipboard2(void);
 
 
+      void destroy() override;
+
+
       void initialize_clipboard2(::subsystem::ClipboardListener *clipboardListener, ::subsystem::LogWriter *log) override;
 
       // This function replaces clipboard content by the text
@@ -61,8 +64,8 @@ namespace subsystem_windows
    //protected:
       bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) override;
 
-      void execute() override;
-      void onTerminate() override;
+      void onThreadMain() override;
+      void onTermThread() override;
 
       //void convertToRfbFormat(const ::scoped_string &source, ::string &dest);
       //void convertFromRfbFormat(const ::scoped_string &scopedstrSource, ::string &dest);

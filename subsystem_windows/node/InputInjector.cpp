@@ -24,6 +24,7 @@
 #include "framework.h"
 #include "InputInjector.h"
 #include "Keyboard.h"
+#include "acme/constant/user_key.h"
 #include "subsystem/node/SystemException.h"
 //#include "remoting/remoting/win_system/Environment.h"
 //#include <vector>
@@ -69,21 +70,21 @@ namespace subsystem_windows
          }
      }
 
-      void InputInjector::injectKeyPress(unsigned char vkCode)
+      void InputInjector::injectKeyPress(::user::enum_key euserkey)
       {
-         injectKeyEvent(vkCode, false);
+         injectKeyEvent(euserkey, false);
       }
 
-      void InputInjector::injectKeyRelease(unsigned char vkCode)
+      void InputInjector::injectKeyRelease(::user::enum_key euserkey)
       {
-         injectKeyEvent(vkCode, true);
+         injectKeyEvent(euserkey, true);
       }
 
-      void InputInjector::injectKeyEvent(unsigned char vkCode, bool release, bool extended)
+      void InputInjector::injectKeyEvent(::user::enum_key euserkey, bool release, bool extended)
       {
          m_plogwriter->debug("Prepare to inject the key event:"
-                    " vkCode = {}, release = {}, extended = {}",
-                    (int)vkCode,
+                    " user::enum_key = {}, release = {}, extended = {}",
+                    (int)euserkey,
                     (int)release,
                     (int)extended);
          m_plogwriter->debug("The modifier states before:"
@@ -98,19 +99,19 @@ namespace subsystem_windows
                     (int)m_shiftIsPressed,
                     (int)m_winIsPressed);
 
-         if (vkCode == VK_CONTROL || vkCode == VK_RCONTROL || vkCode == VK_LCONTROL) {
+         if (euserkey == ::user::e_key_control || euserkey == ::user::e_key_right_control || euserkey == ::user::e_key_left_control) {
             m_controlIsPressed = !release;
          }
-         if (vkCode == VK_MENU || vkCode == VK_RMENU || vkCode == VK_LMENU) {
+         if (euserkey == ::user::e_key_alt || euserkey == ::user::e_key_right_alt || euserkey == ::user::e_key_left_alt) {
             m_menuIsPressed = !release;
          }
-         if (vkCode == VK_DELETE) {
+         if (euserkey == ::user::e_key_delete) {
             m_deleteIsPressed = !release;
          }
-         if (vkCode == VK_SHIFT || vkCode == VK_RSHIFT || vkCode == VK_LSHIFT) {
+         if (euserkey == ::user::e_key_shift || euserkey == ::user::e_key_right_shift || euserkey == ::user::e_key_left_shift) {
             m_shiftIsPressed = !release;
          }
-         if (vkCode == VK_LWIN || vkCode == VK_RWIN) {
+         if (euserkey == ::user::e_key_left_command || euserkey == ::user::e_key_right_command) {
             m_winIsPressed = !release;
          }
          m_plogwriter->debug("The modifier states after:"
@@ -142,6 +143,7 @@ namespace subsystem_windows
              } else {
                 INPUT keyEvent = {0};
 
+                auto vkCode = e_user_key_to_vk_code(euserkey);
                 keyEvent.type = INPUT_KEYBOARD;
                 keyEvent.ki.wVk = vkCode;
                 keyEvent.ki.wScan = MapVirtualKey(vkCode, 0);

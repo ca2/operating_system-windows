@@ -35,8 +35,8 @@ namespace subsystem_windows
 
    class CLASS_DECL_SUBSYSTEM_WINDOWS PipeImpersonatedThread :
 
-      virtual public Implementation<::subsystem::PipeImpersonatedThreadInterface, Thread >
-      //virtual public ::subsystem::Thread
+      virtual public Implementation<::subsystem::PipeImpersonatedThreadInterface >,
+      virtual public ::subsystem::Thread
    {
    public:
       //PipeImpersonatedThread(HANDLE pipeHandle);
@@ -51,8 +51,8 @@ namespace subsystem_windows
       ::string getFaultReason() override;
 
       //private:
-      void execute() override;
-      void onTerminate() override;
+      void onThreadMain() override;
+      void onTermThread() override;
 
       ::pointer < ::subsystem::FileInterface > m_pfilePipe;
       bool m_success;
