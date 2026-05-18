@@ -362,7 +362,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             m_timeEnd.FormatGmt(strEndTime, "%Y-%m-%d %H-%M-%S");
 
-            m_strBuild = "\"This a long build version string text description that makes really trigger a int_size that is will end up making this status rquired and needed to be recorded and written to another set of records or table...\"";
+            m_strBuild = "\"This a long build version string text description that makes really trigger a i32_size that is will end up making this status rquired and needed to be recorded and written to another set of records or table...\"";
 
             //string str;
 

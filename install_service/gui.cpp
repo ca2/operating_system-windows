@@ -47,7 +47,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
   /* Set service name if given */
   if (service->name[0]) {
     SetDlgItemText(dlg, IDC_NAME, service->name);
-    /* No int_point making user click erase if the name is already entered */
+    /* No i32_point making user click erase if the name is already entered */
     if (resource == IDD_REMOVE) {
       HWND button = GetDlgItem(dlg, IDC_REMOVE);
       if (button) {
@@ -226,14 +226,14 @@ void centre_window(HWND window) {
 
   if (! window) return;
 
-  /* Find window int_size */
+  /* Find window i32_size */
   if (! GetWindowRect(window, &size)) return;
 
   /* Find desktop window */
   desktop = GetDesktopWindow();
   if (! desktop) return;
 
-  /* Find desktop window int_size */
+  /* Find desktop window i32_size */
   if (! GetWindowRect(desktop, &desktop_size)) return;
 
   /* Centre window */
@@ -1042,7 +1042,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
       */
       if (n < 32) {
         int columns = (n - 1) / 4;
-        RECT int_rectangle;
+        RECT i32_rectangle;
         GetWindowRect(list_base, &rectangle);
         int width = rectangle.right - rectangle.left;
         width -= (7 - columns) * 16;

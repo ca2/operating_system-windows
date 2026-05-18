@@ -417,7 +417,7 @@ namespace ca2plugin_container
          {
 
 
-            const ::int_rectangle & rectangle = *((LPCRECT) pdata);
+            const ::i32_rectangle & rectangle = *((LPCRECT) pdata);
 
             try
             {
@@ -430,7 +430,7 @@ namespace ca2plugin_container
 
                //on_paint(g, rectangle);
 
-               on_paint(nullptr,int_rectangle);
+               on_paint(nullptr,i32_rectangle);
 
             }
             catch(...)

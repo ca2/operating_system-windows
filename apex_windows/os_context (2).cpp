@@ -881,7 +881,7 @@ namespace windows
    {
       LPTSTR ReferencedDomain=nullptr;
       DWORD cbSid=128;    // initial allocation attempt
-      DWORD cchReferencedDomain=16; // initial allocation int_size
+      DWORD cchReferencedDomain=16; // initial allocation i32_size
       SID_NAME_USE peUse;
       BOOL bSuccess=false; // assume this function will fail
 
@@ -910,7 +910,7 @@ namespace windows
                SystemName,         // machine to find account on
                AccountName,        // account to find
                *Sid,               // SID of interest
-               &cbSid,             // int_size of SID
+               &cbSid,             // i32_size of SID
                ReferencedDomain,   // domain account was found on
                &cchReferencedDomain,
                &peUse

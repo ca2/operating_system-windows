@@ -38,7 +38,7 @@ namespace draw2d_gdiplus
 
       defer_update(pgraphics, 0);
 
-      Gdiplus::Rect int_rectangle;
+      Gdiplus::Rect i32_rectangle;
 
       m_pregion->GetBounds(&rectangle, __graphics(pgraphics)->m_pgraphics);
 
@@ -60,7 +60,7 @@ namespace draw2d_gdiplus
    void region::expand_bounding_box(::double_rectangle * prectangle, ::draw2d::graphics * pgraphics)
    {
 
-      ::int_rectangle rectangle;
+      ::i32_rectangle rectangle;
       ((region*)this)->get_bounding_box(rectangle);
       __copy(prectangle, rectangle);
 
@@ -138,7 +138,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::GraphicsPath path;
 
-      Gdiplus::RectF int_rectangle;
+      Gdiplus::RectF i32_rectangle;
 
       rectangle.X      = (Gdiplus::REAL) m_x1;
       rectangle.Y      = (Gdiplus::REAL) m_y1;

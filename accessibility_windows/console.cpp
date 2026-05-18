@@ -135,7 +135,7 @@ namespace acme_windows
 
       //make cout, wcout, cin, wcin, wcerr, cerr, wclog and clog
 
-      //int_point to console as well
+      //i32_point to console as well
 
       //ios::sync_with_stdio();
 

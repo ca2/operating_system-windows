@@ -14,7 +14,7 @@ namespace production
    public:
 
 
-      //int_size                          m_sizeTotal;
+      //i32_size                          m_sizeTotal;
       int                     m_iStep;
       bool                    m_bLayout;
 
@@ -102,7 +102,7 @@ namespace production
       DECLARE_MESSAGE_HANDLER(on_message_key_up);
 
 
-      virtual ::int_size get_total_size();
+      virtual ::i32_size get_total_size();
 
 
       virtual void on_context_offset(::draw2d::graphics_pointer & pgraphics);

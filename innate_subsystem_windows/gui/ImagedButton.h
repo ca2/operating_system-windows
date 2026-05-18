@@ -55,9 +55,9 @@ namespace innate_subsystem_windows
 
         virtual void subclassWindow(const ::operating_system::window & window) override;
 
-        virtual void _setHICON(HICON hicon, const ::int_size & size);
-        //virtual void setIcon(::innate_subsystem::IconInterface * picon, const ::int_size & size, int flags, int iInitialSize = 1, int iGrow = 1) override;
-       virtual void setIcon(::innate_subsystem::IconInterface * picon, const ::int_size & size) override;
+        virtual void _setHICON(HICON hicon, const ::i32_size & size);
+        //virtual void setIcon(::innate_subsystem::IconInterface * picon, const ::i32_size & size, int flags, int iInitialSize = 1, int iGrow = 1) override;
+       virtual void setIcon(::innate_subsystem::IconInterface * picon, const ::i32_size & size) override;
 
     //private:
 
@@ -91,7 +91,7 @@ namespace innate_subsystem_windows
 
       ::pointer < ::innate_subsystem_windows::Icon > m_picon;
 
-       ::int_size m_size;
+       ::i32_size m_size;
       //int m_iconWidth;
       //int m_iconHeight;
   //  private:

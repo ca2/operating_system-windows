@@ -34,13 +34,13 @@ namespace subsystem_windows
       {
       }
 
-      ::int_point Cursor::getCursorPos() const
+      ::i32_point Cursor::getCursorPos() const
       {
          POINT curPoint;
          GetCursorPos(&curPoint);
          // Correcting point to frame buffer coordinates
          curPoint.x -= GetSystemMetrics(SM_XVIRTUALSCREEN);
          curPoint.y -= GetSystemMetrics(SM_YVIRTUALSCREEN);
-         return ::int_point(curPoint.x, curPoint.y);
+         return ::i32_point(curPoint.x, curPoint.y);
       }
 } // namespace subsystem_windows

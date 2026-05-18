@@ -264,7 +264,7 @@ namespace win32
          void window::_draw(HDC hdc)
          {
 
-            ::int_rectangle r;
+            ::i32_rectangle r;
 
             auto hwnd = (HWND) _HWND();
 
@@ -423,7 +423,7 @@ namespace win32
          //
          //   for (int i = 0; i < m_iButtonCount; i++)
          //   {
-         //      if (m_buttona[i].m_rectangle.contains(int_point(x, y)))
+         //      if (m_buttona[i].m_rectangle.contains(i32_point(x, y)))
          //      {
          //
          //         return m_buttona[i].m_edialogresult;
@@ -451,7 +451,7 @@ namespace win32
 
          //   //   m_pdragmove->m_bDrag = false;
 
-         //   //   int_point pointCursor(x, y);
+         //   //   i32_point pointCursor(x, y);
 
          //   //   pointCursor += m_rectangle.origin();
 
@@ -512,7 +512,7 @@ namespace win32
 
          //   //      m_pdragmove->m_bDrag = true;
 
-         //   //      int_point pointCursor(x, y);
+         //   //      i32_point pointCursor(x, y);
 
          //   //      pointCursor += m_rectangle.origin();
 
@@ -547,7 +547,7 @@ namespace win32
 
          //   //   m_pdragmove->m_bDrag = false;
 
-         //   //   int_point pointCursor(x, y);
+         //   //   i32_point pointCursor(x, y);
 
          //   //   pointCursor += m_rectangle.origin();
 
@@ -607,7 +607,7 @@ namespace win32
 
 
 
-         //::micro::child * window::hit_test(const ::int_point & point, ::user::e_zorder ezorder)
+         //::micro::child * window::hit_test(const ::i32_point & point, ::user::e_zorder ezorder)
          //{
 
          //   return m_pacmeuserinteraction->hit_test(point);
@@ -1025,7 +1025,7 @@ namespace win32
 
                HDC hdc = ::CreateCompatibleDC(hdcWindow);
 
-               ::int_rectangle rectangleX;
+               ::i32_rectangle rectangleX;
 
                ::GetClientRect(hwnd, (LPRECT)&rectangleX);
 
@@ -1319,7 +1319,7 @@ namespace win32
          }
 
 
-         ::int_point window::client_to_screen(const ::int_point & point)
+         ::i32_point window::client_to_screen(const ::i32_point & point)
          {
 
             POINT p{ point.x, point.y };
@@ -1429,7 +1429,7 @@ namespace win32
          //}
 
 
-         void window::set_position(const ::int_point & point)
+         void window::set_position(const ::i32_point & point)
          {
 
             auto pacmeuserinteractionOwner = owner_interaction();
@@ -1469,7 +1469,7 @@ namespace win32
          }
 
 
-         //::int_point window::try_absolute_mouse_position(const ::int_point& point)
+         //::i32_point window::try_absolute_mouse_position(const ::i32_point& point)
          //{
 
          //   return point;
@@ -1477,10 +1477,10 @@ namespace win32
          //}
 
 
-         //::int_rectangle window::get_client_rectangle()
+         //::i32_rectangle window::get_client_rectangle()
          //{
 
-         //   ::int_rectangle rectangle;
+         //   ::i32_rectangle rectangle;
 
          //   ::GetClientRect(hwnd, (LPRECT)&rectangle);
 
@@ -1489,10 +1489,10 @@ namespace win32
          //}
 
 
-         int_rectangle window::get_window_rectangle()
+         i32_rectangle window::get_window_rectangle()
          {
 
-            ::int_rectangle rectangle;
+            ::i32_rectangle rectangle;
 
             auto hwnd = (HWND) _HWND();
 

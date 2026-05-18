@@ -180,7 +180,7 @@ namespace apex_windows
 
       }
 
-      return (DWORD) estatus.as_long_long();
+      return (DWORD) estatus.as_i64();
 
    }
 

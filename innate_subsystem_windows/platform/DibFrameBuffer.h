@@ -44,18 +44,18 @@
 //         virtual ~DibFramebuffer();
 //
 //         virtual void setColor(unsigned int8 reg, unsigned int8 green, unsigned int8 blue);
-//         virtual void fillRect(const ::int_rectangle &rectangleTarget, unsigned int32 color);
+//         virtual void fillRect(const ::i32_rectangle &rectangleTarget, unsigned int32 color);
 //
 //         virtual bool isEqualTo(const Framebuffer * pframebuffer);
 //
-//         virtual bool copyFrom(const ::int_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
+//         virtual bool copyFrom(const ::i32_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
 //                               int srcX, int srcY);
 //         virtual bool copyFrom(const Framebuffer * pframebufferSource,
 //                               int srcX, int srcY);
-//         virtual bool overlay(const ::int_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
+//         virtual bool overlay(const ::i32_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
 //                              int srcX, int srcY, const char *andMask);
-//         virtual void move(const ::int_rectangle &rectangleTarget, const int srcX, const int srcY);
-//         virtual bool cmpFrom(const ::int_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
+//         virtual void move(const ::i32_rectangle &rectangleTarget, const int srcX, const int srcY);
+//         virtual bool cmpFrom(const ::i32_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
 //                              const int srcX, const int srcY);
 //
 //         virtual inline Dimension getDimension() const;
@@ -91,25 +91,25 @@
 //         // DIB section) to the DIB section.
 //         // Note that this function does not copy any transparent windows.
 //         // This function throwing an exception on a failure.
-//         void blitToDibSection(const ::int_rectangle &rect);
+//         void blitToDibSection(const ::i32_rectangle &rect);
 //
 //         // This function copies a block of bits from a source DC (that has been used to create the
 //         // DIB section) to the DIB section.
 //         // Note that this function copies transparent windows too.
 //         // This function throwing an exception on a failure.
-//         void blitTransparentToDibSection(const ::int_rectangle &rect);
+//         void blitTransparentToDibSection(const ::i32_rectangle &rect);
 //
 //         // This function copies a block of bits from the DIB section to the source DC
 //         // (that has been used to create the compatible DIB section).
 //         // Note that this function does not copy any transparent windows.
 //         // This function throwing an exception on a failure.
-//         void blitFromDibSection(const ::int_rectangle &rect);
+//         void blitFromDibSection(const ::i32_rectangle &rect);
 //
 //         // This function copies with strech a block of bits from the DIB section to the source DC
 //         // (that has been used to create the compatible DIB section).
 //         // Note that this function does not copy any transparent windows.
 //         // This function throwing an exception on a failure.
-//         void stretchFromDibSection(const ::int_rectangle &srcRect, const ::int_rectangle &rectangleTarget);
+//         void stretchFromDibSection(const ::i32_rectangle &srcRect, const ::i32_rectangle &rectangleTarget);
 //
 //     private:
 //         // This section to reduce access to some function that have been inherited from the
@@ -118,12 +118,12 @@
 //         virtual bool assignProperties(const Framebuffer * pframebufferSource);
 //         virtual bool clone(const Framebuffer * pframebufferSource);
 //         virtual bool setDimension(const Dimension *newDim);
-//         virtual bool setDimension(const ::int_rectangle &rect);
-//         virtual void setEmptyDimension(const ::int_rectangle &dimByRect);
+//         virtual bool setDimension(const ::i32_rectangle &rect);
+//         virtual void setEmptyDimension(const ::i32_rectangle &dimByRect);
 //         virtual bool setPixelFormat(const PixelFormat *pixelFormat);
 //         virtual void setEmptyPixelFmt(const PixelFormat *pf);
 //         virtual bool setProperties(const Dimension *newDim, const PixelFormat *pixelFormat);
-//         virtual bool setProperties(const ::int_rectangle &dimByRect, const PixelFormat *pixelFormat);
+//         virtual bool setProperties(const ::i32_rectangle &dimByRect, const PixelFormat *pixelFormat);
 //         virtual void setPropertiesWithoutResize(const Dimension *newDim, const PixelFormat *pf);
 //         virtual void setBuffer(void *newBuffer);
 //

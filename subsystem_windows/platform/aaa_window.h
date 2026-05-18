@@ -43,8 +43,8 @@ namespace win32
       //      string m_strTitle;
       //      bool m_bNcActive;
 
-      //      int_rectangle m_rectangle;
-      //      int_rectangle m_rectangleX;
+      //      i32_rectangle m_rectangle;
+      //      i32_rectangle m_rectangleX;
       //
       //      pointer_array < ::micro::child > m_childa;
       //      ::atom m_atomLeftButtonDown;
@@ -89,7 +89,7 @@ namespace win32
 
             //void update_drawing_objects() override;
 
-            //::micro::child * on_hit_test(const ::int_point & point, ::user::e_zorder ezorder) override;
+            //::micro::child * on_hit_test(const ::i32_point & point, ::user::e_zorder ezorder) override;
 
             //void add_child(::micro::child* pchild) override;
 
@@ -113,7 +113,7 @@ namespace win32
 
             virtual LRESULT window_procedure(unsigned int message, wparam wparam, lparam lparam);
 
-            void set_position(const ::int_point& point) override;
+            void set_position(const ::i32_point& point) override;
 
             //void _destroy_window();
 
@@ -125,16 +125,16 @@ namespace win32
             bool _is_window() override;
 
             
-            ::int_point client_to_screen(const ::int_point & point);
+            ::i32_point client_to_screen(const ::i32_point & point);
 
 
-            //::int_point try_absolute_mouse_position(const ::int_point& point) override;
+            //::i32_point try_absolute_mouse_position(const ::i32_point& point) override;
 
 
 
-            //void get_client_rectangle(::int_rectangle& rectangle) override;
+            //void get_client_rectangle(::i32_rectangle& rectangle) override;
 
-            ::int_rectangle get_window_rectangle() override;
+            ::i32_rectangle get_window_rectangle() override;
 
             void set_mouse_capture() override;
 
@@ -147,7 +147,7 @@ namespace win32
             static bool _is_light_theme();
 
 
-            //::int_size get_main_screen_size() override;
+            //::i32_size get_main_screen_size() override;
 
 
             void user_post(const ::procedure& procedure) override;

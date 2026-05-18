@@ -131,7 +131,7 @@
          unsigned int nBalanceID = nID++;
          unsigned int nBalanceLabelID = nID++;
 
-         ::int_rectangle rectangle(0, 0, 0, 0);
+         ::i32_rectangle rectangle(0, 0, 0, 0);
 
          ::pointer<::audio_mixer_user::level_control>plevelcontrol = source->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_level_control();
          if (plevelcontrol == nullptr)

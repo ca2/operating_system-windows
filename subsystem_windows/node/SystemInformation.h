@@ -36,11 +36,11 @@ namespace subsystem_windows
    public:
 
       // get rectangle of all desktop area
-      void getDesktopAllArea(int_rectangle & rectangle) override;
+      void getDesktopAllArea(i32_rectangle & rectangle) override;
 
       // get rectangle of user desktop area
       // without button 'Start' (only primary monitor).
-      bool getDesktopArea(int_rectangle & rectangle) override;
+      bool getDesktopArea(i32_rectangle & rectangle) override;
 
       // return true if StretchBlt is used
       // in provided device

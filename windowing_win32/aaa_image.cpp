@@ -152,7 +152,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::create(const ::int_size& size, ::eobject eobjectCreate, int iGoodStride, bool bPreserve)
+   void image::create(const ::i32_size& size, ::eobject eobjectCreate, int iGoodStride, bool bPreserve)
    {
 
       if (m_pbitmap.is_set()
@@ -191,7 +191,7 @@ namespace draw2d_gdiplus
 
       //destroy();
 
-      //if (!int_size)
+      //if (!i32_size)
       //{
 
       //   return true;
@@ -308,7 +308,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool image::to(::draw2d::graphics * pgraphics, const ::int_point & point, const ::int_size & size, const ::int_point & pointSrc)
+   //bool image::to(::draw2d::graphics * pgraphics, const ::i32_point & point, const ::i32_size & size, const ::i32_point & pointSrc)
    //{
 
    //   return pgraphics->draw(point, size, get_graphics(), pointSrc);
@@ -323,7 +323,7 @@ namespace draw2d_gdiplus
 
    ////   bitmap->CreateCompatibleBitmap(pgraphics, 1, 1);
 
-   ////   const ::int_size & size = bitmap->get_size();
+   ////   const ::i32_size & size = bitmap->get_size();
 
    ////   if (!create(size))
    ////   {
@@ -356,7 +356,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool image::draw(const ::int_point & pointDest, ::image::image * pimage, const ::int_rectangle & rectangleSource)
+   //bool image::draw(const ::i32_point & pointDest, ::image::image * pimage, const ::i32_rectangle & rectangleSource)
    //{
 
    //   return m_pgraphics->draw(pointDest, pimage, rectangleSource) != false;
@@ -364,14 +364,14 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool image::_draw_raw(const ::int_rectangle & rectangleDstParam, ::image::image * pimageSrc, const ::int_point & pointSrcParam)
+   bool image::_draw_raw(const ::i32_rectangle & rectangleDstParam, ::image::image * pimageSrc, const ::i32_point & pointSrcParam)
    {
 
-      ::int_rectangle rectangleTarget(rectangleDstParam);
+      ::i32_rectangle rectangleTarget(rectangleDstParam);
 
-      ::int_point pointSrc(pointSrcParam);
+      ::i32_point pointSrc(pointSrcParam);
 
-      ::int_size size(rectangleTarget.size());
+      ::i32_size size(rectangleTarget.size());
 
       ::image * pimageDst = this;
 
@@ -479,7 +479,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         pimageDst->g()->draw(::double_rectangle(rectangleTarget.top_left(), int_size ), pimageSrc->g(), pointSrc);
+         pimageDst->g()->draw(::double_rectangle(rectangleTarget.top_left(), i32_size ), pimageSrc->g(), pointSrc);
 
       }
 
@@ -488,7 +488,7 @@ namespace draw2d_gdiplus
    }
 
 
- /*  bool image::draw(const ::int_rectangle & rectangleTarget, ::image::image * pimage, const ::int_point & pointSrc)
+ /*  bool image::draw(const ::i32_rectangle & rectangleTarget, ::image::image * pimage, const ::i32_point & pointSrc)
    {
 
       return ::image::draw(rectangleTarget, pimage, pointSrc);

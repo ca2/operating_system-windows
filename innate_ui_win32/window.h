@@ -53,9 +53,9 @@ namespace innate_ui_win32
       void hide() override;
       void show_front(::user::activation_token * puseractivationtoken)override;
 
-      void set_position(const ::int_point & point) override;
-      void set_size(const ::int_size & size) override;
-      void adjust_for_client_size(const ::int_size & size) override;
+      void set_position(const ::i32_point & point) override;
+      void set_size(const ::i32_size & size) override;
+      void adjust_for_client_size(const ::i32_size & size) override;
 
       ::innate_ui_win32::innate_ui * innate_ui();
 

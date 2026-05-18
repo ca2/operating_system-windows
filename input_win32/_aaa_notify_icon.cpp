@@ -95,7 +95,7 @@ namespace windowing_win32
 
       m_nid.hWnd = as_hwnd(oswindow());
       m_nid.uID = as_hash32((const ::string &) atom);
-      m_nid.hIcon = (HICON) picon->get_os_data(::int_size(16, 16));
+      m_nid.hIcon = (HICON) picon->get_os_data(::i32_size(16, 16));
       m_nid.uFlags = NIF_ICON | NIF_MESSAGE;
       m_nid.uCallbackMessage = ::user::e_message_notify_icon;
 
@@ -133,7 +133,7 @@ namespace windowing_win32
 
       }
 
-      m_nid.hIcon = (HICON) picon->get_os_data(::int_size(16, 16));
+      m_nid.hIcon = (HICON) picon->get_os_data(::i32_size(16, 16));
 
       m_nid.uFlags = NIF_ICON;
 

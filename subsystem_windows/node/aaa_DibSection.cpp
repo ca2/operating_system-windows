@@ -26,7 +26,7 @@
 #include "DibSection.h"
 #include "subsystem/node/SystemException.h"
 
-DibSection::DibSection(const PixelFormat & pf, const ::int_size & dim, HWND compatibleWin)
+DibSection::DibSection(const PixelFormat & pf, const ::i32_size & dim, HWND compatibleWin)
 : m_isOwnTargetDC(false),
   m_targetDC(0),
   m_memDC(0),
@@ -64,27 +64,27 @@ void *DibSection::getBuffer()
   return m_buffer;
 }
 
-void DibSection::blitToDibSection(const ::int_rectangle &  rect)
+void DibSection::blitToDibSection(const ::i32_rectangle &  rect)
 {
   blitToDibSection(rect, SRCCOPY);
 }
 
-void DibSection::blitTransparentToDibSection(const ::int_rectangle &  rect)
+void DibSection::blitTransparentToDibSection(const ::i32_rectangle &  rect)
 {
   blitToDibSection(rect, SRCCOPY | CAPTUREBLT);
 }
 
-void DibSection::blitFromDibSection(const ::int_rectangle &  rect)
+void DibSection::blitFromDibSection(const ::i32_rectangle &  rect)
 {
   blitFromDibSection(rect, SRCCOPY);
 }
 
-void DibSection::stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & rectangleTarget)
+void DibSection::stretchFromDibSection(const ::i32_rectangle &  srcRect,const ::i32_rectangle & rectangleTarget)
 {
   stretchFromDibSection(srcRect, rectangleTarget, SRCCOPY);
 }
 
-void DibSection::blitToDibSection(const ::int_rectangle &  rect, DWORD flags)
+void DibSection::blitToDibSection(const ::i32_rectangle &  rect, DWORD flags)
 {
   if (BitBlt(m_memDC, rect.left, rect.top, rect.width(), rect.height(),
              m_targetDC, rect.left + m_srcOffsetX,
@@ -93,7 +93,7 @@ void DibSection::blitToDibSection(const ::int_rectangle &  rect, DWORD flags)
   }
 }
 
-void DibSection::blitFromDibSection(const ::int_rectangle &  rect, DWORD flags)
+void DibSection::blitFromDibSection(const ::i32_rectangle &  rect, DWORD flags)
 {
   if (BitBlt(m_targetDC, rect.left + m_srcOffsetX, rect.top + m_srcOffsetY,
              rect.width(), rect.height(),
@@ -102,7 +102,7 @@ void DibSection::blitFromDibSection(const ::int_rectangle &  rect, DWORD flags)
   }
 }
 
-void DibSection::stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & rectangleTarget, DWORD flags)
+void DibSection::stretchFromDibSection(const ::i32_rectangle &  srcRect,const ::i32_rectangle & rectangleTarget, DWORD flags)
 {
   SetStretchBltMode(m_targetDC, HALFTONE);
   if (StretchBlt(m_targetDC, srcRect.left + m_srcOffsetX, srcRect.top + m_srcOffsetY,
@@ -113,7 +113,7 @@ void DibSection::stretchFromDibSection(const ::int_rectangle &  srcRect,const ::
   }
 }
 
-void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const PixelFormat & pf, const ::int_size & dim)
+void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const PixelFormat & pf, const ::i32_size & dim)
 {
   if (pf.bitsPerPixel == 8) {
     Screen::Palette8bitBMI *paletteBMI = reinterpret_cast<Screen::Palette8bitBMI *>(pBmi);
@@ -146,7 +146,7 @@ void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const PixelFormat & pf, const 
   pBmi->bmiHeader.biHeight = -dim.cy;
 }
 
-void DibSection::openDIBSection(const PixelFormat & pf, const ::int_size & dim, HWND compatibleWin)
+void DibSection::openDIBSection(const PixelFormat & pf, const ::i32_size & dim, HWND compatibleWin)
 {
   m_targetDC = GetDC(compatibleWin);
   m_isOwnTargetDC = true;
@@ -157,7 +157,7 @@ void DibSection::openDIBSection(const PixelFormat & pf, const ::int_size & dim, 
     // In this special case is needed to store offset of the desktop, because coordinates
     // of the top level corner may be non zero.
     m_screen.update();
-    ::int_rectangle deskRect = m_screen.getDesktopRect();
+    ::i32_rectangle deskRect = m_screen.getDesktopRect();
     m_srcOffsetX = deskRect.left;
     m_srcOffsetY = deskRect.top;
   }

@@ -20,15 +20,15 @@
 #include <gdiplus.h>
 #endif
 
-CLASS_DECL_AURA::int_point __get_bottom_right();
-CLASS_DECL_AURA void __set_bottom_right(const ::int_point & pointBottomRight);
+CLASS_DECL_AURA::i32_point __get_bottom_right();
+CLASS_DECL_AURA void __set_bottom_right(const ::i32_point & pointBottomRight);
 
 
 namespace windowing_win32
 {
 
 
-   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::int_size & size, int * piScan, ::color32_t ** ppdata);
+   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::i32_size & size, int * piScan, ::color32_t ** ppdata);
 
 
    buffer::layered_window_buffer::layered_window_buffer()
@@ -142,7 +142,7 @@ namespace windowing_win32
    }
 
 
-   bool buffer::create_window_device_context(const ::int_size & size, int iStrideParam)
+   bool buffer::create_window_device_context(const ::i32_size & size, int iStrideParam)
    {
 
       if (m_hdcScreen != NULL && m_pwindow)
@@ -468,7 +468,7 @@ namespace windowing_win32
    }
 
 
-   ::int_point g_pointLastBottomRight;
+   ::i32_point g_pointLastBottomRight;
 
 
    bool buffer::on_update_screen(::graphics::buffer_item * pbufferitem)
@@ -641,7 +641,7 @@ namespace windowing_win32
             //else
             //{
 
-            ::int_point pointSrc = { 0 };
+            ::i32_point pointSrc = { 0 };
 
             BLENDFUNCTION blendPixelFunction = { AC_SRC_OVER, 0, 255, AC_SRC_ALPHA };
 
@@ -857,7 +857,7 @@ namespace windowing_win32
 
                //string str;
 
-               //int_rectangle rectangleDrawing(point, size);
+               //i32_rectangle rectangleDrawing(point, size);
 
 
                   //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
@@ -879,7 +879,7 @@ namespace windowing_win32
                      if (p.is_set())
                      {
 
-                        auto r = ::int_rectangle(point, size);
+                        auto r = ::i32_rectangle(point, size);
 
                         auto Δ = r.bottom_right() - p;
 
@@ -937,7 +937,7 @@ namespace windowing_win32
 
                //}
 
-               ::int_point pointBottomRight = point + size;
+               ::i32_point pointBottomRight = point + size;
 
                if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
                {
@@ -989,11 +989,11 @@ namespace windowing_win32
             //
             //               }
 
-                           //::int_rectangle r3;
+                           //::i32_rectangle r3;
 
                            //GetWindowRect(m_pacmewindowingwindow, &r3);
 
-                           //::int_rectangle r4;
+                           //::i32_rectangle r4;
 
                            //GetClientRect(m_pacmewindowingwindow, &r4);
 

@@ -143,12 +143,12 @@ namespace draw2d_gdi
 
       // convert nPointSize to logical units based on pgraphics
       LOGFONTW logFont = *lpLogFont;
-      ::int_point point;
-      // 72 points/inch, 10 decipoints/int_point
+      ::i32_point point;
+      // 72 points/inch, 10 decipoints/i32_point
       point.y = ::MulDiv(::GetDeviceCaps(hDC, LOGPIXELSY), logFont.lfHeight, 720);
       point.x = 0;
       ::DPtoLP(hDC, &point, 1);
-      ::int_point pointOrg;
+      ::i32_point pointOrg;
       ::DPtoLP(hDC, pointOrg, 1);
       logFont.lfHeight = -abs(point.y - pointOrg.y);
 

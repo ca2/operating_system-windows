@@ -31,20 +31,20 @@
 
 namespace innate_subsystem_windows
 {
-   // BitmapGraphics::BitmapGraphics(DeviceContext *complatibleDC, const ::int_size & size)
+   // BitmapGraphics::BitmapGraphics(DeviceContext *complatibleDC, const ::i32_size & size)
    // : Graphics(complatibleDC), m_isPainting(false)
    // {
    //    m_bitmap = new Bitmap(complatibleDC->m_dc, width, height);
    //    m_dc = new DeviceContext(complatibleDC);
    // }
 
-   // BitmapGraphics::BitmapGraphics(DeviceContext* pdevicecontextCompatible, const int_size& size)
+   // BitmapGraphics::BitmapGraphics(DeviceContext* pdevicecontextCompatible, const i32_size& size)
    // {
    //
    //
    // }
 
-   // BitmapGraphics::BitmapGraphics(DeviceContext* pdevicecontextCompatible, const int_size& size)
+   // BitmapGraphics::BitmapGraphics(DeviceContext* pdevicecontextCompatible, const i32_size& size)
    // {
    //
    //
@@ -65,7 +65,7 @@ namespace innate_subsystem_windows
       //delete m_dc;
    }
 
-   void BitmapGraphics::initialize_bitmap_graphics(::innate_subsystem::DeviceContextInterface *pdevicecontextCompatible, const ::int_size & size)
+   void BitmapGraphics::initialize_bitmap_graphics(::innate_subsystem::DeviceContextInterface *pdevicecontextCompatible, const ::i32_size & size)
 //   : Graphics(complatibleDC), m_isPainting(false)
    {
       constructø(m_pbitmap);

@@ -1341,7 +1341,7 @@ namespace acme_windows
    //   // strip attribute of NORMAL bit, our API doesn't have a "normal" bit.
    //   rStatus.m_attribute = (unsigned char)(findFileData.dwFileAttributes & ~FILE_ATTRIBUTE_NORMAL);
 
-   //   // get just the low unsigned int of the file int_size
+   //   // get just the low unsigned int of the file i32_size
    //   ASSERT(findFileData.nFileSizeHigh == 0);
    //   rStatus.m_size = (int)findFileData.nFileSizeLow;
 

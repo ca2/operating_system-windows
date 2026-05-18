@@ -36,7 +36,7 @@
 
 typedef struct {
   uint32_t tag;         // information identifier
-  uint32_t size;        // int_size (including header)
+  uint32_t size;        // i32_size (including header)
   uint32_t atom;          // cddb atom
   uint32_t flags;
 } CDCACHEHEADER, FAR *LPCDCACHEHEADER;

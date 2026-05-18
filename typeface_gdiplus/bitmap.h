@@ -138,8 +138,8 @@ namespace typeface_gdiplus
 #endif
 
 
-      ::int_size               m_sizeOut;
-      ::int_size               m_sizeIn;
+      ::i32_size               m_sizeOut;
+      ::i32_size               m_sizeIn;
 
 
       bitmap();
@@ -174,7 +174,7 @@ namespace typeface_gdiplus
       void CreateCompatibleBitmap(::draw2d::graphics * pgraphics, int nWidth, int nHeight);
       void CreateDiscardableBitmap(::draw2d::graphics * pgraphics, int nWidth, int nHeight);
       
-      void create_bitmap(::draw2d::graphics * pgraphics, const ::int_size& size, void** ppcolorref, int* piScan) override;
+      void create_bitmap(::draw2d::graphics * pgraphics, const ::i32_size& size, void** ppcolorref, int* piScan) override;
       void CreateDIBitmap(::draw2d::graphics * pgraphics, int cx, int cy, unsigned int flInit, const void* pjBits, unsigned int iUsage) override;
 
 
@@ -183,8 +183,8 @@ namespace typeface_gdiplus
 
       unsigned int SetBitmapBits(unsigned int dwCount, const void * lpBits);
       unsigned int GetBitmapBits(unsigned int dwCount, LPVOID lpBits) const;
-      ::int_size SetBitmapDimension(int nWidth, int nHeight);
-      ::int_size GetBitmapDimension() const;
+      ::i32_size SetBitmapDimension(int nWidth, int nHeight);
+      ::i32_size GetBitmapDimension() const;
 
       // void dump(dump_context & dumpcontext) const override;
 

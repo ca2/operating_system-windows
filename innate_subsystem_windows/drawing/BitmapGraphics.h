@@ -43,13 +43,13 @@ namespace innate_subsystem_windows
 
       // Creates BitmapGraphics object with bitmap complatible with specified dc and
       // with specified size.
-      //BitmapGraphics(DeviceContext *pdevicecontextCompatible, const ::int_size & size);
+      //BitmapGraphics(DeviceContext *pdevicecontextCompatible, const ::i32_size & size);
       BitmapGraphics();
       // Destroys bitmap and graphics object.
       ~BitmapGraphics() override;
 
 
-      void initialize_bitmap_graphics(innate_subsystem::DeviceContextInterface* pdevicecontextCompatible, const int_size& size) override;
+      void initialize_bitmap_graphics(innate_subsystem::DeviceContextInterface* pdevicecontextCompatible, const i32_size& size) override;
 
       // Returns target bitmap that we paint.
       ::innate_subsystem::BitmapInterface *getBitmap() override;

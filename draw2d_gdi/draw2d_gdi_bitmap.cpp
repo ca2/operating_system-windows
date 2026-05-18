@@ -95,10 +95,10 @@ namespace draw2d_gdi
    }
 
 
-   ::int_size bitmap::SetBitmapDimension(int nWidth,int nHeight)
+   ::i32_size bitmap::SetBitmapDimension(int nWidth,int nHeight)
    {
 
-      ::int_size size;
+      ::i32_size size;
 
       VERIFY(::SetBitmapDimensionEx((HBITMAP)get_handle(),nWidth,nHeight,&size));
 
@@ -107,10 +107,10 @@ namespace draw2d_gdi
    }
 
 
-   ::int_size bitmap::GetBitmapDimension() const
+   ::i32_size bitmap::GetBitmapDimension() const
    {
 
-      ::int_size size;
+      ::i32_size size;
 
       VERIFY(::GetBitmapDimensionEx((HBITMAP)get_handle(),&size));
 

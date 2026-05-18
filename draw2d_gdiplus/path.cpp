@@ -61,7 +61,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         throw ::exception(error_failed, "path does not have last int_point");
+         throw ::exception(error_failed, "path does not have last i32_point");
 
       }
 
@@ -596,7 +596,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::int_rectangle & rectangleParam, const ::scoped_string & scopedstrText, ::write_text::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext)
+   bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::i32_rectangle & rectangleParam, const ::scoped_string & scopedstrText, ::write_text::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
       ::double_rectangle rectangle(rectangleParam);

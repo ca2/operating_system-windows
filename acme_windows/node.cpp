@@ -1513,7 +1513,7 @@ namespace acme_windows
             if (GetModuleFileNameExW(hProcess, hmods[i], (WCHAR*)memory.data(), (DWORD)(memory.size() / sizeof(WCHAR))))
             {
 
-               if (case_insensitive_string_order((const wchar_t*)memory.data(), wstrLibrary) == 0)
+               if (case_insensitive_string_compare((const wchar_t*)memory.data(), wstrLibrary) == 0)
                {
 
                   bFound = true;
@@ -5534,7 +5534,7 @@ namespace acme_windows
    }
 
    
-   ::int_size node::get_main_monitor_size()
+   ::i32_size node::get_main_monitor_size()
    {
    
       auto wDisplay = ::GetSystemMetrics(SM_CXSCREEN);

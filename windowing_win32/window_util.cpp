@@ -167,7 +167,7 @@ namespace windows
    }
    }
 
-   void window_util::ExcludeChildren(HWND hwnd, HRGN hrgn, const int_point & pointOffset)
+   void window_util::ExcludeChildren(HWND hwnd, HRGN hrgn, const i32_point & pointOffset)
    {
 
 
@@ -178,7 +178,7 @@ namespace windows
    for(int i = 0; i < hwnda.get_size(); i++)
    {
    HWND hwndChild = hwnda[i];
-   ::int_rectangle rectangleChild;
+   ::i32_rectangle rectangleChild;
    ::this->rectangle(hwndChild, rectangleChild);
    ::_001ClientToScreen(hwndChild, &rectangleChild.top_left());
    ::_001ClientToScreen(hwndChild, &rectangleChild.bottom_right());
@@ -195,9 +195,9 @@ namespace windows
 
    }*/
 
-   /*HRGN window_util::GetAClipRgn(HWND hwnd, const int_point & pointOffset, bool bExludeChildren)
+   /*HRGN window_util::GetAClipRgn(HWND hwnd, const i32_point & pointOffset, bool bExludeChildren)
    {
-   ::int_rectangle rectangleWnd;
+   ::i32_rectangle rectangleWnd;
    ::this->rectangle(hwnd, rectangleWnd);
    rectangleWnd.offset(pointOffset);
    HRGN hrgn = ::create_rect(rectangleWnd);
@@ -510,7 +510,7 @@ namespace windows
    void window_util::ContraintPosToParent(HWND hwnd)
    {
       //#if !defined(UNIVERSAL_WINDOWS) && !defined(APPLE_IOS)
-      //      ::int_rectangle rectangleMajor;
+      //      ::i32_rectangle rectangleMajor;
       //      HWND hwndParent = ::get_parent(hwnd);
       //      if(hwndParent == nullptr)
       //      {
@@ -534,7 +534,7 @@ namespace windows
       //         ::this->rectangle(hwndParent, rectangleMajor);
       //      }
       //
-      //      ::int_rectangle rectangle;
+      //      ::i32_rectangle rectangle;
       //      ::this->rectangle(hwnd, rectangle);
       //
       //#ifdef WINDOWS_DESKTOP
@@ -836,7 +836,7 @@ namespace windows
    }
    }*/
 
-   //   void window_util::ExcludeChildren(HWND hwnd, HRGN hrgn, const int_point & pointOffset)
+   //   void window_util::ExcludeChildren(HWND hwnd, HRGN hrgn, const i32_point & pointOffset)
    //   {
    //
    //
@@ -851,7 +851,7 @@ namespace windows
    //
    //         HWND hwndChild = hwnda[i];
    //
-   //         ::int_rectangle rectangleChild;
+   //         ::i32_rectangle rectangleChild;
    //
    //         ::GetClientRect(hwndChild, rectangleChild);
    //
@@ -882,12 +882,12 @@ namespace windows
    //
    //   }
 
-   //   HRGN window_util::GetAClipRgn(HWND hwnd, const int_point & pointOffset, bool bExludeChildren)
+   //   HRGN window_util::GetAClipRgn(HWND hwnd, const i32_point & pointOffset, bool bExludeChildren)
    //   {
    //
    //#ifdef WINDOWS_DESKTOP
    //
-   //      ::int_rectangle rectangleWnd;
+   //      ::i32_rectangle rectangleWnd;
    //
    //      ::GetClientRect(hwnd, rectangleWnd);
    //

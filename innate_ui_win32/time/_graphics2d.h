@@ -33,9 +33,9 @@ template <  typename L, typename T, typename W, typename H >
 inline auto _001SetRectDim(Gdiplus::RectF * p, L l, T t, W w, H h) { return set_XYWH_dim(p, l, t, w, h); }
 
 
-inline auto copy(Gdiplus::Rect * prectTarget, const ::int_rectangle * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
+inline auto copy(Gdiplus::Rect * prectTarget, const ::i32_rectangle * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
 inline auto copy(Gdiplus::Rect * prectTarget, const ::double_rectangle * prectSource) { return _001CopyRect(prectTarget, prectSource); }
-inline auto copy(Gdiplus::RectF * prectTarget, const ::int_rectangle * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
+inline auto copy(Gdiplus::RectF * prectTarget, const ::i32_rectangle * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
 inline auto copy(Gdiplus::RectF * prectTarget, const ::double_rectangle * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
 
 
@@ -48,7 +48,7 @@ inline void copy(Gdiplus::Point * ppoint1, const ::double_point * ppoint2)
 }
 
 
-inline void copy(Gdiplus::Point * ppoint1, const ::int_point * ppoint2)
+inline void copy(Gdiplus::Point * ppoint1, const ::i32_point * ppoint2)
 {
 
    ppoint1->X = (int)ppoint2->x;

@@ -579,7 +579,7 @@ namespace uac_tools
       ::SendMessage(oswindowShell,uVEMsg,0,0);
 
       ////////////////////////////////////////////////////////
-      // At this int_point our hook procedure has been executed!
+      // At this i32_point our hook procedure has been executed!
 
       if(phProcess)
          *phProcess = hVE_Process;

@@ -38,9 +38,9 @@ namespace innate_subsystem_windows
    {
    public:
       // // Creates empty bitmap with specified size.
-      // Bitmap(const ::int_size & size);
+      // Bitmap(const ::i32_size & size);
       // // Creates compatible with dc bitmap with specified size.
-      // Bitmap(HDC dc, const ::int_size & size);
+      // Bitmap(HDC dc, const ::i32_size & size);
       // // Creates bitmap from HBITMAP object.
       // Bitmap(HBITMAP bitmap);
       // // Destroys bitmap object.
@@ -54,15 +54,15 @@ namespace innate_subsystem_windows
 
 
       // Creates empty bitmap with specified size.
-      void initialize_bitmap(const int_size& size) override;
+      void initialize_bitmap(const i32_size& size) override;
       // Creates compatible with dc bitmap with specified size.
-      void initialize_bitmap(innate_subsystem::DeviceContextInterface* pdevicecontext, const int_size& size) override;
+      void initialize_bitmap(innate_subsystem::DeviceContextInterface* pdevicecontext, const i32_size& size) override;
       // Creates bitmap from HBITMAP object.
       void initialize_bitmap(BitmapInterface* pbitmap) override;
       virtual void _initialize_bitmap(HBITMAP hbitmap, HPALETTE hpalette);
 
       // Returns bitmap width.
-      int_size getSize() const override;
+      i32_size getSize() const override;
       // Returns bitmap height.
       //int getHeight() const;
 

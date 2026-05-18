@@ -29,7 +29,7 @@
 namespace subsystem_windows
 {
 
-   void SystemInformation::getDesktopAllArea(int_rectangle & rectangle)
+   void SystemInformation::getDesktopAllArea(i32_rectangle & rectangle)
    {
       RECT rc;
       if (GetClientRect(GetDesktopWindow(), &rc))
@@ -38,7 +38,7 @@ namespace subsystem_windows
       }
    }
 
-   bool SystemInformation::getDesktopArea(int_rectangle & rectangle)
+   bool SystemInformation::getDesktopArea(i32_rectangle & rectangle)
    {
       RECT rc;
       bool bOk = !!SystemParametersInfo(SPI_GETWORKAREA, 0, &rc, 0);

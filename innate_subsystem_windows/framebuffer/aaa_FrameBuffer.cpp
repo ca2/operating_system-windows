@@ -56,7 +56,7 @@ namespace innate_subsystem_windows
          return false;
       }
 
-      ::int_rectangle fbRect(m_dimension);
+      ::i32_rectangle fbRect(m_dimension);
       copyFrom(fbRect, pframebufferSource, fbRect.left, fbRect.top);
 
       return true;
@@ -81,9 +81,9 @@ namespace innate_subsystem_windows
       }
    }
 
-   void Framebuffer::fillRect(const ::int_rectangle & rectangleTarget, unsigned int color)
+   void Framebuffer::fillRect(const ::i32_rectangle & rectangleTarget, unsigned int color)
    {
-      ::int_rectangle clipRect = ::int_rectangle(m_dimension).intersection(rectangleTarget);
+      ::i32_rectangle clipRect = ::i32_rectangle(m_dimension).intersection(rectangleTarget);
 
       int pixelSize = getBytesPerPixel();
       size_t sizeLineFb = getBytesPerRow();
@@ -109,35 +109,35 @@ namespace innate_subsystem_windows
              m_pixelformat == pframebuffer->getPixelFormat();
    }
 
-   void Framebuffer::clipRect(const ::int_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
+   void Framebuffer::clipRect(const ::i32_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
                               const int srcX, const int srcY,
-                              ::int_rectangle & rectangleTargetClipped, ::int_rectangle & rectangleSourceClipped)
+                              ::i32_rectangle & rectangleTargetClipped, ::i32_rectangle & rectangleSourceClipped)
    {
-      ::int_rectangle srcBufferRect(pframebufferSource->getDimension());
+      ::i32_rectangle srcBufferRect(pframebufferSource->getDimension());
       clipRect(rectangleTarget, srcBufferRect, srcX, srcY, rectangleTargetClipped, rectangleSourceClipped);
    }
 
-   void Framebuffer::clipRect(const ::int_rectangle & rectangleTarget, const ::int_rectangle & srcBufferRect,
+   void Framebuffer::clipRect(const ::i32_rectangle & rectangleTarget, const ::i32_rectangle & srcBufferRect,
                               const int srcX, const int srcY,
-                              ::int_rectangle & rectangleTargetClipped, ::int_rectangle & rectangleSourceClipped)
+                              ::i32_rectangle & rectangleTargetClipped, ::i32_rectangle & rectangleSourceClipped)
    {
-      ::int_rectangle dstBufferRect(m_dimension);
+      ::i32_rectangle dstBufferRect(m_dimension);
 
       // Building srcRect
-      ::int_rectangle srcRect(srcX, srcY, srcX + rectangleTarget.width(), srcY + rectangleTarget.height());
+      ::i32_rectangle srcRect(srcX, srcY, srcX + rectangleTarget.width(), srcY + rectangleTarget.height());
 
       // Finding common area between the rectangleTarget, srcRect and the Framebuffers
-      ::int_rectangle dstRectFB = dstBufferRect.intersection(rectangleTarget);
-      ::int_rectangle srcRectFB = srcBufferRect.intersection(srcRect);
+      ::i32_rectangle dstRectFB = dstBufferRect.intersection(rectangleTarget);
+      ::i32_rectangle srcRectFB = srcBufferRect.intersection(srcRect);
 
       // Finding common area between the dstRectFB and the srcRectFB
-      ::int_rectangle dstCommonArea(dstRectFB);
-      ::int_rectangle srcCommonArea(srcRectFB);
+      ::i32_rectangle dstCommonArea(dstRectFB);
+      ::i32_rectangle srcCommonArea(srcRectFB);
       // Move to common place (left = 0, top = 0)
       dstCommonArea.offset(-rectangleTarget.left, -rectangleTarget.top);
       srcCommonArea.offset(-srcRect.left, -srcRect.top);
 
-      ::int_rectangle commonRect(dstCommonArea.intersection(srcCommonArea));
+      ::i32_rectangle commonRect(dstCommonArea.intersection(srcCommonArea));
 
       // Moving commonRect to destination coordinates and source
       rectangleTargetClipped->set(commonRect);
@@ -147,7 +147,7 @@ namespace innate_subsystem_windows
       rectangleSourceClipped->offset(srcRect.left, srcRect.top);
    }
 
-   bool Framebuffer::overlay(const ::int_rectangle & rectangleTarget,
+   bool Framebuffer::overlay(const ::i32_rectangle & rectangleTarget,
                              const ::innate_subsystem::PixelFormat &pframebufferSource,
                              int srcX, int srcY,
                              const char *andMask)
@@ -167,12 +167,12 @@ namespace innate_subsystem_windows
       return false;
    }
 
-   template<class PIXEL_T> bool Framebuffer::overlayT(const ::int_rectangle & rectangleTarget,
+   template<class PIXEL_T> bool Framebuffer::overlayT(const ::i32_rectangle & rectangleTarget,
                                                       const ::innate_subsystem::PixelFormat &pframebufferSource,
                                                       int srcX, int srcY,
                                                       const char *andMask)
    {
-      ::int_rectangle rectangleSourceClipped, rectangleTargetClipped;
+      ::i32_rectangle rectangleSourceClipped, rectangleTargetClipped;
 
       clipRect(rectangleTarget, pframebufferSource, srcX, srcY, &rectangleTargetClipped, &rectangleSourceClipped);
       if (rectangleTargetClipped.area() <= 0 || rectangleSourceClipped.area() <= 0) {
@@ -198,14 +198,14 @@ namespace innate_subsystem_windows
       return true;
    }
 
-   bool Framebuffer::copyFrom(const ::int_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
+   bool Framebuffer::copyFrom(const ::i32_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
                               int srcX, int srcY)
    {
       if (m_pixelformat != pframebufferSource->getPixelFormat()) {
          return false;
       }
 
-      ::int_rectangle rectangleSourceClipped, rectangleTargetClipped;
+      ::i32_rectangle rectangleSourceClipped, rectangleTargetClipped;
 
       clipRect(rectangleTarget, pframebufferSource, srcX, srcY, &rectangleTargetClipped, &rectangleSourceClipped);
       if (rectangleTargetClipped.area() <= 0 || rectangleSourceClipped.area() <= 0) {
@@ -241,7 +241,7 @@ namespace innate_subsystem_windows
       return copyFrom(m_dimension, pframebufferSource, srcX, srcY);
    }
 
-   bool Framebuffer::copyFromRotated90(const ::int_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
+   bool Framebuffer::copyFromRotated90(const ::i32_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
                                        int srcX, int srcY)
    {
       if (m_pixelformat.bitsPerPixel != 32 || m_pixelformat != pframebufferSource->getPixelFormat())
@@ -254,11 +254,11 @@ namespace innate_subsystem_windows
       int dstStrideBytesByX = m_dimension.cx * pixelSize;
       int srcStrideBytes = pframebufferSource->getDimension().cx * pixelSize;
 
-      ::int_rectangle rectangleSourceClipped, rectangleTargetClipped;
+      ::i32_rectangle rectangleSourceClipped, rectangleTargetClipped;
 
-      ::int_size srcBuffTransposedDim = pframebufferSource->getDimension().transposed();
-      ::int_rectangle srcBuffTransposedRect = srcBuffTransposedDim;
-      ::int_rectangle srcRotatedCoordinates(srcX, srcY, srcX + rectangleTarget.height(), srcY + rectangleTarget.width());
+      ::i32_size srcBuffTransposedDim = pframebufferSource->getDimension().transposed();
+      ::i32_rectangle srcBuffTransposedRect = srcBuffTransposedDim;
+      ::i32_rectangle srcRotatedCoordinates(srcX, srcY, srcX + rectangleTarget.height(), srcY + rectangleTarget.width());
       srcRotatedCoordinates.rotateOn90InsideDimension(pframebufferSource->getDimension().cy);
       int srcXinDstRotation = srcRotatedCoordinates.left;
       int srcYinDstRotation = srcRotatedCoordinates.top;
@@ -291,7 +291,7 @@ namespace innate_subsystem_windows
       return true;
    }
 
-   bool Framebuffer::copyFromRotated180(const ::int_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
+   bool Framebuffer::copyFromRotated180(const ::i32_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
                                        int srcX, int srcY)
    {
       if (m_pixelformat.bitsPerPixel != 32 || m_pixelformat != pframebufferSource->getPixelFormat())
@@ -304,11 +304,11 @@ namespace innate_subsystem_windows
       int dstStrideBytesByX = m_dimension.cx * pixelSize;
       int srcStrideBytes = pframebufferSource->getDimension().cx * pixelSize;
 
-      ::int_rectangle rectangleSourceClipped, rectangleTargetClipped;
+      ::i32_rectangle rectangleSourceClipped, rectangleTargetClipped;
 
-      ::int_size srcBuffTransposedDim = pframebufferSource->getDimension();
-      ::int_rectangle srcBuffTransposedRect = srcBuffTransposedDim;
-      ::int_rectangle srcRotatedCoordinates(srcX, srcY, srcX + rectangleTarget.width(), srcY + rectangleTarget.height());
+      ::i32_size srcBuffTransposedDim = pframebufferSource->getDimension();
+      ::i32_rectangle srcBuffTransposedRect = srcBuffTransposedDim;
+      ::i32_rectangle srcRotatedCoordinates(srcX, srcY, srcX + rectangleTarget.width(), srcY + rectangleTarget.height());
       srcRotatedCoordinates.rotateOn180InsideDimension(pframebufferSource->getDimension().cx,
                                                        pframebufferSource->getDimension().cy);
       int srcXinDstRotation = srcRotatedCoordinates.left;
@@ -343,7 +343,7 @@ namespace innate_subsystem_windows
       return true;
    }
 
-   bool Framebuffer::copyFromRotated270(const ::int_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
+   bool Framebuffer::copyFromRotated270(const ::i32_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
                                        int srcX, int srcY)
    {
       if (m_pixelformat.bitsPerPixel != 32 || m_pixelformat != pframebufferSource->getPixelFormat())
@@ -356,11 +356,11 @@ namespace innate_subsystem_windows
       int dstStrideBytesByX = m_dimension.cx * pixelSize;
       int srcStrideBytes = pframebufferSource->getDimension().cx * pixelSize;
 
-      ::int_rectangle rectangleSourceClipped, rectangleTargetClipped;
+      ::i32_rectangle rectangleSourceClipped, rectangleTargetClipped;
 
-      ::int_size srcBuffTransposedDim = pframebufferSource->getDimension().transposed();
-      ::int_rectangle srcBuffTransposedRect = srcBuffTransposedDim;
-      ::int_rectangle srcRotatedCoordinates(srcX, srcY, srcX + rectangleTarget.height(), srcY + rectangleTarget.width());
+      ::i32_size srcBuffTransposedDim = pframebufferSource->getDimension().transposed();
+      ::i32_rectangle srcBuffTransposedRect = srcBuffTransposedDim;
+      ::i32_rectangle srcRotatedCoordinates(srcX, srcY, srcX + rectangleTarget.height(), srcY + rectangleTarget.width());
       srcRotatedCoordinates.rotateOn270InsideDimension(pframebufferSource->getDimension().cx);
       int srcXinDstRotation = srcRotatedCoordinates.left;
       int srcYinDstRotation = srcRotatedCoordinates.top;
@@ -393,7 +393,7 @@ namespace innate_subsystem_windows
       return true;
    }
 
-   bool Framebuffer::cmpFrom(const ::int_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
+   bool Framebuffer::cmpFrom(const ::i32_rectangle & rectangleTarget, const ::innate_subsystem::PixelFormat &pframebufferSource,
                              const int srcX, const int srcY)
    {
       if (m_pixelformat != pframebufferSource->getPixelFormat())
@@ -401,7 +401,7 @@ namespace innate_subsystem_windows
          return false;
       }
 
-      ::int_rectangle rectangleSourceClipped, rectangleTargetClipped;
+      ::i32_rectangle rectangleSourceClipped, rectangleTargetClipped;
 
       clipRect(rectangleTarget, pframebufferSource, srcX, srcY, &rectangleTargetClipped, &rectangleSourceClipped);
       if (rectangleTargetClipped.area() <= 0 || rectangleSourceClipped.area() <= 0) {
@@ -433,9 +433,9 @@ namespace innate_subsystem_windows
       return true;
    }
 
-   void Framebuffer::move(const ::int_rectangle & rectangleTarget, const int srcX, const int srcY)
+   void Framebuffer::move(const ::i32_rectangle & rectangleTarget, const int srcX, const int srcY)
    {
-      ::int_rectangle rectangleSourceClipped, rectangleTargetClipped;
+      ::i32_rectangle rectangleSourceClipped, rectangleTargetClipped;
 
       clipRect(rectangleTarget, this, srcX, srcY, &rectangleTargetClipped, &rectangleSourceClipped);
       if (rectangleTargetClipped.area() <= 0 || rectangleSourceClipped.area() <= 0) {
@@ -481,13 +481,13 @@ namespace innate_subsystem_windows
       return resizeBuffer();
    }
 
-   bool Framebuffer::setDimension(const ::int_size & newDim)
+   bool Framebuffer::setDimension(const ::i32_size & newDim)
    {
       m_dimension = newDim;
       return resizeBuffer();
    }
 
-   void Framebuffer::setEmptyDimension(const ::int_rectangle & dimByRect)
+   void Framebuffer::setEmptyDimension(const ::i32_rectangle & dimByRect)
    {
       m_dimension = dimByRect.size();
    }
@@ -497,13 +497,13 @@ namespace innate_subsystem_windows
       m_pixelformat = pf;
    }
 
-   void Framebuffer::setPropertiesWithoutResize(const ::int_size & newDim, const PixelFormat & pf)
+   void Framebuffer::setPropertiesWithoutResize(const ::i32_size & newDim, const PixelFormat & pf)
    {
       m_dimension = newDim;
       m_pixelformat = pf;
    }
 
-   bool Framebuffer::setProperties(const ::int_size & newDim,
+   bool Framebuffer::setProperties(const ::i32_size & newDim,
                                    const PixelFormat & pixelFormat)
    {
       m_pixelformat = pixelFormat;
@@ -511,7 +511,7 @@ namespace innate_subsystem_windows
       return resizeBuffer();
    }
 
-   bool Framebuffer::setProperties(const ::int_rectangle & dimByRect,
+   bool Framebuffer::setProperties(const ::i32_rectangle & dimByRect,
                                    const PixelFormat & pixelFormat)
    {
       m_pixelformat = pixelFormat;

@@ -61,7 +61,7 @@ namespace windows
 
 
 
-         void device::_draw_text(const ::scoped_string & scopedstr, const ::int_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext,
+         void device::_draw_text(const ::scoped_string & scopedstr, const ::i32_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext,
             ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText,
             ::nano::graphics::font* pnanofont)
          {
@@ -95,7 +95,7 @@ namespace windows
          }
 
 
-         ::int_size device::get_text_extents(const ::scoped_string & scopedstr, ::nano::graphics::font* pnanofont)
+         ::i32_size device::get_text_extents(const ::scoped_string & scopedstr, ::nano::graphics::font* pnanofont)
          {
 
             pnanofont->update(this);
@@ -118,7 +118,7 @@ namespace windows
          }
 
 
-         void device::rectangle(const ::int_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen)
+         void device::rectangle(const ::i32_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen)
          {
 
             pnanobrush->update(this);

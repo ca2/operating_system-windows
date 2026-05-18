@@ -18,7 +18,7 @@
 
       ~SystemMetrics() override;
 
-      ::int_size  get_small_icon_size_in_pixels() override;
+      ::i32_size  get_small_icon_size_in_pixels() override;
 
     };
 

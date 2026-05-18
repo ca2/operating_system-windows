@@ -30,7 +30,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::translate(const ::int_point& point, ::draw2d::graphics * pgraphics)
+   bool region::translate(const ::i32_point& point, ::draw2d::graphics * pgraphics)
    {
 
       return true;
@@ -38,7 +38,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::get_bounding_box(::int_rectangle & rectangle, ::draw2d::graphics * pgraphics)
+   bool region::get_bounding_box(::i32_rectangle & rectangle, ::draw2d::graphics * pgraphics)
    {
 
       defer_update(pgraphics, 0);
@@ -57,7 +57,7 @@ namespace draw2d_gdiplus
    void region::expand_bounding_box(::double_rectangle & rectangle, ::draw2d::graphics * pgraphics)
    {
 
-      ::int_rectangle rectanglei32;
+      ::i32_rectangle rectanglei32;
 
       ((region*)this)->get_bounding_box(rectanglei32, pgraphics);
 
@@ -66,7 +66,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::contains(const ::int_point & point, ::draw2d::graphics * pgraphics)
+   bool region::contains(const ::i32_point & point, ::draw2d::graphics * pgraphics)
    {
 
       defer_update(pgraphics, 0);

@@ -22,7 +22,7 @@ namespace win32
 
 
             //::array < ::procedure >      m_procedureaPost;
-            ::int_point                   m_pointCursor2;
+            ::i32_point                   m_pointCursor2;
 
             //enum_display_type          m_edisplaytype;
 
@@ -48,7 +48,7 @@ namespace win32
             //virtual bool display_posted_routine_step();
 
 
-            virtual ::int_size get_main_screen_size();
+            virtual ::i32_size get_main_screen_size();
 
 
          };

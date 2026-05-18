@@ -31,7 +31,7 @@
 
 namespace innate_subsystem_windows
 {
-   // Bitmap::Bitmap(const ::int_size & size)
+   // Bitmap::Bitmap(const ::i32_size & size)
    // : m_bitmap(NULL)
    // {
    //    // Prepare buffer
@@ -45,7 +45,7 @@ namespace innate_subsystem_windows
    //    }
    // }
    //
-   // Bitmap::Bitmap(HDC dc, const ::int_size & size)
+   // Bitmap::Bitmap(HDC dc, const ::i32_size & size)
    // {
    //    m_bitmap = CreateCompatibleBitmap(dc, width, height);
    // }
@@ -71,7 +71,7 @@ namespace innate_subsystem_windows
       // }
    }
 
-   void Bitmap::initialize_bitmap(const ::int_size & size)
+   void Bitmap::initialize_bitmap(const ::i32_size & size)
    {
       destroyGraphicsObject();
       // //;mm_bitmap(NULL)
@@ -91,7 +91,7 @@ namespace innate_subsystem_windows
        m_pbitmap = new Gdiplus::Bitmap(m_hbitmap, nullptr);
    }
 
-   void Bitmap::initialize_bitmap(::innate_subsystem::DeviceContextInterface * pdevicecontext, const ::int_size & size)
+   void Bitmap::initialize_bitmap(::innate_subsystem::DeviceContextInterface * pdevicecontext, const ::i32_size & size)
    {
       destroyGraphicsObject();
       auto pdevicecontextWin32 = pdevicecontext->impl<::innate_subsystem_windows::DeviceContext>();
@@ -126,7 +126,7 @@ namespace innate_subsystem_windows
 
    }
 
-   ::int_size Bitmap::getSize() const
+   ::i32_size Bitmap::getSize() const
    {
 
       auto w = m_pbitmap->GetWidth();

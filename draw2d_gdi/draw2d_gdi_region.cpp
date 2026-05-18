@@ -55,7 +55,7 @@ namespace draw2d_gdi
    }
 
 
-   bool region::create_rect(const ::int_rectangle & rectangle)
+   bool region::create_rect(const ::i32_rectangle & rectangle)
    {
 
       return Attach(::CreateRectRgnIndirect(rectangle));
@@ -71,7 +71,7 @@ namespace draw2d_gdi
    }
 
 
-   bool region::create_oval(const ::int_rectangle & rectangle)
+   bool region::create_oval(const ::i32_rectangle & rectangle)
    {
 
       return Attach(::CreateEllipticRgnIndirect(rectangle));
@@ -128,7 +128,7 @@ namespace draw2d_gdi
       ASSERT(get_os_data() != nullptr); ::SetRectRgn((HRGN)get_os_data(), x1, y1, x2, y2);
    }
 
-   void region::SetRectRgn(const ::int_rectangle & rectangle)
+   void region::SetRectRgn(const ::i32_rectangle & rectangle)
    {
 
       ::SetRectRgn((HRGN)get_os_data(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom);
@@ -177,7 +177,7 @@ namespace draw2d_gdi
    }
 
 
-   int region::OffsetRgn(const ::int_point & point)
+   int region::OffsetRgn(const ::i32_point & point)
    {
 
       ASSERT(get_os_data() != nullptr);
@@ -207,7 +207,7 @@ namespace draw2d_gdi
    }
 
 
-   bool region::contains(const ::int_point & point) const
+   bool region::contains(const ::i32_point & point) const
    {
       ASSERT(get_os_data() != nullptr);
 
@@ -216,7 +216,7 @@ namespace draw2d_gdi
    }
 
 
-   bool region::rectInRegion(const ::int_rectangle & rectangle) const
+   bool region::rectInRegion(const ::i32_rectangle & rectangle) const
    {
 
       ASSERT(get_os_data() != nullptr);

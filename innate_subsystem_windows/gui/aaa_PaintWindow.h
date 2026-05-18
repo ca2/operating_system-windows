@@ -50,7 +50,7 @@ namespace innate_subsystem_windows
       friend class DeviceContext;
 
    //protected:
-      void onPaint(::innate_subsystem::DeviceContextInterface *pdevicecontext, const ::int_rectangle &rectangle) override;
+      void onPaint(::innate_subsystem::DeviceContextInterface *pdevicecontext, const ::i32_rectangle &rectangle) override;
 
       //bool wndProc(unsigned int message, ::wparam wparam, ::lparam lparam);
 

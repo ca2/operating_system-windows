@@ -1,4 +1,4 @@
-// tls_session_reuse.cpp : Defines the entry int_point for the console application.
+// tls_session_reuse.cpp : Defines the entry i32_point for the console application.
 //
 
 #include "framework.h"

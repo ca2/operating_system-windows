@@ -178,7 +178,7 @@ typedef char JOCTET;
  * They must be at least as wide as specified; but making them too big
  * won't cost a huge amount of memory, so we don't provide special
  * extraction code like we did for JSAMPLE.  (In other words, these
- * typedefs live at a different int_point on the speed/space tradeoff curve.)
+ * typedefs live at a different i32_point on the speed/space tradeoff curve.)
  */
 
 /* UINT8 must hold at least the values 0..255. */
@@ -353,7 +353,7 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
 
 #define DCT_ISLOW_SUPPORTED	/* slow but accurate integer algorithm */
 #define DCT_IFAST_SUPPORTED	/* faster, less accurate integer method */
-#define DCT_FLOAT_SUPPORTED	/* floating-int_point: accurate, fast on fast HW */
+#define DCT_FLOAT_SUPPORTED	/* floating-i32_point: accurate, fast on fast HW */
 
 /* Encoder capability options: */
 
@@ -436,7 +436,7 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
 
 
 /* FAST_FLOAT should be either float or double, whichever is done faster
- * by your compiler.  (Note that this type is only used in the floating int_point
+ * by your compiler.  (Note that this type is only used in the floating i32_point
  * DCT routines, so it only matters if you've defined DCT_FLOAT_SUPPORTED.)
  * Typically, float is faster in ANSI C compilers, while double is faster in
  * pre-ANSI compilers (because they insist on converting to double anyway).

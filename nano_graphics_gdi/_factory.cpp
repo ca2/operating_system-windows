@@ -33,7 +33,7 @@ IMPLEMENT_FACTORY(nano_graphics_gdi)
    //pfactory->add_factory_item < ::windows::micro::user, ::micro::user >();
    //pfactory->add_factory_item < ::windows::micro::user, ::micro::user >();
 
-   //::int_rectangle rectangleMainScreen;
+   //::i32_rectangle rectangleMainScreen;
 
    //rectangleMainScreen.left = 0;
    //rectangleMainScreen.top = 0; 

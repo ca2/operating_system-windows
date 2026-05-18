@@ -5534,7 +5534,7 @@ namespace acme_windows
    }
 
    
-   ::int_size node::get_main_monitor_size()
+   ::i32_size node::get_main_monitor_size()
    {
    
       auto wDisplay = ::GetSystemMetrics(SM_CXSCREEN);

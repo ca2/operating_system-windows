@@ -39,9 +39,9 @@ namespace windows
             ~device() override;
 
 
-            void _draw_text(const ::scoped_string & scopedstr, const ::int_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext, ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText, ::nano::graphics::font* pnanofont) override;
-            ::int_size get_text_extents(const ::scoped_string & scopedstr, ::nano::graphics::font* pnanofont) override;
-            void rectangle(const ::int_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen) override;
+            void _draw_text(const ::scoped_string & scopedstr, const ::i32_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext, ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText, ::nano::graphics::font* pnanofont) override;
+            ::i32_size get_text_extents(const ::scoped_string & scopedstr, ::nano::graphics::font* pnanofont) override;
+            void rectangle(const ::i32_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen) override;
 
 
          };

@@ -188,14 +188,14 @@ return m_pdevicecontext;
    }
 
 
-   void Graphics::moveTo(const ::int_point & point)
+   void Graphics::moveTo(const ::i32_point & point)
    {
       //MoveToEx(m_pdevicecontext->m_hdc, x, y, NULL);
       m_pointCurrent = point;
       //m_pointCurrent.y = y;
    }
 
-   void Graphics::lineTo(const ::int_point & point)
+   void Graphics::lineTo(const ::i32_point & point)
    {
       //LineTo(m_pdevicecontext->m_hdc, x, y);
       m_pdevicecontext->m_pgraphics->DrawLine(m_ppen->m_ppen, m_pointCurrent.x, m_pointCurrent.y, point.x, point.y);
@@ -204,7 +204,7 @@ return m_pdevicecontext;
 
    }
 
-   void Graphics::fillRect(const ::int_rectangle & rectangle, ::innate_subsystem::BrushInterface *pbrush)
+   void Graphics::fillRect(const ::i32_rectangle & rectangle, ::innate_subsystem::BrushInterface *pbrush)
    {
       Gdiplus::Rect gdiplusrect;
 
@@ -220,7 +220,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
    }
 
 
-   void Graphics::fillRect(const ::int_rectangle & rectangle, const ::color::color & color)
+   void Graphics::fillRect(const ::i32_rectangle & rectangle, const ::color::color & color)
    {
       Gdiplus::Rect gdiplusrect;
 
@@ -237,7 +237,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
 
    }
 
-   void Graphics::ellipse(const ::int_rectangle & rectangle)
+   void Graphics::ellipse(const ::i32_rectangle & rectangle)
    {
       //Ellipse(m_pdevicecontext->m_hdc, l, t, r, b);
       Gdiplus::Rect gdiplusrect;
@@ -250,7 +250,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
       m_pdevicecontext->m_pgraphics->DrawEllipse(m_ppen->m_ppen, gdiplusrect);
    }
 
-   void Graphics::rectangle(const ::int_rectangle & rectangle)
+   void Graphics::rectangle(const ::i32_rectangle & rectangle)
    {
       //Rectangle(m_pdevicecontext->m_hdc, l, t, r, b);
       Gdiplus::Rect gdiplusrect;
@@ -264,7 +264,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
 
    }
 
-   void Graphics::drawBitmap(::innate_subsystem::BitmapInterface *pbitmap, const ::int_rectangle & rectangle)
+   void Graphics::drawBitmap(::innate_subsystem::BitmapInterface *pbitmap, const ::i32_rectangle & rectangle)
    {
 
       auto pbitmapWin32 = pbitmap->impl<::innate_subsystem_windows::Bitmap>();
@@ -286,7 +286,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
    }
 
 
-   void Graphics::drawBitmap(::innate_subsystem::BitmapInterface *pbitmap, const ::int_point & point, const ::int_rectangle & rectangle)
+   void Graphics::drawBitmap(::innate_subsystem::BitmapInterface *pbitmap, const ::i32_point & point, const ::i32_rectangle & rectangle)
    {
 
       auto pbitmapWin32 = pbitmap->impl<::innate_subsystem_windows::Bitmap>();
@@ -327,7 +327,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
 
    }
 
-   void Graphics::drawText(const char *text, int cchText, ::int_rectangle &rectangle, unsigned int format, enum_align ealign)
+   void Graphics::drawText(const char *text, int cchText, ::i32_rectangle &rectangle, unsigned int format, enum_align ealign)
    {
 
       ::string str;

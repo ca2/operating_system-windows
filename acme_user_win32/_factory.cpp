@@ -24,7 +24,7 @@ IMPLEMENT_FACTORY(nano_user_win32)
 
    pfactory->add_factory_item < ::windows::micro::user, ::micro::user >();
 
-   //::int_rectangle rectangleMainScreen;
+   //::i32_rectangle rectangleMainScreen;
 
    //rectangleMainScreen.left = 0;
    //rectangleMainScreen.top = 0; 

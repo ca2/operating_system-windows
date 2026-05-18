@@ -164,7 +164,7 @@ namespace innate_subsystem_windows
       return !!result;
    }
 
-   bool Toolbar::getButtonRect(int nIndex, ::int_rectangle & buttonRect)
+   bool Toolbar::getButtonRect(int nIndex, ::i32_rectangle & buttonRect)
    {
       RECT rc;
       LRESULT result = SendMessage((HWND) _HWND(), TB_GETITEMRECT,
@@ -173,7 +173,7 @@ namespace innate_subsystem_windows
       return !!result;
    }
 
-   bool Toolbar::setButtonsSize(const ::int_size & size)
+   bool Toolbar::setButtonsSize(const ::i32_size & size)
    {
       LRESULT result = SendMessage((HWND) _HWND(), TB_SETBUTTONSIZE,
                                    0, MAKELONG(size.cx, size.cy));
@@ -189,7 +189,7 @@ namespace innate_subsystem_windows
       LRESULT style = SendMessage((HWND) _HWND(), TB_GETSTYLE,  0, 0);
       if (style & CCS_NORESIZE) {
          RECT r;
-         ::int_rectangle btnRect;
+         ::i32_rectangle btnRect;
          GetClientRect(GetParent((HWND) _HWND()), &r);
          getButtonRect(0, btnRect);
          int height = getButtonsHeight() + btnRect.top * 2 + 2;

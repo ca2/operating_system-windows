@@ -29,7 +29,7 @@
 
 namespace subsystem_windows
 {
-   DibSection::DibSection(const ::innate_subsystem::PixelFormat & pf, const ::int_size & dim, const ::operating_system::window & operatingsystemwindowCompatible)
+   DibSection::DibSection(const ::innate_subsystem::PixelFormat & pf, const ::i32_size & dim, const ::operating_system::window & operatingsystemwindowCompatible)
    // : m_isOwnTargetDC(false),
    //   m_targetDC(0),
    //   m_memDC(0),
@@ -57,7 +57,7 @@ namespace subsystem_windows
    }
 
 
-   void DibSection::initialize_dib_section(const ::innate_subsystem::PixelFormat& pf, const int_size& dim, const operating_system::window& operatingsystemwindowCompatible)
+   void DibSection::initialize_dib_section(const ::innate_subsystem::PixelFormat& pf, const i32_size& dim, const operating_system::window& operatingsystemwindowCompatible)
    {
 
       m_pparticleThis->initialize_dib_section(pf, dim, operatingsystemwindowCompatible);
@@ -78,32 +78,32 @@ namespace subsystem_windows
       return m_pparticleThis->getBuffer();
    }
 
-   void DibSection::blitToDibSection(const ::int_rectangle &  rect)
+   void DibSection::blitToDibSection(const ::i32_rectangle &  rect)
    {
       //blitToDibSection(rect, SRCCOPY);
       m_pparticleThis->blitToDibSection(rect);
    }
 
-   void DibSection::blitTransparentToDibSection(const ::int_rectangle &  rect)
+   void DibSection::blitTransparentToDibSection(const ::i32_rectangle &  rect)
    {
       //blitToDibSection(rect, SRCCOPY | CAPTUREBLT);
       m_pparticleThis->blitTransparentToDibSection(rect);
    }
 
-   void DibSection::blitFromDibSection(const ::int_rectangle &  rect)
+   void DibSection::blitFromDibSection(const ::i32_rectangle &  rect)
    {
       //blitFromDibSection(rect, SRCCOPY);
       m_pparticleThis->blitFromDibSection(rect);
    }
 
-   void DibSection::stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & rectangleTarget)
+   void DibSection::stretchFromDibSection(const ::i32_rectangle &  srcRect,const ::i32_rectangle & rectangleTarget)
    {
       //stretchFromDibSection(srcRect, rectangleTarget, SRCCOPY);
 
       m_pparticleThis->stretchFromDibSection(srcRect, rectangleTarget);
    }
 
-   void DibSection::blitToDibSection(const ::int_rectangle &  rect, unsigned int flags)
+   void DibSection::blitToDibSection(const ::i32_rectangle &  rect, unsigned int flags)
    {
       m_pparticleThis->blitToDibSection(rect, flags);
       // if (BitBlt(m_memDC, rect.left, rect.top, rect.width(), rect.height(),
@@ -113,7 +113,7 @@ namespace subsystem_windows
       //            }
    }
 
-   void DibSection::blitFromDibSection(const ::int_rectangle &  rect, unsigned int flags)
+   void DibSection::blitFromDibSection(const ::i32_rectangle &  rect, unsigned int flags)
    {
       m_pparticleThis->blitFromDibSection(rect, flags);
       // if (BitBlt(m_targetDC, rect.left + m_srcOffsetX, rect.top + m_srcOffsetY,
@@ -123,7 +123,7 @@ namespace subsystem_windows
       //            }
    }
 
-   void DibSection::stretchFromDibSection(const ::int_rectangle &  srcRect,const ::int_rectangle & rectangleTarget, unsigned int flags)
+   void DibSection::stretchFromDibSection(const ::i32_rectangle &  srcRect,const ::i32_rectangle & rectangleTarget, unsigned int flags)
    {
       m_pparticleThis->stretchFromDibSection(srcRect, rectangleTarget, flags);
       //    SetStretchBltMode(m_targetDC, HALFTONE);
@@ -136,7 +136,7 @@ namespace subsystem_windows
       // }
    }
    //
-   // void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const PixelFormat & pf, const ::int_size & dim)
+   // void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const PixelFormat & pf, const ::i32_size & dim)
    // {
    //    if (pf.bitsPerPixel == 8) {
    //       Screen::Palette8bitBMI *paletteBMI = reinterpret_cast<Screen::Palette8bitBMI *>(pBmi);
@@ -169,7 +169,7 @@ namespace subsystem_windows
    //    pBmi->bmiHeader.biHeight = -dim.cy;
    // }
 
-   // void DibSection::openDIBSection(const PixelFormat & pf, const ::int_size & dim, HWND compatibleWin)
+   // void DibSection::openDIBSection(const PixelFormat & pf, const ::i32_size & dim, HWND compatibleWin)
    // {
    //    m_targetDC = GetDC(compatibleWin);
    //    m_isOwnTargetDC = true;
@@ -180,7 +180,7 @@ namespace subsystem_windows
    //       // In this special case is needed to store offset of the desktop, because coordinates
    //       // of the top level corner may be non zero.
    //       m_screen.update();
-   //       ::int_rectangle deskRect = m_screen.getDesktopRect();
+   //       ::i32_rectangle deskRect = m_screen.getDesktopRect();
    //       m_srcOffsetX = deskRect.left;
    //       m_srcOffsetY = deskRect.top;
    //    }

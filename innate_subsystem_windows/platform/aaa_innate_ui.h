@@ -40,7 +40,7 @@ namespace innate_ui_win32
 
       //virtual LRESULT _window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
 
-      //virtual void _defer_show_system_menu(HWND hwnd, const ::int_point & pointAbsolute);
+      //virtual void _defer_show_system_menu(HWND hwnd, const ::i32_point & pointAbsolute);
 
 
    };

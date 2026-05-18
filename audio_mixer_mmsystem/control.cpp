@@ -131,7 +131,7 @@ namespace audio_mixer_mmsystem
       unsigned int nBalanceID = nID++;
       unsigned int nBalanceLabelID = nID++;
 
-      //::int_rectangle rectangle(0, 0, 0, 0);
+      //::i32_rectangle rectangle(0, 0, 0, 0);
 
       auto pcontroldatavolume = create_newø <::audio_mixer::control_data_volume>();
 

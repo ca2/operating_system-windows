@@ -78,7 +78,7 @@ namespace innate_subsystem_windows
 
       //void _000OnNotify(windows_reflect_notify_t & notify) override;
 
-      void adjustRect(::int_rectangle &rect) override;
+      void adjustRect(::i32_rectangle &rect) override;
 
    //protected:
       ::innate_subsystem::TabContainer m_tabContainer;

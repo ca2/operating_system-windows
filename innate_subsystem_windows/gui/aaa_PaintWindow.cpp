@@ -45,7 +45,7 @@ namespace innate_subsystem_windows
       }
 
       void PaintWindow::onPaint(::innate_subsystem::DeviceContextInterface *pdevicecontext,
-                                const ::int_rectangle &rectangle)
+                                const ::i32_rectangle &rectangle)
          {
       m_ppaintwindowCallback->onPaint(pdevicecontext, rectangle);
       }
@@ -59,7 +59,7 @@ namespace innate_subsystem_windows
              m_pdevicecontext->m_hdc2 = BeginPaint(hwnd, &m_paintStruct);
              m_bIsDraw = true;
              //DeviceContext dc(this);
-             ::int_rectangle r;
+             ::i32_rectangle r;
              copy(r, m_paintStruct.rcPaint);
              onPaint(m_pdevicecontext, r);
              EndPaint(hwnd, &m_paintStruct);

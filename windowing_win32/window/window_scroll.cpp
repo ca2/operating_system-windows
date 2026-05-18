@@ -88,7 +88,7 @@ namespace windowing_win32
    //}
 
    //void interaction_impl::ScrollWindow(int xAmount, int yAmount,
-   //   const ::int_rectangle * rectangle, const ::int_rectangle * lpClipRect)
+   //   const ::i32_rectangle * rectangle, const ::i32_rectangle * lpClipRect)
 
    //{
    //   //ASSERT(::IsWindow(get_handle()));
@@ -112,7 +112,7 @@ namespace windowing_win32
    //   //      for(; oswindow_Child != nullptr;
    //   //            oswindow_Child = ::GetNextWindow(oswindow_Child,GW_HWNDNEXT))
    //   //      {
-   //   //         ::int_rectangle rectangle;
+   //   //         ::i32_rectangle rectangle;
    //   //         ::window_rectangle(oswindow_Child,&rectangle);
    //   //         _001ScreenToClient(&rectangle);
    //   //         ::set_window_position(oswindow_Child,nullptr,rectangle.left + xAmount,rectangle.top + yAmount,0,0,SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOZORDER);

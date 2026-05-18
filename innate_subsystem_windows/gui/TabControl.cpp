@@ -103,7 +103,7 @@ namespace innate_subsystem_windows
    void TabControl::moveWindowToTabControl(innate_subsystem::WindowInterface *pwindow)
    {
 
-      ::int_rectangle rectangle;
+      ::i32_rectangle rectangle;
       POINT first, last;
 
       this->adjustRect(rectangle);
@@ -155,7 +155,7 @@ namespace innate_subsystem_windows
       return page;
    }
 
-   void TabControl::adjustRect(::int_rectangle &rect)
+   void TabControl::adjustRect(::i32_rectangle &rect)
    {
       RECT rc;
       GetClientRect((HWND) _HWND(), &rc);

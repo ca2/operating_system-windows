@@ -195,7 +195,7 @@ namespace innate_subsystem_windows
       }
    }
 
-   void ImagedButton::_setHICON(HICON hicon, const ::int_size & size)
+   void ImagedButton::_setHICON(HICON hicon, const ::i32_size & size)
    {
       m_picon->m_hicon = hicon;
       m_size = size;
@@ -203,7 +203,7 @@ namespace innate_subsystem_windows
 
 
 
-   void ImagedButton::setIcon(::innate_subsystem::IconInterface * picon, const ::int_size & size)
+   void ImagedButton::setIcon(::innate_subsystem::IconInterface * picon, const ::i32_size & size)
    {
 
       //auto piconImpl = picon->impl < ::innate_subsystem_windows::Icon >();

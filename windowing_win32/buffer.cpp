@@ -25,15 +25,15 @@
 #include <gdiplus.h>
 #endif
 
-CLASS_DECL_AURA::int_point __get_bottom_right();
-CLASS_DECL_AURA void __set_bottom_right(const ::int_point & pointBottomRight);
+CLASS_DECL_AURA::i32_point __get_bottom_right();
+CLASS_DECL_AURA void __set_bottom_right(const ::i32_point & pointBottomRight);
 
 
 namespace windowing_win32
 {
 
 
-   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::int_size & size, int * piScan, ::color32_t ** ppdata);
+   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::i32_size & size, int * piScan, ::color32_t ** ppdata);
 
 
    buffer::layered_window_buffer::layered_window_buffer()
@@ -151,7 +151,7 @@ namespace windowing_win32
    }
 
 
-   bool buffer::create_window_device_context(const ::int_size & size, int iStrideParam)
+   bool buffer::create_window_device_context(const ::i32_size & size, int iStrideParam)
    {
 
       if (m_papplication->m_gpu.m_bUseSwapChainWindow)
@@ -353,7 +353,7 @@ namespace windowing_win32
 
       int iScan = -1;
 
-      ::int_size sizeAllocate;
+      ::i32_size sizeAllocate;
 
       auto pwindowing = m_pwindow->user_interaction()->windowing();
 
@@ -608,7 +608,7 @@ namespace windowing_win32
    }
 
 
-   ::int_point g_pointLastBottomRight;
+   ::i32_point g_pointLastBottomRight;
 
 
    void buffer::_on_configure_window(::graphics::buffer_item *pbufferitem)
@@ -646,7 +646,7 @@ namespace windowing_win32
 
          // string str;
 
-         // int_rectangle rectangleDrawing(point, size);
+         // i32_rectangle rectangleDrawing(point, size);
 
 
          // if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
@@ -668,7 +668,7 @@ namespace windowing_win32
                if (p.is_set())
                {
 
-                  auto r = ::int_rectangle(pointBufferItemWindow, sizeBufferItemWindow);
+                  auto r = ::i32_rectangle(pointBufferItemWindow, sizeBufferItemWindow);
 
                   auto Δ = r.bottom_right() - p;
 
@@ -728,7 +728,7 @@ namespace windowing_win32
 
          //}
 
-         ::int_point pointBottomRight = pointBufferItemWindow + sizeBufferItemWindow;
+         ::i32_point pointBottomRight = pointBufferItemWindow + sizeBufferItemWindow;
 
          // if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
          {
@@ -738,16 +738,16 @@ namespace windowing_win32
             // if (!p2->m_bSizeMoveMode)
             {
 
-               ::int_rectangle rectangleWindow;
+               ::i32_rectangle rectangleWindow;
 
                RECT rectWindow;
 
                ::GetWindowRect(hwnd, &rectWindow);
 
                {
-                  int_rectangle rWindow2;
+                  i32_rectangle rWindow2;
                   ::GetWindowRect(hwnd, (LPRECT)&rWindow2);
-                  int_rectangle rClient2;
+                  i32_rectangle rClient2;
                   ::GetClientRect(hwnd, (LPRECT)&rClient2);
                   information("rWindow2 x{} y{} w{} h{}", rWindow2.left, rWindow2.top, rWindow2.width(), rWindow2.height());
                   information("rClient2 x{} y{} w{} h{}", rClient2.left, rClient2.top, rClient2.width(),
@@ -757,7 +757,7 @@ namespace windowing_win32
 
                rectangleWindow = rectWindow;
 
-               ::int_rectangle rectangleRequest(pointBufferItemWindow, sizeBufferItemWindow);
+               ::i32_rectangle rectangleRequest(pointBufferItemWindow, sizeBufferItemWindow);
 
                // if (rectangleWindow.size() != size)
                //{
@@ -950,7 +950,7 @@ namespace windowing_win32
       ::collection::index iScreenBuffer = get_screen_index();
 
       ::pointer < layered_window_buffer > playeredwindowbuffer = pbufferitem->m_pparticleData;
-      ::int_size sizeLayeredWindowBuffer;
+      ::i32_size sizeLayeredWindowBuffer;
       if (playeredwindowbuffer)
       {
 
@@ -1160,7 +1160,7 @@ namespace windowing_win32
 
             ::cast < ::windowing_win32::window > pwindow = m_pwindow;
 
-            ::int_point pointSrc = { 0 };
+            ::i32_point pointSrc = { 0 };
 
             BLENDFUNCTION blendPixelFunction = { AC_SRC_OVER, 0, pwindow->m_uOpacity, AC_SRC_ALPHA };
 
@@ -1442,7 +1442,7 @@ namespace windowing_win32
 
                      //GdiFlush();
 
-                     ::int_rectangle rectangleWindow;
+                     ::i32_rectangle rectangleWindow;
 
                      RECT rectWindow;
 
@@ -1450,7 +1450,7 @@ namespace windowing_win32
 
                      rectangleWindow = rectWindow;
 
-                     ::int_rectangle rectangleCache(pwindow->m_pointWindow, pwindow->m_sizeWindow);
+                     ::i32_rectangle rectangleCache(pwindow->m_pointWindow, pwindow->m_sizeWindow);
 
                      if (rectangleCache != rectangleWindow)
                      {
@@ -1604,11 +1604,11 @@ namespace windowing_win32
             //
             //               }
 
-                           //::int_rectangle r3;
+                           //::i32_rectangle r3;
 
                            //GetWindowRect(m_pacmewindowingwindow, &r3);
 
-                           //::int_rectangle r4;
+                           //::i32_rectangle r4;
 
                            //GetClientRect(m_pacmewindowingwindow, &r4);
 

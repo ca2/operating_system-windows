@@ -122,12 +122,12 @@ namespace innate_subsystem_windows
       WINDOWPLACEMENT   m_windowplacementWorkArea;
       //WINDOWPLACEMENT m_workArea;
       // It's size of optimal size of work-area in windowed mode.
-      ::int_rectangle m_rectangleNormal;
+      ::i32_rectangle m_rectangleNormal;
       ::innate_subsystem::enum_control m_econtrol = innate_subsystem::e_control_none;
 
-      ::int_rectangle m_clientArea;
+      ::i32_rectangle m_clientArea;
 
-      ::int_size m_sizeBuffer = {};
+      ::i32_size m_sizeBuffer = {};
       HDC m_hdcBuffer = nullptr;
       HBITMAP m_hbitmapOld = nullptr;
       HBITMAP m_hbitmapBuffer = nullptr;
@@ -210,9 +210,9 @@ namespace innate_subsystem_windows
       void enableWindow(bool bEnable) override;
       void setEnabled(bool bEnable) override;
       void updateWindow() override;
-      bool setSize(const ::int_size & size) override;
-      bool setPosition(const ::int_point & point) override;
-      bool setPlacement(const ::int_rectangle & rectangle) override;
+      bool setSize(const ::i32_size & size) override;
+      bool setPosition(const ::i32_point & point) override;
+      bool setPlacement(const ::i32_rectangle & rectangle) override;
       void setWindowText(const ::scoped_string  & scopedstrText) override;
 
 
@@ -309,7 +309,7 @@ namespace innate_subsystem_windows
       bool isExStyleEnabled(unsigned int styleFlag) override;
 
       // full redraw of window area
-      void redraw(const ::int_rectangle &rcArea ={}) override;
+      void redraw(const ::i32_rectangle &rcArea ={}) override;
 
       // set or kill timer, with identifactor ident
       // and time in milliseconds
@@ -323,10 +323,10 @@ namespace innate_subsystem_windows
       void postMessage(unsigned int Msg, ::wparam wparam = 0, ::lparam lparam = 0) override;
       void post(const ::procedure & procedure) override;
 
-      ::int_rectangle getClientRect() override;
-      ::int_rectangle getFullScreenRect() override;
-      ::int_size getBorderSize() override;
-      ::int_rectangle getScreenWorkArea() override;
+      ::i32_rectangle getClientRect() override;
+      ::i32_rectangle getFullScreenRect() override;
+      ::i32_size getBorderSize() override;
+      ::i32_rectangle getScreenWorkArea() override;
 
 
       //void doRestoreFromFullScreen() override;
@@ -359,8 +359,8 @@ namespace innate_subsystem_windows
       virtual bool onSysCommand(::wparam wparam, ::lparam lparam) override;
       virtual bool onMessage(unsigned int message, ::wparam wparam, ::lparam lparam) override;
       virtual bool onMouseEx(unsigned int uMessage, int iButtonMask, unsigned short wheelSpeed,
-                             const ::int_point &point, bool &bDoDefaultProcessing) override;
-      virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, const ::int_point & position) override;
+                             const ::i32_point &point, bool &bDoDefaultProcessing) override;
+      virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, const ::i32_point & position) override;
 
       virtual bool onCreate(void * pCreateStruct) override;
 
@@ -370,7 +370,7 @@ namespace innate_subsystem_windows
       virtual void _defer_update_double_buffering();
 
 
-      void onDraw(::innate_subsystem::GraphicsInterface * pgraphics, const ::int_rectangle & rectangle) override;
+      void onDraw(::innate_subsystem::GraphicsInterface * pgraphics, const ::i32_rectangle & rectangle) override;
 
 
       virtual void _doPaint(HDC hdc);
@@ -379,7 +379,7 @@ namespace innate_subsystem_windows
       void onBeforeUnFullScreen(bool bMinimizing) override;
       void onAfterUnFullScreen(bool bMinimizing) override;
       bool onGetTooltip(int iControl, string &strTooltip) override;
-      bool onCalculateDefaultSize(int_rectangle &rectangleDefaultSize) override;
+      bool onCalculateDefaultSize(i32_rectangle &rectangleDefaultSize) override;
       void onAdjustWindowSize() override;
       void onSize() override;
 

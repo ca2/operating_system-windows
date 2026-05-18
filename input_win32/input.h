@@ -56,7 +56,7 @@ namespace input_win32
 
       ////void destroy() override;
 
-      ////void get_cursor_position(::int_point* ppoint) override;
+      ////void get_cursor_position(::i32_point* ppoint) override;
 
       //virtual bool defer_create_system_window();
       ////virtual ::pointer<::user::interaction>create_system_window();
@@ -128,13 +128,13 @@ namespace input_win32
       ////virtual enum_dialog_result message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox);
 
 
-      //virtual void get_cursor_pos(::int_point * ppoint);
+      //virtual void get_cursor_pos(::i32_point * ppoint);
 
-      //virtual void set_cursor_position(const ::int_point & point);
+      //virtual void set_cursor_position(const ::i32_point & point);
 
 
 
-      //virtual int_bool point_is_window_origin(::int_point ptHitTest, oswindow oswindowExclude, int iMargin);
+      //virtual int_bool point_is_window_origin(::i32_point ptHitTest, oswindow oswindowExclude, int iMargin);
 
       ////virtual void top_windows_by_z_order(hwnd_array & a);
 
@@ -146,7 +146,7 @@ namespace input_win32
 
       //virtual void get_app_wnda(::windows::hwnd_array & wnda);
 
-      //::pointer<::windowing::window>window_from_point(::aura::application * papp, const ::int_point & point);
+      //::pointer<::windowing::window>window_from_point(::aura::application * papp, const ::i32_point & point);
 
       //
       ////virtual void windowing_post(const ::procedure & procedure) override;

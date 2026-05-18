@@ -52,12 +52,12 @@ namespace subsystem_windows
          return m_pixelformat;
       }
 
-      ::int_size Screen::getDesktopDimension()
+      ::i32_size Screen::getDesktopDimension()
       {
          return m_virtDesktopRect.size();
       }
 
-      ::int_rectangle Screen::getDesktopRect()
+      ::i32_rectangle Screen::getDesktopRect()
       {
          return m_virtDesktopRect;
       }

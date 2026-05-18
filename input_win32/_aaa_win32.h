@@ -20,7 +20,7 @@ namespace windows
    CLASS_DECL_WINDOWING_WIN32 HBITMAP create_alpha_bitmap_v5(::image::image * pimage);
    CLASS_DECL_WINDOWING_WIN32 HICON create_alpha_icon(::image::image * pimage, bool bIcon = true, int xHotSpot = 0, int yHotSpot = 0);
    CLASS_DECL_WINDOWING_WIN32 HCURSOR create_alpha_cursor(::image::image * pimage, int xHotSpot, int yHotSpot);
-   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::int_size & size, int * piScan = nullptr, ::image32_t ** ppdata = nullptr);;
+   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::i32_size & size, int * piScan = nullptr, ::image32_t ** ppdata = nullptr);;
    CLASS_DECL_WINDOWING_WIN32 HICON load_icon(::particle * pparticle, string_array_base & straMatter, const ::scoped_string & scopedstrIcon, int cx, int cy);
 
 

@@ -93,12 +93,12 @@ namespace windows
             LOGFONTW& logFont = *pLogFont;
 
 
-            ::int_point point;
-            // 72 points/inch, 10 decipoints/int_point
+            ::i32_point point;
+            // 72 points/inch, 10 decipoints/i32_point
             point.y = ::MulDiv(::GetDeviceCaps(hdc, LOGPIXELSY), logFont.lfHeight, 720);
             point.x = 0;
             ::DPtoLP(hdc, (POINT*)&point, 1);
-            ::int_point pointOrg = { 0, 0 };
+            ::i32_point pointOrg = { 0, 0 };
             ::DPtoLP(hdc, (POINT*)&pointOrg, 1);
             logFont.lfHeight = -abs(point.y - pointOrg.y);
 
