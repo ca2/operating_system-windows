@@ -25,6 +25,7 @@
 #include "InputInjector.h"
 #include "Keyboard.h"
 #include "acme/constant/user_key.h"
+#include "acme/operating_system/windows/user.h"
 #include "subsystem/node/SystemException.h"
 //#include "remoting/remoting/win_system/Environment.h"
 //#include <vector>
@@ -159,7 +160,7 @@ namespace subsystem_windows
                 if (SendInput(1, &keyEvent, sizeof(keyEvent)) == 0) {
                    auto lasterror = ::windows::last_error();
                    if (lasterror != ERROR_SUCCESS) {
-                      throw ::subsystem::SystemException("SendInput() function failed:", lasterror.m_uLastError);
+                      throw ::subsystem::SystemException("SendInput() function failed:", lasterror);
                    } else {
                       // Under Vista or later the SendInput() function doesn't return error
                       // code if inputs blocked by UIPI.
@@ -256,27 +257,29 @@ namespace subsystem_windows
                     (int)altPressNeeded);
 
          if (ctrlPressNeeded) {
-            injectKeyEvent(VK_CONTROL, false);
+            injectKeyEvent(::user::e_key_control, false);
          }
          if (altPressNeeded) {
-            injectKeyEvent(VK_MENU, false);
+            injectKeyEvent(::user::e_key_alt, false);
          }
          if (shiftPressNeeded) {
-            injectKeyEvent(VK_SHIFT, false);
+            injectKeyEvent(::user::e_key_shift, false);
          } else if (shiftUpNeeded) {
-            injectKeyEvent(VK_SHIFT, true);
+            injectKeyEvent(::user::e_key_shift, true);
          }
-         injectKeyEvent(vkKeyScanResult & 255, release);
+
+         auto euserkey = windows::virtual_key_code_to_user_key(vkKeyScanResult & 255);
+         injectKeyEvent(euserkey, release);
          if (shiftPressNeeded) {
-            injectKeyEvent(VK_SHIFT, true);
+            injectKeyEvent(::user::e_key_shift, true);
          } else if (shiftUpNeeded) {
-            injectKeyEvent(VK_SHIFT, false);
+            injectKeyEvent(::user::e_key_shift, false);
          }
          if (altPressNeeded) {
-            injectKeyEvent(VK_MENU, true);
+            injectKeyEvent(::user::e_key_alt, true);
          }
          if (ctrlPressNeeded) {
-            injectKeyEvent(VK_CONTROL, true);
+            injectKeyEvent(::user::e_key_control, true);
          }
       }
 
@@ -473,22 +476,22 @@ namespace subsystem_windows
       void InputInjector::resetModifiers()
       {
          // The Alt key.
-         injectKeyEvent(VK_MENU, true);
-         injectKeyEvent(VK_LMENU, true);
-         injectKeyEvent(VK_RMENU, true);
+         injectKeyEvent(::user::e_key_alt, true);
+         injectKeyEvent(::user::e_key_left_alt, true);
+         injectKeyEvent(::user::e_key_right_alt, true);
          // The Shift key.
-         injectKeyEvent(VK_SHIFT, true);
-         injectKeyEvent(VK_LSHIFT, true);
-         injectKeyEvent(VK_RSHIFT, true);
+         injectKeyEvent(::user::e_key_shift, true);
+         injectKeyEvent(::user::e_key_left_shift, true);
+         injectKeyEvent(::user::e_key_right_shift, true);
          // The Ctrl key.
-         injectKeyEvent(VK_CONTROL, true);
-         injectKeyEvent(VK_LCONTROL, true);
-         injectKeyEvent(VK_RCONTROL, true);
+         injectKeyEvent(::user::e_key_control, true);
+         injectKeyEvent(::user::e_key_left_control, true);
+         injectKeyEvent(::user::e_key_right_control, true);
          // The Win key.
-         injectKeyEvent(VK_LWIN, true);
-         injectKeyEvent(VK_RWIN, true);
+         injectKeyEvent(::user::e_key_left_command, true);
+         injectKeyEvent(::user::e_key_right_command, true);
          // The Delete key.
-         injectKeyEvent(VK_DELETE, true);
+         injectKeyEvent(::user::e_key_delete, true);
       }
 
 }// namespace subsystem_windows

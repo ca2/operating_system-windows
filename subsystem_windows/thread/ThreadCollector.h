@@ -51,7 +51,7 @@ namespace subsystem_windows
       ~ThreadCollector() override;
 
       // Adds thread to a self ::list_base.
-      void addThread(::subsystem::Thread *thread);
+      void addThread(::subsystem::Thread *thread) override;
 
       // Forces terminates all threads, waits until they dies and than
       // delete them from memory and thread ::list_base.
@@ -60,10 +60,10 @@ namespace subsystem_windows
       const memsize Size() override;
 
    ///protected:
-      virtual void execute();
+      void onThreadMain() override;
 
       // Deletes all dead threads from memory and removes them from self ::list_base.
-      void deleteDeadThreads();
+      void deleteDeadThreads() override;
 
    //protected:
       ::pointer_array < ::subsystem::Thread >  m_threada;

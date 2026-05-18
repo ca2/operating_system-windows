@@ -58,9 +58,9 @@ namespace subsystem_windows
                          NULL);                 // no template file
 
       if (hPipe == INVALID_HANDLE_VALUE) {
-         int errCode = GetLastError();
+         auto lasterror = ::windows::last_error();
          ::string errMess;
-         errMess.format("Connect to pipe server failed, error code = {}", errCode);
+         errMess.format("Connect to pipe server failed, error code = {}", lasterror.m_uLastError);
          throw ::subsystem::Exception(errMess);
       }
       pfilePipe->m_handle = hPipe;
@@ -70,9 +70,9 @@ namespace subsystem_windows
                                    NULL,      // don't set maximum bytes
                                    NULL)      // don't set maximum time
                                    ) {
-         int errCode = GetLastError();
+         auto lasterror = ::windows::last_error();
          ::string errMess;
-         errMess.formatf("SetNamedPipeHandleState failed, error code = {}", errCode);
+         errMess.formatf("SetNamedPipeHandleState failed, error code = {}", lasterror.m_uLastError);
          throw ::subsystem::Exception(errMess);
                                    }
 

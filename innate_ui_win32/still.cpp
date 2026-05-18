@@ -118,7 +118,7 @@ namespace innate_ui_win32
          (HINSTANCE)hinstanceParent,
          NULL);
 
-      if (!hwndResult || !_HWND() || hwndResult != (HWND) _HWND())
+      if (!hwndResult || !_HWND() || hwndResult != ::as_HWND(this->operating_system_window()))
       {
 
          throw ::exception(error_failed);
@@ -130,7 +130,7 @@ namespace innate_ui_win32
 
          ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
 
-         auto hwnd = (HWND) _HWND();
+         auto hwnd = ::as_HWND(this->operating_system_window());
 
          pwindowing->m_windowmap[hwnd] = this;
 
@@ -181,7 +181,7 @@ namespace innate_ui_win32
          
          PAINTSTRUCT ps;
 
-         auto hwnd = (HWND) _HWND();
+         auto hwnd = ::as_HWND(this->operating_system_window());
 
          HDC hdc = ::BeginPaint(hwnd, &ps);
 

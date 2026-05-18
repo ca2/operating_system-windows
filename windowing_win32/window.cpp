@@ -407,7 +407,7 @@ namespace windowing_win32
    void window::destroy()
    {
 
-      auto hwnd = (HWND) _HWND();
+      auto hwnd = ::as_HWND(this->operating_system_window());
 
       WNDPROC pfnWndProc = WNDPROC(::GetWindowLongPtr(hwnd, GWLP_WNDPROC));
 
@@ -472,7 +472,7 @@ namespace windowing_win32
    //HWND window::_HWND() const 
    //{ 
 
-   //   auto hwnd = (HWND) _HWND();
+   //   auto hwnd = ::as_HWND(this->operating_system_window());
    //   
    //   return hwnd; 
    //
@@ -780,7 +780,7 @@ namespace windowing_win32
          if (puserinteraction->m_bEdgeGestureDisableTouchWhenFullscreen)
          {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             SetTouchDisableProperty(hwnd, true);
 
@@ -790,9 +790,9 @@ namespace windowing_win32
 
       puserinteraction->m_ewindowflag += ::e_window_flag_is_window;
 
-      //auto hwnd = (HWND) _HWND();
+      //auto hwnd = ::as_HWND(this->operating_system_window());
 
-      bool bUnicode = ::IsWindowUnicode((HWND) _HWND()) != false;
+      bool bUnicode = ::IsWindowUnicode(::as_HWND(this->operating_system_window())) != false;
 
       if (bUnicode)
       {
@@ -1075,14 +1075,14 @@ namespace windowing_win32
 
    //   //SetLastError(0);
    //   {
-   //      //HWND hwnd = (HWND) _HWND();
+   //      //HWND hwnd = ::as_HWND(this->operating_system_window());
    //      user_interaction()->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
    //      //auto lasterror = ::windows::get_last_error();
    //      //information() << "ICON_BIT_SMALLER" << dwLastError;
    //   }
    //   //SetLastError(0);
    //   {
-   //     // HWND hwnd = (HWND) _HWND();
+   //     // HWND hwnd = ::as_HWND(this->operating_system_window());
    //      user_interaction()->post_message(WM_SETICON, ICON_BIG, (LPARAM)hicon);
    //      //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
    //      //auto lasterror = ::windows::get_last_error();
@@ -1649,9 +1649,9 @@ namespace windowing_win32
    //{
 
 
-   //   WNDPROC pfnWndProc = WNDPROC(::GetWindowLongPtr((HWND) _HWND(), GWLP_WNDPROC));
+   //   WNDPROC pfnWndProc = WNDPROC(::GetWindowLongPtr(::as_HWND(this->operating_system_window()), GWLP_WNDPROC));
 
-   //   if (WNDPROC(::GetWindowLongPtr((HWND) _HWND(), GWLP_WNDPROC)) == pfnWndProc)
+   //   if (WNDPROC(::GetWindowLongPtr(::as_HWND(this->operating_system_window()), GWLP_WNDPROC)) == pfnWndProc)
    //   {
 
    //      WNDPROC pfnSuper = *GetSuperWndProcAddr();
@@ -1659,7 +1659,7 @@ namespace windowing_win32
    //      if (pfnSuper != nullptr)
    //      {
 
-   //         ::SetWindowLongPtr((HWND) _HWND(), GWLP_WNDPROC, reinterpret_cast<iptr>(pfnSuper));
+   //         ::SetWindowLongPtr(::as_HWND(this->operating_system_window()), GWLP_WNDPROC, reinterpret_cast<iptr>(pfnSuper));
 
    //      }
 
@@ -1685,9 +1685,9 @@ namespace windowing_win32
    //{
 
 
-   //   WNDPROC pfnWndProc = WNDPROC(::GetWindowLongPtr((HWND) _HWND(), GWLP_WNDPROC));
+   //   WNDPROC pfnWndProc = WNDPROC(::GetWindowLongPtr(::as_HWND(this->operating_system_window()), GWLP_WNDPROC));
 
-   //   if (WNDPROC(::GetWindowLongPtr((HWND) _HWND(), GWLP_WNDPROC)) == pfnWndProc)
+   //   if (WNDPROC(::GetWindowLongPtr(::as_HWND(this->operating_system_window()), GWLP_WNDPROC)) == pfnWndProc)
    //   {
 
    //      WNDPROC pfnSuper = *GetSuperWndProcAddr();
@@ -1695,7 +1695,7 @@ namespace windowing_win32
    //      if (pfnSuper != nullptr)
    //      {
 
-   //         ::SetWindowLongPtr((HWND) _HWND(), GWLP_WNDPROC, reinterpret_cast<iptr>(pfnSuper));
+   //         ::SetWindowLongPtr(::as_HWND(this->operating_system_window()), GWLP_WNDPROC, reinterpret_cast<iptr>(pfnSuper));
 
    //      }
 
@@ -1734,7 +1734,7 @@ namespace windowing_win32
    //oswindow window::get_parent_oswindow() const
    //{
 
-   //   auto hwnd = (HWND) _HWND();
+   //   auto hwnd = ::as_HWND(this->operating_system_window());
 
    //   auto hwndParent = ::GetParent(hwnd);
 
@@ -1748,7 +1748,7 @@ namespace windowing_win32
    void window::set_parent(::windowing::window *pwindowParent)
    {
 
-      auto hwnd = (HWND) _HWND();
+      auto hwnd = ::as_HWND(this->operating_system_window());
 
       HWND hwndParent = nullptr;
 
@@ -1779,7 +1779,7 @@ namespace windowing_win32
 
       auto iShowWindow = windows::show_window(edisplay, useractivation);
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       //if (iShowWindow == SW_MAXIMIZE)
       //{
@@ -2048,7 +2048,7 @@ namespace windowing_win32
 
       information() << "set_keyboard_focus";
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       HWND hwndThreadPreviousFocus = ::SetFocus(hwnd);
 
@@ -2086,7 +2086,7 @@ namespace windowing_win32
 
       information() << "set_active_window";
 
-      auto hwnd = (HWND) _HWND();
+      auto hwnd = ::as_HWND(this->operating_system_window());
 
       if (!::SetActiveWindow(hwnd))
       {
@@ -2107,7 +2107,7 @@ namespace windowing_win32
    void window::bring_to_front()
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       if (!::BringWindowToTop(hwnd))
       {
@@ -2126,7 +2126,7 @@ namespace windowing_win32
    void window::switch_to_this_window(bool b)
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       ::SwitchToThisWindow(hwnd, b ? TRUE : FALSE);
 
@@ -2337,7 +2337,7 @@ namespace windowing_win32
          << [this, strType]()
          {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             if (::IsWindowVisible(hwnd))
             {
@@ -2377,7 +2377,7 @@ namespace windowing_win32
 
    //   int nCmdShow = windows_show_window(edisplay, useractivation);
 
-   //   if(!::XXXShowWindow((HWND) _HWND(), nCmdShow))
+   //   if(!::XXXShowWindow(::as_HWND(this->operating_system_window()), nCmdShow))
    //   {
 
    //      return ::error_failed;
@@ -2392,7 +2392,7 @@ namespace windowing_win32
    iptr window::_get_window_long_ptr(int nIndex) const
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       auto iptr = GetWindowLongPtr(hwnd, nIndex);
 
@@ -2423,7 +2423,7 @@ namespace windowing_win32
 
       auto puserinteraction = user_interaction();
 
-      auto hwnd = (HWND) _HWND();
+      auto hwnd = ::as_HWND(this->operating_system_window());
       auto zorder = zorderParam;
       auto x = xParam;
       auto y = yParam;
@@ -2652,7 +2652,7 @@ namespace windowing_win32
    bool window::_set_window_long_ptr(int nIndex, iptr i)
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       SetWindowLongPtr(hwnd, nIndex, i);
 
@@ -2664,7 +2664,7 @@ namespace windowing_win32
    bool window::client_to_screen(::i32_point *ppoint)
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       ClientToScreen(hwnd, (POINT *)ppoint);
 
@@ -2676,7 +2676,7 @@ namespace windowing_win32
    bool window::screen_to_client(::i32_point *ppoint)
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       ScreenToClient(hwnd, (POINT *)ppoint);
 
@@ -2691,7 +2691,7 @@ namespace windowing_win32
    //
    //      i32_rectangle rectangleWindowCurrent;
    //
-   //      GetWindowRect((HWND) _HWND(), (RECT *)&rectangleWindowCurrent);
+   //      GetWindowRect(::as_HWND(this->operating_system_window()), (RECT *)&rectangleWindowCurrent);
    //
    //      //               }
    //                     //else
@@ -2851,7 +2851,7 @@ namespace windowing_win32
    //bool window::is_iconic()
    //{
 
-   //   HWND hwnd = (HWND) _HWND();
+   //   HWND hwnd = ::as_HWND(this->operating_system_window());
 
    //   auto bIconic = ::IsIconic(hwnd);
 
@@ -2863,7 +2863,7 @@ namespace windowing_win32
    bool window::is_window()
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       auto bWindow = ::IsWindow(hwnd);
 
@@ -2875,7 +2875,7 @@ namespace windowing_win32
    bool window::is_window_visible()
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       auto bWindowVisible = ::IsWindowVisible(hwnd);
 
@@ -3096,7 +3096,7 @@ namespace windowing_win32
 
       information() << "windowing_win32::window::__set_window_position";
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       auto pwin32windowing = win32_windowing();
 
@@ -3346,7 +3346,7 @@ namespace windowing_win32
    //   //}
 
 
-   //   HWND hwnd = (HWND) _HWND();
+   //   HWND hwnd = ::as_HWND(this->operating_system_window());
 
    //   ::pointer < class windowing > pwindowing = this->windowing();
 
@@ -3678,7 +3678,7 @@ namespace windowing_win32
 
    //   ::GetCursorPos(&point);
 
-   //   ::ScreenToClient((HWND) _HWND(), &point);
+   //   ::ScreenToClient(::as_HWND(this->operating_system_window()), &point);
 
    //   ::i32_point i32_point;
 
@@ -3824,7 +3824,7 @@ namespace windowing_win32
 
       puserinteractionpl->length = sizeof(WINDOWPLACEMENT);
 
-      return ::GetWindowPlacement((HWND) _HWND(), puserinteractionpl) != false;
+      return ::GetWindowPlacement(::as_HWND(this->operating_system_window()), puserinteractionpl) != false;
 
    }
 
@@ -3836,11 +3836,11 @@ namespace windowing_win32
 
       synchronous_lock synchronouslock(puserinteraction->synchronization());
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
       ((WINDOWPLACEMENT *)puserinteractionpl)->length = sizeof(WINDOWPLACEMENT);
 
-      return ::SetWindowPlacement((HWND) _HWND(), puserinteractionpl) != false;
+      return ::SetWindowPlacement(::as_HWND(this->operating_system_window()), puserinteractionpl) != false;
 
    }
 
@@ -3869,7 +3869,7 @@ namespace windowing_win32
             pactivationtoken->m_ptaskForeground->post([this]()
             {
 
-               HWND hwnd = (HWND) _HWND();
+               HWND hwnd = ::as_HWND(this->operating_system_window());
 
                ::SetForegroundWindow(hwnd);
 
@@ -3884,7 +3884,7 @@ namespace windowing_win32
       if (!bPosted)
       {
 
-         HWND hwnd = (HWND) _HWND();
+         HWND hwnd = ::as_HWND(this->operating_system_window());
 
          ::SetForegroundWindow(hwnd);
 
@@ -4101,7 +4101,7 @@ namespace windowing_win32
 
       memory_set(&paint, 0, sizeof(paint));
 
-      HDC hdc = ::BeginPaint((HWND) _HWND(), &paint);
+      HDC hdc = ::BeginPaint(::as_HWND(this->operating_system_window()), &paint);
 
       ::SelectClipRgn(hdc, nullptr);
 
@@ -4193,7 +4193,7 @@ namespace windowing_win32
 
       //}
 
-      ::EndPaint((HWND) _HWND(), &paint);
+      ::EndPaint(::as_HWND(this->operating_system_window()), &paint);
 
       pmessage->m_bRet = true;
 
@@ -4209,9 +4209,9 @@ namespace windowing_win32
 
    //   return nullptr;
 
-   //   //ASSERT(::IsWindow((HWND) _HWND()));
+   //   //ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   //return psystem->ui_from_handle(::SetParent((HWND) _HWND(), pWndNewParent->_HWND()));
+   //   //return psystem->ui_from_handle(::SetParent(::as_HWND(this->operating_system_window()), pWndNewParent->_HWND()));
 
    //}
 
@@ -4221,21 +4221,21 @@ namespace windowing_win32
 
    //   return nullptr;
 
-   //   //if (!::IsWindow((HWND) _HWND()))
+   //   //if (!::IsWindow(::as_HWND(this->operating_system_window())))
    //   //{
 
    //   //   return nullptr;
 
    //   //}
 
-   //   //if ((HWND) _HWND(); == nullptr)
+   //   //if (::as_HWND(this->operating_system_window()); == nullptr)
    //   //{
 
    //   //   return nullptr;
 
    //   //}
 
-   //   //HWND hwndParent = ::GetParent((HWND) _HWND());
+   //   //HWND hwndParent = ::GetParent(::as_HWND(this->operating_system_window()));
 
    //   //if (hwndParent == nullptr)
    //   //{
@@ -4263,14 +4263,14 @@ namespace windowing_win32
       //else
       {
 
-         if (!::IsWindow((HWND) _HWND()))
+         if (!::IsWindow(::as_HWND(this->operating_system_window())))
          {
 
             return false;
 
          }
 
-         return ::IsIconic((HWND) _HWND()) != false;
+         return ::IsIconic(::as_HWND(this->operating_system_window())) != false;
 
       }
 
@@ -4294,7 +4294,7 @@ namespace windowing_win32
    ::operating_system::window window::get_owner_operating_system_window()
    {
 
-      auto hwnd = (HWND) _HWND();
+      auto hwnd = ::as_HWND(this->operating_system_window());
 
       if (!::IsWindow(hwnd))
       {
@@ -4303,14 +4303,14 @@ namespace windowing_win32
 
       }
 
-      if ((HWND) _HWND() == nullptr)
+      if (::as_HWND(this->operating_system_window()) == nullptr)
       {
 
          return nullptr;
 
       }
 
-      HWND hwndOwner = ::GetWindow((HWND) _HWND(), GW_OWNER);
+      HWND hwndOwner = ::GetWindow(::as_HWND(this->operating_system_window()), GW_OWNER);
 
       if (hwndOwner == nullptr)
       {
@@ -4333,7 +4333,7 @@ namespace windowing_win32
    void window::set_owner(::windowing::window *pWndNewOwner)
    {
 
-      auto hwnd = (HWND) _HWND();
+      auto hwnd = ::as_HWND(this->operating_system_window());
 
       HWND hwndOwner = nullptr;
 
@@ -4360,19 +4360,19 @@ namespace windowing_win32
 
    //int window::get_window_long(int nIndex) const
    //{
-   //   return ::GetWindowLong((HWND) _HWND(), nIndex);
+   //   return ::GetWindowLong(::as_HWND(this->operating_system_window()), nIndex);
    //}
 
    //int window::set_window_long(int nIndex, int lValue)
    //{
-   //   return ::SetWindowLong((HWND) _HWND(), nIndex, lValue);
+   //   return ::SetWindowLong(::as_HWND(this->operating_system_window()), nIndex, lValue);
    //}
 
 
    //iptr window::get_window_long_ptr(int nIndex) const
    //{
 
-   //   return ::GetWindowLongPtr((HWND) _HWND(), nIndex);
+   //   return ::GetWindowLongPtr(::as_HWND(this->operating_system_window()), nIndex);
 
    //}
 
@@ -4380,14 +4380,14 @@ namespace windowing_win32
    //iptr window::set_window_long_ptr(int nIndex, iptr lValue)
    //{
 
-   //   return ::SetWindowLongPtr((HWND) _HWND(), nIndex, lValue);
+   //   return ::SetWindowLongPtr(::as_HWND(this->operating_system_window()), nIndex, lValue);
 
    //}
 
 
    // window
    /* window::operator hwnd() const
-   { return this == nullptr ? nullptr : (HWND) _HWND();; }*/
+   { return this == nullptr ? nullptr : ::as_HWND(this->operating_system_window());; }*/
    //bool window::operator==(const window & wnd) const
    //{
 
@@ -4407,10 +4407,10 @@ namespace windowing_win32
    //unsigned int window::GetStyle() const
    //{
 
-   //   if (!::IsWindow((HWND) _HWND()))
+   //   if (!::IsWindow(::as_HWND(this->operating_system_window())))
    //      return 0;
 
-   //   return (unsigned int)::GetWindowLong((HWND) _HWND(), GWL_STYLE);
+   //   return (unsigned int)::GetWindowLong(::as_HWND(this->operating_system_window()), GWL_STYLE);
 
    //}
 
@@ -4482,7 +4482,7 @@ namespace windowing_win32
          if (nFlags)
          {
 
-            ::SetWindowPos((HWND) _HWND(),
+            ::SetWindowPos(::as_HWND(this->operating_system_window()),
                            0, 0, 0, 0, 0,
                            SWP_NOSIZE
                            | SWP_NOZORDER
@@ -4516,7 +4516,7 @@ namespace windowing_win32
          if (nFlags)
          {
 
-            ::SetWindowPos((HWND) _HWND(),
+            ::SetWindowPos(::as_HWND(this->operating_system_window()),
                            0, 0, 0, 0, 0,
                            SWP_NOSIZE
                            | SWP_NOZORDER
@@ -4536,10 +4536,10 @@ namespace windowing_win32
    //bool window::ModifyStyleEx(unsigned int dwRemove, unsigned int dwAdd, unsigned int nFlags)
    //{
 
-   //   if (!::IsWindow((HWND) _HWND()))
+   //   if (!::IsWindow(::as_HWND(this->operating_system_window())))
    //      return false;
 
-   //   return ModifyStyleEx((HWND) _HWND(), dwRemove, dwAdd, nFlags);
+   //   return ModifyStyleEx(::as_HWND(this->operating_system_window()), dwRemove, dwAdd, nFlags);
 
    //}
 
@@ -4547,7 +4547,7 @@ namespace windowing_win32
    lresult window::send_message(::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    {
 
-      return ::SendMessage((HWND) _HWND(), eusermessage, wparam, lparam);
+      return ::SendMessage(::as_HWND(this->operating_system_window()), eusermessage, wparam, lparam);
 
    }
 
@@ -4555,7 +4555,7 @@ namespace windowing_win32
    void window::post_message(::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       BOOL bOk = ::PostMessage(hwnd, eusermessage, wparam, lparam);
 
@@ -4592,7 +4592,7 @@ namespace windowing_win32
 
       const unichar *pwszText = wstrText;
 
-      if (!::SendMessageTimeoutW((HWND) _HWND(), WM_SETTEXT, 0, (LONG_PTR)pwszText, SMTO_ABORTIFHUNG, 500, &lresult))
+      if (!::SendMessageTimeoutW(::as_HWND(this->operating_system_window()), WM_SETTEXT, 0, (LONG_PTR)pwszText, SMTO_ABORTIFHUNG, 500, &lresult))
       {
 
          return;
@@ -4625,7 +4625,7 @@ namespace windowing_win32
 
       DWORD_PTR lresult = 0;
 
-      if (!::SendMessageTimeoutW((HWND) _HWND(), WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, 90, &lresult))
+      if (!::SendMessageTimeoutW(::as_HWND(this->operating_system_window()), WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, 90, &lresult))
       {
 
          return {};
@@ -4636,7 +4636,7 @@ namespace windowing_win32
 
       auto p = wstr.get_buffer(lresult);
 
-      if (!::SendMessageTimeoutW((HWND) _HWND(), WM_GETTEXT, (lparam)p, lresult + 1, SMTO_ABORTIFHUNG, 90, &lresult))
+      if (!::SendMessageTimeoutW(::as_HWND(this->operating_system_window()), WM_GETTEXT, (lparam)p, lresult + 1, SMTO_ABORTIFHUNG, 90, &lresult))
       {
 
          return {};
@@ -4653,25 +4653,25 @@ namespace windowing_win32
    //character_count window::get_window_text_length()
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return ::GetWindowTextLength((HWND) _HWND());
+   //   return ::GetWindowTextLength(::as_HWND(this->operating_system_window()));
 
    //}
 
 
    //void window::DragAcceptFiles(bool bAccept)
    //{
-   //   ASSERT(::IsWindow((HWND) _HWND()));
-   //   ::DragAcceptFiles((HWND) _HWND(), bAccept);
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+   //   ::DragAcceptFiles(::as_HWND(this->operating_system_window()), bAccept);
    //}
 
 
    unsigned int window::ArrangeIconicWindows()
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
-      return ::ArrangeIconicWindows((HWND) _HWND());
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+      return ::ArrangeIconicWindows(::as_HWND(this->operating_system_window()));
 
    }
 
@@ -4679,7 +4679,7 @@ namespace windowing_win32
    //int window::SetWindowRgn(HRGN hRgn,bool bRedraw)
    //{
 
-   //   //ASSERT(::IsWindow((HWND) _HWND())); return ::SetWindowRgn((HWND) _HWND(),hRgn,bRedraw);
+   //   //ASSERT(::IsWindow(::as_HWND(this->operating_system_window()))); return ::SetWindowRgn(::as_HWND(this->operating_system_window()),hRgn,bRedraw);
 
    //}
 
@@ -4687,7 +4687,7 @@ namespace windowing_win32
    //int window::GetWindowRgn(HRGN hRgn)
    //{
 
-   //   //ASSERT(::IsWindow((HWND) _HWND()) && hRgn != nullptr); return ::GetWindowRgn((HWND) _HWND(),hRgn);
+   //   //ASSERT(::IsWindow(::as_HWND(this->operating_system_window())) && hRgn != nullptr); return ::GetWindowRgn(::as_HWND(this->operating_system_window()),hRgn);
 
    //}
 
@@ -4705,7 +4705,7 @@ namespace windowing_win32
    //         !no_activate(edisplay))
    //      {
 
-   //         HWND hwnd = (HWND) _HWND();
+   //         HWND hwnd = ::as_HWND(this->operating_system_window());
 
    //         hwnd = ::GetLastActivePopup(hwnd);
 
@@ -4737,7 +4737,7 @@ namespace windowing_win32
    //bool window::BringWindowToTop()
    //{
 
-   //   bool bOk = ::BringWindowToTop((HWND) _HWND()) != false;
+   //   bool bOk = ::BringWindowToTop(::as_HWND(this->operating_system_window())) != false;
 
 
    //   if (GetExStyle() & WS_EX_LAYERED)
@@ -4746,13 +4746,13 @@ namespace windowing_win32
    //      if (!(GetExStyle() & WS_EX_TOPMOST))
    //      {
 
-   //         ::set_window_position((HWND) _HWND(), (HWND)e_zorder_top, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+   //         ::set_window_position(::as_HWND(this->operating_system_window()), (HWND)e_zorder_top, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 
-   //         //::set_window_position((HWND) _HWND(),(HWND)e_zorder_top,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+   //         //::set_window_position(::as_HWND(this->operating_system_window()),(HWND)e_zorder_top,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 
-   //         //::set_window_position((HWND) _HWND(),(HWND)e_zorder_top_most,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+   //         //::set_window_position(::as_HWND(this->operating_system_window()),(HWND)e_zorder_top_most,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 
-   //         //::set_window_position((HWND) _HWND(),(HWND)e_zorder_top,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+   //         //::set_window_position(::as_HWND(this->operating_system_window()),(HWND)e_zorder_top,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 
    //      }
 
@@ -4766,9 +4766,9 @@ namespace windowing_win32
    //void window::MapWindowPoints(::user::window * puserinteractionTo, ::i32_point * pPoint, unsigned int nCount)
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   ::MapWindowPoints((HWND) _HWND(), puserinteractionTo->_HWND(), pPoint, nCount);
+   //   ::MapWindowPoints(::as_HWND(this->operating_system_window()), puserinteractionTo->_HWND(), pPoint, nCount);
 
    //}
 
@@ -4776,31 +4776,31 @@ namespace windowing_win32
    //void window::MapWindowPoints(::user::window * puserinteractionTo, ::i32_rectangle * prectangle)
 
    //{
-   //   ASSERT(::IsWindow((HWND) _HWND()));
-   //   ::MapWindowPoints((HWND) _HWND(), puserinteractionTo->_HWND(), (::i32_point *)prectangle, 2);
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+   //   ::MapWindowPoints(::as_HWND(this->operating_system_window()), puserinteractionTo->_HWND(), (::i32_point *)prectangle, 2);
 
    //}
 
 
    void window::UpdateWindow()
    {
-      ::UpdateWindow((HWND) _HWND());
+      ::UpdateWindow(::as_HWND(this->operating_system_window()));
    }
 
 
    void window::SetRedraw(bool bRedraw)
    {
-      ASSERT(::IsWindow((HWND) _HWND()));
-      ::SendMessage((HWND) _HWND(), WM_SETREDRAW, bRedraw, 0);
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+      ::SendMessage(::as_HWND(this->operating_system_window()), WM_SETREDRAW, bRedraw, 0);
    }
 
 
    bool window::GetUpdateRect(::i32_rectangle *prectangle, bool bErase)
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
       RECT r;
-      auto bOk = ::GetUpdateRect((HWND) _HWND(), &r, bErase) != false;
+      auto bOk = ::GetUpdateRect(::as_HWND(this->operating_system_window()), &r, bErase) != false;
 
       *prectangle = r;
 
@@ -4812,8 +4812,8 @@ namespace windowing_win32
    int window::GetUpdateRgn(::draw2d::region *pRgn, bool bErase)
    {
 
-      //ASSERT(::IsWindow((HWND) _HWND()));
-      //return ::GetUpdateRgn((HWND) _HWND(), (HRGN)pRgn->get_os_data(), bErase);
+      //ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+      //return ::GetUpdateRgn(::as_HWND(this->operating_system_window()), (HRGN)pRgn->get_os_data(), bErase);
 
       return 0;
 
@@ -4822,16 +4822,16 @@ namespace windowing_win32
 
    void window::Invalidate(bool bErase)
    {
-      ASSERT(::IsWindow((HWND) _HWND()));
-      ::InvalidateRect((HWND) _HWND(), nullptr, bErase);
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+      ::InvalidateRect(::as_HWND(this->operating_system_window()), nullptr, bErase);
    }
 
 
    void window::InvalidateRect(const ::i32_rectangle *rectangle, bool bErase)
 
    {
-      ASSERT(::IsWindow((HWND) _HWND()));
-      ::InvalidateRect((HWND) _HWND(), (RECT *)rectangle, bErase);
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+      ::InvalidateRect(::as_HWND(this->operating_system_window()), (RECT *)rectangle, bErase);
 
    }
 
@@ -4839,8 +4839,8 @@ namespace windowing_win32
    void window::InvalidateRgn(::draw2d::region *pRgn, bool bErase)
    {
 
-      //ASSERT(::IsWindow((HWND) _HWND()));
-      //::InvalidateRgn((HWND) _HWND(), (HRGN)pRgn->get_os_data(), bErase);
+      //ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+      //::InvalidateRgn(::as_HWND(this->operating_system_window()), (HRGN)pRgn->get_os_data(), bErase);
 
    }
 
@@ -4849,9 +4849,9 @@ namespace windowing_win32
 
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-      ::ValidateRect((HWND) _HWND(), (RECT *)rectangle);
+      ::ValidateRect(::as_HWND(this->operating_system_window()), (RECT *)rectangle);
 
 
    }
@@ -4860,9 +4860,9 @@ namespace windowing_win32
    void window::ValidateRgn(::draw2d::region *pRgn)
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-      //::ValidateRgn((HWND) _HWND(), (HRGN)pRgn->get_os_data());
+      //::ValidateRgn(::as_HWND(this->operating_system_window()), (HRGN)pRgn->get_os_data());
 
    }
 
@@ -4922,9 +4922,9 @@ namespace windowing_win32
    void window::ShowOwnedPopups(bool bShow)
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-      ::ShowOwnedPopups((HWND) _HWND(), bShow);
+      ::ShowOwnedPopups(::as_HWND(this->operating_system_window()), bShow);
 
    }
 
@@ -4932,13 +4932,13 @@ namespace windowing_win32
    ::pointer<::draw2d::graphics> window::GetDCEx(::draw2d::region *prgnClip, unsigned int flags)
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
       auto pgraphics = createø<::draw2d::graphics>();
 
       throw ::exception(todo);
 
-      //pgraphics->attach(::GetDCEx((HWND) _HWND(), (HRGN)prgnClip->get_os_data(), flags));
+      //pgraphics->attach(::GetDCEx(::as_HWND(this->operating_system_window()), (HRGN)prgnClip->get_os_data(), flags));
 
       return pgraphics;
 
@@ -4949,9 +4949,9 @@ namespace windowing_win32
    bool window::LockWindowUpdate()
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-      return ::LockWindowUpdate((HWND) _HWND()) != false;
+      return ::LockWindowUpdate(::as_HWND(this->operating_system_window())) != false;
 
    }
 
@@ -4959,7 +4959,7 @@ namespace windowing_win32
    void window::UnlockWindowUpdate()
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
       ::LockWindowUpdate(nullptr);
 
@@ -4988,7 +4988,7 @@ namespace windowing_win32
       if (!(_get_ex_style() & WS_EX_LAYERED))
       {
 
-         ::RedrawWindow((HWND) _HWND(), nullptr, nullptr, flags);
+         ::RedrawWindow(::as_HWND(this->operating_system_window()), nullptr, nullptr, flags);
 
       }
 
@@ -5022,7 +5022,7 @@ namespace windowing_win32
 
          //   }
 
-         //   return ::set_need_redraw((HWND) _HWND(), pRectUpdate, prgnUpdate == nullptr ? nullptr : (HRGN)prgnUpdate->get_os_data(),
+         //   return ::set_need_redraw(::as_HWND(this->operating_system_window()), pRectUpdate, prgnUpdate == nullptr ? nullptr : (HRGN)prgnUpdate->get_os_data(),
 
          //      flags | RDW_NOERASE | RDW_NOFRAME | RDW_INVALIDATE) != false;
 
@@ -5044,9 +5044,9 @@ namespace windowing_win32
    bool window::EnableScrollBar(int nSBFlags, unsigned int nArrowFlags)
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-      return ::EnableScrollBar((HWND) _HWND(), nSBFlags, nArrowFlags) != false;
+      return ::EnableScrollBar(::as_HWND(this->operating_system_window()), nSBFlags, nArrowFlags) != false;
 
    }
 
@@ -5055,9 +5055,9 @@ namespace windowing_win32
 
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return ::DrawAnimatedRects((HWND) _HWND(), idAni, prcFrom, lprcTo) != false;
+   //   return ::DrawAnimatedRects(::as_HWND(this->operating_system_window()), idAni, prcFrom, lprcTo) != false;
 
 
    //}
@@ -5066,11 +5066,11 @@ namespace windowing_win32
 
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
       throw ::interface_only();
       return false;
-      //      return ::DrawCaption((HWND) _HWND(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->_HWND(), prc, uFlags) != false;
+      //      return ::DrawCaption(::as_HWND(this->operating_system_window()), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->_HWND(), prc, uFlags) != false;
 
 
    }
@@ -5079,7 +5079,7 @@ namespace windowing_win32
    bool window::is_this_enabled()
    {
 
-      return ::IsWindowEnabled((HWND) _HWND()) != false;
+      return ::IsWindowEnabled(::as_HWND(this->operating_system_window())) != false;
 
    }
 
@@ -5087,7 +5087,7 @@ namespace windowing_win32
    void window::enable_window(bool bEnable)
    {
 
-      BOOL bStateOk = ::EnableWindow((HWND) _HWND(), bEnable);
+      BOOL bStateOk = ::EnableWindow(::as_HWND(this->operating_system_window()), bEnable);
 
 
       if (is_different(bStateOk, bEnable))
@@ -5109,7 +5109,7 @@ namespace windowing_win32
    //void window::set_focus()
    //{
 
-   //   HWND hwnd = (HWND) _HWND();
+   //   HWND hwnd = ::as_HWND(this->operating_system_window());
 
    //   if (!::XXXSetFocus(hwnd))
    //   {
@@ -5126,14 +5126,14 @@ namespace windowing_win32
    //bool window::XXXSetFocus()
    //{
 
-   //   if (!::IsWindow((HWND) _HWND()))
+   //   if (!::IsWindow(::as_HWND(this->operating_system_window())))
    //   {
 
    //      return false;
 
    //   }
 
-   //   if (!::IsWindowVisible((HWND) _HWND()))
+   //   if (!::IsWindowVisible(::as_HWND(this->operating_system_window())))
    //   {
 
    //      return false;
@@ -5143,7 +5143,7 @@ namespace windowing_win32
    //   puserinteraction->post_procedure(__routine([this]()
    //      {
 
-   //         HWND hwnd = ::XXXSetFocus((HWND) _HWND());
+   //         HWND hwnd = ::XXXSetFocus(::as_HWND(this->operating_system_window()));
 
    //         ::output_debug_string("::windowing_win32::window::XXXSetFocus ::XXXSetFocus(" + ::hex::lower_from((iptr)hwnd) + ")");
 
@@ -5179,9 +5179,9 @@ namespace windowing_win32
    //void window::CheckDlgButton(int nIDButton, unsigned int nCheck)
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   ::CheckDlgButton((HWND) _HWND(), nIDButton, nCheck);
+   //   ::CheckDlgButton(::as_HWND(this->operating_system_window()), nIDButton, nCheck);
 
    //}
 
@@ -5189,9 +5189,9 @@ namespace windowing_win32
    //void window::CheckRadioButton(int nIDFirstButton, int nIDLastButton, int nIDCheckButton)
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   ::CheckRadioButton((HWND) _HWND(), nIDFirstButton, nIDLastButton, nIDCheckButton);
+   //   ::CheckRadioButton(::as_HWND(this->operating_system_window()), nIDFirstButton, nIDLastButton, nIDCheckButton);
 
    //}
 
@@ -5200,9 +5200,9 @@ namespace windowing_win32
 
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return ::DlgDirList((HWND) _HWND(), pPathSpec, nIDListBox, nIDStaticPath, nFileType);
+   //   return ::DlgDirList(::as_HWND(this->operating_system_window()), pPathSpec, nIDListBox, nIDStaticPath, nFileType);
 
 
    //}
@@ -5212,9 +5212,9 @@ namespace windowing_win32
 
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return ::DlgDirListComboBox((HWND) _HWND(), pPathSpec, nIDComboBox, nIDStaticPath, nFileType);
+   //   return ::DlgDirListComboBox(::as_HWND(this->operating_system_window()), pPathSpec, nIDComboBox, nIDStaticPath, nFileType);
 
 
    //}
@@ -5224,9 +5224,9 @@ namespace windowing_win32
 
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return ::DlgDirSelectEx((HWND) _HWND(), pString, nSize, nIDListBox) != false;
+   //   return ::DlgDirSelectEx(::as_HWND(this->operating_system_window()), pString, nSize, nIDListBox) != false;
 
 
    //}
@@ -5236,9 +5236,9 @@ namespace windowing_win32
 
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return ::DlgDirSelectComboBoxEx((HWND) _HWND(), pString, nSize, nIDComboBox) != false;
+   //   return ::DlgDirSelectComboBoxEx(::as_HWND(this->operating_system_window()), pString, nSize, nIDComboBox) != false;
 
 
    //}
@@ -5319,14 +5319,14 @@ namespace windowing_win32
 
    //void window::SetDlgItemInt(int nID, unsigned int nValue, bool bSigned)
    //{
-   //   ASSERT(::IsWindow((HWND) _HWND()));
-   //   ::SetDlgItemInt((HWND) _HWND(), nID, nValue, bSigned);
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+   //   ::SetDlgItemInt(::as_HWND(this->operating_system_window()), nID, nValue, bSigned);
    //}
    //void window::SetDlgItemText(int nID, const ::scoped_string & scopedstrString)
 
    //{
-   //   ASSERT(::IsWindow((HWND) _HWND()));
-   //   ::SetDlgItemTextW((HWND) _HWND(), nID, wstring(pszString));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+   //   ::SetDlgItemTextW(::as_HWND(this->operating_system_window()), nID, wstring(pszString));
 
    //}
    //int window::ScrollWindowEx(int dx, int dy,
@@ -5336,8 +5336,8 @@ namespace windowing_win32
 
    //{
 
-   //   //ASSERT(::IsWindow((HWND) _HWND()));
-   //   //return ::ScrollWindowEx((HWND) _HWND(), dx, dy, pRectScroll, lpRectClip,
+   //   //ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+   //   //return ::ScrollWindowEx(::as_HWND(this->operating_system_window()), dx, dy, pRectScroll, lpRectClip,
 
    //   //                        (HRGN)prgnUpdate->get_os_data(), pRectUpdate, flags);
 
@@ -5348,23 +5348,23 @@ namespace windowing_win32
 
    //void window::ShowScrollBar(unsigned int nBar, bool bShow)
    //{
-   //   ASSERT(::IsWindow((HWND) _HWND()));
-   //   ::ShowScrollBar((HWND) _HWND(), nBar, bShow);
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+   //   ::ShowScrollBar(::as_HWND(this->operating_system_window()), nBar, bShow);
    //}
    //::user::interaction * window::ChildWindowFromPoint(const ::i32_point & point)
    //{
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return  psystem->ui_from_handle(::ChildWindowFromPoint((HWND) _HWND(), i32_point));
+   //   return  psystem->ui_from_handle(::ChildWindowFromPoint(::as_HWND(this->operating_system_window()), i32_point));
 
 
    //}
 
    //::user::interaction * window::ChildWindowFromPoint(const ::i32_point & point, unsigned int nFlags)
    //{
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return  psystem->ui_from_handle(::ChildWindowFromPointEx((HWND) _HWND(), point, nFlags));
+   //   return  psystem->ui_from_handle(::ChildWindowFromPointEx(::as_HWND(this->operating_system_window()), point, nFlags));
 
 
    //}
@@ -5373,7 +5373,7 @@ namespace windowing_win32
    ::windowing::window *window::get_next_window(unsigned int nFlag)
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       HWND hwndNext = ::GetNextWindow(hwnd, nFlag);
 
@@ -5389,7 +5389,7 @@ namespace windowing_win32
    ::windowing::window *window::get_top_window()
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       HWND hwndTop = ::GetTopWindow(hwnd);
 
@@ -5405,7 +5405,7 @@ namespace windowing_win32
    ::windowing::window *window::get_window(unsigned int nCmd)
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       HWND hwndGet = ::GetWindow(hwnd, nCmd);
 
@@ -5421,7 +5421,7 @@ namespace windowing_win32
    ::windowing::window *window::get_last_active_popup()
    {
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       HWND hwndLastActivePopup = ::GetLastActivePopup(hwnd);
 
@@ -5437,9 +5437,9 @@ namespace windowing_win32
    //bool window::FlashWindow(bool bInvert)
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return ::FlashWindow((HWND) _HWND(), bInvert) != false;
+   //   return ::FlashWindow(::as_HWND(this->operating_system_window()), bInvert) != false;
 
    //}
 
@@ -5447,9 +5447,9 @@ namespace windowing_win32
    //bool window::ChangeClipboardChain(hwnd oswindow_Next)
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return ::ChangeClipboardChain((HWND) _HWND(), oswindow_Next) != false;
+   //   return ::ChangeClipboardChain(::as_HWND(this->operating_system_window()), oswindow_Next) != false;
 
    //}
 
@@ -5457,9 +5457,9 @@ namespace windowing_win32
    //hwnd window::SetClipboardImpacter()
    //{
 
-   //   ASSERT(::IsWindow((HWND) _HWND()));
+   //   ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-   //   return ::SetClipboardImpacter((HWND) _HWND());
+   //   return ::SetClipboardImpacter(::as_HWND(this->operating_system_window()));
 
    //}
 
@@ -5474,7 +5474,7 @@ namespace windowing_win32
 
    //   }
 
-   //   if (!::OpenClipboard((HWND) _HWND()))
+   //   if (!::OpenClipboard(::as_HWND(this->operating_system_window())))
    //   {
 
    //      return false;
@@ -5559,7 +5559,7 @@ namespace windowing_win32
    void window::HideCaret()
    {
 
-      ::HideCaret((HWND) _HWND());
+      ::HideCaret(::as_HWND(this->operating_system_window()));
 
    }
 
@@ -5567,7 +5567,7 @@ namespace windowing_win32
    void window::ShowCaret()
    {
 
-      ::ShowCaret((HWND) _HWND());
+      ::ShowCaret(::as_HWND(this->operating_system_window()));
 
    }
 
@@ -5827,7 +5827,7 @@ namespace windowing_win32
 
       output_debug_string("\ninteraction_impl::_001OnWindowPosChanged");
 
-      if (::IsIconic((HWND) _HWND()))
+      if (::IsIconic(::as_HWND(this->operating_system_window())))
       {
 
          auto puserinteraction = user_interaction();
@@ -5840,7 +5840,7 @@ namespace windowing_win32
          }
 
       }
-      else if (::IsZoomed((HWND) _HWND()))
+      else if (::IsZoomed(::as_HWND(this->operating_system_window())))
       {
 
          auto puserinteraction = user_interaction();
@@ -6257,7 +6257,7 @@ namespace windowing_win32
    void window::BeginModalState()
    {
 
-      ::EnableWindow((HWND) _HWND(), false);
+      ::EnableWindow(::as_HWND(this->operating_system_window()), false);
 
    }
 
@@ -6265,7 +6265,7 @@ namespace windowing_win32
    void window::EndModalState()
    {
 
-      ::EnableWindow((HWND) _HWND(), true);
+      ::EnableWindow(::as_HWND(this->operating_system_window()), true);
 
    }
 
@@ -6288,17 +6288,17 @@ namespace windowing_win32
 
    void window::CloseWindow()
    {
-      ASSERT(::IsWindow((HWND) _HWND()));
-      ::CloseWindow((HWND) _HWND());
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
+      ::CloseWindow(::as_HWND(this->operating_system_window()));
    }
 
 
    bool window::OpenIcon()
    {
 
-      ASSERT(::IsWindow((HWND) _HWND()));
+      ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-      return ::OpenIcon((HWND) _HWND()) != false;
+      return ::OpenIcon(::as_HWND(this->operating_system_window())) != false;
 
    }
 
@@ -6536,7 +6536,7 @@ namespace windowing_win32
 
       TRACKMOUSEEVENT tme = {sizeof(tme)};
       tme.dwFlags = TME_LEAVE;
-      tme.hwndTrack = (HWND) _HWND();
+      tme.hwndTrack = ::as_HWND(this->operating_system_window());
       TrackMouseEvent(&tme);
 
       track_mouse_leave();
@@ -6624,7 +6624,7 @@ namespace windowing_win32
 
    //   HRESULT hr = OleInitialize(nullptr);
 
-   //   hr = ::RegisterDragDrop((HWND) _HWND(), pimpl);
+   //   hr = ::RegisterDragDrop(::as_HWND(this->operating_system_window()), pimpl);
 
    //   if (SUCCEEDED(CoCreateInstance(CLSID_DragDropHelper, nullptr,
    //      CLSCTX_INPROC_SERVER,
@@ -6681,7 +6681,7 @@ namespace windowing_win32
          if (bShowTaskBar)
          {
 
-            hr = tasklist->AddTab((HWND) _HWND());
+            hr = tasklist->AddTab(::as_HWND(this->operating_system_window()));
 
             informationf("result = %d", hr);
 
@@ -6689,7 +6689,7 @@ namespace windowing_win32
          else
          {
 
-            tasklist->DeleteTab((HWND) _HWND());
+            tasklist->DeleteTab(::as_HWND(this->operating_system_window()));
 
          }
 
@@ -6712,7 +6712,7 @@ namespace windowing_win32
       {
 
 
-         if (!::set_window_position((HWND) _HWND(), zorder, x, y, cx, cy, nFlags))
+         if (!::set_window_position(::as_HWND(this->operating_system_window()), zorder, x, y, cx, cy, nFlags))
          {
 
             return false;
@@ -6753,7 +6753,7 @@ namespace windowing_win32
 
          unsigned int dw = DWMNCRP_ENABLED;
 
-         HWND hwnd = (HWND) _HWND();
+         HWND hwnd = ::as_HWND(this->operating_system_window());
 
          DwmExtendFrameIntoClientArea(hwnd, &m);
 
@@ -6798,7 +6798,7 @@ namespace windowing_win32
 
          unsigned int dw = DWMNCRP_ENABLED;
 
-         HWND hwnd = (HWND) _HWND();
+         HWND hwnd = ::as_HWND(this->operating_system_window());
 
          DwmExtendFrameIntoClientArea(hwnd, &m);
 
@@ -6871,7 +6871,7 @@ namespace windowing_win32
          WINDOWINFO wi = {};
          wi.cbSize = sizeof(wi);
 
-         HWND hwnd = (HWND) _HWND();
+         HWND hwnd = ::as_HWND(this->operating_system_window());
 
          ::GetWindowInfo(hwnd, &wi);
 
@@ -6936,7 +6936,7 @@ namespace windowing_win32
    //void window::default_message_handler(::message::message * pmessage)
    //{
 
-   //   if ((HWND) _HWND(); == nullptr)
+   //   if (::as_HWND(this->operating_system_window()); == nullptr)
    //   {
 
    //      return;
@@ -7008,13 +7008,13 @@ namespace windowing_win32
 
       HICON hiconBig = (HICON)picon->get_os_data(sizeBig);
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       if (hiconSmall)
       {
 
          {
-            //HWND hwnd = (HWND) _HWND();
+            //HWND hwnd = ::as_HWND(this->operating_system_window());
             user_interaction()->post_message((::user::enum_message)WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
             //auto lasterror = ::windows::get_last_error();
             //information() << "ICON_BIT_SMALLER" << dwLastError;
@@ -7029,7 +7029,7 @@ namespace windowing_win32
 
          //SetLastError(0);
          {
-            // HWND hwnd = (HWND) _HWND();
+            // HWND hwnd = ::as_HWND(this->operating_system_window());
             //user_interaction()->post_message(WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
             //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
             //auto lasterror = ::windows::get_last_error();
@@ -7156,12 +7156,12 @@ namespace windowing_win32
    //      else if (message == ::user::e_message_left_button_down)
    //      {
    //         ::i32_rectangle rectangleX;
-   //         ::GetClientRect((HWND) _HWND(), rectangleX);
+   //         ::GetClientRect(::as_HWND(this->operating_system_window()), rectangleX);
    //         ::i32_rectangle rectangleWindow;
-   //         ::GetWindowRect((HWND) _HWND(), rectangleWindow);
+   //         ::GetWindowRect(::as_HWND(this->operating_system_window()), rectangleWindow);
    //         ::i32_rectangle rectangleRegion;
    //         HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
-   //         int regionType = ::GetWindowRgn((HWND) _HWND(), hrgn);
+   //         int regionType = ::GetWindowRgn(::as_HWND(this->operating_system_window()), hrgn);
    //         if (regionType != ERROR)
    //         {
    //            ::GetRgnBox(hrgn, rectangleRegion);
@@ -7170,9 +7170,9 @@ namespace windowing_win32
    //         WINDOWPLACEMENT wp;
    //         zero(wp);
    //         wp.length = sizeof(WINDOWPLACEMENT);
-   //         ::GetWindowPlacement((HWND) _HWND(), &wp);
-   //         bool bZoomed = ::IsZoomed((HWND) _HWND()) != false;
-   //         bool bIconic = ::IsIconic((HWND) _HWND()) != false;
+   //         ::GetWindowPlacement(::as_HWND(this->operating_system_window()), &wp);
+   //         bool bZoomed = ::IsZoomed(::as_HWND(this->operating_system_window())) != false;
+   //         bool bIconic = ::IsIconic(::as_HWND(this->operating_system_window())) != false;
    //      }
    //      else if (message == ::user::e_message_set_cursor
    //         || message == ::user::e_message_non_client_mouse_move)
@@ -7313,7 +7313,7 @@ namespace windowing_win32
    //
    //            pmouse->m_bTranslated = true;
    //
-   //            ::ClientToScreen((HWND) _HWND(), &pmouse->m_point);
+   //            ::ClientToScreen(::as_HWND(this->operating_system_window()), &pmouse->m_point);
    //
    //         }
    //
@@ -7613,7 +7613,7 @@ namespace windowing_win32
 
       RECT rectangle;
 
-      if (!::GetWindowRect((HWND) _HWND(), &rectangle))
+      if (!::GetWindowRect(::as_HWND(this->operating_system_window()), &rectangle))
       {
 
          return false;
@@ -7645,7 +7645,7 @@ namespace windowing_win32
 
       RECT rectangle;
 
-      if (!::GetClientRect((HWND) _HWND(), &rectangle))
+      if (!::GetClientRect(::as_HWND(this->operating_system_window()), &rectangle))
       {
 
          return false;
@@ -7667,7 +7667,7 @@ namespace windowing_win32
 
       auto phwnda = toplevelenum.m_phwnda;
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       ::collection::index iFind = phwnda->find_first(hwnd);
 
@@ -7764,7 +7764,7 @@ namespace windowing_win32
 
       auto itask = user_interaction()->user_thread()->m_itask;
 
-      HWND hwnd = (HWND) _HWND();
+      HWND hwnd = ::as_HWND(this->operating_system_window());
 
       lparam lparam;
 
@@ -7951,7 +7951,7 @@ namespace windowing_win32
    float window::get_dpi_for_window()
    {
 
-      auto hwnd = (HWND) _HWND();
+      auto hwnd = ::as_HWND(this->operating_system_window());
 
       auto operatingsystemwindow = ::as_operating_system_window(hwnd);
 
@@ -8069,7 +8069,7 @@ namespace windowing_win32
       if (!(_get_ex_style() & WS_EX_LAYERED))
       {
 
-         ::RedrawWindow((HWND) _HWND(), nullptr, nullptr, flags);
+         ::RedrawWindow(::as_HWND(this->operating_system_window()), nullptr, nullptr, flags);
 
       }
 
@@ -8146,7 +8146,7 @@ namespace windowing_win32
          if (m_papplication->m_gpu.m_bUseSwapChainWindow)
          {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             lresult = ::DefWindowProc(hwnd, message, wparam, lparam);
 
@@ -8325,7 +8325,7 @@ namespace windowing_win32
          if (wparam > 0)
          {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             information() << "activation window " << (iptr)hwnd;
 
@@ -8335,7 +8335,7 @@ namespace windowing_win32
          else
          {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             information() << "(2) activation window " << (iptr)hwnd;
 
@@ -8361,7 +8361,7 @@ namespace windowing_win32
       //if (pimpl)
       {
 
-         auto hwnd = (HWND) _HWND();
+         auto hwnd = ::as_HWND(this->operating_system_window());
 
          if (__windows_message_bypass(hwnd, message, wparam, (iptr)lparam, lresult))
          {
@@ -8390,7 +8390,7 @@ namespace windowing_win32
 
             RECT r;
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             GetWindowRect(hwnd, &r);
 
@@ -8583,7 +8583,7 @@ namespace windowing_win32
             if (message == WM_GETTEXT)
             {
 
-               auto hwnd = (HWND) _HWND();
+               auto hwnd = ::as_HWND(this->operating_system_window());
 
                return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
@@ -8591,7 +8591,7 @@ namespace windowing_win32
             else if (message == WM_GETTEXTLENGTH)
             {
 
-               auto hwnd = (HWND) _HWND();
+               auto hwnd = ::as_HWND(this->operating_system_window());
 
                return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
@@ -8599,7 +8599,7 @@ namespace windowing_win32
             else if (message == WM_SETTEXT)
             {
 
-               auto hwnd = (HWND) _HWND();
+               auto hwnd = ::as_HWND(this->operating_system_window());
 
                return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
@@ -8702,7 +8702,7 @@ namespace windowing_win32
          else
          {
 
-            auto hwnd = (HWND) _HWND();
+            auto hwnd = ::as_HWND(this->operating_system_window());
 
             lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
 
@@ -8807,7 +8807,7 @@ namespace windowing_win32
    void window::_raw_client_to_screen(::i32_point &point)
    {
 
-      ::ClientToScreen((HWND) _HWND(), (POINT *)&point);
+      ::ClientToScreen(::as_HWND(this->operating_system_window()), (POINT *)&point);
 
    }
 
@@ -8815,7 +8815,7 @@ namespace windowing_win32
    void window::_raw_screen_to_client(::i32_point &point)
    {
 
-      ::ScreenToClient((HWND) _HWND(), (POINT *)&point);
+      ::ScreenToClient(::as_HWND(this->operating_system_window()), (POINT *)&point);
 
    }
 

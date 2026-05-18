@@ -69,9 +69,9 @@ namespace subsystem_windows
       critical_section_lock al(&m_criticalsectionPipe);
       if (m_asServer) {
          if (DisconnectNamedPipe(::as_HANDLE(m_pfilePipe)) == 0) {
-            DWORD errCode = GetLastError();
+            auto lasterror = ::windows::last_error();
             ::string errMess;
-            errMess.formatf("DisconnectNamedPipe failed, error code = %u", errCode);
+            errMess.formatf("DisconnectNamedPipe failed, error code = %u", lasterror.m_uLastError);
             throw ::subsystem::Exception(errMess);
          }
       }

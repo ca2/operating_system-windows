@@ -70,7 +70,7 @@ namespace innate_subsystem_windows
       ::wstring wstr(ptab->getCaption());
       _tcscpy(&fixedCaption[0], wstr.c_str());
       tcitem.pszText = fixedCaption;
-      if (TabCtrl_InsertItem((HWND) _HWND(), m_tabContainer.size() - 1, &tcitem) == FALSE) {
+      if (TabCtrl_InsertItem(::as_HWND(this->operating_system_window()), m_tabContainer.size() - 1, &tcitem) == FALSE) {
          //
          // Handle error
          // ...
@@ -84,7 +84,7 @@ namespace innate_subsystem_windows
       if (selectedIndex >= 0) {
          getTab(selectedIndex)->setVisible(false);
       }
-      TabCtrl_SetCurSel((HWND) _HWND(), index);
+      TabCtrl_SetCurSel(::as_HWND(this->operating_system_window()), index);
       getTab(index)->setVisible(true);
    }
 
@@ -132,7 +132,7 @@ namespace innate_subsystem_windows
       //    delete tab;
       // }
       m_tabContainer.clear();
-      TabCtrl_DeleteAllItems((HWND) _HWND());
+      TabCtrl_DeleteAllItems(::as_HWND(this->operating_system_window()));
    }
 
    void TabControl::removeTab(int index)
@@ -142,7 +142,7 @@ namespace innate_subsystem_windows
         // if (i == index) {
             //delete *it;
             m_tabContainer.erase_at(index);
-            TabCtrl_DeleteItem((HWND) _HWND(), index);
+            TabCtrl_DeleteItem(::as_HWND(this->operating_system_window()), index);
         //    break;
          //}
          //i++;
@@ -151,15 +151,15 @@ namespace innate_subsystem_windows
 
    int TabControl::getSelectedTabIndex()
    {
-      int page = TabCtrl_GetCurSel((HWND) _HWND());
+      int page = TabCtrl_GetCurSel(::as_HWND(this->operating_system_window()));
       return page;
    }
 
    void TabControl::adjustRect(::i32_rectangle &rect)
    {
       RECT rc;
-      GetClientRect((HWND) _HWND(), &rc);
-      TabCtrl_AdjustRect((HWND) _HWND(), FALSE, &rc);
+      GetClientRect(::as_HWND(this->operating_system_window()), &rc);
+      TabCtrl_AdjustRect(::as_HWND(this->operating_system_window()), FALSE, &rc);
       ::copy(&rect, &rc);
 
    }

@@ -65,8 +65,8 @@ list(APPEND library_source
    #sapi.cpp
    serial.cpp
    serial.h
-   shared_memory.cpp
-   shared_memory.h
+   #shared_memory.cpp
+   #shared_memory.h
    strdup_array.cpp
    trace.cpp
    uac_tools.cpp

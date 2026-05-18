@@ -104,22 +104,22 @@
 
          auto hwnd = ::as_HWND(operating_system_window());
 
-         return ComboBox_GetCurSel((HWND) _HWND());
+         return ComboBox_GetCurSel(::as_HWND(this->operating_system_window()));
       }
 
       void ComboBox::setSelectedItem(int index)
       {
-         ComboBox_SetCurSel((HWND) _HWND(), index);
+         ComboBox_SetCurSel(::as_HWND(this->operating_system_window()), index);
       }
 
       void ComboBox::deleteItem(int index)
       {
-         ComboBox_DeleteString((HWND) _HWND(), index);
+         ComboBox_DeleteString(::as_HWND(this->operating_system_window()), index);
       }
 
       void ComboBox::removeAllItems()
       {
-         ComboBox_ResetContent((HWND) _HWND());
+         ComboBox_ResetContent(::as_HWND(this->operating_system_window()));
       }
    } // namespace subsystem
 //

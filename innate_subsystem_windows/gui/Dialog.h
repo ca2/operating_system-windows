@@ -65,6 +65,9 @@ namespace innate_subsystem_windows
       void show() override;
 
 
+      void doAttachedModal(const ::function < void(int) > & callback) override;
+
+
       int showModal() override;
 
 
@@ -164,7 +167,7 @@ namespace innate_subsystem_windows
 
 
       //private:
-      char *getResouceName() override;
+      //char *getResouceName() override;
 
 
       //protected:

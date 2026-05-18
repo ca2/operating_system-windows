@@ -102,6 +102,8 @@ namespace innate_subsystem_windows
       //HWND           m_hwnd;
       ::string       m_strClassName;
       ::string       m_strWindowName;
+      ::string       m_strResourceName;
+      ::i32          m_iResourceId;
       HICON          m_hicon;
       bool           m_bWndCreated;
       //WNDPROC        m_wndprocDefault;
@@ -160,24 +162,36 @@ namespace innate_subsystem_windows
       ~Window() override;
 
 
-      void * _HWND() const override;
-      //void _setHWND(void *) override;
-      operating_ambient_window_t operating_ambient_window() const override;
-      void set_operating_ambient_window(operating_ambient_window_t operatingambientwindow) override;
 
 
+
+
+      void setMouseCursor(enum_cursor ecursor) override;
 
       void * _WNDPROC_default() const override;
 
       virtual void _setWindowClassGeneric();
       virtual void _setWindowClassViewer();
 
+
+      void * _HWND() const override;
       // getWindow()
       // Get a handle of the window
       ::operating_system::window operating_system_window() const override;
       void set_operating_system_window(const ::operating_system::window & operatingsystemwindow) override;
 
       ::innate_subsystem::WindowInterface * get_window_implementation() override;
+
+
+      // Set resource name for the window
+      void setResourceName(const ::scoped_string & scopedstr) override;
+      // Set resource id for the window
+      void setResourceId(::u32 uId) override;
+      // Get resource name for the window
+      ::string getResourceName() override;
+      // Get resource id for the window
+      ::u32 getResourceId() override;
+
 
       // createWindow()
       // Create window with windowName and setted style
@@ -360,15 +374,16 @@ namespace innate_subsystem_windows
       virtual bool _onWmCommand(::wparam wparam, ::lparam lparam);
       virtual bool onCommand(unsigned int controlID, unsigned int notificationID) override;
       //virtual bool onSysCommand(::wparam wparam, ::lparam lparam) override;
-      bool on_user_system_command(::user::enum_system_command esystemcommand) override { return false;}
-      virtual bool onMessage(::user::enum_message emessage, ::wparam wparam, ::lparam lparam) override;
-      virtual bool onMouseEx(unsigned int uMessage, int iButtonMask, unsigned short wheelSpeed,
+      bool on_user_system_command(::user::enum_system_command esystemcommand) override;
+      bool onMessage(::user::enum_message emessage, ::wparam wparam, ::lparam lparam) override;
+      bool onKey(user::enum_message eusermessage, user::enum_key euserkey) override;
+      bool onMouseEx(unsigned int uMessage, int iButtonMask, unsigned short wheelSpeed,
                              const ::i32_point &point, bool &bDoDefaultProcessing) override;
-      virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, const ::i32_point & position) override;
+      bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, const ::i32_point & position) override;
 
-      virtual bool onCreate(void * pCreateStruct) override;
+      bool onCreate(void * pCreateStruct) override;
 
-      virtual bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) override;
+      bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) override;
 
 
       virtual void _defer_update_double_buffering();

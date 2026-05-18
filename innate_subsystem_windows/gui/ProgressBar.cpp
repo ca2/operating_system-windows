@@ -38,12 +38,12 @@ namespace innate_subsystem_windows
 
    void ProgressBar::setRange(WORD min, WORD max)
    {
-      SendMessage((HWND) _HWND(), PBM_SETRANGE, 0, MAKELPARAM(min, max));
+      SendMessage(::as_HWND(this->operating_system_window()), PBM_SETRANGE, 0, MAKELPARAM(min, max));
    }
 
    void ProgressBar::setPos(WORD pos)
    {
-      SendMessage((HWND) _HWND(), PBM_SETPOS, (::wparam)pos, 0);
+      SendMessage(::as_HWND(this->operating_system_window()), PBM_SETPOS, (::wparam)pos, 0);
    }
 } // namespace innate_subsystem_windows
 

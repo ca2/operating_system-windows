@@ -51,36 +51,36 @@ namespace innate_subsystem_windows
       initCtrlEx.dwICC  = ICC_BAR_CLASSES;
       InitCommonControlsEx(&initCtrlEx);
 
-      //(HWND) _HWND() = 0;
+      //::as_HWND(this->operating_system_window()) = 0;
       m_initialStr = -1;
    }
 
    Toolbar::~Toolbar()
    {
-      //if ((HWND) _HWND()) {
-        // DestroyWindow((HWND) _HWND());
+      //if (::as_HWND(this->operating_system_window())) {
+        // DestroyWindow(::as_HWND(this->operating_system_window()));
       //}
    }
 
-   bool Toolbar::create(int _tbID, const ::operating_system::window & windowParent, unsigned int dwStyle)
+   bool Toolbar::create(int _tbID, const ::operating_system::window & operatingsystemwindowParent, unsigned int dwStyle)
    {
       dwStyle |= WS_CHILD;
 
-      //_ASSERT((HWND) _HWND() == 0);
+      //_ASSERT(::as_HWND(this->operating_system_window()) == 0);
       // Create the Toolbar window
-      _setHWND(CreateWindowEx(0, TOOLBARCLASSNAME, 0, dwStyle,
-                                     0, 0, 0, 0,
-                                     ::as_HWND(windowParent),
+      _create_window_ex(0, TOOLBARCLASSNAME, 0, dwStyle,
+                                     {0, 0, 0, 0},
+                                     operatingsystemwindowParent,
                                      (HMENU)(::iptr)_tbID, (HINSTANCE) ::system()->m_hinstanceMain,
-                                     0));
-      if ((HWND) _HWND()) {
+                                     nullptr);
+      if (::as_HWND(this->operating_system_window())) {
          // It's required for backward compatibility
-         SendMessage((HWND) _HWND(),
+         SendMessage(::as_HWND(this->operating_system_window()),
                      TB_BUTTONSTRUCTSIZE,
                      static_cast<::wparam>(sizeof(TBBUTTON)),
                      0);
       }
-      return !!(HWND) _HWND();
+      return !!::as_HWND(this->operating_system_window());
    };
 
    void Toolbar::setViewAutoButtons(int iButton, int style)
@@ -137,7 +137,7 @@ namespace innate_subsystem_windows
       }
       m_autoButtons.clear();
 
-      _setHWND( CreateToolbarEx(::as_HWND(window),
+      set_operating_system_window(::as_operating_system_window(CreateToolbarEx(::as_HWND(window),
          WS_VISIBLE | WS_CHILD | TBSTYLE_TOOLTIPS | WS_CLIPSIBLINGS | TBSTYLE_FLAT | WS_BORDER,
          m_id,
          static_cast<int>(tbuttons.size()), 
@@ -146,20 +146,20 @@ namespace innate_subsystem_windows
          tbuttons.data(),
          static_cast<int>(tbuttons.size()),
          0, 0, 0, 0,
-         sizeof(TBBUTTON)));
-      SendMessage((HWND) _HWND(), TB_SETINDENT, 4, 0);
+         sizeof(TBBUTTON))));
+      SendMessage(::as_HWND(this->operating_system_window()), TB_SETINDENT, 4, 0);
    }
 
    bool Toolbar::enableButton(int idButton, bool enable)
    {
-      LRESULT result = SendMessage((HWND) _HWND(), TB_ENABLEBUTTON,
+      LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_ENABLEBUTTON,
                                    idButton, MAKELONG(enable, 0));
       return !!result;
    }
 
    bool Toolbar::pressButton(int idButton, bool press)
    {
-      LRESULT result = SendMessage((HWND) _HWND(), TB_PRESSBUTTON,
+      LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_PRESSBUTTON,
                                    idButton, MAKELONG(press, 0));
       return !!result;
    }
@@ -167,7 +167,7 @@ namespace innate_subsystem_windows
    bool Toolbar::getButtonRect(int nIndex, ::i32_rectangle & buttonRect)
    {
       RECT rc;
-      LRESULT result = SendMessage((HWND) _HWND(), TB_GETITEMRECT,
+      LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_GETITEMRECT,
                                    nIndex, (LPARAM)&rc);
       ::copy(buttonRect, rc);
       return !!result;
@@ -175,10 +175,10 @@ namespace innate_subsystem_windows
 
    bool Toolbar::setButtonsSize(const ::i32_size & size)
    {
-      LRESULT result = SendMessage((HWND) _HWND(), TB_SETBUTTONSIZE,
+      LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_SETBUTTONSIZE,
                                    0, MAKELONG(size.cx, size.cy));
       if (result) {
-         SendMessage((HWND) _HWND(), TB_AUTOSIZE, 0, 0);
+         SendMessage(::as_HWND(this->operating_system_window()), TB_AUTOSIZE, 0, 0);
          return true;
       }
       return false;
@@ -186,70 +186,70 @@ namespace innate_subsystem_windows
 
    void Toolbar::autoSize()
    {
-      LRESULT style = SendMessage((HWND) _HWND(), TB_GETSTYLE,  0, 0);
+      LRESULT style = SendMessage(::as_HWND(this->operating_system_window()), TB_GETSTYLE,  0, 0);
       if (style & CCS_NORESIZE) {
          RECT r;
          ::i32_rectangle btnRect;
-         GetClientRect(GetParent((HWND) _HWND()), &r);
+         GetClientRect(GetParent(::as_HWND(this->operating_system_window())), &r);
          getButtonRect(0, btnRect);
          int height = getButtonsHeight() + btnRect.top * 2 + 2;
-         SetWindowPos((HWND) _HWND(), HWND_TOP, 0, 0, r.right - r.left, height,
+         SetWindowPos(::as_HWND(this->operating_system_window()), HWND_TOP, 0, 0, r.right - r.left, height,
                       SWP_NOMOVE);
       } else {
-         SendMessage((HWND) _HWND(), TB_AUTOSIZE, 0, 0);
+         SendMessage(::as_HWND(this->operating_system_window()), TB_AUTOSIZE, 0, 0);
       }
    }
 
    int Toolbar::getButtonsHeight()
    {
-      return HIWORD(SendMessage((HWND) _HWND(), TB_GETBUTTONSIZE, 0, 0));
+      return HIWORD(SendMessage(::as_HWND(this->operating_system_window()), TB_GETBUTTONSIZE, 0, 0));
    }
 
    int Toolbar::getButtonsWidth()
    {
-      return LOWORD(SendMessage((HWND) _HWND(), TB_GETBUTTONSIZE, 0, 0));
+      return LOWORD(SendMessage(::as_HWND(this->operating_system_window()), TB_GETBUTTONSIZE, 0, 0));
    }
 
    int Toolbar::getHeight()
    {
       RECT r;
-      GetWindowRect((HWND) _HWND(), &r);
+      GetWindowRect(::as_HWND(this->operating_system_window()), &r);
       return r.bottom - r.top;
    }
 
    int Toolbar::getTotalWidth()
    {
       SIZE size;
-      SendMessage((HWND) _HWND(), TB_GETMAXSIZE, 0, reinterpret_cast<LPARAM>(&size));
+      SendMessage(::as_HWND(this->operating_system_window()), TB_GETMAXSIZE, 0, reinterpret_cast<LPARAM>(&size));
       return size.cx;
    }
 
    void Toolbar::show()
    {
-      ShowWindow((HWND) _HWND(), SW_SHOW);
+      ShowWindow(::as_HWND(this->operating_system_window()), SW_SHOW);
    }
 
    void Toolbar::hide()
    {
-      ShowWindow((HWND) _HWND(), SW_HIDE);
+      ShowWindow(::as_HWND(this->operating_system_window()), SW_HIDE);
    }
 
    bool Toolbar::isVisible()
    {
-      LRESULT style = GetWindowLong((HWND) _HWND(), GWL_STYLE);
+      LRESULT style = GetWindowLong(::as_HWND(this->operating_system_window()), GWL_STYLE);
       return !!(style & WS_VISIBLE);
    }
 
    bool Toolbar::checkButton(int idButton, bool check)
    {
-      LRESULT result = SendMessage((HWND) _HWND(), TB_CHECKBUTTON,
+      LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_CHECKBUTTON,
               idButton, MAKELONG(check, 0));
       return !!result;
    }
 
    LRESULT Toolbar::getState(int idButton)
    {
-      LRESULT result = SendMessage((HWND) _HWND(), TB_GETSTATE,
+      LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_GETSTATE,
                        idButton, 0);
       return result;
    }
@@ -267,7 +267,7 @@ namespace innate_subsystem_windows
 
       resBitmap.hInst = GetModuleHandle(0);
       resBitmap.nID = bitmapID;
-      return SendMessage((HWND) _HWND(), TB_ADDBITMAP, nButtons, (LPARAM)&resBitmap);
+      return SendMessage(::as_HWND(this->operating_system_window()), TB_ADDBITMAP, nButtons, (LPARAM)&resBitmap);
    }
 
    LRESULT Toolbar::addSystemBitmap(unsigned int stdBitmapID)
@@ -276,7 +276,7 @@ namespace innate_subsystem_windows
 
       resBitmap.hInst = HINST_COMMCTRL;
       resBitmap.nID = stdBitmapID;
-      return SendMessage((HWND) _HWND(), TB_ADDBITMAP, 0, (::lparam)&resBitmap);
+      return SendMessage(::as_HWND(this->operating_system_window()), TB_ADDBITMAP, 0, (::lparam)&resBitmap);
    }
 
    bool Toolbar::addButton(int iBitmap, int idCommand, BYTE state, BYTE style, unsigned int dwData, int iString)
@@ -290,9 +290,9 @@ namespace innate_subsystem_windows
       tbb.dwData = dwData;
       tbb.iString = iString;
 
-      LRESULT result = SendMessage((HWND) _HWND(), TB_ADDBUTTONS, 1, (LPARAM)(&tbb));
+      LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_ADDBUTTONS, 1, (LPARAM)(&tbb));
       if (result) {
-         SendMessage((HWND) _HWND(), TB_AUTOSIZE, 0, 0);
+         SendMessage(::as_HWND(this->operating_system_window()), TB_AUTOSIZE, 0, 0);
       }
       return !!result;
    }
@@ -301,9 +301,9 @@ namespace innate_subsystem_windows
    {
       TBBUTTON tbb{};
       copy(&tbb, ptoolbarbutton);
-      LRESULT result = SendMessage((HWND) _HWND(), TB_ADDBUTTONS, nButtons, (LPARAM)&tbb);
+      LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_ADDBUTTONS, nButtons, (LPARAM)&tbb);
       if (result) {
-         SendMessage((HWND) _HWND(), TB_AUTOSIZE, 0, 0);
+         SendMessage(::as_HWND(this->operating_system_window()), TB_AUTOSIZE, 0, 0);
       }
       return !!result;
    }
