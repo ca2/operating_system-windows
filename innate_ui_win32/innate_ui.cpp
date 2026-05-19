@@ -215,6 +215,36 @@ namespace innate_ui_win32
 
    //}
 
+
+   //void innate_ui::track_popup_menu(int iMenuResourceId, const ::function<void(int)> &functionOnActionId)
+   //{
+
+   //   HMENU hRoot = LoadMenu(GetModuleHandle(0), MAKEINTRESOURCE(iMenuResourceId));
+   //   HMENU hMenu = GetSubMenu(hRoot, 0);
+   //   
+   //   SetMenuDefaultItem(hMenu, ID_CONFIGURATION, false);
+   //   
+   //   if (m_pcontrolapplication->m_slaveModeEnabled) {
+   //      RemoveMenu(hMenu, ID_CLOSE_CONTROL_INTERFACE, MF_BYCOMMAND);
+   //   }
+   //   
+   //   POINT pos;
+   //   
+   //   if (!GetCursorPos(&pos)) {
+   //      pos.x = pos.y = 0;
+   //   }
+   //   
+   //   ///SetForegroundWindow(operating_system_window());
+   //   ///
+   //   setForegroundWindow();
+   //   
+   //   int action = TrackPopupMenu(hMenu,
+   //                                 TPM_NONOTIFY | TPM_RETURNCMD | TPM_RIGHTBUTTON,
+   //                                 pos.x, pos.y, 0, ::as_HWND(operating_system_window()), NULL);
+   //   
+   //   functionOnActionId(action);
+
+   //}
    
 
 } // namespace innate_ui_win32

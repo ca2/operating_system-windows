@@ -135,7 +135,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{31F3D4C6-61F7-4E68-8C48-6DE00A2D7D78}</ProjectGuid>
+    <ProjectGuid>{1F20CF93-AE0B-4A16-A786-56A623C8726A}</ProjectGuid>
     <RootNamespace>operating_system-windows</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -2679,6 +2679,7 @@
     </ClCompile>
     <ClCompile Include="icon.cpp" />
     <ClCompile Include="innate_ui.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="still.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="_.cpp" />
@@ -2708,6 +2709,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="icon.h" />
     <ClInclude Include="innate_ui.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="still.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="_.h" />
