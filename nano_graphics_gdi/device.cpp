@@ -66,7 +66,21 @@ namespace windows
 
          }
 
-
+         
+HFONT CreateSimpleFont16(void)
+         {
+            // Negative height means character height in pixels
+            return CreateFontA(-16, // height ≈ 16 px
+                               0, // width (auto)
+                               0, // escapement
+                               0, // orientation
+                               FW_NORMAL, // weight
+                               FALSE, // italic
+                               FALSE, // underline
+                               FALSE, // strikeout
+                               DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY,
+                               DEFAULT_PITCH | FF_DONTCARE, "Segoe UI");
+         }
          void device::_draw_text(const ::scoped_string & scopedstr, const ::i32_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext,
             ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText,
             ::nano::graphics::font* pnanofont)
@@ -79,6 +93,7 @@ namespace windows
             COLORREF colorrefTextColor = win32_COLORREF(pnanobrushText->m_color);
 
             SetTextColor(m_hdc, colorrefTextColor);
+            //SetTextColor(m_hdc, RGB(100, 100, 255));
 
             SetBkMode(m_hdc, OPAQUE);
 
@@ -86,7 +101,20 @@ namespace windows
 
             pnanofont->update(this);
 
-            ::SelectObject(m_hdc, (HFONT)pnanofont->operating_system_data());
+            
+
+            auto hfont = (HFONT)pnanofont->operating_system_data();
+
+            //auto hfont2 = CreateSimpleFont16();
+
+            //auto h3 = ::SelectObject(m_hdc, hfont2);
+
+            auto h3 = ::SelectObject(m_hdc, hfont);
+
+
+            LOGFONTW lf{};
+
+            ::GetObject(hfont, sizeof(lf), &lf);
 
             TEXTMETRICW textmetricw = {};
 
@@ -96,7 +124,50 @@ namespace windows
 
             int iFlag = draw_text_to_windows_draw_text(edrawtext);
 
-            ::DrawText(m_hdc, wstrMessage, (int)wstrMessage.length(), (LPRECT)&rectangleText, iAlign | iFlag);
+            //iAlign = 0;
+
+            //iFlag = 0;
+
+            RECT r;
+
+            ::copy(r, rectangleText);
+
+            //InflateRect(&r, 16, 16);
+
+            
+            auto pszMessage = wstrMessage.c_str();
+
+            //            if (scopedstr.contains("Operating"))
+            //{
+
+            //   information("Operating");
+
+            //   //r.left = 0;
+            //   //r.top = 0;
+            //   //r.right = 400;
+            //   //r.bottom = 30;
+
+            //   wstrMessage = "test";
+            //   // return;
+            //}
+            
+            int iLength = wstrMessage.length();
+
+            //auto pbrush = createø<::nano::graphics::brush>();
+
+            //pbrush->m_color = ::color::yellow;
+
+            //auto ppen = createø<::nano::graphics::pen>();
+
+            //ppen->m_color = ::color::magenta;
+
+            //rectangle(r, nullptr, ppen);
+
+            ::DrawTextW(m_hdc, wstrMessage, (int)iLength, (LPRECT)&r, iAlign | iFlag);
+
+            //::SelectObject(m_hdc, h3);
+
+            //::DeleteObject(hfont2);
 
          }
 
@@ -127,19 +198,50 @@ namespace windows
          void device::rectangle(const ::i32_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen)
          {
 
-            pnanobrush->update(this);
+            if (!pnanobrush && !pnanopen)
+            {
 
-            ::SelectObject(m_hdc, (HGDIOBJ)pnanobrush->operating_system_data());
+               return;
 
-            pnanopen->update(this);
+            }
 
-            ::SelectObject(m_hdc, (HGDIOBJ)pnanopen->operating_system_data());
+            if (pnanobrush)
+            {
+
+               pnanobrush->update(this);
+
+               ::SelectObject(m_hdc, (HGDIOBJ)pnanobrush->operating_system_data());
+            }
+            else
+            {
+
+               ::SelectObject(m_hdc, (HGDIOBJ)::GetStockObject(NULL_BRUSH));
+
+            }
+
+            if (pnanopen)
+            {
+
+               pnanopen->update(this);
+
+               ::SelectObject(m_hdc, (HGDIOBJ)pnanopen->operating_system_data());
+            }
+            else
+            {
+
+               ::SelectObject(m_hdc, (HGDIOBJ)::GetStockObject(NULL_PEN));
+
+            }
 
 
             auto r = rectangle;
 
-            r.left += pnanopen->m_iWidth - 1;
-            r.top += pnanopen->m_iWidth - 1;
+            if (pnanopen)
+            {
+
+               r.left += pnanopen->m_iWidth - 1;
+               r.top += pnanopen->m_iWidth - 1;
+            }
 
             ::Rectangle(m_hdc,
                r.left,

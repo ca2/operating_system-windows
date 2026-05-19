@@ -59,6 +59,9 @@ namespace innate_ui_win32
 
       ::innate_ui_win32::innate_ui * innate_ui();
 
+
+      ::operating_system::window operating_system_window() const override;
+
       virtual ::pointer < window > _get_child_with_id(int iId);
       bool on_window_procedure(::lresult & lresult, unsigned message, ::wparam wparam, ::lparam lparam) override;
       //virtual LRESULT _window_procedure(UINT message, WPARAM wparam, LPARAM lparam);

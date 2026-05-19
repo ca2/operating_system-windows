@@ -648,6 +648,14 @@ return false;
 
    }
 
+
+   ::operating_system::window window::operating_system_window() const
+   {
+
+      return m_windowswindow.as_operating_system_window();
+
+   }
+
    
    void window::defer_show_system_menu(::user::mouse * pmouse)
    {

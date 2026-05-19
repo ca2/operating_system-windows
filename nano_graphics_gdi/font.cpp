@@ -45,7 +45,7 @@ namespace windows
 
                auto pwindowsnanodevice = dynamic_cast <::windows::nano::graphics::device*>(pnanodevice);
 
-               m_hgdiobj = _create_point_font(m_iFontSize * 10, m_strFontName, m_bBold, pwindowsnanodevice->m_hdc, &logfontw);
+               m_hgdiobj = _create_point_font(m_iFontSize * 10, m_strFontName, m_bBold, m_bUnderline, pwindowsnanodevice->m_hdc, &logfontw);
 
                m_bModified = false;
 
@@ -55,7 +55,7 @@ namespace windows
          }
 
 
-         HFONT font::_create_point_font(int nPointSize, const ::scoped_string& scopedstrFaceName, bool bBold, HDC hdc, LOGFONTW* plf)
+         HFONT font::_create_point_font(int nPointSize, const ::scoped_string& scopedstrFaceName, bool bBold, bool bUnderline, HDC hdc, LOGFONTW* plf)
          {
 
             LOGFONTW lF;
@@ -74,6 +74,8 @@ namespace windows
             plf->lfHeight = nPointSize;
 
             plf->lfWeight = bBold ? FW_BOLD : FW_NORMAL;
+
+            plf->lfUnderline = bUnderline ? TRUE : FALSE;
 
             wstring wstr(scopedstrFaceName);
 

@@ -118,10 +118,17 @@ namespace innate_ui_win32
          (HINSTANCE)hinstanceParent,
          NULL);
 
-      if (!hwndResult || !_HWND() || hwndResult != ::as_HWND(this->operating_system_window()))
+      if (!hwndResult || !_HWND())
       {
 
          throw ::exception(error_failed);
+
+      }
+
+      if (hwndResult != ::as_HWND(this->operating_system_window()))
+      {
+
+         m_windowswindow = hwndResult;
 
       }
 
@@ -140,6 +147,7 @@ namespace innate_ui_win32
 
    }
 
+
    void still::create_icon_still(::innate_ui::window * pwindowParent)
    {
 
@@ -150,7 +158,6 @@ namespace innate_ui_win32
       m_iCreateStyle = WS_TABSTOP | WS_VISIBLE | WS_CHILD | SS_OWNERDRAW;
 
       create_child(pwindowParent);
-
 
    }
 
