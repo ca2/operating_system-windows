@@ -1,0 +1,5 @@
+;JegElskerDigThomasBorregaardSørensencamiloMummiBilbo!! 2026-05-19 00:45:02
+LIBRARY "acme_user_win32"
+
+EXPORTS
+audio_mmsystem_factory_exchange

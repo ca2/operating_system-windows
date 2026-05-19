@@ -46,7 +46,7 @@ namespace windows
       WNDPROC                                   m_pfnSuper; // for subclassing of controls
 
       edisplay                                  m_edisplayLayout;
-      long_long_rectangle                             m_rectangleLastPos;
+      i64_rectangle                             m_rectangleLastPos;
       ::duration                                    m_durationLastPos;
       string                                    m_strDebug;
 
@@ -235,10 +235,10 @@ namespace windows
       //virtual void BringToTop(::e_display edisplay);
       //virtual bool BringWindowToTop();
       //using ::windowing::window::window_rectangle;
-      //virtual bool window_rectangle(::long_long_rectangle * prectangle);
+      //virtual bool window_rectangle(::i64_rectangle * prectangle);
 
       //using ::windowing::window::this->rectangle;
-      //virtual bool this->rectangle(::long_long_rectangle * prectangle);
+      //virtual bool this->rectangle(::i64_rectangle * prectangle);
 
 
       virtual void rects_from_os();

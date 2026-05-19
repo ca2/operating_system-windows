@@ -128,7 +128,7 @@ namespace acme_windows
 
          }
 
-         put_contents(path, scopedstrExtension);
+         put_contents(path, scopedstr);
 
          break;
 

@@ -347,10 +347,10 @@ namespace windowing_win32
       //virtual void BringToTop(::e_display edisplay);
       //virtual bool BringWindowToTop();
       //using ::windowing::window::window_rectangle;
-      //virtual bool window_rectangle(::long_long_rectangle * prectangle);
+      //virtual bool window_rectangle(::i64_rectangle * prectangle);
 
       //using ::windowing::window::this->rectangle;
-      //virtual bool this->rectangle(::long_long_rectangle * prectangle);
+      //virtual bool this->rectangle(::i64_rectangle * prectangle);
 
 
       //virtual void rects_from_os();

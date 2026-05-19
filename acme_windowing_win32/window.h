@@ -130,7 +130,7 @@ namespace win32
 
             //::i32_point try_absolute_mouse_position(const ::i32_point& point) override;
 
-
+            ::operating_system::window operating_system_window() const override;
 
             //void get_client_rectangle(::i32_rectangle& rectangle) override;
 

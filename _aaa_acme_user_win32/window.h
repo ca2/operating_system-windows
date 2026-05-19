@@ -120,11 +120,11 @@ namespace windows
 
             ::i32_rectangle get_window_rectangle() override;
 
-            void set_capture() override;
+            void set_mouse_capture() override;
 
-            bool has_capture() override;
+            bool has_mouse_capture() override;
 
-            void release_capture() override;
+            void release_mouse_capture() override;
 
             void set_cursor(enum_cursor ecursor) override;
 

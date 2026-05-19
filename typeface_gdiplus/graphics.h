@@ -548,7 +548,7 @@ namespace typeface_gdiplus
       //void DrawDragRect(const ::i32_rectangle & rectangle, const ::i32_size & size,
       //                  const ::i32_rectangle & lpRectLast, const ::i32_size & sizeLast,
       //                  ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr);
-      //void FillSolidRect(const ::long_long_rectangle * rectangle, color32_t clr);
+      //void FillSolidRect(const ::i64_rectangle * rectangle, color32_t clr);
       //void FillSolidRect(const ::i32_rectangle & rectangle, color32_t clr);
       //void FillSolidRect(int x, int y, int cx, int cy, color32_t clr);
       /*void Draw3dRect(const ::i32_rectangle & rectangle, color32_t clrTopLeft, color32_t clrBottomRight);
