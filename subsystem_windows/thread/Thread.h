@@ -86,7 +86,7 @@
 //       * Terminates thread execution.
 //       * @remark thread-safe.
 //       */
-//      virtual void terminate() override;
+//      virtual void setThreadToFinish() override;
 //
 //      /**
 //       * Checks if thread is not dead.
@@ -118,14 +118,14 @@
 //
 //   //protected:
 //      /**
-//       * Returns true if terminate() method was called.
+//       * Returns true if setThreadToFinish() method was called.
 //       * @remark thread-safe.
 //       */
 //      bool isTerminating() override;
 //
 //      /**
-//       * Slot of terminate() signal.
-//       * Method called from terminate() method.
+//       * Slot of setThreadToFinish() signal.
+//       * Method called from setThreadToFinish() method.
 //       * Can be overrided by subclasses to gracefully shutdown thread.
 //       */
 //      virtual void onTerminate() override;

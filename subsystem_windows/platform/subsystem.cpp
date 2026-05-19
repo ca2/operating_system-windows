@@ -27,6 +27,11 @@ namespace subsystem_windows
    subsystem::subsystem()
    {
 
+      if (g_p)
+      {
+         throw ::exception(::error_already_exists);
+      }
+
       g_p = this;
       m_i_LOADER_CLOSE_CODE = -1;
       m_i_SPEC_IPC_CODE = -1;

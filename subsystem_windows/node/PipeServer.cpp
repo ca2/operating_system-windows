@@ -38,7 +38,7 @@ namespace subsystem_windows
    bool PipeServer::s_bInitialized = false;
 
    PipeServer::PipeServer()
-   : m_milliseconds(0),
+   : //m_milliseconds(0),
      //m_serverPipe(INVALID_HANDLE_VALUE),
      m_bufferSize(0)
    {
@@ -46,8 +46,18 @@ namespace subsystem_windows
 
    }
 
+      PipeServer::~PipeServer()
+      {
+         close(); 
+      
+      }
 
-   void PipeServer::initialize_pipe_server(const scoped_string& scopedstrName, unsigned int bufferSize, ::subsystem::SecurityAttributesInterface* secAttr, DWORD milliseconds)
+
+   void PipeServer::initialize_pipe_server(
+      const scoped_string& scopedstrName,
+      unsigned int bufferSize, 
+      ::subsystem::SecurityAttributesInterface* secAttr,
+      const class ::time & timeTimeout)
    {
    //
    // }
@@ -56,7 +66,7 @@ namespace subsystem_windows
    // const ::scoped_string & scopedstrName, unsigned int bufferSize,
    //                        ::subsystem::SecurityAttributesInterface *secAttr,
    //                        DWORD milliseconds)
-    m_milliseconds = milliseconds;
+    m_timeTimeout = timeTimeout;
      m_psecurityattributes = secAttr;
      //m_serverPipe(INVALID_HANDLE_VALUE),
      m_bufferSize = bufferSize;
@@ -81,8 +91,12 @@ namespace subsystem_windows
       if (::system()->node()->_windows_isVistaOrLater()) {
          pipeMode |= PIPE_REJECT_REMOTE_CLIENTS;     // local only
       }
-      construct_newø(m_pfileServerPipe);
-      m_pfileServerPipe->m_handle = CreateNamedPipe(::wstring(m_pipeName),   // pipe name
+
+      ::wstring wstrPipeName(m_pipeName);
+
+      auto pszPipeName = wstrPipeName.c_str();
+
+      auto handle = CreateNamedPipe(pszPipeName,   // pipe name
                                      openMode,
                                      pipeMode,
                                      PIPE_UNLIMITED_INSTANCES, // max. instances
@@ -92,11 +106,13 @@ namespace subsystem_windows
                                      m_psecurityattributes != 0 ?          // security attributes
                                      m_psecurityattributes->_getSecurityAttributes() : 0
                                      );
-      if (m_pfileServerPipe->m_handle == INVALID_HANDLE_VALUE) {
+      if (handle == INVALID_HANDLE_VALUE) {
          ::string errMess;
          errMess.formatf("CreateNamedPipe failed, error code = {}", GetLastError());
          throw ::subsystem::Exception(errMess);
       }
+      construct_newø(m_pfileServerPipe);
+      m_pfileServerPipe->m_handle = handle;
    }
 
    ::pointer < ::subsystem::NamedPipeInterface > PipeServer::accept()
@@ -123,14 +139,7 @@ namespace subsystem_windows
                break;
             case ERROR_IO_PENDING:
             {
-               if (m_milliseconds == INFINITE)
-               {
-                  m_happening._wait();
-               }
-               else
-               {
-                  m_happening._wait(m_milliseconds * 1_ms);
-               }
+               m_happening._wait(m_timeTimeout);
                DWORD cbRet = 0; // Fake
                auto h = m_pfileServerPipe->m_handle;
                if (!GetOverlappedResult(h, &overlapped, &cbRet, FALSE)) {
@@ -178,10 +187,7 @@ namespace subsystem_windows
       m_happening.set_happening();
    }
 
-   PipeServer::~PipeServer()
-   {
-      close();
-   }
+
 
    void PipeServer::closeConnection()
    {

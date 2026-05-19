@@ -60,7 +60,7 @@ namespace subsystem_windows
       //::happening m_impersonationReadyEvent;
       //::happening m_threadSleeper;
        ::happening m_impersonationReadyEvent;
-      ::happening m_threadSleeper;
+      //::happening m_threadSleeper;
    };
 
 

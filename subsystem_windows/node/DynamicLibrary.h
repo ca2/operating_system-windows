@@ -39,6 +39,12 @@ namespace subsystem_windows
    virtual public Implementation<::subsystem::DynamicLibraryInterface>
    {
    public:
+
+
+            
+      HMODULE m_hmodule;
+
+
       /**
       Load dynamic library with specified filename.
       @param filename path to library file.
@@ -53,7 +59,7 @@ namespace subsystem_windows
 
       // Use the init() function after default constructor calling to load
       // a library before the getProcAddress() function calling.
-      void init(const ::scoped_string & scopedstrFilename) override;
+      void openLibrary(const ::scoped_string & scopedstrFilename) override;
 
       /**
       Gets procedure address.
@@ -63,7 +69,8 @@ namespace subsystem_windows
       void * getProcAddress(const char *procName) override;
 
    //protected:
-      HMODULE m_module;
+
+
    };
 
 } // namespace subsystem_windows

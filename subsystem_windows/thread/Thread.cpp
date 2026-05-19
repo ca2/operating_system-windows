@@ -87,7 +87,7 @@
 //       return m_active;
 //    }
 //
-//    void Thread::terminate()
+//    void Thread::setThreadToFinish()
 //    {
 //       m_terminated = true;
 //

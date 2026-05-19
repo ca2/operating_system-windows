@@ -25,54 +25,85 @@
 #include "subsystem_windows/_common_header.h"
 #include "DynamicLibrary.h"
 
-//#include <crtdbg.h>
-
 
 namespace subsystem_windows
 {
-   // DynamicLibrary::DynamicLibrary(const ::scoped_string & scopedstrFilename)
-   // : m_module(null)
-   // {
-   //    init(scopedstrFilename);
-   // }
+
 
    DynamicLibrary::DynamicLibrary()
-   : m_module(0)
+   : m_hmodule(nullptr)
    {
    }
 
+
    DynamicLibrary::~DynamicLibrary()
    {
-      if (m_module != 0) {
-         FreeLibrary(m_module);
+      
+      if (m_hmodule) 
+      {
+
+         ::FreeLibrary(m_hmodule);
+
       }
+
    }
 
 
    void DynamicLibrary::initialize_dynamic_library(const ::scoped_string & scopedstrFilename)
-///: m_module(0)
    {
-      init(scopedstrFilename);
+
+      openLibrary(scopedstrFilename);
+
    }
 
-   void DynamicLibrary::init(const ::scoped_string & scopedstrFilename)
+
+   void DynamicLibrary::openLibrary(const ::scoped_string & scopedstrFilename)
    {
-      m_module = LoadLibrary(::wstring(scopedstrFilename));
 
-      if (m_module == 0) {
-         ::string errMsg;
+      ::wstring wstrLibraryName(scopedstrFilename);
 
-         errMsg.format("{} library not found", scopedstrFilename);
+      auto pszLibraryName = wstrLibraryName.c_str();
 
-         throw ::subsystem::Exception(errMsg);
+      m_hmodule = LoadLibraryW(pszLibraryName);
+
+      if (!m_hmodule)
+      {
+
+         ::string strMessage;
+
+         strMessage.format("{} library not found", scopedstrFilename);
+
+         throw ::subsystem::Exception(strMessage);
+
       }
+
    }
+
 
    void * DynamicLibrary::getProcAddress(const char *procName)
    {
-      _ASSERT(m_module != 0);
 
-      return ::GetProcAddress(m_module, procName);
+      if (!m_hmodule)
+      {
+
+         throw ::exception(error_wrong_state);
+
+      }
+
+      auto pProcedureAddress = ::GetProcAddress(m_hmodule, procName);
+
+      if (!pProcedureAddress)
+      {
+
+         throw ::exception(error_not_found);
+
+      }
+
+      return pProcedureAddress;
+
    }
+
+
+
 }  // namespace subsystem_windows
 

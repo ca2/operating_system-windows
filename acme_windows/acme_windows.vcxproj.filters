@@ -50,9 +50,6 @@
     <ClCompile Include="file_find.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="shared_memory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="strdup_array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -226,9 +223,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="serial.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="shared_memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="simple_hold_handle.h">

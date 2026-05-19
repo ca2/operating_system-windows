@@ -53,7 +53,7 @@ namespace subsystem_windows
    // ZombieKiller::~ZombieKiller()
    // {
    //   if (isActive()) {
-   //     terminate();
+   //     setThreadToFinish();
    //     wait();
    //   }
    //   killAllZombies();

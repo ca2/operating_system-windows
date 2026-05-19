@@ -28,6 +28,7 @@
 //#include "subsystem/platform/winhdr.h"
 #include "acme/prototype/collection/comparable_list.h"
 #include "subsystem/node/OperatingSystemApplication.h"
+#include "subsystem/thread/Thread.h"
 #include "subsystem_windows/_common_header.h"
 
 //#include "remoting/remoting/thread/LocalMutex.h"
@@ -40,11 +41,19 @@ namespace subsystem_windows
        * Have hidden main window and main scopedstrMessage loop.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS OperatingSystemApplication :
-      virtual public Implementation< ::subsystem::OperatingSystemApplicationCallback >
+      virtual public Implementation< ::subsystem::OperatingSystemApplicationCallback > ,
+         virtual public ::subsystem::Thread
       {
       public:
 
          int m_iExitCode = 0;
+         HINSTANCE m_appInstance;
+         HWND m_mainWindow;
+         ::wstring m_wstrWindowClassName;
+         // private:
+         critical_section m_MDLMutex; // Modeless dialog ::list_base mutex.
+         ::comparable_list_base<HWND> m_modelessDialogList;
+
          /**
           * Creates WindowsApplication instance.
           * @param appInstance parameter that passed to WinMain.
@@ -112,6 +121,10 @@ namespace subsystem_windows
 
          void setExitCode(int iExitCode) override;
 
+
+         void onThreadMain() override;
+         void onOperatingSystemApplicationMain() override;
+
          // Fills the wndClass argument and registers new class name in the Windows.
          //virtual void registerWindowClass(WNDCLASS *wndClass);
 
@@ -124,19 +137,13 @@ namespace subsystem_windows
           */
          //static LRESULT CALLBACK wndProc(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
-         HINSTANCE m_appInstance;
-         HWND m_mainWindow;
-         ::wstring m_wstrWindowClassName;
-         //protected:
+         // protected:
          /**
           * Helper method to process modeless dialog scopedstrMessage for modal dialog.
           * @param msg scopedstrMessage to process.
           * @return true if don't need to translate and dispatch scopedstrMessage in main scopedstrMessage loop.
           */
          bool processDialogMessage(MSG *msg);
-         //private:
-         critical_section m_MDLMutex; // Modeless dialog ::list_base mutex.
-         ::comparable_list_base<HWND> m_modelessDialogList;
 
          void onMainThreadMessage(unsigned int message, ::wparam wparam, ::lparam lparam) override;
 

@@ -50,7 +50,7 @@ namespace subsystem_windows
 
    Clipboard2::~Clipboard2()
    {
-      //terminate();
+      //setThreadToFinish();
       //wait();
    }
 

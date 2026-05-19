@@ -276,22 +276,22 @@ namespace subsystem_windows
 
    void WTS::duplicatePipeClientToken(HANDLE pipeHandle)
    {
-      ::subsystem_windows::PipeImpersonatedThread impThread;
-       ::subsystem_windows::File filePipeHandle;
-       filePipeHandle.m_handle = pipeHandle;
-       impThread.initialize_pipe_impersonated_thread(&filePipeHandle);
-      impThread.resumeThread();
-      impThread.waitUntilImpersonated();
-      if (!impThread.getImpersonationSuccess()) {
+      scoped_thread<::subsystem_windows::PipeImpersonatedThread> impThread;
+       auto pfilePipeHandle = create_newø< ::subsystem_windows::File>();
+       pfilePipeHandle->m_handle = pipeHandle;
+       impThread->initialize_pipe_impersonated_thread(pfilePipeHandle);
+      impThread->resumeThread();
+      impThread->waitUntilImpersonated();
+      if (!impThread->getImpersonationSuccess()) {
          ::string faultReason, errMessage;
-         faultReason = impThread.getFaultReason();
+         faultReason = impThread->getFaultReason();
          errMessage.format("Can't impersonate thread by pipe handle: {}",
                            faultReason);
          throw ::subsystem::Exception(errMessage);
       }
 
       HANDLE threadHandle = OpenThread(THREAD_QUERY_INFORMATION, FALSE,
-                                       impThread.getThreadId());
+                                       impThread->getThreadId());
       if (threadHandle == 0) {
          throw ::subsystem::SystemException("Can't open thread to duplicate"
                                " impersonate token");

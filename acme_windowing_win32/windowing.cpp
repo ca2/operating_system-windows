@@ -33,7 +33,7 @@ namespace win32
          windowing::windowing()
          {
 
-            m_bKeepRunningPostedProcedures = true;
+            m_bRunMainLoop = true;
             m_bMessageThread = true;
 
          }

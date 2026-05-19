@@ -36,7 +36,7 @@ namespace subsystem_windows
    ThreadCollector::~ThreadCollector()
    {
       if (isThreadActive()) {
-         terminate();
+         setThreadToFinish();
          m_timer.set_happening() ;
          wait();
       }
@@ -61,14 +61,12 @@ namespace subsystem_windows
    {
       critical_section_lock l(&m_lockObj);
 
-      auto iter = m_threada.begin();
-      while ( iter != m_threada.end()) {
-         auto it= iter;
-         iter++;
-         auto pthread = *it;
-         if (!pthread->isThreadActive()) {
-            //delete thread;
-            m_threada.erase_at(it - m_threada.data());
+      for(auto & pthread : m_threada)
+      {
+         if (!pthread->isThreadActive())
+         {
+            m_threada.erase(pthread);
+            break;
          }
       }
    }

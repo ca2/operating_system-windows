@@ -34,7 +34,7 @@ namespace subsystem_windows
 
    CtrlAltDelSimulator::~CtrlAltDelSimulator()
    {
-      terminate();
+      setThreadToFinish();
       wait();
    }
 

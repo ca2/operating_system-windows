@@ -38,8 +38,10 @@ namespace subsystem_windows
 
    PipeImpersonatedThread::~PipeImpersonatedThread()
    {
-      terminate();
-      wait();
+
+      information("PipeImpersonatedThread::~PipeImpersonatedThread()");
+      //setThreadToFinish();
+      //wait();
    }
 
    void PipeImpersonatedThread::initialize_pipe_impersonated_thread(::subsystem::FileInterface* pfilePipe)
@@ -51,7 +53,7 @@ namespace subsystem_windows
 
    void PipeImpersonatedThread::onTermThread()
    {
-      m_threadSleeper.set_happening();
+      //m_threadSleeper.set_happening();
    }
 
    void PipeImpersonatedThread::waitUntilImpersonated()
@@ -84,9 +86,10 @@ namespace subsystem_windows
       }
       m_impersonationReadyEvent.set_happening();
 
-      while (!isThreadTerminating()) {
-         m_threadSleeper.wait();
-      }
+      run_main_loop();
+      //while (!isThreadTerminating()) {
+        // m_threadSleeper.wait();
+      //}
       RevertToSelf();
    }
 

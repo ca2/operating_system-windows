@@ -63,7 +63,7 @@ namespace subsystem_windows
 
       auto ptask = ::get_task();
 
-      ptask->run_loop();
+      ptask->run_main_loop();
 
    }
 
@@ -91,15 +91,17 @@ namespace subsystem_windows
    void OperatingSystemApplication::run()
    {
 
-::get_task()->run();
-       //WNDCLASS wndClass;
-       ///registerWindowClass(&wndClass);
-       //createWindow(wndClass.lpszClassName);
-       //try {
-          //m_iExitCode = processMessages();
-       //} catch (...) {
+      onOperatingSystemApplicationMain();
+
+      //::get_task()->run();
+      //WNDCLASS wndClass;
+      ///registerWindowClass(&wndClass);
+      //createWindow(wndClass.lpszClassName);
+      //try {
+         //m_iExitCode = processMessages();
+      //} catch (...) {
          // m_iExitCode = 1;
-       //}
+      //}
    }
 
    // int OperatingSystemApplication::processMessages()
@@ -191,6 +193,20 @@ namespace subsystem_windows
 
       m_iExitCode = iExitCode; 
    
+   }
+
+
+   void OperatingSystemApplication::onThreadMain() { 
+   
+      onOperatingSystemApplicationMain();
+   
+   }
+
+   void OperatingSystemApplication::onOperatingSystemApplicationMain()
+   {
+
+      m_poperatingsystemapplicationCallback->onOperatingSystemApplicationMain();
+
    }
 
 

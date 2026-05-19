@@ -66,7 +66,7 @@ namespace subsystem_windows
       ::string m_pipeName;
       //::happening m_winEvent;
       ::happening m_happening;
-      DWORD m_milliseconds;
+      class ::time m_timeTimeout;
       ::pointer < ::subsystem_windows::SecurityAttributes > m_psecurityattributes;
       ::pointer < ::subsystem_windows::File > m_pfileServerPipe;
       //HANDLE m_serverPipe;
@@ -90,12 +90,12 @@ namespace subsystem_windows
        *
        * Destroys pipe server.
        */
-      virtual ~PipeServer();
+      ~PipeServer() override;
 
 
       void initialize_pipe_server(const ::scoped_string & scopedstrName, unsigned int bufferSize,
            ::subsystem::SecurityAttributesInterface *secAttr = 0,
-           DWORD milliseconds = INFINITE);
+           const class ::time & timeOut = ::time::infinity()) override;
 
       /**
        * Waits until pipe client connects.

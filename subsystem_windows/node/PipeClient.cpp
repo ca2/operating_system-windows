@@ -45,10 +45,12 @@ namespace subsystem_windows
    {
       ::string pipeName;
       pipeName.format("\\\\.\\pipe\\{}", ::string(scopedstrName).c_str());
+      ::wstring wstrPipeName(pipeName);
+      auto pszPipeName = wstrPipeName.c_str();
 
       auto pfilePipe = create_newø< ::subsystem_windows::File>();
       HANDLE hPipe;
-      hPipe = CreateFile(::wstring(pipeName),  // pipe name
+      hPipe = CreateFile(pszPipeName,  // pipe name
                          GENERIC_READ |         // read and write access
                          GENERIC_WRITE,
                          0,                     // no sharing
@@ -60,7 +62,9 @@ namespace subsystem_windows
       if (hPipe == INVALID_HANDLE_VALUE) {
          auto lasterror = ::windows::last_error();
          ::string errMess;
-         errMess.format("Connect to pipe server failed, error code = {}", lasterror.m_uLastError);
+         errMess.format("Connect to pipe server failed, error code = {} \"{}\"", lasterror.m_uLastError, lasterror.get_error_description());
+         error(errMess);
+         auto pszError = errMess.c_str();
          throw ::subsystem::Exception(errMess);
       }
       pfilePipe->m_handle = hPipe;

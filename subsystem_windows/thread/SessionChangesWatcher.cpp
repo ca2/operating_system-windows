@@ -23,6 +23,7 @@
 //
 #include "framework.h"
 #include "SessionChangesWatcher.h"
+#include "subsystem/thread/DesktopSelector.h"
 #include "subsystem_windows/node/WTS.h"
 #include "subsystem_windows/platform/subsystem.h"
 
@@ -46,7 +47,7 @@ namespace subsystem_windows
 
    SessionChangesWatcher::~SessionChangesWatcher()
    {
-      terminate();
+      setThreadToFinish();
       wait();
    }
 
@@ -57,7 +58,7 @@ namespace subsystem_windows
         m_procedureSessionChanged = procedureSessionChanged;
       m_plogwriter = plogwriter;
       ProcessIdToSessionId(GetCurrentProcessId(), &m_baseSessionId);
-      resume();
+      resumeThread();
    }
 
 
@@ -68,7 +69,7 @@ namespace subsystem_windows
       ::string prevDeskName, currDeskName;
       prevDeskName = MainSubsystem().DesktopSelector().getThreadDesktopName();
 
-      while (!isTerminating())
+      while (!isThreadTerminating())
       {
          DWORD currSessionId = prevSession;
          if (!isRdp)
@@ -87,7 +88,7 @@ namespace subsystem_windows
             prevSession = currSessionId;
             prevDeskName = currDeskName;
             m_procedureSessionChanged();
-            terminate();
+            setThreadToFinish();
          }
          else
          {
