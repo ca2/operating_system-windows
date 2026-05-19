@@ -377,7 +377,7 @@ namespace windowing_win32
 {
 
 
-   wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserinteraction, unsigned int dwDefaultStyle, const ::scoped_string & scopedstrMatter)
+   wstring windowing::_windows_calc_icon_window_class(::acme::user::interaction * puserinteraction, unsigned int dwDefaultStyle, const ::scoped_string & scopedstrMatter)
    {
 
       auto papplication = application();
@@ -423,12 +423,12 @@ namespace windowing_win32
 
 
 
-   wstring windowing::_windows_get_user_interaction_window_class(::user::interaction * puserinteraction)
+   wstring windowing::_windows_get_user_interaction_window_class(::acme::user::interaction * pacmeuserinteraction)
    {
 
-      ::user::enum_window_type ewindowtype = puserinteraction->get_window_type();
+      auto ewindowtype = pacmeuserinteraction->get_window_type();
 
-      ::wstring wstrClassName = puserinteraction->payload("class_name").as_string();
+      ::wstring wstrClassName = pacmeuserinteraction->payload("class_name").as_string();
 
       WNDCLASSEXW wndcls;
 

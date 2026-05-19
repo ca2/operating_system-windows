@@ -505,11 +505,11 @@ namespace windowing_win32
 
       wstring wstrClassName;
 
+      wstrClassName = pwindowing->_windows_get_user_interaction_window_class(m_pacmeuserinteraction);
+
       auto puserinteraction = user_interaction();
 
-      wstrClassName = pwindowing->_windows_get_user_interaction_window_class(puserinteraction);
-
-      //if (!puserinteraction->m_pusersystem)
+      // if (!puserinteraction->m_pusersystem)
       //{
 
       //   puserinteraction->m_pusersystem = allocateø ::user::system();
@@ -518,7 +518,7 @@ namespace windowing_win32
 
       ::pointer<::user::system> pusersystem;
 
-      if (user_interaction()->is_system_message_window())
+      if (puserinteraction && puserinteraction->is_system_message_window())
       {
 
          pusersystem = allocateø::user::system();
@@ -527,7 +527,7 @@ namespace windowing_win32
       else
       {
 
-         if (user_interaction()->m_pusersystem)
+         if (puserinteraction && puserinteraction->m_pusersystem)
          {
 
             pusersystem = user_interaction()->m_pusersystem;
@@ -542,7 +542,7 @@ namespace windowing_win32
 
       }
 
-      if (!puserinteraction->pre_create_window(puserinteraction->m_pusersystem))
+      if (puserinteraction && !puserinteraction->pre_create_window(puserinteraction->m_pusersystem))
       {
 
          //return false;
@@ -557,7 +557,7 @@ namespace windowing_win32
 
       //puserinteraction->m_pwindow = this;
 
-      if (puserinteraction->m_bMessageOnlyWindow)
+      if (puserinteraction && puserinteraction->m_bMessageOnlyWindow)
       {
 
          puserinteraction->m_ewindowflag -= e_window_flag_graphical;
@@ -618,7 +618,12 @@ namespace windowing_win32
 
       //auto pusersystem = puserinteraction->m_pusersystem.get();
 
-      wstrWindowName = puserinteraction->m_strWindowText2;
+      if (puserinteraction)
+      {
+
+         wstrWindowName = puserinteraction->m_strWindowText2;
+
+      }
 
       int x = 0;
       int y = 0;
@@ -627,7 +632,7 @@ namespace windowing_win32
 
       HWND hwndParent = nullptr;
 
-      if (user_interaction()->m_bMessageOnlyWindow)
+      if (puserinteraction && puserinteraction->m_bMessageOnlyWindow)
       {
 
          hwndParent = HWND_MESSAGE;
@@ -640,10 +645,27 @@ namespace windowing_win32
 
          win32_windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
 
-         x = puserinteraction->const_layout().sketch().origin().x;
-         y = puserinteraction->const_layout().sketch().origin().y;
-         cx = puserinteraction->const_layout().sketch().size().cx;
-         cy = puserinteraction->const_layout().sketch().size().cy;
+         if (puserinteraction)
+         {
+
+            x = puserinteraction->const_layout().sketch().origin().x;
+            y = puserinteraction->const_layout().sketch().origin().y;
+            cx = puserinteraction->const_layout().sketch().size().cx;
+            cy = puserinteraction->const_layout().sketch().size().cy;
+
+         }
+         else
+         {
+
+            x = m_pacmeuserinteraction->get_rectangle().left;
+
+            y = m_pacmeuserinteraction->get_rectangle().top;
+
+            cx = m_pacmeuserinteraction->get_rectangle().width();
+
+            cy = m_pacmeuserinteraction->get_rectangle().height();
+
+         }
 
       }
 
@@ -659,22 +681,27 @@ namespace windowing_win32
 
       DWORD dwLastErrorPreCreateWindow = ::GetLastError();
 
-      auto edisplaySketch = user_interaction()->const_layout().sketch().display();
-
-      if (is_equivalent_in_equivalence_sink(edisplaySketch, e_display_normal))
+      if (puserinteraction)
       {
 
-         ::i32_rectangle rectangleRequest;
+         auto edisplaySketch = puserinteraction->const_layout().sketch().display();
 
-         rectangleRequest.left = x;
-         rectangleRequest.top = y;
-         rectangleRequest.set_size({cx, cy});
+         if (is_equivalent_in_equivalence_sink(edisplaySketch, e_display_normal))
+         {
 
-         user_interaction()->set_window_normal_stored_rectangle(rectangleRequest);
+            ::i32_rectangle rectangleRequest;
+
+            rectangleRequest.left = x;
+            rectangleRequest.top = y;
+            rectangleRequest.set_size({cx, cy});
+
+            puserinteraction->set_window_normal_stored_rectangle(rectangleRequest);
+
+         }
 
       }
 
-      if (puserinteraction->is_graphical())
+      if (puserinteraction && puserinteraction->is_graphical())
       {
 
          if (m_papplication->m_bGpu)
@@ -756,7 +783,7 @@ namespace windowing_win32
 
 #endif
 
-      if (user_interaction()->is_graphical())
+      if (puserinteraction && puserinteraction->is_graphical())
       {
 
          if (m_papplication->m_bGpu)
@@ -770,7 +797,7 @@ namespace windowing_win32
 
       }
 
-      if (puserinteraction->is_graphical())
+      if (puserinteraction && puserinteraction->is_graphical())
       {
 
          //draw2d()->on_create_window(this);
@@ -788,7 +815,12 @@ namespace windowing_win32
 
       }
 
-      puserinteraction->m_ewindowflag += ::e_window_flag_is_window;
+      if (puserinteraction)
+      {
+
+         puserinteraction->m_ewindowflag += ::e_window_flag_is_window;
+
+      }
 
       //auto hwnd = ::as_HWND(this->operating_system_window());
 
@@ -2327,9 +2359,7 @@ namespace windowing_win32
 
       }
 
-      auto puserinteraction = user_interaction();
-
-      ::string strType = ::platform::type(puserinteraction).name();
+      ::string strType = ::platform::type(m_pacmeuserinteraction).name();
 
       set_destroying_flag();
 
@@ -8443,26 +8473,46 @@ namespace windowing_win32
          if (message == ::user::e_message_activate)
          {
 
-            puserinteraction->informationf("__window_procedure ::user::e_message_activate");
+            if (puserinteraction)
+            {
+
+               puserinteraction->informationf("__window_procedure ::user::e_message_activate");
+
+            }
 
          }
          else if (message == ::user::e_message_create)
          {
 
-            puserinteraction->informationf("::user::e_message_create");
+            if (puserinteraction)
+            {
+
+               puserinteraction->informationf("::user::e_message_create");
+
+            }
 
          }
 
          if (message == ::user::e_message_left_button_down)
          {
 
-            puserinteraction->informationf("::user::e_message_left_button_down");
+            if (puserinteraction)
+            {
+
+               puserinteraction->informationf("::user::e_message_left_button_down");
+
+            }
 
          }
          else if (message == ::user::e_message_left_button_up)
          {
 
-            puserinteraction->informationf("::user::e_message_left_button_up");
+            if (puserinteraction)
+            {
+
+               puserinteraction->informationf("::user::e_message_left_button_up");
+
+            }
 
          }
          else if (message == ::user::e_message_right_button_up)
@@ -8472,12 +8522,16 @@ namespace windowing_win32
          else if (message == 33815)
          {
 
-            string strType = ::platform::type(puserinteraction).name();
-
-            if (strType.contains("list_box"))
+            if (puserinteraction)
             {
 
-               puserinteraction->informationf("list_box");
+               string strType = ::platform::type(puserinteraction).name();
+
+               if (strType.contains("list_box"))
+               {
+
+                  puserinteraction->informationf("list_box");
+               }
 
             }
 
@@ -8551,7 +8605,7 @@ namespace windowing_win32
 
          }
 
-         if (m_bDestroyImplOnly || ::is_null(puserinteraction))
+         if (m_bDestroyImplOnly &&  ::is_set(puserinteraction))
          {
 
             auto pmessage = get_message((::user::enum_message)message, wparam, (iptr)lparam);
@@ -8702,9 +8756,11 @@ namespace windowing_win32
          else
          {
 
-            auto hwnd = ::as_HWND(this->operating_system_window());
+            return ::win32::acme::windowing::window::on_window_procedure(lresult, message, wparam, lparam);
 
-            lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
+            //auto hwnd = ::as_HWND(this->operating_system_window());
+
+//            lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
 
          }
 

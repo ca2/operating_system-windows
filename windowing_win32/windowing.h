@@ -93,7 +93,7 @@ namespace windowing_win32
       virtual ::windowing::window * get_active_window(::thread * pthread) override;
 
 
-      virtual void __synthesizes_creates_styles(::user::interaction * pinteraction, unsigned int & nExStyle, unsigned int & nStyle);
+      virtual void __synthesizes_creates_styles(::acme::user::interaction * pinteraction, unsigned int & nExStyle, unsigned int & nStyle);
 
       
       virtual zorder zorder_from_hwnd(HWND hwnd);
@@ -170,8 +170,8 @@ namespace windowing_win32
       //CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::particle * pparticle, unsigned int nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
       virtual bool _windows_register_class(WNDCLASSEXW* puserinteractionclass);
       //
-      virtual wstring _windows_calc_icon_window_class(::user::interaction* pinteraction, unsigned int dwDefaultStyle, const ::scoped_string & scopedstrMatter) override;
-      virtual wstring _windows_get_user_interaction_window_class(::user::interaction* pinteraction) override;
+      virtual wstring _windows_calc_icon_window_class(::acme::user::interaction* pinteraction, unsigned int dwDefaultStyle, const ::scoped_string & scopedstrMatter) override;
+      virtual wstring _windows_get_user_interaction_window_class(::acme::user::interaction* pinteraction) override;
       virtual bool _windows_register_with_icon(WNDCLASSEXW* puserinteractionclass, const unichar* pszClassName, unsigned int nIDIcon);
 
       virtual void _window_create_caret(HWND hwnd, HBITMAP hbitmap);

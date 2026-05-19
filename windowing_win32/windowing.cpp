@@ -393,10 +393,19 @@ namespace windowing_win32
    }
 
 
-   void windowing::__synthesizes_creates_styles(::user::interaction* pinteraction, unsigned int& nExStyle, unsigned int& nStyle)
+   void windowing::__synthesizes_creates_styles(::acme::user::interaction* pacmeuserinteraction, unsigned int& nExStyle, unsigned int& nStyle)
    {
 
-      if (pinteraction->m_bCompositedFrameWindow)
+      ::cast<::user::interaction> pinteraction = pacmeuserinteraction;
+
+      if (!pinteraction)
+      {
+
+         nStyle = WS_POPUP | WS_SYSMENU;
+
+      }
+
+      if (pinteraction && pinteraction->m_bCompositedFrameWindow)
       {
 
          draw2d()->adjust_composited_window_styles(nExStyle, nStyle);
@@ -407,14 +416,14 @@ namespace windowing_win32
 
       }
 
-      if (pinteraction->const_layout().sketch().is_visible())
+      if (pinteraction && pinteraction->const_layout().sketch().is_visible())
       {
 
          nStyle |= WS_VISIBLE;
 
       }
 
-      if (pinteraction->m_bToolWindow)
+      if (pinteraction && pinteraction->m_bToolWindow)
       {
 
          nExStyle |= WS_EX_TOOLWINDOW;
