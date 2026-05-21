@@ -404,7 +404,7 @@ static const ::user::enum_key xfree86_key_table2[] = {
    /* 238 */   ::user::e_key_none,   /* xf86wlan */
 };
 
-///* xvnc / xtightvnc scancodes from xmodmap -pk */
+///* xvnc / xremoting scancodes from xmodmap -pk */
 //static const sdl_scancode xvnc_scancode_table[] = {
 //   /*  0 */    sdl_scancode_lctrl,
 //   /*  1 */    sdl_scancode_rctrl,

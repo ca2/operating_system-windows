@@ -68,7 +68,7 @@ IMPLEMENT_FACTORY(subsystem_windows)
    pfactory->add_factory_item<::subsystem_windows::OperatingSystemHook,
                               ::subsystem::OperatingSystemHookInterface>();
 
-   pfactory->add_factory_item<::subsystem_windows::DesktopSelector, ::subsystem::DesktopSelector>();
+   pfactory->add_factory_item<::subsystem_windows::DesktopSelector, ::subsystem::DesktopSelectorInterface>();
    pfactory->add_factory_item<::subsystem_windows::Clipboard, ::subsystem::ClipboardInterface>();
 
 }

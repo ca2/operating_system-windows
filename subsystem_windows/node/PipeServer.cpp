@@ -2,9 +2,9 @@
 // All rights reserved.
 //
 //-------------------------------------------------------------------------
-// This file is part of the TightVNC software.  Please visit our Web site:
+// This file is part of the T i g h t V N C software.  Please visit our Web site:
 //
-//                       http://www.tightvnc.com/
+//                       http://www.t i g h t v n c.com/
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -251,7 +251,8 @@ namespace subsystem_windows
       }
       CloseHandle(server);
 
-      if (std::equal(serverName, serverName + MAX_PATH, clientName)) {
+      if (m_papplication->check_pipe_node_client_executable_paths(serverName, clientName))
+      {
          return true;
       }
       return false;

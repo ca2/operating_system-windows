@@ -16,6 +16,8 @@ list(APPEND library_source
    icon.h
    innate_ui.cpp
    innate_ui.h
+   menu.cpp
+   menu.h
    still.cpp
    still.h
    window.cpp
