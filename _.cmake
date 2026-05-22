@@ -44,6 +44,11 @@ add_compile_definitions(_UNICODE)
 add_compile_definitions(WINDOWS_DESKTOP)
 
 
+set(USE_SYSTEM_ARCHIVE TRUE)
+set(USE_SYSTEM_PCRE TRUE)
+set(USE_SYSTEM_ZLIB TRUE)
+
+
 list(APPEND app_common_dependencies
    acme_windows_common
    acme_windows
