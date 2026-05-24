@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "activation_token.h"
 #include "windowing.h"
+#include "window.h"
 #include "acme/constant/user_message.h"
 #include "acme/nano/nano.h"
 #include "acme/user/micro/user.h"
@@ -66,9 +67,11 @@ namespace win32
          void windowing::initialize_windowing()
          {
 
-            informationf("windowing_system_win32::windowing::initialize_windowing_system");
+            debugf("::win32::acme::windowing::initialize_windowing");
 
-            informationf("windowing_system_win32::windowing::initialize_windowing_system going to call init_threads");
+#if defined(LINUX) || defined(__BSD__)
+
+            informationf("::win32::acme::windowing::initialize_windowing going to call init_threads");
 
             if (!system()->acme_windowing()->init_threads())
             {
@@ -77,7 +80,9 @@ namespace win32
 
             }
 
-            fetch_system_background_color();
+#endif
+
+            //fetch_system_background_color();
 
             // gdk_x11 does error handling?!?!?!
             //XSetErrorHandler(_c_XErrorHandler);
@@ -147,6 +152,22 @@ namespace win32
       //
       //      }
 
+
+         }
+
+
+         void windowing::user_send(const ::procedure & procedure)
+         {
+
+            main_send(procedure);
+
+         }
+
+
+         void windowing::user_post(const ::procedure & procedure)
+         {
+
+            main_post(procedure);
 
          }
 
@@ -238,6 +259,298 @@ namespace win32
 
          }
 
+         //
+         // bool g_bNanoWindowClassRegistered = false;
+         //
+         //
+         //
+         // //CLASS_DECL_ACME_WINDOWING_WIN32 LRESULT CALLBACK acme_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#define DEFAULT_WINDOW_CLASS "default_window_class"
+
+
+
+         ::windows::window_class windowing::_default_window_class()
+         {
+
+            if (m_windowclassDefault.m_wstrClassName.is_empty())
+            {
+
+               _register_default_window_class();
+
+            }
+
+            return m_windowclassDefault;
+
+         }
+
+         void windowing::_register_default_window_class()
+         {
+
+            _register_default_window_class(::windows::window::s_window_procedure);
+
+         //
+         //    WNDCLASSEXW wndclassex{};
+         //
+         //    //Step 1: Registering the Window Class
+         //    wndclassex.cbSize = sizeof(WNDCLASSEXW);
+         //    wndclassex.style = CS_DBLCLKS;
+         //    wndclassex.lpfnWndProc = &windows::window::s_window_procedure;
+         //    wndclassex.cbClsExtra = 0;
+         //    wndclassex.cbWndExtra = 0;
+         //    wndclassex.hInstance = hinstanceWndProc;
+         //    wndclassex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+         //    wndclassex.hCursor = LoadCursor(NULL, IDC_ARROW);
+         //    wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+         //    wndclassex.lpszMenuName = NULL;
+         //    wndclassex.lpszClassName = m_wstrNanoWindowClassName;
+         //    wndclassex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+         //
+         //    if (!RegisterClassEx(&wndclassex))
+         //    {
+         //
+         //       m_wstrNanoWindowClassName.clear();
+         //
+         //       throw ::exception(error_failed, "Failed to register nano message box window class.");
+         //
+         //    }
+         //
+         //    //g_bNanoWindowClassRegistered = true;
+         //
+          }
+
+         void windowing::_register_default_window_class(hinstance hinstance)
+         {
+
+            if (m_windowclassDefault.m_wstrClassName.has_character())
+            {
+
+               return;
+
+            }
+
+            m_windowclassDefault.m_wstrClassName = DEFAULT_WINDOW_CLASS;
+
+            m_windowclassDefault.m_hinstance = hinstance;
+
+            WNDCLASSEXW wndclassex{};
+
+            //Step 1: Registering the Window Class
+            wndclassex.cbSize = sizeof(WNDCLASSEXW);
+            wndclassex.style = CS_DBLCLKS;
+            wndclassex.lpfnWndProc = &::windows::window::s_window_procedure;
+            wndclassex.cbClsExtra = 0;
+            wndclassex.cbWndExtra = 0;
+            wndclassex.hInstance = (HINSTANCE) m_windowclassDefault.m_hinstance;
+            wndclassex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+            wndclassex.hCursor = LoadCursor(NULL, IDC_ARROW);
+            wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+            wndclassex.lpszMenuName = NULL;
+            wndclassex.lpszClassName = m_windowclassDefault.m_wstrClassName;
+            wndclassex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+
+            if (!RegisterClassEx(&wndclassex))
+            {
+
+               m_windowclassDefault.m_wstrClassName.clear();
+
+               throw ::exception(error_failed, "Failed to register nano message box window class.");
+
+            }
+
+            //g_bNanoWindowClassRegistered = true;
+
+         }
+
+
+#define ACME_NANO_WINDOW_CLASS "acme_nano_window_class"
+
+
+         ::windows::window_class windowing::_acme_nano_window_class()
+         {
+
+            if (m_windowclassAcmeNano.m_wstrClassName.is_empty())
+            {
+
+               _register_acme_nano_window_class();
+
+            }
+
+            return m_windowclassAcmeNano;
+
+         }
+
+         void windowing::_register_acme_nano_window_class()
+         {
+
+            _register_acme_nano_window_class(::windows::window::s_window_procedure);
+
+         //
+         //    WNDCLASSEXW wndclassex{};
+         //
+         //    //Step 1: Registering the Window Class
+         //    wndclassex.cbSize = sizeof(WNDCLASSEXW);
+         //    wndclassex.style = CS_DBLCLKS;
+         //    wndclassex.lpfnWndProc = &windows::window::s_window_procedure;
+         //    wndclassex.cbClsExtra = 0;
+         //    wndclassex.cbWndExtra = 0;
+         //    wndclassex.hInstance = hinstanceWndProc;
+         //    wndclassex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+         //    wndclassex.hCursor = LoadCursor(NULL, IDC_ARROW);
+         //    wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+         //    wndclassex.lpszMenuName = NULL;
+         //    wndclassex.lpszClassName = m_wstrNanoWindowClassName;
+         //    wndclassex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+         //
+         //    if (!RegisterClassEx(&wndclassex))
+         //    {
+         //
+         //       m_wstrNanoWindowClassName.clear();
+         //
+         //       throw ::exception(error_failed, "Failed to register nano message box window class.");
+         //
+         //    }
+         //
+         //    //g_bNanoWindowClassRegistered = true;
+         //
+          }
+
+         void windowing::_register_acme_nano_window_class(hinstance hinstance)
+         {
+
+            if (m_windowclassAcmeNano.m_wstrClassName.has_character())
+            {
+
+               return;
+
+            }
+
+            m_windowclassAcmeNano.m_wstrClassName = ACME_NANO_WINDOW_CLASS;
+
+            m_windowclassAcmeNano.m_hinstance = hinstance;
+
+            WNDCLASSEXW wndclassex{};
+
+            //Step 1: Registering the Window Class
+            wndclassex.cbSize = sizeof(WNDCLASSEXW);
+            wndclassex.style = CS_DBLCLKS;
+            wndclassex.lpfnWndProc = &::windows::window::s_window_procedure;
+            wndclassex.cbClsExtra = 0;
+            wndclassex.cbWndExtra = 0;
+            wndclassex.hInstance = (HINSTANCE) m_windowclassAcmeNano.m_hinstance;
+            wndclassex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+            wndclassex.hCursor = LoadCursor(NULL, IDC_ARROW);
+            wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+            wndclassex.lpszMenuName = NULL;
+            wndclassex.lpszClassName = m_windowclassAcmeNano.m_wstrClassName;
+            wndclassex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+
+            if (!RegisterClassEx(&wndclassex))
+            {
+
+               m_windowclassAcmeNano.m_wstrClassName.clear();
+
+               throw ::exception(error_failed, "Failed to register nano message box window class.");
+
+            }
+
+            //g_bNanoWindowClassRegistered = true;
+
+         }
+
+
+#define COM_HOST_WINDOW_CLASS "com_host_window_class"
+
+         ::windows::window_class windowing::_com_host_window_class()
+         {
+
+            if (m_windowclassComHost.m_wstrClassName.is_empty())
+            {
+
+               _register_com_host_window_class();
+
+            }
+
+            return m_windowclassComHost;
+
+         }
+
+         void windowing::_register_com_host_window_class()
+         {
+
+            _register_com_host_window_class(::windows::window::s_window_procedure);
+
+         //
+         //    WNDCLASSEXW wndclassex{};
+         //
+         //    //Step 1: Registering the Window Class
+         //    wndclassex.cbSize = sizeof(WNDCLASSEXW);
+         //    wndclassex.style = CS_DBLCLKS;
+         //    wndclassex.lpfnWndProc = &windows::window::s_window_procedure;
+         //    wndclassex.cbClsExtra = 0;
+         //    wndclassex.cbWndExtra = 0;
+         //    wndclassex.hInstance = hinstanceWndProc;
+         //    wndclassex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+         //    wndclassex.hCursor = LoadCursor(NULL, IDC_ARROW);
+         //    wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+         //    wndclassex.lpszMenuName = NULL;
+         //    wndclassex.lpszClassName = m_wstrNanoWindowClassName;
+         //    wndclassex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+         //
+         //    if (!RegisterClassEx(&wndclassex))
+         //    {
+         //
+         //       m_wstrNanoWindowClassName.clear();
+         //
+         //       throw ::exception(error_failed, "Failed to register nano message box window class.");
+         //
+         //    }
+         //
+         //    //g_bNanoWindowClassRegistered = true;
+         //
+          }
+
+         void windowing::_register_com_host_window_class(hinstance hinstance)
+         {
+
+            if (m_windowclassComHost.m_wstrClassName.has_character())
+            {
+
+               return;
+
+            }
+
+            m_windowclassComHost.m_wstrClassName = COM_HOST_WINDOW_CLASS;
+
+            m_windowclassComHost.m_hinstance = hinstance;
+
+            WNDCLASSEXW wndclassex{};
+
+            //Step 1: Registering the Window Class
+            wndclassex.cbSize = sizeof(WNDCLASSEXW);
+            wndclassex.style = CS_DBLCLKS;
+            wndclassex.lpfnWndProc = &::windows::window::s_window_procedure;
+            wndclassex.cbClsExtra = 0;
+            wndclassex.cbWndExtra = 0;
+            wndclassex.hInstance = (HINSTANCE) m_windowclassComHost.m_hinstance;
+            wndclassex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+            wndclassex.hCursor = LoadCursor(NULL, IDC_ARROW);
+            wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+            wndclassex.lpszMenuName = NULL;
+            wndclassex.lpszClassName = m_windowclassComHost.m_wstrClassName;
+            wndclassex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+
+            if (!RegisterClassEx(&wndclassex))
+            {
+
+               m_windowclassComHost.m_wstrClassName.clear();
+
+               throw ::exception(error_failed, "Failed to register nano message box window class.");
+
+            }
+
+            //g_bNanoWindowClassRegistered = true;
+
+         }
 
          bool windowing::_win32_registry_windows_dark_mode_for_app()
          {
@@ -333,6 +646,7 @@ namespace win32
             _set_app_dark_mode1(bDarkMode);
 
             DWORD_PTR res;
+
             SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)TEXT("ImmersiveColorSet"), 0, 1000, &res);
 
             //return ::success;

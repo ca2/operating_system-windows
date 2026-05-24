@@ -219,10 +219,11 @@ namespace acme_windows
    }
 
 
+   /// This function must run under apartment_thread
    comptr < IShellLinkW > path_system::_get_IShellLinkW(const ::file::path & pathLink)
    {
 
-      node()->defer_co_initialize_ex(false);
+      //node()->defer_co_initialize_ex(false);
 
       HRESULT hr;
 

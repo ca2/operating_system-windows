@@ -8,14 +8,15 @@
 //#include "acme/parallelization/task.h"
 //#include "acme/nano/nano.h"
 //#include "acme/nano/user/button.h"
-//#include "acme/nano/user/message_box.h"
+// #include "acme/nano/user/message_box.h"
+#include "acme/operating_system/windows/windows.h"
 #include "acme/platform/system.h"
 #include "acme/user/micro/elemental.h"
 #include "acme/user/user/frame_interaction.h"
 #include "acme/user/user/interaction.h"
 #include "acme/user/user/mouse.h"
 #include "acme/windowing/windowing.h"
-#include "acme/operating_system/windows/windows.h"
+#include "windowing.h"
 
 
 void win32_post(HWND hwnd, const ::procedure& procedure)
@@ -106,58 +107,6 @@ namespace win32
          }
 
 
-         bool g_bNanoWindowClassRegistered = false;
-
-
-
-         //CLASS_DECL_ACME_WINDOWING_WIN32 LRESULT CALLBACK acme_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-
-#define ACME_WINDOW_CLASS "acme_window_class"
-
-
-
-
-
-         void register_nano_window_class()
-         {
-
-            if (g_bNanoWindowClassRegistered)
-            {
-
-               return;
-
-            }
-
-            auto hinstanceWndProc = ::windows::window::s_window_procedure_hinstance();
-
-            WNDCLASSEX wndclassex{};
-
-            //Step 1: Registering the Window Class
-            wndclassex.cbSize = sizeof(WNDCLASSEX);
-            wndclassex.style = CS_DBLCLKS;
-            wndclassex.lpfnWndProc = &windows::window::s_window_procedure;
-            wndclassex.cbClsExtra = 0;
-            wndclassex.cbWndExtra = 0;
-            wndclassex.hInstance = hinstanceWndProc;
-            wndclassex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-            wndclassex.hCursor = LoadCursor(NULL, IDC_ARROW);
-            wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-            wndclassex.lpszMenuName = NULL;
-            wndclassex.lpszClassName = _T(ACME_WINDOW_CLASS);
-            wndclassex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-
-            if (!RegisterClassEx(&wndclassex))
-            {
-
-               throw ::exception(error_failed, "Failed to register nano message box window class.");
-
-            }
-
-            g_bNanoWindowClassRegistered = true;
-
-         }
-
 
 
 
@@ -173,22 +122,37 @@ namespace win32
          {
 
 
-            if (!g_bNanoWindowClassRegistered)
-            {
+            auto windowclass= m_pacmeuserinteraction->_get_window_class();
 
-               register_nano_window_class();
 
-            }
+            //::cast < ::win32::acme::windowing::windowing > pacmewindowingwindow = ::system()->acme_windowing();
 
+            // if (!g_bNanoWindowClassRegistered)
+            // {
+            //
+            //    acmeregister_nano_window_class();
+            //
+            // }
+            //
             wstring wstrTitle(m_pacmeuserinteraction->get_title());
 
-            auto hinstanceWndProc = ::windows::window::s_window_procedure_hinstance();
+            //auto hinstanceWndProc = ::windows::window::s_window_procedure_hinstance();
 
             m_ptask = ::get_task();
 
             auto r = m_pacmeuserinteraction->get_rectangle();
 
             ::cast < ::acme::user::frame_interaction > pframeinteraction = m_pacmeuserinteraction;
+
+
+            auto iStyle = m_pacmeuserinteraction->get_style_for_creating_window();
+
+            if (iStyle < 0)
+            {
+
+               iStyle = WS_POPUP | WS_SYSMENU;
+
+            }
 
             DWORD dwExStyle = 0;
 
@@ -201,20 +165,23 @@ namespace win32
 
             HWND hwnd = CreateWindowEx(
                dwExStyle,
-               _T(ACME_WINDOW_CLASS),
+               windowclass.m_wstrClassName,
                wstrTitle,
-               WS_POPUP | WS_SYSMENU,
+               iStyle,
                r.left,
                r.top,
                r.width(),
                r.height(),
-               NULL, NULL, hinstanceWndProc,
+               NULL, NULL, (HINSTANCE) windowclass.m_hinstance,
                (::windows::window *)this);
 
             if (hwnd == NULL)
             {
+
                throw ::exception(error_failed, "Failed to create nano message box window.");
+
                return;
+
             }
 
             //nanowindowimplementationa().add(this);
@@ -751,14 +718,6 @@ namespace win32
                system()->acme_windowing()->erase_window(this); 
                break;
             }
-            case WM_CREATE:
-            {
-               //update_drawing_objects();
-
-               on_create_window();
-
-            }
-            break;
             case WM_CHAR:
             {
 
@@ -819,7 +778,7 @@ namespace win32
 
                   on_mouse_leave();
 
-                  m_bMouseOn = false;
+                  //m_bMouseOn = false;
 
                }
 
@@ -836,52 +795,7 @@ namespace win32
             case WM_MOUSEMOVE:
             {
 
-               if (!m_bMouseOn)
-               {
-
-                  m_bMouseOn = true;
-
-                  auto hwnd = ::as_HWND(this->operating_system_window());
-
-                  TRACKMOUSEEVENT trackmouseevent = { sizeof(TRACKMOUSEEVENT) };
-                  trackmouseevent.dwFlags = TME_LEAVE;
-                  trackmouseevent.hwndTrack = hwnd;
-                  ::TrackMouseEvent(&trackmouseevent);
-
-                  on_mouse_enter();
-
-               }
-
-               auto pmouse = create_newø < ::user::mouse >();
-
-               pmouse->m_pointHost = lparam.point();
-
-               pmouse->m_pointAbsolute = client_to_screen(lparam.point());
-
-               fore_on_mouse_move(pmouse);
-
-               //::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
-
-               //if (pelemental)
-               //{
-
-               //   pelemental->fore_on_mouse_move(pmouse);
-
-               //}
-
-               if (!pmouse->m_bRet)
-               {
-
-
-                  //if (pelemental)
-                  //{
-
-                     back_on_mouse_move(pmouse);
-
-                  //}
-
-               }
-
+               on_window_mouse_move(lparam.point(), client_to_screen(lparam.point()));
 
             }
             break;
@@ -994,68 +908,77 @@ namespace win32
             }
                case WM_MOUSEACTIVATE:
                {
-                  lresult= MA_ACTIVATE;
-                  return true;
+                  //lresult= MA_ACTIVATE;
+                  //return true;
                }
+                  break;
             case WM_PAINT:
             {
 
-               PAINTSTRUCT paintstruct{};
+               if (m_pacmeuserinteraction && m_pacmeuserinteraction->m_bCustomPaint)
+               {
+                  PAINTSTRUCT paintstruct{};
 
-               auto hwnd = ::as_HWND(this->operating_system_window());
+                  auto hwnd = ::as_HWND(this->operating_system_window());
 
-               HDC hdcWindow = BeginPaint(hwnd, &paintstruct);
+                  HDC hdcWindow = BeginPaint(hwnd, &paintstruct);
 
-               HDC hdc = ::CreateCompatibleDC(hdcWindow);
+                  HDC hdc = ::CreateCompatibleDC(hdcWindow);
 
-               ::i32_rectangle rectangleX;
+                  ::i32_rectangle rectangleX;
 
-               ::GetClientRect(hwnd, (LPRECT)&rectangleX);
+                  ::GetClientRect(hwnd, (LPRECT)&rectangleX);
 
-               HBITMAP hbitmap = ::CreateCompatibleBitmap(hdcWindow, rectangleX.width(), rectangleX.height());
+                  HBITMAP hbitmap = ::CreateCompatibleBitmap(hdcWindow, rectangleX.width(), rectangleX.height());
 
-               HGDIOBJ hbitmapOld = ::SelectObject(hdc, hbitmap);
+                  HGDIOBJ hbitmapOld = ::SelectObject(hdc, hbitmap);
 
-               _draw(hdc);
+                  _draw(hdc);
 
 
-               ::BitBlt(hdcWindow, 0, 0, rectangleX.width(), rectangleX.height(),
-                  hdc, 0, 0, SRCCOPY);
+                  ::BitBlt(hdcWindow, 0, 0, rectangleX.width(), rectangleX.height(),
+                     hdc, 0, 0, SRCCOPY);
 
-               hbitmapOld = ::SelectObject(hdc, hbitmapOld);
+                  hbitmapOld = ::SelectObject(hdc, hbitmapOld);
 
-               ::DeleteDC(hdc);
-               EndPaint(hwnd, &paintstruct);
-               lresult = 0;
-               return true;
+                  ::DeleteDC(hdc);
+                  EndPaint(hwnd, &paintstruct);
+                  lresult = 0;
+                  return true;
+               }
             }
+               break;
                case WM_NCACTIVATE:
             {
 
-               auto hwnd = ::as_HWND(this->operating_system_window());
+               break;
 
-               lresult = DefWindowProc(hwnd, message, wparam, lparam);
-               m_bNcActive = wparam != 0;
-               redraw();
-
-               return true;
+               // auto hwnd = ::as_HWND(this->operating_system_window());
+               //
+               // lresult = DefWindowProc(hwnd, message, wparam, lparam);
+               // m_bNcActive = wparam != 0;
+               // redraw();
+               //
+               // return true;
 
             }
             case WM_ACTIVATE:
             {
 
-               if (wparam > 0)
-               {
+               break;
 
-                  auto hwnd = ::as_HWND(this->operating_system_window());
-
-                  ::SetFocus(hwnd);
-
-               }
-
-                  lresult = 0;
-                  return true;
-
+               // if (wparam > 0)
+               // {
+               //
+               //    auto hwnd = ::as_HWND(this->operating_system_window());
+               //
+               //    ::SetFocus(hwnd);
+               //
+               // }
+               //
+               //    lresult = 0;
+               //    return true;
+               //
             }
             case WM_FONTCHANGE:
             {
@@ -1064,7 +987,21 @@ namespace win32
 
             }
             break;
-            case WM_SETTINGCHANGE:
+               case WM_SIZE:
+               {
+
+                  on_window_size();
+
+               }
+                  break;
+               case WM_SETFOCUS:
+               {
+
+                  on_window_set_focus();
+
+               }
+                  break;
+               case WM_SETTINGCHANGE:
             {
 
                string strLparamString;
@@ -1265,7 +1202,7 @@ namespace win32
          void window::hide_window()
          {
 
-            main_send([this]()
+            user_send([this]()
             {
 
                auto hwnd = ::as_HWND(this->operating_system_window());
@@ -1295,6 +1232,29 @@ namespace win32
             auto hwnd = ::as_HWND(this->operating_system_window());
 
             ::RedrawWindow(hwnd, nullptr, nullptr, RDW_UPDATENOW | RDW_INVALIDATE);
+
+         }
+
+
+         void window::window_invalidate_rect(const i32_rectangle *prectangle, bool bErase)
+         {
+
+            ::windows::window::window_invalidate_rect(prectangle, bErase);
+
+         }
+
+         void window::update_window()
+         {
+
+            ::windows::window::update_window();
+
+         }
+
+
+         void window::dump_operating_system_child_window_hierarchy()
+         {
+
+            ::windows::window::dump_operating_system_child_window_hierarchy();
 
          }
 
@@ -1530,8 +1490,64 @@ namespace win32
          }
 
 
+         void window::main_send(const ::procedure& procedure)
+         {
+
+            if (m_ptask)
+            {
+
+               m_ptask->send(procedure);
+
+            }
+            else
+            {
+
+               auto pacmewindowing = ::system()->acme_windowing();
+
+               if (pacmewindowing)
+               {
+
+                  pacmewindowing->main_send(procedure);
+
+                  return;
+
+               }
+
+               ::acme::windowing::window::main_send(procedure);
+
+            }
+
+         }
 
 
+         void window::main_post(const ::procedure& procedure)
+         {
+
+            if (m_ptask)
+            {
+
+               m_ptask->post(procedure);
+
+            }
+            else
+            {
+
+               auto pacmewindowing = ::system()->acme_windowing();
+
+               if (pacmewindowing)
+               {
+
+                  pacmewindowing->main_post(procedure);
+
+                  return;
+
+               }
+
+               ::acme::windowing::window::main_post(procedure);
+
+            }
+
+         }
 
 
          void window::user_post(const ::procedure & procedure)
@@ -1546,10 +1562,20 @@ namespace win32
             else
             {
 
+               auto pacmewindowing = ::system()->acme_windowing();
+
+               if (pacmewindowing)
+               {
+
+                  pacmewindowing->user_post(procedure);
+
+                  return;
+
+               }
+
                ::acme::windowing::window::user_post(procedure);
 
             }
-
 
          }
 

@@ -19,10 +19,15 @@ namespace win32
       {
 
 
+
          class CLASS_DECL_ACME_WINDOWING_WIN32 windowing :
             virtual public ::windows::windowing
          {
          public:
+
+            ::windows::window_class m_windowclassDefault;
+            ::windows::window_class m_windowclassAcmeNano;
+            ::windows::window_class m_windowclassComHost;
 
             
             windowing();
@@ -35,6 +40,8 @@ namespace win32
             ::acme::windowing::display * acme_display() override;
             void main_send(const ::procedure & procedure) override;
             void main_post(const ::procedure & procedure) override;
+            void user_send(const ::procedure & procedure) override;
+            void user_post(const ::procedure & procedure) override;
             void display_error_trap_push(int i) override;
             void display_error_trap_pop_ignored(int i) override;
 
@@ -50,6 +57,18 @@ namespace win32
 
             bool dark_mode() override;
             void fetch_system_background_color() override;
+
+            ::windows::window_class _default_window_class() override;
+            virtual void _register_default_window_class();
+            virtual void _register_default_window_class(hinstance hinstance);
+
+            ::windows::window_class _acme_nano_window_class() override;
+            virtual void _register_acme_nano_window_class();
+            virtual void _register_acme_nano_window_class(hinstance hinstance);
+
+            ::windows::window_class _com_host_window_class() override;
+            virtual void _register_com_host_window_class();
+            virtual void _register_com_host_window_class(hinstance hinstance);
 
 
             virtual bool _win32_registry_windows_dark_mode_for_app();

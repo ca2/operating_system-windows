@@ -283,6 +283,13 @@ namespace innate_ui_win32
          PostQuitMessage(0);
          break;
       }
+         case WM_SIZE:
+      {
+
+         on_size();
+
+      }
+            break;
       case WM_SYSCOMMAND:
       {
          int wmId = LOWORD(wparam);

@@ -165,7 +165,23 @@ namespace innate_ui_win32
    void still::set_icon(::innate_ui::icon * piconParam)
    {
 
+      if (m_pgdiplusimage)
+      {
+
+         delete m_pgdiplusimage;
+
+         m_pgdiplusimage = nullptr;
+
+      }
+
       ::pointer <::innate_ui_win32::icon > picon = piconParam;
+
+      if (::is_null(picon))
+      {
+
+         return;
+
+      }
 
       main_send([this, picon]()
       {
@@ -173,7 +189,15 @@ namespace innate_ui_win32
          
          //::SendMessage(m_hwnd, STM_SETICON, (WPARAM) picon->m_hicon, 0);
 
-         m_pgdiplusimage = LoadImageFromMemory(picon->m_memory.data(), picon->m_memory.size());
+         try
+         {
+            m_pgdiplusimage = LoadImageFromMemory(picon->m_memory.data(), picon->m_memory.size());
+         }
+         catch (...)
+         {
+
+
+         }
          
       });
 

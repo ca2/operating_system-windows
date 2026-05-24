@@ -122,6 +122,10 @@ namespace win32
             void redraw() override;
 
 
+            void window_invalidate_rect(const i32_rectangle *prectangle, bool bErase) override;
+            void update_window() override;
+            void dump_operating_system_child_window_hierarchy() override;
+
             bool _is_window() override;
 
             
@@ -149,6 +153,8 @@ namespace win32
 
             //::i32_size get_main_screen_size() override;
 
+            void main_send(const ::procedure& procedure) override;
+            void main_post(const ::procedure& procedure) override;
 
             void user_post(const ::procedure& procedure) override;
 

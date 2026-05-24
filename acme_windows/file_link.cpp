@@ -63,7 +63,10 @@ namespace acme_windows
 
       SHFILEINFOW info{};
 
-      node()->defer_co_initialize_ex(false);
+      //node()->defer_co_initialize_ex(false);
+
+      system()->apartment_thread()->send([&]()
+         {
 
       DWORD_PTR dw = 0;
 
@@ -201,6 +204,8 @@ namespace acme_windows
          }
 
       }
+
+         });
 
    }
 
