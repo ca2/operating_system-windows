@@ -124,6 +124,16 @@ namespace win32
 
             auto windowclass= m_pacmeuserinteraction->_get_window_class();
 
+            HWND hwndParent = nullptr;
+
+            auto pacmeuserinteractionParent = m_pacmeuserinteraction->m_pacmeuserinteractionParent;
+
+            if (pacmeuserinteractionParent)
+            {
+
+               hwndParent = ::as_HWND(pacmeuserinteractionParent->operating_system_window());
+
+            }
 
             //::cast < ::win32::acme::windowing::windowing > pacmewindowingwindow = ::system()->acme_windowing();
 
@@ -144,7 +154,6 @@ namespace win32
 
             ::cast < ::acme::user::frame_interaction > pframeinteraction = m_pacmeuserinteraction;
 
-
             auto iStyle = m_pacmeuserinteraction->get_style_for_creating_window();
 
             if (iStyle < 0)
@@ -154,17 +163,24 @@ namespace win32
 
             }
 
-            DWORD dwExStyle = 0;
+            auto iExStyle = m_pacmeuserinteraction->get_ex_style_for_creating_window();
+
+            if (iExStyle < 0)
+            {
+
+               iExStyle = 0;
+
+            }
 
             if (pframeinteraction && pframeinteraction->m_bTopMost)
             {
 
-               dwExStyle |= WS_EX_TOPMOST;
+               iExStyle |= WS_EX_TOPMOST;
 
             }
 
             HWND hwnd = CreateWindowEx(
-               dwExStyle,
+               iExStyle,
                windowclass.m_wstrClassName,
                wstrTitle,
                iStyle,
@@ -172,19 +188,40 @@ namespace win32
                r.top,
                r.width(),
                r.height(),
-               NULL, NULL, (HINSTANCE) windowclass.m_hinstance,
+               hwndParent, NULL, (HINSTANCE) windowclass.m_hinstance,
                (::windows::window *)this);
 
             if (hwnd == NULL)
             {
 
-               throw ::exception(error_failed, "Failed to create nano message box window.");
+               throw ::exception(error_failed, "Failed to create acme nano window.");
 
                return;
 
             }
 
+
+            HICON hiconBig = (HICON) m_pacmeuserinteraction->m_pHICON_Big;
+
+            HICON hiconSmall = (HICON) m_pacmeuserinteraction->m_pHICON_Small;
+
+            if (hiconBig)
+            {
+
+               ::SendMessage(hwnd, WM_SETICON, ICON_BIG,   (LPARAM)hiconBig);
+
+            }
+
+
+            if (hiconSmall)
+            {
+
+               ::SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+
+            }
             //nanowindowimplementationa().add(this);
+
+
 
             //system()->window_
 
@@ -243,24 +280,13 @@ namespace win32
 
             {
 
-               //nano()->graphics();
+               system()->do_graphics_factory();
 
                constructø(m_pnanodevice);
 
                m_pnanodevice->attach(hdc, { ::width(r), ::height(r) });
 
-               ::pointer < ::micro::elemental > pelemental;
-
-               pelemental = m_pacmeuserinteraction;
-
-               if (pelemental)
-               {
-
-                  pelemental->draw_background(m_pnanodevice);
-
-                  pelemental->draw_foreground(m_pnanodevice);
-
-               }
+               on_window_paint(m_pnanodevice);
 
             }
 

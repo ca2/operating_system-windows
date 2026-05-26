@@ -29,6 +29,9 @@ namespace win32
             ::windows::window_class m_windowclassAcmeNano;
             ::windows::window_class m_windowclassComHost;
 
+
+            string_map < ::windows::window_class > m_mapWindowClass;
+
             
             windowing();
             ~windowing() override;
@@ -57,6 +60,9 @@ namespace win32
 
             bool dark_mode() override;
             void fetch_system_background_color() override;
+
+            ::windows::window_class _custom_window_class(const scoped_string &scopedstrClassName, void *pHICON_Big, void *pHICON_Small) override;
+            virtual ::windows::window_class _register_custom_window_class(const scoped_string & scopedstrClassName, void * pHICON_Big, void * pHICON_Small);
 
             ::windows::window_class _default_window_class() override;
             virtual void _register_default_window_class();

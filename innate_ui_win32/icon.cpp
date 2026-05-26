@@ -10,6 +10,7 @@ namespace innate_ui_win32
    icon::icon()
    {
       m_hicon = nullptr;
+      m_hiconSmall = nullptr;
    }
 
 

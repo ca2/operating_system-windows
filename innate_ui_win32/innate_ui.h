@@ -38,6 +38,9 @@ namespace innate_ui_win32
       void main_post(const ::procedure & procedure) override;
 
 
+      ::pointer<::innate_ui::icon> try_get_application_icon_from_main_window() override;
+
+
       /*void track_popup_menu(const ::function<void(int)> &functionOnActionId) override;*/
 
       //virtual LRESULT _window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);

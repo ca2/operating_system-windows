@@ -75,6 +75,8 @@ namespace innate_ui_win32
 
       }
 
+      defer_set_scaled_font();
+
    }
 
 

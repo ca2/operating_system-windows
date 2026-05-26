@@ -16,6 +16,7 @@ namespace innate_ui_win32
 
 
       HICON m_hicon;
+      HICON m_hiconSmall;
 
       icon();
       ~icon() override;

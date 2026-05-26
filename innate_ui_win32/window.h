@@ -27,6 +27,8 @@ namespace innate_ui_win32
       //HMENU m_hmenuSystem;
       int m_iChildIdSeed;
       int m_iCreateStyle;
+      //double m_dFontSizeEm = 1.0;
+      //int m_iFontWeight = 400;
 
 
       window();
@@ -82,6 +84,9 @@ namespace innate_ui_win32
                                                  UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
 
       virtual bool _subclass_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
+
+
+      virtual void defer_set_scaled_font();
 
 
    };

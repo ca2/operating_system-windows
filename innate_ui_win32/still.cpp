@@ -4,30 +4,6 @@
 #include "still.h"
 #include "acme/operating_system/windows/windowing.h"
 
-HFONT CreateScaledFont(HWND hWnd, int pointSize, int weight, const wchar_t *fontFamily)
-{
-   // 1. Get the current DPI for the window
-   UINT dpi = GetDpiForWindow(hWnd);
-   if (dpi == 0)
-      dpi = 96;
-
-   // 2. Convert point size to logical height (scaled for DPI)
-   // Formula: Height = -MulDiv(PointSize, DPI, 72)
-   int height = -MulDiv(pointSize, dpi, 72);
-
-   // 3. Create the font
-   return CreateFont(height, // Height (DPI scaled)
-                     0, 0, 0, // Width, Escapement, Orientation
-                     weight, // Font Weight (e.g., FW_BOLD, FW_NORMAL)
-                     FALSE, FALSE, FALSE, // Italic, Underline, Strikeout
-                     DEFAULT_CHARSET, // Character Set
-                     OUT_DEFAULT_PRECIS, // Output Precision
-                     CLIP_DEFAULT_PRECIS, // Clipping Precision
-                     DEFAULT_QUALITY, // Quality
-                     DEFAULT_PITCH | FF_DONTCARE, // Pitch and Family
-                     fontFamily // Typeface Name (e.g., L"Segoe UI", L"Arial")
-   );
-}
 
 ::Gdiplus::Image * LoadImageFromMemory(const void * imageData, memsize size)
 {
@@ -186,18 +162,33 @@ namespace innate_ui_win32
       main_send([this, picon]()
       {
 
-         
-         //::SendMessage(m_hwnd, STM_SETICON, (WPARAM) picon->m_hicon, 0);
 
-         try
-         {
-            m_pgdiplusimage = LoadImageFromMemory(picon->m_memory.data(), picon->m_memory.size());
-         }
-         catch (...)
-         {
+            if (picon->m_memory.data() && picon->m_memory.size() > 0)
+            {
 
 
-         }
+               try
+               {
+                  m_pgdiplusimage = LoadImageFromMemory(picon->m_memory.data(), picon->m_memory.size());
+               }
+               catch (...)
+               {
+               }
+            }
+            else if (picon->m_hicon)
+            {
+
+               //auto hwnd = ::as_HWND(this->operating_system_window());
+
+               //::SendMessage(hwnd, STM_SETICON, (WPARAM)picon->m_hicon, 0);
+               try
+               {
+                  m_pgdiplusimage = new Gdiplus::Bitmap(picon->m_hicon);
+               }
+               catch (...)
+               {
+               }
+            }
          
       });
 
@@ -251,32 +242,24 @@ namespace innate_ui_win32
    void still::layout()
    {
 
-      auto hStatic = ::as_HWND(m_windowswindow.as_operating_system_window());
+      defer_set_scaled_font();
 
-      // Create a bold, 12pt Segoe UI font scaled for the current monitor
-      HFONT hNewFont = CreateScaledFont(hStatic, 12 *m_dFontSizeEm,m_iFontWeight, L"Segoe UI");
-
-
-      // Send the WM_SETFONT message to the control
-      // wParam: Handle to the new font
-      // lParam: TRUE to redraw the control immediately
-      SendMessage(hStatic, WM_SETFONT, (WPARAM)hNewFont, TRUE);
-
+      auto hwnd = ::as_HWND(m_windowswindow.as_operating_system_window());
 
       // 1. Get the current DPI for the specific window (Windows 10 1607+)
       // For older versions, use GetDeviceCaps(hdc, LOGPIXELSX)
-      UINT dpi = GetDpiForWindow(hStatic);
+      UINT dpi = GetDpiForWindow(hwnd);
       if (dpi == 0)
          dpi = 96; // Fallback to default
       wstring wstr;
 
       // 2. Get the text from the control
-      int len = GetWindowTextLength(hStatic);
+      int len = GetWindowTextLength(hwnd);
       if (len > 0)
       {
 
          auto buffer = wstr.get_buffer(len);
-         GetWindowText(hStatic, buffer, len + 1);
+         GetWindowText(hwnd, buffer, len + 1);
          wstr.release_buffer();
       }
 
@@ -288,8 +271,8 @@ namespace innate_ui_win32
 
 
       // 3. Prepare the Device Context
-      HDC hdc = GetDC(hStatic);
-      HFONT hFont = (HFONT)SendMessage(hStatic, WM_GETFONT, 0, 0);
+      HDC hdc = GetDC(hwnd);
+      HFONT hFont = (HFONT)SendMessage(hwnd, WM_GETFONT, 0, 0);
       HFONT hOldFont = (HFONT)SelectObject(hdc, hFont);
 
       // 4. Calculate dimensions
@@ -306,7 +289,7 @@ namespace innate_ui_win32
 
       // 6. Cleanup and Apply
       SelectObject(hdc, hOldFont);
-      ReleaseDC(hStatic, hdc);
+      ReleaseDC(hwnd, hdc);
       //delete[] buffer;
 
       //SetWindowPos(hStatic, NULL, 0, 0, newWidth, newHeight, SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);

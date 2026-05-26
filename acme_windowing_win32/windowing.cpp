@@ -268,6 +268,65 @@ namespace win32
 #define DEFAULT_WINDOW_CLASS "default_window_class"
 
 
+         windows::window_class windowing::_custom_window_class(const scoped_string &scopedstrClassName,
+                                                               void *pHICON_Big, void *pHICON_Small)
+         {
+
+            auto & windowclass = m_mapWindowClass[scopedstrClassName];
+
+            if (!windowclass.m_wstrClassName.has_character())
+            {
+
+               windowclass = _register_custom_window_class(scopedstrClassName, pHICON_Big, pHICON_Small);
+
+            }
+
+            return windowclass;
+
+         }
+
+
+         windows::window_class windowing::_register_custom_window_class(const scoped_string &scopedstrClassName,
+                                                                        void *pHICON_Big, void *pHICON_Small)
+         {
+
+
+            windows::window_class windowclass;
+
+            windowclass.m_wstrClassName = scopedstrClassName;
+
+            windowclass.m_hinstance = ::windows::hinstance_from_function(::windows::window::s_window_procedure);
+
+            WNDCLASSEXW wndclassex{};
+
+            //Step 1: Registering the Window Class
+            wndclassex.cbSize = sizeof(WNDCLASSEXW);
+            wndclassex.style = CS_DBLCLKS;
+            wndclassex.lpfnWndProc = &::windows::window::s_window_procedure;
+            wndclassex.cbClsExtra = 0;
+            wndclassex.cbWndExtra = 0;
+            wndclassex.hInstance = (HINSTANCE) windowclass.m_hinstance;
+            wndclassex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+            wndclassex.hCursor = LoadCursor(NULL, IDC_ARROW);
+            wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+            wndclassex.lpszMenuName = NULL;
+            wndclassex.lpszClassName = windowclass.m_wstrClassName;
+            wndclassex.hIcon = (HICON) pHICON_Big;
+            wndclassex.hIconSm = (HICON) pHICON_Small;
+
+            if (!RegisterClassEx(&wndclassex))
+            {
+
+               windowclass.m_wstrClassName.clear();
+
+               throw ::exception(error_failed, "Failed to register nano message box window class.");
+
+            }
+
+            return windowclass;
+
+         }
+
 
          ::windows::window_class windowing::_default_window_class()
          {
@@ -748,10 +807,15 @@ namespace win32
          }
 
 
+         /// <summary>
+         ///  Actually this function may be called from a different thread, but it is the thread that is responsible for
+         ///  windowing messages, so it is the thread that should be processing windowing messages.
+         /// </summary>
+         /// <returns></returns>
          bool windowing::handle_messages()
          {
 
-            ASSERT(is_current_task());
+            ASSERT(::get_task()->is_current_task());
 
             MSG msg;
 
@@ -761,7 +825,7 @@ namespace win32
                if (msg.message == WM_QUIT)
                {
 
-                  set_finish();
+                  ::get_task()->set_finish();
 
                   return false;
 

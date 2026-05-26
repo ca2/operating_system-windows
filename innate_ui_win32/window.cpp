@@ -19,6 +19,32 @@
 #pragma comment(lib, "Comctl32.lib")
 
 
+HFONT CreateScaledFont(HWND hWnd, int pointSize, int weight, const wchar_t *fontFamily)
+{
+   // 1. Get the current DPI for the window
+   UINT dpi = GetDpiForWindow(hWnd);
+   if (dpi == 0)
+      dpi = 96;
+
+   // 2. Convert point size to logical height (scaled for DPI)
+   // Formula: Height = -MulDiv(PointSize, DPI, 72)
+   int height = -MulDiv(pointSize, dpi, 72);
+
+   // 3. Create the font
+   return CreateFont(height, // Height (DPI scaled)
+                     0, 0, 0, // Width, Escapement, Orientation
+                     weight, // Font Weight (e.g., FW_BOLD, FW_NORMAL)
+                     FALSE, FALSE, FALSE, // Italic, Underline, Strikeout
+                     DEFAULT_CHARSET, // Character Set
+                     OUT_DEFAULT_PRECIS, // Output Precision
+                     CLIP_DEFAULT_PRECIS, // Clipping Precision
+                     DEFAULT_QUALITY, // Quality
+                     DEFAULT_PITCH | FF_DONTCARE, // Pitch and Family
+                     fontFamily // Typeface Name (e.g., L"Segoe UI", L"Arial")
+   );
+}
+
+
 namespace innate_ui_win32
 {
 
@@ -255,26 +281,6 @@ namespace innate_ui_win32
       {
       case WM_SHOWWINDOW:
       {
-         if (wparam)
-         {
-            if (!m_hmenuSystem)
-            {
-               //auto hmenu = GetSystemMenu(hwnd, true);
-
-               auto hwnd =(HWND)  _HWND();
-
-               m_hmenuSystem = GetSystemMenu(hwnd, false);
-               WPARAM wparamHere = (WPARAM) m_hmenuSystem;
-               LRESULT lresultHere = 1;
-               if (_on_default_system_menu_init_menu(lresultHere, wparamHere))
-               {
-
-                  return lresult;
-
-               }
-
-            }
-         }
 
       }
       break;
@@ -293,7 +299,7 @@ namespace innate_ui_win32
       case WM_SYSCOMMAND:
       {
          int wmId = LOWORD(wparam);
-         if (wmId == 123)
+         if (wmId == ID_SHOW_ABOUT_BOX)
          {
             application()->show_about_box(system()->acme_windowing()->get_user_activation_token());
             return 0;
@@ -309,7 +315,7 @@ namespace innate_ui_win32
       case WM_COMMAND:
       {
          int wmId = LOWORD(wparam);
-         if (wmId == 123)
+         if (wmId == ID_SHOW_ABOUT_BOX)
          {
             application()->show_about_box(system()->acme_windowing()->get_user_activation_token());
             return 0;
@@ -477,8 +483,8 @@ return false;
 
       auto puseractivationtoken = ::as_pointer(puseractivationtokenParameter);
 
-      
-      main_post([this, puseractivationtoken]()
+      main_post(
+         [this, puseractivationtoken]()
       {
 
          auto hwnd = ::as_HWND(this->operating_system_window());
@@ -492,10 +498,12 @@ return false;
           if (pwin32activationtoken)
           {
 
-             if (pwin32activationtoken->m_ptaskForeground)
+             auto ptaskForeground = pwin32activationtoken->m_ptaskForeground;
+
+             if (ptaskForeground)
              {
 
-                pwin32activationtoken->m_ptaskForeground->post([this]()
+                ptaskForeground->post([this]()
                 {
                       
                   auto hwnd = ::as_HWND(this->operating_system_window());
@@ -741,6 +749,25 @@ return false;
       return false;
 
    }
+
+
+   void window::defer_set_scaled_font()
+   {
+
+
+      auto hwnd = ::as_HWND(m_windowswindow.as_operating_system_window());
+
+      // Create a bold, 12pt Segoe UI font scaled for the current monitor
+      HFONT hNewFont = CreateScaledFont(hwnd, 12 * m_dFontSizeEm, m_iFontWeight, L"Segoe UI");
+
+      // Send the WM_SETFONT message to the control
+      // wParam: Handle to the new font
+      // lParam: TRUE to redraw the control immediately
+      SendMessage(hwnd, WM_SETFONT, (WPARAM)hNewFont, TRUE);
+
+
+   }
+
 
 
 } // namespace innate_ui

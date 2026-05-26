@@ -2,6 +2,7 @@
 #include "framework.h"
 #include "innate_ui.h"
 #include "window.h"
+#include "icon.h"
 #include "acme/platform/platform.h"
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
@@ -245,6 +246,36 @@ namespace innate_ui_win32
    //   functionOnActionId(action);
 
    //}
+
+   ::pointer<::innate_ui::icon> innate_ui::try_get_application_icon_from_main_window()
+   {
+
+      auto pacmeuserinteractionMain = m_papplication->m_pacmeuserinteractionMain;
+
+      if (!pacmeuserinteractionMain)
+      {
+
+         return {};
+
+      }
+
+      if (!pacmeuserinteractionMain->m_pHICON_Big
+         && !pacmeuserinteractionMain->m_pHICON_Small)
+      {
+
+         return {};
+
+      }
+
+      auto picon = create_newø<::innate_ui_win32::icon>();
+
+      picon->m_hicon = (HICON)pacmeuserinteractionMain->m_pHICON_Big;
+
+      picon->m_hiconSmall = (HICON)pacmeuserinteractionMain->m_pHICON_Small;
+
+      return picon;
+
+   }
    
 
 } // namespace innate_ui_win32
