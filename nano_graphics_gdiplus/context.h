@@ -59,16 +59,21 @@ namespace nano_graphics_gdiplus
       ::i32_size get_text_extents(const ::scoped_string &scopedstr, ::nano::graphics::font *pnanofont) override;
       void rectangle(const ::f64_rectangle &rectangle, ::nano::graphics::brush *pnanobrush,
                      ::nano::graphics::pen *pnanopen) override;
+      void ellipse(const ::f64_rectangle &rectangle, ::nano::graphics::brush *pnanobrush,
+                     ::nano::graphics::pen *pnanopen) override;
 
+      void line(const ::f64_point &point1, const ::f64_point &point2,
+                   ::nano::graphics::pen *pnanopen) override;
 
       void draw(::nano::graphics::icon *picon, ::i32 x, ::i32 y, ::i32 cx, ::i32 cy) override;
 
 
       void translate(::f64 x, ::f64 y) override;
 
-      void fill_path(::nano::graphics::path *ppath, ::nano::graphics::brush *pbrush) override;
+      void do_path(::nano::graphics::path *ppath, ::nano::graphics::brush *pbrush,
+                   ::nano::graphics::pen *ppen) override;
 
-      void draw_path(::nano::graphics::path *ppath, ::nano::graphics::pen *ppen) override;
+      //void draw_path(::nano::graphics::path *ppath, ::nano::graphics::pen *ppen) override;
 
 
    };

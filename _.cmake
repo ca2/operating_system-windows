@@ -32,7 +32,7 @@ set(default_input "input_win32")
 set(default_networking "networking_bsd")
 set(default_acme "acme_windows")
 set(default_acme_windowing "acme_windowing_win32")
-set(default_nano_graphics "nano_graphics_gdi")
+set(default_nano_graphics "nano_graphics_gdiplus")
 set(default_apex "apex_windows")
 set(default_innate_ui "innate_ui_win32")
 set(default_subsystem "subsystem_windows")
@@ -53,7 +53,7 @@ list(APPEND app_common_dependencies
    acme_windows_common
    acme_windows
    acme_windowing_win32
-   nano_graphics_gdi
+   nano_graphics_gdiplus
    apex_windows_common
    apex_windows
    innate_ui_win32

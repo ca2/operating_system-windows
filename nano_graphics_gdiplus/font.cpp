@@ -58,7 +58,7 @@ namespace nano_graphics_gdiplus
 
       m_pfont = new ::Gdiplus::Font(m_pfontfamily, fSize, 
          (bBold ? Gdiplus::FontStyleBold : Gdiplus::FontStyleRegular) | 
-         (bUnderline  ? Gdiplus::FontStyleUnderline | Gdiplus::FontStyleRegular),
+         (bUnderline ? Gdiplus::FontStyleUnderline : Gdiplus::FontStyleRegular),
                      bPointSize ? Gdiplus::UnitPoint : Gdiplus::UnitPixel);
    }
 

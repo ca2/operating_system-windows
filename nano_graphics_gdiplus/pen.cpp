@@ -15,7 +15,46 @@ namespace nano_graphics_gdiplus
    pen::~pen() {}
 
 
+      void pen::create_pen(const ::color::color &color, ::f64 fWidth)
+   {
 
+      m_ppen = new ::Gdiplus::Pen(
+         ::Gdiplus::Color(color.u8_opacity(), color.u8_red(), color.u8_green(), color.u8_blue()),
+         (::Gdiplus::REAL) fWidth);
+   }
+
+
+      void pen::set_start_cap(::nano::graphics::enum_line_cap elinecap)
+      { 
+         
+         ::Gdiplus::LineCap egdipluslinecap = ::Gdiplus::LineCapFlat;
+
+         if (elinecap == ::nano::graphics::e_line_cap_round)
+         {
+
+            egdipluslinecap = ::Gdiplus::LineCapRound;
+
+         }
+         
+         m_ppen->SetStartCap(egdipluslinecap);
+
+      }
+
+
+      void pen::set_end_cap(::nano::graphics::enum_line_cap elinecap)
+      {
+
+         ::Gdiplus::LineCap egdipluslinecap = ::Gdiplus::LineCapFlat;
+
+         if (elinecap == ::nano::graphics::e_line_cap_round)
+         {
+
+            egdipluslinecap = ::Gdiplus::LineCapRound;
+         }
+
+         m_ppen->SetStartCap(egdipluslinecap);
+
+   }
 
    //void pen::update(::nano::graphics::context *pnanodevice)
    //{

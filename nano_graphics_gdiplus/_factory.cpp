@@ -6,6 +6,7 @@
 #include "icon.h"
 #include "pen.h"
 #include "context.h"
+#include "path.h"
 #include "graphics.h"
 //#include "acme/operating_system/windows/nano/user/user.h"
 //#include "acme/operating_system/windows/nano/user/window.h"
@@ -16,7 +17,7 @@
 //#include "acme/prototype/prototype/_factory.h"
 
 
-IMPLEMENT_FACTORY(nano_graphics_gdi)
+IMPLEMENT_FACTORY(nano_graphics_gdiplus)
 {
 
 
@@ -26,6 +27,7 @@ IMPLEMENT_FACTORY(nano_graphics_gdi)
    pfactory->add_factory_item < ::nano_graphics_gdiplus::pen, ::nano::graphics::pen >();
    pfactory->add_factory_item < ::nano_graphics_gdiplus::icon, ::nano::graphics::icon >();
    pfactory->add_factory_item < ::nano_graphics_gdiplus::context, ::nano::graphics::context >();
+   pfactory->add_factory_item<::nano_graphics_gdiplus::path, ::nano::graphics::path>();
 
 
    pfactory->add_factory_item < ::nano_graphics_gdiplus::graphics, ::nano::graphics::graphics >();

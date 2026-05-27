@@ -30,4 +30,13 @@ namespace nano_graphics_gdiplus
 
    }
 
+
+   void path::close_figure()
+   {
+
+      m_pgraphicspath->CloseFigure();
+
+   }
+
+
 } // nano_graphics_gdiplus

@@ -29,6 +29,9 @@ namespace nano_graphics_gdiplus
 
       void create_pen(const ::color::color & color, ::f64 fWidth) override;
 
+      void set_start_cap(::nano::graphics::enum_line_cap elinecap) override;
+      void set_end_cap(::nano::graphics::enum_line_cap elinecap) override;
+
       //void update(::nano::graphics::context *pnanodevice) override;
    };
 

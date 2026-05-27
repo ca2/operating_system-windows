@@ -2,7 +2,7 @@
 #define default_windowing windowing_win32
 #define default_crypto crypto_openssl
 #define default_database database_sqlite3
-#define default_nano_graphics nano_graphics_gdi
+#define default_nano_graphics nano_graphics_gdiplus
 #define default_acme_windowing acme_windowing_win32
 #define default_draw2d draw2d_gdiplus
 #define default_folder folder_zip
