@@ -26,7 +26,7 @@
             ~object();
 
 
-            void* operating_system_data() override;
+            //void* operating_system_data() override;
 
 
             void destroy() override;

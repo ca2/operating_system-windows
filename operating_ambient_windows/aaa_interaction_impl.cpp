@@ -4864,7 +4864,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //   }
 //
 //
-//   void interaction_impl::non_top_most_upper_window_rects(::int_rectangle_array& recta)
+//   void interaction_impl::non_top_most_upper_window_rects(::i32_rectangle_array& recta)
 //   {
 //
 //      /// from top to bottom

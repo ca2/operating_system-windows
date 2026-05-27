@@ -13,7 +13,7 @@
          pen::pen()
          {
 
-            m_pthis = this;
+            //m_pthis = this;
 
          }
 
@@ -24,21 +24,21 @@
          }
 
 
-         void pen::update(::nano::graphics::context* pgraphicscontext)
-         {
+         //void pen::update(::nano::graphics::context* pgraphicscontext)
+         //{
 
-            if (m_bModified)
-            {
+         //   if (m_bModified)
+         //   {
 
-               destroy();
+         //      destroy();
 
-               m_hgdiobj = ::CreatePen(PS_SOLID, m_iWidth, win32_COLORREF(m_color));
+         //      m_hgdiobj = ::CreatePen(PS_SOLID, m_iWidth, win32_COLORREF(m_color));
 
-               m_bModified = false;
+         //      m_bModified = false;
 
-            }
+         //   }
 
-         }
+         //}
 
 
 

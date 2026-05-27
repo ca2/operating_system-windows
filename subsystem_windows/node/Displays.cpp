@@ -81,7 +81,7 @@ namespace subsystem_windows
       }
    }
 
-   ::int_rectangle_array_base Displays::getDisplaysCoords()
+   ::i32_rectangle_array_base Displays::getDisplaysCoords()
    {
       //return m_pparticleThis->getDisplaysCoords();
        critical_section_lock al(&m_displayRectsMutex);
@@ -99,7 +99,7 @@ namespace subsystem_windows
        }
    }
 
-   ::int_rectangle_array_base Displays::getDisplays()
+   ::i32_rectangle_array_base Displays::getDisplays()
    {
       //return m_pparticleThis->getDisplaysCoords();
        update();

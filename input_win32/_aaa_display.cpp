@@ -490,7 +490,7 @@ namespace windowing_win32
    //}
 
 
-   void display::_get_monitor(::int_rectangle_array & rectaMonitor, ::int_rectangle_array & rectaIntersect, const i32_rectangle & rectangleParam)
+   void display::_get_monitor(::i32_rectangle_array & rectaMonitor, ::i32_rectangle_array & rectaIntersect, const i32_rectangle & rectangleParam)
    {
 
       for (::collection::index iMonitor = 0; iMonitor < get_monitor_count(); iMonitor++)

@@ -25,7 +25,7 @@
             ~font() override;
 
 
-            void update(::nano::graphics::context* pgraphicscontext) override;
+            //void update(::nano::graphics::context* pgraphicscontext) override;
 
 
             static HFONT _create_point_font(::i32 nPointSize, const ::scoped_string& scopedstrFaceName, bool bBold, bool bUnderline, HDC hdc, LOGFONTW* plf);

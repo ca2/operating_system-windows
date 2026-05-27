@@ -753,7 +753,7 @@ namespace aura_windows
       //void _window_show_change_visibility_unlocked(::e_display edisplay, const ::user::activation & useractivation) override;
 
 
-      //virtual void non_top_most_upper_window_rects(::int_rectangle_array& recta) override;
+      //virtual void non_top_most_upper_window_rects(::i32_rectangle_array& recta) override;
 
 
       virtual void activate_top_parent();

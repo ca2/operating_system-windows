@@ -875,7 +875,7 @@ namespace windowing_win32
       void _window_show_change_visibility(::e_display edisplay, const ::user::activation & useractivation) override;
 
 
-      virtual void non_top_most_upper_window_rects(::int_rectangle_array & recta) override;
+      virtual void non_top_most_upper_window_rects(::i32_rectangle_array & recta) override;
 
 
       // virtual void activate_top_parent();

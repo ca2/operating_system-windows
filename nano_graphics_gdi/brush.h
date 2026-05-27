@@ -29,7 +29,7 @@
 
 
 
-            void update(::nano::graphics::context* pgraphicscontext) override;
+            //void update(::nano::graphics::context* pgraphicscontext) override;
 
 
          };
