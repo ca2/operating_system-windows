@@ -1429,7 +1429,7 @@ namespace windowing_win32
    (SIZE *)&sizeBufferItemWindow,
    playeredwindowbuffer->m_hdc,
    (POINT *)&pointSrc,
-   make_unsigned_int(0, 0, 0, 0),
+   make_u32(0, 0, 0, 0),
    &blendPixelFunction,
    ULW_ALPHA);
 

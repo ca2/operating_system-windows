@@ -715,7 +715,7 @@ namespace audio_mixer_mmsystem
             nSBCode == SB_PAGEDOWN ||
             nSBCode == SB_TOP)
       {
-         //::audio_mixer_user::control * pinteraction = GetControlByDlgCtrlID(pParamWnd->GetDlgCtrlId().as_unsigned_int());
+         //::audio_mixer_user::control * pinteraction = GetControlByDlgCtrlID(pParamWnd->GetDlgCtrlId().as_u32());
          //if (pinteraction != nullptr)
          {
             //::audio_mixer_user::level_control * pSlider = dynamic_cast<::audio_mixer_user::level_control *>(pinteraction);
@@ -723,7 +723,7 @@ namespace audio_mixer_mmsystem
             {
                //mix::SliderInterface * pSlider = dynamic_cast < ::audio_mixer_user::level_control * > ( pusercontrol);
                ::audio_mixer::control_data * pData;
-               //if (nullptr != (pData = GetWindowDataByDlgCtrlID(pParamWnd->GetDlgCtrlId().as_unsigned_int())))
+               //if (nullptr != (pData = GetWindowDataByDlgCtrlID(pParamWnd->GetDlgCtrlId().as_u32())))
                if (nullptr != (pData = GetWindowData(::audio_mixer::control_data::TypeStereoVolume)))
                {
 

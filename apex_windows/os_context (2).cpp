@@ -185,7 +185,7 @@ namespace windows
 
    bool os_context::get_pid_by_path(const ::scoped_string & scopedstrName, ::u32 & dwPid)
    {
-      unsigned_int_array dwa;
+      u32_array dwa;
       get_all_processes(dwa);
       for(::i32 i = 0; i < dwa.get_count(); i++)
       {
@@ -200,7 +200,7 @@ namespace windows
 
    bool os_context::get_pid_by_title(const ::scoped_string & scopedstrName, ::u32 & dwPid)
    {
-      unsigned_int_array dwa;
+      u32_array dwa;
       get_all_processes(dwa);
       for(::i32 i = 0; i < dwa.get_count(); i++)
       {
@@ -257,7 +257,7 @@ namespace windows
    }
 
 
-   void os_context::get_all_processes(unsigned_int_array & ua)
+   void os_context::get_all_processes(u32_array & ua)
    {
 
       ASSERT(sizeof(::u32) == sizeof(::u32));
@@ -3588,7 +3588,7 @@ repeat:
    }
 
 
-   void os_context::list_process(::file::path_array_base & patha, unsigned_int_array & uaPid)
+   void os_context::list_process(::file::path_array_base & patha, u32_array & uaPid)
    {
 
       ASSERT(sizeof(::u32) == sizeof(::u32));
