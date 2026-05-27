@@ -27,7 +27,7 @@ namespace nano_graphics_gdiplus
       ~pen() override;
 
 
-      void create_pen(::particle *pparticle, ::i32 iWidth, color32_t color) override;
+      void create_pen(const ::color::color & color, ::f64 fWidth) override;
 
       //void update(::nano::graphics::context *pnanodevice) override;
    };

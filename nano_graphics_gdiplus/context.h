@@ -7,6 +7,7 @@
 #include "acme/nano/graphics/context.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "acme/_operating_system.h"
+#include <gdiplus.h>
 
 
 namespace nano_graphics_gdiplus
@@ -21,9 +22,13 @@ namespace nano_graphics_gdiplus
 
       // CreatableFromBase(device, device);
 
-
       HDC m_hdc;
-      bool m_bDelete;
+
+      ::auto_pointer<::Gdiplus::Graphics> m_pgraphics;
+
+
+      //HDC m_hdc;
+      //bool m_bDelete;
 
 
       context();

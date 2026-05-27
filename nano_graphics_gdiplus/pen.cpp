@@ -9,25 +9,27 @@
 namespace nano_graphics_gdiplus
 {
 
-   pen::pen() { m_pthis = this; }
+   pen::pen() {  }
 
 
    pen::~pen() {}
 
 
-   void pen::update(::nano::graphics::context *pnanodevice)
-   {
 
-      if (m_bModified)
-      {
 
-         destroy();
+   //void pen::update(::nano::graphics::context *pnanodevice)
+   //{
 
-         m_hgdiobj = ::CreatePen(PS_SOLID, m_iWidth, win32_COLORREF(m_color));
+   //   if (m_bModified)
+   //   {
 
-         m_bModified = false;
-      }
-   }
+   //      destroy();
+
+   //      m_hgdiobj = ::CreatePen(PS_SOLID, m_iWidth, win32_COLORREF(m_color));
+
+   //      m_bModified = false;
+   //   }
+   //}
 
 
 } // namespace nano_graphics_gdiplus

@@ -9,25 +9,25 @@
 namespace nano_graphics_gdiplus
 {
 
-   brush::brush() { m_pthis = this; }
+   brush::brush() { }
 
 
    brush::~brush() {}
 
 
-   void brush::update(::nano::graphics::context *pnanodevice)
-   {
+   //void brush::update(::nano::graphics::context *pnanodevice)
+   //{
 
-      if (m_bModified)
-      {
+   //   if (m_bModified)
+   //   {
 
-         destroy();
+   //      destroy();
 
-         m_hgdiobj = ::CreateSolidBrush(win32_COLORREF(m_color));
+   //      m_hgdiobj = ::CreateSolidBrush(win32_COLORREF(m_color));
 
-         m_bModified = false;
-      }
-   }
+   //      m_bModified = false;
+   //   }
+   //}
 
 
 } // namespace nano_graphics_gdiplus

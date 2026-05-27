@@ -6,6 +6,7 @@
 
 #include "acme/nano/graphics/font.h"
 #include "object.h"
+#include <gdiplus.h>
 
 
 namespace nano_graphics_gdiplus
@@ -16,6 +17,11 @@ namespace nano_graphics_gdiplus
    {
    public:
 
+
+      ::auto_pointer < ::Gdiplus::FontFamily > m_pfontfamily;
+      ::auto_pointer<::Gdiplus::Font> m_pfont;
+
+
       // CreatableFromBase(::nano::graphics::font, ::nano::graphics::font);
 
 
@@ -25,11 +31,13 @@ namespace nano_graphics_gdiplus
 
       //void update(::nano::graphics::context *pnanodevice) override;
 
-      void create_point_font(enum_font efont, ::f64 fSize, bool bBold, bool bUnderline) override;
+      void create_point_font(enum_font efont, ::f64 fPointSize, bool bBold = false, bool bUnderline = false) override;
+      void create_pixel_font(enum_font efont, ::f64 fPixelSize, bool bBold = false, bool bUnderline = false) override;
       //static HFONT _create_point_font(::i32 nPointSize, const ::scoped_string &scopedstrFaceName, bool bBold,
         //                              bool bUnderline, HDC hdc, LOGFONTW *plf);
       //static HFONT _create_point_font_indirect(LOGFONTW *pLogFont, HDC hdc);
 
+      virtual void _create_font(enum_font efont, ::f64 fPixelSize, bool bPointSize, bool bBold = false, bool bUnderline = false);
 
 
    };

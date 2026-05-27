@@ -27,31 +27,32 @@ namespace nano_graphics_gdiplus
    context::context()
    {
 
-      m_hdc = ::CreateCompatibleDC(nullptr);
-      m_bDelete = true;
+      m_hdc = nullptr;
+      //m_hdc = ::CreateCompatibleDC(nullptr);
+      //m_bDelete = true;
    }
 
 
    context::~context()
    {
 
-      if (m_bDelete)
-      {
+      //if (m_bDelete)
+      //{
 
-         ::DeleteDC(m_hdc);
-      }
+      //   ::DeleteDC(m_hdc);
+      //}
    }
 
 
    void context::set_smoothing_mode(::nano::graphics::enum_smoothing_mode esmoothingmode)
    {
 
-      switch (emoothingmode)
+      switch (esmoothingmode)
       {
          case ::nano::graphics::e_smoothing_mode_high_quality:
             m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
             break;
-         default
+         default:
             m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeDefault);
             break;
       }
@@ -64,11 +65,12 @@ namespace nano_graphics_gdiplus
 
       switch (etextrenderinghint)
       {
-         case ::nano::graphics::e_text_rendering_hint_clear_type_grid_fit:
-            m_pgraphics->SetText(Gdiplus::SmoothingModeAntiAlias);
-            break;
-            default m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeDefault);
-            break;
+      case ::nano::graphics::e_text_rendering_hint_clear_type_grid_fit:
+         m_pgraphics->SetTextRenderingHint(::Gdiplus::TextRenderingHintClearTypeGridFit);
+         break;
+      default:
+         m_pgraphics->SetTextRenderingHint(::Gdiplus::TextRenderingHintSystemDefault);
+         break;
       }
    }
 
@@ -77,7 +79,7 @@ namespace nano_graphics_gdiplus
    {
 
       Gdiplus::Color gdipluscolor(color.u8_opacity(), color.u8_red(), color.u8_green(), color.u8_blue());
-      m_pgraphics->Clear()
+      m_pgraphics->Clear(gdipluscolor);
 
    }
 
@@ -92,7 +94,9 @@ namespace nano_graphics_gdiplus
 
          m_hdc = hdc;
 
-         m_bDelete = false;
+         m_pgraphics = new ::Gdiplus::Graphics(hdc);
+
+         //m_bDelete = false;
 
          m_size = size;
 
@@ -120,35 +124,57 @@ namespace nano_graphics_gdiplus
                          DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY,
                          DEFAULT_PITCH | FF_DONTCARE, "Segoe UI");
    }
-   void context::_draw_text(const ::scoped_string &scopedstr, const ::i32_rectangle &rectangleText,
+   void context::_draw_text(const ::scoped_string &scopedstr, const ::f64_rectangle &rectangleText,
                            const ::e_align &ealign, const ::e_draw_text &edrawtext,
                            ::nano::graphics::brush *pnanobrushBack, ::nano::graphics::brush *pnanobrushText,
                            ::nano::graphics::font *pnanofont)
    {
 
-      COLORREF colorrefBackgroundColor = win32_COLORREF(pnanobrushBack->m_color);
+      //COLORREF colorrefBackgroundColor = win32_COLORREF(pnanobrushBack->m_color);
 
-      SetBkColor(m_hdc, colorrefBackgroundColor);
+      //SetBkColor(m_hdc, colorrefBackgroundColor);
 
-      COLORREF colorrefTextColor = win32_COLORREF(pnanobrushText->m_color);
+      //COLORREF colorrefTextColor = win32_COLORREF(pnanobrushText->m_color);
 
-      SetTextColor(m_hdc, colorrefTextColor);
+      //SetTextColor(m_hdc, colorrefTextColor);
       // SetTextColor(m_hdc, RGB(100, 100, 255));
 
-      SetBkMode(m_hdc, OPAQUE);
+      //SetBkMode(m_hdc, OPAQUE);
 
-      wstring wstrMessage(scopedstr);
+      //wstring wstrMessage(scopedstr);
 
-      pnanofont->update(this);
+      //pnanofont->update(this);
 
 
-      auto hfont = (HFONT)pnanofont->operating_system_data();
+      //auto hfont = (HFONT)pnanofont->operating_system_data();
 
       // auto hfont2 = CreateSimpleFont16();
 
       // auto h3 = ::SelectObject(m_hdc, hfont2);
 
-      auto h3 = ::SelectObject(m_hdc, hfont);
+      //auto h3 = ::SelectObject(m_hdc, hfont);
+
+
+                   //SolidBrush textBrush(
+       //Color(255,255,255,255));
+
+       
+      
+       StringFormat sf;
+       sf.SetAlignment(
+           StringAlignmentCenter);
+      
+       sf.SetLineAlignment(
+           StringAlignmentCenter);
+      
+       RectF btn1(12.f, 8.f, 80.f, 32.f);
+       RectF btn2(100.f, 8.f, 80.f, 32.f);
+       RectF btn3(188.f, 8.f, 80.f, 32.f);
+      
+       pgraphicscontext->FillRectangle(
+           &buttonBrush,
+           btn1);
+      
 
 
       LOGFONTW lf{};

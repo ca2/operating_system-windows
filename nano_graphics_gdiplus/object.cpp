@@ -27,7 +27,7 @@ namespace nano_graphics_gdiplus
    }
 
 
-   void *object::operating_system_data() { return m_hgdiobj; }
+   //void *object::operating_system_data() { return m_hgdiobj; }
 
 
    void object::destroy()
