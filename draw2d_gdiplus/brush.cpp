@@ -38,7 +38,7 @@ namespace draw2d_gdiplus
 //
 //#endif
 
-   void brush::create(::draw2d::graphics * pgraphics, char iCreate)
+   void brush::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
       if(m_ebrush == ::draw2d::e_brush_solid)
@@ -149,9 +149,9 @@ namespace draw2d_gdiplus
 
             pgraphics->constructø(ppath);
 
-            ::double_rectangle rectangleRoundRect(m_point, m_size);
+            ::f64_rectangle rectangleRoundRect(m_point, m_size);
 
-            double dDiameter = m_dRadius * 2.0;
+            ::f64 dDiameter = m_dRadius * 2.0;
 
             if (dDiameter <= rectangleRoundRect.minimum_dimension())
             {
@@ -179,8 +179,8 @@ namespace draw2d_gdiplus
 
                innerRectangle.deflate(m_dRadius, m_dRadius);
 
-               double dCenterToOuterVertice = rectangleRoundRect.top_left().distance(rectangleRoundRect.center());
-               double dCenterToInnerVertice = innerRectangle.top_left().distance(innerRectangle.center());
+               ::f64 dCenterToOuterVertice = rectangleRoundRect.top_left().distance(rectangleRoundRect.center());
+               ::f64 dCenterToInnerVertice = innerRectangle.top_left().distance(innerRectangle.center());
 
                //auto d = (Gdiplus::REAL)(dCenterToInnerVertice / dCenterToOuterVertice);
 

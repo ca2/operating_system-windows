@@ -36,9 +36,9 @@ TCHAR *message_string(unsigned long error) {
 }
 
 /* Log a message to the Event Log */
-void log_event(unsigned short type, unsigned long atom, ...) {
+void log_event(::u16 type, unsigned long atom, ...) {
   va_list arg;
-  int count;
+  ::i32 count;
   TCHAR *s;
   TCHAR *strings[NSSM_NUM_EVENT_STRINGS];
 
@@ -73,7 +73,7 @@ void print_message(FILE *file, unsigned long atom, ...) {
 }
 
 /* Show a GUI dialogue */
-int popup_message(HWND owner, unsigned int type, unsigned long atom, ...) {
+::i32 popup_message(HWND owner, ::u32 type, unsigned long atom, ...) {
   va_list arg;
 
   TCHAR *format = message_string(atom);
@@ -103,7 +103,7 @@ int popup_message(HWND owner, unsigned int type, unsigned long atom, ...) {
     params.lpszIcon = MAKEINTRESOURCE(IDI_NSSM);
   }
 
-  int ret = MessageBoxIndirect(&params);
+  ::i32 ret = MessageBoxIndirect(&params);
 
   LocalFree(format);
 

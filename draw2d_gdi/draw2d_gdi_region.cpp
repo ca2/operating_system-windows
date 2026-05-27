@@ -4,10 +4,10 @@
 namespace draw2d_gdi
 {
 
-   int get_os_fill_mode(::draw2d::e_fill_mode efillmode)
+   ::i32 get_os_fill_mode(::draw2d::e_fill_mode efillmode)
    {
 
-      int nMode;
+      ::i32 nMode;
       switch(efillmode)
       {
       case ::draw2d::e_fill_mode_winding:
@@ -47,7 +47,7 @@ namespace draw2d_gdi
    }
 
 
-   bool region::create_rect(int x1, int y1, int x2, int y2)
+   bool region::create_rect(::i32 x1, ::i32 y1, ::i32 x2, ::i32 y2)
    {
 
       return Attach(::CreateRectRgn(x1, y1, x2, y2));
@@ -63,7 +63,7 @@ namespace draw2d_gdi
    }
 
 
-   bool region::create_oval(int x1, int y1, int x2, int y2)
+   bool region::create_oval(::i32 x1, ::i32 y1, ::i32 x2, ::i32 y2)
    {
 
       return Attach(::CreateEllipticRgn(x1, y1, x2, y2));
@@ -79,14 +79,14 @@ namespace draw2d_gdi
    }
 
 
-   bool region::create_polygon(LPPOINT lpPoints, int nCount, ::draw2d::e_fill_mode efillmode)
+   bool region::create_polygon(LPPOINT lpPoints, ::i32 nCount, ::draw2d::e_fill_mode efillmode)
    {
 
       return Attach(::CreatePolygonRgn(lpPoints, nCount, get_os_fill_mode(efillmode)));
 
    }
 
-   bool region::create_poly_polygon(LPPOINT lpPoints, LPINT lpPolyCounts, int nCount, ::draw2d::e_fill_mode efillmode)
+   bool region::create_poly_polygon(LPPOINT lpPoints, LPINT lpPolyCounts, ::i32 nCount, ::draw2d::e_fill_mode efillmode)
    {
 
       return Attach(::CreatePolyPolygonRgn(lpPoints, lpPolyCounts, nCount, get_os_fill_mode(efillmode)));
@@ -94,7 +94,7 @@ namespace draw2d_gdi
    }
 
 
-   bool region::CreateRoundRectRgn(int x1, int y1, int x2, int y2, int x3, int y3)
+   bool region::CreateRoundRectRgn(::i32 x1, ::i32 y1, ::i32 x2, ::i32 y2, ::i32 x3, ::i32 y3)
    {
 
       return Attach(::CreateRoundRectRgn(x1, y1, x2, y2, x3, y3));
@@ -112,17 +112,17 @@ namespace draw2d_gdi
    }
 
 
-   bool region::CreateFromData(const XFORM* lpXForm, int nCount, const RGNDATA* pRgnData)
+   bool region::CreateFromData(const XFORM* lpXForm, ::i32 nCount, const RGNDATA* pRgnData)
    {
 
       return Attach(::ExtCreateRegion(lpXForm, nCount, pRgnData));
    }
-   int region::GetRegionData(LPRGNDATA lpRgnData, int nDataSize) const
+   ::i32 region::GetRegionData(LPRGNDATA lpRgnData, ::i32 nDataSize) const
    {
 
-      ASSERT(get_os_data() != nullptr); return (int)::GetRegionData((HRGN)get_os_data(), nDataSize, lpRgnData);
+      ASSERT(get_os_data() != nullptr); return (::i32)::GetRegionData((HRGN)get_os_data(), nDataSize, lpRgnData);
    }
-   void region::SetRectRgn(int x1, int y1, int x2, int y2)
+   void region::SetRectRgn(::i32 x1, ::i32 y1, ::i32 x2, ::i32 y2)
    {
 
       ASSERT(get_os_data() != nullptr); ::SetRectRgn((HRGN)get_os_data(), x1, y1, x2, y2);
@@ -136,7 +136,7 @@ namespace draw2d_gdi
    }
 
 
-   int region::CombineRgn(const ::draw2d::region* pRgn1, const ::draw2d::region* pRgn2, int nCombineMode)
+   ::i32 region::CombineRgn(const ::draw2d::region* pRgn1, const ::draw2d::region* pRgn2, ::i32 nCombineMode)
    {
 
       ASSERT(get_os_data() != nullptr);
@@ -146,7 +146,7 @@ namespace draw2d_gdi
    }
 
 
-   int region::CopyRgn(const ::draw2d::region* pRgnSrc)
+   ::i32 region::CopyRgn(const ::draw2d::region* pRgnSrc)
    {
 
       ASSERT(get_os_data() != nullptr);
@@ -166,7 +166,7 @@ namespace draw2d_gdi
    }
 
 
-   int region::OffsetRgn(int x, int y)
+   ::i32 region::OffsetRgn(::i32 x, ::i32 y)
    {
 
       ASSERT(get_os_data() != nullptr);
@@ -177,7 +177,7 @@ namespace draw2d_gdi
    }
 
 
-   int region::OffsetRgn(const ::i32_point & point)
+   ::i32 region::OffsetRgn(const ::i32_point & point)
    {
 
       ASSERT(get_os_data() != nullptr);
@@ -187,7 +187,7 @@ namespace draw2d_gdi
    }
 
 
-   int region::GetRgnBox(RECT * prectangle) const
+   ::i32 region::GetRgnBox(RECT * prectangle) const
    {
 
       ASSERT(get_os_data() != nullptr);
@@ -197,7 +197,7 @@ namespace draw2d_gdi
    }
 
 
-   bool region::contains(int x, int y) const
+   bool region::contains(::i32 x, ::i32 y) const
    {
 
       ASSERT(get_os_data() != nullptr);
@@ -231,7 +231,7 @@ namespace draw2d_gdi
 
       ::draw2d_gdi::object::create();
 
-      //for(int i = 0; i <
+      //for(::i32 i = 0; i <
 
       return true;
 

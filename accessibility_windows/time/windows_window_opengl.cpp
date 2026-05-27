@@ -26,7 +26,7 @@ void window_opengl::on_create_window(::acme::windowing::window * pacmewindowingw
 
 
 
-void window_opengl::create_window_graphics(long long cxParam, long long cyParam, int iStrideParam)
+void window_opengl::create_window_graphics(::i64 cxParam, ::i64 cyParam, ::i32 iStrideParam)
 {
 
    destroy_window_graphics();

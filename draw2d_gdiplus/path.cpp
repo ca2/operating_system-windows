@@ -12,7 +12,7 @@
 //#undef ___new
 
 
-bool almost_integer(double d)
+bool almost_integer(::f64 d)
 {
 
    if (fmod(fabs(d), 1.0) < 0.01)
@@ -49,13 +49,13 @@ namespace draw2d_gdiplus
 
 
 
-   double_point path::internal_last_point()
+   ::f64_point path::internal_last_point()
    {
 
       if(m_bHasPointInternal)
       {
 
-         return double_point((LONG) m_pointInternal.X, (LONG) m_pointInternal.Y);
+         return ::f64_point((LONG) m_pointInternal.X, (LONG) m_pointInternal.Y);
 
       }
       else
@@ -136,7 +136,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_line(double x1, double y1, double x2, double y2)
+   bool path::internal_add_line(::f64 x1, ::f64 y1, ::f64 x2, ::f64 y2)
    {
 
 
@@ -213,7 +213,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_rect(double x,double y, double cx, double cy, ::draw2d::graphics * pgraphics)
+   bool path::internal_add_rect(::f64 x,::f64 y, ::f64 cx, ::f64 cy, ::draw2d::graphics * pgraphics)
    {
 
       if (m_ppath == nullptr)
@@ -256,10 +256,10 @@ namespace draw2d_gdiplus
       {
 
          Gdiplus::RectF rectangle(
-         (float)(x),
-         (float)(y),
-         (float)(cx),
-         (float)(cy)
+         (::f32)(x),
+         (::f32)(y),
+         (::f32)(cx),
+         (::f32)(cy)
          );
 
          try
@@ -284,7 +284,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_ellipse(double x, double y, double cx, double cy)
+   bool path::internal_add_ellipse(::f64 x, ::f64 y, ::f64 cx, ::f64 cy)
    {
 
       if (m_ppath == nullptr)
@@ -323,10 +323,10 @@ namespace draw2d_gdiplus
       {
 
          Gdiplus::RectF rectangle(
-            (float)(x),
-            (float)(y),
-            (float)(cx),
-            (float)(cy)
+            (::f32)(x),
+            (::f32)(y),
+            (::f32)(cx),
+            (::f32)(cy)
          );
 
          try
@@ -346,7 +346,7 @@ namespace draw2d_gdiplus
 
    }
 
-   //bool path::internal_add_line(double x, double y)
+   //bool path::internal_add_line(::f64 x, ::f64 y)
    //{
 
    //   bool bOk1 = true;
@@ -381,7 +381,7 @@ namespace draw2d_gdiplus
 
    //}
 
-   double_point path::internal_current_point()
+   ::f64_point path::internal_current_point()
    {
 
       return get_current_point();
@@ -389,7 +389,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool path::internal_add_move(double x, double y)
+   //bool path::internal_add_move(::f64 x, ::f64 y)
    //{
 
    //   if(!m_bHasPointInternal)
@@ -411,7 +411,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void path::create(::draw2d::graphics * pgraphicsParam, char iCreate)
+   void path::create(::draw2d::graphics * pgraphicsParam, ::i8 iCreate)
    {
 
       //auto pgdiplusgraphics = __graphics(pgraphicsParam);
@@ -458,7 +458,7 @@ namespace draw2d_gdiplus
          //internal_begin_figure(m_bFill,m_efillmode);
       }
 
-      //for(int i = 0; i < m_elementa.get_count(); i++)
+      //for(::i32 i = 0; i < m_elementa.get_count(); i++)
       //{
 
         // set(pgraphicsParam, m_elementa(i));
@@ -484,7 +484,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_arc(const ::double_rectangle & rectangle, const ::double_angle & angleBeg, const ::double_angle & angleEnd)
+   bool path::internal_add_arc(const ::f64_rectangle & rectangle, const ::f64_angle & angleBeg, const ::f64_angle & angleEnd)
    {
 
       if (m_ppath == nullptr)
@@ -498,10 +498,10 @@ namespace draw2d_gdiplus
       {
 
 
-         ::Gdiplus::RectF float_rectangle((Gdiplus::REAL) rectangle.left, (Gdiplus::REAL) rectangle.top, (Gdiplus::REAL) width(rectangle), (Gdiplus::REAL) height(rectangle));
+         ::Gdiplus::RectF rectf((Gdiplus::REAL) rectangle.left, (Gdiplus::REAL) rectangle.top, (Gdiplus::REAL) width(rectangle), (Gdiplus::REAL) height(rectangle));
 
 
-         m_ppath->AddArc(float_rectangle, (Gdiplus::REAL) angleBeg.degree(), (Gdiplus::REAL) (angleEnd - angleBeg).degree());
+         m_ppath->AddArc(rectf, (Gdiplus::REAL) angleBeg.degree(), (Gdiplus::REAL) (angleEnd - angleBeg).degree());
 
          ::Gdiplus::PointF point;
 
@@ -522,7 +522,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_text_out(::draw2d::graphics * pgraphics,int x,int y, const ::scoped_string & scopedstrText,::write_text::font * pfont)
+   bool path::internal_add_text_out(::draw2d::graphics * pgraphics,::i32 x,::i32 y, const ::scoped_string & scopedstrText,::write_text::font * pfont)
    {
 
       if (m_ppath == nullptr)
@@ -541,7 +541,7 @@ namespace draw2d_gdiplus
 
          wstring wstr(scopedstrText);
 
-         Gdiplus::REAL dSize = (Gdiplus::REAL) pfont->m_fontsize.as_double();
+         Gdiplus::REAL dSize = (Gdiplus::REAL) pfont->m_fontsize.as_f64();
 
          Gdiplus::Unit unit = __graphics(pgraphics)->m_pgraphics->GetPageUnit();
 
@@ -599,7 +599,7 @@ namespace draw2d_gdiplus
    bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::i32_rectangle & rectangleParam, const ::scoped_string & scopedstrText, ::write_text::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
-      ::double_rectangle rectangle(rectangleParam);
+      ::f64_rectangle rectangle(rectangleParam);
 
       //auto estatus = 
 
@@ -652,10 +652,10 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, const ::double_arc & arc)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::f64_arc & arc)
    {
 
-      ::double_rectangle rectangle;
+      ::f64_rectangle rectangle;
 
       rectangle = arc;
 
@@ -678,7 +678,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, const ::double_rectangle & rectangle)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::f64_rectangle & rectangle)
    {
 
       return internal_add_rect(rectangle.left, rectangle.top,  rectangle.width(), rectangle.height(), pgraphics);
@@ -686,7 +686,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, const ::double_ellipse & ellipse)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::f64_ellipse & ellipse)
    {
 
       return internal_add_ellipse(ellipse.left, ellipse.top, ellipse.width(), ellipse.height());
@@ -694,7 +694,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, const ::double_line & line)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::f64_line & line)
    {
 
       return internal_add_line(line.m_p1.x, line.m_p1.y, line.m_p2.x, line.m_p2.y);
@@ -702,7 +702,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, const ::double_lines & lines)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::f64_lines & lines)
    {
 
       ::array < Gdiplus::PointF > pointa;
@@ -723,7 +723,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, const ::double_polygon & polygon)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::f64_polygon & polygon)
    {
 
       ::array < Gdiplus::PointF > pointa;
@@ -749,8 +749,8 @@ namespace draw2d_gdiplus
 
       return internal_add_text_out(
          pgraphics,
-         (int)textout.m_point.x,
-         (int)textout.m_point.y,
+         (::i32)textout.m_point.x,
+         (::i32)textout.m_point.y,
          textout.m_strText,
          textout.m_pfont);
 
@@ -775,7 +775,7 @@ namespace draw2d_gdiplus
 
 
 
-   bool path::contains(::draw2d::graphics_pointer& pgraphics, const double_point& point)
+   bool path::contains(::draw2d::graphics_pointer& pgraphics, const ::f64_point& point)
    {
 
       //return ::draw2d::path::contains(pgraphics, point);

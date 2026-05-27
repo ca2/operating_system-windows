@@ -51,7 +51,7 @@ namespace draw2d_gdi
 
 
    template < class T >
-   void attach(const ::draw2d::graphics * pgraphicsConst, const pointer < T > & objectConst, int iType)
+   void attach(const ::draw2d::graphics * pgraphicsConst, const pointer < T > & objectConst, ::i32 iType)
    {
 
       ::draw2d::graphics_pointer & pgraphics = (::draw2d::graphics *) pgraphicsConst;

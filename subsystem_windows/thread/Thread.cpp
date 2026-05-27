@@ -49,7 +49,7 @@
 //       } catch (const ::exception & e) {
 //          /*Log::error("Abnormal thread termination."
 //                     " ThreadId = %u, scopedstrMessage = \"{}\" \n",
-//                     (unsigned int)_this->m_threadID, e.get_message());
+//                     (::u32)_this->m_threadID, e.get_message());
 //
 //          */
 //       }
@@ -106,7 +106,7 @@
 //
 //    bool Thread::setPriority(::subsystem::THREAD_PRIORITY value)
 //    {
-//       int priority;
+//       ::i32 priority;
 //
 //       switch(value)
 //       {

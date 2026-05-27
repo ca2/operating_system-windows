@@ -17,7 +17,7 @@ namespace typeface_gdiplus
    public:
 
       
-      ///unsigned int m_FaceVAO, m_FaceVBO;
+      ///::u32 m_FaceVAO, m_FaceVBO;
 
 
       Gdiplus::Font* m_pfont;
@@ -36,7 +36,7 @@ namespace typeface_gdiplus
 
       //void create_draw_buffers();
 
-      //void create_texture(::typeface::character& ch, const unsigned char* p);
+      //void create_texture(::typeface::character& ch, const ::u8* p);
 
       void get_text_metric(::write_text::text_metric* ptextmetric);
 

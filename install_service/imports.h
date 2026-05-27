@@ -19,7 +19,7 @@ typedef struct {
 
 HMODULE get_dll(const TCHAR *, unsigned long *);
 FARPROC get_import(HMODULE, const ::scoped_string & scopedstr, unsigned long *);
-int get_imports();
+::i32 get_imports();
 void free_imports();
 
 #endif

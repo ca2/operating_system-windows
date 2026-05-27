@@ -20,7 +20,7 @@ namespace innate_ui_win32
    menu::~menu() {}
 
 
-   void menu::load_menu_from_resource(int iMenuResourceId)
+   void menu::load_menu_from_resource(::i32 iMenuResourceId)
    {
 
       
@@ -42,7 +42,7 @@ namespace innate_ui_win32
    }
 
 
-   void menu::set_default_menu_item_command_id(int iDefaultMenuItemCommandId)
+   void menu::set_default_menu_item_command_id(::i32 iDefaultMenuItemCommandId)
    {
 
       SetMenuDefaultItem(m_hmenu, iDefaultMenuItemCommandId, false);
@@ -50,7 +50,7 @@ namespace innate_ui_win32
    }
 
 
-   void menu::erase_menu_item_by_command_id(int iDefaultMenuItemCommandId)
+   void menu::erase_menu_item_by_command_id(::i32 iDefaultMenuItemCommandId)
    {
 
       RemoveMenu(m_hmenu, iDefaultMenuItemCommandId, MF_BYCOMMAND);
@@ -58,7 +58,7 @@ namespace innate_ui_win32
    }
    
    void menu::track_popup_menu(
-      const ::operating_system::window &operatingsystemwindow, const ::function<void(int)> &functionOnActionId)
+      const ::operating_system::window &operatingsystemwindow, const ::function<void(::i32)> &functionOnActionId)
    {
          POINT pos;
 
@@ -76,7 +76,7 @@ namespace innate_ui_win32
          
          ::SetForegroundWindow(hwnd);
 
-         int action = TrackPopupMenu(m_hmenu, TPM_NONOTIFY | TPM_RETURNCMD | TPM_RIGHTBUTTON, pos.x, pos.y, 0,
+         ::i32 action = TrackPopupMenu(m_hmenu, TPM_NONOTIFY | TPM_RETURNCMD | TPM_RIGHTBUTTON, pos.x, pos.y, 0,
                                      hwnd, NULL);
 
          functionOnActionId(action);

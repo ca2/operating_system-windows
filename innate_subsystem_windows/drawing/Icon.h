@@ -53,7 +53,7 @@ namespace innate_subsystem_windows
       virtual void initialize_icon(::innate_subsystem::IconInterface * picon) override;
       virtual void initialize_icon(::innate_subsystem::BitmapInterface *bitmap) override;
       virtual void initialize_icon(::innate_subsystem::BitmapInterface *bitmap, ::innate_subsystem::BitmapInterface *mask) override;
-      virtual void initialize_icon(unsigned int icon) override;
+      virtual void initialize_icon(::u32 icon) override;
 
       //void initi(HICON icon);
       //Icon(Bitmap *bitmap);

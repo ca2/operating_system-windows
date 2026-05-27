@@ -3,7 +3,7 @@
 
 #define  VERSION_MINOR              0x00
 #define  VERSION_MAJOR              0x04
-#define  SEQ_VERSION                ((unsigned int)(WORD)((BYTE)VERSION_MINOR | (((WORD)(BYTE)VERSION_MAJOR) << 8)))
+#define  SEQ_VERSION                ((::u32)(WORD)((BYTE)VERSION_MINOR | (((WORD)(BYTE)VERSION_MAJOR) << 8)))
 
 #define MMSG_DONE                   (WM_USER+20)
 
@@ -38,9 +38,9 @@ namespace music
             ::pointer<file>                  m_pfile;
             ::pointer<sequence_thread>       m_psequencethread;
 
-            unsigned int                        m_cbPreroll;         
+            ::u32                        m_cbPreroll;         
 
-            unsigned int                        m_cbPrerollNominalMax;
+            ::u32                        m_cbPrerollNominalMax;
 
             buffer_array               m_buffera;
 
@@ -48,21 +48,21 @@ namespace music
 
             midi_callback_data         m_midicallbackdata;
 
-            int                        m_iBuffersInMMSYSTEM;
+            ::i32                        m_iBuffersInMMSYSTEM;
 
 
 
             sequence(midi * pmidi, const ::scoped_string & scopedstrDevice);
             virtual ~sequence();
 
-            virtual long long increment_reference_count()
+            virtual ::i64 increment_reference_count()
             {
 
                return ::object::increment_reference_count();
 
             }
 
-            virtual long long decrement_reference_count()
+            virtual ::i64 decrement_reference_count()
             {
 
                return ::object::decrement_reference_count();
@@ -71,30 +71,30 @@ namespace music
 
 
 
-            void MuteAll(bool bMute = true, int iExcludeTrack = -1);
-            void MuteTrack(int iIndex, bool bMute = true);
+            void MuteAll(bool bMute = true, ::i32 iExcludeTrack = -1);
+            void MuteTrack(::i32 iIndex, bool bMute = true);
 
 
-            virtual int GetDefaultCodePage();
+            virtual ::i32 GetDefaultCodePage();
 
             void Prepare(::ikaraoke::data & data);
-            void Prepare(int iTrack, ::ikaraoke::data & data);
+            void Prepare(::i32 iTrack, ::ikaraoke::data & data);
             void Prepare(
             string_array_array_base & straa,
             imedia_position_2darray & tickaaTokensTicks,
-            int iMelodyTrack,
+            ::i32 iMelodyTrack,
             int2a & ia2TokenLine,
             ::ikaraoke::data & data);
 
-            void SetLevelMeter(int iLevel);
+            void SetLevelMeter(::i32 iLevel);
             void     CloseStream();
             void     close_device();
-            //bool SetMidiOutDevice(unsigned int uiDevice);
-            int SetKeyShift(int iKeyShift);
-            int GetKeyShift();
+            //bool SetMidiOutDevice(::u32 uiDevice);
+            ::i32 SetKeyShift(::i32 iKeyShift);
+            ::i32 GetKeyShift();
 
             void on_midi_playback_end(::music::midi::sequence::happening * phappening);
-            virtual void     SetTempoShift(double dTempoShift);
+            virtual void     SetTempoShift(::f64 dTempoShift);
 
             void OnPositionCB(LPMIDIHDR lpmidihdr);
             void OnDone(HMIDISTRM hmidistream, LPMIDIHDR lpmidihdr);
@@ -113,7 +113,7 @@ namespace music
             virtual void SetTempoChangeFlag(bool bSet = true);
             virtual bool IsChangingTempo();
 
-            virtual double GetTempoShift();
+            virtual ::f64 GetTempoShift();
             //virtual void GetMidiDoneData(::music::midi::LPMIDIDONEDATA lpmdd);
             //virtual bool is_in_operation();
             //virtual bool WasInSpecialModeV001();

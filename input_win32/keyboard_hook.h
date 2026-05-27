@@ -33,9 +33,9 @@ namespace input_win32
       virtual void _keyboard_hook_task();
 
 
-      static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
+      static LRESULT CALLBACK LowLevelKeyboardProc(::i32 nCode, WPARAM wParam, LPARAM lParam);
 
-      virtual void keyboard_proc(::user::enum_message emessage, int iVirtualKeyCode, int iScanCode);
+      virtual void keyboard_proc(::user::enum_message emessage, ::i32 iVirtualKeyCode, ::i32 iScanCode);
 
 
    };

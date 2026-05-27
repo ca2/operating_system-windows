@@ -41,9 +41,9 @@ namespace apex_windows
 
       }
 
-      int jCount = 23;
+      ::i32 jCount = 23;
 
-      int iCount;
+      ::i32 iCount;
 
       if (plauncher != nullptr)
       {
@@ -60,10 +60,10 @@ namespace apex_windows
 
       set_hwnd(nullptr);
 
-      for (int i = 0; i < iCount; i++)
+      for (::i32 i = 0; i < iCount; i++)
       {
 
-         for (int j = 0; j < jCount; j++)
+         for (::i32 j = 0; j < jCount; j++)
          {
 
             set_hwnd(::FindWindowW(nullptr, wstring(scopedstrKey)));
@@ -85,7 +85,7 @@ namespace apex_windows
 
             }
             
-            int k = 40;
+            ::i32 k = 40;
 
             while (k > 0)
             {
@@ -172,7 +172,7 @@ namespace apex_windows
       COPYDATASTRUCT cds;
 
       cds.dwData = I32_MINIMUM;
-      cds.cbData = (unsigned int) scopedstrUri.length();
+      cds.cbData = (::u32) scopedstrUri.length();
       cds.lpData = (void *) scopedstrUri.data();
 
       HWND hwnd = get_hwnd();
@@ -195,7 +195,7 @@ namespace apex_windows
 
          }
 
-         unsigned int dwError = ::GetLastError();
+         ::u32 dwError = ::GetLastError();
 
          if (dwError == ERROR_TIMEOUT)
          {
@@ -211,7 +211,7 @@ namespace apex_windows
    }
 
 
-   //void interprocess_caller::send(int message, void * pdata, int len, const class time & timeTimeout)
+   //void interprocess_caller::send(::i32 message, void * pdata, ::i32 len, const class time & timeTimeout)
    //{
 
    //   if (message == I32_MINIMUM)
@@ -230,8 +230,8 @@ namespace apex_windows
 
    //   COPYDATASTRUCT cds;
 
-   //   cds.dwData = (unsigned int)message;
-   //   cds.cbData = (unsigned int)maximum(0, len);
+   //   cds.dwData = (::u32)message;
+   //   cds.cbData = (::u32)maximum(0, len);
    //   cds.lpData = (void *)pdata;
 
 
@@ -264,7 +264,7 @@ namespace apex_windows
 
    //      }
 
-   //      unsigned int dwError = ::GetLastError();
+   //      ::u32 dwError = ::GetLastError();
 
    //      if (dwError == ERROR_TIMEOUT)
    //      {

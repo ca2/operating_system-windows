@@ -30,9 +30,9 @@ public:
 
    //void create_drawing_objects();
    //void update_drawing_objects();
-   //enum_dialog_result hit_test(int x, int y);
-   //void on_mouse_down(int x, int y);
-   //void on_mouse_up(int x, int y);
+   //enum_dialog_result hit_test(::i32 x, ::i32 y);
+   //void on_mouse_down(::i32 x, ::i32 y);
+   //void on_mouse_up(::i32 x, ::i32 y);
    //enum_dialog_result get_result();
 
    //static LRESULT CALLBACK s_window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);

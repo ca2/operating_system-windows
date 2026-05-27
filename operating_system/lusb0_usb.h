@@ -66,50 +66,50 @@
 #define USB_DT_HUB_NONVAR_SIZE		7
 
 
-/* ensure unsigned char-packed structures */
+/* ensure ::u8-packed structures */
 #include <pshpack1.h>
 
 
 /* All standard descriptors have these 2 fields in common */
 struct usb_descriptor_header
 {
-    unsigned char  bLength;
-    unsigned char  bDescriptorType;
+    ::u8  bLength;
+    ::u8  bDescriptorType;
 };
 
 /* String descriptor */
 struct usb_string_descriptor
 {
-    unsigned char  bLength;
-    unsigned char  bDescriptorType;
-    unsigned short wData[1];
+    ::u8  bLength;
+    ::u8  bDescriptorType;
+    ::u16 wData[1];
 };
 
 /* HID descriptor */
 struct usb_hid_descriptor
 {
-    unsigned char  bLength;
-    unsigned char  bDescriptorType;
-    unsigned short bcdHID;
-    unsigned char  bCountryCode;
-    unsigned char  bNumDescriptors;
+    ::u8  bLength;
+    ::u8  bDescriptorType;
+    ::u16 bcdHID;
+    ::u8  bCountryCode;
+    ::u8  bNumDescriptors;
 };
 
 /* Endpoint descriptor */
 #define USB_MAXENDPOINTS	32
 struct usb_endpoint_descriptor
 {
-    unsigned char  bLength;
-    unsigned char  bDescriptorType;
-    unsigned char  bEndpointAddress;
-    unsigned char  bmAttributes;
-    unsigned short wMaxPacketSize;
-    unsigned char  bInterval;
-    unsigned char  bRefresh;
-    unsigned char  bSynchAddress;
+    ::u8  bLength;
+    ::u8  bDescriptorType;
+    ::u8  bEndpointAddress;
+    ::u8  bmAttributes;
+    ::u16 wMaxPacketSize;
+    ::u8  bInterval;
+    ::u8  bRefresh;
+    ::u8  bSynchAddress;
 
-    unsigned char *extra;	/* Extra descriptors */
-    int extralen;
+    ::u8 *extra;	/* Extra descriptors */
+    ::i32 extralen;
 };
 
 #define USB_ENDPOINT_ADDRESS_MASK	0x0f    /* in bEndpointAddress */
@@ -125,20 +125,20 @@ struct usb_endpoint_descriptor
 #define USB_MAXINTERFACES	32
 struct usb_interface_descriptor
 {
-    unsigned char  bLength;
-    unsigned char  bDescriptorType;
-    unsigned char  bInterfaceNumber;
-    unsigned char  bAlternateSetting;
-    unsigned char  bNumEndpoints;
-    unsigned char  bInterfaceClass;
-    unsigned char  bInterfaceSubClass;
-    unsigned char  bInterfaceProtocol;
-    unsigned char  iInterface;
+    ::u8  bLength;
+    ::u8  bDescriptorType;
+    ::u8  bInterfaceNumber;
+    ::u8  bAlternateSetting;
+    ::u8  bNumEndpoints;
+    ::u8  bInterfaceClass;
+    ::u8  bInterfaceSubClass;
+    ::u8  bInterfaceProtocol;
+    ::u8  iInterface;
 
     struct usb_endpoint_descriptor *endpoint;
 
-    unsigned char *extra;	/* Extra descriptors */
-    int extralen;
+    ::u8 *extra;	/* Extra descriptors */
+    ::i32 extralen;
 };
 
 #define USB_MAXALTSETTING	128	/* Hard limit */
@@ -147,54 +147,54 @@ struct usb_interface
 {
     struct usb_interface_descriptor *altsetting;
 
-    int num_altsetting;
+    ::i32 num_altsetting;
 };
 
 /* Configuration descriptor information.. */
 #define USB_MAXCONFIG		8
 struct usb_config_descriptor
 {
-    unsigned char  bLength;
-    unsigned char  bDescriptorType;
-    unsigned short wTotalLength;
-    unsigned char  bNumInterfaces;
-    unsigned char  bConfigurationValue;
-    unsigned char  iConfiguration;
-    unsigned char  bmAttributes;
-    unsigned char  MaxPower;
+    ::u8  bLength;
+    ::u8  bDescriptorType;
+    ::u16 wTotalLength;
+    ::u8  bNumInterfaces;
+    ::u8  bConfigurationValue;
+    ::u8  iConfiguration;
+    ::u8  bmAttributes;
+    ::u8  MaxPower;
 
     struct usb_interface *interface;
 
-    unsigned char *extra;	/* Extra descriptors */
-    int extralen;
+    ::u8 *extra;	/* Extra descriptors */
+    ::i32 extralen;
 };
 
 /* Device descriptor */
 struct usb_device_descriptor
 {
-    unsigned char  bLength;
-    unsigned char  bDescriptorType;
-    unsigned short bcdUSB;
-    unsigned char  bDeviceClass;
-    unsigned char  bDeviceSubClass;
-    unsigned char  bDeviceProtocol;
-    unsigned char  bMaxPacketSize0;
-    unsigned short idVendor;
-    unsigned short idProduct;
-    unsigned short bcdDevice;
-    unsigned char  iManufacturer;
-    unsigned char  iProduct;
-    unsigned char  iSerialNumber;
-    unsigned char  bNumConfigurations;
+    ::u8  bLength;
+    ::u8  bDescriptorType;
+    ::u16 bcdUSB;
+    ::u8  bDeviceClass;
+    ::u8  bDeviceSubClass;
+    ::u8  bDeviceProtocol;
+    ::u8  bMaxPacketSize0;
+    ::u16 idVendor;
+    ::u16 idProduct;
+    ::u16 bcdDevice;
+    ::u8  iManufacturer;
+    ::u8  iProduct;
+    ::u8  iSerialNumber;
+    ::u8  bNumConfigurations;
 };
 
 struct usb_ctrl_setup
 {
-    unsigned char  bRequestType;
-    unsigned char  bRequest;
-    unsigned short wValue;
-    unsigned short wIndex;
-    unsigned short wLength;
+    ::u8  bRequestType;
+    ::u8  bRequest;
+    ::u16 wValue;
+    ::u16 wIndex;
+    ::u16 wLength;
 };
 
 /*
@@ -258,7 +258,7 @@ struct usb_device
 {
     struct usb_device *next, *prev;
 
-    char filename[LIBUSB_PATH_MAX];
+    ::i8 filename[LIBUSB_PATH_MAX];
 
     struct usb_bus *bus;
 
@@ -267,9 +267,9 @@ struct usb_device
 
     void *dev;		/* Darwin support */
 
-    unsigned char devnum;
+    ::u8 devnum;
 
-    unsigned char num_children;
+    ::u8 num_children;
     struct usb_device **children;
 };
 
@@ -277,7 +277,7 @@ struct usb_bus
 {
     struct usb_bus *next, *prev;
 
-    char dirname[LIBUSB_PATH_MAX];
+    ::i8 dirname[LIBUSB_PATH_MAX];
 
     struct usb_device *devices;
     unsigned long location;
@@ -290,17 +290,17 @@ struct usb_version
 {
     struct
     {
-        int major;
-        int minor;
-        int micro;
-        int nano;
+        ::i32 major;
+        ::i32 minor;
+        ::i32 micro;
+        ::i32 nano;
     } dll;
     struct
     {
-        int major;
-        int minor;
-        int micro;
-        int nano;
+        ::i32 major;
+        ::i32 minor;
+        ::i32 micro;
+        ::i32 nano;
     } driver;
 };
 
@@ -327,46 +327,46 @@ extern "C"
 
     /* usb.c */
     usb_dev_handle *usb_open(struct usb_device *dev);
-    int usb_close(usb_dev_handle *dev);
-    int usb_get_string(usb_dev_handle *dev, int index, int langid, char *buf,
+    ::i32 usb_close(usb_dev_handle *dev);
+    ::i32 usb_get_string(usb_dev_handle *dev, ::i32 index, ::i32 langid, ::i8 *buf,
                        size_t buflen);
-    int usb_get_string_simple(usb_dev_handle *dev, int index, char *buf,
+    ::i32 usb_get_string_simple(usb_dev_handle *dev, ::i32 index, ::i8 *buf,
                               size_t buflen);
 
     /* descriptors.c */
-    int usb_get_descriptor_by_endpoint(usb_dev_handle *udev, int ep,
-                                       unsigned char type, unsigned char index,
-                                       void *buf, int i32_size);
-    int usb_get_descriptor(usb_dev_handle *udev, unsigned char type,
-                           unsigned char index, void *buf, int i32_size);
+    ::i32 usb_get_descriptor_by_endpoint(usb_dev_handle *udev, ::i32 ep,
+                                       ::u8 type, ::u8 index,
+                                       void *buf, ::i32 i32_size);
+    ::i32 usb_get_descriptor(usb_dev_handle *udev, ::u8 type,
+                           ::u8 index, void *buf, ::i32 i32_size);
 
     /* <arch>.c */
-    int usb_bulk_write(usb_dev_handle *dev, int ep, char *bytes, int size,
-                       int timeout);
-    int usb_bulk_read(usb_dev_handle *dev, int ep, char *bytes, int size,
-                      int timeout);
-    int usb_interrupt_write(usb_dev_handle *dev, int ep, char *bytes, int size,
-                            int timeout);
-    int usb_interrupt_read(usb_dev_handle *dev, int ep, char *bytes, int size,
-                           int timeout);
-    int usb_control_msg(usb_dev_handle *dev, int requesttype, int request,
-                        int value, int index, char *bytes, int size,
-                        int timeout);
-    int usb_set_configuration(usb_dev_handle *dev, int configuration);
-    int usb_claim_interface(usb_dev_handle *dev, int interface);
-    int usb_release_interface(usb_dev_handle *dev, int interface);
-    int usb_set_altinterface(usb_dev_handle *dev, int alternate);
-    int usb_resetep(usb_dev_handle *dev, unsigned int ep);
-    int usb_clear_halt(usb_dev_handle *dev, unsigned int ep);
-    int usb_reset(usb_dev_handle *dev);
-    int usb_reset_ex(usb_dev_handle *dev, unsigned int reset_type);
+    ::i32 usb_bulk_write(usb_dev_handle *dev, ::i32 ep, ::i8 *bytes, ::i32 size,
+                       ::i32 timeout);
+    ::i32 usb_bulk_read(usb_dev_handle *dev, ::i32 ep, ::i8 *bytes, ::i32 size,
+                      ::i32 timeout);
+    ::i32 usb_interrupt_write(usb_dev_handle *dev, ::i32 ep, ::i8 *bytes, ::i32 size,
+                            ::i32 timeout);
+    ::i32 usb_interrupt_read(usb_dev_handle *dev, ::i32 ep, ::i8 *bytes, ::i32 size,
+                           ::i32 timeout);
+    ::i32 usb_control_msg(usb_dev_handle *dev, ::i32 requesttype, ::i32 request,
+                        ::i32 value, ::i32 index, ::i8 *bytes, ::i32 size,
+                        ::i32 timeout);
+    ::i32 usb_set_configuration(usb_dev_handle *dev, ::i32 configuration);
+    ::i32 usb_claim_interface(usb_dev_handle *dev, ::i32 interface);
+    ::i32 usb_release_interface(usb_dev_handle *dev, ::i32 interface);
+    ::i32 usb_set_altinterface(usb_dev_handle *dev, ::i32 alternate);
+    ::i32 usb_resetep(usb_dev_handle *dev, ::u32 ep);
+    ::i32 usb_clear_halt(usb_dev_handle *dev, ::u32 ep);
+    ::i32 usb_reset(usb_dev_handle *dev);
+    ::i32 usb_reset_ex(usb_dev_handle *dev, ::u32 reset_type);
 
-    char *usb_strerror(void);
+    ::i8 *usb_strerror(void);
 
     void usb_init(void);
-    void usb_set_debug(int level);
-    int usb_find_busses(void);
-    int usb_find_devices(void);
+    void usb_set_debug(::i32 level);
+    ::i32 usb_find_busses(void);
+    ::i32 usb_find_devices(void);
     struct usb_device *usb_device(usb_dev_handle *dev);
     struct usb_bus *usb_get_busses(void);
 
@@ -374,49 +374,49 @@ extern "C"
     /* Windows specific functions */
 
 #define LIBUSB_HAS_INSTALL_SERVICE_NP 1
-    int usb_install_service_np(void);
+    ::i32 usb_install_service_np(void);
     void CALLBACK usb_install_service_np_rundll(HWND wnd, HINSTANCE instance,
-            LPSTR cmd_line, int cmd_show);
+            LPSTR cmd_line, ::i32 cmd_show);
 
 #define LIBUSB_HAS_UNINSTALL_SERVICE_NP 1
-    int usb_uninstall_service_np(void);
+    ::i32 usb_uninstall_service_np(void);
     void CALLBACK usb_uninstall_service_np_rundll(HWND wnd, HINSTANCE instance,
-            LPSTR cmd_line, int cmd_show);
+            LPSTR cmd_line, ::i32 cmd_show);
 
 #define LIBUSB_HAS_INSTALL_DRIVER_NP 1
-    int usb_install_driver_np(const ::string &inf_file);
+    ::i32 usb_install_driver_np(const ::string &inf_file);
     void CALLBACK usb_install_driver_np_rundll(HWND wnd, HINSTANCE instance,
-            LPSTR cmd_line, int cmd_show);
+            LPSTR cmd_line, ::i32 cmd_show);
 
 #define LIBUSB_HAS_TOUCH_INF_FILE_NP 1
-    int usb_touch_inf_file_np(const ::string &inf_file);
+    ::i32 usb_touch_inf_file_np(const ::string &inf_file);
     void CALLBACK usb_touch_inf_file_np_rundll(HWND wnd, HINSTANCE instance,
-            LPSTR cmd_line, int cmd_show);
+            LPSTR cmd_line, ::i32 cmd_show);
 
 #define LIBUSB_HAS_INSTALL_NEEDS_RESTART_NP 1
-    int usb_install_needs_restart_np(void);
+    ::i32 usb_install_needs_restart_np(void);
 
 #define LIBUSB_HAS_INSTALL_NP 1
-    int usb_install_npW(HWND hwnd, HINSTANCE instance, LPCWSTR cmd_line, int starg_arg);
-    int usb_install_npA(HWND hwnd, HINSTANCE instance, LPCSTR cmd_line, int starg_arg);
+    ::i32 usb_install_npW(HWND hwnd, HINSTANCE instance, LPCWSTR cmd_line, ::i32 starg_arg);
+    ::i32 usb_install_npA(HWND hwnd, HINSTANCE instance, LPCSTR cmd_line, ::i32 starg_arg);
 	#define usb_install_np usb_install_npA
     void CALLBACK usb_install_np_rundll(HWND wnd, HINSTANCE instance, 
-            LPSTR cmd_line, int cmd_show);
+            LPSTR cmd_line, ::i32 cmd_show);
 
     const struct usb_version *usb_get_version(void);
 
-    int usb_isochronous_setup_async(usb_dev_handle *dev, void **action_context,
-                                    unsigned char ep, int pktsize);
-    int usb_bulk_setup_async(usb_dev_handle *dev, void **action_context,
-                             unsigned char ep);
-    int usb_interrupt_setup_async(usb_dev_handle *dev, void **action_context,
-                                  unsigned char ep);
+    ::i32 usb_isochronous_setup_async(usb_dev_handle *dev, void **action_context,
+                                    ::u8 ep, ::i32 pktsize);
+    ::i32 usb_bulk_setup_async(usb_dev_handle *dev, void **action_context,
+                             ::u8 ep);
+    ::i32 usb_interrupt_setup_async(usb_dev_handle *dev, void **action_context,
+                                  ::u8 ep);
 
-    int usb_submit_async(void *action_context, char *bytes, int i32_size);
-    int usb_reap_async(void *action_context, int timeout);
-    int usb_reap_async_nocancel(void *action_context, int timeout);
-    int usb_cancel_async(void *action_context);
-    int usb_free_async(void **action_context);
+    ::i32 usb_submit_async(void *action_context, ::i8 *bytes, ::i32 i32_size);
+    ::i32 usb_reap_async(void *action_context, ::i32 timeout);
+    ::i32 usb_reap_async_nocancel(void *action_context, ::i32 timeout);
+    ::i32 usb_cancel_async(void *action_context);
+    ::i32 usb_free_async(void **action_context);
 
 
 #ifdef __cplusplus

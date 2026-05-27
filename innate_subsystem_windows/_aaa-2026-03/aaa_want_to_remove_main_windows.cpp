@@ -4,33 +4,33 @@
 #include "acme/os/_application.h"
 
 
-//CLASS_DECL_ACME int main_windows(HINSTANCE hinstance, HINSTANCE hPrevInstance, char * pCmdLine, int nCmdShow)
+//CLASS_DECL_ACME ::i32 main_windows(HINSTANCE hinstance, HINSTANCE hPrevInstance, ::i8 * pCmdLine, ::i32 nCmdShow)
 //{
 //
-//   int iStatus = -1;
+//   ::i32 iStatus = -1;
 //
 //   class aura_aura aura_aura;
 //
 //   {
 //
 ////
-////      int iResult = 0;
+////      ::i32 iResult = 0;
 ////
 ////#ifdef GET_COMMAND_LINE
 ////
-////      char* pszCommandLine = GET_COMMAND_LINE(argc, argv);
+////      ::i8* pszCommandLine = GET_COMMAND_LINE(argc, argv);
 ////
 ////#elif defined(MAIN_STRING)
 ////
-////      char* pszCommandLine = strdup(MAIN_STRING);
+////      ::i8* pszCommandLine = strdup(MAIN_STRING);
 ////
 ////#elif defined (_WIN32)
 ////
-////      char* pszCommandLine = _strdup("");
+////      ::i8* pszCommandLine = _strdup("");
 ////
 ////#else
 ////
-////      char* pszCommandLine = strdup("");
+////      ::i8* pszCommandLine = strdup("");
 ////
 ////#endif
 //

@@ -70,11 +70,11 @@ namespace remoting
       /**
        * Returns written data.
        */
-      const char *toByteArray() const;
+      const ::i8 *toByteArray() const;
 
    protected:
       bool m_ownMemory;
-      char *m_buffer;
+      ::i8 *m_buffer;
       size_t m_size;
       size_t m_max;
    };

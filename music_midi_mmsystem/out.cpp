@@ -84,11 +84,11 @@ namespace music
          }
 
 
-         void     out::send_short_message(::music::midi::enum_midi_message emessage, int iChannel, int iData1, int iData2)
+         void     out::send_short_message(::music::midi::enum_midi_message emessage, ::i32 iChannel, ::i32 iData1, ::i32 iData2)
          {
 
-//            return mmresult_status(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");
-            MMRESULT mmresult = midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2));
+//            return mmresult_status(midiOutShortMsg(m_hmidiout, MIDIMSG(((::i32)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");
+            MMRESULT mmresult = midiOutShortMsg(m_hmidiout, MIDIMSG(((::i32)emessage) >> 4, iChannel, iData1, iData2));
 
             auto estatus = mmresult_status(mmresult);
 
@@ -113,7 +113,7 @@ namespace music
 
             DWORD dwRounded = (block.size() + 3) & ~3;
 
-            m.set_size(3 * sizeof(unsigned int) + dwRounded);
+            m.set_size(3 * sizeof(::u32) + dwRounded);
 
             midihdr.lpData = (LPSTR) m.data();
 

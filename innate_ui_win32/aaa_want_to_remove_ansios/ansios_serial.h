@@ -52,7 +52,7 @@ using serial::io_exception;
 
 class ::durationTimer {
 public:
-  ::durationTimer(const unsigned int ::duration);
+  ::durationTimer(const ::u32 ::duration);
   int64_t remaining();
 
 private:
@@ -85,7 +85,7 @@ public:
   available ();
 
   bool
-  waitReadable (unsigned int timeout);
+  waitReadable (::u32 timeout);
 
   void
   waitByteTimes (size_t count);
@@ -106,7 +106,7 @@ public:
   flushOutput ();
 
   void
-  sendBreak (int duration);
+  sendBreak (::i32 duration);
 
   void
   setBreak (bool level);
@@ -191,7 +191,7 @@ protected:
 
 private:
   string port_;               // Path to the file descriptor
-  int fd_;                    // The current file descriptor
+  ::i32 fd_;                    // The current file descriptor
 
   bool is_open_;
   bool xonxoff_;
@@ -199,7 +199,7 @@ private:
 
   Timeout timeout_;           // Timeout for read operations
   unsigned long baudrate_;    // Baudrate
-  unsigned int byte_time_ns_;     // Nanoseconds to transmit/receive a single unsigned char
+  ::u32 byte_time_ns_;     // Nanoseconds to transmit/receive a single ::u8
 
   enum_parity eparity_;           // Parity
   enum_byte_size ebytesize_;       // Size of the bytes

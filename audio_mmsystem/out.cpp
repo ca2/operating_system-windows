@@ -83,7 +83,7 @@ namespace audio_mmsystem
    }
 
 
-   void out::out_open_ex(thread * pthreadCallback, unsigned int uiSamplesPerSec, unsigned int uiChannelCount, unsigned int uiBitsPerSample,::wave::enum_purpose epurpose)
+   void out::out_open_ex(thread * pthreadCallback, ::u32 uiSamplesPerSec, ::u32 uiChannelCount, ::u32 uiBitsPerSample,::wave::enum_purpose epurpose)
    {
 
       synchronous_lock synchronouslock(synchronization());
@@ -173,8 +173,8 @@ namespace audio_mmsystem
 
          }
 
-      int iBufferCount;
-      int iBufferSampleCount;
+      ::i32 iBufferCount;
+      ::i32 iBufferSampleCount;
 
       if(epurpose == ::wave::e_purpose_playback)
       {
@@ -201,7 +201,7 @@ namespace audio_mmsystem
 
       }
 
-      //int iPower2Size = 2;
+      //::i32 iPower2Size = 2;
 
       //while (iPower2Size < iBufferSampleCount)
       //{
@@ -212,7 +212,7 @@ namespace audio_mmsystem
 
       //iBufferSampleCount = iPower2Size;
 
-      int iBufferSize = iBufferSampleCount * uiBitsPerSample * uiChannelCount / 8;
+      ::i32 iBufferSize = iBufferSampleCount * uiBitsPerSample * uiChannelCount / 8;
 
       out_get_buffer()->PCMOutOpen(this, iBufferSize, iBufferCount,128, m_pwaveformat, m_pwaveformat);
 
@@ -564,9 +564,9 @@ namespace audio_mmsystem
       if(mmt.wType == TIME_BYTES)
       {
 
-         //double d =  );
+         //::f64 d =  );
 
-         ////return floating_second((double) d / (double) wave_base_get_byte_count_per_second());
+         ////return floating_second((::f64) d / (::f64) wave_base_get_byte_count_per_second());
 
          return second_time(
             mmt.u.cb * 8 / (m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels),
@@ -613,7 +613,7 @@ namespace audio_mmsystem
    //         if (::success != estatus)
    //         {
 
-   //            information( "waveOutGetPosition() returned %lu", (unsigned int)estatus);
+   //            information( "waveOutGetPosition() returned %lu", (::u32)estatus);
 
    //            return 0;
 
@@ -630,7 +630,7 @@ namespace audio_mmsystem
    //      if(mmt.wType == TIME_MS)
    //      {
 
-   //         ::time position = (unsigned int) mmt.u.ms;
+   //         ::time position = (::u32) mmt.u.ms;
 
    //         position *= m_pwaveformat->nSamplesPerSec;
 

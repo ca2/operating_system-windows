@@ -66,7 +66,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      //int iFoundFamily = -1;
+      //::i32 iFoundFamily = -1;
 
       //WCHAR wszGetFamilyName[LF_FACESIZE];
 
@@ -75,7 +75,7 @@ namespace draw2d_gdiplus
       //if (::write_text::font::m_pfontfamily->m_strFamilyName.has_character())
       //{
 
-      //   for (int iFamily = 0; iFamily < pgdiplusinternalfont->m_iFamilyCount; iFamily++)
+      //   for (::i32 iFamily = 0; iFamily < pgdiplusinternalfont->m_iFamilyCount; iFamily++)
       //   {
 
       //      auto & fontfamily = pgdiplusinternalfont->m_familya[iFamily];
@@ -161,7 +161,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void font::create(::draw2d::graphics * pgraphics, char iCreate)
+   void font::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
       auto & iStyle = m_iStyle;
@@ -169,28 +169,28 @@ namespace draw2d_gdiplus
       if (m_fontweight > e_font_weight_semibold)
       {
 
-         iStyle |= (int)Gdiplus::FontStyleBold;
+         iStyle |= (::i32)Gdiplus::FontStyleBold;
 
       }
 
       if (m_bItalic)
       {
 
-         iStyle |= (int)Gdiplus::FontStyleItalic;
+         iStyle |= (::i32)Gdiplus::FontStyleItalic;
 
       }
 
       if (m_bUnderline)
       {
 
-         iStyle |= (int)Gdiplus::FontStyleUnderline;
+         iStyle |= (::i32)Gdiplus::FontStyleUnderline;
 
       }
 
       if (m_bStrikeout)
       {
 
-         iStyle |= (int)Gdiplus::FontStyleStrikeout;
+         iStyle |= (::i32)Gdiplus::FontStyleStrikeout;
 
       }
 
@@ -262,14 +262,14 @@ namespace draw2d_gdiplus
       //      else
       //      {
 
-      //         int iFoundFamily = -1;
+      //         ::i32 iFoundFamily = -1;
 
       //         WCHAR wszGetFamilyName[LF_FACESIZE];
 
       //         if (::write_text::font::m_pfontfamily->m_strFamilyName.has_character())
       //         {
 
-      //            for (int iFamily = 0; iFamily < pprivatefont->m_iFamilyCount; iFamily++)
+      //            for (::i32 iFamily = 0; iFamily < pprivatefont->m_iFamilyCount; iFamily++)
       //            {
 
       //               auto & fontfamily = pprivatefont->m_familya[iFamily];
@@ -435,11 +435,11 @@ namespace draw2d_gdiplus
 
             INT iStyle = pfont->GetStyle();
 
-            double dHeight = pgdiplusfontfamily->GetEmHeight(iStyle);
+            ::f64 dHeight = pgdiplusfontfamily->GetEmHeight(iStyle);
 
-            double dSize = pfont->GetSize();
+            ::f64 dSize = pfont->GetSize();
 
-            double dFontHeight = pfont->GetHeight((Gdiplus::REAL)pgraphics->get_dpiy());
+            ::f64 dFontHeight = pfont->GetHeight((Gdiplus::REAL)pgraphics->get_dpiy());
 
             auto & textmetric = m_textmetric2;
 

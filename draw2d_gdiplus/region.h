@@ -24,7 +24,7 @@ namespace draw2d_gdiplus
       ~region() override;
 
 
-      void create(::draw2d::graphics * pgraphics, char iCreate) override;
+      void create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
       void destroy() override;
 
 
@@ -34,7 +34,7 @@ namespace draw2d_gdiplus
 
       bool get_bounding_box(::i32_rectangle & rectangle, ::draw2d::graphics * pgraphics = nullptr) override;
 
-      void expand_bounding_box(::double_rectangle & rectangle, ::draw2d::graphics * pgraphics) override;
+      void expand_bounding_box(::f64_rectangle & rectangle, ::draw2d::graphics * pgraphics) override;
 
       Gdiplus::Region * get(::draw2d::graphics * pgraphics);
       Gdiplus::Region * get_rectangle(::draw2d::graphics * pgraphics);

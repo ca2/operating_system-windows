@@ -6,13 +6,13 @@
 
 BEGIN_EXTERN_C
 
-int WINAPI _tWinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+::i32 WINAPI _tWinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, ::i32 nCmdShow)
 {
 
    if(!defer_core_init())
       return -1;
 
-   int iRet = app_core_main(hinstance,hPrevInstance,nullptr,nCmdShow);
+   ::i32 iRet = app_core_main(hinstance,hPrevInstance,nullptr,nCmdShow);
 
    defer_core_term();
 

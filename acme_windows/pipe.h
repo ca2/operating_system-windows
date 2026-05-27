@@ -25,12 +25,12 @@ namespace acme_windows
          OVERLAPPED m_overlapped;
          inline overlapped * from(OVERLAPPED * poverlapped)
          {
-            return (overlapped *)((unsigned char *)poverlapped - sizeof(pipe *));
+            return (overlapped *)((::u8 *)poverlapped - sizeof(pipe *));
          }
       };
 
 
-      char *               m_pchBuf;
+      ::i8 *               m_pchBuf;
       string               m_strRead;
 
       overlapped           m_overlapped;
@@ -59,8 +59,8 @@ namespace acme_windows
 
 
       static void WINAPI read_complete(
-         unsigned int dwErrorCode,
-         unsigned int dwNumberOfBytesTransfered,
+         ::u32 dwErrorCode,
+         ::u32 dwNumberOfBytesTransfered,
          LPOVERLAPPED pOverlapped
 
          );

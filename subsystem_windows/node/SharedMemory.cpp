@@ -115,7 +115,7 @@ namespace subsystem_windows
                                         0);
       if (errorCode != ERROR_SUCCESS) {
          ::string errMess;
-         errMess.formatf("Cannot SetSecurityInfo with error = {}", (int)errorCode);
+         errMess.formatf("Cannot SetSecurityInfo with error = {}", (::i32)errorCode);
          throw ::subsystem::Exception(errMess);
       }
    }

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define iFileNull ((int)-1)
+#define iFileNull ((::i32)-1)
 
 namespace windows
 {
@@ -14,7 +14,7 @@ namespace windows
 
 
       FILE *            m_pStream;     // stdio FILE
-      int               m_iFile;       // _fileno(m_pStream)
+      ::i32               m_iFile;       // _fileno(m_pStream)
 
 
 
@@ -27,7 +27,7 @@ namespace windows
 
       virtual void write_string(const ::scoped_string & scopedstr);
 
-      virtual char * read_string(char * psz, unsigned int nMax);
+      virtual ::i8 * read_string(::i8 * psz, ::u32 nMax);
 
       virtual bool read_string(string & rString);
 

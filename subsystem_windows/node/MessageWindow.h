@@ -40,9 +40,9 @@ namespace subsystem_windows
       // messageHandler is an external message handler that replace the
       // wndProc() function on message processing. If
       // messageHandler == 0 the wndProc() function will be used.
-      //MessageWindow(const HINSTANCE hinst, const char *windowClassName,
+      //MessageWindow(const HINSTANCE hinst, const ::i8 *windowClassName,
         //            WindowMessageHandler *messageHandler = 0);
-      //MessageWindow(const char *windowClassName,
+      //MessageWindow(const ::i8 *windowClassName,
         //            WindowMessageHandler *messageHandler = 0);
       MessageWindow();
       ~MessageWindow() override;
@@ -54,9 +54,9 @@ namespace subsystem_windows
 
    //protected:
       // Function must return true value if the message has been processed.
-      virtual bool wndProc(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) { return false; }
+      virtual bool wndProc(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam) { return false; }
 
-      virtual bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
+      virtual bool on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam);
 
       //HWND m_hwnd;
       ::pointer < ::subsystem::WindowMessageHandler > m_pwindowmessagehandler;
@@ -65,10 +65,10 @@ namespace subsystem_windows
       ::string m_strWindowClassName;
 
    //private:
-     // ATOM regClass(HINSTANCE hinst, const char * pszWindowClassName);
+     // ATOM regClass(HINSTANCE hinst, const ::i8 * pszWindowClassName);
 
       //static LRESULT CALLBACK staticWndProc(HWND hwnd,
-        //                                    unsigned int message,
+        //                                    ::u32 message,
           //                                  WPARAM wparam,
             //                                LPARAM lparam);
    };

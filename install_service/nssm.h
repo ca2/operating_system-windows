@@ -53,12 +53,12 @@
 #include "io.h"
 #include "gui.h"
 
-int str_equiv(const TCHAR *, const TCHAR *);
+::i32 str_equiv(const TCHAR *, const TCHAR *);
 void strip_basename(TCHAR *);
-int str_number(const TCHAR *, unsigned long *, TCHAR **);
-int str_number(const TCHAR *, unsigned long *);
-int num_cpus();
-int usage(int);
+::i32 str_number(const TCHAR *, unsigned long *, TCHAR **);
+::i32 str_number(const TCHAR *, unsigned long *);
+::i32 num_cpus();
+::i32 usage(::i32);
 
 #define NSSM _T("NSSM")
 #ifdef _WIN64

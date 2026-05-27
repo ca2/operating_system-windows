@@ -66,7 +66,7 @@ namespace subsystem_windows
       @param procName procedure name.
       @return address of procedure or 0 if failed.
       */
-      void * getProcAddress(const char *procName) override;
+      void * getProcAddress(const ::i8 *procName) override;
 
    //protected:
 

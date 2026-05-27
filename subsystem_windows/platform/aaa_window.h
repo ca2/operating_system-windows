@@ -53,7 +53,7 @@ namespace win32
       //      ::pointer<::micro::child>m_pchildFocus;
             ::task_pointer       m_ptask;
 
-            ::pointer < ::nano::graphics::device > m_pnanodevice;
+            ::pointer < ::nano::graphics::context > m_pnanodevice;
 
             window();
 
@@ -73,13 +73,13 @@ namespace win32
 
             //void * __win32_HWND() override;
 
-            //void on_draw(::nano::graphics::device * pnanodevice) override;
+            //void on_draw(::nano::graphics::context * pnanodevice) override;
 
-            //void on_char(int iChar) override;
+            //void on_char(::i32 iChar) override;
 
             //bool is_active() override;
 
-            //virtual void draw_children(::nano::graphics::device * pnanodevice);
+            //virtual void draw_children(::nano::graphics::context * pnanodevice);
 
             //void delete_drawing_objects() override;
 
@@ -111,7 +111,7 @@ namespace win32
 
             bool on_window_procedure(LRESULT & lresult, UINT message, WPARAM wparam, LPARAM lparam) override;
 
-            virtual LRESULT window_procedure(unsigned int message, wparam wparam, lparam lparam);
+            virtual LRESULT window_procedure(::u32 message, wparam wparam, lparam lparam);
 
             void set_position(const ::i32_point& point) override;
 
@@ -166,7 +166,7 @@ namespace win32
             //void set_mouse_capture() override;
 
             //bool has_mouse_capture() override;
-            void get_os_window_handle(void *p, int iSize) override;
+            void get_os_window_handle(void *p, ::i32 iSize) override;
 
 
          };

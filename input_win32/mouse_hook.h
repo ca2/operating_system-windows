@@ -33,7 +33,7 @@ namespace input_win32
 
       virtual void _mouse_hook_task();
 
-      static LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam);
+      static LRESULT CALLBACK LowLevelMouseProc(::i32 nCode, WPARAM wParam, LPARAM lParam);
 
       virtual void mouse_proc(::user::enum_message emessage);
 

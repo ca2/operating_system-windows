@@ -46,7 +46,7 @@ namespace subsystem_windows
       }
 
 
-      LRESULT CALLBACK OperatingSystemHook::s_lowLevelKeyboardHook(int nCode, WPARAM wParam, LPARAM lParam)
+      LRESULT CALLBACK OperatingSystemHook::s_lowLevelKeyboardHook(::i32 nCode, WPARAM wParam, LPARAM lParam)
       {
 
          if (nCode < 0)
@@ -69,7 +69,7 @@ namespace subsystem_windows
       }
 
 
-      bool OperatingSystemHook::lowLevelKeyboardHook(::lresult & lresult, int nCode, WPARAM wParam, LPARAM lParam)
+      bool OperatingSystemHook::lowLevelKeyboardHook(::lresult & lresult, ::i32 nCode, WPARAM wParam, LPARAM lParam)
       {
 
          KBDLLHOOKSTRUCT *str = (KBDLLHOOKSTRUCT*) lParam;
@@ -122,7 +122,7 @@ namespace subsystem_windows
 
       //   bool OperatingSystemHook::operating_system_hook_on_keyboard_message(::lresult &lresult,
       //                                                                             ::user::enum_message emessage,
-      //                                                                             int iVkCode, ::lparam lparam)
+      //                                                                             ::i32 iVkCode, ::lparam lparam)
       //{
 
 
@@ -204,7 +204,7 @@ namespace subsystem_windows
 
 
       bool OperatingSystemHook::operating_system_hook_on_keyboard_message(::lresult& lresult, ::user::enum_message emessage,
-         int iVkCode, ::lparam lparam)
+         ::i32 iVkCode, ::lparam lparam)
 
       {
          for (auto plistener: m_listenera)

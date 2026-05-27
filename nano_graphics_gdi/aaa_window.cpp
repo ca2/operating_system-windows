@@ -14,7 +14,7 @@
 bool _c_simple_message_loop_step();
 
 CLASS_DECL_ACME string task_get_name();
-CLASS_DECL_ACME void task_set_name(const char* pszName);
+CLASS_DECL_ACME void task_set_name(const ::i8* pszName);
 
 
 class CLASS_DECL_ACME scoped_task_name
@@ -220,7 +220,7 @@ namespace windows
          }
 
 
-         void window::on_char(int iChar)
+         void window::on_char(::i32 iChar)
          {
 
             m_pinterface->on_char(iChar);
@@ -239,7 +239,7 @@ namespace windows
 
             {
 
-               auto pnanodevice = allocateø ::windows::nano::graphics::device(hdc);
+               auto pnanodevice = allocateø ::nano_graphics_gdi::context(hdc);
 
                m_pinterface->draw(pnanodevice);
 
@@ -323,7 +323,7 @@ namespace windows
             //{
 
             //   HDC hdc = ::GetDC(m_hwnd);
-            //   int nHeight = -MulDiv(14, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+            //   ::i32 nHeight = -MulDiv(14, GetDeviceCaps(hdc, LOGPIXELSY), 72);
             //   m_hfont = ::CreateFontW(nHeight, 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
             //                           CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, FF_SWISS, L"Segoe UI");
             //   ::ReleaseDC(m_hwnd, hdc);
@@ -366,10 +366,10 @@ namespace windows
          }
 
 
-         //::atom window::hit_test(int x, int y)
+         //::atom window::hit_test(::i32 x, ::i32 y)
          //{
          //
-         //   for (int i = 0; i < m_iButtonCount; i++)
+         //   for (::i32 i = 0; i < m_iButtonCount; i++)
          //   {
          //      if (m_buttona[i].m_rectangle.contains(i32_point(x, y)))
          //      {
@@ -692,7 +692,7 @@ namespace windows
             break;
             case WM_CHAR:
             {
-               on_char((int)wparam);
+               on_char((::i32)wparam);
                return 0;
             }
             break;

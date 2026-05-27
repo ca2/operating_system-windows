@@ -389,7 +389,7 @@ namespace acme_windows
 
          //pnode->run_silent(pacmedirectory->system() / strRel / "env1.bat", "");
 
-         int iExitCode = 0;
+         ::i32 iExitCode = 0;
 
          string strCommand;
 
@@ -420,9 +420,9 @@ namespace acme_windows
 
          };
 
-         //int iStart = m_straLog.size();
+         //::i32 iStart = m_straLog.size();
          pnode->command_system(strCommand, functionTrace);
-         //int iCount = m_straLog.size() - iStart;
+         //::i32 iCount = m_straLog.size() - iStart;
 
          //m_straOutput.each([](auto & str) { str.case_insensitive_begins_eat("i: "); });
          //m_straOutput.each([](auto & str) { str.case_insensitive_begins_eat("e: "); });
@@ -587,8 +587,8 @@ namespace acme_windows
          //
          //#ifdef WINDOWS_DESKTOP
          //   {
-         //      unsigned int dwSize = GetEnvironmentVariable("PATH", nullptr, 0);
-         //      char * lpsz = ___new char[dwSize + 1];
+         //      ::u32 dwSize = GetEnvironmentVariable("PATH", nullptr, 0);
+         //      ::i8 * lpsz = ___new ::i8[dwSize + 1];
          //      dwSize = GetEnvironmentVariable("PATH", lpsz, dwSize + 1);
          //      delete lpsz;
          //   }
@@ -602,7 +602,7 @@ namespace acme_windows
          //
          //   //   ::time tickStart= ::time::now();
          //
-         //   //   unsigned int dwExitCode;
+         //   //   ::u32 dwExitCode;
          //
          //   //   string strLog;
          //
@@ -631,8 +631,8 @@ namespace acme_windows
          //   //      CProcessEnvReader::ReleaseHandle(hProcess);
          //   //   }
          //   //process->write("\n");
-         //   unsigned int dwExitCode;
-         //   unsigned int tickStart= ::time::now();
+         //   ::u32 dwExitCode;
+         //   ::u32 tickStart= ::time::now();
          //   while(::task_get_run() && task_get_run())
          //   {
          //
@@ -661,8 +661,8 @@ namespace acme_windows
          //
          //   #ifdef WINDOWS_DESKTOP
          //   {
-         //      unsigned int dwSize = GetEnvironmentVariable("PATH", nullptr, 0);
-         //      char * lpsz = ___new char[dwSize + 1];
+         //      ::u32 dwSize = GetEnvironmentVariable("PATH", nullptr, 0);
+         //      ::i8 * lpsz = ___new ::i8[dwSize + 1];
          //      dwSize = GetEnvironmentVariable("PATH", lpsz, dwSize + 1);
          //      delete lpsz;
          //   }
@@ -874,7 +874,7 @@ namespace acme_windows
       //}
 
 
-      int context::bash(const ::scoped_string& scopedstr, const class ::time & timeTimeout)
+      ::i32 context::bash(const ::scoped_string& scopedstr, const class ::time & timeTimeout)
       {
 
          string strEscaped = scopedstr;
@@ -916,7 +916,7 @@ namespace acme_windows
       }
 
 
-      int context::git_bash(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
+      ::i32 context::git_bash(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
       {
 
          string strEscaped = scopedstr;
@@ -939,7 +939,7 @@ namespace acme_windows
 
       }
 
-      int context::zsh(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
+      ::i32 context::zsh(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
       {
 
          string strEscaped = scopedstr;
@@ -1042,7 +1042,7 @@ namespace acme_windows
       }
 
 
-      int context::posix_shell_command(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell, const trace_function& tracefunction)
+      ::i32 context::posix_shell_command(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell, const trace_function& tracefunction)
       {
 
          try

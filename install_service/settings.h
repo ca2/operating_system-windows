@@ -27,21 +27,21 @@ typedef union {
   TCHAR *string;
 } value_t;
 
-typedef int (*setting_function_t)(const TCHAR *, void *, const TCHAR *, void *, value_t *, const TCHAR *);
+typedef ::i32 (*setting_function_t)(const TCHAR *, void *, const TCHAR *, void *, value_t *, const TCHAR *);
 
 typedef struct {
   const TCHAR *name;
   unsigned long type;
   void *default_value;
   bool native;
-  int additional;
+  ::i32 additional;
   setting_function_t set;
   setting_function_t get;
 } settings_t;
 
-int set_setting(const TCHAR *, HKEY, settings_t *, value_t *, const TCHAR *);
-int set_setting(const TCHAR *, SC_HANDLE, settings_t *, value_t *, const TCHAR *);
-int get_setting(const TCHAR *, HKEY, settings_t *, value_t *, const TCHAR *);
-int get_setting(const TCHAR *, SC_HANDLE, settings_t *, value_t *, const TCHAR *);
+::i32 set_setting(const TCHAR *, HKEY, settings_t *, value_t *, const TCHAR *);
+::i32 set_setting(const TCHAR *, SC_HANDLE, settings_t *, value_t *, const TCHAR *);
+::i32 get_setting(const TCHAR *, HKEY, settings_t *, value_t *, const TCHAR *);
+::i32 get_setting(const TCHAR *, SC_HANDLE, settings_t *, value_t *, const TCHAR *);
 
 #endif

@@ -23,7 +23,7 @@ namespace acme_windows
 
 
 
-   unsigned int get_current_directory(string& str)
+   ::u32 get_current_directory(string& str)
    {
 
       return ::GetCurrentDirectoryW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
@@ -31,7 +31,7 @@ namespace acme_windows
    }
 
 
-   unsigned int get_temp_path(string& str)
+   ::u32 get_temp_path(string& str)
    {
 
       return ::GetTempPathW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
@@ -39,12 +39,12 @@ namespace acme_windows
    }
 
 
-   //int reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string& str)
+   //::i32 reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string& str)
    //{
 
    //   DWORD dwType = 0;
    //   DWORD dwSize = 0;
-   //   int lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+   //   ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
 
    //   if (lResult != ERROR_SUCCESS)
    //      return lResult;
@@ -54,7 +54,7 @@ namespace acme_windows
 
    //      natural_wstring pwsz(byte_count, dwSize);
 
-   //      lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (unsigned char*)(unichar*)pwsz, &dwSize);
+   //      lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8*)(unichar*)pwsz, &dwSize);
 
    //      str = pwsz;
 
@@ -73,7 +73,7 @@ namespace acme_windows
    //}
 
 
-   HICON extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex)
+   HICON extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, ::u32 nIconIndex)
 
    {
 

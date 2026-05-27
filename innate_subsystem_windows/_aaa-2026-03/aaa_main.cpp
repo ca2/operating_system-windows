@@ -4,18 +4,18 @@
 
 //CLASS_DECL_ACME string ca2_command_line(hinstance hinstance);
 
-//CLASS_DECL_ACME HRESULT os_create_link(::file::path pathObj, ::file::path pathLink, string strDesc, ::file::path pathIcon = nullptr, int iIcon = 0);
+//CLASS_DECL_ACME HRESULT os_create_link(::file::path pathObj, ::file::path pathLink, string strDesc, ::file::path pathIcon = nullptr, ::i32 iIcon = 0);
 
-//const char* get_cube_app_id();
-
-
-//CLASS_DECL_ACME int ca2_main();
+//const ::i8* get_cube_app_id();
 
 
-void __cdecl _null_se_translator(unsigned int uiCode, EXCEPTION_POINTERS * ppointers);
+//CLASS_DECL_ACME ::i32 ca2_main();
 
 
-void __cdecl _null_se_translator(unsigned int uiCode, EXCEPTION_POINTERS * ppointers)
+void __cdecl _null_se_translator(::u32 uiCode, EXCEPTION_POINTERS * ppointers);
+
+
+void __cdecl _null_se_translator(::u32 uiCode, EXCEPTION_POINTERS * ppointers)
 {
 
    __UNREFERENCED_PARAMETER(uiCode);

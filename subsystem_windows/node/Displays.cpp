@@ -67,7 +67,7 @@ namespace subsystem_windows
       }
    }
 
-   void Displays::getDisplayCoordinates(unsigned char displayNumber,
+   void Displays::getDisplayCoordinates(::u8 displayNumber,
                                                ::i32_rectangle & rectangle)
    {
      // m_pparticleThis->getDisplayCoordinates(displayNumber, prectangle);

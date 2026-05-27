@@ -65,7 +65,7 @@ namespace input_win32
 
       //inline system_interaction * system_interaction() { return m_psysteminteraction; }
 
-      //virtual HICON _load_icon(string_array_base& straMatter, const ::scoped_string & scopedstrIcon, int cx, int cy);
+      //virtual HICON _load_icon(string_array_base& straMatter, const ::scoped_string & scopedstrIcon, ::i32 cx, ::i32 cy);
 
       //virtual ::windows::hwnd_array _get_hwnda(const ::user::prototype_pointer_array& prototypepointera);
 
@@ -93,7 +93,7 @@ namespace input_win32
       //virtual ::windowing::window * get_active_window(::thread * pthread) override;
 
 
-      //virtual void __synthesizes_creates_styles(::user::interaction * pinteraction, unsigned int & nExStyle, unsigned int & nStyle);
+      //virtual void __synthesizes_creates_styles(::user::interaction * pinteraction, ::u32 & nExStyle, ::u32 & nStyle);
 
       //
       //virtual zorder zorder_from_hwnd(HWND hwnd);
@@ -134,7 +134,7 @@ namespace input_win32
 
 
 
-      //virtual int_bool point_is_window_origin(::i32_point ptHitTest, oswindow oswindowExclude, int iMargin);
+      //virtual int_bool point_is_window_origin(::i32_point ptHitTest, oswindow oswindowExclude, ::i32 iMargin);
 
       ////virtual void top_windows_by_z_order(hwnd_array & a);
 
@@ -163,17 +163,17 @@ namespace input_win32
 
       //virtual void lock_set_foreground_window(bool bLock) override;
 
-      //virtual wstring _windows_register_window_class(unsigned int nClassStyle, HCURSOR hCursor = 0, HBRUSH hbrBackground = 0, HICON hIcon = 0);
-      ////CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::particle * pparticle, unsigned int nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
+      //virtual wstring _windows_register_window_class(::u32 nClassStyle, HCURSOR hCursor = 0, HBRUSH hbrBackground = 0, HICON hIcon = 0);
+      ////CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::particle * pparticle, ::u32 nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
       //virtual bool _windows_register_class(WNDCLASSEXW* puserinteractionclass);
       ////
-      //virtual wstring _windows_calc_icon_window_class(::user::interaction* pinteraction, unsigned int dwDefaultStyle, const ::scoped_string & scopedstrMatter) override;
+      //virtual wstring _windows_calc_icon_window_class(::user::interaction* pinteraction, ::u32 dwDefaultStyle, const ::scoped_string & scopedstrMatter) override;
       //virtual wstring _windows_get_user_interaction_window_class(::user::interaction* pinteraction) override;
-      //virtual bool _windows_register_with_icon(WNDCLASSEXW* puserinteractionclass, const unichar* pszClassName, unsigned int nIDIcon);
+      //virtual bool _windows_register_with_icon(WNDCLASSEXW* puserinteractionclass, const unichar* pszClassName, ::u32 nIDIcon);
 
       //virtual void _window_create_caret(HWND hwnd, HBITMAP hbitmap);
-      //virtual void _window_create_solid_caret(HWND hwnd, int nWidth, int nHeight);
-      //virtual void _window_create_gray_caret(HWND hwnd, int nWidth, int nHeight);
+      //virtual void _window_create_solid_caret(HWND hwnd, ::i32 nWidth, ::i32 nHeight);
+      //virtual void _window_create_gray_caret(HWND hwnd, ::i32 nWidth, ::i32 nHeight);
 
 
       ////template < typename PRED >

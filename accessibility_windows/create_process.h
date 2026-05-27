@@ -51,7 +51,7 @@ namespace acme_windows
 
       string m_strOutput;
 
-      int m_iExitCode;
+      ::i32 m_iExitCode;
 
       DWORD m_dwExitCode2;
 

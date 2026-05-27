@@ -95,7 +95,7 @@ namespace apex
 
       DWORD dw;
 
-      unsigned int dwResSize = GetFileVersionInfoSizeW(
+      ::u32 dwResSize = GetFileVersionInfoSizeW(
                         pszModuleFilePath,
                         &dw);
 
@@ -114,11 +114,11 @@ namespace apex
             memory.get_data()))
 
          {
-            unsigned int cbTranslate;
+            ::u32 cbTranslate;
             struct LANGANDCODEPAGE
             {
-               unsigned short wLanguage;
-               unsigned short wCodePage;
+               ::u16 wLanguage;
+               ::u16 wCodePage;
             } *pTranslate;
 
 
@@ -131,7 +131,7 @@ namespace apex
 
             string strKey;
 
-            for( unsigned int u = 0; u < (cbTranslate/sizeof(struct LANGANDCODEPAGE)); u++ )
+            for( ::u32 u = 0; u < (cbTranslate/sizeof(struct LANGANDCODEPAGE)); u++ )
             {
 
                WCHAR * psz;
@@ -244,7 +244,7 @@ namespace apex
 
 
 //
-//void __node_init_main_data(::particle * pparticle, HINSTANCE hInstance, HINSTANCE hPrevInstance, char * pCmdLine, ::display edisplay)
+//void __node_init_main_data(::particle * pparticle, HINSTANCE hInstance, HINSTANCE hPrevInstance, ::i8 * pCmdLine, ::display edisplay)
 
 //{
 //

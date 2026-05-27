@@ -20,7 +20,7 @@ namespace mouse_hook
 
    itask g_itask = 0;
 
-   LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
+   LRESULT CALLBACK LowLevelMouseProc(::i32 nCode, WPARAM wParam, LPARAM lParam)
    {
 
       if (nCode == 0)
@@ -77,7 +77,7 @@ namespace mouse_hook
       while (task_get_run())
       {
 
-         int iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
+         ::i32 iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
 
          if (iRet == 0)
          {

@@ -44,14 +44,14 @@ namespace innate_subsystem_windows
       return m_tabContainer;
 
    }
-   int TabControl::getTabCount()
+   ::i32 TabControl::getTabCount()
    {
 
       return m_tabContainer.size();
 
    }
 
-   innate_subsystem::TabInterface *TabControl::getTab(int index)
+   innate_subsystem::TabInterface *TabControl::getTab(::i32 index)
    {
       if ((index < 0) || ((size_t)index > m_tabContainer.size() - 1)) {
          return NULL;
@@ -59,7 +59,7 @@ namespace innate_subsystem_windows
       return m_tabContainer[index];
    }
 
-   void TabControl::addTab(innate_subsystem::WindowInterface *pwindow, const char *caption)
+   void TabControl::addTab(innate_subsystem::WindowInterface *pwindow, const ::i8 *caption)
    {
       auto ptab = createø<::innate_subsystem::TabInterface>();
       ptab->initialize_tab(pwindow, caption);
@@ -78,9 +78,9 @@ namespace innate_subsystem_windows
       }
    }
 
-   void TabControl::showTab(int index)
+   void TabControl::showTab(::i32 index)
    {
-      int selectedIndex = getSelectedTabIndex();
+      ::i32 selectedIndex = getSelectedTabIndex();
       if (selectedIndex >= 0) {
          getTab(selectedIndex)->setVisible(false);
       }
@@ -92,7 +92,7 @@ namespace innate_subsystem_windows
    {
       for (size_t i = 0; i < m_tabContainer.size(); i++) {
          if (m_tabContainer[i]->getWindow() == pwindow) {
-            showTab((int)i);
+            showTab((::i32)i);
             return;
          }
       }
@@ -135,9 +135,9 @@ namespace innate_subsystem_windows
       TabCtrl_DeleteAllItems(::as_HWND(this->operating_system_window()));
    }
 
-   void TabControl::removeTab(int index)
+   void TabControl::removeTab(::i32 index)
    {
-      //int i = 0;
+      //::i32 i = 0;
       //for (TabContainer::iterator it = m_tabContainer.begin(); it != m_tabContainer.end(); it++) {
         // if (i == index) {
             //delete *it;
@@ -149,9 +149,9 @@ namespace innate_subsystem_windows
       //}
    }
 
-   int TabControl::getSelectedTabIndex()
+   ::i32 TabControl::getSelectedTabIndex()
    {
-      int page = TabCtrl_GetCurSel(::as_HWND(this->operating_system_window()));
+      ::i32 page = TabCtrl_GetCurSel(::as_HWND(this->operating_system_window()));
       return page;
    }
 
@@ -164,13 +164,13 @@ namespace innate_subsystem_windows
 
    }
 
-   bool TabControl::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool TabControl::on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
 
       if (message == WM_APP + 125)
       {
 
-         int iId = (int) ::GetWindowLongPtr((HWND) this->_HWND(), GWLP_ID);
+         ::i32 iId = (::i32) ::GetWindowLongPtr((HWND) this->_HWND(), GWLP_ID);
 
          ::cast < ::innate_subsystem_windows::Window > pwindowParent = getParent();
 

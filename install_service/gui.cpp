@@ -2,7 +2,7 @@
 
 static enum { NSSM_TAB_APPLICATION, NSSM_TAB_DETAILS, NSSM_TAB_LOGON, NSSM_TAB_DEPENDENCIES, NSSM_TAB_PROCESS, NSSM_TAB_SHUTDOWN, NSSM_TAB_EXIT, NSSM_TAB_IO, NSSM_TAB_ROTATION, NSSM_TAB_ENVIRONMENT, NSSM_NUM_TABS };
 static HWND tablist[NSSM_NUM_TABS];
-static int selected_tab;
+static ::i32 selected_tab;
 
 static HWND dialog(const TCHAR *templ, HWND parent, DLGPROC function, LPARAM l) {
   /* The caller will deal with GetLastError()... */
@@ -23,7 +23,7 @@ static HWND dialog(const TCHAR *templ, HWND parent, DLGPROC function) {
   return dialog(templ, parent, function, 0);
 }
 
-int nssm_gui(int resource, nssm_service_t *service) {
+::i32 nssm_gui(::i32 resource, nssm_service_t *service) {
   /* Create window */
   HWND dlg = dialog(MAKEINTRESOURCE(resource), 0, nssm_dlg, (LPARAM) service);
   if (! dlg) {
@@ -99,7 +99,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
     if (service->dependencieslen) {
       TCHAR *formatted;
       unsigned long newlen;
-      if (format_double_null(service->dependencies, service->dependencieslen, &formatted, &newlen)) {
+      if (format_f64_null(service->dependencies, service->dependencieslen, &formatted, &newlen)) {
         popup_message(dlg, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("dependencies"), _T("nssm_dlg()"));
       }
       else {
@@ -110,7 +110,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
 
     /* Process tab. */
     if (service->priority) {
-      int priority = priority_constant_to_index(service->priority);
+      ::i32 priority = priority_constant_to_index(service->priority);
       combo = GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_PRIORITY);
       SendMessage(combo, CB_SETCURSEL, priority, 0);
     }
@@ -125,7 +125,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
         if ((service->affinity & (__int64) system_affinity) != service->affinity) popup_message(dlg, MB_OK | ::user::e_message_box_icon_warning, NSSM_GUI_WARN_AFFINITY);
       }
 
-      for (int i = 0; i < num_cpus(); i++) {
+      for (::i32 i = 0; i < num_cpus(); i++) {
         if (! (service->affinity & (1LL << (__int64) i))) SendMessage(list_base, LB_SETSEL, 0, i);
       }
     }
@@ -197,7 +197,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
     if (envlen) {
       TCHAR *formatted;
       unsigned long newlen;
-      if (format_double_null(env, envlen, &formatted, &newlen)) {
+      if (format_f64_null(env, envlen, &formatted, &newlen)) {
         popup_message(dlg, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("environment"), _T("nssm_dlg()"));
       }
       else {
@@ -216,7 +216,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
     DispatchMessage(&message);
   }
 
-  return (int) message.wParam;
+  return (::i32) message.wParam;
 }
 
 void centre_window(HWND window) {
@@ -254,23 +254,23 @@ static inline void check_number(HWND tab, unsigned long control, unsigned long *
 }
 
 static inline void set_timeout_enabled(unsigned long control, unsigned long dependent) {
-  unsigned char enabled = 0;
+  ::u8 enabled = 0;
   if (SendDlgItemMessage(tablist[NSSM_TAB_SHUTDOWN], control, BM_GETCHECK, 0, 0) & BST_CHECKED) enabled = 1;
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_SHUTDOWN], dependent), enabled);
 }
 
-static inline void set_logon_enabled(unsigned char enabled) {
+static inline void set_logon_enabled(::u8 enabled) {
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_INTERACT), ! enabled);
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_USERNAME), enabled);
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_PASSWORD1), enabled);
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_PASSWORD2), enabled);
 }
 
-static inline void set_affinity_enabled(unsigned char enabled) {
+static inline void set_affinity_enabled(::u8 enabled) {
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY), enabled);
 }
 
-static inline void set_rotation_enabled(unsigned char enabled) {
+static inline void set_rotation_enabled(::u8 enabled) {
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_ROTATION], IDC_ROTATE_ONLINE), enabled);
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_ROTATION], IDC_ROTATE_SECONDS), enabled);
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_ROTATION], IDC_ROTATE_BYTES_LOW), enabled);
@@ -278,13 +278,13 @@ static inline void set_rotation_enabled(unsigned char enabled) {
 
 static inline void check_io(HWND owner, TCHAR *name, TCHAR *buffer, unsigned long len, unsigned long control) {
   if (! SendMessage(GetDlgItem(tablist[NSSM_TAB_IO], control), WM_GETTEXTLENGTH, 0, 0)) return;
-  if (GetDlgItemText(tablist[NSSM_TAB_IO], control, buffer, (int) len)) return;
+  if (GetDlgItemText(tablist[NSSM_TAB_IO], control, buffer, (::i32) len)) return;
   popup_message(owner, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_MESSAGE_PATH_TOO_LONG, name);
   ZeroMemory(buffer, len * sizeof(TCHAR));
 }
 
 /* Set service parameters. */
-int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service) {
+::i32 configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service) {
   if (! service) return 1;
 
   set_nssm_service_defaults(service);
@@ -371,7 +371,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
       popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("account name"), _T("install()"));
       return 6;
     }
-    if (! GetDlgItemText(tablist[NSSM_TAB_LOGON], IDC_USERNAME, service->username, (int) service->usernamelen)) {
+    if (! GetDlgItemText(tablist[NSSM_TAB_LOGON], IDC_USERNAME, service->username, (::i32) service->usernamelen)) {
       HeapFree(GetProcessHeap(), 0, service->username);
       service->username = 0;
       service->usernamelen = 0;
@@ -438,7 +438,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
         }
 
         /* Get first password. */
-        if (! GetDlgItemText(tablist[NSSM_TAB_LOGON], IDC_PASSWORD1, service->password, (int) service->passwordlen)) {
+        if (! GetDlgItemText(tablist[NSSM_TAB_LOGON], IDC_PASSWORD1, service->password, (::i32) service->passwordlen)) {
           HeapFree(GetProcessHeap(), 0, password);
           SecureZeroMemory(service->password, service->passwordlen);
           HeapFree(GetProcessHeap(), 0, service->password);
@@ -452,7 +452,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
         }
 
         /* Get confirmation. */
-        if (! GetDlgItemText(tablist[NSSM_TAB_LOGON], IDC_PASSWORD2, password, (int) service->passwordlen)) {
+        if (! GetDlgItemText(tablist[NSSM_TAB_LOGON], IDC_PASSWORD2, password, (::i32) service->passwordlen)) {
           SecureZeroMemory(password, service->passwordlen);
           HeapFree(GetProcessHeap(), 0, password);
           SecureZeroMemory(service->password, service->passwordlen);
@@ -501,7 +501,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
       return 6;
     }
 
-    if (unformat_double_null(dependencies, dependencieslen, &service->dependencies, &service->dependencieslen)) {
+    if (unformat_f64_null(dependencies, dependencieslen, &service->dependencies, &service->dependencieslen)) {
       HeapFree(GetProcessHeap(), 0, dependencies);
       popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("dependencies"), _T("install()"));
       cleanup_nssm_service(service);
@@ -521,14 +521,14 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
   service->affinity = 0LL;
   if (! (SendDlgItemMessage(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY_ALL, BM_GETCHECK, 0, 0) & BST_CHECKED)) {
     HWND list_base = GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY);
-    int selected = (int) SendMessage(list_base, LB_GETSELCOUNT, 0, 0);
-    int count = (int) SendMessage(list_base, LB_GETCOUNT, 0, 0);
+    ::i32 selected = (::i32) SendMessage(list_base, LB_GETSELCOUNT, 0, 0);
+    ::i32 count = (::i32) SendMessage(list_base, LB_GETCOUNT, 0, 0);
     if (! selected) {
       popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_WARN_AFFINITY_NONE);
       return 5;
     }
     else if (selected < count) {
-      for (int i = 0; i < count; i++) {
+      for (::i32 i = 0; i < count; i++) {
         if (SendMessage(list_base, LB_GETSEL, i, 0)) service->affinity |= (1LL << (__int64) i);
       }
     }
@@ -591,7 +591,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
 
     TCHAR *newenv;
     unsigned long newlen;
-    if (unformat_double_null(env, envlen, &newenv, &newlen)) {
+    if (unformat_f64_null(env, envlen, &newenv, &newlen)) {
       HeapFree(GetProcessHeap(), 0, env);
       popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("environment"), _T("install()"));
       cleanup_nssm_service(service);
@@ -624,12 +624,12 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
 }
 
 /* Install the service. */
-int install(HWND window) {
+::i32 install(HWND window) {
   if (! window) return 1;
 
   nssm_service_t *service = alloc_nssm_service();
   if (service) {
-    int ret = configure(window, service, 0);
+    ::i32 ret = configure(window, service, 0);
     if (ret) return ret;
   }
 
@@ -672,7 +672,7 @@ int install(HWND window) {
 }
 
 /* Remove the service */
-int erase(HWND window) {
+::i32 erase(HWND window) {
   if (! window) return 1;
 
   /* See if it works */
@@ -719,12 +719,12 @@ int erase(HWND window) {
   return 0;
 }
 
-int edit(HWND window, nssm_service_t *orig_service) {
+::i32 edit(HWND window, nssm_service_t *orig_service) {
   if (! window) return 1;
 
   nssm_service_t *service = alloc_nssm_service();
   if (service) {
-    int ret = configure(window, service, orig_service);
+    ::i32 ret = configure(window, service, orig_service);
     if (ret) return ret;
   }
 
@@ -756,7 +756,7 @@ int edit(HWND window, nssm_service_t *orig_service) {
   return 0;
 }
 
-static TCHAR *browse_filter(int message) {
+static TCHAR *browse_filter(::i32 message) {
   switch (message) {
     case NSSM_GUI_BROWSE_FILTER_APPLICATIONS: return _T("*.exe;*.bat;*.cmd");
     case NSSM_GUI_BROWSE_FILTER_DIRECTORIES: return _T(".");
@@ -781,7 +781,7 @@ void browse(HWND window, TCHAR *current, unsigned long flags, ...) {
   va_list arg;
   size_t bufsize = 256;
   size_t len = bufsize;
-  int i;
+  ::i32 i;
 
   OPENFILENAME ofn;
   ZeroMemory(&ofn, sizeof(ofn));
@@ -793,7 +793,7 @@ void browse(HWND window, TCHAR *current, unsigned long flags, ...) {
     len = 0;
     /* "Applications" + nullptr + "*.exe" + nullptr */
     va_start(arg, flags);
-    while (i = va_arg(arg, int)) {
+    while (i = va_arg(arg, ::i32)) {
       TCHAR *localised = message_string(i);
       _sntprintf_s((TCHAR *) ofn.lpstrFilter + len, bufsize, _TRUNCATE, localised);
       len += _tcslen(localised) + 1;
@@ -838,7 +838,7 @@ INT_PTR CALLBACK tab_dlg(HWND tab, const ::atom & atom, WPARAM w, LPARAM l) {
     case WM_COMMAND:
       HWND dlg;
       TCHAR buffer[PATH_LENGTH];
-      unsigned char enabled;
+      ::u8 enabled;
 
       switch (LOWORD(w)) {
         /* Browse for application. */
@@ -945,7 +945,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
       HWND tabs;
       HWND combo;
       HWND list_base;
-      int i, n;
+      ::i32 i, n;
       tabs = GetDlgItem(window, IDC_TAB1);
       if (! tabs) return 0;
 
@@ -959,7 +959,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
       /* papplication tab. */
       if (service->native) tab.pszText = message_string(NSSM_GUI_TAB_NATIVE);
       else tab.pszText = message_string(NSSM_GUI_TAB_APPLICATION);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
+      tab.cchTextMax = (::i32) _tcslen(tab.pszText);
       SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_APPLICATION, (LPARAM) &tab);
       if (service->native) {
         tablist[NSSM_TAB_APPLICATION] = dialog(MAKEINTRESOURCE(IDD_NATIVE), window, tab_dlg);
@@ -971,7 +971,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
 
       /* Details tab. */
       tab.pszText = message_string(NSSM_GUI_TAB_DETAILS);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
+      tab.cchTextMax = (::i32) _tcslen(tab.pszText);
       SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_DETAILS, (LPARAM) &tab);
       tablist[NSSM_TAB_DETAILS] = dialog(MAKEINTRESOURCE(IDD_DETAILS), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_DETAILS], SW_HIDE);
@@ -986,7 +986,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
 
       /* Logon tab. */
       tab.pszText = message_string(NSSM_GUI_TAB_LOGON);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
+      tab.cchTextMax = (::i32) _tcslen(tab.pszText);
       SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_LOGON, (LPARAM) &tab);
       tablist[NSSM_TAB_LOGON] = dialog(MAKEINTRESOURCE(IDD_LOGON), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_LOGON], SW_HIDE);
@@ -997,7 +997,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
 
       /* Dependencies tab. */
       tab.pszText = message_string(NSSM_GUI_TAB_DEPENDENCIES);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
+      tab.cchTextMax = (::i32) _tcslen(tab.pszText);
       SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_DEPENDENCIES, (LPARAM) &tab);
       tablist[NSSM_TAB_DEPENDENCIES] = dialog(MAKEINTRESOURCE(IDD_DEPENDENCIES), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_DEPENDENCIES], SW_HIDE);
@@ -1007,7 +1007,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
 
       /* Process tab. */
       tab.pszText = message_string(NSSM_GUI_TAB_PROCESS);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
+      tab.cchTextMax = (::i32) _tcslen(tab.pszText);
       SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_PROCESS, (LPARAM) &tab);
       tablist[NSSM_TAB_PROCESS] = dialog(MAKEINTRESOURCE(IDD_PROCESS), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_PROCESS], SW_HIDE);
@@ -1041,13 +1041,13 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
         adding the strings.
       */
       if (n < 32) {
-        int columns = (n - 1) / 4;
+        ::i32 columns = (n - 1) / 4;
         RECT i32_rectangle;
         GetWindowRect(list_base, &rectangle);
-        int width = rectangle.right - rectangle.left;
+        ::i32 width = rectangle.right - rectangle.left;
         width -= (7 - columns) * 16;
-        int height = rectangle.bottom - rectangle.top;
-        if (n < 4) height -= (int) SendMessage(list_base, LB_GETITEMHEIGHT, 0, 0) * (4 - n);
+        ::i32 height = rectangle.bottom - rectangle.top;
+        if (n < 4) height -= (::i32) SendMessage(list_base, LB_GETITEMHEIGHT, 0, 0) * (4 - n);
         set_window_position(list_base, 0, 0, 0, width, height, SWP_NOMOVE | SWP_NOOWNERZORDER);
       }
       SendMessage(list_base, LB_SELITEMRANGE, 1, MAKELPARAM(0, n));
@@ -1057,7 +1057,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
 
       /* Shutdown tab. */
       tab.pszText = message_string(NSSM_GUI_TAB_SHUTDOWN);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
+      tab.cchTextMax = (::i32) _tcslen(tab.pszText);
       SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_SHUTDOWN, (LPARAM) &tab);
       tablist[NSSM_TAB_SHUTDOWN] = dialog(MAKEINTRESOURCE(IDD_SHUTDOWN), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_SHUTDOWN], SW_HIDE);
@@ -1073,7 +1073,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
 
       /* Restart tab. */
       tab.pszText = message_string(NSSM_GUI_TAB_EXIT);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
+      tab.cchTextMax = (::i32) _tcslen(tab.pszText);
       SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_EXIT, (LPARAM) &tab);
       tablist[NSSM_TAB_EXIT] = dialog(MAKEINTRESOURCE(IDD_APPEXIT), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_EXIT], SW_HIDE);
@@ -1090,14 +1090,14 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
 
       /* I/O tab. */
       tab.pszText = message_string(NSSM_GUI_TAB_IO);
-      tab.cchTextMax = (int) _tcslen(tab.pszText) + 1;
+      tab.cchTextMax = (::i32) _tcslen(tab.pszText) + 1;
       SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_IO, (LPARAM) &tab);
       tablist[NSSM_TAB_IO] = dialog(MAKEINTRESOURCE(IDD_IO), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_IO], SW_HIDE);
 
       /* Rotation tab. */
       tab.pszText = message_string(NSSM_GUI_TAB_ROTATION);
-      tab.cchTextMax = (int) _tcslen(tab.pszText) + 1;
+      tab.cchTextMax = (::i32) _tcslen(tab.pszText) + 1;
       SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_ROTATION, (LPARAM) &tab);
       tablist[NSSM_TAB_ROTATION] = dialog(MAKEINTRESOURCE(IDD_ROTATION), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_ROTATION], SW_HIDE);
@@ -1110,7 +1110,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
 
       /* Environment tab. */
       tab.pszText = message_string(NSSM_GUI_TAB_ENVIRONMENT);
-      tab.cchTextMax = (int) _tcslen(tab.pszText) + 1;
+      tab.cchTextMax = (::i32) _tcslen(tab.pszText) + 1;
       SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_ENVIRONMENT, (LPARAM) &tab);
       tablist[NSSM_TAB_ENVIRONMENT] = dialog(MAKEINTRESOURCE(IDD_ENVIRONMENT), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_ENVIRONMENT], SW_HIDE);
@@ -1125,12 +1125,12 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
       switch (notification->code) {
         case TCN_SELCHANGE:
           HWND tabs;
-          int selection;
+          ::i32 selection;
 
           tabs = GetDlgItem(window, IDC_TAB1);
           if (! tabs) return 0;
 
-          selection = (int) SendMessage(tabs, TCM_GETCURSEL, 0, 0);
+          selection = (::i32) SendMessage(tabs, TCM_GETCURSEL, 0, 0);
           if (selection != selected_tab) {
             ShowWindow(tablist[selected_tab], SW_HIDE);
             ShowWindow(tablist[selection], SW_SHOWDEFAULT);
@@ -1147,7 +1147,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
       switch (LOWORD(w)) {
         /* OK button */
         case IDOK:
-          if ((int) GetWindowLongPtr(window, GWLP_USERDATA) == IDD_EDIT) {
+          if ((::i32) GetWindowLongPtr(window, GWLP_USERDATA) == IDD_EDIT) {
             if (! edit(window, (nssm_service_t *) GetWindowLongPtr(window, DWLP_USER))) PostQuitMessage(0);
           }
           else if (! install(window)) PostQuitMessage(0);

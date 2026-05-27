@@ -66,7 +66,7 @@ public:
 //protected:
   DataOutputStream *m_output;
 
-  char m_buffer[100000];
+  ::i8 m_buffer[100000];
 
   size_t m_dataLength;
 };

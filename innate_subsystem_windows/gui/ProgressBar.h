@@ -40,8 +40,8 @@ namespace innate_subsystem_windows
         ProgressBar();
         ~ProgressBar() override;
 
-        void setRange(unsigned short min, unsigned short max) override;
-        void setPos(unsigned short pos) override;
+        void setRange(::u16 min, ::u16 max) override;
+        void setPos(::u16 pos) override;
     };
 
 

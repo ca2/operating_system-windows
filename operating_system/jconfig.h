@@ -29,23 +29,23 @@
  */
 #define HAVE_PROTOTYPES
 
-/* Does your compiler support the declaration "unsigned char" ?
- * How about "unsigned short" ?
+/* Does your compiler support the declaration "::u8" ?
+ * How about "::u16" ?
  */
 //#define HAVE_UNSIGNED_CHAR
 //#define HAVE_UNSIGNED_SHORT
 
-/* Define "void" as "char" if your compiler doesn't know about type void.
+/* Define "void" as "::i8" if your compiler doesn't know about type void.
  * NOTE: be sure to define void such that "void *" represents the most general
  * pointer type, e.g., that returned by malloc().
  */
-/* #define void char */
+/* #define void ::i8 */
 
 /* Define "const" as empty if your compiler doesn't know the "const" keyword.
  */
 /* #define const */
 
-/* Define this if an ordinary "char" type is unsigned.
+/* Define this if an ordinary "::i8" type is unsigned.
  * If you're not sure, leaving it undefined will work at some cost in speed.
  * If you defined HAVE_UNSIGNED_CHAR then the speed difference is minimal.
  */
@@ -92,9 +92,9 @@
  */
 #undef INCOMPLETE_TYPES_BROKEN
 
-/* Define "boolean" as unsigned char, not int, per Windows custom */
+/* Define "boolean" as ::u8, not ::i32, per Windows custom */
 #ifndef __RPCNDR_H__		/* don't conflict if rpcndr.h already read */
-typedef unsigned char boolean;
+typedef ::u8 boolean;
 #endif
 #define HAVE_BOOLEAN		/* prevent jmorecfg.h from redefining it */
 

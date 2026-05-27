@@ -568,9 +568,9 @@ namespace acme_windows
       //
       //      throw ::exception(todo);
       //
-      //      //         static const int FILE_DIALOG_MAX_BUFFER = 16384;
+      //      //         static const ::i32 FILE_DIALOG_MAX_BUFFER = 16384;
       //      //
-      //      //         char buffer[FILE_DIALOG_MAX_BUFFER];
+      //      //         ::i8 buffer[FILE_DIALOG_MAX_BUFFER];
       //      //
       //      //         buffer[0] = '\0';
       //      //

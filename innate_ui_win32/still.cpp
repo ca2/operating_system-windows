@@ -195,7 +195,7 @@ namespace innate_ui_win32
    }
 
    
-   bool still::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool still::on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
 
       if (message == WM_PAINT && m_bIcon)
@@ -254,7 +254,7 @@ namespace innate_ui_win32
       wstring wstr;
 
       // 2. Get the text from the control
-      int len = GetWindowTextLength(hwnd);
+      ::i32 len = GetWindowTextLength(hwnd);
       if (len > 0)
       {
 
@@ -283,9 +283,9 @@ namespace innate_ui_win32
 
       // 5. Account for Control Borders (DPI Scaled)
       // If the static has WS_BORDER or SS_SUNKEN, add scaled padding.
-      int padding = MulDiv(2, dpi, 96); // Add 2 pixels of padding scaled to DPI
-      int newWidth = (rect.right - rect.left) + padding;
-      int newHeight = (rect.bottom - rect.top) + padding;
+      ::i32 padding = MulDiv(2, dpi, 96); // Add 2 pixels of padding scaled to DPI
+      ::i32 newWidth = (rect.right - rect.left) + padding;
+      ::i32 newHeight = (rect.bottom - rect.top) + padding;
 
       // 6. Cleanup and Apply
       SelectObject(hdc, hOldFont);

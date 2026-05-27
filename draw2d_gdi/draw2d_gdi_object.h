@@ -34,11 +34,11 @@ namespace draw2d_gdi
 
       virtual bool destroy();
 
-      int get_object(int nCount, LPVOID lpObject) const;
+      ::i32 get_object(::i32 nCount, LPVOID lpObject) const;
 
       UINT GetObjectType() const;
 
-      bool CreateStockObject(int nIndex);
+      bool CreateStockObject(::i32 nIndex);
 
       bool UnrealizeObject();
 

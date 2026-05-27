@@ -70,12 +70,12 @@ namespace acme_windows
 
    // maximum mumber of lines the output console should have
 
-   static const unsigned short MAX_CONSOLE_LINES = 500;
+   static const ::u16 MAX_CONSOLE_LINES = 500;
 
    void console::redirect_io()
    {
 
-      //int hConHandle;
+      //::i32 hConHandle;
 
       //HANDLE lStdHandle;
 
@@ -142,7 +142,7 @@ namespace acme_windows
    }
 
 
-   void console::SetWindowSize(int height,int width)
+   void console::SetWindowSize(::i32 height,::i32 width)
    {
       m_iH = height;
       m_iW = width;
@@ -165,20 +165,20 @@ namespace acme_windows
       SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&cursor);
    }
 
-   void console::SetCursorPosition(int y,int x)
+   void console::SetCursorPosition(::i32 y,::i32 x)
    {
       COORD cursor = {(SHORT)x,(SHORT)y};
       SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),cursor);
    }
 
-   void console::SetTextColor(int color)
+   void console::SetTextColor(::i32 color)
    {
       m_iTextColor = color;
       SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),color);
    }
 
    
-   void console::SetScreenColor(enum_dos_color edoscolor, int iLineStart, int iLineCount)
+   void console::SetScreenColor(enum_dos_color edoscolor, ::i32 iLineStart, ::i32 iLineCount)
    {
 
       COORD coord = {0,(SHORT)iLineStart};
@@ -199,7 +199,7 @@ namespace acme_windows
 
       }
 
-      FillConsoleOutputAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (int) edoscolor,iLineCount * m_iW,coord,&dwWritten);
+      FillConsoleOutputAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (::i32) edoscolor,iLineCount * m_iW,coord,&dwWritten);
 
    }
 

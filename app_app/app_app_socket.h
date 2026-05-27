@@ -30,7 +30,7 @@ namespace app_app
 
 
       virtual void simple_file_server(const ::scoped_string & scopedstrPath);
-      virtual void simple_image_server(const ::scoped_string & scopedstrPath, int iMaxWidth = -1, int iMaxHeight = -1);
+      virtual void simple_image_server(const ::scoped_string & scopedstrPath, ::i32 iMaxWidth = -1, ::i32 iMaxHeight = -1);
 
       virtual bool http_filter_response_header(atom key, string_array_base & straValue);
 

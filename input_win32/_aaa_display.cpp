@@ -194,7 +194,7 @@ namespace windowing_win32
    //
    //      }
    //
-   //      GetScreenRect(prectangle, (int)iMonitor);
+   //      GetScreenRect(prectangle, (::i32)iMonitor);
    //
    //
    //#else
@@ -315,7 +315,7 @@ namespace windowing_win32
    //
    //      }
    //
-   //      GetWkspaceRect(prectangle, (int)iWkspace);
+   //      GetWkspaceRect(prectangle, (::i32)iWkspace);
    //
    //
    //      //      prectangle->top += ::mac::get_system_main_menu_bar_height();
@@ -534,7 +534,7 @@ namespace windowing_win32
 
 #define ZONEING_COMPARE ::comparison
 
-   long long g_i_get_best_zoneing = 0;
+   ::i64 g_i_get_best_zoneing = 0;
 
 
    ::collection::index display::_get_best_zoneing(::e_display * pedisplay, ::i32_rectangle * prectangle, const ::i32_rectangle & rectangleRequest, bool bPreserveSize)
@@ -552,7 +552,7 @@ namespace windowing_win32
 
       auto psystem = system();
 
-      double dMargin = psystem->m_dDpi;
+      ::f64 dMargin = psystem->m_dDpi;
 
       if (ZONEING_COMPARE::is_equal(rectangle.top, rectangleWkspace.top, dMargin, !(edisplayPrevious & e_display_top)))
       {
@@ -820,7 +820,7 @@ namespace windowing_win32
 
       ::collection::index iMatchingMonitor = -1;
 
-      long long iBestArea = -1;
+      ::i64 iBestArea = -1;
 
       ::i32_rectangle rectangleMatch;
 
@@ -918,7 +918,7 @@ namespace windowing_win32
 
       ::collection::index iMatchingWkspace = -1;
 
-      long long iBestArea = -1;
+      ::i64 iBestArea = -1;
 
       ::i32_rectangle rectangleMatch;
 
@@ -1037,7 +1037,7 @@ namespace windowing_win32
 
          auto hdc = create_compatible_graphics(NULL);
 
-         m_dpi = (float)GetDeviceCaps(hdc, LOGPIXELSX);
+         m_dpi = (::f32)GetDeviceCaps(hdc, LOGPIXELSX);
 
          ::DeleteDC(hdc);
 

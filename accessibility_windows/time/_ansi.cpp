@@ -13,7 +13,7 @@ namespace str
 
       character_count nLen = utf_to_utf_length(bstr, pchData, nDataLength);
 
-      bstr = ::SysAllocStringLen(nullptr, (unsigned int)nLen);
+      bstr = ::SysAllocStringLen(nullptr, (::u32)nLen);
 
       if (bstr != nullptr)
       {
@@ -33,7 +33,7 @@ namespace str
 
       character_count nLen = utf_to_utf_length(pbstr, pchData, nDataLength);
 
-      bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (unsigned int)nLen) != 0;
+      bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (::u32)nLen) != 0;
 
       if (bSuccess)
       {
@@ -50,7 +50,7 @@ namespace str
    inline wstring bstr_to_wstr(BSTR bstr)
    {
 
-      int len = ::SysStringLen(bstr);
+      ::i32 len = ::SysStringLen(bstr);
 
       wstring wstr((wchar_t *)bstr, len);
 
@@ -69,7 +69,7 @@ namespace str
    }
 
 
-   unsigned int format_message(unsigned int dwFlags, const void * pSource, unsigned int dwMessageID, unsigned int dwLanguageID, ::ansi_character * pszBuffer, unsigned int nSize, va_list * pArguments) noexcept
+   ::u32 format_message(::u32 dwFlags, const void * pSource, ::u32 dwMessageID, ::u32 dwLanguageID, ::ansi_character * pszBuffer, ::u32 nSize, va_list * pArguments) noexcept
    {
 
        return ::FormatMessageA(dwFlags, pSource, dwMessageID, dwLanguageID, pszBuffer, nSize, pArguments);
@@ -77,7 +77,7 @@ namespace str
    }
 
    
-//    unsigned int xxxget_environment_variable(const_char_pointer pszVar, ::ansi_character * pszBuffer, unsigned int dwSize)
+//    ::u32 xxxget_environment_variable(const_char_pointer pszVar, ::ansi_character * pszBuffer, ::u32 dwSize)
 //    {
 
 // #ifdef UNIVERSAL_WINDOWS
@@ -104,13 +104,13 @@ namespace str
 //             else
 //             {
 
-//                return (unsigned int)strlen(pszEnv);
+//                return (::u32)strlen(pszEnv);
 
 //             }
 
 //          }
 
-//          return (unsigned int)strlen(ansi_count_copy(pszBuffer, pszEnv, dwSize));
+//          return (::u32)strlen(ansi_count_copy(pszBuffer, pszEnv, dwSize));
 
 // #endif
 

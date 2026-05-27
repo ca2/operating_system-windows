@@ -65,8 +65,8 @@ TCHAR *expand_environment_string(TCHAR *string) {
   environment or erase all the variables in the block from the current
   environment.
 */
-static int set_environment_block(TCHAR *env, bool set) {
-  int ret = 0;
+static ::i32 set_environment_block(TCHAR *env, bool set) {
+  ::i32 ret = 0;
 
   TCHAR *s, *t;
   for (s = env; *s; s++) {
@@ -94,20 +94,20 @@ static int set_environment_block(TCHAR *env, bool set) {
   return ret;
 }
 
-int set_environment_block(TCHAR *env) {
+::i32 set_environment_block(TCHAR *env) {
   return set_environment_block(env, true);
 }
 
-static int unset_environment_block(TCHAR *env) {
+static ::i32 unset_environment_block(TCHAR *env) {
   return set_environment_block(env, false);
 }
 
 /* Remove all variables from the process environment. */
-int clear_environment() {
+::i32 clear_environment() {
   TCHAR *rawenv = GetEnvironmentStrings();
   TCHAR *env = useful_environment(rawenv);
 
-  int ret = unset_environment_block(env);
+  ::i32 ret = unset_environment_block(env);
 
   if (rawenv) FreeEnvironmentStrings(rawenv);
 
@@ -115,8 +115,8 @@ int clear_environment() {
 }
 
 /* Set the current environment to exactly duplicate an environment block. */
-int duplicate_environment(TCHAR *rawenv) {
-  int ret = clear_environment();
+::i32 duplicate_environment(TCHAR *rawenv) {
+  ::i32 ret = clear_environment();
   TCHAR *env = useful_environment(rawenv);
   ret += set_environment_block(env);
   return ret;
@@ -128,7 +128,7 @@ int duplicate_environment(TCHAR *rawenv) {
             0 if environment is OK.
            -1 on error.
 */
-int test_environment(TCHAR *env) {
+::i32 test_environment(TCHAR *env) {
   TCHAR path[PATH_LENGTH];
   GetModuleFileName(0, path, _countof(path));
   STARTUPINFO si;

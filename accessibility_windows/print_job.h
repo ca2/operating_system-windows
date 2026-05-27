@@ -15,7 +15,7 @@ namespace acme_windows
 	   virtual ~print_task();
 
 
-	   virtual int run();
+	   virtual ::i32 run();
 
 	};
 

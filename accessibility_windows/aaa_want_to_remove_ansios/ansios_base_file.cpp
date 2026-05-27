@@ -68,7 +68,7 @@ int_bool file_set_length(const scoped_string & strName, size_t iSize)
 
 
 
-int_bool file_system()->exists(const char * path1)
+int_bool file_system()->exists(const ::i8 * path1)
 {
 
    // dedicaverse stat -> Sir And Arthur - Cesar Serenato
@@ -87,7 +87,7 @@ int_bool file_system()->exists(const char * path1)
 
 
 
-int_bool file_system()->put_contents(const char * path, const char * contents, ::collection::count len)
+int_bool file_system()->put_contents(const ::i8 * path, const ::i8 * contents, ::collection::count len)
 {
 
    bool bOk = false;
@@ -133,7 +133,7 @@ pacmedir->create(::file_path_folder(path));
 
       }
 
-      size_t dwWritten = ::fwrite(contents, 1, (unsigned int) dwWrite, file);
+      size_t dwWritten = ::fwrite(contents, 1, (::u32) dwWrite, file);
 
       bOk = dwWritten == dwWrite;
 
@@ -153,7 +153,7 @@ pacmedir->create(::file_path_folder(path));
 
 
 
-string file_system()->as_string(const char * path)
+string file_system()->as_string(const ::i8 * path)
 {
 
    string str;
@@ -166,7 +166,7 @@ string file_system()->as_string(const char * path)
 
    ::collection::count iSize = FILE_get_size(f);
 
-   char * lpsz = str.GetBufferSetLength(iSize);
+   ::i8 * lpsz = str.GetBufferSetLength(iSize);
 
    ::collection::count iRead = fread(lpsz, 1,iSize, f);
 
@@ -181,7 +181,7 @@ string file_system()->as_string(const char * path)
 }
 
 
-memory file_as_memory(const char * path)
+memory file_as_memory(const ::i8 * path)
 {
 
    memory mem;
@@ -193,7 +193,7 @@ memory file_as_memory(const char * path)
 }
 
 
-bool file_as_memory(memory_base & memory, const char * path)
+bool file_as_memory(memory_base & memory, const ::i8 * path)
 {
 
    FILE * f = fopen(path, "rb");
@@ -208,9 +208,9 @@ bool file_as_memory(memory_base & memory, const char * path)
 
       mem.set_size(1024 * 16);
 
-      int iRead;
+      ::i32 iRead;
 
-      while((iRead = (int) fread(mem.get_data(),1,mem.get_size(),f)) > 0)
+      while((iRead = (::i32) fread(mem.get_data(),1,mem.get_size(),f)) > 0)
       {
 
          memory.append(mem.get_data(), iRead);
@@ -233,7 +233,7 @@ bool file_as_memory(memory_base & memory, const char * path)
 
 }
 
-memsize file_as_memory(const char * path, void * p, memsize s)
+memsize file_as_memory(const ::i8 * path, void * p, memsize s)
 {
    FILE * f = fopen(path, "rb");
    if (f == nullptr)
@@ -264,7 +264,7 @@ memsize file_as_memory(const char * path, void * p, memsize s)
 
 
 
-uint64_t file_length_dup(const char * path)
+uint64_t file_length_dup(const ::i8 * path)
 {
 
    struct stat st;
@@ -369,7 +369,7 @@ CLASS_DECL_ACME string file_get_mozilla_firefox_plugin_container_path()
 
 
 
-int_bool file_delete(const char * lpszFileName)
+int_bool file_delete(const ::i8 * lpszFileName)
 {
 
 
@@ -440,10 +440,10 @@ FILE * ansi_fopen(const scoped_string & str,const scoped_string & strMode)
 }
 
 
-int ansi_file_flag(int iFlag)
+::i32 ansi_file_flag(::i32 iFlag)
 {
 
-   int i = 0;
+   ::i32 i = 0;
 
    if(iFlag & ::file::e_open_binary)
    {
@@ -489,7 +489,7 @@ void ansi_unlink(const scoped_string & str)
 }
 
 
-int_bool is_dir(const char * path1)
+int_bool is_dir(const ::i8 * path1)
 {
 
    struct stat st;
@@ -531,7 +531,7 @@ string file_first_line_dup(const ::scoped_string & scopedstrPath)
    try
    {
 
-      int c;
+      ::i32 c;
 
       do
       {
@@ -542,7 +542,7 @@ string file_first_line_dup(const ::scoped_string & scopedstrPath)
 
          if (c == '\r') break;
 
-         line += (char) c;
+         line += (::i8) c;
 
       }
       while (c != EOF);

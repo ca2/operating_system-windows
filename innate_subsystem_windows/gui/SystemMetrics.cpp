@@ -22,8 +22,8 @@ namespace innate_subsystem_windows
 
      ::i32_size SystemMetrics::get_small_icon_size_in_pixels()
      {
-         int iSmallIconWidthInPixels = ::GetSystemMetrics(SM_CXSMICON);
-         int iSmallIconHeightInPixels = ::GetSystemMetrics(SM_CYSMICON);
+         ::i32 iSmallIconWidthInPixels = ::GetSystemMetrics(SM_CXSMICON);
+         ::i32 iSmallIconHeightInPixels = ::GetSystemMetrics(SM_CYSMICON);
          return {iSmallIconWidthInPixels, iSmallIconHeightInPixels};
      }
 

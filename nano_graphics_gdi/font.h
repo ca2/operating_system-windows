@@ -8,14 +8,7 @@
 #include "object.h"
 
 
-namespace windows
-{
-
-   namespace nano
-   {
-
-
-      namespace graphics
+      namespace nano_graphics_gdi
       {
 
 
@@ -32,24 +25,15 @@ namespace windows
             ~font() override;
 
 
-            void update(::nano::graphics::device* pnanodevice) override;
+            void update(::nano::graphics::context* pgraphicscontext) override;
 
 
-            static HFONT _create_point_font(int nPointSize, const ::scoped_string& scopedstrFaceName, bool bBold, bool bUnderline, HDC hdc, LOGFONTW* plf);
+            static HFONT _create_point_font(::i32 nPointSize, const ::scoped_string& scopedstrFaceName, bool bBold, bool bUnderline, HDC hdc, LOGFONTW* plf);
             static HFONT _create_point_font_indirect(LOGFONTW* pLogFont, HDC hdc);
 
          };
 
 
 
-      } // namespace graphics
-
-
-   } // namespace nano
-
-
-
-} // namespace windows
-
-
+      } // namespace nano_graphics_gdi
 

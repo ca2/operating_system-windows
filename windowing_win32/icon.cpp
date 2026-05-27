@@ -21,9 +21,9 @@
 struct MYICON_INFO
 {
 
-   int     nWidth;
-   int     nHeight;
-   int     nBitsPerPixel;
+   ::i32     nWidth;
+   ::i32     nHeight;
+   ::i32     nBitsPerPixel;
 
 };
 
@@ -98,12 +98,12 @@ uint32_t Convert16BitToARGB(uint16_t value)
 {
    return (0xFF000000 | ((value >> 7) & 0x0000F8) | ((value << 6) & 0x00F800) | ((value << 19) & 0xF80000));
 }
-uint32_t GetMaskBit(uint8_t * data, int x, int y, int w, int h)
+uint32_t GetMaskBit(uint8_t * data, ::i32 x, ::i32 y, ::i32 w, ::i32 h)
 {
    uint32_t mask_data_rowsize = (((w + 31) >> 5) * 4);
    return ((~(data[(mask_data_rowsize * ((h - 1) - y)) + (x >> 3)] >> (0x07 - (x & 0x07))) & 1) * 0xFFFFFFFF);
 }
-uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, int w, int h, uint32_t * pal)
+uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, ::i32 x, ::i32 y, ::i32 w, ::i32 h, uint32_t * pal)
 {
    uint32_t mask_data_rowsize = (((w + 31) >> 5) * 4);
    uint32_t xor_bit = (((xordata[(mask_data_rowsize * ((h - 1) - y)) + (x >> 3)] >> (0x07 - (x & 0x07))) << 1) & 2);
@@ -114,10 +114,10 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 
 
 
-//BITMAP * CreateBmp32bppFromIconResData(void * data, int size, int depth, int w, int h, int colors)
+//BITMAP * CreateBmp32bppFromIconResData(void * data, ::i32 size, ::i32 depth, ::i32 w, ::i32 h, ::i32 colors)
 //{
-//   char * pngheader = "\211PNG\r\n\032\n";
-//   char * cpd = (char *)data;
+//   ::i8 * pngheader = "\211PNG\r\n\032\n";
+//   ::i8 * cpd = (::i8 *)data;
 //   bool is_png = ((cpd[0] == pngheader[0])
 //      && (cpd[1] == pngheader[1])
 //      && (cpd[2] == pngheader[2])
@@ -145,8 +145,8 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //      case 32:
 //      {
 //         uint32_t * src = (uint32_t *)(((uint8_t *)data) + ignore_size);
-//         for (int yy = h - 1; yy >= 0; --yy) {
-//            for (int xx = 0; xx < w; ++xx) {
+//         for (::i32 yy = h - 1; yy >= 0; --yy) {
+//            for (::i32 xx = 0; xx < w; ++xx) {
 //               _putpixel32(bmp, xx, yy, src[0]);
 //               src++;
 //            }
@@ -159,12 +159,12 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //      {
 //         uint32_t * src = (uint32_t *)(((uint8_t *)data) + ignore_size);
 //         uint8_t * bitmask = (uint8_t *)(((uint8_t *)data) + ignore_size + color_data_size);
-//         int padding_checker = 0;
-//         for (int yy = h - 1; yy >= 0; --yy) {
-//            for (int xx = 0; xx < w; ++xx) {
+//         ::i32 padding_checker = 0;
+//         for (::i32 yy = h - 1; yy >= 0; --yy) {
+//            for (::i32 xx = 0; xx < w; ++xx) {
 //               _putpixel32(bmp, xx, yy, ((src[0] & 0x00FFFFFF) | 0xFF000000) & GetMaskBit(bitmask, xx, yy, w, h));
 //               src++;
-//               src = (uint32_t *)(((uint8_t *)src) - 1); //go back a unsigned char due to packing
+//               src = (uint32_t *)(((uint8_t *)src) - 1); //go back a ::u8 due to packing
 //               padding_checker += 3;
 //               padding_checker &= 3;
 //            }
@@ -184,9 +184,9 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //         //Note: there might be a color table present! ignore it.
 //         uint16_t * src = (uint16_t *)(((uint8_t *)data) + ignore_size + (colors << 2));
 //         uint8_t * bitmask = (uint8_t *)(((uint8_t *)data) + ignore_size + (colors << 2) + color_data_size);
-//         int padding_checker = 0;
-//         for (int yy = h - 1; yy >= 0; --yy) {
-//            for (int xx = 0; xx < w; ++xx) {
+//         ::i32 padding_checker = 0;
+//         for (::i32 yy = h - 1; yy >= 0; --yy) {
+//            for (::i32 xx = 0; xx < w; ++xx) {
 //               _putpixel32(bmp, xx, yy, Convert16BitToARGB(src[0]) & GetMaskBit(bitmask, xx, yy, w, h));
 //               src++;
 //               padding_checker += 2;
@@ -210,9 +210,9 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //         uint8_t * src = (((uint8_t *)data) + ignore_size + (colors << 2));
 //         uint32_t * pal = ((uint32_t *)(((uint8_t *)data) + ignore_size));
 //         uint8_t * bitmask = (uint8_t *)(((uint8_t *)data) + ignore_size + (colors << 2) + color_data_size);
-//         int padding_checker = 0;
-//         for (int yy = h - 1; yy >= 0; --yy) {
-//            for (int xx = 0; xx < w; ++xx) {
+//         ::i32 padding_checker = 0;
+//         for (::i32 yy = h - 1; yy >= 0; --yy) {
+//            for (::i32 xx = 0; xx < w; ++xx) {
 //               uint8_t color = src[0];
 //               if (color < colors) {
 //                  _putpixel32(bmp, xx, yy, (pal[color] | 0xFF000000) & GetMaskBit(bitmask, xx, yy, w, h));
@@ -242,9 +242,9 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //         uint8_t * src = (((uint8_t *)data) + ignore_size + (colors << 2));
 //         uint32_t * pal = ((uint32_t *)(((uint8_t *)data) + ignore_size));
 //         uint8_t * bitmask = (uint8_t *)(((uint8_t *)data) + ignore_size + (colors << 2) + color_data_size);
-//         int padding_checker = 0;
-//         for (int yy = h - 1; yy >= 0; --yy) {
-//            for (int xx = 0; xx < w; ++xx) {
+//         ::i32 padding_checker = 0;
+//         for (::i32 yy = h - 1; yy >= 0; --yy) {
+//            for (::i32 xx = 0; xx < w; ++xx) {
 //               uint8_t color = src[0];
 //               if (xx & 1) color = (color & 0x0F);
 //               else       color = ((color >> 4) & 0x0F);
@@ -261,7 +261,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //                  padding_checker &= 3;
 //               }
 //            }
-//            //if the pointer hasn't incremented to the next unsigned char yet, do so.
+//            //if the pointer hasn't incremented to the next ::u8 yet, do so.
 //            if (w & 1) //odd width
 //            {
 //               src++;
@@ -287,8 +287,8 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //         uint8_t * bitmaskXOR = (uint8_t *)(((uint8_t *)data) + ignore_size + (colors << 2));
 //         uint8_t * bitmaskAND = (uint8_t *)(((uint8_t *)data) + ignore_size + (colors << 2) + color_data_size);
 //         uint32_t  ret_colors[4] = { pal[0] | 0xFF000000, 0x00FF00FF, pal[1] | 0xFF000000, 0x0000FF00 };
-//         for (int yy = h - 1; yy >= 0; --yy) {
-//            for (int xx = 0; xx < w; ++xx) {
+//         for (::i32 yy = h - 1; yy >= 0; --yy) {
+//            for (::i32 xx = 0; xx < w; ++xx) {
 //               _putpixel32(bmp, xx, yy, GetColorMonochrome(bitmaskXOR, bitmaskAND, xx, yy, w, h, ret_colors));
 //            }
 //         }
@@ -311,7 +311,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //      GRPICONDIR * gd = (GRPICONDIR *)LockResource(hg);
 //      if (gd->idType == 1)
 //      {
-//         for (int i = 0; i < gd->idCount; ++i)
+//         for (::i32 i = 0; i < gd->idCount; ++i)
 //         {
 //            //WARNING: The GRPICONDIRENTRY's data might be wrong!
 //            GRPICONDIRENTRY * ie = (GRPICONDIRENTRY *)&(gd->idEntries[i]);
@@ -352,7 +352,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //   ICONDIR * gd = (ICONDIR *)icon_data;
 //   if (gd->idType == 1)
 //   {
-//      for (int i = 0; i < gd->idCount; ++i)
+//      for (::i32 i = 0; i < gd->idCount; ++i)
 //      {
 //         //WARNING: The ICONDIRENTRY's data might be wrong!
 //         DWORD offset = gd->idEntries[i].dwImageOffset;
@@ -374,7 +374,7 @@ array< ::i32_size > ico_file_sizes(const ::block & block)
    ICONDIR * gd = (ICONDIR *)block.data();
    if (gd->idType == 1)
    {
-      for (int i = 0; i < gd->idCount; ++i)
+      for (::i32 i = 0; i < gd->idCount; ++i)
       {
          //WARNING: The ICONDIRENTRY's data might be wrong!
          DWORD offset = gd->idEntries[i].dwImageOffset;
@@ -387,10 +387,10 @@ array< ::i32_size > ico_file_sizes(const ::block & block)
          }
 
 
-         auto buf = (unsigned char *)(((uint8_t *)block.data()) + ((uint32_t)offset));
+         auto buf = (::u8 *)(((uint8_t *)block.data()) + ((uint32_t)offset));
 
-         int w;
-         int h;
+         ::i32 w;
+         ::i32 h;
 
          if (buf[0] == 0x89 && buf[1] == 'P' && buf[2] == 'N' && buf[3] == 'G' && buf[4] == 0x0D && buf[5] == 0x0A 
             && buf[6] == 0x1A && buf[7] == 0x0A
@@ -424,7 +424,7 @@ array< ::i32_size > ico_file_sizes(const ::block & block)
 }
 
 
-//vector< BITMAP * > UnearthIconResource(string & file, bool self_refrence, bool res_index, int index)
+//vector< BITMAP * > UnearthIconResource(string & file, bool self_refrence, bool res_index, ::i32 index)
 //{
 //#define LOAD_IGNORE_CODE_AUTHZ_LEVEL 0x00000010
 //
@@ -436,7 +436,7 @@ array< ::i32_size > ico_file_sizes(const ::block & block)
 //
 //   //extract and 'demangle' the file extension by convertng to lowercase.
 //   string ext = get_file_extension(file.c_str());
-//   for (int i = 0; i < ext.size(); ++i) ext[i] = tolower(ext[i]);
+//   for (::i32 i = 0; i < ext.size(); ++i) ext[i] = tolower(ext[i]);
 //
 //   bool is_icl = false;
 //   if ((ext == "exe") || (ext == "dll") || (ext == "scr") || (is_icl = (ext == "icl")))
@@ -470,7 +470,7 @@ array< ::i32_size > ico_file_sizes(const ::block & block)
 //               //The icon we want is the (index)'th icon in the file
 //               //We must preform a manual search for the resource ID!
 //               //WARNING: Using EnumResourceNames() *DOES NOT WORK PROPERLY* for this.
-//               for (int nicon = 0, i = 0; i < 0x8000; ++i)
+//               for (::i32 nicon = 0, i = 0; i < 0x8000; ++i)
 //               {
 //                  bool is_single_icon = false;
 //                  hr = FindResource(hm, MAKEINTRESOURCE(i), RT_GROUP_ICON);
@@ -492,7 +492,7 @@ array< ::i32_size > ico_file_sizes(const ::block & block)
 //            //Happens when location is a %1.
 //            //We must preform a manual search for the resource ID!
 //            //WARNING: Using EnumResourceNames() *DOES NOT WORK PROPERLY* for this.
-//            for (int i = 0; i < 0x8000; ++i)
+//            for (::i32 i = 0; i < 0x8000; ++i)
 //            {
 //               bool is_single_icon = false;
 //               hr = FindResource(hm, MAKEINTRESOURCE(i), RT_GROUP_ICON);
@@ -825,7 +825,7 @@ namespace windowing_win32
    }
 
 
-   void icon::get_sizes(::int_size_array & a)
+   void icon::get_sizes(::i32_size_array & a)
    {
 
       a.erase_all();
@@ -942,10 +942,10 @@ namespace windowing_win32
             HGDIOBJ oldMask = SelectObject(hMaskDC, iconInfo.hbmMask);
 
 
-            for (int y = 0; y < size.cy; ++y)
+            for (::i32 y = 0; y < size.cy; ++y)
             {
 
-               for (int x = 0; x < size.cx; ++x)
+               for (::i32 x = 0; x < size.cx; ++x)
                {
 
                   // Get mask pixel
@@ -992,12 +992,12 @@ namespace windowing_win32
 
          //pixmap.map();
 
-         //int area = size.area();
+         //::i32 area = size.area();
 
          //auto pc = pixmap.colorref();
-         //unsigned char * pA = &((unsigned char *)pc)[3];
+         //::u8 * pA = &((::u8 *)pc)[3];
 
-         //for (int i = 0; i < area; i++)
+         //for (::i32 i = 0; i < area; i++)
          //{
          //   if (*pc != 0)
          //   {
@@ -1016,9 +1016,9 @@ namespace windowing_win32
          //{
 
          //   pc = pixmap.colorref();
-         //   pA = &((unsigned char *)pc)[3];
+         //   pA = &((::u8 *)pc)[3];
 
-         //   for (int i = 0; i < area; i++)
+         //   for (::i32 i = 0; i < area; i++)
          //   {
          //      if (*pc != 0)
          //      {
@@ -1121,7 +1121,7 @@ MYICON_INFO MyGetIconInfo(HICON hIcon)
 
    if (info.hbmColor)
    {
-      const int nWrittenBytes = GetObject(info.hbmColor, sizeof(bmp), &bmp);
+      const ::i32 nWrittenBytes = GetObject(info.hbmColor, sizeof(bmp), &bmp);
       if (nWrittenBytes > 0)
       {
          myinfo.nWidth = bmp.bmWidth;
@@ -1132,7 +1132,7 @@ MYICON_INFO MyGetIconInfo(HICON hIcon)
    else if (info.hbmMask)
    {
       // Icon has no color plane, image data stored in mask
-      const int nWrittenBytes = GetObject(info.hbmMask, sizeof(bmp), &bmp);
+      const ::i32 nWrittenBytes = GetObject(info.hbmMask, sizeof(bmp), &bmp);
       if (nWrittenBytes > 0)
       {
          myinfo.nWidth = bmp.bmWidth;

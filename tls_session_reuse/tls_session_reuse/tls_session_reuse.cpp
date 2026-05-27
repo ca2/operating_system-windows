@@ -12,7 +12,7 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 
-int main(int argc, char **argv)
+::i32 main(::i32 argc, ::i8 **argv)
 {
    WSADATA wsadata;
    memory_set(&wsadata, 0, sizeof(wsadata));
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
    SSL                *ssl = nullptr;
    SSL_CTX            *ctx = nullptr;
    SSL_SESSION        *session = nullptr;
-   int                 clntfd = -1;
+   ::i32                 clntfd = -1;
    struct sockaddr_in  clnt;
    size_t              i;
 

@@ -44,7 +44,7 @@ namespace subsystem_windows
       }
 
 
-      void AnonymousPipeFactory::initialize_anonymous_pipe_factory(unsigned int bufferSize,
+      void AnonymousPipeFactory::initialize_anonymous_pipe_factory(::u32 bufferSize,
                                                  ::subsystem::LogWriter *plogwriter)
       //:
         //m_log(log)
@@ -54,7 +54,7 @@ namespace subsystem_windows
          m_plogwriter =  plogwriter;
       }
 
-      // void AnonymousPipeFactory::init(unsigned int bufferSize,
+      // void AnonymousPipeFactory::init(::u32 bufferSize,
       //                                      ::subsystem::LogWriter *plogwriter)
       // {
       //    m_bufferSize = bufferSize;

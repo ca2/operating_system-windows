@@ -6,16 +6,9 @@
 //#include "_nano.h"
 
 
-namespace windows
-{
 
 
-
-   namespace nano
-   {
-
-
-      namespace graphics
+      namespace nano_graphics_gdi
       {
 
          brush::brush()
@@ -32,7 +25,7 @@ namespace windows
          }
 
 
-         void brush::update(::nano::graphics::device* pnanodevice)
+         void brush::update(::nano::graphics::context* pgraphicscontext)
          {
 
             if (m_bModified)
@@ -50,14 +43,5 @@ namespace windows
 
 
 
-      } // namespace graphics
-
-
-   } // namespace nano
-
-
-} // namespace windows
-
-
-
+      } // namespace nano_graphics_gdi
 

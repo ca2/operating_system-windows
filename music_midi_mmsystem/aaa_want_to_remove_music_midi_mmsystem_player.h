@@ -31,26 +31,26 @@ namespace music
             virtual void install_message_routing(::channel * psender) override;
 
 
-            virtual bool PlayRate(double dRate = 0.0, unsigned int dwEllapse = (unsigned int) -1) override;
-            virtual bool Play(::duration tickStart, unsigned int dwEllapse = (unsigned int)-1) override;
+            virtual bool PlayRate(::f64 dRate = 0.0, ::u32 dwEllapse = (::u32) -1) override;
+            virtual bool Play(::duration tickStart, ::u32 dwEllapse = (::u32)-1) override;
 
             virtual bool init_thread() override;
             virtual void term_thread() override;
             virtual void pre_translate_message(::message::message * pmessage) override;
             virtual void OnMmsgDone(::music::midi::sequence *pSeq) override;
             //virtual void SaveFile(const ::scoped_string & scopedstrPathName) override;
-            virtual void SetPosition(double dRate) override;
+            virtual void SetPosition(::f64 dRate) override;
             virtual void pause() override;
             virtual void close_file() override;
-            virtual bool ExecuteCommand(::music::midi::enum_command ecommand, unsigned int dwEllapse) override;
+            virtual bool ExecuteCommand(::music::midi::enum_command ecommand, ::u32 dwEllapse) override;
             virtual void OnMidiOutDeviceChange() override;
 
             //virtual var get_midi_out_device() override;
             virtual void PostNotifyEvent(::music::midi::e_notify_event ehappening) override;
 
-            virtual ::duration RateToTicks(double dRate) override;
+            virtual ::duration RateToTicks(::f64 dRate) override;
 
-            virtual void     SetTempoShift(double dTempoShift) override;
+            virtual void     SetTempoShift(::f64 dTempoShift) override;
 
             //virtual bool set_midi_out_device(var varDevice) override;
 

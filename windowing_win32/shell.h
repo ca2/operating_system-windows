@@ -74,29 +74,29 @@ namespace windowing_win32
 
       bool _internal_get_file_image(_get_file_image_ & getfileimage);
 
-      //int get_image_by_file_extension(image_key & key);
+      //::i32 get_image_by_file_extension(image_key & key);
 
       void get_image_by_file_extension(_get_file_image_ & getfileimage);
 
 
-      void add_system_icon(int iIcon, _get_file_image_ & getfileimage);
-      //int add_icon_info(int iSize, SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, ::color::color crBk, bool & bUsedImageList16, bool & bUsedImageList48, int iImage);
-      void add_system_icon(int iSize, int iIcon, _get_file_image_ & getfileimage);
+      void add_system_icon(::i32 iIcon, _get_file_image_ & getfileimage);
+      //::i32 add_icon_info(::i32 iSize, SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, ::color::color crBk, bool & bUsedImageList16, bool & bUsedImageList48, ::i32 iImage);
+      void add_system_icon(::i32 iSize, ::i32 iIcon, _get_file_image_ & getfileimage);
 
 
-      //int get_file_image(image_key key, const unichar * pcszExtra, ::color::color crBk);
+      //::i32 get_file_image(image_key key, const unichar * pcszExtra, ::color::color crBk);
 
 
 
 
 
-      ///         virtual int get_extension_image(const ::scoped_string & scopedstrExtension, e_file_attribute eattribute, e_icon eicon, ::color::color crBk = 0) override;
+      ///         virtual ::i32 get_extension_image(const ::scoped_string & scopedstrExtension, e_file_attribute eattribute, e_icon eicon, ::color::color crBk = 0) override;
 
-      void add_icon(int iSize, HICON hicon, _get_file_image_ & getfileimage);
+      void add_icon(::i32 iSize, HICON hicon, _get_file_image_ & getfileimage);
 
       void set_icon(const ::file::path & path, ::user::shell::_get_file_image_ & getfileimageParam);
 
-      void add_system_icon(int iSize, IImageList * plist, int iIcon, _get_file_image_ & getfileimage);
+      void add_system_icon(::i32 iSize, IImageList * plist, ::i32 iIcon, _get_file_image_ & getfileimage);
 
 
 
@@ -111,7 +111,7 @@ namespace windowing_win32
 
       void destroy() override;
 
-      //int shell::add_hover_image(int iSize, int iImage, ::color::color crBk)
+      //::i32 shell::add_hover_image(::i32 iSize, ::i32 iImage, ::color::color crBk)
 
    };
 

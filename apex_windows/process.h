@@ -31,7 +31,7 @@ namespace apex_windows
 
       virtual bool has_exited() override;
 
-      virtual bool synch_elevated(const ::scoped_string & scopedstrCmdLine,int iShow,const class time & timeTimeOut,bool * pbTimeOut) override;
+      virtual bool synch_elevated(const ::scoped_string & scopedstrCmdLine,::i32 iShow,const class time & timeTimeOut,bool * pbTimeOut) override;
 
       virtual bool kill() override;
 

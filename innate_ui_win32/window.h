@@ -25,10 +25,10 @@ namespace innate_ui_win32
 
       //HWND m_hwnd;
       //HMENU m_hmenuSystem;
-      int m_iChildIdSeed;
-      int m_iCreateStyle;
-      //double m_dFontSizeEm = 1.0;
-      //int m_iFontWeight = 400;
+      ::i32 m_iChildIdSeed;
+      ::i32 m_iCreateStyle;
+      //::f64 m_dFontSizeEm = 1.0;
+      //::i32 m_iFontWeight = 400;
 
 
       window();
@@ -64,26 +64,26 @@ namespace innate_ui_win32
 
       ::operating_system::window operating_system_window() const override;
 
-      virtual ::pointer < window > _get_child_with_id(int iId);
+      virtual ::pointer < window > _get_child_with_id(::i32 iId);
       bool on_window_procedure(::lresult & lresult, unsigned message, ::wparam wparam, ::lparam lparam) override;
       //virtual LRESULT _window_procedure(UINT message, WPARAM wparam, LPARAM lparam);
 
       virtual bool _on_command();
 
-      virtual int _get_id();
+      virtual ::i32 _get_id();
 
       void defer_show_system_menu(::user::mouse * pmouse) override;
 
 
-      HWND _create_subclassed_window(DWORD dwExStyle, LPCWSTR lpClassName, LPCWSTR lpWindowName, DWORD dwStyle, int X,
-                                     int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, HINSTANCE hInstance,
+      HWND _create_subclassed_window(DWORD dwExStyle, LPCWSTR lpClassName, LPCWSTR lpWindowName, DWORD dwStyle, ::i32 X,
+                                     ::i32 Y, ::i32 nWidth, ::i32 nHeight, HWND hWndParent, HMENU hMenu, HINSTANCE hInstance,
                                      LPVOID lpParam);
 
       
       static LRESULT CALLBACK _static_subclass_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam,
                                                  UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
 
-      virtual bool _subclass_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
+      virtual bool _subclass_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam);
 
 
       virtual void defer_set_scaled_font();

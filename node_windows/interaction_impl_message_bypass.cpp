@@ -5,26 +5,26 @@
 ////#include "aura/message.h"
 //
 //
-//unsigned int g_puiaMessageTrace[] =
+//::u32 g_puiaMessageTrace[] =
 //{
 //   ::user::e_message_move,
 //   ::user::e_message_size,
 //   ::user::e_message_activate,
 //   ::user::e_message_set_focus,
 //   ::user::e_message_kill_focus,
-//   (unsigned int)-1
+//   (::u32)-1
 //};
 //
-//CLASS_DECL_APEX string get_message_text(unsigned int uMessage, bool bWithNumbers);
+//CLASS_DECL_APEX string get_message_text(::u32 uMessage, bool bWithNumbers);
 //
 //
-//extern unsigned int g_puiaMessageMouseMove[];
-//extern unsigned int g_puiaMessageWindowDeactivating[];
-//extern unsigned int g_puiaMessageWindowActivating[];
-//extern unsigned int f[];
-//extern unsigned int g_puiaMessageWindowCreated[];
-//extern unsigned int g_puiaMessageInputLanguageChange[];
-//extern unsigned int g_puiaMessageTrace[];
+//extern ::u32 g_puiaMessageMouseMove[];
+//extern ::u32 g_puiaMessageWindowDeactivating[];
+//extern ::u32 g_puiaMessageWindowActivating[];
+//extern ::u32 f[];
+//extern ::u32 g_puiaMessageWindowCreated[];
+//extern ::u32 g_puiaMessageInputLanguageChange[];
+//extern ::u32 g_puiaMessageTrace[];
 //
 //#define STATE_WINDOW_CREATION 0
 //#define STATE_WINDOW_CREATED 1
@@ -32,10 +32,10 @@
 //#define STATE_WINDOW_DEACTIVATING 3
 //#define STATE_WINDOW_ACTIVATING 4
 //
-//bool __windows_message_bypass(HWND oswindow, unsigned int message, wparam wparam, lparam lparam, lresult & lresult, unsigned int * puia)
+//bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult, ::u32 * puia)
 //{
 //
-//   for (int i = 0; puia[i] != -1; i++)
+//   for (::i32 i = 0; puia[i] != -1; i++)
 //   {
 //
 //      if (message == puia[i])
@@ -64,7 +64,7 @@
 //{
 //
 //
-//   bool interaction_impl::__windows_message_bypass(HWND oswindow, unsigned int message, wparam wparam, lparam lparam, lresult & lresult)
+//   bool interaction_impl::__windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult)
 //   {
 //
 //      //if (message == ::user::e_message_mouse_move)
@@ -225,7 +225,7 @@
 //
 //      bool bTrace = false;
 //
-//      for (int i = 0; g_puiaMessageTrace[i] != -1; i++)
+//      for (::i32 i = 0; g_puiaMessageTrace[i] != -1; i++)
 //      {
 //
 //         if (message == g_puiaMessageTrace[i])

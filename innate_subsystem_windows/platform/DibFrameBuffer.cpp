@@ -72,29 +72,29 @@
 //       }
 //
 //       bool DibFramebuffer::copyFrom(const ::i32_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
-//                                     int srcX, int srcY)
+//                                     ::i32 srcX, ::i32 srcY)
 //       {
 //          return m_fb.copyFrom(rectangleTarget, pframebufferSource, srcX, srcY);
 //       }
 //
-//       bool DibFramebuffer::copyFrom(const Framebuffer * pframebufferSource, int srcX, int srcY)
+//       bool DibFramebuffer::copyFrom(const Framebuffer * pframebufferSource, ::i32 srcX, ::i32 srcY)
 //       {
 //          return m_fb.copyFrom(pframebufferSource, srcX, srcY);
 //       }
 //
 //       bool DibFramebuffer::overlay(const ::i32_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
-//                                    int srcX, int srcY, const char *andMask)
+//                                    ::i32 srcX, ::i32 srcY, const ::i8 *andMask)
 //       {
 //          return m_fb.overlay(rectangleTarget, pframebufferSource, srcX, srcY, andMask);
 //       }
 //
-//       void DibFramebuffer::move(const ::i32_rectangle &rectangleTarget, const int srcX, const int srcY)
+//       void DibFramebuffer::move(const ::i32_rectangle &rectangleTarget, const ::i32 srcX, const ::i32 srcY)
 //       {
 //          m_fb.move(rectangleTarget, srcX, srcY);
 //       }
 //
 //       bool DibFramebuffer::cmpFrom(const ::i32_rectangle &rectangleTarget, const Framebuffer * pframebufferSource,
-//                                    const int srcX, const int srcY)
+//                                    const ::i32 srcX, const ::i32 srcY)
 //       {
 //          return m_fb.cmpFrom(rectangleTarget, pframebufferSource, srcX, srcY);
 //       }
@@ -169,17 +169,17 @@
 //          return m_fb.getBuffer();
 //       }
 //
-//       void *DibFramebuffer::getBufferPtr(int x, int y) const
+//       void *DibFramebuffer::getBufferPtr(::i32 x, ::i32 y) const
 //       {
 //          return m_fb.getBufferPtr(x, y);
 //       }
 //
-//       inline int DibFramebuffer::getBufferSize() const
+//       inline ::i32 DibFramebuffer::getBufferSize() const
 //       {
 //          return m_fb.getBufferSize();
 //       }
 //
-//       inline int DibFramebuffer::getBytesPerRow() const
+//       inline ::i32 DibFramebuffer::getBytesPerRow() const
 //       {
 //          return m_fb.getBytesPerRow();
 //       }

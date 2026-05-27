@@ -47,7 +47,7 @@ public:
       ptimer->on_millis_timer_step();
    }
 
-   bool wait(int class ::time)
+   bool wait(::i32 class ::time)
    {
 
       ::ResetEvent(gDoneEvent);
@@ -67,7 +67,7 @@ public:
 
       return true;
    }
-   bool timer(int class ::time)
+   bool timer(::i32 class ::time)
    {
 
       ::ResetEvent(gDoneEvent);
@@ -138,7 +138,7 @@ namespace multimedia
 
             run_step_thread(out * pout);
 
-            virtual int run();
+            virtual ::i32 run();
 
          };
 
@@ -148,7 +148,7 @@ namespace multimedia
 
          run_step_thread *                m_prunstepthread;
 
-         int                              m_iBuffer;
+         ::i32                              m_iBuffer;
 
          WAVEFORMATEX                     m_waveformatex;
 
@@ -164,11 +164,11 @@ namespace multimedia
 
          virtual class ::time out_get_time();
          class ::time out_get_time();
-         virtual void out_buffer_ready(int iBuffer);
+         virtual void out_buffer_ready(::i32 iBuffer);
          //virtual void out_buffer_ready(LPWAVEHDR lpwavehdr);
 
-         virtual void     out_open(::thread * pthreadCallback, int iBufferCount, int iBufferSampleCount);
-         virtual void     out_open_ex(::thread * pthreadCallback, int iBufferCount, int iBufferSampleCount, unsigned int uiSamplesPerSec, unsigned int uiChannelCount, unsigned int uiBitsPerSample);
+         virtual void     out_open(::thread * pthreadCallback, ::i32 iBufferCount, ::i32 iBufferSampleCount);
+         virtual void     out_open_ex(::thread * pthreadCallback, ::i32 iBufferCount, ::i32 iBufferSampleCount, ::u32 uiSamplesPerSec, ::u32 uiChannelCount, ::u32 uiBitsPerSample);
          virtual void     out_stop();
          virtual void     out_close();
          virtual void     out_pause();
@@ -177,23 +177,23 @@ namespace multimedia
          //HWAVEOUT out_get_safe_HWAVEOUT();
 
          virtual void out_on_playback_end();
-         virtual void out_free(int iBuffer);
+         virtual void out_free(::i32 iBuffer);
          //virtual void out_free(LPWAVEHDR lpwavehdr);
 
          virtual bool initialize_thread() override;
-         virtual int exit_instance();
+         virtual ::i32 exit_instance();
 
-         virtual int run();
+         virtual ::i32 run();
 
          //DECLARE_MESSAGE_HANDLER(OnMultimediaOpen);
          //DECLARE_MESSAGE_HANDLER(OnMultimediaDone);
          //DECLARE_MESSAGE_HANDLER(OnMultimediaClose);
 
-//         virtual void out_out_buffer_done(int iBuffer);
+//         virtual void out_out_buffer_done(::i32 iBuffer);
          //       virtual void out_out_buffer_done(LPWAVEHDR lpwavehdr);
 
          WAVEFORMATEX * wave_format();
-         //LPWAVEHDR wave_hdr(int iBuffer);
+         //LPWAVEHDR wave_hdr(::i32 iBuffer);
          virtual void out_run_step();
       };
 

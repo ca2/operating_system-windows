@@ -33,7 +33,7 @@ namespace innate_subsystem_windows
 {
 
 
-   // Pen::Pen(::innate_subsystem::enum_pennt type, int width, COLORREF color)
+   // Pen::Pen(::innate_subsystem::enum_pennt type, ::i32 width, COLORREF color)
    // : m_pen(NULL)
    // {
    //    m_pen = CreatePen(type, width, color);
@@ -64,14 +64,14 @@ namespace innate_subsystem_windows
    //
    // }
 
-   void Pen::initialize_pen(innate_subsystem::enum_pen epen, int width, const color::color& color)
+   void Pen::initialize_pen(innate_subsystem::enum_pen epen, ::i32 width, const color::color& color)
    {
 
       destroyGraphicsObject();
 
-      //m_hpen = CreatePen((int) epen, width, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+      //m_hpen = CreatePen((::i32) epen, width, RGB(color.u8_red(), color.u8_green(), color.u8_blue()));
 
-      Gdiplus::Color gdipluscolor(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue());
+      Gdiplus::Color gdipluscolor(color.u8_opacity(), color.u8_red(), color.u8_green(), color.u8_blue());
 
       m_ppen = new Gdiplus::Pen(gdipluscolor, width);
 

@@ -44,17 +44,17 @@ namespace subsystem_windows
 
 
  /*              bool operating_system_hook_on_keyboard_message(::lresult &lresult,
-                                                                          ::user::enum_message emessage, int iVkCode,
+                                                                          ::user::enum_message emessage, ::i32 iVkCode,
                                                                           ::lparam lparam) override;
 */
 
 
-      virtual bool lowLevelKeyboardHook(::lresult & lresult, int nCode,
+      virtual bool lowLevelKeyboardHook(::lresult & lresult, ::i32 nCode,
                                              WPARAM wParam,
                                              LPARAM lParam);
 
       // Hook procedure.
-      static LRESULT CALLBACK s_lowLevelKeyboardHook(int nCode,
+      static LRESULT CALLBACK s_lowLevelKeyboardHook(::i32 nCode,
                                                    WPARAM wParam,
                                                    LPARAM lParam);
 
@@ -74,7 +74,7 @@ namespace subsystem_windows
       void unregisterKeyboardHook(::subsystem::OperatingSystemHookListener *phooklistener) override;
 
 
-         bool operating_system_hook_on_keyboard_message(::lresult &lresult, ::user::enum_message emessage, int iVkCode,
+         bool operating_system_hook_on_keyboard_message(::lresult &lresult, ::user::enum_message emessage, ::i32 iVkCode,
                                                      ::lparam lparam) override;
 
 

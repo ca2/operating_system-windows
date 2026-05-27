@@ -48,18 +48,18 @@ namespace innate_subsystem_windows
 
       // Override Control::setWindow method
       void setWindow(const ::operating_system::window & operatingsystemwindow) override;
-      void setText(char *text) override;
+      void setText(::i8 *text) override;
       void setErrorBalloonTip(innate_subsystem::TooltipInterface *tip) override;
       void setStringFilter(::innate_subsystem::StringFilter *filter) override;
       LRESULT makeCheck() override;
 
    //protected:
-      bool isStringValid(const char *string) override;
+      bool isStringValid(const ::i8 *string) override;
       ::lresult onKeyDown(::wparam code, ::lparam params) override;
 
-      //static LRESULT CALLBACK windowProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam);
+      //static LRESULT CALLBACK windowProc(HWND hwnd, ::u32 uMsg, WPARAM wparam, LPARAM lparam);
 
-      virtual bool window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam);
+      virtual bool window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam);
 
    //protected:
       WNDPROC  m_wndprocOld;

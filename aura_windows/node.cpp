@@ -109,7 +109,7 @@ namespace aura_windows
    }
 
 
-   ::color::color node::get_default_color(unsigned long long u)
+   ::color::color node::get_default_color(::u64 u)
    {
 
       switch (u)
@@ -135,7 +135,7 @@ namespace aura_windows
    }
 
 
-   void node::set_console_colors(unsigned int dwScreenColors, unsigned int dwPopupColors, unsigned int dwWindowAlpha)
+   void node::set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha)
    {
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Console", true);
@@ -148,10 +148,10 @@ namespace aura_windows
 
 
 
-   double node::get_time_zone()
+   ::f64 node::get_time_zone()
    {
 
-      double dTimeZone = 0.;
+      ::f64 dTimeZone = 0.;
 
 #ifdef WINDOWS
       {
@@ -161,24 +161,24 @@ namespace aura_windows
 
          DYNAMIC_TIME_ZONE_INFORMATION i = {};
 
-         unsigned int dw = GetDynamicTimeZoneInformation(&i);
+         ::u32 dw = GetDynamicTimeZoneInformation(&i);
 
          if (dw == TIME_ZONE_ID_STANDARD)
          {
 
-            dTimeZone = -((double)(i.Bias + i.StandardBias) / 60.0);
+            dTimeZone = -((::f64)(i.Bias + i.StandardBias) / 60.0);
 
          }
          else if (dw == TIME_ZONE_ID_DAYLIGHT)
          {
 
-            dTimeZone = -((double)(i.Bias + i.DaylightBias) / 60.0);
+            dTimeZone = -((::f64)(i.Bias + i.DaylightBias) / 60.0);
 
          }
          else
          {
 
-            dTimeZone = -((double)i.Bias / 60.0);
+            dTimeZone = -((::f64)i.Bias / 60.0);
 
          }
 
@@ -196,7 +196,7 @@ namespace aura_windows
 
          //printf("The time zone is '%s'.\n", lt.tm_zone);
 
-         dTimeZone = +((double)lt.tm_gmtoff / (60.0 * 60.0));
+         dTimeZone = +((::f64)lt.tm_gmtoff / (60.0 * 60.0));
 
       }
 #endif
@@ -211,7 +211,7 @@ namespace aura_windows
 
       wstring wstrFolder(pathFolder);
 
-      int i = (int)(iptr) ::ShellExecuteW(nullptr, L"open", wstrFolder, nullptr, nullptr, SW_NORMAL);
+      ::i32 i = (::i32)(iptr) ::ShellExecuteW(nullptr, L"open", wstrFolder, nullptr, nullptr, SW_NORMAL);
 
       if (i < 32)
       {
@@ -310,7 +310,7 @@ namespace aura_windows
       set["privileged"] = true;
 
 
-      int iExitCode = 0;
+      ::i32 iExitCode = 0;
 
       call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set, &iExitCode);
 
@@ -390,16 +390,16 @@ namespace aura_windows
    }
 
 
-   int _os_message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::user::e_message_box& emessagebox)
+   ::i32 _os_message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::user::e_message_box& emessagebox)
    {
 
-      int iMessageBox = emessagebox.m_eenum & 0x7f;
+      ::i32 iMessageBox = emessagebox.m_eenum & 0x7f;
 
       wstring wstrText(scopedstrMessage);
 
       wstring wstrTitle(scopedstrTitle);
 
-      int iResult = ::MessageBox(nullptr, wstrText, wstrTitle, iMessageBox);
+      ::i32 iResult = ::MessageBox(nullptr, wstrText, wstrTitle, iMessageBox);
 
       return iResult;
 

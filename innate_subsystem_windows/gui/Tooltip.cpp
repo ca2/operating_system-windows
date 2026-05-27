@@ -40,12 +40,12 @@ namespace innate_subsystem_windows
 
       }
 
-   void Tooltip::setText(const char *text)
+   void Tooltip::setText(const ::i8 *text)
    {
 
 
    }
-   void Tooltip::setTitle(const char *caption)
+   void Tooltip::setTitle(const ::i8 *caption)
    {
 
 

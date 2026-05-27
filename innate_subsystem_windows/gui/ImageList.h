@@ -27,7 +27,7 @@ namespace innate_subsystem_windows
 
       void initializeImageList() override;
 
-      void createImageList(const ::i32_size & size, int flags, int iInitialSize, int iGrow) override;
+      void createImageList(const ::i32_size & size, ::i32 flags, ::i32 iInitialSize, ::i32 iGrow) override;
 
       void destroyImageList() override;
 

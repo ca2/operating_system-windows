@@ -46,7 +46,7 @@ public:
    * and error code.
    * @param errcode windows error code.
    */
-  SystemException(int errcode);
+  SystemException(::i32 errcode);
   /**
    * Creates exception with user scopedstrMessage + formatted scopedstrMessage from system
    * and error code set to GetLastError() value.
@@ -59,7 +59,7 @@ public:
    * @param userMessage user scopedstrMessage.
    * @param errcode windows error code.
    */
-  SystemException(const ::scoped_string & scopedstrUserMessage, int errcode);
+  SystemException(const ::scoped_string & scopedstrUserMessage, ::i32 errcode);
   /**
    * Destructor, does nothing.
    */
@@ -68,7 +68,7 @@ public:
    * Returns error code.
    * @return windows error code associated with this exception.
    */
-  int getErrorCode() const;
+  ::i32 getErrorCode() const;
   /**
    * Returns system error description.
    * @return system error description.
@@ -81,7 +81,7 @@ private:
    * @param errcode windows error code.
    * @fixme document all special cases.
    */
-  void createMessage(const ::scoped_string & scopedstrUserMessage, int errcode);
+  void createMessage(const ::scoped_string & scopedstrUserMessage, ::i32 errcode);
 private:
   /**
    * Description of error from OS.
@@ -90,7 +90,7 @@ private:
   /**
    * Windows error code.
    */
-  int m_errcode;
+  ::i32 m_errcode;
 };
 
 

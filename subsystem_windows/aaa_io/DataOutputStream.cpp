@@ -47,7 +47,7 @@ namespace remoting
 
    void DataOutputStream::write(const void *buffer, memsize len)
    {
-      char *typedBuffer = (char *)buffer;
+      ::i8 *typedBuffer = (::i8 *)buffer;
       size_t totalWritten = 0;
       size_t left = len;
       while (totalWritten < len) {
@@ -57,36 +57,36 @@ namespace remoting
       }
    }
 
-   void DataOutputStream::writeUInt8(unsigned char x)
+   void DataOutputStream::writeUInt8(::u8 x)
    {
-      write((char *)&x, 1);
+      write((::i8 *)&x, 1);
    };
 
-   void DataOutputStream::writeUInt16(unsigned short data)
+   void DataOutputStream::writeUInt16(::u16 data)
    {
-      unsigned char buf[2];
+      ::u8 buf[2];
 
       buf[0] = GETBYTE(data, 1);
       buf[1] = GETBYTE(data, 0);
 
-      write((char *)buf, sizeof(buf));
+      write((::i8 *)buf, sizeof(buf));
    }
 
-   void DataOutputStream::writeUInt32(unsigned int data)
+   void DataOutputStream::writeUInt32(::u32 data)
    {
-      unsigned char buf[4];
+      ::u8 buf[4];
 
       buf[0] = GETBYTE(data, 3);
       buf[1] = GETBYTE(data, 2);
       buf[2] = GETBYTE(data, 1);
       buf[3] = GETBYTE(data, 0);
 
-      write((char *)buf, sizeof(buf));
+      write((::i8 *)buf, sizeof(buf));
    }
 
-   void DataOutputStream::writeUInt64(unsigned long long data)
+   void DataOutputStream::writeUInt64(::u64 data)
    {
-      unsigned char buf[8];
+      ::u8 buf[8];
 
       buf[0] = GETBYTE(data, 7);
       buf[1] = GETBYTE(data, 6);
@@ -97,27 +97,27 @@ namespace remoting
       buf[6] = GETBYTE(data, 1);
       buf[7] = GETBYTE(data, 0);
 
-      write((char *)buf, sizeof(buf));
+      write((::i8 *)buf, sizeof(buf));
    }
 
-   void DataOutputStream::writeInt8(char x)
+   void DataOutputStream::writeInt8(::i8 x)
    {
-      writeUInt8((unsigned char)x);
+      writeUInt8((::u8)x);
    }
 
-   void DataOutputStream::writeInt16(short x)
+   void DataOutputStream::writeInt16(::i16 x)
    {
-      writeUInt16((unsigned short)x);
+      writeUInt16((::u16)x);
    }
 
-   void DataOutputStream::writeInt32(int x)
+   void DataOutputStream::writeInt32(::i32 x)
    {
-      writeUInt32((unsigned int)x);
+      writeUInt32((::u32)x);
    }
 
-   void DataOutputStream::writeInt64(long long x)
+   void DataOutputStream::writeInt64(::i64 x)
    {
-      writeUInt64((unsigned long long)x);
+      writeUInt64((::u64)x);
    }
 
    void DataOutputStream::writeUTF8(const scoped_ansi_string &str)
@@ -129,7 +129,7 @@ namespace remoting
 
       // FIXME: Why try/catch() is used?
       try {
-         unsigned int sizeInBytes = (unsigned int)str.size();
+         ::u32 sizeInBytes = (::u32)str.size();
          //_ASSERT(sizeInBytes == str.size());
          writeUInt32(sizeInBytes);
          write(str.data(), sizeInBytes);

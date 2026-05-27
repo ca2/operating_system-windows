@@ -85,20 +85,20 @@ namespace subsystem_windows
       {
          m_plogwriter->debug("Prepare to inject the key event:"
                     " user::enum_key = {}, release = {}, extended = {}",
-                    (int)euserkey,
-                    (int)release,
-                    (int)extended);
+                    (::i32)euserkey,
+                    (::i32)release,
+                    (::i32)extended);
          m_plogwriter->debug("The modifier states before:"
                     " m_controlIsPressed = {};"
                     " m_menuIsPressed = {};"
                     " m_deleteIsPressed = {};"
                     " m_shiftIsPressed = {};"
                     " m_winIsPressed = {};",
-                    (int)m_controlIsPressed,
-                    (int)m_menuIsPressed,
-                    (int)m_deleteIsPressed,
-                    (int)m_shiftIsPressed,
-                    (int)m_winIsPressed);
+                    (::i32)m_controlIsPressed,
+                    (::i32)m_menuIsPressed,
+                    (::i32)m_deleteIsPressed,
+                    (::i32)m_shiftIsPressed,
+                    (::i32)m_winIsPressed);
 
          if (euserkey == ::user::e_key_control || euserkey == ::user::e_key_right_control || euserkey == ::user::e_key_left_control) {
             m_controlIsPressed = !release;
@@ -121,11 +121,11 @@ namespace subsystem_windows
                     " m_deleteIsPressed = {};"
                     " m_shiftIsPressed = {};"
                     " m_winIsPressed = {};",
-                    (int)m_controlIsPressed,
-                    (int)m_menuIsPressed,
-                    (int)m_deleteIsPressed,
-                    (int)m_shiftIsPressed,
-                    (int)m_winIsPressed);
+                    (::i32)m_controlIsPressed,
+                    (::i32)m_menuIsPressed,
+                    (::i32)m_deleteIsPressed,
+                    (::i32)m_shiftIsPressed,
+                    (::i32)m_winIsPressed);
 
          if (m_controlIsPressed && m_menuIsPressed && m_deleteIsPressed &&
              !m_winIsPressed && !m_shiftIsPressed) {
@@ -170,24 +170,24 @@ namespace subsystem_windows
              }
       }
 
-      void InputInjector::injectCharEvent(int ch, bool release)
+      void InputInjector::injectCharEvent(::i32 ch, bool release)
       {
-         m_plogwriter->debug("Try insert a char event: char = {}, release = {}",
-                    (int)ch, (int)release);
+         m_plogwriter->debug("Try insert a ::i8 event: ::i8 = {}, release = {}",
+                    (::i32)ch, (::i32)release);
 
          bool ctrlOrAltPressed = m_controlIsPressed || m_menuIsPressed;
          SHORT vkKeyScanResult = 0;
          HKL hklCurrent = (HKL)0x04090409;
          try {
             hklCurrent = _getCurrentKbdLayout();
-            m_plogwriter->debug("Current keyboard layout = {:#08x}", (int)hklCurrent);
+            m_plogwriter->debug("Current keyboard layout = {:#08x}", (::i32)hklCurrent);
             vkKeyScanResult = _searchVirtKey(ch, hklCurrent);
-            m_plogwriter->debug("The virtual code scan result = {}", (int)vkKeyScanResult);
+            m_plogwriter->debug("The virtual code scan result = {}", (::i32)vkKeyScanResult);
          } catch (...) {
-            m_plogwriter->debug("Can't insert the char by simulating a key press event,"
+            m_plogwriter->debug("Can't insert the ::i8 by simulating a key press event,"
                       " therefore try insert it as an unicode symbol");
             if (ctrlOrAltPressed) {
-               m_plogwriter->warning("Can't insert the char by an unicode symbol because"
+               m_plogwriter->warning("Can't insert the ::i8 by an unicode symbol because"
                             " a modifier is pressed");
                throw;
             }
@@ -238,7 +238,7 @@ namespace subsystem_windows
             return;
              }
 
-         m_plogwriter->debug("Variable states before generate key events to get the char:"
+         m_plogwriter->debug("Variable states before generate key events to get the ::i8:"
                     " controlSym = {};"
                     " resistantToCaps = {};"
                     " invariantToShift = {};"
@@ -247,14 +247,14 @@ namespace subsystem_windows
                     " shiftUpNeeded = {};"
                     " ctrlPressNeeded = {};"
                     " altPressNeeded = {};",
-                    (int)controlSym,
-                    (int)resistantToCaps,
-                    (int)invariantToShift,
-                    (int)shiftedKey,
-                    (int)shiftPressNeeded,
-                    (int)shiftUpNeeded,
-                    (int)ctrlPressNeeded,
-                    (int)altPressNeeded);
+                    (::i32)controlSym,
+                    (::i32)resistantToCaps,
+                    (::i32)invariantToShift,
+                    (::i32)shiftedKey,
+                    (::i32)shiftPressNeeded,
+                    (::i32)shiftUpNeeded,
+                    (::i32)ctrlPressNeeded,
+                    (::i32)altPressNeeded);
 
          if (ctrlPressNeeded) {
             injectKeyEvent(::user::e_key_control, false);
@@ -283,7 +283,7 @@ namespace subsystem_windows
          }
       }
 
-      bool InputInjector::isAscii(int ch)
+      bool InputInjector::isAscii(::i32 ch)
       {
          if (ch >= 0 && ch < 128) {
             return true;
@@ -310,7 +310,7 @@ namespace subsystem_windows
             }
             ::string errMess;
             errMess.formatf("Can't translate the {} character to the scan code",
-                           (unsigned int)ch);
+                           (::u32)ch);
             throw ::subsystem::Exception(errMess);
          }
          if (_isDeadKey(vkKeyScanResult, hklCurrent)) {
@@ -320,19 +320,19 @@ namespace subsystem_windows
          if (!_isOneKeyEventChar(ch, vkKeyScanResult, hklCurrent)) {
             ::string errMess;
             errMess.formatf("Can't get the {} character by one keyboard event",
-                           (unsigned int)ch);
+                           (::u32)ch);
             throw ::subsystem::Exception(errMess);
          }
          // Special trick to get round a problem when printing the ^6 characters
          // instead of estimated 6.
          if (!modifiersPressed) {
-            unsigned short layout = ((unsigned int)hklCurrent & 0xffff0000) >> 16;
-            const unsigned short TURKISH = MAKELANGID(LANG_TURKISH, SUBLANG_DEFAULT);
-            const unsigned short NORWEGIAN = MAKELANGID(LANG_NORWEGIAN, SUBLANG_DEFAULT);
-            const unsigned short BRAZILIAN = MAKELANGID(LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN);
-            const unsigned short GREEK = MAKELANGID(LANG_GREEK, SUBLANG_DEFAULT);
-            const unsigned short POLISH1 = MAKELANGID(LANG_POLISH, SUBLANG_DEFAULT);
-            const unsigned short POLISH2 = MAKELANGID(LANG_POLISH, SUBLANG_POLISH_POLAND);
+            ::u16 layout = ((::u32)hklCurrent & 0xffff0000) >> 16;
+            const ::u16 TURKISH = MAKELANGID(LANG_TURKISH, SUBLANG_DEFAULT);
+            const ::u16 NORWEGIAN = MAKELANGID(LANG_NORWEGIAN, SUBLANG_DEFAULT);
+            const ::u16 BRAZILIAN = MAKELANGID(LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN);
+            const ::u16 GREEK = MAKELANGID(LANG_GREEK, SUBLANG_DEFAULT);
+            const ::u16 POLISH1 = MAKELANGID(LANG_POLISH, SUBLANG_DEFAULT);
+            const ::u16 POLISH2 = MAKELANGID(LANG_POLISH, SUBLANG_POLISH_POLAND);
 
             if ((layout == POLISH1 || layout == POLISH2) && ch == _T('`')) {
                throw ::subsystem::Exception("Special case for the '`' character on the POLISH"
@@ -376,7 +376,7 @@ namespace subsystem_windows
 
       bool InputInjector::_isDeadKey(SHORT scanResult, HKL keyboardLayout)
       {
-         unsigned char kbdState[256];
+         ::u8 kbdState[256];
          memset(kbdState, 0, sizeof(kbdState));
          WCHAR outBuff[20];
          bool withShift = (scanResult >> 8 & 1) != 0;
@@ -387,9 +387,9 @@ namespace subsystem_windows
          kbdState[VK_CONTROL] = withCtrl  ? 128 : 0;
          kbdState[VK_MENU]    = withAlt   ? 128 : 0;
 
-         unsigned char virtKey = scanResult & 255;
+         ::u8 virtKey = scanResult & 255;
 
-         int count = ToUnicodeEx(virtKey, 0, kbdState, outBuff,
+         ::i32 count = ToUnicodeEx(virtKey, 0, kbdState, outBuff,
                                  sizeof(outBuff) / sizeof(WCHAR),
                                  0, keyboardLayout);
          bool result = count == -1;
@@ -403,7 +403,7 @@ namespace subsystem_windows
       bool InputInjector::_isOneKeyEventChar(WCHAR ch, SHORT scanResult,
                                             HKL keyboardLayout)
       {
-         unsigned char kbdState[256];
+         ::u8 kbdState[256];
          memset(kbdState, 0, sizeof(kbdState));
          WCHAR outBuff[20];
          bool withShift = (scanResult >> 8 & 1) != 0;
@@ -414,9 +414,9 @@ namespace subsystem_windows
          kbdState[VK_CONTROL] = withCtrl  ? 128 : 0;
          kbdState[VK_MENU]    = withAlt   ? 128 : 0;
 
-         unsigned char virtKey = scanResult & 255;
+         ::u8 virtKey = scanResult & 255;
 
-         int count = ToUnicodeEx(virtKey, 0, kbdState, outBuff,
+         ::i32 count = ToUnicodeEx(virtKey, 0, kbdState, outBuff,
                                  sizeof(outBuff) / sizeof(WCHAR),
                                  0, keyboardLayout);
          if (count == 1) {
@@ -441,18 +441,18 @@ namespace subsystem_windows
       bool InputInjector::_isDifferentWith(BYTE modifier, BYTE modStateValueOfOn,
                                           BYTE virtKey, HKL keyboardLayout)
       {
-         unsigned char kbdState[256];
+         ::u8 kbdState[256];
          memset(kbdState, 0, sizeof(kbdState));
          WCHAR outBuff1[20], outBuff2[20];
 
          // Get symbol(s) without the modifier.
-         int count1 = ToUnicodeEx(virtKey, 0, kbdState, outBuff1,
+         ::i32 count1 = ToUnicodeEx(virtKey, 0, kbdState, outBuff1,
                                   sizeof(outBuff1) / sizeof(WCHAR),
                                   0, keyboardLayout);
 
          // Get symbol(s) with modifier.
          kbdState[modifier & 255] = modStateValueOfOn;
-         int count2 = ToUnicodeEx(virtKey, 0, kbdState, outBuff2,
+         ::i32 count2 = ToUnicodeEx(virtKey, 0, kbdState, outBuff2,
                                  sizeof(outBuff2) / sizeof(WCHAR),
                                  0, keyboardLayout);
          if (count1 != count2) return false; // It isn't invariant

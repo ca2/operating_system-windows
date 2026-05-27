@@ -19,21 +19,21 @@ namespace draw2d_gdi
 
 
       operator HBRUSH() const;
-      int GetLogBrush(LOGBRUSH* pLogBrush);
+      ::i32 GetLogBrush(LOGBRUSH* pLogBrush);
 
 
       virtual void construct(::color::color crColor);                // CreateSolidBrush
-      virtual void construct(int nIndex, ::color::color crColor);    // CreateHatchBrush
+      virtual void construct(::i32 nIndex, ::color::color crColor);    // CreateHatchBrush
       virtual void construct(::draw2d::bitmap * pbitmap);                // CreatePatternBrush
 
 
       bool CreateSolid(::color::color crColor);
-      bool CreateHatchBrush(int nIndex, ::color::color crColor);
+      bool CreateHatchBrush(::i32 nIndex, ::color::color crColor);
       bool CreateBrushIndirect(const LOGBRUSH* lpLogBrush);
       bool CreatePatternBrush(::draw2d::bitmap* pBitmap);
       bool CreateDIBPatternBrush(HGLOBAL hPackedDIB, UINT nUsage);
       bool CreateDIBPatternBrush(const void * lpPackedDIB, UINT nUsage);
-      bool CreateSysColorBrush(int nIndex);
+      bool CreateSysColorBrush(::i32 nIndex);
 
 
       void dump(dump_context & dumpcontext) const override;

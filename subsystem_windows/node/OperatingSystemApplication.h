@@ -46,7 +46,7 @@ namespace subsystem_windows
       {
       public:
 
-         int m_iExitCode = 0;
+         ::i32 m_iExitCode = 0;
          HINSTANCE m_appInstance;
          HWND m_mainWindow;
          ::wstring m_wstrWindowClassName;
@@ -89,7 +89,7 @@ namespace subsystem_windows
          /**
           * Posts scopedstrMessage to main window.
           */
-         void postMessage(unsigned int message, ::wparam wparam = 0, ::lparam lparam = 0) override;
+         void postMessage(::u32 message, ::wparam wparam = 0, ::lparam lparam = 0) override;
 
          /**
           * Adds modeless dialog to application modeless dialog ::list_base to
@@ -114,12 +114,12 @@ namespace subsystem_windows
          void createApplicationMainTask() override;
 
 
-         //virtual void postMainThreadMessage(int iMainThreadMessage) override;
+         //virtual void postMainThreadMessage(::i32 iMainThreadMessage) override;
 
 
-         int getExitCode() override;
+         ::i32 getExitCode() override;
 
-         void setExitCode(int iExitCode) override;
+         void setExitCode(::i32 iExitCode) override;
 
 
          void onThreadMain() override;
@@ -130,7 +130,7 @@ namespace subsystem_windows
 
          // Runs main messages process cycle. The run() function returns
          // value returned by this function.
-         //virtual int processMessages();
+         //virtual ::i32 processMessages();
 
          /**
           * Windows prodecure for main application window.
@@ -145,7 +145,7 @@ namespace subsystem_windows
           */
          bool processDialogMessage(MSG *msg);
 
-         void onMainThreadMessage(unsigned int message, ::wparam wparam, ::lparam lparam) override;
+         void onMainThreadMessage(::u32 message, ::wparam wparam, ::lparam lparam) override;
 
       };
 

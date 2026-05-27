@@ -36,8 +36,8 @@
 //    virtual public ::particle
 //    {
 //    public:
-//       static const int APPLICATION_DATA_SPECIAL_FOLDER = 0x0;
-//       static const int COMMON_APPLICATION_DATA_SPECIAL_FOLDER = 0x1;
+//       static const ::i32 APPLICATION_DATA_SPECIAL_FOLDER = 0x0;
+//       static const ::i32 COMMON_APPLICATION_DATA_SPECIAL_FOLDER = 0x1;
 //    //public:
 //       Environment();
 //       ~Environment();
@@ -62,7 +62,7 @@
 //       // will be failed.
 //       //
 //
-//       virtual ::string getSpecialFolderPath(int specialFolderId);
+//       virtual ::string getSpecialFolderPath(::i32 specialFolderId);
 //
 //       // Sets full path to current executing process file to out argument
 //       virtual ::string getCurrentModulePath();
@@ -71,7 +71,7 @@
 //       // return true if tested process has the same path as current process
 //       // else return false
 //       // throw ::subsystem::Exception an error.
-//       virtual bool isItTheSamePathAsCurrent(unsigned int pId);
+//       virtual bool isItTheSamePathAsCurrent(::u32 pId);
 //
 //       // Sets full path to folder (without last directory separator character)
 //       // where current executing process file is located to out argument.

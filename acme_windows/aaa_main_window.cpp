@@ -129,7 +129,7 @@ namespace acme_windows
       while (i < idPath.size())
       {
 
-         hwnd = ::GetDlgItem(hwnd, (int) idPath[i]);
+         hwnd = ::GetDlgItem(hwnd, (::i32) idPath[i]);
 
          if (!hwnd)
          {

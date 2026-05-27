@@ -87,7 +87,7 @@ namespace input_win32
    }
 
 
-   LRESULT CALLBACK mouse_hook::LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
+   LRESULT CALLBACK mouse_hook::LowLevelMouseProc(::i32 nCode, WPARAM wParam, LPARAM lParam)
    {
 
       if (nCode == 0)
@@ -149,7 +149,7 @@ namespace input_win32
          while (task_get_run())
          {
 
-            int iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
+            ::i32 iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
 
             if (iRet == 0)
             {

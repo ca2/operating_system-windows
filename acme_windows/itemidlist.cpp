@@ -85,7 +85,7 @@ void itemidlist::_free(LPITEMIDLIST & pidl)
 }
 
 
-int itemidlist::count() const
+::i32 itemidlist::count() const
 {
 
    return _count(m_pidl); //Get pidl count.
@@ -124,7 +124,7 @@ bool itemidlist::has_child() const
 
 }
 
-int itemidlist::len() const
+::i32 itemidlist::len() const
 {
 
    return _len(m_pidl);
@@ -195,7 +195,7 @@ bool itemidlist::_is_empty(LPCITEMIDLIST pidl)
 }
 
 
-int itemidlist::_count(LPCITEMIDLIST pidl)
+::i32 itemidlist::_count(LPCITEMIDLIST pidl)
 {
 
    if (_is_empty(pidl))
@@ -205,7 +205,7 @@ int itemidlist::_count(LPCITEMIDLIST pidl)
 
    }
 
-   int nCount = 0;
+   ::i32 nCount = 0;
 
    while (pidl)
    {
@@ -225,7 +225,7 @@ int itemidlist::_count(LPCITEMIDLIST pidl)
 bool itemidlist::__is_unitary(LPCITEMIDLIST pidl)
 {
 
-   int nCount = 0;
+   ::i32 nCount = 0;
 
    while (pidl && nCount <= 1)
    {
@@ -251,7 +251,7 @@ bool itemidlist::_is_unitary(LPCITEMIDLIST pidl)
 
    }
 
-   int nCount = 0;
+   ::i32 nCount = 0;
 
    while (pidl && nCount <= 1)
    {
@@ -303,7 +303,7 @@ bool itemidlist::_has_child(LPCITEMIDLIST pidl)
 
 }
 
-int itemidlist::_len(LPCITEMIDLIST pidl)
+::i32 itemidlist::_len(LPCITEMIDLIST pidl)
 {
 
    if (!pidl)
@@ -360,7 +360,7 @@ LPITEMIDLIST itemidlist::_cat(LPCITEMIDLIST pidl1, LPCITEMIDLIST pidl2)
 }
 
 
-//LPITEMIDLIST itemidlist::_create(int nSize)
+//LPITEMIDLIST itemidlist::_create(::i32 nSize)
 //{
 //
 //   comptr < IMalloc > pmalloc;
@@ -429,7 +429,7 @@ itemidlist & itemidlist::operator/=(const itemidlist & pidl)
 }
 
 
-itemidlist & itemidlist::operator-=(int i)
+itemidlist & itemidlist::operator-=(::i32 i)
 {
 
    while (i > 0)
@@ -450,7 +450,7 @@ itemidlist & itemidlist::operator-=(int i)
 
 }
 
-itemidlist itemidlist::operator-(int i) const
+itemidlist itemidlist::operator-(::i32 i) const
 {
 
    auto pidl = ILCloneFull(m_pidl);
@@ -513,7 +513,7 @@ itemidlist itemidlist::last_item_id_removed() const
 
 }
 
-itemidlist itemidlist::at(int nIndex) const
+itemidlist itemidlist::at(::i32 nIndex) const
 {
 
    return _create_relative(m_pidl, nIndex);
@@ -521,7 +521,7 @@ itemidlist itemidlist::at(int nIndex) const
 }
 
 
-itemidlist itemidlist::operator[](int nIndex) const
+itemidlist itemidlist::operator[](::i32 nIndex) const
 {
 
    return at(nIndex);
@@ -529,7 +529,7 @@ itemidlist itemidlist::operator[](int nIndex) const
 }
 
 
-LPITEMIDLIST itemidlist::_create_relative(LPCITEMIDLIST pidlf, int iIndex)
+LPITEMIDLIST itemidlist::_create_relative(LPCITEMIDLIST pidlf, ::i32 iIndex)
 {
 
    if (iIndex < 0)
@@ -572,7 +572,7 @@ bool itemidlist::operator==(const itemidlist & pidl) const
 }
 
 
-itemidlist itemidlist::left(int nCount) const
+itemidlist itemidlist::left(::i32 nCount) const
 {
 
    auto pitem = _copy(m_pidl, nCount);
@@ -582,10 +582,10 @@ itemidlist itemidlist::left(int nCount) const
 }
 
 
-int itemidlist::_len(LPCITEMIDLIST pidl, int nCount)
+::i32 itemidlist::_len(LPCITEMIDLIST pidl, ::i32 nCount)
 {
 
-   int iCount = _count(pidl);
+   ::i32 iCount = _count(pidl);
 
    if (nCount >= iCount)
    {
@@ -594,7 +594,7 @@ int itemidlist::_len(LPCITEMIDLIST pidl, int nCount)
 
    }
 
-   int cbTotal = 0;
+   ::i32 cbTotal = 0;
 
    if (pidl)
    {
@@ -615,7 +615,7 @@ int itemidlist::_len(LPCITEMIDLIST pidl, int nCount)
 }
 
 
-string itemidlist::display_name(unsigned int dwFlags) const
+string itemidlist::display_name(::u32 dwFlags) const
 {
 
    comptr < IShellFolder > psf;
@@ -636,7 +636,7 @@ string itemidlist::display_name(unsigned int dwFlags) const
 
    }
 
-   int nCount = count();
+   ::i32 nCount = count();
 
    if (nCount > 1)
    {
@@ -677,7 +677,7 @@ string itemidlist::path() const
 }
 
 
-int itemidlist::icon_index(int uFlags) const
+::i32 itemidlist::icon_index(::i32 uFlags) const
 {
 
    return _icon_index(m_pidl, uFlags);
@@ -721,7 +721,7 @@ string itemidlist::tooltip_info() const
 
    }
 
-   int iCount = count();
+   ::i32 iCount = count();
 
    itemidlist item = left(iCount - 1);
 
@@ -879,7 +879,7 @@ void itemidlist::split(IShellFolder ** psf, itemidlist & pidl)
 itemidlist itemidlist::last() const
 {
 
-   int nCount = count();
+   ::i32 nCount = count();
 
    return at(nCount - 1);
 
@@ -935,7 +935,7 @@ void itemidlist::_split(IShellFolder ** psf, LPITEMIDLIST &pidl, LPITEMIDLIST pi
 }
 
 
-LPITEMIDLIST itemidlist::_copy(LPCITEMIDLIST pidlOrg, int nCount)
+LPITEMIDLIST itemidlist::_copy(LPCITEMIDLIST pidlOrg, ::i32 nCount)
 {
 
    if (nCount < 1)
@@ -945,7 +945,7 @@ LPITEMIDLIST itemidlist::_copy(LPCITEMIDLIST pidlOrg, int nCount)
 
    }
 
-   int iToRemove = _count(pidlOrg) - nCount;
+   ::i32 iToRemove = _count(pidlOrg) - nCount;
 
    if (iToRemove <= 0)
    {
@@ -970,7 +970,7 @@ LPITEMIDLIST itemidlist::_copy(LPCITEMIDLIST pidlOrg, int nCount)
 }
 
 
-int itemidlist::_order(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2,
+::i32 itemidlist::_order(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2,
                          IShellFolder * psfFolder, LPARAM lParam)
 {
 
@@ -998,7 +998,7 @@ int itemidlist::_order(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2,
 
    HRESULT hr = psfDesktop->CompareIDs(lParam, pidlf1, pidlf2);
 
-   return int(HRESULT_CODE(hr));
+   return ::i32(HRESULT_CODE(hr));
 
 }
 
@@ -1119,7 +1119,7 @@ HRESULT itemidlist::_parse(itemidlist & idl, const ::scoped_string & scopedstrPa
 //}
 
 
-int itemidlist::_icon_index(LPCITEMIDLIST pidlf, int uFlags)
+::i32 itemidlist::_icon_index(LPCITEMIDLIST pidlf, ::i32 uFlags)
 {
 
    SHFILEINFO sfi;
@@ -1131,7 +1131,7 @@ int itemidlist::_icon_index(LPCITEMIDLIST pidlf, int uFlags)
 }
 
 
-int itemidlist::_overlay_icon_index(IShellFolder * psfFolder, LPCITEMIDLIST pidl)
+::i32 itemidlist::_overlay_icon_index(IShellFolder * psfFolder, LPCITEMIDLIST pidl)
 {
 
    if (!psfFolder || !pidl)
@@ -1148,7 +1148,7 @@ int itemidlist::_overlay_icon_index(IShellFolder * psfFolder, LPCITEMIDLIST pidl
    comptr < IShellIconOverlay >  psiIconOl;
 
 
-   int index = -1;
+   ::i32 index = -1;
 
    psfFolder->QueryInterface(IID_IShellIcon, (LPVOID*)&psiIcon);
 
@@ -1199,12 +1199,12 @@ string itemidlist::_display_name(STRRET & strret, LPCITEMIDLIST pidl)
    break;
    case STRRET_OFFSET:
    {
-      str = (char *)pidl + strret.uOffset;
+      str = (::i8 *)pidl + strret.uOffset;
    }
    break;
    case STRRET_CSTR:
    {
-      str = (char *)strret.cStr;
+      str = (::i8 *)strret.cStr;
       break;
    }
    default:
@@ -1216,7 +1216,7 @@ string itemidlist::_display_name(STRRET & strret, LPCITEMIDLIST pidl)
 }
 
 
-string itemidlist::_display_name(IShellFolder * psf, LPCITEMIDLIST pi, unsigned int dwFlags)
+string itemidlist::_display_name(IShellFolder * psf, LPCITEMIDLIST pi, ::u32 dwFlags)
 {
 
    string str;

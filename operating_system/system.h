@@ -59,7 +59,7 @@
 //#include "cross/cross.h"
 #define __time_t time_t
 #define stat64 _stat64
-using int_bool = int;
+using int_bool = ::i32;
 
 
 #include <stddef.h>
@@ -94,7 +94,7 @@ using platform_char = wchar_t;
 
 #else
 
-using platform_char = char;
+using platform_char = ::i8;
 
 #endif
 

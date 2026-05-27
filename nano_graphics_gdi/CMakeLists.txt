@@ -29,8 +29,8 @@ list(APPEND library_source
 #        xkb_input.h
 #        windowing_system.cpp
 #        windowing_system.h
-   device.cpp
-   device.h
+   context.cpp
+   context.h
    brush.cpp
    brush.h
    font.cpp

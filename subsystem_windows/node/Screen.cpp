@@ -136,10 +136,10 @@ namespace subsystem_windows
          }
       }
 
-      int Screen::findFirstBit(const unsigned int bits)
+      ::i32 Screen::findFirstBit(const ::u32 bits)
       {
-         unsigned int b = bits;
-         int shift;
+         ::u32 b = bits;
+         ::i32 shift;
 
          for (shift = 0; (shift < 32) && ((b & 1) == 0); shift++) {
             b >>= 1;
@@ -156,9 +156,9 @@ namespace subsystem_windows
          m_virtDesktopRect.set_height(GetSystemMetrics(SM_CYVIRTUALSCREEN));
       }
 
-      int Screen::getVisibleMonitorCount()
+      ::i32 Screen::getVisibleMonitorCount()
       {
-         int monitorCount = GetSystemMetrics(SM_CMONITORS);
+         ::i32 monitorCount = GetSystemMetrics(SM_CMONITORS);
          // Why check for the result? Skip it.
          return (size_t)monitorCount;
       }

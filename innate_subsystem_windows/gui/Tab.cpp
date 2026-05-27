@@ -32,13 +32,13 @@ namespace innate_subsystem_windows
 //         m_caption.setString(_T(""));
       }
 
-      void Tab::initialize_tab(::innate_subsystem::WindowInterface *pwindow, const char *caption)
+      void Tab::initialize_tab(::innate_subsystem::WindowInterface *pwindow, const ::i8 *caption)
 
       {
          m_pwindow = pwindow;
          m_caption = caption;
       }
-   const char *Tab::getCaption()
+   const ::i8 *Tab::getCaption()
    {
          return m_caption;
       }

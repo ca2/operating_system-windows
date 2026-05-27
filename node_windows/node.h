@@ -36,10 +36,10 @@ namespace node_windows
       // virtual bool _os_calc_system_dark_mode() override;
       //
       //
-      virtual ::color::color get_default_color(unsigned long long u) override;
+      virtual ::color::color get_default_color(::u64 u) override;
 
 
-      //virtual void set_console_colors(unsigned int dwScreenColors, unsigned int dwPopupColors, unsigned int dwWindowAlpha) override;
+      //virtual void set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha) override;
 
 
       // virtual void set_system_dark_mode1(bool bSet = true);
@@ -48,7 +48,7 @@ namespace node_windows
       // virtual void set_app_dark_mode1(bool bSet = true);
 
 
-      virtual double get_time_zone() override;
+      virtual ::f64 get_time_zone() override;
 
 
       //virtual void get_system_time(system_time_t * psystemtime) override;

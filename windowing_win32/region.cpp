@@ -57,7 +57,7 @@ namespace draw2d_gdiplus
 
 
 
-   void region::expand_bounding_box(::double_rectangle * prectangle, ::draw2d::graphics * pgraphics)
+   void region::expand_bounding_box(::f64_rectangle * prectangle, ::draw2d::graphics * pgraphics)
    {
 
       ::i32_rectangle rectangle;
@@ -79,14 +79,14 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::PointF float_point((Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y);
+      Gdiplus::PointF ::f32_point((Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y);
 
-      return m_pregion->IsVisible(float_point)  != false;
+      return m_pregion->IsVisible(::f32_point)  != false;
 
    }
 
 
-   bool region::create(::draw2d::graphics * pgraphics, char iCreate)
+   bool region::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
       m_pregion = get(pgraphics);
@@ -171,7 +171,7 @@ namespace draw2d_gdiplus
 
       array < Gdiplus::PointF > pa;
 
-      for(int i = 0; i < m_nCount; i++)
+      for(::i32 i = 0; i < m_nCount; i++)
       {
          pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[i].x, (Gdiplus::REAL) m_lppoints[i].y));
       }
@@ -185,7 +185,7 @@ namespace draw2d_gdiplus
          path.SetFillMode(Gdiplus::FillModeWinding);
       }
 
-      path.AddPolygon(pa.get_data(), (int) pa.get_count());
+      path.AddPolygon(pa.get_data(), (::i32) pa.get_count());
 
       return ___new Gdiplus::Region(&path);
 
@@ -208,18 +208,18 @@ namespace draw2d_gdiplus
          path.SetFillMode(Gdiplus::FillModeWinding);
       }
 
-      int n = 0;
+      ::i32 n = 0;
 
-      for(int i = 0; i < m_nCount; i++)
+      for(::i32 i = 0; i < m_nCount; i++)
       {
-         int jCount = m_lppolycounts[i];
+         ::i32 jCount = m_lppolycounts[i];
          pa.erase_all();
-         for(int j = 0; j < jCount; j++)
+         for(::i32 j = 0; j < jCount; j++)
          {
             pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[n].x, (Gdiplus::REAL) m_lppoints[n].y));
             n++;
          }
-         path.AddPolygon(pa.get_data(), (int) pa.get_count());
+         path.AddPolygon(pa.get_data(), (::i32) pa.get_count());
          path.CloseFigure();
       }
 

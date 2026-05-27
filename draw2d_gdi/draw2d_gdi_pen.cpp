@@ -26,7 +26,7 @@ namespace draw2d_gdi
    }
 
 
-   bool pen::CreatePen(int nPenStyle, int nWidth, ::color::color crColor)
+   bool pen::CreatePen(::i32 nPenStyle, ::i32 nWidth, ::color::color crColor)
    {
 
       return Attach(::CreatePen(nPenStyle, nWidth, crColor));
@@ -42,7 +42,7 @@ namespace draw2d_gdi
    }
 
 
-   bool pen::CreatePen(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush, int nStyleCount, const unsigned int* lpStyle)
+   bool pen::CreatePen(::i32 nPenStyle, ::i32 nWidth, const LOGBRUSH* pLogBrush, ::i32 nStyleCount, const ::u32* lpStyle)
    {
 
       return Attach(::ExtCreatePen(nPenStyle, nWidth, pLogBrush, nStyleCount, (DWORD *) lpStyle));
@@ -50,7 +50,7 @@ namespace draw2d_gdi
    }
 
 
-   int pen::GetExtLogPen(EXTLOGPEN* pLogPen)
+   ::i32 pen::GetExtLogPen(EXTLOGPEN* pLogPen)
    {
 
       ASSERT(get_handle() != nullptr);
@@ -60,7 +60,7 @@ namespace draw2d_gdi
    }
 
 
-   int pen::GetLogPen(LOGPEN* pLogPen)
+   ::i32 pen::GetLogPen(LOGPEN* pLogPen)
    {
 
       if(get_handle() == nullptr)
@@ -71,7 +71,7 @@ namespace draw2d_gdi
    }
 
 
-   void pen::construct(int nPenStyle, int nWidth, ::color::color crColor)
+   void pen::construct(::i32 nPenStyle, ::i32 nWidth, ::color::color crColor)
    {
 
       if (!Attach(::CreatePen(nPenStyle, nWidth, crColor)))
@@ -79,7 +79,7 @@ namespace draw2d_gdi
 
    }
 
-   void pen::construct(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush, int nStyleCount, const unsigned int* lpStyle)
+   void pen::construct(::i32 nPenStyle, ::i32 nWidth, const LOGBRUSH* pLogBrush, ::i32 nStyleCount, const ::u32* lpStyle)
    {
 
       if (!Attach(::ExtCreatePen(nPenStyle, nWidth, pLogBrush, nStyleCount, (DWORD *) lpStyle)))
@@ -121,13 +121,13 @@ namespace draw2d_gdi
       if(m_bProcess)
       {
 
-         CreatePen(PS_SOLID, (int) m_dWidth, rgb(255, 255, 255));
+         CreatePen(PS_SOLID, (::i32) m_dWidth, rgb(255, 255, 255));
 
       }
       else if(m_epen == type_solid)
       {
 
-         CreatePen(PS_SOLID, (int) m_dWidth, m_color.get_rgb());
+         CreatePen(PS_SOLID, (::i32) m_dWidth, m_color.get_rgb());
 
       }
 

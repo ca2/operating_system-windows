@@ -55,7 +55,7 @@ namespace remoting
 
    void DataInputStream::readFully(void* buffer, size_t len)
    {
-      char* typedBuffer = (char *)buffer;
+      ::i8* typedBuffer = (::i8 *)buffer;
       size_t totalRead = 0;
       size_t left = len;
       while (totalRead < len)
@@ -67,18 +67,18 @@ namespace remoting
    }
 
 
-   unsigned char DataInputStream::readUInt8()
+   ::u8 DataInputStream::readUInt8()
    {
-      unsigned char x;
+      ::u8 x;
       readFully(&x, 1);
       return x;
    }
 
 
-   unsigned short DataInputStream::readUInt16()
+   ::u16 DataInputStream::readUInt16()
    {
-      unsigned short x = 0;
-      unsigned char buf[2];
+      ::u16 x = 0;
+      ::u8 buf[2];
       readFully(&buf[0], 2);
       x += SETBYTE(buf[0], 1);
       x += SETBYTE(buf[1], 0);
@@ -86,10 +86,10 @@ namespace remoting
    }
 
 
-   unsigned int DataInputStream::readUInt32()
+   ::u32 DataInputStream::readUInt32()
    {
-      unsigned int x = 0;
-      unsigned char buf[4];
+      ::u32 x = 0;
+      ::u8 buf[4];
       readFully(&buf[0], 4);
       x += SETBYTE(buf[0], 3);
       x += SETBYTE(buf[1], 2);
@@ -99,53 +99,53 @@ namespace remoting
    }
 
 
-   unsigned long long DataInputStream::readUInt64()
+   ::u64 DataInputStream::readUInt64()
    {
-      unsigned long long x = 0;
-      unsigned char buf[8];
+      ::u64 x = 0;
+      ::u8 buf[8];
       readFully(&buf[0], 8);
-      x += (unsigned long long)buf[0] << (7 * 8);
-      x += (unsigned long long)buf[1] << (6 * 8);
-      x += (unsigned long long)buf[2] << (5 * 8);
-      x += (unsigned long long)buf[3] << (4 * 8);
-      x += (unsigned long long)buf[4] << (3 * 8);
-      x += (unsigned long long)buf[5] << (2 * 8);
-      x += (unsigned long long)buf[6] << (1 * 8);
-      x += (unsigned long long)buf[7] << (0 * 8);
+      x += (::u64)buf[0] << (7 * 8);
+      x += (::u64)buf[1] << (6 * 8);
+      x += (::u64)buf[2] << (5 * 8);
+      x += (::u64)buf[3] << (4 * 8);
+      x += (::u64)buf[4] << (3 * 8);
+      x += (::u64)buf[5] << (2 * 8);
+      x += (::u64)buf[6] << (1 * 8);
+      x += (::u64)buf[7] << (0 * 8);
       return x;
    }
 
 
-   char DataInputStream::readInt8()
+   ::i8 DataInputStream::readInt8()
    {
-      char x;
+      ::i8 x;
       readFully(&x, 1);
       return x;
    }
 
 
-   short DataInputStream::readInt16()
+   ::i16 DataInputStream::readInt16()
    {
-      return (short)readUInt16();
+      return (::i16)readUInt16();
    }
 
 
-   int DataInputStream::readInt32()
+   ::i32 DataInputStream::readInt32()
    {
-      return (int)readUInt32();
+      return (::i32)readUInt32();
    }
 
 
-   long long DataInputStream::readInt64()
+   ::i64 DataInputStream::readInt64()
    {
-      return (long long)readUInt64();
+      return (::i64)readUInt64();
    }
 
 
    ::string DataInputStream::read_utf8_string()
    {
       //::string strStorage;
-      unsigned int sizeInBytes = readUInt32();
+      ::u32 sizeInBytes = readUInt32();
       if (sizeInBytes <= 0)
       {
          return {};
@@ -155,7 +155,7 @@ namespace remoting
       buffer.set_size(sizeInBytes);
 
       readFully(buffer.data(), sizeInBytes);
-      ::string utf8String((const char *) buffer.data(), buffer.size());
+      ::string utf8String((const ::i8 *) buffer.data(), buffer.size());
       return utf8String;
 
    }

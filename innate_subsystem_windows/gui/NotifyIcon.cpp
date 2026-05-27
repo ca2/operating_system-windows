@@ -122,7 +122,7 @@ namespace innate_subsystem_windows
    }
 
 
-   void NotifyIcon::setText(const char *text)
+   void NotifyIcon::setText(const ::i8 *text)
    {
       m_nid.uFlags = NIF_TIP;
 
@@ -133,8 +133,8 @@ namespace innate_subsystem_windows
    }
 
    void
-   NotifyIcon::showBalloon(const char *message, const char *caption,
-                         unsigned int timeoutMillis)
+   NotifyIcon::showBalloon(const ::i8 *message, const ::i8 *caption,
+                         ::u32 timeoutMillis)
    {
       m_nid.uFlags = NIF_INFO;
       _tcsncpy_s(m_nid.szInfo, 255, ::wstring(message), _TRUNCATE);

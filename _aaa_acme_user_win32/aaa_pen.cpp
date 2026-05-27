@@ -32,7 +32,7 @@ namespace windows
          }
 
 
-         void pen::update(::nano::graphics::device* pnanodevice)
+         void pen::update(::nano::graphics::context* pgraphicscontext)
          {
 
             if (m_bModified)

@@ -1,7 +1,7 @@
 #include "framework.h"
 #include <eh.h>
 
-unsigned int g_nRedrawThreadID;
+::u32 g_nRedrawThreadID;
 extern bool g_bAppStarted;
 extern void * g_pvoidPluginSystem;
 
@@ -148,7 +148,7 @@ namespace ca2plugin_container
    }
 
 
-   void host::post_message(unsigned int emessage, wparam wparam, lparam lparam)
+   void host::post_message(::u32 emessage, wparam wparam, lparam lparam)
    {
 
       ::PostMessage(m_pacmewindowingwindow, eusermessage, wparam, lparam);
@@ -173,7 +173,7 @@ namespace ca2plugin_container
    bool host::open_link(const ::scoped_string & scopedstrLink, const ::scoped_string & scopedstrTarget)
    {
 
-      ensure_tx(::hotplugin::message_open_url,(void *)strLink.c_str(),(int)strLink.length(), 2000);
+      ensure_tx(::hotplugin::message_open_url,(void *)strLink.c_str(),(::i32)strLink.length(), 2000);
 
       return true;
 
@@ -213,7 +213,7 @@ namespace ca2plugin_container
    }
 
 
-   LRESULT CALLBACK window_proc(::acme::windowing::window * pacmewindowingwindow, unsigned int message, WPARAM wParam, LPARAM lParam)
+   LRESULT CALLBACK window_proc(::acme::windowing::window * pacmewindowingwindow, ::u32 message, WPARAM wParam, LPARAM lParam)
    {
       return DefWindowProc(oswindow, message, wParam, lParam);
    }
@@ -360,7 +360,7 @@ namespace ca2plugin_container
    }
 
 
-   void host::on_receive(::aura::ipc::rx * prx, int message, void * pdata, int len)
+   void host::on_receive(::aura::ipc::rx * prx, ::i32 message, void * pdata, ::i32 len)
    {
 
       if(prx == &m_rx)
@@ -560,7 +560,7 @@ namespace ca2plugin_container
 
    }
 
-   bool host::set_window_position(iptr z,int x,int y,int cx,int cy,UINT nFlags)
+   bool host::set_window_position(iptr z,::i32 x,::i32 y,::i32 cx,::i32 cy,UINT nFlags)
    {
 
       bool bOk = ::hotplugin::host::set_window_position(z,x,y,cx,cy,nFlags);
@@ -622,7 +622,7 @@ namespace ca2plugin_container
 
                      static tick dwLast = 0;
                      static ::collection::count c = 0;
-                     static double dLast = 0.0;
+                     static ::f64 dLast = 0.0;
 
                      c++;
 

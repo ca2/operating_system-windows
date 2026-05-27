@@ -21,8 +21,8 @@ namespace windows
 
 
       virtual void * on_interprocess_receive(rx * prx, const ::scoped_string & scopedstrMessage);
-      virtual void * on_interprocess_receive(rx * prx, int message, void * pdata, memsize len);
-      virtual void * on_interprocess_post(rx * prx, long long a, long long b);
+      virtual void * on_interprocess_receive(rx * prx, ::i32 message, void * pdata, memsize len);
+      virtual void * on_interprocess_post(rx * prx, ::i64 a, ::i64 b);
 
 
       virtual bool on_idle();

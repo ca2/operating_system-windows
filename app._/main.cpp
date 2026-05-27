@@ -135,7 +135,7 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //      //}
 //      ////////////////////////////////////////////////////////////
 //      // configuration encryption system : with C:\\" hardware :-)
-//      // short login               short password  access configuration
+//      // ::i16 login               ::i16 password  access configuration
 //      // |                         |               |
 //      // -----------------------   --       --------
 //      //                       |    |       |
@@ -174,7 +174,7 @@ pacmedir->system() / "config\\appfy\\appfy_beg_debug_box.txt"))
 //   }
 
 
-void wmain(int argc, wchar_t * wargv[])
+void wmain(::i32 argc, wchar_t * wargv[])
 {
 
    console console(argc, wargv);
@@ -473,7 +473,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
          ICON_HEADER* phd = (ICON_HEADER*)memory.get_data();
 
-         int iTotalHd = sizeof(ICON_HEADER) + (sizeof(ICON_ITEM) * phd->idCount);
+         ::i32 iTotalHd = sizeof(ICON_HEADER) + (sizeof(ICON_ITEM) * phd->idCount);
 
          ICON_ITEM* itema = (ICON_ITEM*)(memory.get_data() + 6);
 
@@ -485,8 +485,8 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
          pfileHd->write(&hd, sizeof(hd));
 
-         int iSize = iTotalHd;
-         for (int i = 0; i < phd->idCount; i++)
+         ::i32 iSize = iTotalHd;
+         for (::i32 i = 0; i < phd->idCount; i++)
          {
             ICON_ITEM* pitem = &itema[i];
             MEM_ICON_ITEM item;

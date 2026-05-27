@@ -161,7 +161,7 @@ namespace win32
          }
 
 
-         void windowing::display_error_trap_push(int i)
+         void windowing::display_error_trap_push(::i32 i)
          {
 
 
@@ -180,7 +180,7 @@ namespace win32
          }
 
 
-         void windowing::display_error_trap_pop_ignored(int i)
+         void windowing::display_error_trap_pop_ignored(::i32 i)
          {
 
             //node()->windowing_system_display_error_trap_pop_ignored(i);
@@ -213,14 +213,14 @@ namespace win32
          //    }
          //
          //
-         //    void node::display_error_trap_push(int i)
+         //    void node::display_error_trap_push(::i32 i)
          //    {
          //
          //
          //    }
          //
          //
-         //    void node::display_error_trap_pop_ignored(int i)
+         //    void node::display_error_trap_pop_ignored(::i32 i)
          //    {
          //
          //
@@ -314,7 +314,7 @@ namespace win32
 
             string str;
 
-            str.formatf("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.m_uchRed, colorWindowBackground.m_uchGreen, colorWindowBackground.m_uchBlue);
+            str.formatf("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.m_u8Red, colorWindowBackground.m_u8Green, colorWindowBackground.m_u8Blue);
 
             ::output_debug_string(str);
 
@@ -345,7 +345,7 @@ namespace win32
 
             ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
-            unsigned int dwSystemUseLightTheme;
+            ::u32 dwSystemUseLightTheme;
             if (bSet)
             {
                dwSystemUseLightTheme = 0;
@@ -366,7 +366,7 @@ namespace win32
 
             ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
-            unsigned int dwAppsUseLightTheme;
+            ::u32 dwAppsUseLightTheme;
             if (bSet)
             {
                dwAppsUseLightTheme = 0;

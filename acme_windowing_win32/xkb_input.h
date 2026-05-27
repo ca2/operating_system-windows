@@ -21,8 +21,8 @@ namespace xkb_input
 
 
       ::string          m_strXkbKeymapString;
-      int             m_iXkbKeymapFormat;
-      int             m_iXkbKeymapFlags;
+      ::i32             m_iXkbKeymapFormat;
+      ::i32             m_iXkbKeymapFlags;
       bool              m_bNewXkbKeymap;
 
       ::xkb_context *   m_pxkbcontext;
@@ -35,10 +35,10 @@ namespace xkb_input
 
 
 
-      virtual void __xkb_keymap_new_from_string(const_char_pointer p, int format, int flags);
+      virtual void __xkb_keymap_new_from_string(const_char_pointer p, ::i32 format, ::i32 flags);
 
 
-      virtual void xkb_keymap_new_from_string(const_char_pointer p, int format, int flags);
+      virtual void xkb_keymap_new_from_string(const_char_pointer p, ::i32 format, ::i32 flags);
 
 
       virtual void defer_update_xkb_keymap();

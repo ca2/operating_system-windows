@@ -95,7 +95,7 @@ namespace draw2d_gdi
    }
 
 
-   int palette::GetEntryCount()
+   ::i32 palette::GetEntryCount()
    {
 
       ASSERT(get_os_data() != nullptr);
@@ -104,7 +104,7 @@ namespace draw2d_gdi
 
       get_object(sizeof(WORD), &nEntries);
 
-      return (int)nEntries;
+      return (::i32)nEntries;
 
    }
 

@@ -30,7 +30,7 @@ namespace apex_windows
 
 
       void call(const ::scoped_string & scopedstrUri, const class time & timeTimeout) override;
-      //void send(int message, void * pdata, int len, const class time & timeTimeout) override;
+      //void send(::i32 message, void * pdata, ::i32 len, const class time & timeTimeout) override;
 
 
       bool is_caller_ok() override;

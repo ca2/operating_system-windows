@@ -50,13 +50,13 @@ namespace innate_subsystem_windows
       //
 
       innate_subsystem::TabContainer &getTabs() override;
-      int getTabCount() override;
-      ::innate_subsystem::TabInterface *getTab(int index) override;
-      void addTab(innate_subsystem::WindowInterface *pwindow, const char *caption) override;
-      void showTab(int index) override;
+      ::i32 getTabCount() override;
+      ::innate_subsystem::TabInterface *getTab(::i32 index) override;
+      void addTab(innate_subsystem::WindowInterface *pwindow, const ::i8 *caption) override;
+      void showTab(::i32 index) override;
       void showTab(innate_subsystem::WindowInterface *pwindow) override;
       void deleteAllTabs() override;
-      void removeTab(int index) override;
+      void removeTab(::i32 index) override;
 
 
       void moveWindowToTabControl(innate_subsystem::WindowInterface *pwindow) override;
@@ -65,12 +65,12 @@ namespace innate_subsystem_windows
       // Return selected tab number
       //
 
-      int getSelectedTabIndex() override;
+      ::i32 getSelectedTabIndex() override;
 
       //
       // Tab work rect methods
       //
-      bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) override;
+      bool on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam) override;
 
       bool onTabNotification(windows_reflect_notify_t & notify) override;
 

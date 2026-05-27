@@ -15,7 +15,7 @@ namespace draw2d_gdiplus
 {
 
 
-   void graphics::_gdiplus_draw_text(::draw2d::path * ppathParam, const ::scoped_string & scopedstr, double_rectangle & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfontParam, double dFontWidth, ::draw2d::brush * pbrushParam, bool bMeasure)
+   void graphics::_gdiplus_draw_text(::draw2d::path * ppathParam, const ::scoped_string & scopedstr, ::f64_rectangle & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfontParam, ::f64 dFontWidth, ::draw2d::brush * pbrushParam, bool bMeasure)
    {
 
       if (scopedstr.is_empty())
@@ -157,7 +157,7 @@ namespace draw2d_gdiplus
       //{
 
       Gdiplus::FontFamily f;
-      int nStyle;
+      ::i32 nStyle;
       Gdiplus::REAL size;
       Gdiplus::Unit unit;
 
@@ -205,21 +205,21 @@ namespace draw2d_gdiplus
       if (dFontWidth == 1.0)
       {
 
-         Gdiplus::RectF float_rectangle((Gdiplus::REAL)rectangleParam.left, (Gdiplus::REAL)rectangleParam.top, (Gdiplus::REAL)(width(rectangleParam) * dFontWidth), (Gdiplus::REAL)(height(rectangleParam)));
+         Gdiplus::RectF rectf((Gdiplus::REAL)rectangleParam.left, (Gdiplus::REAL)rectangleParam.top, (Gdiplus::REAL)(width(rectangleParam) * dFontWidth), (Gdiplus::REAL)(height(rectangleParam)));
 
          character_count iSize = ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length();
 
          if (ppath)
          {
 
-            status = ppath->AddString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)iSize, &f, nStyle, size, float_rectangle, &format);
+            status = ppath->AddString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)iSize, &f, nStyle, size, rectf, &format);
 
             if (bMeasure)
             {
 
                Gdiplus::RectF box;
 
-               status = pgraphics->MeasureString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)iSize, pfont, float_rectangle, &format, &box);
+               status = pgraphics->MeasureString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)iSize, pfont, rectf, &format, &box);
 
                copy(rectangleParam, box);
 
@@ -245,14 +245,14 @@ namespace draw2d_gdiplus
 
             }
 
-            status = pgraphics->DrawString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length(), pfont, float_rectangle, &format, pbrush);
+            status = pgraphics->DrawString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length(), pfont, rectf, &format, pbrush);
 
             if (bMeasure)
             {
 
                Gdiplus::RectF box;
 
-               status = pgraphics->MeasureString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)iSize, pfont, float_rectangle, &format, &box);
+               status = pgraphics->MeasureString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)iSize, pfont, rectf, &format, &box);
 
                copy(rectangleParam, box);
 
@@ -275,7 +275,7 @@ namespace draw2d_gdiplus
 
          //auto e = pgraphics->GetTextRenderingHint();
 
-         //status = pgraphics->DrawString(ptext->m_wstr, (INT)iSize, pfont, float_rectangle, &format, pbrush);
+         //status = pgraphics->DrawString(ptext->m_wstr, (INT)iSize, pfont, rectf, &format, pbrush);
 
       //}
 
@@ -295,20 +295,20 @@ namespace draw2d_gdiplus
 
          status = pmNew->Scale((Gdiplus::REAL)dFontWidth, (Gdiplus::REAL)1.0, Gdiplus::MatrixOrderAppend);
 
-         Gdiplus::RectF float_rectangle(0, 0, (Gdiplus::REAL)(width(rectangleParam) * dFontWidth), (Gdiplus::REAL)(height(rectangleParam)));
+         Gdiplus::RectF rectf(0, 0, (Gdiplus::REAL)(width(rectangleParam) * dFontWidth), (Gdiplus::REAL)(height(rectangleParam)));
 
          status = pgraphics->SetTransform(pmNew);
 
          character_count iSize = ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length();
 
-         status = pgraphics->DrawString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)iSize, pfont, float_rectangle, &format, pbrush);
+         status = pgraphics->DrawString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)iSize, pfont, rectf, &format, pbrush);
 
          if (bMeasure)
          {
 
             Gdiplus::RectF box;
 
-            status = pgraphics->MeasureString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)iSize, pfont, float_rectangle, &format, &box);
+            status = pgraphics->MeasureString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)iSize, pfont, rectf, &format, &box);
 
             copy(rectangleParam, box);
 
@@ -329,7 +329,7 @@ namespace draw2d_gdiplus
 
          //status = pmNew->Scale((Gdiplus::REAL) m_pfont->m_dFontWidth, (Gdiplus::REAL) 1.0, Gdiplus::MatrixOrderAppend);
 
-         //Gdiplus::RectF float_rectangle(0, 0, (Gdiplus::REAL) (width(rectangleParam) * m_pfont->m_dFontWidth), (Gdiplus::REAL) (height(rectangleParam)));
+         //Gdiplus::RectF rectf(0, 0, (Gdiplus::REAL) (width(rectangleParam) * m_pfont->m_dFontWidth), (Gdiplus::REAL) (height(rectangleParam)));
 
          //status = ppath->SetTransform(pmNew);
 
@@ -341,7 +341,7 @@ namespace draw2d_gdiplus
 
          //character_count iSize = ptext->m_wstr.get_length();
 
-         //status = ppath->AddString(ptext->m_wstr, (INT)iSize, f, nStyle, emSize, float_rectangle, &format);
+         //status = ppath->AddString(ptext->m_wstr, (INT)iSize, f, nStyle, emSize, rectf, &format);
 
          //status = ppath->SetTransform(m);
 

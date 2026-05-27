@@ -2,7 +2,7 @@
 
 extern const TCHAR *exit_action_strings[];
 
-int create_messages() {
+::i32 create_messages() {
   HKEY key;
 
   TCHAR registry[KEY_LENGTH];
@@ -21,14 +21,14 @@ int create_messages() {
   GetModuleFileName(0, path, _countof(path));
 
   /* Try to register the module but don't worry so much on failure */
-  RegSetValueEx(key, _T("EventMessageFile"), 0, REG_SZ, (const unsigned char *) path, (unsigned long) (_tcslen(path) +  1) * sizeof(TCHAR));
+  RegSetValueEx(key, _T("EventMessageFile"), 0, REG_SZ, (const ::u8 *) path, (unsigned long) (_tcslen(path) +  1) * sizeof(TCHAR));
   unsigned long types = EVENTLOG_INFORMATION_TYPE | EVENTLOG_WARNING_TYPE | EVENTLOG_ERROR_TYPE;
-  RegSetValueEx(key, _T("TypesSupported"), 0, REG_DWORD, (const unsigned char *) &types, sizeof(types));
+  RegSetValueEx(key, _T("TypesSupported"), 0, REG_DWORD, (const ::u8 *) &types, sizeof(types));
 
   return 0;
 }
 
-int create_parameters(nssm_service_t *service, bool editing) {
+::i32 create_parameters(nssm_service_t *service, bool editing) {
   /* Try to open the registry */
   HKEY key = open_registry(service->name, KEY_WRITE);
   if (! key) return 1;
@@ -56,7 +56,7 @@ int create_parameters(nssm_service_t *service, bool editing) {
   if (service->affinity) {
     TCHAR *string;
     if (! affinity_mask_to_string(service->affinity, &string)) {
-      if (RegSetValueEx(key, NSSM_REG_AFFINITY, 0, REG_SZ, (const unsigned char *) string, (unsigned long) (_tcslen(string) + 1) * sizeof(TCHAR)) != ERROR_SUCCESS) {
+      if (RegSetValueEx(key, NSSM_REG_AFFINITY, 0, REG_SZ, (const ::u8 *) string, (unsigned long) (_tcslen(string) + 1) * sizeof(TCHAR)) != ERROR_SUCCESS) {
         log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_SETVALUE_FAILED, NSSM_REG_AFFINITY, error_string(GetLastError()), 0);
         HeapFree(GetProcessHeap(), 0, string);
         return 5;
@@ -124,13 +124,13 @@ int create_parameters(nssm_service_t *service, bool editing) {
 
   /* Environment */
   if (service->env) {
-    if (RegSetValueEx(key, NSSM_REG_ENV, 0, REG_MULTI_SZ, (const unsigned char *) service->env, (unsigned long) service->envlen * sizeof(TCHAR)) != ERROR_SUCCESS) {
+    if (RegSetValueEx(key, NSSM_REG_ENV, 0, REG_MULTI_SZ, (const ::u8 *) service->env, (unsigned long) service->envlen * sizeof(TCHAR)) != ERROR_SUCCESS) {
       log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_SETVALUE_FAILED, NSSM_REG_ENV, error_string(GetLastError()), 0);
     }
   }
   else if (editing) RegDeleteValue(key, NSSM_REG_ENV);
   if (service->env_extra) {
-    if (RegSetValueEx(key, NSSM_REG_ENV_EXTRA, 0, REG_MULTI_SZ, (const unsigned char *) service->env_extra, (unsigned long) service->env_extralen * sizeof(TCHAR)) != ERROR_SUCCESS) {
+    if (RegSetValueEx(key, NSSM_REG_ENV_EXTRA, 0, REG_MULTI_SZ, (const ::u8 *) service->env_extra, (unsigned long) service->env_extralen * sizeof(TCHAR)) != ERROR_SUCCESS) {
       log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_SETVALUE_FAILED, NSSM_REG_ENV_EXTRA, error_string(GetLastError()), 0);
     }
   }
@@ -142,7 +142,7 @@ int create_parameters(nssm_service_t *service, bool editing) {
   return 0;
 }
 
-int create_exit_action(TCHAR *service_name, const TCHAR *action_string, bool editing) {
+::i32 create_exit_action(TCHAR *service_name, const TCHAR *action_string, bool editing) {
   /* Get registry */
   TCHAR registry[KEY_LENGTH];
   if (_sntprintf_s(registry, _countof(registry), _TRUNCATE, NSSM_REGISTRY _T("\\%s"), service_name, NSSM_REG_EXIT) < 0) {
@@ -165,7 +165,7 @@ int create_exit_action(TCHAR *service_name, const TCHAR *action_string, bool edi
   }
 
   /* Create the default value */
-  if (RegSetValueEx(key, 0, 0, REG_SZ, (const unsigned char *) action_string, (unsigned long) (_tcslen(action_string) + 1) * sizeof(TCHAR)) != ERROR_SUCCESS) {
+  if (RegSetValueEx(key, 0, 0, REG_SZ, (const ::u8 *) action_string, (unsigned long) (_tcslen(action_string) + 1) * sizeof(TCHAR)) != ERROR_SUCCESS) {
     log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_SETVALUE_FAILED, NSSM_REG_EXIT, error_string(GetLastError()), 0);
     RegCloseKey(key);
     return 3;
@@ -177,7 +177,7 @@ int create_exit_action(TCHAR *service_name, const TCHAR *action_string, bool edi
   return 0;
 }
 
-int get_environment(TCHAR *service_name, HKEY key, TCHAR *value, TCHAR **env, unsigned long *envlen) {
+::i32 get_environment(TCHAR *service_name, HKEY key, TCHAR *value, TCHAR **env, unsigned long *envlen) {
   unsigned long type = REG_MULTI_SZ;
 
   /* Dummy test to find buffer i32_size */
@@ -212,7 +212,7 @@ int get_environment(TCHAR *service_name, HKEY key, TCHAR *value, TCHAR **env, un
   }
 
   /* Actually get the strings */
-  ret = RegQueryValueEx(key, value, 0, &type, (unsigned char *) *env, envlen);
+  ret = RegQueryValueEx(key, value, 0, &type, (::u8 *) *env, envlen);
   if (ret != ERROR_SUCCESS) {
     log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_QUERYVALUE_FAILED, value, error_string(GetLastError()), 0);
     HeapFree(GetProcessHeap(), 0, *env);
@@ -225,7 +225,7 @@ int get_environment(TCHAR *service_name, HKEY key, TCHAR *value, TCHAR **env, un
 }
 
 
-int get_string(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool expand, bool sanitise, bool must_exist) {
+::i32 get_string(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool expand, bool sanitise, bool must_exist) {
   TCHAR *buffer = (TCHAR *) HeapAlloc(GetProcessHeap(), 0, datalen);
   if (! buffer) {
     log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_OUT_OF_MEMORY, value, _T("get_string()"), 0);
@@ -237,7 +237,7 @@ int get_string(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool 
   unsigned long type = REG_EXPAND_SZ;
   unsigned long buflen = datalen;
 
-  unsigned long ret = RegQueryValueEx(key, value, 0, &type, (unsigned char *) buffer, &buflen);
+  unsigned long ret = RegQueryValueEx(key, value, 0, &type, (::u8 *) buffer, &buflen);
   if (ret != ERROR_SUCCESS) {
     unsigned long error = GetLastError();
     HeapFree(GetProcessHeap(), 0, buffer);
@@ -276,15 +276,15 @@ int get_string(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool 
   return 0;
 }
 
-int get_string(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool sanitise) {
+::i32 get_string(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool sanitise) {
   return get_string(key, value, data, datalen, false, sanitise, true);
 }
 
-int expand_parameter(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool sanitise, bool must_exist) {
+::i32 expand_parameter(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool sanitise, bool must_exist) {
   return get_string(key, value, data, datalen, true, sanitise, must_exist);
 }
 
-int expand_parameter(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool sanitise) {
+::i32 expand_parameter(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool sanitise) {
   return expand_parameter(key, value, data, datalen, sanitise, true);
 }
 
@@ -293,19 +293,19 @@ int expand_parameter(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen,
   Returns: 0 if it was set.
            1 on error.
 */
-int set_string(HKEY key, TCHAR *value, TCHAR *string, bool expand) {
+::i32 set_string(HKEY key, TCHAR *value, TCHAR *string, bool expand) {
   unsigned long type = expand ? REG_EXPAND_SZ : REG_SZ;
-  if (RegSetValueEx(key, value, 0, type, (const unsigned char *) string, (unsigned long) (_tcslen(string) + 1) * sizeof(TCHAR)) == ERROR_SUCCESS) return 0;
+  if (RegSetValueEx(key, value, 0, type, (const ::u8 *) string, (unsigned long) (_tcslen(string) + 1) * sizeof(TCHAR)) == ERROR_SUCCESS) return 0;
   log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_SETVALUE_FAILED, value, error_string(GetLastError()), 0);
   return 1;
 }
 
-int set_string(HKEY key, TCHAR *value, TCHAR *string) {
+::i32 set_string(HKEY key, TCHAR *value, TCHAR *string) {
   return set_string(key, value, string, false);
   return 1;
 }
 
-int set_expand_string(HKEY key, TCHAR *value, TCHAR *string) {
+::i32 set_expand_string(HKEY key, TCHAR *value, TCHAR *string) {
   return set_string(key, value, string, true);
   return 1;
 }
@@ -315,8 +315,8 @@ int set_expand_string(HKEY key, TCHAR *value, TCHAR *string) {
   Returns: 0 if it was set.
            1 on error.
 */
-int set_number(HKEY key, TCHAR *value, unsigned long number) {
-  if (RegSetValueEx(key, value, 0, REG_DWORD, (const unsigned char *) &number, sizeof(number)) == ERROR_SUCCESS) return 0;
+::i32 set_number(HKEY key, TCHAR *value, unsigned long number) {
+  if (RegSetValueEx(key, value, 0, REG_DWORD, (const ::u8 *) &number, sizeof(number)) == ERROR_SUCCESS) return 0;
   log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_SETVALUE_FAILED, value, error_string(GetLastError()), 0);
   return 1;
 }
@@ -328,11 +328,11 @@ int set_number(HKEY key, TCHAR *value, unsigned long number) {
            -1 if none was found and must_exist is true.
            -2 otherwise.
 */
-int get_number(HKEY key, TCHAR *value, unsigned long *number, bool must_exist) {
+::i32 get_number(HKEY key, TCHAR *value, unsigned long *number, bool must_exist) {
   unsigned long type = REG_DWORD;
   unsigned long number_len = sizeof(unsigned long);
 
-  int ret = RegQueryValueEx(key, value, 0, &type, (unsigned char *) number, &number_len);
+  ::i32 ret = RegQueryValueEx(key, value, 0, &type, (::u8 *) number, &number_len);
   if (ret == ERROR_SUCCESS) return 1;
 
   if (ret == ERROR_FILE_NOT_FOUND) {
@@ -345,12 +345,12 @@ int get_number(HKEY key, TCHAR *value, unsigned long *number, bool must_exist) {
   return -2;
 }
 
-int get_number(HKEY key, TCHAR *value, unsigned long *number) {
+::i32 get_number(HKEY key, TCHAR *value, unsigned long *number) {
   return get_number(key, value, number, true);
 }
 
 /* Replace nullptr with CRLF. Leave nullptr nullptr as the end marker. */
-int format_double_null(TCHAR *dn, unsigned long dnlen, TCHAR **formatted, unsigned long *newlen) {
+::i32 format_f64_null(TCHAR *dn, unsigned long dnlen, TCHAR **formatted, unsigned long *newlen) {
   unsigned long i, j;
   *newlen = dnlen;
 
@@ -382,7 +382,7 @@ int format_double_null(TCHAR *dn, unsigned long dnlen, TCHAR **formatted, unsign
 }
 
 /* Strip CR and replace LF with nullptr. */
-int unformat_double_null(TCHAR *dn, unsigned long dnlen, TCHAR **unformatted, unsigned long *newlen) {
+::i32 unformat_f64_null(TCHAR *dn, unsigned long dnlen, TCHAR **unformatted, unsigned long *newlen) {
   unsigned long i, j;
   *newlen = 0;
 
@@ -433,7 +433,7 @@ void override_::times(TCHAR *service_name, HKEY key, TCHAR *value, unsigned long
   unsigned long type = REG_DWORD;
   unsigned long buflen = sizeof(unsigned long);
   bool ok = false;
-  unsigned long ret = RegQueryValueEx(key, value, 0, &type, (unsigned char *) buffer, &buflen);
+  unsigned long ret = RegQueryValueEx(key, value, 0, &type, (::u8 *) buffer, &buflen);
   if (ret != ERROR_SUCCESS) {
     if (ret != ERROR_FILE_NOT_FOUND) {
       if (type != REG_DWORD) {
@@ -453,7 +453,7 @@ HKEY open_registry(const TCHAR *service_name, const TCHAR *sub, REGSAM sam) {
   /* Get registry */
   TCHAR registry[KEY_LENGTH];
   HKEY key;
-  int ret;
+  ::i32 ret;
 
   if (sub) ret = _sntprintf_s(registry, _countof(registry), _TRUNCATE, NSSM_REGISTRY _T("\\%s"), service_name, sub);
   else ret = _sntprintf_s(registry, _countof(registry), _TRUNCATE, NSSM_REGISTRY, service_name);
@@ -482,7 +482,7 @@ HKEY open_registry(const TCHAR *service_name, REGSAM sam) {
   return open_registry(service_name, 0, sam);
 }
 
-int get_io_parameters(nssm_service_t *service, HKEY key) {
+::i32 get_io_parameters(nssm_service_t *service, HKEY key) {
   /* stdin */
   if (get_createfile_parameters(key, NSSM_REG_STDIN, service->stdin_path, &service->stdin_sharing, NSSM_STDIN_SHARING, &service->stdin_disposition, NSSM_STDIN_DISPOSITION, &service->stdin_flags, NSSM_STDIN_FLAGS)) {
     service->stdin_sharing = service->stdin_disposition = service->stdin_flags = 0;
@@ -507,7 +507,7 @@ int get_io_parameters(nssm_service_t *service, HKEY key) {
   return 0;
 }
 
-int get_parameters(nssm_service_t *service, STARTUPINFO *si) {
+::i32 get_parameters(nssm_service_t *service, STARTUPINFO *si) {
   unsigned long ret;
 
   /* Try to open the registry */
@@ -629,7 +629,7 @@ int get_parameters(nssm_service_t *service, STARTUPINFO *si) {
   unsigned long stop_method_skip;
   unsigned long buflen = sizeof(stop_method_skip);
   bool stop_ok = false;
-  ret = RegQueryValueEx(key, NSSM_REG_STOP_METHOD_SKIP, 0, &type, (unsigned char *) &stop_method_skip, &buflen);
+  ret = RegQueryValueEx(key, NSSM_REG_STOP_METHOD_SKIP, 0, &type, (::u8 *) &stop_method_skip, &buflen);
   if (ret != ERROR_SUCCESS) {
     if (ret != ERROR_FILE_NOT_FOUND) {
       if (type != REG_DWORD) {
@@ -654,7 +654,7 @@ int get_parameters(nssm_service_t *service, STARTUPINFO *si) {
   service->default_exit_action = NSSM_EXIT_RESTART;
   TCHAR action_string[ACTION_LEN];
   if (! get_exit_action(service->name, 0, action_string, &default_action)) {
-    for (int i = 0; exit_action_strings[i]; i++) {
+    for (::i32 i = 0; exit_action_strings[i]; i++) {
       if (! _tcsnicmp((const TCHAR *) action_string, exit_action_strings[i], ACTION_LEN)) {
         service->default_exit_action = i;
         break;
@@ -683,7 +683,7 @@ int get_parameters(nssm_service_t *service, STARTUPINFO *si) {
   Returns: 0 on success.
            1 on error.
 */
-int get_exit_action(const TCHAR *service_name, unsigned long *ret, TCHAR *action, bool *default_action) {
+::i32 get_exit_action(const TCHAR *service_name, unsigned long *ret, TCHAR *action, bool *default_action) {
   /* Are we returning the default action or a status-specific one? */
   *default_action = ! ret;
 
@@ -700,7 +700,7 @@ int get_exit_action(const TCHAR *service_name, unsigned long *ret, TCHAR *action
     RegCloseKey(key);
     return get_exit_action(service_name, 0, action, default_action);
   }
-  if (RegQueryValueEx(key, code, 0, &type, (unsigned char *) action, &action_len) != ERROR_SUCCESS) {
+  if (RegQueryValueEx(key, code, 0, &type, (::u8 *) action, &action_len) != ERROR_SUCCESS) {
     RegCloseKey(key);
     /* Try again with * as the key if an exit code was defined */
     if (ret) return get_exit_action(service_name, 0, action, default_action);

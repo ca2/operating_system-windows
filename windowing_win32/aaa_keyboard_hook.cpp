@@ -17,11 +17,11 @@ namespace keyboard_hook
 
    HHOOK g_hhook = nullptr;
 
-   int alt = 0;
+   ::i32 alt = 0;
 
-   int g_bRun = false;
+   ::i32 g_bRun = false;
 
-   LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
+   LRESULT CALLBACK LowLevelKeyboardProc(::i32 nCode, WPARAM wParam, LPARAM lParam)
    {
 
       if (nCode == 0)
@@ -110,7 +110,7 @@ namespace keyboard_hook
       while (::task_get_run() && g_bRun)
       {
 
-         int iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
+         ::i32 iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
 
          if (iRet == 0)
          {

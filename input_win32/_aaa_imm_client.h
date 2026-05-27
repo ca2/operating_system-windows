@@ -33,7 +33,7 @@ public:
    DECLARE_MESSAGE_HANDLER(on_message_set_focus);
    DECLARE_MESSAGE_HANDLER(on_message_kill_focus);
 
-   virtual int on_text_composition_message(int iMessage);
+   virtual ::i32 on_text_composition_message(::i32 iMessage);
 
    virtual void on_text_composition_done() override;
 
@@ -81,7 +81,7 @@ public:
 //   DECLARE_MESSAGE_HANDLER(on_message_set_focus);
 //   DECLARE_MESSAGE_HANDLER(on_message_kill_focus);
 //
-//   virtual int on_text_composition_message(int iMessage);
+//   virtual ::i32 on_text_composition_message(::i32 iMessage);
 //
 //   virtual void on_text_composition_done() override;
 //

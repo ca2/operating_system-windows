@@ -38,15 +38,15 @@ namespace aura_windows
       virtual bool _os_calc_system_dark_mode() override;
 
 
-      virtual ::color::color get_default_color(unsigned long long u) override;
+      virtual ::color::color get_default_color(::u64 u) override;
 
-      virtual void set_console_colors(unsigned int dwScreenColors, unsigned int dwPopupColors, unsigned int dwWindowAlpha) override;
+      virtual void set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha) override;
 
       //virtual void set_system_dark_mode1(bool bSet = true);
 
       //virtual void set_app_dark_mode1(bool bSet = true);
 
-      virtual double get_time_zone() override;
+      virtual ::f64 get_time_zone() override;
 
       //virtual void get_system_time(system_time_t * psystemtime) override;
 
@@ -64,7 +64,7 @@ namespace aura_windows
       virtual void system_main() override;
 
 
-      virtual HICON extract_resource_icon(const ::scoped_string & scopedstrPath, int& cx, int& cy, int iIcon);
+      virtual HICON extract_resource_icon(const ::scoped_string & scopedstrPath, ::i32& cx, ::i32& cy, ::i32 iIcon);
 
       //void* HICON_from_ico_file(const ::block& block);
       void* HICON_from_image(::image::image * pimage);

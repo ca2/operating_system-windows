@@ -64,7 +64,7 @@
 
       }
 
-      int File::_fd()
+      ::i32 File::_fd()
       {
 
          throw ::not_implemented();

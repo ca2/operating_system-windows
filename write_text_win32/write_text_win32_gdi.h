@@ -6,7 +6,7 @@ namespace write_text_win32_gdi
 {
 
 
-   CLASS_DECL_WRITE_TEXT_WIN32::enum_character_set get_character_set(int iCharacterSet);
+   CLASS_DECL_WRITE_TEXT_WIN32::enum_character_set get_character_set(::i32 iCharacterSet);
 
 
 } // namespace write_text_win32_gdi

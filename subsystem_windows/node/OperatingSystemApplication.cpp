@@ -104,7 +104,7 @@ namespace subsystem_windows
       //}
    }
 
-   // int OperatingSystemApplication::processMessages()
+   // ::i32 OperatingSystemApplication::processMessages()
    // {
    //    MSG msg;
    //    BOOL ret;
@@ -118,11 +118,11 @@ namespace subsystem_windows
    //       }
    //    }
    //
-   //    return (int)msg.wParam;
+   //    return (::i32)msg.wParam;
    // }
 
 
-   void OperatingSystemApplication::postMessage(unsigned int uMessage, ::wparam wparam, ::lparam lparam)
+   void OperatingSystemApplication::postMessage(::u32 uMessage, ::wparam wparam, ::lparam lparam)
    {
       system()->acme_windowing()->post([this, uMessage, wparam, lparam]()
       {
@@ -180,7 +180,7 @@ namespace subsystem_windows
    }
 
    
-   int OperatingSystemApplication::getExitCode()
+   ::i32 OperatingSystemApplication::getExitCode()
    {
 
       return m_iExitCode;
@@ -188,7 +188,7 @@ namespace subsystem_windows
    }
 
    
-   void OperatingSystemApplication::setExitCode(int iExitCode)
+   void OperatingSystemApplication::setExitCode(::i32 iExitCode)
    {
 
       m_iExitCode = iExitCode; 
@@ -234,7 +234,7 @@ namespace subsystem_windows
    //    }
    //    return DefWindowProc(hWnd, msg, wparam, lparam);
    // }
-   void OperatingSystemApplication::onMainThreadMessage(unsigned int message, ::wparam wparam, ::lparam lparam)
+   void OperatingSystemApplication::onMainThreadMessage(::u32 message, ::wparam wparam, ::lparam lparam)
    {
 
       m_poperatingsystemapplicationCallback->onMainThreadMessage(message, wparam, lparam);

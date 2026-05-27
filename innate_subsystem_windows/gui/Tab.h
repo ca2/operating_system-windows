@@ -36,15 +36,15 @@ namespace innate_subsystem_windows
    {
    public:
       Tab();
-      void initialize_tab(::innate_subsystem::WindowInterface *dialog, const char *caption) override;
+      void initialize_tab(::innate_subsystem::WindowInterface *dialog, const ::i8 *caption) override;
 
       //
       // Access methods to protected members
       //
 
-      void setCaption(const char *caption) override { m_caption = caption; }
+      void setCaption(const ::i8 *caption) override { m_caption = caption; }
 
-      const char *getCaption() override;
+      const ::i8 *getCaption() override;
 
       void setWindow(::innate_subsystem::WindowInterface  *pdialog) override;
       ::innate_subsystem::WindowInterface *getWindow() override;

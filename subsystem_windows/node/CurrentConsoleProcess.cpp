@@ -71,8 +71,8 @@ namespace subsystem_windows
 
       m_plogwriter->debug("sti: cb = {}, hStdError = %p, hStdInput = %p,"
                    " hStdOutput = %p, dwFlags = %u",
-                   (unsigned int)sti.cb, (void *)sti.hStdError, (void *)sti.hStdInput, (void *)sti.hStdOutput,
-                   (unsigned int)sti.dwFlags);
+                   (::u32)sti.cb, (void *)sti.hStdError, (void *)sti.hStdInput, (void *)sti.hStdOutput,
+                   (::u32)sti.dwFlags);
 
       try
       {
@@ -82,7 +82,7 @@ namespace subsystem_windows
 
          m_plogwriter->debug("Try CreateProcessAsUser({} 0, {}, 0, 0, {}, NORMAL_PRIORITY_CLASS, 0, 0,"
                       " sti, pi)",
-                      (void *)userToken, commandLine, (int)pprocessWindows->m_handlesIsInherited);
+                      (void *)userToken, commandLine, (::i32)pprocessWindows->m_handlesIsInherited);
          if (CreateProcessAsUser(userToken, 0, (LPTSTR)::wstring(commandLine).c_str(), 0, 0,
                                  pprocessWindows->m_handlesIsInherited,
                                  NORMAL_PRIORITY_CLASS, 0, 0, &sti, &pi) == 0)

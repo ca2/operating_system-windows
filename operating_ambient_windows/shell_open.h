@@ -25,8 +25,8 @@ namespace windows
       virtual void initialize(::particle * pparticle) override;
 
       static HDDEDATA CALLBACK DdeCallback(
-         unsigned int uType,
-         unsigned int uFmt,
+         ::u32 uType,
+         ::u32 uFmt,
          HCONV hconv,
          HDDEDATA hsz1,
          HDDEDATA hsz2,

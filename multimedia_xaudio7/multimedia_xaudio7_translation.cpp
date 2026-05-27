@@ -25,7 +25,7 @@ namespace multimedia
       }
 
 
-      //void translate(WAVEHDR & wavehdr, ::wave::buffer * pwavebuffer, int iBuffer)
+      //void translate(WAVEHDR & wavehdr, ::wave::buffer * pwavebuffer, ::i32 iBuffer)
       //{
 
       //   ::wave::buffer::item * pbuffer = pwavebuffer->get_buffer(iBuffer);
@@ -41,7 +41,7 @@ namespace multimedia
       //}
 
 
-      //LPWAVEHDR create_new_WAVEHDR(::wave::buffer * pwavebuffer, int iBuffer)
+      //LPWAVEHDR create_new_WAVEHDR(::wave::buffer * pwavebuffer, ::i32 iBuffer)
       //{
 
       //   LPWAVEHDR lpwavehdr = ___new WAVEHDR;
@@ -52,7 +52,7 @@ namespace multimedia
 
       //}
 
-      //LPWAVEHDR get_os_data(::wave::buffer * pwavebuffer, int iBuffer)
+      //LPWAVEHDR get_os_data(::wave::buffer * pwavebuffer, ::i32 iBuffer)
       //{
       //
       //   ::wave::buffer::item * pbuffer = pwavebuffer->get_buffer(iBuffer);

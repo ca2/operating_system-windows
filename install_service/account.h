@@ -11,14 +11,14 @@
 /* This is explicitly a wide string. */
 #define NSSM_LOGON_AS_SERVICE_RIGHT L"SeServiceLogonRight"
 
-int open_lsa_policy(LSA_HANDLE *);
-int username_sid(const TCHAR *, SID **, LSA_HANDLE *);
-int username_sid(const TCHAR *, SID **);
-int username_equiv(const TCHAR *, const TCHAR *);
-int canonicalise_username(const TCHAR *, TCHAR **);
-int is_localsystem(const TCHAR *);
+::i32 open_lsa_policy(LSA_HANDLE *);
+::i32 username_sid(const TCHAR *, SID **, LSA_HANDLE *);
+::i32 username_sid(const TCHAR *, SID **);
+::i32 username_equiv(const TCHAR *, const TCHAR *);
+::i32 canonicalise_username(const TCHAR *, TCHAR **);
+::i32 is_localsystem(const TCHAR *);
 const TCHAR *well_known_sid(SID *);
 const TCHAR *well_known_username(const TCHAR *);
-int grant_logon_as_service(const TCHAR *);
+::i32 grant_logon_as_service(const TCHAR *);
 
 #endif

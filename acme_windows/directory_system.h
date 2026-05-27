@@ -81,15 +81,15 @@ namespace acme_windows
 
       void set_path_install_folder(const ::scoped_string & scopedstrPath) override;
 
-      bool _shell_get_special_folder_path(HWND hwnd, ::file::path& str, int csidl, bool fCreate);
-      ::file::path _shell_get_special_folder_path(int csidl, bool fCreate = true, ::windowing::window* pwindow = nullptr);
+      bool _shell_get_special_folder_path(HWND hwnd, ::file::path& str, ::i32 csidl, bool fCreate);
+      ::file::path _shell_get_special_folder_path(::i32 csidl, bool fCreate = true, ::windowing::window* pwindow = nullptr);
       ::file::path _get_known_folder(REFKNOWNFOLDERID kfid);
 
       //::file::path pathfind(const ::scoped_string & scopedstrEnv, const ::scoped_string & scopedstrTopic, const ::scoped_string & scopedstrMode) override;
 
       ::file::path user_appdata_local() override;
 
-      // bool _is(const_char_pointer path1) override;
+      // bool _is(const_char_pointer pszPath1) override;
 
 
 
@@ -112,20 +112,20 @@ namespace acme_windows
 // directory_system();
 // ~directory_system() override;
 
-      //virtual string name(const_char_pointer path1) override;
+      //virtual string name(const_char_pointer pszPath1) override;
 
 
       //virtual ::file::path module_folder() override;
       
-      //bool create(const_char_pointer path) override;
+      //bool create(const_char_pointer pszPath) override;
 
-      //void createø(const_char_pointer path) override;
+      //void createø(const_char_pointer pszPath) override;
 
-      //bool create_directory(const_char_pointer path) override;
+      //bool create_directory(const_char_pointer pszPath) override;
 
-      //void _create_directory(const_char_pointer path) override;
+      //void _create_directory(const_char_pointer pszPath) override;
 
-      //bool is(const_char_pointer path) override;
+      //bool is(const_char_pointer pszPath) override;
 
       //bool _enumerates(::file::listing_base & listing) override;
       bool enumerate(::file::listing_base & listing) override;
@@ -138,7 +138,7 @@ namespace acme_windows
 
       //void ls_file(::file::path_array_base & stra, const scoped_string & str) override;
 
-      //int make_path(const scoped_string & str) override;
+      //::i32 make_path(const scoped_string & str) override;
 
       ::file::path current() override;
       void change_current(const ::file::path & path) override;

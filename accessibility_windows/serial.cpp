@@ -55,7 +55,7 @@ namespace acme_windows
 
    void serial::initialize_serial(
       const string& port,
-      unsigned int baudrate,
+      ::u32 baudrate,
       ::serial::timeout timeout,
       ::serial::enum_byte_size ebytesize,
       ::serial::enum_parity eparity, ::serial::enum_stop_bit estopbit,
@@ -306,7 +306,7 @@ namespace acme_windows
          dcbSerialParams.BaudRate = m_ulBaudrate;
       }
 
-      // setup char len
+      // setup ::i8 len
       if (m_ebytesize == ::serial::e_byte_size_eight)
          dcbSerialParams.ByteSize = 8;
       else if (m_ebytesize == ::serial::e_byte_size_seven)
@@ -316,7 +316,7 @@ namespace acme_windows
       else if (m_ebytesize == ::serial::e_byte_size_five)
          dcbSerialParams.ByteSize = 5;
       else
-         throw ::exception(error_bad_argument, "invalid char len");
+         throw ::exception(error_bad_argument, "invalid ::i8 len");
 
          // setup estopbit
          if (m_estopbit == ::serial::e_stop_bit_one)
@@ -397,20 +397,20 @@ namespace acme_windows
             }
 
 
-            // Compensate for the e_stop_bit_one_point_five enum being equal to int 3,
+            // Compensate for the e_stop_bit_one_point_five enum being equal to ::i32 3,
             // and not 1.5.
             // Update byte_time_ based on the ___new settings.
 
             if (m_estopbit == ::serial::e_stop_bit_one_point_five)
             {
 
-               m_uiByteTimeNs = (unsigned int)(((((unsigned long long)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity)) + (1500LL * 1000LL * 1000LL)) / ((unsigned long long)(m_ulBaudrate)));
+               m_uiByteTimeNs = (::u32)(((((::u64)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity)) + (1500LL * 1000LL * 1000LL)) / ((::u64)(m_ulBaudrate)));
 
             }
             else
             {
 
-               m_uiByteTimeNs = (unsigned int)((((unsigned long long)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity + m_estopbit)) / ((unsigned long long)(m_ulBaudrate)));
+               m_uiByteTimeNs = (::u32)((((::u64)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity + m_estopbit)) / ((::u64)(m_ulBaudrate)));
 
             }
 
@@ -427,7 +427,7 @@ namespace acme_windows
          if (m_hFile != INVALID_HANDLE_VALUE)
          {
             output_debug_string("\nSerial::serialimpl::close valid");
-            int ret;
+            ::i32 ret;
             ret = CloseHandle(m_hFile);
             if (ret == 0)
             {
@@ -515,7 +515,7 @@ namespace acme_windows
    }
 
 
-   size_t serial::_read(unsigned char* buf, size_t size)
+   size_t serial::_read(::u8* buf, size_t size)
    {
 
       if (!m_bOpened)
@@ -527,7 +527,7 @@ namespace acme_windows
 
       DWORD bytes_read;
 
-      if (!ReadFile(m_hFile, buf, static_cast<unsigned int>(size), &bytes_read, nullptr))
+      if (!ReadFile(m_hFile, buf, static_cast<::u32>(size), &bytes_read, nullptr))
       {
 
          string ss;
@@ -545,7 +545,7 @@ namespace acme_windows
    }
 
 
-   size_t serial::_write(const unsigned char* data, size_t length)
+   size_t serial::_write(const ::u8* data, size_t length)
    {
 
       if (m_bOpened == false)
@@ -557,7 +557,7 @@ namespace acme_windows
 
       DWORD bytes_written;
 
-      if (!WriteFile(m_hFile, data, static_cast<unsigned int>(length), &bytes_written, nullptr))
+      if (!WriteFile(m_hFile, data, static_cast<::u32>(length), &bytes_written, nullptr))
       {
 
          string str;
@@ -582,7 +582,7 @@ namespace acme_windows
 
       size_t eol_len = (size_t)eol.length();
 
-      unsigned char* buffer_ = static_cast <unsigned char*> (alloca(size * sizeof(unsigned char)));
+      ::u8* buffer_ = static_cast <::u8*> (alloca(size * sizeof(::u8)));
 
       auto timeStart = ::time::now();
 
@@ -605,7 +605,7 @@ namespace acme_windows
 
             }
 
-            // time_out occured on reading 1 unsigned char
+            // time_out occured on reading 1 ::u8
             preempt(maximum(100_ηs, m_timeout.m_timeReadTimeoutConstant / 10));
 
             if (!::task_get_run())
@@ -683,7 +683,7 @@ namespace acme_windows
    }
 
 
-   void serial::setBaudrate(unsigned int baudrate)
+   void serial::setBaudrate(::u32 baudrate)
    {
       
       m_ulBaudrate = baudrate;
@@ -698,7 +698,7 @@ namespace acme_windows
    }
 
 
-   unsigned int serial::getBaudrate() const
+   ::u32 serial::getBaudrate() const
    {
 
       return m_ulBaudrate;
@@ -829,7 +829,7 @@ namespace acme_windows
    }
 
 
-   void serial::sendBreak(int /*time*/)
+   void serial::sendBreak(::i32 /*time*/)
    {
 
       throw ::exception(error_io, "sendBreak is not supported on Windows.");

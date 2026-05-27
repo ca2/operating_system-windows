@@ -25,7 +25,7 @@ public:
                     GetCommandLineW(),
                     &m_argc
                     );
-      m_argv = ___new char *[m_argc];
+      m_argv = ___new ::i8 *[m_argc];
       for(::collection::index i = 0; i < m_argc; i++)
       {
          m_argv[i] = ansi_duplicate(string(pwa[i]));
@@ -42,7 +42,7 @@ public:
    virtual void win_sync_out(const ::scoped_string & scopedstr,const ::scoped_string & scopedstrRepos);
 
 
-   virtual int run();
+   virtual ::i32 run();
 
    string call(const ::scoped_string & scopedstr);
 
@@ -148,13 +148,13 @@ void app_t::win_sync_out(const ::scoped_string & scopedstrLocal,const ::scoped_s
 
    //		const_char_pointer textoBunitin = strUni;
 
-   //		char ch0 = *(textoBunitin + 0);
+   //		::i8 ch0 = *(textoBunitin + 0);
 
-   //		char ch0b = textoBunitin[0];
+   //		::i8 ch0b = textoBunitin[0];
 
-   //		char ch4 = *(textoBunitin + 4);
+   //		::i8 ch4 = *(textoBunitin + 4);
 
-   //		char ch4b = textoBunitin[4];
+   //		::i8 ch4b = textoBunitin[4];
 
    //	}
 
@@ -200,7 +200,7 @@ void app_t::win_sync_out(const ::scoped_string & scopedstrLocal,const ::scoped_s
 }
 
 
-//int main()
+//::i32 main()
 //{
 //
 //   if(!defer_aura_init())
@@ -212,7 +212,7 @@ void app_t::win_sync_out(const ::scoped_string & scopedstrLocal,const ::scoped_s
 //
 //   app_t * psystem = ___new app_t;
 //
-//   int iReturnCode = ::app_main(psystem, nullptr,nullptr,nullptr,0);
+//   ::i32 iReturnCode = ::app_main(psystem, nullptr,nullptr,nullptr,0);
 //
 //   defer_aura_term();
 //
@@ -233,7 +233,7 @@ void app_t::win_sync_out(const ::scoped_string & scopedstrLocal,const ::scoped_s
 
 
 
-int app_t::run()
+::i32 app_t::run()
 {
    /*printf("I am the post-commit wizard and oracle!!\n");
    printf("First: Be patient!! Keep calm, take it easy and try to enjoy the ride!!\n");
@@ -297,7 +297,7 @@ int app_t::run()
       stra.add_lines(str);
 
 
-      int iCount = 0;
+      ::i32 iCount = 0;
 
       for (auto str : stra)
       {
@@ -342,7 +342,7 @@ string app_t::call(const ::scoped_string & scopedstr)
       process->create_child_process(str, true, nullptr, ::e_priority_highest);
 auto tickStart = ::tick::now();
 
-      unsigned int dwExitCode;
+      ::u32 dwExitCode;
 
       bool bTimeout = false;
 

@@ -11,7 +11,7 @@ namespace apex_windows
 {
 
 
-   error_code node::_windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, int iIcon)
+   error_code node::_windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, ::i32 iIcon)
    {
 
       HRESULT hresult;
@@ -67,7 +67,7 @@ namespace apex_windows
 
       }
 
-      return { e_error_code_type_hresult, (long long)hresult };
+      return { e_error_code_type_hresult, (::i64)hresult };
 
    }
 

@@ -17,7 +17,7 @@ namespace draw2d_gdi
 
       synchronous_lock ml(&draw2d_gdi_mutex());
 
-      for(int i = 0; i < m_ptraGraphics.get_size(); i++)
+      for(::i32 i = 0; i < m_ptraGraphics.get_size(); i++)
       {
 
          try
@@ -36,7 +36,7 @@ namespace draw2d_gdi
       if(m_hgdiobj != nullptr)
       {
 
-         for(int i = 0; i < m_ptraGraphics.get_size(); i++)
+         for(::i32 i = 0; i < m_ptraGraphics.get_size(); i++)
          {
 
             try
@@ -64,14 +64,14 @@ namespace draw2d_gdi
    }
 
 
-   int object::get_object(int nCount, LPVOID lpObject) const
+   ::i32 object::get_object(::i32 nCount, LPVOID lpObject) const
    {
 
       return ::GetObjectW(m_hgdiobj, nCount, lpObject);
 
    }
 
-   bool object::CreateStockObject(int nIndex)
+   bool object::CreateStockObject(::i32 nIndex)
    {
 
       return (m_hgdiobj = ::GetStockObject(nIndex)) != nullptr;
@@ -159,7 +159,7 @@ namespace draw2d_gdi
 
       synchronous_lock ml(&draw2d_gdi_mutex());
 
-      for(int i = 0; i < m_ptraGraphics.get_size(); i++)
+      for(::i32 i = 0; i < m_ptraGraphics.get_size(); i++)
       {
 
          try
@@ -186,7 +186,7 @@ namespace draw2d_gdi
 
       }
 
-      for(int i = 0; i < m_ptraGraphics.get_size(); i++)
+      for(::i32 i = 0; i < m_ptraGraphics.get_size(); i++)
       {
 
          try

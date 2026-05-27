@@ -30,10 +30,10 @@ public:
 
    bool close_candidate(::collection::index iIndex = 0);
 
-   string get_string(int iStr = GCS_COMPSTR);
-   void set_string(const scoped_string & str, int iStr = GCS_COMPSTR);
+   string get_string(::i32 iStr = GCS_COMPSTR);
+   void set_string(const scoped_string & str, ::i32 iStr = GCS_COMPSTR);
 
-   string _get_candidate(int iList);
+   string _get_candidate(::i32 iList);
 
    string get_candidate();
 

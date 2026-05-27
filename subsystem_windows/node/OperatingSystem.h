@@ -38,8 +38,8 @@
     class CLASS_DECL_SUBSYSTEM_WINDOWS OperatingSystem : public ::subsystem::OperatingSystem
     {
     public:
-       //static const int APPLICATION_DATA_SPECIAL_FOLDER = 0x0;
-       //static const int COMMON_APPLICATION_DATA_SPECIAL_FOLDER = 0x1;
+       //static const ::i32 APPLICATION_DATA_SPECIAL_FOLDER = 0x0;
+       //static const ::i32 COMMON_APPLICATION_DATA_SPECIAL_FOLDER = 0x1;
     //public:
        OperatingSystem();
        ~OperatingSystem();
@@ -64,7 +64,7 @@
        // will be failed.
        //
 
-       ::string getSpecialFolderPath(int specialFolderId) override;
+       ::string getSpecialFolderPath(::i32 specialFolderId) override;
 
        // Sets full path to current executing process file to out argument
        ::string getCurrentModulePath() override;
@@ -73,7 +73,7 @@
        // return true if tested process has the same path as current process
        // else return false
        // throw Exception an error.
-       bool isItTheSamePathAsCurrent(unsigned int pId) override;
+       bool isItTheSamePathAsCurrent(::u32 pId) override;
 
        // Sets full path to folder (without last directory separator character)
        // where current executing process file is located to out argument.
@@ -120,7 +120,7 @@
 
        ::memory getSharedMemorySnapshot(const ::scoped_string &scopedstrShareMemoryName, memsize size, const class ::time & timeWaitMax) override;
 
-       unsigned int getActiveConsoleSessionId(::subsystem::LogWriter *plogwriter) override;
+       ::u32 getActiveConsoleSessionId(::subsystem::LogWriter *plogwriter) override;
        void duplicatePipeClientToken(::subsystem::FileInterface * pfile) override;
     //private:
        //void init() override;

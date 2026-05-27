@@ -113,13 +113,13 @@ namespace acme_windows
 
       string str;
 
-      const int BUFSIZE = 1024 * 8;
+      const ::i32 BUFSIZE = 1024 * 8;
 
       DWORD dwRead;
 
       bool bSuccess = false;
 
-      char chBuf[BUFSIZE];
+      ::i8 chBuf[BUFSIZE];
 
       for(;;)
       {
@@ -158,13 +158,13 @@ namespace acme_windows
 
       string str;
 
-      const int BUFSIZE = 1024 * 8;
+      const ::i32 BUFSIZE = 1024 * 8;
 
       DWORD dwRead;
 
       bool bSuccess = false;
 
-      char chBuf[BUFSIZE];
+      ::i8 chBuf[BUFSIZE];
 
       memory_set(chBuf,0,BUFSIZE);
 
@@ -197,7 +197,7 @@ namespace acme_windows
       if(m_pchBuf == nullptr)
       {
 
-         m_pchBuf = (char *)malloc(1025);
+         m_pchBuf = (::i8 *)malloc(1025);
 
          if (m_pchBuf == nullptr)
          {
@@ -218,8 +218,8 @@ namespace acme_windows
 
 
    void WINAPI pipe::read_complete(
-   unsigned int dwErrorCode,
-   unsigned int dwNumberOfBytesTransfered,
+   ::u32 dwErrorCode,
+   ::u32 dwNumberOfBytesTransfered,
    LPOVERLAPPED pOverlapped
 
    )
@@ -231,7 +231,7 @@ namespace acme_windows
 
       plap = plap->from(pOverlapped);
 
-      int iLimit = minimum(dwNumberOfBytesTransfered,1024u);
+      ::i32 iLimit = minimum(dwNumberOfBytesTransfered,1024u);
 
       plap->m_ppipe->m_pchBuf[iLimit] = '\0';
 

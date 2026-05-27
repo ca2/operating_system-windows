@@ -29,7 +29,7 @@ namespace draw2d_gdi
 
       ::i32_size size;
 
-      if(::GetTextExtentPoint32W(hdc,wstr,(int)wstr.get_length(),&size))
+      if(::GetTextExtentPoint32W(hdc,wstr,(::i32)wstr.get_length(),&size))
       {
          lprect->left   = (LONG)minimum(p.m_x,lprect->left);
 

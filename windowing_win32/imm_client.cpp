@@ -211,7 +211,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       else
       {
 
-         ::output_debug_string("\nWM_IME_COMPOSITION " + ::as_string((long long)pusermessage->m_lparam.m_lparam));
+         ::output_debug_string("\nWM_IME_COMPOSITION " + ::as_string((::i64)pusermessage->m_lparam.m_lparam));
 
          if ((pmessage->m_lparam & GCS_RESULTSTR) != 0)
          {
@@ -510,7 +510,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
             if (dwConversion & IME_CMODE_CHARCODE)
             {
 
-               str += "char code mode; ";
+               str += "::i8 code mode; ";
 
             }
             if (dwConversion & IME_CMODE_HANJACONVERT)
@@ -552,7 +552,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       else
       {
 
-         int wparam = (int) pusermessage->m_wparam;
+         ::i32 wparam = (::i32) pusermessage->m_wparam;
 
          output_debug_string("\n" "WM_IME_NOTIFY" " > " + ::as_string(wparam) + "    ");
 
@@ -693,7 +693,7 @@ void imm_client::clear_ime_composition()
 }
 
 
-int imm_client::on_text_composition_message(int iMessage)
+::i32 imm_client::on_text_composition_message(::i32 iMessage)
 {
 
 #ifdef WINDOWS_DESKTOP
@@ -706,14 +706,14 @@ int imm_client::on_text_composition_message(int iMessage)
 
       //_001GetSel(iBeg, iEnd);
 
-      //int x;
-      //int iLine = SelToLineX(iEnd, x);
+      //::i32 x;
+      //::i32 iLine = SelToLineX(iEnd, x);
 
 
 
 
-      //int y = (iLine)* m_iLineHeight - get_context_offset().y;
-      //int y2 = y + m_iLineHeight;
+      //::i32 y = (iLine)* m_iLineHeight - get_context_offset().y;
+      //::i32 y2 = y + m_iLineHeight;
       // ::i32_point point(x, y);
       //::i32_rectangle r;
       //this->rectangle(rectangle);

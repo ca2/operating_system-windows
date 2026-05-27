@@ -32,38 +32,38 @@
 #pragma once
 
 template <>
-inline unsigned int HashKey < oswindow >(oswindow key)
+inline ::u32 HashKey < oswindow >(oswindow key)
 {
    // default identity hash - works for most prototype values
-   return (unsigned int)((uptr)key);
+   return (::u32)((uptr)key);
 }
 
 template <>
-inline unsigned int HashKey < HMENU >(HMENU key)
+inline ::u32 HashKey < HMENU >(HMENU key)
 {
    // default identity hash - works for most prototype values
-   return (unsigned int)((uptr)key);
+   return (::u32)((uptr)key);
 }
 
 template <>
-inline unsigned int HashKey < HDC >(HDC key)
+inline ::u32 HashKey < HDC >(HDC key)
 {
    // default identity hash - works for most prototype values
-   return (unsigned int)((uptr)key);
+   return (::u32)((uptr)key);
 }
 
 template <>
-inline unsigned int HashKey < HGDIOBJ >(HGDIOBJ key)
+inline ::u32 HashKey < HGDIOBJ >(HGDIOBJ key)
 {
    // default identity hash - works for most prototype values
-   return (unsigned int)((uptr)key);
+   return (::u32)((uptr)key);
 }
 
 template <>
-inline unsigned int HashKey < HIMAGELIST >(HIMAGELIST key)
+inline ::u32 HashKey < HIMAGELIST >(HIMAGELIST key)
 {
    // default identity hash - works for most prototype values
-   return (unsigned int)((uptr)key);
+   return (::u32)((uptr)key);
 }
 
 
@@ -74,12 +74,12 @@ namespace windows
    class graphics;
    class matter;
 
-   template < int t_iHandleCount >
+   template < ::i32 t_iHandleCount >
    class handle_base
    {
    public:
       HANDLE m_handlea[t_iHandleCount];
-      static const int s_iHandleCount = t_iHandleCount;
+      static const ::i32 s_iHandleCount = t_iHandleCount;
    };
 
    template < class H >
@@ -271,7 +271,7 @@ CT* handle_map < HT, CT >::from_handle(HANDLE h, CT * (*pfnAllocator) (::pointer
       else
       {
          // get memory for the matter from the fixed allocator
-   //      ASSERT((unsigned int)m_pClass->m_nObjectSize == m_alloc.GetAllocSize());
+   //      ASSERT((::u32)m_pClass->m_nObjectSize == m_alloc.GetAllocSize());
          pTemp = (CT*)m_alloc.Alloc();
          if (pTemp == nullptr)
             throw ::exception(error_no_memory);

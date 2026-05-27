@@ -129,7 +129,7 @@ rem ============================================================================
 rem set the variable HOSTNAME by executing the command (that's the computer's name)
 FOR /F "delims=" %%a IN ('hostname') DO @set HOSTNAME=%%a
 
-rem strip double quotes
+rem strip ::f64 quotes
 set scriptFile=%1
 set scriptFile=%scriptFile:"=%
 
@@ -810,8 +810,8 @@ rem ============================================================================
 if not defined %~1 EXIT /b
 for %%a in ("A=a" "B=b" "C=c" "D=d" "E=e" "F=f" "G=g" "H=h" "I=i"
             "J=j" "K=k" "L=l" "M=m" "N=n" "O=o" "P=p" "Q=q" "R=r"
-            "S=s" "T=t" "U=u" "V=v" "W=w" "X=x" "Y=y" "Z=z" "Ä=ä"
-            "Ö=ö" "Ü=ü") do (
+            "S=s" "T=t" "U=u" "V=v" "W=w" "X=x" "Y=y" "Z=z" "ï¿½=ï¿½"
+            "ï¿½=ï¿½" "ï¿½=ï¿½") do (
     call set %~1=%%%~1:%%~a%%
 )
 EXIT /b

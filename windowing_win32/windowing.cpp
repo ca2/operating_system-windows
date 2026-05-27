@@ -393,7 +393,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::__synthesizes_creates_styles(::acme::user::interaction* pacmeuserinteraction, unsigned int& nExStyle, unsigned int& nStyle)
+   void windowing::__synthesizes_creates_styles(::acme::user::interaction* pacmeuserinteraction, ::u32& nExStyle, ::u32& nStyle)
    {
 
       ::cast<::user::interaction> pinteraction = pacmeuserinteraction;
@@ -623,7 +623,7 @@ namespace windowing_win32
    void windowing::set(message::key* pkey, const ::operating_system::window & operatingsystemwindow, ::windowing::window* pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    {
 
-      pkey->m_nChar = static_cast<unsigned int>(wparam);
+      pkey->m_nChar = static_cast<::u32>(wparam);
 
       pkey->m_nRepCnt = LOWORD(lparam);
 
@@ -633,7 +633,7 @@ namespace windowing_win32
 
       pkey->m_bExt = (lparam & (1 << 24)) != 0;
 
-      pkey->m_iVirtualKey = (int)MapLeftRightKeys(wparam, lparam);
+      pkey->m_iVirtualKey = (::i32)MapLeftRightKeys(wparam, lparam);
 
       ::windowing::windowing::set(pkey, operatingsystemwindow, pwindow, eusermessage, wparam, lparam);
 
@@ -921,7 +921,7 @@ namespace windowing_win32
 
    int_bool windowing::point_is_window_origin(::i32_point ptHitTest,
                                               const ::operating_system::window &operatingsystemwindowExclude,
-                                              int iMargin)
+                                              ::i32 iMargin)
    {
 
       HWND hwndExclude = as_HWND(operatingsystemwindowExclude);
@@ -984,7 +984,7 @@ namespace windowing_win32
 
       ::windows::hwnd_array hwnda;
 
-      for (int i = 0; i < userinteractiona.interaction_count(); i++)
+      for (::i32 i = 0; i < userinteractiona.interaction_count(); i++)
       {
 
          ::pointer<::user::interaction>puserinteraction = userinteractiona.interaction_at(i);
@@ -1009,7 +1009,7 @@ namespace windowing_win32
 
       ::windows::window_util::SortByZOrder(hwnda);
 
-      for (int i = 0; i < hwnda.get_count(); i++)
+      for (::i32 i = 0; i < hwnda.get_count(); i++)
       {
 
          auto pacmewindowingwindow = acme_windowing_window(::as_operating_system_window(hwnda[i]));
@@ -1103,14 +1103,14 @@ namespace windowing_win32
    void windowing::initialize_keyboard(::windowing::keyboard* pkeyboard)
    {
 
-      for (char ch = 'A'; ch <= 'Z'; ch++)
+      for (::i8 ch = 'A'; ch <= 'Z'; ch++)
       {
 
          pkeyboard->m_mapKey[ch] = (::user::enum_key)(::user::e_key_a + (ch - 'A'));
 
       }
 
-      for (char ch = '0'; ch <= '9'; ch++)
+      for (::i8 ch = '0'; ch <= '9'; ch++)
       {
 
          pkeyboard->m_mapKey[ch] = (::user::enum_key)(::user::e_key_0 + (ch - '0'));
@@ -1218,8 +1218,8 @@ namespace windowing_win32
 //
 //                  ::color::color crCustColors[16];
 //
-//                  // init-int this array did not affect the mouse problem
-//                  // unsigned int idx ;
+//                  // init-::i32 this array did not affect the mouse problem
+//                  // ::u32 idx ;
 //                  // for (idx=0; idx<16; idx++) {
 //                  // crCustColors[idx] = rgb(idx, idx, idx) ;
 //                  // }
@@ -1253,8 +1253,8 @@ namespace windowing_win32
 //      CHOOSECOLOR cc;
 //      ::color::color crCustColors[16];
 //
-//      // init-int this array did not affect the mouse problem
-//      // unsigned int idx ;
+//      // init-::i32 this array did not affect the mouse problem
+//      // ::u32 idx ;
 //      // for (idx=0; idx<16; idx++) {
 //      // crCustColors[idx] = rgb(idx, idx, idx) ;
 //      // }
@@ -1342,7 +1342,7 @@ namespace windowing_win32
       return _top_level_contains_predicate([this, scopedstr](HWND hwnd)
          {
 
-            //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
+            //PSEUDO-Code ::i8 sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
 
             //auto operatingsystemwindow = pacmewindowingwindow->operating_system_window();
 
@@ -1363,7 +1363,7 @@ namespace windowing_win32
       return _top_level_contains_predicate([this, scopedstr](HWND hwnd)
          {
 
-            //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
+            //PSEUDO-Code ::i8 sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
             //auto operatingsystemwindow = pacmewindowingwindow->operating_system_window();
 
             //auto hwnd = ::as_HWND(operatingsystemwindow);
@@ -1413,7 +1413,7 @@ namespace windowing_win32
       return _top_level_contains_predicate([this, &stra](HWND hwnd)
          {
 
-            //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
+            //PSEUDO-Code ::i8 sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
 
             //auto operatingsystemwindow = pacmewindowingwindow->operating_system_window();
 
@@ -1565,7 +1565,7 @@ namespace windowing_win32
    }
 
 
-   int windowing::system_metrics_get_cx_icon_spacing()
+   ::i32 windowing::system_metrics_get_cx_icon_spacing()
    {
 
       return ::GetSystemMetrics(SM_CXICONSPACING);
@@ -1573,7 +1573,7 @@ namespace windowing_win32
    }
 
 
-   int windowing::system_metrics_get_cy_icon_spacing()
+   ::i32 windowing::system_metrics_get_cy_icon_spacing()
    {
 
       return ::GetSystemMetrics(SM_CYICONSPACING);
@@ -1581,7 +1581,7 @@ namespace windowing_win32
    }
 
 
-   int windowing::system_metrics_get_cx_icon()
+   ::i32 windowing::system_metrics_get_cx_icon()
    {
 
       return ::GetSystemMetrics(SM_CXICON);
@@ -1589,7 +1589,7 @@ namespace windowing_win32
    }
 
 
-   int windowing::system_metrics_get_cy_icon()
+   ::i32 windowing::system_metrics_get_cy_icon()
    {
 
       return ::GetSystemMetrics(SM_CYICON);
@@ -1597,7 +1597,7 @@ namespace windowing_win32
    }
 
 
-   int windowing::system_metrics_get_cy_caption()
+   ::i32 windowing::system_metrics_get_cy_caption()
    {
 
       return ::GetSystemMetrics(SM_CYCAPTION);

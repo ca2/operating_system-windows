@@ -33,7 +33,7 @@
 
 namespace subsystem_windows
 {
-   // EmulatedAnonymousPipeFactory::EmulatedAnonymousPipeFactory(unsigned int bufferSize, LogWriter *log)
+   // EmulatedAnonymousPipeFactory::EmulatedAnonymousPipeFactory(::u32 bufferSize, LogWriter *log)
    // : m_bufferSize(bufferSize),
    //   m_log(log)
    // {
@@ -46,7 +46,7 @@ namespace subsystem_windows
    {
    }
 
-   void EmulatedAnonymousPipeFactory::initialize_emulated_anonymous_pipe_factory(unsigned int bufferSize, ::subsystem::LogWriter *log)
+   void EmulatedAnonymousPipeFactory::initialize_emulated_anonymous_pipe_factory(::u32 bufferSize, ::subsystem::LogWriter *log)
    {
       m_bufferSize = bufferSize;
         m_log = log;
@@ -86,8 +86,8 @@ namespace subsystem_windows
    {
       ::string result;
       srand((unsigned)::time(0));
-      for (int i = 0; i < 20; i++) {
-         result += (char) ('a' + rand() % ('z' - 'a'));
+      for (::i32 i = 0; i < 20; i++) {
+         result += (::i8) ('a' + rand() % ('z' - 'a'));
       }
       return result;
    }

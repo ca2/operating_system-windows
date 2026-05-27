@@ -17,7 +17,7 @@ namespace draw2d_gdi
 
 
       operator HPALETTE() const;
-      int GetEntryCount();
+      ::i32 GetEntryCount();
 
 
       bool CreatePalette(LPLOGPALETTE lpLogPalette);

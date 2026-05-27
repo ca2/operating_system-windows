@@ -40,7 +40,7 @@ HANDLE SymGetProcessHandle()
 
 
 
-bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, unsigned int * puiDisplacement, OS_IMAGEHLP_LINE * pline)
+bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, ::u32 * puiDisplacement, OS_IMAGEHLP_LINE * pline)
 {
 
 #ifdef WORK_AROUND_SRCLINE_BUG
@@ -86,7 +86,7 @@ bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, unsigned 
 
 
 
-::collection::index engine_fileline(OS_DWORD dwAddress, char * psz, int nCount, unsigned int * pline, unsigned int * pdisplacement = 0)
+::collection::index engine_fileline(OS_DWORD dwAddress, ::i8 * psz, ::i32 nCount, ::u32 * pline, ::u32 * pdisplacement = 0)
 {
 
    OS_IMAGEHLP_LINE img_line = {};
@@ -95,7 +95,7 @@ bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, unsigned 
 
    HANDLE hprocess = SymGetProcessHandle();
 
-   unsigned int displacement = 0;
+   ::u32 displacement = 0;
 
    if (!engine_get_line_from_address(hprocess, dwAddress, &displacement, &img_line))
    {
@@ -130,10 +130,10 @@ bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, unsigned 
 }
 
 
-size_t engine_symbol(char * sz, int n, OS_DWORD * pdisplacement, OS_DWORD dwAddress)
+size_t engine_symbol(::i8 * sz, ::i32 n, OS_DWORD * pdisplacement, OS_DWORD dwAddress)
 {
 
-   unsigned char symbol[4096];
+   ::u8 symbol[4096];
    OS_PIMAGEHLP_SYMBOL pSym = (OS_PIMAGEHLP_SYMBOL)&symbol;
    memory_set(pSym, 0, sizeof(symbol));
    pSym->SizeOfStruct = sizeof(OS_IMAGEHLP_SYMBOL);
@@ -141,7 +141,7 @@ size_t engine_symbol(char * sz, int n, OS_DWORD * pdisplacement, OS_DWORD dwAddr
 
    HANDLE hprocess = SymGetProcessHandle();
    OS_DWORD displacement = 0;
-   int r = OS_SymGetSymFromAddr(hprocess, dwAddress, &displacement, pSym);
+   ::i32 r = OS_SymGetSymFromAddr(hprocess, dwAddress, &displacement, pSym);
    if (!r) return 0;
    if (pdisplacement)
       *pdisplacement = displacement;
@@ -176,7 +176,7 @@ int_bool __stdcall engine_ReadProcessMemory(HANDLE      hProcess,
    DWORD64     qwBaseAddress,
    PVOID       pBuffer,
 
-   unsigned int       nSize,
+   ::u32       nSize,
    LPDWORD     pNumberOfBytesRead
 
 );
@@ -192,7 +192,7 @@ _In_ HANDLE hProcess,
 _In_ DWORD64 qwBaseAddress,
 _Out_writes_bytes_(nSize) PVOID pBuffer,
 
-_In_ unsigned int nSize,
+_In_ ::u32 nSize,
 _Out_ LPDWORD pNumberOfBytesRead
 
 );*/
@@ -203,7 +203,7 @@ int_bool __stdcall engine_ReadProcessMemory(
    DWORD64     qwBaseAddress,
    PVOID       pBuffer,
 
-   unsigned int       nSize,
+   ::u32       nSize,
    LPDWORD     pNumberOfBytesRead
 
 )
@@ -219,7 +219,7 @@ int_bool __stdcall engine_ReadProcessMemory(
 
    }
 
-   *pNumberOfBytesRead = (unsigned int)size;
+   *pNumberOfBytesRead = (::u32)size;
 
    return true;
 
@@ -228,7 +228,7 @@ int_bool __stdcall engine_ReadProcessMemory(
 
 #ifndef FAST_STACK_TRACE
 
-int_bool __stdcall engine_ReadProcessMemory32(HANDLE hProcess, unsigned int qwBaseAddress, PVOID pBuffer, unsigned int nSize, LPDWORD lpNumberOfBytesRead)
+int_bool __stdcall engine_ReadProcessMemory32(HANDLE hProcess, ::u32 qwBaseAddress, PVOID pBuffer, ::u32 nSize, LPDWORD lpNumberOfBytesRead)
 
 {
 
@@ -238,7 +238,7 @@ int_bool __stdcall engine_ReadProcessMemory32(HANDLE hProcess, unsigned int qwBa
 
       return false;
 
-   *pNumberOfBytesRead = (unsigned int)size;
+   *pNumberOfBytesRead = (::u32)size;
 
 
    return true;
@@ -249,7 +249,7 @@ int_bool __stdcall engine_ReadProcessMemory32(HANDLE hProcess, unsigned int qwBa
 
 /*
 #else
-int_bool __stdcall My_ReadProcessMemory (HANDLE, const void * pBaseAddress, LPVOID lpBuffer, unsigned int nSize, SIZE_T * lpNumberOfBytesRead)
+int_bool __stdcall My_ReadProcessMemory (HANDLE, const void * pBaseAddress, LPVOID lpBuffer, ::u32 nSize, SIZE_T * lpNumberOfBytesRead)
 
 {
 return ReadProcessMemory(GetCurrentProcess(), pBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead) != false;
@@ -266,7 +266,7 @@ namespace windows
    critical_section * callstack::s_pcriticalsection = nullptr;
 
 
-   callstack::callstack(const scoped_string & strFormat, int iSkip, void * caller_address, int iCount):
+   callstack::callstack(const scoped_string & strFormat, ::i32 iSkip, void * caller_address, ::i32 iCount):
       m_iSkip(iSkip),
       m_iCount(iCount),
       m_bOk(false),
@@ -292,7 +292,7 @@ namespace windows
    }
 
 
-   size_t callstack::module(char * psz, int nCount)
+   size_t callstack::module(::i8 * psz, ::i32 nCount)
    {
 
       if (!check())
@@ -319,7 +319,7 @@ namespace windows
    }
 
 
-   size_t callstack::symbol(char * psz, int nCount, OS_DWORD * pdisplacement)
+   size_t callstack::symbol(::i8 * psz, ::i32 nCount, OS_DWORD * pdisplacement)
    {
 
       if (!check())
@@ -334,7 +334,7 @@ namespace windows
    }
 
 
-   ::collection::index callstack::fileline(char * psz, int nCount, unsigned int * pline, unsigned int * pdisplacement)
+   ::collection::index callstack::fileline(::i8 * psz, ::i32 nCount, ::u32 * pline, ::u32 * pdisplacement)
    {
 
       if (!check())
@@ -349,7 +349,7 @@ namespace windows
    }
 
 
-   bool callstack::stack_first(CONTEXT * pcontext, int iCount)
+   bool callstack::stack_first(CONTEXT * pcontext, ::i32 iCount)
    {
       m_iAddressRead = 0;
 #if !FAST_STACK_TRACE
@@ -380,13 +380,13 @@ namespace windows
       m_stackframe.AddrFrame.Offset = pcontext->Ebp;
       m_stackframe.AddrFrame.Mode = AddrModeFlat;
 #else
-      m_stackframe.AddrPC.offset = (unsigned int)pcontext->Fir;
+      m_stackframe.AddrPC.offset = (::u32)pcontext->Fir;
       m_stackframe.AddrPC.Mode = AddrModeFlat;
-      m_stackframe.AddrReturn.offset = (unsigned int)pcontext->IntRa;
+      m_stackframe.AddrReturn.offset = (::u32)pcontext->IntRa;
       m_stackframe.AddrReturn.Mode = AddrModeFlat;
-      m_stackframe.AddrStack.offset = (unsigned int)pcontext->IntSp;
+      m_stackframe.AddrStack.offset = (::u32)pcontext->IntSp;
       m_stackframe.AddrStack.Mode = AddrModeFlat;
-      m_stackframe.AddrFrame.offset = (unsigned int)pcontext->IntFp;
+      m_stackframe.AddrFrame.offset = (::u32)pcontext->IntFp;
       m_stackframe.AddrFrame.Mode = AddrModeFlat;
 #endif
 
@@ -400,13 +400,13 @@ namespace windows
    }
 
 
-   void callstack::backtrace(OS_DWORD * pinteraction, int & c)
+   void callstack::backtrace(OS_DWORD * pinteraction, ::i32 & c)
    {
       critical_section_lock csl(s_pcriticalsection);
 
 #if FAST_STACK_TRACE
 
-      unsigned int maxframes = c;
+      ::u32 maxframes = c;
       ULONG BackTraceHash;
       c = RtlCaptureStackBackTrace(0, maxframes, reinterpret_cast<PVOID *>(pinteraction), &BackTraceHash);
 
@@ -414,11 +414,11 @@ namespace windows
    }
 
 
-   void callstack::backtrace(int iCount)
+   void callstack::backtrace(::i32 iCount)
    {
 
 #if FAST_STACK_TRACE
-      unsigned int maxframes = minimum_non_negative(iCount, (int)(sizeof(m_uia) / sizeof(m_uia[0])));
+      ::u32 maxframes = minimum_non_negative(iCount, (::i32)(sizeof(m_uia) / sizeof(m_uia[0])));
       ULONG BackTraceHash;
       m_iAddressWrite = RtlCaptureStackBackTrace(0, maxframes, reinterpret_cast<PVOID *>(&m_uia), &BackTraceHash);
 #else
@@ -436,7 +436,7 @@ namespace windows
          set_last_error(0);
          HANDLE hprocess = SymGetProcessHandle();
 
-         unsigned int dwType;
+         ::u32 dwType;
 
          bool bRetry;
 
@@ -448,7 +448,7 @@ namespace windows
 
 #if OSBIT == 64
          bool r = StackWalk64(
-            dwType,   // __in      unsigned int MachineType,
+            dwType,   // __in      ::u32 MachineType,
             hprocess,        // __in      HANDLE hProcess,
             current_htask(),         // __in      htask htask,
             &m_stackframe,                       // __inout   LP STACKFRAME64 StackFrame,
@@ -461,7 +461,7 @@ namespace windows
          ) != false;
 #else
          bool r = StackWalk(
-            dwType,   // __in      unsigned int MachineType,
+            dwType,   // __in      ::u32 MachineType,
             hprocess,        // __in      HANDLE hProcess,
             current_htask(),         // __in      htask htask,
             &m_stackframe,                       // __inout   LP STACKFRAME64 StackFrame,
@@ -500,7 +500,7 @@ namespace windows
 
          // "Debugging Applications" John Robbins
          // Before I get too carried away and start calculating
-         // everything, I need to double-check that the address returned
+         // everything, I need to ::f64-check that the address returned
          // by StackWalk really exists. I've seen cases in which
          // StackWalk returns true but the address doesn't belong to
          // a module in the process.
@@ -553,7 +553,7 @@ namespace windows
    }
 
 
-   bool callstack::get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, unsigned int * puiDisplacement, OS_IMAGEHLP_LINE * pline)
+   bool callstack::get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, ::u32 * puiDisplacement, OS_IMAGEHLP_LINE * pline)
    {
 
       return engine_get_line_from_address(hprocess, uiAddress, puiDisplacement, pline);
@@ -563,7 +563,7 @@ namespace windows
       //      // line addresses (after the first lookup) that fall exactly on
       //      // a zero displacement. I'hi walk backward 100 bytes to
       //      // find the line and return the proper displacement.
-      //      unsigned int dwDisplacement = 0 ;
+      //      ::u32 dwDisplacement = 0 ;
       //      while (!SymGetLineFromAddr (hprocess, uiAddress - dwDisplacement, puiDisplacement, pline))
       //      {
       //         if (100 == ++dwDisplacement)
@@ -577,11 +577,11 @@ namespace windows
       //         *puiDisplacement = dwDisplacement;
       //      return true;
       //#else
-      //      return 0 != SymGetLineFromAddr64 (hprocess, uiAddress, (unsigned int *) puiDisplacement, pline);
+      //      return 0 != SymGetLineFromAddr64 (hprocess, uiAddress, (::u32 *) puiDisplacement, pline);
       //#endif
    }
    //#else
-   //   bool callstack::get_line_from_address(HANDLE hprocess, DWORD64 uiAddress, unsigned int * puiDisplacement, IMAGEHLP_LINE64 * pline)
+   //   bool callstack::get_line_from_address(HANDLE hprocess, DWORD64 uiAddress, ::u32 * puiDisplacement, IMAGEHLP_LINE64 * pline)
    //   {
    //
    //      return engine_get_line_from_address(hprocess, uiAddress, puiDisplacement, pline);
@@ -591,7 +591,7 @@ namespace windows
    //      // line addresses (after the first lookup) that fall exactly on
    //      // a zero displacement. I'hi walk backward 100 bytes to
    //      // find the line and return the proper displacement.
-   //      unsigned int dwDisplacement = 0;
+   //      ::u32 dwDisplacement = 0;
    //      while (!SymGetLineFromAddr64(hprocess, uiAddress - dwDisplacement, puiDisplacement, pline))
    //      {
    //         if (100 == ++dwDisplacement)
@@ -605,16 +605,16 @@ namespace windows
    //         *puiDisplacement = dwDisplacement;
    //      return true;
    //#else
-   //      return 0 != SymGetLineFromAddr64(hprocess, uiAddress, (unsigned int *)puiDisplacement, pline);
+   //      return 0 != SymGetLineFromAddr64(hprocess, uiAddress, (::u32 *)puiDisplacement, pline);
    //#endif
    //   }
    //#endif
 
 
-   size_t callstack::get_module_name(HMODULE hmodule, char * psz, int nCount)
+   size_t callstack::get_module_name(HMODULE hmodule, ::i8 * psz, ::i32 nCount)
    {
 
-      for (int i = 0; i < m_iMa; i++)
+      for (::i32 i = 0; i < m_iMa; i++)
       {
          if (m_ma[i] == hmodule)
          {
@@ -626,7 +626,7 @@ namespace windows
          }
       }
 
-      char filename[MAX_PATH];
+      ::i8 filename[MAX_PATH];
       if (!GetModuleFileNameA(hmodule, filename, MAX_PATH))
       {
          m_ma[m_iMa] = hmodule;
@@ -638,7 +638,7 @@ namespace windows
       m_ma[m_iMa] = hmodule;
       m_szaModule[m_iMa] = strdup(filename);
       ansi_count_copy(psz, m_szaModule[m_iMa++], nCount);
-      //unsigned int r = GetModuleFileNameA(hmodule, psz, nCount);
+      //::u32 r = GetModuleFileNameA(hmodule, psz, nCount);
 
       //if(!r)
       // return 0;
@@ -646,7 +646,7 @@ namespace windows
 
 
       // find the last '\' mark.
-      //char * p = strrchr(psz, '\\');
+      //::i8 * p = strrchr(psz, '\\');
 
       //if(p != nullptr)
       //{
@@ -674,29 +674,29 @@ namespace windows
       return true;
 
       //      HANDLE hprocess = SymGetProcessHandle();
-      //      unsigned int  dwPid = get_current_process_id();
+      //      ::u32  dwPid = get_current_process_id();
       //
       //      // enumerate modules
       //      if (is_windows_nt())
       //      {
-      //         typedef bool (WINAPI *ENUMPROCESSMODULES)(HANDLE, HMODULE*, unsigned int, LPDWORD);
+      //         typedef bool (WINAPI *ENUMPROCESSMODULES)(HANDLE, HMODULE*, ::u32, LPDWORD);
       //
       //         HINSTANCE hInst = LoadLibrary("psapi.dll");
       //         if (hInst)
       //         {
       //            ENUMPROCESSMODULES fnEnumProcessModules =
       //            (ENUMPROCESSMODULES)GetProcAddress(hInst, "EnumProcessModules");
-      //            unsigned int cbNeeded = 0;
+      //            ::u32 cbNeeded = 0;
       //            if (fnEnumProcessModules &&
       //                  fnEnumProcessModules(GetCurrentProcess(), 0, 0, &cbNeeded) &&
       //                  cbNeeded)
       //            {
       //               HMODULE * pmod = (HMODULE *)alloca(cbNeeded);
-      //               unsigned int cb = cbNeeded;
+      //               ::u32 cb = cbNeeded;
       //               if (fnEnumProcessModules(GetCurrentProcess(), pmod, cb, &cbNeeded))
       //               {
       //                  m_iRef = 0;
-      //                  for (unsigned int i = 0; i < cb / sizeof (HMODULE); ++i)
+      //                  for (::u32 i = 0; i < cb / sizeof (HMODULE); ++i)
       //                  {
       //                     if (!load_module(hprocess, pmod[i]))
       //                     {
@@ -722,7 +722,7 @@ namespace windows
       //      }
       //      else
       //      {
-      //         typedef HANDLE (WINAPI *CREATESNAPSHOT)(unsigned int, unsigned int);
+      //         typedef HANDLE (WINAPI *CREATESNAPSHOT)(::u32, ::u32);
       //         typedef bool (WINAPI *MODULEWALK)(HANDLE, LPMODULEENTRY32);
       //
       //         HMODULE hMod = GetModuleHandle("kernel32");
@@ -861,7 +861,7 @@ namespace windows
       }
 
       HANDLE hprocess = SymGetProcessHandle();
-      unsigned int  dwPid = get_current_process_id();
+      ::u32  dwPid = get_current_process_id();
 
       // initializes
       //SymSetOptions(SymGetOptions()|SYMOPT_DEFERRED_LOADS|SYMOPT_LOAD_LINES);
@@ -869,7 +869,7 @@ namespace windows
       //   SymSetOptions (SYMOPT_UNDNAME|SYMOPT_LOAD_LINES);
       if (!::SymInitialize(hprocess, 0, true))
       {
-         unsigned int dw = ::GetLastError();
+         ::u32 dw = ::GetLastError();
          output_debug_string("Last Error = " + ::as_string(dw));
          ASSERT(0);
 
@@ -966,7 +966,7 @@ namespace windows
    bool callstack::load_module(HANDLE hProcess, HMODULE hMod)
    {
 
-      for (int i = 0; i < m_iHa; i++)
+      for (::i32 i = 0; i < m_iHa; i++)
       {
 
          if (m_ha[i] == hMod)
@@ -980,7 +980,7 @@ namespace windows
 
       m_ha[m_iHa++] = hMod;
 
-      char filename[MAX_PATH];
+      ::i8 filename[MAX_PATH];
 
       if (!GetModuleFileNameA(hMod, filename, MAX_PATH))
       {
@@ -1018,7 +1018,7 @@ namespace windows
    }
 
 
-   bool callstack::stack_trace(CONTEXT * pcontext, iptr iSkip, const scoped_string & strFormat, int iCount)
+   bool callstack::stack_trace(CONTEXT * pcontext, iptr iSkip, const scoped_string & strFormat, ::i32 iCount)
    {
 
       if (!pszFormat)
@@ -1046,11 +1046,11 @@ namespace windows
    struct current_context : CONTEXT
    {
       HANDLE   thread;
-      volatile int signal;
+      volatile ::i32 signal;
    };
 
 
-   unsigned int WINAPI callstack::stack_trace_ThreadProc(void * pvoidParam)
+   ::u32 WINAPI callstack::stack_trace_ThreadProc(void * pvoidParam)
    {
 
       current_context * pcontext = reinterpret_cast<current_context *>(pvoidParam);
@@ -1062,9 +1062,9 @@ namespace windows
          
          // must wait in spin lock until Main thread will leave a ResumeThread (must return back to ::account::user context)
 
-         int iInverseAgility = 26 + 24; // former iPatienceQuota
+         ::i32 iInverseAgility = 26 + 24; // former iPatienceQuota
          
-         int iPatience = iInverseAgility;
+         ::i32 iPatience = iInverseAgility;
 
          while (pcontext->signal && iPatience > 0)
          {
@@ -1080,7 +1080,7 @@ namespace windows
 
          }
 
-         //         char sz[200];
+         //         ::i8 sz[200];
          //         sprintf(sz, "callstack::stack_trace patience near down %u%%\n", iPatience * 100 / iInverseAgility);
          //         ::output_debug_string(sz);
 
@@ -1127,7 +1127,7 @@ namespace windows
    }
 
 
-   bool callstack::stack_trace(iptr iSkip, const scoped_string & strFormat, int iCount)
+   bool callstack::stack_trace(iptr iSkip, const scoped_string & strFormat, ::i32 iCount)
    {
 
       if (iSkip >= 0)
@@ -1179,7 +1179,7 @@ namespace windows
    }
 
 
-   bool callstack::stack_trace(CONTEXT * pcontext, iptr iSkip, bool bSkip, const scoped_string & strFormat, int iCount)
+   bool callstack::stack_trace(CONTEXT * pcontext, iptr iSkip, bool bSkip, const scoped_string & strFormat, ::i32 iCount)
    {
 
       if (iSkip >= 0)
@@ -1191,7 +1191,7 @@ namespace windows
 
       *_strS = '\0';
 
-      if (!stack_first(pcontext, (int)(iSkip >= 0 && iCount >= 0 ? iSkip + iCount + 1 : -1)))
+      if (!stack_first(pcontext, (::i32)(iSkip >= 0 && iCount >= 0 ? iSkip + iCount + 1 : -1)))
       {
 
          return false;
@@ -1200,7 +1200,7 @@ namespace windows
 
       uptr uiSkipStart = iSkip;
 
-      int iLine;
+      ::i32 iLine;
 
       do
       {
@@ -1211,7 +1211,7 @@ namespace windows
 
             iLine = 0;
 
-            char * psz = get_frame(pszFormat, iLine);
+            ::i8 * psz = get_frame(pszFormat, iLine);
 
             if (iCount > 0)
             {
@@ -1269,7 +1269,7 @@ namespace windows
    }
 
 
-   //char * callstack::stack_trace(OS_DWORD * pinteraction, int c, const scoped_string & strFormat, int iCount)
+   //::i8 * callstack::stack_trace(OS_DWORD * pinteraction, ::i32 c, const scoped_string & strFormat, ::i32 iCount)
    //{
 
    //   critical_section_lock csl(s_pcriticalsection);
@@ -1280,9 +1280,9 @@ namespace windows
 
    //   m_iAddressWrite = c;
    //   m_iAddressRead = 0;
-   //   char * psz;
+   //   ::i8 * psz;
 
-   //   int iLine;
+   //   ::i32 iLine;
 
    //   do
    //   {
@@ -1307,7 +1307,7 @@ namespace windows
 
 
 
-   //char * callstack::get_frame(const scoped_string & strFormat, int & iLine)
+   //::i8 * callstack::get_frame(const scoped_string & strFormat, ::i32 & iLine)
    //{
 
 
@@ -1316,19 +1316,19 @@ namespace windows
    //   *_strFile = '\0';
    //   *_strSymbol = '\0';
 
-   //   unsigned int uiLineDisplacement = 0;
-   //   unsigned int uiLineNumber = 0;
+   //   ::u32 uiLineDisplacement = 0;
+   //   ::u32 uiLineNumber = 0;
    //   OS_DWORD uiSymbolDisplacement = 0;
 
 
-   //   char sz[2];
+   //   ::i8 sz[2];
    //   sz[1] = '\0';
-   //   for (char * p = (char *)pszFormat; *p; ++p)
+   //   for (::i8 * p = (::i8 *)pszFormat; *p; ++p)
    //   {
    //      if (*p == '%')
    //      {
    //         ++p; // skips '%'
-   //         char ca = *p;
+   //         ::i8 ca = *p;
    //         switch (ca)
    //         {
    //         case 'm':
@@ -1436,7 +1436,7 @@ namespace  windows
       DWORD64     qwBaseAddress,
       PVOID       pBuffer,
 
-      unsigned int       nSize,
+      ::u32       nSize,
       LPDWORD     pNumberOfBytesRead,
 
       LPVOID      pUserData  // optional data, which was passed in "ShowCallstack"
@@ -1451,14 +1451,14 @@ namespace  windows
    static LPVOID s_readMemoryFunction_UserData = nullptr;
 
 
-   //bool callstack::stack_trace(iptr iSkip, const scoped_string & strFormat, int iCount)
+   //bool callstack::stack_trace(iptr iSkip, const scoped_string & strFormat, ::i32 iCount)
    //{
 
    //   return false;
 
    //}
 
-   char * callstack::stack_trace(OS_DWORD * pinteraction, int c, const scoped_string & strFormat, int iCount)
+   ::i8 * callstack::stack_trace(OS_DWORD * pinteraction, ::i32 c, const scoped_string & strFormat, ::i32 iCount)
    {
 
       critical_section_lock csl(s_pcriticalsection);
@@ -1469,9 +1469,9 @@ namespace  windows
 
       m_iAddressWrite = c;
       m_iAddressRead = 0;
-      char * psz;
+      ::i8 * psz;
 
-      int iLine;
+      ::i32 iLine;
 
       do
       {
@@ -1496,7 +1496,7 @@ namespace  windows
 
 
 
-   char * callstack::get_frame(const scoped_string & strFormat, int & iLine)
+   ::i8 * callstack::get_frame(const scoped_string & strFormat, ::i32 & iLine)
    {
 
 
@@ -1505,19 +1505,19 @@ namespace  windows
       *_strFile = '\0';
       *_strSymbol = '\0';
 
-      unsigned int uiLineDisplacement = 0;
-      unsigned int uiLineNumber = 0;
+      ::u32 uiLineDisplacement = 0;
+      ::u32 uiLineNumber = 0;
       OS_DWORD uiSymbolDisplacement = 0;
 
 
-      char sz[2];
+      ::i8 sz[2];
       sz[1] = '\0';
-      for (char * p = (char *)pszFormat; *p; ++p)
+      for (::i8 * p = (::i8 *)pszFormat; *p; ++p)
       {
          if (*p == '%')
          {
             ++p; // skips '%'
-            char ca = *p;
+            ::i8 ca = *p;
             switch (ca)
             {
             case 'm':
@@ -1610,7 +1610,7 @@ namespace  windows
 
    }
 
-   const char * callstack::get_dup(const scoped_string & strFormat, int iSkip, int iCount)
+   const ::i8 * callstack::get_dup(const scoped_string & strFormat, ::i32 iSkip, ::i32 iCount)
    {
 
       if (iSkip >= 0)

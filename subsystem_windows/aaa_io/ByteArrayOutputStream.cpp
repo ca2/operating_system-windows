@@ -32,17 +32,17 @@ namespace remoting
    ByteArrayOutputStream::ByteArrayOutputStream(size_t max)
    : m_size(0), m_max(max), m_ownMemory(true)
    {
-      m_buffer = new char[m_max];
+      m_buffer = new ::i8[m_max];
    }
 
    ByteArrayOutputStream::ByteArrayOutputStream()
    : m_size(0), m_buffer(0), m_max(DEFAULT_INNER_BUFFER_CAPACITY), m_ownMemory(true)
    {
-      m_buffer = new char[m_max];
+      m_buffer = new ::i8[m_max];
    }
 
    ByteArrayOutputStream::ByteArrayOutputStream(void *alienMemory)
-   : m_size(0), m_buffer((char *)alienMemory), m_max(0xFFFFFF), m_ownMemory(false)
+   : m_size(0), m_buffer((::i8 *)alienMemory), m_max(0xFFFFFF), m_ownMemory(false)
    {
    }
 
@@ -60,7 +60,7 @@ namespace remoting
       if (allocateNewBuffer && m_ownMemory) {
          size_t reserve = DEFAULT_INNER_BUFFER_CAPACITY;
          // Create new buffer with some reserve
-         char *newBuffer = new char[m_size + len + reserve];
+         ::i8 *newBuffer = new ::i8[m_size + len + reserve];
          // Copy old buffer content to new
          memcpy(newBuffer, m_buffer, m_size);
          // Cleanup
@@ -75,7 +75,7 @@ namespace remoting
       // Write data to buffer
       //
 
-      memcpy(&m_buffer[m_size], (const char *)buffer, len);
+      memcpy(&m_buffer[m_size], (const ::i8 *)buffer, len);
       m_size += len;
 
       return len;
@@ -86,7 +86,7 @@ namespace remoting
       return m_size;
    }
 
-   const char *ByteArrayOutputStream::toByteArray() const
+   const ::i8 *ByteArrayOutputStream::toByteArray() const
    {
       return m_buffer;
    }

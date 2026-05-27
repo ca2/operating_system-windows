@@ -20,7 +20,7 @@ namespace draw2d_gdiplus
 
       auto_pointer < Gdiplus::PrivateFontCollection >    m_pprivateFontCollection;
       auto_pointer < Gdiplus::FontFamily >               m_pgdiplusfontfamily;
-      int m_iStyle;
+      ::i32 m_iStyle;
       //__creatable_from_base(font, ::write_text::font);
 
 
@@ -37,7 +37,7 @@ namespace draw2d_gdiplus
 //#endif
 
 
-      virtual void create(::draw2d::graphics * pgraphics, char iCreate) override;
+      virtual void create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
       void destroy() override;
 
 

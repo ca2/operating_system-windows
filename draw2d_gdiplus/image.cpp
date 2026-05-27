@@ -178,7 +178,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::create_ex(const ::i32_size& size, ::image32_t * pimage32, int iScan, ::enum_flag eflagCreate, int iGoodStride, bool bPreserve)
+   void image::create_ex(const ::i32_size& size, ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate, ::i32 iGoodStride, bool bPreserve)
    {
 
       if (m_pbitmap.is_set()
@@ -251,7 +251,7 @@ namespace draw2d_gdiplus
 
       }
 
-      //int iScan = 0;
+      //::i32 iScan = 0;
 
       //::image32_t * pimage32 = nullptr;
 
@@ -342,7 +342,7 @@ namespace draw2d_gdiplus
 
    }
 
-   //void image::create(const ::i32_size & size, ::eobject eobjectCreate, int iGoodStride, bool bPreserve)
+   //void image::create(const ::i32_size & size, ::eobject eobjectCreate, ::i32 iGoodStride, bool bPreserve)
    //{
 
    //   //if (m_pbitmap.is_set()
@@ -398,7 +398,7 @@ namespace draw2d_gdiplus
 
    //   //}
 
-   //   //int iScan = 0;
+   //   //::i32 iScan = 0;
 
    //   //::image32_t * pimage32 = nullptr;
 
@@ -623,9 +623,9 @@ namespace draw2d_gdiplus
 
          }
 
-         int xEnd = minimum(size.cx, minimum(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectangleTarget.left));
+         ::i32 xEnd = minimum(size.cx, minimum(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectangleTarget.left));
 
-         int yEnd = minimum(size.cy, minimum(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectangleTarget.top));
+         ::i32 yEnd = minimum(size.cy, minimum(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectangleTarget.top));
 
          if (xEnd < 0)
          {
@@ -641,19 +641,19 @@ namespace draw2d_gdiplus
 
          }
 
-         int scanDst = pimageDst->scan_size();
+         ::i32 scanDst = pimageDst->scan_size();
 
-         int scanSrc = pimageSrc->scan_size();
+         ::i32 scanSrc = pimageSrc->scan_size();
 
-         unsigned char * pdst = &((unsigned char *)pimageDst->image32())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
+         ::u8 * pdst = &((::u8 *)pimageDst->image32())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
 
-         unsigned char * psrc = &((unsigned char *)pimageSrc->image32())[scanSrc * pointSrc.y + pointSrc.x * sizeof(::color::color)];
+         ::u8 * psrc = &((::u8 *)pimageSrc->image32())[scanSrc * pointSrc.y + pointSrc.x * sizeof(::color::color)];
 
          ::color::color * pdst2;
 
          ::color::color * psrc2;
 
-         for (int y = 0; y < yEnd; y++)
+         for (::i32 y = 0; y < yEnd; y++)
          {
 
             pdst2 = (::color::color *)&pdst[scanDst * y];
@@ -668,9 +668,9 @@ namespace draw2d_gdiplus
       else
       {
 
-         ::image::image_source imagesource(pimageSrc, ::double_rectangle(pointSrc, size));
+         ::image::image_source imagesource(pimageSrc, ::f64_rectangle(pointSrc, size));
 
-         ::image::image_drawing_options imagedrawingoptions(::double_rectangle(rectangleTarget.top_left(), size));
+         ::image::image_drawing_options imagedrawingoptions(::f64_rectangle(rectangleTarget.top_left(), size));
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
@@ -691,7 +691,7 @@ namespace draw2d_gdiplus
    }*/
 
 
-   void image::SetIconMask(::image::icon * picon, int cx, int cy)
+   void image::SetIconMask(::image::icon * picon, ::i32 cx, ::i32 cy)
    {
 
       if (cx <= 0 || cy <= 0)
@@ -747,7 +747,7 @@ namespace draw2d_gdiplus
       
          ::image::image_source imagesource(picon);
 
-         ::image::image_drawing_options imagedrawingoptions(::int_rectangle_dimension(0, 0, cx, cy));
+         ::image::image_drawing_options imagedrawingoptions(::i32_rectangle_dimension(0, 0, cx, cy));
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
@@ -787,7 +787,7 @@ namespace draw2d_gdiplus
 
          ::image::image_source imagesource(picon);
 
-         ::image::image_drawing_options imagedrawingoptions(::int_rectangle_dimension(0, 0, cx, cy));
+         ::image::image_drawing_options imagedrawingoptions(::i32_rectangle_dimension(0, 0, cx, cy));
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
@@ -828,7 +828,7 @@ namespace draw2d_gdiplus
 
          ::image::image_source imagesource(picon);
 
-         ::image::image_drawing_options imagedrawingoptions(::int_rectangle_dimension(0, 0, cx, cy));
+         ::image::image_drawing_options imagedrawingoptions(::i32_rectangle_dimension(0, 0, cx, cy));
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
@@ -836,14 +836,14 @@ namespace draw2d_gdiplus
 
       }
 
-      unsigned char * r1 = (unsigned char *)pimage1->image32();
-      unsigned char * r2 = (unsigned char *)pimage2->image32();
-      unsigned char * srcM = (unsigned char *)pimageM->image32();
-      unsigned char * dest = (unsigned char *)image32();
-      int iSize = cx*cy;
+      ::u8 * r1 = (::u8 *)pimage1->image32();
+      ::u8 * r2 = (::u8 *)pimage2->image32();
+      ::u8 * srcM = (::u8 *)pimageM->image32();
+      ::u8 * dest = (::u8 *)image32();
+      ::i32 iSize = cx*cy;
 
-      unsigned char b;
-      unsigned char bMax;
+      ::u8 b;
+      ::u8 bMax;
       while (iSize-- > 0)
       {
          if (srcM[0] == 255)
@@ -853,11 +853,11 @@ namespace draw2d_gdiplus
          else
          {
             bMax = 0;
-            b = (unsigned char)(r1[0] - r2[0]);
+            b = (::u8)(r1[0] - r2[0]);
             bMax = maximum(b, bMax);
-            b = (unsigned char)(r1[1] - r2[1]);
+            b = (::u8)(r1[1] - r2[1]);
             bMax = maximum(b, bMax);
-            b = (unsigned char)(r1[2] - r2[2]);
+            b = (::u8)(r1[2] - r2[2]);
             bMax = maximum(b, bMax);
             bMax = 255 - bMax;
          }

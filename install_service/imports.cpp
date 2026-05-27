@@ -45,7 +45,7 @@ FARPROC get_import(HMODULE library, const ::string &function, unsigned long *err
   return ret;
 }
 
-int get_imports() {
+::i32 get_imports() {
   unsigned long error;
 
   ZeroMemory(&imports, sizeof(imports));

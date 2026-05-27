@@ -46,7 +46,7 @@ namespace innate_subsystem_windows
       ::pointer<::innate_subsystem_windows::Brush > m_pbrush;
       ::pointer<::innate_subsystem_windows::Pen>m_ppen;
       ::pointer<::innate_subsystem_windows::Font>m_pfont;
-      int m_iBkMode;
+      ::i32 m_iBkMode;
       ::color::color m_colorText;
       ::color::color m_colorBk;
       ::i32_point m_pointCurrent;
@@ -110,7 +110,7 @@ namespace innate_subsystem_windows
       void drawBitmap(::innate_subsystem::BitmapInterface * pbitmap, const ::i32_rectangle & rectangle) override;
       void drawBitmap(::innate_subsystem::BitmapInterface *bitmap, const ::i32_point & point, const ::i32_rectangle & rectangle) override;
       // Draws text.
-      void drawText(const ::scoped_string & scopedstr, ::i32_rectangle &rect, unsigned int format, enum_align ealign) override;
+      void drawText(const ::scoped_string & scopedstr, ::i32_rectangle &rect, ::u32 format, enum_align ealign) override;
 
    ///protected:
 

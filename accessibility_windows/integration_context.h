@@ -55,9 +55,9 @@ namespace acme_windows
      
          //::file::path base_integration_folder() override;
 
-         int git_bash(const ::scoped_string& scopedstr, const class ::time& timeTimeout) override;
-         int bash(const ::scoped_string & scopedstr, const class ::time & timeTimeout) override;
-         int zsh(const ::scoped_string& scopedstr, const class ::time& timeTimeout) override;
+         ::i32 git_bash(const ::scoped_string& scopedstr, const class ::time& timeTimeout) override;
+         ::i32 bash(const ::scoped_string & scopedstr, const class ::time & timeTimeout) override;
+         ::i32 zsh(const ::scoped_string& scopedstr, const class ::time& timeTimeout) override;
 
 
          void set_msys2(bool bSet = true) override;
@@ -67,7 +67,7 @@ namespace acme_windows
          virtual void defer_msys2();
 
 
-         int posix_shell_command(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell, const trace_function& tracefunction) override;
+         ::i32 posix_shell_command(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell, const trace_function& tracefunction) override;
 
 
       };

@@ -35,9 +35,9 @@ wparam MapLeftRightKeys(wparam vk, lparam lParam)
 
    wparam new_vk = vk;
 
-   unsigned int scancode = (lParam & 0x00ff0000) >> 16;
+   ::u32 scancode = (lParam & 0x00ff0000) >> 16;
 
-   int extended = (lParam & 0x01000000) != 0;
+   ::i32 extended = (lParam & 0x01000000) != 0;
 
    switch (vk)
    {
@@ -61,7 +61,7 @@ wparam MapLeftRightKeys(wparam vk, lparam lParam)
 
 
 
-bool is_registered_windows_message(unsigned int message)
+bool is_registered_windows_message(::u32 message)
 {
 
    return message >= 0xc000 && message <= 0xffff;
@@ -69,10 +69,10 @@ bool is_registered_windows_message(unsigned int message)
 }
 
 
-//lresult CALLBACK WndProc(HWND hwnd, unsigned int message, wparam wparam, lparam lparam);
+//lresult CALLBACK WndProc(HWND hwnd, ::u32 message, wparam wparam, lparam lparam);
 //
 //
-//int g_iCol = 0;
+//::i32 g_iCol = 0;
 //
 //
 //LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
@@ -377,7 +377,7 @@ namespace windowing_win32
 {
 
 
-   wstring windowing::_windows_calc_icon_window_class(::acme::user::interaction * puserinteraction, unsigned int dwDefaultStyle, const ::scoped_string & scopedstrMatter)
+   wstring windowing::_windows_calc_icon_window_class(::acme::user::interaction * puserinteraction, ::u32 dwDefaultStyle, const ::scoped_string & scopedstrMatter)
    {
 
       auto papplication = application();
@@ -479,7 +479,7 @@ namespace windowing_win32
 
    }
 
-   bool windowing::_windows_register_with_icon(WNDCLASSEXW * puserinteractionclass, const unichar * pszClassName, unsigned int nIDIcon)
+   bool windowing::_windows_register_with_icon(WNDCLASSEXW * puserinteractionclass, const unichar * pszClassName, ::u32 nIDIcon)
    {
 
       puserinteractionclass->lpszClassName = pszClassName;
@@ -494,12 +494,12 @@ namespace windowing_win32
    //CLASS_DECL_WINDOWING_WIN32 WNDPROC get_window_procedure();
 
 
-   wstring windowing::_windows_register_window_class(unsigned int nClassStyle, const WCHAR * pwszClassName, HCURSOR hCursor, HBRUSH hbrBackground, HICON hIcon)
+   wstring windowing::_windows_register_window_class(::u32 nClassStyle, const WCHAR * pwszClassName, HCURSOR hCursor, HBRUSH hbrBackground, HICON hIcon)
    {
 
       //auto papp = pobject->get_application();
 
-      const int iLen = 4096;
+      const ::i32 iLen = 4096;
 
       wstring wstrClassName;
 
@@ -656,13 +656,13 @@ namespace windowing_win32
       if (!::RegisterClassExW(puserinteractionclass))
       {
 
-         unsigned int dw = GetLastError();
+         ::u32 dw = GetLastError();
 
          return false;
 
       }
 
-      unsigned int dw = GetLastError();
+      ::u32 dw = GetLastError();
 
       bool bRet = true;
 

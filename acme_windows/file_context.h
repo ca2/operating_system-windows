@@ -7,7 +7,7 @@
 //CLASS_DECL_APEX_WINDOWS bool windows_full_path(unichar * pszPathOut, const unichar * pszFileIn);
 
 //CLASS_DECL_APEX_WINDOWS bool windows_full_path(wstring & wstrFullPath, const wstring & wstrPath);
-///CLASS_DECL_APEX_WINDOWS unsigned int vfxGetFileName(const unichar * pszPathName, unichar * pszTitle, unsigned int nMax);
+///CLASS_DECL_APEX_WINDOWS ::u32 vfxGetFileName(const unichar * pszPathName, unichar * pszTitle, ::u32 nMax);
 
 //CLASS_DECL_APEX_WINDOWS string windows_get_module_short_file_name(HINSTANCE hInst);
 
@@ -62,7 +62,7 @@ namespace acme_windows
       //virtual bool FullPath(string & str, const ::scoped_string & scopedstrFileIn);
 
       //virtual bool FullPath(wstring & wstrFullPath, const wstring & wstrPath);
-      //virtual unsigned int GetFileName(const ::scoped_string & scopedstrPathName, string & str);
+      //virtual ::u32 GetFileName(const ::scoped_string & scopedstrPathName, string & str);
 
       virtual string get_short_file_name(const ::scoped_string & scopedstr);
       virtual string get_module_short_file_name(HINSTANCE hinstance);
@@ -82,8 +82,8 @@ namespace acme_windows
       ::block get_main_resource_block() override;
 
       //::folder * _defer_resource_folder();
-      //::file_pointer create_resource_file(const_char_pointer path) override;
-      //bool resource_is_file_or_dir(const_char_pointer path) override;
+      //::file_pointer create_resource_file(const_char_pointer pszPath) override;
+      //bool resource_is_file_or_dir(const_char_pointer pszPath) override;
 
       file_pointer resource_get_file(const ::file::path & path) override;
 

@@ -34,7 +34,7 @@ namespace draw2d_gdi
    }
 
 
-   bool font::CreateFont(int nHeight, int nWidth, int nEscapement, int nOrientation, int nWeight, BYTE bItalic, BYTE bUnderline, BYTE cStrikeOut, BYTE nCharSet, BYTE nOutPrecision, BYTE nClipPrecision, BYTE nQuality, BYTE nPitchAndFamily, const ::scoped_string & scopedstrFacename)
+   bool font::CreateFont(::i32 nHeight, ::i32 nWidth, ::i32 nEscapement, ::i32 nOrientation, ::i32 nWeight, BYTE bItalic, BYTE bUnderline, BYTE cStrikeOut, BYTE nCharSet, BYTE nOutPrecision, BYTE nClipPrecision, BYTE nQuality, BYTE nPitchAndFamily, const ::scoped_string & scopedstrFacename)
    {
 
       return Attach(::CreateFontW(nHeight, nWidth, nEscapement, nOrientation, nWeight, bItalic, bUnderline, cStrikeOut, nCharSet, nOutPrecision, nClipPrecision, nQuality,  nPitchAndFamily, wstring(lpszFacename)));
@@ -90,14 +90,14 @@ namespace draw2d_gdi
       dumpcontext << "\nlf.lfEscapement = " << lf.lfEscapement;
       dumpcontext << "\nlf.lfOrientation = " << lf.lfOrientation;
       dumpcontext << "\nlf.lfWeight = " << lf.lfWeight;
-      dumpcontext << "\nlf.lfItalic = " << (int)lf.lfItalic;
-      dumpcontext << "\nlf.lfUnderline = " << (int)lf.lfUnderline;
-      dumpcontext << "\nlf.lfStrikeOut = " << (int)lf.lfStrikeOut;
-      dumpcontext << "\nlf.lfCharSet = " << (int)lf.lfCharSet;
-      dumpcontext << "\nlf.lfOutPrecision = " << (int)lf.lfOutPrecision;
-      dumpcontext << "\nlf.lfClipPrecision = " << (int)lf.lfClipPrecision;
-      dumpcontext << "\nlf.lfQuality = " << (int)lf.lfQuality;
-      dumpcontext << "\nlf.lfPitchAndFamily = " << (int)lf.lfPitchAndFamily;
+      dumpcontext << "\nlf.lfItalic = " << (::i32)lf.lfItalic;
+      dumpcontext << "\nlf.lfUnderline = " << (::i32)lf.lfUnderline;
+      dumpcontext << "\nlf.lfStrikeOut = " << (::i32)lf.lfStrikeOut;
+      dumpcontext << "\nlf.lfCharSet = " << (::i32)lf.lfCharSet;
+      dumpcontext << "\nlf.lfOutPrecision = " << (::i32)lf.lfOutPrecision;
+      dumpcontext << "\nlf.lfClipPrecision = " << (::i32)lf.lfClipPrecision;
+      dumpcontext << "\nlf.lfQuality = " << (::i32)lf.lfQuality;
+      dumpcontext << "\nlf.lfPitchAndFamily = " << (::i32)lf.lfPitchAndFamily;
       dumpcontext << "\nlf.lfFaceName = " << (const ::string &)lf.lfFaceName;
 
       dumpcontext << "\n";
@@ -107,7 +107,7 @@ namespace draw2d_gdi
    // out-of-line ::draw2d::brush, font, etc. helpers
 
    // nPointSize is actually scaled 10x
-   bool font::CreatePointFont(int nPointSize, const ::scoped_string & scopedstrFaceName, ::draw2d::graphics_pointer & pgraphics)
+   bool font::CreatePointFont(::i32 nPointSize, const ::scoped_string & scopedstrFaceName, ::draw2d::graphics_pointer & pgraphics)
    {
 
       LOGFONTW logFont;
@@ -171,12 +171,12 @@ namespace draw2d_gdi
       if(m_eunitFontSize == ::draw2d::e_unit_pixel)
       {
 
-         CreatePointFont((int) (m_dFontSize * 720.0 / 96.0), m_strFontFamilyName, nullptr);
+         CreatePointFont((::i32) (m_dFontSize * 720.0 / 96.0), m_strFontFamilyName, nullptr);
 
       }
       else
       {
-         CreatePointFont((int) (m_dFontSize * 10.0), m_strFontFamilyName, nullptr);
+         CreatePointFont((::i32) (m_dFontSize * 10.0), m_strFontFamilyName, nullptr);
       }
 
       return true;

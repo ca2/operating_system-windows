@@ -42,12 +42,12 @@ namespace subsystem_windows
    public:
 
 
-      //EmulatedAnonymousPipeFactory(unsigned int bufferSize, LogWriter *log);
+      //EmulatedAnonymousPipeFactory(::u32 bufferSize, LogWriter *log);
       EmulatedAnonymousPipeFactory();
       ~EmulatedAnonymousPipeFactory() override;
 
 
-      void initialize_emulated_anonymous_pipe_factory(unsigned int bufferSize, ::subsystem::LogWriter *log) override;
+      void initialize_emulated_anonymous_pipe_factory(::u32 bufferSize, ::subsystem::LogWriter *log) override;
 
       void generatePipes(::pointer < ::subsystem::NamedPipeInterface > & serverPipe, bool serverInheritable,
                          ::pointer < ::subsystem::NamedPipeInterface > & clientPipe, bool clientInheritable) override;
@@ -56,7 +56,7 @@ namespace subsystem_windows
       ::string getUniqPipeName() override;
 
       ::pointer < ::subsystem::LogWriter  > m_log;
-      unsigned int m_bufferSize = 0;
+      ::u32 m_bufferSize = 0;
    };
 
    //// __EMULATEDANONYMOUSPIPEFACTORY_H__

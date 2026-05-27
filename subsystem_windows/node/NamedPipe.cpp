@@ -34,7 +34,7 @@
 
 namespace subsystem_windows
 {
-//      NamedPipe::NamedPipe(::subsystem::File * pfilePipe, unsigned int maxPortionSize, bool asServer):
+//      NamedPipe::NamedPipe(::subsystem::File * pfilePipe, ::u32 maxPortionSize, bool asServer):
 //      m_asServer(false)
 
    NamedPipe::NamedPipe():
@@ -50,14 +50,14 @@ namespace subsystem_windows
       }
    }
 
-   void NamedPipe::initialize_pipe(unsigned int maxPortionSize)
+   void NamedPipe::initialize_pipe(::u32 maxPortionSize)
    {
 
       Pipe::initialize_pipe(maxPortionSize);
 
    }
 
-   void NamedPipe::initialize_named_pipe(::subsystem::FileInterface * pfilePipe, unsigned int maxPortionSize, bool asServer)
+   void NamedPipe::initialize_named_pipe(::subsystem::FileInterface * pfilePipe, ::u32 maxPortionSize, bool asServer)
    {
       initialize_pipe(maxPortionSize);
     m_pfilePipe = pfilePipe;

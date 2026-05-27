@@ -440,7 +440,7 @@ namespace sapi
 
                         bool bAllMatch = true;
 
-                        for (int iAttribute = 0; iAttribute < iAttributesToMatchCount; iAttribute++)
+                        for (::i32 iAttribute = 0; iAttribute < iAttributesToMatchCount; iAttribute++)
                         {
 
                            wstring wstrAttribute = straAttributes[iAttribute];

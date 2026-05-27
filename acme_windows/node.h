@@ -53,7 +53,7 @@ namespace acme_windows
       //virtual ::file::path roaming() override;
 
 
-      //void call_async(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid = nullptr) override;
+      //void call_async(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, bool bPrivileged, ::u32* puiPid = nullptr) override;
 
 
       //void initialize_integration();
@@ -163,12 +163,12 @@ namespace acme_windows
 
       void set_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable, const ::scoped_string & scopedstrValue) override;
 
-      //virtual unsigned int       get_file_attributes(const ::scoped_string & scopedstrFileName);
+      //virtual ::u32       get_file_attributes(const ::scoped_string & scopedstrFileName);
       //virtual ::file::path       get_current_directory();
-      virtual int              reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string & str);
-      virtual  HICON             extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex);
+      virtual ::i32              reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string & str);
+      virtual  HICON             extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, ::u32 nIconIndex);
       virtual  void              delete_file(const ::file::path & path);
-      //virtual  int     get_menu_string(HMENU hMenu, unsigned int uDItem, string& str, unsigned int flags);
+      //virtual  ::i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
       //virtual  void        time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime);
 
 
@@ -223,46 +223,46 @@ namespace acme_windows
       void flush_stdin() override;
 
       //void defer_initialize_callstack() override;
-      //string get_callstack(const scoped_string & strFormat, int iSkip, void * caller_address, int iCount) override;
+      //string get_callstack(const scoped_string & strFormat, ::i32 iSkip, void * caller_address, ::i32 iCount) override;
 
 
       ::pointer < ::acme::exclusive > _get_exclusive(::particle * pparticleContext, const ::scoped_string & scopedstrName, ::security_attributes * psecurityattributes = nullptr) override;
-      int get_current_process_affinity_order() override;
+      ::i32 get_current_process_affinity_order() override;
 
 
-      void call_async(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid = nullptr) override;
-      void call_sync(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, const class time & timeTimeout, ::property_set & set, int * piExitCode) override;
+      void call_async(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, bool bPrivileged, ::u32 * puiPid = nullptr) override;
+      void call_sync(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, const class time & timeTimeout, ::property_set & set, ::i32 * piExitCode) override;
 
 
-      void launch_application(::particle * pparticle, const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrParams, int iBitCount) override;
+      void launch_application(::particle * pparticle, const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrParams, ::i32 iBitCount) override;
 
 
       //void shell_open(const ::file::path & path, const ::scoped_string & scopedstrParams = "", const ::file::path & pathFolder = {}) override;
       //void open_url(const ::scoped_string & scopedstrUrl) override; //
-      //void command_system(string_array_base & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
-      virtual int _command_system(const ::scoped_string& scopedstr, const ::scoped_string& scopedstrCommand, const trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay, bool bInteractive);
-      int command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
-      //int command_system(const ::scoped_string& scopedstr, const class ::time& timeOut = 15_min) override;
-      //int interactive_command_system(const ::scoped_string& scopedstrPrompt, const ::scoped_string& scopedstrCommand, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
+      //void command_system(string_array_base & straOutput, ::i32 & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
+      virtual ::i32 _command_system(const ::scoped_string& scopedstr, const ::scoped_string& scopedstrCommand, const trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay, bool bInteractive);
+      ::i32 command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
+      //::i32 command_system(const ::scoped_string& scopedstr, const class ::time& timeOut = 15_min) override;
+      //::i32 interactive_command_system(const ::scoped_string& scopedstrPrompt, const ::scoped_string& scopedstrCommand, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
       //void open_terminal_and_run(const ::scoped_string& scopedstr);
       void launch_command_system(const ::scoped_string& scopedstr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
-      int synchronous_posix_terminal(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell = e_posix_shell_system_default, const trace_function& tracefunction = nullptr) override;
+      ::i32 synchronous_posix_terminal(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell = e_posix_shell_system_default, const trace_function& tracefunction = nullptr) override;
 
 
       void shell_execute_async(const scoped_string & strFile, const scoped_string & strParams, const ::file::path& pathWorkingDirectory = {}) override;
-      int shell_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute, const ::file::path& pathWorkingDirectory = {}) override;
+      ::i32 shell_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute, const ::file::path& pathWorkingDirectory = {}) override;
 
       void root_execute_async(const scoped_string & strFile, const scoped_string & strParams, const ::file::path& pathWorkingDirectory = {}) override;
-      int root_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute, const ::file::path& pathWorkingDirectory = {}) override;
+      ::i32 root_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute, const ::file::path& pathWorkingDirectory = {}) override;
 
       bool set_process_priority(::enum_priority epriority) override;
       ::string get_command_line() override;
 
-      int get_current_processor_index() override;
-      int get_current_process_maximum_affinity() override;
+      ::i32 get_current_processor_index() override;
+      ::i32 get_current_process_maximum_affinity() override;
 
-      //int get_current_process_affinity_order() override;
-      unsigned long long translate_processor_affinity(int i) override;
+      //::i32 get_current_process_affinity_order() override;
+      ::u64 translate_processor_affinity(::i32 i) override;
 
 
       void _node_file_dialog(::file::file_dialog * pdialog) override;
@@ -272,7 +272,7 @@ namespace acme_windows
 
       virtual ::string registry_environment_variable_to_system(const ::scoped_string & scopedstr);
       virtual ::string system_environment_variable_to_registry(const ::scoped_string & scopedstr);
-      virtual int environment_variable_registry_payload_type(const ::scoped_string& scopedstr);
+      virtual ::i32 environment_variable_registry_payload_type(const ::scoped_string& scopedstr);
 
       ::string get_user_permanent_environment_variable(const ::scoped_string & scopedstr) override;
       ::string get_system_permanent_environment_variable(const ::scoped_string& scopedstr) override;
@@ -334,7 +334,7 @@ namespace acme_windows
    
       ::pointer <::operating_system::summary > operating_system_summary() override;
 
-      void launch_app(const ::scoped_string & scopedstr, const_char_pointer *argv, int iFlags) override;
+      void launch_app(const ::scoped_string & scopedstr, const_char_pointer *argv, ::i32 iFlags) override;
 
 
       // ::pointer < ::operating_system::application > module_path_application(const ::scoped_string & scopestr) override;
@@ -356,19 +356,19 @@ namespace acme_windows
 
       //using ::acme_windows_common::node::get_command_output;
 
-      int command(const ::scoped_string& scopedstr, const trace_function& tracefunction) override;
+      ::i32 command(const ::scoped_string& scopedstr, const trace_function& tracefunction) override;
 
       
-      //int get_command_output(::string& strOutput, const ::scoped_string& scopedstr, const class ::time& timeOut) override;
+      //::i32 get_command_output(::string& strOutput, const ::scoped_string& scopedstr, const class ::time& timeOut) override;
       ::file::path _get_power_shell_path() override;
 
       ::file::path _get_cmd_path() override;
 
-      //int building_core_count(bool bDedicatedBuilder) override;
+      //::i32 building_core_count(bool bDedicatedBuilder) override;
 
-      //int performance_core_count() override;
+      //::i32 performance_core_count() override;
 
-      //int efficiency_core_count() override;
+      //::i32 efficiency_core_count() override;
       bool _is_google_chrome_installed() override;
       bool _is_opera_browser_installed() override;
       bool _is_visual_studio_code_installed() override;

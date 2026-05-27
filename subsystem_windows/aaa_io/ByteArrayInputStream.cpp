@@ -28,7 +28,7 @@
 
 namespace remoting
 {
-   ByteArrayInputStream::ByteArrayInputStream(const char *buffer, size_t bufferSize)
+   ByteArrayInputStream::ByteArrayInputStream(const ::i8 *buffer, size_t bufferSize)
    : m_buffer(buffer), m_bufferSize(bufferSize), m_left(bufferSize)
    {
    }
@@ -47,8 +47,8 @@ namespace remoting
          throw ::io_exception(error_io, "Negative data length value");
       }
 
-      char *out = (char *)buffer;
-      char *in = (char *)m_buffer;
+      ::i8 *out = (::i8 *)buffer;
+      ::i8 *in = (::i8 *)m_buffer;
 
       size_t bytesToCopy = ::minimum(m_left, len);
       size_t outOffset = 0;

@@ -47,8 +47,8 @@ namespace innate_subsystem_windows
 
         virtual void showTooltip(::innate_subsystem::ControlInterface * pcontrol) override;
 
-        virtual void setText(const char *text) override;
-        virtual void setTitle(const char *caption) override;
+        virtual void setText(const ::i8 *text) override;
+        virtual void setTitle(const ::i8 *caption) override;
 
         virtual ::string getText() override;
         virtual ::string getTitle() const override;

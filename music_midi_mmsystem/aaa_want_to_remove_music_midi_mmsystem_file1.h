@@ -26,15 +26,15 @@ namespace music
             virtual ~file();
 
 
-            void     WorkStreamRender(LPMIDIHDR lpmh, ::duration tickMax, unsigned int cbPrerollNomimalMax);
+            void     WorkStreamRender(LPMIDIHDR lpmh, ::duration tickMax, ::u32 cbPrerollNomimalMax);
 
             using ::music::midi::file::WorkSeek;
 
             void     WorkSeek(::duration tickPosition, LPMIDIHDR lpmh);
 
-            void     StreamEvent(::duration tickDelta, ::music::midi::happening * Event, LPMIDIHDR lpmh, ::duration tickMax, unsigned int cbPrerollNomimalMax);
+            void     StreamEvent(::duration tickDelta, ::music::midi::happening * Event, LPMIDIHDR lpmh, ::duration tickMax, ::u32 cbPrerollNomimalMax);
 
-            void     StreamEventF1(::duration tickDelta, array < ::music::midi::happening *, ::music::midi::happening * > & eventptra, LPMIDIHDR lpmh, ::duration tickMax, unsigned int cbPrerollNomimalMax);
+            void     StreamEventF1(::duration tickDelta, array < ::music::midi::happening *, ::music::midi::happening * > & eventptra, LPMIDIHDR lpmh, ::duration tickMax, ::u32 cbPrerollNomimalMax);
 
             void     InsertParmData(::duration tickDelta, LPMIDIHDR lpmh);
 

@@ -47,37 +47,37 @@ namespace innate_subsystem_windows
         ~ComboBox();
 
         // Adds new item to the end of combo box items list.
-        virtual int addItem(const char *text);
+        virtual ::i32 addItem(const ::i8 *text);
 
         // Adds new item to the end of combo box items list.
-        virtual int addItem(const char *text, void *tag);
+        virtual ::i32 addItem(const ::i8 *text, void *tag);
 
         // Inserts new item to the specified position
-        virtual void insertItem(int index, const char *text);
+        virtual void insertItem(::i32 index, const ::i8 *text);
 
         // Inserts new item to the specified position
-        virtual void insertItem(int index, const char *text, void *tag);
+        virtual void insertItem(::i32 index, const ::i8 *text, void *tag);
 
         // Returns count of combo box items
-        virtual int getItemsCount();
+        virtual ::i32 getItemsCount();
 
         // Sets user data (tag) associated with combo box item with specified index
-        virtual void setItemData(int index, void *tag);
+        virtual void setItemData(::i32 index, void *tag);
 
         // Returns user data associated with combo box item with specified index
-        virtual void *getItemData(int index);
+        virtual void *getItemData(::i32 index);
 
         // Sets text associated with combo box item with specified index
-        virtual ::string getItemText(int index);
+        virtual ::string getItemText(::i32 index);
 
         // Returns current selected item index
-        virtual int getSelectedItemIndex();
+        virtual ::i32 getSelectedItemIndex();
 
         // Selects item with specified index
-        virtual void setSelectedItem(int index);
+        virtual void setSelectedItem(::i32 index);
 
         // Deletes item from specified location
-        virtual void deleteItem(int index);
+        virtual void deleteItem(::i32 index);
 
         // Removes all combo box items
         virtual void removeAllItems();

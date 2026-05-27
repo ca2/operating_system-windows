@@ -33,7 +33,7 @@ SystemException::SystemException()
   createMessage(0, m_errcode);
 }
 
-SystemException::SystemException(int errcode)
+SystemException::SystemException(::i32 errcode)
 : ::subsystem::Exception(), m_errcode(errcode)
 {
   createMessage(0, m_errcode);
@@ -45,7 +45,7 @@ SystemException::SystemException(const ::scoped_string & scopedstrUserMessage)
   createMessage(scopedstrUserMessage, m_errcode);
 }
 
-SystemException::SystemException(const ::scoped_string & scopedstrUserMessage, int errcode)
+SystemException::SystemException(const ::scoped_string & scopedstrUserMessage, ::i32 errcode)
 : ::subsystem::Exception(), m_errcode(errcode)
 {
   createMessage(scopedstrUserMessage, m_errcode);
@@ -55,7 +55,7 @@ SystemException::~SystemException()
 {
 }
 
-int SystemException::getErrorCode() const
+::i32 SystemException::getErrorCode() const
 {
   return m_errcode;
 }
@@ -65,7 +65,7 @@ int SystemException::getErrorCode() const
   return m_systemMessage;
 }
 
-void SystemException::createMessage(const ::scoped_string & scopedstrUserMessage, int errcode)
+void SystemException::createMessage(const ::scoped_string & scopedstrUserMessage, ::i32 errcode)
 {
 
    ::string strMessage(scopedstrUserMessage);

@@ -99,7 +99,7 @@ namespace innate_subsystem_windows
    }
 
    HRESULT ThemeLib::DrawThemeBackground(HTHEME hTheme, HDC hdc,
-                                         int iPartId, int iStateId,
+                                         ::i32 iPartId, ::i32 iStateId,
                                          RECT *pRect,
                                          const RECT *pClipRect)
    {
@@ -111,9 +111,9 @@ namespace innate_subsystem_windows
       return s_OpenThemeData(hwnd, pszClassList);
    }
 
-   HRESULT ThemeLib::DrawThemeText(HTHEME hTheme, HDC hdc, int iPartId,
-                                   int iStateId, LPCWSTR pszText,
-                                   int iCharCount, DWORD dwTextFlags,
+   HRESULT ThemeLib::DrawThemeText(HTHEME hTheme, HDC hdc, ::i32 iPartId,
+                                   ::i32 iStateId, LPCWSTR pszText,
+                                   ::i32 iCharCount, DWORD dwTextFlags,
                                    DWORD dwTextFlags2, const RECT *pRect)
    {
       return s_DrawThemeText(hTheme, hdc, iPartId, iStateId, pszText,
@@ -121,7 +121,7 @@ namespace innate_subsystem_windows
    }
 
    HRESULT ThemeLib::GetThemeBackgroundContentRect(HTHEME hTheme,  HDC hdc,
-                                                   int iPartId, int iStateId,
+                                                   ::i32 iPartId, ::i32 iStateId,
                                                    const RECT *pBoundingRect,
                                                    RECT *pContentRect)
    {

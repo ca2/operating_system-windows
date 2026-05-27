@@ -27,7 +27,7 @@ namespace remoting
 
 
    size_t BufferedInputStream::read(void *buffer, size_t len) {
-      char *buf = (char *)buffer;
+      ::i8 *buf = (::i8 *)buffer;
 
       if (m_have == 0) {
          m_pos = 0;

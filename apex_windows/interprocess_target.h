@@ -30,8 +30,8 @@ namespace apex_windows
 
 
       //void * on_interprocess_receive(const ::scoped_string & scopedstrMessage) override;
-      //void * on_interprocess_receive(int message, void * pdata, memsize len) override;
-      //void * on_interprocess_post(long long a, long long b) override;
+      //void * on_interprocess_receive(::i32 message, void * pdata, memsize len) override;
+      //void * on_interprocess_post(::i64 a, ::i64 b) override;
 
 
       virtual bool on_idle() override;

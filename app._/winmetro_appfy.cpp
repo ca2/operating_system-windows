@@ -3,7 +3,7 @@
 
 
 [Platform::MTAThread]
-int main(Platform::Array<Platform::String^>^)
+::i32 main(Platform::Array<Platform::String^>^)
 {
 
    auto source = ::metrowin::new_directx_application_source("m_app.exe : app=app-core/hellomultiverse");
@@ -17,7 +17,7 @@ int main(Platform::Array<Platform::String^>^)
 
 
 /*[Platform::MTAThread]
-int main(Platform::Array<Platform::String^>^)
+::i32 main(Platform::Array<Platform::String^>^)
 {
    
    // No Depends

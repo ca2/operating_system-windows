@@ -2,7 +2,7 @@
 // Created by camilo on 31/01/2022.
 //
 #include "framework.h"
-#include "device.h"
+#include "context.h"
 #include "brush.h"
 #include "font.h"
 #include "icon.h"
@@ -12,25 +12,19 @@
 ////#include "acme/exception/exception.h"
 #pragma comment(lib, "Msimg32.lib")
 #include <gdiplus.h>
-int align_to_windows_draw_text_align(enum_align ealign);
+::i32 align_to_windows_draw_text_align(enum_align ealign);
 
-int draw_text_to_windows_draw_text(enum_draw_text edrawtext);
-
-
-namespace windows
-{
+::i32 draw_text_to_windows_draw_text(enum_draw_text edrawtext);
 
 
 
-   namespace nano
-   {
 
 
-      namespace graphics
+      namespace nano_graphics_gdi
       {
 
 
-         device::device()
+         context::context()
          {
 
             m_hdc = ::CreateCompatibleDC(nullptr);
@@ -41,7 +35,7 @@ namespace windows
 
 
 
-         device::~device()
+         context::~context()
          {
 
             if (m_bDelete)
@@ -54,15 +48,23 @@ namespace windows
          }
 
 
-         void device::attach(void * posdata, const ::i32_size & size)
+         void context::attach(void * posdata, const ::i32_size & size, int iType)
          {
 
-            auto hdc = (HDC)posdata;
+             if (iType == 0) {
+                 auto hdc = (HDC)posdata;
 
-            m_hdc = hdc;
-            m_bDelete = false;
+                 m_hdc = hdc;
+                 m_bDelete = false;
 
-            m_size = size;
+                 m_size = size;
+             }
+             else {
+
+                 throw ::exception(error_wrong_type);
+
+             }
+
 
          }
 
@@ -81,7 +83,7 @@ HFONT CreateSimpleFont16(void)
                                DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY,
                                DEFAULT_PITCH | FF_DONTCARE, "Segoe UI");
          }
-         void device::_draw_text(const ::scoped_string & scopedstr, const ::i32_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext,
+         void context::_draw_text(const ::scoped_string & scopedstr, const ::i32_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext,
             ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText,
             ::nano::graphics::font* pnanofont)
          {
@@ -120,9 +122,9 @@ HFONT CreateSimpleFont16(void)
 
             ::GetTextMetrics(m_hdc, &textmetricw);
 
-            int iAlign = align_to_windows_draw_text_align(ealign);
+            ::i32 iAlign = align_to_windows_draw_text_align(ealign);
 
-            int iFlag = draw_text_to_windows_draw_text(edrawtext);
+            ::i32 iFlag = draw_text_to_windows_draw_text(edrawtext);
 
             //iAlign = 0;
 
@@ -151,7 +153,7 @@ HFONT CreateSimpleFont16(void)
             //   // return;
             //}
             
-            int iLength = wstrMessage.length();
+            ::i32 iLength = wstrMessage.length();
 
             //auto pbrush = createø<::nano::graphics::brush>();
 
@@ -163,7 +165,7 @@ HFONT CreateSimpleFont16(void)
 
             //rectangle(r, nullptr, ppen);
 
-            ::DrawTextW(m_hdc, wstrMessage, (int)iLength, (LPRECT)&r, iAlign | iFlag);
+            ::DrawTextW(m_hdc, wstrMessage, (::i32)iLength, (LPRECT)&r, iAlign | iFlag);
 
             //::SelectObject(m_hdc, h3);
 
@@ -172,7 +174,7 @@ HFONT CreateSimpleFont16(void)
          }
 
 
-         ::i32_size device::get_text_extents(const ::scoped_string & scopedstr, ::nano::graphics::font* pnanofont)
+         ::i32_size context::get_text_extents(const ::scoped_string & scopedstr, ::nano::graphics::font* pnanofont)
          {
 
             pnanofont->update(this);
@@ -183,7 +185,7 @@ HFONT CreateSimpleFont16(void)
 
             ::SIZE size;
 
-            if (!::GetTextExtentPoint32W(m_hdc, wstr, (int)wstr.length(), &size))
+            if (!::GetTextExtentPoint32W(m_hdc, wstr, (::i32)wstr.length(), &size))
             {
 
                throw ::exception(error_failed);
@@ -195,7 +197,7 @@ HFONT CreateSimpleFont16(void)
          }
 
 
-         void device::rectangle(const ::i32_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen)
+         void context::rectangle(const ::i32_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen)
          {
 
             if (!pnanobrush && !pnanopen)
@@ -253,12 +255,12 @@ HFONT CreateSimpleFont16(void)
          }
 
 
-         void device::draw(::nano::graphics::icon * picon, int x, int y, int cx, int cy)
+         void context::draw(::nano::graphics::icon * picon, ::i32 x, ::i32 y, ::i32 cx, ::i32 cy)
          {
 
 
 
-            ::pointer < ::windows::nano::graphics::icon > pwindowsicon = picon;
+            ::pointer < ::nano_graphics_gdi::icon > pwindowsicon = picon;
 
             Gdiplus::Graphics g(m_hdc);
 
@@ -296,7 +298,7 @@ HFONT CreateSimpleFont16(void)
          }
 
 
-         void device::translate(int x, int y)
+         void context::translate(::i32 x, ::i32 y)
          {
 
             OffsetViewportOrgEx(m_hdc, x, y, nullptr);
@@ -304,21 +306,16 @@ HFONT CreateSimpleFont16(void)
          }
 
 
-      } // namespace graphics
-
-
-   } // namespace nano
-
-
-} // namespace windows
+      } // namespace nano_graphics_gdi
 
 
 
 
-int align_to_windows_draw_text_align(enum_align ealign)
+
+::i32 align_to_windows_draw_text_align(enum_align ealign)
 {
 
-   int iAlign = 0;
+   ::i32 iAlign = 0;
 
    if (ealign & e_align_right)
    {
@@ -365,10 +362,10 @@ int align_to_windows_draw_text_align(enum_align ealign)
 
 
 
-int draw_text_to_windows_draw_text(enum_draw_text edrawtext)
+::i32 draw_text_to_windows_draw_text(enum_draw_text edrawtext)
 {
 
-   int iFlag = 0;
+   ::i32 iFlag = 0;
 
    if (edrawtext & e_draw_text_end_ellipsis)
    {

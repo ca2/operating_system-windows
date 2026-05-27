@@ -23,7 +23,7 @@ namespace acme_windows
       HANDLE               m_hContext;
       bool                 m_bGotLast;
       string               m_strRoot;
-      char                 m_chDirSeparator;     // not '\\' for Internet classes
+      ::i8                 m_chDirSeparator;     // not '\\' for Internet classes
 
 
    public:
@@ -38,7 +38,7 @@ namespace acme_windows
 
 
       
-      long long get_length() const;
+      ::i64 get_length() const;
       virtual ::file::path GetFileName() const;
       virtual ::file::path GetFilePath() const;
       virtual string GetFileTitle() const;
@@ -52,7 +52,7 @@ namespace acme_windows
       virtual bool GetLastAccessTime(::earth::time& refTime) const;
       virtual bool GetCreationTime(::earth::time& refTime) const;
 
-      bool MatchesMask(unsigned int dwMask) const;
+      bool MatchesMask(::u32 dwMask) const;
 
       virtual bool IsDots() const;
       // these aren't virtual because they all use MatchesMask(), which is
@@ -67,7 +67,7 @@ namespace acme_windows
 
       
       void close();
-      virtual bool find_file(const ::scoped_string & scopedstrName = nullptr, unsigned int dwUnused = 0);
+      virtual bool find_file(const ::scoped_string & scopedstrName = nullptr, ::u32 dwUnused = 0);
       virtual bool find_next_file();
 
       virtual void CloseContext();
@@ -132,7 +132,7 @@ namespace acme_windows
 
    }
 
-   inline bool file_find::MatchesMask(unsigned int dwMask) const
+   inline bool file_find::MatchesMask(::u32 dwMask) const
    {
 
 
@@ -143,11 +143,11 @@ namespace acme_windows
 
    }
 
-   inline long long file_find::get_length() const
+   inline ::i64 file_find::get_length() const
    {
 
       if (m_pFoundInfo != nullptr)
-         return m_pFoundInfo->nFileSizeLow + (((long long)m_pFoundInfo->nFileSizeHigh) << 32);
+         return m_pFoundInfo->nFileSizeLow + (((::i64)m_pFoundInfo->nFileSizeHigh) << 32);
       else
          return 0;
 

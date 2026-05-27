@@ -62,7 +62,7 @@ namespace subsystem_windows
    }
 
    HANDLE WinHandles::assignHandleFor(HANDLE hSource,
-                                      unsigned int procId,
+                                      ::u32 procId,
                                       bool neededToCloseSource,
                                       bool keepCloseRight)
    {

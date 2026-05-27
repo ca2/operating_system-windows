@@ -117,7 +117,7 @@ namespace innate_subsystem_windows
     }
 
 
-    ::user::enum_key subsystem::virtual_key_code_to_user_key(int iVirtualKeyCode)
+    ::user::enum_key subsystem::virtual_key_code_to_user_key(::i32 iVirtualKeyCode)
     {
         return ::windows::virtual_key_code_to_user_key(iVirtualKeyCode);
         //switch (iVirtualKeyCode)

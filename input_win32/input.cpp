@@ -382,7 +382,7 @@ namespace input_win32
    //   }
    //
    //
-   //   void windowing::__synthesizes_creates_styles(::user::interaction* pinteraction, unsigned int& nExStyle, unsigned int& nStyle)
+   //   void windowing::__synthesizes_creates_styles(::user::interaction* pinteraction, ::u32& nExStyle, ::u32& nStyle)
    //   {
    //
    //      if (pinteraction->m_bCompositedFrameWindow)
@@ -603,7 +603,7 @@ namespace input_win32
    //   void windowing::set(message::key* pkey, ::acme::windowing::window * pacmewindowingwindow, ::windowing::window* pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    //   {
    //
-   //      pkey->m_nChar = static_cast<unsigned int>(wparam);
+   //      pkey->m_nChar = static_cast<::u32>(wparam);
    //
    //      pkey->m_nRepCnt = LOWORD(lparam);
    //
@@ -613,7 +613,7 @@ namespace input_win32
    //
    //      pkey->m_bExt = (lparam & (1 << 24)) != 0;
    //
-   //      pkey->m_iVirtualKey = (int)MapLeftRightKeys(wparam, lparam);
+   //      pkey->m_iVirtualKey = (::i32)MapLeftRightKeys(wparam, lparam);
    //
    //      ::windowing::windowing::set(pkey, oswindow, pwindow, eusermessage, wparam, lparam);
    //
@@ -895,7 +895,7 @@ namespace input_win32
    //   //   }
    //
    //
-   //   int_bool windowing::point_is_window_origin(::i32_point ptHitTest, oswindow oswindowExclude, int iMargin)
+   //   int_bool windowing::point_is_window_origin(::i32_point ptHitTest, oswindow oswindowExclude, ::i32 iMargin)
    //   {
    //
    //      HWND hwndExclude = as_hwnd(oswindowExclude);
@@ -958,7 +958,7 @@ namespace input_win32
    //
    //      ::windows::hwnd_array hwnda;
    //
-   //      for (int i = 0; i < prototypepointera.prototype_count(); i++)
+   //      for (::i32 i = 0; i < prototypepointera.prototype_count(); i++)
    //      {
    //
    //         ::pointer<::user::interaction>puserinteraction = prototypepointera.prototype_at(i);
@@ -983,7 +983,7 @@ namespace input_win32
    //
    //      ::windows::window_util::SortByZOrder(hwnda);
    //
-   //      for (int i = 0; i < hwnda.get_count(); i++)
+   //      for (::i32 i = 0; i < hwnda.get_count(); i++)
    //      {
    //
    //         auto puieWindow = uia.find_first(__oswindow(hwnda[i]));
@@ -1076,14 +1076,14 @@ namespace input_win32
    //   {
    //
    //
-   //      for (char ch = 'A'; ch <= 'Z'; ch++)
+   //      for (::i8 ch = 'A'; ch <= 'Z'; ch++)
    //      {
    //
    //         pkeyboard->m_mapKey[ch] = (::user::enum_key)(::user::e_key_a + (ch - 'A'));
    //
    //      }
    //
-   //      for (char ch = '0'; ch <= '9'; ch++)
+   //      for (::i8 ch = '0'; ch <= '9'; ch++)
    //      {
    //
    //         pkeyboard->m_mapKey[ch] = (::user::enum_key)(::user::e_key_0 + (ch - '0'));
@@ -1191,8 +1191,8 @@ namespace input_win32
    ////
    ////                  ::color::color crCustColors[16];
    ////
-   ////                  // init-int this array did not affect the mouse problem
-   ////                  // unsigned int idx ;
+   ////                  // init-::i32 this array did not affect the mouse problem
+   ////                  // ::u32 idx ;
    ////                  // for (idx=0; idx<16; idx++) {
    ////                  // crCustColors[idx] = rgb(idx, idx, idx) ;
    ////                  // }
@@ -1226,8 +1226,8 @@ namespace input_win32
    ////      CHOOSECOLOR cc;
    ////      ::color::color crCustColors[16];
    ////
-   ////      // init-int this array did not affect the mouse problem
-   ////      // unsigned int idx ;
+   ////      // init-::i32 this array did not affect the mouse problem
+   ////      // ::u32 idx ;
    ////      // for (idx=0; idx<16; idx++) {
    ////      // crCustColors[idx] = rgb(idx, idx, idx) ;
    ////      // }
@@ -1295,7 +1295,7 @@ namespace input_win32
    //      return _top_level_contains_predicate([this, str](::acme::windowing::window * pacmewindowingwindow)
    //         {
    //
-   //            //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
+   //            //PSEUDO-Code ::i8 sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
    //
    //            string strWindowText = _get_window_text_timeout(oswindow, 200_ms);
    //
@@ -1312,7 +1312,7 @@ namespace input_win32
    //      return _top_level_contains_predicate([this, str](::acme::windowing::window * pacmewindowingwindow)
    //         {
    //
-   //            //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
+   //            //PSEUDO-Code ::i8 sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
    //
    //            if (!::IsWindowVisible((HWND)oswindow))
    //            {
@@ -1336,7 +1336,7 @@ namespace input_win32
    //      return _top_level_contains_predicate([this, &stra](::acme::windowing::window * pacmewindowingwindow)
    //         {
    //
-   //            //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
+   //            //PSEUDO-Code ::i8 sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
    //
    //            if (!::IsWindowVisible((HWND)oswindow))
    //            {

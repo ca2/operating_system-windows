@@ -8,8 +8,8 @@
 //
 //struct CLASS_DECL_APEX_WINDOWS __MAP_MESSAGE
 //{
-//   unsigned int    nMsg;
-//   const char *  pszMsg;
+//   ::u32    nMsg;
+//   const ::i8 *  pszMsg;
 
 //};
 //

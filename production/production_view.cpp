@@ -138,18 +138,18 @@ namespace production
       ::i32_rectangle rectangleX = this->rectangle();
       //GetClientRect(rectangleX);
       rectangleX.deflate(2, 2);
-      int iW = rectangleX.width() / 2;
-      int iH = rectangleX.height() / 2;
+      ::i32 iW = rectangleX.width() / 2;
+      ::i32 iH = rectangleX.height() / 2;
       iH = minimum(iH, 120);
-      double r = (double) iW / (double) iH;
-      double rScreen = (double) rectangleDesktop.width() / (double) rectangleDesktop.height();
+      ::f64 r = (::f64) iW / (::f64) iH;
+      ::f64 rScreen = (::f64) rectangleDesktop.width() / (::f64) rectangleDesktop.height();
       if(r < rScreen)
       {
-         iH = (int) (iW / rScreen);
+         iH = (::i32) (iW / rScreen);
       }
       else if(r > rScreen)
       {
-         iW = (int) (iH * rScreen);
+         iW = (::i32) (iH * rScreen);
       }
       m_iW = iW;
       m_iH = iH;
@@ -187,8 +187,8 @@ namespace production
 
       ::i32_point pointOffset = get_context_offset();
 
-      int iStart = pointOffset.y / m_iLineHeight;
-      int y = m_iLineHeight - pointOffset.y % m_iLineHeight;
+      ::i32 iStart = pointOffset.y / m_iLineHeight;
+      ::i32 y = m_iLineHeight - pointOffset.y % m_iLineHeight;
       if(pointOffset.y > m_iLineHeight)
       {
          iStart--;
@@ -205,7 +205,7 @@ namespace production
       auto pbrush = createø < ::draw2d::brush >();
       pbrush->create_solid(argb(0xcc, 90, 90, 90));
       pgraphics->SelectObject(brush);
-      for(int i = iStart; i < m_pproduction->m_straStatus.get_size() && y < rectangleText.bottom; i++)
+      for(::i32 i = iStart; i < m_pproduction->m_straStatus.get_size() && y < rectangleText.bottom; i++)
       {
          rcItem = rectangleText;
          rcItem.bottom = y + m_iLineHeight;
@@ -332,7 +332,7 @@ namespace production
    }
 
 
-   void impact::_001OnTabClick(int iTab)
+   void impact::_001OnTabClick(::i32 iTab)
    {
       if(iTab == 1)
       {
@@ -360,7 +360,7 @@ namespace production
    }
 
 
-   void impact::GetAreaThumbRect(LPRECT lprect, int iArea)
+   void impact::GetAreaThumbRect(LPRECT lprect, ::i32 iArea)
    {
       ::i32_rectangle rectangleX = this->rectangle();
       //GetClientRect(rectangleX);
@@ -408,7 +408,7 @@ namespace production
       __UNREFERENCED_PARAMETER(pmessage);
       //    auto pmouse = pmessage->m_pmouse;
 
-//      int iHitArea = hit_test(pmouse->m_point);
+//      ::i32 iHitArea = hit_test(pmouse->m_point);
 
    }
 
@@ -436,7 +436,7 @@ namespace production
       __UNREFERENCED_PARAMETER(pmessage);
       //    auto pmouse = pmessage->m_pmouse;
 
-//      int iHitArea = hit_test(pmouse->m_point);
+//      ::i32 iHitArea = hit_test(pmouse->m_point);
       /*   {
             ::aura::menu menu;
             menu.LoadXmlMenu(get_application(), "production\\popup_production.xml");
@@ -501,7 +501,7 @@ namespace production
    }
 
 
-   void impact::production_loop(int iLoopCount)
+   void impact::production_loop(::i32 iLoopCount)
    {
       m_iStep = 1;
       ::pointer<application>papp =  (get_application());
@@ -521,7 +521,7 @@ namespace production
       ::pointer<::user::message>pusermessage(pmessage);
       if(pusermessage->m_wparam == 1)
       {
-         int iLineHeight = m_iLineHeight;
+         ::i32 iLineHeight = m_iLineHeight;
          {
             single_lock synchronouslock(&m_pproduction->m_mutexStatus,true);
             if(m_pproduction->m_straStatus.get_size() > 0)

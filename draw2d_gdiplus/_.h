@@ -26,17 +26,17 @@ inline void copy(Gdiplus::ColorMatrix & a, const color_matrix & b)
 }
 
 
-//void gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const ::scoped_string & scopedstr, double_rectangle & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
+//void gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const ::scoped_string & scopedstr, ::f64_rectangle & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfont, ::f64 dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
 
 
 inline auto gdiplus_color(const ::color::color & color)
 {
 
    return Gdiplus::Color(
-      color.m_uchOpacity,
-      color.m_uchRed,
-      color.m_uchGreen,
-      color.m_uchBlue);
+      color.m_u8Opacity,
+      color.m_u8Red,
+      color.m_u8Green,
+      color.m_u8Blue);
 
 }
 

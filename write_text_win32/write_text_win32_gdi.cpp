@@ -11,7 +11,7 @@ namespace write_text_win32_gdi
 {
 
 
-   ::enum_character_set get_character_set(int iCharacterSet)
+   ::enum_character_set get_character_set(::i32 iCharacterSet)
    {
 
       if (iCharacterSet == CHINESEBIG5_CHARSET)
@@ -131,7 +131,7 @@ namespace write_text_win32_gdi
       else
       {
 
-         output_debug_string("OTHER char SET");
+         output_debug_string("OTHER ::i8 SET");
 
       }
 

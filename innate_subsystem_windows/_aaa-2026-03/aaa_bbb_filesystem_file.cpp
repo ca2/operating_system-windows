@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 
-string file_extension_dup(const char * path)
+string file_extension_dup(const ::i8 * path)
 {
 
    string str = file_path_name(path);
@@ -25,7 +25,7 @@ string file_extension_dup(const char * path)
 
 }
 
-string file_final_extension_dup(const char * path)
+string file_final_extension_dup(const ::i8 * path)
 {
 
    string str = file_path_name(path);
@@ -79,7 +79,7 @@ CLASS_DECL_ACME string solve_relative(const ::scoped_string & scopedstrParam, bo
 
    character_count iaSlash[512];
 
-   int iSlashCount = 512;
+   ::i32 iSlashCount = 512;
 
    solve_relative_inline(str, bUrl, bOnlyNativeFileSep, iaSlash, &iSlashCount);
 
@@ -119,7 +119,7 @@ if (bOnlyNativeFileSep && psz[iPos] == '/') \
 #endif
 
 
-CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOnlyNativeFileSep, character_count * iaSlash, int * piSlashCount)
+CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOnlyNativeFileSep, character_count * iaSlash, ::i32 * piSlashCount)
 {
 
    bOnlyNativeFileSep = true;
@@ -132,7 +132,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
 
    character_count iLen = str.length();
 
-   char * psz = str.get_buffer(iLen);
+   ::i8 * psz = str.get_buffer(iLen);
 
    //string strAbsolute(strParam);
 
@@ -142,7 +142,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
 
    //character_count * iaSlash = *iaSlash;
 
-   int & iSlashCount = *piSlashCount;
+   ::i32 & iSlashCount = *piSlashCount;
 
    iSlashCount = 0;
 
@@ -507,7 +507,7 @@ CLASS_DECL_ACME string defer_solve_relative(const scoped_string & strRelative, c
 
 
 
-//CLASS_DECL_ACME bool read_resource_as_file(const scoped_string & strFile,HINSTANCE hinst,unsigned int nID,LPCTSTR pcszType);
+//CLASS_DECL_ACME bool read_resource_as_file(const scoped_string & strFile,HINSTANCE hinst,::u32 nID,LPCTSTR pszType);
 
 
 
@@ -517,7 +517,7 @@ CLASS_DECL_ACME string defer_solve_relative(const scoped_string & strRelative, c
 
 
 
-void replace_char(char * sz, char ch1, char ch2)
+void replace_char(::i8 * sz, ::i8 ch1, ::i8 ch2)
 {
 
    while (*sz)

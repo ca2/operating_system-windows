@@ -23,8 +23,8 @@ public:
 
    HANDLE                     m_hmutex_app_removal;
 
-   char *                     m_modpath;
-   char *                     m_pszDllEnds;
+   ::i8 *                     m_modpath;
+   ::i8 *                     m_pszDllEnds;
    UINT *                     m_dwaProcess;
    INT                        m_iSizeProcess;
    HMODULE *                  m_hmodulea;
@@ -64,7 +64,7 @@ public:
 
 
 //// if MSVC CRT is used
-//extern "C" int WINAPI _tWinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLine,int nCmdShow)
+//extern "C" ::i32 WINAPI _tWinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLine,::i32 nCmdShow)
 //{
 //
 //   __UNREFERENCED_PARAMETER(lpCmdLine);
@@ -78,7 +78,7 @@ public:
 //
 //   removal * premoval = ___new removal();
 //
-//   int iRet = ::app_main(premoval, hInstance,hPrevInstance,lpCmdLine,nCmdShow);
+//   ::i32 iRet = ::app_main(premoval, hInstance,hPrevInstance,lpCmdLine,nCmdShow);
 //
 //   defer_aura_term();
 //
@@ -153,7 +153,7 @@ void removal::system(const ::scoped_string & scopedstrCmd)
    si.dwFlags |= STARTF_USESHOWWINDOW;
    si.wShowWindow = SW_HIDE;
 
-   if (CreateProcess(nullptr, (char *) pszCmd, nullptr, nullptr, false, CREATE_NO_WINDOW | CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+   if (CreateProcess(nullptr, (::i8 *) pszCmd, nullptr, nullptr, false, CREATE_NO_WINDOW | CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
    {
        WaitForSingleObject(pi.hProcess, INFINITE);
        CloseHandle(pi.hProcess);

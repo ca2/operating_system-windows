@@ -47,7 +47,7 @@
 //      virtual void initialize_graphics_graphics(::windowing::window * pimpl) override;
 //
 //
-//      virtual bool update_buffer(const ::i32_size & size, int iStride = -1) override;
+//      virtual bool update_buffer(const ::i32_size & size, ::i32 iStride = -1) override;
 //      virtual void destroy_buffer() override;
 //      virtual bool update_window() override;
 //
@@ -58,7 +58,7 @@
 //      virtual ::draw2d::graphics * on_begin_draw() override;
 //
 //
-//      bool create_os_buffer(const ::i32_size & size, int iStride = -1);
+//      bool create_os_buffer(const ::i32_size & size, ::i32 iStride = -1);
 //      void destroy_os_buffer();
 //
 //

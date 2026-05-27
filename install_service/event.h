@@ -3,8 +3,8 @@
 
 TCHAR *error_string(unsigned long);
 TCHAR *message_string(unsigned long);
-void log_event(unsigned short, unsigned long, ...);
+void log_event(::u16, unsigned long, ...);
 void print_message(FILE *, unsigned long, ...);
-int popup_message(HWND, unsigned int, unsigned long, ...);
+::i32 popup_message(HWND, ::u32, unsigned long, ...);
 
 #endif

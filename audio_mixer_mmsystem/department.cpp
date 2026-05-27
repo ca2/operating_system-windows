@@ -44,12 +44,12 @@ namespace audio_mixer_mmsystem
 
 
 
-   /*void     department::CreateNewDevice(unsigned int uiMixerID)
+   /*void     department::CreateNewDevice(::u32 uiMixerID)
    {
    void     mmrc;
    if(MMSYSERR_NOERROR != (mmrc = m_pmixer->set_new_device(
    uiMixerID,
-   (unsigned int) m_oswindow_,
+   (::u32) m_oswindow_,
    0,
    CALLBACK_WINDOW)))
    {
@@ -61,7 +61,7 @@ namespace audio_mixer_mmsystem
    return mmrc;
    }
 
-   void     department::CreateNewDestination(unsigned int dwComponentType)
+   void     department::CreateNewDestination(::u32 dwComponentType)
    {
    void     mmrc;
    ::audio_mixer::destination * pdestination = nullptr;

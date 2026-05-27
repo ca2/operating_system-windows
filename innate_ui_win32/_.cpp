@@ -20,7 +20,7 @@
 //   }
 //
 //
-//   bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::path& str, int csidl, bool fCreate)
+//   bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::path& str, ::i32 csidl, bool fCreate)
 //   {
 //
 //      return ::SHGetSpecialFolderPathW(hwnd, wstring_adaptor(str, MAX_PATH * 8), csidl, fCreate) != false;
@@ -28,7 +28,7 @@
 //   }
 //
 //
-//   ::file::path CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(int csidl, bool fCreate, ::windowing::window* pwindow)
+//   ::file::path CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(::i32 csidl, bool fCreate, ::windowing::window* pwindow)
 //   {
 //
 //      ::file::path path;
@@ -43,7 +43,7 @@
 //      return path;
 //
 //   }
-//   unsigned int get_current_directory(string& str)
+//   ::u32 get_current_directory(string& str)
 //   {
 //
 //      return ::GetCurrentDirectoryW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
@@ -51,7 +51,7 @@
 //   }
 //
 //
-//   unsigned int get_temp_path(string& str)
+//   ::u32 get_temp_path(string& str)
 //   {
 //
 //      return ::GetTempPathW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
@@ -59,12 +59,12 @@
 //   }
 //
 //
-//   //int reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string& str)
+//   //::i32 reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string& str)
 //   //{
 //
 //   //   DWORD dwType = 0;
 //   //   DWORD dwSize = 0;
-//   //   int lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+//   //   ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
 //
 //   //   if (lResult != ERROR_SUCCESS)
 //   //      return lResult;
@@ -74,7 +74,7 @@
 //
 //   //      natural_wstring pwsz(byte_count, dwSize);
 //
-//   //      lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (unsigned char*)(unichar*)pwsz, &dwSize);
+//   //      lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8*)(unichar*)pwsz, &dwSize);
 //
 //   //      str = pwsz;
 //
@@ -93,7 +93,7 @@
 //   //}
 //
 //
-//   HICON extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex)
+//   HICON extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, ::u32 nIconIndex)
 //
 //   {
 //

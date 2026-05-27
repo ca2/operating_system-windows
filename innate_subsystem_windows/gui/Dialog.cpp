@@ -71,21 +71,21 @@ namespace innate_subsystem_windows
       }
    }
 
-   void Dialog::initialize_dialog(unsigned int resourceId)
+   void Dialog::initialize_dialog(::u32 resourceId)
    //: m_ctrlParent(NULL), m_resourceName(0), m_resourceId(resourceId), m_hicon(0)
    {
 
       m_resourceId = resourceId;
    }
 void
-   Dialog::initialize_dialog(const char *resourceName)
+   Dialog::initialize_dialog(const ::i8 *resourceName)
    //: m_ctrlParent(NULL), m_resourceName(0), m_resourceId(0), m_hicon(0)
    {
       setResourceName(resourceName);
    }
 
 
-   // void Dialog::setResourceName(const char * resourceName)
+   // void Dialog::setResourceName(const ::i8 * resourceName)
    // {
    //    if (m_resourceName != 0) {
    //       free(m_resourceName);
@@ -94,12 +94,12 @@ void
    //    m_resourceName = _strdup(resourceName);
    // }
    //
-   // void Dialog::setResourceId(unsigned int id)
+   // void Dialog::setResourceId(::u32 id)
    // {
    //    m_resourceId = id;
    // }
 
-   void Dialog::setDefaultPushButton(unsigned int buttonId)
+   void Dialog::setDefaultPushButton(::u32 buttonId)
    {
       SendMessage(::as_HWND(this->operating_system_window()), DM_SETDEFID, buttonId, 0);
    }
@@ -125,7 +125,7 @@ void
       Window::hide();
    }
 
-   void Dialog::closeDialog(int code)
+   void Dialog::closeDialog(::i32 code)
    {
       // Destroy dialog
       if (!m_isModal) {
@@ -165,7 +165,7 @@ void
    }
 
 
-   void Dialog::doAttachedModal(const ::function < void(int) > & callback)
+   void Dialog::doAttachedModal(const ::function < void(::i32) > & callback)
    {
 
       if (::as_HWND(this->operating_system_window()) == NULL) {
@@ -180,8 +180,8 @@ void
             HWND parentWindow = (pwindow->m_pwindowDeferredParent != NULL)
                                    ? ::as_HWND(pwindow->m_pwindowDeferredParent->operating_system_window())
                                    : (HWND) nullptr;
-            //result = (int)DialogBoxParam(GetModuleHandle(NULL),
-            auto result = (int)DialogBoxParam((HINSTANCE) MainSubsystem().m_hinstanceResource,
+            //result = (::i32)DialogBoxParam(GetModuleHandle(NULL),
+            auto result = (::i32)DialogBoxParam((HINSTANCE) MainSubsystem().m_hinstanceResource,
                                          (LPCWSTR) MAKEINTRESOURCEW(m_resourceId), parentWindow,
                                          dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
 
@@ -205,9 +205,9 @@ void
 
    }
 
-   int Dialog::showModal()
+   ::i32 Dialog::showModal()
    {
-      int result = 0;
+      ::i32 result = 0;
       if (::as_HWND(this->operating_system_window()) == NULL) {
 
          ::system()->acme_windowing()->send([&]()
@@ -218,8 +218,8 @@ void
             HWND parentWindow = (pwindow->m_pwindowDeferredParent != NULL)
                                    ? ::as_HWND(pwindow->m_pwindowDeferredParent->operating_system_window())
                                    : (HWND) nullptr;
-            //result = (int)DialogBoxParam(GetModuleHandle(NULL),
-            result = (int)DialogBoxParam((HINSTANCE) MainSubsystem().m_hinstanceResource,
+            //result = (::i32)DialogBoxParam(GetModuleHandle(NULL),
+            result = (::i32)DialogBoxParam((HINSTANCE) MainSubsystem().m_hinstanceResource,
                                          (LPCWSTR) MAKEINTRESOURCEW(m_resourceId), parentWindow,
                                          dialogProc,(::lparam) (::uptr)(::innate_subsystem_windows::Dialog * )this);
 
@@ -264,11 +264,11 @@ void
 
    }
 
-   void Dialog::onMessageReceived(unsigned int uMsg, ::wparam wparam, ::lparam lparam)
+   void Dialog::onMessageReceived(::u32 uMsg, ::wparam wparam, ::lparam lparam)
    {
    }
 
-   INT_PTR CALLBACK Dialog::dialogProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam)
+   INT_PTR CALLBACK Dialog::dialogProc(HWND hwnd, ::u32 uMsg, WPARAM wparam, LPARAM lparam)
    {
       ::innate_subsystem_windows::Dialog * _this = nullptr;
 
@@ -343,15 +343,15 @@ void
       return bResult;
    }
 
-   // char *Dialog::getResouceName()
+   // ::i8 *Dialog::getResouceName()
    // {
    //    if (m_resourceId != 0) {
-   //       return (char *)MAKEINTRESOURCE(m_resourceId);
+   //       return (::i8 *)MAKEINTRESOURCE(m_resourceId);
    //    }
    //    return m_resourceName;
    // }
 
-   // void Dialog::subControlById(ControlInterface *control, unsigned int id)
+   // void Dialog::subControlById(ControlInterface *control, ::u32 id)
    // {
    //    control = GetDlgItem(::as_HWND(this->operating_system_window()), id);
    // }
@@ -363,7 +363,7 @@ void
       }
    }
 
-   void Dialog::loadIcon(unsigned int id)
+   void Dialog::loadIcon(::u32 id)
    {
       if (m_hicon) {
          DeleteObject(m_hicon);
@@ -385,12 +385,12 @@ void
       return pcomposite->onInitDialog();
    }
 
-   // bool Dialog::_onNotify(int iControl, LPNMHDR lpnmhdr)
+   // bool Dialog::_onNotify(::i32 iControl, LPNMHDR lpnmhdr)
    // {
    //    return FALSE;
    // }
 
-   bool Dialog::onCommand(unsigned int controlID, unsigned int notificationID)
+   bool Dialog::onCommand(::u32 controlID, ::u32 notificationID)
    {
       return m_pwindowCallback->onCommand(controlID, notificationID);
       //return FALSE;
@@ -407,7 +407,7 @@ void
    }
 
 
-   bool Dialog::dialog_procedure(iptr & iptrResult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool Dialog::dialog_procedure(iptr & iptrResult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
 
       return false;

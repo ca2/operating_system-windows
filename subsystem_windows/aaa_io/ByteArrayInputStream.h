@@ -41,7 +41,7 @@ namespace remoting
        * @param buffer source buffer.
        * @param bufferSize count of bytes in memory buffer.
        */
-      ByteArrayInputStream(const char *buffer, size_t bufferSize);
+      ByteArrayInputStream(const ::i8 *buffer, size_t bufferSize);
       virtual ~ByteArrayInputStream();
 
       /**
@@ -55,7 +55,7 @@ namespace remoting
       virtual size_t available();
 
    protected:
-      const char *m_buffer;
+      const ::i8 *m_buffer;
       size_t m_bufferSize;
       size_t m_left;
    };

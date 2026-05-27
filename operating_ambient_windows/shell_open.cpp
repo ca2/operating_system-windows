@@ -39,8 +39,8 @@ namespace windows
 
 
    HDDEDATA CALLBACK shell_open::DdeCallback(
-      unsigned int uType,
-      unsigned int uFmt,
+      ::u32 uType,
+      ::u32 uFmt,
       HCONV hconv,
       HDDEDATA hsz1,
       HDDEDATA hsz2,
@@ -86,7 +86,7 @@ namespace windows
       case XTYP_EXECUTE:
       {
          // get the command string
-         unsigned int dwSize = DdeGetData(
+         ::u32 dwSize = DdeGetData(
             hdata,
             nullptr,
             0,
@@ -105,7 +105,7 @@ namespace windows
          //throw ::not_implemented();
          /*
          // execute the command
-         if (!psystem->OnDDECommand( (char *)(const wchar_t *)str))
+         if (!psystem->OnDDECommand( (::i8 *)(const wchar_t *)str))
             TRACE1("Error: failed to execute DDE command '%S'.\n", str);
          */
          //

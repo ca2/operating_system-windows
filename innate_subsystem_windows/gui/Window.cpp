@@ -267,8 +267,8 @@ namespace innate_subsystem_windows
    }
 
 
-   bool Window::createWindow(const ::scoped_string & scopedstrWindowName, unsigned int style, const ::operating_system::window & operatingsystemwindowParent,
-                                 int xPos, int yPos, int width, int height)
+   bool Window::createWindow(const ::scoped_string & scopedstrWindowName, ::u32 style, const ::operating_system::window & operatingsystemwindowParent,
+                                 ::i32 xPos, ::i32 yPos, ::i32 width, ::i32 height)
    {
       if (m_windowswindow.is_set()) {
          return false;
@@ -296,7 +296,7 @@ namespace innate_subsystem_windows
       return true;
    }
 
-   void Window::loadIcon(unsigned int id)
+   void Window::loadIcon(::u32 id)
    {
       if (m_hicon) {
          DeleteObject(m_hicon);
@@ -435,7 +435,7 @@ namespace innate_subsystem_windows
    }
 
 
-   ::operating_system::window Window::dialog_item_operating_system_window(int iDlgItem)
+   ::operating_system::window Window::dialog_item_operating_system_window(::i32 iDlgItem)
    {
 
       _ASSERT(m_windowswindow.as_HWND() != 0);
@@ -443,7 +443,7 @@ namespace innate_subsystem_windows
       return ::as_operating_system_window(hwndChild);
    }
 
-   void Window::subclassControlById(::Particle * pWindowControl, unsigned int id)
+   void Window::subclassControlById(::Particle * pWindowControl, ::u32 id)
    {
 
        auto pwindow = pWindowControl->impl<innate_subsystem_windows::Window>();
@@ -501,7 +501,7 @@ namespace innate_subsystem_windows
    }
 
 
-   void Window::_addChildNotification(int iControl, int iNotification)
+   void Window::_addChildNotification(::i32 iControl, ::i32 iNotification)
    {
 
       auto & notification = m_mapControlNotification[iControl];
@@ -512,7 +512,7 @@ namespace innate_subsystem_windows
    }
 
 
-   void Window::_setChildControlType(int iControl, innate_subsystem::enum_control econtrol)
+   void Window::_setChildControlType(::i32 iControl, innate_subsystem::enum_control econtrol)
    {
 
       auto & notification = m_mapControlNotification[iControl];
@@ -539,7 +539,7 @@ namespace innate_subsystem_windows
    }
 
 
-   void Window::setClassStyle(unsigned int style)
+   void Window::setClassStyle(::u32 style)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       SetClassLong(m_windowswindow.as_HWND(), GCL_STYLE, style);
@@ -578,21 +578,21 @@ namespace innate_subsystem_windows
    }
 
 
-   long long Window::getStyle()
+   ::i64 Window::getStyle()
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       return GetWindowLong(m_windowswindow.as_HWND(), GWL_STYLE);
    }
 
 
-   void Window::setStyle(unsigned int style)
+   void Window::setStyle(::u32 style)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       SetWindowLong(m_windowswindow.as_HWND(), GWL_STYLE, style);
    }
 
 
-   void Window::addStyle(unsigned int styleFlag)
+   void Window::addStyle(::u32 styleFlag)
    {
       if (!isWindow())
       {
@@ -608,28 +608,28 @@ namespace innate_subsystem_windows
 
 
 
-   void Window::removeStyle(unsigned int  styleFlag)
+   void Window::removeStyle(::u32  styleFlag)
    {
       DWORD flags = getStyle();
       flags &= ~styleFlag;
       setStyle(flags);
    }
 
-   bool Window::isStyleEnabled(unsigned int  styleFlag)
+   bool Window::isStyleEnabled(::u32  styleFlag)
    {
-      unsigned int  flags = getStyle();
+      ::u32  flags = getStyle();
       return (flags & styleFlag) == styleFlag;
    }
 
 
 
-   long long Window::getExStyle()
+   ::i64 Window::getExStyle()
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       return GetWindowLong(m_windowswindow.as_HWND(), GWL_EXSTYLE);
    }
 
-   void Window::setExStyle(unsigned int exstyle)
+   void Window::setExStyle(::u32 exstyle)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       SetWindowLong(m_windowswindow.as_HWND(), GWL_EXSTYLE, exstyle);
@@ -637,7 +637,7 @@ namespace innate_subsystem_windows
 
 
 
-   void Window::addExStyle(unsigned int styleFlag)
+   void Window::addExStyle(::u32 styleFlag)
    {
       if (!isWindow())
       {
@@ -654,16 +654,16 @@ namespace innate_subsystem_windows
 
 
 
-   void Window::removeExStyle(unsigned int  styleFlag)
+   void Window::removeExStyle(::u32  styleFlag)
    {
       DWORD flags = getExStyle();
       flags &= ~styleFlag;
       setExStyle(flags);
    }
 
-   bool Window::isExStyleEnabled(unsigned int  styleFlag)
+   bool Window::isExStyleEnabled(::u32  styleFlag)
    {
-      unsigned int  flags = getExStyle();
+      ::u32  flags = getExStyle();
       return (flags & styleFlag) == styleFlag;
    }
 
@@ -674,7 +674,7 @@ namespace innate_subsystem_windows
       UpdateWindow(m_windowswindow.as_HWND());
    }
 
-   void Window::setTimer(::uptr ident, unsigned int time)
+   void Window::setTimer(::uptr ident, ::u32 time)
    {
       _ASSERT(m_windowswindow.as_HWND() != 0);
       SetTimer(m_windowswindow.as_HWND(), ident, time, 0);
@@ -694,7 +694,7 @@ namespace innate_subsystem_windows
 
    }
 
-   bool Window::onCommand(unsigned int controlID, unsigned int notificationID)
+   bool Window::onCommand(::u32 controlID, ::u32 notificationID)
    {
        if (m_pwindowCallback)
        {
@@ -710,7 +710,7 @@ namespace innate_subsystem_windows
       return false;
    }
 
-   // bool Window::onNotify(int idCtrl, LPNMHDR pnmh)
+   // bool Window::onNotify(::i32 idCtrl, LPNMHDR pnmh)
    // {
    //    return false;
    // }
@@ -808,7 +808,7 @@ namespace innate_subsystem_windows
       return false;
    }
 
-   bool Window::onMouseEx(unsigned int uMessage, int mouseButtons, unsigned short wspeed, const ::i32_point &point,
+   bool Window::onMouseEx(::u32 uMessage, ::i32 mouseButtons, ::u16 wspeed, const ::i32_point &point,
                           bool &bDoDefaultProcessing)
    {
       if (m_pwindowCallback)
@@ -822,7 +822,7 @@ namespace innate_subsystem_windows
       return false;
    }
 
-   bool Window::onMouse(unsigned char mouseButtons, unsigned short wspeed, const ::i32_point &point)
+   bool Window::onMouse(::u8 mouseButtons, ::u16 wspeed, const ::i32_point &point)
    {
        if (m_pwindowCallback)
        {
@@ -900,7 +900,7 @@ namespace innate_subsystem_windows
    ::string Window::getText()
    {
 
-      int length = (int)SendMessage(m_windowswindow.as_HWND(), WM_GETTEXTLENGTH, 0, 0);
+      ::i32 length = (::i32)SendMessage(m_windowswindow.as_HWND(), WM_GETTEXTLENGTH, 0, 0);
 
       ::wstring wstr;
 
@@ -911,7 +911,7 @@ namespace innate_subsystem_windows
    }
 
 
-   void Window::postMessage(unsigned int Msg, ::wparam wparam, ::lparam lparam)
+   void Window::postMessage(::u32 Msg, ::wparam wparam, ::lparam lparam)
    {
 
       _ASSERT(m_windowswindow.as_HWND() != 0);
@@ -1074,7 +1074,7 @@ namespace innate_subsystem_windows
    }
 
 
-   bool Window::_applyScreenChanges(int isFullScreen)
+   bool Window::_applyScreenChanges(::i32 isFullScreen)
    {
        m_isFullScr = isFullScreen;
        onSize();
@@ -1147,7 +1147,7 @@ namespace innate_subsystem_windows
         //    m_toolbar.hide();
         //}
 
-        //unsigned int isEnable = static_cast<unsigned int>(m_pconnectionconfig->isViewOnly());
+        //::u32 isEnable = static_cast<::u32>(m_pconnectionconfig->isViewOnly());
         //m_menu.enableMenuItem(IDS_TB_TOOLBAR, isEnable);
 
         //// Restore position, style and exstyle of windowed window.
@@ -1419,7 +1419,7 @@ namespace innate_subsystem_windows
 
 
    //bool Window::on_window_procedure(LRESULT & lresult, HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
-   bool Window::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool Window::on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
 
       if (m_pwindowCallback)
@@ -1637,7 +1637,7 @@ break;
       case WM_MOUSEWHEEL:
       case WM_MOUSEMOVE:
       {
-         unsigned char mouseButtons = 0;
+         ::u8 mouseButtons = 0;
 
          mouseButtons |= LOWORD(wparam) & MK_RBUTTON ? innate_subsystem::e_mouse_right : 0;
          mouseButtons |= LOWORD(wparam) & MK_MBUTTON ? innate_subsystem::e_mouse_middle : 0;
@@ -1649,11 +1649,11 @@ break;
          point.x = points.x;
          point.y = points.y;
 
-         unsigned short wheelSpeed = 0;
+         ::u16 wheelSpeed = 0;
          if (message == WM_MOUSEWHEEL) 
          {
             // Get speed wheel and set mouse button.
-            signed short wheelSignedSpeed = static_cast<signed short>(HIWORD(wparam));
+            ::i16 wheelSignedSpeed = static_cast<::i16>(HIWORD(wparam));
             if (wheelSignedSpeed < 0) {
                mouseButtons |= ::innate_subsystem::e_mouse_wheel_down;
                wheelSpeed = -wheelSignedSpeed / WHEEL_DELTA;
@@ -1691,7 +1691,7 @@ break;
          }
 
          // Notify window about mouse-event.
-         return onMouse(mouseButtons, static_cast<unsigned short>(wheelSpeed), point);
+         return onMouse(mouseButtons, static_cast<::u16>(wheelSpeed), point);
       }
          case WM_CLOSE:
       {
@@ -1722,7 +1722,7 @@ m_windowswindow = nullptr;
       if (notification.m_econtrol != ::innate_subsystem::e_control_none)
       {
 
-         int iOperatingSystemNotificationCode = lpnmhdr->code;
+         ::i32 iOperatingSystemNotificationCode = lpnmhdr->code;
 
          if (notification.m_iaNotification.contains(iOperatingSystemNotificationCode))
          {
@@ -1883,7 +1883,7 @@ m_windowswindow = nullptr;
    }
 
 
-   bool Window::onGetTooltip(int iControl, ::string & strTooltip)
+   bool Window::onGetTooltip(::i32 iControl, ::string & strTooltip)
    {
 
       return m_pwindowCallback->onGetTooltip(iControl, strTooltip);

@@ -1,11 +1,11 @@
 #include "aura/.h"
 
-extern int APIENTRY app_chromium_deferred_run(HINSTANCE hInstance,
+extern ::i32 APIENTRY app_chromium_deferred_run(HINSTANCE hInstance,
       HINSTANCE hPrevInstance,
       LPTSTR lpCmdLine,
-      int nCmdShow);
+      ::i32 nCmdShow);
 
-//int app_chromium_runner(HINSTANCE hInstance);
+//::i32 app_chromium_runner(HINSTANCE hInstance);
 
 //#define MAIN_RUNNER0 &::app_chromium_runner
 #define MAIN_DEFERRED_RUN &::app_chromium_deferred_run

@@ -20,8 +20,8 @@
 
 
 
-CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const_char_pointer pcszType, memsize & memsize);
-CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const_char_pointer pcszType, character_count iReadAtMostByteCount = -1);
+CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const_char_pointer pszType, memsize & memsize);
+CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const_char_pointer pszType, character_count iReadAtMostByteCount = -1);
 CLASS_DECL_ACME::file::path get_module_path(HMODULE hmodule);
 CLASS_DECL_ACME FILETIME & copy(FILETIME & filetime, const ::earth::time & time);
 
@@ -294,15 +294,15 @@ namespace acme_windows
    //}
 
 
-   //unsigned int file_context::GetFileName(const ::scoped_string & scopedstrPathName, string & str)
+   //::u32 file_context::GetFileName(const ::scoped_string & scopedstrPathName, string & str)
 
    //{
-   //   int nMax = MAX_PATH * 8;
+   //   ::i32 nMax = MAX_PATH * 8;
    //   wstring wstrPathName;
    //   wstrPathName = utf8_to_unicode(pszPathName);
 
    //   wstring wstrTitle;
-   //   unsigned int user = vfxGetFileName(wstrPathName, wstrTitle.get_buffer(nMax), nMax);
+   //   ::u32 user = vfxGetFileName(wstrPathName, wstrTitle.get_buffer(nMax), nMax);
    //   str = unicode_to_utf8(wstrTitle);
    //   return user;
    //}
@@ -349,7 +349,7 @@ namespace acme_windows
       }
       else
       {
-         varRet = (unsigned int)data.nFileSizeLow;
+         varRet = (::u32)data.nFileSizeLow;
       }
 
 #else
@@ -489,7 +489,7 @@ namespace acme_windows
 #else
       if (::rename(psz, pszNew) != 0)
       {
-         int err = errno;
+         ::i32 err = errno;
          string strError;
          strError.Format("Failed to delete file error=%d", err);
          throw ::exception(::exception(strError));
@@ -551,7 +551,7 @@ namespace acme_windows
 
       /*      if(!::DeleteFileW(utf8_to_unicode(string("\\\\?\\") + psz)))
       {
-      unsigned int dwError = ::get_last_error();
+      ::u32 dwError = ::get_last_error();
       if(dwError == 2) // the file does not exist, so delete "failed"
       return;
       string strError;
@@ -564,7 +564,7 @@ namespace acme_windows
 //
 //      if (unlink(psz) != 0)
 //      {
-//         int err = errno;
+//         ::i32 err = errno;
 //         if (err != ENOENT) // already does not exist - consider removal successful - does not issue an exception
 //         {
 //            string strError;
@@ -582,7 +582,7 @@ namespace acme_windows
 
 #ifdef WINDOWS_DESKTOP
 
-      unsigned int dwAttrib = ::windows::get_file_attributes(path);
+      ::u32 dwAttrib = ::windows::get_file_attributes(path);
 
       if (dwAttrib & FILE_ATTRIBUTE_READONLY)
       {
@@ -632,7 +632,7 @@ namespace acme_windows
 
       auto pfile = create_memory_file();
 
-      int iId = atoi(path);
+      ::i32 iId = atoi(path);
 
       string strExtension = path.final_extension();
 
@@ -683,7 +683,7 @@ namespace acme_windows
 
    //   wstring pszFileName(path);
 
-   //   unsigned int wAttr;
+   //   ::u32 wAttr;
    //   FILETIME creationTime;
    //   FILETIME lastAccessTime;
    //   FILETIME lastWriteTime;
@@ -694,19 +694,19 @@ namespace acme_windows
    //   LPFILETIME pLastWriteTime = nullptr;
 
 
-   //   if((wAttr = windows_get_file_attributes((LPWSTR)(const ::wide_character *)pszFileName)) == (unsigned int)-1L)
+   //   if((wAttr = windows_get_file_attributes((LPWSTR)(const ::wide_character *)pszFileName)) == (::u32)-1L)
 
-   //      file_exception::throw_os_error((int)GetLastError());
+   //      file_exception::throw_os_error((::i32)GetLastError());
 
-   //   if((unsigned int)status.m_attribute != wAttr && (wAttr & readOnly))
+   //   if((::u32)status.m_attribute != wAttr && (wAttr & readOnly))
    //   {
    //      // set file attribute, only if currently readonly.
    //      // This way we will be able to modify the time assuming the
    //      // caller changed the file from readonly.
 
-   //      if(!SetFileAttributesW((LPWSTR)(const ::wide_character *)pszFileName,(unsigned int)status.m_attribute))
+   //      if(!SetFileAttributesW((LPWSTR)(const ::wide_character *)pszFileName,(::u32)status.m_attribute))
 
-   //         file_exception::throw_os_error((int)GetLastError());
+   //         file_exception::throw_os_error((::i32)GetLastError());
    //   }
 
    //   // last modification time
@@ -738,21 +738,21 @@ namespace acme_windows
    //         nullptr);
 
    //      if(hFile == INVALID_HANDLE_VALUE)
-   //         file_exception::throw_os_error((int)::GetLastError());
+   //         file_exception::throw_os_error((::i32)::GetLastError());
 
    //      if(!SetFileTime((HANDLE)hFile,pCreationTime,lpLastAccessTime,lpLastWriteTime))
 
-   //         file_exception::throw_os_error((int)::GetLastError());
+   //         file_exception::throw_os_error((::i32)::GetLastError());
 
    //      if(!::CloseHandle(hFile))
-   //         file_exception::throw_os_error((int)::GetLastError());
+   //         file_exception::throw_os_error((::i32)::GetLastError());
    //   }
 
-   //   if((unsigned int)status.m_attribute != wAttr && !(wAttr & readOnly))
+   //   if((::u32)status.m_attribute != wAttr && !(wAttr & readOnly))
    //   {
-   //      if(!SetFileAttributes((char *)pszFileName,(unsigned int)status.m_attribute))
+   //      if(!SetFileAttributes((::i8 *)pszFileName,(::u32)status.m_attribute))
 
-   //         file_exception::throw_os_error((int)GetLastError());
+   //         file_exception::throw_os_error((::i32)GetLastError());
    //   }
    //}
 
@@ -760,7 +760,7 @@ namespace acme_windows
    //void file::SetStatus(const ::scoped_string & scopedstrFileName,const ::file::file_status& status)
 
    //{
-   //   unsigned int wAttr;
+   //   ::u32 wAttr;
    //   FILETIME creationTime;
    //   FILETIME lastAccessTime;
    //   FILETIME lastWriteTime;
@@ -771,19 +771,19 @@ namespace acme_windows
    //   LPFILETIME pLastWriteTime = nullptr;
 
 
-   //   if((wAttr = GetFileAttributes((char *)pszFileName)) == (unsigned int)-1L)
+   //   if((wAttr = GetFileAttributes((::i8 *)pszFileName)) == (::u32)-1L)
 
-   //      file_exception::throw_os_error((int)GetLastError());
+   //      file_exception::throw_os_error((::i32)GetLastError());
 
-   //   if((unsigned int)status.m_attribute != wAttr && (wAttr & readOnly))
+   //   if((::u32)status.m_attribute != wAttr && (wAttr & readOnly))
    //   {
    //      // set file attribute, only if currently readonly.
    //      // This way we will be able to modify the time assuming the
    //      // caller changed the file from readonly.
 
-   //      if(!SetFileAttributes((char *)pszFileName,(unsigned int)status.m_attribute))
+   //      if(!SetFileAttributes((::i8 *)pszFileName,(::u32)status.m_attribute))
 
-   //         file_exception::throw_os_error((int)GetLastError());
+   //         file_exception::throw_os_error((::i32)GetLastError());
    //   }
 
    //   // last modification time
@@ -815,21 +815,21 @@ namespace acme_windows
    //         nullptr);
 
    //      if(hFile == INVALID_HANDLE_VALUE)
-   //         file_exception::throw_os_error((int)::GetLastError());
+   //         file_exception::throw_os_error((::i32)::GetLastError());
 
    //      if(!SetFileTime((HANDLE)hFile,pCreationTime,lpLastAccessTime,lpLastWriteTime))
 
-   //         file_exception::throw_os_error((int)::GetLastError());
+   //         file_exception::throw_os_error((::i32)::GetLastError());
 
    //      if(!::CloseHandle(hFile))
-   //         file_exception::throw_os_error((int)::GetLastError());
+   //         file_exception::throw_os_error((::i32)::GetLastError());
    //   }
 
-   //   if((unsigned int)status.m_attribute != wAttr && !(wAttr & readOnly))
+   //   if((::u32)status.m_attribute != wAttr && !(wAttr & readOnly))
    //   {
-   //      if(!SetFileAttributes((char *)pszFileName,(unsigned int)status.m_attribute))
+   //      if(!SetFileAttributes((::i8 *)pszFileName,(::u32)status.m_attribute))
 
-   //         file_exception::throw_os_error((int)GetLastError());
+   //         file_exception::throw_os_error((::i32)GetLastError());
    //   }
    //}
 

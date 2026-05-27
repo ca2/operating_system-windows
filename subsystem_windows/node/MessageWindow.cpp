@@ -34,7 +34,7 @@ namespace subsystem_windows
 
 
    //MessageWindow::MessageWindow(const HINSTANCE hinst,
-   //                             const char *windowClassName,
+   //                             const ::i8 *windowClassName,
    //                             WindowMessageHandler *messageHandler)
    //: m_hwnd(0),
    //  m_hinst(hinst),
@@ -123,7 +123,7 @@ namespace subsystem_windows
    }
 
 
-   bool MessageWindow::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool MessageWindow::on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
 
       if (m_pwindowmessagehandler)
@@ -143,7 +143,7 @@ namespace subsystem_windows
 
    }
 
-   // LRESULT CALLBACK MessageWindow::staticWndProc(HWND hwnd, unsigned int message,
+   // LRESULT CALLBACK MessageWindow::staticWndProc(HWND hwnd, ::u32 message,
    //                                        WPARAM wparam, LPARAM lparam)
    // {
    //    MessageWindow *_this;
@@ -170,7 +170,7 @@ namespace subsystem_windows
    //    return DefWindowProc(hwnd, message, wparam, lparam);
    // }
 
-   // ATOM MessageWindow::regClass(HINSTANCE hinst, const char *windowClassName)
+   // ATOM MessageWindow::regClass(HINSTANCE hinst, const ::i8 *windowClassName)
    // {
    //
    //    ::wstring wstrWindowClassName;

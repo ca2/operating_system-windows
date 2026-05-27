@@ -11,7 +11,7 @@ void * __node_library_open(const scoped_string & strPath, string & strMessage)
 
    string strPath(pszPath);
 
-   unsigned int uiError;
+   ::u32 uiError;
 
    void * plibrary = nullptr;
 
@@ -235,7 +235,7 @@ void * __node_library_touch(const scoped_string & strPath, string & strMessage)
 
    string strPath(pszPath);
 
-   unsigned int uiError;
+   ::u32 uiError;
 
    void * plibrary = nullptr;
 
@@ -487,7 +487,7 @@ void * __node_library_open_ca2(const scoped_string & str, string & strMessage)
    else
    {
 
-      unsigned int uiError = GetLastError();
+      ::u32 uiError = GetLastError();
 
       strMessage = "Failed to Load Library (2) " + string(psz) + " with error (" + ::as_string(uiError) +
                    ")" + get_error_string(uiError);

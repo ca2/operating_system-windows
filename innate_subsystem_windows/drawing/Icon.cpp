@@ -106,7 +106,7 @@ namespace innate_subsystem_windows
       fromBitmap(bitmap, mask);
    }
 
-   void Icon::initialize_icon(unsigned int icon)
+   void Icon::initialize_icon(::u32 icon)
    {
       m_bHasOwnIcon = false;
       HINSTANCE hInstance = GetModuleHandle(NULL);

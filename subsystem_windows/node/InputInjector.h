@@ -74,7 +74,7 @@ namespace subsystem_windows
          void injectKeyEvent(::user::enum_key euserkey, bool release, bool extended = false) override;
 
          /**
-          * Syntezises char press or release event.
+          * Syntezises ::i8 press or release event.
           * @param ch target unicode character.
           * @param release if set to true then release event will be emulated, otherwise,
           * press event.
@@ -82,7 +82,7 @@ namespace subsystem_windows
           * not for extended and auxilary keys like LEFT, RIGHT, INSERT etc.
           * @throws SystemException on fail.
           */
-         void injectCharEvent(int ch, bool release) override;
+         void injectCharEvent(::i32 ch, bool release) override;
 
          //private:
          // Return true if CapsLock toggled on.
@@ -91,9 +91,9 @@ namespace subsystem_windows
          // Returns true if the vkCode value is a dead key in keyboardLayout layout.
          virtual bool _isDeadKey(SHORT scanResult, HKL keyboardLayout);
 
-         // Returns true if the printed char can get by one key event sending.
+         // Returns true if the printed ::i8 can get by one key event sending.
          // Else returns false e.g. for uppercase french e with ogonek that may be get
-         // only by a sequence keyevenst with a dead char, but the lower case
+         // only by a sequence keyevenst with a dead ::i8, but the lower case
          // e can be get by one pressing of the "7" key.
          virtual bool _isOneKeyEventChar(WCHAR ch, SHORT scanResult, HKL keyboardLayout);
 
@@ -105,11 +105,11 @@ namespace subsystem_windows
          // and without.
          virtual bool _isInvariantToShift(BYTE virtKey, HKL keyboardLayout);
 
-         // Return true if the char is the same with the CAPS or without.
+         // Return true if the ::i8 is the same with the CAPS or without.
          virtual bool _isResistantToCaps(BYTE virtKey, HKL keyboardLayout);
 
          // Returns true if the ch symbol is a ascii symbol.
-         bool isAscii(int ch) override;
+         bool isAscii(::i32 ch) override;
 
          // Returns current kbd layout of an active window.
          // Throws ::subsystem::Exception on an error.

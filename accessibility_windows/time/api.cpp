@@ -6,7 +6,7 @@ namespace windows
 {
 
 
-   FARPROC api_base::get_address(const scoped_string & strModule, const_char_pointer lpszName)
+   FARPROC api_base::get_address(const scoped_string & strModule, const_char_pointer pszName)
    {
 
       auto hmodule = ::GetModuleHandleW(wstring(pszModule));
@@ -14,7 +14,7 @@ namespace windows
       if (hmodule)
       {
 
-         return GetProcAddress(hmodule, lpszName);
+         return GetProcAddress(hmodule, pszName);
 
       }
 

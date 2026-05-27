@@ -58,7 +58,7 @@ namespace music
             void mmsystem_GetMidiOutDeviceInterface(UINT_PTR i);
 
             using ::music::midi::midi::translate_os_result;
-            virtual ::e_status midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, long long iOsResult, const ::scoped_string & scopedstrContext, const ::scoped_string & scopedstrText);
+            virtual ::e_status midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, ::i64 iOsResult, const ::scoped_string & scopedstrContext, const ::scoped_string & scopedstrText);
 
 
             virtual void enumerate_midi_out_devices() override;

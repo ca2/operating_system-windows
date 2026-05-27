@@ -11,37 +11,37 @@
 BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* pType, LPWSTR lpName, LONG_PTR lParam);
 
 
-CLASS_DECL_ACME HICON ExtractResourceIcon(const ::scoped_string & scopedstrPath, int& cx, int& cy, int iIcon);
+CLASS_DECL_ACME HICON ExtractResourceIcon(const ::scoped_string & scopedstrPath, ::i32& cx, ::i32& cy, ::i32 iIcon);
 
 
 struct extract_resource_icon
 {
 
-   int         iIcon;
-   int         cx;
-   int         cy;
+   ::i32         iIcon;
+   ::i32         cx;
+   ::i32         cy;
    HICON       hicon;
-   int         iCounter;
+   ::i32         iCounter;
 
 };
 
 typedef struct
 {
-   unsigned char        bWidth;          // Width, in pixels, of the image
-   unsigned char        bHeight;         // Height, in pixels, of the image
-   unsigned char        bColorCount;     // Number of colors in image (0 if >=8bpp)
-   unsigned char        bReserved;       // Reserved ( must be 0)
-   unsigned short        wPlanes;         // Color Planes
-   unsigned short        wBitCount;       // Bits per pixel
-   unsigned int       dwBytesInRes;    // How many bytes in this resource?
-   unsigned int       dwImageOffset;   // Where in the file is this image?
+   ::u8        bWidth;          // Width, in pixels, of the image
+   ::u8        bHeight;         // Height, in pixels, of the image
+   ::u8        bColorCount;     // Number of colors in image (0 if >=8bpp)
+   ::u8        bReserved;       // Reserved ( must be 0)
+   ::u16        wPlanes;         // Color Planes
+   ::u16        wBitCount;       // Bits per pixel
+   ::u32       dwBytesInRes;    // How many bytes in this resource?
+   ::u32       dwImageOffset;   // Where in the file is this image?
 } ICONDIRENTRY, * LPICONDIRENTRY;
 
 typedef struct
 {
-   unsigned short           idReserved;   // Reserved (must be 0)
-   unsigned short           idType;       // Resource Type (1 for icons)
-   unsigned short           idCount;      // How many images?
+   ::u16           idReserved;   // Reserved (must be 0)
+   ::u16           idType;       // Resource Type (1 for icons)
+   ::u16           idCount;      // How many images?
    ICONDIRENTRY   idEntries[1]; // An entry for each image (idCount of 'em)
 } ICONDIR, * LPICONDIR;
 
@@ -49,22 +49,22 @@ typedef struct
 {
    BITMAPINFOHEADER   icHeader;      // DIB header
    RGBQUAD         icColors[1];   // Color table
-   unsigned char            icXOR[1];      // DIB bits for XOR mask
-   unsigned char            icAND[1];      // DIB bits for AND mask
+   ::u8            icXOR[1];      // DIB bits for XOR mask
+   ::u8            icAND[1];      // DIB bits for AND mask
 } ICONIMAGE, * LPICONIMAGE;
 
 #pragma pack( push )
 #pragma pack( 2 )
 typedef struct
 {
-   unsigned char   bWidth;               // Width, in pixels, of the image
-   unsigned char   bHeight;              // Height, in pixels, of the image
-   unsigned char   bColorCount;          // Number of colors in image (0 if >=8bpp)
-   unsigned char   bReserved;            // Reserved
-   unsigned short   wPlanes;              // Color Planes
-   unsigned short   wBitCount;            // Bits per pixel
-   unsigned int   dwBytesInRes;         // how many bytes in this resource?
-   unsigned short   nID;                  // the ID
+   ::u8   bWidth;               // Width, in pixels, of the image
+   ::u8   bHeight;              // Height, in pixels, of the image
+   ::u8   bColorCount;          // Number of colors in image (0 if >=8bpp)
+   ::u8   bReserved;            // Reserved
+   ::u16   wPlanes;              // Color Planes
+   ::u16   wBitCount;            // Bits per pixel
+   ::u32   dwBytesInRes;         // how many bytes in this resource?
+   ::u16   nID;                  // the ID
 } GRPICONDIRENTRY, * LPGRPICONDIRENTRY;
 #pragma pack( pop )
 // #pragmas are used here to insure that the structure's
@@ -73,9 +73,9 @@ typedef struct
 #pragma pack( 2 )
 typedef struct
 {
-   unsigned short            idReserved;   // Reserved (must be 0)
-   unsigned short            idType;       // Resource type (1 for icons)
-   unsigned short            idCount;      // How many images?
+   ::u16            idReserved;   // Reserved (must be 0)
+   ::u16            idType;       // Resource type (1 for icons)
+   ::u16            idCount;      // How many images?
    GRPICONDIRENTRY   idEntries[1]; // The entries for each image
 } GRPICONDIR, * LPGRPICONDIR;
 #pragma pack( pop )
@@ -87,7 +87,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 namespace aura_windows
 {
 
-   HICON node::extract_resource_icon(const ::scoped_string & scopedstrPath, int& cx, int& cy, int iIcon)
+   HICON node::extract_resource_icon(const ::scoped_string & scopedstrPath, ::i32& cx, ::i32& cy, ::i32 iIcon)
    {
 
       HMODULE hLib = nullptr;
@@ -314,7 +314,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
       if (pGrpIconDir->idCount > 0)
       {
 
-         int iId = pGrpIconDir->idEntries[0].nID;
+         ::i32 iId = pGrpIconDir->idEntries[0].nID;
 
          if (iId != pi->iIcon && pi->iIcon != 0)
          {
@@ -333,7 +333,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 
    }
 
-   for (int i = 0; i < pGrpIconDir->idCount; ++i)
+   for (::i32 i = 0; i < pGrpIconDir->idCount; ++i)
    {
 
       GRPICONDIRENTRY* e = &pGrpIconDir->idEntries[i];
@@ -355,7 +355,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 
                e->dwBytesInRes,
                true,
-               0x00030000,//unsigned int dwVersion,
+               0x00030000,//::u32 dwVersion,
                e->bWidth,
                e->bHeight,
                0);
@@ -373,7 +373,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 
    }
 
-   for (int i = 0; i < pGrpIconDir->idCount; ++i)
+   for (::i32 i = 0; i < pGrpIconDir->idCount; ++i)
    {
 
       GRPICONDIRENTRY * e = &pGrpIconDir->idEntries[i];
@@ -395,7 +395,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 
                e->dwBytesInRes,
                true,
-               0x00030000,//unsigned int dwVersion,
+               0x00030000,//::u32 dwVersion,
                e->bWidth,
                e->bHeight,
                0);
@@ -413,7 +413,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 
    }
 
-   for (int i = 0; i < pGrpIconDir->idCount; ++i)
+   for (::i32 i = 0; i < pGrpIconDir->idCount; ++i)
    {
 
       GRPICONDIRENTRY * e = &pGrpIconDir->idEntries[i];
@@ -435,7 +435,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 
                e->dwBytesInRes,
                true,
-               0x00030000,//unsigned int dwVersion,
+               0x00030000,//::u32 dwVersion,
                e->bWidth,
                e->bHeight,
                0);
@@ -453,7 +453,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 
    }
 
-   for (int i = 0; i < pGrpIconDir->idCount; ++i)
+   for (::i32 i = 0; i < pGrpIconDir->idCount; ++i)
    {
 
       GRPICONDIRENTRY * e = &pGrpIconDir->idEntries[i];
@@ -475,7 +475,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 
                e->dwBytesInRes,
                true,
-               0x00030000,//unsigned int dwVersion,
+               0x00030000,//::u32 dwVersion,
                e->bWidth,
                e->bHeight,
                0);
@@ -493,7 +493,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 
    }
 
-   for (int i = 0; i < pGrpIconDir->idCount; ++i)
+   for (::i32 i = 0; i < pGrpIconDir->idCount; ++i)
    {
 
       GRPICONDIRENTRY* e = &pGrpIconDir->idEntries[i];
@@ -512,7 +512,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 
             e->dwBytesInRes,
             true,
-            0x00030000,//unsigned int dwVersion,
+            0x00030000,//::u32 dwVersion,
             e->bWidth,
             e->bHeight,
             0);

@@ -86,7 +86,7 @@ BOOL CProcessEnvReader::ReadEnvironmentBlock(HANDLE hProcess,_ENVSTRING_t& stEnv
       UCHAR* puPEB = (UCHAR*)&peb;
       UCHAR* pRTLUserInfo = (UCHAR*)*((iptr*)(puPEB + 0x10));
 
-      int nReadbleSize = 0;
+      ::i32 nReadbleSize = 0;
       if(!HasReadAccess(hProcess,pRTLUserInfo,nReadbleSize))
       {
          SHOW_ERR_DLG(_T("Error Reading Process Memory"));
@@ -94,7 +94,7 @@ BOOL CProcessEnvReader::ReadEnvironmentBlock(HANDLE hProcess,_ENVSTRING_t& stEnv
       }
 
       // Get the first 0x64 bytes of RTL_USER_PROCESS_PARAMETERS strcuture
-      char cBuffRTLUserInfo[0x64] = {0};
+      ::i8 cBuffRTLUserInfo[0x64] = {0};
       ReadProcessMemory(hProcess,(const void *)pRTLUserInfo,cBuffRTLUserInfo,0x64,&nReturnNumBytes);
 
       // Validate the read operation
@@ -127,7 +127,7 @@ BOOL CProcessEnvReader::ReadEnvironmentBlock(HANDLE hProcess,_ENVSTRING_t& stEnv
       {
          // Set the values in the return pointer
          stEnvData.pData = (const ::wide_character *)pchBuffEnvString;
-         stEnvData.nSize = (int) nReturnNumBytes;
+         stEnvData.nSize = (::i32) nReturnNumBytes;
          return true;
       }
       else
@@ -148,7 +148,7 @@ BOOL CProcessEnvReader::ReadEnvironmentBlock(HANDLE hProcess,_ENVSTRING_t& stEnv
 * Helper function to check the read access to the virtual memory of specified process
 **/
 BOOL CProcessEnvReader::HasReadAccess(HANDLE hProcess,
-                                      void* pAddress,int& nSize)
+                                      void* pAddress,::i32& nSize)
 {
    MEMORY_BASIC_INFORMATION memInfo;
    __try
@@ -161,7 +161,7 @@ BOOL CProcessEnvReader::HasReadAccess(HANDLE hProcess,
          return false;
       }
 
-      nSize = (int) memInfo.RegionSize;
+      nSize = (::i32) memInfo.RegionSize;
       return true;
    }
    __except(SHOW_ERR_DLG(_T("Failed to close Handle")))
@@ -175,7 +175,7 @@ BOOL CProcessEnvReader::HasReadAccess(HANDLE hProcess,
 /**
 * Function to open the specified process to read or query information
 **/
-HANDLE CProcessEnvReader::OpenProcessToRead(unsigned int dwPID)
+HANDLE CProcessEnvReader::OpenProcessToRead(::u32 dwPID)
 {
    HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION |
                                  PROCESS_VM_READ,false,dwPID);
@@ -229,7 +229,7 @@ void CProcessEnvReader::EnumProcessInfo(ProcessInfoArray& arrProcessInfo)
    // Now walk the snapshot of processes, and
    // display information about each process in turn
    string csProcessInfo;
-   int i = 0;
+   ::i32 i = 0;
    do
    {
       arrProcessInfo.push_back(pe32);
@@ -250,7 +250,7 @@ string CProcessEnvReader::GetProcessNameFromHandle(HANDLE hProcess)
    return szProcessName;
 }
 
-string CProcessEnvReader::GetProcessNameFromID(unsigned int dwPID)
+string CProcessEnvReader::GetProcessNameFromID(::u32 dwPID)
 {
    HANDLE hProcess = OpenProcessToRead(dwPID);
    string csName = GetProcessNameFromHandle(hProcess);
@@ -272,10 +272,10 @@ void CProcessEnvReader::LoadIconFromProcess(HANDLE hProcess,HICON& hIconSmall,HI
 /**
 * Helper function to convert Unicode string to Multibyte
 **/
-void CProcessEnvReader::ConvertUnicodeToMBCS(const ::wide_character * pStringToConvert,int nLen,string& csMBCSStr)
+void CProcessEnvReader::ConvertUnicodeToMBCS(const ::wide_character * pStringToConvert,::i32 nLen,string& csMBCSStr)
 
 {
-   char* buff = ___new char[nLen + 1];
+   ::i8* buff = ___new ::i8[nLen + 1];
 
    WideCharToMultiByte2(CP_ACP,0,pStringToConvert,-1,
 
@@ -289,10 +289,10 @@ void CProcessEnvReader::ConvertUnicodeToMBCS(const ::wide_character * pStringToC
 /**
 * Extract each strings
 **/
-void CProcessEnvReader::ParseEnvironmentStrings(const ::wide_character * pStringToConvert,int nLen,string_array_base& EnvStrArr)
+void CProcessEnvReader::ParseEnvironmentStrings(const ::wide_character * pStringToConvert,::i32 nLen,string_array_base& EnvStrArr)
 
 {
-   int nIdx = 0;
+   ::i32 nIdx = 0;
 
    EnvStrArr.erase_all();
    while(nIdx < nLen)
@@ -303,7 +303,7 @@ void CProcessEnvReader::ParseEnvironmentStrings(const ::wide_character * pString
          break;
 
       const ::wide_character * pcsStr = (wchar_t*)&pStringToConvert[nIdx];
-      nIdx += (int) nSingleLen + 1;
+      nIdx += (::i32) nSingleLen + 1;
 
       EnvStrArr.add(string(pcsStr)); // add string to array
 
@@ -319,11 +319,11 @@ void CProcessEnvReader::ParseEnvironmentStrings(const ::wide_character * pString
 void CProcessEnvReader::SeparateVariablesAndValues(const string_array_base& EnvStrArray,EnvVarValArray& varValArr)
 {
 
-   int nLen = (int) EnvStrArray.get_size();
-   for(int i = 0; i< nLen; i++)
+   ::i32 nLen = (::i32) EnvStrArray.get_size();
+   for(::i32 i = 0; i< nLen; i++)
    {
       const ::scoped_string & scopedstrVal = EnvStrArray[i];
-      int nIndex = (int) csVal.find("=",0);
+      ::i32 nIndex = (::i32) csVal.find("=",0);
 
       if(-1 == nIndex || 0 == nIndex)
       {
@@ -351,13 +351,13 @@ void CProcessEnvReader::SeparateVariablesAndValues(const string_array_base& EnvS
 //   COPY_DEST_e Dest,
 //   HWND hClipboardOwner)
 //{
-//   const int nSize = csArrEnvStr.get_count();
+//   const ::i32 nSize = csArrEnvStr.get_count();
 //   if(!nSize)
 //      return;
 //
 //   // Prepare the string to export
 //   string csVal;
-//   for(int i = 0; i < nSize; i++)
+//   for(::i32 i = 0; i < nSize; i++)
 //   {
 //      csVal += csArrEnvStr[i];
 //      csVal+="\r\n";

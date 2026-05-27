@@ -54,7 +54,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void region::expand_bounding_box(::double_rectangle & rectangle, ::draw2d::graphics * pgraphics)
+   void region::expand_bounding_box(::f64_rectangle & rectangle, ::draw2d::graphics * pgraphics)
    {
 
       ::i32_rectangle rectanglei32;
@@ -85,7 +85,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void region::create(::draw2d::graphics * pgraphics, char iCreate)
+   void region::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
       m_pregion = get(pgraphics);
@@ -185,7 +185,7 @@ namespace draw2d_gdiplus
 
       ::pointer<::geometry2d::polygon_item>pitem = m_pitem;
 
-      for(int i = 0; i < pitem->m_polygon.get_size(); i++)
+      for(::i32 i = 0; i < pitem->m_polygon.get_size(); i++)
       {
          pa.add(Gdiplus::PointF((Gdiplus::REAL) pitem->m_polygon[i].x, (Gdiplus::REAL) pitem->m_polygon[i].y));
       }
@@ -199,7 +199,7 @@ namespace draw2d_gdiplus
          path.SetFillMode(Gdiplus::FillModeWinding);
       }
 
-      path.AddPolygon(pa.data(), (int) pa.get_count());
+      path.AddPolygon(pa.data(), (::i32) pa.get_count());
 
       return øraw_new Gdiplus::Region(&path);
 
@@ -224,9 +224,9 @@ namespace draw2d_gdiplus
          path.SetFillMode(Gdiplus::FillModeWinding);
       }
 
-      int n = 0;
+      ::i32 n = 0;
 
-      for(int i = 0; i < pitem->m_polypolygon.get_size(); i++)
+      for(::i32 i = 0; i < pitem->m_polypolygon.get_size(); i++)
       {
 
          auto & ppolygon = pitem->m_polypolygon[i];
@@ -235,7 +235,7 @@ namespace draw2d_gdiplus
 
          pa.erase_all();
 
-         for(int j = 0; j < jCount; j++)
+         for(::i32 j = 0; j < jCount; j++)
          {
 
             auto & point = ppolygon->element_at(n);
@@ -246,7 +246,7 @@ namespace draw2d_gdiplus
 
          }
 
-         path.AddPolygon(pa.data(), (int) pa.get_count());
+         path.AddPolygon(pa.data(), (::i32) pa.get_count());
 
          path.CloseFigure();
 

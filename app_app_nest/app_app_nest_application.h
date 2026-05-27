@@ -12,7 +12,7 @@ namespace ca2plugin_container
    public:
 
 
-      int                    m_iReturn;
+      ::i32                    m_iReturn;
 
       string                     m_strChannel;
 
@@ -30,7 +30,7 @@ namespace ca2plugin_container
 
       virtual void on_receive(::aura::ipc::rx * prx, const ::scoped_string & scopedstrMessage);
 
-      virtual void on_receive(::aura::ipc::rx * prx, int message, void * pdata, int len);
+      virtual void on_receive(::aura::ipc::rx * prx, ::i32 message, void * pdata, ::i32 len);
 
       virtual bool initialize_communication();
 

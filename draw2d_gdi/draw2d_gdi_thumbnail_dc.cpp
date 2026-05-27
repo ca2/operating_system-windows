@@ -7,13 +7,13 @@
 // Helper functions
 
 static long CLASS_DECL_DRAW2D_GDI _::windows_definition::MultMultDivDiv(
-   int factor, int num1, int num2,
-   int den1, int den2)
+   ::i32 factor, ::i32 num1, ::i32 num2,
+   ::i32 den1, ::i32 den2)
 {
 #ifdef _WINDOWS_DEFINITION_PORTABLE
    // make sure that (num1 * num2) does not overflow 31-bits.
    long temp = num1 < 0 ? -num1 : num1;
-   for (int nBitsResult = 0; temp != 0; nBitsResult++)
+   for (::i32 nBitsResult = 0; temp != 0; nBitsResult++)
       temp >>= 1;
    temp = num2 < 0 ? -num2 : num2;
    for (; temp != 0; nBitsResult++)
@@ -46,12 +46,12 @@ static long CLASS_DECL_DRAW2D_GDI _::windows_definition::MultMultDivDiv(
 #endif
 
    temp = numerator < 0 ? -numerator : numerator;
-   int nBitsInNum;
+   ::i32 nBitsInNum;
    for (nBitsInNum = 0; temp != 0; nBitsInNum++)
       temp >>= 1;
 
    temp = factor < 0 ? -factor : factor;
-   int nBitsInFactor;
+   ::i32 nBitsInFactor;
    for (nBitsInFactor = 0; temp != 0; nBitsInFactor++)
       temp >>= 1;
 
@@ -144,7 +144,7 @@ preview_dc::~preview_dc()
    ::windows_definition::DeleteObject((HGDIOBJ*)&m_hFont);
 }
 
-void preview_dc::SetScaleRatio(int nNumerator, int nDenominator)
+void preview_dc::SetScaleRatio(::i32 nNumerator, ::i32 nDenominator)
 {
    m_nScaleNum = nNumerator;
    m_nScaleDen = nDenominator;
@@ -172,10 +172,10 @@ void preview_dc::dump(dump_context & dumpcontext) const
 }
 #endif
 
-int preview_dc::SaveDC()
+::i32 preview_dc::SaveDC()
 {
    ASSERT(get_handle2() != nullptr);
-   int nAttribIndex = ::SaveDC(get_handle2());
+   ::i32 nAttribIndex = ::SaveDC(get_handle2());
    if (get_os_data() != nullptr)
    {
       // erase font from object
@@ -191,7 +191,7 @@ int preview_dc::SaveDC()
    return nAttribIndex;
 }
 
-bool preview_dc::RestoreDC(int nSavedDC)
+bool preview_dc::RestoreDC(::i32 nSavedDC)
 {
    ASSERT(get_handle2() != nullptr);
    bool bSuccess = ::RestoreDC(get_handle2(), nSavedDC);
@@ -238,7 +238,7 @@ void preview_dc::MirrorAttributes()
    }
 }
 
-::draw2d::object* preview_dc::SelectStockObject(int nIndex)
+::draw2d::object* preview_dc::SelectStockObject(::i32 nIndex)
 {
    ASSERT(get_handle2() != nullptr);
 
@@ -322,8 +322,8 @@ void preview_dc::MirrorFont()
 
    // Is the displayed font too large?
 
-   int cyDesired = -logFont.lfHeight;
-   int cyActual;
+   ::i32 cyDesired = -logFont.lfHeight;
+   ::i32 cyActual;
    if (tm.tmHeight < 0)
       cyActual = -tm.tmHeight;
    else
@@ -407,15 +407,15 @@ void preview_dc::MirrorFont()
    return ::SetTextColor(get_handle2(), crColor);
 }
 
-int preview_dc::SetMapMode(int nMapMode)
+::i32 preview_dc::SetMapMode(::i32 nMapMode)
 {
    ASSERT(get_handle2() != nullptr);
-   int nModeOld = ::SetMapMode(get_handle2(), nMapMode);
+   ::i32 nModeOld = ::SetMapMode(get_handle2(), nMapMode);
    MirrorMappingMode(true);
    return nModeOld;
 }
 
-i32_point preview_dc::SetViewportOrg(int x, int y)
+i32_point preview_dc::SetViewportOrg(::i32 x, ::i32 y)
 {
    ASSERT(get_handle2() != nullptr);
    ::i32_point pointOrgOld;
@@ -424,7 +424,7 @@ i32_point preview_dc::SetViewportOrg(int x, int y)
    return pointOrgOld;
 }
 
-i32_point preview_dc::OffsetViewportOrg(int nWidth, int nHeight)
+i32_point preview_dc::OffsetViewportOrg(::i32 nWidth, ::i32 nHeight)
 {
    ASSERT(get_handle2() != nullptr);
    ::i32_point pointOrgOld;
@@ -433,7 +433,7 @@ i32_point preview_dc::OffsetViewportOrg(int nWidth, int nHeight)
    return pointOrgOld;
 }
 
-i32_size preview_dc::SetViewportExt(int x, int y)
+i32_size preview_dc::SetViewportExt(::i32 x, ::i32 y)
 {
    ASSERT(get_handle2() != nullptr);
    i32_size sizeExtOld;
@@ -442,7 +442,7 @@ i32_size preview_dc::SetViewportExt(int x, int y)
    return sizeExtOld;
 }
 
-i32_size preview_dc::ScaleViewportExt(int xNum, int xDenom, int yNum, int yDenom)
+i32_size preview_dc::ScaleViewportExt(::i32 xNum, ::i32 xDenom, ::i32 yNum, ::i32 yDenom)
 {
    ASSERT(get_handle2() != nullptr);
    i32_size sizeExtOld;
@@ -452,7 +452,7 @@ i32_size preview_dc::ScaleViewportExt(int xNum, int xDenom, int yNum, int yDenom
    return sizeExtOld;
 }
 
-i32_size preview_dc::set_window_ext(int x, int y)
+i32_size preview_dc::set_window_ext(::i32 x, ::i32 y)
 {
    ASSERT(get_handle2() != nullptr);
    i32_size sizeExtOld;
@@ -461,7 +461,7 @@ i32_size preview_dc::set_window_ext(int x, int y)
    return sizeExtOld;
 }
 
-i32_size preview_dc::scale_window_ext(int xNum, int xDenom, int yNum, int yDenom)
+i32_size preview_dc::scale_window_ext(::i32 xNum, ::i32 xDenom, ::i32 yNum, ::i32 yDenom)
 {
    ASSERT(get_handle2() != nullptr);
    i32_size sizeExtOld;
@@ -476,7 +476,7 @@ i32_size preview_dc::scale_window_ext(int xNum, int xDenom, int yNum, int yDenom
 
 // private helpers for text_out functions
 
-static int CLASS_DECL_DRAW2D_GDI _::windows_definition::ComputeNextTab(int x, UINT nTabStops, LPINT lpnTabStops, int nTabOrigin, int nTabWidth)
+static ::i32 CLASS_DECL_DRAW2D_GDI _::windows_definition::ComputeNextTab(::i32 x, UINT nTabStops, LPINT lpnTabStops, ::i32 nTabOrigin, ::i32 nTabWidth)
 {
    ENSURE(nTabWidth!=0);
    x -= nTabOrigin;        // normalize position to tab origin
@@ -492,9 +492,9 @@ static int CLASS_DECL_DRAW2D_GDI _::windows_definition::ComputeNextTab(int x, UI
 
 // Compute a character delta table for correctly positioning the screen
 // font characters where the printer characters will appear on the page
-i32_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrString, UINT &nCount,
-   bool bTabbed, UINT nTabStops, LPINT lpnTabStops, int nTabOrigin,
-   __out_z LPTSTR lpszOutputString, int* pnDxWidths, int& nRightFixup)
+i32_size preview_dc::ComputeDeltas(::i32& x, const ::scoped_string & scopedstrString, UINT &nCount,
+   bool bTabbed, UINT nTabStops, LPINT lpnTabStops, ::i32 nTabOrigin,
+   __out_z LPTSTR lpszOutputString, ::i32* pnDxWidths, ::i32& nRightFixup)
 {
    ASSERT_OK(this);
 
@@ -515,14 +515,14 @@ i32_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrStri
       x = pointCurrent.x;
    }
 
-   const_char_pointer lpszCurChar = lpszString;
-   const_char_pointer lpszStartRun = lpszString;
-   int* pnCurDelta = pnDxWidths;
-   int nStartRunPos = x;
-   int nCurrentPos = x;
-   int nStartOffset = 0;
+   const_char_pointer pszCurChar = lpszString;
+   const_char_pointer pszStartRun = lpszString;
+   ::i32* pnCurDelta = pnDxWidths;
+   ::i32 nStartRunPos = x;
+   ::i32 nCurrentPos = x;
+   ::i32 nStartOffset = 0;
 
-   int nTabWidth = 0;
+   ::i32 nTabWidth = 0;
    if (bTabbed)
    {
       if (nTabStops == 1)
@@ -545,12 +545,12 @@ i32_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrStri
          // bSpace will be either true (==1) or false (==0).  For spaces
          // we want the space included in the get_text_extent, for tabs we
          // do not want the tab included
-         int nRunLength = (int)(lpszCurChar - lpszStartRun) + bSpace;
+         ::i32 nRunLength = (::i32)(lpszCurChar - lpszStartRun) + bSpace;
 
          i32_size sizeExtent;
          ::GetTextExtentPoint32(get_handle2(), lpszStartRun, nRunLength,
             &sizeExtent);
-         int nNewPos = nStartRunPos + sizeExtent.cx
+         ::i32 nNewPos = nStartRunPos + sizeExtent.cx
             - tmAttrib.tmOverhang;
 
          // now, if this is a Tab (!bSpace), compute the next tab stop
@@ -575,7 +575,7 @@ i32_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrStri
       else
       {
          // For the non-tabbed or non-tab-character case
-         int cxScreen;
+         ::i32 cxScreen;
          if (_istlead(*lpszCurChar))
          {
             cxScreen = tmScreen.tmAveCharWidth;
@@ -599,15 +599,15 @@ i32_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrStri
          // Center character in allotted space
          if (pnCurDelta != pnDxWidths)
          {
-            int diff = (*pnCurDelta - cxScreen) / 2;
+            ::i32 diff = (*pnCurDelta - cxScreen) / 2;
             *pnCurDelta -= diff;
             *(pnCurDelta - 1) += diff;
          }
          *lpszOutputString++ = *lpszCurChar;
          if (_istlead(*lpszCurChar))
          {
-            *lpszOutputString++ = *(lpszCurChar+1); // copy trailing unsigned char
-            *(pnCurDelta + 1) = *pnCurDelta;        // double wide
+            *lpszOutputString++ = *(lpszCurChar+1); // copy trailing ::u8
+            *(pnCurDelta + 1) = *pnCurDelta;        // ::f64 wide
             nCurrentPos += *pnCurDelta;
             pnCurDelta++;
             i++;
@@ -635,24 +635,24 @@ i32_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrStri
    return sizeExtent;
 }
 
-bool preview_dc::text_out(int x, int y, const ::scoped_string & scopedstrString, int nCount)
+bool preview_dc::text_out(::i32 x, ::i32 y, const ::scoped_string & scopedstrString, ::i32 nCount)
 {
    return ExtTextOut(x, y, 0, nullptr, lpszString, nCount, nullptr);
 }
 
-bool preview_dc::ExtTextOut(int x, int y, UINT nOptions, const ::i32_rectangle & rectangle,
-   const_char_pointer lpszString, UINT nCount, LPINT lpDxWidths)
+bool preview_dc::ExtTextOut(::i32 x, ::i32 y, UINT nOptions, const ::i32_rectangle & rectangle,
+   const_char_pointer pszString, UINT nCount, LPINT lpDxWidths)
 {
    ASSERT(get_os_data() != nullptr);
    ASSERT(get_handle2() != nullptr);
    ASSERT(lpszString != nullptr);
    ASSERT(lpDxWidths == nullptr ||
-         fx_is_valid_address(lpDxWidths, sizeof(int) * nCount, false));
+         fx_is_valid_address(lpDxWidths, sizeof(::i32) * nCount, false));
    ASSERT(fx_is_valid_address(lpszString, nCount, false));
 
-   int* pDeltas = nullptr;
+   ::i32* pDeltas = nullptr;
    LPTSTR pOutputString = nullptr;
-   int nRightFixup = 0;
+   ::i32 nRightFixup = 0;
 
    if (lpDxWidths == nullptr)
    {
@@ -661,8 +661,8 @@ bool preview_dc::ExtTextOut(int x, int y, UINT nOptions, const ::i32_rectangle &
 
       try
       {
-         pDeltas = ___new int[nCount];
-         pOutputString = ___new char[nCount];
+         pDeltas = ___new ::i32[nCount];
+         pOutputString = ___new ::i8[nCount];
       }
       catch(::exception::base * pe)
       {
@@ -693,34 +693,34 @@ bool preview_dc::ExtTextOut(int x, int y, UINT nOptions, const ::i32_rectangle &
    return bSuccess;
 }
 
-i32_size preview_dc::TabbedTextOut(int x, int y, const ::scoped_string & scopedstrString, int nCount,
-   int nTabPositions, LPINT lpnTabStopPositions, int nTabOrigin)
+i32_size preview_dc::TabbedTextOut(::i32 x, ::i32 y, const ::scoped_string & scopedstrString, ::i32 nCount,
+   ::i32 nTabPositions, LPINT lpnTabStopPositions, ::i32 nTabOrigin)
 {
    ASSERT(get_handle2() != nullptr);
    ASSERT(get_os_data() != nullptr);
    ASSERT(lpszString != nullptr);
    ASSERT(fx_is_valid_address(lpszString, nCount, false));
    ASSERT(lpnTabStopPositions == nullptr ||
-         fx_is_valid_address(lpnTabStopPositions, sizeof(int) * nTabPositions,
+         fx_is_valid_address(lpnTabStopPositions, sizeof(::i32) * nTabPositions,
             false));
 
    if (nCount <= 0)
-      return (unsigned int) 0;         // nCount is zero, there is nothing to print
+      return (::u32) 0;         // nCount is zero, there is nothing to print
 
-   int* pDeltas = nullptr;
+   ::i32* pDeltas = nullptr;
    LPTSTR pOutputString = nullptr;
-   int nRightFixup;
+   ::i32 nRightFixup;
 
    try
    {
-      pDeltas = ___new int[nCount];
-      pOutputString = ___new char[nCount];
+      pDeltas = ___new ::i32[nCount];
+      pOutputString = ___new ::i8[nCount];
    }
    catch(::exception::base * pe)
    {
       delete[] pDeltas;
       // Note: DELETE_EXCEPTION(e) not required
-      return (unsigned int) 0;           // signify error
+      return (::u32) 0;           // signify error
    }
    
 
@@ -746,7 +746,7 @@ i32_size preview_dc::TabbedTextOut(int x, int y, const ::scoped_string & scopeds
 
 // This one is too complicated to do character-by-character output positioning
 // All we really need to do here is mirror the current position
-int preview_dc::draw_text(const ::scoped_string & scopedstrString, int nCount, RECT * prectangle,
+::i32 preview_dc::draw_text(const ::scoped_string & scopedstrString, ::i32 nCount, RECT * prectangle,
    UINT nFormat)
 {
    ASSERT(get_handle2() != nullptr);
@@ -758,7 +758,7 @@ int preview_dc::draw_text(const ::scoped_string & scopedstrString, int nCount, R
       ::windows_definition::IsValidString(lpszString) :
       fx_is_valid_address(lpszString, nCount, false));
 
-   int retVal = ::draw_text(get_os_data(), lpszString, nCount, rectangle, nFormat);
+   ::i32 retVal = ::draw_text(get_os_data(), lpszString, nCount, rectangle, nFormat);
 
    i32_point pos;
    ::GetCurrentPositionEx(get_os_data(), &pos);
@@ -766,7 +766,7 @@ int preview_dc::draw_text(const ::scoped_string & scopedstrString, int nCount, R
    return retVal;
 }
 
-int preview_dc::draw_text_ex(__in_ecount(nCount) LPTSTR lpszString, int nCount, RECT * prectangle,
+::i32 preview_dc::draw_text_ex(__in_ecount(nCount) LPTSTR lpszString, ::i32 nCount, RECT * prectangle,
    UINT nFormat, LPDRAWTEXTPARAMS lpDTParams)
 {
    ASSERT(get_handle2() != nullptr);
@@ -778,7 +778,7 @@ int preview_dc::draw_text_ex(__in_ecount(nCount) LPTSTR lpszString, int nCount, 
       ::windows_definition::IsValidString(lpszString) :
       fx_is_valid_address(lpszString, nCount, false));
 
-   int retVal = ::draw_text_ex(get_os_data(), lpszString, nCount, rectangle, nFormat, lpDTParams);
+   ::i32 retVal = ::draw_text_ex(get_os_data(), lpszString, nCount, rectangle, nFormat, lpDTParams);
 
    i32_point pos;
    ::GetCurrentPositionEx(get_os_data(), &pos);
@@ -787,14 +787,14 @@ int preview_dc::draw_text_ex(__in_ecount(nCount) LPTSTR lpszString, int nCount, 
 }
 
 bool preview_dc::GrayString(::draw2d::brush*,
-            bool (CALLBACK *)(HDC, LPARAM, int),
-               LPARAM lpData, int nCount, int x, int y, int, int)
+            bool (CALLBACK *)(HDC, LPARAM, ::i32),
+               LPARAM lpData, ::i32 nCount, ::i32 x, ::i32 y, ::i32, ::i32)
 {
    information(::radix::trace::category_AppMsg, 0, "text_out() substituted for GrayString() in Print Preview.\n");
    return text_out(x, y, (const ::string &)lpData, nCount);
 }
 
-int preview_dc::Escape(int nEscape, int nCount, const ::scoped_string & scopedstrInData, void * lpOutData)
+::i32 preview_dc::Escape(::i32 nEscape, ::i32 nCount, const ::scoped_string & scopedstrInData, void * lpOutData)
 {
    // The tact here is to NOT allow any of the document control escapes
    // to be passed through.  Elimination of StartDoc and EndDoc should
@@ -892,14 +892,14 @@ void preview_dc::MirrorMappingMode(bool bCompute)
          m_nScaleDen, ::GetDeviceCaps(get_handle2(), LOGPIXELSX));
 
       ASSERT(m_sizeWinExt.cx != 0);
-      m_sizeVpExt.cx = (int)lTempExt;
+      m_sizeVpExt.cx = (::i32)lTempExt;
 
       lTempExt = _::windows_definition::MultMultDivDiv(m_sizeVpExt.cy,
          m_nScaleNum, ::windows_definition::Data.cyPixelsPerInch,
          m_nScaleDen, ::GetDeviceCaps(get_handle2(), LOGPIXELSY));
 
       ASSERT(m_sizeWinExt.cy != 0);
-      m_sizeVpExt.cy = (int)lTempExt;
+      m_sizeVpExt.cy = (::i32)lTempExt;
    }
 
    if (get_os_data() != nullptr)
@@ -975,13 +975,13 @@ void preview_dc::PrinterDPtoScreenDP(LPPOINT lpPoint) const
       sizePrinterWinExt.cx, m_sizeVpExt.cx,
       sizePrinterVpExt.cx, m_sizeWinExt.cx);
 
-   lpPoint->x = (int)xScreen;
+   lpPoint->x = (::i32)xScreen;
 
    long yScreen = _::windows_definition::MultMultDivDiv(lpPoint->y,
       sizePrinterWinExt.cy, m_sizeVpExt.cy,
       sizePrinterVpExt.cy, m_sizeWinExt.cy);
 
-   lpPoint->y = (int)yScreen;
+   lpPoint->y = (::i32)yScreen;
 }
 
 ////////////////////////////////////////////////////////////////////////////

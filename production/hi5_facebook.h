@@ -11,7 +11,7 @@ namespace hi5
    public:
       /* Constants */
       const string TWIT_COLON;
-      const char TWIT_EOS;
+      const ::i8 TWIT_EOS;
 
       /* Miscellaneous data used to build twitter URLs*/
       const string TWIT_SEARCHQUERYSTRING;
@@ -175,7 +175,7 @@ namespace hi5
       string get_response();
 
       /* Internal cURL related methods */
-      int saveLastWebResponse(char*& data, size_t size);
+      ::i32 saveLastWebResponse(::i8*& data, size_t size);
 
 
 

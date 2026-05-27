@@ -39,13 +39,13 @@ namespace subsystem_windows
       virtual  public Implementation<::subsystem::PipeClientInterface>
       {
       public:
-         ::pointer< ::subsystem::NamedPipeInterface > connect(const ::scoped_string & scopedstrName, unsigned int maxPortionSize) override;
+         ::pointer< ::subsystem::NamedPipeInterface > connect(const ::scoped_string & scopedstrName, ::u32 maxPortionSize) override;
 
       //private:
          PipeClient();
          ~PipeClient();
 
-         unsigned int m_maxPortionSize;
+         ::u32 m_maxPortionSize;
       };
 
       //// __PIPECLIENT_H__

@@ -381,7 +381,7 @@ namespace music
          }
 
 
-         ::e_status midi::midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, long long iOsResult, const ::scoped_string & scopedstrContext, const ::scoped_string & scopedstrText)
+         ::e_status midi::midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, ::i64 iOsResult, const ::scoped_string & scopedstrContext, const ::scoped_string & scopedstrText)
          {
 
             auto estatus = midi_in_get_error_text((MMRESULT) iOsResult, strOsMessage, strMessage);
@@ -478,7 +478,7 @@ namespace music
 
                auto iPort = get_midi_in_device_port(strMMSystemDevice);
 
-               pin->open((int) iPort);
+               pin->open((::i32) iPort);
 
                pmessagein = pin;
 
@@ -510,13 +510,13 @@ namespace music
 
             synchronous_lock synchronouslock(synchronization());
 
-            unsigned int uDeviceCount = midiOutGetNumDevs();
+            ::u32 uDeviceCount = midiOutGetNumDevs();
 
             MIDIOUTCAPSW midioutcaps;
 
             string str;
 
-            for (unsigned int uDev = 0; uDev < uDeviceCount; uDev++)
+            for (::u32 uDev = 0; uDev < uDeviceCount; uDev++)
             {
 
                if (MMSYSERR_NOERROR == midiOutGetDevCapsW(uDev, &midioutcaps, sizeof(midioutcaps)))
@@ -544,13 +544,13 @@ namespace music
 
             synchronous_lock synchronouslock(synchronization());
 
-            unsigned int uDeviceCount = midiInGetNumDevs();
+            ::u32 uDeviceCount = midiInGetNumDevs();
 
             MIDIINCAPSW midiincaps;
 
             string str;
 
-            for (unsigned int uDev = 0; uDev < uDeviceCount; uDev++)
+            for (::u32 uDev = 0; uDev < uDeviceCount; uDev++)
             {
 
                if (MMSYSERR_NOERROR == midiInGetDevCapsW(uDev, &midiincaps, sizeof(midiincaps)))

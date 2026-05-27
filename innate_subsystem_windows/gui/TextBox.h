@@ -55,15 +55,15 @@ namespace innate_subsystem_windows
         // Methods for multiline textboxes
         //
 
-        virtual int getCurrentLineIndex() override;
-        virtual int getLineCount() override;
+        virtual ::i32 getCurrentLineIndex() override;
+        virtual ::i32 getLineCount() override;
 
         //
         // Get / set caret position
         //
 
-        virtual int getCaretPos() override;
-        virtual void setCaretPos(int h, int v) override;
+        virtual ::i32 getCaretPos() override;
+        virtual void setCaretPos(::i32 h, ::i32 v) override;
 
         //
         // Text selection

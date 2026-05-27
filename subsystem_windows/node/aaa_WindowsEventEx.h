@@ -29,7 +29,7 @@
 
 namespace subsystem_windows
 {
-   class CLASS_DECL_SUBSYSTEM_WINDOWS WindowsEventEx : public ::subsystem_windows::::happening
+   class CLASS_DECL_SUBSYSTEM_WINDOWS WindowsEventEx : public ::subsystem_windows::happening
    {
    public:
       WindowsEventEx(const ::scoped_string & scopedstrName = 0);

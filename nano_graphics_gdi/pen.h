@@ -8,15 +8,9 @@
 #include "object.h"
 
 
-namespace windows
-{
 
 
-   namespace nano
-   {
-
-
-      namespace graphics
+      namespace nano_graphics_gdi
       {
 
 
@@ -34,19 +28,11 @@ namespace windows
             ~pen() override;
 
 
-            void update(::nano::graphics::device* pnanodevice) override;
+            void update(::nano::graphics::context* pgraphicscontext) override;
 
 
          };
 
 
 
-      } // namespace graphics
-
-
-   } // namespace nano
-
-} // namespace windows
-
-
-
+      } // namespace nano_graphics_gdi

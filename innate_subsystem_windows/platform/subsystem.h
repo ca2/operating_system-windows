@@ -33,7 +33,7 @@ namespace innate_subsystem_windows
          const ::scoped_string & scopedstrCaption,
          ::user::enum_message_box emessagebox) override;
 
-        ::user::enum_key virtual_key_code_to_user_key(int iVirtualKeyCode) override;
+        ::user::enum_key virtual_key_code_to_user_key(::i32 iVirtualKeyCode) override;
 
       void initializeInnateSubsystemControls() override;
 

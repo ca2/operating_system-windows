@@ -40,7 +40,7 @@ namespace windowing_win32
       };
 
 
-      /*unsigned int     m_uiId;
+      /*::u32     m_uiId;
       bool     m_bCreated;
       string   m_strId;
 #ifdef WINDOWS_DESKTOP*/
@@ -95,12 +95,12 @@ namespace windowing_win32
 //#else
 //      virtual void notify_icon_play(const ::scoped_string & scopedstrAction) override;
 //#endif
-//      virtual int _get_notification_area_action_count() override;
-//      virtual const_char_pointer _get_notification_area_action_name(int iIndex) override;
-//      virtual const_char_pointer _get_notification_area_action_id(int iIndex) override;
-//      virtual const_char_pointer _get_notification_area_action_label(int iIndex) override;
-//      virtual const_char_pointer _get_notification_area_action_accelerator(int iIndex) override;
-//      virtual const_char_pointer _get_notification_area_action_description(int iIndex) override;
+//      virtual ::i32 _get_notification_area_action_count() override;
+//      virtual const_char_pointer _get_notification_area_action_name(::i32 iIndex) override;
+//      virtual const_char_pointer _get_notification_area_action_id(::i32 iIndex) override;
+//      virtual const_char_pointer _get_notification_area_action_label(::i32 iIndex) override;
+//      virtual const_char_pointer _get_notification_area_action_accelerator(::i32 iIndex) override;
+//      virtual const_char_pointer _get_notification_area_action_description(::i32 iIndex) override;
 //      virtual void call_notification_area_action(const ::scoped_string & scopedstrId) override;
 //#endif
 

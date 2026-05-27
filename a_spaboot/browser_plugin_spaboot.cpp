@@ -20,7 +20,7 @@ public:
 
 extern std::string get_starter_version();
 
-int bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed);
+::i32 bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed);
 bool read_resource_as_file(const ::scoped_string & scopedstrFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 std::string get_temp_file_name_dup(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrExtension);
 bool file_system()->exists(const ::scoped_string & scopedstrPath1);
@@ -33,17 +33,17 @@ DWORD g_dwPrepareSmallBell = 0;
 void parse_installer(const ::scoped_string & scopedstr);
 bool parse_installer_start(const ::scoped_string & scopedstr);
 //SPALIB_API std::string read_resource_as_string(HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
-//int gzuncompress(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed);
+//::i32 gzuncompress(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed);
 //SPALIB_API bool read_resource_as_file(const ::scoped_string & scopedstrFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 //SPALIB_API std::string get_temp_file_name(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrExtension);
 
-//int start();
+//::i32 start();
 
 //SPALIB_API void prepare_small_bell();
 //SPALIB_API void defer_play_small_bell();
 //SPALIB_API void play_small_bell();
 
-int APIENTRY ca2_cube_install(const ::scoped_string & scopedstrId)
+::i32 APIENTRY ca2_cube_install(const ::scoped_string & scopedstrId)
 {
    g_hmutexBoot = nullptr;
    SECURITY_ATTRIBUTES MutexAttributes;
@@ -118,7 +118,7 @@ int APIENTRY ca2_cube_install(const ::scoped_string & scopedstrId)
    }
 
    DWORD dwExitCode;
-   int i = 1;
+   ::i32 i = 1;
    while(true)
    {
       if(!GetExitCodeProcess(sei.hProcess, &dwExitCode))
@@ -137,7 +137,7 @@ int APIENTRY ca2_cube_install(const ::scoped_string & scopedstrId)
    strUrl = "http://spaignition.ca2api.net/query?node=install_application&atom=";
    strUrl += g_strId;
    strUrl += "&key=application";
-   int iRetry = 0;
+   ::i32 iRetry = 0;
    while(true)
    {
       strApp = ms_get(strUrl.c_str());
@@ -176,7 +176,7 @@ void parse_installer(XNode & node)
    if(node.name == "spa" && node.childs.size() > 0)
    {
       LPXNode lpnode = &node;
-      for(unsigned int u = 0; u < lpnode->childs.size(); u++)
+      for(::u32 u = 0; u < lpnode->childs.size(); u++)
       {
          if(lpnode->childs[u]->name == "index")
          {
@@ -202,13 +202,13 @@ void parse_installer(const ::scoped_string & scopedstr)
 
 bool parse_installer_start(XNode & node)
 {
-   int iOkCount = 0;
+   ::i32 iOkCount = 0;
    std::string strInstalledBuild;
    std::string strRequestedBuild;
    if(node.name == "spa" && node.childs.size() > 0)
    {
       LPXNode lpnode = &node;
-      for(unsigned int u = 0; u < lpnode->childs.size(); u++)
+      for(::u32 u = 0; u < lpnode->childs.size(); u++)
       {
          if(lpnode->childs[u]->name == "index")
          {
@@ -277,7 +277,7 @@ void trace(const ::scoped_string & scopedstr)
    printf("%s", psz);
 }
 
-int installer_start(const ::scoped_string & scopedstrVersion, const ::scoped_string & scopedstrId)
+::i32 installer_start(const ::scoped_string & scopedstrVersion, const ::scoped_string & scopedstrId)
 {
    STARTUPINFO si;
    PROCESS_INFORMATION pi;
@@ -318,13 +318,13 @@ int installer_start(const ::scoped_string & scopedstrVersion, const ::scoped_str
 
 
 
-int bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed)
+::i32 bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed)
 {
-   char * g_pchGzUncompressBuffer = nullptr;
-   int g_iGzUncompressLen = 1024 * 256;
+   ::i8 * g_pchGzUncompressBuffer = nullptr;
+   ::i32 g_iGzUncompressLen = 1024 * 256;
    if(g_pchGzUncompressBuffer == nullptr)
    {
-       g_pchGzUncompressBuffer = ___new char[g_iGzUncompressLen];
+       g_pchGzUncompressBuffer = ___new ::i8[g_iGzUncompressLen];
    }
    BZFILE * file = BZ2_bzopen(lpcszGzFileCompressed, "rb");
    if (file == nullptr)
@@ -338,13 +338,13 @@ int bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed)
    if (fileUn == nullptr)
    {
       BZ2_bzclose(file);
-      int err;
+      ::i32 err;
       _get_errno(&err);
       fprintf(stderr, "fopen error\n %d", err);
 
       return -1;
    }
-   int uncomprLen;
+   ::i32 uncomprLen;
    while((uncomprLen = BZ2_bzread(file, g_pchGzUncompressBuffer, g_iGzUncompressLen)) > 0)
    {
       fwrite(g_pchGzUncompressBuffer, 1, uncomprLen, fileUn);
@@ -406,7 +406,7 @@ bool read_resource_as_file(
 
 std::string get_temp_file_name_dup(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrExtension)
 {
-   char lpPathBuffer[MAX_PATH * 16];
+   ::i8 lpPathBuffer[MAX_PATH * 16];
  // Get the temp path.
    DWORD dwRetVal = GetTempPath(sizeof(lpPathBuffer),     // length of the buffer
                         lpPathBuffer); // buffer for path 
@@ -416,15 +416,15 @@ std::string get_temp_file_name_dup(const ::scoped_string & scopedstrName, const 
       return "";
    }
    std::string str;
-   char buf[30];
-   int iLen= strlen(lpPathBuffer);
+   ::i8 buf[30];
+   ::i32 iLen= strlen(lpPathBuffer);
    if(!(lpPathBuffer[iLen - 1] == '/'
       || lpPathBuffer[iLen - 1] == '\\'))
    {
       lpPathBuffer[iLen] = '\\';
       lpPathBuffer[iLen+1] = '\0';
    }
-   for(int i = 0; i < (64 * 1024); i++)
+   for(::i32 i = 0; i < (64 * 1024); i++)
    {
       sprintf(buf, "%d", i);
       str = lpPathBuffer;
@@ -457,7 +457,7 @@ bool file_system()->exists(const ::scoped_string & scopedstrPath1)
 }
 
 
-int install_spa()
+::i32 install_spa()
 {
    std::string strPlatform;
 

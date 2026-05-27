@@ -9,7 +9,7 @@ namespace windows
 {
 
 
-   CLASS_DECL_WINDOWING_WIN32 int show_window(enum_display edisplay, const ::user::activation & useractivation)
+   CLASS_DECL_WINDOWING_WIN32 ::i32 show_window(enum_display edisplay, const ::user::activation & useractivation)
    {
 
       auto bNoActivate = useractivation & ::user::e_activation_no_activate;
@@ -43,7 +43,7 @@ namespace windows
    }
 
 
-   CLASS_DECL_WINDOWING_WIN32 enum_display show_window_to_edisplay(int iShowWindow, ::user::activation & useractivation)
+   CLASS_DECL_WINDOWING_WIN32 enum_display show_window_to_edisplay(::i32 iShowWindow, ::user::activation & useractivation)
    {
 
       useractivation = { ::user::e_activation_default } ;

@@ -372,7 +372,7 @@ namespace windowing_win32
 //#if defined(LINUX) || defined(MACOS)
 //
 //
-//   int notify_icon::_get_notification_area_action_count()
+//   ::i32 notify_icon::_get_notification_area_action_count()
 //   {
 //
 //      return m_plistener->_get_notification_area_action_count();
@@ -380,7 +380,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   const_char_pointer notify_icon::_get_notification_area_action_name(int iIndex)
+//   const_char_pointer notify_icon::_get_notification_area_action_name(::i32 iIndex)
 //   {
 //
 //      return m_plistener->_get_notification_area_action_name(iIndex);
@@ -388,7 +388,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   const_char_pointer notify_icon::_get_notification_area_action_id(int iIndex)
+//   const_char_pointer notify_icon::_get_notification_area_action_id(::i32 iIndex)
 //   {
 //
 //      return m_plistener->_get_notification_area_action_id(iIndex);
@@ -396,7 +396,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   const_char_pointer notify_icon::_get_notification_area_action_label(int iIndex)
+//   const_char_pointer notify_icon::_get_notification_area_action_label(::i32 iIndex)
 //   {
 //
 //      return m_plistener->_get_notification_area_action_label(iIndex);
@@ -404,7 +404,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   const_char_pointer notify_icon::_get_notification_area_action_accelerator(int iIndex)
+//   const_char_pointer notify_icon::_get_notification_area_action_accelerator(::i32 iIndex)
 //   {
 //
 //      return m_plistener->_get_notification_area_action_accelerator(iIndex);
@@ -412,7 +412,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   const_char_pointer notify_icon::_get_notification_area_action_description(int iIndex)
+//   const_char_pointer notify_icon::_get_notification_area_action_description(::i32 iIndex)
 //   {
 //
 //      return m_plistener->_get_notification_area_action_description(iIndex);

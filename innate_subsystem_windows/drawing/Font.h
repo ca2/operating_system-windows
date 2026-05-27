@@ -43,14 +43,14 @@ virtual public Implementation<::innate_subsystem::FontInterface>
    public:
 
       //public:
-      //Pen(int type, int width, const ::color::color & color);
+      //Pen(::i32 type, ::i32 width, const ::color::color & color);
       Font();
       ~Font() override;
 
 
       //void * _HGDIOBJ() override;
 
-      virtual void initialize_font(const char * pszFamily, int iPixelHeight, int iFontWeight = 400, bool bItalic = false) override;
+      virtual void initialize_font(const ::i8 * pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight = 400, bool bItalic = false) override;
 
       void destroyGraphicsObject() override;
 

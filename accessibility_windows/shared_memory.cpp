@@ -17,7 +17,7 @@ shared_memory::shared_memory(const memory_base & s)
 
 }
 
-shared_memory::shared_memory(memory_container * pcontainer, double dAllocationRateUp, unsigned int nAllocFlags)
+shared_memory::shared_memory(memory_container * pcontainer, ::f64 dAllocationRateUp, ::u32 nAllocFlags)
 {
 
    m_nAllocFlags = nAllocFlags;
@@ -79,7 +79,7 @@ shared_memory::~shared_memory()
 }
 
 
-unsigned char * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
+::u8 * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
 {
 
    if (this->offset() > 0)
@@ -99,7 +99,7 @@ unsigned char * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
 
    }
 
-   unsigned char * pbStorage = m_beginStorage;
+   ::u8 * pbStorage = m_beginStorage;
 
    m_hGlobalMemory = nullptr;
    m_beginStorage = nullptr;
@@ -130,7 +130,7 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 
    m_hGlobalMemory = hGlobalMemory;
 
-   m_beginStorage = (unsigned char *)::GlobalLock(m_hGlobalMemory);
+   m_beginStorage = (::u8 *)::GlobalLock(m_hGlobalMemory);
 
    m_begin = m_beginStorage;
 
@@ -141,7 +141,7 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 }
 
 
-unsigned char * shared_memory::impl_alloc(memsize nBytes)
+::u8 * shared_memory::impl_alloc(memsize nBytes)
 {
 
    ASSERT(m_hGlobalMemory == nullptr);        // do once only
@@ -151,12 +151,12 @@ unsigned char * shared_memory::impl_alloc(memsize nBytes)
    if (m_hGlobalMemory == nullptr)
       return nullptr;
 
-   return (unsigned char *) ::GlobalLock(m_hGlobalMemory);
+   return (::u8 *) ::GlobalLock(m_hGlobalMemory);
 
 }
 
 
-unsigned char * shared_memory::impl_realloc(void *, memsize nBytes)
+::u8 * shared_memory::impl_realloc(void *, memsize nBytes)
 {
 
    if (!m_bAllowGrow)
@@ -175,12 +175,12 @@ unsigned char * shared_memory::impl_realloc(void *, memsize nBytes)
 
    m_hGlobalMemory = hNew;
 
-   return (unsigned char *) ::GlobalLock(m_hGlobalMemory);
+   return (::u8 *) ::GlobalLock(m_hGlobalMemory);
 
 }
 
 
-void shared_memory::impl_free(unsigned char *)
+void shared_memory::impl_free(::u8 *)
 {
 
    ASSERT(m_hGlobalMemory != nullptr);
@@ -192,7 +192,7 @@ void shared_memory::impl_free(unsigned char *)
 }
 
 
-//unsigned char * * shared_memory::detach()
+//::u8 * * shared_memory::detach()
 //{
 
 //   throw ::exception(not_supported_exception("not valid for Global Memory(\"HGLOBAL\")"));
@@ -254,26 +254,26 @@ void shared_memory::set_data(void *pdata, memsize uiSize)
    iStart = maximum(iStart, 0);
    if(iEnd == -1)
       iEnd = this->get_size() - 1;
-   char * pch = (char *) get_data();
+   ::i8 * pch = (::i8 *) get_data();
    for(memsize i = iStart; i <= iEnd; i++)
    {
       if(((pch[i] & 0xf0) >> 4) < 10)
-         str += (char)(((pch[i] & 0xf0) >> 4) + '0');
+         str += (::i8)(((pch[i] & 0xf0) >> 4) + '0');
       else
-         str += (char)(((pch[i] & 0xf0) >> 4) + 'A' - 10);
+         str += (::i8)(((pch[i] & 0xf0) >> 4) + 'A' - 10);
       if(((pch[i] & 0x0f)) < 10)
-         str += (char)((pch[i] & 0x0f) + '0');
+         str += (::i8)((pch[i] & 0x0f) + '0');
       else
-         str += (char)((pch[i] & 0x0f) + 'A' - 10);
+         str += (::i8)((pch[i] & 0x0f) + 'A' - 10);
    }
 }
 
 void shared_memory::From(const ::scoped_string & scopedstr)
 {
-   char ch;
-   int iLen = strlen(psz);
+   ::i8 ch;
+   ::i32 iLen = strlen(psz);
    allocate(iLen / 2);
-   char * pch = (char *) get_data();
+   ::i8 * pch = (::i8 *) get_data();
    while(*psz != '\0')
    {
       ch = 0;
@@ -298,9 +298,9 @@ void shared_memory::ToAsc(string & str)
 {
    string strTo;
    To(strTo);
-   char ch;
-   int iLen = strTo.length() - 1;
-   for(int i = 0; i < iLen; i+=2)
+   ::i8 ch;
+   ::i32 iLen = strTo.length() - 1;
+   for(::i32 i = 0; i < iLen; i+=2)
    {
       if(strTo[i] <= '9')
          ch = (strTo[i] - '0') << 4;
@@ -319,7 +319,7 @@ void shared_memory::FromAsc(const ::scoped_string & scopedstr)
    string str;
    while(*psz)
    {
-      char ch = ((*psz & 0xf0) >> 4);
+      ::i8 ch = ((*psz & 0xf0) >> 4);
       if(ch < 10)
          ch += '0';
       else
@@ -350,7 +350,7 @@ void shared_memory::from_string(const ::scoped_string & scopedstr)
 
 void shared_memory::to_string(string & str)
 {
-   char * psz = str.get_buffer(this->get_size() + 1);
+   ::i8 * psz = str.get_buffer(this->get_size() + 1);
 
    ::memory_copy(psz, get_data(), this->get_size());
 

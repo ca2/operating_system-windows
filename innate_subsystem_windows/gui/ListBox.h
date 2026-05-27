@@ -38,21 +38,21 @@ namespace innate_subsystem_windows
    public:
       ListBox();
       ~ListBox()override ;
-      void addString(const char *str)override ;
-      void addString(const char *str, void *tag)override ;
-      ::string getItemText(int index)override ;
-      void setItemText(int index, const char *str)override ;
-      void insertString(int index, const char *str)override ;
-      void insertString(int index, const char *str, ::lparam data)override ;
-      void appendString(const char *str, ::lparam data)override ;
-      void setItemData(int index, ::lparam data)override ;
-      void removeString(int index)override ;
-      int getSelectedIndex()override ;
-      int getTopIndex()override ;
-      void setTopIndex(int index)override ;
-      void setSelectedIndex(int index)override ;
-      ::lparam getItemData(int index)override ;
-      int getCount()override ;
+      void addString(const ::i8 *str)override ;
+      void addString(const ::i8 *str, void *tag)override ;
+      ::string getItemText(::i32 index)override ;
+      void setItemText(::i32 index, const ::i8 *str)override ;
+      void insertString(::i32 index, const ::i8 *str)override ;
+      void insertString(::i32 index, const ::i8 *str, ::lparam data)override ;
+      void appendString(const ::i8 *str, ::lparam data)override ;
+      void setItemData(::i32 index, ::lparam data)override ;
+      void removeString(::i32 index)override ;
+      ::i32 getSelectedIndex()override ;
+      ::i32 getTopIndex()override ;
+      void setTopIndex(::i32 index)override ;
+      void setSelectedIndex(::i32 index)override ;
+      ::lparam getItemData(::i32 index)override ;
+      ::i32 getCount()override ;
       void clear()override ;
    };
 } // innate_subsystem_windows

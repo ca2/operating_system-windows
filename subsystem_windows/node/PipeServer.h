@@ -70,7 +70,7 @@ namespace subsystem_windows
       ::pointer < ::subsystem_windows::SecurityAttributes > m_psecurityattributes;
       ::pointer < ::subsystem_windows::File > m_pfileServerPipe;
       //HANDLE m_serverPipe;
-      unsigned int m_bufferSize;
+      ::u32 m_bufferSize;
 
       /**
        * Creates new pipe server ready to accept connections.
@@ -80,7 +80,7 @@ namespace subsystem_windows
        *
        * @fixme stub.
        */
-      // PipeServer(const ::scoped_string & scopedstrName, unsigned int bufferSize,
+      // PipeServer(const ::scoped_string & scopedstrName, ::u32 bufferSize,
       //            ::subsystem::SecurityAttributesInterface *secAttr = 0,
       //            DWORD milliseconds = INFINITE);
 
@@ -93,7 +93,7 @@ namespace subsystem_windows
       ~PipeServer() override;
 
 
-      void initialize_pipe_server(const ::scoped_string & scopedstrName, unsigned int bufferSize,
+      void initialize_pipe_server(const ::scoped_string & scopedstrName, ::u32 bufferSize,
            ::subsystem::SecurityAttributesInterface *secAttr = 0,
            const class ::time & timeOut = ::time::infinity()) override;
 

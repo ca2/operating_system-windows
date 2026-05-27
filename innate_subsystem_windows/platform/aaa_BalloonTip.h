@@ -51,8 +51,8 @@
 //       void getText(StringStorage* text) const;
 //       void getTitle(StringStorage* title) const;
 //
-//       void setIconType(int iconType);
-//       int getIconType() const;
+//       void setIconType(::i32 iconType);
+//       ::i32 getIconType() const;
 //
 //    protected:
 //       StringStorage m_text;

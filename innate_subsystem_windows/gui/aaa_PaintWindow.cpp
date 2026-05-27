@@ -50,8 +50,8 @@ namespace innate_subsystem_windows
       m_ppaintwindowCallback->onPaint(pdevicecontext, rectangle);
       }
 
-      bool PaintWindow::on_window_procedure(::lresult &lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
-      // bool PaintWindow::wndProc(unsigned int message, ::wparam wparam, ::lparam lparam)
+      bool PaintWindow::on_window_procedure(::lresult &lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
+      // bool PaintWindow::wndProc(::u32 message, ::wparam wparam, ::lparam lparam)
        {
           if (message == WM_PAINT) {
              construct_newø(m_pdevicecontext);

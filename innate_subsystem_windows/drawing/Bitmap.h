@@ -64,7 +64,7 @@ namespace innate_subsystem_windows
       // Returns bitmap width.
       i32_size getSize() const override;
       // Returns bitmap height.
-      //int getHeight() const;
+      //::i32 getHeight() const;
 
       void destroyGraphicsObject() override;
 

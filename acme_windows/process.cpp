@@ -15,14 +15,14 @@
 
 //typedef struct _PROCESS_BASIC_INFORMATION64
 //{
-//   unsigned long long  Reserved1;
-//   unsigned long long  PebBaseAddress;
-//   unsigned long long  Reserved2[2];
-//   unsigned long long  UniqueProcessId;
-//   unsigned long long  Reserved3;
+//   ::u64  Reserved1;
+//   ::u64  PebBaseAddress;
+//   ::u64  Reserved2[2];
+//   ::u64  UniqueProcessId;
+//   ::u64  Reserved3;
 //} PROCESS_BASIC_INFORMATION64;
 
-//typedef NTSTATUS(NTAPI *_NtQueryInformationProcess)(HANDLE ProcessHandle, unsigned int ProcessInformationClass, PVOID ProcessInformation, unsigned int ProcessInformationLength, PDWORD ReturnLength);
+//typedef NTSTATUS(NTAPI *_NtQueryInformationProcess)(HANDLE ProcessHandle, ::u32 ProcessInformationClass, PVOID ProcessInformation, ::u32 ProcessInformationLength, PDWORD ReturnLength);
 //
 //PPEB GetPebAddress(HANDLE handleProcess);
 //
@@ -67,7 +67,7 @@
 
 
 
-//string get_last_error_message(unsigned int NTStatusMessage);
+//string get_last_error_message(::u32 NTStatusMessage);
 //
 //PPEB GetPebAddress(HANDLE handleProcess)
 //{
@@ -76,7 +76,7 @@
 //   memory_set(&pbi, 0, sizeof(pbi));
 //   DWORD dwInLen = sizeof(pbi);
 //   DWORD dwOutLen = 0xffffffff;
-//   unsigned int dwStatus = NtQueryInformationProcess(handleProcess, ProcessBasicInformation, &pbi, dwInLen, &dwOutLen);
+//   ::u32 dwStatus = NtQueryInformationProcess(handleProcess, ProcessBasicInformation, &pbi, dwInLen, &dwOutLen);
 //   string strError = get_last_error_message(dwStatus);
 //   if ((dwStatus & 3) == 3)
 //   {
@@ -86,7 +86,7 @@
 //}
 
 
-//string get_last_error_message(unsigned int NTStatusMessage)
+//string get_last_error_message(::u32 NTStatusMessage)
 //{
 //
 //   return get_last_error_message(NTStatusMessage);

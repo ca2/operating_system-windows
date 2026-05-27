@@ -5,7 +5,7 @@
 #include "font.h"
 #include "icon.h"
 #include "pen.h"
-#include "device.h"
+#include "context.h"
 #include "graphics.h"
 //#include "acme/operating_system/windows/nano/user/user.h"
 //#include "acme/operating_system/windows/nano/user/window.h"
@@ -21,14 +21,14 @@ IMPLEMENT_FACTORY(nano_graphics_gdi)
 
 
    //pfactory->add_factory_item < ::windows::micro::window, ::acme::windowing::window >();
-   pfactory->add_factory_item < ::windows::nano::graphics::brush, ::nano::graphics::brush >();
-   pfactory->add_factory_item < ::windows::nano::graphics::font, ::nano::graphics::font >();
-   pfactory->add_factory_item < ::windows::nano::graphics::pen, ::nano::graphics::pen >();
-   pfactory->add_factory_item < ::windows::nano::graphics::icon, ::nano::graphics::icon >();
-   pfactory->add_factory_item < ::windows::nano::graphics::device, ::nano::graphics::device >();
+   pfactory->add_factory_item < ::nano_graphics_gdi::brush, ::nano::graphics::brush >();
+   pfactory->add_factory_item < ::nano_graphics_gdi::font, ::nano::graphics::font >();
+   pfactory->add_factory_item < ::nano_graphics_gdi::pen, ::nano::graphics::pen >();
+   pfactory->add_factory_item < ::nano_graphics_gdi::icon, ::nano::graphics::icon >();
+   pfactory->add_factory_item < ::nano_graphics_gdi::context, ::nano::graphics::context >();
 
 
-   pfactory->add_factory_item < ::windows::nano::graphics::graphics, ::nano::graphics::graphics >();
+   pfactory->add_factory_item < ::nano_graphics_gdi::graphics, ::nano::graphics::graphics >();
 
    //pfactory->add_factory_item < ::windows::micro::user, ::micro::user >();
    //pfactory->add_factory_item < ::windows::micro::user, ::micro::user >();

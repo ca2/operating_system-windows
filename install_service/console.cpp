@@ -12,7 +12,7 @@ void check_console() {
   /*
     If the process associated with the console window handle is the same as
     this process, we were not launched from an existing console.  The user
-    probably double-clicked our executable.
+    probably ::f64-clicked our executable.
   */
   if (GetCurrentProcessId() != pid) return;
 
@@ -21,7 +21,7 @@ void check_console() {
 }
 
 /* Helpers for drawing the banner. */
-static inline void block(unsigned int a, short x, short y, unsigned long n) {
+static inline void block(::u32 a, ::i16 x, ::i16 y, unsigned long n) {
   HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
   TCHAR s = _T(' ');
 
@@ -31,15 +31,15 @@ static inline void block(unsigned int a, short x, short y, unsigned long n) {
   FillConsoleOutputCharacter(h, s, n, c, &out);
 }
 
-static inline void R(short x, short y, unsigned long n) {
+static inline void R(::i16 x, ::i16 y, unsigned long n) {
   block(BACKGROUND_RED | BACKGROUND_INTENSITY, x, y, n);
 }
 
-static inline void r(short x, short y, unsigned long n) {
+static inline void r(::i16 x, ::i16 y, unsigned long n) {
   block(BACKGROUND_RED, x, y, n);
 }
 
-static inline void b(short x, short y, unsigned long n) {
+static inline void b(::i16 x, ::i16 y, unsigned long n) {
   block(0, x, y, n);
 }
 
@@ -68,7 +68,7 @@ void alloc_console(nssm_service_t *service) {
   SetConsoleTitle(title);
 
   /* Draw the NSSM logo on the console window. */
-  short y = 0;
+  ::i16 y = 0;
 
   b(0, y, 80);
   y++;

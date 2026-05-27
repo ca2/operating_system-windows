@@ -66,7 +66,7 @@ namespace multimedia
       }
 
 
-      void     out::out_open(thread * pthreadCallback, int iBufferCount, int iBufferSampleCount)
+      void     out::out_open(thread * pthreadCallback, ::i32 iBufferCount, ::i32 iBufferSampleCount)
       {
 
          synchronous_lock synchronouslock(synchronization());
@@ -149,7 +149,7 @@ namespace multimedia
          //   audiowave->m_uiWaveInDevice,
          //   wave_format(),
          //   get_os_int(),
-         //   (unsigned int) 0,
+         //   (::u32) 0,
          //   CALLBACK_THREAD))))
          //   goto Opened;
          //m_pwaveformat->nSamplesPerSec = 22050;
@@ -158,8 +158,8 @@ namespace multimedia
          //   &m_hwaveout,
          //   WAVE_MAPPER,
          //   ,
-         //   (unsigned int) get_os_int(),
-         //   (unsigned int) 0,
+         //   (::u32) get_os_int(),
+         //   (::u32) 0,
          //   CALLBACK_THREAD))))
          //   goto Opened;
          //m_pwaveformat->nSamplesPerSec = 11025;
@@ -168,8 +168,8 @@ namespace multimedia
          //   &m_hwaveout,
          //   WAVE_MAPPER,
          //   wave_format(),
-         //   (unsigned int) get_os_int(),
-         //   (unsigned int) 0,
+         //   (::u32) get_os_int(),
+         //   (::u32) 0,
          //   CALLBACK_THREAD))))
          //   goto Opened;
 
@@ -179,13 +179,13 @@ namespace multimedia
          //}
 
 //Opened:
-         unsigned int uiBufferSizeLog2;
-         unsigned int uiBufferSize;
-         unsigned int uiAnalysisSize;
-         unsigned int uiAllocationSize;
-         unsigned int uiInterestSize;
-         unsigned int uiSkippedSamplesCount;
-         unsigned int uiBufferCount = iBufferCount;
+         ::u32 uiBufferSizeLog2;
+         ::u32 uiBufferSize;
+         ::u32 uiAnalysisSize;
+         ::u32 uiAllocationSize;
+         ::u32 uiInterestSize;
+         ::u32 uiSkippedSamplesCount;
+         ::u32 uiBufferCount = iBufferCount;
 
          if(m_pwaveformat->nSamplesPerSec == 44100)
          {
@@ -244,7 +244,7 @@ namespace multimedia
             return error_failed;
          }
 
-         //int i, iSize;
+         //::i32 i, iSize;
          //iSize = out_get_buffer()->GetBufferCount();
          //for(i = 0; i < iSize; i++)
          //{
@@ -262,7 +262,7 @@ namespace multimedia
 
       }
 
-      void     out::out_open_ex(thread * pthreadCallback, int iBufferCount, int iBufferSampleCount, unsigned int uiSamplesPerSec, unsigned int uiChannelCount, unsigned int uiBitsPerSample)
+      void     out::out_open_ex(thread * pthreadCallback, ::i32 iBufferCount, ::i32 iBufferSampleCount, ::u32 uiSamplesPerSec, ::u32 uiChannelCount, ::u32 uiBitsPerSample)
       {
 
          synchronous_lock synchronouslock(synchronization());
@@ -353,7 +353,7 @@ namespace multimedia
          iBufferCount = 4;
          iBufferSampleCount = (1 << 10);
 
-         unsigned int uiBufferSize = iBufferSampleCount * m_pwaveformat->nChannels * 2;
+         ::u32 uiBufferSize = iBufferSampleCount * m_pwaveformat->nChannels * 2;
 
 
 
@@ -498,7 +498,7 @@ namespace multimedia
 
                memory_copy(lpvAudio1,out_get_buffer_data(i),dwBytesAudio1);
 
-               memory_copy(lpvAudio2,(unsigned char *)out_get_buffer_data(i) + dwBytesAudio1,dwBytesAudio2);
+               memory_copy(lpvAudio2,(::u8 *)out_get_buffer_data(i) + dwBytesAudio1,dwBytesAudio2);
 
             }
 
@@ -638,13 +638,13 @@ namespace multimedia
 
       /*::time out::GetPositionMillisForSynch()
       {
-         long long dwMillis = GetPositionMillis();
-         long long dwPosition = m_pprebuffer->m_position * 8;
+         ::i64 dwMillis = GetPositionMillis();
+         ::i64 dwPosition = m_pprebuffer->m_position * 8;
          dwPosition /= m_pwaveformat->wBitsPerSample;
          dwPosition *= 1000;
          dwPosition /= m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          if(m_pprebuffer != nullptr && m_pprebuffer->m_pdecoder != nullptr)
-            return dwMillis + dwPosition - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_millis(dwMillis + dwPosition) - (((long long) m_dwLostSampleCount) /  ((long long) m_pwaveformat->nSamplesPerSec));
+            return dwMillis + dwPosition - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_millis(dwMillis + dwPosition) - (((::i64) m_dwLostSampleCount) /  ((::i64) m_pwaveformat->nSamplesPerSec));
          else
             return dwMillis + dwPosition - ((m_dwLostSampleCount) * 1000 / m_pwaveformat->nSamplesPerSec);
       }*/
@@ -671,7 +671,7 @@ namespace multimedia
          //   {
          //      if (::success != mmr)
          //      {
-         //         information( "waveOutGetPosition() returned %lu", (unsigned int)mmr);
+         //         information( "waveOutGetPosition() returned %lu", (::u32)mmr);
          //         //      return MCIERR_DEVICE_NOT_READY;
          //         return 0;
          //      }
@@ -683,7 +683,7 @@ namespace multimedia
          //   }
          //   if(mmt.wType == TIME_BYTES)
          //   {
-         //      long long i = mmt.u.cb;
+         //      ::i64 i = mmt.u.cb;
          //      i *= 8 * 1000;
          //      i /= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          //      return i;
@@ -692,7 +692,7 @@ namespace multimedia
          //   else
          //   {
          //      //& ticka += mmt.u.ticks;
-         //      return (unsigned int) mmt.u.ms;
+         //      return (::u32) mmt.u.ms;
          //   }
          //}
          //else
@@ -732,7 +732,7 @@ namespace multimedia
          //      if (::success != mmr)
          //      {
 
-         //         information( "waveOutGetPosition() returned %lu", (unsigned int)mmr);
+         //         information( "waveOutGetPosition() returned %lu", (::u32)mmr);
 
          //         return 0;
 
@@ -745,14 +745,14 @@ namespace multimedia
          //   }
          //   if(mmt.wType == TIME_MS)
          //   {
-         //      ::time position = (unsigned int) mmt.u.ms;
+         //      ::time position = (::u32) mmt.u.ms;
          //      position *= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          //      position /= 8 * 1000;
          //      return position;
          //   }
          //   else
          //   {
-         //      return (unsigned int) mmt.u.cb;
+         //      return (::u32) mmt.u.cb;
          //   }
          //}
          //else
@@ -820,7 +820,7 @@ namespace multimedia
          return nullptr;
       }
 
-      //LPWAVEHDR out::wave_hdr(int iBuffer)
+      //LPWAVEHDR out::wave_hdr(::i32 iBuffer)
       //{
       //   return ::multimedia::directsound::get_os_data(out_get_buffer(), iBuffer);
       //}
@@ -831,9 +831,9 @@ namespace multimedia
       void out::out_run_step()
       {
 
-         int iPlay =  -1;
+         ::i32 iPlay =  -1;
 
-         int r = WaitForMultipleObjects((DWORD) m_haEvent.get_count(), m_haEvent.get_data(),false,INFINITE);
+         ::i32 r = WaitForMultipleObjects((DWORD) m_haEvent.get_count(), m_haEvent.get_data(),false,INFINITE);
 
          if(r >= WAIT_OBJECT_0 && r < WAIT_OBJECT_0 + MAXIMUM_WAIT_OBJECTS)
          {
@@ -849,7 +849,7 @@ namespace multimedia
          while(true)
          {
 
-            int iNext = m_iBuffer + 1;
+            ::i32 iNext = m_iBuffer + 1;
 
             if(iNext >= out_get_buffer()->GetBufferCount())
                iNext = 0;

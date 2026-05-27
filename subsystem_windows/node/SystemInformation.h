@@ -48,11 +48,11 @@ namespace subsystem_windows
 
       // return how many bits per pixel
       // for provided device
-      virtual int _getBitsPixel(HDC hdc);
+      virtual ::i32 _getBitsPixel(HDC hdc);
 
       // get the number of monitors that plugged
       // into video card
-      int getMonitorCount() override;
+      ::i32 getMonitorCount() override;
    };
 
 } // namespace subsystem_windows

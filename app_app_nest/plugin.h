@@ -1,7 +1,7 @@
 #pragma once
 
 
-int installer_start(const ::scoped_string & scopedstrVersion, const ::scoped_string & scopedstrId);
+::i32 installer_start(const ::scoped_string & scopedstrVersion, const ::scoped_string & scopedstrId);
 
 
 namespace npca2
@@ -35,7 +35,7 @@ namespace npca2
       virtual void start_ca2();
 
 
-      //int starter_start(const ::scoped_string & scopedstrId);
+      //::i32 starter_start(const ::scoped_string & scopedstrId);
 
       virtual bool initialize();
 

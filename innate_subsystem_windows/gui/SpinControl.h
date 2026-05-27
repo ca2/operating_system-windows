@@ -53,7 +53,7 @@ public:
    bool m_isAutoAccelerationEnabled;
    i32_array m_limitters;
    i32_array m_deltas;
-   int m_maxDelta;
+   ::i32 m_maxDelta;
 
 
 
@@ -61,9 +61,9 @@ public:
   ~SpinControl() override;
 
   void setBuddy(ControlInterface *buddyControl) override;
-  void setRange(short lower, short upper) override;
-  void setRange32(int lower, int upper) override;
-  void setAccel(unsigned int nSec, unsigned int nInc) override;
+  void setRange(::i16 lower, ::i16 upper) override;
+  void setRange32(::i32 lower, ::i32 upper) override;
+  void setAccel(::u32 nSec, ::u32 nInc) override;
 
   //
   // Auto acceleration methods
@@ -74,11 +74,11 @@ public:
   //
 
   //virtual void autoAccelerationHandler(LPNMUPDOWN message);
-   void autoAccelerationHandler(int & iPos, int & iDelta) override;
+   void autoAccelerationHandler(::i32 & iPos, ::i32 & iDelta) override;
   void enableAutoAcceleration(bool enabled) override;
   void setAutoAccelerationParams(const i32_array & limitters,
                                  const i32_array & deltas,
-                                 int maxDelta) override;
+                                 ::i32 maxDelta) override;
 
 
 

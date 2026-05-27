@@ -139,7 +139,7 @@ namespace subsystem_windows
          SetEvent(m_hStopWait);
       }
 
-      unsigned int Process::getExitCode()
+      ::u32 Process::getExitCode()
       {
          DWORD dwExitCode;
 

@@ -40,50 +40,50 @@
       {
       }
 
-      int ComboBox::addItem(const char *text)
+      ::i32 ComboBox::addItem(const ::i8 *text)
       {
          auto hwnd = ::as_HWND(operating_system_window());
          return ComboBox_AddString(hwnd, text);
       }
 
-      int ComboBox::addItem(const char *text, void *tag)
+      ::i32 ComboBox::addItem(const ::i8 *text, void *tag)
       {
-         int index = addItem(text);
+         ::i32 index = addItem(text);
          setItemData(index, tag);
          return index;
       }
 
-      void ComboBox::insertItem(int index, const char *text)
+      void ComboBox::insertItem(::i32 index, const ::i8 *text)
       {
          auto hwnd = ::as_HWND(operating_system_window());
          ComboBox_InsertString(hwnd, index, text);
       }
 
-      void ComboBox::insertItem(int index, const char *text, void *tag)
+      void ComboBox::insertItem(::i32 index, const ::i8 *text, void *tag)
       {
          insertItem(index, text);
          setItemData(index, tag);
       }
 
-      int ComboBox::getItemsCount()
+      ::i32 ComboBox::getItemsCount()
       {
          auto hwnd = ::as_HWND(operating_system_window());
          return ComboBox_GetCount(hwnd);
       }
 
-      void ComboBox::setItemData(int index, void *tag)
+      void ComboBox::setItemData(::i32 index, void *tag)
       {
          auto hwnd = ::as_HWND(operating_system_window());
          ComboBox_SetItemData(hwnd, index, (::lparam)tag);
       }
 
-      void *ComboBox::getItemData(int index)
+      void *ComboBox::getItemData(::i32 index)
       {
          auto hwnd = ::as_HWND(operating_system_window());
          return (void *)ComboBox_GetItemData(hwnd, index);
       }
 
-      ::string ComboBox::getItemText(int index)
+      ::string ComboBox::getItemText(::i32 index)
       {
 
          ::wstring wstr;
@@ -99,7 +99,7 @@
       }
 
 
-      int ComboBox::getSelectedItemIndex()
+      ::i32 ComboBox::getSelectedItemIndex()
       {
 
          auto hwnd = ::as_HWND(operating_system_window());
@@ -107,12 +107,12 @@
          return ComboBox_GetCurSel(::as_HWND(this->operating_system_window()));
       }
 
-      void ComboBox::setSelectedItem(int index)
+      void ComboBox::setSelectedItem(::i32 index)
       {
          ComboBox_SetCurSel(::as_HWND(this->operating_system_window()), index);
       }
 
-      void ComboBox::deleteItem(int index)
+      void ComboBox::deleteItem(::i32 index)
       {
          ComboBox_DeleteString(::as_HWND(this->operating_system_window()), index);
       }

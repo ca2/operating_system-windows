@@ -66,9 +66,9 @@ namespace innate_subsystem_windows
        * @param iconName icon name.
        * @return icon handle of 0 if cannot load icon.
        */
-      ::pointer < ::innate_subsystem::IconInterface > loadIconByIntResource(int iId) override;
+      ::pointer < ::innate_subsystem::IconInterface > loadIconByIntResource(::i32 iId) override;
 
-      ::pointer < ::innate_subsystem::IconInterface > loadIcon(const char* iconName) override;
+      ::pointer < ::innate_subsystem::IconInterface > loadIcon(const ::i8* iconName) override;
 
       // /**
       //  * Loads string from resources.
@@ -76,30 +76,30 @@ namespace innate_subsystem_windows
       //  * @param [out] string storage for string from resources.
       //  * @return true if string is loaded, false otherwise.
       //  */
-      bool loadString(unsigned int id, ::string & str) override;
-      // virtual ::string loadString(unsigned int id);
+      bool loadString(::u32 id, ::string & str) override;
+      // virtual ::string loadString(::u32 id);
 
       /**
        * Loads accelerator from resources.
        * @param [in] id identifier of accelerator in resource file.
        * @return handle of accelerator if it's loaded.
        */
-      //HACCEL loadAccelerator(unsigned int id);
-      void * loadAccelerator(unsigned int id) override;
+      //HACCEL loadAccelerator(::u32 id);
+      void * loadAccelerator(::u32 id) override;
 
       /**
        * Loads standart cursor.
        * @param [in] id identifier of accelerator in resource file.
        * @return handle of cursor if it's loaded.
        */
-      //HCURSOR loadStandardCursor(const char *id);
+      //HCURSOR loadStandardCursor(const ::i8 *id);
       /**
        * Loads cursor from resources.
        * @param [in] id identifier of accelerator in resource file.
        * @return handle of cursor if it's loaded.
        */
-      //HCURSOR loadCursor(unsigned int id);
-      virtual ::pointer < ::innate_subsystem::CursorInterface > loadCursor(unsigned int id) override;
+      //HCURSOR loadCursor(::u32 id);
+      virtual ::pointer < ::innate_subsystem::CursorInterface > loadCursor(::u32 id) override;
 
    //protected:
       /**

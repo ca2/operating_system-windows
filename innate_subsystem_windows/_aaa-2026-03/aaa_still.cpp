@@ -4,7 +4,7 @@
 #include "still.h"
 #include "acme/operating_system/windows/windowing.h"
 
-HFONT CreateScaledFont(HWND hWnd, int pointSize, int weight, const wchar_t *fontFamily)
+HFONT CreateScaledFont(HWND hWnd, ::i32 pointSize, ::i32 weight, const wchar_t *fontFamily)
 {
    // 1. Get the current DPI for the window
    UINT dpi = GetDpiForWindow(hWnd);
@@ -13,7 +13,7 @@ HFONT CreateScaledFont(HWND hWnd, int pointSize, int weight, const wchar_t *font
 
    // 2. Convert point size to logical height (scaled for DPI)
    // Formula: Height = -MulDiv(PointSize, DPI, 72)
-   int height = -MulDiv(pointSize, dpi, 72);
+   ::i32 height = -MulDiv(pointSize, dpi, 72);
 
    // 3. Create the font
    return CreateFont(height, // Height (DPI scaled)
@@ -236,7 +236,7 @@ namespace innate_ui_win32
       wstring wstr;
 
       // 2. Get the text from the control
-      int len = GetWindowTextLength(hStatic);
+      ::i32 len = GetWindowTextLength(hStatic);
       if (len > 0)
       {
 
@@ -265,9 +265,9 @@ namespace innate_ui_win32
 
       // 5. Account for Control Borders (DPI Scaled)
       // If the static has WS_BORDER or SS_SUNKEN, add scaled padding.
-      int padding = MulDiv(2, dpi, 96); // Add 2 pixels of padding scaled to DPI
-      int newWidth = (rect.right - rect.left) + padding;
-      int newHeight = (rect.bottom - rect.top) + padding;
+      ::i32 padding = MulDiv(2, dpi, 96); // Add 2 pixels of padding scaled to DPI
+      ::i32 newWidth = (rect.right - rect.left) + padding;
+      ::i32 newHeight = (rect.bottom - rect.top) + padding;
 
       // 6. Cleanup and Apply
       SelectObject(hdc, hOldFont);

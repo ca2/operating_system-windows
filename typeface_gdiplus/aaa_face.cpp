@@ -60,11 +60,11 @@ namespace typeface_gdiplus
       GLCheckError("");
       glBindBuffer(GL_ARRAY_BUFFER, m_FaceVBO);
       GLCheckError("");
-      glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+      glBufferData(GL_ARRAY_BUFFER, sizeof(::f32) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
       GLCheckError("");
       glEnableVertexAttribArray(0);
       GLCheckError("");
-      glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+      glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(::f32), 0);
       GLCheckError("");
       glBindBuffer(GL_ARRAY_BUFFER, 0);
       GLCheckError("");
@@ -73,12 +73,12 @@ namespace typeface_gdiplus
 
    }
 
-   void face::create_texture(::gpu::character& ch, const unsigned char* p)
+   void face::create_texture(::gpu::character& ch, const ::u8* p)
    {
 
       glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
       // generate texture
-         //unsigned int texture;
+         //::u32 texture;
       glGenTextures(1, &ch.TextureID);
       glBindTexture(GL_TEXTURE_2D, ch.TextureID);
       glTexImage2D(

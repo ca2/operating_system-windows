@@ -38,7 +38,7 @@ namespace innate_subsystem_windows
       {
       }
 
-      void TextBox::setCaretPos(int h, int v)
+      void TextBox::setCaretPos(::i32 h, ::i32 v)
       {
          SendMessage(::as_HWND(this->operating_system_window()), EM_LINESCROLL, h, v);
       }
@@ -53,21 +53,21 @@ namespace innate_subsystem_windows
          SendMessage(::as_HWND(this->operating_system_window()), EM_SETLIMITTEXT, n, 0);
       }
 
-      int TextBox::getCurrentLineIndex()
+      ::i32 TextBox::getCurrentLineIndex()
       {
-         return (int)SendMessage(::as_HWND(this->operating_system_window()), EM_LINEINDEX, -1, 0);
+         return (::i32)SendMessage(::as_HWND(this->operating_system_window()), EM_LINEINDEX, -1, 0);
       }
 
-      int TextBox::getLineCount()
+      ::i32 TextBox::getLineCount()
       {
-         return (int)SendMessage(::as_HWND(this->operating_system_window()), EM_GETLINECOUNT, 0, 0);
+         return (::i32)SendMessage(::as_HWND(this->operating_system_window()), EM_GETLINECOUNT, 0, 0);
       }
 
       //
       // FIXME: Unimplemented
       //
 
-      int TextBox::getCaretPos()
+      ::i32 TextBox::getCaretPos()
       {
          return 0;
       }

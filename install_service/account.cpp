@@ -5,7 +5,7 @@
 extern imports_t imports;
 
 /* Open Policy object. */
-int open_lsa_policy(LSA_HANDLE *policy) {
+::i32 open_lsa_policy(LSA_HANDLE *policy) {
   LSA_OBJECT_ATTRIBUTES attributes;
   ZeroMemory(&attributes, sizeof(attributes));
 
@@ -19,7 +19,7 @@ int open_lsa_policy(LSA_HANDLE *policy) {
 }
 
 /* Look up SID for an account. */
-int username_sid(const TCHAR *username, SID **sid, LSA_HANDLE *policy) {
+::i32 username_sid(const TCHAR *username, SID **sid, LSA_HANDLE *policy) {
   LSA_HANDLE handle;
   if (! policy) {
     policy = &handle;
@@ -64,12 +64,12 @@ int username_sid(const TCHAR *username, SID **sid, LSA_HANDLE *policy) {
   LSA_UNICODE_STRING lsa_username;
 #ifdef UNICODE
   lsa_username.Buffer = (wchar_t *) expanded;
-  lsa_username.Length = (unsigned short) _tcslen(expanded) * sizeof(TCHAR);
+  lsa_username.Length = (::u16) _tcslen(expanded) * sizeof(TCHAR);
   lsa_username.MaximumLength = lsa_username.Length + sizeof(TCHAR);
 #else
   size_t buflen;
   mbstowcs_s(&buflen, nullptr, 0, expanded, _TRUNCATE);
-  lsa_username.MaximumLength = (unsigned short) buflen * sizeof(wchar_t);
+  lsa_username.MaximumLength = (::u16) buflen * sizeof(wchar_t);
   lsa_username.Length = lsa_username.MaximumLength - sizeof(wchar_t);
   lsa_username.Buffer = (wchar_t *) HeapAlloc(GetProcessHeap(), 0, lsa_username.MaximumLength);
   if (lsa_username.Buffer) mbstowcs_s(&buflen, lsa_username.Buffer, lsa_username.MaximumLength, expanded, _TRUNCATE);
@@ -112,7 +112,7 @@ int username_sid(const TCHAR *username, SID **sid, LSA_HANDLE *policy) {
   }
 
   /* GetSidSubAuthority*() return pointers! */
-  unsigned char *n = GetSidSubAuthorityCount(trust->Sid);
+  ::u8 *n = GetSidSubAuthorityCount(trust->Sid);
 
   /* Convert translated SID to SID. */
   *sid = (SID *) HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, GetSidLengthRequired(*n + 1));
@@ -133,13 +133,13 @@ int username_sid(const TCHAR *username, SID **sid, LSA_HANDLE *policy) {
     return 9;
   }
 
-  for (unsigned char i = 0; i <= *n; i++) {
+  for (::u8 i = 0; i <= *n; i++) {
     unsigned long *sub = GetSidSubAuthority(*sid, i);
     if (i < *n) *sub = *GetSidSubAuthority(trust->Sid, i);
     else *sub = translated_sid->RelativeId;
   }
 
-  int ret = 0;
+  ::i32 ret = 0;
   if (translated_sid->Use == SidTypeWellKnownGroup && ! well_known_sid(*sid)) {
     print_message(stderr, NSSM_GUI_INVALID_USERNAME, username);
     ret = 10;
@@ -151,11 +151,11 @@ int username_sid(const TCHAR *username, SID **sid, LSA_HANDLE *policy) {
   return ret;
 }
 
-int username_sid(const TCHAR *username, SID **sid) {
+::i32 username_sid(const TCHAR *username, SID **sid) {
   return username_sid(username, sid, 0);
 }
 
-int canonicalise_username(const TCHAR *username, TCHAR **canon) {
+::i32 canonicalise_username(const TCHAR *username, TCHAR **canon) {
   LSA_HANDLE policy;
   if (open_lsa_policy(&policy)) return 1;
 
@@ -186,9 +186,9 @@ int canonicalise_username(const TCHAR *username, TCHAR **canon) {
   }
 
   /* Buffer is wchar_t but Length is in bytes. */
-  memory_transfer((char *) lsa_canon.Buffer, trust->Name.Buffer, trust->Name.Length);
-  memory_transfer((char *) lsa_canon.Buffer + trust->Name.Length, L"\\", sizeof(wchar_t));
-  memory_transfer((char *) lsa_canon.Buffer + trust->Name.Length + sizeof(wchar_t), translated_name->Name.Buffer, translated_name->Name.Length);
+  memory_transfer((::i8 *) lsa_canon.Buffer, trust->Name.Buffer, trust->Name.Length);
+  memory_transfer((::i8 *) lsa_canon.Buffer + trust->Name.Length, L"\\", sizeof(wchar_t));
+  memory_transfer((::i8 *) lsa_canon.Buffer + trust->Name.Length + sizeof(wchar_t), translated_name->Name.Buffer, translated_name->Name.Length);
 
 #ifdef UNICODE
   *canon = lsa_canon.Buffer;
@@ -213,7 +213,7 @@ int canonicalise_username(const TCHAR *username, TCHAR **canon) {
 }
 
 /* Do two usernames map_base to the same SID? */
-int username_equiv(const TCHAR *a, const TCHAR *b) {
+::i32 username_equiv(const TCHAR *a, const TCHAR *b) {
   SID *sid_a, *sid_b;
   if (username_sid(a, &sid_a)) return 0;
 
@@ -222,7 +222,7 @@ int username_equiv(const TCHAR *a, const TCHAR *b) {
     return 0;
   }
 
-  int ret = 0;
+  ::i32 ret = 0;
   if (EqualSid(sid_a, sid_b)) ret = 1;
 
   FreeSid(sid_a);
@@ -232,14 +232,14 @@ int username_equiv(const TCHAR *a, const TCHAR *b) {
 }
 
 /* Does the username represent the LocalSystem account? */
-int is_localsystem(const TCHAR *username) {
+::i32 is_localsystem(const TCHAR *username) {
   if (str_equiv(username, NSSM_LOCALSYSTEM_ACCOUNT)) return 1;
   if (! imports.IsWellKnownSid) return 0;
 
   SID *sid;
   if (username_sid(username, &sid)) return 0;
 
-  int ret = 0;
+  ::i32 ret = 0;
   if (imports.IsWellKnownSid(sid, WinLocalSystemSid)) ret = 1;
 
   FreeSid(sid);
@@ -271,7 +271,7 @@ const TCHAR *well_known_username(const TCHAR *username) {
   return well_known;
 }
 
-int grant_logon_as_service(const TCHAR *username) {
+::i32 grant_logon_as_service(const TCHAR *username) {
   if (! username) return 0;
 
   /* Open Policy object. */
@@ -301,7 +301,7 @@ int grant_logon_as_service(const TCHAR *username) {
   /* Check if the SID has the "Log on as a service" right. */
   LSA_UNICODE_STRING lsa_right;
   lsa_right.Buffer = NSSM_LOGON_AS_SERVICE_RIGHT;
-  lsa_right.Length = (unsigned short) wcslen(lsa_right.Buffer) * sizeof(wchar_t);
+  lsa_right.Length = (::u16) wcslen(lsa_right.Buffer) * sizeof(wchar_t);
   lsa_right.MaximumLength = lsa_right.Length + sizeof(wchar_t);
 
   LSA_UNICODE_STRING *rights;

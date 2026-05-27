@@ -83,9 +83,9 @@ IMPLEMENT_APPLICATION_FACTORY();
    //   GetModuleFileNameW(nullptr, pszModuleFilePath, MAX_PATH + 1);
 
 
-   //   unsigned int dw;
+   //   ::u32 dw;
 
-   //   unsigned int dwResSize = GetFileVersionInfoSizeW(
+   //   ::u32 dwResSize = GetFileVersionInfoSizeW(
    //                     pszModuleFilePath,
 
    //                     &dw);
@@ -106,11 +106,11 @@ IMPLEMENT_APPLICATION_FACTORY();
    //         memory.get_data()))
 
    //      {
-   //         unsigned int cbTranslate;
+   //         ::u32 cbTranslate;
    //         struct LANGANDCODEPAGE
    //         {
-   //            unsigned short wLanguage;
-   //            unsigned short wCodePage;
+   //            ::u16 wLanguage;
+   //            ::u16 wCodePage;
    //         } *pTranslate;
 
 
@@ -123,12 +123,12 @@ IMPLEMENT_APPLICATION_FACTORY();
 
    //         string strKey;
 
-   //         for( unsigned int u = 0; u < (cbTranslate/sizeof(struct LANGANDCODEPAGE)); u++ )
+   //         for( ::u32 u = 0; u < (cbTranslate/sizeof(struct LANGANDCODEPAGE)); u++ )
    //         {
 
-   //            char * psz;
+   //            ::i8 * psz;
 
-   //            unsigned int uSize;
+   //            ::u32 uSize;
 
    //            //strKey.Format(
    //            //"\\StringFileInfo\\%04x%04x\\FileDescription",
@@ -143,7 +143,7 @@ IMPLEMENT_APPLICATION_FACTORY();
 
    //            // Retrieve file description for language and code page "i".
    //            if (VerQueryValue(memory.get_data(),
-   //               (char *)(const ::string &)strKey,
+   //               (::i8 *)(const ::string &)strKey,
    //               (LPVOID*)&psz,
    //               &uiSize))
    //            {
@@ -257,7 +257,7 @@ pacmedir->system() / "config\\system\\audio.txt");
 
 
 //
-//void __node_init_main_data(::particle * pparticle, HINSTANCE hInstance, HINSTANCE hPrevInstance, char * pCmdLine, ::display edisplay)
+//void __node_init_main_data(::particle * pparticle, HINSTANCE hInstance, HINSTANCE hPrevInstance, ::i8 * pCmdLine, ::display edisplay)
 
 //{
 //

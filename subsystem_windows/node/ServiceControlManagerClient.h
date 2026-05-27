@@ -43,35 +43,35 @@ namespace subsystem_windows
    //   /**
    //    * Service already stopped and cannot be stopped.
    //    */
-   //   const static int ERROR_ALREADY_STOPPED = 0;
+   //   const static ::i32 ERROR_ALREADY_STOPPED = 0;
    //   /**
    //    * Timeout expired while waiting for service to stop.
    //    */
-   //   const static int ERROR_STOP_TIMEOUT = 1;
+   //   const static ::i32 ERROR_STOP_TIMEOUT = 1;
    //   /**
    //    * Service alreadying running and cannot be started.
    //    */
-   //   const static int ERROR_ALREADY_RUNNING = 2;
+   //   const static ::i32 ERROR_ALREADY_RUNNING = 2;
    //   /**
    //    * Timeout expired while waiting for service to start.
    //    */
-   //   const static int ERROR_START_TIMEOUT = 3;
+   //   const static ::i32 ERROR_START_TIMEOUT = 3;
    // public:
    //   /**
    //    * Creates new ServiceControlManagerClient exception.
    //    * @param scmErrCode service client manager client own error code,
    //    * see ServiceControlManagerClientException public constants for information.
    //    */
-   //   ServiceControlManagerClientException(int scmErrCode);
+   //   ServiceControlManagerClientException(::i32 scmErrCode);
    //   /**
    //    * Returns scm error code.
    //    */
-   //   int getServiceControlManagerErrorCode() const;
+   //   ::i32 getServiceControlManagerErrorCode() const;
    // private:
    //   /**
    //    * scm own error code.
    //    */
-   //   int m_iServiceControlManagerErrorCode;
+   //   ::i32 m_iServiceControlManagerErrorCode;
    // };
 
    /**
@@ -99,7 +99,7 @@ namespace subsystem_windows
       ~ServiceControlManagerClient() override;
 
 
-      void initialize_service_control_manager_client(unsigned int uDesiredAccess) override;
+      void initialize_service_control_manager_client(::u32 uDesiredAccess) override;
       /**
        * Registers new service in system.
        * @param name name of service.

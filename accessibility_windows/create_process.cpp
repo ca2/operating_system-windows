@@ -154,9 +154,9 @@
 //BOOL WaitReadFile(HANDLE hFile, LPVOID lpBuffer, LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped)
 //{
 //
-//   const int BUF_SIZE = 4096;
+//   const ::i32 BUF_SIZE = 4096;
 //
-//   char inBuffer[BUF_SIZE];
+//   ::i8 inBuffer[BUF_SIZE];
 //   DWORD nBytesToRead = BUF_SIZE;
 //   DWORD dwBytesRead = 0;
 //   DWORD dwFileSize = GetFileSize(hFile, NULL);
@@ -672,7 +672,7 @@ namespace acme_windows
 
 
             HANDLE hList[3];
-            int c = 0;
+            ::i32 c = 0;
             if (m_hErrWr)
                hList[c++] = m_hErrWr;
             if (m_hOutWr)
@@ -887,9 +887,9 @@ namespace acme_windows
 //   {
 //
 //
-//      const int BUF_SIZE = 4096;
+//      const ::i32 BUF_SIZE = 4096;
 //
-//      char inBuffer[BUF_SIZE];
+//      ::i8 inBuffer[BUF_SIZE];
 //      DWORD nBytesToRead = BUF_SIZE;
 //      DWORD dwBytesRead = 0;
 //      DWORD dwFileSize = GetFileSize(hFile, NULL);
@@ -1070,9 +1070,9 @@ namespace acme_windows
       }
 
 
-      char szOut[4096];
-      char szErr[4096];
-      char szIn[4096];
+      ::i8 szOut[4096];
+      ::i8 szErr[4096];
+      ::i8 szIn[4096];
       DWORD dwReadOut = 0;
       DWORD dwReadErr = 0;
       DWORD dwReadIn = 0;
@@ -1088,7 +1088,7 @@ namespace acme_windows
 
       string_array straOutput;
 
-      int iEmptyCycles = 0;
+      ::i32 iEmptyCycles = 0;
 
       while (!bFinished)
       {
@@ -1350,7 +1350,7 @@ namespace acme_windows
 
 
 
-                  char c = rec.Event.KeyEvent.uChar.AsciiChar;
+                  ::i8 c = rec.Event.KeyEvent.uChar.AsciiChar;
 
                   if (c != 0) {  // normal characters only
                      WriteFile(m_hInWr, &c, 1, &written, NULL);
@@ -1381,7 +1381,7 @@ namespace acme_windows
                //else
                //{
 
-               //   char ch;
+               //   ::i8 ch;
                //   while (kbhit())
                //   {
                //      if ((ch = _getch()) != 3)

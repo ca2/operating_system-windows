@@ -11,9 +11,9 @@
 ////#include "acme/exception/exception.h"
 
 
-int align_to_windows_draw_text_align(enum_align ealign);
+::i32 align_to_windows_draw_text_align(enum_align ealign);
 
-int draw_text_to_windows_draw_text(enum_draw_text edrawtext);
+::i32 draw_text_to_windows_draw_text(enum_draw_text edrawtext);
 
 
 namespace windows
@@ -86,11 +86,11 @@ namespace windows
 
             ::GetTextMetrics(m_hdc, &textmetricw);
 
-            int iAlign = align_to_windows_draw_text_align(ealign);
+            ::i32 iAlign = align_to_windows_draw_text_align(ealign);
 
-            int iFlag = draw_text_to_windows_draw_text(edrawtext);
+            ::i32 iFlag = draw_text_to_windows_draw_text(edrawtext);
 
-            ::DrawText(m_hdc, wstrMessage, (int)wstrMessage.length(), (LPRECT)&rectangleText, iAlign | iFlag);
+            ::DrawText(m_hdc, wstrMessage, (::i32)wstrMessage.length(), (LPRECT)&rectangleText, iAlign | iFlag);
 
          }
 
@@ -106,7 +106,7 @@ namespace windows
 
             ::SIZE size;
 
-            if (!::GetTextExtentPoint32W(m_hdc, wstr, (int)wstr.length(), &size))
+            if (!::GetTextExtentPoint32W(m_hdc, wstr, (::i32)wstr.length(), &size))
             {
 
                throw ::exception(error_failed);
@@ -150,10 +150,10 @@ namespace windows
 
 
 
-int align_to_windows_draw_text_align(enum_align ealign)
+::i32 align_to_windows_draw_text_align(enum_align ealign)
 {
 
-   int iAlign = 0;
+   ::i32 iAlign = 0;
 
    if (ealign & e_align_right)
    {
@@ -200,10 +200,10 @@ int align_to_windows_draw_text_align(enum_align ealign)
 
 
 
-int draw_text_to_windows_draw_text(enum_draw_text edrawtext)
+::i32 draw_text_to_windows_draw_text(enum_draw_text edrawtext)
 {
 
-   int iFlag = 0;
+   ::i32 iFlag = 0;
 
    if (edrawtext & e_draw_text_end_ellipsis)
    {

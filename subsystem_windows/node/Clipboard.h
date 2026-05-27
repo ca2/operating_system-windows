@@ -52,8 +52,8 @@ namespace subsystem_windows
          bool setString(const ::scoped_string & str) override;
 
          //protected:
-         static const char CR = '\r';
-         static const char LF = '\n';
+         static const ::i8 CR = '\r';
+         static const ::i8 LF = '\n';
 
          //protected:
          // function removed CR before LF

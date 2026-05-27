@@ -86,7 +86,7 @@ namespace windowing_win32
       bool _on_begin_draw(::graphics::buffer_item * pbufferitem) override;
 
 
-      bool create_window_device_context(const ::i32_size & size, int iStride = -1);
+      bool create_window_device_context(const ::i32_size & size, ::i32 iStride = -1);
       void destroy_window_device_context();
 
 

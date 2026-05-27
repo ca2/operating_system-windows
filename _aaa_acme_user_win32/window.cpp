@@ -1,6 +1,6 @@
 // Created by camilo on 2022-01-21 05:05 PM <3ThomasBorregaardSorensen
 #include "framework.h"
-#include "acme/nano/graphics/device.h"
+#include "acme/nano/graphics/context.h"
 #include "window.h"
 #include "user.h"
 #include "acme/parallelization/task.h"
@@ -232,7 +232,7 @@ namespace windows
          }
 
 
-         //void window::on_char(int iChar)
+         //void window::on_char(::i32 iChar)
          //{
 
          //   m_pacmeuserinteraction->on_char(iChar);
@@ -350,7 +350,7 @@ namespace windows
          //   //{
 
          //   //   HDC hdc = ::GetDC(m_hwnd);
-         //   //   int nHeight = -MulDiv(14, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+         //   //   ::i32 nHeight = -MulDiv(14, GetDeviceCaps(hdc, LOGPIXELSY), 72);
          //   //   m_hfont = ::CreateFontW(nHeight, 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
          //   //                           CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, FF_SWISS, L"Segoe UI");
          //   //   ::ReleaseDC(m_hwnd, hdc);
@@ -393,10 +393,10 @@ namespace windows
          //}
 
 
-         //::atom window::hit_test(int x, int y)
+         //::atom window::hit_test(::i32 x, ::i32 y)
          //{
          //
-         //   for (int i = 0; i < m_iButtonCount; i++)
+         //   for (::i32 i = 0; i < m_iButtonCount; i++)
          //   {
          //      if (m_buttona[i].m_rectangle.contains(i32_point(x, y)))
          //      {
@@ -738,7 +738,7 @@ namespace windows
                if (pelemental)
                {
 
-                  pelemental->on_char((int)wparam);
+                  pelemental->on_char((::i32)wparam);
 
                }
                return 0;

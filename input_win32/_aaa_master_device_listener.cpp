@@ -87,26 +87,26 @@ namespace windowing_win32
    //   //msgCount++;
    //   //StringCchPrintf(
    //      //strBuff, 256,
-   //     // TEXT("Message %d: DBT_DEVICEARRIVAL\n"), (int)msgCount);
+   //     // TEXT("Message %d: DBT_DEVICEARRIVAL\n"), (::i32)msgCount);
    //   break;
    //case DBT_DEVICEREMOVECOMPLETE:
    //   //msgCount++;
    //   //StringCchPrintf(
    //   //   strBuff, 256,
-   //   //   TEXT("Message %d: DBT_DEVICEREMOVECOMPLETE\n"), (int)msgCount);
+   //   //   TEXT("Message %d: DBT_DEVICEREMOVECOMPLETE\n"), (::i32)msgCount);
    //   break;
    //case DBT_DEVNODES_CHANGED:
    //   //msgCount++;
    //   //StringCchPrintf(
    //   //   strBuff, 256,
-   //   //   TEXT("Message %d: DBT_DEVNODES_CHANGED\n"), (int)msgCount);
+   //   //   TEXT("Message %d: DBT_DEVNODES_CHANGED\n"), (::i32)msgCount);
    //   break;
    //default:
    //   //msgCount++;
    //   //StringCchPrintf(
    //   //   strBuff, 256,
    //   //   TEXT("Message %d: WM_DEVICECHANGE message received, value %d unhandled.\n"),
-   //   //   (int)msgCount, wParam);
+   //   //   (::i32)msgCount, wParam);
    //   break;
    }
    //OutputMessage(hEditWnd, wParam, (LPARAM)strBuff);

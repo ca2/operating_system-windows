@@ -148,9 +148,9 @@ namespace subsystem_windows
 // NOTE: In non-Unicode version, conversion correctness may depend on current
 //       input language. We should always use Unicode in all programs.
 #ifdef _UNICODE
-      const unsigned int CF_TCTEXT = CF_UNICODETEXT;
+      const ::u32 CF_TCTEXT = CF_UNICODETEXT;
 #else
-      const unsigned int CF_TCTEXT = CF_TEXT;
+      const ::u32 CF_TCTEXT = CF_TEXT;
 #endif
 
       clipDest.clear();
@@ -167,7 +167,7 @@ namespace subsystem_windows
       if (hglb != NULL)
       {
          
-         auto psz = (char *)GlobalLock(hglb);
+         auto psz = (::i8 *)GlobalLock(hglb);
 
          if (psz != 0)
          {
@@ -185,10 +185,10 @@ namespace subsystem_windows
    }
 
 
-   bool Clipboard2::on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool Clipboard2::on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
       
-      int fake = 3;
+      ::i32 fake = 3;
 
       switch (message)
       {
@@ -347,7 +347,7 @@ namespace subsystem_windows
 
    //   auto destLen = sourceLen + lfCount;
    //   auto destText = dest.get_buffer(destLen);
-   //   int j = 0;
+   //   ::i32 j = 0;
    //   for (character_count i = 0; i < sourceLen; i++)
    //   {
    //      if (scopedstrSource[i] == 0x0a)

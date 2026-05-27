@@ -34,25 +34,25 @@
 
 HKEY open_registry(const TCHAR *, const TCHAR *, REGSAM sam);
 HKEY open_registry(const TCHAR *, REGSAM sam);
-int create_messages();
-int create_parameters(nssm_service_t *, bool);
-int create_exit_action(TCHAR *, const TCHAR *, bool);
-int get_environment(TCHAR *, HKEY, TCHAR *, TCHAR **, unsigned long *);
-int get_string(HKEY, TCHAR *, TCHAR *, unsigned long, bool, bool, bool);
-int get_string(HKEY, TCHAR *, TCHAR *, unsigned long, bool);
-int expand_parameter(HKEY, TCHAR *, TCHAR *, unsigned long, bool, bool);
-int expand_parameter(HKEY, TCHAR *, TCHAR *, unsigned long, bool);
-int set_string(HKEY, TCHAR *, TCHAR *, bool);
-int set_string(HKEY, TCHAR *, TCHAR *);
-int set_expand_string(HKEY, TCHAR *, TCHAR *);
-int set_number(HKEY, TCHAR *, unsigned long);
-int get_number(HKEY, TCHAR *, unsigned long *, bool);
-int get_number(HKEY, TCHAR *, unsigned long *);
-int format_double_null(TCHAR *, unsigned long, TCHAR **, unsigned long *);
-int unformat_double_null(TCHAR *, unsigned long, TCHAR **, unsigned long *);
+::i32 create_messages();
+::i32 create_parameters(nssm_service_t *, bool);
+::i32 create_exit_action(TCHAR *, const TCHAR *, bool);
+::i32 get_environment(TCHAR *, HKEY, TCHAR *, TCHAR **, unsigned long *);
+::i32 get_string(HKEY, TCHAR *, TCHAR *, unsigned long, bool, bool, bool);
+::i32 get_string(HKEY, TCHAR *, TCHAR *, unsigned long, bool);
+::i32 expand_parameter(HKEY, TCHAR *, TCHAR *, unsigned long, bool, bool);
+::i32 expand_parameter(HKEY, TCHAR *, TCHAR *, unsigned long, bool);
+::i32 set_string(HKEY, TCHAR *, TCHAR *, bool);
+::i32 set_string(HKEY, TCHAR *, TCHAR *);
+::i32 set_expand_string(HKEY, TCHAR *, TCHAR *);
+::i32 set_number(HKEY, TCHAR *, unsigned long);
+::i32 get_number(HKEY, TCHAR *, unsigned long *, bool);
+::i32 get_number(HKEY, TCHAR *, unsigned long *);
+::i32 format_f64_null(TCHAR *, unsigned long, TCHAR **, unsigned long *);
+::i32 unformat_f64_null(TCHAR *, unsigned long, TCHAR **, unsigned long *);
 void override_::times(TCHAR *, HKEY, TCHAR *, unsigned long *, unsigned long, unsigned long);
-int get_io_parameters(nssm_service_t *, HKEY);
-int get_parameters(nssm_service_t *, STARTUPINFO *);
-int get_exit_action(const TCHAR *, unsigned long *, TCHAR *, bool *);
+::i32 get_io_parameters(nssm_service_t *, HKEY);
+::i32 get_parameters(nssm_service_t *, STARTUPINFO *);
+::i32 get_exit_action(const TCHAR *, unsigned long *, TCHAR *, bool *);
 
 #endif

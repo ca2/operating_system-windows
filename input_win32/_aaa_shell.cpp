@@ -36,10 +36,10 @@ bool IsDibSection(HBITMAP bmp)
    bool Result = true; //assume that it is a DIBSECTION.
 
    DIBSECTION ds; //initialize everything to zeros
-   //int res ;
+   //::i32 res ;
 
    //Try to decode hbitmap as a DIBSECTION
-   int res = GetObject(bmp, sizeof(ds), &ds);
+   ::i32 res = GetObject(bmp, sizeof(ds), &ds);
    if (res == 0)
       return false;
 
@@ -73,11 +73,11 @@ bool IsDibSection(HBITMAP bmp)
 //
 //   ::GetObject(hbitmap, sizeof(bitmap), &bitmap);
 //
-//   int w = bitmap.bmWidth;
-//   int h = bitmap.bmHeight;
+//   ::i32 w = bitmap.bmWidth;
+//   ::i32 h = bitmap.bmHeight;
 //
 //   //   HDC hMemDC;
-//   unsigned int dwWidth, dwHeight;
+//   ::u32 dwWidth, dwHeight;
 //   BITMAPV5HEADER bi;
 //   // HBITMAP hOldBitmap;
 //   HBITMAP hBitmap;
@@ -91,7 +91,7 @@ bool IsDibSection(HBITMAP bmp)
 //   ZeroMemory(&bi, sizeof(BITMAPV5HEADER));
 //   bi.bV5Size = sizeof(BITMAPV5HEADER);
 //   bi.bV5Width = dwWidth;
-//   bi.bV5Height = -(int)dwHeight;
+//   bi.bV5Height = -(::i32)dwHeight;
 //   bi.bV5Planes = 1;
 //   bi.bV5BitCount = 32;
 //   bi.bV5Compression = BI_BITFIELDS;
@@ -102,13 +102,13 @@ bool IsDibSection(HBITMAP bmp)
 //   bi.bV5BlueMask = 0x000000FF;
 //   bi.bV5AlphaMask = 0xFF000000;
 //
-//   int iStride = w * 4;
+//   ::i32 iStride = w * 4;
 //
 //   HDC hdc;
 //   hdc = GetDC(nullptr);
 //
 //   // Create the DIB section with an alpha channel.
-//   hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (unsigned int)0);
+//   hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (::u32)0);
 //
 //
 //   HDC sourceHdc = ::CreateCompatibleDC(hdc);
@@ -143,7 +143,7 @@ bool IsDibSection(HBITMAP bmp)
 //   // Set the alpha values for each pixel in the cursor so that
 //   // the complete cursor is semi-transparent.
 //
-//   int iStrideDst = dwWidth * sizeof(::image32_t);
+//   ::i32 iStrideDst = dwWidth * sizeof(::image32_t);
 //
 //   ::copy_image32(pimage->get_data(), pimage->width(), pimage->height(), pimage->scan_size(), (const image32_t *) pBits, iStride);
 //
@@ -167,12 +167,12 @@ bool IsDibSection(HBITMAP bmp)
          && ds.dsBmih.biCompression == 0)
       {
 
-         int w = ds.dsBmih.biWidth;
-         int h = ds.dsBmih.biHeight;
+         ::i32 w = ds.dsBmih.biWidth;
+         ::i32 h = ds.dsBmih.biHeight;
 
          auto pBits = ds.dsBm.bmBits;
          auto pimage = pparticle->image()->create_image({ w, h });
-         int iStride = ds.dsBmih.biSizeImage / abs(h );
+         ::i32 iStride = ds.dsBmih.biSizeImage / abs(h );
 
          if (h < 0)
          {
@@ -235,7 +235,7 @@ bool IsDibSection(HBITMAP bmp)
 
 }
 
-//CLASS_DECL_AURA HICON ExtractResourceIcon(const ::scoped_string & scopedstrPath, int & cx, int & cy, int iIcon);
+//CLASS_DECL_AURA HICON ExtractResourceIcon(const ::scoped_string & scopedstrPath, ::i32 & cx, ::i32 & cy, ::i32 iIcon);
 
 
 namespace windowing_win32
@@ -289,7 +289,7 @@ namespace windowing_win32
    }
 
 
-   //      int shell::thread::get_image_by_file_extension(oswindow image_key & imagekey, ::color::color colorBackground)
+   //      ::i32 shell::thread::get_image_by_file_extension(oswindow image_key & imagekey, ::color::color colorBackground)
    //      {
    //
    //#ifdef WINDOWS_DESKTOP
@@ -367,7 +367,7 @@ namespace windowing_win32
 
                   HBITMAP hbitmap = nullptr;
 
-                  int iSize = m_iaSize[i];
+                  ::i32 iSize = m_iaSize[i];
 
                   HRESULT hrThumbnail = pthumbnailprovider->GetThumbnail(iSize, &hbitmap, &alphatype);
 
@@ -388,7 +388,7 @@ namespace windowing_win32
                      if(SUCCEEDED(hr))
                      {
 
-                        int iSuccessCount = 0;
+                        ::i32 iSuccessCount = 0;
 
                         HBITMAP hbitmap = nullptr;
 
@@ -433,7 +433,7 @@ namespace windowing_win32
 
                   ::image::image_source imagesource(pimage);
 
-                  ::image::image_drawing_options imagedrawingoptions(::double_rectangle(), e_placement_aspect_fit);
+                  ::image::image_drawing_options imagedrawingoptions(::f64_rectangle(), e_placement_aspect_fit);
 
                   set_image(getfileimage.m_iImage, iSize, { imagedrawingoptions, imagesource });
 
@@ -524,7 +524,7 @@ namespace windowing_win32
 
 
 
-      int iType;
+      ::i32 iType;
 
       switch (getfileimage.m_imagekey.m_eicon)
       {
@@ -616,7 +616,7 @@ namespace windowing_win32
       if (SUCCEEDED(hrShellIcon) && pshellicon)
       {
 
-         int iIconIndex = -1;
+         ::i32 iIconIndex = -1;
 
          HRESULT hrGetIconOf = pshellicon->GetIconOf(getfileimage.m_itemidlistChild, 0, &iIconIndex);
 
@@ -661,7 +661,7 @@ namespace windowing_win32
 
       //   getfileimage.m_iImage = _reserve_image(imagekey);
 
-      //   int iSuccessCount = 0;
+      //   ::i32 iSuccessCount = 0;
 
       //   for (auto & iSize : m_iaSize)
       //   {
@@ -712,7 +712,7 @@ namespace windowing_win32
          //if (pioverlay)
          //{
 
-         //   int iIndex = 0;
+         //   ::i32 iIndex = 0;
 
          //   DWORD dwFlags = 0;
 
@@ -841,14 +841,14 @@ namespace windowing_win32
 
       }
 
-      unsigned int uExtractIconLocationFlags = 0;
+      ::u32 uExtractIconLocationFlags = 0;
 
       string strIconLocation;
 
       if(piextracticon)
       {
 
-         int iIcon = 0;
+         ::i32 iIcon = 0;
 
          if (SUCCEEDED(hrIconLocation = piextracticon->GetIconLocation(
             iType,
@@ -1212,7 +1212,7 @@ namespace windowing_win32
    //{
    //   LPITEMIDLIST ppidl;
 
-   //   int csidla[] =
+   //   ::i32 csidla[] =
    //   {
    //      CSIDL_DESKTOP,
    //      CSIDL_DRIVES,
@@ -1223,7 +1223,7 @@ namespace windowing_win32
    //      -1,
    //   };
 
-   //   int * pcsidl = csidla;
+   //   ::i32 * pcsidl = csidla;
 
    //   while (*pcsidl != -1)
    //   {
@@ -1316,7 +1316,7 @@ namespace windowing_win32
    }
 
 
-   //int shell::_get_file_image(const image_key & key)
+   //::i32 shell::_get_file_image(const image_key & key)
    bool shell::_get_file_image(::user::shell::_get_file_image_ & getfileimage)
    {
 
@@ -1422,7 +1422,7 @@ namespace windowing_win32
                if (SUCCEEDED(hrFolderDefinition))
                {
 
-                  int & iImage = m_imagemap[getfileimage.m_imagekey];
+                  ::i32 & iImage = m_imagemap[getfileimage.m_imagekey];
 
                   if (iImage >= 0)
                   {
@@ -1533,7 +1533,7 @@ namespace windowing_win32
 
       //   string strProtocol = imagekey.m_strPath.left(maximum(iFind, iFind2));
 
-      //   int i = 0;
+      //   ::i32 i = 0;
 
       //   while (i < strProtocol.length() && character_isalnum(strProtocol[i]))
       //   {
@@ -1650,7 +1650,7 @@ namespace windowing_win32
    }
 
 
-   //int _017ItemIDListGetLen(LPITEMIDLIST piidl)
+   //::i32 _017ItemIDListGetLen(LPITEMIDLIST piidl)
 
    //{
    //   if (piidl == nullptr)
@@ -1661,7 +1661,7 @@ namespace windowing_win32
    //   LPSHITEMID  pshiidLast = nullptr;
 
    //   USHORT cb;
-   //   int iLen = 0;
+   //   ::i32 iLen = 0;
    //   while (true)
    //   {
    //      cb = pshiid->cb;
@@ -1671,7 +1671,7 @@ namespace windowing_win32
    //         break;
    //      pshiidLast = lpshiid;
 
-   //      pshiid = (LPSHITEMID)(((unsigned char *)lpshiid) + cb);
+   //      pshiid = (LPSHITEMID)(((::u8 *)lpshiid) + cb);
 
 
    //   }
@@ -1755,7 +1755,7 @@ namespace windowing_win32
    }
 
 
-   void shell::add_system_icon(int iIcon, _get_file_image_ & getfileimage)
+   void shell::add_system_icon(::i32 iIcon, _get_file_image_ & getfileimage)
    {
 
       synchronous_lock synchronouslock(synchronization());
@@ -1826,7 +1826,7 @@ namespace windowing_win32
    }
 
 
-   void shell::add_icon(int iSize, HICON hicon, _get_file_image_ & getfileimage)
+   void shell::add_icon(::i32 iSize, HICON hicon, _get_file_image_ & getfileimage)
    {
 
       synchronous_lock synchronouslock(m_pimagelist[iSize]->synchronization());
@@ -1868,7 +1868,7 @@ namespace windowing_win32
    }
 
 
-   void shell::add_system_icon(int iSize, int iIcon, _get_file_image_ & getfileimage)
+   void shell::add_system_icon(::i32 iSize, ::i32 iIcon, _get_file_image_ & getfileimage)
    {
 
       bool bUsed = false;
@@ -1901,7 +1901,7 @@ namespace windowing_win32
    }
 
 
-   void shell::add_system_icon(int iSize, IImageList * pil, int iIcon, _get_file_image_ & getfileimage)
+   void shell::add_system_icon(::i32 iSize, IImageList * pil, ::i32 iIcon, _get_file_image_ & getfileimage)
    {
 
       if (pil != nullptr)
@@ -1973,7 +1973,7 @@ namespace windowing_win32
          for (auto iSize : iaSize)
          {
 
-            int iSizeOut = iSize;
+            ::i32 iSizeOut = iSize;
 
             HICON hicon = pnode->extract_resource_icon(strIconLocation, iSizeOut, iSizeOut, getfileimage.m_imagekey.m_iIcon);
 

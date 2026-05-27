@@ -70,11 +70,11 @@
 //   out->format("{} ({})", specification, sysErrText);
 // }
 //
-// bool Environment::getSpecialFolderPath(int specialFolderId, ::string & out)
+// bool Environment::getSpecialFolderPath(::i32 specialFolderId, ::string & out)
 // {
 //   _ASSERT(out != NULL);
 //
-//   int csidl = 0;
+//   ::i32 csidl = 0;
 //
 //   switch (specialFolderId) {
 //   case APPLICATION_DATA_SPECIAL_FOLDER:
@@ -124,7 +124,7 @@
 //   return true;
 // } // void
 //
-// bool Environment::isItTheSamePathAsCurrent(unsigned int pId)
+// bool Environment::isItTheSamePathAsCurrent(::u32 pId)
 // {
 //   ::string currModulePath, testedModulePath;
 //   ProcessHandle pHandle;
@@ -262,7 +262,7 @@
 //     if (dwmIsEnabledResult != S_OK) {
 //       ::string errMess;
 //       errMess.formatf("The DwmIsCompositionEnabled() error code is {}",
-//                      (int)dwmIsEnabledResult);
+//                      (::i32)dwmIsEnabledResult);
 //       throw ::subsystem::Exception("");
 //     }
 //     return result != FALSE;

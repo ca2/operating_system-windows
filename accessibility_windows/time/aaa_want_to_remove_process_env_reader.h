@@ -31,7 +31,7 @@ inline void SAFE_ARRAY_CLEANUP(void* pData)
 struct _ENVSTRING_t
 {
    const ::wide_character * pData;
-   int nSize;
+   ::i32 nSize;
 
    _ENVSTRING_t() // Ctor of structure
    {
@@ -76,26 +76,26 @@ public:
 
    /* Process helper functions */
    static BOOL ReadEnvironmentBlock(HANDLE hProcess,_ENVSTRING_t& stEnvData);
-   static HANDLE OpenProcessToRead(unsigned int dwPID);
+   static HANDLE OpenProcessToRead(::u32 dwPID);
    static void ReleaseHandle(HANDLE hHandle);
-   static BOOL HasReadAccess(HANDLE hProcess,void* pAddress,int& nSize);
+   static BOOL HasReadAccess(HANDLE hProcess,void* pAddress,::i32& nSize);
    static void EnumProcessInfo(ProcessInfoArray& arrProcessInfo);
    static string GetProcessNameFromHandle(HANDLE hProcess);
-   static string GetProcessNameFromID(unsigned int dwPID);
+   static string GetProcessNameFromID(::u32 dwPID);
 
    /* GDI helper functions */
    static void LoadIconFromProcess(HANDLE hProcess,HICON& hIconSmall,HICON& hIconLarge);
 
    /* String helper functions */
-   static void ConvertUnicodeToMBCS(const ::wide_character * pStringToConvert,int nLen,string& csMBCSStr);
+   static void ConvertUnicodeToMBCS(const ::wide_character * pStringToConvert,::i32 nLen,string& csMBCSStr);
 
-   static void ParseEnvironmentStrings(const ::wide_character * pStringToConvert,int nLen,string_array_base& EnvStrArr);
+   static void ParseEnvironmentStrings(const ::wide_character * pStringToConvert,::i32 nLen,string_array_base& EnvStrArr);
 
    static void SeparateVariablesAndValues(const string_array_base& EnvStrArray,EnvVarValArray& varValArr);
 
    /* Export functions */
    //   static void ExportEnvStrings(const string_array_base& csArrEnvStr,COPY_DEST_e Dest,HWND hClipboardOwner);
-   static void UpdateProcessMiscInfo(HANDLE hProcess,int nItemSelected);
+   static void UpdateProcessMiscInfo(HANDLE hProcess,::i32 nItemSelected);
 };
 
 

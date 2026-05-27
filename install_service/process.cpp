@@ -2,7 +2,7 @@
 
 extern imports_t imports;
 
-int get_process_creation_time(HANDLE process_handle, FILETIME *ft) {
+::i32 get_process_creation_time(HANDLE process_handle, FILETIME *ft) {
   FILETIME creation_time, exit_time, kernel_time, user_time;
 
   if (! GetProcessTimes(process_handle, &creation_time, &exit_time, &kernel_time, &user_time)) {
@@ -15,7 +15,7 @@ int get_process_creation_time(HANDLE process_handle, FILETIME *ft) {
   return 0;
 }
 
-int get_process_exit_time(HANDLE process_handle, FILETIME *ft) {
+::i32 get_process_exit_time(HANDLE process_handle, FILETIME *ft) {
   FILETIME creation_time, exit_time, kernel_time, user_time;
 
   if (! GetProcessTimes(process_handle, &creation_time, &exit_time, &kernel_time, &user_time)) {
@@ -29,7 +29,7 @@ int get_process_exit_time(HANDLE process_handle, FILETIME *ft) {
   return 0;
 }
 
-int check_parent(nssm_service_t *service, PROCESSENTRY32 *pe, unsigned long ppid) {
+::i32 check_parent(nssm_service_t *service, PROCESSENTRY32 *pe, unsigned long ppid) {
   /* Check parent process ID matches. */
   if (pe->th32ParentProcessID != ppid) return 1;
 
@@ -65,7 +65,7 @@ int check_parent(nssm_service_t *service, PROCESSENTRY32 *pe, unsigned long ppid
 }
 
 /* Send some window messages and hope the window respects one or more. */
-int CALLBACK kill_window(HWND window, LPARAM arg) {
+::i32 CALLBACK kill_window(HWND window, LPARAM arg) {
   kill_t *k = (kill_t *) arg;
 
   unsigned long pid;
@@ -91,8 +91,8 @@ int CALLBACK kill_window(HWND window, LPARAM arg) {
   processes so this function returns only true if at least one thread was
   successfully prodded.
 */
-int kill_threads(TCHAR *service_name, kill_t *k) {
-  int ret = 0;
+::i32 kill_threads(TCHAR *service_name, kill_t *k) {
+  ::i32 ret = 0;
 
   /* Get a snapshot of all threads in the system. */
   HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
@@ -137,7 +137,7 @@ int kill_threads(TCHAR *service_name, kill_t *k) {
 }
 
 /* Give the process a chance to die gracefully. */
-int kill_process(nssm_service_t *service, HANDLE process_handle, unsigned long pid, unsigned long exitcode) {
+::i32 kill_process(nssm_service_t *service, HANDLE process_handle, unsigned long pid, unsigned long exitcode) {
   /* Shouldn't happen. */
   if (! service) return 1;
   if (! pid) return 1;
@@ -187,7 +187,7 @@ int kill_process(nssm_service_t *service, HANDLE process_handle, unsigned long p
 }
 
 /* Simulate a Control-C happening to our console (shared with the app). */
-int kill_console(nssm_service_t *service, kill_t *k) {
+::i32 kill_console(nssm_service_t *service, kill_t *k) {
   unsigned long ret;
 
   if (! service) return 1;

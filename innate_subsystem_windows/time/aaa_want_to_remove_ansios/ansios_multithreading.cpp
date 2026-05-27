@@ -5,17 +5,17 @@ CLASS_DECL_ACME void thread_get_os_priority(int32_t * piOsPolicy, sched_param * 
 
 CLASS_DECL_ACME void process_get_os_priority(int32_t * piOsPolicy, sched_param * pparam, int32_t iCa2Priority);
 
-CLASS_DECL_ACME int32_t thread_get_scheduling_priority(int iOsPolicy, const sched_param * pparam);
+CLASS_DECL_ACME int32_t thread_get_scheduling_priority(::i32 iOsPolicy, const sched_param * pparam);
 
-CLASS_DECL_ACME int32_t process_get_scheduling_priority(int iOsPolicy, const sched_param * pparam);
+CLASS_DECL_ACME int32_t process_get_scheduling_priority(::i32 iOsPolicy, const sched_param * pparam);
 
 
-unsigned int MsgWaitForMultipleObjectsEx(unsigned int dwSize, sync_object * * pobjectptra, unsigned int tickTimeout, unsigned int dwWakeMask, unsigned int dwFlags)
+::u32 MsgWaitForMultipleObjectsEx(::u32 dwSize, sync_object * * pobjectptra, ::u32 tickTimeout, ::u32 dwWakeMask, ::u32 dwFlags)
 {
 
-   unsigned int start = 0;
+   ::u32 start = 0;
 
-   if(tickTimeout != (unsigned int) U32_INFINITE_TIMEOUT)
+   if(tickTimeout != (::u32) U32_INFINITE_TIMEOUT)
    {
 
       start= ::duration::now();
@@ -68,7 +68,7 @@ unsigned int MsgWaitForMultipleObjectsEx(unsigned int dwSize, sync_object * * po
 
             }
 
-            if(tickTimeout != (unsigned int) U32_INFINITE_TIMEOUT && start.elapsed() >= tickTimeout)
+            if(tickTimeout != (::u32) U32_INFINITE_TIMEOUT && start.elapsed() >= tickTimeout)
             {
 
                for(j = 0; j < i; j++)
@@ -127,7 +127,7 @@ unsigned int MsgWaitForMultipleObjectsEx(unsigned int dwSize, sync_object * * po
 
             }
 
-            if(tickTimeout != (unsigned int) U32_INFINITE_TIMEOUT && start.elapsed() >= tickTimeout)
+            if(tickTimeout != (::u32) U32_INFINITE_TIMEOUT && start.elapsed() >= tickTimeout)
             {
 
                return WAIT_TIMEOUT;
@@ -152,7 +152,7 @@ unsigned int MsgWaitForMultipleObjectsEx(unsigned int dwSize, sync_object * * po
 }
 
 
-unsigned int MsgWaitForMultipleObjects(unsigned int dwSize, sync_object ** pobjectptra, int_bool bWaitForAll, unsigned int tickTimeout, unsigned int dwWakeMask)
+::u32 MsgWaitForMultipleObjects(::u32 dwSize, sync_object ** pobjectptra, int_bool bWaitForAll, ::u32 tickTimeout, ::u32 dwWakeMask)
 {
 
    return MsgWaitForMultipleObjectsEx(dwSize, pobjectptra, tickTimeout, dwWakeMask, (bWaitForAll ?  MWMO_WAITALL : 0));
@@ -160,7 +160,7 @@ unsigned int MsgWaitForMultipleObjects(unsigned int dwSize, sync_object ** pobje
 }
 
 
-unsigned int WaitForMultipleObjectsEx(unsigned int dwSize, sync_object ** pobjectptra, int_bool bWaitForAll, unsigned int tickTimeout, int_bool bAlertable)
+::u32 WaitForMultipleObjectsEx(::u32 dwSize, sync_object ** pobjectptra, int_bool bWaitForAll, ::u32 tickTimeout, int_bool bAlertable)
 {
 
    return MsgWaitForMultipleObjectsEx(dwSize, pobjectptra, tickTimeout, 0, (bWaitForAll ?  MWMO_WAITALL : 0) | (bAlertable ?  MWMO_ALERTABLE : 0));
@@ -168,7 +168,7 @@ unsigned int WaitForMultipleObjectsEx(unsigned int dwSize, sync_object ** pobjec
 }
 
 
-unsigned int WaitForMultipleObjects(unsigned int dwSize, sync_object ** pobjectptra, int_bool bWaitForAll, unsigned int tickTimeout)
+::u32 WaitForMultipleObjects(::u32 dwSize, sync_object ** pobjectptra, int_bool bWaitForAll, ::u32 tickTimeout)
 {
 
    return WaitForMultipleObjectsEx(dwSize, pobjectptra, bWaitForAll, tickTimeout, false);
@@ -176,7 +176,7 @@ unsigned int WaitForMultipleObjects(unsigned int dwSize, sync_object ** pobjectp
 }
 
 
-unsigned int WaitForSingleObjectEx(sync_object * pobject, unsigned int tickTimeout, int_bool bAlertable)
+::u32 WaitForSingleObjectEx(sync_object * pobject, ::u32 tickTimeout, int_bool bAlertable)
 {
 
    return WaitForMultipleObjectsEx(1, &pobject, true, tickTimeout, bAlertable);
@@ -184,7 +184,7 @@ unsigned int WaitForSingleObjectEx(sync_object * pobject, unsigned int tickTimeo
 }
 
 
-unsigned int WaitForSingleObject(sync_object * pobject, unsigned int tickTimeout)
+::u32 WaitForSingleObject(sync_object * pobject, ::u32 tickTimeout)
 {
 
    return WaitForSingleObjectEx(pobject, tickTimeout, false);
@@ -286,7 +286,7 @@ int_bool WINAPI SetThreadPriority(htask htask,int32_t nCa2Priority)
 int32_t WINAPI GetThreadPriority(htask  htask)
 {
 
-   int iOsPolicy = SCHED_OTHER;
+   ::i32 iOsPolicy = SCHED_OTHER;
 
    sched_param schedparam;
 
@@ -338,15 +338,15 @@ CLASS_DECL_ACME itask get_main_ithread()
 
 
 
-// LPVOID WINAPI thread_get_data(htask htask,unsigned int dwIndex);
+// LPVOID WINAPI thread_get_data(htask htask,::u32 dwIndex);
 
-// int_bool WINAPI thread_set_data(htask htask,unsigned int dwIndex,LPVOID lpTlsValue);
+// int_bool WINAPI thread_set_data(htask htask,::u32 dwIndex,LPVOID lpTlsValue);
 
-unsigned int g_dwDebug_post_thread_msg_time;
+::u32 g_dwDebug_post_thread_msg_time;
 
-int g_iDebug_post_thread_msg_time;
+::i32 g_iDebug_post_thread_msg_time;
 
-CLASS_DECL_ACME int_bool WINAPI PostThreadMessage(itask iThreadId,unsigned int Msg,WPARAM wParam,LPARAM lParam)
+CLASS_DECL_ACME int_bool WINAPI PostThreadMessage(itask iThreadId,::u32 Msg,WPARAM wParam,LPARAM lParam)
 {
 
    ::pointer<message_queue>pmq = __get_mq(iThreadId);
@@ -449,7 +449,7 @@ bool on_term_thread()
 }
 
 
-CLASS_DECL_ACME unsigned long long translate_processor_affinity(int iOrder)
+CLASS_DECL_ACME ::u64 translate_processor_affinity(::i32 iOrder)
 {
 
    return 1 << iOrder;

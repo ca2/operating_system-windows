@@ -35,15 +35,15 @@ namespace win32
             ::acme::windowing::display * acme_display() override;
             void main_send(const ::procedure & procedure) override;
             void main_post(const ::procedure & procedure) override;
-            void display_error_trap_push(int i) override;
-            void display_error_trap_pop_ignored(int i) override;
+            void display_error_trap_push(::i32 i) override;
+            void display_error_trap_pop_ignored(::i32 i) override;
 
             //   ::e_status x11_initialize() override;
             //   void * x11_get_display() override;
             //   void x11_sync(const ::procedure & procedure) override;
             //   void x11_async(const ::procedure & procedure) override;
-            //   void x11_display_error_trap_push(int i) override;
-            //   void x11_display_error_trap_pop_ignored(int i) override;
+            //   void x11_display_error_trap_push(::i32 i) override;
+            //   void x11_display_error_trap_pop_ignored(::i32 i) override;
 
             void set_dark_mode(bool bDarkMode) override;
 

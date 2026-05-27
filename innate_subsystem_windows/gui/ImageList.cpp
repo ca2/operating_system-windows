@@ -34,7 +34,7 @@ namespace innate_subsystem_windows
    }
 
 
-   void ImageList::createImageList(const ::i32_size & size, int flags, int iInitialSize, int iGrow)
+   void ImageList::createImageList(const ::i32_size & size, ::i32 flags, ::i32 iInitialSize, ::i32 iGrow)
    {
      m_himagelist = ImageList_Create(size.cx,
                            size.cy,

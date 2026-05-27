@@ -7,7 +7,7 @@
 
 
 //
-//int __node_is_debugger_attached()
+//::i32 __node_is_debugger_attached()
 //{
 //
 //   return ::IsDebuggerPresent();
@@ -19,10 +19,10 @@
 
 
 
-::enum_status os_error_to_estatus(int lOsErr)
+::enum_status os_error_to_estatus(::i32 lOsErr)
 {
     // NT Error codes
-    switch ((unsigned int)lOsErr)
+    switch ((::u32)lOsErr)
     {
         case NO_ERROR:
             return error_file;

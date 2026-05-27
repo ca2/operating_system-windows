@@ -61,15 +61,15 @@ namespace remoting
        */
       void readFully(void *buffer, size_t len);
 
-      unsigned char readUInt8();
-      unsigned short readUInt16();
-      unsigned int readUInt32();
-      unsigned long long readUInt64();
+      ::u8 readUInt8();
+      ::u16 readUInt16();
+      ::u32 readUInt32();
+      ::u64 readUInt64();
 
-      char readInt8();
-      short readInt16();
-      int readInt32();
-      long long readInt64();
+      ::i8 readInt8();
+      ::i16 readInt16();
+      ::i32 readInt32();
+      ::i64 readInt64();
 
       ::string read_utf8_string();
 

@@ -18,14 +18,14 @@ namespace windows
 
 
    CLASS_DECL_WINDOWING_WIN32 HBITMAP create_alpha_bitmap_v5(::image::image * pimage);
-   CLASS_DECL_WINDOWING_WIN32 HICON create_alpha_icon(::image::image * pimage, bool bIcon = true, int xHotSpot = 0, int yHotSpot = 0);
-   CLASS_DECL_WINDOWING_WIN32 HCURSOR create_alpha_cursor(::image::image * pimage, int xHotSpot, int yHotSpot);
-   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::i32_size & size, int * piScan = nullptr, ::image32_t ** ppdata = nullptr);;
-   CLASS_DECL_WINDOWING_WIN32 HICON load_icon(::particle * pparticle, string_array_base & straMatter, const ::scoped_string & scopedstrIcon, int cx, int cy);
+   CLASS_DECL_WINDOWING_WIN32 HICON create_alpha_icon(::image::image * pimage, bool bIcon = true, ::i32 xHotSpot = 0, ::i32 yHotSpot = 0);
+   CLASS_DECL_WINDOWING_WIN32 HCURSOR create_alpha_cursor(::image::image * pimage, ::i32 xHotSpot, ::i32 yHotSpot);
+   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::i32_size & size, ::i32 * piScan = nullptr, ::image32_t ** ppdata = nullptr);;
+   CLASS_DECL_WINDOWING_WIN32 HICON load_icon(::particle * pparticle, string_array_base & straMatter, const ::scoped_string & scopedstrIcon, ::i32 cx, ::i32 cy);
 
 
-   CLASS_DECL_WINDOWING_WIN32 int show_window(enum_display edisplay, enum_activation useractivation);
-   CLASS_DECL_WINDOWING_WIN32 enum_display show_window_to_edisplay(int iShowWindow, enum_activation & useractivation);
+   CLASS_DECL_WINDOWING_WIN32 ::i32 show_window(enum_display edisplay, enum_activation useractivation);
+   CLASS_DECL_WINDOWING_WIN32 enum_display show_window_to_edisplay(::i32 iShowWindow, enum_activation & useractivation);
 
    CLASS_DECL_WINDOWING_WIN32 HWND get_mouse_capture(itask itask);
    CLASS_DECL_WINDOWING_WIN32 bool set_mouse_capture(itask itask, HWND hwnd);

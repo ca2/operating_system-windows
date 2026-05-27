@@ -34,7 +34,7 @@
 //    {
 //    public:
 //       // This function must return true if a message has been processed.
-//       virtual bool processMessage(unsigned int message, ::wparam wparam, ::lparam lparam) = 0;
+//       virtual bool processMessage(::u32 message, ::wparam wparam, ::lparam lparam) = 0;
 //
 //    };
 //

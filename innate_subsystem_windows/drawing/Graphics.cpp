@@ -134,7 +134,7 @@ return m_pdevicecontext;
    void Graphics::setTextColor(const ::color::color & color)
    {
       m_colorText= color;
-      //SetTextColor(m_pdevicecontext->m_hdc, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+      //SetTextColor(m_pdevicecontext->m_hdc, RGB(color.u8_red(), color.u8_green(), color.u8_blue()));
    }
 
 
@@ -147,7 +147,7 @@ return m_pdevicecontext;
 
    void Graphics::setBkColor(const ::color::color & color)
    {
-      //SetBkColor(m_pdevicecontext->m_hdc, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+      //SetBkColor(m_pdevicecontext->m_hdc, RGB(color.u8_red(), color.u8_green(), color.u8_blue()));
       m_colorBk = color;
    }
 
@@ -227,7 +227,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
       ::copy(gdiplusrect, rectangle);
 
       //auto pbrushWin32 = pbrush->impl<::innate_subsystem_windows::Brush>();
-      Gdiplus::Color gdipluscolor(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue());
+      Gdiplus::Color gdipluscolor(color.u8_opacity(), color.u8_red(), color.u8_green(), color.u8_blue());
       Gdiplus::SolidBrush solidbrush(gdipluscolor);
 
       //auto hbrush = (HBRUSH) pbrush->_HGDIOBJ();
@@ -320,14 +320,14 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
          }
          auto color = m_colorText;
          m_colorBrushText = color;
-         Gdiplus::Color gdipluscolor(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue());
+         Gdiplus::Color gdipluscolor(color.u8_opacity(), color.u8_red(), color.u8_green(), color.u8_blue());
          m_pbrushText = new Gdiplus::SolidBrush(gdipluscolor);
 
       }
 
    }
 
-   void Graphics::drawText(const ::scoped_string & scopedstr, ::i32_rectangle &rectangle, unsigned int format, enum_align ealign)
+   void Graphics::drawText(const ::scoped_string & scopedstr, ::i32_rectangle &rectangle, ::u32 format, enum_align ealign)
    {
 
       ::string str(scopedstr);

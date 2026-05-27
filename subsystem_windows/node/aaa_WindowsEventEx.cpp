@@ -50,7 +50,7 @@ namespace subsystem_windows
       if (errorCode != ERROR_SUCCESS &&
           errorCode != ERROR_NO_SECURITY_ON_OBJECT) {
          ::string errMess;
-         errMess.formatf("Cannot SetSecurityInfo with error = {}", (int)errorCode);
+         errMess.formatf("Cannot SetSecurityInfo with error = {}", (::i32)errorCode);
          throw ::subsystem::Exception(errMess);
           }
    }

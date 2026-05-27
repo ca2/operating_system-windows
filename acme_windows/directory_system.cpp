@@ -527,7 +527,7 @@ pacmedir->roaming();
 
    //   string strCandidate;
 
-   //   for (int i = 0; i < stra.get_count(); i++)
+   //   for (::i32 i = 0; i < stra.get_count(); i++)
    //   {
 
    //      strCandidate = stra[i] / pszTopic;
@@ -564,7 +564,7 @@ pacmedir->roaming();
    }
 
 
-   bool directory_system::_shell_get_special_folder_path(HWND hwnd, ::file::path& str, int csidl, bool fCreate)
+   bool directory_system::_shell_get_special_folder_path(HWND hwnd, ::file::path& str, ::i32 csidl, bool fCreate)
    {
 
       return ::SHGetSpecialFolderPathW(hwnd, wstring_adaptor(str, MAX_PATH * 8), csidl, fCreate) != false;
@@ -572,7 +572,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path directory_system::_shell_get_special_folder_path(int csidl, bool fCreate, ::windowing::window* pwindow)
+   ::file::path directory_system::_shell_get_special_folder_path(::i32 csidl, bool fCreate, ::windowing::window* pwindow)
    {
 
       ::file::path path;
@@ -609,7 +609,7 @@ pacmedir->roaming();
    }
 
    
-//   bool directory_system::_is(const_char_pointer path1)
+//   bool directory_system::_is(const_char_pointer pszPath1)
 //   {
 //
 //#ifdef UNIVERSAL_WINDOWS
@@ -626,7 +626,7 @@ pacmedir->roaming();
 //      //str.case_insensitive_ends_eat("\\");
 //      //str.case_insensitive_ends_eat("/");
 //
-//      unsigned int dwFileAttributes = ::windows_get_file_attributes(path1);
+//      ::u32 dwFileAttributes = ::windows_get_file_attributes(path1);
 //
 //      if (dwFileAttributes != INVALID_FILE_ATTRIBUTES)
 //      {
@@ -861,7 +861,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 //
 //         }
 //
-//         if (!GetModuleFileNameW(hmodule, wstrModuleFilePath, (unsigned int)wstrModuleFilePath.length()))
+//         if (!GetModuleFileNameW(hmodule, wstrModuleFilePath, (::u32)wstrModuleFilePath.length()))
 //         {
 //
 //            return "";
@@ -870,7 +870,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 //
 //         LPWSTR pszModuleFileName;
 //
-//         if (!GetFullPathNameW(wstrModuleFilePath, (unsigned int)wstrModuleFilePath.length(), wstrModuleFolder, &pszModuleFileName))
+//         if (!GetFullPathNameW(wstrModuleFilePath, (::u32)wstrModuleFilePath.length(), wstrModuleFolder, &pszModuleFileName))
 //         {
 //
 //            return "";
@@ -898,7 +898,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 //      }
 //
 
-      // bool eat_end_level(string & str, int iLevelCount, const_char_pointer pSeparator)
+      // bool eat_end_level(string & str, ::i32 iLevelCount, const_char_pointer pszSeparator)
       // {
 
       //    character_count iLast = str.length() - 1;
@@ -909,7 +909,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //    while(str[iLast] == '/' || str[iLast] == '\\')
       //       iLast--;
 
-      //    for(int i = 0; i < iLevelCount; i++)
+      //    for(::i32 i = 0; i < iLevelCount; i++)
       //    {
 
       //       character_count iFind1 = str.rear_find('/', iLast);
@@ -994,7 +994,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //
       //         }
       //
-      //         str = ::dir::pathfind(::file::path(str).folder(), "libacme.dylib", "rfs"); // readable - normal file - non zero double_size
+      //         str = ::dir::pathfind(::file::path(str).folder(), "libacme.dylib", "rfs"); // readable - normal file - non zero f64_size
       //
       //         if(str.has_character())
       //         {
@@ -1003,7 +1003,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //
       //         }
       //
-      //         str = ::dir::pathfind(getenv("DYLD_LIBRARY_PATH"), "libacme.dylib", "rfs"); // readable - normal file - non zero double_size
+      //         str = ::dir::pathfind(getenv("DYLD_LIBRARY_PATH"), "libacme.dylib", "rfs"); // readable - normal file - non zero f64_size
       //
       //         if(str.has_character())
       //         {
@@ -1021,7 +1021,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //
       //         }
       //
-      //         str = ::dir::pathfind(getenv("DYLD_FALLBACK_LIBRARY_PATH"), "libacme.dylib", "rfs"); // readable - normal file - non zero double_size
+      //         str = ::dir::pathfind(getenv("DYLD_FALLBACK_LIBRARY_PATH"), "libacme.dylib", "rfs"); // readable - normal file - non zero f64_size
       //
       //         if(str.has_character())
       //         {
@@ -1045,7 +1045,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //   }
 
 
-      //bool directory_system::create(const_char_pointer path)
+      //bool directory_system::create(const_char_pointer pszPath)
       //{
 
       //   return _create(path);
@@ -1056,7 +1056,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 #ifndef WINDOWS_DESKTOP
 
 
-      bool directory_system::_mk(const_char_pointer path)
+      bool directory_system::_mk(const_char_pointer pszPath)
       {
 
          if (is(path))
@@ -1181,9 +1181,9 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 
 #ifdef WINDOWS_DESKTOP
 
-               char * pszError;
+               ::i8 * pszError;
 
-               FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (char *)&pszError, 8, nullptr);
+               FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (::i8 *)&pszError, 8, nullptr);
 
                //informationf("         auto psystem = system();
 
@@ -1222,7 +1222,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          auto p = path.get_buffer(MAX_PATH * 8);
 
-         if (!GetModuleFileNameW(nullptr, p, (unsigned int)path.size()))
+         if (!GetModuleFileNameW(nullptr, p, (::u32)path.size()))
          {
 
             return "";
@@ -1248,7 +1248,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      //bool directory_system::is(const_char_pointer path)
+      //bool directory_system::is(const_char_pointer pszPath)
       //{
 
       //   //if (::file::system_dir::g_pthis == nullptr)
@@ -1711,7 +1711,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //         auto a = folder->GetItemsAsync().get();
 //
-//         for (unsigned int u = 0; u < a->Size; u++)
+//         for (::u32 u = 0; u < a->Size; u++)
 //         {
 //
 //            string strPath = string(begin(a->GetAt(u)->Path));
@@ -1806,7 +1806,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
 //
-//         for (unsigned int u = 0; u < a->Size; u++)
+//         for (::u32 u = 0; u < a->Size; u++)
 //         {
 //            stra.add(begin(a->GetAt(u)->Path));
 //         }
@@ -1888,7 +1888,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
 //
-//         for (unsigned int u = 0; u < a->Size; u++)
+//         for (::u32 u = 0; u < a->Size; u++)
 //         {
 //            stra.add(begin(a->GetAt(u)->Path));
 //         }
@@ -1940,7 +1940,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          string strCandidate;
 
-         for (int i = 0; i < stra.get_count(); i++)
+         for (::i32 i = 0; i < stra.get_count(); i++)
          {
 
             if (stra[i].is_empty())
@@ -1993,7 +1993,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      //int directory_system::make_path(const scoped_string & str)
+      //::i32 directory_system::make_path(const scoped_string & str)
       //{
 
 
@@ -2002,7 +2002,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //}
 
 
-//      void directory_system::createø(const_char_pointer pathParam)
+//      void directory_system::createø(const_char_pointer pszPathParam)
 //      {
 //
 //         if (is(pathParam))

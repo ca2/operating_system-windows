@@ -33,7 +33,7 @@ namespace windowing_win32
 {
 
 
-   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::i32_size & size, int * piScan, ::color32_t ** ppdata);
+   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::i32_size & size, ::i32 * piScan, ::color32_t ** ppdata);
 
 
    buffer::layered_window_buffer::layered_window_buffer()
@@ -151,7 +151,7 @@ namespace windowing_win32
    }
 
 
-   bool buffer::create_window_device_context(const ::i32_size & size, int iStrideParam)
+   bool buffer::create_window_device_context(const ::i32_size & size, ::i32 iStrideParam)
    {
 
       if (m_papplication->m_gpu.m_bUseSwapChainWindow)
@@ -351,7 +351,7 @@ namespace windowing_win32
 
       ::image32_t * pimage32 = nullptr;
 
-      int iScan = -1;
+      ::i32 iScan = -1;
 
       ::i32_size sizeAllocate;
 
@@ -879,8 +879,8 @@ namespace windowing_win32
 
                            }
 
-                           int iRequestWidth = rectangleRequest.width();
-                           int iRequestHeight = rectangleRequest.height();
+                           ::i32 iRequestWidth = rectangleRequest.width();
+                           ::i32 iRequestHeight = rectangleRequest.height();
                            str.append_formatf("w=%d; ", iRequestWidth);
                            str.append_formatf("h=%d; ", iRequestHeight);
                            ::SetWindowPos(hwnd, hwndInsertAfter, rectangleRequest.left, rectangleRequest.top,
@@ -1286,7 +1286,7 @@ namespace windowing_win32
 
                wstring wstr;
 
-               int i = m_pwindow->prop("iSquaryHint");
+               ::i32 i = m_pwindow->prop("iSquaryHint");
                string str;
                str.formatf("%d", i);
                //iSquaryHint++;
@@ -1492,7 +1492,7 @@ namespace windowing_win32
 
                      //   RECT rClipScreen;
 
-                     //   int iResult = ::GetClipBox(m_hdcScreen, &rClipScreen);
+                     //   ::i32 iResult = ::GetClipBox(m_hdcScreen, &rClipScreen);
 
                      //   if (iResult == ERROR_REGION || iResult == NULLREGION)
                      //   {
@@ -1516,7 +1516,7 @@ namespace windowing_win32
 
                      //   RECT rClip;
 
-                     //   int iResult = ::GetClipBox(buffer.m_hdc, &rClip);
+                     //   ::i32 iResult = ::GetClipBox(buffer.m_hdc, &rClip);
 
                      //   if (iResult == ERROR_REGION || iResult == NULLREGION)
                      //   {
@@ -1592,7 +1592,7 @@ namespace windowing_win32
             //#endif
             //               {
             //
-            //                  unsigned int uFlags = SWP_NOREDRAW
+            //                  ::u32 uFlags = SWP_NOREDRAW
             //                     | SWP_NOCOPYBITS
             //                     | SWP_NOACTIVATE
             //                     | SWP_NOOWNERZORDER

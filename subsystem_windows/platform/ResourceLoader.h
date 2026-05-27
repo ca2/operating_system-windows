@@ -62,7 +62,7 @@ namespace subsystem_windows
        * @param iconName icon name.
        * @return icon handle of 0 if cannot load icon.
        */
-      //virtual ::pointer < innate_ui::icon > loadIconByIntResource(int iId);
+      //virtual ::pointer < innate_ui::icon > loadIconByIntResource(::i32 iId);
 
       /**
        * Loads string from resources.
@@ -70,8 +70,8 @@ namespace subsystem_windows
        * @param [out] string storage for string from resources.
        * @return true if string is loaded, false otherwise.
        */
-      virtual bool loadString(unsigned int id, ::string & str);
-      //virtual ::string loadString(unsigned int id);
+      virtual bool loadString(::u32 id, ::string & str);
+      //virtual ::string loadString(::u32 id);
 
       /**
        * Loads accelerator from resources.
@@ -92,7 +92,7 @@ namespace subsystem_windows
        * @return handle of cursor if it's loaded.
        */
       //HCURSOR loadCursor(UINT id);
-      //virtual ::pointer < innate_ui::icon > loadCursor(unsigned int id);
+      //virtual ::pointer < innate_ui::icon > loadCursor(::u32 id);
 
    //protected:
       /**

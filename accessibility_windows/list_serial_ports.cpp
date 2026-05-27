@@ -43,7 +43,7 @@ namespace acme_windows
 			nullptr,
 			DIGCF_PRESENT);
 
-		unsigned int device_info_set_index = 0;
+		::u32 device_info_set_index = 0;
 		SP_DEVINFO_DATA device_info_data = {};
 
 		device_info_data.cbSize = sizeof(SP_DEVINFO_DATA);
@@ -65,12 +65,12 @@ namespace acme_windows
 			TCHAR port_name[port_name_max_length];
 			DWORD port_name_length = port_name_max_length;
 
-			int return_code = RegQueryValueEx(
+			::i32 return_code = RegQueryValueEx(
 				hkey,
 				_T("PortName"),
 				nullptr,
 				nullptr,
-				(unsigned char*)port_name,
+				(::u8*)port_name,
 				&port_name_length);
 
 			RegCloseKey(hkey);

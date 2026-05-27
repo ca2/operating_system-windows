@@ -39,21 +39,21 @@ namespace apex_windows
 
       virtual void _001InitializeShellOpen() override;
 
-      void shell_create_link(::file::path pathObj, ::file::path pathLnk, const ::scoped_string & scopedstrDesc, ::file::path pathIco, int iIcon = -1) override;
+      void shell_create_link(::file::path pathObj, ::file::path pathLnk, const ::scoped_string & scopedstrDesc, ::file::path pathIco, ::i32 iIcon = -1) override;
 
       bool shell_link_target(::file::path& pathTarget, const ::file::path& pathLnk) override;
 
-      bool shell_link_icon(::file::path& pathIcon, int & iIcon, const ::file::path& pathLnk) override;
+      bool shell_link_icon(::file::path& pathIcon, ::i32 & iIcon, const ::file::path& pathLnk) override;
 
       //virtual bool _os_calc_app_dark_mode();
 
       //virtual bool _os_calc_system_dark_mode();
 
-      virtual ::color::color get_default_color(unsigned long long u);
+      virtual ::color::color get_default_color(::u64 u);
 
-      virtual void set_console_colors(unsigned int dwScreenColors, unsigned int dwPopupColors, unsigned int dwWindowAlpha);
+      virtual void set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha);
 
-      virtual double get_time_zone();
+      virtual ::f64 get_time_zone();
 
       //virtual void get_system_time(system_time_t * psystemtime);
 
@@ -84,13 +84,13 @@ namespace apex_windows
       //virtual bool set_last_run_application_path(const ::scoped_string & scopedstrAppId) override;
 
 
-      //virtual unsigned int       get_file_attributes(const ::scoped_string & scopedstrFileName);
-      virtual unsigned int       get_current_directory(string& str);
-      virtual unsigned int       get_temp_path(string& str);
-      virtual int        reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string& str);
-      virtual  HICON       extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex);
+      //virtual ::u32       get_file_attributes(const ::scoped_string & scopedstrFileName);
+      virtual ::u32       get_current_directory(string& str);
+      virtual ::u32       get_temp_path(string& str);
+      virtual ::i32        reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string& str);
+      virtual  HICON       extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, ::u32 nIconIndex);
       virtual  void        delete_file(const ::string& pFileName);
-      // virtual  int     get_menu_string(HMENU hMenu, unsigned int uDItem, string& str, unsigned int flags);
+      // virtual  ::i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
       //virtual  void        time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime);
 
       virtual string get_version();
@@ -104,7 +104,7 @@ namespace apex_windows
       //void on_start_application(::apex::application * papplication) override;
 
 
-      virtual error_code _windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, int iIcon);
+      virtual error_code _windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, ::i32 iIcon);
 
 
       void on_create_app_shortcut(::platform::application* papplication) override;
@@ -181,7 +181,7 @@ namespace apex_windows
 
       //void edit_link_target(const ::file::path & path, const ::file::path & pathLink) override;
       //void edit_link_folder(const ::file::path & path, const ::file::path & pathLink) override;
-      //void edit_link_icon(const ::file::path& path, int iIcon, const ::file::path& pathLink) override;
+      //void edit_link_icon(const ::file::path& path, ::i32 iIcon, const ::file::path& pathLink) override;
 
       //::pointer < ::file::link > resolve_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all) override;
 
@@ -192,7 +192,7 @@ namespace apex_windows
       bool is_alias(const ::file::path& path) override;
 
 
-      void raise_exception(unsigned int dwExceptionCode, unsigned int dwExceptionFlags);
+      void raise_exception(::u32 dwExceptionCode, ::u32 dwExceptionFlags);
 
       bool is_remote_session() override;
 

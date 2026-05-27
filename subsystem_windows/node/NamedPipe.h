@@ -59,9 +59,9 @@ namespace subsystem_windows
        */
       ~NamedPipe();
 
-      void initialize_pipe(unsigned int maxPortionSize);
+      void initialize_pipe(::u32 maxPortionSize);
 
-      void initialize_named_pipe(::subsystem::FileInterface* pfilePipe, unsigned int maxPortionSize, bool asServer);
+      void initialize_named_pipe(::subsystem::FileInterface* pfilePipe, ::u32 maxPortionSize, bool asServer);
 
       // bool is_subsystem_implementation(void) const override
       // {
@@ -76,7 +76,7 @@ namespace subsystem_windows
       //
       // }
 
-      unsigned int getMaxPortionSize() override
+      ::u32 getMaxPortionSize() override
       {
 
          return Pipe::getMaxPortionSize();

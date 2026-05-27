@@ -1,7 +1,7 @@
 #include "framework.h"
 #include <process.h>
 
-void simple_se_translator(unsigned int uiCode, EXCEPTION_POINTERS * ppointers)
+void simple_se_translator(::u32 uiCode, EXCEPTION_POINTERS * ppointers)
 {
    //throw 0;
 }
@@ -118,8 +118,8 @@ install:
       RECT rectangleWindow;
       window_rectangle(&rectangleWindow);
 
-      int cx = rectangleWindow.right - rectangleWindow.left;
-      int cy = rectangleWindow.bottom - rectangleWindow.top;
+      ::i32 cx = rectangleWindow.right - rectangleWindow.left;
+      ::i32 cy = rectangleWindow.bottom - rectangleWindow.top;
 
       RECT i32_rectangle;
       rectangle.left         = 0;
@@ -211,7 +211,7 @@ install:
 
       /*if(papp->does_launch_window_on_startup())
       {
-         int iRetry = 100;
+         ::i32 iRetry = 100;
          while(papp->m_puserinteractionMain == nullptr && (iRetry > 0))
          {
             Sleep(100);
@@ -245,7 +245,7 @@ install:
       {
       }
 
-      int iExitCode = -1;
+      ::i32 iExitCode = -1;
 
       try
       {

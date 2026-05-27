@@ -8,12 +8,12 @@
 
 
 
-int ansi_open(const scoped_string & str,int i)
+::i32 ansi_open(const scoped_string & str,::i32 i)
 {
    return _wopen(utf8_to_unicode(psz),i);
 }
 
-void ansi_get_errno(int * perrno)
+void ansi_get_errno(::i32 * perrno)
 {
    *perrno = errno;
 }
@@ -26,10 +26,10 @@ FILE * ansi_fopen(const scoped_string & str,const scoped_string & strMode)
 
 
 
-int ansi_file_flag(int iFlag)
+::i32 ansi_file_flag(::i32 iFlag)
 {
 
-   int i = 0;
+   ::i32 i = 0;
 
    if(iFlag & ::file::e_open_binary)
    {

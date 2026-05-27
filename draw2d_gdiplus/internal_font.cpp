@@ -47,7 +47,7 @@ namespace draw2d_gdiplus
 
       m_familya.set_size(iFamilyCount);
 
-      for (int iFamily = 0; iFamily < iFamilyCount; iFamily++)
+      for (::i32 iFamily = 0; iFamily < iFamilyCount; iFamily++)
       {
 
          if (m_familya[iFamily].GetLastStatus() != Gdiplus::Ok)
@@ -74,7 +74,7 @@ namespace draw2d_gdiplus
 
       ::cast < ::draw2d_gdiplus::font> pdraw2dgdiplusfont = pfont;
 
-      int iFoundFamily = -1;
+      ::i32 iFoundFamily = -1;
 
       WCHAR wszGetFamilyName[LF_FACESIZE];
 
@@ -83,7 +83,7 @@ namespace draw2d_gdiplus
       if (pdraw2dgdiplusfont->::write_text::font::m_pfontfamily->m_strFamilyName.has_character())
       {
 
-         for (int iFamily = 0; iFamily < m_iFamilyCount; iFamily++)
+         for (::i32 iFamily = 0; iFamily < m_iFamilyCount; iFamily++)
          {
 
             auto & fontfamily = m_familya[iFamily];

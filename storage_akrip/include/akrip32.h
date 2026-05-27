@@ -81,10 +81,10 @@ typedef struct
 
 typedef struct
 {
-  char vendor[9];
-  char prodId[17];
-  char rev[5];
-  char vendSpec[21];
+  ::i8 vendor[9];
+  ::i8 prodId[17];
+  ::i8 rev[5];
+  ::i8 vendSpec[21];
 } CDINFO, *PCDINFO, FAR *LPCDINFO;
 
 typedef struct
@@ -93,7 +93,7 @@ typedef struct
   BYTE      tgt;
   BYTE      lun;
   BYTE      pad;
-  char      atom[MAXIDLEN + 1];
+  ::i8      atom[MAXIDLEN + 1];
   CDINFO    info;
 } CDREC, *PCDREC, FAR *LPCDREC;
 
@@ -110,9 +110,9 @@ typedef struct
 #endif
 
 /*
- * TOCTRACK and TOC must be unsigned char-aligned.  If you're not using Mingw32,
+ * TOCTRACK and TOC must be ::u8-aligned.  If you're not using Mingw32,
  * CygWin, map_base some other compiler that understands the PACKED keyword,
- * you need to ensure that these structures are unsigned char aligned.  Usually,
+ * you need to ensure that these structures are ::u8 aligned.  Usually,
  * this is done using a
  *  #pragma pack(1)
  * See your compiler's documentation for details
@@ -141,7 +141,7 @@ typedef struct
   uint32_t trackLen;
   BYTE  type;
   BYTE  pad[3];
-  char  name[256];
+  ::i8  name[256];
 } PACKED TRACK, *PTRACK, FAR *LPTRACK;
 
 #ifndef __GNUC__
@@ -266,7 +266,7 @@ typedef struct _GETCDHAND {
   BYTE tgt;              /* target atom                           */
   BYTE lun;              /* LUN                                 */
   BYTE readType;         /* read function to use                */
-  int jitterCorr;       /* use built-in jitter correction?     */
+  ::i32 jitterCorr;       /* use built-in jitter correction?     */
   BYTE numJitter;        /* number of frames to try to match    */
   BYTE numOverlap;       /* number of frames to overlap         */
 } PACKED GETCDHAND, *PGETCDHAND, FAR *LPGETCDHAND;
@@ -300,14 +300,14 @@ int32_t GetCDList( LPCDLIST cd );
 int32_t GetAspiLibError();
 BYTE GetAspiLibAspiError();
 
-uint32_t GetCDId( HCDROM hCD, char *buf, int32_t maxBuf );
+uint32_t GetCDId( HCDROM hCD, ::i8 *buf, int32_t maxBuf );
 uint32_t GetDriveInfo( BYTE ha, BYTE tgt, BYTE lun, LPCDREC cdrec );
 uint32_t ReadTOC( HCDROM hCD, LPTOC lpToc );
 uint32_t ReadCDAudioLBA( HCDROM hCD, LPTRACKBUF );
-int QueryCDParms( HCDROM hCD, int32_t which, uint32_t *pNum );
-int ModifyCDParms( HCDROM hCD, int32_t which, uint32_t val );
+::i32 QueryCDParms( HCDROM hCD, int32_t which, uint32_t *pNum );
+::i32 ModifyCDParms( HCDROM hCD, int32_t which, uint32_t val );
 HCDROM GetCDHandle( LPGETCDHAND lpcd );
-int CloseCDHandle( HCDROM );
+::i32 CloseCDHandle( HCDROM );
 uint32_t ReadCDAudioLBAEx( HCDROM hCD, LPTRACKBUF, LPTRACKBUF );
 uint32_t GetAKRipDllVersion();
 
@@ -315,11 +315,11 @@ uint32_t GetAKRipDllVersion();
  * CDDB support
  */
 typedef struct {
-  char categ[12];
-  char cddbId[9];
-  int bExact;
-  char artist[81];
-  char title[81];
+  ::i8 categ[12];
+  ::i8 cddbId[9];
+  ::i32 bExact;
+  ::i8 artist[81];
+  ::i8 title[81];
 } CDDBQUERYITEM, FAR *LPCDDBQUERYITEM;
 
 
@@ -330,13 +330,13 @@ typedef struct {
 
 
 typedef struct {
-  char szServer[81];
-  int bHTTP;
+  ::i8 szServer[81];
+  ::i32 bHTTP;
   int32_t  iPort;
-  char szCGI[81];
-  char szNorth[16];
-  char szSouth[16];
-  char szLocation[81];
+  ::i8 szCGI[81];
+  ::i8 szNorth[16];
+  ::i8 szSouth[16];
+  ::i8 szLocation[81];
 } CDDBSITE, FAR *LPCDDBSITE;
 
 
@@ -348,11 +348,11 @@ typedef struct {
 
 uint32_t GetCDDBDiskID( HCDROM hCD, uint32_t *pID, int32_t numEntries );
 uint32_t CDDBQuery( HCDROM hCD, LPCDDBQUERY lpq );
-uint32_t CDDBGetDiskInfo( LPCDDBQUERYITEM lpq, char *szCDDBEntry, int32_t maxLen );
-void CDDBSetOption( int32_t what, char *szVal, int32_t iVal );
+uint32_t CDDBGetDiskInfo( LPCDDBQUERYITEM lpq, ::i8 *szCDDBEntry, int32_t maxLen );
+void CDDBSetOption( int32_t what, ::i8 *szVal, int32_t iVal );
 uint32_t CDDBGetServerList( LPCDDBSITELIST lpSiteList );
-uint32_t CDDBSubmit( uint32_t dwDiscID, int bTest, char *szEmail, char *szCategory,
-		  char *szEntry );
+uint32_t CDDBSubmit( uint32_t dwDiscID, ::i32 bTest, ::i8 *szEmail, ::i8 *szCategory,
+		  ::i8 *szEntry );
 
 #ifdef __cplusplus
 }

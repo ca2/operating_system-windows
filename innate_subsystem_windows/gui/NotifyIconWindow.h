@@ -63,7 +63,7 @@ namespace innate_subsystem_windows
       //HWND m_window;
       ///::pointer < WindowProcHolder  > m_pwindowprocholder;
 
-      const int WM_USER_TASKBAR;
+      const ::i32 WM_USER_TASKBAR;
 
       NotifyIconWindow();
        ~NotifyIconWindow() override;
@@ -73,7 +73,7 @@ namespace innate_subsystem_windows
       //virtual void _setWindowProcHolder(WindowProcHolder *wph);
 
 
-      bool on_window_procedure(lresult &lresult, unsigned int message, wparam wparam, lparam lparam) override;
+      bool on_window_procedure(lresult &lresult, ::u32 message, wparam wparam, lparam lparam) override;
 
 
       virtual void onNotifyIconRightButtonUp() override;

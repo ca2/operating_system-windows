@@ -54,7 +54,7 @@ namespace multimedia
 
       }
 
-      int out::run()
+      ::i32 out::run()
       {
          m_timeRunLock = ::time(1);
          while(m_bRun)
@@ -74,7 +74,7 @@ namespace multimedia
 
       }
 
-      int out::exit_thread()
+      ::i32 out::exit_thread()
       {
 
          ::wave::out::exit_thread();
@@ -83,7 +83,7 @@ namespace multimedia
 
       }
 
-      void     out::out_open(thread * pthreadCallback, int iBufferCount, int iBufferSampleCount)
+      void     out::out_open(thread * pthreadCallback, ::i32 iBufferCount, ::i32 iBufferSampleCount)
       {
 
          single_lock sLock(&m_mutex, true);
@@ -136,7 +136,7 @@ namespace multimedia
          //   audiowave->m_uiWaveInDevice,
          //   wave_format(),
          //   get_os_int(),
-         //   (unsigned int) 0,
+         //   (::u32) 0,
          //   CALLBACK_THREAD))))
          //   goto Opened;
          //m_pwaveformat->nSamplesPerSec = 22050;
@@ -145,8 +145,8 @@ namespace multimedia
          //   &m_hwaveout,
          //   WAVE_MAPPER,
          //   ,
-         //   (unsigned int) get_os_int(),
-         //   (unsigned int) 0,
+         //   (::u32) get_os_int(),
+         //   (::u32) 0,
          //   CALLBACK_THREAD))))
          //   goto Opened;
          //m_pwaveformat->nSamplesPerSec = 11025;
@@ -155,8 +155,8 @@ namespace multimedia
          //   &m_hwaveout,
          //   WAVE_MAPPER,
          //   wave_format(),
-         //   (unsigned int) get_os_int(),
-         //   (unsigned int) 0,
+         //   (::u32) get_os_int(),
+         //   (::u32) 0,
          //   CALLBACK_THREAD))))
          //   goto Opened;
 
@@ -166,13 +166,13 @@ namespace multimedia
          //}
 
 Opened:
-         unsigned int uiBufferSizeLog2;
-         unsigned int uiBufferSize;
-         unsigned int uiAnalysisSize;
-         unsigned int uiAllocationSize;
-         unsigned int uiInterestSize;
-         unsigned int uiSkippedSamplesCount;
-         unsigned int uiBufferCount = iBufferCount;
+         ::u32 uiBufferSizeLog2;
+         ::u32 uiBufferSize;
+         ::u32 uiAnalysisSize;
+         ::u32 uiAllocationSize;
+         ::u32 uiInterestSize;
+         ::u32 uiSkippedSamplesCount;
+         ::u32 uiBufferCount = iBufferCount;
 
          if(m_pwaveformat->nSamplesPerSec == 44100)
          {
@@ -229,7 +229,7 @@ Opened:
 
       }
 
-      void     out::out_open_ex(thread * pthreadCallback, int iBufferCount, int iBufferSampleCount, unsigned int uiSamplesPerSec, unsigned int uiChannelCount, unsigned int uiBitsPerSample)
+      void     out::out_open_ex(thread * pthreadCallback, ::i32 iBufferCount, ::i32 iBufferSampleCount, ::u32 uiSamplesPerSec, ::u32 uiChannelCount, ::u32 uiBitsPerSample)
       {
 
          single_lock sLock(&m_mutex, true);
@@ -301,11 +301,11 @@ Opened:
          }
 
 Opened:
-         int iAlign = 2048;
+         ::i32 iAlign = 2048;
          iBufferCount = 4;
          iBufferSampleCount = (1 << 10);
 
-         unsigned int uiBufferSize = iBufferSampleCount * m_pwaveformat->nChannels * 2;
+         ::u32 uiBufferSize = iBufferSampleCount * m_pwaveformat->nChannels * 2;
 
          ASSERT((uiBufferSize % 2048) == 0);// Streaming i32_size must be 2K aligned to use for async I/O
 
@@ -342,7 +342,7 @@ Opened:
 
          void     mmr;
 
-         int i, iSize;
+         ::i32 i, iSize;
 
          iSize =  out_get_buffer()->GetBufferCount();
 
@@ -372,7 +372,7 @@ Opened:
 
 
 
-      void out::out_buffer_ready(int iBuffer)
+      void out::out_buffer_ready(::i32 iBuffer)
       {
 
          if(out_get_state() != e_state_playing)
@@ -387,7 +387,7 @@ Opened:
          void     mmr;
          if(m_peffect != nullptr)
          {
-            m_peffect->Process16bits((short *)pbuffer->m_pData,pwbuffer->m_uiBufferSize / 2);
+            m_peffect->Process16bits((::i16 *)pbuffer->m_pData,pwbuffer->m_uiBufferSize / 2);
          }
 
          XAUDIO2_BUFFER b;
@@ -483,7 +483,7 @@ Opened:
 
          ::wave::buffer::item * pbuffer = (::wave::buffer::item *)pBufferContext;
 
-         int iBuffer = (int)pbuffer->m_iIndex;
+         ::i32 iBuffer = (::i32)pbuffer->m_iIndex;
 
          out_out_buffer_done(iBuffer);
 
@@ -551,13 +551,13 @@ Opened:
 
       /*::time out::GetPositionMillisForSynch()
       {
-         long long dwMillis = GetPositionMillis();
-         long long dwPosition = m_pprebuffer->m_position * 8;
+         ::i64 dwMillis = GetPositionMillis();
+         ::i64 dwPosition = m_pprebuffer->m_position * 8;
          dwPosition /= m_pwaveformat->wBitsPerSample;
          dwPosition *= 1000;
          dwPosition /= m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          if(m_pprebuffer != nullptr && m_pprebuffer->m_pdecoder != nullptr)
-            return dwMillis + dwPosition - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_millis(dwMillis + dwPosition) - (((long long) m_dwLostSampleCount) /  ((long long) m_pwaveformat->nSamplesPerSec));
+            return dwMillis + dwPosition - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_millis(dwMillis + dwPosition) - (((::i64) m_dwLostSampleCount) /  ((::i64) m_pwaveformat->nSamplesPerSec));
          else
             return dwMillis + dwPosition - ((m_dwLostSampleCount) * 1000 / m_pwaveformat->nSamplesPerSec);
       }*/
@@ -584,7 +584,7 @@ Opened:
          //   {
          //      if (::success != mmr)
          //      {
-         //         information( "waveOutGetPosition() returned %lu", (unsigned int)mmr);
+         //         information( "waveOutGetPosition() returned %lu", (::u32)mmr);
          //         //      return MCIERR_DEVICE_NOT_READY;
          //         return 0;
          //      }
@@ -596,7 +596,7 @@ Opened:
          //   }
          //   if(mmt.wType == TIME_BYTES)
          //   {
-         //      long long i = mmt.u.cb;
+         //      ::i64 i = mmt.u.cb;
          //      i *= 8 * 1000;
          //      i /= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          //      return i;
@@ -605,7 +605,7 @@ Opened:
          //   else
          //   {
          //      //& ticka += mmt.u.ticks;
-         //      return (unsigned int) mmt.u.ms;
+         //      return (::u32) mmt.u.ms;
          //   }
          //}
          //else
@@ -645,7 +645,7 @@ Opened:
          //      if (::success != mmr)
          //      {
 
-         //         information( "waveOutGetPosition() returned %lu", (unsigned int)mmr);
+         //         information( "waveOutGetPosition() returned %lu", (::u32)mmr);
 
          //         return 0;
 
@@ -658,14 +658,14 @@ Opened:
          //   }
          //   if(mmt.wType == TIME_MS)
          //   {
-         //      ::time position = (unsigned int) mmt.u.ms;
+         //      ::time position = (::u32) mmt.u.ms;
          //      position *= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          //      position /= 8 * 1000;
          //      return position;
          //   }
          //   else
          //   {
-         //      return (unsigned int) mmt.u.cb;
+         //      return (::u32) mmt.u.cb;
          //   }
          //}
          //else
@@ -673,7 +673,7 @@ Opened:
          return 0;
       }
 
-      void out::out_free(int iBuffer)
+      void out::out_free(::i32 iBuffer)
       {
 
          //out_free(wave_hdr(iBuffer));
@@ -734,7 +734,7 @@ Opened:
          return nullptr;
       }
 
-      //LPWAVEHDR out::wave_hdr(int iBuffer)
+      //LPWAVEHDR out::wave_hdr(::i32 iBuffer)
       //{
       //   return ::multimedia::xaudio7::get_os_data(out_get_buffer(), iBuffer);
       //}
@@ -745,9 +745,9 @@ Opened:
       void out::out_run_step()
       {
 
-         int iPlay =  -1;
+         ::i32 iPlay =  -1;
 
-         //int r = WaitForMultipleObjects(m_haEvent.get_count(),m_haEvent.get_data(),false,INFINITE);
+         //::i32 r = WaitForMultipleObjects(m_haEvent.get_count(),m_haEvent.get_data(),false,INFINITE);
          //
          //if(r >= WAIT_OBJECT_0 && r < WAIT_OBJECT_0 + MAXIMUM_WAIT_OBJECTS)
          //{
@@ -763,7 +763,7 @@ Opened:
          //while(true)
          //{
 
-         //   int iNext = m_iBuffer + 1;
+         //   ::i32 iNext = m_iBuffer + 1;
 
          //   if(iNext >= out_get_buffer()->GetBufferCount())
          //      iNext = 0;
@@ -790,7 +790,7 @@ Opened:
          begin();
       }
 
-      int out::run_step_thread::run()
+      ::i32 out::run_step_thread::run()
       {
 
          while(m_bRun && m_pout->m_estate == out::e_state_playing)

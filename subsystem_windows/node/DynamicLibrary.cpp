@@ -80,7 +80,7 @@ namespace subsystem_windows
    }
 
 
-   void * DynamicLibrary::getProcAddress(const char *procName)
+   void * DynamicLibrary::getProcAddress(const ::i8 *procName)
    {
 
       if (!m_hmodule)

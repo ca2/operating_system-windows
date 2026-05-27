@@ -1,11 +1,11 @@
 #pragma once
 
 
-typedef unsigned int (WINAPI* GetFinalPathNameByHandleDef)(
+typedef ::u32 (WINAPI* GetFinalPathNameByHandleDef)(
 	HANDLE hFile,
 	LPWSTR lpszFilePath,
-	unsigned int cchFilePath,
-	unsigned int dwFlags	);
+	::u32 cchFilePath,
+	::u32 dwFlags	);
 
 
 
@@ -22,10 +22,10 @@ int_bool StopAndUninstallDrv( HANDLE hDrvHandle );
 
 HANDLE ExtractAndInstallDrv();
 
-int ftruncate(int file, filesize len);
+::i32 ftruncate(::i32 file, filesize len);
 
 
 
 
-//CLASS_DECL_ACME int_bool ensure_file_size_handle(HANDLE h, unsigned long long iSize);
+//CLASS_DECL_ACME int_bool ensure_file_size_handle(HANDLE h, ::u64 iSize);
 //CLASS_DECL_ACME int_bool get_filetime(HANDLE hFile, LPFILETIME lpCreationTime, LPFILETIME lpLastAccessTime, LPFILETIME lpLastWriteTime);

@@ -31,8 +31,8 @@ namespace windowing_win32
    {
 
       HWND           m_hwnd;
-      unsigned int          m_uID;
-      unsigned int          m_uCallbackMessage;
+      ::u32          m_uID;
+      ::u32          m_uCallbackMessage;
       string         m_strTip;
       string         m_strProcessPath;
       bool           m_bVisible;
@@ -41,7 +41,7 @@ namespace windowing_win32
    };
 
 
-   CLASS_DECL_WINDOWING_WIN32 char GetDriveLetter(const ::scoped_string & scopedstrDevicePath);
+   CLASS_DECL_WINDOWING_WIN32 ::i8 GetDriveLetter(const ::scoped_string & scopedstrDevicePath);
 
    CLASS_DECL_WINDOWING_WIN32 HWND find_tray_toolbar_window();
 
@@ -65,15 +65,15 @@ namespace windowing_win32
 
       virtual void Initialize(::particle * pparticle);
 
-      void ListTrayIcons(int defindex = 0);
-      void EditCopy(int iItem);
-      void DoubleClick(int iItem);
-      void RightClick(int iItem);
-      void LeftClick(int iItem);
-      void MoveLeft(int iItem);
-      void MoveRight(int iItem);
+      void ListTrayIcons(::i32 defindex = 0);
+      void EditCopy(::i32 iItem);
+      void DoubleClick(::i32 iItem);
+      void RightClick(::i32 iItem);
+      void LeftClick(::i32 iItem);
+      void MoveLeft(::i32 iItem);
+      void MoveRight(::i32 iItem);
       void Refresh();
-      void PostMessageToTrayIcon(int iItem, LPARAM lParam);
+      void PostMessageToTrayIcon(::i32 iItem, LPARAM lParam);
 
 
    };

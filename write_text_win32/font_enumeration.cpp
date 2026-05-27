@@ -73,7 +73,7 @@ namespace write_text_win32
    }
 
 
-   int CALLBACK font_enumeration::OLDFONTENUMPROCW(CONST LOGFONTW* plogfont, CONST TEXTMETRICW* ptextmetric, DWORD dwFontType, LPARAM lparam)
+   ::i32 CALLBACK font_enumeration::OLDFONTENUMPROCW(CONST LOGFONTW* plogfont, CONST TEXTMETRICW* ptextmetric, DWORD dwFontType, LPARAM lparam)
    {
 
       auto pfontenumeration = (font_enumeration *)lparam;
@@ -147,12 +147,12 @@ namespace write_text_win32
    }
 
 
-   int CALLBACK font_enumeration::OLDFONTENUMPROCW_character_set(CONST LOGFONTW* plogfont, CONST TEXTMETRICW* ptextmetric, DWORD dwFontType, LPARAM lparam)
+   ::i32 CALLBACK font_enumeration::OLDFONTENUMPROCW_character_set(CONST LOGFONTW* plogfont, CONST TEXTMETRICW* ptextmetric, DWORD dwFontType, LPARAM lparam)
    {
 
       auto pfontenumerationitem = (::write_text::font_enumeration_item *)lparam;
 
-      int iCharacterSet = plogfont->lfCharSet;
+      ::i32 iCharacterSet = plogfont->lfCharSet;
 
       ::enum_character_set echaracterset = ::write_text_win32_gdi::get_character_set(iCharacterSet);
 

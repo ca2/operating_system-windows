@@ -95,7 +95,7 @@ namespace windows
    }
 
 
-   inline bool myspace(char ch)
+   inline bool myspace(::i8 ch)
    {
       return ch == ' ' ||
          ch == '\t' ||
@@ -115,7 +115,7 @@ namespace windows
    //      return pszFolder;
 
    //   string strPath;
-   //   char * psz;
+   //   ::i8 * psz;
 
 
    //   if(bEmptyRelative)
@@ -331,7 +331,7 @@ namespace windows
    ::file::listing_base & directory_context::root_ones(::file::listing_base & listing)
    {
 
-      unsigned int dwSize = ::GetLogicalDriveStringsW(0, nullptr);
+      ::u32 dwSize = ::GetLogicalDriveStringsW(0, nullptr);
 
       ::acme::malloc < LPWSTR > pszAlloc;
 
@@ -412,7 +412,7 @@ namespace windows
 
             ls_dir(dira, listing.m_pathUser);
 
-            for (int i = 0; i < dira.get_count(); i++)
+            for (::i32 i = 0; i < dira.get_count(); i++)
             {
 
                ::file::path directory_context = dira[i];
@@ -597,7 +597,7 @@ namespace windows
 
             ls_dir(dira, listing.m_pathUser);
 
-            for (int i = 0; i < dira.get_count(); i++)
+            for (::i32 i = 0; i < dira.get_count(); i++)
             {
 
                ::file::path directory_context = dira[i];
@@ -753,7 +753,7 @@ namespace windows
 
       }
 
-      unsigned int dwAttrib;
+      ::u32 dwAttrib;
 
       dwAttrib = windows_get_file_attributes(pcszPath);
 
@@ -809,7 +809,7 @@ namespace windows
 
       }
 
-      unsigned int dwAttrib;
+      ::u32 dwAttrib;
 
       dwAttrib = windows_get_file_attributes(str);
 
@@ -1246,18 +1246,18 @@ namespace windows
    //   unicode_to_utf8(rStatus.m_strFullName,wstrFullName);
 
    //   WIN32_FIND_DATA findFileData;
-   //   HANDLE hFind = FindFirstFile((char *)pszFileName,&findFileData);
+   //   HANDLE hFind = FindFirstFile((::i8 *)pszFileName,&findFileData);
 
    //   if(hFind == INVALID_HANDLE_VALUE)
    //      return false;
    //   VERIFY(FindClose(hFind));
 
    //   // strip attribute of NORMAL bit, our API doesn't have a "normal" bit.
-   //   rStatus.m_attribute = (unsigned char)(findFileData.dwFileAttributes & ~FILE_ATTRIBUTE_NORMAL);
+   //   rStatus.m_attribute = (::u8)(findFileData.dwFileAttributes & ~FILE_ATTRIBUTE_NORMAL);
 
-   //   // get just the low unsigned int of the file i32_size
+   //   // get just the low ::u32 of the file i32_size
    //   ASSERT(findFileData.nFileSizeHigh == 0);
-   //   rStatus.m_size = (int)findFileData.nFileSizeLow;
+   //   rStatus.m_size = (::i32)findFileData.nFileSizeLow;
 
    //   // convert times as appropriate
    //   rStatus.m_ctime = ::earth::time(findFileData.ftCreationTime);

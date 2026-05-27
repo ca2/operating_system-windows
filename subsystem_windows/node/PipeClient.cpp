@@ -41,7 +41,7 @@ namespace subsystem_windows
 
    }
 
-   ::pointer < ::subsystem::NamedPipeInterface >PipeClient::connect(const ::scoped_string & scopedstrName, unsigned int maxPortionSize)
+   ::pointer < ::subsystem::NamedPipeInterface >PipeClient::connect(const ::scoped_string & scopedstrName, ::u32 maxPortionSize)
    {
       ::string pipeName;
       pipeName.format("\\\\.\\pipe\\{}", ::string(scopedstrName).c_str());

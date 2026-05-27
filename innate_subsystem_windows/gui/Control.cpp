@@ -52,7 +52,7 @@ namespace innate_subsystem_windows
   // }
 
 
-  void Control::setText(const char *text)
+  void Control::setText(const ::i8 *text)
   {
      //SetWindowText(m_hwnd, text);
      setWindowText(text);
@@ -67,7 +67,7 @@ namespace innate_subsystem_windows
   }*/
 
 
-  void Control::setSignedInt(int value)
+  void Control::setSignedInt(::i32 value)
   {
 
      ::string strText;
@@ -79,7 +79,7 @@ namespace innate_subsystem_windows
   }
 
 
-  void Control::setUnsignedInt(unsigned int value)
+  void Control::setUnsignedInt(::u32 value)
   {
 
      ::string strText;
@@ -200,7 +200,7 @@ namespace innate_subsystem_windows
   // }
 
 
-   // void Control::postUserMessage(unsigned int uMessage, ::wparam wparam, ::lparam lparam)
+   // void Control::postUserMessage(::u32 uMessage, ::wparam wparam, ::lparam lparam)
    // {
    //
    //    ::PostMessage()

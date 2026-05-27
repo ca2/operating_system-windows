@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <stdio.h>
 
-int main(void)
+::i32 main(void)
 {
    USHORT processMachine = 0;
    USHORT nativeMachine = 0;

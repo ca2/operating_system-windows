@@ -52,16 +52,16 @@ if (bOk)
 
    bool SystemInformation::_isSupportStretchBlt(HDC hdc)
    {
-      int rasterCaps = GetDeviceCaps(hdc, RASTERCAPS);
+      ::i32 rasterCaps = GetDeviceCaps(hdc, RASTERCAPS);
       return !!(rasterCaps & RC_STRETCHBLT);
    }
 
-   int SystemInformation::_getBitsPixel(HDC hdc)
+   ::i32 SystemInformation::_getBitsPixel(HDC hdc)
    {
       return GetDeviceCaps(hdc, BITSPIXEL);
    }
 
-   int SystemInformation::getMonitorCount()
+   ::i32 SystemInformation::getMonitorCount()
    {
       return GetSystemMetrics(SM_CMONITORS);
    }

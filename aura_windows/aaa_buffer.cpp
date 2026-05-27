@@ -18,4 +18,4 @@ extern i32_point g_pointLastBottomRight;
 #define SQUARY_HINT
 #endif
 
-//int iSquaryHint = 0;
+//::i32 iSquaryHint = 0;

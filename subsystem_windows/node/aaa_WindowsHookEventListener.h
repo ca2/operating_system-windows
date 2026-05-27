@@ -30,6 +30,6 @@ namespace subsystem_windows
    class CLASS_DECL_SUBSYSTEM_WINDOWS WindowsHookEventListener
    {
    public:
-      virtual LRESULT onHookProc(int code, WPARAM wParam, LPARAM lParam) = 0;
+      virtual LRESULT onHookProc(::i32 code, WPARAM wParam, LPARAM lParam) = 0;
    };
 } // namespace subsystem_windows

@@ -98,7 +98,7 @@
           * Returns exit code of terminated process.
           * @throws SystemException on fail.
           */
-          unsigned int getExitCode() override;
+          ::u32 getExitCode() override;
 
          /**
           * Returns the process handle if process already run and zero otherwise.

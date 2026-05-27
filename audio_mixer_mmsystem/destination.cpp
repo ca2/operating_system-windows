@@ -30,11 +30,11 @@
 
          ::pointer<::audio_mixer_mmsystem::source>    lpSource;
 
-         int iConnections = (int) m_mixerline.cConnections;
+         ::i32 iConnections = (::i32) m_mixerline.cConnections;
 
          m_mixersourcea.set_size_create(this, iConnections);
 
-         for (int i = 0; i < iConnections; i++)
+         for (::i32 i = 0; i < iConnections; i++)
          {
 
             lpSource = m_mixersourcea[i];
@@ -57,7 +57,7 @@
 
          ::audio_mixer::source_array & sourcea = m_mixersourcea;
 
-         for(int i = 0; i < sourcea.get_size(); i++)
+         for(::i32 i = 0; i < sourcea.get_size(); i++)
          {
 
             sourcea[i]->GetLineControls();
@@ -76,7 +76,7 @@
 
          ::audio_mixer::source_array & sourcea = m_mixersourcea;
 
-         for(int i = 0; i < sourcea.get_size(); i++)
+         for(::i32 i = 0; i < sourcea.get_size(); i++)
          {
 
             sourcea[i]->update_all_controls();
@@ -86,7 +86,7 @@
       }
 
 
-      unsigned int destination::get_component_type()
+      ::u32 destination::get_component_type()
       {
 
          return m_mixerline.dwComponentType;
@@ -118,7 +118,7 @@
       }
 
 
-      unsigned int destination::get_mixer_line_id()
+      ::u32 destination::get_mixer_line_id()
       {
 
          return m_mixerline.dwLineID;

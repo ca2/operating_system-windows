@@ -66,7 +66,7 @@ namespace subsystem_windows
       void readFromClipBoard(::string &clipDest) override;
 
    //protected:
-      bool on_window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam) override;
+      bool on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam) override;
 
       void onThreadMain() override;
       void onTermThread() override;

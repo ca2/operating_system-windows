@@ -100,12 +100,12 @@ namespace subsystem_windows
       return out;
    }
 
-   ::string OperatingSystem::getSpecialFolderPath(int specialFolderId)
+   ::string OperatingSystem::getSpecialFolderPath(::i32 specialFolderId)
    {
       ::string out;
       //_ASSERT(out != NULL);
 
-      int csidl = 0;
+      ::i32 csidl = 0;
 
       switch (specialFolderId)
       {
@@ -164,7 +164,7 @@ namespace subsystem_windows
       return buffer;
    } // void
 
-   bool OperatingSystem::isItTheSamePathAsCurrent(unsigned int pId)
+   bool OperatingSystem::isItTheSamePathAsCurrent(::u32 pId)
    {
       ::string currModulePath, testedModulePath;
       ProcessHandle pHandle;
@@ -364,7 +364,7 @@ namespace subsystem_windows
          if (dwmIsEnabledResult != S_OK)
          {
             ::string errMess;
-            errMess.formatf("The DwmIsCompositionEnabled() error code is {}", (int)dwmIsEnabledResult);
+            errMess.formatf("The DwmIsCompositionEnabled() error code is {}", (::i32)dwmIsEnabledResult);
             throw ::subsystem::Exception("");
          }
          return result != FALSE;
@@ -430,7 +430,7 @@ namespace subsystem_windows
       ::memory memory;
       memory.set_size(size);
    ::subsystem_windows::SharedMemory shMem(scopedstrShareMemoryName, size);
-   unsigned long long *mem = (unsigned long long *)shMem.getMemPointer();
+   ::u64 *mem = (::u64 *)shMem.getMemPointer();
 
    class ::time timeStart = ::time::now();
 
@@ -438,7 +438,7 @@ namespace subsystem_windows
    //::happening m_sleepInterval;
    while (mem[0] == 0)
    {
-      unsigned int timeForWait = maximum(timeWaitMax - timeStart.elapsed(), 0_s).integral_millisecond();
+      ::u32 timeForWait = maximum(timeWaitMax - timeStart.elapsed(), 0_s).integral_millisecond();
       if (timeForWait == 0)
       {
          throw ::subsystem::Exception("The desktop server time out expired");
@@ -451,7 +451,7 @@ namespace subsystem_windows
 }
 
 
-   unsigned int OperatingSystem::getActiveConsoleSessionId(::subsystem::LogWriter *plogwriter)
+   ::u32 OperatingSystem::getActiveConsoleSessionId(::subsystem::LogWriter *plogwriter)
    {
 
       return WindowsSubsystem().WTS().getActiveConsoleSessionId(plogwriter);

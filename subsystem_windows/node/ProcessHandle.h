@@ -43,7 +43,7 @@ namespace subsystem_windows
          ~ProcessHandle() override;
 
          // @throws ::subsystem::Exception on an error.
-         void openProcess(unsigned int dwDesiredAccess,
+         void openProcess(::u32 dwDesiredAccess,
                           bool bInheritHandle,
                           ::process_identifier processidentifier) override;
 

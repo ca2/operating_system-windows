@@ -17,7 +17,7 @@
 //
 //      virtual bool watch(const ::scoped_string & scopedstrPath);
 //
-//      virtual e_action translate_os_action(int iAction);
+//      virtual e_action translate_os_action(::i32 iAction);
 //
 //      virtual void     run() override;
 //

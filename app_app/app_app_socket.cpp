@@ -109,7 +109,7 @@ namespace user_service
             ::fork(get_application(), [=]
             {
 
-               unsigned int uiPid;
+               ::u32 uiPid;
 
                call_async(path, ": app=" + strApp, path.folder(), SW_SHOWNORMAL, false, &uiPid);
 
@@ -126,7 +126,7 @@ namespace user_service
          {
             //         outheader("Cache-control") = "public";
             //         outheader("Pragma") = "public";
-            //         int iPathCount;
+            //         ::i32 iPathCount;
             //         outheader("Expires") = http()->gmdate(pdatetime->strtotime(nullptr, "+1 day", 0, iPathCount));
             //#ifdef WINDOWS
             //         simple_file_server(::file::path("Z:\\") / m_request.m_strRequestUri);
@@ -183,7 +183,7 @@ namespace user_service
       }
 
 
-      int iStatusCode;
+      ::i32 iStatusCode;
 
       string strStatus;
 
@@ -262,7 +262,7 @@ auto tickExecuteEnd = ::tick::now();
    {
       if (key == "location" && straValue.get_count() >= 1)
       {
-         for (int i = 0; i < straValue.get_size(); i++)
+         for (::i32 i = 0; i < straValue.get_size(); i++)
          {
             url_domain domain;
             domain.create(purl->get_server(straValue[i]));
@@ -299,7 +299,7 @@ auto tickExecuteEnd = ::tick::now();
             string strUnit = straItem[0];
             string_array_base stra;
             stra.explode(",", straItem[1]);
-            for (int i = 0; i < stra.get_count(); i++)
+            for (::i32 i = 0; i < stra.get_count(); i++)
             {
                string_array_base straRange;
                straRange.explode("-", stra[i]);
@@ -321,7 +321,7 @@ auto tickExecuteEnd = ::tick::now();
 
    }
 
-   void socket::simple_image_server(const ::scoped_string & scopedstrPath, int iMaxWidth, int iMaxHeight)
+   void socket::simple_image_server(const ::scoped_string & scopedstrPath, ::i32 iMaxWidth, ::i32 iMaxHeight)
    {
 
       if (iMaxWidth <= 0 && iMaxHeight <= 0)
@@ -334,31 +334,31 @@ auto tickExecuteEnd = ::tick::now();
 
 /*         pimage->load_image(pszPath);
 
-         double dRateW = 1.0;
+         ::f64 dRateW = 1.0;
 
          if (iMaxWidth > 0)
          {
 /*            if (pimage->width() > iMaxWidth)
             {
-/*               dRateW = (double)iMaxWidth / (double)pimage->width();
+/*               dRateW = (::f64)iMaxWidth / (::f64)pimage->width();
             }
          }
 
-         double dRateH = 1.0;
+         ::f64 dRateH = 1.0;
 
          if (iMaxHeight > 0)
          {
 /*            if (pimage->height() > iMaxHeight)
             {
-/*               dRateH = (double)iMaxHeight / (double)pimage->width();
+/*               dRateH = (::f64)iMaxHeight / (::f64)pimage->width();
             }
          }
 
-         double dRate = minimum(dRateW, dRateH);
+         ::f64 dRate = minimum(dRateW, dRateH);
 
 /*         ::image::image_pointer pimage;
 
-/*         pimage = create_image({(int)(pimage->width() * dRate),  (int)(pimage->height() * dRate)});
+/*         pimage = create_image({(::i32)(pimage->width() * dRate),  (::i32)(pimage->height() * dRate)});
 
 /*         pimage->stretch_image(pimage);
 

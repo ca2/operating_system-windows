@@ -22,7 +22,7 @@ namespace windows
 
 
          class CLASS_DECL_ACME device :
-            virtual public ::nano::graphics::device
+            virtual public ::nano::graphics::context
          {
          public:
 

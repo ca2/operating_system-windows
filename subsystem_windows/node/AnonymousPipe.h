@@ -48,7 +48,7 @@ namespace subsystem_windows
          // function calling.
          // @param hRead is a read handle getting by the CreatePipe()
          // function calling but is not the same as for hWrite.
-         //  AnonymousPipe(::subsystem::File *pfileWrite, HANDLE hRead, unsigned int maxPortionSize, ::subsystem::LogWriter *log);
+         //  AnonymousPipe(::subsystem::File *pfileWrite, HANDLE hRead, ::u32 maxPortionSize, ::subsystem::LogWriter *log);
          AnonymousPipe();
          ~AnonymousPipe() override;
 
@@ -64,7 +64,7 @@ namespace subsystem_windows
          //    return ::subsystem::AnonymousPipe::is_subsystem_composite();
          //
          // }
-         void initialize_anonymous_pipe(::subsystem::FileInterface* pfileWrite, ::subsystem::FileInterface* pfileRead, unsigned int maxPortionSize, ::subsystem::LogWriter* log) override;
+         void initialize_anonymous_pipe(::subsystem::FileInterface* pfileWrite, ::subsystem::FileInterface* pfileRead, ::u32 maxPortionSize, ::subsystem::LogWriter* log) override;
 
          /**
           * Closes transport.
@@ -110,7 +110,7 @@ namespace subsystem_windows
          void assignHandlesFor(::subsystem::ProcessHandleInterface * pprocesshandleTarget, bool neededToClose,
                                bool keepCloseRight = false) override;
 
-         void setTimeOut(unsigned int timeOut);
+         void setTimeOut(::u32 timeOut);
 
       //private:
          void checkPipeFile(::subsystem::FileInterface * pfile);
@@ -118,7 +118,7 @@ namespace subsystem_windows
          ::pointer< ::subsystem_windows::File > m_pfileWrite;
          ::pointer< ::subsystem_windows::File > m_pfileRead;
          bool m_neededToClose;
-         unsigned int m_timeOut;
+         ::u32 m_timeOut;
 
          critical_section m_criticalsectionPipe;
          ::happening m_readEvent;

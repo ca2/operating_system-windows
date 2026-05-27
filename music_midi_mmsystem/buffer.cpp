@@ -18,7 +18,7 @@ namespace music
       {
 
 
-         void buffer::Initialize(int iSize, buffer_array* pbuffera)
+         void buffer::Initialize(::i32 iSize, buffer_array* pbuffera)
          {
 
             m_pbuffera = pbuffera;
@@ -32,14 +32,14 @@ namespace music
          }
 
 
-         void buffer_array::Initialize(int iCount, int iSize, midi_callback_data* pcallbackdata)
+         void buffer_array::Initialize(::i32 iCount, ::i32 iSize, midi_callback_data* pcallbackdata)
          {
 
             m_pcallbackdata = pcallbackdata;
 
             m_buffera.set_size(iCount);
 
-            for (int i = 0; i < this->buffer_count(); i++)
+            for (::i32 i = 0; i < this->buffer_count(); i++)
             {
 
                this->buffer_at(i) = create_newø<buffer>();
@@ -54,7 +54,7 @@ namespace music
          void buffer_array::Reset()
          {
 
-            for (int i = 0; i < this->buffer_count(); i++)
+            for (::i32 i = 0; i < this->buffer_count(); i++)
             {
 
                this->buffer_at(i)->Reset();
@@ -68,8 +68,8 @@ namespace music
 
             zero(m_midihdr);
 
-            m_midihdr.lpData = (char*)m_storage.data();
-            m_midihdr.dwBufferLength = (unsigned int)m_storage.size();
+            m_midihdr.lpData = (::i8*)m_storage.data();
+            m_midihdr.dwBufferLength = (::u32)m_storage.size();
             m_midihdr.dwUser = (DWORD_PTR)this;
 
             zero(m_midihdr.lpData, m_midihdr.dwBufferLength);
@@ -211,7 +211,7 @@ namespace music
          ::e_status buffer_array::midiOutUnprepareHeader(HMIDIOUT hmidiout)
          {
 
-            for (int i = 0; i < this->buffer_count(); i++)
+            for (::i32 i = 0; i < this->buffer_count(); i++)
             {
 
                auto estatus = this->buffer_at(i)->midiOutUnprepareHeader(hmidiout);
@@ -233,7 +233,7 @@ namespace music
          ::e_status buffer_array::midiOutPrepareHeader(HMIDIOUT hmidiout)
          {
 
-            for (int i = 0; i < this->buffer_count(); i++)
+            for (::i32 i = 0; i < this->buffer_count(); i++)
             {
 
                auto estatus = this->buffer_at(i)->midiOutPrepareHeader(hmidiout);
@@ -283,7 +283,7 @@ namespace music
          ::e_status buffer_array::midiStreamOut(HMIDISTRM hmidiout)
          {
 
-            for (int i = 0; i < this->buffer_count(); i++)
+            for (::i32 i = 0; i < this->buffer_count(); i++)
             {
 
                _synchronous_lock synchronouslock(m_pcallbackdata->m_psequence->synchronization());

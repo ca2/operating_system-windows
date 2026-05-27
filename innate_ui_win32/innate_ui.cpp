@@ -217,7 +217,7 @@ namespace innate_ui_win32
    //}
 
 
-   //void innate_ui::track_popup_menu(int iMenuResourceId, const ::function<void(int)> &functionOnActionId)
+   //void innate_ui::track_popup_menu(::i32 iMenuResourceId, const ::function<void(::i32)> &functionOnActionId)
    //{
 
    //   HMENU hRoot = LoadMenu(GetModuleHandle(0), MAKEINTRESOURCE(iMenuResourceId));
@@ -239,7 +239,7 @@ namespace innate_ui_win32
    //   ///
    //   setForegroundWindow();
    //   
-   //   int action = TrackPopupMenu(hMenu,
+   //   ::i32 action = TrackPopupMenu(hMenu,
    //                                 TPM_NONOTIFY | TPM_RETURNCMD | TPM_RIGHTBUTTON,
    //                                 pos.x, pos.y, 0, ::as_HWND(operating_system_window()), NULL);
    //   

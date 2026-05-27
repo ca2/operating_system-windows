@@ -145,7 +145,7 @@ namespace subsystem_windows
       return RegDeleteValue(m_key, ::wstring(scopedstrName)) == ERROR_SUCCESS;
    }
 
-   bool WindowsRegistryKey::setValueAsInt32(const ::scoped_string & scopedstrName, int value)
+   bool WindowsRegistryKey::setValueAsInt32(const ::scoped_string & scopedstrName, ::i32 value)
    {
       if (!isOpened()) {
          return false;
@@ -188,7 +188,7 @@ namespace subsystem_windows
       return RegSetValueEx(m_key,::wstring( scopedstrName), 0, REG_BINARY, (BYTE *)value, size) == ERROR_SUCCESS;
    }
 
-   bool WindowsRegistryKey::getValueAsInt32(const ::scoped_string & scopedstrName, int *out)
+   bool WindowsRegistryKey::getValueAsInt32(const ::scoped_string & scopedstrName, ::i32 *out)
    {
       if (!isOpened()) {
          return false;

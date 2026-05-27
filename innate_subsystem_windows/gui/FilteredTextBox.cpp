@@ -54,7 +54,7 @@ namespace innate_subsystem_windows
       set_operating_system_window(operatingsystemwindow);
    }
 
-   void FilteredTextBox::setText(char *text)
+   void FilteredTextBox::setText(::i8 *text)
    {
       m_strText = text;
       TextBox::setText(text);
@@ -91,7 +91,7 @@ namespace innate_subsystem_windows
       return 0;
    }
 
-   bool FilteredTextBox::isStringValid(const char *string)
+   bool FilteredTextBox::isStringValid(const ::i8 *string)
    {
       if (m_pstringfilter != NULL) {
          return m_pstringfilter->isStringCorrect(string);
@@ -110,7 +110,7 @@ namespace innate_subsystem_windows
    }
 
 
-   bool FilteredTextBox::window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool FilteredTextBox::window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
 
       if (message == WM_CHAR)
@@ -127,7 +127,7 @@ namespace innate_subsystem_windows
       return false;
 
    }
-   // LRESULT FilteredTextBox::windowProc(HWND hwnd, unsigned int uMsg, WPARAM wparam, LPARAM lparam)
+   // LRESULT FilteredTextBox::windowProc(HWND hwnd, ::u32 uMsg, WPARAM wparam, LPARAM lparam)
    // {
    //    FilteredTextBox *_this = (FilteredTextBox *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
    //    if (_this == NULL) {

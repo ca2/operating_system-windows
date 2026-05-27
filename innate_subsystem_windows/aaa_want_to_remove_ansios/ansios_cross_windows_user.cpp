@@ -1,17 +1,17 @@
 #include "framework.h"
 
 
-char char_to_upper(int32_t ch);
+::i8 char_to_upper(int32_t ch);
 
 
-int_bool MessageBoxAForConsole(oswindow interaction_impl, const scoped_string & str, const scoped_string & strTitle, unsigned int uFlags);
+int_bool MessageBoxAForConsole(oswindow interaction_impl, const scoped_string & str, const scoped_string & strTitle, ::u32 uFlags);
 
 
-//int_bool (* g_messageboxa)(oswindow interaction_impl, const scoped_string & str, const scoped_string & strTitle, unsigned int uFlags) = MessageBoxAForConsole;
+//int_bool (* g_messageboxa)(oswindow interaction_impl, const scoped_string & str, const scoped_string & strTitle, ::u32 uFlags) = MessageBoxAForConsole;
 
 
 
-int_bool MessageBoxAForConsole(oswindow interaction_impl, const scoped_string & str, const scoped_string & strTitle, unsigned int uFlags)
+int_bool MessageBoxAForConsole(oswindow interaction_impl, const scoped_string & str, const scoped_string & strTitle, ::u32 uFlags)
 {
 
    string strLine;
@@ -30,7 +30,7 @@ int_bool MessageBoxAForConsole(oswindow interaction_impl, const scoped_string & 
 
    strLine += psz;
 
-   int iDefaultButton = e_dialog_result_ok;
+   ::i32 iDefaultButton = e_dialog_result_ok;
 
 
    string str;
@@ -78,7 +78,7 @@ int_bool MessageBoxAForConsole(oswindow interaction_impl, const scoped_string & 
 
    }
 
-   int iRet = iDefaultButton;
+   ::i32 iRet = iDefaultButton;
 
    bool bAnswer = false;
 
@@ -100,7 +100,7 @@ repeat:
    if((uFlags & MB_YESNOCANCEL) == MB_YESNOCANCEL)
    {
 
-      int c = getc(stdin);
+      ::i32 c = getc(stdin);
 
       switch(c)
       {
@@ -129,7 +129,7 @@ repeat:
    else if((uFlags & MB_YESNO) == MB_YESNO)
    {
 
-      int c = getc(stdin);
+      ::i32 c = getc(stdin);
 
       switch(c)
       {

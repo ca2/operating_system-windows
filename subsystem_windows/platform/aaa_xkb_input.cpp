@@ -58,7 +58,7 @@ namespace xkb_input
    }
 
 
-   void xkb_input::xkb_keymap_new_from_string(const_char_pointer p, int format, int flags)
+   void xkb_input::xkb_keymap_new_from_string(const_char_pointer p, ::i32 format, ::i32 flags)
    {
 
       m_strXkbKeymapString = p;
@@ -87,7 +87,7 @@ namespace xkb_input
    }
 
 
-   void xkb_input::__xkb_keymap_new_from_string(const_char_pointer p, int iFormat, int iFlags)
+   void xkb_input::__xkb_keymap_new_from_string(const_char_pointer p, ::i32 iFormat, ::i32 iFlags)
    {
 
       if(!m_pxkbcontext)

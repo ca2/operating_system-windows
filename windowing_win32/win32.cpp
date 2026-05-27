@@ -37,7 +37,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::_window_create_solid_caret(HWND hwnd, int nWidth, int nHeight)
+   void windowing::_window_create_solid_caret(HWND hwnd, ::i32 nWidth, ::i32 nHeight)
    {
 
       ASSERT(::IsWindow(hwnd));
@@ -47,7 +47,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::_window_create_gray_caret(HWND hwnd, int nWidth, int nHeight)
+   void windowing::_window_create_gray_caret(HWND hwnd, ::i32 nWidth, ::i32 nHeight)
    {
 
       ASSERT(::IsWindow(hwnd));
@@ -57,7 +57,7 @@ namespace windowing_win32
    }
 
 
-   CLASS_DECL_WINDOWING_WIN32 string message_box_result_to_string(int iResult);
+   CLASS_DECL_WINDOWING_WIN32 string message_box_result_to_string(::i32 iResult);
 
 
    void defer_term_ui()
@@ -68,7 +68,7 @@ namespace windowing_win32
 
 
 
-   CLASS_DECL_WINDOWING_WIN32 int erelative_get_window(enum_relative erelative)
+   CLASS_DECL_WINDOWING_WIN32 ::i32 erelative_get_window(enum_relative erelative)
    {
 
       switch (erelative)
@@ -86,7 +86,7 @@ namespace windowing_win32
    CLASS_DECL_WINDOWING_WIN32 HWND get_window(HWND hwnd, enum_relative erelative)
    {
 
-      int iGetWindow = erelative_get_window(erelative);
+      ::i32 iGetWindow = erelative_get_window(erelative);
 
       if (iGetWindow < 0)
       {
@@ -107,10 +107,10 @@ namespace windowing_win32
 
 
 
-   int desktop1_main(HINSTANCE hInstance, int nCmdShow);
+   ::i32 desktop1_main(HINSTANCE hInstance, ::i32 nCmdShow);
 
 
-   ::color::color get_default_sys_color(unsigned long long u)
+   ::color::color get_default_sys_color(::u64 u)
    {
 
       switch (u)

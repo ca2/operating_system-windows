@@ -15,18 +15,18 @@
 
 
 // Entry i32_point function for all processes.
-//int APIENTRY cef_main(HINSTANCE hInstance,
+//::i32 APIENTRY cef_main(HINSTANCE hInstance,
 //                      HINSTANCE hPrevInstance,
 //                      LPTSTR lpCmdLine,
-//                      int nCmdShow)
+//                      ::i32 nCmdShow)
 //{
 //   __UNREFERENCED_PARAMETER(hPrevInstance);
 //   __UNREFERENCED_PARAMETER(lpCmdLine);
 
-int APIENTRY app_chromium_deferred_run(HINSTANCE hInstance,
+::i32 APIENTRY app_chromium_deferred_run(HINSTANCE hInstance,
                                        HINSTANCE hPrevInstance,
                                        LPTSTR lpCmdLine,
-                                       int nCmdShow)
+                                       ::i32 nCmdShow)
 {
 
    // Enable High-DPI support on Windows 7 or newer.
@@ -53,7 +53,7 @@ int APIENTRY app_chromium_deferred_run(HINSTANCE hInstance,
 
 
 
-//int cef_main(HINSTANCE hInstance)
+//::i32 cef_main(HINSTANCE hInstance)
 //{
 //   // Enable High-DPI support on Windows 7 or newer.
 //   CefEnableHighDPISupport();
@@ -73,7 +73,7 @@ int APIENTRY app_chromium_deferred_run(HINSTANCE hInstance,
 //   //// CEF applications have multiple sub-processes (render, plugin, GPU, etc)
 //   //// that share the same executable. This function checks the command-line and,
 //   //// if this is a sub-process, executes the appropriate logic.
-//   //int exit_code = CefExecuteProcess(main_args, nullptr, sandbox_info);
+//   //::i32 exit_code = CefExecuteProcess(main_args, nullptr, sandbox_info);
 //   //if (exit_code >= 0)
 //   //{
 //   //   // The sub-process has completed so return here.

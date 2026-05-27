@@ -73,9 +73,9 @@ namespace innate_subsystem_windows
       // Sets text associated with window
       //
 
-      void setText(const char *text) override;
-      void setSignedInt(int value) override;
-      void setUnsignedInt(unsigned int value) override;
+      void setText(const ::i8 *text) override;
+      void setSignedInt(::i32 value) override;
+      void setUnsignedInt(::u32 value) override;
 
 
 
@@ -112,43 +112,43 @@ namespace innate_subsystem_windows
       // Sets windows style for this control
       //
 
-      //void setStyle(unsigned int styleFlags) override;
+      //void setStyle(::u32 styleFlags) override;
 
       //
       // Gets windows style for this control
       //
 
-      //long long getStyle() override;
+      //::i64 getStyle() override;
 
       //
       // Adds style to this control
       //
 
-      //void addStyle(unsigned int styleFlag) override;
+      //void addStyle(::u32 styleFlag) override;
 
       //
       // Removes style from this control
       //
 
-      //void removeStyle(unsigned int styleFlag) override;
+      //void removeStyle(::u32 styleFlag) override;
 
       //
       // Returns true if styleFlags parameter is in
       // this control's style
       //
 
-      //bool isStyleEnabled(unsigned int styleFlags) override;
+      //bool isStyleEnabled(::u32 styleFlags) override;
 
       //
       // Private methods for manipulation window extended styles
       //
 
-      //void setExStyle(unsigned int style) override;
-      //void addExStyle(unsigned int styleFlag) override;
-      //void removeExStyle(unsigned int styleFlag) override;
+      //void setExStyle(::u32 style) override;
+      //void addExStyle(::u32 styleFlag) override;
+      //void removeExStyle(::u32 styleFlag) override;
 
-      //unsigned int getExStyle() override;
-      //bool isExStyleEnabled(unsigned int styleFlag) override;
+      //::u32 getExStyle() override;
+      //bool isExStyleEnabled(::u32 styleFlag) override;
 
       //
       // Replaces default window proc with wndProc.
@@ -172,7 +172,7 @@ namespace innate_subsystem_windows
       //    //
       //
       //    WNDPROC m_defWindowProc;
-      //void postUserMessage(unsigned int uMessage, ::wparam wparam, ::lparam lparam) override;
+      //void postUserMessage(::u32 uMessage, ::wparam wparam, ::lparam lparam) override;
 
 
    };

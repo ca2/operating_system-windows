@@ -40,20 +40,20 @@ namespace subsystem_windows
    public:
 
 
-      int m_xVirtualScreen;
-      int m_yVirtualScreen;
+      ::i32 m_xVirtualScreen;
+      ::i32 m_yVirtualScreen;
 
       ::int_rectangle_array_base m_displayRects;
       critical_section m_displayRectsMutex;
 
-      static const unsigned int UPDATE_INTERVAL = 3000;
+      static const ::u32 UPDATE_INTERVAL = 3000;
       class ::time m_latestUpdateTime;
 
       Displays();
       ~Displays() override;
 
       // If a display does not exist now the function return an empty rectangle.
-      virtual void getDisplayCoordinates(unsigned char displayNumber, ::i32_rectangle & rectangle)override;
+      virtual void getDisplayCoordinates(::u8 displayNumber, ::i32_rectangle & rectangle)override;
 
       virtual ::int_rectangle_array_base getDisplaysCoords() override;
 
@@ -86,7 +86,7 @@ namespace subsystem_windows
    //    ~Displays() override;
    //
    //    // If a display does not exist now the function return an empty rectangle.
-   //    void getDisplayCoordinates(unsigned char displayNumber, ::i32_rectangle *rect) override;
+   //    void getDisplayCoordinates(::u8 displayNumber, ::i32_rectangle *rect) override;
    //
    //    ::int_rectangle_array_base getDisplaysCoords() override;
    //
@@ -105,13 +105,13 @@ namespace subsystem_windows
    //    // Returns true if the update() function has been called lately.
    //    bool isAlreadyUpdated() override;
    //
-   //    // int m_xVirtualScreen;
-   //    // int m_yVirtualScreen;
+   //    // ::i32 m_xVirtualScreen;
+   //    // ::i32 m_yVirtualScreen;
    //    //
    //    // ::int_rectangle_array_base m_displayRects;
    //    // LocalMutex m_displayRectsMutex;
    //    //
-   //    // static const unsigned int UPDATE_INTERVAL = 3000;
+   //    // static const ::u32 UPDATE_INTERVAL = 3000;
    //    // class ::time m_latestUpdateTime;
    // };
 

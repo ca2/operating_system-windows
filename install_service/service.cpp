@@ -11,8 +11,8 @@ const TCHAR *startup_strings[] = { _T("SERVICE_AUTO_START"), _T("SERVICE_DELAYED
 const TCHAR *priority_strings[] = { _T("REALTIME_PRIORITY_CLASS"), _T("HIGH_PRIORITY_CLASS"), _T("ABOVE_NORMAL_PRIORITY_CLASS"), _T("NORMAL_PRIORITY_CLASS"), _T("BELOW_NORMAL_PRIORITY_CLASS"), _T("IDLE_PRIORITY_CLASS"), 0 };
 
 typedef struct {
-  int first;
-  int last;
+  ::i32 first;
+  ::i32 last;
 } list_t;
 
 /*
@@ -21,7 +21,7 @@ typedef struct {
             0 if the status is desired, eg STOPPED following CONTROL_STOP.
            -1 if the status is undesired, eg STOPPED following CONTROL_START.
 */
-static inline int service_control_response(unsigned long control, unsigned long status) {
+static inline ::i32 service_control_response(unsigned long control, unsigned long status) {
   switch (control) {
     case NSSM_SERVICE_CONTROL_START:
       switch (status) {
@@ -79,10 +79,10 @@ static inline int service_control_response(unsigned long control, unsigned long 
   return 0;
 }
 
-static inline int await_service_control_response(unsigned long control, SC_HANDLE service_handle, SERVICE_STATUS *service_status, unsigned long initial_status) {
-  int tries = 0;
+static inline ::i32 await_service_control_response(unsigned long control, SC_HANDLE service_handle, SERVICE_STATUS *service_status, unsigned long initial_status) {
+  ::i32 tries = 0;
   while (QueryServiceStatus(service_handle, service_status)) {
-    int response = service_control_response(control, service_status->dwCurrentState);
+    ::i32 response = service_control_response(control, service_status->dwCurrentState);
     /* Alas we can't WaitForSingleObject() on an SC_HANDLE. */
     if (! response) return response;
     if (response > 0 || service_status->dwCurrentState == initial_status) {
@@ -94,7 +94,7 @@ static inline int await_service_control_response(unsigned long control, SC_HANDL
   return -1;
 }
 
-int affinity_mask_to_string(__int64 mask, TCHAR **string) {
+::i32 affinity_mask_to_string(__int64 mask, TCHAR **string) {
   if (! string) return 1;
   if (! mask) {
     *string = 0;
@@ -109,11 +109,11 @@ int affinity_mask_to_string(__int64 mask, TCHAR **string) {
 
   for (i = 0, n = 0; i < _countof(set); i++) {
     if (mask & (1LL << i)) {
-      if (set[n].first == -1) set[n].first = set[n].last = (int) i;
-      else if (set[n].last == (int) i - 1) set[n].last = (int) i;
+      if (set[n].first == -1) set[n].first = set[n].last = (::i32) i;
+      else if (set[n].last == (::i32) i - 1) set[n].last = (::i32) i;
       else {
         n++;
-        set[n].first = set[n].last = (int) i;
+        set[n].first = set[n].last = (::i32) i;
       }
     }
   }
@@ -124,7 +124,7 @@ int affinity_mask_to_string(__int64 mask, TCHAR **string) {
   if (! string) return 2;
 
   size_t s = 0;
-  int ret;
+  ::i32 ret;
   for (i = 0; i <= n; i++) {
     if (i) (*string)[s++] = _T(',');
     ret = _sntprintf_s(*string + s, 3, _TRUNCATE, _T("%u"), set[i].first);
@@ -148,7 +148,7 @@ int affinity_mask_to_string(__int64 mask, TCHAR **string) {
   return 0;
 }
 
-int affinity_string_to_mask(TCHAR *string, __int64 *mask) {
+::i32 affinity_string_to_mask(TCHAR *string, __int64 *mask) {
   if (! mask) return 1;
 
   *mask = 0LL;
@@ -158,9 +158,9 @@ int affinity_string_to_mask(TCHAR *string, __int64 *mask) {
 
   TCHAR *s = string;
   TCHAR *end;
-  int ret;
-  int i;
-  int n = 0;
+  ::i32 ret;
+  ::i32 i;
+  ::i32 n = 0;
   unsigned long number;
 
   for (n = 0; n < _countof(set); n++) set[n].first = set[n].last = -1;
@@ -171,7 +171,7 @@ int affinity_string_to_mask(TCHAR *string, __int64 *mask) {
     s = end;
     if (ret == 0 || ret == 2) {
       if (number >= _countof(set)) return 2;
-      set[n].first = set[n].last = (int) number;
+      set[n].first = set[n].last = (::i32) number;
 
       switch (*s) {
         case 0:
@@ -188,7 +188,7 @@ int affinity_string_to_mask(TCHAR *string, __int64 *mask) {
           if (ret == 0 || ret == 2) {
             s = end;
             if (! *s || *s == _T(',')) {
-              set[n].last = (int) number;
+              set[n].last = (::i32) number;
               if (! *s) break;
               n++;
               s++;
@@ -206,7 +206,7 @@ int affinity_string_to_mask(TCHAR *string, __int64 *mask) {
   }
 
   for (i = 0; i <= n; i++) {
-    for (int j = set[i].first; j <= set[i].last; j++) (__int64) *mask |= (1LL << (__int64) j);
+    for (::i32 j = set[i].first; j <= set[i].last; j++) (__int64) *mask |= (1LL << (__int64) j);
   }
 
   return 0;
@@ -216,7 +216,7 @@ inline unsigned long priority_mask() {
  return REALTIME_PRIORITY_CLASS | HIGH_PRIORITY_CLASS | ABOVE_NORMAL_PRIORITY_CLASS | NORMAL_PRIORITY_CLASS | BELOW_NORMAL_PRIORITY_CLASS | IDLE_PRIORITY_CLASS;
 }
 
-int priority_constant_to_index(unsigned long constant) {
+::i32 priority_constant_to_index(unsigned long constant) {
   switch (constant & priority_mask()) {
     case REALTIME_PRIORITY_CLASS: return NSSM_REALTIME_PRIORITY;
     case HIGH_PRIORITY_CLASS: return NSSM_HIGH_PRIORITY;
@@ -227,7 +227,7 @@ int priority_constant_to_index(unsigned long constant) {
   return NSSM_NORMAL_PRIORITY;
 }
 
-unsigned long priority_index_to_constant(int index) {
+unsigned long priority_index_to_constant(::i32 index) {
   switch (index) {
     case NSSM_REALTIME_PRIORITY: return REALTIME_PRIORITY_CLASS;
     case NSSM_HIGH_PRIORITY: return HIGH_PRIORITY_CLASS;
@@ -313,7 +313,7 @@ SC_HANDLE open_service(SC_HANDLE services, TCHAR *service_name, unsigned long ac
         there's more data to come.
       0 and sets last error to something else on error.
     */
-    int ret = EnumServicesStatus(services, SERVICE_DRIVER | SERVICE_FILE_SYSTEM_DRIVER | SERVICE_KERNEL_DRIVER | SERVICE_WIN32, SERVICE_STATE_ALL, status, bufsize, &required, &count, &resume);
+    ::i32 ret = EnumServicesStatus(services, SERVICE_DRIVER | SERVICE_FILE_SYSTEM_DRIVER | SERVICE_KERNEL_DRIVER | SERVICE_WIN32, SERVICE_STATE_ALL, status, bufsize, &required, &count, &resume);
     if (! ret) {
       error = GetLastError();
       if (error != ERROR_MORE_DATA) {
@@ -371,7 +371,7 @@ QUERY_SERVICE_CONFIG *query_service_config(const TCHAR *service_name, SC_HANDLE 
   return qsc;
 }
 
-int set_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle, TCHAR *buffer) {
+::i32 set_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle, TCHAR *buffer) {
   TCHAR *dependencies = _T("");
   unsigned long num_dependencies = 0;
 
@@ -412,7 +412,7 @@ int set_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle
           return 3;
         }
 
-        ret = RegQueryValueEx(key, NSSM_REG_GROUPS, 0, &type, (unsigned char *) groups, &groupslen);
+        ret = RegQueryValueEx(key, NSSM_REG_GROUPS, 0, &type, (::u8 *) groups, &groupslen);
         if (ret != ERROR_SUCCESS) {
           _ftprintf(stderr, _T("%s\\%s: %s"), NSSM_REGISTRY_GROUPS, NSSM_REG_GROUPS, error_string(GetLastError()));
           HeapFree(GetProcessHeap(), 0, groups);
@@ -494,7 +494,7 @@ int set_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle
   return 0;
 }
 
-int get_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle, TCHAR **buffer, unsigned long *bufsize, int type) {
+::i32 get_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle, TCHAR **buffer, unsigned long *bufsize, ::i32 type) {
   if (! buffer) return 1;
   if (! bufsize) return 2;
 
@@ -546,11 +546,11 @@ int get_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle
   return 0;
 }
 
-int get_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle, TCHAR **buffer, unsigned long *bufsize) {
+::i32 get_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle, TCHAR **buffer, unsigned long *bufsize) {
   return get_service_dependencies(service_name, service_handle, buffer, bufsize, DEPENDENCY_ALL);
 }
 
-int set_service_description(const TCHAR *service_name, SC_HANDLE service_handle, TCHAR *buffer) {
+::i32 set_service_description(const TCHAR *service_name, SC_HANDLE service_handle, TCHAR *buffer) {
   SERVICE_DESCRIPTION description;
   ZeroMemory(&description, sizeof(description));
   /*
@@ -566,7 +566,7 @@ int set_service_description(const TCHAR *service_name, SC_HANDLE service_handle,
   return 1;
 }
 
-int get_service_description(const TCHAR *service_name, SC_HANDLE service_handle, unsigned long len, TCHAR *buffer) {
+::i32 get_service_description(const TCHAR *service_name, SC_HANDLE service_handle, unsigned long len, TCHAR *buffer) {
   if (! buffer) return 1;
 
   unsigned long bufsize;
@@ -579,7 +579,7 @@ int get_service_description(const TCHAR *service_name, SC_HANDLE service_handle,
       return 2;
     }
 
-    if (QueryServiceConfig2(service_handle, SERVICE_CONFIG_DESCRIPTION, (unsigned char *) description, bufsize, &bufsize)) {
+    if (QueryServiceConfig2(service_handle, SERVICE_CONFIG_DESCRIPTION, (::u8 *) description, bufsize, &bufsize)) {
       if (description->lpDescription) _sntprintf_s(buffer, len, _TRUNCATE, _T("%s"), description->lpDescription);
       else ZeroMemory(buffer, len * sizeof(TCHAR));
       HeapFree(GetProcessHeap(), 0, description);
@@ -599,7 +599,7 @@ int get_service_description(const TCHAR *service_name, SC_HANDLE service_handle,
   return 0;
 }
 
-int get_service_startup(const TCHAR *service_name, SC_HANDLE service_handle, const QUERY_SERVICE_CONFIG *qsc, unsigned long *startup) {
+::i32 get_service_startup(const TCHAR *service_name, SC_HANDLE service_handle, const QUERY_SERVICE_CONFIG *qsc, unsigned long *startup) {
   if (! qsc) return 1;
 
   switch (qsc->tickStartType) {
@@ -622,7 +622,7 @@ int get_service_startup(const TCHAR *service_name, SC_HANDLE service_handle, con
       return 2;
     }
 
-    if (QueryServiceConfig2(service_handle, SERVICE_CONFIG_DELAYED_AUTO_START_INFO, (unsigned char *) info, bufsize, &bufsize)) {
+    if (QueryServiceConfig2(service_handle, SERVICE_CONFIG_DELAYED_AUTO_START_INFO, (::u8 *) info, bufsize, &bufsize)) {
       if (info->fDelayedAutostart) *startup = NSSM_STARTUP_DELAYED;
       HeapFree(GetProcessHeap(), 0, info);
       return 0;
@@ -643,7 +643,7 @@ int get_service_startup(const TCHAR *service_name, SC_HANDLE service_handle, con
   return 0;
 }
 
-int get_service_username(const TCHAR *service_name, const QUERY_SERVICE_CONFIG *qsc, TCHAR **username, size_t *usernamelen) {
+::i32 get_service_username(const TCHAR *service_name, const QUERY_SERVICE_CONFIG *qsc, TCHAR **username, size_t *usernamelen) {
   if (! username) return 1;
   if (! usernamelen) return 1;
 
@@ -719,7 +719,7 @@ void cleanup_nssm_service(nssm_service_t *service) {
 }
 
 /* About to install the service */
-int pre_install_service(int argc, TCHAR **argv) {
+::i32 pre_install_service(::i32 argc, TCHAR **argv) {
   nssm_service_t *service = alloc_nssm_service();
   set_nssm_service_defaults(service);
   if (argc) _sntprintf_s(service->name, _countof(service->name), _TRUNCATE, _T("%s"), argv[0]);
@@ -736,7 +736,7 @@ int pre_install_service(int argc, TCHAR **argv) {
   /* Arguments are optional */
   size_t flagslen = 0;
   size_t s = 0;
-  int i;
+  ::i32 i;
   for (i = 2; i < argc; i++) flagslen += _tcslen(argv[i]) + 1;
   if (! flagslen) flagslen = 1;
   if (flagslen > _countof(service->flags)) {
@@ -755,13 +755,13 @@ int pre_install_service(int argc, TCHAR **argv) {
   _sntprintf_s(service->dir, _countof(service->dir), _TRUNCATE, _T("%s"), service->exe);
   strip_basename(service->dir);
 
-  int ret = install_service(service);
+  ::i32 ret = install_service(service);
   cleanup_nssm_service(service);
   return ret;
 }
 
 /* About to edit the service. */
-int pre_edit_service(int argc, TCHAR **argv) {
+::i32 pre_edit_service(::i32 argc, TCHAR **argv) {
   /* Require service name. */
   if (argc < 2) return usage(1);
 
@@ -773,10 +773,10 @@ int pre_edit_service(int argc, TCHAR **argv) {
   bool unsetting = false;
 
   /* Minimum number of arguments. */
-  int mandatory = 2;
+  ::i32 mandatory = 2;
   /* Index of first value. */
-  int remainder = 3;
-  int i;
+  ::i32 remainder = 3;
+  ::i32 i;
   if (str_equiv(verb, _T("get"))) {
     mandatory = 3;
     mode = MODE_GETTING;
@@ -942,7 +942,7 @@ int pre_edit_service(int argc, TCHAR **argv) {
 
   HKEY key;
   value_t value;
-  int ret;
+  ::i32 ret;
 
   if (mode == MODE_GETTING) {
     if (! service->native) {
@@ -1037,7 +1037,7 @@ int pre_edit_service(int argc, TCHAR **argv) {
 }
 
 /* About to erase the service */
-int pre_erase_service(int argc, TCHAR **argv) {
+::i32 pre_erase_service(::i32 argc, TCHAR **argv) {
   nssm_service_t *service = alloc_nssm_service();
   set_nssm_service_defaults(service);
   if (argc) _sntprintf_s(service->name, _countof(service->name), _TRUNCATE, _T("%s"), argv[0]);
@@ -1045,7 +1045,7 @@ int pre_erase_service(int argc, TCHAR **argv) {
   /* Show dialogue box if we didn't pass service name and "confirm" */
   if (argc < 2) return nssm_gui(IDD_REMOVE, service);
   if (str_equiv(argv[1], _T("confirm"))) {
-    int ret = erase_service(service);
+    ::i32 ret = erase_service(service);
     cleanup_nssm_service(service);
     return ret;
   }
@@ -1054,7 +1054,7 @@ int pre_erase_service(int argc, TCHAR **argv) {
 }
 
 /* Install the service */
-int install_service(nssm_service_t *service) {
+::i32 install_service(nssm_service_t *service) {
   if (! service) return 1;
 
   /* Open service manager */
@@ -1091,7 +1091,7 @@ int install_service(nssm_service_t *service) {
 }
 
 /* Edit the service. */
-int edit_service(nssm_service_t *service, bool editing) {
+::i32 edit_service(nssm_service_t *service, bool editing) {
   if (! service) return 1;
 
   /*
@@ -1183,7 +1183,7 @@ int edit_service(nssm_service_t *service, bool editing) {
 }
 
 /* Control a service. */
-int control_service(unsigned long control, int argc, TCHAR **argv) {
+::i32 control_service(unsigned long control, ::i32 argc, TCHAR **argv) {
   if (argc < 1) return usage(1);
   TCHAR *service_name = argv[0];
   TCHAR canonical_name[SERVICE_NAME_LENGTH];
@@ -1220,7 +1220,7 @@ int control_service(unsigned long control, int argc, TCHAR **argv) {
     return 3;
   }
 
-  int ret;
+  ::i32 ret;
   unsigned long error;
   SERVICE_STATUS service_status;
   if (control == NSSM_SERVICE_CONTROL_START) {
@@ -1240,7 +1240,7 @@ int control_service(unsigned long control, int argc, TCHAR **argv) {
     }
 
     if (ret) {
-      int response = await_service_control_response(control, service_handle, &service_status, initial_status);
+      ::i32 response = await_service_control_response(control, service_handle, &service_status, initial_status);
       CloseServiceHandle(service_handle);
 
       if (response) {
@@ -1286,7 +1286,7 @@ int control_service(unsigned long control, int argc, TCHAR **argv) {
     }
 
     if (ret) {
-      int response = await_service_control_response(control, service_handle, &service_status, initial_status);
+      ::i32 response = await_service_control_response(control, service_handle, &service_status, initial_status);
       CloseServiceHandle(service_handle);
 
       if (response) {
@@ -1308,7 +1308,7 @@ int control_service(unsigned long control, int argc, TCHAR **argv) {
 }
 
 /* Remove the service */
-int erase_service(nssm_service_t *service) {
+::i32 erase_service(nssm_service_t *service) {
   if (! service) return 1;
 
   /* Open service manager */
@@ -1431,9 +1431,9 @@ void set_service_recovery(nssm_service_t *service) {
   }
 }
 
-int monitor_service(nssm_service_t *service) {
+::i32 monitor_service(nssm_service_t *service) {
   /* Set service status to started */
-  int ret = start_service(service);
+  ::i32 ret = start_service(service);
   if (ret) {
     TCHAR code[16];
     _sntprintf_s(code, _countof(code), _TRUNCATE, _T("%d"), ret);
@@ -1575,7 +1575,7 @@ unsigned long WINAPI service_control_handler(unsigned long control, unsigned lon
 }
 
 /* Start the service */
-int start_service(nssm_service_t *service) {
+::i32 start_service(nssm_service_t *service) {
   service->stopping = false;
   service->allow_restart = true;
 
@@ -1591,7 +1591,7 @@ int start_service(nssm_service_t *service) {
   ZeroMemory(&pi, sizeof(pi));
 
   /* Get startup parameters */
-  int ret = get_parameters(service, &si);
+  ::i32 ret = get_parameters(service, &si);
   if (ret) {
     log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_GET_PARAMETERS_FAILED, service->name, 0);
     return stop_service(service, 2, true, true);
@@ -1706,7 +1706,7 @@ int start_service(nssm_service_t *service) {
 }
 
 /* Stop the service */
-int stop_service(nssm_service_t *service, unsigned long exitcode, bool graceful, bool default_action) {
+::i32 stop_service(nssm_service_t *service, unsigned long exitcode, bool graceful, bool default_action) {
   service->allow_restart = false;
   if (service->wait_handle) {
     UnregisterWait(service->wait_handle);
@@ -1755,7 +1755,7 @@ int stop_service(nssm_service_t *service, unsigned long exitcode, bool graceful,
 }
 
 /* Callback function triggered when the server exits */
-void CALLBACK end_service(void *arg, unsigned char why) {
+void CALLBACK end_service(void *arg, ::u8 why) {
   nssm_service_t *service = (nssm_service_t *) arg;
 
   if (service->stopping) return;
@@ -1803,11 +1803,11 @@ void CALLBACK end_service(void *arg, unsigned char why) {
   if (! service->allow_restart) return;
 
   /* What action should we take? */
-  int action = NSSM_EXIT_RESTART;
+  ::i32 action = NSSM_EXIT_RESTART;
   TCHAR action_string[ACTION_LEN];
   bool default_action;
   if (! get_exit_action(service->name, &exitcode, action_string, &default_action)) {
-    for (int i = 0; exit_action_strings[i]; i++) {
+    for (::i32 i = 0; exit_action_strings[i]; i++) {
       if (! _tcsnicmp((const TCHAR *) action_string, exit_action_strings[i], ACTION_LEN)) {
         action = i;
         break;
@@ -1916,7 +1916,7 @@ void throttle_restart(nssm_service_t *service) {
            0 if the wait completed.
           -1 on error.
 */
-int await_shutdown(nssm_service_t *service, TCHAR *function_name, unsigned long timeout) {
+::i32 await_shutdown(nssm_service_t *service, TCHAR *function_name, unsigned long timeout) {
   unsigned long interval;
   unsigned long waithint;
   unsigned long ret;

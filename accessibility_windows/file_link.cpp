@@ -185,7 +185,7 @@ namespace acme_windows
 
          auto pwsz = wstr.get_buffer(MAX_PATH * 8);
 
-         int iIcon = 0;
+         ::i32 iIcon = 0;
 
          if (SUCCEEDED(m_pshelllink->GetIconLocation(pwsz, MAX_PATH * 8, &iIcon)))
          {

@@ -76,7 +76,7 @@ namespace innate_subsystem_windows
       m_bCreated = true;
    }
 
-   bool Menu::loadMenu(const char * lpMenuName)
+   bool Menu::loadMenu(const ::i8 * lpMenuName)
    {
       _ASSERT(m_hmenu == 0);
 
@@ -93,42 +93,42 @@ namespace innate_subsystem_windows
       m_bCreated = true;
    }
 
-   int Menu::getMenuItemCount()
+   ::i32 Menu::getMenuItemCount()
    {
       _ASSERT(m_hmenu != 0);
 
       return GetMenuItemCount(m_hmenu);
    }
 
-   bool Menu::_appendMenu(unsigned int uFlags, ::uptr uIDNewItem, const char * lpNewItem)
+   bool Menu::_appendMenu(::u32 uFlags, ::uptr uIDNewItem, const ::i8 * lpNewItem)
    {
       _ASSERT(m_hmenu != 0);
 
       return !!AppendMenu(m_hmenu, uFlags, uIDNewItem,::wstring( lpNewItem));
    }
 
-   bool Menu::_insertMenuItem(unsigned int uItem, BOOL fByPosition, LPCMENUITEMINFO lpmii)
+   bool Menu::_insertMenuItem(::u32 uItem, BOOL fByPosition, LPCMENUITEMINFO lpmii)
    {
       _ASSERT(m_hmenu != 0);
 
       return !!InsertMenuItem(m_hmenu, uItem, fByPosition, lpmii);
    }
 
-   bool Menu::_modifyMenu(unsigned int uPosition, unsigned int uFlags, LONG_PTR uIDNewItem, const char * lpNewItem)
+   bool Menu::_modifyMenu(::u32 uPosition, ::u32 uFlags, LONG_PTR uIDNewItem, const ::i8 * lpNewItem)
    {
       _ASSERT(m_hmenu != 0);
 
       return !!ModifyMenu(m_hmenu, uPosition, uFlags, uIDNewItem, ::wstring(lpNewItem));
    }
 
-   bool Menu::deleteMenu(unsigned int uPosition)
+   bool Menu::deleteMenu(::u32 uPosition)
    {
       _ASSERT(m_hmenu != 0);
 
       return !!DeleteMenu(m_hmenu, uPosition, MF_BYPOSITION);
    }
 
-   bool Menu::getSubMenu(int nPos, ::innate_subsystem::MenuInterface *pmenu)
+   bool Menu::getSubMenu(::i32 nPos, ::innate_subsystem::MenuInterface *pmenu)
    {
       HMENU tmenu;
 
@@ -140,14 +140,14 @@ namespace innate_subsystem_windows
       return (!tmenu?false:true);
    }
 
-   bool Menu::enableMenuItem(unsigned int uID, unsigned int uEnable)
+   bool Menu::enableMenuItem(::u32 uID, ::u32 uEnable)
    {
       _ASSERT(m_hmenu != 0);
 
       return !!EnableMenuItem(m_hmenu, uID, uEnable);
    }
 
-   bool Menu::_setMenuItem(unsigned int uItem, BOOL fByPosition, LPMENUITEMINFO lpmii)
+   bool Menu::_setMenuItem(::u32 uItem, BOOL fByPosition, LPMENUITEMINFO lpmii)
    {
       _ASSERT(m_hmenu != 0);
 
@@ -170,11 +170,11 @@ namespace innate_subsystem_windows
       }
    }
 
-   int Menu::findMenuItem(unsigned int uID)
+   ::i32 Menu::findMenuItem(::u32 uID)
    {
       _ASSERT(m_hmenu != 0);
 
-      for (int i = 0; i < getMenuItemCount(); i++) {
+      for (::i32 i = 0; i < getMenuItemCount(); i++) {
          if (GetMenuItemID(m_hmenu, i) == uID) {
             return i;
          }
@@ -182,7 +182,7 @@ namespace innate_subsystem_windows
       return -1;
    }
 
-   bool Menu::appendMenu(const ::scoped_string & scopedstr, unsigned int uID)
+   bool Menu::appendMenu(const ::scoped_string & scopedstr, ::u32 uID)
    {
       return _appendMenu(MF_STRING, uID, ::string(scopedstr));
    }
@@ -197,7 +197,7 @@ namespace innate_subsystem_windows
       return _appendMenu(MF_POPUP, (::uptr)pMenu->_HMENU(),::string(scopedstr));
    }
 
-   bool Menu::insertMenuItem(unsigned int uItem, const ::scoped_string & scopedstr, unsigned int uID)
+   bool Menu::insertMenuItem(::u32 uItem, const ::scoped_string & scopedstr, ::u32 uID)
    {
       MENUITEMINFO mii;
       ::wstring wstr(scopedstr);
@@ -210,7 +210,7 @@ namespace innate_subsystem_windows
       return _insertMenuItem(uItem, TRUE, (LPMENUITEMINFO)&mii);
    }
 
-   bool Menu::insertCheckMenuItem(unsigned int uItem, const ::scoped_string & scopedstr, unsigned int uID)
+   bool Menu::insertCheckMenuItem(::u32 uItem, const ::scoped_string & scopedstr, ::u32 uID)
    {
       MENUITEMINFO mii;
       ::wstring wstr(scopedstr);
@@ -223,20 +223,20 @@ namespace innate_subsystem_windows
       return _insertMenuItem(uItem, TRUE, (LPMENUITEMINFO)&mii);
    }
 
-   bool Menu::checkedMenuItem(unsigned int uID, bool bEnable)
+   bool Menu::checkedMenuItem(::u32 uID, bool bEnable)
    {
       _ASSERT(m_hmenu != 0);
 
-      int pos = findMenuItem(uID);
+      ::i32 pos = findMenuItem(uID);
       if (pos == -1) {
          return false;
       }
-      unsigned int command = bEnable ? MF_CHECKED : MF_UNCHECKED;
+      ::u32 command = bEnable ? MF_CHECKED : MF_UNCHECKED;
       DWORD res = CheckMenuItem(m_hmenu, pos, MF_BYPOSITION | command);
       return (res == -1) ? false : true;
    }
 
-   bool Menu::insertSeparator(unsigned int uItem)
+   bool Menu::insertSeparator(::u32 uItem)
    {
       MENUITEMINFO mii;
 
@@ -246,7 +246,7 @@ namespace innate_subsystem_windows
       return _insertMenuItem(uItem, TRUE, (LPMENUITEMINFO)&mii);
    }
 
-   bool Menu::insertSubMenu(unsigned int uItem, const ::scoped_string & scopedstr, ::innate_subsystem::MenuInterface *pMenu)
+   bool Menu::insertSubMenu(::u32 uItem, const ::scoped_string & scopedstr, ::innate_subsystem::MenuInterface *pMenu)
    {
       MENUITEMINFO mii;
 
@@ -257,7 +257,7 @@ namespace innate_subsystem_windows
       return _insertMenuItem(uItem, TRUE, (LPMENUITEMINFO)&mii);
    }
 
-   bool Menu::setDefaultItem(unsigned int uID)
+   bool Menu::setDefaultItem(::u32 uID)
    {
       _ASSERT(m_hmenu != 0);
 
@@ -265,7 +265,7 @@ namespace innate_subsystem_windows
    }
 
 
-   void Menu::trackPopupMenuOnCursorPosition(::innate_subsystem::WindowInterface * pwindowNotify, const function<void(int)> &onCommand)
+   void Menu::trackPopupMenuOnCursorPosition(::innate_subsystem::WindowInterface * pwindowNotify, const function<void(::i32)> &onCommand)
    {
 
       m_papplication->fork([this, onCommand, pwindowNotify]()
@@ -280,7 +280,7 @@ namespace innate_subsystem_windows
       HWND notifyWnd = (HWND) ::as_HWND(pwindowNotify->operating_system_window());
       SetForegroundWindow(notifyWnd);
 
-       int action = TrackPopupMenu(this->m_hmenu,
+       ::i32 action = TrackPopupMenu(this->m_hmenu,
                                    TPM_NONOTIFY | TPM_RETURNCMD | TPM_RIGHTBUTTON,
                                    pos.x, pos.y, 0, notifyWnd, NULL);
          onCommand(action);

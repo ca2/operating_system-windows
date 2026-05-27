@@ -33,7 +33,7 @@ namespace windows
          }
 
 
-         void font::update(::nano::graphics::device* pnanodevice)
+         void font::update(::nano::graphics::context* pgraphicscontext)
          {
 
             if (m_bModified)
@@ -43,7 +43,7 @@ namespace windows
 
                LOGFONTW logfontw = {};
 
-               auto pwindowsnanodevice = dynamic_cast <::windows::nano::graphics::device*>(pnanodevice);
+               auto pwindowsnanodevice = dynamic_cast <::windows::nano::graphics::context*>(pnanodevice);
 
                m_hgdiobj = _create_point_font(m_iFontSize * 10, m_strFontName, m_bBold, pwindowsnanodevice->m_hdc, &logfontw);
 
@@ -55,7 +55,7 @@ namespace windows
          }
 
 
-         HFONT font::_create_point_font(int nPointSize, const ::scoped_string& scopedstrFaceName, bool bBold, HDC hdc, LOGFONTW* plf)
+         HFONT font::_create_point_font(::i32 nPointSize, const ::scoped_string& scopedstrFaceName, bool bBold, HDC hdc, LOGFONTW* plf)
          {
 
             LOGFONTW lF;

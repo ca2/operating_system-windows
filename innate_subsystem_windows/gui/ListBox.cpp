@@ -33,38 +33,38 @@ namespace innate_subsystem_windows
       {
       }
 
-      void ListBox::addString(const char *str)
+      void ListBox::addString(const ::i8 *str)
       {
          addString(str, 0);
       }
 
-      void ListBox::addString(const char *str, void *tag)
+      void ListBox::addString(const ::i8 *str, void *tag)
       {
          ::wstring wstr(str);
          LRESULT lresult = SendMessage(::as_HWND(this->operating_system_window()), LB_ADDSTRING, 0, (::lparam)(LPARAM) wstr.c_str());
-         int i = (int)lresult;
+         ::i32 i = (::i32)lresult;
          _ASSERT(i == lresult);
          setItemData(i, (::lparam)tag);
       }
 
-      void ListBox::removeString(int index)
+      void ListBox::removeString(::i32 index)
       {
-         int top = getTopIndex();
+         ::i32 top = getTopIndex();
          SendMessage(::as_HWND(this->operating_system_window()), LB_DELETESTRING, index, NULL);
          setTopIndex(top);
       }
 
-      int ListBox::getTopIndex()
+      ::i32 ListBox::getTopIndex()
       {
-         return (int)SendMessage(::as_HWND(this->operating_system_window()), LB_GETTOPINDEX, NULL, NULL);
+         return (::i32)SendMessage(::as_HWND(this->operating_system_window()), LB_GETTOPINDEX, NULL, NULL);
       }
 
-      void ListBox::setTopIndex(int index)
+      void ListBox::setTopIndex(::i32 index)
       {
          SendMessage(::as_HWND(this->operating_system_window()), LB_SETTOPINDEX, index, NULL);
       }
 
-      ::string ListBox::getItemText(int index)
+      ::string ListBox::getItemText(::i32 index)
       {
          size_t length = SendMessage(::as_HWND(this->operating_system_window()), LB_GETTEXTLEN, index, NULL);
          _ASSERT(length <= 65536);
@@ -75,12 +75,12 @@ namespace innate_subsystem_windows
          return wstr;
       }
 
-      void ListBox::setItemText(int index, const char *str)
+      void ListBox::setItemText(::i32 index, const ::i8 *str)
       {
-         int si = getSelectedIndex();
-         int top = getTopIndex();
+         ::i32 si = getSelectedIndex();
+         ::i32 top = getTopIndex();
          LRESULT lresult = SendMessage(::as_HWND(this->operating_system_window()), LB_GETTOPINDEX, NULL, NULL);
-         unsigned int topIndex = (unsigned int)lresult;
+         ::u32 topIndex = (::u32)lresult;
          _ASSERT(topIndex == lresult);
          ::lparam data = getItemData(index);
          removeString(index);
@@ -91,41 +91,41 @@ namespace innate_subsystem_windows
          setTopIndex(top);
       }
 
-      void ListBox::appendString(const char *str, ::lparam data)
+      void ListBox::appendString(const ::i8 *str, ::lparam data)
       {
          LRESULT lresult = SendMessage(::as_HWND(this->operating_system_window()), LB_ADDSTRING, 0, (LPARAM)::wstring(str).c_str());
-         int index = (int)lresult;
+         ::i32 index = (::i32)lresult;
          _ASSERT(index == lresult);
          setItemData(index, data);
       }
 
-      void ListBox::insertString(int index, const char *str)
+      void ListBox::insertString(::i32 index, const ::i8 *str)
       {
          SendMessage(::as_HWND(this->operating_system_window()), LB_INSERTSTRING, index, (LPARAM)wstring(str).c_str());
       }
 
-      void ListBox::insertString(int index, const char *str, ::lparam data)
+      void ListBox::insertString(::i32 index, const ::i8 *str, ::lparam data)
       {
          LRESULT lresult = SendMessage(::as_HWND(this->operating_system_window()), LB_INSERTSTRING, index, (LPARAM)::wstring(str).c_str());
-         int i = (int)lresult;
+         ::i32 i = (::i32)lresult;
          _ASSERT(i == lresult);
          setItemData(i, data);
       }
 
-      void ListBox::setItemData(int index, ::lparam data)
+      void ListBox::setItemData(::i32 index, ::lparam data)
       {
          SendMessage(::as_HWND(this->operating_system_window()), LB_SETITEMDATA, index, data);
       }
 
-      ::lparam ListBox::getItemData(int index)
+      ::lparam ListBox::getItemData(::i32 index)
       {
          return SendMessage(::as_HWND(this->operating_system_window()), LB_GETITEMDATA, index, NULL);
       }
 
-      int ListBox::getCount()
+      ::i32 ListBox::getCount()
       {
          LRESULT lresult = SendMessage(::as_HWND(this->operating_system_window()), LB_GETCOUNT, NULL, NULL);
-         int result = (int)lresult;
+         ::i32 result = (::i32)lresult;
          _ASSERT(result == lresult);
          return result;
       }
@@ -135,15 +135,15 @@ namespace innate_subsystem_windows
          SendMessage(::as_HWND(this->operating_system_window()), LB_RESETCONTENT, NULL, NULL);
       }
 
-      int ListBox::getSelectedIndex()
+      ::i32 ListBox::getSelectedIndex()
       {
          LRESULT lresult = SendMessage(::as_HWND(this->operating_system_window()), LB_GETCURSEL, NULL, NULL);
-         int index = (int)lresult;
+         ::i32 index = (::i32)lresult;
          _ASSERT(index == lresult);
          return (index == LB_ERR) ? -1 : index;
       }
 
-      void ListBox::setSelectedIndex(int index)
+      void ListBox::setSelectedIndex(::i32 index)
       {
          SendMessage(::as_HWND(this->operating_system_window()), LB_SETCURSEL, index, NULL);
       }

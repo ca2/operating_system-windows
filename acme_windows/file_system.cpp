@@ -108,7 +108,7 @@ namespace acme_windows
 
       ::file::path path;
 
-      int i = 0;
+      ::i32 i = 0;
 
       while (true)
       {
@@ -156,7 +156,7 @@ namespace acme_windows
 
       WCHAR pPathBuffer[MAX_PATH * 16];
 
-      unsigned int dwRetVal = GetTempPathW(sizeof(pPathBuffer) / sizeof(WCHAR), pPathBuffer);
+      ::u32 dwRetVal = GetTempPathW(sizeof(pPathBuffer) / sizeof(WCHAR), pPathBuffer);
 
       if (dwRetVal > sizeof(pPathBuffer) || (dwRetVal == 0))
       {
@@ -173,7 +173,7 @@ namespace acme_windows
 
 #else
 #define MAX_PATH_HERE 300
-      char pPathBuffer[MAX_PATH_HERE * 16];
+      ::i8 pPathBuffer[MAX_PATH_HERE * 16];
 
       strcpy(pPathBuffer, "/tmp/");
 
@@ -181,7 +181,7 @@ namespace acme_windows
 
       ::file::path pathFolder(pPathBuffer);
 
-      for (int i = 0; i < 1000; i++)
+      for (::i32 i = 0; i < 1000; i++)
       {
 
          ::file::path path;
@@ -217,18 +217,18 @@ namespace acme_windows
 //
 //      memsize pos = 0;
 //
-//      unsigned int dw = 0;
+//      ::u32 dw = 0;
 //
-//      unsigned int dwWrite;
+//      ::u32 dwWrite;
 //
 //      memsize uiWrittenTotal = 0;
 //
 //      while (pos < nCount)
 //      {
 //
-//         dwWrite = (unsigned int)minimum(nCount - uiWrittenTotal, 0xffffffffu);
+//         dwWrite = (::u32)minimum(nCount - uiWrittenTotal, 0xffffffffu);
 //
-//         dw = (unsigned int)(fwrite(&((unsigned char *)pdata)[pos], 1, dwWrite, file));
+//         dw = (::u32)(fwrite(&((::u8 *)pdata)[pos], 1, dwWrite, file));
 //
 //
 //         if (dw != dwWrite)
@@ -278,7 +278,7 @@ namespace acme_windows
 //
 //#else
 //
-//      unsigned int dw = 0;
+//      ::u32 dw = 0;
 //
 //      dw = ::fwrite(pdata, 1, (size_t)nCount, file);
 //

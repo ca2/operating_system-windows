@@ -13,15 +13,15 @@
 //
 //// Forward declarations of functions included in this code module:
 //ATOM                MyRegisterClass(HINSTANCE hInstance);
-//BOOL                InitInstance(HINSTANCE, int);
-//lresult CALLBACK    WndProc(HWND, unsigned int, wparam, lparam);
-//INT_PTR CALLBACK    About(HWND, unsigned int, wparam, lparam);
+//BOOL                InitInstance(HINSTANCE, ::i32);
+//lresult CALLBACK    WndProc(HWND, ::u32, wparam, lparam);
+//INT_PTR CALLBACK    About(HWND, ::u32, wparam, lparam);
 
-////int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
+////::i32 APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 ////   _In_opt_ HINSTANCE hPrevInstance,
 ////   _In_ LPWSTR    lpCmdLine,
-////   _In_ int       nCmdShow)
-//   int windows_desktop1_main(HINSTANCE hInstance,int       nCmdShow)
+////   _In_ ::i32       nCmdShow)
+//   ::i32 windows_desktop1_main(HINSTANCE hInstance,::i32       nCmdShow)
 //{
 //   //__UNREFERENCED_PARAMETER(hPrevInstance);
 //   //__UNREFERENCED_PARAMETER(lpCmdLine);
@@ -53,7 +53,7 @@
 //      }
 //   }
 //
-//   return (int)msg.wParam;
+//   return (::i32)msg.wParam;
 //}
 //
 
@@ -87,7 +87,7 @@
 //}
 //
 ////
-////   FUNCTION: InitInstance(HINSTANCE, int)
+////   FUNCTION: InitInstance(HINSTANCE, ::i32)
 ////
 ////   PURPOSE: Saves instance handle and creates main window
 ////
@@ -96,7 +96,7 @@
 ////        In this function, we save the instance handle in a global variable and
 ////        create and display the main program window.
 ////
-////BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+////BOOL InitInstance(HINSTANCE hInstance, ::i32 nCmdShow)
 ////{
 ////   hInst = hInstance; // Store instance handle in our global variable
 ////
@@ -115,7 +115,7 @@
 ////}
 //
 ////
-////  FUNCTION: WndProc(HWND, unsigned int, wparam, lparam)
+////  FUNCTION: WndProc(HWND, ::u32, wparam, lparam)
 ////
 ////  PURPOSE: Processes messages for the main window.
 ////
@@ -124,7 +124,7 @@
 ////  ::user::e_message_destroy  - post a quit message and return
 ////
 ////
-//lresult CALLBACK WndProc(HWND hWnd, unsigned int message, wparam wParam, lparam lParam)
+//lresult CALLBACK WndProc(HWND hWnd, ::u32 message, wparam wParam, lparam lParam)
 //{
 //
 //   switch (message)
@@ -148,7 +148,7 @@
 //}
 //
 //// Message handler for about box.
-//INT_PTR CALLBACK About(HWND hDlg, unsigned int message, wparam wParam, lparam lParam)
+//INT_PTR CALLBACK About(HWND hDlg, ::u32 message, wparam wParam, lparam lParam)
 //{
 //   __UNREFERENCED_PARAMETER(lParam);
 //   switch (message)

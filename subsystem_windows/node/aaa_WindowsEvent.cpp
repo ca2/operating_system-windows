@@ -28,7 +28,7 @@
 
 namespace subsystem_windows
 {
-      ::happening::::happening(const ::scoped_string & scopedstrName)
+      ::happening::happening(const ::scoped_string & scopedstrName)
       {
          m_hEvent = CreateEvent(0, FALSE, FALSE, ::wstring(scopedstrName));
          if (m_hEvent == 0) {

@@ -34,7 +34,7 @@ namespace windows
             ~pen() override;
 
 
-            void update(::nano::graphics::device* pnanodevice) override;
+            void update(::nano::graphics::context* pgraphicscontext) override;
 
 
          };

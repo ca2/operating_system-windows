@@ -126,7 +126,7 @@
 // setting up globals for 68K plugins.
 NPError Private_Initialize(void);
 void    Private_Shutdown(void);
-NPError Private_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, char* argn[], char* argv[], NPSavedData* saved);
+NPError Private_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, ::i8* argn[], ::i8* argv[], NPSavedData* saved);
 NPError Private_Destroy(NPP instance, NPSavedData** save);
 NPError Private_SetWindow(NPP instance, NPWindow* window);
 NPError Private_NewStream(NPP instance, NPMIMEType type, NPStream* stream, NPBool seekable, uint16* stype);
@@ -152,7 +152,7 @@ NPError Private_SetValue(NPP instance, NPNVariable variable, void *value);
 // #endif
 
 
-typedef unsigned short uint16;
+typedef ::u16 uint16;
 
 #include "npapi.h"
 #include "npruntime.h"

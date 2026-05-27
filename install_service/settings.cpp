@@ -9,11 +9,11 @@ extern const TCHAR *startup_strings[];
 extern const TCHAR *priority_strings[];
 
 /* Does the parameter refer to the default value of the setting? */
-static inline int is_default(const TCHAR *value) {
+static inline ::i32 is_default(const TCHAR *value) {
   return (str_equiv(value, _T("default")) || str_equiv(value, _T("*")) || ! value[0]);
 }
 
-static int value_from_string(const TCHAR *name, value_t *value, const TCHAR *string) {
+static ::i32 value_from_string(const TCHAR *name, value_t *value, const TCHAR *string) {
   size_t len = _tcslen(string);
   if (! len++) {
     value->string = 0;
@@ -36,7 +36,7 @@ static int value_from_string(const TCHAR *name, value_t *value, const TCHAR *str
 }
 
 /* Functions to manage NSSM-specific settings in the registry. */
-static int setting_set_number(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_set_number(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   HKEY key = (HKEY) param;
   if (! key) return -1;
 
@@ -64,12 +64,12 @@ static int setting_set_number(const TCHAR *service_name, void *param, const TCHA
   return 1;
 }
 
-static int setting_get_number(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_get_number(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   HKEY key = (HKEY) param;
   return get_number(key, (TCHAR *) name, &value->numeric, false);
 }
 
-static int setting_set_string(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_set_string(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   HKEY key = (HKEY) param;
   if (! key) return -1;
 
@@ -97,7 +97,7 @@ static int setting_set_string(const TCHAR *service_name, void *param, const TCHA
   return 1;
 }
 
-static int setting_get_string(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_get_string(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   HKEY key = (HKEY) param;
   TCHAR buffer[VALUE_LENGTH];
 
@@ -106,7 +106,7 @@ static int setting_get_string(const TCHAR *service_name, void *param, const TCHA
   return value_from_string(name, value, buffer);
 }
 
-static int setting_set_exit_action(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_set_exit_action(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   unsigned long exitcode;
   TCHAR *code;
   TCHAR action_string[ACTION_LEN];
@@ -124,7 +124,7 @@ static int setting_set_exit_action(const TCHAR *service_name, void *param, const
   if (! key) return -1;
 
   long error;
-  int ret = 1;
+  ::i32 ret = 1;
 
   /* Resetting to default? */
   if (value && value->string) _sntprintf_s(action_string, _countof(action_string), _TRUNCATE, _T("%s"), value->string);
@@ -145,10 +145,10 @@ static int setting_set_exit_action(const TCHAR *service_name, void *param, const
   }
 
   /* Validate the string. */
-  for (int i = 0; exit_action_strings[i]; i++) {
+  for (::i32 i = 0; exit_action_strings[i]; i++) {
     if (! _tcsnicmp((const TCHAR *) action_string, exit_action_strings[i], ACTION_LEN)) {
       if (default_value && str_equiv(action_string, (TCHAR *) default_value)) ret = 0;
-      if (RegSetValueEx(key, code, 0, REG_SZ, (const unsigned char *) exit_action_strings[i], (unsigned long) (_tcslen(action_string) + 1) * sizeof(TCHAR)) != ERROR_SUCCESS) {
+      if (RegSetValueEx(key, code, 0, REG_SZ, (const ::u8 *) exit_action_strings[i], (unsigned long) (_tcslen(action_string) + 1) * sizeof(TCHAR)) != ERROR_SUCCESS) {
         print_message(stderr, NSSM_MESSAGE_SETVALUE_FAILED, code, service_name, error_string(GetLastError()));
         RegCloseKey(key);
         return -1;
@@ -160,12 +160,12 @@ static int setting_set_exit_action(const TCHAR *service_name, void *param, const
   }
 
   print_message(stderr, NSSM_MESSAGE_INVALID_EXIT_ACTION, action_string);
-  for (int i = 0; exit_action_strings[i]; i++) _ftprintf(stderr, _T("%s\n"), exit_action_strings[i]);
+  for (::i32 i = 0; exit_action_strings[i]; i++) _ftprintf(stderr, _T("%s\n"), exit_action_strings[i]);
 
   return -1;
 }
 
-static int setting_get_exit_action(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_get_exit_action(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   unsigned long exitcode = 0;
   unsigned long *code = 0;
 
@@ -186,7 +186,7 @@ static int setting_get_exit_action(const TCHAR *service_name, void *param, const
   return 1;
 }
 
-static int setting_set_affinity(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_set_affinity(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   HKEY key = (HKEY) param;
   if (! key) return -1;
 
@@ -233,7 +233,7 @@ static int setting_set_affinity(const TCHAR *service_name, void *param, const TC
     }
   }
 
-  if (RegSetValueEx(key, name, 0, REG_SZ, (const unsigned char *) canon, (unsigned long) (_tcslen(canon) + 1) * sizeof(TCHAR)) != ERROR_SUCCESS) {
+  if (RegSetValueEx(key, name, 0, REG_SZ, (const ::u8 *) canon, (unsigned long) (_tcslen(canon) + 1) * sizeof(TCHAR)) != ERROR_SUCCESS) {
     if (canon != value->string) HeapFree(GetProcessHeap(), 0, canon);
     log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_SETVALUE_FAILED, name, error_string(GetLastError()), 0);
     return -1;
@@ -243,7 +243,7 @@ static int setting_set_affinity(const TCHAR *service_name, void *param, const TC
   return 1;
 }
 
-static int setting_get_affinity(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_get_affinity(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   HKEY key = (HKEY) param;
   if (! key) return -1;
 
@@ -251,7 +251,7 @@ static int setting_get_affinity(const TCHAR *service_name, void *param, const TC
   TCHAR *buffer = 0;
   unsigned long buflen = 0;
 
-  int ret = RegQueryValueEx(key, name, 0, &type, 0, &buflen);
+  ::i32 ret = RegQueryValueEx(key, name, 0, &type, 0, &buflen);
   if (ret == ERROR_FILE_NOT_FOUND) {
     if (value_from_string(name, value, NSSM_AFFINITY_ALL) == 1) return 0;
     return -1;
@@ -291,7 +291,7 @@ static int setting_get_affinity(const TCHAR *service_name, void *param, const TC
   return ret;
 }
 
-static int setting_set_environment(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_set_environment(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   HKEY key = (HKEY) param;
   if (! param) return -1;
 
@@ -305,7 +305,7 @@ static int setting_set_environment(const TCHAR *service_name, void *param, const
   unsigned long envlen = (unsigned long) _tcslen(value->string) + 1;
   TCHAR *unformatted = 0;
   unsigned long newlen;
-  if (unformat_double_null(value->string, envlen, &unformatted, &newlen)) return -1;
+  if (unformat_f64_null(value->string, envlen, &unformatted, &newlen)) return -1;
 
   if (test_environment(unformatted)) {
     HeapFree(GetProcessHeap(), 0, unformatted);
@@ -313,7 +313,7 @@ static int setting_set_environment(const TCHAR *service_name, void *param, const
     return -1;
   }
 
-  if (RegSetValueEx(key, name, 0, REG_MULTI_SZ, (const unsigned char *) unformatted, (unsigned long) newlen * sizeof(TCHAR)) != ERROR_SUCCESS) {
+  if (RegSetValueEx(key, name, 0, REG_MULTI_SZ, (const ::u8 *) unformatted, (unsigned long) newlen * sizeof(TCHAR)) != ERROR_SUCCESS) {
     if (newlen) HeapFree(GetProcessHeap(), 0, unformatted);
     log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_SETVALUE_FAILED, NSSM_REG_ENV, error_string(GetLastError()), 0);
     return -1;
@@ -323,7 +323,7 @@ static int setting_set_environment(const TCHAR *service_name, void *param, const
   return 1;
 }
 
-static int setting_get_environment(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_get_environment(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   HKEY key = (HKEY) param;
   if (! param) return -1;
 
@@ -334,9 +334,9 @@ static int setting_get_environment(const TCHAR *service_name, void *param, const
 
   TCHAR *formatted;
   unsigned long newlen;
-  if (format_double_null(env, envlen, &formatted, &newlen)) return -1;
+  if (format_f64_null(env, envlen, &formatted, &newlen)) return -1;
 
-  int ret;
+  ::i32 ret;
   if (additional) {
     /* Find named environment variable. */
     TCHAR *s;
@@ -365,12 +365,12 @@ static int setting_get_environment(const TCHAR *service_name, void *param, const
   return ret;
 }
 
-static int setting_set_priority(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_set_priority(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   HKEY key = (HKEY) param;
   if (! param) return -1;
 
   TCHAR *priority_string;
-  int i;
+  ::i32 i;
   long error;
 
   if (value && value->string) priority_string = value->string;
@@ -402,7 +402,7 @@ static int setting_set_priority(const TCHAR *service_name, void *param, const TC
   return -1;
 }
 
-static int setting_get_priority(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 setting_get_priority(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   HKEY key = (HKEY) param;
   if (! param) return -1;
 
@@ -416,7 +416,7 @@ static int setting_get_priority(const TCHAR *service_name, void *param, const TC
 }
 
 /* Functions to manage native service settings. */
-static int native_set_dependongroup(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 native_set_dependongroup(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -441,7 +441,7 @@ static int native_set_dependongroup(const TCHAR *service_name, void *param, cons
   unsigned long len = (unsigned long) _tcslen(value->string) + 1;
   TCHAR *unformatted = 0;
   unsigned long newlen;
-  if (unformat_double_null(value->string, len, &unformatted, &newlen)) {
+  if (unformat_f64_null(value->string, len, &unformatted, &newlen)) {
     if (buffer) HeapFree(GetProcessHeap(), 0, buffer);
     return -1;
   }
@@ -459,7 +459,7 @@ static int native_set_dependongroup(const TCHAR *service_name, void *param, cons
   }
 
   if (missing) {
-    /* Missing identifiers plus double nullptr terminator. */
+    /* Missing identifiers plus ::f64 nullptr terminator. */
     canonlen += missing + 1;
     newlen = (unsigned long) canonlen;
 
@@ -497,7 +497,7 @@ static int native_set_dependongroup(const TCHAR *service_name, void *param, cons
   }
   else dependencies = canon;
 
-  int ret = 1;
+  ::i32 ret = 1;
   if (set_service_dependencies(service_name, service_handle, dependencies)) ret = -1;
   if (dependencies != unformatted) HeapFree(GetProcessHeap(), 0, dependencies);
   if (canon != unformatted) HeapFree(GetProcessHeap(), 0, canon);
@@ -507,7 +507,7 @@ static int native_set_dependongroup(const TCHAR *service_name, void *param, cons
   return ret;
 }
 
-static int native_get_dependongroup(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 native_get_dependongroup(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -515,11 +515,11 @@ static int native_get_dependongroup(const TCHAR *service_name, void *param, cons
   unsigned long buflen;
   if (get_service_dependencies(service_name, service_handle, &buffer, &buflen, DEPENDENCY_GROUPS)) return -1;
 
-  int ret;
+  ::i32 ret;
   if (buflen) {
     TCHAR *formatted;
     unsigned long newlen;
-    if (format_double_null(buffer, buflen, &formatted, &newlen)) {
+    if (format_f64_null(buffer, buflen, &formatted, &newlen)) {
       HeapFree(GetProcessHeap(), 0, buffer);
       return -1;
     }
@@ -536,7 +536,7 @@ static int native_get_dependongroup(const TCHAR *service_name, void *param, cons
   return ret;
 }
 
-static int native_set_dependonservice(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 native_set_dependonservice(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -561,7 +561,7 @@ static int native_set_dependonservice(const TCHAR *service_name, void *param, co
   unsigned long len = (unsigned long) _tcslen(value->string) + 1;
   TCHAR *unformatted = 0;
   unsigned long newlen;
-  if (unformat_double_null(value->string, len, &unformatted, &newlen)) {
+  if (unformat_f64_null(value->string, len, &unformatted, &newlen)) {
     if (buffer) HeapFree(GetProcessHeap(), 0, buffer);
     return -1;
   }
@@ -581,7 +581,7 @@ static int native_set_dependonservice(const TCHAR *service_name, void *param, co
   }
   else dependencies = unformatted;
 
-  int ret = 1;
+  ::i32 ret = 1;
   if (set_service_dependencies(service_name, service_handle, dependencies)) ret = -1;
   if (dependencies != unformatted) HeapFree(GetProcessHeap(), 0, dependencies);
   if (unformatted) HeapFree(GetProcessHeap(), 0, unformatted);
@@ -590,7 +590,7 @@ static int native_set_dependonservice(const TCHAR *service_name, void *param, co
   return ret;
 }
 
-static int native_get_dependonservice(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+static ::i32 native_get_dependonservice(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -598,11 +598,11 @@ static int native_get_dependonservice(const TCHAR *service_name, void *param, co
   unsigned long buflen;
   if (get_service_dependencies(service_name, service_handle, &buffer, &buflen, DEPENDENCY_SERVICES)) return -1;
 
-  int ret;
+  ::i32 ret;
   if (buflen) {
     TCHAR *formatted;
     unsigned long newlen;
-    if (format_double_null(buffer, buflen, &formatted, &newlen)) {
+    if (format_f64_null(buffer, buflen, &formatted, &newlen)) {
       HeapFree(GetProcessHeap(), 0, buffer);
       return -1;
     }
@@ -619,7 +619,7 @@ static int native_get_dependonservice(const TCHAR *service_name, void *param, co
   return ret;
 }
 
-int native_set_description(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_set_description(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -632,7 +632,7 @@ int native_set_description(const TCHAR *service_name, void *param, const TCHAR *
   return 0;
 }
 
-int native_get_description(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_get_description(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -645,7 +645,7 @@ int native_get_description(const TCHAR *service_name, void *param, const TCHAR *
   return 0;
 }
 
-int native_set_displayname(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_set_displayname(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -669,20 +669,20 @@ int native_set_displayname(const TCHAR *service_name, void *param, const TCHAR *
   return 0;
 }
 
-int native_get_displayname(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_get_displayname(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
   QUERY_SERVICE_CONFIG *qsc = query_service_config(service_name, service_handle);
   if (! qsc) return -1;
 
-  int ret = value_from_string(name, value, qsc->lpDisplayName);
+  ::i32 ret = value_from_string(name, value, qsc->lpDisplayName);
   HeapFree(GetProcessHeap(), 0, qsc);
 
   return ret;
 }
 
-int native_set_imagepath(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_set_imagepath(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -700,29 +700,29 @@ int native_set_imagepath(const TCHAR *service_name, void *param, const TCHAR *na
   return 1;
 }
 
-int native_get_imagepath(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_get_imagepath(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
   QUERY_SERVICE_CONFIG *qsc = query_service_config(service_name, service_handle);
   if (! qsc) return -1;
 
-  int ret = value_from_string(name, value, qsc->lpBinaryPathName);
+  ::i32 ret = value_from_string(name, value, qsc->lpBinaryPathName);
   HeapFree(GetProcessHeap(), 0, qsc);
 
   return ret;
 }
 
-int native_set_name(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_set_name(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   print_message(stderr, NSSM_MESSAGE_CANNOT_RENAME_SERVICE);
   return -1;
 }
 
-int native_get_name(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_get_name(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   return value_from_string(name, value, service_name);
 }
 
-int native_set_objectname(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_set_objectname(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -790,20 +790,20 @@ int native_set_objectname(const TCHAR *service_name, void *param, const TCHAR *n
   return 1;
 }
 
-int native_get_objectname(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_get_objectname(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
   QUERY_SERVICE_CONFIG *qsc = query_service_config(service_name, service_handle);
   if (! qsc) return -1;
 
-  int ret = value_from_string(name, value, qsc->lpServiceStartName);
+  ::i32 ret = value_from_string(name, value, qsc->lpServiceStartName);
   HeapFree(GetProcessHeap(), 0, qsc);
 
   return ret;
 }
 
-int native_set_startup(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_set_startup(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -814,8 +814,8 @@ int native_set_startup(const TCHAR *service_name, void *param, const TCHAR *name
   }
 
   /* Map NSSM_STARTUP_* constant to Windows SERVICE_*_START constant. */
-  int service_startup = -1;
-  int i;
+  ::i32 service_startup = -1;
+  ::i32 i;
   for (i = 0; startup_strings[i]; i++) {
     if (str_equiv(value->string, startup_strings[i])) {
       service_startup = i;
@@ -856,7 +856,7 @@ int native_set_startup(const TCHAR *service_name, void *param, const TCHAR *name
   return 1;
 }
 
-int native_get_startup(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_get_startup(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -864,7 +864,7 @@ int native_get_startup(const TCHAR *service_name, void *param, const TCHAR *name
   if (! qsc) return -1;
 
   unsigned long startup;
-  int ret = get_service_startup(service_name, service_handle, qsc, &startup);
+  ::i32 ret = get_service_startup(service_name, service_handle, qsc, &startup);
   HeapFree(GetProcessHeap(), 0, qsc);
 
   if (ret) return -1;
@@ -876,7 +876,7 @@ int native_get_startup(const TCHAR *service_name, void *param, const TCHAR *name
   return value_from_string(name, value, startup_strings[startup]);
 }
 
-int native_set_type(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_set_type(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -924,7 +924,7 @@ int native_set_type(const TCHAR *service_name, void *param, const TCHAR *name, v
   return 1;
 }
 
-int native_get_type(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
+::i32 native_get_type(const TCHAR *service_name, void *param, const TCHAR *name, void *default_value, value_t *value, const TCHAR *additional) {
   SC_HANDLE service_handle = (SC_HANDLE) param;
   if (! service_handle) return -1;
 
@@ -948,9 +948,9 @@ int native_get_type(const TCHAR *service_name, void *param, const TCHAR *name, v
   return value_from_string(name, value, string);
 }
 
-int set_setting(const TCHAR *service_name, HKEY key, settings_t *setting, value_t *value, const TCHAR *additional) {
+::i32 set_setting(const TCHAR *service_name, HKEY key, settings_t *setting, value_t *value, const TCHAR *additional) {
   if (! key) return -1;
-  int ret;
+  ::i32 ret;
 
   if (setting->set) ret = setting->set(service_name, (void *) key, setting->name, setting->default_value, value, additional);
   else ret = -1;
@@ -962,10 +962,10 @@ int set_setting(const TCHAR *service_name, HKEY key, settings_t *setting, value_
   return ret;
 }
 
-int set_setting(const TCHAR *service_name, SC_HANDLE service_handle, settings_t *setting, value_t *value, const TCHAR *additional) {
+::i32 set_setting(const TCHAR *service_name, SC_HANDLE service_handle, settings_t *setting, value_t *value, const TCHAR *additional) {
   if (! service_handle) return -1;
 
-  int ret;
+  ::i32 ret;
   if (setting->set) ret = setting->set(service_name, service_handle, setting->name, setting->default_value, value, additional);
   else ret = -1;
 
@@ -981,9 +981,9 @@ int set_setting(const TCHAR *service_name, SC_HANDLE service_handle, settings_t 
             0 if the default value was retrieved.
            -1 on error.
 */
-int get_setting(const TCHAR *service_name, HKEY key, settings_t *setting, value_t *value, const TCHAR *additional) {
+::i32 get_setting(const TCHAR *service_name, HKEY key, settings_t *setting, value_t *value, const TCHAR *additional) {
   if (! key) return -1;
-  int ret;
+  ::i32 ret;
 
   switch (setting->type) {
     case REG_EXPAND_SZ:
@@ -1010,7 +1010,7 @@ int get_setting(const TCHAR *service_name, HKEY key, settings_t *setting, value_
   return ret;
 }
 
-int get_setting(const TCHAR *service_name, SC_HANDLE service_handle, settings_t *setting, value_t *value, const TCHAR *additional) {
+::i32 get_setting(const TCHAR *service_name, SC_HANDLE service_handle, settings_t *setting, value_t *value, const TCHAR *additional) {
   if (! service_handle) return -1;
   return setting->get(service_name, service_handle, setting->name, 0, value, additional);
 }

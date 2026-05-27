@@ -61,9 +61,9 @@ namespace apex_windows
 
    //   }
 
-   //   int jCount = 23;
+   //   ::i32 jCount = 23;
 
-   //   int iCount;
+   //   ::i32 iCount;
 
    //   if (plauncher != nullptr)
    //   {
@@ -80,10 +80,10 @@ namespace apex_windows
 
    //   set_hwnd(nullptr);
 
-   //   for (int i = 0; i < iCount; i++)
+   //   for (::i32 i = 0; i < iCount; i++)
    //   {
 
-   //      for (int j = 0; j < jCount; j++)
+   //      for (::i32 j = 0; j < jCount; j++)
    //      {
 
    //         set_hwnd(::FindWindowW(nullptr, wstring(strKey)));
@@ -105,7 +105,7 @@ namespace apex_windows
 
    //         }
    //         
-   //         int k = 40;
+   //         ::i32 k = 40;
 
    //         while (k > 0)
    //         {
@@ -192,7 +192,7 @@ namespace apex_windows
    //   COPYDATASTRUCT cds;
 
    //   cds.dwData = I32_MINIMUM;
-   //   cds.cbData = (unsigned int) strMessage.length();
+   //   cds.cbData = (::u32) strMessage.length();
    //   cds.lpData = (void *) strMessage.c_str();
 
    //   HWND hwnd = get_hwnd();
@@ -215,7 +215,7 @@ namespace apex_windows
 
    //      }
 
-   //      unsigned int dwError = ::GetLastError();
+   //      ::u32 dwError = ::GetLastError();
 
    //      if (dwError == ERROR_TIMEOUT)
    //      {
@@ -231,7 +231,7 @@ namespace apex_windows
    //}
 
 
-   //void interprocess_caller::send(int message, void * pdata, int len, const class time & timeTimeout)
+   //void interprocess_caller::send(::i32 message, void * pdata, ::i32 len, const class time & timeTimeout)
    //{
 
    //   if (message == I32_MINIMUM)
@@ -250,8 +250,8 @@ namespace apex_windows
 
    //   COPYDATASTRUCT cds;
 
-   //   cds.dwData = (unsigned int)message;
-   //   cds.cbData = (unsigned int)maximum(0, len);
+   //   cds.dwData = (::u32)message;
+   //   cds.cbData = (::u32)maximum(0, len);
    //   cds.lpData = (void *)pdata;
 
 
@@ -284,7 +284,7 @@ namespace apex_windows
 
    //      }
 
-   //      unsigned int dwError = ::GetLastError();
+   //      ::u32 dwError = ::GetLastError();
 
    //      if (dwError == ERROR_TIMEOUT)
    //      {
@@ -437,7 +437,7 @@ namespace apex_windows
    //}
 
 
-   //void * interprocess_target::on_interprocess_receive(::inteprocess::handler * prx, int message, void * pdata, memsize len)
+   //void * interprocess_target::on_interprocess_receive(::inteprocess::handler * prx, ::i32 message, void * pdata, memsize len)
    //{
 
    //   if (m_preceiver != nullptr)
@@ -454,7 +454,7 @@ namespace apex_windows
    //}
 
 
-   //void * interprocess_target::on_interprocess_post(::inteprocess::handler * prx, long long int a, long long int b)
+   //void * interprocess_target::on_interprocess_post(::inteprocess::handler * prx, ::i64 ::i32 a, ::i64 ::i32 b)
    //{
 
    //   if (m_preceiver != nullptr)
@@ -474,7 +474,7 @@ namespace apex_windows
    LRESULT CALLBACK s_rx_message_queue_proc(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
    {
 
-      int iRet = 0;
+      ::i32 iRet = 0;
 
       interprocess_target * pchannel = (interprocess_target *)GetWindowLongPtr((HWND)hwnd, GWLP_USERDATA);
 
@@ -561,7 +561,7 @@ namespace apex_windows
 
          //   memory memory(pdata, size);
 
-         //   on_interprocess_receive((int)pcopydatastruct->dwData, ::move(memory));
+         //   on_interprocess_receive((::i32)pcopydatastruct->dwData, ::move(memory));
 
          //}
 

@@ -67,7 +67,7 @@ namespace input_win32
    }
 
    
-   LRESULT CALLBACK keyboard_hook::LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
+   LRESULT CALLBACK keyboard_hook::LowLevelKeyboardProc(::i32 nCode, WPARAM wParam, LPARAM lParam)
    {
 
       if (nCode == 0)
@@ -156,7 +156,7 @@ namespace input_win32
       while (::task_get_run())
       {
 
-         int iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
+         ::i32 iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
 
          if (iRet == 0)
          {
@@ -214,7 +214,7 @@ namespace input_win32
    }
 
 
-   void keyboard_hook::keyboard_proc(::user::enum_message eusermessage, int iVirtualKeyCode, int iScanCode)
+   void keyboard_hook::keyboard_proc(::user::enum_message eusermessage, ::i32 iVirtualKeyCode, ::i32 iScanCode)
    {
 
       auto pkey = create_newø < ::message::key >();

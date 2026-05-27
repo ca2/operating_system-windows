@@ -47,7 +47,7 @@ namespace subsystem_windows
       }
    }
 
-   void ProcessHandle::openProcess(unsigned int dwDesiredAccess,
+   void ProcessHandle::openProcess(::u32 dwDesiredAccess,
                        bool bInheritHandle,
                        ::process_identifier processidentifier)
    {

@@ -97,7 +97,7 @@ namespace innate_subsystem_windows
             FrameRect(dc, &itemRect, shadow);
             DeleteObject(shadow);
          } else {
-            unsigned int uState = DFCS_BUTTONPUSH |
+            ::u32 uState = DFCS_BUTTONPUSH |
                           ((m_mouseOver) ? DFCS_HOT : 0) |
                           ((isPressed) ? DFCS_PUSHED : 0);
 
@@ -142,7 +142,7 @@ namespace innate_subsystem_windows
             }
 
             ThemeLib::DrawThemeText(m_theme, dc, BP_PUSHBUTTON, state,
-                                    uniTitle.c_str(), (int)uniTitle.length(),
+                                    uniTitle.c_str(), (::i32)uniTitle.length(),
                                     DT_CENTER | DT_VCENTER | DT_SINGLELINE,
                                     0, &captionRect);
          } else {
@@ -250,9 +250,9 @@ namespace innate_subsystem_windows
    } // End of drawIcon
 
 
-   bool ImagedButton::window_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool ImagedButton::window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
-   //LRESULT CALLBACK ImagedButton::wndProc(HWND hWnd, unsigned int message, WPARAM wparam, LPARAM lparam)
+   //LRESULT CALLBACK ImagedButton::wndProc(HWND hWnd, ::u32 message, WPARAM wparam, LPARAM lparam)
    //{
       ImagedButton *_this = (ImagedButton *)this;
       auto hwnd = (HWND) this->_HWND();

@@ -47,7 +47,7 @@ public:
       ptimer->on_millis_timer_step();
    }
 
-   bool wait(int class ::time)
+   bool wait(::i32 class ::time)
    {
 
       ::ResetEvent(gDoneEvent);
@@ -67,7 +67,7 @@ public:
 
       return true;
    }
-   bool timer(int class ::time)
+   bool timer(::i32 class ::time)
    {
 
       ::ResetEvent(gDoneEvent);
@@ -108,7 +108,7 @@ namespace multimedia
       public:
 
 
-         int                              m_iBuffer;
+         ::i32                              m_iBuffer;
 
          LPDIRECTSOUND8                   m_pdirectsound;
          LPDIRECTSOUNDBUFFER              m_psoundbuffer;
@@ -130,8 +130,8 @@ namespace multimedia
          virtual void out_filled(::collection::index iBuffer) override;
          //virtual void out_buffer_ready(LPWAVEHDR lpwavehdr);
 
-         virtual void     out_open(::thread * pthreadCallback, int iBufferCount, int iBufferSampleCount);
-         virtual void     out_open_ex(::thread * pthreadCallback, int iBufferCount, int iBufferSampleCount, unsigned int uiSamplesPerSec, unsigned int uiChannelCount, unsigned int uiBitsPerSample);
+         virtual void     out_open(::thread * pthreadCallback, ::i32 iBufferCount, ::i32 iBufferSampleCount);
+         virtual void     out_open_ex(::thread * pthreadCallback, ::i32 iBufferCount, ::i32 iBufferSampleCount, ::u32 uiSamplesPerSec, ::u32 uiChannelCount, ::u32 uiBitsPerSample);
          virtual void     out_stop();
          virtual void     out_close();
          virtual void     out_pause();
@@ -152,11 +152,11 @@ namespace multimedia
          //DECLARE_MESSAGE_HANDLER(OnMultimediaDone);
          //DECLARE_MESSAGE_HANDLER(OnMultimediaClose);
 
-//         virtual void out_out_buffer_done(int iBuffer);
+//         virtual void out_out_buffer_done(::i32 iBuffer);
          //       virtual void out_out_buffer_done(LPWAVEHDR lpwavehdr);
 
          WAVEFORMATEX * wave_format();
-         //LPWAVEHDR wave_hdr(int iBuffer);
+         //LPWAVEHDR wave_hdr(::i32 iBuffer);
          virtual void out_run_step();
       };
 

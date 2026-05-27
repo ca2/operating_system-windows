@@ -101,7 +101,7 @@
 
          if (OpenProcessToken(processHandle, TOKEN_QUERY, &procToken)) {
             try {
-               char buffer[1024];
+               ::i8 buffer[1024];
                DWORD retLen = 0;
                if (!GetTokenInformation(procToken, TokenUser, &buffer, sizeof(buffer), &retLen)) {
                   throw ::subsystem::SystemException();

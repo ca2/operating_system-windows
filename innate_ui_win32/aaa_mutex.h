@@ -29,7 +29,7 @@ namespace windows
       bool already_exists();
 
 
-      static ::mutex open_mutex(const ::scoped_string & scopedstrName) { return ::open_mutex(lpszName); }
+      static ::mutex open_mutex(const ::scoped_string & scopedstrName) { return ::open_mutex(pszName); }
 
 
    };

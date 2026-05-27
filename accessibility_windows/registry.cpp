@@ -51,7 +51,7 @@ namespace acme_windows
 
          }
 
-         return (unsigned int) uData;
+         return (::u32) uData;
 
       }
       else if (dwType == REG_SZ)
@@ -211,7 +211,7 @@ namespace acme_windows
    bool registry::key::_data(void* pdata, const ::scoped_string & scopedstrName, DWORD& dwType, DWORD& cbData)
    {
 
-      if (ERROR_SUCCESS != ::RegQueryValueExW(m_hkeySub, wstring(scopedstrName), nullptr, (LPDWORD) &dwType, (unsigned char*)pdata, (LPDWORD) &cbData))
+      if (ERROR_SUCCESS != ::RegQueryValueExW(m_hkeySub, wstring(scopedstrName), nullptr, (LPDWORD) &dwType, (::u8*)pdata, (LPDWORD) &cbData))
       {
 
          return false;
@@ -351,7 +351,7 @@ namespace acme_windows
    void registry::key::_set_data(const void* pdata, const ::scoped_string & scopedstrName, DWORD dwType, DWORD cbData)
    {
 
-      auto lstatus = ::RegSetValueExW(m_hkeySub, scopedstrName.is_empty() ? nullptr : wstring(scopedstrName), 0, dwType, (const unsigned char *) pdata, cbData);
+      auto lstatus = ::RegSetValueExW(m_hkeySub, scopedstrName.is_empty() ? nullptr : wstring(scopedstrName), 0, dwType, (const ::u8 *) pdata, cbData);
 
       if (lstatus != ERROR_SUCCESS)
       {
@@ -391,7 +391,7 @@ namespace acme_windows
    //}
 
 
-   void registry::key::_set(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrData, int iType)
+   void registry::key::_set(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrData, ::i32 iType)
    {
 
       wstring wstr(scopedstrData);
@@ -472,7 +472,7 @@ namespace acme_windows
 
    //}
 
-   void registry::key::set(const ::scoped_string & scopedstrName, const scoped_string & scopedstrData, int iType)
+   void registry::key::set(const ::scoped_string & scopedstrName, const scoped_string & scopedstrData, ::i32 iType)
    { 
 
       /*auto estatus = */ _set(scopedstrName, scopedstrData, iType);
@@ -596,9 +596,9 @@ namespace acme_windows
       nullptr,
       nullptr,
       nullptr);
-      int iSize = maximum(dwMaxSubKeyLen, 1024u);
+      ::i32 iSize = maximum(dwMaxSubKeyLen, 1024u);
       wchar_t *buf = (wchar_t *) malloc(iSize * 2);
-      int iKey = 0;
+      ::i32 iKey = 0;
       while(::RegEnumKeyW(m_hkeySub, iKey, buf, iSize) == ERROR_SUCCESS)
       {
          stra.add(string(buf));
@@ -638,7 +638,7 @@ namespace acme_windows
       
       auto pwsz=hwstr.get_buffer(dwMaxDataNameLen * 2);
 
-      int l;
+      ::i32 l;
 
       DWORD dwIndex = 0;
 
@@ -680,12 +680,12 @@ namespace acme_windows
    }
 
 
-   //int reg_query_data(HKEY hkey, const ::scoped_string & scopedstrSubKey, string & str)
+   //::i32 reg_query_data(HKEY hkey, const ::scoped_string & scopedstrSubKey, string & str)
    //{
 
    //   DWORD dwType = 0;
    //   DWORD dwSize = 0;
-   //   int lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+   //   ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
 
    //   if (lResult != ERROR_SUCCESS)
    //      return lResult;
@@ -697,7 +697,7 @@ namespace acme_windows
    //      
    //      auto pwsz = wstr.get_buffer(dwSize/sizeof(::wide_character));
 
-   //      lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (unsigned char *)(unichar *)pwsz, &dwSize);
+   //      lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8 *)(unichar *)pwsz, &dwSize);
 
    //      wstr.release_buffer(dwSize / sizeof(::wide_character));
 
@@ -726,13 +726,13 @@ namespace acme_windows
       //if (ERROR_SUCCESS == ::RegOpenKeyW(hkey, wstring(name), &hkeySub))
       {
 
-         unsigned int dwAlloc = 1026 * 64;
+         ::u32 dwAlloc = 1026 * 64;
 
          ::wstring wstr;
 
          auto szKey = wstr.get_buffer(dwAlloc * 2);
 
-         unsigned int dwIndex = 0;
+         ::u32 dwIndex = 0;
 
          while (ERROR_SUCCESS == ::RegEnumKeyW(m_hkeySub, dwIndex, szKey, dwAlloc))
          {
@@ -780,7 +780,7 @@ LSTATUS
 
    const ::wide_character * pData,
 
-   unsigned int dwFlags,
+   ::u32 dwFlags,
    LPDWORD pdwType,
    PVOID pvData,
    LPDWORD pcbData
@@ -790,7 +790,7 @@ LSTATUS
 LPFN_RegGetDataW g_pfnRegGetDataW = nullptr;
 
 
-int WinRegGetDataW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpData, DWORD dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData)
+::i32 WinRegGetDataW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpData, DWORD dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData)
 {
 
    if (g_pfnRegGetDataW != nullptr)
@@ -802,7 +802,7 @@ int WinRegGetDataW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_cha
    else
    {
 
-      LSTATUS lstatus = RegQueryValueExW(hkey, pSubKey, nullptr, pdwType, (unsigned char *)pvData, pcbData);
+      LSTATUS lstatus = RegQueryValueExW(hkey, pSubKey, nullptr, pdwType, (::u8 *)pvData, pcbData);
 
       if (lstatus == ERROR_SUCCESS)
       {
@@ -823,7 +823,7 @@ int WinRegGetDataW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_cha
 }
 
 
-CLASS_DECL_ACME_WINDOWS void reg_delete_tree_dup(HKEY hkey, const_char_pointer name)
+CLASS_DECL_ACME_WINDOWS void reg_delete_tree_dup(HKEY hkey, const_char_pointer pszName)
 {
 
    HKEY hkeySub = nullptr;
@@ -831,13 +831,13 @@ CLASS_DECL_ACME_WINDOWS void reg_delete_tree_dup(HKEY hkey, const_char_pointer n
    if (ERROR_SUCCESS == ::RegOpenKeyW(hkey, wstring(name), &hkeySub))
    {
 
-      unsigned int dwAlloc = 1026 * 64;
+      ::u32 dwAlloc = 1026 * 64;
 
       ::wstring wstr;
 
       auto szKey = wstr.get_buffer(dwAlloc * 2);
 
-      unsigned int dwIndex = 0;
+      ::u32 dwIndex = 0;
 
       while (ERROR_SUCCESS == ::RegEnumKeyW(hkeySub, dwIndex, szKey, dwAlloc))
       {
@@ -957,8 +957,8 @@ bool CLASS_DECL_ACME_WINDOWS windows_get_in_proc_server(const ::scoped_string & 
 
             DWORD dwSize = _MAX_PATH * sizeof(WCHAR);
             DWORD dwType;
-            int lRes = ::RegQueryValueExW(hKeyInProc, L"",
-               nullptr, &dwType, (unsigned char *)psz, &dwSize);
+            ::i32 lRes = ::RegQueryValueExW(hKeyInProc, L"",
+               nullptr, &dwType, (::u8 *)psz, &dwSize);
 
             str.release_buffer();
             str = wstr;

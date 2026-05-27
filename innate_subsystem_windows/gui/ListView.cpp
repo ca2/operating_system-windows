@@ -46,7 +46,7 @@ namespace innate_subsystem_windows
    }
 
 
-   void ListView::addColumn(int index, const char *caption, int width, int fmt)
+   void ListView::addColumn(::i32 index, const ::i8 *caption, ::i32 width, ::i32 fmt)
    {
       //
       // Create LV_COLUMN struct
@@ -65,12 +65,12 @@ namespace innate_subsystem_windows
       ListView_InsertColumn(::as_HWND(this->operating_system_window()), index, &lvColumn);
    }
 
-   void ListView::addColumn(int index, const char *caption, int width)
+   void ListView::addColumn(::i32 index, const ::i8 *caption, ::i32 width)
    {
       addColumn(index, caption, width, LVCFMT_LEFT);
    }
 
-   innate_subsystem::ListViewItem ListView::getItem(int index)
+   innate_subsystem::ListViewItem ListView::getItem(::i32 index)
    {
       // Output structure
       innate_subsystem::ListViewItem item;
@@ -107,12 +107,12 @@ namespace innate_subsystem_windows
       return item;
    }
 
-   void ListView::addItem(int index, const char *caption)
+   void ListView::addItem(::i32 index, const ::i8 *caption)
    {
       addItem(index, caption, NULL);
    }
 
-   void ListView::addItem(int index, const char *caption, ::lparam tag)
+   void ListView::addItem(::i32 index, const ::i8 *caption, ::lparam tag)
    {
       //
       // Prepare LVITEM structure
@@ -132,7 +132,7 @@ namespace innate_subsystem_windows
       ListView_InsertItem(::as_HWND(this->operating_system_window()), &lvI);
    }
 
-   void ListView::addItem(int index, const char *caption, ::lparam tag, int imageIndex)
+   void ListView::addItem(::i32 index, const ::i8 *caption, ::lparam tag, ::i32 imageIndex)
    {
       //
       // Prepare LVITEM structure
@@ -153,7 +153,7 @@ namespace innate_subsystem_windows
       ListView_InsertItem(::as_HWND(this->operating_system_window()), &lvI);
    }
 
-   void ListView::removeItem(int i)
+   void ListView::removeItem(::i32 i)
    {
       ListView_DeleteItem(::as_HWND(this->operating_system_window()), i);
    }
@@ -163,7 +163,7 @@ namespace innate_subsystem_windows
       ListView_DeleteAllItems(::as_HWND(this->operating_system_window()));
    }
 
-   void ListView::setSubItemText(int index, int subIndex, const char  *caption)
+   void ListView::setSubItemText(::i32 index, ::i32 subIndex, const ::i8  *caption)
    {
       //
       // Prepare LVITEM structure
@@ -182,7 +182,7 @@ namespace innate_subsystem_windows
       SendMessage(::as_HWND(this->operating_system_window()), LVM_SETITEM, 0, (LPARAM)&lvI);
    }
 
-   void ListView::setItemData(int index, ::lparam tag)
+   void ListView::setItemData(::i32 index, ::lparam tag)
    {
       //
       // Prepare LVITEM structure
@@ -202,7 +202,7 @@ namespace innate_subsystem_windows
       SendMessage(::as_HWND(this->operating_system_window()), LVM_SETITEM, 0, (LPARAM)&lvI);
    }
 
-   ::lparam ListView::getItemData(int index)
+   ::lparam ListView::getItemData(::i32 index)
    {
       return getItem(index).tag;
    }
@@ -210,7 +210,7 @@ namespace innate_subsystem_windows
    ::innate_subsystem::ListViewItem ListView::getSelectedItem()
    {
       ::innate_subsystem::ListViewItem item;
-      int index = getSelectedIndex();
+      ::i32 index = getSelectedIndex();
       if (index == -1) {
          item.index = -1;
          item.tag = NULL;
@@ -220,13 +220,13 @@ namespace innate_subsystem_windows
       return item;
    }
 
-   int ListView::getSelectedIndex()
+   ::i32 ListView::getSelectedIndex()
    {
-      int iSelect = ListView_GetNextItem(::as_HWND(this->operating_system_window()), -1, LVNI_SELECTED);
+      ::i32 iSelect = ListView_GetNextItem(::as_HWND(this->operating_system_window()), -1, LVNI_SELECTED);
       return iSelect;
    }
 
-   void ListView::selectItem(int index)
+   void ListView::selectItem(::i32 index)
    {
       ::wparam itemIndex = (::wparam)index;
       ListView_SetItemState(::as_HWND(this->operating_system_window()), -1, 0, LVIS_SELECTED);
@@ -254,20 +254,20 @@ namespace innate_subsystem_windows
       }
    }
 
-   unsigned int ListView::getSelectedItemsCount()
+   ::u32 ListView::getSelectedItemsCount()
    {
       return ListView_GetSelectedCount(::as_HWND(this->operating_system_window()));
    }
 
 
-   int ListView::getCount()
+   ::i32 ListView::getCount()
    {
-      return (int) ListView_GetItemCount(::as_HWND(this->operating_system_window()));
+      return (::i32) ListView_GetItemCount(::as_HWND(this->operating_system_window()));
    }
 
    ::i32_array ListView::getSelectedItemsIndexes()
    {
-      int i = -1;
+      ::i32 i = -1;
       ::i32_array ia;
       ia.set_size(getSelectedItemsCount());
       for (auto & iItem : ia)
@@ -278,19 +278,19 @@ namespace innate_subsystem_windows
       return ia;
    }
 
-   int CALLBACK ListView::s_FNLVCOMPARE(LPARAM lparam1, LPARAM lparam2, LPARAM lparamSort)
+   ::i32 CALLBACK ListView::s_FNLVCOMPARE(LPARAM lparam1, LPARAM lparam2, LPARAM lparamSort)
    {
 
-      auto pbase = (::function < int(::lparam, ::lparam) >::base *)lparamSort;
+      auto pbase = (::function < ::i32(::lparam, ::lparam) >::base *)lparamSort;
 
       return pbase->operator()(lparam1, lparam2);
 
    }
 
-   void ListView::set_sort(int columnIndex, const ::function < int(::lparam, ::lparam) > & compare)
+   void ListView::set_sort(::i32 columnIndex, const ::function < ::i32(::lparam, ::lparam) > & compare)
    {
       // Update parameters of sorting.
-      int oldSortColumnIndex = m_sortColumnIndex;
+      ::i32 oldSortColumnIndex = m_sortColumnIndex;
       m_sortColumnIndex = columnIndex;
 
       // make decision about order
@@ -331,7 +331,7 @@ namespace innate_subsystem_windows
          // use sortColumnIndex (::lparamSort) as an index of column and
          // as a flag: positive for ascending order,
          // negative for descending order
-         int sortColumnIndex = m_sortColumnIndex + 1;
+         ::i32 sortColumnIndex = m_sortColumnIndex + 1;
          if (!m_sortAscending) {
             sortColumnIndex = -sortColumnIndex;
          }
@@ -341,24 +341,24 @@ namespace innate_subsystem_windows
       }
    }
 
-   void ListView::setListViewExtendedStyle(unsigned int style)
+   void ListView::setListViewExtendedStyle(::u32 style)
    {
       ::SendMessage(::as_HWND(this->operating_system_window()), LVM_SETEXTENDEDLISTVIEWSTYLE, 0, (::lparam)style);
    }
 
-   unsigned int ListView::getListViewExtendedStyle()
+   ::u32 ListView::getListViewExtendedStyle()
    {
       return ListView_GetExtendedListViewStyle(::as_HWND(this->operating_system_window()));
    }
 
-   void ListView::addListViewExtendedStyle(unsigned int styleFlag)
+   void ListView::addListViewExtendedStyle(::u32 styleFlag)
    {
       DWORD flags = getExStyle();
       flags |= styleFlag;
       setExStyle(flags);
    }
 
-   void ListView::removeListViewExtendedStyle(unsigned int styleFlag)
+   void ListView::removeListViewExtendedStyle(::u32 styleFlag)
    {
       DWORD flags = getExStyle();
       flags &= ~styleFlag;

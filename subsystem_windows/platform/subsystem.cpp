@@ -87,13 +87,13 @@ namespace subsystem_windows
       size_t cmdLen = uniCmdLine.length();
       if (cmdLen > 0)
       {
-         int nArgs;
+         ::i32 nArgs;
          LPWSTR *argList = CommandLineToArgvW(uniCmdLine, &nArgs);
          if (argList == 0)
          {
             throw ::subsystem::Exception("Invalid command line");
          }
-         for (int i = 0; i < nArgs; i++)
+         for (::i32 i = 0; i < nArgs; i++)
          {
             ::wstring uniArg(argList[i]);
             ::string arg;
@@ -147,7 +147,7 @@ namespace subsystem_windows
    DATA_BLOB inBlob;
    DATA_BLOB outBlob;
 
-   inBlob.pbData = (unsigned char*)input.data();
+   inBlob.pbData = (::u8*)input.data();
    inBlob.cbData = (DWORD)input.size();
 
    if (!CryptProtectData(&inBlob, nullptr, nullptr, nullptr, nullptr, 0, &outBlob))
@@ -163,19 +163,19 @@ namespace subsystem_windows
    DATA_BLOB inBlob;
    DATA_BLOB outBlob;
 
-   inBlob.pbData = (unsigned char*)input.data();
+   inBlob.pbData = (::u8*)input.data();
    inBlob.cbData = (DWORD)input.size();
 
    if (!CryptUnprotectData(&inBlob, nullptr, nullptr, nullptr, nullptr, 0, &outBlob))
       return false;
 
-   output.assign((char*)outBlob.pbData, outBlob.cbData);
+   output.assign((::i8*)outBlob.pbData, outBlob.cbData);
    LocalFree(outBlob.pbData);
    return true;
 }
 
 
-   //int subsystem::get_last_socket_error()
+   //::i32 subsystem::get_last_socket_error()
    //{
 
    //   return WSAGetLastError();
@@ -183,7 +183,7 @@ namespace subsystem_windows
    //}
 
 
-   //string subsystem::get_socket_error_message_text(int iError)
+   //string subsystem::get_socket_error_message_text(::i32 iError)
    //{
 
    //   if (iError <= 0)
@@ -285,7 +285,7 @@ namespace subsystem_windows
    }
 
 
-   int subsystem::get_LOADER_CLOSE_CODE()
+   ::i32 subsystem::get_LOADER_CLOSE_CODE()
    {
 
       if (m_i_LOADER_CLOSE_CODE < 0)
@@ -300,7 +300,7 @@ namespace subsystem_windows
    }
 
 
-   int subsystem::get_SPEC_IPC_CODE()
+   ::i32 subsystem::get_SPEC_IPC_CODE()
    {
 
       if (m_i_SPEC_IPC_CODE < 0)
@@ -316,7 +316,7 @@ namespace subsystem_windows
    
 
    // RegisterWindowMessage("TVN.HOOK.LOADER.CLOSE.CODE");
-   // const unsigned int HookDefinitions::SPEC_IPC_CODE =
+   // const ::u32 HookDefinitions::SPEC_IPC_CODE =
    // RegisterWindowMessage("TVN.HOOK.MESSAGE.CODE");
 
 

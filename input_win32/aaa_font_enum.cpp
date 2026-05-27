@@ -92,10 +92,10 @@ namespace windowing_win32
       }
 
 
-      static BOOL CALLBACK callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int FontType, LPVOID i32_point);
+      static BOOL CALLBACK callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 FontType, LPVOID i32_point);
 
 
-      static BOOL CALLBACK callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int FontType, LPVOID i32_point);
+      static BOOL CALLBACK callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 FontType, LPVOID i32_point);
 
 
    };
@@ -103,7 +103,7 @@ namespace windowing_win32
 
 
 
-   BOOL CALLBACK wingdi_font_enum::callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int dwFontType, LPVOID p)
+   BOOL CALLBACK wingdi_font_enum::callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 dwFontType, LPVOID p)
    {
 
       wingdi_font_enum * penum = (wingdi_font_enum *)p;
@@ -151,7 +151,7 @@ namespace windowing_win32
    }
 
 
-   BOOL CALLBACK wingdi_font_enum::callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int dwFontType, LPVOID p)
+   BOOL CALLBACK wingdi_font_enum::callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 dwFontType, LPVOID p)
    {
 
       ::write_text::font_enumeration_item * pitem = (::write_text::font_enumeration_item *)p;
@@ -178,7 +178,7 @@ namespace windowing_win32
    }
 
 
-   ::enum_character_set wingdi_get_cs(int iCs)
+   ::enum_character_set wingdi_get_cs(::i32 iCs)
    {
 
       if (iCs == CHINESEBIG5_CHARSET)
@@ -298,7 +298,7 @@ namespace windowing_win32
       else
       {
 
-         output_debug_string("OTHER char SET");
+         output_debug_string("OTHER ::i8 SET");
 
       }
 

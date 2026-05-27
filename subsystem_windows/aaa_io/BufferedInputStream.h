@@ -26,7 +26,7 @@ namespace remoting
 
       DataInputStream *m_input;
 
-      ::array_base<char> m_buffer;
+      ::array_base<::i8> m_buffer;
 
       size_t m_have;
       size_t m_pos;

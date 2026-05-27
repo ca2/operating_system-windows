@@ -11,7 +11,7 @@
 //static wchar_t* _rawCmd = 0;
 //
 //
-//int _init_args()
+//::i32 _init_args()
 //{
 //	_argv[0] = 0;
 //
@@ -19,7 +19,7 @@
 //	auto szSysCmd = wcslen(sysCmd);
 //
 //	// copy the system command line
-//	WCHAR* cmd = (wchar_t*)HeapAlloc(GetProcessHeap(), 0, sizeof(char) * (szSysCmd + 1));
+//	WCHAR* cmd = (wchar_t*)HeapAlloc(GetProcessHeap(), 0, sizeof(::i8) * (szSysCmd + 1));
 //	_rawCmd = cmd;
 //	if (!cmd)
 //		return 0;
@@ -50,7 +50,7 @@
 //			*cmd++ = 0;
 //	}
 //
-//	int argc = 1;
+//	::i32 argc = 1;
 //	for (;;)
 //	{
 //		while (*cmd && ansi_char_isspace(*cmd))		// Skip over any whitespace

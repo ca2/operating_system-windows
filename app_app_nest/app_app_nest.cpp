@@ -7,7 +7,7 @@ void * g_pvoidPluginSystem = nullptr;
 HANDLE g_hmutex = nullptr;
 
 
-unsigned int plugin_container_app(const ::scoped_string & scopedstrChannel)
+::u32 plugin_container_app(const ::scoped_string & scopedstrChannel)
 {
 
    ::plugin::system * psystem = ___new ::plugin::system(nullptr, nullptr);
@@ -82,14 +82,14 @@ unsigned int plugin_container_app(const ::scoped_string & scopedstrChannel)
 
    auto estatus = papp->m_result.status();
 
-   ExitProcess((unsigned int) estatus);
+   ExitProcess((::u32) estatus);
 
    return estatus;
 
 }
 
 
-int __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+::i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, ::i32 nCmdShow)
 {
 
    __UNREFERENCED_PARAMETER(lpCmdLine);
@@ -109,7 +109,7 @@ int __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 
    //}
 
-   int nReturnCode = 0;
+   ::i32 nReturnCode = 0;
 
    string strChannel(get_command_line_parameter(string(::GetCommandLineW()), "channel"));
 
@@ -148,7 +148,7 @@ int __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 }
 
 
-extern "C" int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+extern "C" ::i32 WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, ::i32 nCmdShow)
 {
 
    return __win_main(hInstance, hPrevInstance, lpCmdLine, nCmdShow);

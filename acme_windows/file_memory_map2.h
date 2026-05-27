@@ -10,7 +10,7 @@ namespace cross_windows
    {
    public:
 
-      int                        m_iFile;
+      ::i32                        m_iFile;
 
 
       file_memory_map();

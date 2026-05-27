@@ -21,8 +21,8 @@ namespace subsystem_windows
    public:
 
 
-      int m_i_LOADER_CLOSE_CODE;
-      int m_i_SPEC_IPC_CODE;
+      ::i32 m_i_LOADER_CLOSE_CODE;
+      ::i32 m_i_SPEC_IPC_CODE;
 
 
       // ::pointer < ::subsystem::string_table >     m_pstringtable;
@@ -67,10 +67,10 @@ namespace subsystem_windows
 
       memsize getCurrentMemoryUsage() override;
 
-      virtual int get_LOADER_CLOSE_CODE();
-      virtual int get_SPEC_IPC_CODE();
+      virtual ::i32 get_LOADER_CLOSE_CODE();
+      virtual ::i32 get_SPEC_IPC_CODE();
       // RegisterWindowMessage("TVN.HOOK.LOADER.CLOSE.CODE");
-      // const unsigned int HookDefinitions::SPEC_IPC_CODE =
+      // const ::u32 HookDefinitions::SPEC_IPC_CODE =
       // RegisterWindowMessage("TVN.HOOK.MESSAGE.CODE");
       
 

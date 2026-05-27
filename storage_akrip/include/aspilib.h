@@ -50,25 +50,25 @@ typedef struct
   CDRomParmsMask              cpm;
   CDRomCapabilitiesStatusMask ccsm;
   CDRomAudioControlMask       cacm;
-  int                        rerAvail;
-  int                        cpmAvail;
-  int                        ccsmAvail;
-  int                        cacmAvail;
+  ::i32                        rerAvail;
+  ::i32                        cpmAvail;
+  ::i32                        ccsmAvail;
+  ::i32                        cacmAvail;
 } SENSEMASK, *PSENSEMASK, FAR *LPSENSEMASK;
 
 int32_t getSCSIDevType( BYTE bHostAdapter, BYTE bTarget, BYTE bLUN,
-		    LPBYTE pDevType, char * lpDevType, int32_t iDevTypeLen );
+		    LPBYTE pDevType, ::i8 * lpDevType, int32_t iDevTypeLen );
 
 
 typedef uint32_t (*CDREADFN)( HCDROM hCD, LPTRACKBUF t );
 typedef uint32_t (*CDDEINIT)( HCDROM hCD );
 
 typedef struct {
-  int bInit;
+  ::i32 bInit;
 } R6INIT;
 
 typedef struct {
-  int bInit;
+  ::i32 bInit;
 } R10INIT;
 
 typedef union {
@@ -81,11 +81,11 @@ typedef struct {
   BYTE      tgt;
   BYTE      lun;
   BYTE      readType;
-  int      used;
-  int      bMSF;
-  int      bInit;
+  ::i32      used;
+  ::i32      bMSF;
+  ::i32      bInit;
   SENSEMASK sm;
-  int      smRead;
+  ::i32      smRead;
   CDREADFN  pfnRead;
   CDDEINIT  pfnDeinit;
   int32_t       numCheck;     // used for jitter correction
@@ -103,7 +103,7 @@ uint32_t readCDAudioLBA_READ10( HCDROM hCD, LPTRACKBUF t );
 uint32_t readCDAudioLBA_D8( HCDROM hCD, LPTRACKBUF t );
 uint32_t readCDAudioLBA_D4( HCDROM hCD, LPTRACKBUF t );
 
-uint32_t pauseResumeCD( HCDROM hCD, int bPause );
+uint32_t pauseResumeCD( HCDROM hCD, ::i32 bPause );
 
-void dbprintf( char *fmt, ... );
+void dbprintf( ::i8 *fmt, ... );
 #endif

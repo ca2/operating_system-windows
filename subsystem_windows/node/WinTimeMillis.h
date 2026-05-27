@@ -39,7 +39,7 @@ namespace subsystem_windows
       bool update() { return setToCurrentTime(); }
 
       // Return difference in milliseconds between two time points.
-      int diffFrom(const WinTimeMillis *older) const;
+      ::i32 diffFrom(const WinTimeMillis *older) const;
 
    protected:
       bool setToCurrentTime() { GetLocalTime(&m_time);

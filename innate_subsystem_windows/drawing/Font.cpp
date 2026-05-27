@@ -30,7 +30,7 @@
 namespace innate_subsystem_windows
 {
 
-//Pen::Pen(int type, int width, const ::color::color & color)
+//Pen::Pen(::i32 type, ::i32 width, const ::color::color & color)
    Font::Font() :
    m_pfont(nullptr)
 //: m_pen(NULL)
@@ -52,7 +52,7 @@ Font::~Font()
    // }
 
 
-   void Font::initialize_font(const char *pszFamily, int iPixelHeight, int iFontWeight, bool bItalic)
+   void Font::initialize_font(const ::i8 *pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight, bool bItalic)
    {
 destroyGraphicsObject();
 

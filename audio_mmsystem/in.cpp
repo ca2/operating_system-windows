@@ -81,7 +81,7 @@ namespace audio_mmsystem
    }
 
 
-   void in::in_open(int iBufferCount, int iBufferSampleCount)
+   void in::in_open(::i32 iBufferCount, ::i32 iBufferSampleCount)
    {
 
       if(m_hwavein != nullptr && m_einstate != ::wave::e_in_state_initial)
@@ -152,7 +152,7 @@ namespace audio_mmsystem
             audiowave->m_uiWaveInDevice,
             wave_format(),
             get_itask().m_i,
-            (unsigned int)0,
+            (::u32)0,
             CALLBACK_THREAD);
 
          estatus = mmresult_status(mmresult);
@@ -198,12 +198,12 @@ namespace audio_mmsystem
 
       }
 
-      unsigned int uiBufferSizeLog2;
-      unsigned int uiBufferSize;
-      unsigned int uiAnalysisSize;
-      unsigned int uiAllocationSize;
-      unsigned int uiInterestSize;
-      unsigned int uiSkippedSamplesCount;
+      ::u32 uiBufferSizeLog2;
+      ::u32 uiBufferSize;
+      ::u32 uiAnalysisSize;
+      ::u32 uiAllocationSize;
+      ::u32 uiInterestSize;
+      ::u32 uiSkippedSamplesCount;
 
       if(m_pwaveformat->m_waveformat.nSamplesPerSec == 44100)
       {
@@ -246,9 +246,9 @@ namespace audio_mmsystem
       uiInterestSize,
       uiSkippedSamplesCount);
 
-      int i, iSize;
+      ::i32 i, iSize;
 
-      iSize = (int) in_get_buffer()->GetBufferCount();
+      iSize = (::i32) in_get_buffer()->GetBufferCount();
 
       for(i = 0; i < iSize; i++)
       {
@@ -307,9 +307,9 @@ namespace audio_mmsystem
 
       in_reset();
 
-      int i, iSize;
+      ::i32 i, iSize;
 
-      iSize = (int) in_get_buffer()->GetBufferCount();
+      iSize = (::i32) in_get_buffer()->GetBufferCount();
 
       for(i = 0; i < iSize; i++)
       {
@@ -436,7 +436,7 @@ namespace audio_mmsystem
       if(uMsg == WIM_DATA)
       {
          ASSERT(false);
-         /*      unsigned int msSampleTime = timeGetTime();
+         /*      ::u32 msSampleTime = timeGetTime();
          thread * pthread = (thread *) dwInstance;
          ASSERT(pthread != nullptr);
          LPWAVEHDR lpWaveHdr = (LPWAVEHDR) dwParam1;
@@ -510,13 +510,13 @@ namespace audio_mmsystem
 
          m_iBuffer--;
 
-         unsigned int msSampleTime = timeGetTime();
+         ::u32 msSampleTime = timeGetTime();
 
          LPWAVEHDR lpwavehdr = (LPWAVEHDR)pmessage->m_lparam.m_lparam;
 
-         in_get_buffer()->get_buffer((int) lpwavehdr->dwUser)->OnMultimediaDone();
+         in_get_buffer()->get_buffer((::i32) lpwavehdr->dwUser)->OnMultimediaDone();
 
-         m_listenerset.in_data_proc(this, msSampleTime, (int) lpwavehdr->dwUser);
+         m_listenerset.in_data_proc(this, msSampleTime, (::i32) lpwavehdr->dwUser);
 
          if(m_pencoder != nullptr)
          {
@@ -527,7 +527,7 @@ namespace audio_mmsystem
 
          if(!in_is_resetting() && in_is_recording())
          {
-            in_add_buffer((int) lpwavehdr->dwUser);
+            in_add_buffer((::i32) lpwavehdr->dwUser);
          }
 
       }
@@ -537,7 +537,7 @@ namespace audio_mmsystem
    }
 
 
-   void     in::in_add_buffer(int iBuffer)
+   void     in::in_add_buffer(::i32 iBuffer)
    {
 
       return in_add_buffer(wave_hdr(iBuffer));
@@ -625,7 +625,7 @@ namespace audio_mmsystem
    }
 
 
-   LPWAVEHDR in::wave_hdr(int iBuffer)
+   LPWAVEHDR in::wave_hdr(::i32 iBuffer)
    {
 
       return ::multimedia::mmsystem::get_os_data(in_get_buffer(), iBuffer);

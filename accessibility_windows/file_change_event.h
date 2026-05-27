@@ -29,7 +29,7 @@ namespace acme_windows
       ///				it monitors only the specified directory
       ///  \lparam		filter filter conditions that satisfy a machine notification wait
       ///				can take values described by enum filter
-      file_change_event(::matter * pobject, const ::scoped_string & scopedstrPath, bool watchsubtree, unsigned int filter);
+      file_change_event(::matter * pobject, const ::scoped_string & scopedstrPath, bool watchsubtree, ::u32 filter);
 
       ///  \brief		destructor
       ~file_change_event();

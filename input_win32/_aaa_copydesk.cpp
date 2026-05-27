@@ -202,7 +202,7 @@ namespace windowing_win32
 
       character_count iLen = 0;
 
-      for (int i = 0; i < patha.get_size(); i++)
+      for (::i32 i = 0; i < patha.get_size(); i++)
       {
 
          iLen += utf8_to_unicode_count(patha[i]) + 1;
@@ -217,14 +217,14 @@ namespace windowing_win32
       pDropFiles->fNC = true;
       pDropFiles->fWide = true;
 
-      char * psz = (char *)pDropFiles;
+      ::i8 * psz = (::i8 *)pDropFiles;
 
       psz += pDropFiles->pFiles;
 
       unichar * pwsz = (unichar *)psz;
 
 
-      for (int i = 0; i < patha.get_size(); i++)
+      for (::i32 i = 0; i < patha.get_size(); i++)
       {
 
          ::collection::count c = utf8_to_unicode_count(patha[i]) + 1;
@@ -266,8 +266,8 @@ namespace windowing_win32
    HGLOBAL copydesk::hglobal_get_utf8_text(const ::scoped_string & scopedstr)
    {
 
-      HGLOBAL hglb = ::GlobalAlloc(GMEM_MOVEABLE, (SIZE_T) (sizeof(char) * (str.length() + 1)));
-      char * psz = (char *) ::GlobalLock(hglb);
+      HGLOBAL hglb = ::GlobalAlloc(GMEM_MOVEABLE, (SIZE_T) (sizeof(::i8) * (str.length() + 1)));
+      ::i8 * psz = (::i8 *) ::GlobalLock(hglb);
 
       strcpy(psz, str);
 
@@ -281,7 +281,7 @@ namespace windowing_win32
    HGLOBAL copydesk::hglobal_get_image(const ::image::image * pimage)
    {
 
-      unsigned int dwWidth, dwHeight;
+      ::u32 dwWidth, dwHeight;
       BITMAPINFOHEADER bi;
       HCURSOR hAlphaCursor = nullptr;
 
@@ -291,7 +291,7 @@ namespace windowing_win32
       ZeroMemory(&bi, sizeof(BITMAPINFOHEADER));
       bi.biSize = sizeof(BITMAPINFOHEADER);
       bi.biWidth = dwWidth;
-      bi.biHeight = -(int)dwHeight;
+      bi.biHeight = -(::i32)dwHeight;
       bi.biPlanes = 1;
       bi.biBitCount = 32;
       bi.biCompression = BI_RGB;
@@ -306,7 +306,7 @@ namespace windowing_win32
 
       }
 
-      unsigned char * p = (unsigned char *) ::GlobalLock(hglb);
+      ::u8 * p = (::u8 *) ::GlobalLock(hglb);
 
 
       pimage->map();
@@ -322,15 +322,15 @@ namespace windowing_win32
    }
 
 
-   int copydesk::_get_priority_text_format()
+   ::i32 copydesk::_get_priority_text_format()
    {
 
       if(m_iPriorityTextFormat == -2)
       {
 
-         unsigned int iCfShellInternetUrlW = ::RegisterClipboardFormat(CFSTR_INETURLW);
+         ::u32 iCfShellInternetUrlW = ::RegisterClipboardFormat(CFSTR_INETURLW);
 
-         unsigned int uaFormatPriorityList[] =
+         ::u32 uaFormatPriorityList[] =
          {
             iCfShellInternetUrlW,
             CF_UNICODETEXT,
@@ -425,13 +425,13 @@ namespace windowing_win32
       for (::collection::index i = 0; i < c; i++)
       {
 
-         unsigned int uLen = ::DragQueryFileW(hdrop, (unsigned int) i, nullptr, 0);
+         ::u32 uLen = ::DragQueryFileW(hdrop, (::u32) i, nullptr, 0);
 
          wstring wstr;
          
          auto psz = wstr.get_buffer(uLen);
 
-         ::DragQueryFileW(hdrop, (unsigned int) i, psz, uLen + 1);
+         ::DragQueryFileW(hdrop, (::u32) i, psz, uLen + 1);
 
          wstr.release_buffer();
 
@@ -479,7 +479,7 @@ namespace windowing_win32
       if(m_iText < 0)
       {
 
-         int iFormat = _get_priority_text_format();
+         ::i32 iFormat = _get_priority_text_format();
 
          m_iText = iFormat != 0 && iFormat != -1 ? 1 : 0;
 
@@ -529,7 +529,7 @@ namespace windowing_win32
    bool copydesk::_get_plain_text(string & str)
    {
 
-      int iFormat = _get_priority_text_format();
+      ::i32 iFormat = _get_priority_text_format();
 
       if (iFormat == 0 || iFormat == -1)
       {
@@ -558,7 +558,7 @@ namespace windowing_win32
       else if (iFormat == CF_TEXT)
       {
 
-         str = (char *)GlobalLock(hglb);
+         str = (::i8 *)GlobalLock(hglb);
 
       }
       else if (iFormat == ::RegisterClipboardFormat(CFSTR_INETURLW))

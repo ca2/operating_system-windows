@@ -9,10 +9,10 @@
 
 
 
-CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const_char_pointer pcszType, memsize & memsize);
+CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const_char_pointer pszType, memsize & memsize);
 
 
-HICON extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex)
+HICON extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, ::u32 nIconIndex)
 {
 
    return ::ExtractIconW(hInst, utf8_to_unicode(scopedstrExeFileName), nIconIndex);
@@ -20,42 +20,42 @@ HICON extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName
 }
 
 
-CLASS_DECL_ACME_WINDOWS const void* get_resource_pointer(HINSTANCE hinstance, DWORD nID, const_char_pointer pcszType, memsize& memsize)
+CLASS_DECL_ACME_WINDOWS const void* get_resource_pointer(HINSTANCE hinstance, DWORD nID, const_char_pointer pszType, memsize& memsize)
 {
 
    HRSRC hrsrc;
 
-   if (::is_set(pcszType))
+   if (::is_set(pszType))
    {
-      hrsrc = FindResourceW(hinstance, MAKEINTRESOURCEW(nID), wstring(pcszType));
+      hrsrc = FindResourceW(hinstance, MAKEINTRESOURCEW(nID), wstring(pszType));
    }
    else
    {
-      hrsrc = FindResourceW(hinstance, MAKEINTRESOURCEW(nID), (const WCHAR*)(pcszType));
+      hrsrc = FindResourceW(hinstance, MAKEINTRESOURCEW(nID), (const WCHAR*)(pszType));
    }
 
 
    if (!hrsrc)
    {
 
-      if (::is_set(pcszType))
+      if (::is_set(pszType))
       {
-         hrsrc = FindResourceW(nullptr, MAKEINTRESOURCEW(nID), wstring(pcszType));
+         hrsrc = FindResourceW(nullptr, MAKEINTRESOURCEW(nID), wstring(pszType));
       }
       else
       {
-         hrsrc = FindResourceW(nullptr, MAKEINTRESOURCEW(nID), (const WCHAR*)(pcszType));
+         hrsrc = FindResourceW(nullptr, MAKEINTRESOURCEW(nID), (const WCHAR*)(pszType));
       }
       if (!hrsrc)
       {
 
-         if (::is_set(pcszType))
+         if (::is_set(pszType))
          {
-            hrsrc = FindResourceW(::GetModuleHandle(NULL), MAKEINTRESOURCEW(nID), wstring(pcszType));
+            hrsrc = FindResourceW(::GetModuleHandle(NULL), MAKEINTRESOURCEW(nID), wstring(pszType));
          }
          else
          {
-            hrsrc = FindResourceW(::GetModuleHandle(NULL), MAKEINTRESOURCEW(nID), (const WCHAR*)(pcszType));
+            hrsrc = FindResourceW(::GetModuleHandle(NULL), MAKEINTRESOURCEW(nID), (const WCHAR*)(pszType));
          }
       }
    }
@@ -98,12 +98,12 @@ CLASS_DECL_ACME_WINDOWS const void* get_resource_pointer(HINSTANCE hinstance, DW
 }
 
 
-CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory& memory, HINSTANCE hinstance, DWORD nID, const_char_pointer pcszType, character_count iReadAtMostByteCount)
+CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory& memory, HINSTANCE hinstance, DWORD nID, const_char_pointer pszType, character_count iReadAtMostByteCount)
 {
 
    memsize memsize;
 
-   auto pdata = get_resource_pointer(hinstance, nID, pcszType, memsize);
+   auto pdata = get_resource_pointer(hinstance, nID, pszType, memsize);
 
    if (::is_null(pdata))
    {
@@ -120,7 +120,7 @@ CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory& memory, HINSTANCE h
 
 }
 
-//bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::path &str, int csidl, bool fCreate)
+//bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::path &str, ::i32 csidl, bool fCreate)
 //{
 //
 //   return ::SHGetSpecialFolderPathW(hwnd, wstring_adaptor(str, MAX_PATH * 8), csidl, fCreate) != false;
@@ -128,7 +128,7 @@ CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory& memory, HINSTANCE h
 //
 //
 //
-//::file::path CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(int csidl, bool fCreate, ::windowing::window* pwindow)
+//::file::path CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(::i32 csidl, bool fCreate, ::windowing::window* pwindow)
 //{
 //
 //   ::file::path path;

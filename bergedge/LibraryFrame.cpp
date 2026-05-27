@@ -40,11 +40,11 @@ CString get_utf8(LPCWSTR lpcwsz)
 
    CString str;
 
-   int count = ::WideCharToMultiByte(CP_UTF8,0,lpcwsz,-1,nullptr,0,nullptr,0);
+   ::i32 count = ::WideCharToMultiByte(CP_UTF8,0,lpcwsz,-1,nullptr,0,nullptr,0);
 
    if(count > 0)
    {
-      char * lpDst = str.get_buffer_set_length(count + 1);
+      ::i8 * lpDst = str.get_buffer_set_length(count + 1);
       memory_set(lpDst,0,count + 1);
 
       ::WideCharToMultiByte(CP_UTF8,0,lpcwsz,-1,lpDst,count,nullptr,0);
@@ -103,7 +103,7 @@ BOOL CLibraryFrame::PreCreateWindow(CREATESTRUCT& cs)
 }
 Gdiplus::Bitmap * LoadPNG(LPCTSTR pName,LPCTSTR pType,HMODULE hInst);
 
-int CLibraryFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
+::i32 CLibraryFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
    if(CMiniFrameWnd::OnCreate(lpCreateStruct) == -1)
       return -1;
@@ -282,7 +282,7 @@ void CLibraryFrame::OnNcLButtonDown(UINT nHitTest,CPoint i32_point)
    //   // initiate toolbar drag for non-CBRS_FLOAT_MULTI toolbars
    //   //if((m_wndDockBar.m_dwStyle & CBRS_FLOAT_MULTI) == 0)
    //   //{
-   //   //   int nPos = 1;
+   //   //   ::i32 nPos = 1;
    //   //   CControlBar* pBar = nullptr;
    //   //   while(pBar == nullptr && nPos < m_wndDockBar.m_arrBars.GetSize())
    //   //      pBar = m_wndDockBar.GetDockedControlBar(nPos++);
@@ -299,7 +299,7 @@ void CLibraryFrame::OnNcLButtonDown(UINT nHitTest,CPoint i32_point)
    //   // special activation for floating toolbars
    //   ActivateTopParent();
 
-   //   //int nPos = 1;
+   //   //::i32 nPos = 1;
    //   //CControlBar* pBar = nullptr;
    //   //while(pBar == nullptr && nPos < m_wndDockBar.m_arrBars.GetSize())
    //   //   pBar = m_wndDockBar.GetDockedControlBar(nPos++);
@@ -329,7 +329,7 @@ void CLibraryFrame::OnNcLButtonDblClk(UINT nHitTest,CPoint i32_point)
       // initiate toolbar toggle for non-CBRS_FLOAT_MULTI toolbars
       //if((m_wndDockBar.m_dwStyle & CBRS_FLOAT_MULTI) == 0)
       //{
-      //   int nPos = 1;
+      //   ::i32 nPos = 1;
       //   CControlBar* pBar = nullptr;
       //   while(pBar == nullptr && nPos < m_wndDockBar.m_arrBars.GetSize())
       //      pBar = m_wndDockBar.GetDockedControlBar(nPos++);
@@ -461,7 +461,7 @@ void CLibraryFrame::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 }
 
 
-int CALLBACK LibraryFrameBrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData)
+::i32 CALLBACK LibraryFrameBrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData)
 {
    CLibraryFrame * pframe = (CLibraryFrame *)lpData;
 
@@ -615,9 +615,9 @@ HRESULT CLibraryFrame::ShouldShow(IShellFolder * psf,PCIDLIST_ABSOLUTE pidlFolde
 
          const scoped_string & strFind = ".spotlibrary";
 
-         int iLenFind = strlen(pszFind);
+         ::i32 iLenFind = strlen(pszFind);
 
-         int iFind = strLo.Find(pszFind);
+         ::i32 iFind = strLo.Find(pszFind);
 
          if(iFind >= 0 && strLo.GetLength() > iFind + iLenFind + 1)
          {

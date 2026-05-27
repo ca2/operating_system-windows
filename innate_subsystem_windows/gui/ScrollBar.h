@@ -45,20 +45,20 @@ namespace  innate_subsystem_windows
       //void setWindow(HWND hwnd) override;
       bool showVertScroll(bool show) override;
       bool showHorzScroll(bool show) override;
-      void setHorzRange(int imin, int imax, int istep) override;
-      void setVertRange(int imin, int imax, int istep) override;
-      void setVertPos(int iPos) override;
-      void setHorzPos(int iPos) override;
-      void moveUpVert(int iPercent = 0) override;
-      void moveDownVert(int iPercent = 0) override;
-      void moveLeftHorz(int iPercent = 0) override;
-      void moveRightHorz(int inPercent = 0) override;
-      int getVertPos() override;
-      int getHorzPos() override;
-      int getVerticalSize() override;
-      int getHorizontalSize() override;
+      void setHorzRange(::i32 imin, ::i32 imax, ::i32 istep) override;
+      void setVertRange(::i32 imin, ::i32 imax, ::i32 istep) override;
+      void setVertPos(::i32 iPos) override;
+      void setHorzPos(::i32 iPos) override;
+      void moveUpVert(::i32 iPercent = 0) override;
+      void moveDownVert(::i32 iPercent = 0) override;
+      void moveLeftHorz(::i32 iPercent = 0) override;
+      void moveRightHorz(::i32 inPercent = 0) override;
+      ::i32 getVertPos() override;
+      ::i32 getHorzPos() override;
+      ::i32 getVerticalSize() override;
+      ::i32 getHorizontalSize() override;
 
-      static const int SCROLL_STEP = 5 ;
+      static const ::i32 SCROLL_STEP = 5 ;
    //protected:
       void enableVirtualScroll() override;
       void disableVirtualScroll() override;
@@ -66,11 +66,11 @@ namespace  innate_subsystem_windows
       bool _showHorzScroll(bool show) override;
 
       //HWND m_hwnd;
-      int m_vPos, m_hPos;
-      int m_vMin, m_vMax;
-      int m_hMin, m_hMax;
-      int m_vStep;
-      int m_hStep;
+      ::i32 m_vPos, m_hPos;
+      ::i32 m_vMin, m_vMax;
+      ::i32 m_hMin, m_hMax;
+      ::i32 m_vStep;
+      ::i32 m_hStep;
       bool m_isVirtualScroll;
       bool m_isVert;
       bool m_isHorz;

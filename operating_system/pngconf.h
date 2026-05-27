@@ -472,45 +472,45 @@
  * png_uint_16 and png_int_16 should always be two bytes in size - this is
  * verified at library build time.
  *
- * png_byte must always be one unsigned char in size.
+ * png_byte must always be one ::u8 in size.
  *
  * The checks below use constants from limits.h, as defined by the ISOC90
  * standard.
  */
 #if CHAR_BIT == 8 && UCHAR_MAX == 255
-   typedef unsigned char png_byte;
+   typedef ::u8 png_byte;
 #else
 #  error "libpng requires 8-bit bytes"
 #endif
 
 #if INT_MIN == -32768 && INT_MAX == 32767
-   typedef int png_int_16;
+   typedef ::i32 png_int_16;
 #elif SHRT_MIN == -32768 && SHRT_MAX == 32767
-   typedef short png_int_16;
+   typedef ::i16 png_int_16;
 #else
 #  error "libpng requires a signed 16-bit type"
 #endif
 
 #if UINT_MAX == 65535
-   typedef unsigned int png_uint_16;
+   typedef ::u32 png_uint_16;
 #elif USHRT_MAX == 65535
-   typedef unsigned short png_uint_16;
+   typedef ::u16 png_uint_16;
 #else
 #  error "libpng requires an unsigned 16-bit type"
 #endif
 
 #if INT_MIN < -2147483646 && INT_MAX > 2147483646
-   typedef int png_int_32;
+   typedef ::i32 png_int_32;
 #elif LONG_MIN < -2147483646 && LONG_MAX > 2147483646
-   typedef long int png_int_32;
+   typedef long ::i32 png_int_32;
 #else
 #  error "libpng requires a signed 32-bit (or more) type"
 #endif
 
 #if UINT_MAX > 4294967294
-   typedef unsigned int png_uint_32;
+   typedef ::u32 png_uint_32;
 #elif ULONG_MAX > 4294967294
-   typedef unsigned long int png_uint_32;
+   typedef unsigned long ::i32 png_uint_32;
 #else
 #  error "libpng requires an unsigned 32-bit (or more) type"
 #endif
@@ -585,8 +585,8 @@ typedef png_uint_16           * png_uint_16p;
 typedef const png_uint_16     * png_const_uint_16p;
 typedef png_int_16            * png_int_16p;
 typedef const png_int_16      * png_const_int_16p;
-typedef char                  * png_charp;
-typedef const char            * png_const_charp;
+typedef ::i8                  * png_charp;
+typedef const ::i8            * png_const_charp;
 typedef png_fixed_point       * png_fixed_point_p;
 typedef const png_fixed_point * png_const_fixed_point_p;
 typedef png_size_t            * png_size_tp;
@@ -597,8 +597,8 @@ typedef FILE            * png_FILE_p;
 #endif
 
 #ifdef PNG_FLOATING_POINT_SUPPORTED
-typedef double       * png_doublep;
-typedef const double * png_const_doublep;
+typedef ::f64       * png_doublep;
+typedef const ::f64 * png_const_doublep;
 #endif
 
 /* Pointers to pointers; i.e. arrays */
@@ -607,15 +607,15 @@ typedef png_uint_32     * * png_uint_32pp;
 typedef png_int_32      * * png_int_32pp;
 typedef png_uint_16     * * png_uint_16pp;
 typedef png_int_16      * * png_int_16pp;
-typedef const char      * * png_const_charpp;
-typedef char            * * png_charpp;
+typedef const ::i8      * * png_const_charpp;
+typedef ::i8            * * png_charpp;
 typedef png_fixed_point * * png_fixed_point_pp;
 #ifdef PNG_FLOATING_POINT_SUPPORTED
-typedef double          * * png_doublepp;
+typedef ::f64          * * png_doublepp;
 #endif
 
 /* Pointers to pointers to pointers; i.e., pointer to array */
-typedef char            * * * png_charppp;
+typedef ::i8            * * * png_charppp;
 
 #endif /* PNG_BUILDING_SYMBOL_TABLE */
 

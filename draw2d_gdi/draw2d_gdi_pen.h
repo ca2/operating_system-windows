@@ -19,15 +19,15 @@ namespace draw2d_gdi
       virtual ~pen();
 
       operator HPEN() const;
-      int GetLogPen(LOGPEN* pLogPen);
-      int GetExtLogPen(EXTLOGPEN* pLogPen);
+      ::i32 GetLogPen(LOGPEN* pLogPen);
+      ::i32 GetExtLogPen(EXTLOGPEN* pLogPen);
 
 
-      virtual void construct(int nPenStyle, int nWidth, ::color::color crColor);
-      virtual void construct(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush, int nStyleCount = 0, const unsigned int* lpStyle = nullptr);
-      bool CreatePen(int nPenStyle, int nWidth, ::color::color crColor);
-      bool CreatePen(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush,
-                     int nStyleCount = 0, const unsigned int* lpStyle = nullptr);
+      virtual void construct(::i32 nPenStyle, ::i32 nWidth, ::color::color crColor);
+      virtual void construct(::i32 nPenStyle, ::i32 nWidth, const LOGBRUSH* pLogBrush, ::i32 nStyleCount = 0, const ::u32* lpStyle = nullptr);
+      bool CreatePen(::i32 nPenStyle, ::i32 nWidth, ::color::color crColor);
+      bool CreatePen(::i32 nPenStyle, ::i32 nWidth, const LOGBRUSH* pLogBrush,
+                     ::i32 nStyleCount = 0, const ::u32* lpStyle = nullptr);
       bool CreatePenIndirect(LPLOGPEN lpLogPen);
 
 

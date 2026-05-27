@@ -9,7 +9,7 @@ namespace x11
 {
 
 
-   const char * g_pszAtomName[] = {
+   const ::i8 * g_pszAtomName[] = {
       "_NET_WM_STATE",
       "_NET_WM_STATE_ABOVE",
       "_NET_WM_STATE_BELOW",
@@ -31,10 +31,10 @@ namespace x11
    };
 
 
-   const char * atom_name(enuid() eatom)
+   const ::i8 * atom_name(enuid() eatom)
    {
 
-      int iAtom = (int) eatom;
+      ::i32 iAtom = (::i32) eatom;
 
       if (iAtom < 0 || iAtom >= e_atom_count)
       {
@@ -48,7 +48,7 @@ namespace x11
    }
 
 
-   int atom_count()
+   ::i32 atom_count()
    {
 
       return e_atom_count;

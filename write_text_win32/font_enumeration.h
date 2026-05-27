@@ -36,10 +36,10 @@ namespace write_text_win32
       virtual void enumerate_character_set(::write_text::font_enumeration_item * pitem);
 
 
-      static int CALLBACK OLDFONTENUMPROCW(CONST LOGFONTW* plogfont, CONST TEXTMETRICW* ptextmetric, DWORD dwFontType, LPARAM lparam);
+      static ::i32 CALLBACK OLDFONTENUMPROCW(CONST LOGFONTW* plogfont, CONST TEXTMETRICW* ptextmetric, DWORD dwFontType, LPARAM lparam);
 
 
-      static int CALLBACK OLDFONTENUMPROCW_character_set(CONST LOGFONTW* plogfont, CONST TEXTMETRICW* ptextmetric, DWORD dwFontType, LPARAM lparam);
+      static ::i32 CALLBACK OLDFONTENUMPROCW_character_set(CONST LOGFONTW* plogfont, CONST TEXTMETRICW* ptextmetric, DWORD dwFontType, LPARAM lparam);
 
 
    };

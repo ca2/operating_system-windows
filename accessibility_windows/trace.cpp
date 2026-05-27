@@ -9,7 +9,7 @@
 //
 //struct CLASS_DECL_ACME_WINDOWS __MAP_MESSAGE
 //{
-//   unsigned int    nMsg;
+//   ::u32    nMsg;
 //   const_char_pointer pszMsg;
 
 //};
@@ -257,9 +257,9 @@ void TraceDDE(const ::scoped_string & scopedstrPrefix, const MSG* pMsg)
 
       wchar_t szFormat[80];
       szFormat[0] = '\0';
-      if (((unsigned int)0xC000 <= (unsigned int)pAdvise->cfFormat) &&
+      if (((::u32)0xC000 <= (::u32)pAdvise->cfFormat) &&
 
-            ((unsigned int)pAdvise->cfFormat <= (unsigned int)0xFFFF))
+            ((::u32)pAdvise->cfFormat <= (::u32)0xFFFF))
 
       {
          ::GetClipboardFormatNameW(pAdvise->cfFormat,

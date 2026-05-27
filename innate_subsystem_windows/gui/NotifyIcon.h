@@ -53,9 +53,9 @@ namespace innate_subsystem_windows
       bool isVisible() override;
 
       void setIcon(::innate_subsystem::IconInterface *icon) override;
-      void setText(const char *text) override;
+      void setText(const ::i8 *text) override;
 
-      void showBalloon(const char *message, const char *caption, unsigned int timeoutMillis) override;
+      void showBalloon(const ::i8 *message, const ::i8 *caption, ::u32 timeoutMillis) override;
 
       void show() override;
       void hide() override;

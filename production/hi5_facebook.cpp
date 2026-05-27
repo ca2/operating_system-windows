@@ -1484,7 +1484,7 @@ namespace hi5
       {
          /* Get OAuth header for request token */
          ::property_set set;
-         long long iTime = ::time(nullptr);
+         ::i64 iTime = ::time(nullptr);
          if (m_oauth.getOAuthHeader(eOAuthHttpPost, "https://twitter.com/oauth/request_token", set))
          {
             if (performPost("https://twitter.com/oauth/request_token", set))

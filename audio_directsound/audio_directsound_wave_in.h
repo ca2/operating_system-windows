@@ -26,13 +26,13 @@ namespace multimedia
 
          virtual bool in_initialize_encoder();
 
-         virtual void     in_add_buffer(int iBuffer);
+         virtual void     in_add_buffer(::i32 iBuffer);
          //virtual void     in_add_buffer(LPWAVEHDR lpwavehdr);
 
          //HWAVEIN in_get_safe_HWAVEIN();
          virtual void * get_os_data();
 
-         void     in_open(int iBufferCount, int iBufferSampleCount);
+         void     in_open(::i32 iBufferCount, ::i32 iBufferSampleCount);
          void     in_close();
          void     in_stop();
          void     in_start();
@@ -47,7 +47,7 @@ namespace multimedia
          //static void CALLBACK in_proc(HWAVEIN hwi, UINT uMsg, DWORD dwInstance, DWORD dwParam1, DWORD dwParam2);
 
          WAVEFORMATEX * wave_format();
-         //LPWAVEHDR wave_hdr(int iBuffer);
+         //LPWAVEHDR wave_hdr(::i32 iBuffer);
 
 
       };

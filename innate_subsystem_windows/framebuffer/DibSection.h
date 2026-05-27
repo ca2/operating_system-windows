@@ -96,11 +96,11 @@ namespace innate_subsystem_windows
       virtual void releaseTargetDC() override;
 
       // This function throwing an exception on a failure.
-      virtual void blitToDibSection(const ::i32_rectangle &  rect, unsigned int flags) override;
+      virtual void blitToDibSection(const ::i32_rectangle &  rect, ::u32 flags) override;
 
       // This function throwing an exception on a failure.
-      virtual void blitFromDibSection(const ::i32_rectangle &  rect, unsigned int flags) override;
-      virtual void stretchFromDibSection(const ::i32_rectangle &  srcRect,const ::i32_rectangle & rectangleTarget, unsigned int flags) override;
+      virtual void blitFromDibSection(const ::i32_rectangle &  rect, ::u32 flags) override;
+      virtual void stretchFromDibSection(const ::i32_rectangle &  srcRect,const ::i32_rectangle & rectangleTarget, ::u32 flags) override;
 
       void _setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::PixelFormat & pf, const ::i32_size & dim);
 
@@ -114,8 +114,8 @@ namespace innate_subsystem_windows
        HDC m_memDC;
        HDC m_targetDC;
        // Coordinates of the source dc can be negative.
-       int m_srcOffsetX;
-       int m_srcOffsetY;
+       ::i32 m_srcOffsetX;
+       ::i32 m_srcOffsetY;
 
        void *m_buffer;
 
@@ -179,11 +179,11 @@ namespace innate_subsystem_windows
    //    void releaseTargetDC() override;
    //
    //    // This function throwing an exception on a failure.
-   //    void blitToDibSection(const ::i32_rectangle &  rect, unsigned int flags) override;
+   //    void blitToDibSection(const ::i32_rectangle &  rect, ::u32 flags) override;
    //
    //    // This function throwing an exception on a failure.
-   //    void blitFromDibSection(const ::i32_rectangle &  rect, unsigned int flags) override;
-   //    void stretchFromDibSection(const ::i32_rectangle &  srcRect,const ::i32_rectangle & rectangleTarget, unsigned int flags);
+   //    void blitFromDibSection(const ::i32_rectangle &  rect, ::u32 flags) override;
+   //    void stretchFromDibSection(const ::i32_rectangle &  srcRect,const ::i32_rectangle & rectangleTarget, ::u32 flags);
    //
    //    void setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::PixelFormat & pf, const ::i32_size & dim);
    //
@@ -194,8 +194,8 @@ namespace innate_subsystem_windows
    //    // HBITMAP m_hbmOld;
    //    // HBITMAP m_hbmDIB;
    //    // // Coordinates of the source dc can be negative.
-   //    // int m_srcOffsetX;
-   //    // int m_srcOffsetY;
+   //    // ::i32 m_srcOffsetX;
+   //    // ::i32 m_srcOffsetY;
    //    //
    //    // void* m_buffer;
    //    //

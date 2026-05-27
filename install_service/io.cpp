@@ -52,7 +52,7 @@ static HANDLE create_logging_thread(TCHAR *service_name, TCHAR *path, unsigned l
 
 static inline unsigned long guess_charsize(void *address, unsigned long bufsize) {
   if (IsTextUnicode(address, bufsize, 0)) return (unsigned long) sizeof(wchar_t);
-  else return (unsigned long) sizeof(char);
+  else return (unsigned long) sizeof(::i8);
 }
 
 static inline void write_bom(logger_t *logger, unsigned long *out) {
@@ -63,7 +63,7 @@ static inline void write_bom(logger_t *logger, unsigned long *out) {
 }
 
 /* Get path, share mode, creation disposition and flags for a stream. */
-int get_createfile_parameters(HKEY key, TCHAR *prefix, TCHAR *path, unsigned long *sharing, unsigned long default_sharing, unsigned long *disposition, unsigned long default_disposition, unsigned long *flags, unsigned long default_flags) {
+::i32 get_createfile_parameters(HKEY key, TCHAR *prefix, TCHAR *path, unsigned long *sharing, unsigned long default_sharing, unsigned long *disposition, unsigned long default_disposition, unsigned long *flags, unsigned long default_flags) {
   TCHAR value[NSSM_STDIO_LENGTH];
 
   /* Path. */
@@ -112,7 +112,7 @@ int get_createfile_parameters(HKEY key, TCHAR *prefix, TCHAR *path, unsigned lon
   return 0;
 }
 
-int set_createfile_parameter(HKEY key, TCHAR *prefix, TCHAR *suffix, unsigned long number) {
+::i32 set_createfile_parameter(HKEY key, TCHAR *prefix, TCHAR *suffix, unsigned long number) {
   TCHAR value[NSSM_STDIO_LENGTH];
 
   if (_sntprintf_s(value, _countof(value), _TRUNCATE, _T("%s%s"), prefix, suffix) < 0) {
@@ -123,7 +123,7 @@ int set_createfile_parameter(HKEY key, TCHAR *prefix, TCHAR *suffix, unsigned lo
   return set_number(key, value, number);
 }
 
-int delete_createfile_parameter(HKEY key, TCHAR *prefix, TCHAR *suffix) {
+::i32 delete_createfile_parameter(HKEY key, TCHAR *prefix, TCHAR *suffix) {
   TCHAR value[NSSM_STDIO_LENGTH];
 
   if (_sntprintf_s(value, _countof(value), _TRUNCATE, _T("%s%s"), prefix, suffix) < 0) {
@@ -230,7 +230,7 @@ void rotate_file(TCHAR *service_name, TCHAR *path, unsigned long seconds, unsign
   return;
 }
 
-int get_output_handles(nssm_service_t *service, STARTUPINFO *si) {
+::i32 get_output_handles(nssm_service_t *service, STARTUPINFO *si) {
   if (! si) return 1;
 
   /* Allocate a ___new console so we get a fresh stdin, stdout and stderr. */
@@ -353,10 +353,10 @@ void close_output_handles(STARTUPINFO *si) {
             1 on non-fatal error.
            -1 on fatal error.
 */
-static int try_read(logger_t *logger, void *address, unsigned long bufsize, unsigned long *in, int *complained) {
-  int ret = 1;
+static ::i32 try_read(logger_t *logger, void *address, unsigned long bufsize, unsigned long *in, ::i32 *complained) {
+  ::i32 ret = 1;
   unsigned long error;
-  for (int tries = 0; tries < 5; tries++) {
+  for (::i32 tries = 0; tries < 5; tries++) {
     if (ReadFile(logger->read_handle, address, bufsize, in, 0)) return 0;
 
     error = GetLastError();
@@ -396,10 +396,10 @@ complain_read:
             1 on non-fatal error.
            -1 on fatal error.
 */
-static int try_write(logger_t *logger, void *address, unsigned long bufsize, unsigned long *out, int *complained) {
-  int ret = 1;
+static ::i32 try_write(logger_t *logger, void *address, unsigned long bufsize, unsigned long *out, ::i32 *complained) {
+  ::i32 ret = 1;
   unsigned long error;
-  for (int tries = 0; tries < 5; tries++) {
+  for (::i32 tries = 0; tries < 5; tries++) {
     if (WriteFile(logger->write_handle, address, bufsize, out, 0)) return 0;
 
     error = GetLastError();
@@ -451,13 +451,13 @@ unsigned long WINAPI log_and_rotate(void *arg) {
     size = l.QuadPart;
   }
 
-  char buffer[1024];
+  ::i8 buffer[1024];
   void *address;
   unsigned long in, out;
   unsigned long charsize = 0;
   unsigned long error;
-  int ret;
-  int complained = 0;
+  ::i32 ret;
+  ::i32 complained = 0;
 
   while (true) {
     /* Read data from the pipe. */
@@ -527,7 +527,7 @@ unsigned long WINAPI log_and_rotate(void *arg) {
           }
 
           /* Resume writing after the newline. */
-          address = (void *) ((char *) address + i);
+          address = (void *) ((::i8 *) address + i);
           in -= i;
         }
       }

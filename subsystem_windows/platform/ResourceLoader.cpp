@@ -38,17 +38,17 @@ namespace subsystem_windows
    resource_loader::~resource_loader()
    {}//h
 
-   //HICON resource_loader::loadStandartIcon(const char* iconName)
+   //HICON resource_loader::loadStandartIcon(const ::i8* iconName)
    //{
    //   return LoadIcon(NULL, iconName);
    //}
 
-   //HICON resource_loader::loadIcon(const char* iconName)
+   //HICON resource_loader::loadIcon(const ::i8* iconName)
    //{
    //   return LoadIcon(m_appInstance, iconName);
    //}
 
-   bool resource_loader::loadString(unsigned int id, ::string & str)
+   bool resource_loader::loadString(::u32 id, ::string & str)
    {
       //_ASSERT(string != 0);
       str = "(Undef)";
@@ -64,7 +64,7 @@ namespace subsystem_windows
 
 
       //// Id of string-group, based from 0.
-      //int resId = (id / 16) + 1;
+      //::i32 resId = (id / 16) + 1;
       //HRSRC resHnd = FindResource(m_appInstance,
       //   MAKEINTRESOURCE(resId),
       //   RT_STRING);
@@ -100,7 +100,7 @@ namespace subsystem_windows
    //      MAKEINTRESOURCE(id));
    //}
 
-   //HCURSOR resource_loader::loadStandardCursor(const char* id)
+   //HCURSOR resource_loader::loadStandardCursor(const ::i8* id)
    //{
    //   return LoadCursor(0, id);
    //}

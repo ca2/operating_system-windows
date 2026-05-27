@@ -37,7 +37,7 @@ namespace draw2d_gdi
    }
 
 
-   bool brush::CreateHatchBrush(int nIndex, ::color::color crColor)
+   bool brush::CreateHatchBrush(::i32 nIndex, ::color::color crColor)
    {
 
       return Attach(::CreateHatchBrush(nIndex, argb_invert(crColor)));
@@ -52,7 +52,7 @@ namespace draw2d_gdi
    bool brush::CreateDIBPatternBrush(const void * lpPackedDIB, UINT nUsage)
    { return Attach(::CreateDIBPatternBrushPt(lpPackedDIB, nUsage)); }
 
-   bool brush::CreateSysColorBrush(int nIndex)
+   bool brush::CreateSysColorBrush(::i32 nIndex)
    {
 
       return Attach(::GetSysColorBrush(nIndex));
@@ -60,7 +60,7 @@ namespace draw2d_gdi
    }
 
 
-   int brush::GetLogBrush(LOGBRUSH* pLogBrush)
+   ::i32 brush::GetLogBrush(LOGBRUSH* pLogBrush)
    {
 
       return get_object(sizeof(LOGBRUSH), pLogBrush);
@@ -76,7 +76,7 @@ namespace draw2d_gdi
 
    }
 
-   void brush::construct(int nIndex, ::color::color crColor)
+   void brush::construct(::i32 nIndex, ::color::color crColor)
    {
       if (!Attach(::CreateHatchBrush(nIndex, crColor)))
          throw resource_exception();
@@ -117,7 +117,7 @@ namespace draw2d_gdi
       LOGBRUSH lb;
       VERIFY(get_object(sizeof(lb), &lb));
       dumpcontext << "lb.lbStyle = " << lb.lbStyle;
-      dumpcontext << "\nlb.lbHatch = " << (unsigned int) lb.lbHatch;
+      dumpcontext << "\nlb.lbHatch = " << (::u32) lb.lbHatch;
       dumpcontext << "\nlb.lbColor = " << (void *)(DWORD_PTR)lb.lbColor;
 
       dumpcontext << "\n";

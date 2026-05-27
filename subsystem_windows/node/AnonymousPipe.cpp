@@ -47,7 +47,7 @@ namespace subsystem_windows
       }
    }
 
-   void AnonymousPipe::initialize_anonymous_pipe(::subsystem::FileInterface * pfileWrite, ::subsystem::FileInterface * pfileRead, unsigned int maxPortionSize, ::subsystem::LogWriter *plogwriter)
+   void AnonymousPipe::initialize_anonymous_pipe(::subsystem::FileInterface * pfileWrite, ::subsystem::FileInterface * pfileRead, ::u32 maxPortionSize, ::subsystem::LogWriter *plogwriter)
    {
       initialize_pipe(maxPortionSize);
 
@@ -177,7 +177,7 @@ namespace subsystem_windows
       m_neededToClose = neededToClose;
    }
 
-   void AnonymousPipe::setTimeOut(unsigned int timeOut)
+   void AnonymousPipe::setTimeOut(::u32 timeOut)
    {
       m_timeOut = timeOut;
    }

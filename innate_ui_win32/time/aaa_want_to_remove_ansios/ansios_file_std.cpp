@@ -8,7 +8,7 @@
 
 
 
-FILE *FILE_open(const char *path, const char *attrs)
+FILE *FILE_open(const ::i8 *path, const ::i8 *attrs)
 {
 
 #if defined(WINDOWS)
@@ -79,7 +79,7 @@ size_t fwrite_dup(const void *buffer, size_t size, size_t count, FILE *str)
 
 }
 
-char *fgets_dup(char *str, int32_t n, FILE *s)
+::i8 *fgets_dup(::i8 *str, int32_t n, FILE *s)
 {
 
    return fgets(str, n, s);

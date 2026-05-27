@@ -29,13 +29,13 @@ namespace windowing_win32
       /// negative value undefined
       ::collection::count  m_cFileCount;
       /// -2 value undefined
-      int   m_iPriorityTextFormat;
+      ::i32   m_iPriorityTextFormat;
       /// negative value undefined
-      int  m_iFilea;
+      ::i32  m_iFilea;
       /// negative value undefined
-      int  m_iText;
+      ::i32  m_iText;
       /// negative value undefined
-      int  m_iDib;
+      ::i32  m_iDib;
 
 
       copydesk();
@@ -56,7 +56,7 @@ namespace windowing_win32
       virtual void OnClipboardUpdate();
 
       virtual ::collection::count _get_file_count();
-      virtual int _get_priority_text_format();
+      virtual ::i32 _get_priority_text_format();
 
 
       virtual HGLOBAL hglobal_get_filea(const ::file::path_array_base & stra);

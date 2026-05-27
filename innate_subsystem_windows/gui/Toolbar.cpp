@@ -62,7 +62,7 @@ namespace innate_subsystem_windows
       //}
    }
 
-   bool Toolbar::create(int _tbID, const ::operating_system::window & operatingsystemwindowParent, unsigned int dwStyle)
+   bool Toolbar::create(::i32 _tbID, const ::operating_system::window & operatingsystemwindowParent, ::u32 dwStyle)
    {
       dwStyle |= WS_CHILD;
 
@@ -83,12 +83,12 @@ namespace innate_subsystem_windows
       return !!::as_HWND(this->operating_system_window());
    };
 
-   void Toolbar::setViewAutoButtons(int iButton, int style)
+   void Toolbar::setViewAutoButtons(::i32 iButton, ::i32 style)
    {
       m_autoButtons[iButton] = style;
    }
 
-   void Toolbar::loadToolbarfromRes(unsigned int id)
+   void Toolbar::loadToolbarfromRes(::u32 id)
    {
       BITMAP bmp;
 
@@ -102,7 +102,7 @@ namespace innate_subsystem_windows
       DeleteObject(hbmp);
    }
 
-   void Toolbar::setButtonsRange(unsigned int id)
+   void Toolbar::setButtonsRange(::u32 id)
    {
       m_initialStr = id;
    }
@@ -111,7 +111,7 @@ namespace innate_subsystem_windows
    {
       ::raw_array_base<TBBUTTON> tbuttons;
 
-      for (int i=0; i < m_numberTB; i++) {
+      for (::i32 i=0; i < m_numberTB; i++) {
          TBBUTTON tbutton;
 
          ZeroMemory(&tbutton, sizeof(tbutton));
@@ -140,31 +140,31 @@ namespace innate_subsystem_windows
       set_operating_system_window(::as_operating_system_window(CreateToolbarEx(::as_HWND(window),
          WS_VISIBLE | WS_CHILD | TBSTYLE_TOOLTIPS | WS_CLIPSIBLINGS | TBSTYLE_FLAT | WS_BORDER,
          m_id,
-         static_cast<int>(tbuttons.size()), 
+         static_cast<::i32>(tbuttons.size()), 
           (HINSTANCE)system()->m_hinstanceMain,
          m_id,
          tbuttons.data(),
-         static_cast<int>(tbuttons.size()),
+         static_cast<::i32>(tbuttons.size()),
          0, 0, 0, 0,
          sizeof(TBBUTTON))));
       SendMessage(::as_HWND(this->operating_system_window()), TB_SETINDENT, 4, 0);
    }
 
-   bool Toolbar::enableButton(int idButton, bool enable)
+   bool Toolbar::enableButton(::i32 idButton, bool enable)
    {
       LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_ENABLEBUTTON,
                                    idButton, MAKELONG(enable, 0));
       return !!result;
    }
 
-   bool Toolbar::pressButton(int idButton, bool press)
+   bool Toolbar::pressButton(::i32 idButton, bool press)
    {
       LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_PRESSBUTTON,
                                    idButton, MAKELONG(press, 0));
       return !!result;
    }
 
-   bool Toolbar::getButtonRect(int nIndex, ::i32_rectangle & buttonRect)
+   bool Toolbar::getButtonRect(::i32 nIndex, ::i32_rectangle & buttonRect)
    {
       RECT rc;
       LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_GETITEMRECT,
@@ -192,7 +192,7 @@ namespace innate_subsystem_windows
          ::i32_rectangle btnRect;
          GetClientRect(GetParent(::as_HWND(this->operating_system_window())), &r);
          getButtonRect(0, btnRect);
-         int height = getButtonsHeight() + btnRect.top * 2 + 2;
+         ::i32 height = getButtonsHeight() + btnRect.top * 2 + 2;
          SetWindowPos(::as_HWND(this->operating_system_window()), HWND_TOP, 0, 0, r.right - r.left, height,
                       SWP_NOMOVE);
       } else {
@@ -200,24 +200,24 @@ namespace innate_subsystem_windows
       }
    }
 
-   int Toolbar::getButtonsHeight()
+   ::i32 Toolbar::getButtonsHeight()
    {
       return HIWORD(SendMessage(::as_HWND(this->operating_system_window()), TB_GETBUTTONSIZE, 0, 0));
    }
 
-   int Toolbar::getButtonsWidth()
+   ::i32 Toolbar::getButtonsWidth()
    {
       return LOWORD(SendMessage(::as_HWND(this->operating_system_window()), TB_GETBUTTONSIZE, 0, 0));
    }
 
-   int Toolbar::getHeight()
+   ::i32 Toolbar::getHeight()
    {
       RECT r;
       GetWindowRect(::as_HWND(this->operating_system_window()), &r);
       return r.bottom - r.top;
    }
 
-   int Toolbar::getTotalWidth()
+   ::i32 Toolbar::getTotalWidth()
    {
       SIZE size;
       SendMessage(::as_HWND(this->operating_system_window()), TB_GETMAXSIZE, 0, reinterpret_cast<LPARAM>(&size));
@@ -240,14 +240,14 @@ namespace innate_subsystem_windows
       return !!(style & WS_VISIBLE);
    }
 
-   bool Toolbar::checkButton(int idButton, bool check)
+   bool Toolbar::checkButton(::i32 idButton, bool check)
    {
       LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_CHECKBUTTON,
               idButton, MAKELONG(check, 0));
       return !!result;
    }
 
-   LRESULT Toolbar::getState(int idButton)
+   LRESULT Toolbar::getState(::i32 idButton)
    {
       LRESULT result = SendMessage(::as_HWND(this->operating_system_window()), TB_GETSTATE,
                        idButton, 0);
@@ -261,7 +261,7 @@ namespace innate_subsystem_windows
    }
 
 
-   LRESULT Toolbar::addBitmap(int nButtons, unsigned int bitmapID)
+   LRESULT Toolbar::addBitmap(::i32 nButtons, ::u32 bitmapID)
    {
       TBADDBITMAP resBitmap;
 
@@ -270,7 +270,7 @@ namespace innate_subsystem_windows
       return SendMessage(::as_HWND(this->operating_system_window()), TB_ADDBITMAP, nButtons, (LPARAM)&resBitmap);
    }
 
-   LRESULT Toolbar::addSystemBitmap(unsigned int stdBitmapID)
+   LRESULT Toolbar::addSystemBitmap(::u32 stdBitmapID)
    {
       TBADDBITMAP resBitmap;
 
@@ -279,7 +279,7 @@ namespace innate_subsystem_windows
       return SendMessage(::as_HWND(this->operating_system_window()), TB_ADDBITMAP, 0, (::lparam)&resBitmap);
    }
 
-   bool Toolbar::addButton(int iBitmap, int idCommand, BYTE state, BYTE style, unsigned int dwData, int iString)
+   bool Toolbar::addButton(::i32 iBitmap, ::i32 idCommand, BYTE state, BYTE style, ::u32 dwData, ::i32 iString)
    {
       TBBUTTON tbb;
 
@@ -297,7 +297,7 @@ namespace innate_subsystem_windows
       return !!result;
    }
 
-   bool Toolbar::addNButton(int nButtons, ::innate_subsystem::toolbar_button_t * ptoolbarbutton)
+   bool Toolbar::addNButton(::i32 nButtons, ::innate_subsystem::toolbar_button_t * ptoolbarbutton)
    {
       TBBUTTON tbb{};
       copy(&tbb, ptoolbarbutton);

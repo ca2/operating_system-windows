@@ -15,7 +15,7 @@
 #endif
 
 
-//void x11_check_status(int status, unsigned long window);
+//void x11_check_status(::i32 status, unsigned long window);
 
 
 
@@ -64,7 +64,7 @@
 //::e_status deferx_initializex_x11();
 //void x11_handle_just_hooks();
 //void x11_defer_handle_just_hooks();
-//int x11_message_box(const ::scoped_string & scopedstr, const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox);
+//::i32 x11_message_box(const ::scoped_string & scopedstr, const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox);
 //bool __x11_hook_process_event(Display * pdisplay, XEvent * pevent, XGenericEventCookie * cookie);
 
 
@@ -73,7 +73,7 @@
 //public:
 //
 //
-//   unsigned int m_ui;
+//   ::u32 m_ui;
 //
 //
 //   x11color32_t(){m_ui=0;}

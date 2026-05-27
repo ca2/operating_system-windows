@@ -66,7 +66,7 @@ namespace innate_subsystem_windows
       return picon;
    }
 
-   ::pointer < innate_subsystem::IconInterface > ResourceLoader::loadIcon(const char* iconName)
+   ::pointer < innate_subsystem::IconInterface > ResourceLoader::loadIcon(const ::i8* iconName)
    {
       //return LoadIcon(m_appInstance, iconName);
       auto picon = create_newø<::innate_subsystem_windows::Icon>();
@@ -86,7 +86,7 @@ namespace innate_subsystem_windows
       return picon;
    }
 
-   ::pointer < ::innate_subsystem::IconInterface > ResourceLoader::loadIconByIntResource(int iId)
+   ::pointer < ::innate_subsystem::IconInterface > ResourceLoader::loadIconByIntResource(::i32 iId)
    {
       //return LoadIcon(m_appInstance, iconName);
       auto picon = create_newø<::innate_subsystem_windows::Icon>();
@@ -112,7 +112,7 @@ namespace innate_subsystem_windows
 
 
 
-   bool ResourceLoader::loadString(unsigned int id, ::string & str)
+   bool ResourceLoader::loadString(::u32 id, ::string & str)
    {
       //_ASSERT(string != 0);
       str = "(Undef)";
@@ -128,7 +128,7 @@ namespace innate_subsystem_windows
 
 
       // Id of string-group, based from 0.
-      int resId = (id / 16) + 1;
+      ::i32 resId = (id / 16) + 1;
       HRSRC resHnd = FindResource((HMODULE) MainSubsystem().m_hinstanceResource,
          MAKEINTRESOURCE(resId),
          RT_STRING);
@@ -137,7 +137,7 @@ namespace innate_subsystem_windows
          LPVOID lockRes = LockResource(hGlobal);
 
          WCHAR* lpStr = reinterpret_cast<WCHAR*>(lockRes);
-         for (unsigned int i = 0; i < (id % 16); i++) {
+         for (::u32 i = 0; i < (id % 16); i++) {
             lpStr += 1 + static_cast<UINT16>(lpStr[0]);
          }
 
@@ -160,7 +160,7 @@ namespace innate_subsystem_windows
       return true;
    }
 
-   void * ResourceLoader::loadAccelerator(unsigned int id)
+   void * ResourceLoader::loadAccelerator(::u32 id)
    {
       return (void *) (HACCEL) ::LoadAcceleratorsW((HINSTANCE) system()->m_hinstanceMain, (LPCWSTR) MAKEINTRESOURCEW(id));
 
@@ -170,12 +170,12 @@ namespace innate_subsystem_windows
 
    }
 
-   //HCURSOR ResourceLoader::loadStandardCursor(const char* id)
+   //HCURSOR ResourceLoader::loadStandardCursor(const ::i8* id)
    //{
    //   return LoadCursor(0, id);
    //}
 
-   ::pointer <innate_subsystem::CursorInterface> ResourceLoader::loadCursor(unsigned int id)
+   ::pointer <innate_subsystem::CursorInterface> ResourceLoader::loadCursor(::u32 id)
    {
       //return LoadCursor(m_appInstance, iconName);
       auto pcursor = create_newø<::innate_subsystem_windows::Cursor>();

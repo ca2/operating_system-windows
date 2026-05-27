@@ -64,13 +64,13 @@ namespace wayland
    //    if (keysym >= 'a' && keysym <= 'z')
    //    {
    //
-   //       return (::user::enum_key)((int) (::user::e_key_a) + keysym - 'a');
+   //       return (::user::enum_key)((::i32) (::user::e_key_a) + keysym - 'a');
    //
    //    }
    //    else if (keysym >= 'A' && keysym <= 'Z')
    //    {
    //
-   //       return (::user::enum_key)((int) (::user::e_key_a) + keysym - 'A');
+   //       return (::user::enum_key)((::i32) (::user::e_key_a) + keysym - 'A');
    //
    //    }
    //

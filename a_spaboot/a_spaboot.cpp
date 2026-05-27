@@ -12,16 +12,16 @@ bool parse_installer_start(const ::scoped_string & scopedstr);
 SPALIB_API std::string read_resource_as_string(HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 
 
-int start();
+::i32 start();
 
 ATOM installer_RegisterClass(HINSTANCE hInstance);
 
 LRESULT CALLBACK installer_WndProc(HWND hWnd,::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam);
 
-int APIENTRY _tWinMain(HINSTANCE hInstance,
+::i32 APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
                      LPTSTR    lpCmdLine,
-                     int       nCmdShow)
+                     ::i32       nCmdShow)
 {
    spa_set_admin(false);
 
@@ -79,8 +79,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
       return -1;
 
    wchar_t * lpwstr = ::GetCommandLineW();
-   int numargs;
-   int numchars;
+   ::i32 numargs;
+   ::i32 numchars;
    wparse_cmdline(
       lpwstr, 
       nullptr, 
@@ -100,7 +100,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
    if(numargs >= 2)
    {
-      std::string str(unsigned char(argv[1]));
+      std::string str(::u8(argv[1]));
       if(parse_installer_start(str.c_str()))
       {
          return start();
@@ -122,11 +122,11 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
    if(numargs >= 2)
    {
-      std::string str(unsigned char(argv[1]));
-      int i = str.find("starter_start=");
+      std::string str(::u8(argv[1]));
+      ::i32 i = str.find("starter_start=");
       if(i != std::string::npos)
       {
-         int iStart = i + strlen("starter_start=");
+         ::i32 iStart = i + strlen("starter_start=");
          i = str.find(" ", i);
          if(i != std::string::npos)
          {
@@ -142,7 +142,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
       }
       else
       {
-         std::string str(unsigned char(argv[1]));
+         std::string str(::u8(argv[1]));
          strParameters = "\""+ str + "\"";
          parse_installer(str.c_str());
       }
@@ -160,7 +160,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
    }
 
    DWORD dwExitCode;
-   int i = 1;
+   ::i32 i = 1;
    while(true)
    {
       if(!GetExitCodeProcess(sei.hProcess, &dwExitCode))
@@ -186,7 +186,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
    strUrl = "http://spaignition.api.veriterse.net/query?node=install_application&atom=";
    strUrl += g_strId;
    strUrl += "&key=application";
-   int iRetry = 0;
+   ::i32 iRetry = 0;
    while(true)
    {
       strApp = ms_get(strUrl.c_str());
@@ -202,8 +202,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
       return 1;
    }*/
 
-   int iCount = 20;
-   for(int i = 0; i < iCount; i++)
+   ::i32 iCount = 20;
+   for(::i32 i = 0; i < iCount; i++)
    {
 	   if(PeekMessage(&g_msg, nullptr, 0, 0xffffffffu, PM_REMOVE))
 	   {
@@ -239,7 +239,7 @@ bool file_system()->exists(const ::scoped_string & scopedstrPath1)
 //   if(node.name == "spa" && node.childs.size() > 0)
 //   {
 //      LPXNode lpnode = &node;
-//      for(unsigned int u = 0; u < lpnode->childs.size(); u++)
+//      for(::u32 u = 0; u < lpnode->childs.size(); u++)
 //      {
 //         if(lpnode->childs[u]->name == "index")
 //         {
@@ -264,13 +264,13 @@ bool file_system()->exists(const ::scoped_string & scopedstrPath1)
 //
 //bool parse_installer_start(XNode & node)
 //{
-//   int iOkCount = 0;
+//   ::i32 iOkCount = 0;
 //   std::string strInstalledBuild;
 //   std::string strRequestedBuild;
 //   if(node.name == "spa" && node.childs.size() > 0)
 //   {
 //      LPXNode lpnode = &node;
-//      for(unsigned int u = 0; u < lpnode->childs.size(); u++)
+//      for(::u32 u = 0; u < lpnode->childs.size(); u++)
 //      {
 //         if(lpnode->childs[u]->name == "index")
 //         {
@@ -341,7 +341,7 @@ bool file_system()->exists(const ::scoped_string & scopedstrPath1)
 //   printf("%s", psz);
 //}
 
-//int start()
+//::i32 start()
 //{
 //   STARTUPINFO si;
 //   PROCESS_INFORMATION pi;
@@ -352,10 +352,10 @@ bool file_system()->exists(const ::scoped_string & scopedstrPath1)
 //   if(strCommand.length() > 0)
 //   {
 //      ::DeleteFileA("C:\\ca2\\machine\\on_after_spaadmin.txt");
-//      int iStart = 0;
+//      ::i32 iStart = 0;
 //      while(true)
 //      {
-//         int iFind = strCommand.find(';', iStart);
+//         ::i32 iFind = strCommand.find(';', iStart);
 //         if(iFind < 0)
 //            strInstall = strCommand.substr(iStart);
 //         else
@@ -401,7 +401,7 @@ bool file_system()->exists(const ::scoped_string & scopedstrPath1)
 //         return 1;
 //      }
 //   }
-//   for(unsigned int u = 0; u < g_straRestartCommandLine.size(); u++)
+//   for(::u32 u = 0; u < g_straRestartCommandLine.size(); u++)
 //   {
 //      std::string & str = g_straRestartCommandLine.at(u);
 //      memory_set(&si, 0, sizeof(si));

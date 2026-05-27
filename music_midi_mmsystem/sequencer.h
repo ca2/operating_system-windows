@@ -29,14 +29,14 @@ namespace music
             KEYFRAME                   m_keyframe;
             ::pointer<midi>           m_pmidi;
 
-            int                        m_iBufferSize;
+            ::i32                        m_iBufferSize;
             
             
             manual_reset_happening         m_happeningLongMessage;
             HMIDIOUT                   m_hmidiout;
 
 
-            int                        m_iBufferNominalMax;
+            ::i32                        m_iBufferNominalMax;
 
             ::pointer<buffer_array>   m_pbuffera;
 
@@ -44,7 +44,7 @@ namespace music
 
             midi_callback_data         m_midicallbackdata;
 
-            int                        m_iBuffersInMMSYSTEM;
+            ::i32                        m_iBuffersInMMSYSTEM;
 
             musical_tick               m_tkLastOp;
             bool                       m_bSendXGModeOn;
@@ -60,14 +60,14 @@ namespace music
 
 
 
-            virtual long long increment_reference_count()
+            virtual ::i64 increment_reference_count()
             {
 
                return ::object::increment_reference_count();
 
             }
 
-            virtual long long decrement_reference_count()
+            virtual ::i64 decrement_reference_count()
             {
 
                return ::object::decrement_reference_count();
@@ -83,7 +83,7 @@ namespace music
             virtual void pause(player_command* pcommand) override;
             virtual void restart(player_command* pcommand) override;
 
-            virtual int GetDefaultCodePage();
+            virtual ::i32 GetDefaultCodePage();
 
             virtual ::e_status fill_buffer(LPMIDIHDR lpmidihdr);
 
@@ -147,13 +147,13 @@ namespace music
             virtual void music_midi_on_playback_end();
 
 
-            ::e_status WorkStreamRender(LPMIDIHDR lpmh, musical_tick tickMax, int iBufferNominalMax);
+            ::e_status WorkStreamRender(LPMIDIHDR lpmh, musical_tick tickMax, ::i32 iBufferNominalMax);
 
             ::e_status WorkSeek(musical_tick tickPosition, LPMIDIHDR lpmh);
 
-            ::e_status StreamEvent(musical_tick tickDelta, ::music::midi::happening* Event, LPMIDIHDR lpmh, musical_tick tickMax, unsigned int cbPrerollNomimalMax);
+            ::e_status StreamEvent(musical_tick tickDelta, ::music::midi::happening* Event, LPMIDIHDR lpmh, musical_tick tickMax, ::u32 cbPrerollNomimalMax);
 
-            ::e_status StreamEventF1(musical_tick tickDelta, array < ::music::midi::happening*, ::music::midi::happening* >& eventptra, LPMIDIHDR lpmh, musical_tick tickMax, unsigned int cbPrerollNomimalMax);
+            ::e_status StreamEventF1(musical_tick tickDelta, array < ::music::midi::happening*, ::music::midi::happening* >& eventptra, LPMIDIHDR lpmh, musical_tick tickMax, ::u32 cbPrerollNomimalMax);
 
             ::e_status InsertParmData(musical_tick tickDelta, LPMIDIHDR lpmh);
 

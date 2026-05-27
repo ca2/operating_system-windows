@@ -5,7 +5,7 @@ extern bool is_admin;
 extern imports_t imports;
 
 /* Are two strings case-insensitively equivalent? */
-int str_equiv(const TCHAR *a, const TCHAR *b) {
+::i32 str_equiv(const TCHAR *a, const TCHAR *b) {
   size_t len = _tcslen(a);
   if (_tcslen(b) != len) return 0;
   if (_tcsnicmp(a, b, len)) return 0;
@@ -13,7 +13,7 @@ int str_equiv(const TCHAR *a, const TCHAR *b) {
 }
 
 /* Convert a string to a number. */
-int str_number(const TCHAR *string, unsigned long *number, TCHAR **bogus) {
+::i32 str_number(const TCHAR *string, unsigned long *number, TCHAR **bogus) {
   if (! string) return 1;
 
   *number = _tcstoul(string, bogus, 0);
@@ -22,7 +22,7 @@ int str_number(const TCHAR *string, unsigned long *number, TCHAR **bogus) {
   return 0;
 }
 
-int str_number(const TCHAR *string, unsigned long *number) {
+::i32 str_number(const TCHAR *string, unsigned long *number) {
   TCHAR *bogus;
   return str_number(string, number, &bogus);
 }
@@ -38,7 +38,7 @@ void strip_basename(TCHAR *buffer) {
 }
 
 /* How to use me correctly */
-int usage(int ret) {
+::i32 usage(::i32 ret) {
   if (GetConsoleWindow()) print_message(stderr, NSSM_MESSAGE_USAGE, NSSM_VERSION, NSSM_CONFIGURATION, NSSM_DATE);
   else popup_message(0, MB_OK, NSSM_MESSAGE_USAGE, NSSM_VERSION, NSSM_CONFIGURATION, NSSM_DATE);
   return(ret);
@@ -55,7 +55,7 @@ void check_admin() {
   FreeSid(AdministratorsGroup);
 }
 
-static int elevate(int argc, TCHAR **argv, unsigned long message) {
+static ::i32 elevate(::i32 argc, TCHAR **argv, unsigned long message) {
   print_message(stderr, message);
 
   SHELLEXECUTEINFO sei;
@@ -93,14 +93,14 @@ static int elevate(int argc, TCHAR **argv, unsigned long message) {
   return exitcode;
 }
 
-int num_cpus() {
+::i32 num_cpus() {
   DWORD_PTR i, affinity, system_affinity;
   if (! GetProcessAffinityMask(GetCurrentProcess(), &affinity, &system_affinity)) return 64;
   for (i = 0; system_affinity & (1LL << i); i++);
-  return (int) i;
+  return (::i32) i;
 }
 
-int _tmain(int argc, TCHAR **argv) {
+::i32 _tmain(::i32 argc, TCHAR **argv) {
   check_console();
 
 #ifdef UNICODE
@@ -127,7 +127,7 @@ int _tmain(int argc, TCHAR **argv) {
     if (str_equiv(argv[1], _T("start"))) exit(control_service(NSSM_SERVICE_CONTROL_START, argc - 2, argv + 2));
     if (str_equiv(argv[1], _T("stop"))) exit(control_service(SERVICE_CONTROL_STOP, argc - 2, argv + 2));
     if (str_equiv(argv[1], _T("restart"))) {
-      int ret = control_service(SERVICE_CONTROL_STOP, argc - 2, argv + 2);
+      ::i32 ret = control_service(SERVICE_CONTROL_STOP, argc - 2, argv + 2);
       if (ret) exit(ret);
       exit(control_service(NSSM_SERVICE_CONTROL_START, argc - 2, argv + 2));
     }
@@ -140,10 +140,10 @@ int _tmain(int argc, TCHAR **argv) {
       exit(pre_install_service(argc - 2, argv + 2));
     }
     if (str_equiv(argv[1], _T("edit")) || str_equiv(argv[1], _T("get")) || str_equiv(argv[1], _T("set")) || str_equiv(argv[1], _T("reset")) || str_equiv(argv[1], _T("unset"))) {
-      int ret = pre_edit_service(argc - 1, argv + 1);
+      ::i32 ret = pre_edit_service(argc - 1, argv + 1);
       if (ret == 3 && ! is_admin && argc == 3) exit(elevate(argc, argv, NSSM_MESSAGE_NOT_ADMINISTRATOR_CANNOT_EDIT));
       /* There might be a password here. */
-      for (int i = 0; i < argc; i++) SecureZeroMemory(argv[i], _tcslen(argv[i]) * sizeof(TCHAR));
+      for (::i32 i = 0; i < argc; i++) SecureZeroMemory(argv[i], _tcslen(argv[i]) * sizeof(TCHAR));
       exit(ret);
     }
     if (str_equiv(argv[1], _T("erase"))) {

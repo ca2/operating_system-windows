@@ -7,13 +7,13 @@
 #define TGA_SUCCESS_KILL 2
 #define TGA_SUCCESS_16 3
 
-unsigned int TerminateGuiApp(unsigned int dwPID, unsigned int tickTimeout);
-//unsigned int WINAPI Terminate16App(unsigned int dwPID, unsigned int dwThread,
-//   unsigned short w16Task, unsigned int tickTimeout);
+::u32 TerminateGuiApp(::u32 dwPID, ::u32 tickTimeout);
+//::u32 WINAPI Terminate16App(::u32 dwPID, ::u32 dwThread,
+//   ::u16 w16Task, ::u32 tickTimeout);
 
 //#endif
-//int SendCtrlShiftQToChrome(HWND chrome, int iSleep, ::platform::application * papp);
-//int SendURLToChrome(HWND chrome, const ::scoped_string & scopedstrUrl, ::platform::application * papp);
+//::i32 SendCtrlShiftQToChrome(HWND chrome, ::i32 iSleep, ::platform::application * papp);
+//::i32 SendURLToChrome(HWND chrome, const ::scoped_string & scopedstrUrl, ::platform::application * papp);
 class block_input :
    virtual public matter
 {
@@ -21,7 +21,7 @@ protected:
    ::mutex        m_mutex;
    bool           m_bBlocked;
 public:  
-   block_input(int iSleep = 200);
+   block_input(::i32 iSleep = 200);
 
 
    virtual ~block_input();
@@ -29,7 +29,7 @@ public:
 };
 
 
-block_input::block_input( int iSleep) :
+block_input::block_input( ::i32 iSleep) :
    m_mutex(e_create_new, "Global\\ca2_input")
 {
    m_mutex.lock();
@@ -37,7 +37,7 @@ block_input::block_input( int iSleep) :
    m_bBlocked = ::BlockInput(true) != false;
    //{
 
-   //   unsigned int dw = ::GetLastError();
+   //   ::u32 dw = ::GetLastError();
    //   m_bBlocked = false;
    //   goto repeat;
    //}
@@ -84,7 +84,7 @@ bool is_good_active_w(HWND w)
 
 }
 
-//int SendCtrlShiftQToChrome(oswindow w, int iSleep, ::platform::application * papp)
+//::i32 SendCtrlShiftQToChrome(oswindow w, ::i32 iSleep, ::platform::application * papp)
 //{
 //   /*HWND h = ::GetWindow(chrome, GW_CHILD);
 //   SendMessage(chrome, 0x0272, 0, 0);
@@ -94,11 +94,11 @@ bool is_good_active_w(HWND w)
 //   //   App(papp).message_box_timeout(nullptr, "Quiting browser...", seconds(3), MB_ICONASTERISK);
 //   block_input blockinput;
 //
-//   unsigned int u;
-//   unsigned int character_count;
-//   unsigned short vka[3];
-//   char text[3];
-//   unsigned int flag[3];
+//   ::u32 u;
+//   ::u32 character_count;
+//   ::u16 vka[3];
+//   ::i8 text[3];
+//   ::u32 flag[3];
 //
 //   vka[0] = VK_CONTROL;
 //   vka[1] = VK_SHIFT;
@@ -125,7 +125,7 @@ bool is_good_active_w(HWND w)
 //      return 0;
 //
 //   INPUT input;
-//   unsigned int ::time = 0;
+//   ::u32 ::time = 0;
 //
 //   character_count = 3;
 //   for (u = 0; u < character_count; u++)
@@ -216,10 +216,10 @@ bool is_good_active_w(HWND w)
 //      //keystroke[i + character_count].ki.dwFlags = flag[character_count - i - 1] | KEYEVENTF_KEYUP;
 //      //keystroke[i + character_count].ki.time = ::time;
 //      //keystroke[i + character_count].ki.dwExtraInfo = GetMessageExtraInfo();
-//      //      SendInput((unsigned int)keystrokes_to_send, keystroke, sizeof(*keystroke));
+//      //      SendInput((::u32)keystrokes_to_send, keystroke, sizeof(*keystroke));
 //   }
 //
-//   //keystrokes_sent = SendInput((unsigned int)keystrokes_to_send, keystroke, sizeof(*keystroke));
+//   //keystrokes_sent = SendInput((::u32)keystrokes_to_send, keystroke, sizeof(*keystroke));
 //
 //   //Send the keystrokes.
 //   //delete[] keystroke;
@@ -237,7 +237,7 @@ bool is_good_active_w(HWND w)
 //   return (!a) != (!b);
 //
 //}
-//bool disable_caps(int iSleep)
+//bool disable_caps(::i32 iSleep)
 //{
 //   INPUT input;
 //   if (GetKeyState(VK_CAPITAL) & 0x0001)
@@ -263,7 +263,7 @@ bool is_good_active_w(HWND w)
 //   }
 //   return true;
 //}
-//bool send_ctrl_t(int iSleep)
+//bool send_ctrl_t(::i32 iSleep)
 //{
 //   INPUT input;
 //   input.type = INPUT_KEYBOARD;
@@ -305,7 +305,7 @@ bool is_good_active_w(HWND w)
 //   return true;
 //
 //}
-//bool send_f6(int iSleep)
+//bool send_f6(::i32 iSleep)
 //{
 //   INPUT input;
 //   if (GetKeyState(VK_CAPITAL) & 0x0001)
@@ -331,7 +331,7 @@ bool is_good_active_w(HWND w)
 //   }
 //   return true;
 //}
-//bool send_enter(int iSleep)
+//bool send_enter(::i32 iSleep)
 //{
 //   INPUT input;
 //   input.type = INPUT_KEYBOARD;
@@ -355,7 +355,7 @@ bool is_good_active_w(HWND w)
 //}
 //
 //
-//bool send_input_digit(int i, int iShift, int iSleep)
+//bool send_input_digit(::i32 i, ::i32 iShift, ::i32 iSleep)
 //{
 //   INPUT input;
 //   if (iShift)
@@ -413,7 +413,7 @@ bool is_good_active_w(HWND w)
 //
 //}
 //
-//bool send_input_alpha(int i, int iSleep)
+//bool send_input_alpha(::i32 i, ::i32 iSleep)
 //{
 //   INPUT input;
 //
@@ -443,7 +443,7 @@ bool is_good_active_w(HWND w)
 //
 //}
 //
-//bool send_input_vk(int i, int iShift, int iSleep)
+//bool send_input_vk(::i32 i, ::i32 iShift, ::i32 iSleep)
 //{
 //   INPUT input;
 //
@@ -504,7 +504,7 @@ bool is_good_active_w(HWND w)
 //
 //}
 //
-//bool send_input_scan(int i, int iShift, int iSleep)
+//bool send_input_scan(::i32 i, ::i32 iShift, ::i32 iSleep)
 //{
 //   INPUT input;
 //
@@ -565,7 +565,7 @@ bool is_good_active_w(HWND w)
 //
 //}
 //
-//bool send_input_caps_alpha(int i, int iSleep)
+//bool send_input_caps_alpha(::i32 i, ::i32 iSleep)
 //{
 //   INPUT input;
 //   zero(input);
@@ -593,7 +593,7 @@ bool is_good_active_w(HWND w)
 //
 //}
 //
-//bool send_input_unicode(int i, int iSleep)
+//bool send_input_unicode(::i32 i, ::i32 iSleep)
 //{
 //   if (i >= 'A' &&  i <= 'Z')
 //   {
@@ -749,14 +749,14 @@ bool is_good_active_w(HWND w)
 //
 //}
 //
-////bool add_input_unicode(array < INPUT> & ia, int ch, HKL hkl)
+////bool add_input_unicode(array < INPUT> & ia, ::i32 ch, HKL hkl)
 ////{
 ////   INPUT Event = { 0 };
 ////
 ////
 ////
 ////   const SHORT Vk = VkKeyScanExW(ch, hkl);
-////   //const unsigned int VKey = ::MapVirtualKey(lower_byte(Vk), 0);
+////   //const ::u32 VKey = ::MapVirtualKey(lower_byte(Vk), 0);
 ////
 ////   if (higher_byte(Vk) == 1) // Check if shift key needs to be pressed for this key
 ////   {
@@ -794,9 +794,9 @@ bool is_good_active_w(HWND w)
 ////   return true;
 ////
 ////}
-////bool add_input_unicode(array < INPUT> & ia, int ch, HKL hkl)
-////bool add_input_unicode(array < INPUT> & ia, int ch, int iSleep)
-////bool send_input_unicode(array < INPUT> & ia, int ch, int iSleep)
+////bool add_input_unicode(array < INPUT> & ia, ::i32 ch, HKL hkl)
+////bool add_input_unicode(array < INPUT> & ia, ::i32 ch, ::i32 iSleep)
+////bool send_input_unicode(array < INPUT> & ia, ::i32 ch, ::i32 iSleep)
 ////{
 ////   INPUT Event[2];
 ////
@@ -817,7 +817,7 @@ bool is_good_active_w(HWND w)
 ////   sleep(iSleep);
 ////
 ////   //const SHORT Vk = VkKeyScanExW(ch, hkl);
-////   ////const unsigned int VKey = ::MapVirtualKey(lower_byte(Vk), 0);
+////   ////const ::u32 VKey = ::MapVirtualKey(lower_byte(Vk), 0);
 ////
 ////   //if (higher_byte(Vk) == 1) // Check if shift key needs to be pressed for this key
 ////   //{
@@ -857,7 +857,7 @@ bool is_good_active_w(HWND w)
 ////}
 //
 //
-//bool send_input_string(const ::scoped_string & scopedstr, int iSleep)
+//bool send_input_string(const ::scoped_string & scopedstr, ::i32 iSleep)
 //{
 //
 //   const scoped_string & str = str;
@@ -865,7 +865,7 @@ bool is_good_active_w(HWND w)
 //   while (psz != nullptr && *psz != '\0')
 //   {
 //
-//      int iIndex = unicode_uni_index(psz);
+//      ::i32 iIndex = unicode_uni_index(psz);
 //
 //      send_input_unicode(iIndex, iSleep);
 //
@@ -878,7 +878,7 @@ bool is_good_active_w(HWND w)
 //}
 //
 //
-//int SendURLToChrome(HWND chrome, const ::scoped_string & scopedstrUrl, ::platform::application * papp)
+//::i32 SendURLToChrome(HWND chrome, const ::scoped_string & scopedstrUrl, ::platform::application * papp)
 //{
 //
 //   App(pbapp).message_box_timeout(nullptr, "Sending URL to browser...", seconds(3), MB_ICONASTERISK);
@@ -891,7 +891,7 @@ bool is_good_active_w(HWND w)
 //   if (!XXXSetForegroundWindow(chrome))
 //      return 0;
 //
-//   int iSleep = 40;
+//   ::i32 iSleep = 40;
 //
 //   disable_caps(iSleep);
 //
@@ -917,10 +917,10 @@ bool is_good_active_w(HWND w)
 
 BOOL CALLBACK TerminateGuiAppEnum(HWND hwnd, LPARAM lParam);
 
-unsigned int TerminateGuiApp(unsigned int dwPID, unsigned int tickTimeout)
+::u32 TerminateGuiApp(::u32 dwPID, ::u32 tickTimeout)
 {
    HANDLE   hProc;
-   unsigned int   dwRet;
+   ::u32   dwRet;
 
    // If we can't open the process with PROCESS_TERMINATE rights,
    // then we give up immediately.
@@ -957,7 +957,7 @@ BOOL CALLBACK TerminateGuiAppEnum(HWND hwnd, LPARAM lParam)
 
    GetWindowThreadProcessId(hwnd, &dwID);
 
-   if (dwID == (unsigned int)lParam)
+   if (dwID == (::u32)lParam)
    {
 
       PostMessage(hwnd, ::user::e_message_close, 0, 0);

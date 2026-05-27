@@ -1,7 +1,7 @@
 // Created by camilo on 2022-01-21 05:05 PM <3ThomasBorregaardSorensen
 #include "framework.h"
 #include "window.h"
-#include "acme/nano/graphics/device.h"
+#include "acme/nano/graphics/context.h"
 #include "acme/operating_system/windows/windowing.h"
 // #include "user.h"
 #include "acme/parallelization/task.h"
@@ -253,7 +253,7 @@ namespace win32
          }
 
 
-         //void window::on_char(int iChar)
+         //void window::on_char(::i32 iChar)
          //{
 
          //   m_pacmeuserinteraction->on_char(iChar);
@@ -375,7 +375,7 @@ namespace win32
          //   //{
 
          //   //   HDC hdc = ::GetDC(hwnd);
-         //   //   int nHeight = -MulDiv(14, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+         //   //   ::i32 nHeight = -MulDiv(14, GetDeviceCaps(hdc, LOGPIXELSY), 72);
          //   //   m_hfont = ::CreateFontW(nHeight, 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
          //   //                           CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, FF_SWISS, L"Segoe UI");
          //   //   ::ReleaseDC(hwnd, hdc);
@@ -418,10 +418,10 @@ namespace win32
          //}
 
 
-         //::atom window::hit_test(int x, int y)
+         //::atom window::hit_test(::i32 x, ::i32 y)
          //{
          //
-         //   for (int i = 0; i < m_iButtonCount; i++)
+         //   for (::i32 i = 0; i < m_iButtonCount; i++)
          //   {
          //      if (m_buttona[i].m_rectangle.contains(i32_point(x, y)))
          //      {
@@ -689,7 +689,7 @@ namespace win32
 
 
 
-         LRESULT window::window_procedure(unsigned int message, wparam wparam, lparam lparam)
+         LRESULT window::window_procedure(::u32 message, wparam wparam, lparam lparam)
          {
 
             //{
@@ -791,7 +791,7 @@ namespace win32
                if (pelemental)
                {
 
-                  pelemental->on_char((int)wparam);
+                  pelemental->on_char((::i32)wparam);
 
                }
                return 0;
@@ -1666,7 +1666,7 @@ namespace win32
          }
 
 
-         void window::get_os_window_handle(void * p, int iSize)
+         void window::get_os_window_handle(void * p, ::i32 iSize)
          {
 
             if (iSize != sizeof(::subsystem_windows::os_window_handle))

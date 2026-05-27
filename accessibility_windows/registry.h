@@ -76,9 +76,9 @@ namespace acme_windows
          void _set(const ::scoped_string & scopedstrName, DWORD dwData);
 
 
-         void set(const ::scoped_string & scopedstrName, const scoped_string & scopedstrData, int iType = REG_SZ);
+         void set(const ::scoped_string & scopedstrName, const scoped_string & scopedstrData, ::i32 iType = REG_SZ);
          //void set(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrData);
-         void _set(const ::scoped_string & scopedstrName, const scoped_string & scopedstrData, int iType = REG_SZ);
+         void _set(const ::scoped_string & scopedstrName, const scoped_string & scopedstrData, ::i32 iType = REG_SZ);
          //void _set(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrData);
 
 
@@ -125,7 +125,7 @@ namespace acme_windows
 
 //CLASS_DECL_ACME_WINDOWS void windows_registry_initialize();
 
-//CLASS_DECL_ACME_WINDOWS int WinRegGetDataW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpValue, DWORD dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData);
+//CLASS_DECL_ACME_WINDOWS ::i32 WinRegGetDataW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpValue, DWORD dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData);
 
 //CLASS_DECL_ACME_WINDOWS string file_get_mozilla_firefox_plugin_container_path();
 

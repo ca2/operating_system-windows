@@ -15,7 +15,7 @@ BSTR AllocSysString(const ::wd32_character * pchData, character_count nDataLengt
 
    character_count nLen = utf_to_utf_length(bstr, pchData, nDataLength);
 
-   bstr = ::SysAllocStringLen(nullptr, (unsigned int)nLen);
+   bstr = ::SysAllocStringLen(nullptr, (::u32)nLen);
 
    if (bstr != nullptr)
    {
@@ -35,7 +35,7 @@ bool ReAllocSysString(BSTR * pbstr, const ::wd32_character * pchData, character_
 
    character_count nLen = utf_to_utf_length(pbstr, pchData, nDataLength);
 
-   bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (unsigned int)nLen) != 0;
+   bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (::u32)nLen) != 0;
 
    if (bSuccess)
    {
@@ -50,7 +50,7 @@ bool ReAllocSysString(BSTR * pbstr, const ::wd32_character * pchData, character_
 
 
 
-unsigned int format_message(unsigned int dwFlags, const void * pSource, unsigned int dwMessageID, unsigned int dwLanguageID, ::wd32_character * pszBuffer, unsigned int nSize, va_list * pArguments) noexcept
+::u32 format_message(::u32 dwFlags, const void * pSource, ::u32 dwMessageID, ::u32 dwLanguageID, ::wd32_character * pszBuffer, ::u32 nSize, va_list * pArguments) noexcept
 {
 
 #ifdef WINDOWS
@@ -100,7 +100,7 @@ unsigned int format_message(unsigned int dwFlags, const void * pSource, unsigned
 //}
 
 
-// unsigned int xxxget_environment_variable(const ::wd32_character * pszVar, ::wd32_character * pszBuffer, unsigned int dwSize)
+// ::u32 xxxget_environment_variable(const ::wd32_character * pszVar, ::wd32_character * pszBuffer, ::u32 dwSize)
 // {
 
 // #ifdef UNIVERSAL_WINDOWS
@@ -141,13 +141,13 @@ unsigned int format_message(unsigned int dwFlags, const void * pSource, unsigned
 //       else
 //       {
 
-//          return (unsigned int)wstrEnv.get_length();
+//          return (::u32)wstrEnv.get_length();
 
 //       }
 
 //    }
 
-//    return (unsigned int)__wd32len(wd32_count_copy(pszBuffer, wstrEnv, dwSize));
+//    return (::u32)__wd32len(wd32_count_copy(pszBuffer, wstrEnv, dwSize));
 
 // #endif
 

@@ -19,9 +19,9 @@ namespace innate_subsystem_windows
 
        ~KeyboardLayout() override;
 
-      bool vkCodeToString(unsigned short virtKey, bool down, ::wstring *res, ::innate_subsystem::keyboard_state_t * pkeyboarstate) override;
+      bool vkCodeToString(::u16 virtKey, bool down, ::wstring *res, ::innate_subsystem::keyboard_state_t * pkeyboarstate) override;
 
-      virtual bool _tryTranslateNotPrintableToUnicode(unsigned short virtKey, HKL currentLayout, WCHAR *unicodeChar,
+      virtual bool _tryTranslateNotPrintableToUnicode(::u16 virtKey, HKL currentLayout, WCHAR *unicodeChar,
                                                       ::innate_subsystem::keyboard_state_t *pkeyboarstate);
 
    };

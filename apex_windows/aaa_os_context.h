@@ -86,7 +86,7 @@ namespace apex_windows
 
       //void edit_link_target(const ::file::path & path, const ::file::path & pathLink) override;
       //void edit_link_folder(const ::file::path & path, const ::file::path & pathLink) override;
-      //void edit_link_icon(const ::file::path& path, int iIcon, const ::file::path& pathLink) override;
+      //void edit_link_icon(const ::file::path& path, ::i32 iIcon, const ::file::path& pathLink) override;
 
       //::pointer < ::file::link > resolve_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all) override;
 
@@ -97,7 +97,7 @@ namespace apex_windows
       bool is_alias(const ::file::path & path) override;
 
 
-      void raise_exception(unsigned int dwExceptionCode, unsigned int dwExceptionFlags);
+      void raise_exception(::u32 dwExceptionCode, ::u32 dwExceptionFlags);
 
       bool is_remote_session() override;
 

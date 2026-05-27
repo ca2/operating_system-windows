@@ -4,7 +4,7 @@
 #include "acme/parallelization/synchronous_lock.h"
 
 
-//CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, unsigned long long iSize);
+//CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, ::u64 iSize);
 
 
 namespace acme_windows
@@ -44,7 +44,7 @@ namespace acme_windows
 
          m_fileinstance.m_u = (::uptr) INVALID_HANDLE_VALUE;
 
-         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (unsigned int)m_size, windowspath.extended_path());
+         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (::u32)m_size, windowspath.extended_path());
 
       }
       else
@@ -54,7 +54,7 @@ namespace acme_windows
 
          directory_system()->create(pathFolder);
 
-         int iOpen;
+         ::i32 iOpen;
 
          if (m_bCreate)
          {

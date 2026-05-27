@@ -16,7 +16,7 @@ namespace windowing_win32
       }
 
       //   HDC hMemDC;
-      unsigned int dwWidth, dwHeight;
+      ::u32 dwWidth, dwHeight;
       BITMAPV5HEADER bi;
       // HBITMAP hOldBitmap;
       HBITMAP hBitmap;
@@ -30,7 +30,7 @@ namespace windowing_win32
       ZeroMemory(&bi, sizeof(BITMAPV5HEADER));
       bi.bV5Size = sizeof(BITMAPV5HEADER);
       bi.bV5Width = dwWidth;
-      bi.bV5Height = -(int)dwHeight;
+      bi.bV5Height = -(::i32)dwHeight;
       bi.bV5Planes = 1;
       bi.bV5BitCount = 32;
       bi.bV5Compression = BI_BITFIELDS;
@@ -45,7 +45,7 @@ namespace windowing_win32
       hdc = GetDC(nullptr);
 
       // Create the DIB section with an alpha channel.
-      hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (unsigned int)0);
+      hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (::u32)0);
 
 
       //hMemDC = create_compatible_graphics(hdc);
@@ -63,7 +63,7 @@ namespace windowing_win32
       // Set the alpha values for each pixel in the cursor so that
       // the complete cursor is semi-transparent.
 
-      int iStrideDst = dwWidth * sizeof(color32_t);
+      ::i32 iStrideDst = dwWidth * sizeof(color32_t);
 
       ::copy_image32((color32_t *)pBits, pimage->width(), pimage->height(), iStrideDst, pimage->get_data(), pimage->scan_size());
 
@@ -72,7 +72,7 @@ namespace windowing_win32
    }
 
 
-   HCURSOR create_alpha_icon(const ::image::image * pimage, bool bIcon, int xHotSpot, int yHotSpot)
+   HCURSOR create_alpha_icon(const ::image::image * pimage, bool bIcon, ::i32 xHotSpot, ::i32 yHotSpot)
    {
 
       if (!pimage->is_ok())
@@ -113,7 +113,7 @@ namespace windowing_win32
    }
 
 
-   HCURSOR create_alpha_cursor(const ::image::image * pimage, int xHotSpot, int yHotSpot)
+   HCURSOR create_alpha_cursor(const ::image::image * pimage, ::i32 xHotSpot, ::i32 yHotSpot)
    {
 
       if (pimage.nok())
@@ -163,7 +163,7 @@ namespace windowing_win32
       ZeroMemory(&bminfo, sizeof(bminfo));
       bminfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
       bminfo.bmiHeader.biWidth = ppixmap->width();
-      bminfo.bmiHeader.biHeight = -((int)ppixmap->height());
+      bminfo.bmiHeader.biHeight = -((::i32)ppixmap->height());
       bminfo.bmiHeader.biPlanes = 1;
       bminfo.bmiHeader.biBitCount = 32;
       bminfo.bmiHeader.biCompression = BI_RGB;
@@ -190,7 +190,7 @@ namespace windowing_win32
    }
 
 
-   CLASS_DECL_WINDOWING_WIN32 float os_get_dpi()
+   CLASS_DECL_WINDOWING_WIN32 ::f32 os_get_dpi()
    {
 
       return 96.0f;
@@ -198,7 +198,7 @@ namespace windowing_win32
    }
 
 
-   HICON load_icon(::particle * pparticle, string_array_base & straMatter, const ::scoped_string & scopedstrIcon, int cx, int cy)
+   HICON load_icon(::particle * pparticle, string_array_base & straMatter, const ::scoped_string & scopedstrIcon, ::i32 cx, ::i32 cy)
    {
 
       HICON hicon = nullptr;
@@ -232,7 +232,7 @@ namespace windowing_win32
 
 
 
-   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::i32_size & size, int * piScan, color32_t ** ppdata)
+   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::i32_size & size, ::i32 * piScan, color32_t ** ppdata)
    {
 
       BITMAPINFO bitmapinfo;
@@ -242,12 +242,12 @@ namespace windowing_win32
       auto iScan = size.cx * 4;
 
       bitmapinfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-      bitmapinfo.bmiHeader.biWidth = (int)size.cx;
-      bitmapinfo.bmiHeader.biHeight = (int)-size.cy;
+      bitmapinfo.bmiHeader.biWidth = (::i32)size.cx;
+      bitmapinfo.bmiHeader.biHeight = (::i32)-size.cy;
       bitmapinfo.bmiHeader.biPlanes = 1;
       bitmapinfo.bmiHeader.biBitCount = 32;
       bitmapinfo.bmiHeader.biCompression = BI_RGB;
-      bitmapinfo.bmiHeader.biSizeImage = (int)(size.cy * iScan);
+      bitmapinfo.bmiHeader.biSizeImage = (::i32)(size.cy * iScan);
 
       color32_t * pimage32 = nullptr;
 

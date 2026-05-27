@@ -55,7 +55,7 @@ namespace subsystem_windows
 
    void PipeServer::initialize_pipe_server(
       const scoped_string& scopedstrName,
-      unsigned int bufferSize, 
+      ::u32 bufferSize, 
       ::subsystem::SecurityAttributesInterface* secAttr,
       const class ::time & timeTimeout)
    {
@@ -63,7 +63,7 @@ namespace subsystem_windows
    // }
    //
    //
-   // const ::scoped_string & scopedstrName, unsigned int bufferSize,
+   // const ::scoped_string & scopedstrName, ::u32 bufferSize,
    //                        ::subsystem::SecurityAttributesInterface *secAttr,
    //                        DWORD milliseconds)
     m_timeTimeout = timeTimeout;

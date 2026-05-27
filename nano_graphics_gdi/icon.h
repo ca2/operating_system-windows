@@ -8,14 +8,9 @@
 #include "object.h"
 
 #include <gdiplus.h>
-namespace windows
-{
-
-   namespace nano
-   {
 
 
-      namespace graphics
+      namespace nano_graphics_gdi
       {
 
 
@@ -41,14 +36,5 @@ namespace windows
 
 
 
-      } // namespace graphics
-
-
-   } // namespace nano
-
-
-
-} // namespace windows
-
-
+      } // namespace nano_graphics_gdi
 

@@ -78,7 +78,7 @@ namespace acme_windows
 
       virtual void initialize_serial(
          const string& port = "",
-         unsigned int baudrate = 9600,
+         ::u32 baudrate = 9600,
          ::serial::timeout timeout = nullptr,
          ::serial::enum_byte_size ebytesize = ::serial::e_byte_size_eight,
          ::serial::enum_parity eparity = ::serial::e_parity_none,
@@ -98,9 +98,9 @@ namespace acme_windows
 
       virtual void waitByteTimes (size_t count) override;
 
-      virtual size_t _read (unsigned char *buf, size_t size = 1) override;
+      virtual size_t _read (::u8 *buf, size_t size = 1) override;
 
-      virtual size_t _write (const unsigned char *data, size_t length) override;
+      virtual size_t _write (const ::u8 *data, size_t length) override;
 
       virtual void _flush () override;
 
@@ -108,7 +108,7 @@ namespace acme_windows
 
       virtual void _flushOutput () override;
 
-      virtual void sendBreak (int time) override;
+      virtual void sendBreak (::i32 time) override;
 
       virtual void setBreak (bool level) override;
 
@@ -134,9 +134,9 @@ namespace acme_windows
 
       virtual ::serial::timeout getTimeout () const override;
 
-      virtual void setBaudrate (unsigned int baudrate) override;
+      virtual void setBaudrate (::u32 baudrate) override;
 
-      virtual unsigned int getBaudrate () const override;
+      virtual ::u32 getBaudrate () const override;
 
       virtual void setBytesize (::serial::enum_byte_size ebytesize) override;
 
@@ -182,7 +182,7 @@ namespace acme_windows
 
       ::serial::timeout           m_timeout;           // timeout for read operations
       unsigned long     m_ulBaudrate;    // Baudrate
-      unsigned int          m_uiByteTimeNs;     // Nanoseconds to transmit/receive a single unsigned char
+      ::u32          m_uiByteTimeNs;     // Nanoseconds to transmit/receive a single ::u8
 
       ::serial::enum_parity          m_eparity;           // Parity
       ::serial::enum_byte_size        m_ebytesize;       // Size of the bytes

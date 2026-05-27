@@ -39,12 +39,12 @@ namespace subsystem_windows
    virtual public Implementation<::subsystem::AnonymousPipeFactoryInterface>
    {
    public:
-      //AnonymousPipeFactory(unsigned int bufferSize, ::subsystem::LogWriter *log);
+      //AnonymousPipeFactory(::u32 bufferSize, ::subsystem::LogWriter *log);
       AnonymousPipeFactory();
       ~AnonymousPipeFactory() override;
 
 
-      void initialize_anonymous_pipe_factory(unsigned int bufferSize, ::subsystem::LogWriter *log) override;
+      void initialize_anonymous_pipe_factory(::u32 bufferSize, ::subsystem::LogWriter *log) override;
 
       // This function generates the ::pair of the AnonymousPipe
       // objects that connected to each other.
@@ -64,7 +64,7 @@ namespace subsystem_windows
 
    //private:
       ::subsystem::LogWriter *m_plogwriter;
-      unsigned int m_bufferSize;
+      ::u32 m_bufferSize;
    };
 
 

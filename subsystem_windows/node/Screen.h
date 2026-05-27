@@ -63,9 +63,9 @@ namespace subsystem_windows
       struct BMI
       {
          BITMAPINFOHEADER bmiHeader;
-         unsigned int red;
-         unsigned int green;
-         unsigned int blue;
+         ::u32 red;
+         ::u32 green;
+         ::u32 blue;
       };
 
       struct Palette8bitBMI
@@ -81,12 +81,12 @@ namespace subsystem_windows
       // Windows contain both visible and invisible pseudo-monitors
       // that are associated with mirroring drivers.
       // The function returns only visible monitor count.
-      int getVisibleMonitorCount() override;
+      ::i32 getVisibleMonitorCount() override;
 
    //private:
       virtual void _fillPixelFormat(const BMI *bmi);
       // Find position of first true bit
-      int findFirstBit(const unsigned int bits) override;
+      ::i32 findFirstBit(const ::u32 bits) override;
 
       void fillScreenRect();
 

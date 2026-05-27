@@ -21,10 +21,10 @@ namespace draw2d_gdiplus
          bool delete_object();
 
 
-         int get_object(int nCount, LPVOID pObject) const;
+         ::i32 get_object(::i32 nCount, LPVOID pObject) const;
 
          UINT GetObjectType() const;
-         bool CreateStockObject(int nIndex);
+         bool CreateStockObject(::i32 nIndex);
          bool UnrealizeObject();
          bool operator==(const ::draw2d::object& obj) const;
          bool operator!=(const ::draw2d::object& obj) const;

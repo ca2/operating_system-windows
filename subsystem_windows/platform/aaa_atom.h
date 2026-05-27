@@ -37,9 +37,9 @@ namespace x11
    };
 
 
-   const char * atom_name(enuid() eatom);
+   const ::i8 * atom_name(enuid() eatom);
 
-   int atom_count();
+   ::i32 atom_count();
 
 
 } // namespace x11

@@ -60,7 +60,7 @@ bool file_memory_map::open()
 
    close();
 
-   int iOpen;
+   ::i32 iOpen;
 
    if(m_bCreate)
    {

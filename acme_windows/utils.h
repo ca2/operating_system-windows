@@ -35,19 +35,19 @@ typedef struct _ADDRESS_INFO
 
 
 #ifndef WINDOWS_DESKTOP
-typedef int NTSTATUS;
+typedef ::i32 NTSTATUS;
 #endif
 
 
 typedef struct _SYSTEM_HANDLE
 {
    
-   unsigned int       dwProcessId;
-   unsigned char		      bObjectType;
-   unsigned char		      bFlags;
-   unsigned short		      wValue;
+   ::u32       dwProcessId;
+   ::u8		      bObjectType;
+   ::u8		      bFlags;
+   ::u16		      wValue;
    PVOID          pAddress;
-   unsigned int       GrantedAccess;
+   ::u32       GrantedAccess;
 
 }SYSTEM_HANDLE;
 
@@ -63,14 +63,14 @@ typedef struct _SYSTEM_HANDLE
 // 
 // struct OF_FILE_NAME_INFO
 // {
-// 	unsigned int  FileNameLength;
+// 	::u32  FileNameLength;
 // 	WCHAR FileName[MAX_PATH];
 // };
 // 
 // struct OF_FILE_STREAM_INFO
 // {  
-// 	unsigned int NextEntryOffset;
-// 	unsigned int StreamNameLength;
+// 	::u32 NextEntryOffset;
+// 	::u32 StreamNameLength;
 // 	LARGE_INTEGER StreamSize;
 // 	LARGE_INTEGER StreamAllocationSize; 
 // 	WCHAR StreamName[MAX_PATH];
@@ -82,7 +82,7 @@ typedef struct _SYSTEM_HANDLE
 // 	OF_FILE_INFO_BY_HANDLE_CLASS FileInformationClass,
 // 	LPVOID pFileInformation,
 
-// 	unsigned int dwBufferSize);
+// 	::u32 dwBufferSize);
 
 
 

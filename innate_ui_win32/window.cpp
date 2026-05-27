@@ -19,7 +19,7 @@
 #pragma comment(lib, "Comctl32.lib")
 
 
-HFONT CreateScaledFont(HWND hWnd, int pointSize, int weight, const wchar_t *fontFamily)
+HFONT CreateScaledFont(HWND hWnd, ::i32 pointSize, ::i32 weight, const wchar_t *fontFamily)
 {
    // 1. Get the current DPI for the window
    UINT dpi = GetDpiForWindow(hWnd);
@@ -28,7 +28,7 @@ HFONT CreateScaledFont(HWND hWnd, int pointSize, int weight, const wchar_t *font
 
    // 2. Convert point size to logical height (scaled for DPI)
    // Formula: Height = -MulDiv(PointSize, DPI, 72)
-   int height = -MulDiv(pointSize, dpi, 72);
+   ::i32 height = -MulDiv(pointSize, dpi, 72);
 
    // 3. Create the font
    return CreateFont(height, // Height (DPI scaled)
@@ -218,7 +218,7 @@ namespace innate_ui_win32
    }
 
 
-   int window::_get_id()
+   ::i32 window::_get_id()
    {
 
       auto hwnd = ::as_HWND(this->operating_system_window());
@@ -228,7 +228,7 @@ namespace innate_ui_win32
    }
 
 
-   ::pointer < window > window::_get_child_with_id(int iId)
+   ::pointer < window > window::_get_child_with_id(::i32 iId)
    {
 
       for (auto & pchild : m_childa)
@@ -298,7 +298,7 @@ namespace innate_ui_win32
             break;
       case WM_SYSCOMMAND:
       {
-         int wmId = LOWORD(wparam);
+         ::i32 wmId = LOWORD(wparam);
          if (wmId == ID_SHOW_ABOUT_BOX)
          {
             application()->show_about_box(system()->acme_windowing()->get_user_activation_token());
@@ -314,7 +314,7 @@ namespace innate_ui_win32
          break;
       case WM_COMMAND:
       {
-         int wmId = LOWORD(wparam);
+         ::i32 wmId = LOWORD(wparam);
          if (wmId == ID_SHOW_ABOUT_BOX)
          {
             application()->show_about_box(system()->acme_windowing()->get_user_activation_token());
@@ -639,11 +639,11 @@ return false;
       RECT rThis;
       ::GetWindowRect(hwnd, &rThis);
 
-      int wThis = rThis.right - rThis.left;
-      int hThis = rThis.bottom - rThis.top;
+      ::i32 wThis = rThis.right - rThis.left;
+      ::i32 hThis = rThis.bottom - rThis.top;
 
-      int x = ((r.right - r.left) - (wThis)) / 2;
-      int y = ((r.bottom - r.top) - (hThis)) / 2;
+      ::i32 x = ((r.right - r.left) - (wThis)) / 2;
+      ::i32 y = ((r.bottom - r.top) - (hThis)) / 2;
 
       ::SetWindowPos(hwnd, nullptr, x, y, 0, 0, SWP_NOSIZE);
 
@@ -685,7 +685,7 @@ return false;
 
 
    HWND window::_create_subclassed_window(DWORD dwExStyle, LPCWSTR lpClassName, LPCWSTR lpWindowName, DWORD dwStyle,
-                                          int x, int y, int cx, int cy, HWND hwndParent, HMENU hmenu,
+                                          ::i32 x, ::i32 y, ::i32 cx, ::i32 cy, HWND hwndParent, HMENU hmenu,
                                           HINSTANCE hinstance, LPVOID lpParam)
    {
 
@@ -733,7 +733,7 @@ return false;
    }
 
 
-   bool window::_subclass_procedure(::lresult & lresult, unsigned int message, ::wparam wparam, ::lparam lparam)
+   bool window::_subclass_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
 
       switch (message)
@@ -788,13 +788,13 @@ return false;
 //
 //// Forward declarations of functions included in this code module:
 //ATOM                MyRegisterClass(HINSTANCE hInstance);
-//BOOL                InitInstance(HINSTANCE, int);
+//BOOL                InitInstance(HINSTANCE, ::i32);
 //INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 //
-//int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
+//::i32 APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 //                     _In_opt_ HINSTANCE hPrevInstance,
 //                     _In_ LPWSTR    lpCmdLine,
-//                     _In_ int       nCmdShow)
+//                     _In_ ::i32       nCmdShow)
 //{
 //   UNREFERENCED_PARAMETER(hPrevInstance);
 //   UNREFERENCED_PARAMETER(lpCmdLine);
@@ -817,13 +817,13 @@ return false;
 //   //MSG msg;
 //
 //
-//   return (int)msg.wParam;
+//   return (::i32)msg.wParam;
 //}
 //
 
 
 //
-//   FUNCTION: InitInstance(HINSTANCE, int)
+//   FUNCTION: InitInstance(HINSTANCE, ::i32)
 //
 //   PURPOSE: Saves instance handle and creates main window
 //
@@ -832,7 +832,7 @@ return false;
 //        In this function, we save the instance handle in a global variable and
 //        create and display the main program window.
 //
-//BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+//BOOL InitInstance(HINSTANCE hInstance, ::i32 nCmdShow)
 //{
 //
 //   return TRUE;
@@ -854,7 +854,7 @@ return false;
 //   {
 //   case WM_COMMAND:
 //   {
-//      int wmId = LOWORD(wParam);
+//      ::i32 wmId = LOWORD(wParam);
 //      // Parse the menu selections:
 //      switch (wmId)
 //      {
