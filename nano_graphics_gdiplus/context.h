@@ -25,6 +25,7 @@ namespace nano_graphics_gdiplus
       HDC m_hdc;
 
       ::auto_pointer<::Gdiplus::Graphics> m_pgraphics;
+      ::auto_pointer<::Gdiplus::Bitmap> m_pbitmapMemory;
 
 
       //HDC m_hdc;
@@ -35,6 +36,8 @@ namespace nano_graphics_gdiplus
 
       ~context() override;
 
+      
+      void create(const ::i32_size &size);
 
       
       void set_smoothing_mode(::nano::graphics::enum_smoothing_mode esmoothingmode);

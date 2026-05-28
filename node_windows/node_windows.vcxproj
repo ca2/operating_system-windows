@@ -2771,6 +2771,7 @@
     <Lib />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\nano_graphics_gdiplus\icon.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="aaa_interaction_impl.h" />
     <ClInclude Include="aaa_node.h" />

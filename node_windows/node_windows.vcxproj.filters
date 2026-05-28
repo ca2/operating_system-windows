@@ -32,6 +32,9 @@
     <ClInclude Include="node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\nano_graphics_gdiplus\icon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">

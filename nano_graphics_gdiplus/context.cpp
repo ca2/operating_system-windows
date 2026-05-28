@@ -45,6 +45,23 @@ namespace nano_graphics_gdiplus
    }
 
 
+   void context::create(const ::i32_size & size)
+   {
+
+
+          // Create an off-screen bitmap
+      int width = size.cx;
+      int height = size.cy;
+
+      m_pbitmapMemory = new ::Gdiplus::Bitmap(width, height, PixelFormat32bppARGB);
+
+      // Create a graphics context from the bitmap
+      m_pgraphics = new ::Gdiplus::Graphics(m_pbitmapMemory);
+
+
+   }
+
+
    void context::set_smoothing_mode(::nano::graphics::enum_smoothing_mode esmoothingmode)
    {
 
