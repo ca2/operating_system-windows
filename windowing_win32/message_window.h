@@ -32,13 +32,13 @@ namespace windowing_win32
 
       virtual bool message_window_is_initialized();
 
-      virtual void message_window_set_timer(uptr uId, const class time & time);
+      //virtual void message_window_set_timer(uptr uId, const class time & time);
 
       virtual void message_window_post_message(::user::enum_message eusermessage, ::wparam wparam = {}, ::lparam lparam = {});
 
       virtual lresult message_window_send_message(::user::enum_message eusermessage, ::wparam wparam = {}, ::lparam lparam = {});
 
-      virtual void message_window_del_timer(uptr uId);
+      //virtual void message_window_del_timer(uptr uId);
 
       virtual void message_window_destroy();
 

@@ -1388,7 +1388,7 @@ namespace windowing_win32
                auto edisplay = m_pwindow->user_interaction()->const_layout().sketch().display();
 
 
-               information() << "list_box display is : " << ::as_string(edisplay.m_eenum);
+               information() << "list_box display is : " << ::as_string(edisplay);
 
             }
 

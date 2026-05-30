@@ -87,7 +87,7 @@ namespace draw2d_gdiplus
       format.SetFormatFlags((format.GetFormatFlags()
          //| Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
          | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
-         | (edrawtext & DT_SINGLELINE ? Gdiplus::StringFormatFlagsNoWrap : 0))
+         | (edrawtext & e_draw_text_single_line ? Gdiplus::StringFormatFlagsNoWrap : 0))
          & ~(Gdiplus::StringFormatFlagsLineLimit));
 
       if (edrawtext & e_draw_text_path_ellipsis)

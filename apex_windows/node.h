@@ -113,7 +113,7 @@ namespace apex_windows
       ::file::path app_shortcut_path(::platform::application* papplication) override;
 
 
-      bool is_key_pressed(bool * pbPressed, ::user::enum_key ekey) override;
+      bool is_key_pressed(bool * pbPressed, const ::user::e_key & ekey) override;
 
 
       string get_command_line() override;

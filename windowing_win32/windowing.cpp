@@ -1106,14 +1106,14 @@ namespace windowing_win32
       for (::i8 ch = 'A'; ch <= 'Z'; ch++)
       {
 
-         pkeyboard->m_mapKey[ch] = (::user::enum_key)(::user::e_key_a + (ch - 'A'));
+         pkeyboard->m_mapKey[ch] = (::user::e_key_a + (ch - 'A')).m_eenum;
 
       }
 
       for (::i8 ch = '0'; ch <= '9'; ch++)
       {
 
-         pkeyboard->m_mapKey[ch] = (::user::enum_key)(::user::e_key_0 + (ch - '0'));
+         pkeyboard->m_mapKey[ch] = (::user::e_key_0 + (ch - '0')).m_eenum;
 
       }
 

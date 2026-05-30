@@ -94,20 +94,20 @@ namespace windowing_win32
    }
 
 
-   void message_window::message_window_set_timer(uptr uId, const class time & time)
-   {
-
-      set_timer(uId, time, nullptr);
-
-   }
-
-
-   void message_window::message_window_del_timer(uptr uId)
-   {
-
-      kill_timer(uId);
-
-   }
+   // void message_window::message_window_set_timer(uptr uId, const class time & time)
+   // {
+   //
+   //    set_timer(uId, time, nullptr);
+   //
+   // }
+   //
+   //
+   // void message_window::message_window_del_timer(uptr uId)
+   // {
+   //
+   //    kill_timer(uId);
+   //
+   // }
 
 
    void message_window::message_window_post_message(::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)

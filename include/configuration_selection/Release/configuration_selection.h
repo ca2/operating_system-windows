@@ -2,7 +2,9 @@
 #pragma once
 
 
+#if !defined(NDEBUG)
 #define NDEBUG
+#endif
 
 
 // #define MEMDLEAK 1

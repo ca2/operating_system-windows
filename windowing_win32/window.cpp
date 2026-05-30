@@ -8709,7 +8709,9 @@ namespace windowing_win32
                if (message == WM_CREATE)
                {
 
-                  return -1;
+                  lresult = -1;
+
+                  return true;
 
                }
 

@@ -9,12 +9,12 @@ namespace windows
 {
 
 
-   CLASS_DECL_WINDOWING_WIN32 ::i32 show_window(enum_display edisplay, const ::user::activation & useractivation)
+   CLASS_DECL_WINDOWING_WIN32 ::i32 show_window(const  ::e_display & edisplay, const ::user::activation & useractivation)
    {
 
       auto bNoActivate = useractivation & ::user::e_activation_no_activate;
 
-      switch (edisplay)
+      switch (edisplay.m_cflag)
       {
       case e_display_default:
          return SW_SHOWDEFAULT;
@@ -34,7 +34,7 @@ namespace windows
       case e_display_full_screen:
          return SW_NORMAL;
       default:
-         if (edisplay <= 0)
+         if (edisplay <= e_display_none)
             return SW_HIDE;
          else
             return SW_NORMAL;

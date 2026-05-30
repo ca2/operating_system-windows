@@ -526,7 +526,7 @@ namespace windowing_win32
 
       ::i32 iType;
 
-      switch (getfileimage.m_imagekey.m_eicon)
+      switch (getfileimage.m_imagekey.m_eicon.m_eenum)
       {
       case e_icon_normal:
          iType = 0;
@@ -1201,7 +1201,7 @@ namespace windowing_win32
 
          wstring wstrFilePath;
 
-         if (getfileimage.m_imagekey.m_eattribute.has(e_file_attribute_directory))
+         if (getfileimage.m_imagekey.m_eattribute.is(e_file_attribute_directory))
          {
 
             SHGetFileInfoW(

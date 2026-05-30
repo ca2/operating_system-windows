@@ -6,6 +6,8 @@
 #include "acme/_operating_system.h"
 #include <shellapi.h>
 
+#include "acme/operating_system/windows/windows.h"
+
 
 namespace aura_windows
 {
@@ -393,7 +395,7 @@ namespace aura_windows
    ::i32 _os_message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::user::e_message_box& emessagebox)
    {
 
-      ::i32 iMessageBox = emessagebox.m_eenum & 0x7f;
+      ::i32 iMessageBox = windows::message_box_to_windows_message_box(emessagebox);
 
       wstring wstrText(scopedstrMessage);
 

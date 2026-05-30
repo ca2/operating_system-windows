@@ -122,7 +122,7 @@ CLASS_DECL_ACME_WINDOWS void shell_notify_assoc_change();
 
 namespace windows
 {
-   ::i32 user_key_to_key_code(::user::enum_key ekey);
+   ::i32 user_key_to_key_code(const ::user::e_key & ekey);
 }
 
 ::pointer_array < ::networking::address > get_adapters_addresses();
@@ -131,7 +131,7 @@ namespace windows
 {
 
 
-   ::i32 user_key_to_key_code(::user::enum_key ekey)
+   ::i32 user_key_to_key_code(const ::user::e_key & ekey)
    {
 
       if (ekey >= ::user::e_key_0 && ekey <= ::user::e_key_9)
@@ -155,7 +155,7 @@ namespace windows
 
       }
 
-      switch (ekey)
+      switch (ekey.m_eenum)
       {
       case ::user::e_key_left:
          return VK_LEFT;
@@ -1314,7 +1314,7 @@ namespace apex_windows
 #define PRESSED(key) ((::GetAsyncKeyState(key) & 0x8000) != 0)
 
 
-   bool node::is_key_pressed(bool * pbPressed, ::user::enum_key ekey)
+   bool node::is_key_pressed(bool * pbPressed, const ::user::e_key & ekey)
    {
 
       if (ekey == ::user::e_key_left_button

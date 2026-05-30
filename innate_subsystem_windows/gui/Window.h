@@ -67,13 +67,13 @@ namespace innate_subsystem_windows
 
 
       // virtual bool _001OnAction();
-      // virtual bool _001OnKeyDownNotification(::user::enum_key ekey);
+      // virtual bool _001OnKeyDownNotification(const ::user::e_key & ekey);
       // virtual bool _001OnColumnClick(::i32 iColumn);
       //
       //
       //
       // virtual bool _002OnAction(::i32 iControl);
-      // virtual bool _002OnKeyDownNotification(::i32 iControl, ::user::enum_key ekey);
+      // virtual bool _002OnKeyDownNotification(::i32 iControl, const ::user::e_key & ekey);
       // virtual bool _002OnColumnClick(::i32 iControl, ::i32 iColumn);
 
       virtual bool _000OnNotify(::lresult & lresult, ::wparam wparam, ::lparam lparam);

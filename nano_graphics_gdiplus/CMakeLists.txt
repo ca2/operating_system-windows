@@ -41,6 +41,8 @@ list(APPEND library_source
    icon.h
    object.cpp
    object.h
+   path.cpp
+   path.h
    pen.cpp
    pen.h
 

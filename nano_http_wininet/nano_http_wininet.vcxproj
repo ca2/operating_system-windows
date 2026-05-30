@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{956365B1-9CA7-4B1D-B344-55C95951D832}</ProjectGuid>
+    <ProjectGuid>{561D6A90-AB6B-485F-9FC9-128BDA62C48C}</ProjectGuid>
     <RootNamespace>nano_http_wininet</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>nano_http_wininet</ProjectName>
