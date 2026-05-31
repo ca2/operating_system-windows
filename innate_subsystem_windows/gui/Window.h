@@ -376,7 +376,7 @@ namespace innate_subsystem_windows
       //virtual bool onSysCommand(::wparam wparam, ::lparam lparam) override;
       bool on_user_system_command(::user::enum_system_command esystemcommand) override;
       bool onMessage(::user::enum_message emessage, ::wparam wparam, ::lparam lparam) override;
-      bool onKey(user::enum_message eusermessage, user::enum_key euserkey) override;
+      bool onKey(user::enum_message eusermessage, const ::user::e_key & euserkey) override;
       bool onMouseEx(::u32 uMessage, ::i32 iButtonMask, ::u16 wheelSpeed,
                              const ::i32_point &point, bool &bDoDefaultProcessing) override;
       bool onMouse(::u8 mouseButtons, ::u16 wheelSpeed, const ::i32_point & position) override;

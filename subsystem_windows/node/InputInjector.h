@@ -56,14 +56,14 @@ namespace subsystem_windows
           * @param vkCode virtual code of key.
           * @throws SystemException on fail.
           */
-         void injectKeyPress(::user::enum_key euserkey) override;
+         void injectKeyPress(const ::user::e_key & euserkey) override;
 
          /**
           * Syntezises key released event.
           * @param vkCode virtual code of key.
           * @throws SystemException on fail.
           */
-         void injectKeyRelease(::user::enum_key euserkey) override;
+         void injectKeyRelease(const ::user::e_key & euserkey) override;
 
          /**
           * Syntezises key event (press or release).
@@ -71,7 +71,7 @@ namespace subsystem_windows
           * @param release if true then sybtezises release event, otherwise, press.
           * @throws SystemException on fail.
           */
-         void injectKeyEvent(::user::enum_key euserkey, bool release, bool extended = false) override;
+         void injectKeyEvent(const ::user::e_key & euserkey, bool release, bool extended = false) override;
 
          /**
           * Syntezises ::i8 press or release event.

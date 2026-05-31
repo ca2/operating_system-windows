@@ -71,17 +71,17 @@ namespace subsystem_windows
          }
      }
 
-      void InputInjector::injectKeyPress(::user::enum_key euserkey)
+      void InputInjector::injectKeyPress(const ::user::e_key & euserkey)
       {
          injectKeyEvent(euserkey, false);
       }
 
-      void InputInjector::injectKeyRelease(::user::enum_key euserkey)
+      void InputInjector::injectKeyRelease(const ::user::e_key & euserkey)
       {
          injectKeyEvent(euserkey, true);
       }
 
-      void InputInjector::injectKeyEvent(::user::enum_key euserkey, bool release, bool extended)
+      void InputInjector::injectKeyEvent(const ::user::e_key & euserkey, bool release, bool extended)
       {
          m_plogwriter->debug("Prepare to inject the key event:"
                     " user::enum_key = {}, release = {}, extended = {}",
