@@ -3,7 +3,7 @@
 #include "acme/_operating_system.h"
 
 
-CLASS_DECL_SUBSYSTEM_WINDOWS ::i32 message_box_to_windows_message_box(::user::enum_message_box emessagebox);
+CLASS_DECL_SUBSYSTEM_WINDOWS ::i32 message_box_to_windows_message_box(const ::user::e_message_box & emessagebox);
 CLASS_DECL_SUBSYSTEM_WINDOWS enum_dialog_result windows_message_box_result_to_dialog_result(::i32 iResult);
 
 

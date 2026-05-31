@@ -101,7 +101,7 @@ namespace innate_subsystem_windows
                     const ::user_interaction_sink & userinteractionsink,
                     const ::scoped_string & scopedstrMessage,
                     const ::scoped_string & scopedstrCaption,
-                    ::user::enum_message_box emessagebox)
+                    const ::user::e_message_box & emessagebox)
     {
 
         auto operatingsystemwindow = userinteractionsink.best_effort_operating_system_window();
@@ -117,7 +117,7 @@ namespace innate_subsystem_windows
     }
 
 
-    ::user::enum_key subsystem::virtual_key_code_to_user_key(::i32 iVirtualKeyCode)
+    ::user::e_key subsystem::virtual_key_code_to_user_key(::i32 iVirtualKeyCode)
     {
         return ::windows::virtual_key_code_to_user_key(iVirtualKeyCode);
         //switch (iVirtualKeyCode)

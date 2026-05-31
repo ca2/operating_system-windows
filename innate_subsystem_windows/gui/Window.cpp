@@ -795,7 +795,7 @@ namespace innate_subsystem_windows
    }
 
 
-   bool Window::onKey(user::enum_message eusermessage, user::enum_key euserkey)
+   bool Window::onKey(user::enum_message eusermessage, const ::user::e_key & euserkey)
    {
       if (m_pwindowCallback)
       {
