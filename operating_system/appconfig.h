@@ -17,6 +17,7 @@
 #define aura_node aura_windows
 #define default_nano_http nano_http_wininet
 #define default_nano_compress nano_compress_windows
+#define default_nano_idn nano_idn_windows_common
 
 
 
