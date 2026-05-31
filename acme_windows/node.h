@@ -59,6 +59,9 @@ namespace acme_windows
       //void initialize_integration();
 
 
+      void detached_command(const ::scoped_string& scopedstrCommand, const ::file::path& pathLog) override;
+
+
       void shell_open(const ::file::path & path, const ::scoped_string & scopedstrParams = "", const ::file::path & pathFolder = "") override;
 
 

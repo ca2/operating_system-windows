@@ -60,7 +60,7 @@ namespace windows
          }
 
 
-         bool request::get_response(::nano::http::get * defer_get)
+         bool request::get_response(::nano::http::get * pnanohttpget)
          {
 
             auto    bResults = WinHttpReceiveResponse(m_hinternet, NULL);/**/
@@ -100,32 +100,39 @@ namespace windows
             ::string strRequestHeaders(wstrRequestHeaders);
 
             
-            dwSize = 0;
+            DWORD dwOutHeadersSize = 0;
             WinHttpQueryHeaders(m_hinternet, WINHTTP_QUERY_RAW_HEADERS_CRLF,
                WINHTTP_HEADER_NAME_BY_INDEX, NULL,
-               &dwSize, WINHTTP_NO_HEADER_INDEX);
-            wstring wstrHeaders;
+               &dwOutHeadersSize, WINHTTP_NO_HEADER_INDEX);
+            wstring wstrOutHeaders;
             // Allocate memory for
             // 
             //  the buffer.
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER)
             {
-               auto pwszHeaders = wstrHeaders.get_buffer(dwSize / sizeof(WCHAR));
+               auto pwszOutHeaders = wstrOutHeaders.get_buffer(dwOutHeadersSize / sizeof(WCHAR));
 
                // Now, use WinHttpQueryHeaders to retrieve the header.
                bResults = WinHttpQueryHeaders(m_hinternet,
                   WINHTTP_QUERY_RAW_HEADERS_CRLF,
                   WINHTTP_HEADER_NAME_BY_INDEX,
-                  pwszHeaders, &dwSize,
+                  pwszOutHeaders, &dwOutHeadersSize,
                   WINHTTP_NO_HEADER_INDEX);
-               wstrHeaders.release_buffer();
+               wstrOutHeaders.release_buffer();
             }
 
-            ::string strHeaders(wstrHeaders);
+            ::string strOutHeaders(wstrOutHeaders);
 
-            defer_get->payload("out_headers").as_property_set().parse_network_headers(strHeaders);
+            pnanohttpget->payload("out_headers").as_property_set().parse_network_headers(strOutHeaders);
+
+            ::string_array_base straOutHeaders;
+
+            straOutHeaders.add_lines(strOutHeaders, true);
+
+            pnanohttpget->property_set().parse_network_headers(straOutHeaders);
 
             ::u64 contentLength = 0;
+
             DWORD dwContentLengthBufferSize = sizeof(contentLength);
 
             auto bContentLength = WinHttpQueryHeaders(m_hinternet,
@@ -142,7 +149,7 @@ namespace windows
 
             }
 
-            bool bOnlyHeaders = defer_get->payload("only_headers").as_bool();
+            bool bOnlyHeaders = pnanohttpget->payload("only_headers").as_bool();
 
             if (bOnlyHeaders)
             {
@@ -153,7 +160,7 @@ namespace windows
 
             transfer_progress_function transferprogressfunction;
 
-            transferprogressfunction = defer_get->payload("transfer_progress_function");
+            transferprogressfunction = pnanohttpget->payload("transfer_progress_function");
 
             dwSize = 0;
             do
@@ -194,7 +201,7 @@ namespace windows
                if (dwDownloaded > 0)
                {
 
-                  defer_get->get_memory_response()->append(memory);
+                  pnanohttpget->get_memory_response()->append(memory);
 
                   if (transferprogressfunction)
                   {
@@ -202,14 +209,14 @@ namespace windows
                      if (contentLength > 0)
                      {
 
-                        transferprogressfunction((::f64)defer_get->get_memory_response()->size() /
-                           (::f64)contentLength, defer_get->get_memory_response()->size(),
+                        transferprogressfunction((::f64)pnanohttpget->get_memory_response()->size() /
+                           (::f64)contentLength, pnanohttpget->get_memory_response()->size(),
                            contentLength);
                      }
                      else
                      {
 
-                        transferprogressfunction(0., defer_get->get_memory_response()->size(),
+                        transferprogressfunction(0., pnanohttpget->get_memory_response()->size(),
                            0);
 
                      }

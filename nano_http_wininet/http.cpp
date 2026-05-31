@@ -63,7 +63,7 @@ namespace windows
       //   }
 
 
-         void http::perform(::nano::http::get * defer_get)
+         void http::perform(::nano::http::get * pnanohttpget)
          {
 
             //using namespace std;
@@ -87,7 +87,7 @@ namespace windows
 
             }
 
-            ::string strHost = defer_get->m_url.connect().host();
+            ::string strHost = pnanohttpget->m_url.connect().host();
 
             ::windows::nano::http::connect connect(session, strHost);
 
@@ -98,7 +98,7 @@ namespace windows
 
             }
 
-            ::string strRequestUri = defer_get->m_url.request().as_string();
+            ::string strRequestUri = pnanohttpget->m_url.request().as_string();
 
             ::windows::nano::http::get get(connect, strRequestUri);
 
@@ -111,7 +111,7 @@ namespace windows
 
             get.send_request();
 
-            get.get_response(defer_get);
+            get.get_response(pnanohttpget);
 
             // Use WinHttpOpen to obtain a session handle.
             // Specify an HTTP server.

@@ -324,6 +324,10 @@ namespace acme_windows
 
 
 
+   void node::detached_command(const ::scoped_string& scopedstrCommand, const ::file::path& pathLog)
+   {
+      command_system(scopedstrCommand);
+   }
 
    ::file::path node::get_default_base_integration_folder()
    {

@@ -4,5 +4,7 @@
 //
 #include "framework.h"
 
-
-
+#include <initguid.h>
+#include <wincodec.h>
+#pragma comment(lib, "uuid.lib")
+#pragma comment(lib, "Windowscodecs.lib")

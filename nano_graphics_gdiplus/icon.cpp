@@ -5,8 +5,12 @@
 #include "icon.h"
 #include "acme/_operating_system.h"
 #include <Gdiplus.h>
+
+#include <initguid.h>
+#include <wincodec.h>
+
 // #include <windows.h>
-#include <wincodec.h> // Windows Imaging Component (WIC)
+//#include <wincodec.h> // Windows Imaging Component (WIC)
 
 // Function to convert a PNG buffer in memory to an HBITMAP
 HBITMAP LoadPNGFromMemoryIntoHBITMAP(const void *pngData, size_t dataSize, HDC hdc)
