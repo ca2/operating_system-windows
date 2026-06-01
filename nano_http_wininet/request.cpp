@@ -27,9 +27,13 @@ namespace windows
 
             wstring wstrObject(scopedstrObject);
 
-            m_hinternet = WinHttpOpenRequest(connect.m_hinternet, wstrOperation, wstrObject, NULL, WINHTTP_NO_REFERER, NULL, WINHTTP_FLAG_SECURE);
-            DWORD dwOptionValue = WINHTTP_DISABLE_REDIRECTS;
-            BOOL b = WinHttpSetOption(m_hinternet, WINHTTP_OPTION_DISABLE_FEATURE, &dwOptionValue, sizeof(dwOptionValue));
+            m_hinternet = WinHttpOpenRequest(connect.m_hinternet, wstrOperation, wstrObject, NULL,
+               WINHTTP_NO_REFERER,
+               WINHTTP_DEFAULT_ACCEPT_TYPES,
+               WINHTTP_FLAG_SECURE);
+            //DWORD dwOptionValue = WINHTTP_DISABLE_REDIRECTS;
+            //BOOL b = WinHttpSetOption(m_hinternet, 
+             //  WINHTTP_OPTION_DISABLE_FEATURE, &dwOptionValue, sizeof(dwOptionValue));
 
          }
 
@@ -40,19 +44,23 @@ namespace windows
          }
 
 
-         bool request::send_request()
+         bool request::send_request(::nano::http::get* pnanohttpget)
          {
 
             ::wstring wstrHost = m_connect.m_wstrHost;
 
-            wstring wstrMoreHeaders;
+            //wstring wstrMoreHeaders;
 
-            wstrMoreHeaders += L"Host: ";
-            wstrMoreHeaders += wstrHost;
-            wstrMoreHeaders += L"\r\n";
-            wstrMoreHeaders += L"Accept: */*\r\n";
+            //wstring wstrUserAgent(pnanohttpget->m_strUserAgent);
 
-            auto bResults = WinHttpSendRequest(m_hinternet, wstrMoreHeaders, 0, WINHTTP_NO_REQUEST_DATA, 0, 0, 0);
+            //wstrMoreHeaders += L"Host: ";
+            //wstrMoreHeaders += wstrHost;
+            //wstrMoreHeaders += L"\r\n";
+            //wstrMoreHeaders += L"Accept: */*\r\n";
+            ////wstrMoreHeaders += L"User-Agent: " + wstrUserAgent + L"\r\n";
+
+            //auto bResults = WinHttpSendRequest(m_hinternet, wstrMoreHeaders, 0, WINHTTP_NO_REQUEST_DATA, 0, 0, 0);
+            auto bResults = WinHttpSendRequest(m_hinternet, nullptr, 0, WINHTTP_NO_REQUEST_DATA, 0, 0, 0);
             // End the request.
 
             return bResults != FALSE;

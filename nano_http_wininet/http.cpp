@@ -78,7 +78,7 @@ namespace windows
                //BOOL  bResults = FALSE;
                //HINTERNET  hSession = NULL, hConnect = NULL, hRequest = NULL;
 
-            ::windows::nano::http::session session;
+            ::windows::nano::http::session session(pnanohttpget->m_strUserAgent);
 
             if (!session.m_hinternet)
             {
@@ -109,7 +109,7 @@ namespace windows
 
             }
 
-            get.send_request();
+            get.send_request(pnanohttpget);
 
             get.get_response(pnanohttpget);
 
