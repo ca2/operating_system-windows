@@ -323,11 +323,24 @@ namespace acme_windows
    }
 
 
-
    void node::detached_command(const ::scoped_string& scopedstrCommand, const ::file::path& pathLog)
    {
-      command_system(scopedstrCommand);
+
+      ::string strCommand;
+
+      auto range = scopedstrCommand();
+
+      if (!range.defer_consume_quoted_value(strCommand))
+      {
+
+         range.defer_consume_word(strCommand);
+
+      }
+      
+      shell_open(strCommand, range);
+
    }
+
 
    ::file::path node::get_default_base_integration_folder()
    {
@@ -5520,7 +5533,7 @@ namespace acme_windows
             // ExitProcess(0);
             if (application()->m_pacmeuserinteractionMain)
             {
-               application()->m_pacmeuserinteractionMain->hide();
+               application()->m_pacmeuserinteractionMain->display(e_display_hide, {});
                application()->m_pacmeuserinteractionMain->set_finish();
 
             }

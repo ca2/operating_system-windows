@@ -739,32 +739,17 @@ namespace acme_windows
       string str(scopedstr);
 
       ::string str1;
-      try
-      {
-         auto range = str();
-         range.m_erange = e_range_none;
-         str1 = range.consume_quoted_value();
 
-      }
-      catch (...)
-      {
-
-
-      }
+      auto range1 = str();
+      range1.m_erange = e_range_none;
+      range1.defer_consume_quoted_value(str1);
 
       ::string strCandidateFile;
-      try
-      {
-         auto range = str();
-         range.m_erange = e_range_none;
-         strCandidateFile = range.consume_word();
 
-      }
-      catch (...)
-      {
+      auto range2 = str();
+      range2.m_erange = e_range_none;
+      range2.defer_consume_word(strCandidateFile);
 
-
-      }
       ::string str2;
 
       if (str.begins_eat("powershell://"))
