@@ -1138,111 +1138,111 @@ namespace win32
                   return m_windowswindow.as_operating_system_window(); 
                }
 
-         void window::show_window()
-         {
+         //void window::show_window()
+         //{
 
-            main_send([this]()
-               {
+         //   main_send([this]()
+         //      {
 
-                  auto hwnd = ::as_HWND(this->operating_system_window());
+         //         auto hwnd = ::as_HWND(this->operating_system_window());
 
-                  if (!::IsWindow(hwnd))
-                  {
+         //         if (!::IsWindow(hwnd))
+         //         {
 
-                     create_window();
+         //            create_window();
 
-                  }
+         //         }
 
-                  DWORD dwPid;
-                  HWND hwndForeground = ::GetForegroundWindow();
-                  DWORD dwThread = GetWindowThreadProcessId(
-                     hwndForeground,
-                     &dwPid
-                  );
-                  auto dwCurrentPid = GetCurrentProcessId();
-                  warning() << "dwThread = " << dwThread;
-                  warning() << "hwndForeground = " << (iptr) hwndForeground;
-                  warning() << "hwnd         = " << (iptr) hwnd;
-                  warning() << "dwPid          = " << dwPid;
-                  warning() << "dwCurrentPid   = " << dwCurrentPid;
-
-
-                  if(dwThread && hwndForeground != hwnd && dwPid == dwCurrentPid)
-                  { 
-
-                     ::ShowWindow(hwnd, SW_SHOWNOACTIVATE);
-
-                     warning() << "ShowWindow  SW_SHOWNOACTIVATE at thread " << ::GetCurrentThreadId();
-
-                     win32_post(hwndForeground, [this]()
-                        {
-
-                           warning() << "Before SetForegroundWindow  At thread " << ::GetCurrentThreadId();
-
-                           auto hwnd = ::as_HWND(this->operating_system_window());
-
-                           ::SetForegroundWindow(hwnd);
-
-                           warning() << "SetForegroundWindow  At thread " << ::GetCurrentThreadId();
-
-                           win32_post(hwnd, [this]()
-                              {
-
-                                 warning() << "SetActiveWindow  At thread " << ::GetCurrentThreadId();
-
-                                 auto hwnd = ::as_HWND(this->operating_system_window());
-
-                                 ::SetActiveWindow(hwnd);
-
-                                 ::SetFocus(hwnd);
-
-                                 ::UpdateWindow(hwnd);
-
-                                 ::BringWindowToTop(hwnd);
-
-                                 debug() << "Show window";
-
-                              });
-
-                        });
+         //         DWORD dwPid;
+         //         HWND hwndForeground = ::GetForegroundWindow();
+         //         DWORD dwThread = GetWindowThreadProcessId(
+         //            hwndForeground,
+         //            &dwPid
+         //         );
+         //         auto dwCurrentPid = GetCurrentProcessId();
+         //         warning() << "dwThread = " << dwThread;
+         //         warning() << "hwndForeground = " << (iptr) hwndForeground;
+         //         warning() << "hwnd         = " << (iptr) hwnd;
+         //         warning() << "dwPid          = " << dwPid;
+         //         warning() << "dwCurrentPid   = " << dwCurrentPid;
 
 
-                  }
-                  else
-                  {
-                     ::SetForegroundWindow(hwnd);
+         //         if(dwThread && hwndForeground != hwnd && dwPid == dwCurrentPid)
+         //         { 
 
-                     ::ShowWindow(hwnd, SW_SHOW);
+         //            ::ShowWindow(hwnd, SW_SHOWNOACTIVATE);
 
-                     ::UpdateWindow(hwnd);
+         //            warning() << "ShowWindow  SW_SHOWNOACTIVATE at thread " << ::GetCurrentThreadId();
 
-                     ::BringWindowToTop(hwnd);
-                  }
+         //            win32_post(hwndForeground, [this]()
+         //               {
+
+         //                  warning() << "Before SetForegroundWindow  At thread " << ::GetCurrentThreadId();
+
+         //                  auto hwnd = ::as_HWND(this->operating_system_window());
+
+         //                  ::SetForegroundWindow(hwnd);
+
+         //                  warning() << "SetForegroundWindow  At thread " << ::GetCurrentThreadId();
+
+         //                  win32_post(hwnd, [this]()
+         //                     {
+
+         //                        warning() << "SetActiveWindow  At thread " << ::GetCurrentThreadId();
+
+         //                        auto hwnd = ::as_HWND(this->operating_system_window());
+
+         //                        ::SetActiveWindow(hwnd);
+
+         //                        ::SetFocus(hwnd);
+
+         //                        ::UpdateWindow(hwnd);
+
+         //                        ::BringWindowToTop(hwnd);
+
+         //                        debug() << "Show window";
+
+         //                     });
+
+         //               });
 
 
-            });
+         //         }
+         //         else
+         //         {
+         //            ::SetForegroundWindow(hwnd);
 
-         }
+         //            ::ShowWindow(hwnd, SW_SHOW);
+
+         //            ::UpdateWindow(hwnd);
+
+         //            ::BringWindowToTop(hwnd);
+         //         }
 
 
-         void window::hide_window()
-         {
+         //   });
 
-            user_send([this]()
-            {
+         //}
 
-               auto hwnd = ::as_HWND(this->operating_system_window());
 
-               if (::IsWindow(hwnd))
-               {
+         //void window::hide_window()
+         //{
 
-                  ::ShowWindow(hwnd, SW_HIDE);
+         //   user_send([this]()
+         //   {
 
-               }
+         //      auto hwnd = ::as_HWND(this->operating_system_window());
 
-            });
+         //      if (::IsWindow(hwnd))
+         //      {
 
-         }
+         //         ::ShowWindow(hwnd, SW_HIDE);
+
+         //      }
+
+         //   });
+
+         //}
 
          //void window::add_child(::micro::child* pchild)
          //{

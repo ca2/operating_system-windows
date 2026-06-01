@@ -65,9 +65,9 @@ namespace win32
 
             void destroy_window() override;
 
-            void show_window() override;
+            //void show_window() override;
 
-            void hide_window() override;
+            //void hide_window() override;
 
             virtual void _draw(HDC hdc);
 
