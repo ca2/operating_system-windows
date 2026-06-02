@@ -408,6 +408,8 @@ namespace acme_windows
       memsize get_current_memory_usage() override;
 
 
+      void defer_install_store_dependencies() override;
+
       //virtual void defer_init_os_version_info();
 
       bool _windows_isVistaOrLater() override;

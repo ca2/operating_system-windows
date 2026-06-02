@@ -5653,6 +5653,65 @@ namespace acme_windows
    //}
 
 
+            void node::defer_install_store_dependencies()
+   {
+
+      ::acme_windows::registry::key key;
+
+      string strKey = "SOFTWARE\\Wow6432Node\\Microsoft\\VisualStudio\\14.0\\VC\\Runtimes\\x64"_ansi;
+
+      if (key._open(HKEY_LOCAL_MACHINE, strKey, false))
+      {
+
+         DWORD dwMajor = 0;
+         key._get("Major"_ansi, dwMajor);
+
+         DWORD dwMinor = 0;
+         key._get("Minor"_ansi, dwMinor);
+
+         if (dwMajor == MSVCRT_MAJOR && dwMinor >= MSVCRT_MINOR)
+         {
+
+            return;
+         }
+      }
+
+      auto pathRedist = directory_system()->home() / "application/vc_redist.x64.exe"_ansi;
+
+      ::property_set set;
+
+      set["raw_http"] = true;
+
+      set["disable_common_name_cert_check"] = true;
+
+      string strUrl;
+
+      strUrl = "https://aka.ms/vs/17/release/vc_redist.x64.exe"_ansi;
+
+      http()->download(pathRedist, strUrl, set);
+
+      string strOutput;
+
+      string strError;
+
+      int iExitCode = 0;
+
+      string_array_base straOutput;
+
+      // command_system(strOutput, strError, iExitCode, "\""_ansi + pathRedist + "\" /install
+      // /norestart"_ansi);
+      auto functionTrace = [&](auto etracelevel, auto &str, bool bCarriage)
+      {
+         straOutput.append_formatf("%c: %s%c"_ansi, trace_level_letter(etracelevel), ::string(str).c_str(),
+                                   line_feed_letter(bCarriage));
+
+         // std_inline_log()(etracelevel, str);
+      };
+
+      iExitCode = command_system("\""_ansi + pathRedist + "\" /install /norestart"_ansi, functionTrace);
+
+      strOutput = straOutput.implode("\n"_ansi);
+   }
 
 
 } // namespace acme_windows
