@@ -15,6 +15,7 @@
 #include "acme/filesystem/filesystem/file_context.h"
 #include "acme/filesystem/filesystem/directory_context.h"
 //#include "acme/filesystem/filesystem/folder_dialog.h"
+#include "acme/nano/http/http.h"
 #include "acme/operating_system/cpu_features.h"
 #include "acme/operating_system/process.h"
 #include "acme/operating_system/summary.h"
@@ -47,6 +48,7 @@
 #include <Shlobj.h>
 #include <VersionHelpers.h>
 #include "acme/platform/remoting.h"
+#include "operating_system-windows_common/msvcrt_release.h"
 
 #pragma comment(lib, "Version.lib")
 
