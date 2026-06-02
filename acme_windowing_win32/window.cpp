@@ -995,7 +995,7 @@ namespace win32
             case WM_PAINT:
             {
 
-               if (m_pacmeuserinteraction && m_pacmeuserinteraction->m_bCustomPaint)
+               if (m_pacmeuserinteraction && m_pacmeuserinteraction->m_bNanoPaint)
                {
                   PAINTSTRUCT paintstruct{};
 
