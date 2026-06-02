@@ -30,7 +30,7 @@ namespace windows
             request(connect& connect, const ::scoped_string& scopedstrOperation, const ::scoped_string& scopedstrObject);
             ~request() override;
 
-            bool send_request();
+            bool send_request(::nano::http::get* pnanohttpget);
 
             bool get_response(::nano::http::get * pnanohttpget);
 

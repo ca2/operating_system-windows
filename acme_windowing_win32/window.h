@@ -71,6 +71,8 @@ namespace win32
 
             virtual void _draw(HDC hdc);
 
+            void display(::e_display edisplay, const ::user::activation &useractivation) override; 
+
             //void * __win32_HWND() override;
 
             //void on_draw(::nano::graphics::context * pnanodevice) override;
@@ -111,6 +113,9 @@ namespace win32
 
             bool on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam) override;
 
+
+            void on_window_show(bool bShow, int iDetail);
+
             //virtual LRESULT window_procedure(::u32 message, wparam wparam, lparam lparam);
 
             void set_position(const ::i32_point& point) override;
@@ -120,6 +125,9 @@ namespace win32
             void destroy() override;
 
             void redraw() override;
+
+
+            void post_redraw(bool bAscendants = false) override;
 
 
             void window_invalidate_rect(const i32_rectangle *prectangle, bool bErase) override;
