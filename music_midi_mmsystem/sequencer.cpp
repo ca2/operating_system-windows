@@ -156,6 +156,18 @@ namespace music
 
             MIDIPROPTIMEDIV mptd;
 
+            bool bIsSendingMidiToExternalDevice = true;
+
+            if (m_psequence->m_pfile->m_bHasYamahaSystemExclusive || bIsSendingMidiToExternalDevice)
+            {
+
+               m_bSendXGModeOn = true;
+               m_bSendXGReset = true;
+               m_bSendXGDrumSetup1Reset = true;
+               m_bSendXGDrumSetup2Reset = true;
+               m_bSendMasterVolumeReset = true;
+
+            }
             //
             // We've successfully opened the file and all of the tracks; now
             // open the MIDI device and set the time division.
@@ -267,6 +279,97 @@ namespace music
 
             //midi_out_close();
 
+            ::preempt(500_ms);
+
+             if (m_bSendXGModeOn || m_bSendXGReset || m_bSendXGDrumSetup1Reset || m_bSendXGDrumSetup2Reset ||
+             m_bSendMasterVolumeReset)
+            {
+
+               midi_out_open();
+
+               if (m_bSendXGModeOn)
+               {
+
+                  //midi_out_open();
+
+                  midi_out_xg_mode_on();
+
+                  //midi_out_close();
+
+                  m_bSendXGModeOn = false;
+
+               }
+
+               if (!m_bSendXGModeOn && m_bSendXGReset)
+               {
+
+                  //midi_out_open();
+
+                  midi_out_xg_mode_reset();
+
+                  //midi_out_close();
+
+                  m_bSendXGReset = false;
+
+               }
+
+               if (!m_bSendXGModeOn && !m_bSendXGReset && m_bSendXGDrumSetup1Reset)
+               {
+
+                  //midi_out_open();
+
+                  midi_out_xg_drum_setup1_reset();
+
+                  //midi_out_close();
+
+                  m_bSendXGDrumSetup1Reset = false;
+
+               }
+
+               if (!m_bSendXGModeOn && !m_bSendXGReset && !m_bSendXGDrumSetup1Reset && m_bSendXGDrumSetup2Reset)
+               {
+
+                  //midi_out_open();
+
+                  midi_out_xg_drum_setup2_reset();
+
+                  //midi_out_close();
+
+                  m_bSendXGDrumSetup2Reset = false;
+
+               }
+
+               if (!m_bSendXGModeOn && !m_bSendXGReset && !m_bSendXGDrumSetup1Reset && !m_bSendXGDrumSetup2Reset &&
+               m_bSendMasterVolumeReset)
+               {
+
+                  //midi_out_open();
+
+                  midi_out_master_volume_reset();
+
+                  //midi_out_close();
+
+                  m_bSendMasterVolumeReset = false;
+
+               }
+
+               midi_out_close();
+
+            }
+
+            // midi_out_open();
+
+            // midi_out_xg_mode_on();
+
+            // midi_out_xg_mode_reset();
+
+            // midi_out_xg_drum_setup1_reset();
+
+            // midi_out_xg_drum_setup2_reset();
+
+            // midi_out_master_volume_reset();
+
+            // midi_out_close();
 
 
 
@@ -307,6 +410,27 @@ namespace music
 
                   throw multimedia::exception(multimedia::e_exception_midi, estatus);
 
+               }
+               
+               MIDIPROPTEMPO midiproptempo;
+
+               midiproptempo.cbStruct = sizeof(midiproptempo);
+               midiproptempo.dwTempo = m_psequence->m_pfile->m_dwTempo;
+
+               estatus = translate_os_result(
+                  midiStreamProperty(m_hstream, (LPBYTE)&midiproptempo, MIDIPROP_SET | MIDIPROP_TEMPO),
+                                      "mm_start", "midiStreamProperty(tempo)");
+
+               if (estatus != ::success)
+               {
+
+                  informationf("midiStreamProperty() -> %04X", (WORD)estatus.as_i64());
+
+                  close_device();
+
+                  m_psequence->set_state(sequence::e_state_opened);
+
+                  throw multimedia::exception(multimedia::e_exception_midi, estatus);
                }
 
             }
@@ -829,52 +953,60 @@ namespace music
                else if (m_psequence->has_operation(e_operation_preroll))
                {
 
-                  while (lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
+                  //if (m_psequence->m_tkBase <= 0)
+                  //{
+
+                  //   m_iPrerollPhase++;
+
+                  //   m_psequence->clear_operation(e_operation_preroll);
+
+                  //   m_psequence->set_state(::music::midi::sequence::e_state_pre_rolled);
+
+                  //}
+                  //else
                   {
 
-                     if (m_iPrerollPhase < 0)
+                     while (lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
                      {
 
-                        estatus = m_psequence->m_pfile->WorkPreroll(&m_keyframe, m_psequence->m_tkBase);
+                        if (m_iPrerollPhase < 0)
+                        {
 
-                        if (estatus != success)
+                           estatus = m_psequence->m_pfile->WorkPreroll(&m_keyframe, m_psequence->m_tkBase);
+
+                           if (estatus != success)
+                           {
+
+                              m_psequence->clear_operation(e_operation_preroll);
+
+                              break;
+                           }
+
+                           estatus = success_skip;
+                        }
+                        else
+                        {
+
+                           estatus = preroll_operation(lpmidihdr);
+                        }
+
+                        if (estatus == error_would_reach_buffer_limit)
+                        {
+
+                           break;
+                        }
+                        else if (estatus == ::success)
                         {
 
                            m_psequence->clear_operation(e_operation_preroll);
 
-                           break;
+                           m_psequence->set_state(::music::midi::sequence::e_state_pre_rolled);
 
+                           break;
                         }
 
-                        estatus = success_skip;
-
+                        m_iPrerollPhase++;
                      }
-                     else
-                     {
-
-                        estatus = preroll_operation(lpmidihdr);
-
-                     }
-
-                     if (estatus == error_would_reach_buffer_limit)
-                     {
-
-                        break;
-
-                     }
-                     else if (estatus == ::success)
-                     {
-
-                        m_psequence->clear_operation(e_operation_preroll);
-
-                        m_psequence->set_state(::music::midi::sequence::e_state_pre_rolled);
-
-                        break;
-
-                     }
-
-                     m_iPrerollPhase++;
-
                   }
 
                }
@@ -1904,7 +2036,7 @@ namespace music
             else if (phappening->GetFullType() < sys_ex)
             {
 
-               if (phappening->GetType() == program_change)
+               if (phappening->GetType() == program_change) // 0xCn
                {
 
                   ::i32 iTrack = phappening->GetTrack();
@@ -1914,8 +2046,10 @@ namespace music
                   m_keyframe.rbProgram[iTrack] = (::u8)iProgramChange;
 
                }
-               else if (phappening->GetType() == control_change)
+               else if (phappening->GetType() == control_change) // 0xBn
                {
+
+                  ::i32 iFullType = phappening->GetFullType();
 
                   ::i32 iTrack = phappening->GetTrack();
 
@@ -1929,6 +2063,8 @@ namespace music
                      m_keyframe.rbControl[iTrack][iController] = (::u8)iControllerValue;
 
                   }
+
+                  informationf("Control Change 0x%02x 0x%02x 0x%02x", iFullType, iController, iControllerValue);
 
                   if (iController == 94)
                   {
@@ -2103,7 +2239,7 @@ namespace music
                ::i32 iFullType = phappening->GetFullType();
             
                //if (iFullType == sys_ex || iFullType == sys_ex_end)
-               if (iFullType == sys_ex)
+               if (iFullType == sys_ex || iFullType == sys_ex_end)
                {
 
                   //            if(pEvent->GetFullType() == SysEx)
@@ -2124,23 +2260,30 @@ namespace music
                   ::i32 iSize = (DWORD)phappening->size();
                   auto pdata = phappening->data();
 
-                  m_psequence->m_pfile->m_cbPendingUserEvent = iSize;
-                  m_psequence->m_pfile->m_hpbPendingUserEvent = pdata;
+                  memory memory;
+                  ::u8 u = 0xf0;
+                  memory.append(&u, sizeof(u));
 
+                  memory.append(pdata, iSize);
+
+                  m_psequence->m_pfile->m_cbPendingUserEvent = memory.size();
+                  m_psequence->m_pfile->m_hpbPendingUserEvent = memory.data();
+
+                  auto p = memory.data();
 
                   if (iSize == 9)
                   {
-                     if (pdata[0] == 0xf0 && pdata[1] == 0x43
-                        && pdata[2] == 0x10 && pdata[3] == 0x4c
-                        && pdata[4] == 0x08)
+                     if (p[0] == 0xf0 && p[1] == 0x08 && p[2] == 0x43
+                        && p[3] == 0x10 && p[4] == 0x4c
+                        && p[5] == 0x02)
                      {
 
-                        ::i32 NNMultiPartChannel = pdata[5];
+                        ::i32 NNMultiPartChannel = p[6];
 
-                        if (pdata[6] == 0x14)
+                        if (p[7] == 0x14)
                         {
 
-                           ::i32 iVariationSend = pdata[7];
+                           ::i32 iVariationSend = pdata[8];
 
                            output_debug_string("MULTIPART VARIATION SEND");
 
@@ -2412,7 +2555,7 @@ namespace music
             for (DWORD dw = 0; dw < dwLength; dw++)
             {
 
-               strMessageText += ::hex::upper_case_from(pb[dw]);
+               strMessageText += ::hex::upper_case_padded_from<2>(pb[dw]);
 
                strMessageText += " ";
 

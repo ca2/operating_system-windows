@@ -457,6 +457,8 @@ namespace windowing_win32
       //virtual void Print(::draw2d::graphics_pointer & pgraphics, ::u32 dwFlags) const;
       //virtual void PrintClient(::draw2d::graphics_pointer & pgraphics, ::u32 dwFlags) const;
 
+      void post_redraw(bool bAscendants = false) override;
+
       void on_redraw_window(::u32 flags) override;
 
       void show_task(bool bShowTask) override;

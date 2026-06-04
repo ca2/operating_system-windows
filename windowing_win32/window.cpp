@@ -8093,6 +8093,14 @@ namespace windowing_win32
    }
 
 
+   void window::post_redraw(bool bAscendants)
+   {
+
+      ::windowing::window::post_redraw(bAscendants);
+
+   }
+
+
    void window::on_redraw_window(::u32 flags)
    {
 
