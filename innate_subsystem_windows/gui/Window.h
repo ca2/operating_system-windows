@@ -192,7 +192,7 @@ namespace innate_subsystem_windows
       // Get resource id for the window
       ::u32 getResourceId() override;
 
-
+      ::f32 getWindowScale() override;
       // createWindow()
       // Create window with windowName and setted style
       // other parameters can by changed

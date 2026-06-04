@@ -5,6 +5,7 @@
 #include "platform/subsystem.h"
 #include "thread/GlobalMutex.h"
 #include "thread/Thread.h"
+#include "node/Cursor.h"
 #include "node/DynamicLibrary.h"
 #include "node/NamedPipe.h"
 #include "node/OperatingSystem.h"
@@ -58,6 +59,7 @@ IMPLEMENT_FACTORY(subsystem_windows)
    pfactory->add_factory_item<::subsystem_windows::InputInjector, ::subsystem::InputInjectorInterface>();
    pfactory->add_factory_item<::subsystem_windows::Clipboard2, ::subsystem::Clipboard2>();
    pfactory->add_factory_item<::subsystem_windows::Impersonator, ::subsystem::ImpersonatorInterface>();
+   pfactory->add_factory_item<::subsystem_windows::Cursor, ::subsystem::CursorInterface>();
 
 
    pfactory->add_factory_item<::subsystem_windows::subsystem, ::subsystem::subsystem>();

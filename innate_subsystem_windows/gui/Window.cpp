@@ -178,6 +178,14 @@ namespace innate_subsystem_windows
    }
 
 
+   ::f32 Window::getWindowScale()
+   {
+
+      return get_window_scale();
+
+   }
+
+
    void Window::setClipboardViewerInterest()
    {
 
@@ -1421,6 +1429,13 @@ namespace innate_subsystem_windows
    //bool Window::on_window_procedure(LRESULT & lresult, HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
    bool Window::on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
+
+      if (message == WM_VSCROLL)
+      {
+
+         information("WM_VSCROLL");
+
+      }
 
       if (m_pwindowCallback)
       {

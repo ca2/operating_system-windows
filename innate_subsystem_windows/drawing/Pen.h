@@ -50,7 +50,7 @@ namespace innate_subsystem_windows
       //void * _HGDIOBJ() override;
 
 
-      void initialize_pen(innate_subsystem::enum_pen epen, ::i32 width, const color::color& color) override;
+      void initialize_pen(innate_subsystem::enum_pen epen, ::f32 fWidth, const color::color& color) override;
 
 
       void destroyGraphicsObject() override;

@@ -49,7 +49,7 @@ namespace innate_subsystem_windows
       ::i32 m_iBkMode;
       ::color::color m_colorText;
       ::color::color m_colorBk;
-      ::i32_point m_pointCurrent;
+      ::f64_point m_pointCurrent;
       //Gdiplus::Font * m_pfont;
       Gdiplus::Brush * m_pbrushText;
       ::color::color m_colorBrushText;
@@ -94,23 +94,23 @@ namespace innate_subsystem_windows
       void setFont(::innate_subsystem::FontInterface * pfont) override;
 
       // Moves cursor to specified position.
-      void moveTo(const ::i32_point & point) override;
+      void moveTo(const ::f64_point & point) override;
       // Draws line from current position to specified line.
-      void lineTo(const ::i32_point & point) override;
+      void lineTo(const ::f64_point & point) override;
 
       // Draws filled rect.
-      void fillRect(const ::i32_rectangle & rectangle, ::innate_subsystem::BrushInterface * pbrush) override;
-      void fillRect(const ::i32_rectangle & rectangle, const ::color::color & color) override;
+      void fillRect(const ::f64_rectangle & rectangle, ::innate_subsystem::BrushInterface * pbrush) override;
+      void fillRect(const ::f64_rectangle & rectangle, const ::color::color & color) override;
       // Draws ellipse.
-      void ellipse(const ::i32_rectangle & rectangle) override;
+      void ellipse(const ::f64_rectangle & rectangle) override;
       // Draws rectance.
-      void rectangle(const ::i32_rectangle & rectangle) override;
+      void rectangle(const ::f64_rectangle & rectangle) override;
 
       // Draws bitmap.
       void drawBitmap(::innate_subsystem::BitmapInterface * pbitmap, const ::i32_rectangle & rectangle) override;
       void drawBitmap(::innate_subsystem::BitmapInterface *bitmap, const ::i32_point & point, const ::i32_rectangle & rectangle) override;
       // Draws text.
-      void drawText(const ::scoped_string & scopedstr, ::i32_rectangle &rect, ::u32 format, enum_align ealign) override;
+      void drawText(const ::scoped_string & scopedstr, ::f64_rectangle &rect, ::u32 format, enum_align ealign) override;
 
    ///protected:
 

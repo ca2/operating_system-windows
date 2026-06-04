@@ -7,6 +7,7 @@
 #include "acme/operating_system/windows/user.h"
 #include "acme/operating_system/windows/windows.h"
 #include "innate_subsystem_windows/gui/CommonControlsEx.h"
+#include "operating_system-windows/gdiplus_library/_.h"
 
 
 namespace innate_subsystem_windows
@@ -16,7 +17,7 @@ namespace innate_subsystem_windows
     subsystem::subsystem()
     {
 
-
+       initialize_gdiplus();
 
     }
 

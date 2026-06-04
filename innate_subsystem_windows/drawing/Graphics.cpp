@@ -188,23 +188,25 @@ return m_pdevicecontext;
    }
 
 
-   void Graphics::moveTo(const ::i32_point & point)
+   void Graphics::moveTo(const ::f64_point & point)
    {
       //MoveToEx(m_pdevicecontext->m_hdc, x, y, NULL);
       m_pointCurrent = point;
       //m_pointCurrent.y = y;
    }
 
-   void Graphics::lineTo(const ::i32_point & point)
+   void Graphics::lineTo(const ::f64_point & point)
    {
       //LineTo(m_pdevicecontext->m_hdc, x, y);
-      m_pdevicecontext->m_pgraphics->DrawLine(m_ppen->m_ppen, m_pointCurrent.x, m_pointCurrent.y, point.x, point.y);
+      m_pdevicecontext->m_pgraphics->DrawLine(m_ppen->m_ppen, (Gdiplus::REAL)m_pointCurrent.x,
+                                              (Gdiplus::REAL)m_pointCurrent.y, (Gdiplus::REAL)point.x,
+                                              (Gdiplus::REAL)point.y);
       m_pointCurrent = point;
       //m_pointCurrent.y = y;
 
    }
 
-   void Graphics::fillRect(const ::i32_rectangle & rectangle, ::innate_subsystem::BrushInterface *pbrush)
+   void Graphics::fillRect(const ::f64_rectangle & rectangle, ::innate_subsystem::BrushInterface *pbrush)
    {
       Gdiplus::Rect gdiplusrect;
 
@@ -220,7 +222,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
    }
 
 
-   void Graphics::fillRect(const ::i32_rectangle & rectangle, const ::color::color & color)
+   void Graphics::fillRect(const ::f64_rectangle & rectangle, const ::color::color & color)
    {
       Gdiplus::Rect gdiplusrect;
 
@@ -237,7 +239,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
 
    }
 
-   void Graphics::ellipse(const ::i32_rectangle & rectangle)
+   void Graphics::ellipse(const ::f64_rectangle & rectangle)
    {
       //Ellipse(m_pdevicecontext->m_hdc, l, t, r, b);
       Gdiplus::Rect gdiplusrect;
@@ -250,7 +252,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
       m_pdevicecontext->m_pgraphics->DrawEllipse(m_ppen->m_ppen, gdiplusrect);
    }
 
-   void Graphics::rectangle(const ::i32_rectangle & rectangle)
+   void Graphics::rectangle(const ::f64_rectangle & rectangle)
    {
       //Rectangle(m_pdevicecontext->m_hdc, l, t, r, b);
       Gdiplus::Rect gdiplusrect;
@@ -327,7 +329,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
 
    }
 
-   void Graphics::drawText(const ::scoped_string & scopedstr, ::i32_rectangle &rectangle, ::u32 format, enum_align ealign)
+   void Graphics::drawText(const ::scoped_string & scopedstr, ::f64_rectangle &rectangle, ::u32 format, enum_align ealign)
    {
 
       ::string str(scopedstr);

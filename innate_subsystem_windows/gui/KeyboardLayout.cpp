@@ -4,6 +4,8 @@
 #include "KeyboardLayout.h"
 
 
+CLASS_DECL_ACME ::i32 e_user_key_to_vkcode(const ::user::e_key &euserkey);
+
 
 namespace innate_subsystem_windows
 {
@@ -18,7 +20,7 @@ namespace innate_subsystem_windows
 
 
 
-   bool KeyboardLayout::vkCodeToString(::u16 virtKey, bool down, ::wstring *res, 
+   bool KeyboardLayout::vkCodeToString(const ::user::e_key & ekey, bool down, ::wstring *res, 
                                        ::innate_subsystem::keyboard_state_t *pkeyboardstate)
    {
 
@@ -26,6 +28,8 @@ namespace innate_subsystem_windows
       wchar_t outBuff[20];
 
        HKL currentLayout = GetKeyboardLayout(0);
+
+       auto virtKey = ::e_user_key_to_vkcode(ekey);
       
        ::i32 count = ToUnicodeEx(virtKey, 0, pkeyboardstate->m_viewerKeyState, outBuff,
            sizeof(outBuff) / sizeof(WCHAR),

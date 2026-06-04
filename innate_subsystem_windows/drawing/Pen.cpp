@@ -64,7 +64,7 @@ namespace innate_subsystem_windows
    //
    // }
 
-   void Pen::initialize_pen(innate_subsystem::enum_pen epen, ::i32 width, const color::color& color)
+   void Pen::initialize_pen(innate_subsystem::enum_pen epen, ::f32 fWidth, const color::color& color)
    {
 
       destroyGraphicsObject();
@@ -73,7 +73,7 @@ namespace innate_subsystem_windows
 
       Gdiplus::Color gdipluscolor(color.u8_opacity(), color.u8_red(), color.u8_green(), color.u8_blue());
 
-      m_ppen = new Gdiplus::Pen(gdipluscolor, width);
+      m_ppen = new Gdiplus::Pen(gdipluscolor, fWidth);
 
       if (!m_ppen || m_ppen->GetLastStatus() != Gdiplus::Ok)
       {

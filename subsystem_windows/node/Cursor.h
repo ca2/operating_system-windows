@@ -38,7 +38,7 @@ namespace subsystem_windows
          Cursor();
          ~Cursor() override;
 
-         virtual ::i32_point getCursorPos() const = 0;
+         ::i32_point getCursorPos() const override;
       };
 
       // class CLASS_DECL_SUBSYSTEM_WINDOWS Cursor :
