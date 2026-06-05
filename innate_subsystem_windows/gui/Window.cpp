@@ -1451,6 +1451,22 @@ namespace innate_subsystem_windows
 
       switch (message)
       {
+         case ::user::e_message_key_down:
+         case ::user::e_message_key_up:
+         case ::user::e_message_sys_key_down:
+         case ::user::e_message_sys_key_up:
+         {
+            /// throw "todo";
+
+            auto iVkCode = wparam.raw_cast<::i32>();
+
+            auto euserkey = vk_code_to_e_user_key(iVkCode);
+
+            return onKey((::user::enum_message)message, euserkey);
+            // return onKey(emessage, wParam, lParam);
+            // return false;
+         }
+
          case WM_SIZING:
             m_sizeIsChanged = true;
             return false;
