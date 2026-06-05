@@ -310,7 +310,7 @@ namespace subsystem_windows
 
       }
 
-      return m_i_LOADER_CLOSE_CODE;
+      return m_i_SPEC_IPC_CODE;
 
    }
    

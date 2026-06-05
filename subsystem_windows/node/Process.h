@@ -35,9 +35,12 @@
        * Enables you to start and stop local processes.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS Process :
-      virtual public ::subsystem::Process
+      virtual public Implementation<::subsystem::ProcessInterface>
       {
       public:
+
+         Implement1Defaultø(Process);
+
          /**
           * Creates new Process class instance.
           * @param path full path to file.

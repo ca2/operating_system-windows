@@ -180,7 +180,7 @@ namespace subsystem_windows
    {
       ::string out;
 
-      out = getCurrentModuleFolderPath();
+      out = getCurrentModulePath();
 
       /*if (!getCurrentModulePath(out))
       {
