@@ -31,6 +31,7 @@ namespace innate_subsystem_windows
    class Font;
    class Graphics;
    class Icon;
+   class Path;
    class Pen;
    class SolidBrush;
 

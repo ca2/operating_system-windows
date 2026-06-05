@@ -29,6 +29,7 @@
 #include "Bitmap.h"
 #include "Brush.h"
 #include "Font.h"
+#include "Path.h"
 #include "Pen.h"
 
 
@@ -248,8 +249,14 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
       // gdiplusrect.X = t;
       // gdiplusrect.Y = l;
       // gdiplusrect.Width = r-l;
-      m_pdevicecontext->m_pgraphics->FillEllipse(m_pbrush->m_pbrush, gdiplusrect);
-      m_pdevicecontext->m_pgraphics->DrawEllipse(m_ppen->m_ppen, gdiplusrect);
+      if (m_pbrush)
+      {
+         m_pdevicecontext->m_pgraphics->FillEllipse(m_pbrush->m_pbrush, gdiplusrect);
+      }
+      if (m_ppen)
+      {
+         m_pdevicecontext->m_pgraphics->DrawEllipse(m_ppen->m_ppen, gdiplusrect);
+      }
    }
 
    void Graphics::rectangle(const ::f64_rectangle & rectangle)
@@ -261,8 +268,15 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
       // gdiplusrect.X = t;
       // gdiplusrect.Y = l;
       // gdiplusrect.Width = r-l;
-      m_pdevicecontext->m_pgraphics->FillRectangle(m_pbrush->m_pbrush, gdiplusrect);
-      m_pdevicecontext->m_pgraphics->DrawRectangle(m_ppen->m_ppen, gdiplusrect);
+      if (m_pbrush)
+      {
+         m_pdevicecontext->m_pgraphics->FillRectangle(m_pbrush->m_pbrush, gdiplusrect);
+      }
+
+      if (m_ppen)
+      {
+         m_pdevicecontext->m_pgraphics->DrawRectangle(m_ppen->m_ppen, gdiplusrect);
+      }
 
    }
 
@@ -309,7 +323,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
 
          constructø(m_pfont);
 
-         m_pfont->initialize_font("Arial", 14);
+         m_pfont->initialize_pixel_font("Arial", 14);
 
       }
       if (!m_pbrushText || m_colorBrushText != m_colorText)
@@ -397,6 +411,34 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
       // ::copy(rc, rect);
       // DrawText(m_pdevicecontext->m_hdc, wstr, wstr.length(), &rc, format);
       m_pdevicecontext->m_pgraphics->DrawString(wstr, wstr.length(), m_pfont->m_pfont, gdiplusrect, &stringFormat, m_pbrushText);
+   }
+
+      void Graphics::doPath(::innate_subsystem::PathInterface *ppath, ::innate_subsystem::BrushInterface *pbrush,
+                         ::innate_subsystem::PenInterface *ppen)
+   {
+
+      if (!pbrush && !ppen)
+      {
+
+         return;
+      }
+
+      ::cast<::innate_subsystem_windows::Path> pgdipluspath = ppath;
+
+      if (pbrush)
+      {
+         ::cast<::innate_subsystem_windows::Brush> pgdiplusbrush = pbrush;
+
+         m_pdevicecontext->m_pgraphics->FillPath(pgdiplusbrush->m_pbrush, pgdipluspath->m_pgraphicspath);
+      }
+
+
+      if (ppen)
+      {
+         ::cast<::innate_subsystem_windows::Pen> pgdipluspen = ppen;
+
+         m_pdevicecontext->m_pgraphics->DrawPath(pgdipluspen->m_ppen, pgdipluspath->m_pgraphicspath);
+      }
    }
 
    

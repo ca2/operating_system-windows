@@ -52,7 +52,7 @@ Font::~Font()
    // }
 
 
-   void Font::initialize_font(const ::i8 *pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight, bool bItalic)
+   void Font::initialize_pixel_font(const ::i8 *pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight, bool bItalic)
    {
 destroyGraphicsObject();
 
@@ -60,8 +60,21 @@ destroyGraphicsObject();
       Gdiplus::REAL fontSize =(Gdiplus::REAL) iPixelHeight;
       m_pfont = new Gdiplus::Font(::wstring(pszFamily), fontSize,
          iFontWeight >= 500 ? (bItalic ? Gdiplus::FontStyleBoldItalic : Gdiplus::FontStyleBold) :
-         (bItalic ? Gdiplus::FontStyleItalic : Gdiplus::FontStyleRegular));
+         (bItalic ? Gdiplus::FontStyleItalic : Gdiplus::FontStyleRegular), ::Gdiplus::UnitPixel);
 
+   }
+
+   void Font::initialize_point_font(const ::i8 *pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight, bool bItalic)
+   {
+      destroyGraphicsObject();
+
+
+      Gdiplus::REAL fontSize = (Gdiplus::REAL)iPixelHeight;
+      m_pfont =
+         new Gdiplus::Font(::wstring(pszFamily), fontSize,
+                           iFontWeight >= 500 ? (bItalic ? Gdiplus::FontStyleBoldItalic : Gdiplus::FontStyleBold)
+                                              : (bItalic ? Gdiplus::FontStyleItalic : Gdiplus::FontStyleRegular),
+                                  ::Gdiplus::UnitPoint);
    }
 
 

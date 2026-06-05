@@ -30,6 +30,9 @@
     <Filter Include="Source Files\framebuffer">
       <UniqueIdentifier>{41183d68-3b46-4653-8e3c-6ebde003f418}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\drawing">
+      <UniqueIdentifier>{cd250bc9-c974-422d-9230-06557359042d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_factory.cpp">
@@ -176,6 +179,9 @@
     <ClCompile Include="framebuffer\DibSection.cpp">
       <Filter>Source Files\framebuffer</Filter>
     </ClCompile>
+    <ClCompile Include="drawing\Path.cpp">
+      <Filter>Source Files\drawing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
@@ -305,6 +311,39 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\Bitmap.h">
+      <Filter>Header Files\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\BitmapGraphics.h">
+      <Filter>Header Files\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\Brush.h">
+      <Filter>Header Files\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\Cursor.h">
+      <Filter>Header Files\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\DeviceContext.h">
+      <Filter>Header Files\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\Font.h">
+      <Filter>Header Files\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\Graphics.h">
+      <Filter>Header Files\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\Icon.h">
+      <Filter>Header Files\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\Path.h">
+      <Filter>Header Files\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\Pen.h">
+      <Filter>Header Files\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\SolidBrush.h">
+      <Filter>Header Files\drawing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2648,6 +2648,7 @@
     <ClCompile Include="drawing\Font.cpp" />
     <ClCompile Include="drawing\Graphics.cpp" />
     <ClCompile Include="drawing\Icon.cpp" />
+    <ClCompile Include="drawing\Path.cpp" />
     <ClCompile Include="drawing\Pen.cpp" />
     <ClCompile Include="drawing\SolidBrush.cpp" />
     <ClCompile Include="framebuffer\DibSection.cpp" />
@@ -2730,6 +2731,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="drawing\Bitmap.h" />
+    <ClInclude Include="drawing\BitmapGraphics.h" />
+    <ClInclude Include="drawing\Brush.h" />
+    <ClInclude Include="drawing\Cursor.h" />
+    <ClInclude Include="drawing\DeviceContext.h" />
+    <ClInclude Include="drawing\Font.h" />
+    <ClInclude Include="drawing\Graphics.h" />
+    <ClInclude Include="drawing\Icon.h" />
+    <ClInclude Include="drawing\Path.h" />
+    <ClInclude Include="drawing\Pen.h" />
+    <ClInclude Include="drawing\SolidBrush.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="gui\CheckBox.h" />
     <ClInclude Include="gui\ComboBox.h" />

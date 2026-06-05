@@ -112,6 +112,9 @@ namespace innate_subsystem_windows
       // Draws text.
       void drawText(const ::scoped_string & scopedstr, ::f64_rectangle &rect, ::u32 format, enum_align ealign) override;
 
+
+      void doPath(::innate_subsystem::PathInterface *ppath, ::innate_subsystem::BrushInterface *pbrush,
+                  ::innate_subsystem::PenInterface *ppen) override;
    ///protected:
 
 

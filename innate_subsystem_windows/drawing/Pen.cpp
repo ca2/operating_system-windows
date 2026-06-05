@@ -85,6 +85,37 @@ namespace innate_subsystem_windows
    }
 
 
+   
+
+      void Pen::setStartCap(::innate_subsystem::enum_line_cap elinecap)
+   {
+
+      ::Gdiplus::LineCap egdipluslinecap = ::Gdiplus::LineCapFlat;
+
+      if (elinecap == ::innate_subsystem::e_line_cap_round)
+      {
+
+         egdipluslinecap = ::Gdiplus::LineCapRound;
+      }
+
+      m_ppen->SetStartCap(egdipluslinecap);
+   }
+
+
+   void Pen::setEndCap(::innate_subsystem::enum_line_cap elinecap)
+   {
+
+      ::Gdiplus::LineCap egdipluslinecap = ::Gdiplus::LineCapFlat;
+
+      if (elinecap == ::innate_subsystem::e_line_cap_round)
+      {
+
+         egdipluslinecap = ::Gdiplus::LineCapRound;
+      }
+
+      m_ppen->SetStartCap(egdipluslinecap);
+   }
+
    void Pen::destroyGraphicsObject()
    {
 

@@ -33,6 +33,7 @@
 namespace innate_subsystem_windows
 {
 
+
    class Pen :
       virtual public Implementation<::innate_subsystem::PenInterface>
    {
@@ -51,6 +52,10 @@ namespace innate_subsystem_windows
 
 
       void initialize_pen(innate_subsystem::enum_pen epen, ::f32 fWidth, const color::color& color) override;
+
+
+           void setStartCap(::innate_subsystem::enum_line_cap elinecap) override;
+      void setEndCap(::innate_subsystem::enum_line_cap elinecap) override;
 
 
       void destroyGraphicsObject() override;

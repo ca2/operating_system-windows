@@ -50,7 +50,9 @@ virtual public Implementation<::innate_subsystem::FontInterface>
 
       //void * _HGDIOBJ() override;
 
-      virtual void initialize_font(const ::i8 * pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight = 400, bool bItalic = false) override;
+      virtual void initialize_pixel_font(const ::i8 * pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight = 400, bool bItalic = false) override;
+      virtual void initialize_point_font(const ::i8 *pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight = 400,
+                                         bool bItalic = false) override;
 
       void destroyGraphicsObject() override;
 

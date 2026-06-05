@@ -5,6 +5,7 @@
 #include "platform/subsystem.h"
 #include "drawing/Cursor.h"
 #include "drawing/Icon.h"
+#include "drawing/Path.h"
 #include "drawing/Pen.h"
 #include "drawing/SolidBrush.h"
 #include "drawing/Font.h"
@@ -94,6 +95,8 @@ IMPLEMENT_FACTORY(innate_subsystem_windows)
    pfactory->add_factory_item<::innate_subsystem_windows::Cursor, ::innate_subsystem::CursorInterface>();
 
    pfactory->add_factory_item<::innate_subsystem_windows::Pen, ::innate_subsystem::PenInterface>();
+
+   pfactory->add_factory_item<::innate_subsystem_windows::Path, ::innate_subsystem::PathInterface>();
 
    pfactory->add_factory_item<::innate_subsystem_windows::SolidBrush, ::innate_subsystem::SolidBrushInterface>();
 
