@@ -26,6 +26,10 @@
 
 
             //void update(::nano::graphics::context* pgraphicscontext) override;
+            void create_point_font(::nano::graphics::font_family *pfontfamily, ::f64 fPointSize, bool bBold = false,
+                                           bool bItalic = false, bool bUnderline = false) override;
+            void create_pixel_font(::nano::graphics::font_family *pfontfamily, ::f64 fPixelSize, bool bBold = false,
+                                           bool bItalic = false, bool bUnderline = false) override;
 
 
             static HFONT _create_point_font(::i32 nPointSize, const ::scoped_string& scopedstrFaceName, bool bBold, bool bUnderline, HDC hdc, LOGFONTW* plf);

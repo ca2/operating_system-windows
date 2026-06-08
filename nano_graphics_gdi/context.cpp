@@ -12,12 +12,11 @@
 ////#include "acme/exception/exception.h"
 #pragma comment(lib, "Msimg32.lib")
 #include <gdiplus.h>
-::i32 align_to_windows_draw_text_align(enum_align ealign);
-
-::i32 draw_text_to_windows_draw_text(enum_draw_text edrawtext);
 
 
+::i32 align_to_windows_draw_text_align(const ::e_align & ealign);
 
+::i32 draw_text_to_windows_draw_text(const ::e_draw_text & edrawtext);
 
 
       namespace nano_graphics_gdi
@@ -83,16 +82,19 @@ HFONT CreateSimpleFont16(void)
                                DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY,
                                DEFAULT_PITCH | FF_DONTCARE, "Segoe UI");
          }
-         void context::_draw_text(const ::scoped_string & scopedstr, const ::i32_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext,
-            ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText,
-            ::nano::graphics::font* pnanofont)
+
+
+         void context::_draw_text(const ::scoped_string &scopedstr, const ::f64_rectangle &rectangleText,
+                                  const ::e_draw_text &edrawtext, const ::e_align &ealign)
          {
 
-            COLORREF colorrefBackgroundColor = win32_COLORREF(pnanobrushBack->m_color);
+            //COLORREF colorrefBackgroundColor = win32_COLORREF(pnanobrushBack->m_color);
 
-            SetBkColor(m_hdc, colorrefBackgroundColor);
+            //SetBkColor(m_hdc, colorrefBackgroundColor);
 
-            COLORREF colorrefTextColor = win32_COLORREF(pnanobrushText->m_color);
+            ::SetBkMode(m_hdc, TRANSPARENT);
+
+            COLORREF colorrefTextColor = win32_COLORREF(m_pbrush->m_color);
 
             SetTextColor(m_hdc, colorrefTextColor);
             //SetTextColor(m_hdc, RGB(100, 100, 255));
@@ -101,11 +103,9 @@ HFONT CreateSimpleFont16(void)
 
             wstring wstrMessage(scopedstr);
 
-            pnanofont->update(this);
+            //pnanofont->update(this);
 
-            
-
-            auto hfont = (HFONT)pnanofont->operating_system_data();
+            auto hfont = (HFONT)m_pfont->m_hgdiobj;
 
             //auto hfont2 = CreateSimpleFont16();
 
@@ -174,12 +174,13 @@ HFONT CreateSimpleFont16(void)
          }
 
 
-         ::i32_size context::get_text_extents(const ::scoped_string & scopedstr, ::nano::graphics::font* pnanofont)
+         ::f64_size context::get_text_extents(const ::scoped_string & scopedstr)
          {
 
-            pnanofont->update(this);
+            //pnanofont->update(this);
+            auto hfont = (HFONT) m_pfont->m_hgdiobj;
 
-            ::SelectObject(m_hdc, (HFONT)pnanofont->operating_system_data());
+            ::SelectObject(m_hdc, hfont);
 
             wstring wstr(scopedstr);
 
@@ -197,22 +198,22 @@ HFONT CreateSimpleFont16(void)
          }
 
 
-         void context::rectangle(const ::i32_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen)
+         void context::rectangle(const ::f64_rectangle& rectangle)
          {
 
-            if (!pnanobrush && !pnanopen)
+            if (!m_pbrush && !m_ppen)
             {
 
                return;
 
             }
 
-            if (pnanobrush)
+            if (m_pbrush)
             {
 
-               pnanobrush->update(this);
+               //pnanobrush->update(this);
 
-               ::SelectObject(m_hdc, (HGDIOBJ)pnanobrush->operating_system_data());
+               ::SelectObject(m_hdc, (HGDIOBJ)m_pbrush->m_hgdiobj);
             }
             else
             {
@@ -221,12 +222,12 @@ HFONT CreateSimpleFont16(void)
 
             }
 
-            if (pnanopen)
+            if (m_ppen)
             {
 
-               pnanopen->update(this);
+               //pnanopen->update(this);
 
-               ::SelectObject(m_hdc, (HGDIOBJ)pnanopen->operating_system_data());
+               ::SelectObject(m_hdc, (HGDIOBJ)m_ppen->m_hgdiobj);
             }
             else
             {
@@ -238,11 +239,11 @@ HFONT CreateSimpleFont16(void)
 
             auto r = rectangle;
 
-            if (pnanopen)
+            if (m_ppen)
             {
 
-               r.left += pnanopen->m_iWidth - 1;
-               r.top += pnanopen->m_iWidth - 1;
+               r.left += m_ppen->m_fWidth - 1;
+               r.top += m_ppen->m_fWidth - 1;
             }
 
             ::Rectangle(m_hdc,
@@ -255,7 +256,7 @@ HFONT CreateSimpleFont16(void)
          }
 
 
-         void context::draw(::nano::graphics::icon * picon, ::i32 x, ::i32 y, ::i32 cx, ::i32 cy)
+         void context::draw_icon(::f64 x, ::f64 y, ::f64 cx, ::f64 cy, ::nano::graphics::icon *picon)
          {
 
 
@@ -298,7 +299,7 @@ HFONT CreateSimpleFont16(void)
          }
 
 
-         void context::translate(::i32 x, ::i32 y)
+         void context::translate(::f64 x, ::f64 y)
          {
 
             OffsetViewportOrgEx(m_hdc, x, y, nullptr);
@@ -312,7 +313,7 @@ HFONT CreateSimpleFont16(void)
 
 
 
-::i32 align_to_windows_draw_text_align(enum_align ealign)
+::i32 align_to_windows_draw_text_align(const ::e_align & ealign)
 {
 
    ::i32 iAlign = 0;
@@ -362,7 +363,7 @@ HFONT CreateSimpleFont16(void)
 
 
 
-::i32 draw_text_to_windows_draw_text(enum_draw_text edrawtext)
+::i32 draw_text_to_windows_draw_text(const ::e_draw_text & edrawtext)
 {
 
    ::i32 iFlag = 0;

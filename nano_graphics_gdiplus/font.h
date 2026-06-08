@@ -31,8 +31,8 @@ namespace nano_graphics_gdiplus
 
       //void update(::nano::graphics::context *pnanodevice) override;
 
-      void create_point_font(enum_font efont, ::f64 fPointSize, bool bBold = false, bool bUnderline = false) override;
-      void create_pixel_font(enum_font efont, ::f64 fPixelSize, bool bBold = false, bool bUnderline = false) override;
+      void create_point_font(enum_font efont, ::f64 fPointSize, bool bBold = false, bool bItalic, bool bUnderline = false) override;
+      void create_pixel_font(enum_font efont, ::f64 fPixelSize, bool bBold = false, bool bItalic, bool bUnderline = false) override;
       //static HFONT _create_point_font(::i32 nPointSize, const ::scoped_string &scopedstrFaceName, bool bBold,
         //                              bool bUnderline, HDC hdc, LOGFONTW *plf);
       //static HFONT _create_point_font_indirect(LOGFONTW *pLogFont, HDC hdc);

@@ -96,9 +96,12 @@
 //
 //};
 
-namespace windowing_system_win32
+namespace nano_graphics_gdi
 {
 
+   class pen;
+   class brush;
+   class font;
 
-} // namespace windowing_system_win32
+} // namespace nano_graphics_gdi
 

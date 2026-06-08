@@ -14,7 +14,7 @@
          brush::brush()
          {
 
-            m_pthis = this;
+            //m_pthis = this;
 
          }
 
@@ -25,7 +25,7 @@
          }
 
 
-         void brush::update(::nano::graphics::context* pgraphicscontext)
+     /*    void brush::update(::nano::graphics::context* pgraphicscontext)
          {
 
             if (m_bModified)
@@ -39,8 +39,21 @@
 
             }
 
-         }
+         }*/
 
+         void brush::create_solid_brush(const ::color::color &color)
+         {
+
+            //if (m_bModified)
+            //{
+            destroy();
+            m_color = color;
+
+               m_hgdiobj = ::CreateSolidBrush(win32_COLORREF(m_color));
+
+              // m_bModified = false;
+            //}
+         }
 
 
       } // namespace nano_graphics_gdi

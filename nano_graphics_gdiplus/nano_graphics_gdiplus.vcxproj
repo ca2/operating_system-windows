@@ -2674,6 +2674,9 @@
     <ProjectReference Include="..\acme_windows\acme_windows.vcxproj">
       <Project>{cc8e8200-00a9-414e-9829-7ca3f1091add}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\gdiplus_library\gdiplus_library.vcxproj">
+      <Project>{c70aa9e7-1eda-404e-92ee-dcff6ae4f54a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="nano_graphics_gdiplus.def" />

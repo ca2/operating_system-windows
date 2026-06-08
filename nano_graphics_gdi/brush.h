@@ -27,6 +27,8 @@
             ~brush() override;
 
 
+            
+    void create_solid_brush(const ::color::color &color) override;
 
 
             //void update(::nano::graphics::context* pgraphicscontext) override;

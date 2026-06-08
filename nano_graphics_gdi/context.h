@@ -26,6 +26,10 @@
             HDC         m_hdc;
             bool        m_bDelete;
 
+            ::pointer<::nano_graphics_gdi::pen> m_ppen;
+            ::pointer<::nano_graphics_gdi::brush> m_pbrush;
+            ::pointer<::nano_graphics_gdi::font> m_pfont;
+
 
             context();
             
@@ -34,15 +38,19 @@
 
             void attach(void * posdata, const ::i32_size & size, int iType) override;
 
-            void _draw_text(const ::scoped_string & scopedstr, const ::i32_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext, ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText, ::nano::graphics::font* pnanofont) override;
-            ::i32_size get_text_extents(const ::scoped_string & scopedstr, ::nano::graphics::font* pnanofont) override;
-            void rectangle(const ::i32_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen) override;
+            //void _draw_text(const ::scoped_string & scopedstr, const ::f64_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext, ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText, ::nano::graphics::font* pnanofont) override;
+            void _draw_text(const ::scoped_string &scopedstr, const ::f64_rectangle &rectangleText, 
+                            const ::e_draw_text &edrawtext, const ::e_align &ealign) override;
+            //::f64_size get_text_extents(const ::scoped_string & scopedstr, ::nano::graphics::font* pnanofont) override;
+            ::f64_size get_text_extents(const ::scoped_string &scopedstr) override;
+            //void rectangle(const ::f64_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen) override;
+            void rectangle(const ::f64_rectangle &rectangle) override;
 
 
-            void draw(::nano::graphics::icon * picon, ::i32 x, ::i32 y, ::i32 cx, ::i32 cy) override;
+            void draw_icon(::f64 x, ::f64 y, ::f64 cx, ::f64 cy, ::nano::graphics::icon *picon) override;
 
 
-            void translate(::i32 x, ::i32 y) override;
+            void translate(::f64 x, ::f64 y) override;
 
 
          };

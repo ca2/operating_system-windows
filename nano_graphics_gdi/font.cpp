@@ -3,6 +3,7 @@
 //
 #include "framework.h"
 #include "font.h"
+#include "acme/nano/graphics/font_family.h"
 #include "context.h"
 //#include "_nano.h"
 
@@ -13,7 +14,7 @@
          font::font()
          {
 
-            m_pthis = this;
+            //m_pthis = this;
 
          }
 
@@ -23,27 +24,93 @@
 
          }
 
-
-         void font::update(::nano::graphics::context* pgraphicscontext)
+         
+         void font::create_point_font(::nano::graphics::font_family * pfontfamily, ::f64 fPointSize, bool bBold,
+                                        bool bItalic, bool bUnderline)
          {
 
-            if (m_bModified)
-            {
+            m_pfontfamily = pfontfamily;
 
-               destroy();
+            LOGFONTW logfontw = {};
 
-               LOGFONTW logfontw = {};
+            m_fFontSize = fPointSize;
 
-               auto pgdicontext = dynamic_cast <::nano_graphics_gdi::context*>(pgraphicscontext);
+            m_bPixelSize = false;
 
-               m_hgdiobj = _create_point_font(m_iFontSize * 10, m_strFontName, m_bBold, m_bUnderline, pgdicontext->m_hdc, &logfontw);
+            m_bBold = bBold;
 
-               m_bModified = false;
+            m_bUnderline = bUnderline;
 
-            }
+            m_bItalic = bItalic;
+
+            ::string strFontName = m_pfontfamily->get_font_family_name();
+
+            HDC hdc = ::GetDC(nullptr);
+
+            m_hgdiobj = _create_point_font(m_fFontSize * 10, strFontName, m_bBold, m_bUnderline, hdc, &logfontw);
+
+            ::ReleaseDC(nullptr, hdc);
+
+         }
+
+         
+         void font::create_pixel_font(::nano::graphics::font_family *pfontfamily, ::f64 fPixelSize,
+                                              bool bBold,
+                                        bool bItalic, bool bUnderline)
+         {
+
+            m_pfontfamily = pfontfamily;
+
+            LOGFONTW logfontw = {};
+
+            m_fFontSize = fPixelSize;
+
+            m_bPixelSize = true;
+
+            m_bBold = bBold;
+
+            m_bUnderline = bUnderline;
+
+            m_bItalic = bItalic;
+
+            ::string strFontName = m_pfontfamily->get_font_family_name();
+
+            //auto pgdicontext = dynamic_cast<::nano_graphics_gdi::context *>(pgraphicscontext);
+
+            HDC hdc = ::GetDC(nullptr);
+
+            m_hgdiobj = _create_point_font(m_fFontSize * 10, strFontName, m_bBold, m_bUnderline, hdc,
+                                           &logfontw);
+
+            ::ReleaseDC(nullptr, hdc);
+
+            //m_bModified = false;
 
 
          }
+
+
+
+         //void font::update(::nano::graphics::context* pgraphicscontext)
+         //{
+
+         //   if (m_bModified)
+         //   {
+
+         //      destroy();
+
+         //      LOGFONTW logfontw = {};
+
+         //      auto pgdicontext = dynamic_cast <::nano_graphics_gdi::context*>(pgraphicscontext);
+
+         //      m_hgdiobj = _create_point_font(m_iFontSize * 10, m_strFontName, m_bBold, m_bUnderline, pgdicontext->m_hdc, &logfontw);
+
+         //      m_bModified = false;
+
+         //   }
+
+
+         //}
 
 
          HFONT font::_create_point_font(::i32 nPointSize, const ::scoped_string& scopedstrFaceName, bool bBold, bool bUnderline, HDC hdc, LOGFONTW* plf)
