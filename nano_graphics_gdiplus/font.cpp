@@ -3,6 +3,7 @@
 //
 #include "framework.h"
 #include "font.h"
+#include "font_family.h"
 #include "context.h"
 #include "acme/platform/node.h"
 // #include "_nano.h"
@@ -17,48 +18,36 @@ namespace nano_graphics_gdiplus
    font::~font() {}
 
 
-   void font::create_point_font(enum_font efont, ::f64 fPointSize, bool bBold, bool bUnderline)
+   void font::create_point_font(::nano::graphics::font_family *pfontfamily, ::f64 fPointSize, bool bBold,
+                                bool bItalic, bool bUnderline)
    {
 
-      //auto strFontFamily = node()->font_name(efont);
+     m_pfontfamily = pfontfamily;
 
-      //::wstring wstrFontFamily(strFontFamily);
-
-      //m_pfontfamily = new ::Gdiplus::FontFamily(wstrFontFamily);
-
-      //m_pfont = font(&ff, 12.f, FontStyleRegular, UnitPixel);
-
-      _create_font(efont, fPointSize, true, bBold, bUnderline);
+      _create_font(fPointSize, true, bBold, bItalic, bUnderline);
    }
 
 
-   void font::create_pixel_font(enum_font efont, ::f64 fPixelSize, bool bBold, bool bUnderline)
+   void font::create_pixel_font(::nano::graphics::font_family *pfontfamily, ::f64 fPixelSize, bool bBold,
+                                bool bItalic, bool bUnderline)
    {
 
-      /*auto strFontFamily = node()->font_name(efont);
+      m_pfontfamily = pfontfamily;
 
-      ::wstring wstrFontFamily(strFontFamily);
+      _create_font(fPixelSize, false, bBold, bItalic, bUnderline);
 
-      m_pfontfamily = new ::Gdiplus::FontFamily(wstrFontFamily);
-
-      m_pfont = font(&ff, 12.f, FontStyleRegular, UnitPixel);*/
-
-      _create_font(efont, fPixelSize, false, bBold, bUnderline);
    }
 
 
-   void font::_create_font(enum_font efont, ::f64 fSize, bool bPointSize, bool bBold, bool bUnderline)
+   void font::_create_font(::f64 fSize, bool bPointSize, bool bBold, bool bItalic, bool bUnderline)
    {
 
-      auto strFontFamily = node()->font_name(efont);
+      ::cast<::nano_graphics_gdiplus::font_family> pgdiplusfontfamily = m_pfontfamily;
 
-      ::wstring wstrFontFamily(strFontFamily);
-
-      m_pfontfamily = new ::Gdiplus::FontFamily(wstrFontFamily);
-
-      m_pfont = new ::Gdiplus::Font(m_pfontfamily, fSize, 
+      m_pfont = new ::Gdiplus::Font(pgdiplusfontfamily->m_pfontfamily, fSize, 
          (bBold ? Gdiplus::FontStyleBold : Gdiplus::FontStyleRegular) | 
-         (bUnderline ? Gdiplus::FontStyleUnderline : Gdiplus::FontStyleRegular),
+         (bUnderline ? Gdiplus::FontStyleUnderline : Gdiplus::FontStyleRegular) |
+         (bItalic ? Gdiplus::FontStyleItalic : Gdiplus::FontStyleRegular),
                      bPointSize ? Gdiplus::UnitPoint : Gdiplus::UnitPixel);
    }
 

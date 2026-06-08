@@ -15,7 +15,7 @@ namespace nano_graphics_gdiplus
    pen::~pen() {}
 
 
-      void pen::create_pen(const ::color::color &color, ::f64 fWidth)
+      void pen::create_pen(::nano::graphics::enum_pen epen, ::f64 fWidth, const ::color::color &color)
    {
 
       m_ppen = new ::Gdiplus::Pen(

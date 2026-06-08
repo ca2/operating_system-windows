@@ -107,6 +107,7 @@ namespace nano_graphics_gdiplus
    class graphics;
    class font;
    class icon;
+   class image;
    class object;
    class path;
 

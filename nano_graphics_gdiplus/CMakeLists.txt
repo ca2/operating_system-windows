@@ -39,6 +39,8 @@ list(APPEND library_source
    graphics.h
    icon.cpp
    icon.h
+   image.cpp
+   image.h
    object.cpp
    object.h
    path.cpp

@@ -8,6 +8,7 @@
 #include "brush.h"
 #include "font.h"
 #include "icon.h"
+#include "image.h"
 #include "path.h"
 #include "pen.h"
 ////#include "acme/exception/exception.h"
@@ -102,6 +103,30 @@ namespace nano_graphics_gdiplus
    }
 
 
+   void context::set_brush(::nano::graphics::brush * pbrush)
+   {
+
+      m_pbrush = pbrush;
+
+   }
+
+
+   void context::set_pen(::nano::graphics::pen * ppen)
+   {
+
+      m_ppen = ppen;
+
+   }
+
+
+   void context::set_font(::nano::graphics::font * pfont)
+   {
+
+      m_pfont = pfont;
+
+   }
+
+
    void context::attach(void *posdata, const ::i32_size &size, ::i32 iType)
    {
 
@@ -142,10 +167,16 @@ namespace nano_graphics_gdiplus
                          DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY,
                          DEFAULT_PITCH | FF_DONTCARE, "Segoe UI");
    }
+
+
+
+      //void context::_draw_text(const ::scoped_string &scopedstr, const ::f64_rectangle &rectangleText,
+      //                      const ::e_align &ealign, const ::e_draw_text &edrawtext,
+      //                      ::nano::graphics::brush *pbrushBack, ::nano::graphics::brush *pbrushText,
+      //                      ::nano::graphics::font *pfont)
+
    void context::_draw_text(const ::scoped_string &scopedstr, const ::f64_rectangle &rectangleText,
-                           const ::e_align &ealign, const ::e_draw_text &edrawtext,
-                           ::nano::graphics::brush *pbrushBack, ::nano::graphics::brush *pbrushText,
-                           ::nano::graphics::font * pfont)
+                           const ::e_draw_text &edrawtext, const ::e_align &ealign)
    {
 
       //COLORREF colorrefBackgroundColor = win32_COLORREF(pnanobrushBack->m_color);
@@ -207,9 +238,9 @@ namespace nano_graphics_gdiplus
        }
 
 
-       ::cast<::nano_graphics_gdiplus::font> pgdiplusfont = pfont;
+       ::cast<::nano_graphics_gdiplus::font> pgdiplusfont = m_pfont;
 
-       ::cast<::nano_graphics_gdiplus::brush> pgdiplusbrush = pbrushText;
+       ::cast<::nano_graphics_gdiplus::brush> pgdiplusbrush = m_pbrush;
 
 
        ::wstring wstr(scopedstr);
@@ -284,12 +315,13 @@ namespace nano_graphics_gdiplus
    }
 
 
-   ::i32_size context::get_text_extents(const ::scoped_string &scopedstr, ::nano::graphics::font *pfont)
+   //::i32_size context::get_text_extents(const ::scoped_string &scopedstr, ::nano::graphics::font *pfont)
+   ::f64_size context::get_text_extents(const ::scoped_string &scopedstr)
    {
 
       //pnanofont->update(this);
 
-      ::cast<::nano_graphics_gdiplus::font> pgdiplusfont = pfont;
+      ::cast<::nano_graphics_gdiplus::font> pgdiplusfont = m_pfont;
 
           ::Gdiplus::RectF bounds;
 
@@ -316,11 +348,13 @@ namespace nano_graphics_gdiplus
    }
 
 
-   void context::rectangle(const ::f64_rectangle &rectangle, ::nano::graphics::brush *pbrush,
-                          ::nano::graphics::pen *ppen)
+   //void context::rectangle(const ::f64_rectangle &rectangle, ::nano::graphics::brush *pbrush,
+     //                     ::nano::graphics::pen *ppen)
+
+   void context::rectangle(const ::f64_rectangle &rectangle)
    {
 
-      if (!pbrush && !ppen)
+      if (!m_pbrush && !m_ppen)
       {
 
          return;
@@ -330,13 +364,10 @@ namespace nano_graphics_gdiplus
 
       ::copy(rectf, rectangle);
 
-      if (pbrush)
+      if (m_pbrush)
       {
 
-         ::cast<::nano_graphics_gdiplus::brush> pgdiplusbrush = pbrush;
-         //pbrush->update(this);
-
-         m_pgraphics->FillRectangle(pgdiplusbrush->m_pbrush, rectf);
+         m_pgraphics->FillRectangle(m_pbrush->m_pbrush, rectf);
       }
       //else
       //{
@@ -344,7 +375,7 @@ namespace nano_graphics_gdiplus
       //   //::SelectObject(m_hdc, (HGDIOBJ)::GetStockObject(NULL_BRUSH));
       //}
 
-      if (ppen)
+      if (m_ppen)
       {
 
          //ppen->update(this);
@@ -352,9 +383,7 @@ namespace nano_graphics_gdiplus
            //    ;
          //::SelectObject(m_hdc, (HGDIOBJ)ppen->operating_system_data());
 
-                  ::cast<::nano_graphics_gdiplus::pen> pgdipluspen = ppen;
-
-         m_pgraphics->DrawRectangle(pgdipluspen->m_ppen, rectf);
+         m_pgraphics->DrawRectangle(m_ppen->m_ppen, rectf);
 
       }
       else
@@ -376,11 +405,10 @@ namespace nano_graphics_gdiplus
       //::Rectangle(m_hdc, r.left, r.top, r.right, r.bottom);
    }
 
-      void context::ellipse(const ::f64_rectangle &rectangle, ::nano::graphics::brush *pbrush,
-                           ::nano::graphics::pen *ppen)
+      void context::ellipse(const ::f64_rectangle &rectangle)
    {
 
-      if (!pbrush && !ppen)
+      if (!m_pbrush && !m_ppen)
       {
 
          return;
@@ -390,13 +418,13 @@ namespace nano_graphics_gdiplus
 
       ::copy(rectf, rectangle);
 
-      if (pbrush)
+      if (m_pbrush)
       {
 
-         ::cast<::nano_graphics_gdiplus::brush> pgdiplusbrush = pbrush;
+//         ::cast<::nano_graphics_gdiplus::brush> pgdiplusbrush = m_pbrush;
          // pbrush->update(this);
 
-         m_pgraphics->FillEllipse(pgdiplusbrush->m_pbrush, rectf);
+         m_pgraphics->FillEllipse(m_pbrush->m_pbrush, rectf);
       }
       // else
       //{
@@ -404,7 +432,7 @@ namespace nano_graphics_gdiplus
       //   //::SelectObject(m_hdc, (HGDIOBJ)::GetStockObject(NULL_BRUSH));
       //}
 
-      if (ppen)
+      if (m_ppen)
       {
 
          // ppen->update(this);
@@ -412,9 +440,9 @@ namespace nano_graphics_gdiplus
          //    ;
          //::SelectObject(m_hdc, (HGDIOBJ)ppen->operating_system_data());
 
-         ::cast<::nano_graphics_gdiplus::pen> pgdipluspen = ppen;
+                  //::cast<::nano_graphics_gdiplus::pen> pgdipluspen = m_ppen;
 
-         m_pgraphics->DrawEllipse(pgdipluspen->m_ppen, rectf);
+         m_pgraphics->DrawEllipse(m_ppen->m_ppen, rectf);
       }
       else
       {
@@ -436,34 +464,31 @@ namespace nano_graphics_gdiplus
    }
 
 
-      void context::line(const ::f64_point& point1, const ::f64_point& point2, ::nano::graphics::pen* ppen)
+      void context::line(const ::f64_point& point1, const ::f64_point& point2)
       {
-         ::cast<::nano_graphics_gdiplus::pen> pgdipluspen = ppen;
+         //::cast<::nano_graphics_gdiplus::pen> pgdipluspen = m_ppen;
 
          ::Gdiplus::PointF pointf1((::Gdiplus::REAL)point1.x, (::Gdiplus::REAL)point1.y);
          ::Gdiplus::PointF pointf2((::Gdiplus::REAL)point2.x, (::Gdiplus::REAL)point2.y);
 
-         m_pgraphics->DrawLine(pgdipluspen->m_ppen, pointf1, pointf2);
+         m_pgraphics->DrawLine(m_ppen->m_ppen, pointf1, pointf2);
 
       }
 
 
-   void context::draw(::nano::graphics::icon *picon, ::i32 x, ::i32 y, ::i32 cx, ::i32 cy)
+   void context::draw_icon(::f64 x, ::f64 y, ::f64 cx, ::f64 cy, ::nano::graphics::icon *picon)
    {
 
 
-      ::pointer<::nano_graphics_gdiplus::icon> pwindowsicon = picon;
+      ::cast<::nano_graphics_gdiplus::icon> pgdiplusicon = picon;
 
-      Gdiplus::Graphics g(m_hdc);
+      Gdiplus::RectF rectangle(
+         (::Gdiplus::REAL) x,
+         (::Gdiplus::REAL) y,
+         (::Gdiplus::REAL) cx,
+         (::Gdiplus::REAL) cy);
 
-      Gdiplus::Rect r;
-
-      r.X = x;
-      r.Y = y;
-      r.Width = cx;
-      r.Height = cy;
-
-      g.DrawImage(pwindowsicon->m_pimage, r);
+      m_pgraphics->DrawImage(pgdiplusicon->m_pimage, rectangle);
       //)
 
       // HDC hdcMem = ::CreateCompatibleDC(m_hdc);
@@ -489,6 +514,39 @@ namespace nano_graphics_gdiplus
    }
 
 
+   void context::draw_image(const ::f64_rectangle & rectangle, ::nano::graphics::image * pimage)
+   {
+
+      ::cast < ::nano_graphics_gdiplus::image > pgdiplusimage = pimage;
+
+      ::Gdiplus::RectF rectangleTarget;
+
+      ::copy(rectangleTarget, rectangle);
+
+      m_pgraphics->DrawImage(pgdiplusimage->m_pbitmap, rectangleTarget);
+
+   }
+
+
+   void context::draw_image(const ::f64_point & point, const ::f64_rectangle & rectangle,
+                            ::nano::graphics::image * pimage)
+   {
+
+      ::cast < ::nano_graphics_gdiplus::image > pgdiplusimage = pimage;
+
+      m_pgraphics->DrawImage(
+         pgdiplusimage->m_pbitmap,
+         (::Gdiplus::REAL) point.x,
+         (::Gdiplus::REAL) point.y,
+         (::Gdiplus::REAL) rectangle.left,
+         (::Gdiplus::REAL) rectangle.top,
+         (::Gdiplus::REAL) rectangle.width(),
+         (::Gdiplus::REAL) rectangle.height(),
+         ::Gdiplus::UnitPixel);
+
+   }
+
+
    void context::translate(::f64 x, ::f64 y) {
       //OffsetViewportOrgEx(m_hdc, x, y, nullptr);
 
@@ -497,10 +555,10 @@ namespace nano_graphics_gdiplus
    }
 
 
-   void context::do_path(::nano::graphics::path *ppath, ::nano::graphics::brush *pbrush, ::nano::graphics::pen *ppen)
+   void context::do_path(::nano::graphics::path *ppath)
    {
 
-      if (!pbrush && !ppen)
+      if (!m_pbrush && !m_ppen)
       {
 
          return;
@@ -509,20 +567,20 @@ namespace nano_graphics_gdiplus
 
       ::cast<::nano_graphics_gdiplus::path> pgdipluspath = ppath;
 
-      if (pbrush)
+      if (m_pbrush)
       {
-         ::cast<::nano_graphics_gdiplus::brush> pgdiplusbrush = pbrush;
+         //::cast<::nano_graphics_gdiplus::brush> pgdiplusbrush = m_pbrush;
 
-         m_pgraphics->FillPath(pgdiplusbrush->m_pbrush, pgdipluspath->m_pgraphicspath);
+         m_pgraphics->FillPath(m_pbrush->m_pbrush, pgdipluspath->m_pgraphicspath);
       }
 
       
 
-      if (ppen)
+      if (m_ppen)
       {
-         ::cast<::nano_graphics_gdiplus::pen> pgdipluspen = ppen;
+         //::cast<::nano_graphics_gdiplus::pen> pgdipluspen = m_ppen;
 
-         m_pgraphics->DrawPath(pgdipluspen->m_ppen, pgdipluspath->m_pgraphicspath);
+         m_pgraphics->DrawPath(m_ppen->m_ppen, pgdipluspath->m_pgraphicspath);
       }
 
    }
