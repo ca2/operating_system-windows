@@ -237,7 +237,7 @@ namespace windowing_win32
    }
 
 
-   bool buffer::_on_begin_draw(::graphics::buffer_item * pbufferitem)
+   bool buffer::_on_begin(::graphics::buffer_item * pbufferitem)
    {
 
       //auto pbufferitem = get_buffer_item();
@@ -251,7 +251,7 @@ namespace windowing_win32
 
       auto pimageBuffer = pbufferitem->m_pimage2;
 
-      if (pimageBuffer->m_size != pbufferitem->m_sizeBufferItemDraw)
+      if (pimageBuffer->m_size != pbufferitem->m_sizeBufferItem)
       {
 
          if (!update_buffer(pbufferitem))
@@ -266,7 +266,7 @@ namespace windowing_win32
       if (!m_papplication->m_gpu.m_bUseSwapChainWindow)
       {
 
-         if (!double_buffer::_on_begin_draw(pbufferitem))
+         if (!double_buffer::_on_begin(pbufferitem))
          {
 
             return false;
@@ -340,7 +340,7 @@ namespace windowing_win32
 
          playeredwindowbuffer = pparticleData;
 
-         if (pbufferitem->m_sizeBufferItemDraw == playeredwindowbuffer->m_pixmap.size())
+         if (pbufferitem->m_sizeBufferItem == playeredwindowbuffer->m_pixmap.size())
          {
 
             return false;
@@ -363,17 +363,17 @@ namespace windowing_win32
 
       auto sizeLargeInternalBitmap = rectangleUnion.size();
 
-      if (pbufferitem->m_sizeBufferItemDraw.cx > sizeLargeInternalBitmap.cx)
+      if (pbufferitem->m_sizeBufferItem.cx > sizeLargeInternalBitmap.cx)
       {
 
-         sizeLargeInternalBitmap.cx = pbufferitem->m_sizeBufferItemDraw.cx;
+         sizeLargeInternalBitmap.cx = pbufferitem->m_sizeBufferItem.cx;
 
       }
 
-      if (pbufferitem->m_sizeBufferItemDraw.cy > sizeLargeInternalBitmap.cy)
+      if (pbufferitem->m_sizeBufferItem.cy > sizeLargeInternalBitmap.cy)
       {
 
-         sizeLargeInternalBitmap.cy = pbufferitem->m_sizeBufferItemDraw.cy;
+         sizeLargeInternalBitmap.cy = pbufferitem->m_sizeBufferItem.cy;
 
       }
 
@@ -456,7 +456,7 @@ namespace windowing_win32
 
          }
 
-         playeredwindowbuffer->m_pixmap.m_size = pbufferitem->m_sizeBufferItemDraw;
+         playeredwindowbuffer->m_pixmap.m_size = pbufferitem->m_sizeBufferItem;
 
          if (pbufferitem->m_pimage2->host(playeredwindowbuffer->m_pixmap, m_pwindow))
          {
@@ -504,7 +504,7 @@ namespace windowing_win32
             //else
             //{
 
-            pbufferitem->m_pgraphicsBufferItem->create_for_window_draw2d(puserinteraction, pbufferitem->m_sizeBufferItemDraw);
+            pbufferitem->m_pgraphicsBufferItem->create_for_window_draw2d(puserinteraction, pbufferitem->m_sizeBufferItem);
 
                //pbufferitem->m_pgraphics->create_memory_graphics(pbufferitem->m_sizeBufferItemDraw);
 
@@ -518,7 +518,7 @@ namespace windowing_win32
          else
          {
 
-            pbufferitem->m_pgraphicsBufferItem->defer_set_size(pbufferitem->m_sizeBufferItemDraw);
+            pbufferitem->m_pgraphicsBufferItem->defer_set_size(pbufferitem->m_sizeBufferItem);
 
          }
 

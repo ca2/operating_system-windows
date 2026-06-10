@@ -83,7 +83,7 @@ namespace windowing_win32
 
       virtual void update_screen_task();
 
-      bool _on_begin_draw(::graphics::buffer_item * pbufferitem) override;
+      bool _on_begin(::graphics::buffer_item * pbufferitem) override;
 
 
       bool create_window_device_context(const ::i32_size & size, ::i32 iStride = -1);
