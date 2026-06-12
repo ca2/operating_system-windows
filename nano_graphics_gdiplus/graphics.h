@@ -18,7 +18,6 @@ namespace nano_graphics_gdiplus
    {
    public:
 
-      ULONG_PTR gdiplusToken;
       graphics();
       ~graphics() override;
 

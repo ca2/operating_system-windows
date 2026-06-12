@@ -770,6 +770,9 @@
     <ProjectReference Include="..\..\..\source\app\bred\bred.vcxproj">
       <Project>{dfbf067f-aff9-4bd6-a5e1-72af984d1476}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\gdiplus_library\gdiplus_library.vcxproj">
+      <Project>{c70aa9e7-1eda-404e-92ee-dcff6ae4f54a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

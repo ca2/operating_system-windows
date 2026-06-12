@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "acme/exception/error_number.h"
 #include "acme/_library.h"
+#include <mutex>
 
 
 
@@ -10,13 +11,19 @@ Gdiplus::GdiplusStartupInput *   g_pgdiplusStartupInput = nullptr;
 Gdiplus::GdiplusStartupOutput *  g_pgdiplusStartupOutput = nullptr;
 DWORD_PTR                        g_gdiplusToken = NULL;
 DWORD_PTR                        g_gdiplusHookToken = NULL;
+::i32                            g_iGdiplusReferenceCount = 0;
+std::mutex                       g_mutexGdiplus;
 
 
 CLASS_DECL_GDIPLUS_LIBRARY void initialize_gdiplus()
 {
 
-   if (g_pgdiplusStartupInput != nullptr)
+   std::scoped_lock lock(g_mutexGdiplus);
+
+   if (g_iGdiplusReferenceCount > 0)
    {
+
+      g_iGdiplusReferenceCount++;
 
       return;
 
@@ -39,7 +46,10 @@ CLASS_DECL_GDIPLUS_LIBRARY void initialize_gdiplus()
 
       output_debug_string("Gdiplus Failed to Startup. ca cannot continue.");
 
-      return;
+      ::acme::del(g_pgdiplusStartupInput);
+      ::acme::del(g_pgdiplusStartupOutput);
+
+      throw ::exception(error_failed, "GdiplusStartup failed");
 
    }
 
@@ -50,9 +60,16 @@ CLASS_DECL_GDIPLUS_LIBRARY void initialize_gdiplus()
 
       output_debug_string("Gdiplus Failed to Hook. ca cannot continue.");
 
-      throw ::exception(error_failed);
+      ::Gdiplus::GdiplusShutdown(g_gdiplusToken);
+
+      ::acme::del(g_pgdiplusStartupInput);
+      ::acme::del(g_pgdiplusStartupOutput);
+
+      throw ::exception(error_failed, "GDI+ notification hook failed");
 
    }
+
+   g_iGdiplusReferenceCount = 1;
 
 }
 
@@ -60,7 +77,18 @@ CLASS_DECL_GDIPLUS_LIBRARY void initialize_gdiplus()
 CLASS_DECL_GDIPLUS_LIBRARY void terminate_gdiplus()
 {
 
-   if (g_pgdiplusStartupOutput != nullptr)
+   std::scoped_lock lock(g_mutexGdiplus);
+
+   if (g_iGdiplusReferenceCount <= 0)
+   {
+
+      return;
+
+   }
+
+   g_iGdiplusReferenceCount--;
+
+   if (g_iGdiplusReferenceCount == 0 && g_pgdiplusStartupOutput != nullptr)
    {
 
       g_pgdiplusStartupOutput->NotificationUnhook(g_gdiplusHookToken);
@@ -69,6 +97,9 @@ CLASS_DECL_GDIPLUS_LIBRARY void terminate_gdiplus()
 
       ::acme::del(g_pgdiplusStartupInput);
       ::acme::del(g_pgdiplusStartupOutput);
+
+      g_gdiplusToken = NULL;
+      g_gdiplusHookToken = NULL;
 
    }
 

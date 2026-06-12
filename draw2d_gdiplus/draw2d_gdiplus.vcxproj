@@ -2871,6 +2871,9 @@
     <ProjectReference Include="..\..\..\source\app\aura\aura.vcxproj">
       <Project>{e000ffaf-392f-4e32-bf51-fd7ed638991f}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\gdiplus_library\gdiplus_library.vcxproj">
+      <Project>{c70aa9e7-1eda-404e-92ee-dcff6ae4f54a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

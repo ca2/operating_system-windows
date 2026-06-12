@@ -3,33 +3,12 @@
 #include "framework.h"
 #include "face.h"
 #include "aura/graphics/write_text/text_metric.h"
+#include "operating_system-windows/gdiplus_library/_.h"
 
 #pragma comment(lib, "gdiplus.lib")
 
 
 using namespace Gdiplus;
-
-
-bool g_bGdiplusInitialized = false;
-ULONG_PTR g_gdiplusToken;
-void defer_initialize_gdiplus()
-{
-
-   if (g_bGdiplusInitialized)
-   {
-
-      return;
-
-   }
-
-   g_bGdiplusInitialized = true;
-
-   GdiplusStartupInput gdiplusStartupInput;
-
-   GdiplusStartup(&g_gdiplusToken, &gdiplusStartupInput, nullptr);
-
-
-}
 
 
 namespace typeface_gdiplus
@@ -86,8 +65,6 @@ namespace typeface_gdiplus
    //   //   putchar('\n');
    //   //}
 
-   //   //GdiplusShutdown(gdiplusToken);
-
    //   return grayscale;
    //}
 
@@ -99,6 +76,8 @@ namespace typeface_gdiplus
       m_pfont = nullptr;
       m_pfamily = nullptr;
 
+      initialize_gdiplus();
+
 
    }
 
@@ -109,6 +88,8 @@ namespace typeface_gdiplus
       ::acme::del(m_pfont);
       ::acme::del(m_pfamily);
 
+      terminate_gdiplus();
+
    }
 
 
@@ -118,12 +99,24 @@ namespace typeface_gdiplus
       if (!m_pfamily || !m_pfont)
       {
 
-         defer_initialize_gdiplus();
+         ::acme::del(m_pfont);
+         ::acme::del(m_pfamily);
+
          //m_bFace = true;
          //return ch;
          m_pfamily = new FontFamily(::wstring(m_strFontName));
          //FontFamily* m_pfamily(L"Segoe UI");
          m_pfont = new Font(m_pfamily, (Gdiplus::REAL) m_iPixelSize, FontStyleRegular, UnitPixel);
+
+         if (m_pfamily->GetLastStatus() != Ok || m_pfont->GetLastStatus() != Ok)
+         {
+
+            ::acme::del(m_pfont);
+            ::acme::del(m_pfamily);
+
+            throw ::exception(error_failed, "Could not create GDI+ font family or font");
+
+         }
 
          //create_draw_buffers();
 
@@ -137,43 +130,69 @@ namespace typeface_gdiplus
 
       _defer_gdiplus_font_and_family();
 
-      ::i32 fontSize = m_iPixelSize;
       wd32_character ia[2];
       ia[0] = unicode_index(scopedstr);
       ia[1] = 0;
       WCHAR wch[5];
       auto len = wd32_to_wd16(wch, ia);
       wch[len] = L'\0';
-      // Use a temporary Graphics to measure the glyph
-      HDC screenDC = GetDC(NULL);
-      Graphics measureGraphics(screenDC);
+      auto iLength = static_cast<INT>(len);
+
+      StringFormat format(StringFormat::GenericTypographic());
+      format.SetFormatFlags(
+         format.GetFormatFlags()
+         | StringFormatFlagsMeasureTrailingSpaces
+         | StringFormatFlagsNoWrap);
+
+      Bitmap measureBitmap(1, 1, PixelFormat32bppPARGB);
+      Graphics measureGraphics(&measureBitmap);
       measureGraphics.SetTextRenderingHint(TextRenderingHintAntiAliasGridFit);
 
       RectF layoutRect;
       PointF origin(0, 0);
       
-      measureGraphics.MeasureString(wch, 1, m_pfont, origin, &layoutRect);
-      ReleaseDC(NULL, screenDC);
+      auto status = measureGraphics.MeasureString(wch, iLength, m_pfont, origin, &format, &layoutRect);
 
-      ::i32 bmpWidth = static_cast<::i32>(ceil(layoutRect.Width)) + 4;   // padding
-      ::i32 bmpHeight = static_cast<::i32>(ceil(layoutRect.Height)) + 4;
+      if (status != Ok)
+      {
 
-      Bitmap bmp(bmpWidth, bmpHeight, PixelFormat32bppARGB);
+         throw ::exception(error_failed, "GDI+ could not measure glyph");
+
+      }
+
+      ::i32 bmpWidth = maximum(1, static_cast<::i32>(ceil(layoutRect.Width)) + 4);
+      ::i32 bmpHeight = maximum(1, static_cast<::i32>(ceil(layoutRect.Height)) + 4);
+
+      Bitmap bmp(bmpWidth, bmpHeight, PixelFormat32bppPARGB);
       Graphics g(&bmp);
       g.SetSmoothingMode(SmoothingModeAntiAlias);
       g.SetTextRenderingHint(TextRenderingHintAntiAliasGridFit);
       g.Clear(Color(0, 0, 0, 0)); // Transparent background
 
-      SolidBrush brush(Color(255, 255, 255, 255)); // Black text
+      SolidBrush brush(Color(255, 255, 255, 255));
 
       // Draw glyph at (2, 2) for margin
       PointF drawPoint(2.0f, 2.0f);
-      g.DrawString(wch, 1, m_pfont, drawPoint, &brush);
+      status = g.DrawString(wch, iLength, m_pfont, drawPoint, &format, &brush);
+
+      if (status != Ok)
+      {
+
+         throw ::exception(error_failed, "GDI+ could not render glyph");
+
+      }
 
       // Lock pixels
       BitmapData data;
       Rect rect(0, 0, bmpWidth, bmpHeight);
-      bmp.LockBits(&rect, ImageLockModeRead, PixelFormat32bppPARGB, &data);
+      status = bmp.LockBits(&rect, ImageLockModeRead, PixelFormat32bppPARGB, &data);
+
+      if (status != Ok)
+      {
+
+         throw ::exception(error_failed, "GDI+ could not lock glyph bitmap");
+
+      }
 
       //memory pre;
       //pre.set_size(bmpWidth * bmpHeight*4);
@@ -200,28 +219,16 @@ namespace typeface_gdiplus
 
       
 
-      // Measure metrics (bearing and advance)
-      HDC hdc = GetDC(NULL);
-      HFONT hFont = CreateFontW(
-         static_cast<::i32>(-fontSize), 0, 0, 0, FW_NORMAL,
-         FALSE, FALSE, FALSE, DEFAULT_CHARSET,
-         OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY,
-         DEFAULT_PITCH | FF_DONTCARE, ::wstring(m_strFontName));
+      auto iStyle = m_pfont->GetStyle();
+      auto dEmHeight = (double)m_pfamily->GetEmHeight(iStyle);
+      auto dCellAscent = (double)m_pfamily->GetCellAscent(iStyle);
+      auto dFontSize = (double)m_pfont->GetSize();
 
-      SelectObject(hdc, hFont);
-
-      ABC abc;
-      GetCharABCWidthsW(hdc, wch[0], wch[0], &abc);
-
-      TEXTMETRIC tm;
-      GetTextMetrics(hdc, &tm);
-
-      ::i32 bearingX = abc.abcA;
-      ::i32 bearingY = tm.tmAscent; // baseline to top
-      ::i32 advance = abc.abcA + abc.abcB + abc.abcC;
-
-      DeleteObject(hFont);
-      ReleaseDC(NULL, hdc);
+      ::i32 bearingX = static_cast<::i32>(floor(layoutRect.X));
+      ::i32 bearingY = dEmHeight > 0.0
+         ? static_cast<::i32>(ceil(dFontSize * dCellAscent / dEmHeight))
+         : 0;
+      ::i32 advance = maximum(0, static_cast<::i32>(ceil(layoutRect.Width)));
 
       // now store character for later use
       //aracter = {
@@ -231,7 +238,29 @@ namespace typeface_gdiplus
       ch.Advance = advance;
 
 
-      create_texture(ch,  (const ::u8 *) data.Scan0);
+      ::memory memoryGlyph;
+
+      memoryGlyph.set_size(bmpWidth * bmpHeight * 4);
+
+      auto ptarget = memoryGlyph.data();
+      auto psource = static_cast<const ::u8*>(data.Scan0);
+      auto iStride = data.Stride;
+
+      if (iStride < 0)
+      {
+
+         psource += (bmpHeight - 1) * -iStride;
+
+      }
+
+      for (::i32 y = 0; y < bmpHeight; y++)
+      {
+
+         memory_copy(ptarget + y * bmpWidth * 4, psource + y * iStride, bmpWidth * 4);
+
+      }
+
+      create_texture(ch, memoryGlyph.data());
       bmp.UnlockBits(&data);
       //};
       //Characters.insert(std::pair<::i8, Character>(c, character));
@@ -256,6 +285,13 @@ namespace typeface_gdiplus
 
    void face::get_text_metric(::write_text::text_metric* pmetric)
    {
+
+      if (!pmetric)
+      {
+
+         throw ::exception(error_null_pointer);
+
+      }
 
       _defer_gdiplus_font_and_family();
 
@@ -297,8 +333,15 @@ namespace typeface_gdiplus
 
       ::f64 dFontSize = pgdiplusfont->GetSize();
 
-      HDC screenDC = GetDC(NULL);
-      Graphics measureGraphics(screenDC);
+      if (dEmHeight <= 0.0)
+      {
+
+         throw ::exception(error_failed, "Invalid GDI+ font em height");
+
+      }
+
+      Bitmap measureBitmap(1, 1, PixelFormat32bppPARGB);
+      Graphics measureGraphics(&measureBitmap);
       measureGraphics.SetTextRenderingHint(TextRenderingHintAntiAliasGridFit);
 
 
@@ -306,22 +349,18 @@ namespace typeface_gdiplus
 
       ::f64 dFontHeight = pgdiplusfont->GetHeight(pg);
 
-      auto dpiY = pg->GetDpiY();
-
       //m_pgraphics->DrawLine(m_ppen->get_os_data < Gdiplus::Pen* >(this), Gdiplus::PointF((Gdiplus::REAL)m_point.x, (Gdiplus::REAL)m_point.y), Gdiplus::PointF((Gdiplus::REAL)x, (Gdiplus::REAL)y));
-      pmetric->m_dAscent = dFontSize * dCellAscent * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5);
+      pmetric->m_dAscent = dFontSize * dCellAscent / dEmHeight;
 
-      pmetric->m_dDescent = dFontSize * dCellDescent * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5);
+      pmetric->m_dDescent = dFontSize * dCellDescent / dEmHeight;
 
       pmetric->m_dHeight = dFontHeight;
 
-      ::f64 dLineSpacing2 = maximum(dFontHeight, dFontSize * dLineSpacing * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5));
+      ::f64 dLineSpacing2 = maximum(dFontHeight, dFontSize * dLineSpacing / dEmHeight);
 
       pmetric->m_dInternalLeading = 0;
 
       pmetric->m_dExternalLeading = dLineSpacing2 - (pmetric->m_dAscent + pmetric->m_dDescent);
-
-      ::ReleaseDC(NULL, screenDC);
 
    }
 

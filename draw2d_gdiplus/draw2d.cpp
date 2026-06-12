@@ -1,10 +1,7 @@
 #include "framework.h"
 #include "draw2d.h"
 #include "acme/prototype/prototype/memory.h"
-
-
-CLASS_DECL_DRAW2D_GDIPLUS void initialize_gdiplus();
-CLASS_DECL_DRAW2D_GDIPLUS void terminate_gdiplus();
+#include "operating_system-windows/gdiplus_library/_.h"
 
 
 namespace draw2d_gdiplus
@@ -41,19 +38,6 @@ namespace draw2d_gdiplus
       //   return estatus;
 
       //}
-   
-      //estatus = 
-      
-      initialize_gdiplus();
-
-      //if (!estatus)
-      //{
-
-      //   return estatus;
-
-      //}
-
-      //return estatus;
    
    }
 

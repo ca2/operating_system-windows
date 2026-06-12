@@ -1,1 +1,2 @@
 app/aura
+operating_system-windows/gdiplus_library

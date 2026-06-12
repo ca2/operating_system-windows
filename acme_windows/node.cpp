@@ -5536,11 +5536,14 @@ namespace acme_windows
             if (application()->m_pacmeuserinteractionMain)
             {
                application()->m_pacmeuserinteractionMain->display(e_display_hide, {});
-               application()->m_pacmeuserinteractionMain->set_finish();
+               application()->m_pacmeuserinteractionMain->post_message(::user::e_message_close);
 
             }
-            application()->set_finish();
-            system()->set_finish();
+            else
+            {
+               application()->set_finish();
+               system()->set_finish();
+            }
          });
    }
    
