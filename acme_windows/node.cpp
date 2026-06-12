@@ -5705,7 +5705,7 @@ namespace acme_windows
 
       // command_system(strOutput, strError, iExitCode, "\""_ansi + pathRedist + "\" /install
       // /norestart"_ansi);
-      auto functionTrace = [&](auto etracelevel, auto &str, bool bCarriage)
+      ::trace_function tracefunction = [&](auto etracelevel, auto &str, bool bCarriage)
       {
          straOutput.append_formatf("%c: %s%c"_ansi, trace_level_letter(etracelevel), ::string(str).c_str(),
                                    line_feed_letter(bCarriage));
@@ -5713,7 +5713,9 @@ namespace acme_windows
          // std_inline_log()(etracelevel, str);
       };
 
-      iExitCode = command_system("\""_ansi + pathRedist + "\" /install /norestart"_ansi, functionTrace);
+      tracefunction.set_timeout(::time::infinity());
+
+      iExitCode = command_system("\""_ansi + pathRedist + "\" /install /norestart"_ansi, tracefunction);
 
       strOutput = straOutput.implode("\n"_ansi);
    }
