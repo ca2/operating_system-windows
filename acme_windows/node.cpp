@@ -19,6 +19,7 @@
 #include "acme/operating_system/cpu_features.h"
 #include "acme/operating_system/process.h"
 #include "acme/operating_system/summary.h"
+#include "acme/operating_system/windows/windows.h"
 #include "acme/parallelization/install_mutex.h"
 #include "acme/parallelization/manual_reset_happening.h"
 #include "acme/parallelization/synchronous_lock.h"
@@ -4832,7 +4833,18 @@ namespace acme_windows
          psummary->m_strSystem = "windows";
          psummary->m_strSystemBranch = "windows";
          psummary->m_strSystemFamily = "windows";
-         psummary->m_strSystemRelease = "10";
+         if (::windows::is_windows_11())
+         {
+            psummary->m_strSystemRelease = "11";
+         }
+         else if (::windows::is_windows_10())
+         {
+            psummary->m_strSystemRelease = "10";
+         }
+         else 
+         {
+            psummary->m_strSystemRelease = "11";
+         }
          psummary->m_strSystemArchitecture = strArchitecture;
          psummary->m_strSystemAmbientReleaseArchitecture = "windows/" + strArchitecture;
          //psummary->m_strSlashedStore = "windows";
