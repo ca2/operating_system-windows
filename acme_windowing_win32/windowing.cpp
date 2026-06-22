@@ -6,6 +6,7 @@
 #include "windowing.h"
 #include "window.h"
 #include "acme/constant/user_message.h"
+#include "acme/handler/request.h"
 #include "acme/nano/nano.h"
 #include "acme/user/micro/user.h"
 #include "acme/parallelization/manual_reset_happening.h"
@@ -856,7 +857,7 @@ namespace win32
          void windowing::run()
          {
 
-            system()->prepare_application();
+            //system()->prepare_application();
 
             //m_papplication->prepare_application();
 
@@ -869,7 +870,13 @@ namespace win32
 
             //::set_main_thread();
 
-            //system()->defer_post_initial_request();
+            auto prequest = create_newø<::request>();
+
+            prequest->m_strAppId = system()->m_papplication->m_strAppId;
+
+            prequest->m_ecommand = e_command_start_application;
+
+            system()->post_request(prequest);
 
             //run();
 
@@ -884,13 +891,6 @@ namespace win32
 
             //system()->defer_post_application_start_file_open_request
 
-            m_papplication->send(
-               [this]()
-               {
-                  
-                  m_papplication->process_command_line_options();
-
-               });
 
 
 
