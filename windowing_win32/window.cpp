@@ -2571,7 +2571,7 @@ namespace windowing_win32
                   else
                   {
 
-                     if (useractivation & ::user::e_activation_set_active
+                     if (useractivation & ::user::e_activation_default
                          || useractivation & ::user::e_activation_set_foreground
                          || useractivation & ::user::e_activation_on_center_of_screen)
                      {
@@ -3142,7 +3142,7 @@ namespace windowing_win32
       }
 
 
-      if (useractivation & ::user::e_activation_set_active)
+      if (useractivation & ::user::e_activation_default)
       {
 
          nFlags &= ~SWP_NOACTIVATE;
