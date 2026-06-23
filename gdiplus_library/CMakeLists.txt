@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(draw2d_gdiplus CXX)
+project(gdiplus_library CXX)
 
 
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
@@ -8,33 +8,34 @@ message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
 list(APPEND ${PROJECT_NAME}_source
    _.cpp
    _.h
-   _factory.cpp
-   bitmap.cpp
-   bitmap.h
-   brush.cpp
-   brush.h
-   draw2d.cpp
-   draw2d.h
-   font.cpp
-   font.h
+   #_factory.cpp
+   #bitmap.cpp
+   #bitmap.h
+   #brush.cpp
+   #brush.h
+   #draw2d.cpp
+   #draw2d.h
+   #font.cpp
+   #font.h
    framework.cpp
    framework.h
-   graphics.cpp
-   graphics.h
-   image.cpp
-   image.h
-   internal_font.cpp
-   internal_font.h
-   object.cpp
-   object.h
-   path.cpp
-   path.h
-   pen.cpp
-   pen.h
+   #graphics.cpp
+   #graphics.h
+   #image.cpp
+   #image.h
+   #internal_font.cpp
+   #internal_font.h
+   #object.cpp
+   #object.h
+   #path.cpp
+   #path.h
+   #pen.cpp
+   #pen.h
    #preview_dc.cpp
-   region.cpp
-   region.h
-   text.cpp)
+   #region.cpp
+   #region.h
+   #text.cpp
+)
 
 
 if (MSVC)

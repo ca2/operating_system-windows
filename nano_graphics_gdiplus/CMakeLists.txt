@@ -35,6 +35,8 @@ list(APPEND library_source
    brush.h
    font.cpp
    font.h
+   font_family.cpp
+   font_family.h
    graphics.cpp
    graphics.h
    icon.cpp
@@ -50,6 +52,10 @@ list(APPEND library_source
 
         )
 
+list(APPEND library_references
+   acme gdiplus_library)
+
+
 add_library(${PROJECT_NAME} SHARED ${library_source})
 target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
 
@@ -62,7 +68,7 @@ if (MSVC)
    target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
    target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
    target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-   target_link_libraries(${PROJECT_NAME} PRIVATE acme Gdiplus windowscodecs)
+   target_link_libraries(${PROJECT_NAME} PRIVATE ${library_references} Gdiplus windowscodecs)
 elseif (${LINUX} OR ${__BSD__})
 
    pkg_check_modules(PKGCONFIG cairo xkbcommon wayland-client wayland-server wayland-cursor)
@@ -76,6 +82,7 @@ elseif (${LINUX} OR ${__BSD__})
 endif ()
 
 add_dependencies(${PROJECT_NAME} acme)
+add_dependencies(${PROJECT_NAME} gdiplus_library)
 
 target_link_directories(${PROJECT_NAME} PRIVATE ${LIBRARY_OUTPUT_PATH})
 target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/storage-${OPERATING_SYSTEM_NAME}/library/x64/basis)

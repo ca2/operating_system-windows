@@ -114,7 +114,12 @@ namespace win32
          void window::create_window()
          {
 
-            _create_window();
+            user_post([this]()
+            {
+
+               _create_window();
+
+            });
 
          }
 
@@ -151,7 +156,7 @@ namespace win32
 
             m_ptask = ::get_task();
 
-            auto r = m_pacmeuserinteraction->get_rectangle();
+            auto r = m_pacmeuserinteraction->initial_frame_rectangle();
 
             ::cast < ::acme::user::frame_interaction > pframeinteraction = m_pacmeuserinteraction;
 
@@ -260,53 +265,57 @@ namespace win32
 
          void window::display(::e_display edisplay, const ::user::activation &useractivation)
          {
-            auto hwnd = ::as_HWND(this->operating_system_window());
-            if (hwnd == nullptr)
+            user_post([this, edisplay, useractivation]()
             {
-               return;
-            }
-            switch (edisplay.m_cflag)
-            {
-               case e_display_default:
-                  ShowWindow(hwnd, SW_SHOW);
-                  break;
-               case e_display_iconic:
-                  ShowWindow(hwnd, SW_MINIMIZE);
-                  break;
-               case e_display_zoomed:
-                  ShowWindow(hwnd, SW_MAXIMIZE);
-                  break;
-               case e_display_full_screen:
-                  ShowWindow(hwnd, SW_MAXIMIZE);
-                  break;
-               case e_display_normal:
-                  ShowWindow(hwnd, SW_RESTORE);
-                  break;
-               case e_display_hide:
-                  ShowWindow(hwnd, SW_HIDE);
-                  break;
-               case e_display_center:
+               auto hwnd = ::as_HWND(this->operating_system_window());
+               if (hwnd == nullptr)
                {
-
-                  ::i32_size sizeMainScreen = system()->acme_windowing()->acme_display()->get_main_screen_size();
-
-                  auto rectangle = get_window_rectangle();
-
-                  ::i32_point point = sizeMainScreen / 2 - rectangle.size() / 2;
-
-                  set_window_position(::as_operating_system_window(HWND_TOP),
-                     point, 
-                     {},
-                     SWP_NOSIZE);
-
-                  ShowWindow(hwnd, SW_SHOW);
-                  
+                  return;
                }
-                  break;
-               default:
-                  ShowWindow(hwnd, SW_SHOW);
-                  break;
-            }
+               switch (edisplay.m_cflag)
+               {
+                  case e_display_default:
+                     ShowWindow(hwnd, SW_SHOW);
+                     break;
+                  case e_display_iconic:
+                     ShowWindow(hwnd, SW_MINIMIZE);
+                     break;
+                  case e_display_zoomed:
+                     ShowWindow(hwnd, SW_MAXIMIZE);
+                     break;
+                  case e_display_full_screen:
+                     ShowWindow(hwnd, SW_MAXIMIZE);
+                     break;
+                  case e_display_normal:
+                     ShowWindow(hwnd, SW_RESTORE);
+                     break;
+                  case e_display_hide:
+                     ShowWindow(hwnd, SW_HIDE);
+                     break;
+                  case e_display_center:
+                  {
+
+                     ::i32_size sizeMainScreen = system()->acme_windowing()->acme_display()->get_main_screen_size();
+
+                     auto rectangle = get_window_rectangle();
+
+                     ::i32_point point = sizeMainScreen / 2 - rectangle.size() / 2;
+
+                     set_window_position(::as_operating_system_window(HWND_TOP),
+                        point,
+                        {},
+                        SWP_NOSIZE);
+
+                     ShowWindow(hwnd, SW_SHOW);
+
+                  }
+                     break;
+                  default:
+                     ShowWindow(hwnd, SW_SHOW);
+                     break;
+               }
+            });
+
          }
 
 
@@ -729,7 +738,7 @@ namespace win32
 
             switch (message)
             {
-            case WM_COMMAND:
+                  case WM_COMMAND:
             {
                /* ::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
 
@@ -1067,10 +1076,17 @@ namespace win32
 
             }
             break;
+               case WM_MOVE:
+               {
+
+                  on_window_position(lparam.point());
+
+               }
+                  break;
                case WM_SIZE:
                {
 
-                  on_window_size();
+                  on_window_size(lparam.size());
 
                }
                   break;

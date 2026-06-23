@@ -645,27 +645,35 @@ namespace windowing_win32
 
          win32_windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
 
-         if (puserinteraction)
-         {
+         x = m_pointWindow.x;
 
-            x = puserinteraction->const_layout().sketch().origin().x;
-            y = puserinteraction->const_layout().sketch().origin().y;
-            cx = puserinteraction->const_layout().sketch().size().cx;
-            cy = puserinteraction->const_layout().sketch().size().cy;
+         y = m_pointWindow.y;
 
-         }
-         else
-         {
+         cx = m_sizeWindow.cx;
 
-            x = m_pacmeuserinteraction->get_rectangle().left;
+         cy = m_sizeWindow.cy;
 
-            y = m_pacmeuserinteraction->get_rectangle().top;
-
-            cx = m_pacmeuserinteraction->get_rectangle().width();
-
-            cy = m_pacmeuserinteraction->get_rectangle().height();
-
-         }
+         // if (puserinteraction)
+         // {
+         //
+         //    x = puserinteraction->const_layout().sketch().origin().x;
+         //    y = puserinteraction->const_layout().sketch().origin().y;
+         //    cx = puserinteraction->const_layout().sketch().size().cx;
+         //    cy = puserinteraction->const_layout().sketch().size().cy;
+         //
+         // }
+         // else
+         // {
+         //
+         //    x = m_pacmeuserinteraction->get_rectangle().left;
+         //
+         //    y = m_pacmeuserinteraction->get_rectangle().top;
+         //
+         //    cx = m_pacmeuserinteraction->get_rectangle().width();
+         //
+         //    cy = m_pacmeuserinteraction->get_rectangle().height();
+         //
+         // }
 
       }
 

@@ -36,6 +36,14 @@ list(APPEND ${PROJECT_NAME}_source
    region.h
    text.cpp)
 
+list(APPEND library_references
+   acme
+   apex
+   aqua
+   aura
+   gdiplus_library)
+
+
 
 if (MSVC)
    set(LIBCXX_TARGETING_MSVC ON)
@@ -55,7 +63,7 @@ if (MSVC)
    target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
    target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
    target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-   target_link_libraries(${PROJECT_NAME} PRIVATE acme apex aqua aura Gdiplus)
+   target_link_libraries(${PROJECT_NAME} PRIVATE ${library_references} Gdiplus)
 elseif (LINUX)
 
    if (NOT DONT_USE_PKG_CONFIG)

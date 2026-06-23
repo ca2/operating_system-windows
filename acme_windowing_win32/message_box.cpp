@@ -1,7 +1,8 @@
-#include "framework.h"
-#include "windowing.h"
+#include "../../../source/app/acme/user/interface/message_box.h"
 #include "acme/_operating_system.h"
 #include "acme/operating_system/windows/windows.h"
+#include "framework.h"
+#include "windowing.h"
 
 //CLASS_DECL_ACME ::i32 message_box_to_windows_message_box(const ::user::e_message_box & emessagebox);
 //CLASS_DECL_ACME enum_dialog_result windows_message_box_result_to_dialog_result(::i32 iResult);
@@ -30,7 +31,7 @@ namespace win32
 
             {
 
-               auto pmessageboxpayload = pparticle.cast < ::message_box_payload>();
+               auto pmessageboxpayload = pparticle.cast < ::user_interface::message_box>();
 
                if (pmessageboxpayload)
                {
@@ -51,13 +52,13 @@ namespace win32
                   //      ::enum_dialog_result m_edialogresult;
                   //      void run() override
                   //      {
-                  auto iType = ::windows::message_box_to_windows_message_box(pmessageboxpayload->m_emessagebox);
-                  ::wstring wstrMessage(pmessageboxpayload->m_strMessage);
-                  ::wstring wstrTitle(pmessageboxpayload->m_strTitle);
+                  auto iType = ::windows::message_box_to_windows_message_box(pmessageboxpayload->get_emessagebox());
+                  ::wstring wstrMessage(pmessageboxpayload->get_message());
+                  ::wstring wstrTitle(pmessageboxpayload->get_title());
 
                   auto iRet = ::MessageBoxW(nullptr, wstrMessage, wstrTitle, iType);
 
-                  pmessageboxpayload->m_payloadResult = ::windows::windows_message_box_result_to_dialog_result(iRet);
+                  pmessageboxpayload->set_dialog_response(::windows::windows_message_box_result_to_dialog_result(iRet));
 
 
                }
