@@ -1,6 +1,6 @@
-#include "../../../source/app/acme/user/interface/message_box.h"
-#include "display.h"
 #include "framework.h"
+#include "acme/user/interface/message_box.h"
+#include "display.h"
 #include "window.h"
 #include "windowing.h"
 

@@ -1,7 +1,7 @@
-#include "../../../source/app/acme/user/interface/message_box.h"
+#include "framework.h"
+#include "acme/user/interface/message_box.h"
 #include "acme/_operating_system.h"
 #include "acme/operating_system/windows/windows.h"
-#include "framework.h"
 #include "windowing.h"
 
 //CLASS_DECL_ACME ::i32 message_box_to_windows_message_box(const ::user::e_message_box & emessagebox);
