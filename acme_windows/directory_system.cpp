@@ -2153,6 +2153,26 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    }
 
 
+   void directory_system::change_current_compatibility(const ::file::path& pathParam)
+   {
+
+      auto path = m_papplication->defer_process_path(pathParam);
+
+      auto windowspath = path.windows_path();
+
+      if (!::SetCurrentDirectoryW(windowspath))
+      {
+
+         auto lasterror = ::windows::get_last_error();
+
+         ::windows::throw_file_last_error_exception(path, ::file::_e_open_set_current_directory, lasterror, "acme_windows::directory_system::change_current: Failed to SetCurrentDirectoryW");
+
+      }
+
+      //return ::success;
+
+   }
+
 
 
    //::file::path directory_system::program_files_x86()

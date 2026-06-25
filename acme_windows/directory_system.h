@@ -142,6 +142,7 @@ namespace acme_windows
 
       ::file::path current() override;
       void change_current(const ::file::path & path) override;
+      void change_current_compatibility(const ::file::path& path) override;
 
 
       //::file::path temp() override;
