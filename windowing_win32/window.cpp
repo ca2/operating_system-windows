@@ -743,6 +743,12 @@ namespace windowing_win32
 
       }
 
+      ::string strTaskName = ::task_get_name();
+
+      auto pszTaskName = strTaskName.c_str();
+
+      auto iId = ::get_task()->m_itask.m_i;
+
       HWND hwndResult = ::CreateWindowExW(
          dwExStyle,
          wstrClassName,

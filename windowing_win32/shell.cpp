@@ -1504,6 +1504,8 @@ namespace windowing_win32
 
          ::wstring wstrPath(getfileimage.m_imagekey.m_strPath);
 
+         wstrPath += L"\\";
+
          if (SHGetFileInfoW(wstrPath, 0, &shfi, sizeof(shfi), SHGFI_ICONLOCATION))
          {
 

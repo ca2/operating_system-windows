@@ -749,9 +749,9 @@ namespace windowing_win32
                   ::GetWindowRect(hwnd, (LPRECT)&rWindow2);
                   i32_rectangle rClient2;
                   ::GetClientRect(hwnd, (LPRECT)&rClient2);
-                  information("rWindow2 x{} y{} w{} h{}", rWindow2.left, rWindow2.top, rWindow2.width(), rWindow2.height());
-                  information("rClient2 x{} y{} w{} h{}", rClient2.left, rClient2.top, rClient2.width(),
-                              rClient2.height());
+                  //information("rWindow2 x{} y{} w{} h{}", rWindow2.left, rWindow2.top, rWindow2.width(), rWindow2.height());
+                  //information("rClient2 x{} y{} w{} h{}", rClient2.left, rClient2.top, rClient2.width(),
+                  //            rClient2.height());
                }
 
 
