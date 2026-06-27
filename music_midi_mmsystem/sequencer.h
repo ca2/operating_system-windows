@@ -55,9 +55,11 @@ namespace music
             ::e_status                 m_estatusMidiOut;
 
 
-            sequencer( sequence * psequence, const ::scoped_string & scopedstrDevice);
+            sequencer();
             ~sequencer() override;
 
+
+            virtual void initialize_music_midi_sequencer(sequence *psequence, const ::scoped_string &scopedstrDevice);
 
 
             virtual ::i64 increment_reference_count()

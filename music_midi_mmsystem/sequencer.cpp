@@ -37,12 +37,20 @@ namespace music
       namespace mmsystem
       {
 
-
-         sequencer::sequencer(sequence * psequence, const ::scoped_string & scopedstrDevice) :
-            ::music::midi::sequencer(psequence, scopedstrDevice)
+         sequencer::sequencer()
          {
 
-            initialize(psequence);
+
+
+         }
+
+         void sequencer::initialize_music_midi_sequencer(sequence * psequence, const ::scoped_string & scopedstrDevice) 
+            //::music::midi::sequencer(psequence, scopedstrDevice)
+         {
+
+            ::music::midi::sequencer::initialize_music_midi_sequencer(psequence, scopedstrDevice);
+
+            //initialize(psequence);
 
             construct_newø(m_pbuffera);
 
