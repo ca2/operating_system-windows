@@ -83,28 +83,6 @@ namespace music
          ::pointer<::music::midi::sequencer>midi::create_midi_sequencer(sequence* psequence, const ::scoped_string & scopedstrDevice)
          {
 
-            auto pfactory = system()->factory("music_midi", "tinysoundfont");
-
-            if (pfactory)
-            {
-
-               auto psequencer = createø<::music::midi::sequencer>(pfactory);
-
-               if (psequencer)
-               {
-
-                  psequencer->initialize_music_midi_sequencer(psequence, scopedstrDevice);
-
-                  //auto memory = file()->as_memory("C:/SoundFont/jaz.sf2");
-
-                  auto memory = file()->as_memory("matter://Yamaha_XG_Sound_Set.sf2");
-
-                  psequencer->load_sound_font(memory);
-
-                  return psequencer;
-               }
-            }
-
             string strEngine = device_engine(scopedstrDevice);
 
             if (strEngine.case_insensitive_equals(m_strName))
