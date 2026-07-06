@@ -5082,12 +5082,12 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::intersect_clip(const ::draw2d::clip_group & clipgroup)
+   void graphics::intersect_clip(::draw2d::clip_group * pclipgroup)
    {
 
       auto_pointer < Gdiplus::Region > pregion;
 
-      for (auto & pclipitem : clipgroup)
+      for (auto & pclipitem : *pclipgroup)
       {
 
          if (pclipitem->clip_item_type() == ::draw2d::e_clip_item_rectangle)

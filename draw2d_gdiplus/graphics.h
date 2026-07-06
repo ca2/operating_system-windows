@@ -213,8 +213,8 @@ namespace draw2d_gdiplus
       void _add_shape(const ::f64_polygon_base & polygon) override;
 
 
-      virtual void intersect_clip(const ::draw2d::clip_group & clipgroup);
-      virtual void _add_clip_item(::draw2d::clip_item * pclipitem);
+      void intersect_clip(::draw2d::clip_group * pclipgroup) override;
+      void _add_clip_item(::draw2d::clip_item * pclipitem) override;
 
 
 
