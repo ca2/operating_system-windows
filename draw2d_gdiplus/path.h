@@ -71,7 +71,9 @@ namespace draw2d_gdiplus
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::write_text::draw_text& pdrawtext);
 
-      virtual bool contains(::draw2d::graphics_pointer& pgraphics, const ::f64_point& point) override;
+      //virtual bool contains(::draw2d::graphics_pointer& pgraphics, const ::f64_point& point) override;
+
+      virtual bool path_contains_point(const ::f64_point &point) override;
 
 
    };

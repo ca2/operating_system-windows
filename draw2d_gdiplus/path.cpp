@@ -775,12 +775,14 @@ namespace draw2d_gdiplus
 
 
 
-   bool path::contains(::draw2d::graphics_pointer& pgraphics, const ::f64_point& point)
+   //bool path::path_contains_point(::draw2d::graphics_pointer& pgraphics, const ::f64_point& point)
+
+   bool path::path_contains_point(const ::f64_point &point)
    {
 
       //return ::draw2d::path::contains(pgraphics, point);
 
-      auto pospath = get_os_data < Gdiplus::GraphicsPath *>(pgraphics);
+      auto pospath = get_os_data < Gdiplus::GraphicsPath *>(nullptr);
 
       if (::is_null(pospath))
       {
