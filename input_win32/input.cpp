@@ -1259,9 +1259,9 @@ namespace input_win32
    ////
    ////      auto puser = user();
    ////
-   ////      puser->will_use_impact_hint(COLORSEL_IMPACT);
+   ////      puser->will_use_impact_hint("color_selection_impact");
    ////
-   ////      auto pdocument = m_mapimpactsystem[COLORSEL_IMPACT]->open_document_file(puiOwner->get_application(), ::e_type_null, __visible(true));
+   ////      auto pdocument = m_mapimpactsystem["color_selection_impact"]->open_document_file(puiOwner->get_application(), ::e_type_null, __visible(true));
    ////
    ////      ::pointer<::userex::color_impact>pimpact = pdocument->get_typed_impact < ::userex::color_impact >();
    ////
