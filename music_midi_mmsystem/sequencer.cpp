@@ -1120,7 +1120,8 @@ namespace music
 
                   informationf("::music::midi::sequencer::MidiOutProc sequence::e_state_stopping == pSeq->m_psequence->get_state()\n");
 
-                  music_midi_on_playback_end();
+                  post_midi_sequence_event(sequence::e_event_midi_playback_end, lpmidihdr);
+                  //music_midi_on_playback_end();
 
                }
 
@@ -1390,6 +1391,8 @@ namespace music
             break;
             case sequence::e_event_midi_playback_end:
             {
+
+               music_midi_on_playback_end();
 
                m_psequence->set_state(sequence::e_state_opened);
 

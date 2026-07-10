@@ -6321,23 +6321,44 @@ namespace draw2d_gdiplus
    ::f64_size graphics::get_text_extent(const ::scoped_string & scopedstr)
    {
 
-      if (!m_pfont || scopedstr.is_empty())
+      ::write_text::font_pointer pfont(m_pfont);
+
+      if (!pfont || scopedstr.is_empty())
       {
 
          return ::f64_size(0, 0);
 
       }
 
-      _synchronous_lock synchronouslockFontTextMap(::write_text::font::s_pmutexFontTextMap);
+      pfont->defer_update(this, 0);
 
-      auto & text = m_pfont->m_mapFontText[scopedstr];
-
-      if (text.get_item(::write_text::font::text::e_size_unbounded)->has_size())
       {
 
-         return text.get_item(::write_text::font::text::e_size_unbounded)->get_size();
+         _synchronous_lock synchronouslockFontTextMap(::write_text::font::s_pmutexFontTextMap);
+
+         auto & text = pfont->m_mapFontText[scopedstr];
+
+         if (text.get_item(::write_text::font::text::e_size_unbounded)->has_size())
+         {
+
+            return text.get_item(::write_text::font::text::e_size_unbounded)->get_size();
+
+         }
+
+         if (text.get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().is_empty())
+         {
+
+            text.get_item(::write_text::font::text::e_size_backend_draw_text)->set_text(scopedstr);
+
+         }
 
       }
+
+      auto size = this->_get_text_extent(scopedstr);
+
+      _synchronous_lock synchronouslockFontTextMap(::write_text::font::s_pmutexFontTextMap);
+
+      auto & text = pfont->m_mapFontText[scopedstr];
 
       if (text.get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().is_empty())
       {
@@ -6345,8 +6366,6 @@ namespace draw2d_gdiplus
          text.get_item(::write_text::font::text::e_size_backend_draw_text)->set_text(scopedstr);
 
       }
-
-      auto size = this->_get_text_extent(scopedstr);
 
       text.get_item(::write_text::font::text::e_size_unbounded)->set_size(size);
 
@@ -6358,14 +6377,16 @@ namespace draw2d_gdiplus
    ::f64_size graphics::_get_text_extent(const ::scoped_string & scopedstr)
    {
 
-      if (!m_pfont || scopedstr.is_empty())
+      ::write_text::font_pointer pfontText(m_pfont);
+
+      if (!pfontText || scopedstr.is_empty())
       {
 
          return ::f64_size(0, 0);
 
       }
 
-      m_pfont->defer_update(this, 0);
+      pfontText->defer_update(this, 0);
 
       Gdiplus::RectF box;
 
@@ -6377,7 +6398,7 @@ namespace draw2d_gdiplus
          | Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
       );
 
-      auto pfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
+      auto pfont = pfontText->get_os_data < Gdiplus::Font * >(this);
 
       if (::is_null(pfont))
       {
