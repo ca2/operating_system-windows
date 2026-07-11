@@ -153,7 +153,7 @@ namespace acme_windows
    file_context::file_context()
    {
 
-      m_bFolderResourceCalculated = false;
+      //m_bFolderResourceCalculated = false;
 
    }
 
