@@ -713,6 +713,8 @@ namespace windowing_win32
       m_iconmap[{info.nWidth, info.nHeight}].m_hicon = hicon;
 
       m_iconmap[{info.nWidth, info.nHeight}].m_bCalculated = true;
+
+      set_ok_flag();
       
       return true;
 

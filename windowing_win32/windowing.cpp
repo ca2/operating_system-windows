@@ -430,6 +430,13 @@ namespace windowing_win32
 
       }
 
+      if (pinteraction && pinteraction->m_bAppWindow)
+      {
+
+         nExStyle |= WS_EX_APPWINDOW;
+
+      }
+
    }
 
 
