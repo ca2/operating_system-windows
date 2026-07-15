@@ -59,14 +59,14 @@ namespace windowing_win32
    }
 
    
-   void windowing::on_activate()
+   void windowing::on_application_activate()
    {
 
       auto pdisplay = dynamic_cast<class display *>(display());
 
       pdisplay -> register_device_listener(::hardware::e_device_monitor);
 
-      ::windowing::windowing::on_activate();
+      ::windowing::windowing::on_application_activate();
 
    }
 
