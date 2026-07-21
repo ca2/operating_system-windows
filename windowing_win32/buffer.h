@@ -36,7 +36,7 @@ namespace windowing_win32
          ~layered_window_buffer();
 
 
-         ::pixmap                      m_pixmap;
+         ::pixmap_t                    m_pixmap;
          HBITMAP                       m_hbitmap;
          HBITMAP                       m_hbitmapOld;
          HDC                           m_hdc;

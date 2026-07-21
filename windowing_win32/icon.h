@@ -31,7 +31,7 @@ namespace windowing_win32
 
       map_base < ::i32_size, icon_item >              m_iconmap;
 
-      ::file::path                           m_pathProcessed;
+      //::file::path                           m_pathProcessed;
 
       map_base < ::i32_size, ::image::image_pointer >      m_imagemap;
 
@@ -40,11 +40,15 @@ namespace windowing_win32
       ~icon() override;
 
 
+      ::image::image_pointer _get_image(const ::i32_size &size, const ::file::path &path) const;
+
+      ::image::image_pointer _get_resized_image(const ::i32_size &size, const ::file::path &path) const;
+
       virtual void * get_os_data(const ::i32_size & size) const;
       
-      void load_file(const ::scoped_string & scopedstrPath) override;
+      void set_file(const ::payload & payloads) override;
 
-      void load_app_tray_icon(const ::scoped_string & scopedstrApp) override;
+      void set_app_tray_icon(const ::scoped_string & scopedstrApp) override;
 
       virtual bool add_icon(HICON hicon);
 

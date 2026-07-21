@@ -51,8 +51,8 @@ namespace draw2d_gdiplus
       virtual void create_ex(const ::i32_size & size, ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, ::i32 iGoodStride = -1, bool bPreserve = false);
       //void create(const ::i32_size & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, ::i32 iGoodStride = -1, bool bPreserve = false) override;
       //void initialize(const ::i32_size & size, ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
-      virtual bool host(::pixmap * pixmap, ::windowing::window * pwindow) override;
-      bool on_host_read_pixels(::pixmap* pixmap) const override;
+      virtual bool host(::pixmap_t * pixmap, ::windowing::window * pwindow) override;
+      bool on_host_read_pixels(::pixmap_t* pixmap) const override;
       using ::image::image::create;
       virtual void create(::draw2d::graphics * pgraphics) override;
       void destroy() override;

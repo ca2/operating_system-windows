@@ -64,7 +64,7 @@ namespace draw2d_gdiplus
    }
 
    
-   bool image::on_host_read_pixels(::pixmap* ppixmapHost) const
+   bool image::on_host_read_pixels(::pixmap_t* ppixmapHost) const
    {
 
       return ::image::image::on_host_read_pixels(ppixmapHost);
@@ -72,7 +72,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::host(::pixmap * ppixmap, ::windowing::window * pwindow)
+   bool image::host(::pixmap_t * ppixmap, ::windowing::window * pwindow)
    {
 
       if (!ppixmap->is_ok())
@@ -159,7 +159,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      pixmap::initialize(ppixmap->m_sizeRaw, ppixmap->image32(), ppixmap->m_iScan);
+      initialize_pixmap(ppixmap->m_sizeRaw, ppixmap->image32(), ppixmap->m_iScan);
 
       m_size = ppixmap->m_size;
 
@@ -320,7 +320,7 @@ namespace draw2d_gdiplus
 
       m_pgraphics = pgraphics;
 
-      pixmap::initialize(size, pimage32, iScan);
+      initialize_pixmap(size, pimage32, iScan);
 
       m_pgraphics->m_pimage = this;
       //m_sizeRaw.cx = width;

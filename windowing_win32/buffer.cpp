@@ -414,7 +414,7 @@ namespace windowing_win32
 
             }
 
-            playeredwindowbuffer->m_pixmap.initialize(sizeLargeInternalBitmap, pimage32, iScan);
+            playeredwindowbuffer->m_pixmap.initialize_pixmap(sizeLargeInternalBitmap, pimage32, iScan);
 
             if (playeredwindowbuffer->m_hbitmap != nullptr)
             {

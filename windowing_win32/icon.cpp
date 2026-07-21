@@ -7,6 +7,7 @@
 #include "acme/filesystem/file/memory_file.h"
 #include "acme/platform/system.h"
 #include "acme/filesystem/filesystem/file_context.h"
+#include "acme/filesystem/filesystem/file_system.h"
 #include "innate_ui_win32/icon.h"
 #include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
@@ -549,6 +550,82 @@ namespace windowing_win32
 
    }
 
+   ::image::image_pointer icon::_get_image(const ::i32_size &size, const ::file::path &path) const
+   {
+
+      auto pimage = image()->path_image(path);
+
+      if (pimage.nok())
+      {
+
+         return {};
+
+      }
+
+      auto sizeImage = pimage->size();
+
+      if (sizeImage == size)
+      {
+
+         return pimage;
+
+      }
+
+      auto pimageResized = image()->create_image(size);
+
+      bool bOk = false;
+
+      try
+      {
+
+         ::image::image_source imagesource(pimage);
+
+         ::image::image_drawing_options imagedrawingoptions(size);
+
+         ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+         auto pgraphicsImageResized = pimageResized->g();
+
+         pgraphicsImageResized->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
+
+         pimageResized->draw(imagedrawing);
+
+         bOk = true;
+
+      }
+      catch (...)
+      {
+
+      }
+
+      if (bOk)
+      {
+
+         return pimageResized;
+
+      }
+
+      return nullptr;
+   
+   }
+
+
+   ::image::image_pointer icon::_get_resized_image(const ::i32_size &size, const ::file::path &path) const
+   {
+
+      auto pimage = image()->path_resized_image(path, size);
+
+      if (pimage.nok())
+      {
+
+         return {};
+
+      }
+
+      return pimage;
+
+   }
+
 
    void * icon::get_os_data(const ::i32_size & size) const
    {
@@ -560,71 +637,142 @@ namespace windowing_win32
 
          iconitem.m_bCalculated = true;
 
-         if (m_pathProcessed.has_character())
+         auto pathFile = m_payload.as_file_path();
+
+         auto pathProcessed = m_papplication->defer_process_path(pathFile);
+
+         if (pathProcessed.has_character())
          {
 
-            string strPath = m_pathProcessed;
+            ::file::path path = pathProcessed;
 
-            if (strPath.case_insensitive_begins_eat("zipresource://"))
+            ::string strProperSizeSuffix;
+
+            if (size.cx == size.cy)
             {
 
-               auto pfile = m_papplication->file()->create_resource_file(strPath);
+               strProperSizeSuffix.format("-{}.{}", size.cx, path.all_extensions());
 
-               if (!image())
+            }
+            else
+            {
+
+               strProperSizeSuffix.format("-{}x{}.{}", size.cx, size.cy, path.all_extensions());
+
+            }
+
+            auto pszProperSizeSuffix = strProperSizeSuffix.c_str();
+
+            ::string strNameProperSize = path.title() + strProperSizeSuffix;
+
+            auto pszNameProperSize = strNameProperSize.c_str();
+
+            ::file::path pathProperSize = path.folder() / (strNameProperSize);
+
+            auto pszProperSize = pathProperSize.c_str();
+
+            //if (strPath.case_insensitive_begins_eat("zipresource://"))
+            //{
+
+            auto pimage = _get_image(size, pathProperSize);
+
+            if (pimage.ok())
+            {
+
+               iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimage);
+
+               if (iconitem.m_hicon)
                {
 
-                  return nullptr;
-
-               }
-
-               auto pimage = image()->get_image(pfile);
-
-               auto pimageResized = image()->create_image(size);
-
-               bool bOk = false;
-
-               try
-               {
-
-                  ::image::image_source imagesource(pimage);
-
-                  ::image::image_drawing_options imagedrawingoptions(size);
-
-                  ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
-
-                  auto pgraphicsImageResized = pimageResized->g();
-
-                  pgraphicsImageResized->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
-
-                  pimageResized->draw(imagedrawing);
-
-                  bOk = true;
-
-               }
-               catch (...)
-               {
-
-
-               }
-
-               if (bOk)
-               {
-
-                  iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimageResized);
+                  goto ok;
 
                }
 
             }
-            else 
+
+            pimage = _get_resized_image(size, path);
+
+            if (pimage.ok())
             {
 
-               iconitem.m_hicon = (HICON) ::LoadImageW(nullptr, wstring(m_pathProcessed), IMAGE_ICON, size.cx, size.cy, LR_LOADFROMFILE);
+               iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimage);
+
+               if (iconitem.m_hicon)
+               {
+
+                  goto ok;
+               }
+            }
+
+            pimage = _get_image(size, path);
+
+            if (pimage.ok())
+            {
+
+               iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimage);
+
+               if (iconitem.m_hicon)
+               {
+
+                  goto ok;
+
+               }
+
+            }
+            
+            if (file_system()->exists(pathProcessed))
+            {
+
+               iconitem.m_hicon = (HICON) ::LoadImageW(nullptr, wstring(pathProcessed), IMAGE_ICON, size.cx, size.cy, LR_LOADFROMFILE);
+
+               if (iconitem.m_hicon)
+               {
+
+                  goto ok;
+
+               }
+
+            }
+
+
+            auto timepath = file()->time_path(pathProcessed);
+
+            if (timepath.has_character())
+            {
+
+               iconitem.m_hicon =
+                  (HICON)::LoadImageW(nullptr, wstring(timepath), IMAGE_ICON, size.cx, size.cy, LR_LOADFROMFILE);
+
+               if (iconitem.m_hicon)
+               {
+
+                  goto ok;
+               }
 
             }
 
          }
+         else
+         {
+            auto pimage = image()->get_image(m_payload);
+
+            if (pimage.ok())
+            {
+
+               iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimage);
+
+               if (iconitem.m_hicon)
+               {
+
+                  goto ok;
+               }
+
+            }
+         }
 
       }
+
+      ok:
 
       if (!iconitem.m_hicon)
       {
@@ -721,85 +869,87 @@ namespace windowing_win32
    }
 
 
-   void icon::load_file(const ::scoped_string & scopedstrPath)
+   void icon::set_file(const ::payload & payloadFile)
    {
 
-      m_pathProcessed = application()->defer_process_matter_path(scopedstrPath);
+      ::windowing::icon::set_file(payloadFile);
 
-      auto memory = file()->as_memory(m_pathProcessed);
-
-      if (memory.is_empty())
-      {
-
-         throw exception(error_failed);
-
-      }
-
-      auto pmemoryfile = create_memory_file(memory);
-
-      auto pimage = image()->load_image(pmemoryfile);
-
-      if (pimage.ok())
-      {
-
-         m_imagemap[pimage->size()] = pimage;
-
-         return;
-
-      }
-
-      auto sizes = ico_file_sizes(memory);
-
-      for (auto & size : sizes)
-      {
-         // just to enumerate the sizes
-         m_iconmap.set_at(size, { });
-
-      }
-
-      //::i32_array_base ia;
-
-      //ia.add(16);
-      //ia.add(24);
-      //ia.add(32);
-      //ia.add(48);
-      //ia.add(256);
-
-      //for (auto i : ia)
-      //{
-
-      //   HICON hicon = (HICON) ::LoadImageW(nullptr, wstring(strProcessedPath), IMAGE_ICON, i, i, LR_LOADFROMFILE);
-
-      //   if (hicon != nullptr)
-      //   {
-
-      //      m_iconmap[::i32_size(i, i)] = hicon;
-
-      //   }
-
-      //}
-
-      //return m_pathProcessed.has_character();
-
-//      return !m_iconmap.is_empty();
-
-//#else
+//      m_pathProcessed = application()->defer_process_matter_path(scopedstrPath);
 //
-//      m_strAppTrayIcon = strPath;
+//      auto memory = file()->as_memory(m_pathProcessed);
 //
-//      return true;
+//      if (memory.is_empty())
+//      {
 //
-//#endif
+//         throw exception(error_failed);
+//
+//      }
+//
+//      auto pmemoryfile = create_memory_file(memory);
+//
+//      auto pimage = image()->load_image(pmemoryfile);
+//
+//      if (pimage.ok())
+//      {
+//
+//         m_imagemap[pimage->size()] = pimage;
+//
+//         return;
+//
+//      }
+//
+//      auto sizes = ico_file_sizes(memory);
+//
+//      for (auto & size : sizes)
+//      {
+//         // just to enumerate the sizes
+//         m_iconmap.set_at(size, { });
+//
+//      }
+//
+//      //::i32_array_base ia;
+//
+//      //ia.add(16);
+//      //ia.add(24);
+//      //ia.add(32);
+//      //ia.add(48);
+//      //ia.add(256);
+//
+//      //for (auto i : ia)
+//      //{
+//
+//      //   HICON hicon = (HICON) ::LoadImageW(nullptr, wstring(strProcessedPath), IMAGE_ICON, i, i, LR_LOADFROMFILE);
+//
+//      //   if (hicon != nullptr)
+//      //   {
+//
+//      //      m_iconmap[::i32_size(i, i)] = hicon;
+//
+//      //   }
+//
+//      //}
+//
+//      //return m_pathProcessed.has_character();
+//
+////      return !m_iconmap.is_empty();
+//
+////#else
+////
+////      m_strAppTrayIcon = strPath;
+////
+////      return true;
+////
+////#endif
 
    }
 
 
-   void icon::load_app_tray_icon(const ::scoped_string & scopedstrApp)
+   void icon::set_app_tray_icon(const ::scoped_string & scopedstrApp)
    {
 
       string strMatter = "main/icon.png";
 
-      load_matter(strMatter);
+      set_matter(strMatter);
 
       //if (!load_matter(strMatter))
       //{
@@ -907,9 +1057,9 @@ namespace windowing_win32
          hbitmap = ::CreateDIBSection(hScreenDC, &info, DIB_RGB_COLORS, (void **)&pimage32, nullptr, 0);
          ReleaseDC(nullptr, hScreenDC);
 
-         ::pixmap pixmap;
+         ::pixmap_t pixmap;
 
-         pixmap.initialize(size, pimage32, iScan);
+         pixmap.initialize_pixmap(size, pimage32, iScan);
 
          hdc = ::CreateCompatibleDC(nullptr);
 
@@ -1036,7 +1186,7 @@ namespace windowing_win32
 
             pimage->map();
 
-            pimage->copy(pixmap);
+            pimage->pixmap_t::copy(pixmap);
 
          //}
 

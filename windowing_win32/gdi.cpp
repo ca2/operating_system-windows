@@ -151,7 +151,7 @@ namespace windows
 
       }
 
-      ppixmap->copy(&pixmap);
+      ppixmap->pixmap_t::copy(&pixmap);
 
       return hbitmap;
 
