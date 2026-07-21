@@ -16,6 +16,7 @@
 namespace acme_windows
 {
 
+   class unique_handle;
 
    class CLASS_DECL_ACME_WINDOWS node :
       virtual public ::acme_windows_common::node
@@ -413,6 +414,18 @@ namespace acme_windows
       //virtual void defer_init_os_version_info();
 
       bool _windows_isVistaOrLater() override;
+
+
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="pathExecutable"></param>
+      /// <param name="processidentifiera"></param>
+      /// <returns>allMatchingProcessesWereTerminated</returns>
+      bool terminate_other_instances_by_executable_path(const ::file::path & pathExecutable, const ::comparable_array_base < process_identifier > & processidentifiera) override;
+
+      ::file::path _process_handle_module_path(const unique_handle & uniquehandle);
+
 
    };
 
