@@ -3116,9 +3116,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="acme_directory.h" />
-    <ClInclude Include="acme_file.h" />
-    <ClInclude Include="acme_path.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="d2d1_1.h" />
     <ClInclude Include="directory_context.h" />
@@ -3126,7 +3123,6 @@
     <ClInclude Include="dxgi_device_source.h" />
     <ClInclude Include="exclusive.h" />
     <ClInclude Include="file_change_event.h" />
-    <ClInclude Include="aaa_file_exception.h" />
     <ClInclude Include="file_context.h" />
     <ClInclude Include="file_find.h" />
     <ClInclude Include="file_link.h" />
@@ -3155,6 +3151,7 @@
     <ClInclude Include="create_process.h" />
     <ClInclude Include="sync_options.h" />
     <ClInclude Include="uac_tools.h" />
+    <ClInclude Include="unique_handle.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="_library.h" />

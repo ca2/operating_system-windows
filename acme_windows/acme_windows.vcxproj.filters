@@ -171,9 +171,6 @@
     <ClInclude Include="file_change_event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="aaa_file_exception.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="file_find.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -237,15 +234,6 @@
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="acme_directory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="acme_file.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="acme_path.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="exclusive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -280,6 +268,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dxgi_device_source.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="unique_handle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

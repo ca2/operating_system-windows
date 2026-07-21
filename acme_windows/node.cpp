@@ -11,9 +11,10 @@
 #include "file_link.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/status.h"
+#include "acme/filesystem/filesystem/directory_context.h"
 #include "acme/filesystem/filesystem/directory_system.h"
 #include "acme/filesystem/filesystem/file_context.h"
-#include "acme/filesystem/filesystem/directory_context.h"
+#include "acme/filesystem/filesystem/path_system.h"
 //#include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/nano/http/http.h"
 #include "acme/operating_system/cpu_features.h"
@@ -34,10 +35,8 @@
 #include "acme/prototype/string/international.h"
 #include "acme/prototype/string/str.h"
 #include "acme/user/user/interaction.h"
-
 #include "acme/_operating_system.h"
-
-
+#include "operating_system-windows/acme_windows/unique_handle.h"
 #include "acme/operating_system/windows_common/com/hresult_exception.h"
 #include "acme/operating_system/windows_common/com/comptr.h"
 #include "acme/operating_system/windows_common/com/cotaskptr.h"
@@ -50,6 +49,17 @@
 #include <VersionHelpers.h>
 #include "acme/platform/remoting.h"
 #include "operating_system-windows_common/msvcrt_release.h"
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+
+//#include <windows.h>
+#include <tlhelp32.h>
+//#include <shellapi.h>
+
+//#include <cstdint>
+//#include <cwctype>
+//#include <string>
+//#include <vector>
 
 #pragma comment(lib, "Version.lib")
 
@@ -5731,6 +5741,141 @@ namespace acme_windows
 
       strOutput = straOutput.implode("\n"_ansi);
    }
+
+            bool node::terminate_other_instances_by_executable_path(
+               const ::file::path & pathExecutable, const ::comparable_array_base < process_identifier > & processidentifiera)
+            {
+
+               //const DWORD currentProcessId = GetCurrentProcessId();
+
+               unique_handle snapshot(
+                  CreateToolhelp32Snapshot(
+                     TH32CS_SNAPPROCESS,
+                     0));
+
+               if (!snapshot.is_valid())
+               {
+
+                  throw ::exception(error_failed);
+
+               }
+
+               PROCESSENTRY32W entry{};
+
+               entry.dwSize = sizeof(entry);
+
+               if (!Process32FirstW(snapshot.get(), &entry))
+               {
+
+                  throw ::exception(error_failed);
+
+               }
+
+               bool allMatchingProcessesWereTerminated = true;
+
+               do
+               {
+
+                  if (entry.th32ProcessID == 0 ||
+                     processidentifiera.contains(entry.th32ProcessID))
+                  {
+
+                     continue;
+
+                  }
+
+                  unique_handle process(
+                     OpenProcess(
+                        PROCESS_QUERY_LIMITED_INFORMATION |
+                        PROCESS_TERMINATE |
+                        SYNCHRONIZE,
+                        FALSE,
+                        entry.th32ProcessID));
+
+                  if (!process.is_valid())
+                  {
+
+                     // This may be a protected or elevated process.
+                     // If it is another instance, acquisition of the
+                     // instance mutex will subsequently fail or time out.
+
+                     continue;
+
+                  }
+
+                  auto pathProcess =
+                     _process_handle_module_path(process);
+
+                  if (pathProcess.is_empty())
+                  {
+
+                     continue;
+
+                  }
+
+                  if (!path_system()->real_path_is_same(
+                     pathExecutable,
+                     pathProcess))
+                  {
+
+                     continue;
+
+                  }
+
+                  if (!TerminateProcess(process.get(), 0))
+                  {
+
+                     allMatchingProcessesWereTerminated = false;
+
+                     continue;
+
+                  }
+
+                  const DWORD waitResult =
+                     WaitForSingleObject(
+                        process.get(),
+                        5000);
+
+                  if (waitResult != WAIT_OBJECT_0)
+                  {
+
+                     allMatchingProcessesWereTerminated = false;
+
+                  }
+
+               } while (Process32NextW(snapshot.get(), &entry));
+
+               return allMatchingProcessesWereTerminated;
+
+            }
+
+            ::file::path node::_process_handle_module_path(const unique_handle & uniquehandle)
+            {
+               //std::wstring get_process_executable_path(HANDLE process)
+//{
+
+   DWORD capacity = 32768;
+
+   ::wstring path;
+
+   auto psz = path.get_buffer(capacity);
+
+   if (!QueryFullProcessImageNameW(
+      uniquehandle.get(),
+      0,
+      psz,
+      &capacity))
+   {
+
+      return {};
+
+   }
+
+   path.release_buffer(capacity);
+
+   return path;
+
+}
 
 
 } // namespace acme_windows
