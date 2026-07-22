@@ -7,6 +7,8 @@ list(APPEND library_source
         _.cpp
         _.h
         _factory.cpp
+        font_face_resolver.cpp
+        font_face_resolver.h
    font_enumeration.cpp
    font_enumeration.h
    fonts.cpp
@@ -34,7 +36,7 @@ if (MSVC)
     target_link_options(write_text_win32 PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
     target_link_options(write_text_win32 PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/write_text_win32.lib")
     target_link_options(write_text_win32 PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/write_text_win32.def")
-    target_link_libraries(write_text_win32 PRIVATE acme apex aqua aura Gdiplus)
+    target_link_libraries(write_text_win32 PRIVATE acme apex aqua aura Gdiplus Dwrite)
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)
