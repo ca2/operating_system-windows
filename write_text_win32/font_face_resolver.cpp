@@ -251,6 +251,49 @@ namespace write_text_win32
    }
 
 
+   bool font_face_resolver::_resolve_gdi_font(
+      ::comptr<IDWriteFont> & pfont,
+      const ::scoped_string & scopedstrFamily,
+      const ::write_text::font_face_request & request)
+   {
+
+      if (!m_pgdinterop)
+      {
+
+         auto hr = m_pdwritefactory->GetGdiInterop(&m_pgdinterop);
+
+         if (FAILED(hr) || !m_pgdinterop)
+         {
+
+            return false;
+
+         }
+
+      }
+
+      ::wstring wstrFamily(scopedstrFamily);
+
+      if (wstrFamily.size() >= LF_FACESIZE)
+      {
+
+         return false;
+
+      }
+
+      LOGFONTW logfont{};
+      logfont.lfWeight = request.m_fontweight.as_i32();
+      logfont.lfItalic = request.m_bItalic ? TRUE : FALSE;
+      logfont.lfCharSet = DEFAULT_CHARSET;
+
+      wcscpy_s(logfont.lfFaceName, LF_FACESIZE, wstrFamily);
+
+      auto hr = m_pgdinterop->CreateFontFromLOGFONT(&logfont, &pfont);
+
+      return SUCCEEDED(hr) && pfont;
+
+   }
+
+
    bool font_face_resolver::resolve(
       ::write_text::font_face_source & source,
       const ::write_text::font_face_request & request)
@@ -305,40 +348,44 @@ namespace write_text_win32
          &uFamilyIndex,
          &bExists);
 
-      if (FAILED(hr) || !bExists)
-      {
-
-         _log_failure("family_not_found", request, source);
-
-         return false;
-
-      }
-
-      ::comptr<IDWriteFontFamily> pfontfamily;
-
-      hr = m_pfontcollection->GetFontFamily(uFamilyIndex, &pfontfamily);
-
-      if (FAILED(hr) || !pfontfamily)
-      {
-
-         _log_failure("family_not_found", request, source);
-
-         return false;
-
-      }
-
       ::comptr<IDWriteFont> pfont;
 
-      hr = pfontfamily->GetFirstMatchingFont(
-         static_cast<DWRITE_FONT_WEIGHT>(request.m_fontweight.as_i32()),
-         DWRITE_FONT_STRETCH_NORMAL,
-         request.m_bItalic ? DWRITE_FONT_STYLE_ITALIC : DWRITE_FONT_STYLE_NORMAL,
-         &pfont);
-
-      if (FAILED(hr) || !pfont)
+      if (SUCCEEDED(hr) && bExists)
       {
 
-         _log_failure("face_not_found", request, source);
+         ::comptr<IDWriteFontFamily> pfontfamily;
+
+         hr = m_pfontcollection->GetFontFamily(uFamilyIndex, &pfontfamily);
+
+         if (SUCCEEDED(hr) && pfontfamily)
+         {
+
+            hr = pfontfamily->GetFirstMatchingFont(
+               static_cast<DWRITE_FONT_WEIGHT>(request.m_fontweight.as_i32()),
+               DWRITE_FONT_STRETCH_NORMAL,
+               request.m_bItalic ? DWRITE_FONT_STYLE_ITALIC : DWRITE_FONT_STYLE_NORMAL,
+               &pfont);
+
+         }
+
+      }
+      else
+      {
+
+         _resolve_gdi_font(
+            pfont,
+            source.m_strResolvedFamily,
+            request);
+
+      }
+
+      if (!pfont)
+      {
+
+         _log_failure(
+            bExists ? "face_not_found" : "family_not_found",
+            request,
+            source);
 
          return false;
 

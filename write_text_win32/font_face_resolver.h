@@ -18,6 +18,7 @@ namespace write_text_win32
 
       ::comptr<IDWriteFactory>          m_pdwritefactory;
       ::comptr<IDWriteFontCollection>   m_pfontcollection;
+      ::comptr<IDWriteGdiInterop>       m_pgdinterop;
 
 
       font_face_resolver();
@@ -45,6 +46,11 @@ namespace write_text_win32
          HKEY hkeyRoot,
          const ::scoped_string & scopedstrFamily,
          ::string & strSubstitute);
+
+      bool _resolve_gdi_font(
+         ::comptr<IDWriteFont> & pfont,
+         const ::scoped_string & scopedstrFamily,
+         const ::write_text::font_face_request & request);
 
       void _log_failure(
          const ::scoped_string & scopedstrCategory,

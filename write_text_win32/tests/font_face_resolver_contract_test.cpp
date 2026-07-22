@@ -42,6 +42,9 @@ int main()
    assert(source.find("strValueName.case_insensitive_equals(scopedstrFamily)") != std::string::npos);
    assert(source.find("DWriteCreateFactory") != std::string::npos);
    assert(source.find("FindFamilyName") != std::string::npos);
+   assert(header.find("IDWriteGdiInterop") != std::string::npos);
+   assert(source.find("GetGdiInterop") != std::string::npos);
+   assert(source.find("CreateFontFromLOGFONT") != std::string::npos);
    assert(source.find("GetFirstMatchingFont") != std::string::npos);
    assert(source.find("IDWriteLocalFontFileLoader") != std::string::npos);
    assert(source.find("GetFilePathFromKey") != std::string::npos);
