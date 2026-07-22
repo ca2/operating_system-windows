@@ -1494,7 +1494,7 @@ namespace draw2d_gdi
          bf.SourceConstantAlpha = 0xFF;
          bf.AlphaFormat = AC_SRC_ALPHA;
 
-         return ::AlphaBlend(m_hdc,x,y,nWidth,nHeight,(HDC)pimage1->get_graphics()->get_os_data(),0,0,nWidth,nHeight,bf) != false;
+         return ::AlphaBlend(m_hdc,x,y,nWidth,nHeight,(HDC)pgraphicsImage1->get_os_data(),0,0,nWidth,nHeight,bf) != false;
 
 
 

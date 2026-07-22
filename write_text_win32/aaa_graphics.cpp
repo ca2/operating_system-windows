@@ -7160,13 +7160,13 @@ namespace draw2d_gdiplus
 
             pimage1 = create_image(rectangleText.size());
 
-            pimage1->get_graphics()->set(get_current_font());
+            pgraphicsImage1->set(get_current_font());
 
-            pimage1->get_graphics()->set(get_current_brush());
+            pgraphicsImage1->set(get_current_brush());
 
-            pimage1->get_graphics()->set_alpha_mode(::draw2d::e_alpha_mode_set);
+            pgraphicsImage1->set_alpha_mode(::draw2d::e_alpha_mode_set);
 
-            pimage1->get_graphics()->text_out(0, 0, block);
+            pgraphicsImage1->text_out(0, 0, block);
 
             pimage1->blend2(nullptr, m_pimageAlphaBlend, i32_point((::i32)maximum(0, x - m_pointAlphaBlend.x), (::i32)maximum(0, y - m_pointAlphaBlend.y)), rectangleText.size(), 255);
 
@@ -7284,7 +7284,7 @@ namespace draw2d_gdiplus
 
    //            pimage1->blend2(::i32_point(), m_pimageAlphaBlend, i32_point(x - m_pointAlphaBlend.x, y - m_pointAlphaBlend.y), rectangleBlt.::f64_size(), 255);
 
-   //            BitBltRaw(x, y, nWidth, nHeight, pimage1->get_graphics(), 0, 0, dwRop);
+   //            BitBltRaw(x, y, nWidth, nHeight, pgraphicsImage1, 0, 0, dwRop);
 
    //         }
 

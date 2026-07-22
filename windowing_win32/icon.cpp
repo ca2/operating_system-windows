@@ -9,6 +9,7 @@
 #include "acme/filesystem/filesystem/file_context.h"
 #include "acme/filesystem/filesystem/file_system.h"
 #include "innate_ui_win32/icon.h"
+#include "aura/graphics/draw2d/graphics_lease.h"
 #include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/platform/context.h"
@@ -584,11 +585,11 @@ namespace windowing_win32
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         auto pgraphicsImageResized = pimageResized->g();
+         auto pgraphicsImageResized = pimageResized->acquire_graphics();
 
          pgraphicsImageResized->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
 
-         pimageResized->draw(imagedrawing);
+         pgraphicsImageResized->draw(imagedrawing);
 
          bOk = true;
 
@@ -1182,11 +1183,13 @@ namespace windowing_win32
 
          //   ::SelectObject(hdc, hbitmapOld);
 
-            pimage->create(size);
+            pimage->create_from_data(pixmap.size(), pixmap.image32(), pixmap.m_iScan);
 
-            pimage->map();
+            //pimage->create(size);
 
-            pimage->pixmap_t::copy(pixmap);
+            //pimage->map();
+
+            //pimage->pixmap_t::copy(pixmap);
 
          //}
 

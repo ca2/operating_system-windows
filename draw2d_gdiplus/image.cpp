@@ -6,6 +6,7 @@
 #include "acme/platform/auto_pointer.h"
 #include "aura/graphics/image/icon.h"
 #include "aura/graphics/image/drawing.h"
+#include "aura/graphics/draw2d/graphics_lease.h"
 
 
 namespace draw2d_gdiplus
@@ -898,7 +899,9 @@ namespace draw2d_gdiplus
    bool image::_load_thumbnail(const ::scoped_string & scopedstr)
    {
 
-      ::Gdiplus::Graphics * pgraphics = (::Gdiplus::Graphics *)get_graphics()->get_os_data();
+      auto pgraphicsThis = acquire_graphics();
+
+      ::Gdiplus::Graphics *pgraphics = (::Gdiplus::Graphics *)pgraphicsThis->get_os_data();
 
       wstring wstr(scopedstr);
 
