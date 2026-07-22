@@ -63,6 +63,13 @@ namespace write_text_win32
 
       }
 
+      if (!system()->draw2d()->write_text_supports_legacy_gdi_fonts())
+      {
+
+         m_bOther = false;
+
+      }
+
       ::EnumFontFamiliesW(m_hdc, (const ::wide_character *)nullptr, &font_enumeration::OLDFONTENUMPROCW, (LPARAM)pfontenumeration);
 
       for (auto & pitem : *m_pfontenumerationitema)
