@@ -5,6 +5,7 @@
 #include "font_enumeration.h"
 #include "write_text_win32_gdi.h"
 #include "acme/exception/exception.h"
+#include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/write_text/font_enumeration_item.h"
 
 
@@ -54,6 +55,13 @@ namespace write_text_win32
       //}
 
       class font_enumeration* pfontenumeration = this;
+
+      if (!system()->draw2d()->write_text_supports_raster_fonts())
+      {
+
+         m_bRaster = false;
+
+      }
 
       ::EnumFontFamiliesW(m_hdc, (const ::wide_character *)nullptr, &font_enumeration::OLDFONTENUMPROCW, (LPARAM)pfontenumeration);
 
