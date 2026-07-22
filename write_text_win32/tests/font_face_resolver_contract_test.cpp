@@ -37,6 +37,9 @@ int main()
    assert(header.find("resolve_substitute_family") != std::string::npos);
    assert(header.find("bool resolve(") != std::string::npos);
    assert(source.find("FontSubstitutes") != std::string::npos);
+   assert(header.find("_query_substitute_with_charset_suffix") != std::string::npos);
+   assert(source.find("RegEnumValueW") != std::string::npos);
+   assert(source.find("strValueName.case_insensitive_equals(scopedstrFamily)") != std::string::npos);
    assert(source.find("DWriteCreateFactory") != std::string::npos);
    assert(source.find("FindFamilyName") != std::string::npos);
    assert(source.find("GetFirstMatchingFont") != std::string::npos);

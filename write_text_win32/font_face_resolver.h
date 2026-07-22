@@ -41,6 +41,11 @@ namespace write_text_win32
          const ::scoped_string & scopedstrFamily,
          ::string & strSubstitute);
 
+      bool _query_substitute_with_charset_suffix(
+         HKEY hkeyRoot,
+         const ::scoped_string & scopedstrFamily,
+         ::string & strSubstitute);
+
       void _log_failure(
          const ::scoped_string & scopedstrCategory,
          const ::write_text::font_face_request & request,

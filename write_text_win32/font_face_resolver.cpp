@@ -53,7 +53,10 @@ namespace write_text_win32
       if (lstatus != ERROR_SUCCESS)
       {
 
-         return false;
+         return _query_substitute_with_charset_suffix(
+            hkeyRoot,
+            scopedstrFamily,
+            strSubstitute);
 
       }
 
@@ -71,6 +74,109 @@ namespace write_text_win32
       }
 
       return strSubstitute.has_character();
+
+   }
+
+
+   bool font_face_resolver::_query_substitute_with_charset_suffix(
+      HKEY hkeyRoot,
+      const ::scoped_string & scopedstrFamily,
+      ::string & strSubstitute)
+   {
+
+      HKEY hkeyFontSubstitutes = nullptr;
+
+      auto lstatus = ::RegOpenKeyExW(
+         hkeyRoot,
+         g_pwszFontSubstitutes,
+         0,
+         KEY_QUERY_VALUE,
+         &hkeyFontSubstitutes);
+
+      if (lstatus != ERROR_SUCCESS)
+      {
+
+         return false;
+
+      }
+
+      bool bFound = false;
+
+      for (DWORD dwIndex = 0; ; dwIndex++)
+      {
+
+         wchar_t wszValueName[1024]{};
+         wchar_t wszSubstitute[1024]{};
+         DWORD dwValueNameLength = (DWORD)std::size(wszValueName);
+         DWORD dwSubstituteSize = sizeof(wszSubstitute);
+         DWORD dwType = 0;
+
+         lstatus = ::RegEnumValueW(
+            hkeyFontSubstitutes,
+            dwIndex,
+            wszValueName,
+            &dwValueNameLength,
+            nullptr,
+            &dwType,
+            reinterpret_cast<BYTE *>(wszSubstitute),
+            &dwSubstituteSize);
+
+         if (lstatus == ERROR_NO_MORE_ITEMS)
+         {
+
+            break;
+
+         }
+
+         if (lstatus != ERROR_SUCCESS || dwType != REG_SZ)
+         {
+
+            continue;
+
+         }
+
+         ::string strValueName(wszValueName);
+         auto iComma = strValueName.find_index(',');
+
+         if (iComma < 0)
+         {
+
+            continue;
+
+         }
+
+         strValueName.truncate(iComma);
+         strValueName.trim();
+
+         if (!strValueName.case_insensitive_equals(scopedstrFamily))
+         {
+
+            continue;
+
+         }
+
+         strSubstitute = wszSubstitute;
+         strSubstitute.trim();
+
+         iComma = strSubstitute.find_index(',');
+
+         if (iComma >= 0)
+         {
+
+            strSubstitute.truncate(iComma);
+            strSubstitute.trim();
+
+         }
+
+         bFound = strSubstitute.has_character();
+
+         break;
+
+      }
+
+      ::RegCloseKey(hkeyFontSubstitutes);
+
+      return bFound;
 
    }
 
