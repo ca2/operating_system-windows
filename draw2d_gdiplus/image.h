@@ -28,7 +28,7 @@ namespace draw2d_gdiplus
 
       void draw2d_gdiplus_image_common_construct();
 
-      virtual ::draw2d::graphics * _get_graphics() const;
+      //virtual ::draw2d::graphics * _get_graphics() const;
       virtual ::draw2d::bitmap_pointer get_bitmap() const;
       virtual ::draw2d::bitmap_pointer detach_bitmap();
 
@@ -45,10 +45,8 @@ namespace draw2d_gdiplus
       virtual bool _load_thumbnail(const ::scoped_string & scopedstr);
 
 
-      virtual void _map(bool) override;
-      virtual void _unmap() override;
 
-      virtual void create_ex(const ::i32_size & size, ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, ::i32 iGoodStride = -1, bool bPreserve = false);
+      void create_from_data(const ::i32_size & size, const ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, bool bPreserve = false) override;
       //void create(const ::i32_size & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, ::i32 iGoodStride = -1, bool bPreserve = false) override;
       //void initialize(const ::i32_size & size, ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
       virtual bool host(::pixmap_t * pixmap, ::windowing::window * pwindow) override;
@@ -65,6 +63,10 @@ namespace draw2d_gdiplus
 
       virtual void SetIconMask(::image::icon * picon, ::i32 cx, ::i32 cy) override;
 
+      protected:
+
+         void _map(bool) override;
+         void _unmap(bool bDoUnmap) override;
 
    };
 

@@ -7,6 +7,9 @@
 //#undef ___new
 
 
+CLASS_DECL_IMPORT ::string _001_gdiplus_bitmap_diagnostics(Gdiplus::Bitmap *bitmap);
+
+
 namespace draw2d_gdiplus
 {
 
@@ -112,7 +115,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::i32_size& size, void** ppvBits, ::i32* stride)
+   void bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::i32_size& size, ::image32_t **ppimage32, const ::image32_t * pimage32, ::i32* stride)
    {
 
       if (size == m_size)
@@ -153,6 +156,24 @@ namespace draw2d_gdiplus
 
       }
 
+      auto pimage32Map = (::image32_t *)m_mem.data();
+
+      ::i32 iStrideSrc = size.cx * 4;
+
+      if (stride && *stride > iStrideSrc)
+      {
+
+         iStrideSrc = *stride;
+
+      }
+
+      if (pimage32)
+      {
+
+         pimage32Map->copy(size, m_iStride, pimage32, iStrideSrc);
+
+      }
+
       m_pbitmap = øraw_new Gdiplus::Bitmap(abs(pbmi->bmiHeader.biWidth), abs(pbmi->bmiHeader.biHeight),m_iStride, PixelFormat32bppPARGB, (BYTE *)m_mem.data());
 
       if(m_pbitmap == nullptr)
@@ -162,10 +183,10 @@ namespace draw2d_gdiplus
 
       }
 
-      if(ppvBits != nullptr)
+      if(ppimage32 != nullptr)
       {
 
-         *ppvBits = m_mem.data();
+         *ppimage32 = (::image32_t *) m_mem.data();
 
       }
 
@@ -382,6 +403,15 @@ namespace draw2d_gdiplus
    {
 
       ::DeleteObject(hbitmap);
+
+   }
+
+
+   ::string bitmap::_001_os_bitmap_diagnostics()
+   {
+
+
+      return _001_gdiplus_bitmap_diagnostics(m_pbitmap);
 
    }
 

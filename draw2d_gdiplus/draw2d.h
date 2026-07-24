@@ -30,6 +30,12 @@ namespace draw2d_gdiplus
       //virtual ::write_text::internal_font * internal_font_from_file(::platform::context * pcontext, const ::file::path & path);
       void adjust_composited_window_styles(::u32& nExStyle, ::u32& nStyle) override;
 
+      protected:
+            
+         ::draw2d::graphics_pointer do_allocation_strategy(::draw2d::host *pdraw2dhost, ::image::image *pimage,
+                                                                 const ::i32_size &size) override;
+
+      void do_release_to_pool_strategy(::draw2d::graphics_pointer &pgraphics) override;
 
    };
 

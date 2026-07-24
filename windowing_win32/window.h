@@ -489,7 +489,7 @@ namespace windowing_win32
       //virtual bool _is_window_visible() override;
       virtual void ShowOwnedPopups(bool bShow = true);
 
-      virtual ::pointer<::draw2d::graphics>GetDCEx(::draw2d::region * prgnClip, ::u32 flags);
+      virtual ::draw2d::graphics_pointer GetDCEx(::draw2d::region * prgnClip, ::u32 flags);
       virtual bool LockWindowUpdate();
       virtual void UnlockWindowUpdate();
 

@@ -7277,7 +7277,7 @@ namespace draw2d_gdiplus
 
    //            }
 
-   //            pimage1->g()->set_alpha_mode(::draw2d::e_alpha_mode_set);
+   //            pgraphicsImage1->set_alpha_mode(::draw2d::e_alpha_mode_set);
 
    //            if (!pimage1->from(nullptr, pgraphicsSrc, ::i32_point(xSrc, ySrc), rectangleBlt.::f64_size()))
    //               return false;

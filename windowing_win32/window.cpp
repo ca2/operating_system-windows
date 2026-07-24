@@ -28,6 +28,7 @@
 #include "apex/gpu/approach.h"
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/draw2d/graphics.h"
+#include "aura/graphics/draw2d/graphics_pointer.h"
 #include "aura/graphics/graphics/graphics.h"
 #include "aura/user/user/interaction_graphics_thread.h"
 #include "aura/user/user/interaction_thread.h"
@@ -1507,7 +1508,7 @@ namespace windowing_win32
    //
    //      d1->g()->set_interpolation_mode(::draw2d::e_interpolation_mode_high_quality_bicubic);
    //
-   //      d1->g()->stretch(d1->rectangle(), pimage->g(), pimage->rectangle());
+   //      d1->g()->stretch(d1->rectangle(), pgraphicsImage, pimage->rectangle());
    //
    //      memory m(puserinteraction->get_application());
    //
@@ -4973,7 +4974,7 @@ namespace windowing_win32
    }
 
 
-   ::pointer<::draw2d::graphics> window::GetDCEx(::draw2d::region *prgnClip, ::u32 flags)
+   ::draw2d::graphics_pointer  window::GetDCEx(::draw2d::region *prgnClip, ::u32 flags)
    {
 
       ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));

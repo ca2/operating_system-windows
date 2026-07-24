@@ -674,7 +674,7 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         pimageDst->g()->draw(imagedrawing);
+         pgraphicsImageDst->draw(imagedrawing);
 
       }
 
@@ -751,7 +751,7 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         pimage1->g()->draw(imagedrawing);
+         pgraphicsImage1->draw(imagedrawing);
 
       }
 
@@ -791,7 +791,7 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         pimage2->g()->draw(imagedrawing);
+         pgraphicsImage2->draw(imagedrawing);
 
       }
 
@@ -832,7 +832,7 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         pimageM->g()->draw(imagedrawing);
+         pgraphicsImageM->draw(imagedrawing);
 
       }
 

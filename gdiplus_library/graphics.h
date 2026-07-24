@@ -2,6 +2,7 @@
 
 
 #include "aura/graphics/draw2d/graphics.h"
+#include "aura/graphics/draw2d/graphics_pointer.h"
 
 
 namespace draw2d_gdiplus

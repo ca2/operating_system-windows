@@ -106,4 +106,82 @@ CLASS_DECL_GDIPLUS_LIBRARY void terminate_gdiplus()
 }
 
 
+CLASS_DECL_GDIPLUS_LIBRARY ::string _001_gdiplus_bitmap_diagnostics(Gdiplus::Bitmap *bitmap)
+{
+  
+   if (!bitmap)
+   {
 
+      return "bitmap is null";
+
+   }
+
+   ::string str;
+
+   // 1. Width, Height
+   UINT width = bitmap->GetWidth();
+   UINT height = bitmap->GetHeight();
+
+   Gdiplus::Rect rect(0, 0, width, height);
+   Gdiplus::BitmapData bitmapData;
+
+   // Lock bits in 32-bit ARGB format to guarantee an alpha channel is present
+   if (bitmap->LockBits(&rect, Gdiplus::ImageLockModeRead, PixelFormat32bppARGB, &bitmapData) == Gdiplus::Ok)
+   {
+
+      // 2. Scan size (Stride) and Pointer Address
+      INT stride = bitmapData.Stride; // Scan size in bytes
+      BYTE *pixelPtr = (BYTE *)bitmapData.Scan0; // Pointer address
+
+
+      str.formatf("\n\n   gdiplus::bitmap=%p (%d,%d) scan=%d,", pixelPtr, width, height, stride);
+
+
+      int totalPixels = width * height;
+      int transparentCount = 0;
+      int translucentCount = 0;
+      int opaqueCount = 0;
+
+      // Iterate through pixel data
+      UINT *pixels = (UINT *)pixelPtr;
+      for (UINT y = 0; y < height; ++y)
+      {
+         for (UINT x = 0; x < width; ++x)
+         {
+            // Get the ARGB color of the pixel
+            UINT color = pixels[y * (stride / 4) + x];
+            BYTE alpha = (color >> 24) & 0xFF; // Shift and mask for Alpha
+
+            if (alpha == 0)
+            {
+               transparentCount++;
+            }
+            else if (alpha > 0 && alpha < 255)
+            {
+               translucentCount++;
+            }
+            else
+            {
+               opaqueCount++;
+            }
+         }
+      }
+
+      // Always unlock the bits when finished
+      bitmap->UnlockBits(&bitmapData);
+
+      str.append_formatf("\n   pixel=%d opaque=%d transp=%d transl=%d\n", totalPixels, opaqueCount,
+                                transparentCount, translucentCount);
+
+      // Output or store the statistics as needed
+      // totalPixels, width, height, stride, pixelPtr, transparentCount, translucentCount, opaqueCount
+   }
+   else
+   {
+
+      str.formatf("\n\n   gdiplus::bitmap (%d,%d) couldn't lock bits!!");
+
+   }
+
+   return str;
+}

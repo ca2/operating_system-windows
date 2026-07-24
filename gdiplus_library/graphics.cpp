@@ -1677,7 +1677,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      auto pgraphicsSrc = pimage->g();
+      auto pgraphicsSrc = pgraphicsImage;
 
       if (pgraphicsSrc == nullptr || pgraphicsSrc->get_current_bitmap() == nullptr)
       {
@@ -1757,9 +1757,9 @@ namespace draw2d_gdiplus
 
                      ::image::image_drawing imagedrawing3(imagedrawingoptions3, imagesource3);
 
-                     scoped_restore(pimage->g()->m_bUseImageMipMapsOrResizedImages);
+                     scoped_restore(pgraphicsImage->m_bUseImageMipMapsOrResizedImages);
 
-                     pimage->g()->m_bUseImageMipMapsOrResizedImages = false;
+                     pgraphicsImage->m_bUseImageMipMapsOrResizedImages = false;
 
                      pimage->draw(imagedrawing3);
 
@@ -8053,7 +8053,7 @@ namespace draw2d_gdiplus
 
    //            }
 
-   //            pimage1->g()->set_alpha_mode(::draw2d::e_alpha_mode_set);
+   //            pgraphicsImage1->set_alpha_mode(::draw2d::e_alpha_mode_set);
 
    //            if (!pimage1->from(nullptr, pgraphicsSrc, ::i32_point(xSrc, ySrc), rectangleBlt.::f64_size()))
    //               return false;

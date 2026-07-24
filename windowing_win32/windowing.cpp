@@ -68,7 +68,7 @@ namespace windowing_win32
 
       ::windowing::windowing::on_application_activate();
 
-   //}
+   }
 
 
    void windowing::defer_initialize_system_interaction()

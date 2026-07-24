@@ -653,7 +653,7 @@ namespace draw2d_gdi
          bf.SourceConstantAlpha = 0xFF;
          bf.AlphaFormat = AC_SRC_ALPHA;
 
-         ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, ::width(rectangle), ::height(rectangle), (HDC)pimage->g()->get_os_data(), 0, 0, ::width(rectangle), ::height(rectangle), bf);
+         ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, ::width(rectangle), ::height(rectangle), (HDC)pgraphicsImage->get_os_data(), 0, 0, ::width(rectangle), ::height(rectangle), bf);
 
       }
 
@@ -1375,7 +1375,7 @@ namespace draw2d_gdi
 
             GdiFlush();
 
-            ::AlphaBlend(m_hdc, pointDst.x, pointDst.y, size.cx, size.cy, (HDC) pimage->g()->get_os_data(), 0, 0, size.cx, size.cy, bf);
+            ::AlphaBlend(m_hdc, pointDst.x, pointDst.y, size.cx, size.cy, (HDC) pgraphicsImage->get_os_data(), 0, 0, size.cx, size.cy, bf);
 
             /*for(::i32 y = 0; y < nHeight; y++)
             {
@@ -1622,23 +1622,23 @@ namespace draw2d_gdi
          if(GDI_BRUSH(&brush)->m_bProcess)
          {
 
-            GDI_GRAPHICS(pimage->g())->SetTextColor(rgb(255, 255, 255));
+            GDI_GRAPHICS(pgraphicsImage)->SetTextColor(rgb(255, 255, 255));
 
          }
          else
          {
 
-            //GDI_GRAPHICS(pimage->g())->SetTextColor(rgb(color32_u8_red(brush.m_color), color32_u8_green(brush.m_color), color32_u8_blue(brush.m_color)));
-            GDI_GRAPHICS(pimage->g())->SetTextColor(rgb(color32_u8_blue(brush.m_color), color32_u8_green(brush.m_color), color32_u8_red(brush.m_color)));
+            //GDI_GRAPHICS(pgraphicsImage)->SetTextColor(rgb(color32_u8_red(brush.m_color), color32_u8_green(brush.m_color), color32_u8_blue(brush.m_color)));
+            GDI_GRAPHICS(pgraphicsImage)->SetTextColor(rgb(color32_u8_blue(brush.m_color), color32_u8_green(brush.m_color), color32_u8_red(brush.m_color)));
 
          }
 
 
-         pimage->g()->SelectObject(&font);
+         pgraphicsImage->SelectObject(&font);
 
-         ::SetBkMode((HDC) pimage->g()->get_os_data(), TRANSPARENT);
+         ::SetBkMode((HDC) pgraphicsImage->get_os_data(), TRANSPARENT);
 
-         ::TextOutW((HDC) pimage->g()->get_os_data(), 0, 0, wstr, (::i32) wstr.length());
+         ::TextOutW((HDC) pgraphicsImage->get_os_data(), 0, 0, wstr, (::i32) wstr.length());
 
          ::i32_point point = GetViewportOrg();
 
@@ -1649,7 +1649,7 @@ namespace draw2d_gdi
 
             pimage->dc_select();
 
-            ::AlphaBlend(m_hdc, (::i32) x, (::i32) y, size.cx, size.cy, (HDC) pimage->g()->get_os_data(), 0, 0, size.cx, size.cy, bf);
+            ::AlphaBlend(m_hdc, (::i32) x, (::i32) y, size.cx, size.cy, (HDC) pgraphicsImage->get_os_data(), 0, 0, size.cx, size.cy, bf);
 
          }
 
@@ -2486,19 +2486,19 @@ namespace draw2d_gdi
       if(!GDI_DIB(pimage.m_p)->process_initialize(&brush))
       return false;
 
-      pimage->g()->SelectObject(&brush);
+      pgraphicsImage->SelectObject(&brush);
 
-      GDI_GRAPHICS(pimage->g())->SetViewportOrg(-rectangle.top_left());
+      GDI_GRAPHICS(pgraphicsImage)->SetViewportOrg(-rectangle.top_left());
 
-      GDI_GRAPHICS(pimage->g())->set(m_sppath);
+      GDI_GRAPHICS(pgraphicsImage)->set(m_sppath);
 
-      ::FillPath((HDC) pimage->g()->get_os_data());
+      ::FillPath((HDC) pgraphicsImage->get_os_data());
 
       GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left, rectangle.top, m_ealphamode);
 
-      GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
+      GDI_GRAPHICS(pgraphicsImage)->SetViewportOrg(0, 0);
 
-      ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
+      ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pgraphicsImage->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
 
       return true;
 
@@ -2646,22 +2646,22 @@ namespace draw2d_gdi
          if(!GDI_DIB(pimage.m_p)->process_initialize(&brush))
             return false;
 
-         pimage->g()->SelectObject(&brush);
+         pgraphicsImage->SelectObject(&brush);
 
-         GDI_GRAPHICS(pimage->g())->SetViewportOrg(-rectangle.top_left());
+         GDI_GRAPHICS(pgraphicsImage)->SetViewportOrg(-rectangle.top_left());
 
-         (GDI_GRAPHICS(pimage->g())->*pfnInternalSetPath)(pparam);
+         (GDI_GRAPHICS(pgraphicsImage)->*pfnInternalSetPath)(pparam);
 
-         ::FillPath((HDC) pimage->g()->get_os_data());
+         ::FillPath((HDC) pgraphicsImage->get_os_data());
 
          GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left, rectangle.top, m_ealphamode, m_pimage);
 
          if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
          {
 
-            GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
+            GDI_GRAPHICS(pgraphicsImage)->SetViewportOrg(0, 0);
 
-            ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
+            ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pgraphicsImage->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
 
          }
 
@@ -2814,22 +2814,22 @@ namespace draw2d_gdi
          if(!GDI_DIB(pimage.m_p)->process_initialize(&pen))
             return false;
 
-         pimage->g()->SelectObject(&pen);
+         pgraphicsImage->SelectObject(&pen);
 
-         pimage->g()->SetViewportOrg(-rectangleBound.top_left());
+         pgraphicsImage->SetViewportOrg(-rectangleBound.top_left());
 
-         (GDI_GRAPHICS(pimage->g())->*pfnInternalSetPath)(pparam);
+         (GDI_GRAPHICS(pgraphicsImage)->*pfnInternalSetPath)(pparam);
 
-         ::StrokePath(GDI_HDC(pimage->g()));
+         ::StrokePath(GDI_HDC(pgraphicsImage));
 
          GDI_DIB(pimage.m_p)->process_blend(&pen, rectangle.left, rectangle.top, m_ealphamode, m_pimage);
 
          if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
          {
 
-            GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
+            GDI_GRAPHICS(pgraphicsImage)->SetViewportOrg(0, 0);
 
-            ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
+            ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pgraphicsImage->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
 
          }
 
@@ -2891,13 +2891,13 @@ namespace draw2d_gdi
          if(GDI_DIB(pimage.m_p)->process_initialize(&brush))
          {
 
-            pimage->g()->SelectObject(&brush);
+            pgraphicsImage->SelectObject(&brush);
 
-            GDI_GRAPHICS(pimage->g())->SetViewportOrg(-rectangle.top_left() + ::i32_size((::i32) floor(pen.m_dWidth / 2.0), (::i32) floor(pen.m_dWidth / 2.0)));
+            GDI_GRAPHICS(pgraphicsImage)->SetViewportOrg(-rectangle.top_left() + ::i32_size((::i32) floor(pen.m_dWidth / 2.0), (::i32) floor(pen.m_dWidth / 2.0)));
 
-            (GDI_GRAPHICS(pimage->g())->*pfnInternalSetPath)(pparam);
+            (GDI_GRAPHICS(pgraphicsImage)->*pfnInternalSetPath)(pparam);
 
-            ::FillPath((HDC) pimage->g()->get_os_data());
+            ::FillPath((HDC) pgraphicsImage->get_os_data());
 
             if(GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left, rectangle.top, m_ealphamode, m_pimage))
             {
@@ -2905,9 +2905,9 @@ namespace draw2d_gdi
                if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
                {
 
-                  GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
+                  GDI_GRAPHICS(pgraphicsImage)->SetViewportOrg(0, 0);
 
-                  ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
+                  ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pgraphicsImage->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
 
                }
                /*
@@ -2931,13 +2931,13 @@ namespace draw2d_gdi
 
             // pimage2->from(i32_point((::i32) floor(pen.m_dWidth / 2.0), (::i32) floor(pen.m_dWidth / 2.0)), pimage, ::i32_point(), rectangle.size());
 
-            pimage->g()->SelectObject(&pen);
+            pgraphicsImage->SelectObject(&pen);
 
-            pimage->g()->SetViewportOrg(-rectangleBound.top_left());
+            pgraphicsImage->SetViewportOrg(-rectangleBound.top_left());
 
-            (GDI_GRAPHICS(pimage->g())->*pfnInternalSetPath)(pparam);
+            (GDI_GRAPHICS(pgraphicsImage)->*pfnInternalSetPath)(pparam);
 
-            ::StrokePath(GDI_HDC(pimage->g()));
+            ::StrokePath(GDI_HDC(pgraphicsImage));
 
             if(GDI_DIB(pimage.m_p)->process_blend(&pen, rectangle.left, rectangle.top, m_ealphamode, m_pimage))
             {
@@ -2945,9 +2945,9 @@ namespace draw2d_gdi
                if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
                {
 
-                  GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
+                  GDI_GRAPHICS(pgraphicsImage)->SetViewportOrg(0, 0);
 
-                  ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
+                  ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pgraphicsImage->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
 
                }
                /*
@@ -3153,7 +3153,7 @@ namespace draw2d_gdi
          __keep(m_pimageAlphaBlend->m_pimpl, nullptr);
 
 
-         return BitBlt(pointDest.x, pointDest.y, size.cx, size.cy, pimage1->g(), pointSrc.x, pointSrc.y, SRCCOPY) != false;
+         return BitBlt(pointDest.x, pointDest.y, size.cx, size.cy, pgraphicsImage1, pointSrc.x, pointSrc.y, SRCCOPY) != false;
 
       }
       if(dOpacity < 0.0)
@@ -3646,7 +3646,7 @@ namespace draw2d_gdi
          bf.SourceConstantAlpha = 0xFF;
          bf.AlphaFormat = AC_SRC_ALPHA;
 
-         ::AlphaBlend(m_hdc, x, y, cx, cy, (HDC) pimage->g()->get_os_data(), 0, 0, cx, cy, bf);
+         ::AlphaBlend(m_hdc, x, y, cx, cy, (HDC) pgraphicsImage->get_os_data(), 0, 0, cx, cy, bf);
 
       }
 

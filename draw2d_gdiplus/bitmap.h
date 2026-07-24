@@ -45,7 +45,7 @@ namespace draw2d_gdiplus
       void CreateCompatibleBitmap(::draw2d::graphics * pgraphics, ::i32 nWidth, ::i32 nHeight);
       void CreateDiscardableBitmap(::draw2d::graphics * pgraphics, ::i32 nWidth, ::i32 nHeight);
       virtual bool host_bitmap(::draw2d::graphics * pgraphics, pixmap_t* ppximap) override;
-      virtual void create_bitmap(::draw2d::graphics * pgraphics, const ::i32_size & size, void **ppvBits, ::i32 * stride) override;
+      void create_bitmap(::draw2d::graphics * pgraphics, const ::i32_size & size, ::image32_t ** ppimage32, const ::image32_t * pimage32, ::i32 * stride) override;
       virtual void CreateDIBitmap(::draw2d::graphics * pgraphics, ::i32 cx, ::i32 cy, ::u32 flInit, const void *pjBits, UINT iUsage) override;
 
 
@@ -65,6 +65,10 @@ namespace draw2d_gdiplus
 
       virtual HBITMAP _GetHBITMAP();
       virtual void _ReleaseHBITMAP(HBITMAP hbitmap);
+
+
+      ::string _001_os_bitmap_diagnostics() override;
+
 
    };
 

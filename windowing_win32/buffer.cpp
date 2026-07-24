@@ -249,9 +249,9 @@ namespace windowing_win32
 
       //}
 
-      auto pimageBuffer = pbufferitem->m_pimage2;
+      auto pimageBufferItem = pbufferitem->m_pimageBufferItem;
 
-      if (pimageBuffer->m_size != pbufferitem->m_sizeBufferItem)
+      if (pimageBufferItem->m_size != pbufferitem->m_sizeBufferItem)
       {
 
          if (!update_buffer(pbufferitem))
@@ -458,7 +458,7 @@ namespace windowing_win32
 
          playeredwindowbuffer->m_pixmap.m_size = pbufferitem->m_sizeBufferItem;
 
-         if (pbufferitem->m_pimage2->host(playeredwindowbuffer->m_pixmap, m_pwindow))
+         if (pbufferitem->m_pimageBufferItem->host(playeredwindowbuffer->m_pixmap, m_pwindow))
          {
 
             m_bDibIsHostingBuffer = true;
@@ -470,7 +470,7 @@ namespace windowing_win32
             try
             {
 
-               pbufferitem->m_pimage2->create(playeredwindowbuffer->m_pixmap.m_sizeRaw);
+               pbufferitem->m_pimageBufferItem->create(playeredwindowbuffer->m_pixmap.m_sizeRaw);
 
             }
             catch (...)
@@ -488,37 +488,38 @@ namespace windowing_win32
       else
       {
 
-         if (!pbufferitem->m_pgraphicsBufferItem)
+         if (pbufferitem->m_pimageBufferItem.nok())
          {
 
-            constructø(pbufferitem->m_pgraphicsBufferItem);
+            constructø(pbufferitem->m_pimageBufferItem);
 
             auto puserinteraction = dynamic_cast < ::user::interaction * >( m_pwindow->m_pacmeuserinteraction.m_p);
 
-            //if (m_papplication->m_gpu.m_bUseSwapChainWindow)
-            //{
+            ////if (m_papplication->m_gpu.m_bUseSwapChainWindow)
+            ////{
 
-            //   pbufferitem->m_pgraphics->create_offscreen_graphics_for_swap_chain_blitting(pbufferitem->m_sizeBufferItemDraw);
+            ////   pbufferitem->m_pgraphics->create_offscreen_graphics_for_swap_chain_blitting(pbufferitem->m_sizeBufferItemDraw);
 
-            //}
-            //else
-            //{
+            ////}
+            ////else
+            ////{
 
-            pbufferitem->m_pgraphicsBufferItem->create_for_window_draw2d(puserinteraction, pbufferitem->m_sizeBufferItem);
+            //pbufferitem->m_pgraphicsBufferItem->create_for_window_draw2d(puserinteraction, pbufferitem->m_sizeBufferItem);
 
-               //pbufferitem->m_pgraphics->create_memory_graphics(pbufferitem->m_sizeBufferItemDraw);
-
-//            }
-
-            //pbufferitem->m_pgraphics->set_hint_window_output();
-
-            //pbufferitem->m_pgraphics->create_window_graphics(m_pwindow);
+//               //pbufferitem->m_pgraphics->create_memory_graphics(pbufferitem->m_sizeBufferItemDraw);
+//
+////            }
+//
+//            //pbufferitem->m_pgraphics->set_hint_window_output();
+//
+//            //pbufferitem->m_pgraphics->create_window_graphics(m_pwindow);
 
          }
          else
          {
 
-            pbufferitem->m_pgraphicsBufferItem->defer_set_size(pbufferitem->m_sizeBufferItem);
+            //pbufferitem->m_pgraphicsBufferItem->defer_set_size(pbufferitem->m_sizeBufferItem);
+            pbufferitem->m_pimageBufferItem->create(pbufferitem->m_sizeBufferItem);
 
          }
 
@@ -954,7 +955,7 @@ namespace windowing_win32
       if (playeredwindowbuffer)
       {
 
-         if (!pbufferitem->m_pimage2.ok())
+         if (!pbufferitem->m_pimageBufferItem.ok())
          {
 
             throw ::exception(error_wrong_state);
@@ -969,13 +970,14 @@ namespace windowing_win32
 
          auto pixmapRawData = playeredwindowbuffer->m_pixmap.m_pimage32Raw;
 
-         auto pimageRawData = pbufferitem->m_pimage2->m_pimage32Raw;
+         auto pimageRawData = pbufferitem->m_pimageBufferItem->m_pimage32Raw;
 
          if (m_bDibIsHostingBuffer && pimageRawData == pixmapRawData)
          {
 
          }
-         else if (m_bDibIsHostingBuffer && pbufferitem->m_pimage2->on_host_read_pixels(playeredwindowbuffer->m_pixmap))
+         else if (m_bDibIsHostingBuffer &&
+                  pbufferitem->m_pimageBufferItem->on_host_read_pixels(playeredwindowbuffer->m_pixmap))
          {
 
 
@@ -983,7 +985,7 @@ namespace windowing_win32
          else
          {
 
-            auto sizeBufferImage = pbufferitem->m_pimage2->size();
+            auto sizeBufferImage = pbufferitem->m_pimageBufferItem->size();
 
             if (sizeLayeredWindowBuffer != sizeBufferImage)
             {
@@ -999,9 +1001,9 @@ namespace windowing_win32
 
             }
 
-            pbufferitem->m_pimage2->map();
+            pbufferitem->m_pimageBufferItem->map();
 
-            playeredwindowbuffer->m_pixmap.copy(sizeLayeredWindowBuffer, pbufferitem->m_pimage2);
+            playeredwindowbuffer->m_pixmap.copy(sizeLayeredWindowBuffer, pbufferitem->m_pimageBufferItem);
 
          }
 
@@ -1060,7 +1062,7 @@ namespace windowing_win32
          {
 
 
-         auto sizeBuffer = pbufferitem->m_pimage2->size();
+         auto sizeBuffer = pbufferitem->m_pimageBufferItem->size();
 
          //if (size.cx < sizeDrawn.cx && size.cy < sizeDrawn.cy)
          //if (size != sizeDrawn || sizeDesign != size)
@@ -1643,10 +1645,10 @@ namespace windowing_win32
    }
 
 
-   bool buffer::buffer_lock_round_swap_key_buffers()
+   bool buffer::buffer_lock_round_swap_key_buffers(::draw2d::graphics_pointer &pgraphics)
    {
 
-      bool bOk1 = double_buffer::buffer_lock_round_swap_key_buffers();
+      bool bOk1 = double_buffer::buffer_lock_round_swap_key_buffers(pgraphics);
 
       if (!m_pwindow || !m_pwindow->m_pgraphicsthread)
       {
@@ -1655,7 +1657,7 @@ namespace windowing_win32
 
       }
 
-      bool bOk2 = bitmap_source_buffer::buffer_lock_round_swap_key_buffers();
+      bool bOk2 = bitmap_source_buffer::buffer_lock_round_swap_key_buffers(pgraphics);
 
       return bOk1 && bOk2;
 

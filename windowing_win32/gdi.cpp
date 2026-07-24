@@ -70,7 +70,9 @@ namespace windows
 
       ::i32 iStrideDst = dwWidth * sizeof(::image32_t);
 
-      ((::image32_t *)pBits)->copy(pimage->size(), iStrideDst, pimage->get_data(), pimage->scan_size());
+      auto map = pimage->map();
+
+      ((::image32_t *)pBits)->copy(pimage->size(), iStrideDst, map.data(), pimage->scan_size());
 
       return hBitmap;
 

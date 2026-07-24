@@ -2,11 +2,15 @@
 #include "image.h"
 #include "graphics.h"
 #include "bitmap.h"
+#include "draw2d.h"
 #include "acme/exception/exception.h"
 #include "acme/platform/auto_pointer.h"
 #include "aura/graphics/image/icon.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/draw2d/graphics_lease.h"
+
+
+CLASS_DECL_ACME ::string _001_image32_diagnostics(const ::i32_size &size, const image32_t *pimage32, int iScan);
 
 
 namespace draw2d_gdiplus
@@ -49,17 +53,20 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::_map(bool)
+   void image::_map(bool bApplyTransform)
    {
+
+      //_on_map(bApplyTransform);
 
       //return true;
 
    }
 
 
-   void image::_unmap()
+   void image::_unmap(bool bDoUnmap)
    {
 
+      //_on_unmap(bDoUnmap);
       //return true;
 
    }
@@ -109,7 +116,7 @@ namespace draw2d_gdiplus
 
       defer_constructø(m_pbitmap);
 
-      defer_constructø(m_pgraphics);
+      //defer_constructø(m_pgraphics);
 
       //if (m_pbitmap.is_null())
       //{
@@ -164,22 +171,22 @@ namespace draw2d_gdiplus
 
       m_size = ppixmap->m_size;
 
-      m_pgraphics->set(m_pbitmap);
-
-      m_pgraphics->m_pimage = this;
-
-      m_pgraphics->reset_impact_area();
-
       m_sizeRaw = ppixmap->size();
 
       set_ok_flag();
+
+      auto pgraphics = acquire_graphics();
+
+      pgraphics->m_pimage = this;
+
+      pgraphics->reset_impact_area();
 
       return true;
 
    }
 
 
-   void image::create_ex(const ::i32_size& size, ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate, ::i32 iGoodStride, bool bPreserve)
+   void image::create_from_data(const ::i32_size& size, const ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate, bool bPreserve)
    {
 
       if (m_pbitmap.is_set()
@@ -239,9 +246,10 @@ namespace draw2d_gdiplus
       
       auto pbitmap = createø < ::draw2d::bitmap >();
 
-      auto pgraphics = createø < ::draw2d::graphics >();
+      //auto pgraphics = draw2d()->acquire_memory_graphics(size);
 
-      if (pbitmap.is_null() || pgraphics.is_null())
+      //if (pbitmap.is_null() || pgraphics.is_null())
+      if (pbitmap.is_null())
       {
 
          //destroy();
@@ -254,9 +262,17 @@ namespace draw2d_gdiplus
 
       //::i32 iScan = 0;
 
-      //::image32_t * pimage32 = nullptr;
+      ::image32_t * pimage32Bitmap = nullptr;
 
-      pbitmap->create_bitmap(nullptr, size, (void**)&pimage32, &iScan);
+      auto str1 = _001_image32_diagnostics(size, pimage32, iScan);
+
+      information("draw2d_gdiplus::image::create_from_data (1) {}", str1);
+
+      pbitmap->create_bitmap(nullptr, size, &pimage32Bitmap, pimage32, &iScan);
+
+      auto str2 = _001_image32_diagnostics(size, pimage32Bitmap, iScan);
+
+      information("draw2d_gdiplus::image::create_from_data (2) {}", str2);
 
       //if (!pbitmap->create_bitmap(nullptr, size, (void**)&pimage32, &iScan))
       //{
@@ -278,7 +294,7 @@ namespace draw2d_gdiplus
 
       }
 
-      pgraphics->set(pbitmap);
+      //pgraphics->set(pbitmap);
 
       //if (!pgraphics->set(pbitmap))
       //{
@@ -287,7 +303,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      pgraphics->place_impact_area(0., 0., m_sizeRaw.cx, m_sizeRaw.cy);
+      //pgraphics->place_impact_area(0., 0., m_sizeRaw.cx, m_sizeRaw.cy);
       //
       //if (!)
       //{
@@ -300,14 +316,17 @@ namespace draw2d_gdiplus
 
       if (bPreserve
          && pbitmap
-         && pgraphics
-         && m_pbitmap
-         && m_pgraphics)
+         //&& pgraphics
+          && ::is_null(pimage32)
+         && m_pbitmap)
+         //&& m_pgraphics)
       {
 
          auto w = minimum(m_pbitmap->m_size.cx, pbitmap->m_size.cx);
 
          auto h = minimum(m_pbitmap->m_size.cy, pbitmap->m_size.cy);
+
+         auto pgraphics = draw2d()->acquire_memory_graphics({w, h});
 
          Gdiplus::Rect rect(0, 0, w, h);
          
@@ -318,15 +337,15 @@ namespace draw2d_gdiplus
       }
 
       m_pbitmap = pbitmap;
+//
+  //    m_pgraphics = pgraphics;
 
-      m_pgraphics = pgraphics;
+      initialize_pixmap(size, pimage32Bitmap, iScan);
 
-      initialize_pixmap(size, pimage32, iScan);
-
-      m_pgraphics->m_pimage = this;
+      //m_pgraphics->m_pimage = this;
       //m_sizeRaw.cx = width;
       //m_sizeRaw.cy = height;
-      m_sizeRaw = size;
+      //m_sizeRaw = size;
       //m_sizeAlloc.cy = height;
 
       //if (pbitmapPrevious && pgraphicsPrevious)
@@ -675,7 +694,9 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         pimageDst->g()->draw(imagedrawing);
+         auto pgraphicsImageDst = pimageDst->acquire_graphics();
+
+         pgraphicsImageDst->draw(imagedrawing);
 
       }
 
@@ -752,7 +773,9 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         pimage1->g()->draw(imagedrawing);
+         auto pgraphicsImage1 = pimage1->acquire_graphics();
+
+         pgraphicsImage1->draw(imagedrawing);
 
       }
 
@@ -792,7 +815,9 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         pimage2->g()->draw(imagedrawing);
+         auto pgraphicsImage2 = pimage1->acquire_graphics();
+
+         pgraphicsImage2->draw(imagedrawing);
 
       }
 
@@ -833,7 +858,9 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         pimageM->g()->draw(imagedrawing);
+         auto pgraphicsImageM = pimageM->acquire_graphics();
+
+         pgraphicsImageM->draw(imagedrawing);
 
       }
 
@@ -876,19 +903,19 @@ namespace draw2d_gdiplus
    }
 
 
-   ::draw2d::graphics * image::_get_graphics() const
-   {
+   //::draw2d::graphics * image::_get_graphics() const
+   //{
 
-      return m_pgraphics;
+   //   return m_pgraphics;
 
-   }
+   //}
 
 
    void image::draw2d_gdiplus_image_common_construct()
    {
 
       m_pbitmap.release();
-      m_pgraphics.release();
+      //m_pgraphics.release();
       m_hbitmap               = nullptr;
       m_sizeWnd               = ::i64_size(0, 0);
       memset(&m_bitmapinfo, 0, sizeof(m_bitmapinfo));

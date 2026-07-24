@@ -298,6 +298,33 @@ namespace draw2d_gdiplus
    }
 
 
+   void graphics::create_draw2d_graphics(::draw2d::bitmap * pbitmap)
+   {
+
+      auto pgdiplusbitmap = (::Gdiplus::Bitmap *)pbitmap->get_os_data();
+
+      if (::is_null(pgdiplusbitmap))
+      {
+
+         throw ::exception(error_wrong_state);
+
+      }
+
+      close_graphics();
+
+      m_pbitmap = pbitmap;
+
+      auto pgdiplusgraphics = new Gdiplus::Graphics(pgdiplusbitmap);
+
+      m_pgraphics = pgdiplusgraphics;
+
+      m_osdata[0] = pgdiplusgraphics;
+
+      set_ok_flag();
+
+   }
+
+
    ::i32 graphics::GetDeviceCaps(::i32 nIndex)
    {
 
@@ -1677,16 +1704,16 @@ namespace draw2d_gdiplus
 
       //}
 
-      auto pgraphicsSrc = pimage->g();
+      //auto pgraphicsImage = pimage->acquire_graphics();
 
-      if (pgraphicsSrc == nullptr || pgraphicsSrc->get_current_bitmap() == nullptr)
-      {
+      //if (pgraphicsImage == nullptr || pgraphicsImage->get_current_bitmap() == nullptr)
+      //{
 
          //return false;
 
-         throw ::exception(error_null_pointer);
+        // throw ::exception(error_null_pointer);
 
-      }
+      //}
 
       auto rectangleSource = imagedrawing.source_rectangle();
 
@@ -1719,19 +1746,19 @@ namespace draw2d_gdiplus
 
          m_bUseImageMipMapsOrResizedImages = false;
 
-         if (pgraphicsSrc->m_pimage->is_ok())
+         if (pimage->is_ok())
          {
 
             ::i32 iW = (::i32)nDstWidth;
             ::i32 iH = (::i32)nDstHeight;
 
-            if (pgraphicsSrc->m_pimage->width() != iW
-               && pgraphicsSrc->m_pimage->height() != iH
+            if (pimage->width() != iW
+               && pimage->height() != iH
                && xSrc == 0 && ySrc == 0
                && iW > 0 && iH > 0)
             {
 
-               auto pextension = pgraphicsSrc->m_pimage->get_extension();
+               auto pextension = pimage->get_extension();
 
                if (pextension)
                {
@@ -1757,9 +1784,9 @@ namespace draw2d_gdiplus
 
                      ::image::image_drawing imagedrawing3(imagedrawingoptions3, imagesource3);
 
-                     scoped_restore(pimage->g()->m_bUseImageMipMapsOrResizedImages);
+                     //scoped_restore(pgraphicsImage->m_bUseImageMipMapsOrResizedImages);
 
-                     pimage->g()->m_bUseImageMipMapsOrResizedImages = false;
+                     //pgraphicsImage->m_bUseImageMipMapsOrResizedImages = false;
 
                      pimage->draw(imagedrawing3);
 
@@ -1782,7 +1809,7 @@ namespace draw2d_gdiplus
                }
 
 
-               if (pgraphicsSrc->m_pimage->m_emipmap == ::image::e_mipmap_anisotropic)
+               if (pimage->m_emipmap == ::image::e_mipmap_anisotropic)
                {
 
                   try
@@ -1797,7 +1824,7 @@ namespace draw2d_gdiplus
                      ::i32 cxFound;
                      ::i32 cyFound;
 
-                     for (::collection::index i = 0; i < pgraphicsSrc->m_pimage->get_image_count(); i++)
+                     for (::collection::index i = 0; i < pimage->get_image_count(); i++)
                      {
 
                         ::i32 x1 = 0;
@@ -1866,7 +1893,7 @@ namespace draw2d_gdiplus
                      if (iFind >= 0)
                      {
 
-                        ::image::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
+                        ::image::image_pointer pimage = pimage->get_image(iFind);
 
                         auto emode = m_pgraphics->GetInterpolationMode();
 
@@ -1937,11 +1964,11 @@ namespace draw2d_gdiplus
       try
       {
 
-         Gdiplus::Bitmap * pbitmap = (Gdiplus::Bitmap *)pgraphicsSrc->get_current_bitmap()->get_os_data();
+         Gdiplus::Bitmap * pbitmap = (Gdiplus::Bitmap *)pimage->get_bitmap()->get_os_data();
 
          color_matrix colormatrix;
 
-         if (pgraphicsSrc->m_pimage->is_ok() && imagedrawing.get_matrix(colormatrix))
+         if (pimage->is_ok() && imagedrawing.get_matrix(colormatrix))
          {
 
             Gdiplus::ImageAttributes imageattributes;
@@ -4849,6 +4876,7 @@ namespace draw2d_gdiplus
    }
 
 
+
    //void graphics::_add_clipping_shape(const ::f64_rectangle & rectangle, ::draw2d::region * pregion)
    //{
 
@@ -7642,8 +7670,6 @@ namespace draw2d_gdiplus
 
       m_osdata[0] = pdata;
 
-      //return false;
-
    }
 
 
@@ -8074,7 +8100,7 @@ namespace draw2d_gdiplus
 
    //            }
 
-   //            pimage1->g()->set_alpha_mode(::draw2d::e_alpha_mode_set);
+   //            pgraphicsImage1->set_alpha_mode(::draw2d::e_alpha_mode_set);
 
    //            if (!pimage1->from(nullptr, pgraphicsSrc, ::i32_point(xSrc, ySrc), rectangleBlt.::f64_size()))
    //               return false;

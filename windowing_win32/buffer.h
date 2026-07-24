@@ -90,7 +90,7 @@ namespace windowing_win32
       void destroy_window_device_context();
 
 
-      bool buffer_lock_round_swap_key_buffers() override;
+      bool buffer_lock_round_swap_key_buffers(::draw2d::graphics_pointer &pgraphics) override;
 
       virtual HWND get_hwnd() const;
 

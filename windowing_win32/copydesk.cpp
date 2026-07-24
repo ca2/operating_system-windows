@@ -315,7 +315,9 @@ namespace windowing_win32
 
       ::memory_copy(p, &bi, sizeof(bi));
 
-      ::memory_copy(p + sizeof(bi), pimage->get_data(), pimage->scan_size() * pimage->height());
+      auto map = pimage->map();
+
+      ::memory_copy(p + sizeof(bi), map.data(), pimage->scan_size() * pimage->height());
 
       GlobalUnlock(hglb);
 
