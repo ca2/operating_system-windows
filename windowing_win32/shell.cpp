@@ -171,21 +171,23 @@ bool IsDibSection(HBITMAP bmp)
          ::i32 h = ds.dsBmih.biHeight;
 
          auto pBits = ds.dsBm.bmBits;
-         auto pimage = pparticle->image()->create_image({ w, h });
-         ::i32 iStride = ds.dsBmih.biSizeImage / abs(h );
+         ::i32 iStride = ds.dsBmih.biSizeImage / abs(h);
+         auto pimage = pparticle->image()->create_image({w, h}, (const ::image32_t *) pBits, iStride);
 
-         if (h < 0)
-         {
-         
-            pimage->data()->vertical_swap_copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
 
-         }
-         else
-         {
 
-            pimage->data()->copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
+         //if (h < 0)
+         //{
+         //
+         //   pimage->data()->vertical_swap_copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
 
-         }
+         //}
+         //else
+         //{
+
+         //   pimage->data()->copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
+
+         //}
 
          return pimage;
 

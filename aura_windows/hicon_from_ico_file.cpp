@@ -18,7 +18,7 @@ namespace aura_windows
    // or Bitmap::FromStream() method, and then finally call the 
    // Bitmap::ToHICON() method.
    // ... Remy Lebeau,  Feb 11 '17 at 3:34
-   void* node::HICON_from_image(::image::image * pimage)
+   void* node::HICON_from_pixmap(::pixmap * ppixmap)
    {
 
       //comptr < IStream > pistream = SHCreateMemStream((const BYTE*)block.get_data(), (UINT)block.get_size());
@@ -30,11 +30,11 @@ namespace aura_windows
 
       //}
 
-      auto map = pimage->map();
+      auto map = ppixmap->map();
 
-      Gdiplus::Bitmap bitmap(pimage->width(),
-         pimage->height(),
-         pimage->m_iScan,
+      Gdiplus::Bitmap bitmap(ppixmap->width(),
+         ppixmap->height(),
+         ppixmap->m_iScan,
          PixelFormat32bppARGB,
          (BYTE *) map.data()
          );

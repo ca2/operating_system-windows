@@ -40,9 +40,9 @@ namespace windowing_win32
       ~icon() override;
 
 
-      ::image::image_pointer _get_image(const ::i32_size &size, const ::file::path &path) const;
+      //::pointer<::pixmap> _get_pixmap(const ::i32_size &size, const ::file::path &path) const;
 
-      ::image::image_pointer _get_resized_image(const ::i32_size &size, const ::file::path &path) const;
+      ::pointer<::pixmap> _get_resized_pixmap(const ::i32_size &size, const ::file::path &path) const;
 
       virtual void * get_os_data(const ::i32_size & size) const;
       

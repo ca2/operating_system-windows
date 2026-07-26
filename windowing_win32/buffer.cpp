@@ -318,6 +318,7 @@ namespace windowing_win32
 
       }
 
+
       HWND hwnd = get_hwnd();
 
       auto uExStyle = ::GetWindowLong(hwnd, GWL_EXSTYLE);
@@ -488,10 +489,10 @@ namespace windowing_win32
       else
       {
 
-         if (pbufferitem->m_pimageBufferItem.nok())
+         if (!pbufferitem->m_pgraphicsBufferItem || pbufferitem->m_pgraphicsBufferItem.nok())
          {
 
-            constructø(pbufferitem->m_pimageBufferItem);
+            constructø(pbufferitem->m_pgraphicsBufferItem);
 
             auto puserinteraction = dynamic_cast < ::user::interaction * >( m_pwindow->m_pacmeuserinteraction.m_p);
 
@@ -503,8 +504,12 @@ namespace windowing_win32
             ////}
             ////else
             ////{
+            //pbufferitem->m_pimageBufferItem->create(pbufferitem->m_sizeBufferItem);
+            pbufferitem->m_pgraphicsBufferItem->create_for_window_draw2d(puserinteraction, pbufferitem->m_sizeBufferItem);
 
-            //pbufferitem->m_pgraphicsBufferItem->create_for_window_draw2d(puserinteraction, pbufferitem->m_sizeBufferItem);
+            pbufferitem->m_pgraphicsBufferItem->set_ok_flag();
+
+            pbufferitem->m_pgraphicsBufferItem->m_estatus = success;
 
 //               //pbufferitem->m_pgraphics->create_memory_graphics(pbufferitem->m_sizeBufferItemDraw);
 //
@@ -515,13 +520,13 @@ namespace windowing_win32
 //            //pbufferitem->m_pgraphics->create_window_graphics(m_pwindow);
 
          }
-         else
-         {
+         //else
+         //{
 
-            //pbufferitem->m_pgraphicsBufferItem->defer_set_size(pbufferitem->m_sizeBufferItem);
-            pbufferitem->m_pimageBufferItem->create(pbufferitem->m_sizeBufferItem);
+         //   //pbufferitem->m_pgraphicsBufferItem->defer_set_size(pbufferitem->m_sizeBufferItem);
+         //   pbufferitem->m_pimageBufferItem->create(pbufferitem->m_sizeBufferItem);
 
-         }
+         //}
 
 
       }

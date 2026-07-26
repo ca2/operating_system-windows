@@ -551,79 +551,79 @@ namespace windowing_win32
 
    }
 
-   ::image::image_pointer icon::_get_image(const ::i32_size &size, const ::file::path &path) const
+   //::pointer < ::pixmap > icon::_get_pixmap(const ::i32_size &size, const ::file::path &path) const
+   //{
+
+   //   auto ppixmap = image()->path_pixmap(path);
+
+   //   if (ppixmap.nok())
+   //   {
+
+   //      return {};
+
+   //   }
+
+   //   auto sizeImage = ppixmap->size();
+
+   //   if (sizeImage == size)
+   //   {
+
+   //      return pimage;
+
+   //   }
+
+   //   auto pimageResized = image()->create_image(size);
+
+   //   bool bOk = false;
+
+   //   try
+   //   {
+
+   //      ::image::image_source imagesource(pimage);
+
+   //      ::image::image_drawing_options imagedrawingoptions(size);
+
+   //      ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+   //      auto pgraphicsImageResized = pimageResized->acquire_graphics();
+
+   //      pgraphicsImageResized->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
+
+   //      pgraphicsImageResized->draw(imagedrawing);
+
+   //      bOk = true;
+
+   //   }
+   //   catch (...)
+   //   {
+
+   //   }
+
+   //   if (bOk)
+   //   {
+
+   //      return pimageResized;
+
+   //   }
+
+   //   return nullptr;
+   //
+   //}
+
+
+   ::pointer < ::pixmap > icon::_get_resized_pixmap(const ::i32_size &size, const ::file::path &path) const
    {
 
-      auto pimage = image()->path_image(path);
+      auto ppixmap = image()->path_resized_pixmap(path, size);
 
-      if (pimage.nok())
+      if (ppixmap.nok())
       {
 
          return {};
 
       }
 
-      auto sizeImage = pimage->size();
-
-      if (sizeImage == size)
-      {
-
-         return pimage;
-
-      }
-
-      auto pimageResized = image()->create_image(size);
-
-      bool bOk = false;
-
-      try
-      {
-
-         ::image::image_source imagesource(pimage);
-
-         ::image::image_drawing_options imagedrawingoptions(size);
-
-         ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
-
-         auto pgraphicsImageResized = pimageResized->acquire_graphics();
-
-         pgraphicsImageResized->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
-
-         pgraphicsImageResized->draw(imagedrawing);
-
-         bOk = true;
-
-      }
-      catch (...)
-      {
-
-      }
-
-      if (bOk)
-      {
-
-         return pimageResized;
-
-      }
-
-      return nullptr;
-   
-   }
-
-
-   ::image::image_pointer icon::_get_resized_image(const ::i32_size &size, const ::file::path &path) const
-   {
-
-      auto pimage = image()->path_resized_image(path, size);
-
-      if (pimage.nok())
-      {
-
-         return {};
-
-      }
-
-      return pimage;
+      return ppixmap;
 
    }
 
@@ -675,51 +675,51 @@ namespace windowing_win32
             //if (strPath.case_insensitive_begins_eat("zipresource://"))
             //{
 
-            auto pimage = _get_image(size, pathProperSize);
+            //auto ppixmap = _get_pixmap(size, pathProperSize);
 
-            if (pimage.ok())
+            //if (ppixmap.ok())
+            //{
+
+            //   iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimage);
+
+            //   if (iconitem.m_hicon)
+            //   {
+
+            //      goto ok;
+
+            //   }
+
+            //}
+
+            auto ppixmap = _get_resized_pixmap(size, path);
+
+            if (ppixmap.ok())
             {
 
-               iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimage);
+               iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_pixmap(ppixmap);
 
                if (iconitem.m_hicon)
                {
 
                   goto ok;
-
-               }
-
-            }
-
-            pimage = _get_resized_image(size, path);
-
-            if (pimage.ok())
-            {
-
-               iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimage);
-
-               if (iconitem.m_hicon)
-               {
-
-                  goto ok;
                }
             }
 
-            pimage = _get_image(size, path);
+            //ppixmap = _get_pixmap(size, path);
 
-            if (pimage.ok())
-            {
+            //if (ppixmap.ok())
+            //{
 
-               iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimage);
+            //   iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_pixmap(ppixmap);
 
-               if (iconitem.m_hicon)
-               {
+            //   if (iconitem.m_hicon)
+            //   {
 
-                  goto ok;
+            //      goto ok;
 
-               }
+            //   }
 
-            }
+            //}
             
             if (file_system()->exists(pathProcessed))
             {
@@ -755,12 +755,12 @@ namespace windowing_win32
          }
          else
          {
-            auto pimage = image()->get_image(m_payload);
+            auto ppixmap = image()->get_pixmap(m_payload);
 
-            if (pimage.ok())
+            if (ppixmap.ok())
             {
 
-               iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimage);
+               iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_pixmap(ppixmap);
 
                if (iconitem.m_hicon)
                {

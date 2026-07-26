@@ -67,7 +67,7 @@ namespace aura_windows
       virtual HICON extract_resource_icon(const ::scoped_string & scopedstrPath, ::i32& cx, ::i32& cy, ::i32 iIcon);
 
       //void* HICON_from_ico_file(const ::block& block);
-      void* HICON_from_image(::image::image * pimage);
+      virtual void* HICON_from_pixmap(::pixmap * ppixmap);
 
 
       ::pointer < ::input::input > create_input() override;
