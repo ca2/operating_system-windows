@@ -81,7 +81,7 @@ namespace draw2d_gdiplus
 
       void create_compatible_graphics(::draw2d::graphics * pgraphics) override;
 
-      void create_draw2d_graphics(::draw2d::bitmap * pbitmap) override;
+      void create_bitmap_graphics(::draw2d::bitmap * pbitmap) override;
 
       void DeleteDC() override;
 

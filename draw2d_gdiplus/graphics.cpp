@@ -298,7 +298,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::create_draw2d_graphics(::draw2d::bitmap * pbitmap)
+   void graphics::create_bitmap_graphics(::draw2d::bitmap * pbitmap)
    {
 
       auto pgdiplusbitmap = (::Gdiplus::Bitmap *)pbitmap->get_os_data();

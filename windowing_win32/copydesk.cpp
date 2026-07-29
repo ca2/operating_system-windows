@@ -660,7 +660,7 @@ namespace windowing_win32
 
             ::GetObject(hbitmap, sizeof(bm), &bm);
 
-            pimage->create(::i32_size(bm.bmWidth, bm.bmHeight), NOK_IMAGE);
+            pimage->create_as_descriptor(::i32_size(bm.bmWidth, bm.bmHeight), NOK_IMAGE);
 
             if (pimage->area() > 0)
             {

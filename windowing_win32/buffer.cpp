@@ -344,7 +344,7 @@ namespace windowing_win32
          if (pbufferitem->m_sizeBufferItem == playeredwindowbuffer->m_pixmap.size())
          {
 
-            return false;
+            return true;
 
          }
 
@@ -471,7 +471,7 @@ namespace windowing_win32
             try
             {
 
-               pbufferitem->m_pimageBufferItem->create(playeredwindowbuffer->m_pixmap.m_sizeRaw);
+               pbufferitem->m_pimageBufferItem->create_as_render_target(playeredwindowbuffer->m_pixmap.m_sizeRaw);
 
             }
             catch (...)
@@ -995,7 +995,8 @@ namespace windowing_win32
             if (sizeLayeredWindowBuffer != sizeBufferImage)
             {
 
-               if (m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
+               if (m_pwindow->m_timeLastDrawGuard1.is_set()
+                  && m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
                {
 
                   throw ::exception(error_failed);

@@ -478,7 +478,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::create(::draw2d::graphics * pgraphics)
+   void image::create_from_graphics(::draw2d::graphics * pgraphics)
    {
 
       ::draw2d::bitmap * pbitmap = (dynamic_cast<::draw2d_gdiplus::graphics *>(pgraphics))->get_current_bitmap();
@@ -492,7 +492,7 @@ namespace draw2d_gdiplus
 
       }
       
-      create(pbitmap->get_size());
+      create_as_descriptor(pbitmap->get_size());
       //if (!create(pbitmap->get_size()))
       //{
 
@@ -727,7 +727,7 @@ namespace draw2d_gdiplus
 
       //auto estatus = 
       
-      create({ cx, cy });
+      create_as_descriptor({cx, cy});
 
       //if (!estatus)
       //{
@@ -752,7 +752,7 @@ namespace draw2d_gdiplus
       
       //estatus = 
       
-      pimage1->create({ cx, cy });
+      pimage1->create_as_descriptor({cx, cy});
 
       //if (!estatus)
       //{
@@ -795,7 +795,7 @@ namespace draw2d_gdiplus
 
       //estatus=
       
-      pimage2->create( 
+      pimage2->create_as_descriptor( 
       { cx, cy } );
 
  /*     if (!estatus)
@@ -840,7 +840,7 @@ namespace draw2d_gdiplus
 
       // estatus = 
       
-      pimageM->create(
+      pimageM->create_as_descriptor(
          { cx, cy });
 
       //if (!estatus)
