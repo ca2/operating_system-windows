@@ -33,7 +33,6 @@ namespace draw2d_gdiplus
    path::path()
    {
 
-      m_pthis = this;
       m_ppath = nullptr;
       m_bHasPath = false;
 
@@ -563,13 +562,13 @@ namespace draw2d_gdiplus
 
          }
 
-         auto pdrawdgdiplusfont = __font(pfont);
+         ::cast < ::draw2d_gdiplus::font > pdrawdgdiplusfont = pfont;
 
-         auto pfont = pdrawdgdiplusfont->get_os_data < Gdiplus::Font * > (pgraphics);
+         auto pgdiplusfont = pdrawdgdiplusfont->get_os_data < Gdiplus::Font * > (pgraphics);
 
-         INT iStyle = pfont->GetStyle();
+         INT iStyle = pgdiplusfont->GetStyle();
 
-         pfont->GetFamily(&pfontFamily);
+         pgdiplusfont->GetFamily(&pfontFamily);
          //      Gdiplus::Status status;
 
          //Gdiplus::StringFormat format();

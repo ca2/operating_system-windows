@@ -23,6 +23,7 @@ namespace draw2d_gdiplus
 
 
       image();
+      image(image&& image);
       ~image() override;
 
 
@@ -45,6 +46,8 @@ namespace draw2d_gdiplus
       virtual bool _load_thumbnail(const ::scoped_string & scopedstr);
 
 
+      void create_bitmap() override;
+
 
       void create_from_data(const ::i32_size & size, const ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, bool bPreserve = false) override;
       //void create(const ::i32_size & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, ::i32 iGoodStride = -1, bool bPreserve = false) override;
@@ -53,6 +56,7 @@ namespace draw2d_gdiplus
       bool on_host_read_pixels(::pixmap_t* pixmap) const override;
       //using ::image::image::create;
       void create_from_graphics(::draw2d::graphics * pgraphics) override;
+      void preserve(const ::i32_size& size, ::enum_flag eflagCreate) override;
       void destroy() override;
 
 

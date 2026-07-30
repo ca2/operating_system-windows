@@ -5513,10 +5513,10 @@ namespace acme_windows
 
             // Terminate the current process gracefully
             // ExitProcess(0);
-            if (application()->m_pacmeuserinteractionMain)
+            if (pacmeuserinteractionMain)
             {
-               application()->m_pacmeuserinteractionMain->hide();
-               application()->m_pacmeuserinteractionMain->set_finish();
+               pacmeuserinteractionMain->hide();
+               pacmeuserinteractionMain->set_finish();
 
             }
             application()->set_finish();

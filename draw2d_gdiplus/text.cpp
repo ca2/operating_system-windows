@@ -34,7 +34,9 @@ namespace draw2d_gdiplus
 
       }
 
-      auto pfont = __font(pfontParam)->get_os_data < Gdiplus::Font * >(this);
+      ::cast < ::draw2d_gdiplus::font > pdraw2dgdiplusfont = pfontParam;
+
+      auto pfont = pdraw2dgdiplusfont->get_os_data < Gdiplus::Font * >(this);
 
       if (::is_null(pfont))
       {
@@ -54,7 +56,9 @@ namespace draw2d_gdiplus
       if (::is_set(ppathParam))
       {
 
-         ppath = __graphics_path(ppathParam)->get_os_data < Gdiplus::GraphicsPath * >(this);
+         ::cast < ::draw2d_gdiplus::path > pdraw2dgdipluspath = ppathParam;
+
+         ppath = pdraw2dgdipluspath->get_os_data < Gdiplus::GraphicsPath * >(this);
 
       }
 
@@ -63,7 +67,9 @@ namespace draw2d_gdiplus
       if (::is_set(pbrushParam))
       {
 
-         pbrush = __brush(pbrushParam)->get_os_data < Gdiplus::Brush * >(this);
+         ::cast < ::draw2d_gdiplus::brush > pdraw2dgdiplusbrush = pbrushParam;
+
+         pbrush = pdraw2dgdiplusbrush->get_os_data < Gdiplus::Brush * >(this);
 
          if (::is_null(pbrush))
          {

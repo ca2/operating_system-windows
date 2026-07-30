@@ -54,7 +54,9 @@ namespace draw2d_gdiplus
 
          auto pgraphics = create_newø<::draw2d_gdiplus::graphics>();
 
-         pgraphics->create_bitmap_graphics(pimage->get_bitmap());
+         //pgraphics->create_bitmap_graphics(pimage->get_bitmap());
+
+         pgraphics->create_for_image(pimage);
 
          return pgraphics;
 

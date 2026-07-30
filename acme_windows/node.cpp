@@ -5553,12 +5553,15 @@ namespace acme_windows
             CloseHandle(pi.hProcess);
             CloseHandle(pi.hThread);
 
+
+            auto pacmeuserinteractionMain = application()->main_acme_user_interaction();
+
             // Terminate the current process gracefully
             // ExitProcess(0);
-            if (application()->m_pacmeuserinteractionMain)
+            if (pacmeuserinteractionMain)
             {
-               application()->m_pacmeuserinteractionMain->display(e_display_hide, {});
-               application()->m_pacmeuserinteractionMain->post_message(::user::e_message_close);
+               pacmeuserinteractionMain->display(e_display_hide, {});
+               pacmeuserinteractionMain->post_message(::user::e_message_close);
 
             }
             else

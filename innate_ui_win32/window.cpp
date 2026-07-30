@@ -758,7 +758,7 @@ return false;
       auto hwnd = ::as_HWND(m_windowswindow.as_operating_system_window());
 
       // Create a bold, 12pt Segoe UI font scaled for the current monitor
-      HFONT hNewFont = CreateScaledFont(hwnd, 12 * m_dFontSizeEm, m_iFontWeight, L"Segoe UI");
+      HFONT hNewFont = CreateScaledFont(hwnd, (::i32) ( 12 * m_dFontSizeEm), m_iFontWeight, L"Segoe UI");
 
       // Send the WM_SETFONT message to the control
       // wParam: Handle to the new font

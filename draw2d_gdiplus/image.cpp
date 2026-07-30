@@ -29,6 +29,14 @@ namespace draw2d_gdiplus
    }
 
 
+   image::image(image&& image) :
+      IMAGE_IMAGE_TRANSFER(image)
+   {
+
+
+   }
+
+
    image::~image()
    {
 
@@ -37,10 +45,18 @@ namespace draw2d_gdiplus
    }
 
 
+   void image::create_bitmap()
+   {
+
+      return ::image::image::create_bitmap();
+
+   }
+
+
    ::draw2d::bitmap_pointer image::get_bitmap() const
    {
 
-      return m_pbitmap;
+      return ::image::image::get_bitmap();
 
    }
 
@@ -56,6 +72,8 @@ namespace draw2d_gdiplus
    void image::_map(bool bApplyTransform)
    {
 
+      image_meta::_map(bApplyTransform);
+
       //_on_map(bApplyTransform);
 
       //return true;
@@ -66,7 +84,10 @@ namespace draw2d_gdiplus
    void image::_unmap(bool bDoUnmap)
    {
 
+      image_meta::_unmap(false);
+      
       //_on_unmap(bDoUnmap);
+      
       //return true;
 
    }
@@ -268,7 +289,11 @@ namespace draw2d_gdiplus
 
       information("draw2d_gdiplus::image::create_from_data (1) {}", str1);
 
-      pbitmap->create_bitmap(nullptr, size, &pimage32Bitmap, pimage32, &iScan);
+      m_memoryPixmap.assign(pimage32, iScan * size.cy);
+
+      //pbitmap->create_bitmap(nullptr, size, &pimage32Bitmap, pimage32, &iScan);
+
+      pbitmap->create_bitmap(nullptr, size, m_memoryPixmap, &iScan);
 
       auto str2 = _001_image32_diagnostics(size, pimage32Bitmap, iScan);
 
@@ -503,6 +528,20 @@ namespace draw2d_gdiplus
       copy_from(pgraphics->m_pimage);
 
       //return true;
+
+   }
+
+
+   void image::preserve(const ::i32_size& size, ::enum_flag eflagCreate)
+   {
+
+      auto imageBefore = ::transfer(*this);
+
+      create_as_descriptor(size, eflagCreate);
+
+      auto mapImageBefore = imageBefore.map();
+
+      copy(size.minimum(mapImageBefore.size()), mapImageBefore.data(), mapImageBefore.m_iScan);
 
    }
 

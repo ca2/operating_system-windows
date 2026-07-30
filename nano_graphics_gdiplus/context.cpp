@@ -250,7 +250,7 @@ namespace nano_graphics_gdiplus
        ::copy(rectfText, rectangleText);
 
        m_pgraphics->DrawString(
-       wstr, wstr.length(),
+       wstr, (INT) wstr.length(),
        pgdiplusfont->m_pfont,
        rectfText,
        &sf,
@@ -327,7 +327,7 @@ namespace nano_graphics_gdiplus
 
           ::wstring wstrText(scopedstr);
 
-      m_pgraphics->MeasureString(wstrText.c_str(), wstrText.length(), pgdiplusfont->m_pfont,
+      m_pgraphics->MeasureString(wstrText.c_str(), (INT) wstrText.length(), pgdiplusfont->m_pfont,
          ::Gdiplus::PointF(0.f, 0.f), &bounds);
 
       return {bounds.Width, bounds.Height};

@@ -14,10 +14,10 @@ namespace draw2d_gdiplus
    brush::brush()
    {
 
-      m_pthis = this;
       m_pbrush = nullptr;
 
    }
+
 
    brush::~brush()
    {

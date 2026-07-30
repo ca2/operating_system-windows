@@ -48,8 +48,6 @@ inline auto gdiplus_color(const ::color::color & color)
 #define __graphics_path(ppath) ((::draw2d_gdiplus::path *) ppath->m_pthis)
 
 
-
-
 class g_keep
 {
 

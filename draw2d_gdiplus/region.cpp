@@ -16,7 +16,6 @@ namespace draw2d_gdiplus
    region::region()
    {
 
-      m_pthis = this;
       m_pregion = nullptr;
 
    }

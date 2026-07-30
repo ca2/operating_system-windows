@@ -13,7 +13,6 @@ namespace draw2d_gdiplus
    pen::pen()
    {
 
-      m_pthis = this;
       m_egdiplusalign = (Gdiplus::PenAlignment) -1;
       m_ppen = nullptr;
 

@@ -1673,9 +1673,9 @@ namespace draw2d_gdiplus
    void graphics::_draw_raw(const ::image::image_drawing & imagedrawing)
    {
 
-      auto pimage = imagedrawing.image();
+      auto pimageSource = imagedrawing.image();
 
-      if (!::is_ok(pimage))
+      if (!::is_ok(pimageSource))
       {
 
          //return false;
@@ -1700,7 +1700,7 @@ namespace draw2d_gdiplus
       //else
       //{
 
-      pimage->defer_update_image();
+      auto pimage = pimageSource->get_source_image();
 
       //}
 

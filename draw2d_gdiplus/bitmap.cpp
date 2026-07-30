@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "bitmap.h"
+#include "image.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/interface_only.h"
 #include "acme/graphics/image/pixmap.h"
@@ -20,9 +21,24 @@ namespace draw2d_gdiplus
       m_mem.m_bAligned = true;
 
       m_pbitmap   = nullptr;
+
       m_iStride   = 0;
 
    }
+
+
+   bitmap::bitmap(bitmap&& bitmap) :
+      ::draw2d::bitmap(::transfer(bitmap)),
+      DRAW2D_OBJECT_TRANSFER(bitmap),
+      m_pbitmap(bitmap.m_pbitmap),
+      m_mem(::transfer(m_mem))
+   {
+
+      bitmap.m_pbitmap = nullptr;
+      bitmap.m_size.set_null();
+
+   }
+
 
    bitmap::~bitmap()
    {
@@ -31,7 +47,7 @@ namespace draw2d_gdiplus
 
    }
 
-   
+
    void bitmap::destroy()
    {
 
@@ -40,6 +56,36 @@ namespace draw2d_gdiplus
       ::draw2d::bitmap::destroy();
 
       //return ::success;
+
+   }
+
+
+   void bitmap::create_bitmap_for_image(::image::image* pimage)
+   {
+
+      create_bitmap(nullptr, pimage->size(), pimage->m_memoryPixmap, &pimage->m_iScan);
+
+      pimage->m_pbitmap = this;
+
+      pimage->m_pimage32Raw = (::image32_t *) pimage->m_memoryPixmap.data();
+
+      pimage->m_pimage32 = (::image32_t*)pimage->m_memoryPixmap.data();
+
+      //pimage->m_bMapped = true;
+
+      //pimage->m_interlockedcountMap = 1;
+
+   }
+
+
+   void bitmap::preserve_image(const ::i32_size& size, ::image::image* pimage)
+   {
+
+      auto bitmap = ::transfer(*this);
+
+      create_bitmap_for_image(pimage);
+
+      pimage->m_pbitmap = this;
 
    }
 
@@ -115,7 +161,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::i32_size& size, ::image32_t **ppimage32, const ::image32_t * pimage32, ::i32* stride)
+   void bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::i32_size& size, ::memory & memory, ::i32* piScan)
    {
 
       if (size == m_size)
@@ -127,25 +173,49 @@ namespace draw2d_gdiplus
 
       }
 
-      BITMAPINFO info = {};
-
-      info.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-      info.bmiHeader.biWidth = size.cx;
-      info.bmiHeader.biHeight = -size.cy;
-      info.bmiHeader.biPlanes = 1;
-      info.bmiHeader.biBitCount = 32;
-      info.bmiHeader.biCompression = BI_RGB;
-      info.bmiHeader.biSizeImage = size.area() * sizeof(::color::color);
-
-      const BITMAPINFO* pbmi = &info;
-
       __UNREFERENCED_PARAMETER(pgraphics);
+
+      //BITMAPINFO info = {};
+
+      //info.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+      //info.bmiHeader.biWidth = size.cx;
+      //info.bmiHeader.biHeight = -size.cy;
+      //info.bmiHeader.biPlanes = 1;
+      //info.bmiHeader.biBitCount = 32;
+      //info.bmiHeader.biCompression = BI_RGB;
+      //info.bmiHeader.biSizeImage = size.area() * sizeof(::color::color);
+
+      //const BITMAPINFO* pbmi = &info;
 
       ::acme::del(m_pbitmap);
 
-      m_iStride = 4 * pbmi->bmiHeader.biWidth;
+      m_iStride = 4 * size.cx;
+         
+      ::i32 iScan = m_iStride;
 
-      m_mem.set_size(abs(m_iStride * pbmi->bmiHeader.biHeight));
+      if (piScan && *piScan > iScan)
+      {
+
+         iScan = *piScan;
+
+      }
+
+      if (memory.size() >= iScan * size.cy)
+      {
+
+         m_mem.reference_data(memory);
+
+         m_iStride = iScan;
+
+      }
+      else
+      {
+
+         m_mem.set_size(m_iStride * size.cy);
+
+         memory.reference_data(m_mem);
+
+      }
 
       if (m_mem.data() == nullptr)
       {
@@ -156,25 +226,25 @@ namespace draw2d_gdiplus
 
       }
 
-      auto pimage32Map = (::image32_t *)m_mem.data();
+      //auto pimage32Map = (::image32_t *)m_mem.data();
 
-      ::i32 iStrideSrc = size.cx * 4;
+      //::i32 iStrideSrc = size.cx * 4;
 
-      if (stride && *stride > iStrideSrc)
-      {
+      //if (stride && *stride > iStrideSrc)
+      //{
 
-         iStrideSrc = *stride;
+      //   iStrideSrc = *stride;
 
-      }
+      //}
 
-      if (pimage32)
-      {
+      //if (pimage32)
+      //{
 
-         pimage32Map->copy(size, m_iStride, pimage32, iStrideSrc);
+      //   pimage32Map->copy(size, m_iStride, pimage32, iStrideSrc);
 
-      }
+      //}
 
-      m_pbitmap = øraw_new Gdiplus::Bitmap(abs(pbmi->bmiHeader.biWidth), abs(pbmi->bmiHeader.biHeight),m_iStride, PixelFormat32bppPARGB, (BYTE *)m_mem.data());
+      m_pbitmap = øraw_new Gdiplus::Bitmap(size.cx, size.cy, m_iStride, PixelFormat32bppPARGB, (BYTE *)m_mem.data());
 
       if(m_pbitmap == nullptr)
       {
@@ -183,23 +253,27 @@ namespace draw2d_gdiplus
 
       }
 
-      if(ppimage32 != nullptr)
+      //if(ppimage32 != nullptr)
+      //{
+
+      //   *ppimage32 = (::image32_t *) m_mem.data();
+
+      //}
+
+      if(piScan)
       {
 
-         *ppimage32 = (::image32_t *) m_mem.data();
-
-      }
-
-      if(stride != nullptr)
-      {
-
-         *stride = m_iStride;
+         *piScan = m_iStride;
 
       }
 
       m_osdata[0] = m_pbitmap;
 
       m_size = size;
+
+      set_ok_flag();
+
+      m_estatus = ::success;
 
       //return true;
 

@@ -250,7 +250,7 @@ namespace innate_ui_win32
    ::pointer<::innate_ui::icon> innate_ui::try_get_application_icon_from_main_window()
    {
 
-      auto pacmeuserinteractionMain = m_papplication->m_pacmeuserinteractionMain;
+      auto pacmeuserinteractionMain = m_papplication->main_acme_user_interaction();
 
       if (!pacmeuserinteractionMain)
       {

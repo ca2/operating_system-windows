@@ -1057,7 +1057,7 @@ namespace acme_windows
 
       ::i8 szOut[4096];
       ::i8 szErr[4096];
-      ::i8 szIn[4096];
+      //::i8 szIn[4096];
       DWORD dwReadOut = 0;
       DWORD dwReadErr = 0;
       DWORD dwReadIn = 0;
@@ -1288,7 +1288,7 @@ namespace acme_windows
 
             INPUT_RECORD rec;
             DWORD eventsRead;
-            DWORD bytesAvail;
+            //DWORD bytesAvail;
 
             DWORD written;
 

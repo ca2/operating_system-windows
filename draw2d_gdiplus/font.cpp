@@ -18,8 +18,6 @@ namespace draw2d_gdiplus
    font::font()
    {
 
-      m_pthis = this;
-
    }
 
 

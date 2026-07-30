@@ -186,10 +186,10 @@ namespace win32
             }
 
             HWND hwnd = CreateWindowEx(
-               iExStyle,
+               (DWORD) iExStyle,
                windowclass.m_wstrClassName,
                wstrTitle,
-               iStyle,
+               (DWORD) iStyle,
                r.left,
                r.top,
                r.width(),
