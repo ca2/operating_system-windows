@@ -27,6 +27,10 @@ namespace win32
       {
 
 
+         class window;
+
+         class windowing;
+
 
       } // namespace windowing
 

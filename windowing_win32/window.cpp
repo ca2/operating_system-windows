@@ -1,15 +1,15 @@
 // created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
-#include "buffer.h"
+#include "cursor.h"
 #include "display.h"
+#include "graphics.h"
+#include "icon.h"
 #include "monitor.h"
+#include "system_interaction.h"
+#include "top_level_enum.h"
 #include "window.h"
 #include "windowing.h"
-#include "icon.h"
-#include "cursor.h"
-#include "top_level_enum.h"
-#include "system_interaction.h"
 #include "window_util.h"
 #include "acme/constant/activate.h"
 #include "acme/constant/id.h"
@@ -29,6 +29,7 @@
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/graphics/draw2d/graphics_pointer.h"
+#include "aura/graphics/draw2d/window_attachment.h"
 #include "aura/graphics/graphics/graphics.h"
 #include "aura/user/user/interaction_graphics_thread.h"
 #include "aura/user/user/interaction_thread.h"
@@ -39,6 +40,7 @@
 #include "aura/platform/session.h"
 #include "aura/platform/system.h"
 #include "aura/windowing/placement_log.h"
+#include "operating_system-windows/aura_windows/layered_window_buffer.h"
 #include "acme/operating_system/windows_common/com/comptr.h"
 #include "acme_windowing_win32/activation_token.h"
 
@@ -118,10 +120,6 @@ namespace windowing_win32
 
       //m_pWindow4 = this;
 
-      m_uExtraFlagsSetWindowPos = 0;
-
-      m_uSetWindowPosLastFlags = 0;
-      m_hwndSetWindowPosLastInsertAfter = nullptr;
 
       //set_layer(LAYERED_IMPL, this);
       //m_plongmap  = ___new iptr_to_iptr;
@@ -801,6 +799,10 @@ namespace windowing_win32
       if (puserinteraction && puserinteraction->is_graphical())
       {
 
+         constructø(m_pdraw2dwindowattachment);
+
+         m_pdraw2dwindowattachment->initialize_window_attachment(this);
+
          if (m_papplication->m_bGpu)
          {
 
@@ -861,20 +863,22 @@ namespace windowing_win32
 
       //}
 
-      if (_get_ex_style() & WS_EX_LAYERED)
-      {
+      //if (_get_ex_style() & WS_EX_LAYERED)
+      //{
 
-         m_uExtraFlagsSetWindowPos =
-            SWP_NOZORDER |
-            SWP_ASYNCWINDOWPOS
-            //| SWP_FRAMECHANGED
-            //| SWP_NOSENDCHANGING
-            | SWP_NOREDRAW
-            | SWP_NOCOPYBITS
-            //| SWP_DEFERERASE
-            | SWP_NOACTIVATE;
-         //| SWP_SHOWWINDOW;
-      }
+      //   ::pointer < layered_window_buffer > playeredwindowbuffer = m_pgraphicsgraphics->m_pwindowbuffer;
+
+      //   playeredwindowbuffer->m_uExtraFlagsSetWindowPos =
+      //      SWP_NOZORDER |
+      //      SWP_ASYNCWINDOWPOS
+      //      //| SWP_FRAMECHANGED
+      //      //| SWP_NOSENDCHANGING
+      //      | SWP_NOREDRAW
+      //      | SWP_NOCOPYBITS
+      //      //| SWP_DEFERERASE
+      //      | SWP_NOACTIVATE;
+      //   //| SWP_SHOWWINDOW;
+      //}
 
 
       ////puserinteraction->increment_reference_count();
@@ -2434,16 +2438,6 @@ namespace windowing_win32
    //}
 
 
-   iptr window::_get_window_long_ptr(::i32 nIndex) const
-   {
-
-      HWND hwnd = ::as_HWND(this->operating_system_window());
-
-      auto iptr = GetWindowLongPtr(hwnd, nIndex);
-
-      return iptr;
-
-   }
 
 
    bool window::_set_window_position_unlocked(
@@ -2687,21 +2681,11 @@ namespace windowing_win32
          // If the window is layered, SetWindowPos gonna be called
          // very close to UpdateLayeredWindow call.
 
-         m_uSetWindowPosLastFlags = m_uExtraFlagsSetWindowPos;
+         ::pointer < layered_window_buffer > playeredwindowbuffer = m_pgraphicsgraphics->m_pwindowbuffer;
+
+         playeredwindowbuffer->m_uSetWindowPosLastFlags = playeredwindowbuffer->m_uExtraFlagsSetWindowPos;
 
       }
-
-   }
-
-
-   bool window::_set_window_long_ptr(::i32 nIndex, iptr i)
-   {
-
-      HWND hwnd = ::as_HWND(this->operating_system_window());
-
-      SetWindowLongPtr(hwnd, nIndex, i);
-
-      return true;
 
    }
 
@@ -3147,7 +3131,9 @@ namespace windowing_win32
 
       HWND hwndInsertAfter = pwin32windowing->zorder_to_hwnd(zorder);
 
-      UINT nFlags = m_uExtraFlagsSetWindowPos;
+      ::pointer < layered_window_buffer > playeredwindowbuffer = m_pgraphicsgraphics->m_pwindowbuffer;
+
+      UINT nFlags = playeredwindowbuffer->m_uExtraFlagsSetWindowPos;
 
       if (zorder.is_change_request())
       {
@@ -3222,11 +3208,13 @@ namespace windowing_win32
          // If the window is layered, SetWindowPos gonna be called
          // very close to UpdateLayeredWindow call.
 
-         m_uSetWindowPosLastFlags = nFlags;
+         ::pointer < layered_window_buffer > playeredwindowbuffer = m_pgraphicsgraphics->m_pwindowbuffer;
 
-         m_hwndSetWindowPosLastInsertAfter = hwndInsertAfter;
+         playeredwindowbuffer->m_uSetWindowPosLastFlags = nFlags;
 
-         m_activationSetWindowPosLast = useractivation;
+         playeredwindowbuffer->m_hwndSetWindowPosLastInsertAfter = hwndInsertAfter;
+
+         playeredwindowbuffer->m_activationSetWindowPosLast = useractivation;
 
          return true;
 
@@ -4478,104 +4466,7 @@ namespace windowing_win32
    }
 
 
-   iptr window::_get_style() const
-   {
 
-      return _get_window_long_ptr(GWL_STYLE);
-
-   }
-
-
-   iptr window::_get_ex_style() const
-   {
-
-      return _get_window_long_ptr(GWL_EXSTYLE);
-
-   }
-
-
-   bool window::_set_style(iptr iStyle)
-   {
-
-      return _set_window_long_ptr(GWL_STYLE, iStyle);
-
-   }
-
-
-   bool window::_set_ex_style(iptr iExStyle)
-   {
-
-      return _set_window_long_ptr(GWL_EXSTYLE, iExStyle);
-
-   }
-
-
-   bool window::_modify_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
-   {
-
-      auto nStyleOld = _get_style();
-
-      auto nStyleNew = nStyleOld & ~dwRemove;
-
-      nStyleNew |= dwAdd;
-
-      if (nStyleNew != nStyleOld)
-      {
-
-         _set_style(nStyleNew);
-
-         if (nFlags)
-         {
-
-            ::SetWindowPos(::as_HWND(this->operating_system_window()),
-                           0, 0, 0, 0, 0,
-                           SWP_NOSIZE
-                           | SWP_NOZORDER
-                           | SWP_NOMOVE
-                           | SWP_NOACTIVATE
-                           | nFlags);
-
-         }
-
-      }
-
-      return true;
-
-   }
-
-
-   bool window::_modify_ex_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
-   {
-
-      auto nExStyleOld = _get_ex_style();
-
-      auto nExStyleNew = nExStyleOld & ~dwRemove;
-
-      nExStyleNew |= dwAdd;
-
-      if (nExStyleNew != nExStyleOld)
-      {
-
-         _set_ex_style(nExStyleNew);
-
-         if (nFlags)
-         {
-
-            ::SetWindowPos(::as_HWND(this->operating_system_window()),
-                           0, 0, 0, 0, 0,
-                           SWP_NOSIZE
-                           | SWP_NOZORDER
-                           | SWP_NOMOVE
-                           | SWP_NOACTIVATE
-                           | nFlags);
-
-         }
-
-      }
-
-      return true;
-
-   }
 
 
    //bool window::ModifyStyleEx(::u32 dwRemove, ::u32 dwAdd, ::u32 nFlags)
@@ -7753,6 +7644,11 @@ namespace windowing_win32
 
    void window::set_finish()
    {
+
+      informationf(
+         "ShutdownDiagnostic windowing_win32::window::set_finish hwnd=%p thread=%lu",
+         ::as_HWND(operating_system_window()),
+         (unsigned long)::GetCurrentThreadId());
 
       //auto estatus =
 

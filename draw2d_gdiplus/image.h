@@ -20,6 +20,7 @@ namespace draw2d_gdiplus
       HBITMAP                    m_hbitmap;
       ::i64_size                 m_sizeWnd;
       BITMAPINFO                 m_bitmapinfo;
+      
 
 
       image();
@@ -46,13 +47,14 @@ namespace draw2d_gdiplus
       virtual bool _load_thumbnail(const ::scoped_string & scopedstr);
 
 
-      void create_bitmap() override;
-
+      void create_bitmap(
+         ::acme::user::interaction * pacmeuserinteractionAffinity = nullptr) override;
 
       void create_from_data(const ::i32_size & size, const ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, bool bPreserve = false) override;
       //void create(const ::i32_size & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, ::i32 iGoodStride = -1, bool bPreserve = false) override;
       //void initialize(const ::i32_size & size, ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
-      virtual bool host(::pixmap_t * pixmap, ::windowing::window * pwindow) override;
+      void create_as_render_target(const ::i32_size & sizeRaw, ::user::interaction * puserinteraction, ::enum_flag eflagCreate, ::i32 iGoodStride, bool bPreserve) override;
+      bool host(::windowing::window_buffer * pwindowbuffer, ::windowing::window * pwindow, const ::i32_size & sizeRaw) override;
       bool on_host_read_pixels(::pixmap_t* pixmap) const override;
       //using ::image::image::create;
       void create_from_graphics(::draw2d::graphics * pgraphics) override;

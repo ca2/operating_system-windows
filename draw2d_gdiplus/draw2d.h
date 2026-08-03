@@ -32,10 +32,10 @@ namespace draw2d_gdiplus
 
       protected:
             
-         ::draw2d::graphics_pointer do_allocation_strategy(::draw2d::host *pdraw2dhost, ::image::image *pimage,
+         ::draw2d::graphics_pointer do_allocation_strategy(::acme::user::interaction * pacmeuserinteractionAffinity, ::image::image *pimage,
                                                                  const ::i32_size &size) override;
 
-      void do_release_to_pool_strategy(::draw2d::graphics_pointer &pgraphics) override;
+      void do_release_to_pool_strategy(::draw2d::graphics_pointer &pgraphics, ::image::image * pimage) override;
 
    };
 

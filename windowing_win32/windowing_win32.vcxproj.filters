@@ -19,7 +19,7 @@
     <ClCompile Include="message_bypass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="buffer.cpp">
+    <ClCompile Include="graphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="appbar.cpp">
@@ -109,6 +109,9 @@
     <ClCompile Include="message_window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="aaa_graphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -132,7 +135,7 @@
     <ClInclude Include="top_level_enum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="buffer.h">
+    <ClInclude Include="graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="print_window.h">
@@ -196,6 +199,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="message_window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aaa_graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

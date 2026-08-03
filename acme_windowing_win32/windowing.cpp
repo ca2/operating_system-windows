@@ -799,6 +799,10 @@ namespace win32
             procedure = [this]()
                {
 
+                  informationf(
+                     "ShutdownDiagnostic windowing_post_quit PostQuitMessage thread=%lu",
+                     (unsigned long)::GetCurrentThreadId());
+
                   ::PostQuitMessage(0);
 
                };
@@ -825,6 +829,11 @@ namespace win32
 
                if (msg.message == WM_QUIT)
                {
+
+                  informationf(
+                     "ShutdownDiagnostic handle_messages received WM_QUIT exitCode=%llu thread=%lu",
+                     (unsigned long long)msg.wParam,
+                     (unsigned long)::GetCurrentThreadId());
 
                   ::get_task()->set_finish();
 

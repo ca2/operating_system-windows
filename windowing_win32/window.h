@@ -43,10 +43,6 @@ namespace windowing_win32
       //::pointer<::aura_windows::interaction_impl>   m_pimpl2;
       class ::time                                    m_timeLastMouseMove;
       ::i32_point                                     m_pointMouseMove;
-      ::u32                                    m_uExtraFlagsSetWindowPos;
-      ::u32                                    m_uSetWindowPosLastFlags;
-      HWND                                            m_hwndSetWindowPosLastInsertAfter;
-      ::user::activation                              m_activationSetWindowPosLast;
 
 
       /// windows::interaction_impl
@@ -268,14 +264,6 @@ namespace windowing_win32
       //bool operator==(const interaction_impl & wnd) const;
       //bool operator!=(const interaction_impl & wnd) const;
 
-      virtual iptr _get_style() const;
-      virtual iptr _get_ex_style() const;
-      virtual bool _set_style(iptr iStyle);
-      virtual bool _set_ex_style(iptr iExStyle);
-      virtual bool _modify_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags = 0);
-      virtual bool _modify_ex_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags = 0);
-      virtual iptr _get_window_long_ptr(::i32 iIndex) const;
-      virtual bool _set_window_long_ptr(::i32 iIndex, ::iptr iLong);
 
       //virtual ::user::interaction * get_owner();
       //virtual void set_owner(::user::interaction * pOwnerWnd);

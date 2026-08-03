@@ -3070,6 +3070,7 @@
     <ClInclude Include="extract_icon.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="aaa_interaction_impl.h" />
+    <ClInclude Include="layered_window_buffer.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="shell_open.h" />
     <ClInclude Include="_.h" />
@@ -3116,6 +3117,7 @@
     </ClCompile>
     <ClCompile Include="extract_icon.cpp" />
     <ClCompile Include="hicon_from_ico_file.cpp" />
+    <ClCompile Include="layered_window_buffer.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="shell_open.cpp" />
     <ClCompile Include="_factory.cpp" />

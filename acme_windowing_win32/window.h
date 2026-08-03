@@ -29,7 +29,8 @@ namespace win32
 
             
 
-
+            ::u8 m_uOpacity = 255;
+            //HDC m_hdcScreen = nullptr;
             bool m_bNcActive;
             //CreatableFromBase(window, ::micro::window_implementation);
             //bool m_bSizeMoveMode;
@@ -58,6 +59,18 @@ namespace win32
             window();
 
             ~window() override;
+
+
+
+            virtual iptr _get_style() const;
+            virtual iptr _get_ex_style() const;
+            virtual bool _set_style(iptr iStyle);
+            virtual bool _set_ex_style(iptr iExStyle);
+            virtual bool _modify_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags = 0);
+            virtual bool _modify_ex_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags = 0);
+            virtual iptr _get_window_long_ptr(::i32 iIndex) const;
+            virtual bool _set_window_long_ptr(::i32 iIndex, ::iptr iLong);
+
 
             void create_window() override;
 

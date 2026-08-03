@@ -8,6 +8,7 @@
 #include "aura/graphics/image/icon.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/draw2d/graphics_lease.h"
+#include "aura/windowing/window_buffer.h"
 
 
 CLASS_DECL_ACME ::string _001_image32_diagnostics(const ::i32_size &size, const image32_t *pimage32, int iScan);
@@ -23,6 +24,7 @@ namespace draw2d_gdiplus
       m_sizeWnd.cx = 0;
       m_sizeWnd.cy = 0;
       m_hbitmap = nullptr;
+      
 
       memset(&m_bitmapinfo, 0, sizeof(m_bitmapinfo));
 
@@ -45,10 +47,12 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::create_bitmap()
+   void image::create_bitmap(
+      ::acme::user::interaction * pacmeuserinteractionAffinity)
    {
 
-      return ::image::image::create_bitmap();
+      return ::image::image::create_bitmap(
+         pacmeuserinteractionAffinity);
 
    }
 
@@ -101,108 +105,122 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::host(::pixmap_t * ppixmap, ::windowing::window * pwindow)
+   void image::create_as_render_target(const ::i32_size & sizeRaw, ::user::interaction * puserinteraction, ::enum_flag eflagCreate, ::i32 iGoodStride, bool bPreserve)
    {
 
-      if (!ppixmap->is_ok())
-      {
+      create_from_data(sizeRaw, nullptr, 0);
 
-         //return false;
+      constructø(m_pgraphicsOwned);
 
-         throw ::exception(error_failed);
+      m_pgraphicsOwned->create_for_image(this);
 
-      }
+   }
 
-      if (m_pbitmap.is_set()
-            && m_pbitmap->get_os_data() != nullptr
-            && ppixmap->m_sizeRaw == this->m_sizeRaw
-            && ppixmap->image32() == image32()
-            && ppixmap->scan_size() == scan_size())
-      {
 
-         if (ppixmap->size() != size())
-         {
+   bool image::host(::windowing::window_buffer * pwindowbuffer, ::windowing::window * pwindow, const ::i32_size & sizeRaw)
+   {
 
-            m_size = ppixmap->size();
+      return ::image::image::host(pwindowbuffer, pwindow, sizeRaw);
 
-         }
-
-         return true;
-
-         //return;
-
-      }
-
-      //destroy();
-
-      defer_constructø(m_pbitmap);
-
-      //defer_constructø(m_pgraphics);
-
-      //if (m_pbitmap.is_null())
+      //if (!::is_ok(pwindowbuffer->m_ppixmapWindowBuffer))
       //{
 
-      //   m_sizeRaw.cx = 0;
+      //   //return false;
 
-      //   m_sizeRaw.cy = 0;
-
-      //   m_sizeAlloc.cx = 0;
-
-      //   m_sizeAlloc.cy = 0;
-
-      //   m_iScan = 0;
-
-      //   return false;
+      //   throw ::exception(error_failed);
 
       //}
 
-      
-      if (m_pbitmap->host_bitmap(nullptr, ppixmap))
-      {
-         //this->m_sizeRaw = ppixmap->m_sizeRaw;
-
-      }
-      //if (!)
+      //if (m_pbitmap.is_set()
+      //      && m_pbitmap->get_os_data() != nullptr
+      //      && pwindowbuffer->m_pixmap.m_sizeRaw == this->m_sizeRaw
+      //      && pwindowbuffer->m_pixmap.image32() == image32()
+      //      && pwindowbuffer->m_pixmap.scan_size() == scan_size())
       //{
 
-      //   m_sizeRaw.cx = 0;
+      //   if (pwindowbuffer->m_pixmap.size() != size())
+      //   {
 
-      //   m_sizeRaw.cy = 0;
+      //      m_size = pwindowbuffer->m_pixmap.size();
 
-      //   m_sizeAlloc.cx = 0;
+      //   }
 
-      //   m_sizeAlloc.cy = 0;
+      //   return true;
 
-      //   m_iScan = 0;
-
-      //   return false;
-
-      //}
-         //throw ::exception(error_failed);
-      //if (m_pbitmap->get_os_data() == nullptr)
-      //{
-
-      //   destroy();
-
-      //   return false;
+      //   //return;
 
       //}
 
-      initialize_pixmap(ppixmap->m_sizeRaw, ppixmap->image32(), ppixmap->m_iScan);
+      ////destroy();
 
-      m_size = ppixmap->m_size;
+      //defer_constructø(m_pbitmap);
 
-      m_sizeRaw = ppixmap->size();
+      ////defer_constructø(m_pgraphics);
 
-      set_ok_flag();
+      ////if (m_pbitmap.is_null())
+      ////{
 
-      auto pgraphics = acquire_graphics();
+      ////   m_sizeRaw.cx = 0;
 
-      pgraphics->m_pimage = this;
+      ////   m_sizeRaw.cy = 0;
 
-      pgraphics->reset_impact_area();
+      ////   m_sizeAlloc.cx = 0;
 
-      return true;
+      ////   m_sizeAlloc.cy = 0;
+
+      ////   m_iScan = 0;
+
+      ////   return false;
+
+      ////}
+
+      //
+      //if (m_pbitmap->host_bitmap(nullptr, &pwindowbuffer->m_pixmap))
+      //{
+      //   //this->m_sizeRaw = pwindowbuffer->m_pixmap.m_sizeRaw;
+
+      //}
+      ////if (!)
+      ////{
+
+      ////   m_sizeRaw.cx = 0;
+
+      ////   m_sizeRaw.cy = 0;
+
+      ////   m_sizeAlloc.cx = 0;
+
+      ////   m_sizeAlloc.cy = 0;
+
+      ////   m_iScan = 0;
+
+      ////   return false;
+
+      ////}
+      //   //throw ::exception(error_failed);
+      ////if (m_pbitmap->get_os_data() == nullptr)
+      ////{
+
+      ////   destroy();
+
+      ////   return false;
+
+      ////}
+
+      //initialize_pixmap(pwindowbuffer->m_pixmap.m_sizeRaw, pwindowbuffer->m_pixmap.image32(), pwindowbuffer->m_pixmap.m_iScan);
+
+      //m_size = pwindowbuffer->m_pixmap.m_size;
+
+      //m_sizeRaw = pwindowbuffer->m_pixmap.size();
+
+      //set_ok_flag();
+
+      //auto pgraphics = acquire_graphics();
+
+      //pgraphics->m_pimage = this;
+
+      //pgraphics->reset_impact_area();
+
+      //return true;
 
    }
 
@@ -289,7 +307,28 @@ namespace draw2d_gdiplus
 
       information("draw2d_gdiplus::image::create_from_data (1) {}", str1);
 
-      m_memoryPixmap.assign(pimage32, iScan * size.cy);
+      if (iScan < size.cx * 4)
+      {
+
+         iScan = size.cx * 4;
+
+      }
+
+      if (::is_set(pimage32))
+      {
+
+         m_memoryPixmap.assign(pimage32, iScan * size.cy);
+
+      }
+      else
+      {
+
+         m_memoryPixmap.set_size(iScan * size.cy);
+
+         m_memoryPixmap.zero();
+
+      }
+
 
       //pbitmap->create_bitmap(nullptr, size, &pimage32Bitmap, pimage32, &iScan);
 

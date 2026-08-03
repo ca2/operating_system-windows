@@ -45,7 +45,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::draw2d::graphics_pointer draw2d::do_allocation_strategy(::draw2d::host * pdraw2dhost, ::image::image * pimage,
+   ::draw2d::graphics_pointer draw2d::do_allocation_strategy(::acme::user::interaction * pacmeuserinteractionAffinity, ::image::image * pimage,
                                              const ::i32_size & size)
    {
 
@@ -62,13 +62,13 @@ namespace draw2d_gdiplus
 
       }
 
-      return ::draw2d::draw2d::do_allocation_strategy(pdraw2dhost, pimage, size);
+      return ::draw2d::draw2d::do_allocation_strategy(pacmeuserinteractionAffinity, pimage, size);
 
 }
 
 
 
-   void draw2d::do_release_to_pool_strategy(::draw2d::graphics_pointer &pgraphics)
+   void draw2d::do_release_to_pool_strategy(::draw2d::graphics_pointer &pgraphics, ::image::image * pimage)
    {
          
       pgraphics.release();

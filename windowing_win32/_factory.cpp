@@ -12,7 +12,7 @@
 #include "keyboard.h"
 #include "shell.h"
 #include "imm_client.h"
-#include "buffer.h"
+#include "graphics.h"
 #include "acme/parallelization/mutex.h"
 #include "aura/hardware/device_group.h"
 
@@ -43,7 +43,7 @@ __FACTORY_EXPORT void windowing_win32_factory(::factory::factory * pfactory)
    pfactory->add_factory_item < ::windowing_win32::window, ::acme::windowing::window >();
    pfactory->add_factory_item < ::windowing_win32::display, ::acme::windowing::display >();
    pfactory->add_factory_item < ::windowing_win32::display >();
-   pfactory->add_factory_item < ::windowing_win32::buffer, ::graphics::graphics >();
+   pfactory->add_factory_item < ::windowing_win32::graphics, ::graphics::graphics >();
    pfactory->add_factory_item < ::windowing_win32::notify_icon, ::user::notify_icon >();
    pfactory->add_factory_item < ::windowing_win32::cursor, ::windowing::cursor >();
    pfactory->add_factory_item < ::windowing_win32::icon, ::windowing::icon >();

@@ -108,7 +108,129 @@ namespace win32
          }
 
 
+         iptr window::_get_style() const
+         {
 
+            return _get_window_long_ptr(GWL_STYLE);
+
+         }
+
+
+         iptr window::_get_ex_style() const
+         {
+
+            return _get_window_long_ptr(GWL_EXSTYLE);
+
+         }
+
+
+         bool window::_set_style(iptr iStyle)
+         {
+
+            return _set_window_long_ptr(GWL_STYLE, iStyle);
+
+         }
+
+
+         bool window::_set_ex_style(iptr iExStyle)
+         {
+
+            return _set_window_long_ptr(GWL_EXSTYLE, iExStyle);
+
+         }
+
+
+         bool window::_modify_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
+         {
+
+            auto nStyleOld = _get_style();
+
+            auto nStyleNew = nStyleOld & ~dwRemove;
+
+            nStyleNew |= dwAdd;
+
+            if (nStyleNew != nStyleOld)
+            {
+
+               _set_style(nStyleNew);
+
+               if (nFlags)
+               {
+
+                  ::SetWindowPos(::as_HWND(this->operating_system_window()),
+                                 0, 0, 0, 0, 0,
+                                 SWP_NOSIZE
+                                 | SWP_NOZORDER
+                                 | SWP_NOMOVE
+                                 | SWP_NOACTIVATE
+                                 | nFlags);
+
+               }
+
+            }
+
+            return true;
+
+         }
+
+
+         bool window::_modify_ex_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
+         {
+
+            auto nExStyleOld = _get_ex_style();
+
+            auto nExStyleNew = nExStyleOld & ~dwRemove;
+
+            nExStyleNew |= dwAdd;
+
+            if (nExStyleNew != nExStyleOld)
+            {
+
+               _set_ex_style(nExStyleNew);
+
+               if (nFlags)
+               {
+
+                  ::SetWindowPos(::as_HWND(this->operating_system_window()),
+                                 0, 0, 0, 0, 0,
+                                 SWP_NOSIZE
+                                 | SWP_NOZORDER
+                                 | SWP_NOMOVE
+                                 | SWP_NOACTIVATE
+                                 | nFlags);
+
+               }
+
+            }
+
+            return true;
+
+         }
+
+
+
+         iptr window::_get_window_long_ptr(::i32 nIndex) const
+         {
+
+            HWND hwnd = ::as_HWND(this->operating_system_window());
+
+            auto iptr = GetWindowLongPtr(hwnd, nIndex);
+
+            return iptr;
+
+         }
+
+
+         bool window::_set_window_long_ptr(::i32 nIndex, iptr i)
+         {
+
+            HWND hwnd = ::as_HWND(this->operating_system_window());
+
+            SetWindowLongPtr(hwnd, nIndex, i);
+
+            return true;
+
+         }
 
 
          void window::create_window()

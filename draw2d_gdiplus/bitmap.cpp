@@ -28,8 +28,7 @@ namespace draw2d_gdiplus
 
 
    bitmap::bitmap(bitmap&& bitmap) :
-      ::draw2d::bitmap(::transfer(bitmap)),
-      DRAW2D_OBJECT_TRANSFER(bitmap),
+      DRAW2D_BITMAP_TRANSFER(bitmap),
       m_pbitmap(bitmap.m_pbitmap),
       m_mem(::transfer(m_mem))
    {
@@ -60,8 +59,12 @@ namespace draw2d_gdiplus
    }
 
 
-   void bitmap::create_bitmap_for_image(::image::image* pimage)
+   void bitmap::create_bitmap_for_image(
+      ::image::image * pimage,
+      ::acme::user::interaction * pacmeuserinteractionAffinity)
    {
+
+      __UNREFERENCED_PARAMETER(pacmeuserinteractionAffinity);
 
       create_bitmap(nullptr, pimage->size(), pimage->m_memoryPixmap, &pimage->m_iScan);
 

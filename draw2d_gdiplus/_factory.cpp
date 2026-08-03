@@ -8,7 +8,8 @@
 #include "font.h"
 #include "internal_font.h"
 #include "path.h"
-#include "draw2d.h" 
+#include "draw2d.h"
+#include "aura/graphics/draw2d/window_attachment.h"
 
 //BEGIN_FACTORY(draw2d_gdiplus)
 //FACTORY_ITEM(::draw2d_gdiplus::image)
@@ -38,6 +39,9 @@ __FACTORY_EXPORT void draw2d_gdiplus_factory(::factory::factory * pfactory)
    pfactory->add_factory_item < ::draw2d_gdiplus::internal_font, ::write_text::internal_font >();
    pfactory->add_factory_item < ::draw2d_gdiplus::path, ::draw2d::path >();
    pfactory->add_factory_item < ::draw2d_gdiplus::draw2d, ::draw2d::draw2d >();
+
+
+   pfactory->add_factory_item < ::draw2d::window_attachment >();
 
 
 }
