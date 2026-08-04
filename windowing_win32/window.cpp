@@ -803,15 +803,6 @@ namespace windowing_win32
 
          m_pdraw2dwindowattachment->initialize_window_attachment(this);
 
-         if (m_papplication->m_bGpu)
-         {
-
-            auto pgpuapproach = m_papplication->get_gpu_approach();
-
-            pgpuapproach->gpu_on_create_window(this);
-
-         }
-
       }
 
       if (puserinteraction && puserinteraction->is_graphical())

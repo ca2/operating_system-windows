@@ -238,64 +238,64 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::create_compatible_graphics(::draw2d::graphics * pgraphics)
-   {
+   //void graphics::create_compatible_graphics(::draw2d::graphics * pgraphics)
+   //{
 
-      close_graphics();
+   //   close_graphics();
 
-      HDC hdc = nullptr;
+   //   HDC hdc = nullptr;
 
-      if (pgraphics == nullptr)
-      {
+   //   if (pgraphics == nullptr)
+   //   {
 
-         hdc = ::CreateCompatibleDC(nullptr);
+   //      hdc = ::CreateCompatibleDC(nullptr);
 
-      }
-      else if (__graphics(pgraphics)->m_hdc != nullptr)
-      {
+   //   }
+   //   else if (__graphics(pgraphics)->m_hdc != nullptr)
+   //   {
 
-         hdc = ::CreateCompatibleDC(__graphics(pgraphics)->m_hdc);
+   //      hdc = ::CreateCompatibleDC(__graphics(pgraphics)->m_hdc);
 
-      }
-      else if (__graphics(pgraphics)->m_hdcGraphics != nullptr)
-      {
+   //   }
+   //   else if (__graphics(pgraphics)->m_hdcGraphics != nullptr)
+   //   {
 
-         hdc = ::CreateCompatibleDC(__graphics(pgraphics)->m_hdcGraphics);
+   //      hdc = ::CreateCompatibleDC(__graphics(pgraphics)->m_hdcGraphics);
 
-      }
-      else
-      {
+   //   }
+   //   else
+   //   {
 
-         HDC hdcTemplate = __graphics(pgraphics)->get_hdc();
+   //      HDC hdcTemplate = __graphics(pgraphics)->get_hdc();
 
-         hdc = ::CreateCompatibleDC(hdcTemplate);
+   //      hdc = ::CreateCompatibleDC(hdcTemplate);
 
-         __graphics(pgraphics)->release_hdc(hdcTemplate);
+   //      __graphics(pgraphics)->release_hdc(hdcTemplate);
 
-      }
+   //   }
 
-      if (hdc == nullptr)
-      {
+   //   if (hdc == nullptr)
+   //   {
 
-         throw ::exception(error_failed);
+   //      throw ::exception(error_failed);
 
-      }
+   //   }
 
-      m_hdcGraphics = hdc;
+   //   m_hdcGraphics = hdc;
 
-      m_pgraphics = øraw_new Gdiplus::Graphics(m_hdcGraphics);
+   //   m_pgraphics = øraw_new Gdiplus::Graphics(m_hdcGraphics);
 
-      m_pgraphics->SetPageUnit(Gdiplus::UnitPixel);
+   //   m_pgraphics->SetPageUnit(Gdiplus::UnitPixel);
 
-      set_text_rendering_hint(::write_text::e_rendering_system_default);
+   //   set_text_rendering_hint(::write_text::e_rendering_system_default);
 
-      set_smooth_mode(::draw2d::e_smooth_mode_anti_alias_8x8);
+   //   set_smooth_mode(::draw2d::e_smooth_mode_anti_alias_8x8);
 
-      m_osdata[0] = m_pgraphics;
+   //   m_osdata[0] = m_pgraphics;
 
-      //      return true;
+   //   //      return true;
 
-   }
+   //}
 
 
    void graphics::create_bitmap_graphics(::draw2d::bitmap * pbitmap)
