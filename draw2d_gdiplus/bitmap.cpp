@@ -61,12 +61,13 @@ namespace draw2d_gdiplus
 
    void bitmap::create_bitmap_for_image(
       ::image::image * pimage,
-      ::acme::user::interaction * pacmeuserinteractionAffinity)
+      ::acme::user::interaction * pacmeuserinteractionAffinity,
+      ::draw2d::graphics * pgraphics)
    {
 
       __UNREFERENCED_PARAMETER(pacmeuserinteractionAffinity);
 
-      create_bitmap(nullptr, pimage->size(), pimage->m_memoryPixmap, &pimage->m_iScan);
+      create_bitmap(pgraphics, pimage->size(), pimage->m_memoryPixmap, &pimage->m_iScan);
 
       pimage->m_pbitmap = this;
 

@@ -3,6 +3,7 @@
 #include "pen.h"
 #include "brush.h"
 #include "font.h"
+#include "image.h"
 #include "path.h"
 #include "region.h"
 #include "acme/exception/interface_only.h"
@@ -15,12 +16,15 @@
 #include "acme/prototype/geometry2d/_text_stream.h"
 #include "acme/prototype/mathematics/mathematics.h"
 #include "acme/prototype/string/international.h"
+#include "acme/windowing/window.h"
 #include "aura/graphics/draw2d/clip.h"
 #include "aura/graphics/draw2d/draw2d.h"
+#include "aura/graphics/graphics/buffer_item.h"
 #include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/map.h"
 #include "aura/platform/system.h"
+#include "aura/user/user/interaction.h"
 //#include "acme/prototype/geometry2d/_enhanced.h"
 //#include "acme/prototype/geometry2d/_collection_enhanced.h"
 //#include "acme/prototype/geometry2d/_defer_shape.h"
@@ -298,6 +302,32 @@ namespace draw2d_gdiplus
    //}
 
 
+   void graphics::create_for_window_draw2d(::user::interaction * puserinteraction, const ::i32_size & size)
+   {
+
+      m_bForWindowDraw2d = true;
+
+      m_pacmeuserinteractionAffinity = puserinteraction;
+
+      m_sizeTotal2 = size;
+
+      constructø(m_pgraphicsbufferitem->m_pimageBufferItem);
+
+      m_pgraphicsbufferitem->m_pimageBufferItem->create_as_render_target(size, puserinteraction, this);
+
+      //constructø(m_pbitmapTarget);
+
+      m_pbitmapTarget = m_pgraphicsbufferitem->m_pimageBufferItem->m_pbitmap;
+
+      //::memory memory;
+
+      //m_pbitmapTarget->create_bitmap(this, size, memory, nullptr);
+      //
+      create_bitmap_graphics(m_pbitmapTarget);
+
+   }
+
+
    void graphics::create_bitmap_graphics(::draw2d::bitmap * pbitmap)
    {
 
@@ -316,6 +346,8 @@ namespace draw2d_gdiplus
 
       auto pgdiplusgraphics = new Gdiplus::Graphics(pgdiplusbitmap);
 
+      m_sizeTotal2 = m_pbitmap->size();
+
       m_pgraphics = pgdiplusgraphics;
 
       m_osdata[0] = pgdiplusgraphics;
@@ -323,6 +355,63 @@ namespace draw2d_gdiplus
       set_ok_flag();
 
    }
+
+
+   void graphics::start_layer(bool bFirstLayer)
+   {
+
+      set_alpha_mode(::draw2d::e_alpha_mode_set);
+
+      set_text_rendering_hint(::write_text::e_rendering_system_default);
+
+      //defer_constructø(m_pimage);
+
+      m_pointOrigin = m_pacmeuserinteractionAffinity->m_pacmewindowingwindow->m_pointWindow;
+      m_sizeImpact2 = m_pacmeuserinteractionAffinity->m_pacmewindowingwindow->m_sizeWindow;
+
+      if (m_pgraphicsbufferitem)
+      {
+
+         //m_pgraphicsbufferitem->m_pimageBufferItem = m_pimage;
+
+         auto pimage = m_pgraphicsbufferitem->m_pimageBufferItem;
+
+         if (pimage)
+         {
+
+            ::f64_point pointf64Image = pimage->m_point;
+            ::f64_size sizef64Image = pimage->m_size;
+            ::f64_size sizef64ImageRaw = pimage->m_sizeRaw;
+
+            if (pointf64Image != m_pointOrigin || sizef64Image != m_sizeImpact2 || sizef64ImageRaw != m_sizeTotal2)
+            {
+
+               pimage->m_point = m_pointOrigin;
+
+               pimage->m_size = m_sizeImpact2;
+
+               pimage->m_sizeRaw = m_sizeTotal2;
+
+               pimage->m_pbitmap = m_pbitmapTarget;
+
+               pimage->set_ok_flag();
+
+               pimage->m_estatus = success;
+
+            }
+
+         }
+
+      }
+
+      //::color::color color(0, 0, 0, 0);
+
+      // fill_rectangle(get_size(), color);
+
+      // return true;
+
+   }
+
 
 
    ::i32 graphics::GetDeviceCaps(::i32 nIndex)

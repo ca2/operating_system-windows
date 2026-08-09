@@ -70,6 +70,9 @@ namespace draw2d_gdiplus
       virtual ::f64 get_dpix() override;
       virtual ::f64 get_dpiy() override;
 
+
+      void start_layer(bool bFirstLayer) override;
+
       // Constructors
       //bool CreateDC(const ::scoped_string & scopedstrDriverName, const ::scoped_string & scopedstrDeviceName,
 
@@ -80,7 +83,7 @@ namespace draw2d_gdiplus
       //              const scoped_string & strOutput, const void * lpInitData) override;
 
       //void create_compatible_graphics(::draw2d::graphics * pgraphics) override;
-
+      void create_for_window_draw2d(::user::interaction * puserinteraction, const ::i32_size & size);
       void create_bitmap_graphics(::draw2d::bitmap * pbitmap) override;
 
       void DeleteDC() override;

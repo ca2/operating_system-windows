@@ -48,11 +48,12 @@ namespace draw2d_gdiplus
 
 
    void image::create_bitmap(
-      ::acme::user::interaction * pacmeuserinteractionAffinity)
+      ::acme::user::interaction * pacmeuserinteractionAffinity, ::draw2d::graphics * pgraphics)
    {
 
       return ::image::image::create_bitmap(
-         pacmeuserinteractionAffinity);
+         pacmeuserinteractionAffinity,
+         pgraphics);
 
    }
 
@@ -105,14 +106,14 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::create_as_render_target(const ::i32_size & sizeRaw, ::user::interaction * puserinteraction, ::enum_flag eflagCreate, ::i32 iGoodStride, bool bPreserve)
+   void image::create_as_render_target(const ::i32_size & sizeRaw, ::user::interaction * puserinteraction, ::draw2d::graphics * pdraw2dgraphics, ::enum_flag eflagCreate, ::i32 iGoodStride, bool bPreserve, bool bTopDraw2d)
    {
 
       create_from_data(sizeRaw, nullptr, 0);
 
-      constructø(m_pgraphicsOwned);
+      //constructø(m_pgraphicsOwned);
 
-      m_pgraphicsOwned->create_for_image(this);
+      //m_pgraphicsOwned->create_for_image(this);
 
    }
 

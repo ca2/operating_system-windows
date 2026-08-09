@@ -26,6 +26,7 @@
 #include "acme/windowing/windowing.h"
 //#include "aura_windows/interaction_impl.h"
 #include "apex/gpu/approach.h"
+#include "apex/gpu/window_attachment.h"
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/graphics/draw2d/graphics_pointer.h"
@@ -799,9 +800,30 @@ namespace windowing_win32
       if (puserinteraction && puserinteraction->is_graphical())
       {
 
-         constructø(m_pdraw2dwindowattachment);
+         m_pdraw2dwindowattachment = draw2d()->allocate_draw2d_window_attachment(this);
 
          m_pdraw2dwindowattachment->initialize_window_attachment(this);
+
+      }
+
+      if (puserinteraction && puserinteraction->is_graphical())
+      {
+
+         if (m_papplication->m_bGpu)
+         {
+
+            auto pgpuapproach = m_papplication->m_pgpuapproach;
+
+            m_papexgpuwindowattachment = pgpuapproach->allocate_gpu_window_attachment(this);
+
+            if (m_papexgpuwindowattachment)
+            {
+
+               m_papexgpuwindowattachment->initialize_gpu_window_attachment(this);
+
+            }
+
+         }
 
       }
 

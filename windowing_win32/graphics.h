@@ -25,14 +25,14 @@ namespace windowing_win32
 
       //__creatable_from_base(buffer, ::graphics::graphics);
 
-
+      //::pointer < ::draw2d::graphics > m_pdraw2dgraphics;
 
       //layered_window_buffer         m_layeredwindowbuffera[2];
       HWND                          m_hwndIpc;
       ::i32_rectangle               m_rectangleLast;
       ::task_pointer                m_ptaskUpdateScreen;
       ::manual_reset_happening          m_happeningUpdateScreen;
-      bool                          m_bSingleBufferMode;
+      //bool                          m_bSingleBufferMode;
 
       graphics();
       ~graphics() override;
@@ -41,7 +41,7 @@ namespace windowing_win32
       virtual void initialize_graphics_graphics(::windowing::window * pimpl) override;
 
 
-      bool is_single_buffer_mode() const override;
+      //bool is_single_buffer_mode() const override;
 
 
       virtual void _defer_update_screen_task();
