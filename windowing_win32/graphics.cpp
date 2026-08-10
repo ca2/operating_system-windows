@@ -119,11 +119,24 @@ namespace windowing_win32
 
       //}
 
-      auto pimageBufferItem = pbufferitem->m_pimageBufferItem;
+//      auto pimageBufferItem = pbufferitem->m_pimageBufferItem;
 
-      auto & sizeImageBufferItem = pimageBufferItem->m_size;
+//      auto & sizeImageBufferItem = pimageBufferItem->m_size;
 
-      if (sizeImageBufferItem != pbufferitem->m_sizeBufferItem)
+//      if (sizeImageBufferItem != pbufferitem->m_sizeBufferItem)
+
+      auto pwindowing = m_pwindow->user_interaction()->windowing();
+
+      auto pdisplay = pwindowing->display();
+
+      auto rectangleUnion = pdisplay->get_monitor_union_rectangle();
+
+      m_pwindow->m_sizeRaw = m_pwindow->m_sizeRaw.maximum(rectangleUnion.size());
+
+      if (pbufferitem->m_pimageBufferItem.nok()
+         || pbufferitem->m_pimageBufferItem->m_point != m_pwindow->m_pointWindow
+         || pbufferitem->m_pimageBufferItem->m_size != m_pwindow->m_sizeWindow
+         || pbufferitem->m_pimageBufferItem->m_sizeRaw != m_pwindow->m_sizeRaw)
       {
 
          if (!update_buffer(pbufferitem))
@@ -197,20 +210,19 @@ namespace windowing_win32
 
       }
 
+      //auto pwindowing = m_pwindow->user_interaction()->windowing();
+
+      //auto pdisplay = pwindowing->display();
+
+      //auto rectangleUnion = pdisplay->get_monitor_union_rectangle();
+
+      //auto sizeRaw = m_pwindow->m_sizeWindow.maximum(rectangleUnion.size());
+
       if (pbufferitem->m_pimageBufferItem.nok()
          || pbufferitem->m_pimageBufferItem->m_point != m_pwindow->m_pointWindow
-         || pbufferitem->m_pimageBufferItem->size() != m_pwindow->m_sizeWindow)
+         || pbufferitem->m_pimageBufferItem->m_size != m_pwindow->m_sizeWindow
+         || pbufferitem->m_pimageBufferItem->m_sizeRaw != m_pwindow->m_sizeRaw)
       {
-
-         auto pwindowing = m_pwindow->user_interaction()->windowing();
-
-         auto pdisplay = pwindowing->display();
-
-         auto rectangleUnion = pdisplay->get_monitor_union_rectangle();
-
-         auto sizeLargeInternalBitmap = rectangleUnion.size();
-
-         auto sizeRaw = pbufferitem->m_sizeBufferItem.maximum(sizeLargeInternalBitmap);
 
          if (!m_pdraw2dgraphics)
          {
@@ -219,18 +231,32 @@ namespace windowing_win32
 
             m_pdraw2dgraphics->m_pgraphicsbufferitem = pbufferitem;
 
-            m_pdraw2dgraphics->create_for_window_draw2d(m_pwindow->user_interaction(), sizeRaw);
+            m_pdraw2dgraphics->create_for_window_draw2d(m_pwindow->user_interaction(), m_pwindow->m_sizeRaw);
 
          }
 
-         ::f64_size sizef64Raw = sizeRaw;
+         //::f64_size sizef64Raw = m_pwindow->m_sizeRaw;
 
-         if (m_pdraw2dgraphics && m_pdraw2dgraphics->m_sizeTotal2 != sizef64Raw)
-         {
+         //if (m_pdraw2dgraphics && m_pdraw2dgraphics->m_sizeTotal2 != sizef64Raw)
+         //{
+
+         auto & point = pbufferitem->m_pimageBufferItem->m_point;
+
+         auto & size = pbufferitem->m_pimageBufferItem->m_size;
+
+         auto & sizeRaw = pbufferitem->m_pimageBufferItem->m_sizeRaw;
+
+         point = m_pwindow->m_pointWindow;
+
+         size = m_pwindow->m_sizeWindow;
+
+         sizeRaw = m_pwindow->m_sizeRaw;
+
+         informationf("m_pimageBufferItem point(%d-%d) size(%d-%d) sizeRaw(%d-%d)", point.x, point.y, size.cx, size.cy, sizeRaw.cx, sizeRaw.cy);
                
-            m_pdraw2dgraphics->defer_set_size(sizeRaw);
+            //m_pdraw2dgraphics->defer_set_size(m_pwindow->m_sizeRaw);
 
-         }
+         //}
 
          //if (pbufferitem->m_pimageBufferItem->m_sizeRaw != sizeRaw)
          //{
@@ -958,6 +984,20 @@ namespace windowing_win32
                mapImageBufferItemSource.fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
             }
+
+            if (0)
+            {
+
+               mapImageBufferItemSource.blend_color({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+
+               mapImageBufferItemSource.blend_color({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+
+               mapImageBufferItemSource.blend_color({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+
+               mapImageBufferItemSource.blend_color({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+
+            }
+
 
             mapPixmapWindowBufferTarget.copy(
                {},

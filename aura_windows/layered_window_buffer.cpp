@@ -759,12 +759,14 @@ namespace windowing_win32
       }
 
       auto sizeRaw = sizeWindow;
+
       ::i32_point pointMap{};
 
       if (s_bUseFullScreenMappedGeometry)
       {
 
-         sizeRaw = m_pwindow->m_sizeScreen.maximum(sizeWindow);
+         sizeRaw = m_pwindow->m_sizeRaw.maximum(sizeWindow);
+
          pointMap = m_pwindowWin32->m_pointWindow;
 
       }
@@ -1021,7 +1023,7 @@ namespace windowing_win32
 
       POINT pointSrc = { 0, 0 };
 
-      if (pdeviceindependentbitmap->m_sizeRaw == m_pwindow->m_sizeScreen)
+      if (pdeviceindependentbitmap->m_sizeRaw == m_pwindow->m_sizeRaw)
       {
 
          pointSrc =
@@ -1275,17 +1277,18 @@ namespace windowing_win32
    void layered_window_buffer::buffer_lock_round_swap_key_buffers()
    {
 
-      auto pwindowing = m_pwindow->user_interaction()->windowing();
+      //auto pwindowing = m_pwindow->user_interaction()->windowing();
 
-      auto pdisplay = pwindowing->display();
+      //auto pdisplay = pwindowing->display();
 
-      auto rectangleUnion = pdisplay->get_monitor_union_rectangle();
+      //auto rectangleUnion = pdisplay->get_monitor_union_rectangle();
 
-      m_pwindow->m_sizeScreen = rectangleUnion.size();
+      //m_pwindow->m_sizeScreen = rectangleUnion.size();
 
       auto pointWindow = m_pwindow->m_pointWindow;
       auto sizeWindow = m_pwindow->m_sizeWindow;
-      auto sizeRaw = m_pwindow->m_sizeScreen.maximum(sizeWindow);
+      auto sizeRaw = m_pwindow->m_sizeRaw;
+      //auto sizeRaw = m_pwindow->m_sizeScreen.maximum(sizeWindow);
 
       ::cast < ::windows::device_independent_bitmap > pdeviceindependentbitmap =
          m_ppixmapWindowBuffer;
