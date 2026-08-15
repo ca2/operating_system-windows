@@ -1,7 +1,7 @@
 //
 // Created by camilo on 31/01/2022 16:06 <3ThomasBorregaardSorensen!!
 //
-#include "framework.h"
+#include "platform.h"
 #include "font.h"
 #include "device.h"
 //#include "_nano.h"

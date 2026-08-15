@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 
 //
 //void CLASS_DECL_AURA __init_thread()

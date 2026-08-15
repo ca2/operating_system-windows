@@ -1,5 +1,5 @@
 // created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
-#include "framework.h"
+#include "platform.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "cursor.h"
 #include "display.h"
@@ -561,6 +561,19 @@ namespace windowing_win32
       {
 
          puserinteraction->m_ewindowflag -= e_window_flag_graphical;
+
+      }
+
+      if (puserinteraction && puserinteraction->is_graphical())
+      {
+
+         auto pwindowing = puserinteraction->windowing();
+
+         auto pdisplay = pwindowing->display();
+
+         auto rectangleUnion = pdisplay->get_monitor_union_rectangle();
+
+         m_sizeRaw = m_sizeRaw.maximum(rectangleUnion.size());
 
       }
 

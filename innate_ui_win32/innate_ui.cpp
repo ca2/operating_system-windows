@@ -1,9 +1,9 @@
 // Created by camilo on 2024-09-12 02:02 <3ThomasBorregaardSorensen!!
-#include "framework.h"
+#include "platform.h"
 #include "innate_ui.h"
 #include "window.h"
 #include "icon.h"
-#include "acme/platform/platform.h"
+#include "acme/platform/platform_platform.h"
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
 #include "acme/parallelization/manual_reset_happening.h"

@@ -1,5 +1,5 @@
 // From multimedia_mmsystem by camilo on 2023-04-08 05:22 <3ThomasBorregaardSorensen!!
-#include "framework.h"
+#include "platform.h"
 #include "mmresult.h"
 
 

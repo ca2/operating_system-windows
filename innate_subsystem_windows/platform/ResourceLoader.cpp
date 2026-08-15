@@ -24,7 +24,7 @@
 // From apex/innate_subsystem/ResourceLoader.cpp by
 // camilo on 2026-04-11 04:44 <3ThomasBorregaardSørensen!!
 
-#include "framework.h"
+#include "platform.h"
 #include "ResourceLoader.h"
 #include "drawing/Icon.h"
 #include "drawing/Cursor.h"

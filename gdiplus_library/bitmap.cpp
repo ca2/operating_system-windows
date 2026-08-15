@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "bitmap.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/interface_only.h"

@@ -16,7 +16,7 @@
     <ClCompile Include="backup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include=".\backup_application.cpp">
@@ -45,7 +45,7 @@
     <ClInclude Include="backup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework.h">
+    <ClInclude Include="platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="backup_application.h">

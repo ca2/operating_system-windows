@@ -1,5 +1,5 @@
 // From aura/user by camilo on 2023-04-06 19:53 <3ThomasBorregaardSorensen!!
-#include "framework.h"
+#include "platform.h"
 #include "message_window.h"
 #include "apex/user/user/message.h"
 

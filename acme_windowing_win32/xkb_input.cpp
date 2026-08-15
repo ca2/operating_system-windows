@@ -1,7 +1,7 @@
 //
 // Created by camilo on 9/19/23 01:01 <3ThomasBorregaardSorensen!!
 //
-#include "framework.h"
+#include "platform.h"
 #include "xkb_input.h"
 #include <xkbcommon/xkbcommon.h>
 

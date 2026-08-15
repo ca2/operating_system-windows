@@ -1,5 +1,5 @@
 // From apex/operating_system/windows/gdi.cpp by camilo on 2022-11-07 04:22 <3ThomasBorregaardSorensen!!
-#include "framework.h"
+#include "platform.h"
 
 
 #include "acme/_operating_system.h"

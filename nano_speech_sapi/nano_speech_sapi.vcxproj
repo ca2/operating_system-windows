@@ -1444,12 +1444,12 @@
   <ItemGroup>
     <ClInclude Include="_.h" />
     <ClInclude Include="speech.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="speech.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticMetaDebug|Win32'">Create</PrecompiledHeader>

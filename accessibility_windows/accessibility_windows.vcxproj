@@ -2720,7 +2720,7 @@
     <ClCompile Include="accessibility.cpp" />
     <ClCompile Include="application.cpp" />
     <ClCompile Include="main_window.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugWithInlOpt|x64'">Create</PrecompiledHeader>
@@ -2814,7 +2814,7 @@
   <ItemGroup>
     <ClInclude Include="accessibility.h" />
     <ClInclude Include="application.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="main_window.h" />
     <ClInclude Include="_.h" />
   </ItemGroup>

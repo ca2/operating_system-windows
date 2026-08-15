@@ -1,7 +1,7 @@
 // tls_session_reuse.cpp : Defines the entry i32_point for the console application.
 //
 
-#include "framework.h"
+#include "platform.h"
 #include <WinSock2.h>
 #include <stdio.h>
 #include <string.h>

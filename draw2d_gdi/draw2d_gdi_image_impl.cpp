@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 
 
 inline ::u8 u8_clip(::i32 i)

@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "aura/inline/_app.inl"
 #include <Shlobj.h>
 #include "winnls.h"

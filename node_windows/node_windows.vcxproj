@@ -3054,7 +3054,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\nano_graphics_gdiplus\icon.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="aaa_interaction_impl.h" />
     <ClInclude Include="aaa_node.h" />
     <ClInclude Include="node.h" />
@@ -3064,7 +3064,7 @@
   <ItemGroup>
     <ClCompile Include="node.cpp" />
     <ClCompile Include="_factory.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugAsan|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>

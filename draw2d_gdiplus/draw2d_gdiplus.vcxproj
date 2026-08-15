@@ -3074,7 +3074,7 @@
     <ClInclude Include="internal_font.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="font.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="object.h" />
@@ -3092,7 +3092,7 @@
     <ClCompile Include="_.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="font.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugAsan|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>

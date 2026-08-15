@@ -1,6 +1,6 @@
 // Created by camilo on 2026-04-17 17:45 <3ThomasBorregaardSørensen!!
 // Using HKL (Windows Keyboard Layout) code from Remoting.
-#include "framework.h"
+#include "platform.h"
 #include "KeyboardLayout.h"
 
 

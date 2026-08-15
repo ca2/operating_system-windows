@@ -5,7 +5,7 @@ Contact : nish@voidnish.com
 */
 // ShellTrayInfoImpact.cpp : implementation of the notification_area class
 //
-#include "framework.h"
+#include "platform.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "notification_area.h"
 #include "icon.h"

@@ -1,5 +1,5 @@
 // Moved from app_core_auratype by camilo 2021-09-12 16:31 BRT <3ThomasBS_!!
-#include "framework.h"
+#include "platform.h"
 #include "keyboard_hook.h"
 #include "acme/constant/user_message.h"
 #include "acme/constant/user_key.h"

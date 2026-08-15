@@ -1176,7 +1176,7 @@
   <ItemGroup>
     <ClInclude Include="buffer.h" />
     <ClInclude Include="factory_exchange.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="in.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="aaa_want_to_remove_music_midi_mmsystem_file1.h" />
@@ -1192,7 +1192,7 @@
   <ItemGroup>
     <ClCompile Include="buffer.cpp" />
     <ClCompile Include="_factory.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugAsan|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Create</PrecompiledHeader>

@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 
 
 ::i8 char_to_upper(int32_t ch);

@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "node.h"
 #include "acme/prototype/collection/strdup_array.h"
 

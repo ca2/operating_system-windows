@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "acme/prototype/prototype/memory.h"
 #include "acme/operating_system/windows_common/com/comptr.h"
 

@@ -1,4 +1,4 @@
-#include "../framework.h"
+#include "../platform.h"
 
 
 #define STATE_WINDOW_CREATION 0

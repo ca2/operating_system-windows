@@ -28,8 +28,8 @@ list(APPEND ${PROJECT_NAME}_source
         _factory.cpp
         #font.cpp
         #font.h
-        framework.cpp
-        framework.h
+        platform.cpp
+        platform.h
         #graphics.cpp
         #graphics.h
         #image.cpp
@@ -57,7 +57,7 @@ endif()
 
 add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_source})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

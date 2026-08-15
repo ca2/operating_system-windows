@@ -14,8 +14,8 @@ list(APPEND library_source
    fonts.cpp
    fonts.h
 
-        framework.cpp
-        framework.h
+        platform.cpp
+        platform.h
    write_text.cpp
    write_text.h
    write_text_win32_gdi.cpp
@@ -27,7 +27,7 @@ list(APPEND library_source
 
 add_library(write_text_win32 SHARED ${library_source})
 
-target_precompile_headers(write_text_win32 PRIVATE framework.h)
+target_precompile_headers(write_text_win32 PRIVATE platform.h)
 
 set_target_properties(write_text_win32 PROPERTIES LINKER_LANGUAGE CXX)
 

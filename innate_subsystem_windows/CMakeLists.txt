@@ -114,14 +114,14 @@ list(APPEND library_source
    _factory.cpp
    #BalloonTip.cpp
    #BalloonTip.h
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    )
 
 
 add_library(${PROJECT_NAME} SHARED ${library_source})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 
 

@@ -1,6 +1,6 @@
 // Created by camilo on 2023-02-23 23:00 BRT <3ThomasBorregaardSorensen!!
 // Modified 2023-10-05 23:50
-#include "framework.h"
+#include "platform.h"
 #include "keyboard.h"
 //#include "x11_keyboard.h"
 //#include "x11_exception.h"

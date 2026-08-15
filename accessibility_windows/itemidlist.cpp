@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "itemidlist.h"
 #include "known_folder_struct.h"
 #include "acme/exception/exception.h"

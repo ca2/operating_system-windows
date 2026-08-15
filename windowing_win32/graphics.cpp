@@ -1,6 +1,6 @@
 // created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Soerensen MY ONLY LORD
 // recreated by Camilo 2021-02-01 23:29
-#include "framework.h"
+#include "platform.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "graphics.h"
 #include "display.h"

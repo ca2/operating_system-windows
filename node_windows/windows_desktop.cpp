@@ -1,7 +1,7 @@
 // WindowsDesktop1.cpp : Defines the entry i32_point for the application.
 //
 
-#include "framework.h"
+#include "platform.h"
 //#include "WindowsDesktop1.h"
 //
 //#define MAX_LOADSTRING 100

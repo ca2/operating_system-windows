@@ -1,7 +1,7 @@
 //
 // Created by camilo on 2026-06-08.
 //
-#include "framework.h"
+#include "platform.h"
 #include "image.h"
 #include "acme/prototype/geometry2d/size.h"
 #include <objidl.h>

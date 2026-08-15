@@ -11,8 +11,8 @@ list(APPEND library_source
    app_launcher.cpp
    app_launcher.h
    connectivity.cpp
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
     gdi.cpp
    interprocess_base.cpp
    interprocess_base.h
@@ -45,8 +45,8 @@ add_library(${PROJECT_NAME} SHARED ${library_source})
 add_library(static_${PROJECT_NAME} STATIC ${library_source})
 
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
-target_precompile_headers(static_${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
+target_precompile_headers(static_${PROJECT_NAME} PRIVATE platform.h)
 
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)

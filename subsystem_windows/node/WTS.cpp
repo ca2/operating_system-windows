@@ -21,7 +21,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framework.h"
+#include "platform.h"
 #include "WTS.h"
 #include "subsystem/node/SystemException.h"
 //#include "remoting/remoting/thread/critical_section_lock.h"

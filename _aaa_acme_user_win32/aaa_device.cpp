@@ -1,7 +1,7 @@
 //
 // Created by camilo on 31/01/2022.
 //
-#include "framework.h"
+#include "platform.h"
 #include "device.h"
 #include "brush.h"
 #include "font.h"

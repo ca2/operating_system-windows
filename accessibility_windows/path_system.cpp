@@ -1,5 +1,5 @@
 // Create on 2021-03-22 09:12 <3ThomasBS_
-#include "framework.h"
+#include "platform.h"
 #include "path_system.h"
 #include "file_link.h"
 #include "node.h"

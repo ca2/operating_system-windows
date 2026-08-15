@@ -1,5 +1,5 @@
 // Created by camilo on 2021-01-30 <3ThomasBS_!!
-#include "framework.h"
+#include "platform.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "input.h"
 #include "mouse_hook.h"

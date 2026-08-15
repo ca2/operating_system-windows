@@ -62,7 +62,7 @@
     <ClCompile Include="windows_desktop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="list_serial_ports.cpp">
@@ -180,7 +180,7 @@
     <ClInclude Include="file_memory_map2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework.h">
+    <ClInclude Include="platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="handle.h">

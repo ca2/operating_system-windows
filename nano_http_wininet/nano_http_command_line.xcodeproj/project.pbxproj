@@ -12,7 +12,7 @@
 		9A2049972D2CB1D900C43F75 /* _curl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A20496A2D2CAB5C00C43F75 /* _curl.cpp */; };
 		9A2049982D2CB1D900C43F75 /* _factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A20496B2D2CAB5C00C43F75 /* _factory.cpp */; };
 		9A2049992D2CB1E300C43F75 /* curl_easy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2049732D2CAB5C00C43F75 /* curl_easy.cpp */; };
-		9A20499A2D2CB1E300C43F75 /* framework.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2049762D2CAB5C00C43F75 /* framework.cpp */; };
+		9A20499A2D2CB1E300C43F75 /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2049762D2CAB5C00C43F75 /* platform.cpp */; };
 		9A20499B2D2CB1E300C43F75 /* http.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2049782D2CAB5C00C43F75 /* http.cpp */; };
 		9A20499C2D2CB1EA00C43F75 /* _wget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A20496F2D2CAB5C00C43F75 /* _wget.cpp */; };
 /* End PBXBuildFile section */
@@ -29,8 +29,8 @@
 		9A20496F2D2CAB5C00C43F75 /* _wget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = _wget.cpp; sourceTree = "<group>"; };
 		9A2049722D2CAB5C00C43F75 /* curl_easy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = curl_easy.h; sourceTree = "<group>"; };
 		9A2049732D2CAB5C00C43F75 /* curl_easy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = curl_easy.cpp; sourceTree = "<group>"; };
-		9A2049752D2CAB5C00C43F75 /* framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = framework.h; sourceTree = "<group>"; };
-		9A2049762D2CAB5C00C43F75 /* framework.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = framework.cpp; sourceTree = "<group>"; };
+		9A2049752D2CAB5C00C43F75 /* platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		9A2049762D2CAB5C00C43F75 /* platform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
 		9A2049772D2CAB5C00C43F75 /* http.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = http.h; sourceTree = "<group>"; };
 		9A2049782D2CAB5C00C43F75 /* http.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = http.cpp; sourceTree = "<group>"; };
 		9A2049852D2CABF000C43F75 /* _____debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "_____debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,8 +95,8 @@
 				9A20496F2D2CAB5C00C43F75 /* _wget.cpp */,
 				9A2049722D2CAB5C00C43F75 /* curl_easy.h */,
 				9A2049732D2CAB5C00C43F75 /* curl_easy.cpp */,
-				9A2049752D2CAB5C00C43F75 /* framework.h */,
-				9A2049762D2CAB5C00C43F75 /* framework.cpp */,
+				9A2049752D2CAB5C00C43F75 /* platform.h */,
+				9A2049762D2CAB5C00C43F75 /* platform.cpp */,
 				9A2049772D2CAB5C00C43F75 /* http.h */,
 				9A2049782D2CAB5C00C43F75 /* http.cpp */,
 			);
@@ -243,7 +243,7 @@
 			files = (
 				9A20499C2D2CB1EA00C43F75 /* _wget.cpp in Sources */,
 				9A2049992D2CB1E300C43F75 /* curl_easy.cpp in Sources */,
-				9A20499A2D2CB1E300C43F75 /* framework.cpp in Sources */,
+				9A20499A2D2CB1E300C43F75 /* platform.cpp in Sources */,
 				9A20499B2D2CB1E300C43F75 /* http.cpp in Sources */,
 				9A2049962D2CB1D900C43F75 /* _.cpp in Sources */,
 				9A2049972D2CB1D900C43F75 /* _curl.cpp in Sources */,
@@ -321,7 +321,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = framework.h;
+				GCC_PREFIX_HEADER = platform.h;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_REUSE_STRINGS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -442,7 +442,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = framework.h;
+				GCC_PREFIX_HEADER = platform.h;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_REUSE_STRINGS = YES;
 				GCC_VERSION = "";

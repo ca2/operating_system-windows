@@ -23,8 +23,8 @@ list(APPEND music_midi_mmsystem_source
         _.cpp
         _.h
         _factory.cpp
-        framework.cpp
-        framework.h)
+        platform.cpp
+        platform.h)
 
 
 
@@ -37,7 +37,7 @@ endif()
 
 add_library(music_midi_mmsystem SHARED ${music_midi_mmsystem_source})
 
-target_precompile_headers(music_midi_mmsystem PRIVATE framework.h)
+target_precompile_headers(music_midi_mmsystem PRIVATE platform.h)
 
 set_target_properties(music_midi_mmsystem PROPERTIES LINKER_LANGUAGE CXX)
 

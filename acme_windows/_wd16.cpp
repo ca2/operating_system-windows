@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "acme/prototype/string/string.h"
 #include "acme/_operating_system.h"
 

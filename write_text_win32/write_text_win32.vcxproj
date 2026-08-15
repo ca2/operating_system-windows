@@ -2620,7 +2620,7 @@
     <ClInclude Include="write_text.h" />
     <ClInclude Include="write_text_win32_gdi.h" />
     <ClInclude Include="_.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
@@ -2631,7 +2631,7 @@
     <ClCompile Include="write_text.cpp" />
     <ClCompile Include="write_text_win32_gdi.cpp" />
     <ClCompile Include="_.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugAsan|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>

@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "sphere/hi5/hi5.h"
 #include <mmsystem.h>
 

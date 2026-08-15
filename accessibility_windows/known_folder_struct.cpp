@@ -1,5 +1,5 @@
 // Created by camilo on 2021-08-08 04:50 BRT <3ThomasBorregaardSorensen!!
-#include "framework.h"
+#include "platform.h"
 #include "known_folder_struct.h"
 #include <KnownFolders.h>
 

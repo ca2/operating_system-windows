@@ -2241,7 +2241,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="subsystem.h" />
-    <ClInclude Include="thread\aaa_framework.h" />
+    <ClInclude Include="thread\aaa_platform.h" />
     <ClInclude Include="thread\aaa_ZombieKiller.h" />
     <ClInclude Include="thread\AutoLock.h" />
     <ClInclude Include="thread\DesktopSelector.h" />
@@ -2256,7 +2256,7 @@
     <ClInclude Include="thread\ZombieKiller.h" />
     <ClInclude Include="thread\_.h" />
     <ClInclude Include="_.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="_common_header.h" />
   </ItemGroup>
   <ItemGroup>
@@ -2382,7 +2382,7 @@
     <ClCompile Include="thread\ZombieKiller.cpp" />
     <ClCompile Include="thread\_.cpp" />
     <ClCompile Include="_factory.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugWithInlOpt|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|Win32'">Create</PrecompiledHeader>

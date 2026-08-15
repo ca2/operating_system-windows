@@ -1,5 +1,5 @@
 // Created by camilo on 2026-07-30 23:35 <3ThomasBorregaardSørensen!! Mummi!! Bilbo!!
-#include "framework.h"
+#include "platform.h"
 #include "layered_window_buffer.h"
 #include "acme/operating_system/windows/device_independent_bitmap.h"
 #include "aura/windowing/display.h"

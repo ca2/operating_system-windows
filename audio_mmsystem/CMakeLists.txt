@@ -27,8 +27,8 @@ list(APPEND audio_mmsystem_source
    command.h
    _factory.cpp
    factory_exchange.h
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    in.cpp
    in.h
    out.cpp
@@ -44,7 +44,7 @@ endif ()
 
 add_library(audio_mmsystem SHARED ${audio_mmsystem_source})
 
-target_precompile_headers(audio_mmsystem PRIVATE framework.h)
+target_precompile_headers(audio_mmsystem PRIVATE platform.h)
 
 set_target_properties(audio_mmsystem PROPERTIES LINKER_LANGUAGE CXX)
 

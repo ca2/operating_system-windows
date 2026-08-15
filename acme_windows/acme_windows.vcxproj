@@ -3015,7 +3015,7 @@
     <ClCompile Include="process.cpp" />
     <ClCompile Include="registry.cpp" />
     <ClCompile Include="serial.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugAsan|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>
@@ -3130,7 +3130,7 @@
     <ClInclude Include="file_memory_map2.h" />
     <ClInclude Include="file_watcher.h" />
     <ClInclude Include="file_system.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="handle.h" />
     <ClInclude Include="integration_context.h" />
     <ClInclude Include="itemidlist.h" />

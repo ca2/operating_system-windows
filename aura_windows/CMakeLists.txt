@@ -9,8 +9,8 @@ list(APPEND library_source
    _factory.cpp
    extract_icon.cpp
    extract_icon.h
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    hicon_from_ico_file.cpp
     #interaction_impl.cpp
    #interaction_impl.h
@@ -23,7 +23,7 @@ list(APPEND library_source
 
 add_library(${PROJECT_NAME} SHARED ${library_source})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

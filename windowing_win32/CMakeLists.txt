@@ -43,8 +43,8 @@ list(APPEND draw2d_gdiplus_source
    devices.h
    display.cpp
    display.h
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    gdi.cpp
    icon.cpp
    icon.h
@@ -93,7 +93,7 @@ endif ()
 
 add_library(${PROJECT_NAME} SHARED ${draw2d_gdiplus_source})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

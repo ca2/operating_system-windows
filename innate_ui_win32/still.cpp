@@ -1,5 +1,5 @@
 // Created by camilo on 2024-09-13 01:00 <3ThomasBorregaardSorensen!!
-#include "framework.h"
+#include "platform.h"
 #include "icon.h"
 #include "still.h"
 #include "acme/operating_system/windows/windowing.h"

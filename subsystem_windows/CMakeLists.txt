@@ -22,8 +22,8 @@ list(APPEND library_source
    #io/_.h
    #io/_____debug.xcconfig
    #io/_____release.xcconfig
-   #io/aaa_framework.cpp
-   #io/aaa_framework.h
+   #io/aaa_platform.cpp
+   #io/aaa_platform.h
    #io/aaa_io_exception.h
    #io/BufferedInputStream.cpp
    #io/BufferedInputStream.h
@@ -65,8 +65,8 @@ list(APPEND library_source
    #       node/_____release.xcconfig
    #       node/aaa_Environment.cpp
    #       node/aaa_Environment.h
-   #       node/aaa_framework.cpp
-   #       node/aaa_framework.h
+   #       node/aaa_platform.cpp
+   #       node/aaa_platform.h
    node/AnonymousPipe.cpp
    node/AnonymousPipe.h
    node/AnonymousPipeFactory.cpp
@@ -181,8 +181,8 @@ list(APPEND library_source
    thread/_.h
    #thread/_____debug.xcconfig
    #thread/_____release.xcconfig
-   #thread/aaa_framework.cpp
-   #thread/aaa_framework.h
+   #thread/aaa_platform.cpp
+   #thread/aaa_platform.h
    #thread/aaa_ZombieKiller.cpp
    #thread/aaa_ZombieKiller.h
    thread/AutoLock.cpp
@@ -213,8 +213,8 @@ list(APPEND library_source
    _factory.cpp
    #node/CommandLineArguments.cpp
    #node/CommandLineArguments.h
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    resource.h
 
 )
@@ -224,7 +224,7 @@ if (MSVC)
 endif ()
 
 add_library(${PROJECT_NAME} SHARED ${library_source})
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

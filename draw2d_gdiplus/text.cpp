@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "font.h"
 #include "graphics.h"
 #include "path.h"
@@ -6,7 +6,7 @@
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/acme.h"
-#include "acme/platform/platform.h"
+#include "acme/platform/platform_platform.h"
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/platform/system.h"
 

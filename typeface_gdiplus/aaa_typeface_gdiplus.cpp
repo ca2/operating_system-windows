@@ -1,5 +1,5 @@
 // Created by camilo on 2026-01-06 22:15 <3ThomasBorregaardSørensen!!
-#include "framework.h"
+#include "platform.h"
 #include "typeface_gdiplus.h"
 
 

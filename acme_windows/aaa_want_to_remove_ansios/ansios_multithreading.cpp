@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 
 
 CLASS_DECL_ACME void thread_get_os_priority(int32_t * piOsPolicy, sched_param * pparam, int32_t iCa2Priority);

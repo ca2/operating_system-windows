@@ -2904,7 +2904,7 @@
   <ItemGroup>
     <ClCompile Include="button.cpp" />
     <ClCompile Include="dialog.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugAsan|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>
@@ -2971,7 +2971,7 @@
   <ItemGroup>
     <ClInclude Include="button.h" />
     <ClInclude Include="dialog.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="icon.h" />
     <ClInclude Include="innate_ui.h" />
     <ClInclude Include="menu.h" />

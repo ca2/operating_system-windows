@@ -47,7 +47,7 @@
     <ClInclude Include="draw2d_gdi_path.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework\framework.h">
+    <ClInclude Include="framework\platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="draw2d_gdi_image_impl.h">
@@ -91,7 +91,7 @@
     <ClCompile Include="draw2d_gdi_path.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="framework\framework.cpp">
+    <ClCompile Include="framework\platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="draw2d_gdi_image_impl.cpp">

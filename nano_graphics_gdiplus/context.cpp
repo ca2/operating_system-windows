@@ -1,7 +1,7 @@
 //
 // Created by camilo on 31/01/2022.
 //
-#include "framework.h"
+#include "platform.h"
 #include "context.h"
 #include "acme/prototype/geometry2d/rectangle.h"
 #include "acme/prototype/geometry2d/size.h"

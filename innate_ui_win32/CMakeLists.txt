@@ -10,8 +10,8 @@ list(APPEND library_source
    button.h
    dialog.cpp
    dialog.h
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    icon.cpp
    icon.h
    innate_ui.cpp
@@ -27,7 +27,7 @@ list(APPEND library_source
 
 add_library(${PROJECT_NAME} SHARED ${library_source})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

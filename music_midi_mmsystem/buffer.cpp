@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "buffer.h"
 #include "sequencer.h"
 #include "acme/parallelization/synchronous_lock.h"

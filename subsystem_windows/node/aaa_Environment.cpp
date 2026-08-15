@@ -21,7 +21,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //-------------------------------------------------------------------------
 //
-#include "framework.h"#include "Environment.h"
+#include "platform.h"#include "Environment.h"
 #include "CtrlAltDelSimulator.h"
 
 #include <shlobj.h>

@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "image.h"
 #include "graphics.h"
 #include "bitmap.h"
@@ -74,10 +74,10 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::_map(bool bApplyTransform)
+   void image::_map(const ::i32_rectangle & rectangle, bool bApplyAlphaTransform)
    {
 
-      image_meta::_map(bApplyTransform);
+      image_meta::_map(rectangle, bApplyAlphaTransform);
 
       //_on_map(bApplyTransform);
 

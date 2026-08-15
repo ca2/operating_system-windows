@@ -76,7 +76,7 @@
 			<Add option="-Wl,-z,defs" />
 			<Add directory="../../../time/x64/basis" />
 		</Linker>
-		<Unit filename="framework.h">
+		<Unit filename="platform.h">
 			<Option compile="1" />
 			<Option weight="0" />
 		</Unit>

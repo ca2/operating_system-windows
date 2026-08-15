@@ -22,7 +22,7 @@
 //-------------------------------------------------------------------------
 //
 // Adapted by camilo on beginning of 2026-April <3ThomasBorregaardSorensen!!
-#include "framework.h"
+#include "platform.h"
 #include "FilteredTextBox.h"
 #include "innate_subsystem/gui/StringFilter.h"
 

@@ -1,5 +1,5 @@
 // created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
-#include "framework.h"
+#include "platform.h"
 #include "window.h"
 
 

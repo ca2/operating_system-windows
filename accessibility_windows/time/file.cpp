@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "acme/operating_system.h"
 #include "acme/os/windows_common/_file_c.h"
 #include <stdio.h>
@@ -954,7 +954,7 @@ memory file_as_memory(const_char_pointer pszPath, memsize iReadAtMostByteCount)
 
 
 
-//#include "framework.h"
+//#include "platform.h"
 //#include <Winsvc.h>
 
 //const LPCTSTR DRV_DOS_NAME = _T("\\\\.\\ListFileDrv");

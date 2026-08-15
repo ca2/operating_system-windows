@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "node.h"
 
 //BEGIN_FACTORY(node_windows)

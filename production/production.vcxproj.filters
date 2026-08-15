@@ -28,7 +28,7 @@
     <ClCompile Include=".\production_pane_impact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include=".\framework.cpp">
+    <ClCompile Include=".\platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include=".\production_impact.cpp">
@@ -42,7 +42,7 @@
     <ClInclude Include="production.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework.h">
+    <ClInclude Include="platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="production_production.h">

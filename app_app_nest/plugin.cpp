@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include <process.h>
 
 void simple_se_translator(::u32 uiCode, EXCEPTION_POINTERS * ppointers)

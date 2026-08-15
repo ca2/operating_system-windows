@@ -2129,7 +2129,7 @@
     <ClInclude Include="object.h" />
     <ClInclude Include="pen.h" />
     <ClInclude Include="_.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="brush.cpp" />
@@ -2139,7 +2139,7 @@
     <ClCompile Include="icon.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="pen.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugWithInlOpt|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ASanDbgWithInlOpt|Win32'">Create</PrecompiledHeader>

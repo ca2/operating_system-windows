@@ -1,5 +1,5 @@
 // Created by camilo 2021-02-10 <3TBS_!!
-#include "framework.h"
+#include "platform.h"
 #include "write_text.h"
 
 

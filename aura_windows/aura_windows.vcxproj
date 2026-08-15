@@ -3068,7 +3068,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="extract_icon.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="aaa_interaction_impl.h" />
     <ClInclude Include="layered_window_buffer.h" />
     <ClInclude Include="node.h" />
@@ -3121,7 +3121,7 @@
     <ClCompile Include="node.cpp" />
     <ClCompile Include="shell_open.cpp" />
     <ClCompile Include="_factory.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugAsan|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>

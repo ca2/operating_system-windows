@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "platform.h"
 #include "acme/node/windows/registry.h"
 #include <shlobj.h>
 #include <string.h>

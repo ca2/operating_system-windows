@@ -81,7 +81,7 @@
       <ImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <ClCompile>
-      <PrecompiledHeaderFile>framework.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>platform.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalIncludeDirectories>$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app/thirdparty/include;$(SolutionDir)../../../source/app/thirdparty;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;;$(SolutionDir)../../../source;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_APP_CORE_HELLOMULTIVERSE_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -96,14 +96,14 @@
     <ClInclude Include="application.h" />
     <ClInclude Include="document.h" />
     <ClInclude Include="frame.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="hellomultiverse.h" />
     <ClInclude Include="pane_impact.h" />
     <ClInclude Include="::impact_update.h" />
     <ClInclude Include="impact.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="hellomultiverse.cpp" />

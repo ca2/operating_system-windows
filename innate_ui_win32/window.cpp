@@ -1,10 +1,10 @@
 // Created by camilo on 2024-09-12 22:45 <3ThomasBorregaardSorensen!!
-#include "framework.h"
+#include "platform.h"
 #include "innate_ui.h"
 #include "window.h"
 #include "acme/nano/nano.h"
-#include "acme/platform/platform.h"
 #include "acme/platform/application.h"
+#include "acme/platform/platform_platform.h"
 #include "acme/platform/system.h"
 #include "acme/parallelization/manual_reset_happening.h"
 #include "acme/prototype/geometry2d/size.h"
@@ -776,7 +776,7 @@ return false;
 // WindowsProject1.cpp : Defines the entry point for the application.
 //
 
-//#include "framework.h"
+//#include "platform.h"
 //#include "WindowsProject1.h"
 //
 //#define MAX_LOADSTRING 100

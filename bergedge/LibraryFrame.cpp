@@ -1,5 +1,5 @@
 
-#include "framework.h"
+#include "platform.h"
 
 bool has_subdir(CString str)
 {

@@ -1191,14 +1191,14 @@
     <ClInclude Include="factory_exchange.h" />
     <ClInclude Include="in.h" />
     <ClInclude Include="out.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="in.cpp" />
     <ClCompile Include="out.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugAsan|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Create</PrecompiledHeader>

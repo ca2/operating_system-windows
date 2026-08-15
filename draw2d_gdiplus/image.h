@@ -71,7 +71,7 @@ namespace draw2d_gdiplus
 
       protected:
 
-         void _map(bool) override;
+         void _map(const ::i32_rectangle & rectangle, bool bApplyAlphaTransform = true) override;
          void _unmap(bool bDoUnmap) override;
 
    };

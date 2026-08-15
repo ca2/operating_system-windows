@@ -2971,7 +2971,7 @@
   <ItemGroup>
     <ClInclude Include="app_launcher.h" />
     <ClInclude Include="explorer\explorer_restart.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="interprocess_base.h" />
     <ClInclude Include="interprocess_caller.h" />
     <ClInclude Include="interprocess_target.h" />
@@ -3042,7 +3042,7 @@
     <ClCompile Include="shell\shell.cpp" />
     <ClCompile Include="shell_launcher.cpp" />
     <ClCompile Include="_.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugAsan|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>

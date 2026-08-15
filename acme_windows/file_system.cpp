@@ -1,6 +1,6 @@
 // From acme/filesystem/file/_.cpp by camilo on 2021-08-09 
 // 03:09 BRT <3ThomasBorregaardSorensen
-#include "framework.h"
+#include "platform.h"
 #include "file_system.h"
 #include "path_system.h"
 #include "acme/exception/exception.h"

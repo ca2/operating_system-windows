@@ -1,5 +1,5 @@
 // Create on 2021-03-21 20:00 <3ThomasBS_
-#include "framework.h"
+#include "platform.h"
 #include "directory_system.h"
 #include "file_system.h"
 #include "acme/exception/exception.h"
@@ -730,7 +730,7 @@ pacmedir->roaming();
 //
 //   }
 
-#include "framework.h"
+#include "platform.h"
 //#include "acme/operating_system.h"
 
 

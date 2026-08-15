@@ -1,7 +1,7 @@
 //
 // Created by camilo on 2024-09-27 02:45 <3ThomasBorregaardSorensen!!
 //
-#include "framework.h"
+#include "platform.h"
 #include "icon.h"
 #include "acme/_operating_system.h"
 //#include <windows.h>

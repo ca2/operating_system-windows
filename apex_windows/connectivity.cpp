@@ -1,5 +1,5 @@
-// Created by Camilo on 2024-04-09 10:15 <3ThomasBorregaardSorensen!!
-#include "framework.h"
+// Created by Camilo on 2024-04-09 10:15 <3ThomasBorregaardSørensen!!
+#include "platform.h"
 #include "node.h"
 
 

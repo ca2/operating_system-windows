@@ -21,8 +21,8 @@ list(APPEND library_source
         _.cpp
         _.h
         _factory.cpp
-        framework.cpp
-        framework.h
+        platform.cpp
+        platform.h
 #        keyboard.cpp
 #        keyboard.h
 #        xkb_input.cpp
@@ -57,7 +57,7 @@ list(APPEND library_references
 
 
 add_library(${PROJECT_NAME} SHARED ${library_source})
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

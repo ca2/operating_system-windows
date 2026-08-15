@@ -1,4 +1,4 @@
-#include "../framework.h"
+#include "../platform.h"
 /**
 * @ ProcessEnvReader.cpp - Implementation File for CProcessEnvReader class
 * @ Author - Sarath C
