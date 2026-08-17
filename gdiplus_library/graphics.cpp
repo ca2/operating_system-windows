@@ -8044,7 +8044,7 @@ namespace draw2d_gdiplus
 
    //            }
    //            
-   //            estatus = pimage1->create(rectangleBlt.::f64_size());
+   //            estatus = pimage1->create_as_descriptor(rectangleBlt.::f64_size());
 
    //            if (!estatus)
    //            {

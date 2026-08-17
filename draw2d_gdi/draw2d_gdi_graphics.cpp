@@ -736,7 +736,7 @@ namespace draw2d_gdi
 
          pimage->fill(0, 0, 0, 0);
 
-         ::DrawIconEx((HDC)pimage->get_graphics()->get_os_data(), 0, 0, (HICON) picon->m_picon, cx, cy, istepIfAniCur, nullptr, DI_IMAGE | DI_MASK);
+         ::DrawIconEx((HDC)pgraphicsImage->get_os_data(), 0, 0, (HICON) picon->m_picon, cx, cy, istepIfAniCur, nullptr, DI_IMAGE | DI_MASK);
 
          pimage->div_alpha();
 
@@ -3038,7 +3038,7 @@ namespace draw2d_gdi
    if(imageWork == nullptr)
    {
 
-   pimage->create(this);
+   pimage->create_as_descriptor(this);
 
    imageWork = pimage;
 
@@ -3059,7 +3059,7 @@ namespace draw2d_gdi
    ::image::image_pointer pimage2;
    if(imageWork2 == nullptr)
    {
-   pimage2->create(this);
+   pimage2->create_as_descriptor(this);
    imageWork2 = pimage2;
    }
 

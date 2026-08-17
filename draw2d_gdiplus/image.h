@@ -64,14 +64,14 @@ namespace draw2d_gdiplus
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
       //virtual bool draw(const ::image::image * pimage) override;
-      virtual void _draw_raw(const ::i32_rectangle & rectangleTarget, ::image::image * pimageSrc, const ::i32_point & pointSrc) override;
+      void _draw_raw(const ::i32_rectangle & rectangleTarget, ::image::image * pimageSrc, const ::i32_point & pointSrc) override;
 
 
       virtual void SetIconMask(::image::icon * picon, ::i32 cx, ::i32 cy) override;
 
       protected:
 
-         void _map(const ::i32_rectangle & rectangle, bool bApplyAlphaTransform = true) override;
+         pixmap_lease _map(const ::i32_rectangle & rectangle, bool bApplyAlphaTransform = true) override;
          void _unmap(bool bDoUnmap) override;
 
    };

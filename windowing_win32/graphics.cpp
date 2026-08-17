@@ -445,7 +445,7 @@ namespace windowing_win32
 //            ////}
 //            ////else
 //            ////{
-//            //pbufferitem->m_pimageBufferItem->create(pbufferitem->m_sizeBufferItem);
+//            //pbufferitem->m_pimageBufferItem->create_as_descriptor(pbufferitem->m_sizeBufferItem);
 //            pbufferitem->m_pgraphicsBufferItem->create_for_window_draw2d(puserinteraction, pbufferitem->m_sizeBufferItem);
 //
 //            pbufferitem->m_pgraphicsBufferItem->set_ok_flag();
@@ -465,7 +465,7 @@ namespace windowing_win32
 //         //{
 //
 //         //   //pbufferitem->m_pgraphicsBufferItem->defer_set_size(pbufferitem->m_sizeBufferItem);
-//         //   pbufferitem->m_pimageBufferItem->create(pbufferitem->m_sizeBufferItem);
+//         //   pbufferitem->m_pimageBufferItem->create_as_descriptor(pbufferitem->m_sizeBufferItem);
 //
 //         //}
 //
@@ -964,9 +964,9 @@ namespace windowing_win32
 
             }
 
-            auto mapPixmapWindowBufferTarget = playeredwindowbuffer->m_ppixmapWindowBuffer->map();
+            auto ppixmapPixmapWindowBufferTarget = playeredwindowbuffer->m_ppixmapWindowBuffer->map();
 
-            auto mapImageBufferItemSource = pbufferitem->m_pimageBufferItem->map();
+            auto ppixmapImageBufferItemSource = pbufferitem->m_pimageBufferItem->map();
 
             ::i32_rectangle rectangleWindow{ ::i32_point{}, m_pwindow->m_sizeWindow };
 
@@ -975,35 +975,36 @@ namespace windowing_win32
             if (0)
             {
 
-               mapImageBufferItemSource.fill_solid_rectangle({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageBufferItemSource->fill_solid_rectangle({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               mapImageBufferItemSource.fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageBufferItemSource->fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               mapImageBufferItemSource.fill_solid_rectangle({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageBufferItemSource->fill_solid_rectangle({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               mapImageBufferItemSource.fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageBufferItemSource->fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
             }
 
             if (0)
             {
 
-               mapImageBufferItemSource.blend_color({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageBufferItemSource->blend_color({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               mapImageBufferItemSource.blend_color({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageBufferItemSource->blend_color({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               mapImageBufferItemSource.blend_color({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageBufferItemSource->blend_color({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               mapImageBufferItemSource.blend_color({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageBufferItemSource->blend_color({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
             }
 
+            //ppixmapPixmapWindowBufferTarget->copy(
+              // {},
+               //sizeLayeredWindowBuffer,
+               //{},
+               //ppixmapImageBufferItemSource);
 
-            mapPixmapWindowBufferTarget.copy(
-               {},
-               sizeLayeredWindowBuffer,
-               {},
-               mapImageBufferItemSource);
+            ppixmapPixmapWindowBufferTarget->copy(ppixmapImageBufferItemSource);
 
             //mapImageBufferItemSource.fill_byte(128);
             //pbufferitem->m_pimageBufferItem->fill_byte(128);

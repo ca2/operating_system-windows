@@ -2442,9 +2442,9 @@ namespace draw2d_gdiplus
       if (m_pimage->is_ok())
       {
 
-         m_pimage->map();
+         auto ppixmapImage = m_pimage->map();
 
-         m_pimage->image32()[(::i32)point.x + (::i32)point.y * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
+         ppixmapImage->set_pixel(point.x, point.y, color);
 
       }
       else
@@ -2465,15 +2465,15 @@ namespace draw2d_gdiplus
       if (m_pimage->is_ok())
       {
 
-         m_pimage->map();
+         auto ppixmapImage = m_pimage->map();
 
-         ::color::color color = m_pimage->image32()[(::i32)point.x + (::i32)point.y * m_pimage->scan_size()].color(m_pimage->color_indexes());
+         ::color::color color = ppixmapImage->get_pixel(point.x, point.y);
 
          color.m_u8Red = (::i32)(color.m_u8Red * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Red * colorChange.f64_opacity());
          color.m_u8Green = (::i32)(color.m_u8Green * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Green * colorChange.f64_opacity());
          color.m_u8Blue = (::i32)(color.m_u8Blue * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Blue * colorChange.f64_opacity());
 
-         m_pimage->image32()[(::i32)point.x + (::i32)point.y * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
+         ppixmapImage->set_pixel(point.x, point.y, color);
          //colorCurrent.m_iA = colorCurrent.m_iA * (1.0 - color.da()) + color.m_iR * color.da();
 
       }
@@ -8180,7 +8180,7 @@ namespace draw2d_gdiplus
 
    //            }
    //            
-   //            estatus = pimage1->create(rectangleBlt.::f64_size());
+   //            estatus = pimage1->create_as_descriptor(rectangleBlt.::f64_size());
 
    //            if (!estatus)
    //            {

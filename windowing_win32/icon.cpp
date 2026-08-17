@@ -1185,7 +1185,7 @@ namespace windowing_win32
 
             pimage->create_from_data(pixmap.size(), pixmap.image32(), pixmap.m_iScan);
 
-            //pimage->create(size);
+            //pimage->create_as_descriptor(size);
 
             //pimage->map();
 

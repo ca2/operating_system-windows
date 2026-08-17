@@ -74,10 +74,25 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::_map(const ::i32_rectangle & rectangle, bool bApplyAlphaTransform)
+   ::pixmap_lease image::_map(const ::i32_rectangle & rectangle, bool bApplyAlphaTransform)
    {
 
-      image_meta::_map(rectangle, bApplyAlphaTransform);
+      if (m_ppixmapOwned)
+      {
+
+         auto ppixmapOwned = ::transfer(m_ppixmapOwned->map(rectangle, bApplyAlphaTransform));
+
+         return ::transfer(ppixmapOwned);
+
+      }
+
+      construct_newø(m_ppixmapOwned);
+
+      m_ppixmapOwned->create_as_descriptor(this->raw_size());
+
+      auto ppixmapOwned = ::transfer(m_ppixmapOwned->map(rectangle, bApplyAlphaTransform));
+
+      return ::transfer(ppixmapOwned);
 
       //_on_map(bApplyTransform);
 
@@ -89,7 +104,7 @@ namespace draw2d_gdiplus
    void image::_unmap(bool bDoUnmap)
    {
 
-      image_meta::_unmap(false);
+      image::image::_unmap(false);
       
       //_on_unmap(bDoUnmap);
       
@@ -315,25 +330,27 @@ namespace draw2d_gdiplus
 
       }
 
+      defer_constructø(m_ppixmapOwned);
+
       if (::is_set(pimage32))
       {
 
-         m_memoryPixmap.assign(pimage32, iScan * size.cy);
+         m_ppixmapOwned->m_memoryPixmap.assign(pimage32, iScan * size.cy);
 
       }
       else
       {
 
-         m_memoryPixmap.set_size(iScan * size.cy);
+         m_ppixmapOwned->m_memoryPixmap.set_size(iScan * size.cy);
 
-         m_memoryPixmap.zero();
+         m_ppixmapOwned->m_memoryPixmap.zero();
 
       }
 
 
       //pbitmap->create_bitmap(nullptr, size, &pimage32Bitmap, pimage32, &iScan);
 
-      pbitmap->create_bitmap(nullptr, size, m_memoryPixmap, &iScan);
+      pbitmap->create_bitmap(nullptr, size, m_ppixmapOwned);
 
       auto str2 = _001_image32_diagnostics(size, pimage32Bitmap, iScan);
 
@@ -405,7 +422,9 @@ namespace draw2d_gdiplus
 //
   //    m_pgraphics = pgraphics;
 
-      initialize_pixmap(size, pimage32Bitmap, iScan);
+      //initialize_pixmap(size, pimage32Bitmap, iScan);
+
+      create_as_descriptor(size);
 
       //m_pgraphics->m_pimage = this;
       //m_sizeRaw.cx = width;
@@ -565,7 +584,11 @@ namespace draw2d_gdiplus
 
       //}
 
-      copy_from(pgraphics->m_pimage);
+      auto ppixmapImageThis = this->map();
+
+      auto ppixmapGraphicsImage = pgraphics->m_pimage->map();
+
+      ppixmapImageThis->copy_from(ppixmapGraphicsImage);
 
       //return true;
 
@@ -579,9 +602,12 @@ namespace draw2d_gdiplus
 
       create_as_descriptor(size, eflagCreate);
 
-      auto mapImageBefore = imageBefore.map();
+      auto ppixmapImageThis = this->map();
 
-      copy(size.minimum(mapImageBefore.size()), mapImageBefore.data(), mapImageBefore.m_iScan);
+      auto ppixmapImageBefore = imageBefore.map();
+
+      ppixmapImageThis->copy(ppixmapImageBefore);
+      //copy(size.minimum(ppixmapImageBefore->size()), ppixmapImageBefore->data(), ppixmapImageBefore->m_iScan);
 
    }
 
@@ -663,108 +689,115 @@ namespace draw2d_gdiplus
 
       ::image::image * pimageDst = this;
 
-      if (pimageDst->m_bMapped && pimageSrc->m_bMapped)
+      if (pimageDst->m_bMapped || pimageSrc->m_bMapped)
       {
 
-         rectangleTarget += m_point;
-
-         if (pointSrc.x < 0)
-         {
-
-            rectangleTarget.left -= pointSrc.x;
-
-            pointSrc.x = 0;
-
-         }
-
-         if (pointSrc.y < 0)
-         {
-
-            rectangleTarget.top -= pointSrc.y;
-
-            pointSrc.y = 0;
-
-         }
-
-         if (rectangleTarget.left < 0)
-         {
-
-            size.cx += rectangleTarget.left;
-
-            pointSrc.x -= rectangleTarget.left;
-
-            rectangleTarget.left = 0;
-
-         }
-
-         if (size.cx < 0)
-         {
-
-            return;
-
-         }
-
-         if (rectangleTarget.top < 0)
-         {
-
-            size.cy += rectangleTarget.top;
-
-            pointSrc.y -= rectangleTarget.top;
-
-            rectangleTarget.top = 0;
-
-         }
-
-         if (size.cy < 0)
-         {
-
-            return;
-
-         }
-
-         ::i32 xEnd = minimum(size.cx, minimum(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectangleTarget.left));
-
-         ::i32 yEnd = minimum(size.cy, minimum(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectangleTarget.top));
-
-         if (xEnd < 0)
-         {
-
-            return;
-
-         }
-
-         if (yEnd < 0)
-         {
-
-            return;
-
-         }
-
-         ::i32 scanDst = pimageDst->scan_size();
-
-         ::i32 scanSrc = pimageSrc->scan_size();
-
-         ::u8 * pdst = &((::u8 *)pimageDst->image32())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
-
-         ::u8 * psrc = &((::u8 *)pimageSrc->image32())[scanSrc * pointSrc.y + pointSrc.x * sizeof(::color::color)];
-
-         ::color::color * pdst2;
-
-         ::color::color * psrc2;
-
-         for (::i32 y = 0; y < yEnd; y++)
-         {
-
-            pdst2 = (::color::color *)&pdst[scanDst * y];
-
-            psrc2 = (::color::color *)&psrc[scanSrc * y];
-
-            memory_copy(pdst2, psrc2, xEnd * 4);
-
-         }
+         throw ::exception(error_wrong_state);
 
       }
-      else
+
+      // if (pimageDst->m_bMapped && pimageSrc->m_bMapped)
+      // {
+      //
+      //    //rectangleTarget += m_point;
+      //
+      //    if (pointSrc.x < 0)
+      //    {
+      //
+      //       rectangleTarget.left -= pointSrc.x;
+      //
+      //       pointSrc.x = 0;
+      //
+      //    }
+      //
+      //    if (pointSrc.y < 0)
+      //    {
+      //
+      //       rectangleTarget.top -= pointSrc.y;
+      //
+      //       pointSrc.y = 0;
+      //
+      //    }
+      //
+      //    if (rectangleTarget.left < 0)
+      //    {
+      //
+      //       size.cx += rectangleTarget.left;
+      //
+      //       pointSrc.x -= rectangleTarget.left;
+      //
+      //       rectangleTarget.left = 0;
+      //
+      //    }
+      //
+      //    if (size.cx < 0)
+      //    {
+      //
+      //       return;
+      //
+      //    }
+      //
+      //    if (rectangleTarget.top < 0)
+      //    {
+      //
+      //       size.cy += rectangleTarget.top;
+      //
+      //       pointSrc.y -= rectangleTarget.top;
+      //
+      //       rectangleTarget.top = 0;
+      //
+      //    }
+      //
+      //    if (size.cy < 0)
+      //    {
+      //
+      //       return;
+      //
+      //    }
+      //
+      //    ::i32 xEnd = minimum(size.cx, minimum(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectangleTarget.left));
+      //
+      //    ::i32 yEnd = minimum(size.cy, minimum(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectangleTarget.top));
+      //
+      //    if (xEnd < 0)
+      //    {
+      //
+      //       return;
+      //
+      //    }
+      //
+      //    if (yEnd < 0)
+      //    {
+      //
+      //       return;
+      //
+      //    }
+      //
+      //    ::i32 scanDst = pimageDst->scan_size();
+      //
+      //    ::i32 scanSrc = pimageSrc->scan_size();
+      //
+      //    ::u8 * pdst = &((::u8 *)pimageDst->image32())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
+      //
+      //    ::u8 * psrc = &((::u8 *)pimageSrc->image32())[scanSrc * pointSrc.y + pointSrc.x * sizeof(::color::color)];
+      //
+      //    ::color::color * pdst2;
+      //
+      //    ::color::color * psrc2;
+      //
+      //    for (::i32 y = 0; y < yEnd; y++)
+      //    {
+      //
+      //       pdst2 = (::color::color *)&pdst[scanDst * y];
+      //
+      //       psrc2 = (::color::color *)&psrc[scanSrc * y];
+      //
+      //       memory_copy(pdst2, psrc2, xEnd * 4);
+      //
+      //    }
+      //
+      // }
+      // else
       {
 
          ::image::image_source imagesource(pimageSrc, ::f64_rectangle(pointSrc, size));
@@ -840,19 +873,20 @@ namespace draw2d_gdiplus
 
       //}
 
-
-
-      pimage1->clear(color::white);
-
       {
       
+         auto pgraphicsImage1 = pimage1->acquire_graphics();
+
+
+         pgraphicsImage1->clear(color::white);
+
          ::image::image_source imagesource(picon);
 
          ::image::image_drawing_options imagedrawingoptions(::i32_rectangle_dimension(0, 0, cx, cy));
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         auto pgraphicsImage1 = pimage1->acquire_graphics();
+         //auto pgraphicsImage1 = pimage1->acquire_graphics();
 
          pgraphicsImage1->draw(imagedrawing);
 
@@ -884,9 +918,13 @@ namespace draw2d_gdiplus
 
       }*/
 
-      pimage2->fill_byte(0);
-
       {
+
+         auto pgraphicsImage2 = pimage2->acquire_graphics();
+
+         //pimage2->fill_byte(0);
+
+         pgraphicsImage2->clear(::color::transparent);
 
          ::image::image_source imagesource(picon);
 
@@ -894,7 +932,7 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         auto pgraphicsImage2 = pimage1->acquire_graphics();
+         //auto pgraphicsImage2 = pimage1->acquire_graphics();
 
          pgraphicsImage2->draw(imagedrawing);
 
@@ -931,22 +969,32 @@ namespace draw2d_gdiplus
 
       {
 
+         auto pgraphicsImageM = pimageM->acquire_graphics();
+
          ::image::image_source imagesource(picon);
 
          ::image::image_drawing_options imagedrawingoptions(::i32_rectangle_dimension(0, 0, cx, cy));
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         auto pgraphicsImageM = pimageM->acquire_graphics();
+         //auto pgraphicsImageM = pimageM->acquire_graphics();
 
          pgraphicsImageM->draw(imagedrawing);
 
       }
 
-      ::u8 * r1 = (::u8 *)pimage1->image32();
-      ::u8 * r2 = (::u8 *)pimage2->image32();
-      ::u8 * srcM = (::u8 *)pimageM->image32();
-      ::u8 * dest = (::u8 *)image32();
+      auto ppixmapImage1 = pimage1->map();
+
+      auto ppixmapImage2 = pimage2->map();
+
+      auto ppixmapImageM = pimageM->map();
+
+      auto ppixmapImageThis = this->map();
+
+      ::u8 * r1 = (::u8 *)ppixmapImage1->image32();
+      ::u8 * r2 = (::u8 *)ppixmapImage2->image32();
+      ::u8 * srcM = (::u8 *)ppixmapImageM->image32();
+      ::u8 * dest = (::u8 *)ppixmapImageThis->image32();
       ::i32 iSize = cx*cy;
 
       ::u8 b;

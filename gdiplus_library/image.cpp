@@ -730,7 +730,7 @@ namespace draw2d_gdiplus
       
       //estatus = 
       
-      pimage1->create({ cx, cy });
+      pimage1->create_as_descriptor({ cx, cy });
 
       //if (!estatus)
       //{
@@ -771,7 +771,7 @@ namespace draw2d_gdiplus
 
       //estatus=
       
-      pimage2->create( 
+      pimage2->create_as_descriptor( 
       { cx, cy } );
 
  /*     if (!estatus)
@@ -814,7 +814,7 @@ namespace draw2d_gdiplus
 
       // estatus = 
       
-      pimageM->create(
+      pimageM->create_as_descriptor(
          { cx, cy });
 
       //if (!estatus)

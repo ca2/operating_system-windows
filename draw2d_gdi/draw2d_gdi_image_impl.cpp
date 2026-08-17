@@ -126,7 +126,7 @@ namespace draw2d_gdi
 
       }
 
-      m_spgraphics->create_compatible_graphics(nullptr);
+      m_spgraphics->create_memory_graphics({}, nullptr); // create_compatible_graphics(nullptr);
 
       m_spgraphics->m_pimage = this;
 
@@ -592,7 +592,7 @@ namespace draw2d_gdi
    //{
    //   // If DibSize Wrong Re-create image_impl
    //   if ( (pimage->cx!=this->cx) || (pimage->cy!=this->cy) )
-   //      pimage->create ( this->cx, this->cy );
+   //      pimage->create_as_descriptor ( this->cx, this->cy );
    //   // do copy
    //   memory_copy ( pimage->get_data(), m_pcolorref, this->cx*this->cy*4 );
    //}
@@ -796,7 +796,7 @@ namespace draw2d_gdi
    //      return;
    //   // If DibSize Wrong Re-create image_impl
    //   if ( (dx!=pimage->cx) || (dy!=pimage->cy) )
-   //      pimage->create ( dx, dy );
+   //      pimage->create_as_descriptor ( dx, dy );
 
    //   // Prepare buffer Addresses
    //   ::color::color *src=m_pcolorref+(py*this->cx)+px;

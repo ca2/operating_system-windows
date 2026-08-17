@@ -31,8 +31,6 @@ list(APPEND draw2d_gdiplus_source
    _.h
    _factory.cpp
    appbar.cpp
-   buffer.cpp
-   buffer.h
    copydesk.cpp
    copydesk.h
    cursor.cpp
@@ -43,6 +41,8 @@ list(APPEND draw2d_gdiplus_source
    devices.h
    display.cpp
    display.h
+   graphics.cpp
+   graphics.h
    platform.cpp
    platform.h
    gdi.cpp

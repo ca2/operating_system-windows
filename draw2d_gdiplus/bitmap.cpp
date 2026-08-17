@@ -67,13 +67,13 @@ namespace draw2d_gdiplus
 
       __UNREFERENCED_PARAMETER(pacmeuserinteractionAffinity);
 
-      create_bitmap(pgraphics, pimage->size(), pimage->m_memoryPixmap, &pimage->m_iScan);
+      create_bitmap(pgraphics, pimage->size(), pimage->m_ppixmapOwned);
 
       pimage->m_pbitmap = this;
 
-      pimage->m_pimage32Raw = (::image32_t *) pimage->m_memoryPixmap.data();
+      //pimage->m_pimage32Raw = (::image32_t *) pimage->m_memoryPixmap.data();
 
-      pimage->m_pimage32 = (::image32_t*)pimage->m_memoryPixmap.data();
+      //pimage->m_pimage32 = (::image32_t*)pimage->m_memoryPixmap.data();
 
       //pimage->m_bMapped = true;
 
@@ -165,7 +165,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::i32_size& size, ::memory & memory, ::i32* piScan)
+   void bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::i32_size& size, ::pixmap * ppixmapOwned)
    {
 
       if (size == m_size)
@@ -197,17 +197,17 @@ namespace draw2d_gdiplus
          
       ::i32 iScan = m_iStride;
 
-      if (piScan && *piScan > iScan)
+      if (ppixmapOwned && ppixmapOwned->m_iScan > iScan)
       {
 
-         iScan = *piScan;
+         iScan = ppixmapOwned->m_iScan;
 
       }
 
-      if (memory.size() >= iScan * size.cy)
+      if (ppixmapOwned && ppixmapOwned->m_memoryPixmap.size() >= iScan * size.cy)
       {
 
-         m_mem.reference_data(memory);
+         m_mem.reference_data(ppixmapOwned->m_memoryPixmap);
 
          m_iStride = iScan;
 
@@ -217,7 +217,12 @@ namespace draw2d_gdiplus
 
          m_mem.set_size(m_iStride * size.cy);
 
-         memory.reference_data(m_mem);
+         if (ppixmapOwned)
+         {
+
+            ppixmapOwned->m_memoryPixmap.reference_data(m_mem);
+
+         }
 
       }
 
@@ -264,10 +269,10 @@ namespace draw2d_gdiplus
 
       //}
 
-      if(piScan)
+      if(ppixmapOwned)
       {
 
-         *piScan = m_iStride;
+         ppixmapOwned->m_iScan = m_iStride;
 
       }
 

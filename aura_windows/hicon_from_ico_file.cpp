@@ -30,13 +30,13 @@ namespace aura_windows
 
       //}
 
-      auto map = ppixmap->map();
+      auto ppixmapPixmap = ppixmap->map();
 
-      Gdiplus::Bitmap bitmap(ppixmap->width(),
-         ppixmap->height(),
-         ppixmap->m_iScan,
+      Gdiplus::Bitmap bitmap(ppixmapPixmap->width(),
+         ppixmapPixmap->height(),
+         ppixmapPixmap->m_iScan,
          PixelFormat32bppARGB,
-         (BYTE *) map.data()
+         (BYTE *) ppixmapPixmap->data()
          );
 
       HICON hicon = nullptr;
