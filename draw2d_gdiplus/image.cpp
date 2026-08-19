@@ -74,25 +74,27 @@ namespace draw2d_gdiplus
    }
 
 
-   ::pixmap_lease image::_map(const ::i32_rectangle & rectangle, bool bApplyAlphaTransform)
+   ::image_pixmap_lease image::_map(const ::i32_rectangle & rectangle)
    {
 
-      if (m_ppixmapOwned)
-      {
+      auto ppixmap = ::transfer(::image::image::_map(rectangle));
 
-         auto ppixmapOwned = ::transfer(m_ppixmapOwned->map(rectangle, bApplyAlphaTransform));
+      return ::transfer(ppixmap);
 
-         return ::transfer(ppixmapOwned);
-
-      }
-
-      construct_newø(m_ppixmapOwned);
-
-      m_ppixmapOwned->create_as_descriptor(this->raw_size());
-
-      auto ppixmapOwned = ::transfer(m_ppixmapOwned->map(rectangle, bApplyAlphaTransform));
-
-      return ::transfer(ppixmapOwned);
+      // if (m_ppixmapOwned)
+      // {
+      //
+      //    return {this, m_ppixmapOwned };
+      //
+      // }
+      //
+      // construct_newø(m_ppixmapOwned);
+      //
+      // m_ppixmapOwned->create_as_descriptor(this->raw_size());
+      //
+      // auto ppixmapOwned = ::transfer(m_ppixmapOwned->map(rectangle, bApplyAlphaTransform));
+      //
+      // return ::transfer(ppixmapOwned);
 
       //_on_map(bApplyTransform);
 
@@ -101,10 +103,10 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::_unmap(bool bDoUnmap)
+   void image::_unmap(::image_pixmap_lease * pimagepixmaplease)
    {
 
-      image::image::_unmap(false);
+      ::image::image::_unmap(pimagepixmaplease);
       
       //_on_unmap(bDoUnmap);
       
@@ -438,7 +440,7 @@ namespace draw2d_gdiplus
 
       //}
       
-      m_bMapped = false;
+      //m_bMapped = false;
 
       set_flag(eflagCreate);
 
@@ -554,12 +556,12 @@ namespace draw2d_gdiplus
    //}
 
 
-   void image::dc_select(bool bSelect)
-   {
-
-      //return true;
-
-   }
+   // void image::dc_select(bool bSelect)
+   // {
+   //
+   //    //return true;
+   //
+   // }
 
 
    void image::create_from_graphics(::draw2d::graphics * pgraphics)
@@ -689,7 +691,7 @@ namespace draw2d_gdiplus
 
       ::image::image * pimageDst = this;
 
-      if (pimageDst->m_bMapped || pimageSrc->m_bMapped)
+      if (pimageDst->m_pimagepixmaplease || pimageSrc->m_pimagepixmaplease)
       {
 
          throw ::exception(error_wrong_state);
@@ -1072,12 +1074,12 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::on_exif_orientation()
-   {
-
-      ::image::image::on_exif_orientation();
-
-   }
+   // void image::on_exif_orientation()
+   // {
+   //
+   //    ::image::image::on_exif_orientation();
+   //
+   // }
 
 
 } // namespace draw2d_gdiplus

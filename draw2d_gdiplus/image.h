@@ -2,6 +2,7 @@
 
 
 #include "aura/graphics/image/image.h"
+#include "aura/graphics/image/image_pixmap_lease.h"
 
 
 namespace draw2d_gdiplus
@@ -39,9 +40,9 @@ namespace draw2d_gdiplus
       //virtual bool stretch(::image::image * pimage) override;
 
 
-      void dc_select(bool bSelect = true);
+      //void dc_select(bool bSelect = true);
 
-      virtual void on_exif_orientation();
+      //virtual void on_exif_orientation();
 
 
       virtual bool _load_thumbnail(const ::scoped_string & scopedstr);
@@ -71,8 +72,8 @@ namespace draw2d_gdiplus
 
       protected:
 
-         pixmap_lease _map(const ::i32_rectangle & rectangle, bool bApplyAlphaTransform = true) override;
-         void _unmap(bool bDoUnmap) override;
+         ::image_pixmap_lease _map(const ::i32_rectangle & rectangle) override;
+         void _unmap(::image_pixmap_lease * pimagepixmaplease) override;
 
    };
 

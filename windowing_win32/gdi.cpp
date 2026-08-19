@@ -72,7 +72,7 @@ namespace windows
 
       auto ppixmap = pimage->map();
 
-      ((::image32_t *)pBits)->copy(pimage->size(), iStrideDst, ppixmap->data(), pimage->scan_size());
+      ((::image32_t *)pBits)->copy(pimage->size(), iStrideDst, ppixmap->data(), ppixmap->scan_size());
 
       return hBitmap;
 

@@ -932,7 +932,9 @@ namespace windowing_win32
 
          auto pixmapRawData = playeredwindowbuffer->m_ppixmapWindowBuffer->m_pimage32Raw;
 
-         auto pimageRawData = pbufferitem->m_pimageBufferItem->m_pimage32Raw;
+         auto ppixmapImageRawData = pbufferitem->m_pimageBufferItem->map();
+
+         auto pimageRawData = ppixmapImageRawData->image32();
 
          if (m_bDibIsHostingBuffer && pimageRawData == pixmapRawData)
          {

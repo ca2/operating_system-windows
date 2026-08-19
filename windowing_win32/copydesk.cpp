@@ -297,9 +297,12 @@ namespace windowing_win32
       bi.biPlanes = 1;
       bi.biBitCount = 32;
       bi.biCompression = BI_RGB;
-      bi.biSizeImage = pimage->scan_size() * pimage->height();
 
-      HGLOBAL hglb = GlobalAlloc(GMEM_MOVEABLE, sizeof(bi) + pimage->scan_size() * pimage->height());
+      auto ppixmapImage = ((::image::image * )pimage)->map();
+
+      bi.biSizeImage = ppixmapImage->scan_size() * pimage->height();
+
+      HGLOBAL hglb = GlobalAlloc(GMEM_MOVEABLE, sizeof(bi) + ppixmapImage->scan_size() * pimage->height());
 
       if (hglb == nullptr)
       {
@@ -311,13 +314,11 @@ namespace windowing_win32
       ::u8 * p = (::u8 *) ::GlobalLock(hglb);
 
 
-      pimage->map();
-
       ::memory_copy(p, &bi, sizeof(bi));
 
-      auto ppixmap = pimage->map();
+      //auto ppixmap = pimage->map();
 
-      ::memory_copy(p + sizeof(bi), ppixmap->data(), pimage->scan_size() * pimage->height());
+      ::memory_copy(p + sizeof(bi), ppixmapImage->data(), ppixmapImage->scan_size() * ppixmapImage->height());
 
       GlobalUnlock(hglb);
 
@@ -665,7 +666,9 @@ namespace windowing_win32
             if (pimage->area() > 0)
             {
 
-               pimage->fill_byte(0);
+               auto ppixmapImage = pimage->map();
+
+               ppixmapImage->clear_transparent();
 
                hdcMem = ::CreateCompatibleDC(nullptr);
 
@@ -679,15 +682,16 @@ namespace windowing_win32
                bi.bmiHeader.biPlanes = 1;
                bi.bmiHeader.biBitCount = 32;
                bi.bmiHeader.biCompression = BI_RGB;
-               bi.bmiHeader.biSizeImage = pimage->scan_size() * bm.bmHeight;
                bi.bmiHeader.biXPelsPerMeter = 0;
                bi.bmiHeader.biYPelsPerMeter = 0;
                bi.bmiHeader.biClrUsed = 0;
                bi.bmiHeader.biClrImportant = 0;
+               bi.bmiHeader.biSizeImage = ppixmapImage->scan_size() * bm.bmHeight;
 
-               pimage->map();
+               //auto ppixmapImage = pimage->map();
 
-               bOk = GetDIBits(hdcMem, hbitmap, 0, bm.bmHeight, pimage->data(), &bi, DIB_RGB_COLORS) != false;
+
+               bOk = GetDIBits(hdcMem, hbitmap, 0, bm.bmHeight, ppixmapImage->data(), &bi, DIB_RGB_COLORS) != false;
 
             }
 
