@@ -1183,7 +1183,13 @@ namespace windowing_win32
 
          //   ::SelectObject(hdc, hbitmapOld);
 
-            pimage->create_from_data(pixmap.size(), pixmap.image32(), pixmap.m_iScan);
+         auto sizePixmap = pixmap.size();
+
+         auto pimage32Pixmap = pixmap.image32();
+
+         auto iScanPixmap = pixmap.m_iScan;
+
+            pimage->create_from_data(sizePixmap, pimage32Pixmap,iScanPixmap);
 
             //pimage->create_as_descriptor(size);
 

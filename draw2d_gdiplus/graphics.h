@@ -25,7 +25,7 @@ namespace draw2d_gdiplus
       HDC                           m_hdc;
       HDC                           m_hdcAttach;
       HDC                           m_hdcGraphics;
-
+      //::Gdiplus::Bitmap *           m_pbitmapMemoryGraphics;
 
       graphics();
       ~graphics() override;
@@ -85,6 +85,8 @@ namespace draw2d_gdiplus
       //void create_compatible_graphics(::draw2d::graphics * pgraphics) override;
       void create_for_window_draw2d(::user::interaction * puserinteraction, const ::i32_size & size);
       void create_bitmap_graphics(::draw2d::bitmap * pbitmap) override;
+      void _create_memory_graphics(const ::i32_size & size, ::acme::user::interaction * pacmeuserinteractionAffinity) override;
+     
 
       void DeleteDC() override;
 

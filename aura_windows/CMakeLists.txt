@@ -14,6 +14,8 @@ list(APPEND library_source
    hicon_from_ico_file.cpp
     #interaction_impl.cpp
    #interaction_impl.h
+   layered_window_buffer.cpp
+   layered_window_buffer.h
    node.cpp
    node.h
    shell_open.cpp

@@ -179,6 +179,7 @@ namespace draw2d_gdiplus
       m_ppath = nullptr;
       m_ppathPaint = nullptr;
       m_ewritetextrendering = ::write_text::e_rendering_none;
+      //m_pbitmapMemoryGraphics = nullptr;
       //m_dSizeScaler = 1.0;
 
    }
@@ -342,11 +343,59 @@ namespace draw2d_gdiplus
 
       close_graphics();
 
-      m_pbitmap = pbitmap;
+      m_pbitmapTarget = pbitmap;
 
       auto pgdiplusgraphics = new Gdiplus::Graphics(pgdiplusbitmap);
 
-      m_sizeTotal2 = m_pbitmap->size();
+      m_sizeTotal2 = m_pbitmapTarget->size();
+
+      m_pgraphics = pgdiplusgraphics;
+
+      m_osdata[0] = pgdiplusgraphics;
+
+      set_ok_flag();
+
+   }
+
+
+   void graphics::_create_memory_graphics(const ::i32_size & size, ::acme::user::interaction * pacmeuserinteractionAffinity)
+   {
+
+      //__UNREFERENCED_PARAMETER(size);
+      //__UNREFERENCED_PARAMETER(pacmeuserinteractionAffinity);
+
+      /////create_memory_graphics({}, nullptr); // create_compatible_graphics(nullptr);
+      ////if (!create_compatible_graphics(nullptr))
+      ////{
+
+      ////   return false;
+
+      ////}
+
+      ////return true;
+
+      auto pbitmapNew = createø<::draw2d::bitmap>();
+
+      pbitmapNew->create_bitmap(this, size, nullptr);
+
+      auto pgdiplusbitmap = (::Gdiplus::Bitmap *)pbitmapNew->get_os_data();
+
+      if (::is_null(pgdiplusbitmap))
+      {
+
+         throw ::exception(error_wrong_state);
+
+      }
+
+      close_graphics();
+
+      //m_pbitmap = pbitmap;
+
+      m_pbitmapTarget = pbitmapNew;
+
+      auto pgdiplusgraphics = new Gdiplus::Graphics(pgdiplusbitmap);
+
+      m_sizeTotal2 = m_pbitmapTarget->size();
 
       m_pgraphics = pgdiplusgraphics;
 
@@ -366,8 +415,9 @@ namespace draw2d_gdiplus
 
       //defer_constructø(m_pimage);
 
-      m_pointOrigin = m_pacmeuserinteractionAffinity->m_pacmewindowingwindow->m_pointWindow;
-      m_sizeImpact2 = m_pacmeuserinteractionAffinity->m_pacmewindowingwindow->m_sizeWindow;
+      m_pointTarget = m_pacmeuserinteractionAffinity->m_pacmewindowingwindow->m_pointWindow;
+      m_sizeTarget = m_pacmeuserinteractionAffinity->m_pacmewindowingwindow->m_sizeWindow;
+      m_bTargetRectangleModified = true;
 
       if (m_pgraphicsbufferitem)
       {
@@ -383,12 +433,12 @@ namespace draw2d_gdiplus
             ::f64_size sizef64Image = pimage->m_size;
             ::f64_size sizef64ImageRaw = pimage->m_sizeRaw;
 
-            if (pointf64Image != m_pointOrigin || sizef64Image != m_sizeImpact2 || sizef64ImageRaw != m_sizeTotal2)
+            if (pointf64Image != m_pointTarget || sizef64Image != m_sizeTarget || sizef64ImageRaw != m_sizeTotal2)
             {
 
-               pimage->m_point = m_pointOrigin;
+               pimage->m_point = m_pointTarget;
 
-               pimage->m_size = m_sizeImpact2;
+               pimage->m_size = m_sizeTarget;
 
                pimage->m_sizeRaw = m_sizeTotal2;
 
@@ -958,6 +1008,13 @@ namespace draw2d_gdiplus
    void graphics::draw_rectangle(const ::f64_rectangle & rectangleParam, ::draw2d::pen * ppen)
    {
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       Gdiplus::RectF rectangle;
 
       copy(rectangle, rectangleParam);
@@ -1146,6 +1203,13 @@ namespace draw2d_gdiplus
 
       }
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       Gdiplus::Pen * ppen = m_ppen->get_os_data < Gdiplus::Pen * >(this);
 
       if (ppen == nullptr)
@@ -1249,12 +1313,20 @@ namespace draw2d_gdiplus
    void graphics::fill_ellipse(const ::f64_rectangle & rectangleParam)
    {
 
+
       if (m_pgraphics == nullptr)
       {
 
          //return false;
 
          throw ::exception(error_null_pointer);
+
+      }
+
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
 
       }
 
@@ -1321,6 +1393,13 @@ namespace draw2d_gdiplus
          //return true;
 
          return;
+
+      }
+
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
 
       }
 
@@ -1405,6 +1484,13 @@ namespace draw2d_gdiplus
 
       }
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       bool bOk1 = false;
 
       array < Gdiplus::PointF > pointa;
@@ -1470,6 +1556,13 @@ namespace draw2d_gdiplus
 
    void graphics::fill_rectangle(const ::f64_rectangle & rectangleParam, ::draw2d::brush * pbrush)
    {
+
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
 
       if (::is_null(pbrush))
       {
@@ -2707,6 +2800,13 @@ namespace draw2d_gdiplus
 
       }
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       graphics * pgraphics = ((graphics *)this);
 
       Gdiplus::Font * pgdiplusfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
@@ -3354,6 +3454,13 @@ namespace draw2d_gdiplus
    void graphics::fill_path()
    {
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       if (m_pgraphics->FillPath(m_pbrush->get_os_data < Gdiplus::Brush * >(this), m_ppath) != Gdiplus::Status::Ok)
       {
 
@@ -3419,6 +3526,13 @@ namespace draw2d_gdiplus
    void graphics::stroke_and_fill_path()
    {
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       bool bOk1 = m_pgraphics->FillPath(m_pbrush->get_os_data < Gdiplus::Brush * >(this), m_ppathPaint) == Gdiplus::Status::Ok;
 
       bool bOk2 = m_pgraphics->DrawPath(m_ppen->get_os_data < Gdiplus::Pen * >(this), m_ppathPaint) == Gdiplus::Status::Ok;
@@ -3431,6 +3545,13 @@ namespace draw2d_gdiplus
    void graphics::stroke_path()
    {
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       bool bOk = m_pgraphics->DrawPath(m_ppen->get_os_data < Gdiplus::Pen * >(this), m_ppathPaint) == Gdiplus::Status::Ok;
 
    }
@@ -3439,6 +3560,13 @@ namespace draw2d_gdiplus
    void graphics::widen_path()
    {
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       bool bOk = m_ppath->Widen(m_ppen->get_os_data < Gdiplus::Pen * >(this)) == Gdiplus::Status::Ok;
 
    }
@@ -3446,6 +3574,13 @@ namespace draw2d_gdiplus
 
    void graphics::draw(::draw2d::path * ppath)
    {
+
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
 
       //m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
       //m_pgraphics->SetCompositingQuality(Gdiplus::CompositingQualityGammaCorrected);
@@ -3477,6 +3612,13 @@ namespace draw2d_gdiplus
    void graphics::draw(::draw2d::path * ppath, ::draw2d::pen * ppen)
    {
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       bool bOk = m_pgraphics->DrawPath(ppen->get_os_data<Gdiplus::Pen *>(this), ppath->get_os_data <Gdiplus::GraphicsPath *>(this)) == Gdiplus::Status::Ok;
 
    }
@@ -3484,6 +3626,13 @@ namespace draw2d_gdiplus
 
    void graphics::fill(::draw2d::path * ppath)
    {
+
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
 
       Gdiplus::Brush * pbrush = m_pbrush->get_os_data < Gdiplus::Brush * >(this);
 
@@ -3522,6 +3671,14 @@ namespace draw2d_gdiplus
       {
 
          throw ::exception(error_null_pointer);
+
+      }
+
+
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
 
       }
 
@@ -4043,6 +4200,13 @@ namespace draw2d_gdiplus
 
    void graphics::fill_rectangle(const ::f64_rectangle & rectangleParam, const ::color::color & color)
    {
+
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
 
       try
       {
@@ -4889,6 +5053,13 @@ namespace draw2d_gdiplus
    ::i32 graphics::get_clip_box(::f64_rectangle & rectangle)
    {
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       Gdiplus::Rect gdiplusrectangle;
 
       m_pgraphics->GetClipBounds(&gdiplusrectangle);
@@ -5274,6 +5445,15 @@ namespace draw2d_gdiplus
 
    void graphics::intersect_clip(const ::f64_rectangle & rectangle)
    {
+
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
+
 
       Gdiplus::RectF rectf;
 
@@ -5990,6 +6170,15 @@ namespace draw2d_gdiplus
 
       }
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
+
+
       Gdiplus::Status status = Gdiplus::Status::GenericError;
 
       //if (m_pfont.is_set() 
@@ -6150,6 +6339,13 @@ namespace draw2d_gdiplus
 
       _synchronous_lock synchronouslockFontTextMap(::write_text::font::s_pmutexFontTextMap);
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       daLeft.erase_all();
 
       daRight.erase_all();
@@ -6294,6 +6490,13 @@ namespace draw2d_gdiplus
 
       if (iIndex < 0)
          return ::f64_size(0, 0);
+
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
 
       string str(scopedstrString);
 
@@ -6447,6 +6650,13 @@ namespace draw2d_gdiplus
 
       }
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       pfont->defer_update(this, 0);
 
       {
@@ -6502,6 +6712,15 @@ namespace draw2d_gdiplus
          return ::f64_size(0, 0);
 
       }
+
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
+
 
       pfontText->defer_update(this, 0);
 
@@ -6948,6 +7167,13 @@ namespace draw2d_gdiplus
    void graphics::TextOutRaw(::f64 x, ::f64 y, const ::scoped_string & scopedstr)
    {
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       if (scopedstr.is_empty())
       {
 
@@ -7268,6 +7494,13 @@ namespace draw2d_gdiplus
 
       _synchronous_lock synchronouslock(synchronization());
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       if (m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign != Gdiplus::PenAlignment::PenAlignmentCenter)
       {
 
@@ -7283,8 +7516,8 @@ namespace draw2d_gdiplus
          Gdiplus::PointF((Gdiplus::REAL)x2, (Gdiplus::REAL)y2));
 
 
-      m_point.x = x2;
-      m_point.y = y2;
+      m_pointCurrent.x = x2;
+      m_pointCurrent.y = y2;
 
 
       //return true;
@@ -7351,15 +7584,22 @@ namespace draw2d_gdiplus
 
       _synchronous_lock synchronouslock(synchronization());
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
       auto ppen = ppenParam->get_os_data < Gdiplus::Pen * >(this);
 
       //      ppen->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
 
       m_pgraphics->DrawLine(ppen, Gdiplus::PointF((Gdiplus::REAL)x1, (Gdiplus::REAL)y1), Gdiplus::PointF((Gdiplus::REAL)x2, (Gdiplus::REAL)y2));
 
-      m_point.x = x2;
+      m_pointCurrent.x = x2;
 
-      m_point.y = y2;
+      m_pointCurrent.y = y2;
 
       //return true;
 

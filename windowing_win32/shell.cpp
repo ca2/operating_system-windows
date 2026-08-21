@@ -201,6 +201,8 @@ bool IsDibSection(HBITMAP bmp)
 
    auto pimage = pparticle->image()->create_image({ bitmap.bmWidth, bitmap.bmHeight });
 
+   auto ppixmapImage = pimage->map();
+
    BITMAPINFO bitmapinfo = {};
 
    bitmapinfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
@@ -209,7 +211,7 @@ bool IsDibSection(HBITMAP bmp)
    bitmapinfo.bmiHeader.biPlanes = 1;
    bitmapinfo.bmiHeader.biBitCount = 32;
    bitmapinfo.bmiHeader.biCompression = BI_RGB;
-   bitmapinfo.bmiHeader.biSizeImage = (DWORD) (pimage->area() * sizeof(::color::color));
+   bitmapinfo.bmiHeader.biSizeImage = (DWORD) (ppixmapImage->area() * sizeof(::color::color));
    //bitmapinfo.bmiHeader.biXPelsPerMeter;
    //bitmapinfo.bmiHeader.biYPelsPerMeter;
    //bitmapinfo.bmiHeader.biClrUsed;
@@ -218,7 +220,7 @@ bool IsDibSection(HBITMAP bmp)
    HDC hdc = ::CreateCompatibleDC(NULL);
 
 
-   if (!::GetDIBits(hdc, hbitmap, 0, bitmap.bmHeight, pimage->m_pimage32Raw, &bitmapinfo, DIB_RGB_COLORS))
+   if (!::GetDIBits(hdc, hbitmap, 0, bitmap.bmHeight, ppixmapImage->data(), &bitmapinfo, DIB_RGB_COLORS))
    {
 
       ::DeleteDC(hdc);

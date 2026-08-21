@@ -499,6 +499,180 @@ namespace draw2d_gdiplus
    }
 
 
+   void bitmap::read_pixels(
+      const ::i32_size & size,
+      const ::i32_point & point,
+      ::image32_t * pimage32,
+      ::i32 iScan)
+   {
+
+      if (size.cx <= 0 || size.cy <= 0)
+      {
+
+         return;
+
+      }
+
+      if (!m_pbitmap || !pimage32)
+      {
+
+         throw ::exception(error_null_pointer);
+
+      }
+
+      if (iScan < size.cx * (::i32) sizeof(::image32_t))
+      {
+
+         throw ::exception(error_bad_argument);
+
+      }
+
+      auto sizeBitmap = GetBitmapDimension();
+
+      if (point.x < 0 || point.y < 0
+         || point.x > sizeBitmap.cx - size.cx
+         || point.y > sizeBitmap.cy - size.cy)
+      {
+
+         throw ::exception(error_bad_argument);
+
+      }
+
+      Gdiplus::Rect rect(point.x, point.y, size.cx, size.cy);
+
+      Gdiplus::BitmapData bitmapdata{};
+
+      auto status = m_pbitmap->LockBits(&rect, Gdiplus::ImageLockModeRead, PixelFormat32bppPARGB, &bitmapdata);
+
+      if (status != Gdiplus::Ok)
+      {
+
+         throw ::exception(error_failed);
+
+      }
+
+      auto pimage32Source = (image32_t *) bitmapdata.Scan0;
+
+      auto iScanSource = bitmapdata.Stride;
+
+      auto pimage32Target = pimage32;
+
+      auto iScanTarget = iScan;
+
+      try
+      {
+
+         pimage32Target->copy(size, iScanTarget, pimage32Source, iScanSource);
+
+      }
+      catch (...)
+      {
+
+         m_pbitmap->UnlockBits(&bitmapdata);
+
+         throw;
+
+      }
+
+      status = m_pbitmap->UnlockBits(&bitmapdata);
+
+      if (status != Gdiplus::Ok)
+      {
+
+         throw ::exception(error_failed);
+
+      }
+
+   }
+
+
+   void bitmap::write_pixels(
+      const ::i32_size & size,
+      const ::i32_point & point,
+      const ::image32_t * pimage32,
+      ::i32 iScan)
+   {
+
+      if (size.cx <= 0 || size.cy <= 0)
+      {
+
+         return;
+
+      }
+
+      if (!m_pbitmap || !pimage32)
+      {
+
+         throw ::exception(error_null_pointer);
+
+      }
+
+      if (iScan < size.cx * (::i32) sizeof(::image32_t))
+      {
+
+         throw ::exception(error_bad_argument);
+
+      }
+
+      auto sizeBitmap = GetBitmapDimension();
+
+      if (point.x < 0 || point.y < 0
+         || point.x > sizeBitmap.cx - size.cx
+         || point.y > sizeBitmap.cy - size.cy)
+      {
+
+         throw ::exception(error_bad_argument);
+
+      }
+
+      Gdiplus::Rect rect(point.x, point.y, size.cx, size.cy);
+
+      Gdiplus::BitmapData bitmapdata{};
+
+      auto status = m_pbitmap->LockBits(&rect, Gdiplus::ImageLockModeWrite, PixelFormat32bppPARGB, &bitmapdata);
+
+      if (status != Gdiplus::Ok)
+      {
+
+         throw ::exception(error_failed);
+
+      }
+
+      auto pimage32Target = (image32_t *) bitmapdata.Scan0;
+
+      auto iScanTarget = bitmapdata.Stride;
+
+      auto pimage32Source = pimage32;
+
+      auto iScanSource = iScan;
+
+      try
+      {
+
+         pimage32Target->copy(size, iScanTarget, pimage32Source, iScanSource);
+
+      }
+      catch (...)
+      {
+
+         m_pbitmap->UnlockBits(&bitmapdata);
+
+         throw;
+
+      }
+
+      status = m_pbitmap->UnlockBits(&bitmapdata);
+
+      if (status != Gdiplus::Ok)
+      {
+
+         throw ::exception(error_failed);
+
+      }
+
+   }
+
+
 } // namespace draw2d_gdiplus
 
 

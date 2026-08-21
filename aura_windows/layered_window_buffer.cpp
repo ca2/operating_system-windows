@@ -787,13 +787,15 @@ namespace windowing_win32
 
       }
 
-      if (pdeviceindependentbitmap->m_point != pointMap
-         || pdeviceindependentbitmap->m_size != sizeWindow)
-      {
+      auto ppixmap = pdeviceindependentbitmap->map({pointMap, sizeWindow});
 
-         pdeviceindependentbitmap->pixmap_map({ pointMap, sizeWindow });
-
-      }
+      // if (pdeviceindependentbitmap->m_point != pointMap
+      //    || pdeviceindependentbitmap->m_size != sizeWindow)
+      // {
+      //
+      //    pdeviceindependentbitmap->pixmap_map({ pointMap, sizeWindow });
+      //
+      // }
 
       m_pdeviceindependentbitmapMainThreadDiagnostic->fill_byte(128);
 
@@ -1274,10 +1276,10 @@ namespace windowing_win32
    }
 
 
-   void layered_window_buffer::buffer_lock_round_swap_key_buffers()
+   void layered_window_buffer::update_window_pixmap_buffer()
    {
 
-      //auto pwindowing = m_pwindow->user_interaction()->windowing();
+        //auto pwindowing = m_pwindow->user_interaction()->windowing();
 
       //auto pdisplay = pwindowing->display();
 
@@ -1293,14 +1295,21 @@ namespace windowing_win32
       ::cast < ::windows::device_independent_bitmap > pdeviceindependentbitmap =
          m_ppixmapWindowBuffer;
 
+      auto hdcBitmapMemory = pdeviceindependentbitmap?pdeviceindependentbitmap->m_hdcMemory:nullptr;
+      auto hbitmapBitmap = pdeviceindependentbitmap?pdeviceindependentbitmap->m_hbitmap:nullptr;
+      auto pimage32RawBitmap = pdeviceindependentbitmap?pdeviceindependentbitmap->m_pimage32Raw:nullptr;
+      auto sizeRawBitmap = pdeviceindependentbitmap?pdeviceindependentbitmap->m_sizeRaw: ::i32_size();
+      auto pointBitmap =pdeviceindependentbitmap? pdeviceindependentbitmap->m_point: ::i32_point();
+      auto sizeBitmap = pdeviceindependentbitmap?pdeviceindependentbitmap->m_size: ::i32_size();
+
       auto bNeedsWindowThreadUpdate =
          !pdeviceindependentbitmap
-         || !pdeviceindependentbitmap->m_hdcMemory
-         || !pdeviceindependentbitmap->m_hbitmap
-         || !pdeviceindependentbitmap->m_pimage32Raw
-         || !(sizeRaw <= pdeviceindependentbitmap->m_sizeRaw)
-         || pdeviceindependentbitmap->m_point != pointWindow
-         || pdeviceindependentbitmap->m_size != sizeWindow;
+         || !hdcBitmapMemory
+         || !hbitmapBitmap
+         || !pimage32RawBitmap
+         || !(sizeRaw <= sizeRawBitmap)
+         || pointWindow != pointBitmap
+         || sizeWindow != sizeBitmap;
 
       if (bNeedsWindowThreadUpdate)
       {
@@ -1326,13 +1335,13 @@ namespace windowing_win32
 
                pdeviceindependentbitmap->defer_create_device_independent_bitmap(sizeRaw);
 
-               if (pdeviceindependentbitmap->m_point != pointWindow
-                  || pdeviceindependentbitmap->m_size != sizeWindow)
-               {
+                if (pdeviceindependentbitmap->m_point != pointWindow
+                   || pdeviceindependentbitmap->m_size != sizeWindow)
+                {
 
-                  pdeviceindependentbitmap->pixmap_map({ pointWindow, sizeWindow });
+                   pdeviceindependentbitmap->pixmap_map({ pointWindow, sizeWindow });
 
-               }
+                }
 
             //};
 
@@ -1353,6 +1362,14 @@ namespace windowing_win32
          throw ::exception(error_wrong_state, "layered_window_buffer production DIB is invalid after main-thread defer-create");
 
       }
+
+
+   }
+
+
+   void layered_window_buffer::buffer_lock_round_swap_key_buffers()
+   {
+
 
    }
 

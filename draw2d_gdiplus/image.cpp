@@ -332,7 +332,7 @@ namespace draw2d_gdiplus
 
       }
 
-      defer_constructø(m_ppixmapOwned);
+      defer_construct_newø(m_ppixmapOwned);
 
       if (::is_set(pimage32))
       {
@@ -827,7 +827,7 @@ namespace draw2d_gdiplus
    }*/
 
 
-   void image::SetIconMask(::image::icon * picon, ::i32 cx, ::i32 cy)
+   void image::set_image_icon(::image::icon * picon, ::i32 cx, ::i32 cy)
    {
 
       if (cx <= 0 || cy <= 0)

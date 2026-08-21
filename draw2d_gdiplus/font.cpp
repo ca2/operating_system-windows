@@ -399,7 +399,7 @@ namespace draw2d_gdiplus
 
          }
 
-         auto pgdiplusfont = øraw_new Gdiplus::Font(
+         auto pgdiplusfont = new Gdiplus::Font(
             utf8_to_unicode(strFamilyName),
             gdiplus_font_size(m_fontsize),
             iStyle,

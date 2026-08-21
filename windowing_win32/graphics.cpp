@@ -246,6 +246,8 @@ namespace windowing_win32
 
          auto & sizeRaw = pbufferitem->m_pimageBufferItem->m_sizeRaw;
 
+
+
          point = m_pwindow->m_pointWindow;
 
          size = m_pwindow->m_sizeWindow;
@@ -916,6 +918,8 @@ namespace windowing_win32
       if (playeredwindowbuffer && !m_papplication->m_gpu.m_bUseSwapChainWindow)
       {
 
+         playeredwindowbuffer->update_window_pixmap_buffer();
+
          if (!pbufferitem->m_pimageBufferItem.ok())
          {
 
@@ -968,7 +972,7 @@ namespace windowing_win32
 
             auto ppixmapPixmapWindowBufferTarget = playeredwindowbuffer->m_ppixmapWindowBuffer->map();
 
-            auto ppixmapImageBufferItemSource = pbufferitem->m_pimageBufferItem->map();
+            //auto ppixmapImageRawData = pbufferitem->m_pimageBufferItem->map();
 
             ::i32_rectangle rectangleWindow{ ::i32_point{}, m_pwindow->m_sizeWindow };
 
@@ -977,26 +981,26 @@ namespace windowing_win32
             if (0)
             {
 
-               ppixmapImageBufferItemSource->fill_solid_rectangle({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->fill_solid_rectangle({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageBufferItemSource->fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageBufferItemSource->fill_solid_rectangle({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->fill_solid_rectangle({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageBufferItemSource->fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
             }
 
             if (0)
             {
 
-               ppixmapImageBufferItemSource->blend_color({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->blend_color({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageBufferItemSource->blend_color({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->blend_color({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageBufferItemSource->blend_color({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->blend_color({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageBufferItemSource->blend_color({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->blend_color({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
             }
 
@@ -1004,9 +1008,9 @@ namespace windowing_win32
               // {},
                //sizeLayeredWindowBuffer,
                //{},
-               //ppixmapImageBufferItemSource);
+               //ppixmapImageRawData);
 
-            ppixmapPixmapWindowBufferTarget->copy(ppixmapImageBufferItemSource);
+            ppixmapPixmapWindowBufferTarget->copy(ppixmapImageRawData);
 
             //mapImageBufferItemSource.fill_byte(128);
             //pbufferitem->m_pimageBufferItem->fill_byte(128);
@@ -1124,7 +1128,9 @@ namespace windowing_win32
             //pbufferitem->m_pimage2->fill_channel(0, color::e_channel_green);
             //pbufferitem->m_pimage2->fill_channel(0, color::e_channel_blue);
 
-            if (!m_pwindowbuffer->_create_window_device_context(sizeBufferItemWindow, playeredwindowbuffer->m_ppixmapWindowBuffer->m_iScan))
+            auto iScanWindowBuffer = playeredwindowbuffer->m_ppixmapWindowBuffer->m_iScan;
+
+            if (!m_pwindowbuffer->_create_window_device_context(sizeBufferItemWindow, iScanWindowBuffer))
             {
 
                throw ::exception(error_failed);
