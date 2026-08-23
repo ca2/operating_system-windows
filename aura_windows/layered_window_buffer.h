@@ -46,7 +46,7 @@ namespace windowing_win32
       void initialize_window_buffer(::windowing::window * pwindow) override;
 
 
-      virtual void update_window_pixmap_buffer();
+      virtual void update_window_pixmap_buffer(::graphics::buffer_item * pbufferitem);
 
       HWND get_hwnd() const;
 

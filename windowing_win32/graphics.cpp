@@ -133,9 +133,29 @@ namespace windowing_win32
 
       m_pwindow->m_sizeRaw = m_pwindow->m_sizeRaw.maximum(rectangleUnion.size());
 
+      auto & sizeWindow = m_pwindow->m_sizeWindow;
+
+      auto & cxWindow = sizeWindow.cx;
+
+      auto & cyWindow = sizeWindow.cy;
+
+      RECT r;
+
+      ::GetWindowRect(::as_HWND(m_pwindow->operating_system_window()), &r);
+
+      auto sizeBufferItem = pbufferitem->m_pimageBufferItem->m_size;
+
+      auto &pointBufferItem1 = pbufferitem->m_pimageBufferItem->m_point;
+      auto &pointBufferItem2 = pbufferitem->m_pointBufferItem;
+      auto &sizeBufferItem1 = pbufferitem->m_pimageBufferItem->m_size;
+      auto &sizeBufferItem2 = pbufferitem->m_sizeBufferItem;
+      auto &sizeRawBufferItem1 = pbufferitem->m_pimageBufferItem->m_sizeRaw;
+      auto &sizeRawBufferItem2 = m_pwindow->m_sizeRaw;
+
+
       if (pbufferitem->m_pimageBufferItem.nok()
-         || pbufferitem->m_pimageBufferItem->m_point != m_pwindow->m_pointWindow
-         || pbufferitem->m_pimageBufferItem->m_size != m_pwindow->m_sizeWindow
+         || pbufferitem->m_pimageBufferItem->m_point != pbufferitem->m_pointBufferItem
+         || pbufferitem->m_pimageBufferItem->m_size != pbufferitem->m_sizeBufferItem
          || pbufferitem->m_pimageBufferItem->m_sizeRaw != m_pwindow->m_sizeRaw)
       {
 
@@ -219,43 +239,93 @@ namespace windowing_win32
       //auto sizeRaw = m_pwindow->m_sizeWindow.maximum(rectangleUnion.size());
 
       if (pbufferitem->m_pimageBufferItem.nok()
-         || pbufferitem->m_pimageBufferItem->m_point != m_pwindow->m_pointWindow
-         || pbufferitem->m_pimageBufferItem->m_size != m_pwindow->m_sizeWindow
+         || pbufferitem->m_pimageBufferItem->m_point != pbufferitem->m_pointBufferItem
+         || pbufferitem->m_pimageBufferItem->m_size != pbufferitem->m_sizeBufferItem
          || pbufferitem->m_pimageBufferItem->m_sizeRaw != m_pwindow->m_sizeRaw)
       {
 
-         if (!m_pdraw2dgraphics)
+         ::cast < ::windowing_win32::layered_window_buffer > playeredwindowbuffer =
+            m_pwindowbuffer;
+
+         ::pointer < ::pixmap > ppixmapPreviousWindowBuffer;
+
+         m_bDibIsHostingBuffer = false;
+
+         if (playeredwindowbuffer
+            && !m_papplication->m_gpu.m_bUseSwapChainWindow)
          {
 
-            m_pdraw2dgraphics = system()->draw2d()->allocate_graphics(m_pwindow->m_pacmeuserinteraction);
+            //   //ppixmapPreviousWindowBuffer =
+            //   //   playeredwindowbuffer->m_ppixmapWindowBuffer;
 
-            m_pdraw2dgraphics->m_pgraphicsbufferitem = pbufferitem;
+            //   //playeredwindowbuffer->update_window_pixmap_buffer(pbufferitem);
 
-            m_pdraw2dgraphics->create_for_window_draw2d(m_pwindow->user_interaction(), m_pwindow->m_sizeRaw);
+            //   //auto ppixmapWindowBuffer =
+            //   //   playeredwindowbuffer->m_ppixmapWindowBuffer;
 
-         }
+            //   //if (ppixmapWindowBuffer)
+            //   {
 
-         //::f64_size sizef64Raw = m_pwindow->m_sizeRaw;
+            //     // ppixmapWindowBuffer->m_point = pbufferitem->m_pointBufferItem;
 
-         //if (m_pdraw2dgraphics && m_pdraw2dgraphics->m_sizeTotal2 != sizef64Raw)
-         //{
+            //      //ppixmapWindowBuffer->m_size = pbufferitem->m_sizeBufferItem;
 
-         auto & point = pbufferitem->m_pimageBufferItem->m_point;
+            //      pbufferitem->m_pimageBufferItem->m_bHintCpuBackingEnabled = true;
 
-         auto & size = pbufferitem->m_pimageBufferItem->m_size;
+            //      pbufferitem->m_pimageBufferItem->m_point.clear();
 
-         auto & sizeRaw = pbufferitem->m_pimageBufferItem->m_sizeRaw;
+            //      auto & sizeRaw = pbufferitem->m_pimageBufferItem->m_sizeRaw;
+
+            //      pbufferitem->m_pimageBufferItem->update_as_render_target(m_pwindow->m_sizeRaw, m_pwindow->user_interaction());
+
+            //      auto & sizeRaw2 = pbufferitem->m_pimageBufferItem->m_sizeRaw;
+
+            //     //m_bDibIsHostingBuffer =
+            //         //pbufferitem->m_pimageBufferItem->host(
+            //         //   m_pwindowbuffer,
+            //         //   m_pwindow,
+            //         //   m_pwindow->m_sizeRaw);
+
+            //   }
+
+            //}
+
+            if (!m_pdraw2dgraphics)
+            {
+
+               m_pdraw2dgraphics = system()->draw2d()->allocate_graphics(m_pwindow->m_pacmeuserinteraction);
+
+               m_pdraw2dgraphics->m_pgraphicsbufferitem = pbufferitem;
+
+               m_pdraw2dgraphics->create_for_window_draw2d(m_pwindow->user_interaction(), m_pwindow->m_sizeRaw);
+
+            }
+
+            pbufferitem->m_pimageBufferItem->update_as_render_target(m_pwindow->m_sizeRaw,
+               m_pwindow->user_interaction(),
+               m_pdraw2dgraphics);
+
+            //::f64_size sizef64Raw = m_pwindow->m_sizeRaw;
+
+            //if (m_pdraw2dgraphics && m_pdraw2dgraphics->m_sizeTotal2 != sizef64Raw)
+            //{
+
+            auto & point = pbufferitem->m_pimageBufferItem->m_point;
+
+            auto & size = pbufferitem->m_pimageBufferItem->m_size;
+
+            auto & sizeRaw = pbufferitem->m_pimageBufferItem->m_sizeRaw;
 
 
 
-         point = m_pwindow->m_pointWindow;
+            point = pbufferitem->m_pointBufferItem;
 
-         size = m_pwindow->m_sizeWindow;
+            size = pbufferitem->m_sizeBufferItem;
 
-         sizeRaw = m_pwindow->m_sizeRaw;
+            sizeRaw = m_pwindow->m_sizeRaw;
 
-         informationf("m_pimageBufferItem point(%d-%d) size(%d-%d) sizeRaw(%d-%d)", point.x, point.y, size.cx, size.cy, sizeRaw.cx, sizeRaw.cy);
-               
+            informationf("m_pimageBufferItem point(%d-%d) size(%d-%d) sizeRaw(%d-%d)", point.x, point.y, size.cx, size.cy, sizeRaw.cx, sizeRaw.cy);
+
             //m_pdraw2dgraphics->defer_set_size(m_pwindow->m_sizeRaw);
 
          //}
@@ -275,6 +345,8 @@ namespace windowing_win32
          //{
          //   pbufferitem->m_pimageBufferItem->picreate_as_render_target(pbufferitem->m_sizeBufferItem);
          //}
+
+         }
 
       }
       //HWND hwnd = get_hwnd();
@@ -915,10 +987,42 @@ namespace windowing_win32
 
       ::i32_size sizeLayeredWindowBuffer;
 
+      auto sizeWindow = pbufferitem->m_pimageBufferItem->m_size;
+
+      // The buffer item is the frame being presented. Do not derive its rectangle
+      // from window-wide cached state, which may already describe another frame.
+      auto rectangleWindow = ::i32_rectangle(
+         pbufferitem->m_pointBufferItem,
+         pbufferitem->m_sizeBufferItem);
+
+      auto rectangleRaw = ::i32_rectangle(m_pwindow->m_sizeRaw);
+
+      auto rectangleWindowFixed = rectangleWindow.intersection(rectangleRaw);
+
+      auto sizeWindowFixed = rectangleWindowFixed.size();
+
       if (playeredwindowbuffer && !m_papplication->m_gpu.m_bUseSwapChainWindow)
       {
 
-         playeredwindowbuffer->update_window_pixmap_buffer();
+
+
+         //::pointer < ::pixmap > ppixmapPreviousWindowBuffer;
+
+         //m_bDibIsHostingBuffer = false;
+
+         //if (playeredwindowbuffer
+         //   && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+         //{
+
+         //   ppixmapPreviousWindowBuffer =
+         //      playeredwindowbuffer->m_ppixmapWindowBuffer;
+
+         //   playeredwindowbuffer->update_window_pixmap_buffer(pbufferitem);
+
+         //   auto ppixmapWindowBuffer =
+         //      playeredwindowbuffer->m_ppixmapWindowBuffer;
+
+         playeredwindowbuffer->update_window_pixmap_buffer(pbufferitem);
 
          if (!pbufferitem->m_pimageBufferItem.ok())
          {
@@ -934,28 +1038,28 @@ namespace windowing_win32
 
          //informationf("windowing_win32::graphics::update_screen size(%d, %d)", size.cx, size.cy);
 
-         auto pixmapRawData = playeredwindowbuffer->m_ppixmapWindowBuffer->m_pimage32Raw;
+         //if (pbufferitem->m_pimageBufferItem->on_host_read_pixels(ppixmapWindowBuffer))
+         //{
 
-         auto ppixmapImageRawData = pbufferitem->m_pimageBufferItem->map();
-
-         auto pimageRawData = ppixmapImageRawData->image32();
-
-         if (m_bDibIsHostingBuffer && pimageRawData == pixmapRawData)
+         //}
+         //else
          {
 
-         }
-         else if (m_bDibIsHostingBuffer &&
-                  pbufferitem->m_pimageBufferItem->on_host_read_pixels(playeredwindowbuffer->m_ppixmapWindowBuffer))
-         {
+            auto pixmapRawData = ppixmapWindowBuffer->m_pimage32Raw;
+
+            auto ppixmapImageRawData = pbufferitem->m_pimageBufferItem->map(rectangleWindowFixed);
+
+            auto pimageRawData = ppixmapImageRawData->image32();
+
+            if (m_bDibIsHostingBuffer && pimageRawData == pixmapRawData)
+            {
+
+            }
+            else
+            {
 
 
-         }
-         else
-         {
-
-            auto sizeWindow = pbufferitem->m_pimageBufferItem->m_size;
-
-            if (sizeLayeredWindowBuffer != sizeWindow)
+            if (sizeLayeredWindowBuffer != sizeWindowFixed)
             {
 
                if (m_pwindow->m_timeLastDrawGuard1.is_set()
@@ -970,11 +1074,17 @@ namespace windowing_win32
 
             }
 
-            auto ppixmapPixmapWindowBufferTarget = playeredwindowbuffer->m_ppixmapWindowBuffer->map();
+            auto r5 = rectangleWindowFixed;
+
+            r5.offset(m_pwindow->m_sizeRaw);
+
+            auto ppixmapPixmapWindowBufferTarget = playeredwindowbuffer->m_ppixmapWindowBuffer->map(r5);
 
             //auto ppixmapImageRawData = pbufferitem->m_pimageBufferItem->map();
 
             ::i32_rectangle rectangleWindow{ ::i32_point{}, m_pwindow->m_sizeWindow };
+
+            ::i32_rectangle rectangleBuffer{ ::i32_point{}, m_pwindow->m_sizeWindowBuffer };
 
             //mapImageBufferItemSource.fill_solid_rectangle(rectangleWindow, argb(128, 100 / 2, 200 / 2, 160 / 2));
 
@@ -983,24 +1093,24 @@ namespace windowing_win32
 
                ppixmapImageRawData->fill_solid_rectangle({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageRawData->fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->fill_solid_rectangle({ m_pwindow->m_sizeWindowBuffer.cx - 100, 0, m_pwindow->m_sizeWindowBuffer.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageRawData->fill_solid_rectangle({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->fill_solid_rectangle({ 0, m_pwindow->m_sizeWindowBuffer.cy - 100, 100, m_pwindow->m_sizeWindowBuffer.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageRawData->fill_solid_rectangle({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->fill_solid_rectangle({ m_pwindow->m_sizeWindowBuffer.cx - 100, m_pwindow->m_sizeWindowBuffer.cy - 100, m_pwindow->m_sizeWindowBuffer.cx, m_pwindow->m_sizeWindowBuffer.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
             }
 
-            if (0)
+            if (1)
             {
 
                ppixmapImageRawData->blend_color({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageRawData->blend_color({ m_pwindow->m_sizeWindow.cx - 100, 0, m_pwindow->m_sizeWindow.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->blend_color({ m_pwindow->m_sizeWindowBuffer.cx - 100, 0, m_pwindow->m_sizeWindowBuffer.cx, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageRawData->blend_color({ 0, m_pwindow->m_sizeWindow.cy - 100, 100, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->blend_color({ 0, m_pwindow->m_sizeWindowBuffer.cy - 100, 100, m_pwindow->m_sizeWindowBuffer.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
-               ppixmapImageRawData->blend_color({ m_pwindow->m_sizeWindow.cx - 100, m_pwindow->m_sizeWindow.cy - 100, m_pwindow->m_sizeWindow.cx, m_pwindow->m_sizeWindow.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
+               ppixmapImageRawData->blend_color({ m_pwindow->m_sizeWindowBuffer.cx - 100, m_pwindow->m_sizeWindowBuffer.cy - 100, m_pwindow->m_sizeWindowBuffer.cx, m_pwindow->m_sizeWindowBuffer.cy }, argb(128, 100 / 2, 160 / 2, 200 / 2));
 
             }
 
@@ -1010,10 +1120,12 @@ namespace windowing_win32
                //{},
                //ppixmapImageRawData);
 
-            ppixmapPixmapWindowBufferTarget->copy(ppixmapImageRawData);
+               ppixmapPixmapWindowBufferTarget->copy(ppixmapImageRawData);
 
-            //mapImageBufferItemSource.fill_byte(128);
-            //pbufferitem->m_pimageBufferItem->fill_byte(128);
+               //mapImageBufferItemSource.fill_byte(128);
+               //pbufferitem->m_pimageBufferItem->fill_byte(128);
+
+            }
 
          }
 
@@ -1064,9 +1176,14 @@ namespace windowing_win32
 
          //auto size = layout.output().size();
 
+         //auto pointBufferItemWindow = pbufferitem->m_pointBufferItemWindow;
+
+         //auto sizeBufferItemWindow = pbufferitem->m_sizeBufferItemWindow;
          auto pointBufferItemWindow = pbufferitem->m_pointBufferItemWindow;
 
          auto sizeBufferItemWindow = pbufferitem->m_sizeBufferItemWindow;
+
+         auto sizeBufferItemWindowFixed = m_pwindow->m_sizeWindowBufferFixed;
 
          if (playeredwindowbuffer && !m_papplication->m_gpu.m_bUseSwapChainWindow)
          {
@@ -1074,50 +1191,51 @@ namespace windowing_win32
 
             auto sizeBuffer = pbufferitem->m_pimageBufferItem->size();
 
-            //if (size.cx < sizeDrawn.cx && size.cy < sizeDrawn.cy)
-            //if (size != sizeDrawn || sizeDesign != size)
-            if (sizeBufferItemWindow != sizeBuffer)
+            ////if (size.cx < sizeDrawn.cx && size.cy < sizeDrawn.cy)
+            ////if (size != sizeDrawn || sizeDesign != size)
+            //if (sizeBufferItemWindow != sizeBuffer)
+            if (sizeBufferItemWindowFixed != sizeBuffer)
             {
 
-               if (m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
-               {
-
-                  //throw ::exception(error_failed);
-                  warning("m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s");
-
-               }
-
-               error() << "Requested size is different of graphics size.";
-               error() << "Requested size: " << sizeBufferItemWindow;
-               error() << "Buffer size: " << sizeBuffer;
-               //error() <<"Design size: " << sizeDesign;
-
-               //m_pwindow->user_interaction()->set_need_redraw();
-
-               m_pwindow->user_interaction()->post_redraw();
-
-               return;
-
-            }
-            else if (sizeLayeredWindowBuffer != sizeBuffer)
-            {
-
-               if (m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
-               {
+            //   if (m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
+            //   {
 
                   throw ::exception(error_failed);
+            //      warning("m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s");
 
-               }
+            //   }
 
-               error() << "Os graphics size is different of graphics size.";
-               error() << "Os graphics size: " << sizeLayeredWindowBuffer;
-               error() << "Buffer size: " << sizeBuffer;
+            //   error() << "Requested size is different of graphics size.";
+            //   error() << "Requested size: " << sizeBufferItemWindow;
+            //   error() << "Buffer size: " << sizeBuffer;
+            //   //error() <<"Design size: " << sizeDesign;
 
-               m_pwindow->user_interaction()->post_redraw();
+            //   //m_pwindow->user_interaction()->set_need_redraw();
 
-               return;
+            //   m_pwindow->user_interaction()->post_redraw();
+
+            //   return;
 
             }
+            //else if (sizeLayeredWindowBuffer != sizeBuffer)
+            //{
+
+            //   if (m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
+            //   {
+
+            //      throw ::exception(error_failed);
+
+            //   }
+
+            //   error() << "Os graphics size is different of graphics size.";
+            //   error() << "Os graphics size: " << sizeLayeredWindowBuffer;
+            //   error() << "Buffer size: " << sizeBuffer;
+
+            //   m_pwindow->user_interaction()->post_redraw();
+
+            //   return;
+
+            //}
 
             //else
             //{
@@ -1441,6 +1559,7 @@ namespace windowing_win32
                  // << [playeredwindowbufferPresentation]()
                   //{
 
+
                playeredwindowbufferPresentation->present_window_buffer();
 
                //};
@@ -1459,7 +1578,6 @@ namespace windowing_win32
 
             }
 
-            m_pwindow->m_timeLastDrawGuard1.Now();
 
          }
 
@@ -1641,7 +1759,7 @@ namespace windowing_win32
       if (m_pwindowbuffer)
       {
 
-         m_pwindowbuffer->_destroy_window_device_context();
+      //   m_pwindowbuffer->_destroy_window_device_context();
 
       }
 

@@ -2,6 +2,7 @@
 #include "platform.h"
 #include "layered_window_buffer.h"
 #include "acme/operating_system/windows/device_independent_bitmap.h"
+#include "aura/graphics/graphics/buffer_item.h"
 #include "aura/windowing/display.h"
 #include "aura/windowing/window.h"
 #include "aura/windowing/windowing.h"
@@ -361,27 +362,38 @@ namespace windowing_win32
    }
 
 
-
    void layered_window_buffer::present_window_buffer()
    {
+
       if (m_papplication->m_gpu.m_bUseSwapChainWindow)
       {
+
          return;
+
       }
+
       _configure_window();
+
       _update_layered_window();
+
    }
 
 
    void layered_window_buffer::_configure_window()
    {
+
       if (!m_pwindow)
       {
+
          return;
+
       }
+
       if (!m_pwindow->user_interaction())
       {
+
          return;
+
       }
 
       auto pwindow = m_pwindow;
@@ -658,73 +670,80 @@ namespace windowing_win32
 
                      ::SetLastError(ERROR_SUCCESS);
 
-                     auto bSetWindowPosition = ::SetWindowPos(
-                        hwnd, hwndInsertAfter, rectangleRequest.left, rectangleRequest.top,
-                        iRequestWidth,
-                        iRequestHeight,
-                        nFlags);
+                     nFlags |= SWP_NOCOPYBITS;
 
-                     auto dwSetWindowPositionError =
-                        bSetWindowPosition ? ERROR_SUCCESS : ::GetLastError();
-
-                     auto activationSetWindowPos = m_activationSetWindowPosLast;
-
-                     m_activationSetWindowPosLast.clear();
-
-                     RECT rectWindowAfter{};
-
-                     auto bGotWindowRectAfter = ::GetWindowRect(hwnd, &rectWindowAfter);
-
-                     m_uSetWindowPosLastFlags |= SWP_NOZORDER;
-
-                     informationf(
-                        "SetWindowPos result=%d error=%lu before=(%d,%d)-(%d,%d) "
-                        "request=(%d,%d)-(%d,%d) afterResult=%d after=(%ld,%ld)-(%ld,%ld) "
-                        "flags=0x%08x activation=0x%08x causes[different=%d zorder=%d activate=%d "
-                        "hide=%d show=%d] %s",
-                        (int)bSetWindowPosition,
-                        (unsigned long)dwSetWindowPositionError,
-                        rectangleWindow.left,
-                        rectangleWindow.top,
-                        rectangleWindow.right,
-                        rectangleWindow.bottom,
-                        rectangleRequest.left,
-                        rectangleRequest.top,
-                        rectangleRequest.right,
-                        rectangleRequest.bottom,
-                        (int)bGotWindowRectAfter,
-                        rectWindowAfter.left,
-                        rectWindowAfter.top,
-                        rectWindowAfter.right,
-                        rectWindowAfter.bottom,
-                        (unsigned int)nFlags,
-                        (unsigned int)activationSetWindowPos.m_eactivation,
-                        (int)bDifferent,
-                        (int)bZOrder,
-                        (int)bActivate,
-                        (int)(bWindowVisible && bSwpHideWindow),
-                        (int)(!bWindowVisible && bSwpShowWindow),
-                        str.c_str());
-
-                     if (activationSetWindowPos & ::user::e_activation_set_foreground)
+                     if (1)
                      {
 
-                        ::cast<::win32::acme::windowing::activation_token> pactivationtoken =
-                           activationSetWindowPos.m_pactivationtoken;
+                        auto bSetWindowPosition = ::SetWindowPos(
+                           hwnd, hwndInsertAfter, rectangleRequest.left, rectangleRequest.top,
+                           iRequestWidth,
+                           iRequestHeight,
+                           nFlags);
 
-                        if (pactivationtoken)
+                        auto dwSetWindowPositionError =
+                           bSetWindowPosition ? ERROR_SUCCESS : ::GetLastError();
+
+                        auto activationSetWindowPos = m_activationSetWindowPosLast;
+
+                        m_activationSetWindowPosLast.clear();
+
+                        RECT rectWindowAfter{};
+
+                        auto bGotWindowRectAfter = ::GetWindowRect(hwnd, &rectWindowAfter);
+
+                        m_uSetWindowPosLastFlags |= SWP_NOZORDER;
+
+                        informationf(
+                           "SetWindowPos result=%d error=%lu before=(%d,%d)-(%d,%d) "
+                           "request=(%d,%d)-(%d,%d) afterResult=%d after=(%ld,%ld)-(%ld,%ld) "
+                           "flags=0x%08x activation=0x%08x causes[different=%d zorder=%d activate=%d "
+                           "hide=%d show=%d] %s",
+                           (int)bSetWindowPosition,
+                           (unsigned long)dwSetWindowPositionError,
+                           rectangleWindow.left,
+                           rectangleWindow.top,
+                           rectangleWindow.right,
+                           rectangleWindow.bottom,
+                           rectangleRequest.left,
+                           rectangleRequest.top,
+                           rectangleRequest.right,
+                           rectangleRequest.bottom,
+                           (int)bGotWindowRectAfter,
+                           rectWindowAfter.left,
+                           rectWindowAfter.top,
+                           rectWindowAfter.right,
+                           rectWindowAfter.bottom,
+                           (unsigned int)nFlags,
+                           (unsigned int)activationSetWindowPos.m_eactivation,
+                           (int)bDifferent,
+                           (int)bZOrder,
+                           (int)bActivate,
+                           (int)(bWindowVisible && bSwpHideWindow),
+                           (int)(!bWindowVisible && bSwpShowWindow),
+                           str.c_str());
+
+                        if (activationSetWindowPos & ::user::e_activation_set_foreground)
                         {
 
-                           pactivationtoken->m_ptaskForeground->post(
-                              [hwnd]()
-                              {
-                                 ::SetForegroundWindow(hwnd);
-                              });
-                        }
-                        else
-                        {
+                           ::cast<::win32::acme::windowing::activation_token> pactivationtoken =
+                              activationSetWindowPos.m_pactivationtoken;
 
-                           ::SetForegroundWindow(hwnd);
+                           if (pactivationtoken)
+                           {
+
+                              pactivationtoken->m_ptaskForeground->post(
+                                 [hwnd]()
+                                 {
+                                       ::SetForegroundWindow(hwnd);
+                                 });
+                           }
+                           else
+                           {
+
+                              ::SetForegroundWindow(hwnd);
+                           }
+
                         }
 
                      }
@@ -1016,25 +1035,41 @@ namespace windowing_win32
       ::cast < ::windows::device_independent_bitmap > pdeviceindependentbitmap = m_ppixmapWindowBuffer;
 
       auto hdcScreen = m_hdcScreen;
+      POINT pointUpdateLayeredWindow = {
+         m_pwindow->m_pointWindowBuffer.x,
+         m_pwindow->m_pointWindowBuffer.y };
 
-      POINT pointWindow = { m_pwindowWin32->m_pointWindow.x, m_pwindowWin32->m_pointWindow.y };
-
-      SIZE sizeWindow = { m_pwindowWin32->m_sizeWindow.cx, m_pwindowWin32->m_sizeWindow.cy };
+      SIZE sizeUpdateLayeredWindow = {
+         m_pwindow->m_sizeWindowBuffer.cx,
+         m_pwindow->m_sizeWindowBuffer.cy };
 
       auto hdcMemory = pdeviceindependentbitmap->m_hdcMemory;
 
-      POINT pointSrc = { 0, 0 };
+      //POINT pointSrc = { 0, 0 };
+
+      auto p2 = pointUpdateLayeredWindow;
+
+      p2.x += m_pwindow->m_sizeRaw.cx;
+      p2.y += m_pwindow->m_sizeRaw.cy;
+
+      POINT pointSrc = p2;
+
 
       if (pdeviceindependentbitmap->m_sizeRaw == m_pwindow->m_sizeRaw)
       {
 
-         pointSrc =
-         {
-            pdeviceindependentbitmap->m_point.x,
-            pdeviceindependentbitmap->m_point.y
-         };
+         //pointSrc =
+         //{
+           // pdeviceindependentbitmap->m_point.x,
+            //pdeviceindependentbitmap->m_point.y
+         //};
 
       }
+
+
+      //auto hdcMemory = pdeviceindependentbitmap->m_hdcMemory;
+
+      //POINT pointSrc = pointUpdateLayeredWindow;
 
       COLORREF crKey = RGB(0, 0, 0);
 
@@ -1077,11 +1112,11 @@ namespace windowing_win32
 
          uSourcePixel = *(::u32 *)pbyteSource;
 
-         if (sizeWindow.cx > 0 && sizeWindow.cy > 0)
+         if (sizeUpdateLayeredWindow.cx > 0 && sizeUpdateLayeredWindow.cy > 0)
          {
 
-            auto xCenter = pointSrc.x + sizeWindow.cx / 2;
-            auto yCenter = pointSrc.y + sizeWindow.cy / 2;
+            auto xCenter = pointSrc.x + sizeUpdateLayeredWindow.cx / 2;
+            auto yCenter = pointSrc.y + sizeUpdateLayeredWindow.cy / 2;
 
             if (xCenter >= 0
                && yCenter >= 0
@@ -1101,12 +1136,12 @@ namespace windowing_win32
             for (int iy = 0; iy < 9; iy++)
             {
 
-               auto y = pointSrc.y + (sizeWindow.cy - 1) * iy / 8;
+               auto y = pointSrc.y + (sizeUpdateLayeredWindow.cy - 1) * iy / 8;
 
                for (int ix = 0; ix < 9; ix++)
                {
 
-                  auto x = pointSrc.x + (sizeWindow.cx - 1) * ix / 8;
+                  auto x = pointSrc.x + (sizeUpdateLayeredWindow.cx - 1) * ix / 8;
 
                   if (x >= 0
                      && y >= 0
@@ -1137,13 +1172,15 @@ namespace windowing_win32
       auto bUpdated = ::UpdateLayeredWindow(
          m_hwnd, 
          hdcScreen,
-         (POINT *)&pointWindow,
-         (SIZE *)&sizeWindow,
+         (POINT *)&pointUpdateLayeredWindow,
+         (SIZE *)&sizeUpdateLayeredWindow,
          hdcMemory,
          (POINT *)&pointSrc,
          crKey,
          &blendPixelFunction,
          ULW_ALPHA);
+
+      ::GdiFlush();
 
       auto dwLastError = bUpdated ? ERROR_SUCCESS : ::GetLastError();
 
@@ -1225,10 +1262,10 @@ namespace windowing_win32
             (int)bDwmGetWindowAttributeAvailable,
             (unsigned long)hresultDwmCloaked,
             (unsigned long)dwDwmCloaked,
-            pointWindow.x,
-            pointWindow.y,
-            sizeWindow.cx,
-            sizeWindow.cy,
+            pointUpdateLayeredWindow.x,
+            pointUpdateLayeredWindow.y,
+            sizeUpdateLayeredWindow.cx,
+            sizeUpdateLayeredWindow.cy,
             pointSrc.x,
             pointSrc.y,
             pdeviceindependentbitmap->m_sizeRaw.cx,
@@ -1276,7 +1313,7 @@ namespace windowing_win32
    }
 
 
-   void layered_window_buffer::update_window_pixmap_buffer()
+   void layered_window_buffer::update_window_pixmap_buffer(::graphics::buffer_item * pbufferitem)
    {
 
         //auto pwindowing = m_pwindow->user_interaction()->windowing();
@@ -1287,9 +1324,21 @@ namespace windowing_win32
 
       //m_pwindow->m_sizeScreen = rectangleUnion.size();
 
-      auto pointWindow = m_pwindow->m_pointWindow;
-      auto sizeWindow = m_pwindow->m_sizeWindow;
+      auto pointWindow = pbufferitem->m_pointBufferItem;
+      auto sizeWindow = pbufferitem->m_sizeBufferItem;
       auto sizeRaw = m_pwindow->m_sizeRaw;
+
+      auto rectangleWindow = ::i32_rectangle(pointWindow, sizeWindow);
+      auto rectangleRaw = ::i32_rectangle(sizeRaw);
+
+      auto rectangleFixed = rectangleWindow.intersection(rectangleRaw);
+
+      auto pointBufferFixed = rectangleFixed.top_left();
+      auto sizeBufferFixed = rectangleFixed.size();
+
+      m_pwindow->m_pointWindowBufferFixed = pointBufferFixed;
+      m_pwindow->m_sizeWindowBufferFixed = sizeBufferFixed;
+
       //auto sizeRaw = m_pwindow->m_sizeScreen.maximum(sizeWindow);
 
       ::cast < ::windows::device_independent_bitmap > pdeviceindependentbitmap =
@@ -1307,9 +1356,9 @@ namespace windowing_win32
          || !hdcBitmapMemory
          || !hbitmapBitmap
          || !pimage32RawBitmap
-         || !(sizeRaw <= sizeRawBitmap)
-         || pointWindow != pointBitmap
-         || sizeWindow != sizeBitmap;
+         || !(sizeRaw *3 <= sizeRawBitmap)
+         || pointBufferFixed != pointBitmap
+         || sizeBufferFixed != sizeBitmap;
 
       if (bNeedsWindowThreadUpdate)
       {
@@ -1321,11 +1370,20 @@ namespace windowing_win32
                ::cast < ::windows::device_independent_bitmap > pdeviceindependentbitmap =
                   m_ppixmapWindowBuffer;
 
-               if (!pdeviceindependentbitmap)
+               auto bNeedsNewDeviceIndependentBitmap =
+                  !pdeviceindependentbitmap
+                  || !hdcBitmapMemory
+                  || !hbitmapBitmap
+                  || !pimage32RawBitmap
+                  || !(sizeRaw*3 <= sizeRawBitmap);
+
+               if (bNeedsNewDeviceIndependentBitmap)
                {
 
                   auto pdeviceindependentbitmapNew =
                      create_newø<::windows::device_independent_bitmap>();
+
+                  pdeviceindependentbitmapNew->defer_create_device_independent_bitmap(sizeRaw*3);
 
                   m_ppixmapWindowBuffer = pdeviceindependentbitmapNew;
                   pdeviceindependentbitmap = pdeviceindependentbitmapNew;
@@ -1333,13 +1391,12 @@ namespace windowing_win32
 
                }
 
-               pdeviceindependentbitmap->defer_create_device_independent_bitmap(sizeRaw);
-
-                if (pdeviceindependentbitmap->m_point != pointWindow
-                   || pdeviceindependentbitmap->m_size != sizeWindow)
+                //if (pdeviceindependentbitmap->m_point != pointWindow
+                   //|| pdeviceindependentbitmap->m_size != sizeWindow)
                 {
 
-                   pdeviceindependentbitmap->pixmap_map({ pointWindow, sizeWindow });
+                   pdeviceindependentbitmap->pixmap_map(
+                      { pointBufferFixed, sizeBufferFixed });
 
                 }
 
@@ -1355,14 +1412,19 @@ namespace windowing_win32
          || !pdeviceindependentbitmap->m_pimage32Raw
          || !pdeviceindependentbitmap->m_pimage32
          || !(sizeRaw <= pdeviceindependentbitmap->m_sizeRaw)
-         || pdeviceindependentbitmap->m_point != pointWindow
-         || pdeviceindependentbitmap->m_size != sizeWindow)
+         || pdeviceindependentbitmap->m_point != pointBufferFixed
+         || pdeviceindependentbitmap->m_size != sizeBufferFixed)
       {
 
          throw ::exception(error_wrong_state, "layered_window_buffer production DIB is invalid after main-thread defer-create");
 
       }
 
+      {
+         BITMAP bitmap{};
+         ::GetObject(pdeviceindependentbitmap->m_hbitmap, sizeof(bitmap), &bitmap);
+         informationf("pdeviceindependentbitmap->m_hbitmap %d %d", bitmap.bmWidth, bitmap.bmHeight);
+      }
 
    }
 

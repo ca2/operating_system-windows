@@ -56,7 +56,7 @@ namespace draw2d_gdiplus
 
          //pgraphics->create_bitmap_graphics(pimage->get_bitmap());
 
-         pgraphics->create_for_image(pimage);
+         pgraphics->update_as_image_render_target(pimage);
 
          return pgraphics;
 

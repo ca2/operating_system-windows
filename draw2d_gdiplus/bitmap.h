@@ -20,6 +20,7 @@ namespace draw2d_gdiplus
 
       ::Gdiplus::Bitmap *  m_pbitmap;
       memory               m_mem;
+      //::image32_t *         m_pimage32Host;
 
 
       bitmap();
@@ -40,7 +41,7 @@ namespace draw2d_gdiplus
       bool LoadOEMBitmap(UINT nIDBitmap); // for OBM_/OCR_/OIC_
 
 
-      void create_bitmap_for_image(
+      void update_bitmap_as_image_render_target(
          ::image::image * pimage,
          ::acme::user::interaction * pacmeuserinteractionAffinity = nullptr,
          ::draw2d::graphics * pgraphics = nullptr) override;
@@ -51,13 +52,15 @@ namespace draw2d_gdiplus
 
       void CreateCompatibleBitmap(::draw2d::graphics * pgraphics, ::i32 nWidth, ::i32 nHeight);
       void CreateDiscardableBitmap(::draw2d::graphics * pgraphics, ::i32 nWidth, ::i32 nHeight);
-      virtual bool host_bitmap(::draw2d::graphics * pgraphics, pixmap_t* ppximap) override;
+      //virtual bool host_bitmap(::draw2d::graphics * pgraphics, pixmap_t* ppximap) override;
       void create_bitmap(::draw2d::graphics * pgraphics, const ::i32_size & size, ::pixmap * ppixmapOwned) override;
       virtual void CreateDIBitmap(::draw2d::graphics * pgraphics, ::i32 cx, ::i32 cy, ::u32 flInit, const void *pjBits, UINT iUsage) override;
 
 
       void read_pixels(const ::i32_size & size, const ::i32_point & point, ::image32_t * pimage32, ::i32 iScan) override;
+      bool is_cpu_backed_by(const ::pixmap_t * ppixmap) const override;
       void write_pixels(const ::i32_size & size, const ::i32_point & point, const ::image32_t * pimage32, ::i32 iScan) override;
+
 
 
       ::i32 GetBitmap(BITMAP* pBitMap);
@@ -69,6 +72,9 @@ namespace draw2d_gdiplus
 
       ::i32_size SetBitmapDimension(::i32 nWidth, ::i32 nHeight);
       ::i32_size GetBitmapDimension() const;
+
+      ::i32_size size() const override;
+      void set_size(const ::i32_size & size, bool bPreserve = true) override;
 
 
       virtual void attach(void * posdata);

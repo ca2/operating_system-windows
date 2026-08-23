@@ -314,7 +314,7 @@ namespace draw2d_gdiplus
 
       constructø(m_pgraphicsbufferitem->m_pimageBufferItem);
 
-      m_pgraphicsbufferitem->m_pimageBufferItem->create_as_render_target(size, puserinteraction, this);
+      m_pgraphicsbufferitem->m_pimageBufferItem->update_as_render_target(size, puserinteraction, this);
 
       //constructø(m_pbitmapTarget);
 
@@ -415,9 +415,36 @@ namespace draw2d_gdiplus
 
       //defer_constructø(m_pimage);
 
-      m_pointTarget = m_pacmeuserinteractionAffinity->m_pacmewindowingwindow->m_pointWindow;
-      m_sizeTarget = m_pacmeuserinteractionAffinity->m_pacmewindowingwindow->m_sizeWindow;
+      ::f64_point pointTarget;
+      ::f64_size sizeTarget;
+
+      if (m_pgraphicsbufferitem)
+      {
+
+         pointTarget = m_pgraphicsbufferitem->m_pointBufferItem;
+         sizeTarget = m_pgraphicsbufferitem->m_sizeBufferItem;
+
+      }
+      else
+      {
+
+         auto pacmeuserinteractionAffinity = m_pacmeuserinteractionAffinity;
+
+         auto pacmewindowingwindow = pacmeuserinteractionAffinity->acme_windowing_window();
+
+         pointTarget = pacmewindowingwindow->m_pointWindowBuffer;
+         sizeTarget = pacmewindowingwindow->m_sizeWindowBuffer;
+
+      }
+
+      m_pointTarget = pointTarget;
+      m_sizeTarget = sizeTarget;
       m_bTargetRectangleModified = true;
+
+      // on_acquire_memory_graphics() updates the target metadata too, so comparing
+      // only m_pointTarget cannot tell whether the native GDI+ transform is stale.
+      // Apply it at the frame boundary before any primitive is issued.
+      defer_on_target_rectangle_update();
 
       if (m_pgraphicsbufferitem)
       {
@@ -2097,7 +2124,7 @@ namespace draw2d_gdiplus
 
 
                            ret = m_pgraphics->DrawImage(
-                              (Gdiplus::Bitmap *)pimage->get_bitmap()->get_os_data(),
+                              (Gdiplus::Bitmap *)pimage->get_bitmap_as_source()->get_os_data(),
                               r,
                               (INT)xFound, (INT)yFound,
                               (INT)cxFound, (INT)cyFound,
@@ -2107,7 +2134,7 @@ namespace draw2d_gdiplus
                         else
                         {
                            ret = m_pgraphics->DrawImage(
-                              (Gdiplus::Bitmap *)pimage->get_bitmap()->get_os_data(),
+                              (Gdiplus::Bitmap *)pimage->get_bitmap_as_source()->get_os_data(),
                               rectfTarget,
                               (Gdiplus::REAL)xFound, (Gdiplus::REAL)yFound,
                               (Gdiplus::REAL)cxFound, (Gdiplus::REAL)cyFound,
@@ -2146,7 +2173,7 @@ namespace draw2d_gdiplus
       try
       {
 
-         Gdiplus::Bitmap * pbitmap = (Gdiplus::Bitmap *)pimage->get_bitmap()->get_os_data();
+         Gdiplus::Bitmap * pbitmap = (Gdiplus::Bitmap *)pimage->get_bitmap_as_source()->get_os_data();
 
          color_matrix colormatrix;
 
@@ -7387,7 +7414,13 @@ namespace draw2d_gdiplus
 
             }
 
-            status = m_pgraphics->DrawString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length(), pfont, origin, &format, pbrush);
+            auto wstrText = ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text();
+
+            auto pszText = wstrText.c_str();
+
+            auto iLenText = (INT)wstrText.length();
+
+            status = m_pgraphics->DrawString(wstrText.c_str(), iLenText, pfont, origin, &format, pbrush);
 
             if (eCompositingMode == Gdiplus::CompositingModeSourceCopy)
             {

@@ -119,7 +119,7 @@ namespace draw2d_gdiplus
 
                }
 
-               Gdiplus::Image * pgdiplusimage = pimage->get_bitmap()->get_os_data < Gdiplus::Bitmap * >();
+               Gdiplus::Image * pgdiplusimage = pimage->get_bitmap_as_source()->get_os_data < Gdiplus::Bitmap * >();
 
                if (::is_set(pgdiplusimage))
                {

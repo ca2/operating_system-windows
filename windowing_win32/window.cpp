@@ -940,6 +940,13 @@ namespace windowing_win32
       if (m_pgraphicsgraphics)
       {
 
+         if (m_pgraphicsgraphics->is_single_buffer_mode())
+         {
+
+            return;
+
+         }
+
          //_synchronous_lock synchronouslock(user_synchronization());
 
          //display_lock displayLock(x11_display()->Display());
