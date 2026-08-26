@@ -347,9 +347,109 @@ namespace windowing_win32
          //}
 
          }
+         else
+         {
 
-      }
-      //HWND hwnd = get_hwnd();
+
+            //   //ppixmapPreviousWindowBuffer =
+            //   //   playeredwindowbuffer->m_ppixmapWindowBuffer;
+
+            //   //playeredwindowbuffer->update_window_pixmap_buffer(pbufferitem);
+
+            //   //auto ppixmapWindowBuffer =
+            //   //   playeredwindowbuffer->m_ppixmapWindowBuffer;
+
+            //   //if (ppixmapWindowBuffer)
+            //   {
+
+            //     // ppixmapWindowBuffer->m_point = pbufferitem->m_pointBufferItem;
+
+            //      //ppixmapWindowBuffer->m_size = pbufferitem->m_sizeBufferItem;
+
+            //      pbufferitem->m_pimageBufferItem->m_bHintCpuBackingEnabled = true;
+
+            //      pbufferitem->m_pimageBufferItem->m_point.clear();
+
+            //      auto & sizeRaw = pbufferitem->m_pimageBufferItem->m_sizeRaw;
+
+            //      pbufferitem->m_pimageBufferItem->update_as_render_target(m_pwindow->m_sizeRaw, m_pwindow->user_interaction());
+
+            //      auto & sizeRaw2 = pbufferitem->m_pimageBufferItem->m_sizeRaw;
+
+            //     //m_bDibIsHostingBuffer =
+            //         //pbufferitem->m_pimageBufferItem->host(
+            //         //   m_pwindowbuffer,
+            //         //   m_pwindow,
+            //         //   m_pwindow->m_sizeRaw);
+
+            //   }
+
+            //}
+
+            if (!m_pdraw2dgraphics)
+            {
+
+               m_pdraw2dgraphics = system()->draw2d()->allocate_graphics(m_pwindow->m_pacmeuserinteraction);
+
+               m_pdraw2dgraphics->m_pgraphicsbufferitem = pbufferitem;
+
+               m_pdraw2dgraphics->create_for_window_draw2d(m_pwindow->user_interaction(), m_pwindow->m_sizeRaw);
+               
+               pbufferitem->m_pimageBufferItem->m_bHintCpuBackingEnabled = !m_papplication->m_gpu.m_bUseSwapChainWindow;
+
+            }
+
+            pbufferitem->m_pimageBufferItem->update_as_gpu_render_target(m_pwindow->m_sizeRaw,
+               m_pwindow->user_interaction(),
+               m_pdraw2dgraphics);
+
+            //::f64_size sizef64Raw = m_pwindow->m_sizeRaw;
+
+            //if (m_pdraw2dgraphics && m_pdraw2dgraphics->m_sizeTotal2 != sizef64Raw)
+            //{
+
+            auto & point = pbufferitem->m_pimageBufferItem->m_point;
+
+            auto & size = pbufferitem->m_pimageBufferItem->m_size;
+
+            auto & sizeRaw = pbufferitem->m_pimageBufferItem->m_sizeRaw;
+
+
+
+            point = pbufferitem->m_pointBufferItem;
+
+            size = pbufferitem->m_sizeBufferItem;
+
+            sizeRaw = m_pwindow->m_sizeRaw;
+
+            informationf("m_pimageBufferItem point(%d-%d) size(%d-%d) sizeRaw(%d-%d)", point.x, point.y, size.cx, size.cy, sizeRaw.cx, sizeRaw.cy);
+
+            //m_pdraw2dgraphics->defer_set_size(m_pwindow->m_sizeRaw);
+
+         //}
+
+         //if (pbufferitem->m_pimageBufferItem->m_sizeRaw != sizeRaw)
+         //{
+
+         //   //pbufferitem->m_pimageBufferItem->create_as_render_target(sizeRaw, m_pwindow->user_interaction());
+
+         //   pbufferitem->m_pimageBufferItem->create_as_top_draw2d_target(sizeRaw, m_pwindow->user_interaction(), m_pdraw2dgraphics);
+
+         //}
+
+         //pbufferitem->m_pimageBufferItem->pixmap_map({ m_pwindow->m_pointWindow, m_pwindow->m_sizeWindow });
+
+         //if (pbufferitem->m_pimageBufferItem->m_size != pbufferitem->m_sizeBufferItem)
+         //{
+         //   pbufferitem->m_pimageBufferItem->picreate_as_render_target(pbufferitem->m_sizeBufferItem);
+         //}
+
+
+
+         }
+
+     }
+    //HWND hwnd = get_hwnd();
 
       //auto uExStyle = ::GetWindowLong(hwnd, GWL_EXSTYLE);
 

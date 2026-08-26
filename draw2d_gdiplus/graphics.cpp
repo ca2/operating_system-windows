@@ -406,7 +406,15 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::start_layer(bool bFirstLayer)
+   ::image::image_pointer graphics::get_current_target_image()
+   {
+
+      return m_pgraphicsbufferitem->m_pimageBufferItem;
+
+   }
+
+
+   void graphics::start_layer(bool bFirstLayer, ::user::interaction * puserinteraction)
    {
 
       set_alpha_mode(::draw2d::e_alpha_mode_set);

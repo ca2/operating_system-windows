@@ -106,7 +106,16 @@ namespace typeface_gdiplus
          //return ch;
          m_pfamily = new FontFamily(::wstring(m_strFontName));
          //FontFamily* m_pfamily(L"Segoe UI");
-         m_pfont = new Font(m_pfamily, (Gdiplus::REAL) m_iPixelSize, FontStyleRegular, UnitPixel);
+
+         // 1. Define or receive your numeric weight (e.g., 100-900)
+         int numericWeight = m_iFontWeight; // Example: 700 is Bold
+
+         // 2. Determine the correct Gdiplus FontStyle flag
+         // In typography, weights of 600 (Semi-Bold) and above generally use the Bold flag.
+         Gdiplus::FontStyle style = (numericWeight >= 600) ? Gdiplus::FontStyleBold : Gdiplus::FontStyleRegular;
+
+
+         m_pfont = new Font(m_pfamily, (Gdiplus::REAL) m_iPixelSize, style, UnitPixel);
 
          if (m_pfamily->GetLastStatus() != Ok || m_pfont->GetLastStatus() != Ok)
          {

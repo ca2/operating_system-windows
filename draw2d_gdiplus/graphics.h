@@ -71,7 +71,7 @@ namespace draw2d_gdiplus
       virtual ::f64 get_dpiy() override;
 
 
-      void start_layer(bool bFirstLayer) override;
+      void start_layer(bool bFirstLayer, ::user::interaction * puserinteraction = nullptr) override;
 
       // Constructors
       //bool CreateDC(const ::scoped_string & scopedstrDriverName, const ::scoped_string & scopedstrDeviceName,
@@ -87,6 +87,7 @@ namespace draw2d_gdiplus
       void create_bitmap_graphics(::draw2d::bitmap * pbitmap) override;
       void _create_memory_graphics(const ::i32_size & size, ::acme::user::interaction * pacmeuserinteractionAffinity) override;
      
+      ::image::image_pointer get_current_target_image() override;
 
       void DeleteDC() override;
 
