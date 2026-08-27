@@ -33,7 +33,7 @@
 
             LOGFONTW logfontw = {};
 
-            m_fFontSize = fPointSize;
+            m_fFontSize = (::f32) fPointSize;
 
             m_bPixelSize = false;
 
@@ -47,7 +47,7 @@
 
             HDC hdc = ::GetDC(nullptr);
 
-            m_hgdiobj = _create_point_font(m_fFontSize * 10, strFontName, m_bBold, m_bUnderline, hdc, &logfontw);
+            m_hgdiobj = _create_point_font((::i32) (m_fFontSize * 10), strFontName, m_bBold, m_bUnderline, hdc, &logfontw);
 
             ::ReleaseDC(nullptr, hdc);
 
@@ -63,7 +63,7 @@
 
             LOGFONTW logfontw = {};
 
-            m_fFontSize = fPixelSize;
+            m_fFontSize = (::f32) fPixelSize;
 
             m_bPixelSize = true;
 
@@ -79,7 +79,7 @@
 
             HDC hdc = ::GetDC(nullptr);
 
-            m_hgdiobj = _create_point_font(m_fFontSize * 10, strFontName, m_bBold, m_bUnderline, hdc,
+            m_hgdiobj = _create_point_font((::i32) (m_fFontSize * 10), strFontName, m_bBold, m_bUnderline, hdc,
                                            &logfontw);
 
             ::ReleaseDC(nullptr, hdc);

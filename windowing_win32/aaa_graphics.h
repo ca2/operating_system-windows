@@ -37,7 +37,7 @@ namespace draw2d_gdiplus
 
 //      ::windowing::window * GetWindow() override;
 
-      virtual bool attach(void * pgraphics) override;   // attach/detach affects only the Output DC
+      virtual bool attach(void * pdraw2dgraphics) override;   // attach/detach affects only the Output DC
       virtual void * detach() override;
 
       virtual bool attach_hdc(HDC hdc) override;   // attach/detach affects only the Output DC
@@ -54,7 +54,7 @@ namespace draw2d_gdiplus
       ::u32 SetLayout(::u32 dwLayout) override;
 
 
-      virtual void set(::draw2d::bitmap* pbitmap) override;
+      virtual void set(::draw2d::bitmap* pdraw2dbitmap) override;
 
       HDC get_hdc();
       void release_hdc(HDC hdc);
@@ -72,7 +72,7 @@ namespace draw2d_gdiplus
 
                     const scoped_string & strOutput, const void * lpInitData) override;
 
-      bool create_compatible_graphics(::draw2d::graphics * pgraphics) override;
+      bool create_compatible_graphics(::draw2d::graphics * pdraw2dgraphics) override;
 
       bool DeleteDC() override;
 
@@ -325,8 +325,8 @@ namespace draw2d_gdiplus
       using ::draw2d::graphics::fill_rectangle;
 
       virtual bool i32_rectangle(const ::f64_rectangle & rectangle) override;
-      virtual bool draw_rectangle(const ::f64_rectangle & rectangle, ::draw2d::pen * ppen) override;
-      virtual bool fill_rectangle(const ::f64_rectangle & rectangle, ::draw2d::brush * pbrush) override;
+      virtual bool draw_rectangle(const ::f64_rectangle & rectangle, ::draw2d::pen * pdraw2dpen) override;
+      virtual bool fill_rectangle(const ::f64_rectangle & rectangle, ::draw2d::brush * pdraw2dbrush) override;
 
       virtual bool round_rectangle(const ::f64_rectangle & rectangle, ::f64 dRadius) override;
 
@@ -544,10 +544,10 @@ namespace draw2d_gdiplus
       bool stroke_path() override;
       bool widen_path() override;
 
-      bool draw_path(::draw2d::path * ppath) override;
-      bool draw_path(::draw2d::path * ppath, ::draw2d::pen * ppen) override;
-      bool fill_path(::draw2d::path * ppath) override;
-      bool fill_path(::draw2d::path * ppath, ::draw2d::brush * pbrush) override;
+      bool draw_path(::draw2d::path * pdraw2dpath) override;
+      bool draw_path(::draw2d::path * pdraw2dpath, ::draw2d::pen * pdraw2dpen) override;
+      bool fill_path(::draw2d::path * pdraw2dpath) override;
+      bool fill_path(::draw2d::path * pdraw2dpath, ::draw2d::brush * pdraw2dbrush) override;
 
 
       ::f32 GetMiterLimit() override;
@@ -610,9 +610,9 @@ namespace draw2d_gdiplus
       virtual bool sync_flush() override;
 
       //virtual bool draw_line(::f64 x1, ::f64 y1, ::f64 x2, ::f64 y2) override;
-      virtual bool draw_line(::f64 x1, ::f64 y1, ::f64 x2, ::f64 y2, ::draw2d::pen * ppen) override;
+      virtual bool draw_line(::f64 x1, ::f64 y1, ::f64 x2, ::f64 y2, ::draw2d::pen * pdraw2dpen) override;
 
-      //virtual bool draw_line(const ::f64_point & point1, const ::f64_point & point2, ::draw2d::pen * ppen) override;
+      //virtual bool draw_line(const ::f64_point & point1, const ::f64_point & point2, ::draw2d::pen * pdraw2dpen) override;
 
 
       virtual void enum_fonts(::write_text::font_enumeration_item_array & itema) override;

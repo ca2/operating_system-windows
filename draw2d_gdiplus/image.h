@@ -49,7 +49,7 @@ namespace draw2d_gdiplus
 
 
       void update_bitmap_as_render_target(
-         ::acme::user::interaction * pacmeuserinteractionAffinity = nullptr, ::draw2d::graphics * pgraphics = nullptr) override;
+         ::acme::user::interaction * pacmeuserinteractionAffinity = nullptr, ::draw2d::graphics * pdraw2dgraphics = nullptr) override;
 
       void create_from_data(const ::i32_size & size, const ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, bool bPreserve = false) override;
       //void create(const ::i32_size & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, ::i32 iGoodStride = -1, bool bPreserve = false) override;
@@ -59,12 +59,12 @@ namespace draw2d_gdiplus
       //bool host(::windowing::window_buffer * pwindowbuffer, ::windowing::window * pwindow, const ::i32_size & sizeRaw) override;
       //bool on_host_read_pixels(::pixmap_t* pixmap) const override;
       //using ::image::image::create;
-      void create_from_graphics(::draw2d::graphics * pgraphics) override;
+      void create_from_graphics(::draw2d::graphics * pdraw2dgraphics) override;
       void preserve(const ::i32_size& size, ::enum_flag eflagCreate) override;
       void destroy() override;
 
 
-      //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
+      //cvirtual bool stretch(::draw2d::graphics * pdraw2dgraphics) override;
       //virtual bool draw(const ::image::image * pimage) override;
       void _draw_raw(const ::i32_rectangle & rectangleTarget, ::image::image * pimageSrc, const ::i32_point & pointSrc) override;
 

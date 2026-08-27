@@ -42,9 +42,9 @@ namespace nano_graphics_gdiplus
    void font::_create_font(::f64 fSize, bool bPointSize, bool bBold, bool bItalic, bool bUnderline)
    {
 
-      ::cast<::nano_graphics_gdiplus::font_family> pgdiplusfontfamily = m_pfontfamily;
+      ::cast<::nano_graphics_gdiplus::font_family> pnanographicsgdiplusfontfamily = m_pfontfamily;
 
-      m_pfont = new ::Gdiplus::Font(pgdiplusfontfamily->m_pfontfamily, (Gdiplus::REAL) fSize, 
+      m_pgdiplusfont = new ::Gdiplus::Font(pnanographicsgdiplusfontfamily->m_pgdiplusfontfamily, (Gdiplus::REAL) fSize, 
          (bBold ? Gdiplus::FontStyleBold : Gdiplus::FontStyleRegular) | 
          (bUnderline ? Gdiplus::FontStyleUnderline : Gdiplus::FontStyleRegular) |
          (bItalic ? Gdiplus::FontStyleItalic : Gdiplus::FontStyleRegular),

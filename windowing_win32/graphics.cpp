@@ -1240,13 +1240,13 @@ namespace windowing_win32
          //if (pwindow && m_papplication->m_bUseSwapChainWindow)
          //{
 
-         //   auto pgraphics = pbufferitem->g();
+         //   auto pdraw2dgraphics = pbufferitem->g();
 
-         //   pgraphics->do_on_context([this, pgraphics,
+         //   pdraw2dgraphics->do_on_context([this, pdraw2dgraphics,
          //      pbufferitem]
          //   {
 
-         //      pgraphics->on_present();
+         //      pdraw2dgraphics->on_present();
 
          //   });
 
@@ -1639,13 +1639,13 @@ namespace windowing_win32
             if (m_papplication->m_gpu.m_bUseSwapChainWindow)
             {
 
-               //auto pgraphics = pbufferitem->g();
+               //auto pdraw2dgraphics = pbufferitem->g();
 
-               //pgraphics->do_on_context([this, pgraphics,
+               //pdraw2dgraphics->do_on_context([this, pdraw2dgraphics,
                //   pbufferitem]
                //   {
 
-               //      pgraphics->on_present();
+               //      pdraw2dgraphics->on_present();
 
                //});
 

@@ -48,7 +48,7 @@ namespace write_text_win32
          ::string & strSubstitute);
 
       bool _resolve_gdi_font(
-         ::comptr<IDWriteFont> & pfont,
+         ::comptr<IDWriteFont> & pwritetextfont,
          const ::scoped_string & scopedstrFamily,
          const ::write_text::font_face_request & request);
 

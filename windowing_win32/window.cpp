@@ -4218,15 +4218,15 @@ namespace windowing_win32
       //if (m_spgraphics.is_set())
       //{
 
-      //   ::draw2d::graphics_pointer & pgraphics = m_spgraphics->on_begin_draw();
+      //   ::draw2d::graphics_pointer & pdraw2dgraphics = m_spgraphics->on_begin_draw();
 
-      //   if (pgraphics != nullptr)
+      //   if (pdraw2dgraphics != nullptr)
       //   {
 
       //      try
       //      {
 
-      //         _001Print(pgraphics);
+      //         _001Print(pdraw2dgraphics);
 
       //      }
       //      catch (...)
@@ -4240,12 +4240,12 @@ namespace windowing_win32
       //      try
       //      {
 
-      //         if (pgraphics != nullptr && g->attach_hdc(hdc))
+      //         if (pdraw2dgraphics != nullptr && g->attach_hdc(hdc))
       //         {
 
-      //            pgraphics->SetViewportOrg(0, 0);
+      //            pdraw2dgraphics->SetViewportOrg(0, 0);
 
-      //            g->BitBlt(rectanglePaint.left, rectanglePaint.top, rectanglePaint.width(), rectanglePaint.height(), pgraphics, rectangleUpdate.left, rectangleUpdate.top);
+      //            g->BitBlt(rectanglePaint.left, rectanglePaint.top, rectanglePaint.width(), rectanglePaint.height(), pdraw2dgraphics, rectangleUpdate.left, rectangleUpdate.top);
 
       //         }
 
@@ -4903,13 +4903,13 @@ namespace windowing_win32
 
       ASSERT(::IsWindow(::as_HWND(this->operating_system_window())));
 
-      auto pgraphics = createø<::draw2d::graphics>();
+      auto pdraw2dgraphics = createø<::draw2d::graphics>();
 
       throw ::exception(todo);
 
-      //pgraphics->attach(::GetDCEx(::as_HWND(this->operating_system_window()), (HRGN)prgnClip->get_os_data(), flags));
+      //pdraw2dgraphics->attach(::GetDCEx(::as_HWND(this->operating_system_window()), (HRGN)prgnClip->get_os_data(), flags));
 
-      return pgraphics;
+      return pdraw2dgraphics;
 
 
    }
@@ -5031,7 +5031,7 @@ namespace windowing_win32
 
    //}
 
-   bool window::DrawCaption(::draw2d::graphics_pointer &pgraphics, const i32_rectangle &prc, ::u32 uFlags)
+   bool window::DrawCaption(::draw2d::graphics_pointer &pdraw2dgraphics, const i32_rectangle &prc, ::u32 uFlags)
 
    {
 
@@ -5039,7 +5039,7 @@ namespace windowing_win32
 
       throw ::interface_only();
       return false;
-      //      return ::DrawCaption(::as_HWND(this->operating_system_window()), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->_HWND(), prc, uFlags) != false;
+      //      return ::DrawCaption(::as_HWND(this->operating_system_window()), (HDC)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->_HWND(), prc, uFlags) != false;
 
 
    }
@@ -5557,23 +5557,23 @@ namespace windowing_win32
 
    //}
 
-   //void window::Print(::draw2d::graphics_pointer & pgraphics, ::u32 dwFlags) const
+   //void window::Print(::draw2d::graphics_pointer & pdraw2dgraphics, ::u32 dwFlags) const
    //{
 
    //   ASSERT(::IsWindow(((window *)this)->_HWND()));
 
    //   throw ::interface_only();
-   //   //      const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->_HWND(), (lparam) dwFlags);
+   //   //      const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINT, (wparam)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->_HWND(), (lparam) dwFlags);
 
    //}
 
-   //void window::PrintClient(::draw2d::graphics_pointer & pgraphics, ::u32 dwFlags) const
+   //void window::PrintClient(::draw2d::graphics_pointer & pdraw2dgraphics, ::u32 dwFlags) const
    //{
 
    //   ASSERT(::IsWindow(((window *)this)->_HWND()));
 
    //   throw ::interface_only();
-   //   //const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINTCLIENT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->_HWND(), (lparam) dwFlags);
+   //   //const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINTCLIENT, (wparam)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->_HWND(), (lparam) dwFlags);
 
    //}
 
@@ -6513,12 +6513,12 @@ namespace windowing_win32
    }
 
 
-   //void window::set_origin(::draw2d::graphics_pointer & pgraphics)
+   //void window::set_origin(::draw2d::graphics_pointer & pdraw2dgraphics)
    //{
 
    //   // graphics will be already set its impact port to the window for linux - cairo with xlib
 
-   //   pgraphics->set_origin(::i32_point());
+   //   pdraw2dgraphics->set_origin(::i32_point());
 
    //}
 

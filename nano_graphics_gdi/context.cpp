@@ -94,7 +94,7 @@ HFONT CreateSimpleFont16(void)
 
             ::SetBkMode(m_hdc, TRANSPARENT);
 
-            COLORREF colorrefTextColor = win32_COLORREF(m_pbrush->m_color);
+            COLORREF colorrefTextColor = win32_COLORREF(m_pnanographicsgdibrush->m_color);
 
             SetTextColor(m_hdc, colorrefTextColor);
             //SetTextColor(m_hdc, RGB(100, 100, 255));
@@ -105,7 +105,7 @@ HFONT CreateSimpleFont16(void)
 
             //pnanofont->update(this);
 
-            auto hfont = (HFONT)m_pfont->m_hgdiobj;
+            auto hfont = (HFONT)m_pnanographicsgdifont->m_hgdiobj;
 
             //auto hfont2 = CreateSimpleFont16();
 
@@ -153,17 +153,17 @@ HFONT CreateSimpleFont16(void)
             //   // return;
             //}
             
-            ::i32 iLength = wstrMessage.length();
+            ::i32 iLength = (::i32) wstrMessage.length();
 
-            //auto pbrush = createø<::nano::graphics::brush>();
+            //auto pdraw2dbrush = createø<::nano::graphics::brush>();
 
-            //pbrush->m_color = ::color::yellow;
+            //pdraw2dbrush->m_color = ::color::yellow;
 
-            //auto ppen = createø<::nano::graphics::pen>();
+            //auto pdraw2dpen = createø<::nano::graphics::pen>();
 
-            //ppen->m_color = ::color::magenta;
+            //pdraw2dpen->m_color = ::color::magenta;
 
-            //rectangle(r, nullptr, ppen);
+            //rectangle(r, nullptr, pdraw2dpen);
 
             ::DrawTextW(m_hdc, wstrMessage, (::i32)iLength, (LPRECT)&r, iAlign | iFlag);
 
@@ -178,7 +178,7 @@ HFONT CreateSimpleFont16(void)
          {
 
             //pnanofont->update(this);
-            auto hfont = (HFONT) m_pfont->m_hgdiobj;
+            auto hfont = (HFONT) m_pnanographicsgdifont->m_hgdiobj;
 
             ::SelectObject(m_hdc, hfont);
 
@@ -201,19 +201,19 @@ HFONT CreateSimpleFont16(void)
          void context::rectangle(const ::f64_rectangle& rectangle)
          {
 
-            if (!m_pbrush && !m_ppen)
+            if (!m_pnanographicsgdibrush && !m_pnanographicsgdipen)
             {
 
                return;
 
             }
 
-            if (m_pbrush)
+            if (m_pnanographicsgdibrush)
             {
 
                //pnanobrush->update(this);
 
-               ::SelectObject(m_hdc, (HGDIOBJ)m_pbrush->m_hgdiobj);
+               ::SelectObject(m_hdc, (HGDIOBJ)m_pnanographicsgdibrush->m_hgdiobj);
             }
             else
             {
@@ -222,12 +222,12 @@ HFONT CreateSimpleFont16(void)
 
             }
 
-            if (m_ppen)
+            if (m_pnanographicsgdipen)
             {
 
                //pnanopen->update(this);
 
-               ::SelectObject(m_hdc, (HGDIOBJ)m_ppen->m_hgdiobj);
+               ::SelectObject(m_hdc, (HGDIOBJ)m_pnanographicsgdipen->m_hgdiobj);
             }
             else
             {
@@ -239,18 +239,18 @@ HFONT CreateSimpleFont16(void)
 
             auto r = rectangle;
 
-            if (m_ppen)
+            if (m_pnanographicsgdipen)
             {
 
-               r.left += m_ppen->m_fWidth - 1;
-               r.top += m_ppen->m_fWidth - 1;
+               r.left += m_pnanographicsgdipen->m_fWidth - 1;
+               r.top += m_pnanographicsgdipen->m_fWidth - 1;
             }
 
             ::Rectangle(m_hdc,
-               r.left,
-               r.top,
-               r.right,
-               r.bottom);
+               (int)r.left,
+               (int)r.top,
+               (int)r.right,
+               (int)r.bottom);
 
 
          }
@@ -267,10 +267,10 @@ HFONT CreateSimpleFont16(void)
 
             Gdiplus::Rect r;
 
-            r.X = x;
-            r.Y = y;
-            r.Width = cx;
-            r.Height = cy;
+            r.X = (INT) x;
+            r.Y = (INT)y;
+            r.Width = (INT)cx;
+            r.Height = (INT)cy;
 
             g.DrawImage(pwindowsicon->m_pimage, r);
             //)
@@ -302,7 +302,7 @@ HFONT CreateSimpleFont16(void)
          void context::translate(::f64 x, ::f64 y)
          {
 
-            OffsetViewportOrgEx(m_hdc, x, y, nullptr);
+            OffsetViewportOrgEx(m_hdc, (::i32) x, (::i32)y, nullptr);
 
          }
 

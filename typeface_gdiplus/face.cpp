@@ -73,7 +73,7 @@ namespace typeface_gdiplus
 
       //m_bFace = false;
 
-      m_pfont = nullptr;
+      m_pwritetextfont = nullptr;
       m_pfamily = nullptr;
 
       initialize_gdiplus();
@@ -85,7 +85,7 @@ namespace typeface_gdiplus
    face::~face()
    {
 
-      ::acme::del(m_pfont);
+      ::acme::del(m_pwritetextfont);
       ::acme::del(m_pfamily);
 
       terminate_gdiplus();
@@ -96,10 +96,10 @@ namespace typeface_gdiplus
    void face::_defer_gdiplus_font_and_family()
    {
 
-      if (!m_pfamily || !m_pfont)
+      if (!m_pfamily || !m_pwritetextfont)
       {
 
-         ::acme::del(m_pfont);
+         ::acme::del(m_pwritetextfont);
          ::acme::del(m_pfamily);
 
          //m_bFace = true;
@@ -115,12 +115,12 @@ namespace typeface_gdiplus
          Gdiplus::FontStyle style = (numericWeight >= 600) ? Gdiplus::FontStyleBold : Gdiplus::FontStyleRegular;
 
 
-         m_pfont = new Font(m_pfamily, (Gdiplus::REAL) m_iPixelSize, style, UnitPixel);
+         m_pwritetextfont = new Font(m_pfamily, (Gdiplus::REAL) m_iPixelSize, style, UnitPixel);
 
-         if (m_pfamily->GetLastStatus() != Ok || m_pfont->GetLastStatus() != Ok)
+         if (m_pfamily->GetLastStatus() != Ok || m_pwritetextfont->GetLastStatus() != Ok)
          {
 
-            ::acme::del(m_pfont);
+            ::acme::del(m_pwritetextfont);
             ::acme::del(m_pfamily);
 
             throw ::exception(error_failed, "Could not create GDI+ font family or font");
@@ -160,7 +160,7 @@ namespace typeface_gdiplus
       RectF layoutRect;
       PointF origin(0, 0);
       
-      auto status = measureGraphics.MeasureString(wch, iLength, m_pfont, origin, &format, &layoutRect);
+      auto status = measureGraphics.MeasureString(wch, iLength, m_pwritetextfont, origin, &format, &layoutRect);
 
       if (status != Ok)
       {
@@ -182,7 +182,7 @@ namespace typeface_gdiplus
 
       // Draw glyph at (2, 2) for margin
       PointF drawPoint(2.0f, 2.0f);
-      status = g.DrawString(wch, iLength, m_pfont, drawPoint, &format, &brush);
+      status = g.DrawString(wch, iLength, m_pwritetextfont, drawPoint, &format, &brush);
 
       if (status != Ok)
       {
@@ -228,10 +228,10 @@ namespace typeface_gdiplus
 
       
 
-      auto iStyle = m_pfont->GetStyle();
+      auto iStyle = m_pwritetextfont->GetStyle();
       auto dEmHeight = (double)m_pfamily->GetEmHeight(iStyle);
       auto dCellAscent = (double)m_pfamily->GetCellAscent(iStyle);
-      auto dFontSize = (double)m_pfont->GetSize();
+      auto dFontSize = (double)m_pwritetextfont->GetSize();
 
       ::i32 bearingX = static_cast<::i32>(floor(layoutRect.X));
       ::i32 bearingY = dEmHeight > 0.0
@@ -284,7 +284,7 @@ namespace typeface_gdiplus
       //SolidBrush brush(Color(255, 0, 0, 0)); // black text
 
       //PointF origin(0, 0);
-      //g.DrawString(wch, 1, m_pfont, origin, &brush);
+      //g.DrawString(wch, 1, m_pwritetextfont, origin, &brush);
 
       //auto grayscale = ExtractGrayscaleFromBitmap(bmp);
 
@@ -304,7 +304,7 @@ namespace typeface_gdiplus
 
       _defer_gdiplus_font_and_family();
 
-      Gdiplus::Font* pgdiplusfont = m_pfont;
+      Gdiplus::Font* pgdiplusfont = m_pwritetextfont;
 
       if (pgdiplusfont == nullptr)
       {
@@ -330,7 +330,7 @@ namespace typeface_gdiplus
 
       //Gdiplus::FontFamily family;
 
-      //pfont->GetFamily(&family);
+      //pwritetextfont->GetFamily(&family);
 
       ::f64 dEmHeight = pgdiplusfontfamily->GetEmHeight(iStyle);
 
@@ -358,7 +358,7 @@ namespace typeface_gdiplus
 
       ::f64 dFontHeight = pgdiplusfont->GetHeight(pg);
 
-      //m_pgraphics->DrawLine(m_ppen->get_os_data < Gdiplus::Pen* >(this), Gdiplus::PointF((Gdiplus::REAL)m_point.x, (Gdiplus::REAL)m_point.y), Gdiplus::PointF((Gdiplus::REAL)x, (Gdiplus::REAL)y));
+      //m_pgraphics->DrawLine(m_pdraw2dpen->get_os_data < Gdiplus::Pen* >(this), Gdiplus::PointF((Gdiplus::REAL)m_point.x, (Gdiplus::REAL)m_point.y), Gdiplus::PointF((Gdiplus::REAL)x, (Gdiplus::REAL)y));
       pmetric->m_dAscent = dFontSize * dCellAscent / dEmHeight;
 
       pmetric->m_dDescent = dFontSize * dCellDescent / dEmHeight;

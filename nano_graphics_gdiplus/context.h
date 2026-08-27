@@ -24,11 +24,11 @@ namespace nano_graphics_gdiplus
 
       HDC m_hdc;
 
-      ::auto_pointer<::Gdiplus::Graphics> m_pgraphics;
-      ::auto_pointer<::Gdiplus::Bitmap> m_pbitmapMemory;
-      ::pointer < ::nano_graphics_gdiplus::brush > m_pbrush;
-      ::pointer<::nano_graphics_gdiplus::pen> m_ppen;
-      ::pointer<::nano_graphics_gdiplus::font> m_pfont;
+      ::auto_pointer<::Gdiplus::Graphics> m_pgdiplusgraphics;
+      ::auto_pointer<::Gdiplus::Bitmap> m_pgdiplusbitmapMemory;
+      ::pointer < ::nano_graphics_gdiplus::brush > m_pnanographicsgdiplusbrush;
+      ::pointer<::nano_graphics_gdiplus::pen> m_pnanographicsgdipluspen;
+      ::pointer<::nano_graphics_gdiplus::font> m_pnanographicsgdiplusfont;
 
 
       //HDC m_hdc;
@@ -51,9 +51,9 @@ namespace nano_graphics_gdiplus
 
       void clear(const ::color::color & color);
 
-      void set_brush(::nano::graphics::brush * pbrush) override;
-      void set_pen(::nano::graphics::pen * ppen) override;
-      void set_font(::nano::graphics::font * pfont) override;
+      void set_brush(::nano::graphics::brush * pdraw2dbrush) override;
+      void set_pen(::nano::graphics::pen * pdraw2dpen) override;
+      void set_font(::nano::graphics::font * pwritetextfont) override;
 
       /// <summary>
       ///  type 0 is HDC
@@ -93,11 +93,11 @@ namespace nano_graphics_gdiplus
 
       void translate(::f64 x, ::f64 y) override;
 
-      //void do_path(::nano::graphics::path *ppath, ::nano::graphics::brush *pbrush,
-        //           ::nano::graphics::pen *ppen) override;
-       void do_path(::nano::graphics::path *ppath) override;
+      //void do_path(::nano::graphics::path *pdraw2dpath, ::nano::graphics::brush *pdraw2dbrush,
+        //           ::nano::graphics::pen *pdraw2dpen) override;
+       void do_path(::nano::graphics::path *pdraw2dpath) override;
 
-      //void draw_path(::nano::graphics::path *ppath, ::nano::graphics::pen *ppen) override;
+      //void draw_path(::nano::graphics::path *pdraw2dpath, ::nano::graphics::pen *pdraw2dpen) override;
 
 
    };

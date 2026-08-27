@@ -18,7 +18,7 @@ namespace nano_graphics_gdiplus
    public:
 
 
-      ::auto_pointer<::Gdiplus::GraphicsPath> m_pgraphicspath;
+      ::auto_pointer<::Gdiplus::GraphicsPath> m_pgdiplusgraphicspath;
 
 
       path();

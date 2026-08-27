@@ -20,7 +20,7 @@ namespace typeface_gdiplus
       ///::u32 m_FaceVAO, m_FaceVBO;
 
 
-      Gdiplus::Font* m_pfont;
+      Gdiplus::Font* m_pwritetextfont;
       Gdiplus::FontFamily* m_pfamily;
 
       face();

@@ -359,11 +359,11 @@ namespace aura_windows
    //   return ::GetLayeredWindowAttributes(((interaction_impl *)this)->get_handle(), pcrKey, pbAlpha, (LPDWORD)pdwFlags) != false;
    //}
 
-   //bool interaction_impl::PrintWindow(::draw2d::graphics_pointer & pgraphics, ::u32 nFlags) const
+   //bool interaction_impl::PrintWindow(::draw2d::graphics_pointer & pdraw2dgraphics, ::u32 nFlags) const
    //{
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
    //   throw ::interface_only();
-   //   //      return ::PrintWindow(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), nFlags) != false;
+   //   //      return ::PrintWindow(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->get_handle(), nFlags) != false;
    //   return false;
    //}
 
@@ -1201,7 +1201,7 @@ namespace aura_windows
    }
 
 
-   void interaction_impl::on_layout(::draw2d::graphics_pointer & pgraphics)
+   void interaction_impl::on_layout(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
 
@@ -1852,7 +1852,7 @@ namespace aura_windows
 
    //}
 
-   //bool interaction_impl::DrawCaption(::draw2d::graphics_pointer & pgraphics, const i32_rectangle & prc, ::u32 uFlags)
+   //bool interaction_impl::DrawCaption(::draw2d::graphics_pointer & pdraw2dgraphics, const i32_rectangle & prc, ::u32 uFlags)
 
    //{
 
@@ -1860,7 +1860,7 @@ namespace aura_windows
 
    //   throw ::interface_only();
    //   return false;
-   //   //      return ::DrawCaption(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), prc, uFlags) != false;
+   //   //      return ::DrawCaption(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->get_handle(), prc, uFlags) != false;
 
 
    //}
@@ -2389,24 +2389,24 @@ namespace aura_windows
 
 
 
-   void interaction_impl::Print(::draw2d::graphics_pointer & pgraphics, ::u32 dwFlags)
+   void interaction_impl::Print(::draw2d::graphics_pointer & pdraw2dgraphics, ::u32 dwFlags)
    {
 
       ASSERT(_is_window());
 
       throw ::interface_only();
-      //      const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), (lparam) dwFlags);
+      //      const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINT, (wparam)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->get_handle(), (lparam) dwFlags);
 
    }
 
 
-   void interaction_impl::PrintClient(::draw2d::graphics_pointer & pgraphics, ::u32 dwFlags)
+   void interaction_impl::PrintClient(::draw2d::graphics_pointer & pdraw2dgraphics, ::u32 dwFlags)
    {
 
       ASSERT(_is_window());
 
       throw ::interface_only();
-      //const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINTCLIENT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), (lparam) dwFlags);
+      //const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINTCLIENT, (wparam)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->get_handle(), (lparam) dwFlags);
 
    }
 
@@ -3527,12 +3527,12 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 
 
 
-   void interaction_impl::set_origin(::draw2d::graphics_pointer & pgraphics)
+   void interaction_impl::set_origin(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
       // graphics will be already set its impact port to the interaction_impl for linux - cairo with xlib
 
-      pgraphics->set_origin(::i32_point());
+      pdraw2dgraphics->set_origin(::i32_point());
 
    }
 

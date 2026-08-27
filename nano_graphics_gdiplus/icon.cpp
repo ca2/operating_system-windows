@@ -195,16 +195,16 @@ Gdiplus::Image *LoadGdiplusImageFromMemory(BYTE *buffer, size_t bufferSize)
 namespace nano_graphics_gdiplus
 {
 
-   icon::icon() { m_pimage = nullptr; }
+   icon::icon() { m_pgdiplusimage = nullptr; }
 
 
    icon::~icon()
    {
 
-      if (m_pimage)
+      if (m_pgdiplusimage)
       {
 
-         delete m_pimage;
+         delete m_pgdiplusimage;
       }
    }
 
@@ -213,13 +213,13 @@ namespace nano_graphics_gdiplus
    {
 
 
-      if (m_pimage)
+      if (m_pgdiplusimage)
       {
 
-         delete m_pimage;
+         delete m_pgdiplusimage;
       }
 
-      m_pimage = LoadGdiplusImageFromMemory((BYTE *)p, size);
+      m_pgdiplusimage = LoadGdiplusImageFromMemory((BYTE *)p, size);
    }
 
 

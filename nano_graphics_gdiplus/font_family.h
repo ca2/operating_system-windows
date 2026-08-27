@@ -15,7 +15,7 @@ namespace nano_graphics_gdiplus
    public:
 
 
-      ::auto_pointer<::Gdiplus::FontFamily> m_pfontfamily;
+      ::auto_pointer<::Gdiplus::FontFamily> m_pgdiplusfontfamily;
 
       
       font_family();

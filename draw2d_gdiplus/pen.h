@@ -21,7 +21,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::PenAlignment m_egdiplusalign;
 
-      ::Gdiplus::Pen *  m_ppen;
+      ::Gdiplus::Pen *  m_pgdipluspen;
 
       pen();
       ~pen() override;
@@ -40,7 +40,7 @@ namespace draw2d_gdiplus
       bool CreatePen(::i32 nPenStyle, ::f64 nWidth, const LOGBRUSH* pLogBrush, ::i32 nStyleCount = 0, const DWORD* pStyle = nullptr);*/
 
 
-      virtual void create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
+      void update(::draw2d::graphics * pdraw2dgraphics) override;
       void destroy() override;
 
 

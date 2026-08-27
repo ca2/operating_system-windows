@@ -252,7 +252,7 @@ namespace write_text_win32
 
 
    bool font_face_resolver::_resolve_gdi_font(
-      ::comptr<IDWriteFont> & pfont,
+      ::comptr<IDWriteFont> & pwritetextfont,
       const ::scoped_string & scopedstrFamily,
       const ::write_text::font_face_request & request)
    {
@@ -287,9 +287,9 @@ namespace write_text_win32
 
       wcscpy_s(logfont.lfFaceName, LF_FACESIZE, wstrFamily);
 
-      auto hr = m_pgdinterop->CreateFontFromLOGFONT(&logfont, &pfont);
+      auto hr = m_pgdinterop->CreateFontFromLOGFONT(&logfont, &pwritetextfont);
 
-      return SUCCEEDED(hr) && pfont;
+      return SUCCEEDED(hr) && pwritetextfont;
 
    }
 
@@ -348,7 +348,7 @@ namespace write_text_win32
          &uFamilyIndex,
          &bExists);
 
-      ::comptr<IDWriteFont> pfont;
+      ::comptr<IDWriteFont> pwritetextfont;
 
       if (SUCCEEDED(hr) && bExists)
       {
@@ -364,7 +364,7 @@ namespace write_text_win32
                static_cast<DWRITE_FONT_WEIGHT>(request.m_fontweight.as_i32()),
                DWRITE_FONT_STRETCH_NORMAL,
                request.m_bItalic ? DWRITE_FONT_STYLE_ITALIC : DWRITE_FONT_STYLE_NORMAL,
-               &pfont);
+               &pwritetextfont);
 
          }
 
@@ -373,13 +373,13 @@ namespace write_text_win32
       {
 
          _resolve_gdi_font(
-            pfont,
+            pwritetextfont,
             source.m_strResolvedFamily,
             request);
 
       }
 
-      if (!pfont)
+      if (!pwritetextfont)
       {
 
          _log_failure(
@@ -393,7 +393,7 @@ namespace write_text_win32
 
       ::comptr<IDWriteFontFace> pfontface;
 
-      hr = pfont->CreateFontFace(&pfontface);
+      hr = pwritetextfont->CreateFontFace(&pfontface);
 
       if (FAILED(hr) || !pfontface)
       {

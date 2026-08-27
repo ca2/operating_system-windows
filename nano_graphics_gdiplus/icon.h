@@ -20,7 +20,7 @@ namespace nano_graphics_gdiplus
 
       // CreatableFromBase(::nano::graphics::font, ::nano::graphics::font);
 
-      Gdiplus::Image *m_pimage;
+      Gdiplus::Image *m_pgdiplusimage;
 
 
       icon();

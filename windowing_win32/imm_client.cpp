@@ -767,16 +767,16 @@ void imm_client::clear_ime_composition()
 
       //ShowCaret(get_handle());
 
-      //auto pstyle = get_style(pgraphics);
+      //auto pstyle = get_style(pdraw2dgraphics);
 
-      //auto pfont = get_font(pstyle);
+      //auto pwritetextfont = get_font(pstyle);
 
-      //if (pfont)
+      //if (pwritetextfont)
       //{
 
       //   LOGFONTW lf = {};
 
-      //   if (pfont->GetLogFont(&lf))
+      //   if (pwritetextfont->GetLogFont(&lf))
       //   {
 
       //      if (ImmSetCompositionFontW(imm, &lf))

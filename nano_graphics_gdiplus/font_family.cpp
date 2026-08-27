@@ -41,7 +41,7 @@ namespace nano_graphics_gdiplus
 
       ::wstring wstrFontFamilyName(strFontFamilyName);
 
-      m_pfontfamily = new ::Gdiplus::FontFamily(wstrFontFamilyName);
+      m_pgdiplusfontfamily = new ::Gdiplus::FontFamily(wstrFontFamilyName);
 
 
    }

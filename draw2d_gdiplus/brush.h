@@ -17,7 +17,7 @@ namespace draw2d_gdiplus
       //__creatable_from_base(brush, ::draw2d::brush);
 
 
-      Gdiplus::Brush * m_pbrush;
+      Gdiplus::Brush * m_pgdiplusbrush;
 
 
       brush();
@@ -32,9 +32,9 @@ namespace draw2d_gdiplus
       //virtual void * get_os_data() const;
 
 
-      virtual void create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
+      void update(::draw2d::graphics * pdraw2dgraphics) override;
       void destroy() override;
-      void destroy_os_data() override;
+      // void destroy_os_data() override;
 
       //bool create_solid(::color::color crColor);
       //bool CreateHatchBrush(::i32 nIndex, ::color::color crColor);

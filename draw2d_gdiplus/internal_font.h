@@ -27,7 +27,7 @@ namespace draw2d_gdiplus
 
       
       void load_from_memory(::memory_base * pmemory) override;
-      void on_create_font(::draw2d::graphics * pgraphics, ::write_text::font * pfont) override;
+      void on_create_font(::draw2d::graphics * pdraw2dgraphics, ::write_text::font * pwritetextfont) override;
 
 
    };

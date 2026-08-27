@@ -2123,6 +2123,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="brush.h" />
+    <ClInclude Include="context.h" />
     <ClInclude Include="font.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="icon.h" />

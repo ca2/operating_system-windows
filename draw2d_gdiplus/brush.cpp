@@ -1,4 +1,5 @@
 #include "platform.h"
+#include "bitmap.h"
 #include "brush.h"
 #include "image.h"
 #include "path.h"
@@ -14,7 +15,7 @@ namespace draw2d_gdiplus
    brush::brush()
    {
 
-      m_pbrush = nullptr;
+      m_pgdiplusbrush = nullptr;
 
    }
 
@@ -38,7 +39,7 @@ namespace draw2d_gdiplus
 //
 //#endif
 
-   void brush::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void brush::update(::draw2d::graphics * pdraw2dgraphics)
    {
 
       if(m_ebrush == ::draw2d::e_brush_solid)
@@ -47,7 +48,7 @@ namespace draw2d_gdiplus
          try
          {
 
-            m_pbrush = øraw_new Gdiplus::SolidBrush(gdiplus_color(m_color));
+            m_pgdiplusbrush = øraw_new Gdiplus::SolidBrush(gdiplus_color(m_color));
 
          }
          catch(...)
@@ -62,7 +63,7 @@ namespace draw2d_gdiplus
          try
          {
 
-            m_pbrush = øraw_new Gdiplus::LinearGradientBrush(
+            m_pgdiplusbrush = øraw_new Gdiplus::LinearGradientBrush(
             Gdiplus::PointF((Gdiplus::REAL) m_point1.x,(Gdiplus::REAL) m_point1.y),
             Gdiplus::PointF((Gdiplus::REAL) m_point2.x,(Gdiplus::REAL) m_point2.y),
             gdiplus_color(m_color1),
@@ -79,11 +80,11 @@ namespace draw2d_gdiplus
          try
          {
 
-            Gdiplus::GraphicsPath * ppath = øraw_new Gdiplus::GraphicsPath();
+            Gdiplus::GraphicsPath * pdraw2dpath = øraw_new Gdiplus::GraphicsPath();
 
-            ppath->AddEllipse((Gdiplus::REAL) (m_point.x - m_size.cx / 2),(Gdiplus::REAL)(m_point.y - m_size.cy / 2),(Gdiplus::REAL) (m_size.cx),(Gdiplus::REAL) (m_size.cy));
+            pdraw2dpath->AddEllipse((Gdiplus::REAL) (m_point.x - m_size.cx / 2),(Gdiplus::REAL)(m_point.y - m_size.cy / 2),(Gdiplus::REAL) (m_size.cx),(Gdiplus::REAL) (m_size.cy));
 
-            Gdiplus::PathGradientBrush * pgradientbrush = øraw_new Gdiplus::PathGradientBrush(ppath);
+            Gdiplus::PathGradientBrush * pgradientbrush = øraw_new Gdiplus::PathGradientBrush(pdraw2dpath);
 
             auto c1 = gdiplus_color(m_color1);
             auto c2 = gdiplus_color(m_color2);
@@ -94,7 +95,7 @@ namespace draw2d_gdiplus
             pgradientbrush->SetCenterColor(c1);
             pgradientbrush->SetSurroundColors(&c2,&c);
 
-            m_pbrush = pgradientbrush;
+            m_pgdiplusbrush = pgradientbrush;
 
          }
          catch(...)
@@ -119,14 +120,16 @@ namespace draw2d_gdiplus
 
                }
 
-               Gdiplus::Image * pgdiplusimage = pimage->get_bitmap_as_source()->get_os_data < Gdiplus::Bitmap * >();
+               ::cast < ::draw2d_gdiplus::bitmap > pdraw2dbitmap = pimage->get_bitmap_as_source();
+
+               Gdiplus::Image * pgdiplusimage = pdraw2dbitmap->m_pgdiplusbitmap;
 
                if (::is_set(pgdiplusimage))
                {
 
                   Gdiplus::TextureBrush* ptexturebrush = øraw_new Gdiplus::TextureBrush(pgdiplusimage);
 
-                  m_pbrush = ptexturebrush;
+                  m_pgdiplusbrush = ptexturebrush;
 
                }
 
@@ -145,9 +148,11 @@ namespace draw2d_gdiplus
          try
          {
 
-            ::pointer<::draw2d::path>ppath;
+            ::pointer<::draw2d::path>pdraw2dpath;
 
-            pgraphics->constructø(ppath);
+            pdraw2dgraphics->constructø(pdraw2dpath);
+
+            ::cast < ::draw2d_gdiplus::path > pgdipluspath = pdraw2dpath;
 
             ::f64_rectangle rectangleRoundRect(m_point, m_size);
 
@@ -157,9 +162,9 @@ namespace draw2d_gdiplus
             {
 
 
-               ppath->add_round_rectangle(rectangleRoundRect, m_dRadius);
+               pdraw2dpath->add_round_rectangle(rectangleRoundRect, m_dRadius);
 
-               auto pgdipath = (Gdiplus::GraphicsPath *)ppath->get_os_data(0);
+               auto pgdipath = (Gdiplus::GraphicsPath *)pgdipluspath->m_pgdiplusgraphicspath;
 
                Gdiplus::PathGradientBrush * pgradientbrush = øraw_new Gdiplus::PathGradientBrush(pgdipath);
 
@@ -193,7 +198,7 @@ namespace draw2d_gdiplus
                //pgradientbrush->SetInterpolationColors(&c1, &d, 1);
 
 
-               m_pbrush = pgradientbrush;
+               m_pgdiplusbrush = pgradientbrush;
 
             }
 
@@ -208,7 +213,7 @@ namespace draw2d_gdiplus
          try
          {
 
-            m_pbrush = øraw_new Gdiplus::SolidBrush(gdiplus_color(m_color));
+            m_pgdiplusbrush = øraw_new Gdiplus::SolidBrush(gdiplus_color(m_color));
 
          }
          catch(...)
@@ -218,19 +223,9 @@ namespace draw2d_gdiplus
 
       }
 
-      m_osdata[0] = m_pbrush;
+      //m_osdata[0] = m_pgdiplusbrush;
 
-      //return m_pbrush != nullptr;
-
-   }
-
-
-   void brush::destroy_os_data()
-   {
-
-      ::acme::del(m_pbrush);
-
-      //return ::success;
+      //return m_pgdiplusbrush != nullptr;
 
    }
 
@@ -238,13 +233,23 @@ namespace draw2d_gdiplus
    void brush::destroy()
    {
 
-      destroy_os_data();
-
-      ::draw2d::brush::destroy();
+      ::acme::del(m_pgdiplusbrush);
 
       //return ::success;
 
    }
+
+
+   //void brush::destroy()
+   //{
+
+   //   destroy_os_data();
+
+   //   ::draw2d::brush::destroy();
+
+   //   //return ::success;
+
+   //}
 
 
 

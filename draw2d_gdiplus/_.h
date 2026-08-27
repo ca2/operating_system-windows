@@ -26,7 +26,7 @@ inline void copy(Gdiplus::ColorMatrix & a, const color_matrix & b)
 }
 
 
-//void gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const ::scoped_string & scopedstr, ::f64_rectangle & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfont, ::f64 dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
+//void gdiplus_draw_text(::draw2d::graphics * pdraw2dgraphics, ::draw2d::path * pdraw2dpath, const ::scoped_string & scopedstr, ::f64_rectangle & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pwritetextfont, ::f64 dFontWidth, ::draw2d::brush * pdraw2dbrush = nullptr, bool bMeasure = false);
 
 
 inline auto gdiplus_color(const ::color::color & color)
@@ -41,11 +41,11 @@ inline auto gdiplus_color(const ::color::color & color)
 }
 
 
-#define __graphics(pgraphics) ((::draw2d_gdiplus::graphics *) pgraphics->m_pthis)
-#define __pen(ppen) ((::draw2d_gdiplus::pen *) ppen->m_pthis)
-#define __brush(pbrush) ((::draw2d_gdiplus::brush *) pbrush->m_pthis)
-#define __font(pfont) ((::draw2d_gdiplus::font *) pfont->m_pthis)
-#define __graphics_path(ppath) ((::draw2d_gdiplus::path *) ppath->m_pthis)
+//#define __graphics(pdraw2dgraphics) ((::draw2d_gdiplus::graphics *) pdraw2dgraphics->m_pthis)
+//#define __pen(pdraw2dpen) ((::draw2d_gdiplus::pen *) pdraw2dpen->m_pthis)
+//#define __brush(pdraw2dbrush) ((::draw2d_gdiplus::brush *) pdraw2dbrush->m_pthis)
+//#define __font(pwritetextfont) ((::draw2d_gdiplus::font *) pwritetextfont->m_pthis)
+//#define __graphics_path(pdraw2dpath) ((::draw2d_gdiplus::path *) pdraw2dpath->m_pthis)
 
 
 class g_keep

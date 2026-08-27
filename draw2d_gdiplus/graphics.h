@@ -19,9 +19,9 @@ namespace draw2d_gdiplus
 
 
       //::Gdiplus::Matrix             m_matrix;
-      ::Gdiplus::Graphics *         m_pgraphics;
-      ::Gdiplus::GraphicsPath *     m_ppath;
-      ::Gdiplus::GraphicsPath *     m_ppathPaint;
+      ::Gdiplus::Graphics *         m_pgdiplusgraphics;
+      ::Gdiplus::GraphicsPath *     m_pgdiplusgraphicspath;
+      ::Gdiplus::GraphicsPath *     m_pgdiplusgraphicspathPaint;
       HDC                           m_hdc;
       HDC                           m_hdcAttach;
       HDC                           m_hdcGraphics;
@@ -33,18 +33,18 @@ namespace draw2d_gdiplus
 
       virtual void close_graphics();
 
-      Gdiplus::Graphics * g()
-      {
-         //if(m_pgraphics == nullptr)
-         //{
-         //   m_pgraphics = ::Gdiplus::Graphics::FromHDC(get_handle1());
-         //}
-         return m_pgraphics;
-      }
+      //Gdiplus::Graphics * g()
+      //{
+      //   //if(m_pgraphics == nullptr)
+      //   //{
+      //   //   m_pgraphics = ::Gdiplus::Graphics::FromHDC(get_handle1());
+      //   //}
+      //   return m_pgraphics;
+      //}
 
 //      ::windowing::window * GetWindow() override;
 
-      virtual void attach(void * pgraphics) override;   // attach/detach affects only the Output DC
+      virtual void attach(void * pdraw2dgraphics) override;   // attach/detach affects only the Output DC
       virtual void * detach() override;
 
       //void attach_hdc(HDC hdc) override;   // attach/detach affects only the Output DC
@@ -61,7 +61,7 @@ namespace draw2d_gdiplus
       ::u32 SetLayout(::u32 dwLayout) override;
 
 
-      virtual void set(::draw2d::bitmap* pbitmap) override;
+      virtual void set(::draw2d::bitmap* pdraw2dbitmap) override;
 
       HDC get_hdc();
       void release_hdc(HDC hdc);
@@ -82,9 +82,9 @@ namespace draw2d_gdiplus
 
       //              const scoped_string & strOutput, const void * lpInitData) override;
 
-      //void create_compatible_graphics(::draw2d::graphics * pgraphics) override;
+      //void create_compatible_graphics(::draw2d::graphics * pdraw2dgraphics) override;
       void create_for_window_draw2d(::user::interaction * puserinteraction, const ::i32_size & size);
-      void create_bitmap_graphics(::draw2d::bitmap * pbitmap) override;
+      void create_bitmap_graphics(::draw2d::bitmap * pdraw2dbitmap) override;
       void _create_memory_graphics(const ::i32_size & size, ::acme::user::interaction * pacmeuserinteractionAffinity) override;
      
       ::image::image_pointer get_current_target_image() override;
@@ -227,10 +227,10 @@ namespace draw2d_gdiplus
 
 
 
-      virtual void _add_clip_item(Gdiplus::GraphicsPath * ppath, ::draw2d::clip_item * pclipitem);
-      virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::f64_rectangle & rectangle);
-      virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::f64_ellipse & ellipse);
-      virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::f64_polygon_base & polygon);
+      virtual void _add_clip_item(Gdiplus::GraphicsPath * pdraw2dpath, ::draw2d::clip_item * pclipitem);
+      virtual void _add_shape(Gdiplus::GraphicsPath * pdraw2dpath, const ::f64_rectangle & rectangle);
+      virtual void _add_shape(Gdiplus::GraphicsPath * pdraw2dpath, const ::f64_ellipse & ellipse);
+      virtual void _add_shape(Gdiplus::GraphicsPath * pdraw2dpath, const ::f64_polygon_base & polygon);
 
 
       void intersect_clip(const ::f64_rectangle & rectangle) override;
@@ -356,8 +356,8 @@ namespace draw2d_gdiplus
       using ::draw2d::graphics::fill_rectangle;
 
       virtual void rectangle(const ::f64_rectangle & rectangle) override;
-      virtual void draw_rectangle(const ::f64_rectangle & rectangle, ::draw2d::pen * ppen) override;
-      virtual void fill_rectangle(const ::f64_rectangle & rectangle, ::draw2d::brush * pbrush) override;
+      virtual void draw_rectangle(const ::f64_rectangle & rectangle, ::draw2d::pen * pdraw2dpen) override;
+      virtual void fill_rectangle(const ::f64_rectangle & rectangle, ::draw2d::brush * pdraw2dbrush) override;
 
       void round_rectangle(const ::f64_rectangle & rectangle, ::f64 dRadius) override;
 
@@ -578,14 +578,14 @@ namespace draw2d_gdiplus
       void stroke_path() override;
       void widen_path() override;
 
-      void draw(::draw2d::path * ppath) override;
-      void draw(::draw2d::path * ppath, ::draw2d::pen * ppen) override;
-      void fill(::draw2d::path * ppath) override;
-      void fill(::draw2d::path * ppath, ::draw2d::brush * pbrush) override;
+      void draw(::draw2d::path * pdraw2dpath) override;
+      void draw(::draw2d::path * pdraw2dpath, ::draw2d::pen * pdraw2dpen) override;
+      void fill(::draw2d::path * pdraw2dpath) override;
+      void fill(::draw2d::path * pdraw2dpath, ::draw2d::brush * pdraw2dbrush) override;
 
 
-      void intersect_clip(::draw2d::path * ppath) override;
-      void set_clip(::draw2d::path * ppath) override;
+      void intersect_clip(::draw2d::path * pdraw2dpath) override;
+      void set_clip(::draw2d::path * pdraw2dpath) override;
 
 
       ::f32 GetMiterLimit() override;
@@ -655,9 +655,9 @@ namespace draw2d_gdiplus
       void sync_flush() override;
 
       //void draw_line(::f64 x1, ::f64 y1, ::f64 x2, ::f64 y2) override;
-      void line(::f64 x1, ::f64 y1, ::f64 x2, ::f64 y2, ::draw2d::pen * ppen) override;
+      void line(::f64 x1, ::f64 y1, ::f64 x2, ::f64 y2, ::draw2d::pen * pdraw2dpen) override;
 
-      //void draw_line(const ::f64_point & point1, const ::f64_point & point2, ::draw2d::pen * ppen) override;
+      //void draw_line(const ::f64_point & point1, const ::f64_point & point2, ::draw2d::pen * pdraw2dpen) override;
 
 
       //virtual void enum_fonts(::write_text::font_enumeration_item_array & itema) override;

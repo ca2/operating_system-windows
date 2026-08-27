@@ -26,9 +26,9 @@
             HDC         m_hdc;
             bool        m_bDelete;
 
-            ::pointer<::nano_graphics_gdi::pen> m_ppen;
-            ::pointer<::nano_graphics_gdi::brush> m_pbrush;
-            ::pointer<::nano_graphics_gdi::font> m_pfont;
+            ::pointer<::nano_graphics_gdi::pen>       m_pnanographicsgdipen;
+            ::pointer<::nano_graphics_gdi::brush>     m_pnanographicsgdibrush;
+            ::pointer<::nano_graphics_gdi::font>      m_pnanographicsgdifont;
 
 
             context();

@@ -37,7 +37,7 @@ namespace nano_graphics_gdiplus
    void image::create_image(const ::i32_size & size)
    {
 
-      m_pbitmap.release();
+      m_pgdiplusbitmap.release();
       m_memory.set_size(0);
       m_size = {};
       m_iStride = 0;
@@ -70,17 +70,17 @@ namespace nano_graphics_gdiplus
       m_memory.set_size(sizeMemory);
       m_memory.zero();
 
-      m_pbitmap = new ::Gdiplus::Bitmap(
+      m_pgdiplusbitmap = new ::Gdiplus::Bitmap(
          size.cx,
          size.cy,
          m_iStride,
          PixelFormat32bppARGB,
          (::BYTE *) m_memory.data());
 
-      if (!m_pbitmap || m_pbitmap->GetLastStatus() != ::Gdiplus::Ok)
+      if (!m_pgdiplusbitmap || m_pgdiplusbitmap->GetLastStatus() != ::Gdiplus::Ok)
       {
 
-         m_pbitmap.release();
+         m_pgdiplusbitmap.release();
          m_memory.set_size(0);
          m_iStride = 0;
 
@@ -186,7 +186,7 @@ namespace nano_graphics_gdiplus
 
       }
 
-      ::Gdiplus::Graphics graphics(m_pbitmap);
+      ::Gdiplus::Graphics graphics(m_pgdiplusbitmap);
       graphics.SetCompositingMode(::Gdiplus::CompositingModeSourceCopy);
 
       auto status = graphics.DrawImage(pimageSource, 0, 0, width, height);

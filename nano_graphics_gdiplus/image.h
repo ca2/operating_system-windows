@@ -23,7 +23,7 @@ namespace nano_graphics_gdiplus
       ::i32_size m_size;
       ::i32 m_iStride;
       ::memory m_memory;
-      ::auto_pointer < ::Gdiplus::Bitmap > m_pbitmap;
+      ::auto_pointer < ::Gdiplus::Bitmap > m_pgdiplusbitmap;
 
 
       image();

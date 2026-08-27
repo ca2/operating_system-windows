@@ -393,7 +393,7 @@ namespace windowing_win32
       //virtual void get_window_text(string & rectangleString) override;
       //virtual character_count get_window_text_length() override;
 
-      //virtual void on_layout(::draw2d::graphics_pointer & pgraphics) override;
+      //virtual void on_layout(::draw2d::graphics_pointer & pdraw2dgraphics) override;
       //virtual void on_reposition() override;
       //virtual void on_show_window() override;
       //virtual void on_zorder() override;
@@ -442,8 +442,8 @@ namespace windowing_win32
       //virtual void MapWindowPoints(::windowing::window * puserinteractionTo, ::i32_rectangle * prectangle);
 
 
-      //virtual void Print(::draw2d::graphics_pointer & pgraphics, ::u32 dwFlags) const;
-      //virtual void PrintClient(::draw2d::graphics_pointer & pgraphics, ::u32 dwFlags) const;
+      //virtual void Print(::draw2d::graphics_pointer & pdraw2dgraphics, ::u32 dwFlags) const;
+      //virtual void PrintClient(::draw2d::graphics_pointer & pdraw2dgraphics, ::u32 dwFlags) const;
 
       void post_redraw(bool bAscendants = false) override;
 
@@ -489,7 +489,7 @@ namespace windowing_win32
 
       //virtual bool DrawAnimatedRects(::i32 idAni, const LPRECTprcFrom, const LPRECTlprcTo);
 
-      virtual bool DrawCaption(::draw2d::graphics_pointer & pgraphics, const i32_rectangle & prc, ::u32 uFlags);
+      virtual bool DrawCaption(::draw2d::graphics_pointer & pdraw2dgraphics, const i32_rectangle & prc, ::u32 uFlags);
 
 
       //#if(WINVER >= 0x0500)
@@ -500,7 +500,7 @@ namespace windowing_win32
       //
       //#if(_WIN32_WINNT >= 0x0501)
       //
-      //      virtual bool PrintWindow(::draw2d::graphics_pointer & pgraphics, ::u32 nFlags) const;
+      //      virtual bool PrintWindow(::draw2d::graphics_pointer & pdraw2dgraphics, ::u32 nFlags) const;
       //
       //#endif   // _WIN32_WINNT >= 0x0501
       //
@@ -717,18 +717,18 @@ namespace windowing_win32
       //void OnContextMenu(::windowing::window * pwindow, i32_point pos);
       //bool OnCopyData(::windowing::window * pwindow, COPYDATASTRUCT* pCopyDataStruct);
 
-      //HBRUSH OnCtlColor(::draw2d::graphics_pointer & pgraphics, ::windowing::window * pwindow, ::u32 nCtlColor);
+      //HBRUSH OnCtlColor(::draw2d::graphics_pointer & pdraw2dgraphics, ::windowing::window * pwindow, ::u32 nCtlColor);
 
 
       //void OnEnable(bool bEnable);
       //void OnEndSession(bool bEnding);
       //void OnEnterIdle(::u32 nWhy, ::windowing::window * pWho);
-      //bool OnEraseBkgnd(::draw2d::graphics_pointer & pgraphics);
+      //bool OnEraseBkgnd(::draw2d::graphics_pointer & pdraw2dgraphics);
       //void OnGetMinMaxInfo(MINMAXINFO* pMMI);
 
       //bool OnHelpInfo(HELPINFO* pHelpInfo);
 
-      //void OnIconEraseBkgnd(::draw2d::graphics_pointer & pgraphics);
+      //void OnIconEraseBkgnd(::draw2d::graphics_pointer & pdraw2dgraphics);
       //lresult OnMenuChar(::u32 nChar, ::u32 nFlags, ::user::menu* pMenu);
       //void OnMenuSelect(::u32 nItemID, ::u32 nFlags, HMENU hSysMenu);
       //void OnMove(::i32 x, ::i32 y);
@@ -938,7 +938,7 @@ namespace windowing_win32
 
       virtual void track_mouse_hover() override;
 
-      //void set_origin(::draw2d::graphics_pointer & pgraphics);
+      //void set_origin(::draw2d::graphics_pointer & pdraw2dgraphics);
 
 
       void on_set_parent(::user::interaction * pinteraction);

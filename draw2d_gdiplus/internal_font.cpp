@@ -62,7 +62,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void internal_font::on_create_font(::draw2d::graphics * pgraphics, ::write_text::font * pfont)
+   void internal_font::on_create_font(::draw2d::graphics * pdraw2dgraphics, ::write_text::font * pwritetextfont)
    {
 
       if (m_iFamilyCount <= 0)
@@ -72,7 +72,7 @@ namespace draw2d_gdiplus
 
       }
 
-      ::cast < ::draw2d_gdiplus::font> pdraw2dgdiplusfont = pfont;
+      ::cast < ::draw2d_gdiplus::font> pdraw2dgdiplusfont = pwritetextfont;
 
       ::i32 iFoundFamily = -1;
 
@@ -131,7 +131,7 @@ namespace draw2d_gdiplus
 
          ////}
 
-         ////auto pfont = ___new Gdiplus::Font(
+         ////auto pwritetextfont = ___new Gdiplus::Font(
          ////   wszGetFamilyName,
          ////   (Gdiplus::REAL)m_dFontSize,
          ////   iStyle,
@@ -140,7 +140,7 @@ namespace draw2d_gdiplus
 
          //pfontfamily
 
-         //set_gdiplus_font(pfont);
+         //set_gdiplus_font(pwritetextfont);
 
          //bFont = true;
 
@@ -150,19 +150,19 @@ namespace draw2d_gdiplus
             pdraw2dgdiplusfont->m_iStyle,
             gdiplus_font_unit(pdraw2dgdiplusfont->m_fontsize));
 
-         pdraw2dgdiplusfont->set_gdiplus_font(pgdiplusfont);
+         pdraw2dgdiplusfont->m_pgdiplusfont = pgdiplusfont;
 
       //}
       //else
       //{
 
-      //   auto pfont = ___new Gdiplus::Font(
+      //   auto pwritetextfont = ___new Gdiplus::Font(
       //      &pprivatefont->m_familya.first(),
       //      (Gdiplus::REAL)m_dFontSize,
       //      iStyle,
       //      unit);
 
-      //   set_gdiplus_font(pfont);
+      //   set_gdiplus_font(pwritetextfont);
 
       //   bFont = true;
 

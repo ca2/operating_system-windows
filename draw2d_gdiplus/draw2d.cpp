@@ -52,13 +52,13 @@ namespace draw2d_gdiplus
       if (::is_set(pimage))
       {
 
-         auto pgraphics = create_newø<::draw2d_gdiplus::graphics>();
+         auto pdraw2dgraphics = create_newø<::draw2d_gdiplus::graphics>();
 
-         //pgraphics->create_bitmap_graphics(pimage->get_bitmap());
+         //pdraw2dgraphics->create_bitmap_graphics(pimage->get_bitmap());
 
-         pgraphics->update_as_image_render_target(pimage);
+         pdraw2dgraphics->update_as_image_render_target(pimage);
 
-         return pgraphics;
+         return pdraw2dgraphics;
 
       }
 
@@ -68,10 +68,10 @@ namespace draw2d_gdiplus
 
 
 
-   void draw2d::do_release_to_pool_strategy(::draw2d::graphics_pointer &pgraphics, ::image::image * pimage)
+   void draw2d::do_release_to_pool_strategy(::draw2d::graphics_pointer &pdraw2dgraphics, ::image::image * pimage)
    {
          
-      pgraphics.release();
+      pdraw2dgraphics.release();
       
    }
 

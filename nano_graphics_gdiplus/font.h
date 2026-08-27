@@ -18,7 +18,7 @@ namespace nano_graphics_gdiplus
    public:
 
 
-      ::auto_pointer<::Gdiplus::Font> m_pfont;
+      ::auto_pointer<::Gdiplus::Font> m_pgdiplusfont;
 
 
       // CreatableFromBase(::nano::graphics::font, ::nano::graphics::font);

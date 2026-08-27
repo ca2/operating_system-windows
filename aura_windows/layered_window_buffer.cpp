@@ -98,7 +98,7 @@ namespace windowing_win32
    ::windows::device_independent_bitmap * layered_window_buffer::_device_independent_bitmap()
    {
 
-      ::cast < ::windows::device_independent_bitmap > pbitmap = m_ppixmapWindowBuffer;
+      ::cast < ::windows::device_independent_bitmap > pdraw2dbitmap = m_ppixmapWindowBuffer;
 
       if (!m_ppixmapWindowBuffer)
       {
@@ -111,11 +111,11 @@ namespace windowing_win32
 
          //m_ppixmapWindowBuffer = pdeviceindependentbitmap;
 
-         //pbitmap = pdeviceindependentbitmap;
+         //pdraw2dbitmap = pdeviceindependentbitmap;
 
       }
 
-      return pbitmap;
+      return pdraw2dbitmap;
 
    }
 

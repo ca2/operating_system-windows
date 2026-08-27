@@ -17,7 +17,7 @@ namespace draw2d_gdiplus
       //__creatable_from_base(path, ::draw2d::path);
 
 
-      Gdiplus::GraphicsPath *    m_ppath;
+      Gdiplus::GraphicsPath *    m_pgdiplusgraphicspath;
       Gdiplus::PointF            m_pointInternal;
       bool                       m_bHasPointInternal;
       bool                       m_bHasPath;
@@ -41,37 +41,37 @@ namespace draw2d_gdiplus
       virtual bool internal_close_figure();
 
       virtual bool internal_add_line(::f64 x1, ::f64 y1, ::f64 x2, ::f64 y2);
-      virtual bool internal_add_rect(::f64 x, ::f64 y, ::f64 cx, ::f64 cy, ::draw2d::graphics * pgraphics);
+      virtual bool internal_add_rect(::f64 x, ::f64 y, ::f64 cx, ::f64 cy, ::draw2d::graphics * pdraw2dgraphics);
       virtual bool internal_add_ellipse(::f64 x, ::f64 y, ::f64 cx, ::f64 cy);
       //virtual bool internal_add_line(::f64 x, ::f64 y);
       //virtual bool internal_add_move(::f64 x, ::f64 y);
 
-      virtual bool internal_add_text_out(::draw2d::graphics * pgraphics, ::i32 x,::i32 y, const ::scoped_string & scopedstrText,::write_text::font * pfont);
-      virtual bool internal_add_draw_text(::draw2d::graphics * pgraphics, const ::i32_rectangle & rectangle, const ::scoped_string & scopedstrText, ::write_text::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext);
+      virtual bool internal_add_text_out(::draw2d::graphics * pdraw2dgraphics, ::i32 x,::i32 y, const ::scoped_string & scopedstrText,::write_text::font * pwritetextfont);
+      virtual bool internal_add_draw_text(::draw2d::graphics * pdraw2dgraphics, const ::i32_rectangle & rectangle, const ::scoped_string & scopedstrText, ::write_text::font * pwritetextfont, const ::e_align & ealign, const ::e_draw_text & edrawtext);
 
 
-      virtual void create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
+      void update(::draw2d::graphics * pdraw2dgraphics) override;
       void destroy() override;
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::draw2d::enum_item & eshape);
+      virtual bool _set(::draw2d::graphics * pdraw2dgraphics, const ::draw2d::enum_item & eshape);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::f64_arc & parc);
+      virtual bool _set(::draw2d::graphics * pdraw2dgraphics, const ::f64_arc & parc);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::f64_line & pline);
+      virtual bool _set(::draw2d::graphics * pdraw2dgraphics, const ::f64_line & pline);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::f64_lines & pline);
+      virtual bool _set(::draw2d::graphics * pdraw2dgraphics, const ::f64_lines & pline);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::f64_rectangle & rectangle);
+      virtual bool _set(::draw2d::graphics * pdraw2dgraphics, const ::f64_rectangle & rectangle);
 
-      virtual bool _set(::draw2d::graphics * pgraphics, const ::f64_ellipse & ellipse);
+      virtual bool _set(::draw2d::graphics * pdraw2dgraphics, const ::f64_ellipse & ellipse);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::f64_polygon & polygon);
+      virtual bool _set(::draw2d::graphics * pdraw2dgraphics, const ::f64_polygon & polygon);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::write_text::text_out& ptextout);
+      virtual bool _set(::draw2d::graphics * pdraw2dgraphics, const ::write_text::text_out& ptextout);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::write_text::draw_text& pdrawtext);
+      virtual bool _set(::draw2d::graphics * pdraw2dgraphics, const ::write_text::draw_text& pdrawtext);
 
-      //virtual bool contains(::draw2d::graphics_pointer& pgraphics, const ::f64_point& point) override;
+      //virtual bool contains(::draw2d::graphics_pointer& pdraw2dgraphics, const ::f64_point& point) override;
 
       virtual bool path_contains_point(const ::f64_point &point) override;
 

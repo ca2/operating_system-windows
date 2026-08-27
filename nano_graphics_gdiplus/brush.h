@@ -23,7 +23,7 @@
 
             //CreatableFromBase(brush, brush);
 
-            ::auto_pointer<::Gdiplus::Brush> m_pbrush;
+            ::auto_pointer<::Gdiplus::Brush> m_pgdiplusbrush;
 
 
             brush();

@@ -20,7 +20,7 @@ namespace nano_graphics_gdiplus
 
       //__CreatableFromBase(::nano::graphics::pen, ::nano::graphics::pen);
 
-      ::auto_pointer<::Gdiplus::Pen> m_ppen;
+      ::auto_pointer<::Gdiplus::Pen> m_pgdipluspen;
 
 
       pen();
