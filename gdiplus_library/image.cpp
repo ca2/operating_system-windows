@@ -905,7 +905,7 @@ namespace draw2d_gdiplus
       // Create an image and a thumbnail of the pimage->
       ::Gdiplus::Image image(wstr);
 
-      auto pthumbnail = as_auto_pointer(image.GetThumbnailImage(width(), height(), nullptr, nullptr));
+      auto pthumbnail = adopt_auto_pointer(image.GetThumbnailImage(width(), height(), nullptr, nullptr));
 
       // Draw the original and the thumbnail images.
       pgraphics->DrawImage(pthumbnail, 0, 0, pthumbnail->GetWidth(), pthumbnail->GetHeight());

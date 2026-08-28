@@ -5114,7 +5114,7 @@ namespace draw2d_gdiplus
          else
          {
 
-            auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
+            auto ppath = create_auto_pointerø < Gdiplus::GraphicsPath >();
 
             ppath->SetFillMode(Gdiplus::FillModeWinding);
 
@@ -5170,7 +5170,7 @@ namespace draw2d_gdiplus
    void graphics::intersect_clip(const ::f64_ellipse & ellipse)
    {
 
-      auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
+      auto ppath = create_auto_pointerø < Gdiplus::GraphicsPath >();
 
       _add_shape(ppath, ellipse);
 
@@ -5182,7 +5182,7 @@ namespace draw2d_gdiplus
    void graphics::intersect_clip(const ::f64_polygon_base & polygon)
    {
 
-      auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
+      auto ppath = create_auto_pointerø < Gdiplus::GraphicsPath >();
 
       _add_shape(ppath, polygon);
 

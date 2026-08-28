@@ -44,11 +44,13 @@ namespace nano_graphics_gdiplus
 
       ::cast<::nano_graphics_gdiplus::font_family> pnanographicsgdiplusfontfamily = m_pfontfamily;
 
-      m_pgdiplusfont = new ::Gdiplus::Font(pnanographicsgdiplusfontfamily->m_pgdiplusfontfamily, (Gdiplus::REAL) fSize, 
+      auto pgdiplusfontfamily = pnanographicsgdiplusfontfamily->m_pgdiplusfontfamily;
+
+      m_pgdiplusfont = ::as_pointer(new ::Gdiplus::Font(pgdiplusfontfamily, (Gdiplus::REAL) fSize,
          (bBold ? Gdiplus::FontStyleBold : Gdiplus::FontStyleRegular) | 
          (bUnderline ? Gdiplus::FontStyleUnderline : Gdiplus::FontStyleRegular) |
          (bItalic ? Gdiplus::FontStyleItalic : Gdiplus::FontStyleRegular),
-                     bPointSize ? Gdiplus::UnitPoint : Gdiplus::UnitPixel);
+                     bPointSize ? Gdiplus::UnitPoint : Gdiplus::UnitPixel));
    }
 
 

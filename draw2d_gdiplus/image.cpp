@@ -4,7 +4,6 @@
 #include "bitmap.h"
 #include "draw2d.h"
 #include "acme/exception/exception.h"
-#include "acme/platform/auto_pointer.h"
 #include "aura/graphics/image/icon.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/draw2d/graphics_lease.h"
@@ -375,7 +374,6 @@ namespace draw2d_gdiplus
    {
 
       if (m_pdraw2dbitmap.is_set()
-            && m_pdraw2dbitmap->is_up_to_date()
             && size == m_sizeRaw)
       {
 
@@ -484,38 +482,42 @@ namespace draw2d_gdiplus
 
       ::pixmap_pointer ppixmapOwnedNew;
 
-      construct_newø(ppixmapOwnedNew);
-
-      ppixmapOwnedNew->create_as_descriptor(size, eflagCreate, iScan);
-
-      if (::is_set(pimage32))
+      if (m_bHintCpuBackingEnabled)
       {
 
-         ppixmapOwnedNew->m_memoryPixmap.assign(pimage32, iNewScanArea);
+         construct_newø(ppixmapOwnedNew);
 
-      }
-      else
-      {
+         ppixmapOwnedNew->create_as_descriptor(size, eflagCreate, iScan);
 
-         ppixmapOwnedNew->m_memoryPixmap.set_size(iNewScanArea);
-
-         if (!ppixmapOwnedNew->m_memoryPixmap.data()
-            || ppixmapOwnedNew->m_memoryPixmap.size() < iNewScanArea)
+         if (::is_set(pimage32))
          {
 
-            throw ::exception(error_no_memory);
+            ppixmapOwnedNew->m_memoryPixmap.assign(pimage32, iNewScanArea);
+
+         }
+         else
+         {
+
+            ppixmapOwnedNew->m_memoryPixmap.set_size(iNewScanArea);
+
+            if (!ppixmapOwnedNew->m_memoryPixmap.data()
+               || ppixmapOwnedNew->m_memoryPixmap.size() < iNewScanArea)
+            {
+
+               throw ::exception(error_no_memory);
+
+            }
+
+            ppixmapOwnedNew->m_memoryPixmap.zero();
 
          }
 
-         ppixmapOwnedNew->m_memoryPixmap.zero();
+         ppixmapOwnedNew->m_pimage32Raw =
+            (::image32_t *)ppixmapOwnedNew->m_memoryPixmap.data();
+
+         ppixmapOwnedNew->pixmap_map();
 
       }
-
-      ppixmapOwnedNew->m_pimage32Raw =
-         (::image32_t *) ppixmapOwnedNew->m_memoryPixmap.data();
-
-      ppixmapOwnedNew->pixmap_map();
-
 
       //pdraw2dbitmap->create_bitmap(nullptr, size, &pimage32Bitmap, pimage32, &iScan);
 
@@ -810,10 +812,10 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::destroy()
+   void image::clear_node_data()
    {
 
-      ::image::image::destroy();
+      //::image::image::destroy();
 
       //return ::success;
 

@@ -89,7 +89,7 @@ namespace draw2d_gdiplus
    void region::update(::draw2d::graphics * pdraw2dgraphics)
    {
 
-      m_pgdiplusregion = get(pdraw2dgraphics);
+      m_pgdiplusregion = ::as_pointer(get(pdraw2dgraphics));
 
       //m_osdata[0] = m_pgdiplusregion;
 
@@ -98,12 +98,12 @@ namespace draw2d_gdiplus
    }
 
 
-   void region::destroy()
+   void region::clear_node_data()
    {
 
-      ::acme::del(m_pgdiplusregion);
+      m_pgdiplusregion.destroy();
 
-      ::draw2d::region::destroy();
+      //::draw2d::region::destroy();
 
       //return ::success;
    

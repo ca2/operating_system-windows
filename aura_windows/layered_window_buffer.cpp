@@ -302,34 +302,19 @@ namespace windowing_win32
 
       }
 
-      m_hdcScreen = ::GetDCEx(get_hwnd(), nullptr, DCX_WINDOW);
+      // UpdateLayeredWindow's destination DC is a display/palette reference.
+      // Do not retain a DC belonging to the layered HWND itself: that DC is
+      // reconfigured while the HWND is resized and can cause an intermittent
+      // blank composition. A screen DC remains independent of the destination
+      // window's changing client/window geometry.
+      m_hdcScreen = ::GetDC(nullptr);
 
-      if (m_hdcScreen != nullptr)
+      m_bWindowDC = false;
+
+      if (m_hdcScreen == nullptr)
       {
 
-         m_bWindowDC = true;
-
-      }
-      else
-      {
-
-         m_bWindowDC = false;
-
-         // If it has failed to get window owned device context, 
-         // try to get a device context from the cache.
-         //m_hdcScreen = ::GetDCEx(interaction_impl,nullptr,DCX_CACHE | DCX_CLIPSIBLINGS | DCX_WINDOW);
-         m_hdcScreen = ::GetDCEx(get_hwnd(), nullptr, DCX_CACHE | DCX_WINDOW);
-
-         // If no device context could be retrieved,
-         // nothing can be drawn at the screen.
-         // The function failed.
-         if (m_hdcScreen == nullptr)
-         {
-
-            return false;
-
-
-         }
+         return false;
 
       }
 
@@ -351,7 +336,7 @@ namespace windowing_win32
       if (m_hdcScreen != nullptr)
       {
 
-         ::ReleaseDC(get_hwnd(), m_hdcScreen);
+         ::ReleaseDC(nullptr, m_hdcScreen);
 
          m_hdcScreen = nullptr;
 
@@ -603,9 +588,11 @@ namespace windowing_win32
 
                bool bActivate = !(nFlags & SWP_NOACTIVATE);
 
-               if (rectangleWindow != rectangleRequest
-                   //|| (hwndInsertAfter == HWND_TOPMOST && !bExTopMost)
-                   || bZOrder || bActivate || (bWindowVisible && bSwpHideWindow) || (!bWindowVisible && bSwpShowWindow))
+               // UpdateLayeredWindow commits destination position, size and pixels
+               // together. SetWindowPos is needed here only for non-geometry state.
+               if (bZOrder || bActivate
+                   || (bWindowVisible && bSwpHideWindow)
+                   || (!bWindowVisible && bSwpShowWindow))
                {
 
                   if (!::IsIconic(hwnd) && !::IsZoomed(hwnd))
@@ -615,8 +602,8 @@ namespace windowing_win32
                      //information() << "windowing_win32::graphics bZOrder = " << bZOrder;
                      //information() << "windowing_win32::graphics bActivate = " << bActivate;
 
-                     nFlags &= ~SWP_NOMOVE;
-                     nFlags &= ~SWP_NOSIZE;
+                     nFlags |= SWP_NOMOVE;
+                     nFlags |= SWP_NOSIZE;
                      // nFlags |= SWP_NOZORDER;
                      if (strType.case_insensitive_contains("list_box"))
                      {
@@ -1035,13 +1022,16 @@ namespace windowing_win32
       ::cast < ::windows::device_independent_bitmap > pdeviceindependentbitmap = m_ppixmapWindowBuffer;
 
       auto hdcScreen = m_hdcScreen;
+
+      // The destination rectangle belongs to the buffer being presented. Window-wide
+      // buffer geometry may already have advanced to a newer resize frame.
       POINT pointUpdateLayeredWindow = {
-         m_pwindow->m_pointWindowBuffer.x,
-         m_pwindow->m_pointWindowBuffer.y };
+         m_pointBufferItemWindow.x,
+         m_pointBufferItemWindow.y };
 
       SIZE sizeUpdateLayeredWindow = {
-         m_pwindow->m_sizeWindowBuffer.cx,
-         m_pwindow->m_sizeWindowBuffer.cy };
+         m_sizeBufferItemWindow.cx,
+         m_sizeBufferItemWindow.cy };
 
       auto hdcMemory = pdeviceindependentbitmap->m_hdcMemory;
 
@@ -1183,6 +1173,52 @@ namespace windowing_win32
       ::GdiFlush();
 
       auto dwLastError = bUpdated ? ERROR_SUCCESS : ::GetLastError();
+
+#if defined(_DEBUG)
+
+      auto puserinteraction = m_pwindow->user_interaction();
+
+      if (puserinteraction && puserinteraction->is_window_resizing())
+      {
+
+         RECT rectangleActual{};
+
+         auto bGotActual = ::GetWindowRect(m_hwnd, &rectangleActual) != FALSE;
+
+         auto rectangleLading = puserinteraction->const_layout().lading().parent_raw_rectangle();
+
+         auto rectangleSketch = puserinteraction->const_layout().sketch().parent_raw_rectangle();
+
+         informationf(
+            "RESIZE_PRESENT result=%d error=%lu request=(%ld,%ld)-(%ld,%ld) "
+            "lading=(%d,%d)-(%d,%d) sketch=(%d,%d)-(%d,%d) "
+            "actualResult=%d actual=(%ld,%ld)-(%ld,%ld) rightDeltas[lading=%d sketch=%d actual=%ld]",
+            (int)bUpdated,
+            (unsigned long)dwLastError,
+            pointUpdateLayeredWindow.x,
+            pointUpdateLayeredWindow.y,
+            pointUpdateLayeredWindow.x + sizeUpdateLayeredWindow.cx,
+            pointUpdateLayeredWindow.y + sizeUpdateLayeredWindow.cy,
+            rectangleLading.left,
+            rectangleLading.top,
+            rectangleLading.right,
+            rectangleLading.bottom,
+            rectangleSketch.left,
+            rectangleSketch.top,
+            rectangleSketch.right,
+            rectangleSketch.bottom,
+            (int)bGotActual,
+            rectangleActual.left,
+            rectangleActual.top,
+            rectangleActual.right,
+            rectangleActual.bottom,
+            rectangleLading.right - (pointUpdateLayeredWindow.x + sizeUpdateLayeredWindow.cx),
+            rectangleSketch.right - (pointUpdateLayeredWindow.x + sizeUpdateLayeredWindow.cx),
+            rectangleActual.right - (pointUpdateLayeredWindow.x + sizeUpdateLayeredWindow.cx));
+
+      }
+
+#endif
 
       {
 

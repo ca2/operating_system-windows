@@ -48,7 +48,7 @@ namespace draw2d_gdiplus
          try
          {
 
-            m_pgdiplusbrush = øraw_new Gdiplus::SolidBrush(gdiplus_color(m_color));
+            m_pgdiplusbrush = ::as_pointer(new Gdiplus::SolidBrush(gdiplus_color(m_color)));
 
          }
          catch(...)
@@ -63,11 +63,11 @@ namespace draw2d_gdiplus
          try
          {
 
-            m_pgdiplusbrush = øraw_new Gdiplus::LinearGradientBrush(
+            m_pgdiplusbrush = ::as_pointer(new Gdiplus::LinearGradientBrush(
             Gdiplus::PointF((Gdiplus::REAL) m_point1.x,(Gdiplus::REAL) m_point1.y),
             Gdiplus::PointF((Gdiplus::REAL) m_point2.x,(Gdiplus::REAL) m_point2.y),
             gdiplus_color(m_color1),
-               gdiplus_color(m_color2));
+               gdiplus_color(m_color2)));
 
          }
          catch(...)
@@ -80,11 +80,11 @@ namespace draw2d_gdiplus
          try
          {
 
-            Gdiplus::GraphicsPath * pdraw2dpath = øraw_new Gdiplus::GraphicsPath();
+            Gdiplus::GraphicsPath * pdraw2dpath = new Gdiplus::GraphicsPath();
 
             pdraw2dpath->AddEllipse((Gdiplus::REAL) (m_point.x - m_size.cx / 2),(Gdiplus::REAL)(m_point.y - m_size.cy / 2),(Gdiplus::REAL) (m_size.cx),(Gdiplus::REAL) (m_size.cy));
 
-            Gdiplus::PathGradientBrush * pgradientbrush = øraw_new Gdiplus::PathGradientBrush(pdraw2dpath);
+            Gdiplus::PathGradientBrush * pgradientbrush = new Gdiplus::PathGradientBrush(pdraw2dpath);
 
             auto c1 = gdiplus_color(m_color1);
             auto c2 = gdiplus_color(m_color2);
@@ -95,7 +95,7 @@ namespace draw2d_gdiplus
             pgradientbrush->SetCenterColor(c1);
             pgradientbrush->SetSurroundColors(&c2,&c);
 
-            m_pgdiplusbrush = pgradientbrush;
+            m_pgdiplusbrush = ::as_pointer(pgradientbrush);
 
          }
          catch(...)
@@ -127,9 +127,9 @@ namespace draw2d_gdiplus
                if (::is_set(pgdiplusimage))
                {
 
-                  Gdiplus::TextureBrush* ptexturebrush = øraw_new Gdiplus::TextureBrush(pgdiplusimage);
+                  Gdiplus::TextureBrush* ptexturebrush = new Gdiplus::TextureBrush(pgdiplusimage);
 
-                  m_pgdiplusbrush = ptexturebrush;
+                  m_pgdiplusbrush = ::as_pointer(ptexturebrush);
 
                }
 
@@ -198,7 +198,7 @@ namespace draw2d_gdiplus
                //pgradientbrush->SetInterpolationColors(&c1, &d, 1);
 
 
-               m_pgdiplusbrush = pgradientbrush;
+               m_pgdiplusbrush = ::as_pointer(pgradientbrush);
 
             }
 
@@ -213,7 +213,7 @@ namespace draw2d_gdiplus
          try
          {
 
-            m_pgdiplusbrush = øraw_new Gdiplus::SolidBrush(gdiplus_color(m_color));
+            m_pgdiplusbrush = ::as_pointer(new Gdiplus::SolidBrush(gdiplus_color(m_color)));
 
          }
          catch(...)
@@ -230,10 +230,10 @@ namespace draw2d_gdiplus
    }
 
 
-   void brush::destroy()
+   void brush::clear_node_data()
    {
 
-      ::acme::del(m_pgdiplusbrush);
+      m_pgdiplusbrush.destroy();
 
       //return ::success;
 

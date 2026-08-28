@@ -13,7 +13,7 @@ namespace draw2d_gdiplus
    pen::pen()
    {
 
-      m_egdiplusalign = (Gdiplus::PenAlignment) -1;
+      //m_egdiplusalign = (Gdiplus::PenAlignment) -1;
       m_pgdipluspen = nullptr;
 
    }
@@ -328,13 +328,13 @@ namespace draw2d_gdiplus
 
          ::cast <::draw2d_gdiplus::brush> pdraw2dbrush = m_pdraw2dbrush;
 
-         m_pgdipluspen = øraw_new Gdiplus::Pen(pdraw2dbrush->m_pgdiplusbrush, (Gdiplus::REAL) m_dWidth);
+         m_pgdipluspen = ::as_pointer(new Gdiplus::Pen(pdraw2dbrush->m_pgdiplusbrush, (Gdiplus::REAL) m_dWidth));
 
       }
       else
       {
 
-         m_pgdipluspen = øraw_new Gdiplus::Pen(gdiplus_color(m_color), (Gdiplus::REAL) m_dWidth);
+         m_pgdipluspen = ::as_pointer(new Gdiplus::Pen(gdiplus_color(m_color), (Gdiplus::REAL) m_dWidth));
 
       }
 
@@ -431,14 +431,10 @@ namespace draw2d_gdiplus
    }
 
 
-   void pen::destroy()
+   void pen::clear_node_data()
    {
 
-      ::acme::del(m_pgdipluspen);
-
-      //::draw2d::pen::clear_os_data();
-
-      //return ::success;
+      m_pgdipluspen.destroy();
 
    }
 

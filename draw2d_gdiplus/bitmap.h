@@ -18,8 +18,8 @@ namespace draw2d_gdiplus
       //__creatable_from_base(bitmap, ::draw2d::bitmap);
 
 
-      ::Gdiplus::Bitmap *  m_pgdiplusbitmap;
-      memory               m_mem;
+      auto_pointer < ::Gdiplus::Bitmap >  m_pgdiplusbitmap;
+      memory                              m_mem;
       //::image32_t *         m_pimage32Host;
 
 
@@ -33,7 +33,7 @@ namespace draw2d_gdiplus
 //
 //#endif
 
-      void destroy() override;
+      void clear_node_data() override;
 
       bool LoadBitmap(const ::scoped_string & scopedstrResourceName);
 
@@ -71,14 +71,14 @@ namespace draw2d_gdiplus
       ::u32 GetBitmapBits(::u32 dwCount, LPVOID pBits) const;
 
       ::i32_size SetBitmapDimension(::i32 nWidth, ::i32 nHeight);
-      ::i32_size GetBitmapDimension() const;
+      //::i32_size GetBitmapDimension() const;
 
       ::i32_size size() const override;
       void set_size(const ::i32_size & size, bool bPreserve = true) override;
 
 
-      virtual void attach(void * posdata);
-      virtual void * detach();
+      //virtual void attach(void * posdata);
+      //virtual void * detach();
 
       virtual HBITMAP _GetHBITMAP();
       virtual void _ReleaseHBITMAP(HBITMAP hbitmap);

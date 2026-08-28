@@ -18,9 +18,9 @@ namespace nano_graphics_gdiplus
       void pen::create_pen(::nano::graphics::enum_pen epen, ::f64 fWidth, const ::color::color &color)
    {
 
-      m_pgdipluspen = new ::Gdiplus::Pen(
+      m_pgdipluspen = ::as_pointer(new ::Gdiplus::Pen(
          ::Gdiplus::Color(color.u8_opacity(), color.u8_red(), color.u8_green(), color.u8_blue()),
-         (::Gdiplus::REAL) fWidth);
+         (::Gdiplus::REAL) fWidth));
    }
 
 

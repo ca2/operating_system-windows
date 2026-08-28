@@ -17,7 +17,7 @@ namespace draw2d_gdiplus
       //__creatable_from_base(brush, ::draw2d::brush);
 
 
-      Gdiplus::Brush * m_pgdiplusbrush;
+      auto_pointer < Gdiplus::Brush >    m_pgdiplusbrush;
 
 
       brush();
@@ -33,7 +33,7 @@ namespace draw2d_gdiplus
 
 
       void update(::draw2d::graphics * pdraw2dgraphics) override;
-      void destroy() override;
+      void clear_node_data() override;
       // void destroy_os_data() override;
 
       //bool create_solid(::color::color crColor);

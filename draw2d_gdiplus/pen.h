@@ -19,9 +19,9 @@ namespace draw2d_gdiplus
       //__creatable_from_base(pen, ::draw2d::pen);
 
 
-      Gdiplus::PenAlignment m_egdiplusalign;
+      //Gdiplus::PenAlignment               m_egdiplusalign;
 
-      ::Gdiplus::Pen *  m_pgdipluspen;
+      ::auto_pointer < ::Gdiplus::Pen >   m_pgdipluspen;
 
       pen();
       ~pen() override;
@@ -41,7 +41,7 @@ namespace draw2d_gdiplus
 
 
       void update(::draw2d::graphics * pdraw2dgraphics) override;
-      void destroy() override;
+      void clear_node_data() override;
 
 
    };

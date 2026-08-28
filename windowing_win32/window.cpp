@@ -314,6 +314,7 @@ namespace windowing_win32
    {
 
       USER_MESSAGE_LINK(::user::e_message_create, pchannel, this, &window::_001OnCreate);
+      USER_MESSAGE_LINK(::user::e_message_window_position_changing, pchannel, this, &window::_001OnWindowPosChanging);
       USER_MESSAGE_LINK(::user::e_message_window_position_changed, pchannel, this, &window::on_message_window_position_changed);
       USER_MESSAGE_LINK(WM_SYSCOMMAND, pchannel, this, &window::_001OnSysCommand);
       USER_MESSAGE_LINK(WM_COMMAND, pchannel, this, &window::_001OnSysCommand);
@@ -2506,6 +2507,20 @@ namespace windowing_win32
       auto bNoMove = bNoMoveParam;
       auto bNoSize = bNoSizeParam;
       auto edisplay = edisplayParam;
+
+      // For a software layered window, UpdateLayeredWindow is the frame commit:
+      // it changes destination position, destination size and pixels atomically.
+      // Applying the geometry here first creates a short interval in which the
+      // HWND has the new left-resize rectangle but still contains the old frame.
+      // Keep this path for visibility, activation and z-order only.
+      if ((_get_ex_style() & WS_EX_LAYERED)
+         && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+      {
+
+         bNoMove = true;
+         bNoSize = true;
+
+      }
 
       bool bOk = false;
 
@@ -5783,7 +5798,78 @@ namespace windowing_win32
    void window::_001OnWindowPosChanging(::message::message *pmessage)
    {
 
-      return;
+      auto pwindowpos = (WINDOWPOS *)(void *)pmessage->m_lparam.m_lparam;
+
+      if (!pwindowpos
+         || (pwindowpos->flags & SWP_NOMOVE)
+         || (pwindowpos->flags & SWP_NOSIZE))
+      {
+
+         return;
+
+      }
+
+      auto puserinteraction = user_interaction();
+
+      if (!puserinteraction
+         || !puserinteraction->is_window_resizing()
+         || !(_get_ex_style() & WS_EX_LAYERED)
+         || m_papplication->m_gpu.m_bUseSwapChainWindow)
+      {
+
+         return;
+
+      }
+
+      RECT rectangleNative{};
+
+      if (!::GetWindowRect(::as_HWND(this->operating_system_window()), &rectangleNative))
+      {
+
+         return;
+
+      }
+
+      // A custom left-edge resize changes x and cx together. Preserve the
+      // already displayed right edge at the native transaction boundary, even
+      // if a stale or partially initialized rectangle reaches Windows. A right-
+      // edge resize leaves x unchanged and therefore does not enter this path.
+      if (pwindowpos->x != rectangleNative.left)
+      {
+
+         auto cxAnchored = rectangleNative.right - pwindowpos->x;
+
+         if (cxAnchored > 0)
+         {
+
+#if defined(_DEBUG)
+
+            if (pwindowpos->cx != cxAnchored)
+            {
+
+               informationf(
+                  "LEFT_RESIZE_NATIVE_ANCHOR current=(%ld,%ld)-(%ld,%ld) "
+                  "incoming=(%d,%d,%d,%d) correctedRight=%ld incomingRight=%d",
+                  rectangleNative.left,
+                  rectangleNative.top,
+                  rectangleNative.right,
+                  rectangleNative.bottom,
+                  pwindowpos->x,
+                  pwindowpos->y,
+                  pwindowpos->cx,
+                  pwindowpos->cy,
+                  rectangleNative.right,
+                  pwindowpos->x + pwindowpos->cx);
+
+            }
+
+#endif
+
+            pwindowpos->cx = cxAnchored;
+
+         }
+
+      }
 
 
    }
@@ -8735,12 +8821,69 @@ namespace windowing_win32
       if (pwindowpos)
       {
 
-         auto r = ::i32_rectangle_dimension(
-            pwindowpos->x, pwindowpos->y,
-            pwindowpos->cx, pwindowpos->cy
-            );
+         // WINDOWPOS coordinates whose SWP_NOMOVE/SWP_NOSIZE bits are set are
+         // not geometry. In particular, the layered-window presentation path
+         // uses SetWindowPos only for z-order/activation and passes those bits.
+         // Reading x/y/cx/cy unconditionally can therefore publish a rectangle
+         // that the HWND never had. Query the complete post-operation rectangle
+         // and publish its position and size as one synchronized pair.
+         RECT rectangleNative{};
 
-         _on_configure_notify_unlocked(r);
+         ::i32_rectangle rectangleWindow;
+
+         if (::GetWindowRect(::as_HWND(this->operating_system_window()), &rectangleNative))
+         {
+
+            rectangleWindow = rectangleNative;
+
+         }
+         else
+         {
+
+            rectangleWindow = {m_pointWindow, m_sizeWindow};
+
+            if (!(pwindowpos->flags & SWP_NOMOVE))
+            {
+
+               rectangleWindow.move_to({pwindowpos->x, pwindowpos->y});
+
+            }
+
+            if (!(pwindowpos->flags & SWP_NOSIZE))
+            {
+
+               rectangleWindow.set_size({pwindowpos->cx, pwindowpos->cy});
+
+            }
+
+         }
+
+         if (m_pmutexBufferSizeAndPosition)
+         {
+
+            synchronous_lock synchronouslockBufferSizeAndPosition(
+               m_pmutexBufferSizeAndPosition, DEFAULT_SYNCHRONOUS_LOCK_SUFFIX);
+
+            m_pointWindow = rectangleWindow.origin();
+            m_sizeWindow = rectangleWindow.size();
+
+         }
+         else
+         {
+
+            m_pointWindow = rectangleWindow.origin();
+            m_sizeWindow = rectangleWindow.size();
+
+         }
+
+         auto puserinteraction = user_interaction();
+
+         if (puserinteraction)
+         {
+
+            puserinteraction->_on_configure_notify_unlocked(rectangleWindow);
+
+         }
 
       }
 

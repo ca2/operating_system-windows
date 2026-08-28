@@ -17,10 +17,10 @@ namespace draw2d_gdiplus
       //__creatable_from_base(path, ::draw2d::path);
 
 
-      Gdiplus::GraphicsPath *    m_pgdiplusgraphicspath;
-      Gdiplus::PointF            m_pointInternal;
-      bool                       m_bHasPointInternal;
-      bool                       m_bHasPath;
+      auto_pointer < Gdiplus::GraphicsPath >    m_pgdiplusgraphicspath;
+      Gdiplus::PointF                           m_pointInternal;
+      bool                                      m_bHasPointInternal;
+      bool                                      m_bHasPath;
 
 
       path();
@@ -51,7 +51,7 @@ namespace draw2d_gdiplus
 
 
       void update(::draw2d::graphics * pdraw2dgraphics) override;
-      void destroy() override;
+      void clear_node_data() override;
 
       virtual bool _set(::draw2d::graphics * pdraw2dgraphics, const ::draw2d::enum_item & eshape);
 

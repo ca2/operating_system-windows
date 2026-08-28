@@ -54,10 +54,10 @@ namespace nano_graphics_gdiplus
       int width = size.cx;
       int height = size.cy;
 
-      m_pgdiplusbitmapMemory = new ::Gdiplus::Bitmap(width, height, PixelFormat32bppARGB);
+      m_pgdiplusbitmapMemory = ::as_pointer(new ::Gdiplus::Bitmap(width, height, PixelFormat32bppARGB));
 
       // Create a graphics context from the bitmap
-      m_pgdiplusgraphics = new ::Gdiplus::Graphics(m_pgdiplusbitmapMemory);
+      m_pgdiplusgraphics = ::as_pointer(new ::Gdiplus::Graphics(m_pgdiplusbitmapMemory));
 
 
    }
@@ -137,7 +137,7 @@ namespace nano_graphics_gdiplus
 
          m_hdc = hdc;
 
-         m_pgdiplusgraphics = new ::Gdiplus::Graphics(hdc);
+         m_pgdiplusgraphics = ::as_pointer(new ::Gdiplus::Graphics(hdc));
 
          //m_bDelete = false;
 
@@ -327,7 +327,9 @@ namespace nano_graphics_gdiplus
 
           ::wstring wstrText(scopedstr);
 
-      m_pgdiplusgraphics->MeasureString(wstrText.c_str(), (INT) wstrText.length(), pnanographicsgdiplusfont->m_pgdiplusfont,
+          auto pgdiplusfont = pnanographicsgdiplusfont->m_pgdiplusfont;
+
+      m_pgdiplusgraphics->MeasureString(wstrText.c_str(), (INT) wstrText.length(), pgdiplusfont,
          ::Gdiplus::PointF(0.f, 0.f), &bounds);
 
       return {bounds.Width, bounds.Height};
@@ -367,7 +369,9 @@ namespace nano_graphics_gdiplus
       if (m_pnanographicsgdiplusbrush)
       {
 
-         m_pgdiplusgraphics->FillRectangle(m_pnanographicsgdiplusbrush->m_pgdiplusbrush, rectf);
+         auto pgdiplusbrush = m_pnanographicsgdiplusbrush->m_pgdiplusbrush;
+
+         m_pgdiplusgraphics->FillRectangle(pgdiplusbrush, rectf);
       }
       //else
       //{
@@ -383,7 +387,9 @@ namespace nano_graphics_gdiplus
            //    ;
          //::SelectObject(m_hdc, (HGDIOBJ)pnanographicspen->operating_system_data());
 
-         m_pgdiplusgraphics->DrawRectangle(m_pnanographicsgdipluspen->m_pgdipluspen, rectf);
+         auto pgdiplusbrush = m_pnanographicsgdipluspen->m_pgdipluspen;
+
+         m_pgdiplusgraphics->DrawRectangle(pgdiplusbrush, rectf);
 
       }
       else
@@ -424,7 +430,9 @@ namespace nano_graphics_gdiplus
 //         ::cast<::nano_graphics_gdiplus::brush> pnanographicsgdiplusbrush = m_pnanographicsgdiplusbrush;
          // pnanographicsbrush->update(this);
 
-         m_pgdiplusgraphics->FillEllipse(m_pnanographicsgdiplusbrush->m_pgdiplusbrush, rectf);
+         auto pgdiplusbrush = m_pnanographicsgdiplusbrush->m_pgdiplusbrush;
+
+         m_pgdiplusgraphics->FillEllipse(pgdiplusbrush, rectf);
       }
       // else
       //{
@@ -442,7 +450,9 @@ namespace nano_graphics_gdiplus
 
                   //::cast<::nano_graphics_gdiplus::pen> pgdipluspen = m_pnanographicsgdipluspen;
 
-         m_pgdiplusgraphics->DrawEllipse(m_pnanographicsgdipluspen->m_pgdipluspen, rectf);
+         auto pgdipluspen = m_pnanographicsgdipluspen->m_pgdipluspen;
+
+         m_pgdiplusgraphics->DrawEllipse(pgdipluspen, rectf);
       }
       else
       {
@@ -471,7 +481,9 @@ namespace nano_graphics_gdiplus
          ::Gdiplus::PointF pointf1((::Gdiplus::REAL)point1.x, (::Gdiplus::REAL)point1.y);
          ::Gdiplus::PointF pointf2((::Gdiplus::REAL)point2.x, (::Gdiplus::REAL)point2.y);
 
-         m_pgdiplusgraphics->DrawLine(m_pnanographicsgdipluspen->m_pgdipluspen, pointf1, pointf2);
+         auto pgdipluspen = m_pnanographicsgdipluspen->m_pgdipluspen;
+
+         m_pgdiplusgraphics->DrawLine(pgdipluspen, pointf1, pointf2);
 
       }
 
@@ -523,7 +535,9 @@ namespace nano_graphics_gdiplus
 
       ::copy(rectangleTarget, rectangle);
 
-      m_pgdiplusgraphics->DrawImage(pnanographicsgdiplusimage->m_pgdiplusbitmap, rectangleTarget);
+      auto pgdiplusbitmap = pnanographicsgdiplusimage->m_pgdiplusbitmap;
+
+      m_pgdiplusgraphics->DrawImage(pgdiplusbitmap, rectangleTarget);
 
    }
 
@@ -534,8 +548,10 @@ namespace nano_graphics_gdiplus
 
       ::cast < ::nano_graphics_gdiplus::image > pnanographicsgdiplusimage = pimage;
 
+      auto pgdiplusbitmap = pnanographicsgdiplusimage->m_pgdiplusbitmap;
+
       m_pgdiplusgraphics->DrawImage(
-         pnanographicsgdiplusimage->m_pgdiplusbitmap,
+         pgdiplusbitmap,
          (::Gdiplus::REAL) point.x,
          (::Gdiplus::REAL) point.y,
          (::Gdiplus::REAL) rectangle.left,
@@ -555,7 +571,7 @@ namespace nano_graphics_gdiplus
    }
 
 
-   void context::do_path(::nano::graphics::path *pdraw2dpath)
+   void context::do_path(::nano::graphics::path *pnanographicspath)
    {
 
       if (!m_pnanographicsgdiplusbrush && !m_pnanographicsgdipluspen)
@@ -565,13 +581,18 @@ namespace nano_graphics_gdiplus
 
       }
 
-      ::cast<::nano_graphics_gdiplus::path> pgdipluspath = pdraw2dpath;
+      ::cast<::nano_graphics_gdiplus::path> pnanographicsgdipluspath = pnanographicspath;
 
       if (m_pnanographicsgdiplusbrush)
       {
          //::cast<::nano_graphics_gdiplus::brush> pnanographicsgdiplusbrush = m_pnanographicsgdiplusbrush;
 
-         m_pgdiplusgraphics->FillPath(m_pnanographicsgdiplusbrush->m_pgdiplusbrush, pgdipluspath->m_pgdiplusgraphicspath);
+         auto pgdiplusbrush = m_pnanographicsgdiplusbrush->m_pgdiplusbrush;
+
+         auto pgdiplusgraphicspath = pnanographicsgdipluspath->m_pgdiplusgraphicspath;
+
+         m_pgdiplusgraphics->FillPath(pgdiplusbrush, pgdiplusgraphicspath);
+
       }
 
       
@@ -580,7 +601,12 @@ namespace nano_graphics_gdiplus
       {
          //::cast<::nano_graphics_gdiplus::pen> pgdipluspen = m_pnanographicsgdipluspen;
 
-         m_pgdiplusgraphics->DrawPath(m_pnanographicsgdipluspen->m_pgdipluspen, pgdipluspath->m_pgdiplusgraphicspath);
+         auto pgdipluspen = m_pnanographicsgdipluspen->m_pgdipluspen;
+
+         auto pgdiplusgraphicspath = pnanographicsgdipluspath->m_pgdiplusgraphicspath;
+
+         m_pgdiplusgraphics->DrawPath(pgdipluspen, pgdiplusgraphicspath);
+
       }
 
    }

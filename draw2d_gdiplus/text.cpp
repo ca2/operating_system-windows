@@ -291,19 +291,17 @@ namespace draw2d_gdiplus
 
          g_keep k(pdraw2dgraphics);
 
-         Gdiplus::Matrix m;
+         Gdiplus::Matrix gdiplusmatrix;
 
-         status = pdraw2dgraphics->GetTransform(&m);
+         status = pdraw2dgraphics->GetTransform(&gdiplusmatrix);
 
-         auto pmNew = as_auto_pointer(m.Clone());
+         status = gdiplusmatrix.Translate((Gdiplus::REAL)rectangleParam.left, (Gdiplus::REAL)rectangleParam.top);
 
-         status = pmNew->Translate((Gdiplus::REAL)rectangleParam.left, (Gdiplus::REAL)rectangleParam.top);
-
-         status = pmNew->Scale((Gdiplus::REAL)dFontWidth, (Gdiplus::REAL)1.0, Gdiplus::MatrixOrderAppend);
+         status = gdiplusmatrix.Scale((Gdiplus::REAL)dFontWidth, (Gdiplus::REAL)1.0, Gdiplus::MatrixOrderAppend);
 
          Gdiplus::RectF rectf(0, 0, (Gdiplus::REAL)(width(rectangleParam) * dFontWidth), (Gdiplus::REAL)(height(rectangleParam)));
 
-         status = pdraw2dgraphics->SetTransform(pmNew);
+         status = pdraw2dgraphics->SetTransform(&gdiplusmatrix);
 
          character_count iSize = ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length();
 

@@ -434,13 +434,13 @@ namespace draw2d_gdiplus
       if(m_efillmode == ::draw2d::e_fill_mode_winding)
       {
 
-         m_pgdiplusgraphicspath = øraw_new Gdiplus::GraphicsPath(Gdiplus::FillModeWinding);
+         m_pgdiplusgraphicspath = ::as_pointer(new Gdiplus::GraphicsPath(Gdiplus::FillModeWinding));
 
       }
       else
       {
 
-         m_pgdiplusgraphicspath = øraw_new Gdiplus::GraphicsPath(Gdiplus::FillModeAlternate);
+         m_pgdiplusgraphicspath = ::as_pointer(new Gdiplus::GraphicsPath(Gdiplus::FillModeAlternate));
 
       }
 
@@ -473,12 +473,12 @@ namespace draw2d_gdiplus
    }
 
 
-   void path::destroy()
+   void path::clear_node_data()
    {
 
-      ::acme::del(m_pgdiplusgraphicspath);
+      m_pgdiplusgraphicspath.destroy();
 
-      ::draw2d::path::destroy();
+      //::draw2d::path::destroy();
 
    }
 

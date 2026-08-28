@@ -19,9 +19,9 @@ namespace draw2d_gdiplus
 
 
       //::Gdiplus::Matrix             m_matrix;
-      ::Gdiplus::Graphics *         m_pgdiplusgraphics;
-      ::Gdiplus::GraphicsPath *     m_pgdiplusgraphicspath;
-      ::Gdiplus::GraphicsPath *     m_pgdiplusgraphicspathPaint;
+      auto_pointer < ::Gdiplus::Graphics >      m_pgdiplusgraphics;
+      auto_pointer < ::Gdiplus::GraphicsPath >  m_pgdiplusgraphicspath;
+      auto_pointer < ::Gdiplus::GraphicsPath >  m_pgdiplusgraphicspathPaint;
       HDC                           m_hdc;
       HDC                           m_hdcAttach;
       HDC                           m_hdcGraphics;
@@ -44,8 +44,8 @@ namespace draw2d_gdiplus
 
 //      ::windowing::window * GetWindow() override;
 
-      virtual void attach(void * pdraw2dgraphics) override;   // attach/detach affects only the Output DC
-      virtual void * detach() override;
+      virtual void _attach(Gdiplus::Graphics * pgdiplusgraphics);
+      virtual bool _detach(auto_pointer < Gdiplus::Graphics > & pgdiplusgraphics);
 
       //void attach_hdc(HDC hdc) override;   // attach/detach affects only the Output DC
       //virtual HDC detach_hdc() override;
@@ -86,7 +86,7 @@ namespace draw2d_gdiplus
       void create_for_window_draw2d(::user::interaction * puserinteraction, const ::i32_size & size);
       void create_bitmap_graphics(::draw2d::bitmap * pdraw2dbitmap) override;
       void _create_memory_graphics(const ::i32_size & size, ::acme::user::interaction * pacmeuserinteractionAffinity) override;
-     
+
       ::image::image_pointer get_current_target_image() override;
 
       void DeleteDC() override;

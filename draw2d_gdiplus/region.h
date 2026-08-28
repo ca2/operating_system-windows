@@ -17,7 +17,7 @@ namespace draw2d_gdiplus
       //__creatable_from_base(region, ::draw2d::region);
 
 
-      Gdiplus::Region *       m_pgdiplusregion;
+      auto_pointer < Gdiplus::Region >       m_pgdiplusregion;
 
 
       region();
@@ -25,7 +25,7 @@ namespace draw2d_gdiplus
 
 
       void update(::draw2d::graphics * pdraw2dgraphics) override;
-      void destroy() override;
+      void clear_node_data() override;
 
 
       bool translate(const ::i32_point & point, ::draw2d::graphics * pdraw2dgraphics = nullptr) override;

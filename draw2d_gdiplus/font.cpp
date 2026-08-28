@@ -29,21 +29,12 @@ namespace draw2d_gdiplus
    }
 
 
-   void font::destroy()
+   void font::clear_node_data()
    {
 
-      auto pwritetextfont = m_pgdiplusfont;
+      m_pgdiplusfont.destroy();
 
-      if (pwritetextfont)
-      {
-
-         delete pwritetextfont;
-
-         m_pgdiplusfont = nullptr;
-
-      }
-
-      ::write_text::font::destroy();
+      //::write_text::font::destroy();
 
       //return ::success;
 
@@ -405,7 +396,7 @@ namespace draw2d_gdiplus
             iStyle,
             gdiplus_font_unit(m_fontsize));
 
-         m_pgdiplusfont = pgdiplusfont;
+         m_pgdiplusfont = ::as_pointer(pgdiplusfont);
 
       }
 
@@ -414,21 +405,21 @@ namespace draw2d_gdiplus
       if (pwritetextfont)
       {
 
-         if (::is_null(pgdiplusfontfamily))
+         if (!pgdiplusfontfamily)
          {
 
-            auto pgdiplusfontfamilyNew = øraw_new Gdiplus::FontFamily();
+            auto pgdiplusfontfamilyNew = new Gdiplus::FontFamily();
 
             if (pwritetextfont->GetFamily(pgdiplusfontfamilyNew) == Gdiplus::Ok)
             {
 
-               pgdiplusfontfamily = pgdiplusfontfamilyNew;
+               pgdiplusfontfamily = ::as_pointer(pgdiplusfontfamilyNew);
 
             }
 
          }
 
-         if(::is_set(pgdiplusfontfamily))
+         if (pgdiplusfontfamily)
          {
 
             INT iStyle = pwritetextfont->GetStyle();

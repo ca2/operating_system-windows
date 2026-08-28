@@ -33,24 +33,31 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pcollection = øraw_new Gdiplus::PrivateFontCollection();
+      if (m_pgdiplusprivatefontcollection)
+      {
 
-      m_pcollection->AddMemoryFont(pmemory->data(), (INT)pmemory->size());
+         delete m_pgdiplusprivatefontcollection;
 
-      auto & fontCollection = *m_pcollection;
+      }
+
+      m_pgdiplusprivatefontcollection = ::as_pointer(new Gdiplus::PrivateFontCollection());
+
+      m_pgdiplusprivatefontcollection->AddMemoryFont(pmemory->data(), (INT)pmemory->size());
+
+      auto & fontCollection = *m_pgdiplusprivatefontcollection;
 
       auto iFamilyCount = fontCollection.GetFamilyCount();
 
-      m_familya.set_size(iFamilyCount);
+      m_gdiplusfamilya.set_size(iFamilyCount);
 
-      fontCollection.GetFamilies(iFamilyCount, m_familya.data(), &m_iFamilyCount);
+      fontCollection.GetFamilies(iFamilyCount, m_gdiplusfamilya.data(), &m_iFamilyCount);
 
-      m_familya.set_size(iFamilyCount);
+      m_gdiplusfamilya.set_size(iFamilyCount);
 
       for (::i32 iFamily = 0; iFamily < iFamilyCount; iFamily++)
       {
 
-         if (m_familya[iFamily].GetLastStatus() != Gdiplus::Ok)
+         if (m_gdiplusfamilya[iFamily].GetLastStatus() != Gdiplus::Ok)
          {
 
             warningf("font family nok");
@@ -86,7 +93,7 @@ namespace draw2d_gdiplus
          for (::i32 iFamily = 0; iFamily < m_iFamilyCount; iFamily++)
          {
 
-            auto & fontfamily = m_familya[iFamily];
+            auto & fontfamily = m_gdiplusfamilya[iFamily];
 
             if (fontfamily.GetFamilyName(wszGetFamilyName) == Gdiplus::Ok)
             {
@@ -96,7 +103,7 @@ namespace draw2d_gdiplus
                if (strFontFamily.case_insensitive_order(pdraw2dgdiplusfont->::write_text::font::m_pfontfamily->m_strFamilyName) == 0)
                {
 
-                  pgdiplusfontfamily = fontfamily.Clone();
+                  pgdiplusfontfamily = ::as_pointer(fontfamily.Clone());
 
                   break;
 
@@ -108,14 +115,14 @@ namespace draw2d_gdiplus
 
       }
 
-      if (::is_null(pgdiplusfontfamily))
+      if (!pgdiplusfontfamily)
       {
 
-         pgdiplusfontfamily = m_familya.first().Clone();
+         pgdiplusfontfamily = ::as_pointer(m_gdiplusfamilya.first().Clone());
 
       }
 
-      if (::is_null(pgdiplusfontfamily))
+      if (!pgdiplusfontfamily)
       {
 
          throw exception(error_resource);
@@ -144,13 +151,13 @@ namespace draw2d_gdiplus
 
          //bFont = true;
 
-         auto pgdiplusfont = øraw_new Gdiplus::Font(
+         auto pgdiplusfont = new Gdiplus::Font(
             pgdiplusfontfamily,
             gdiplus_font_size(pdraw2dgdiplusfont->m_fontsize),
             pdraw2dgdiplusfont->m_iStyle,
             gdiplus_font_unit(pdraw2dgdiplusfont->m_fontsize));
 
-         pdraw2dgdiplusfont->m_pgdiplusfont = pgdiplusfont;
+         pdraw2dgdiplusfont->m_pgdiplusfont = ::as_pointer(pgdiplusfont);
 
       //}
       //else

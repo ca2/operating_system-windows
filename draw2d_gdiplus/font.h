@@ -2,7 +2,7 @@
 
 
 #include "aura/graphics/write_text/font.h"
-#include "acme/platform/auto_pointer.h"
+
 
 
 namespace draw2d_gdiplus
@@ -39,7 +39,7 @@ namespace draw2d_gdiplus
 
 
       void update(::draw2d::graphics * pdraw2dgraphics) override;
-      void destroy() override;
+      void clear_node_data() override;
 
 
       //Gdiplus::Font * get_gdiplus_font() { return (Gdiplus::Font *) m_osdata[0]; }

@@ -37,7 +37,7 @@ namespace nano_graphics_gdiplus
    void image::create_image(const ::i32_size & size)
    {
 
-      m_pgdiplusbitmap.release();
+      m_pgdiplusbitmap.destroy();
       m_memory.set_size(0);
       m_size = {};
       m_iStride = 0;
@@ -70,17 +70,17 @@ namespace nano_graphics_gdiplus
       m_memory.set_size(sizeMemory);
       m_memory.zero();
 
-      m_pgdiplusbitmap = new ::Gdiplus::Bitmap(
+      m_pgdiplusbitmap = ::as_pointer(new ::Gdiplus::Bitmap(
          size.cx,
          size.cy,
          m_iStride,
          PixelFormat32bppARGB,
-         (::BYTE *) m_memory.data());
+         (::BYTE *) m_memory.data()));
 
       if (!m_pgdiplusbitmap || m_pgdiplusbitmap->GetLastStatus() != ::Gdiplus::Ok)
       {
 
-         m_pgdiplusbitmap.release();
+         m_pgdiplusbitmap.destroy();
          m_memory.set_size(0);
          m_iStride = 0;
 

@@ -429,7 +429,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
       {
          ::cast<::innate_subsystem_windows::Brush> pgdiplusbrush = pbrush;
 
-         m_pdevicecontext->m_pgraphics->FillPath(pgdiplusbrush->m_pbrush, pgdipluspath->m_pgraphicspath);
+         m_pdevicecontext->m_pgraphics->FillPath(pgdiplusbrush->m_pbrush, pgdipluspath->m_pgraphicspath.get());
       }
 
 
@@ -437,7 +437,7 @@ m_pdevicecontext->m_pgraphics->FillRectangle(pbrushWin32->m_pbrush, gdiplusrect)
       {
          ::cast<::innate_subsystem_windows::Pen> pgdipluspen = ppen;
 
-         m_pdevicecontext->m_pgraphics->DrawPath(pgdipluspen->m_ppen, pgdipluspath->m_pgraphicspath);
+         m_pdevicecontext->m_pgraphics->DrawPath(pgdipluspen->m_ppen, pgdipluspath->m_pgraphicspath.get());
       }
    }
 

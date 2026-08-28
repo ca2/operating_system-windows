@@ -2,7 +2,6 @@
 #pragma once
 
 
-#include "acme/platform/auto_pointer.h"
 #include "aura/graphics/write_text/internal_font.h"
 
 
@@ -17,9 +16,9 @@ namespace draw2d_gdiplus
    public:
 
 
-      auto_pointer < Gdiplus::PrivateFontCollection >    m_pcollection;
-      ::raw_array_base < Gdiplus::FontFamily >           m_familya;
-      ::i32                                                m_iFamilyCount;
+      auto_pointer < Gdiplus::PrivateFontCollection >       m_pgdiplusprivatefontcollection;
+      ::raw_array_base < Gdiplus::FontFamily >              m_gdiplusfamilya;
+      ::i32                                                 m_iFamilyCount;
 
       
       internal_font();

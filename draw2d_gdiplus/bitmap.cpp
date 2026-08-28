@@ -51,14 +51,14 @@ namespace draw2d_gdiplus
    }
 
 
-   void bitmap::destroy()
+   void bitmap::clear_node_data()
    {
 
-      ::acme::del(m_pgdiplusbitmap);
+      m_pgdiplusbitmap.destroy();
 
       //m_pimage32Host = nullptr;
 
-      ::draw2d::bitmap::destroy();
+      //::draw2d::bitmap::destroy();
 
       //return ::success;
 
@@ -123,11 +123,11 @@ namespace draw2d_gdiplus
 
       __UNREFERENCED_PARAMETER(pdraw2dgraphics);
 
-      ::acme::del(m_pgdiplusbitmap);
+      //m_pgdiplusbitmap.destroy();
 
       //m_pimage32Host = nullptr;
 
-      m_pgdiplusbitmap = øraw_new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
+      m_pgdiplusbitmap = ::as_pointer(new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality));
 
       //m_osdata[0] = m_pgdiplusbitmap;
 
@@ -233,7 +233,7 @@ namespace draw2d_gdiplus
 
       //const BITMAPINFO* pbmi = &info;
 
-      ::acme::del(m_pgdiplusbitmap);
+      //m_pgdiplusbitmap.destroy();
 
       //m_pimage32Host = nullptr;
 
@@ -316,13 +316,13 @@ namespace draw2d_gdiplus
       if (m_bHintCpuBackingEnabled)
       {
 
-         m_pgdiplusbitmap = new Gdiplus::Bitmap(size.cx, size.cy, m_iStride, PixelFormat32bppPARGB, (BYTE *)m_mem.data());
+         m_pgdiplusbitmap = ::as_pointer(new Gdiplus::Bitmap(size.cx, size.cy, m_iStride, PixelFormat32bppPARGB, (BYTE *)m_mem.data()));
 
       }
       else
       {
 
-         m_pgdiplusbitmap = new Gdiplus::Bitmap(size.cx, size.cy, PixelFormat32bppPARGB);
+         m_pgdiplusbitmap = ::as_pointer(new Gdiplus::Bitmap(size.cx, size.cy, PixelFormat32bppPARGB));
 
          if (::is_set(ppixmapOwned))
          {
@@ -413,7 +413,7 @@ namespace draw2d_gdiplus
    }
 
    
-   i32_size bitmap::GetBitmapDimension() const
+   i32_size bitmap::size() const
    {
 
       if (m_pgdiplusbitmap == nullptr)
@@ -428,12 +428,12 @@ namespace draw2d_gdiplus
    }
 
 
-   i32_size bitmap::size() const
-   {
+   //i32_size bitmap::size() const
+   //{
 
-      return GetBitmapDimension();
+   //   return GetBitmapDimension();
 
-   }
+   //}
 
 
    void bitmap::set_size(const ::i32_size & size, bool bPreserve)
@@ -446,7 +446,7 @@ namespace draw2d_gdiplus
 
       }
 
-      auto sizeOld = GetBitmapDimension();
+      auto sizeOld = this->size();
 
       if (size == sizeOld)
       {
@@ -512,9 +512,7 @@ namespace draw2d_gdiplus
 
       }
 
-      ::acme::del(m_pgdiplusbitmap);
-
-      m_pgdiplusbitmap = pbitmapNew;
+      m_pgdiplusbitmap = ::as_pointer(pbitmapNew);
       //m_pimage32Host = nullptr;
       //m_osdata[0] = m_pgdiplusbitmap;
       m_size = size;
@@ -541,11 +539,11 @@ namespace draw2d_gdiplus
 
       {
 
-         ::acme::del(m_pgdiplusbitmap);
+         //::acme::del(m_pgdiplusbitmap);
 
          //m_pimage32Host = nullptr;
 
-         m_pgdiplusbitmap = øraw_new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
+         m_pgdiplusbitmap = ::as_pointer(new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality));
 
       }
 
@@ -559,11 +557,11 @@ namespace draw2d_gdiplus
    void bitmap::CreateDiscardableBitmap(::draw2d::graphics * pdraw2dgraphics, ::i32 nWidth, ::i32 nHeight)
    {
 
-      ::acme::del(m_pgdiplusbitmap);
+      // ::acme::del(m_pgdiplusbitmap);
 
       //m_pimage32Host = nullptr;
 
-      m_pgdiplusbitmap = øraw_new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
+      m_pgdiplusbitmap = ::as_pointer(new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality));
 
       //m_osdata[0] = m_pgdiplusbitmap;
 
@@ -614,36 +612,36 @@ namespace draw2d_gdiplus
 //#endif
 
 
-   void bitmap::attach(void * posdata)
-   {
+   //void bitmap::attach(void * posdata)
+   //{
 
-      ::acme::del(m_pgdiplusbitmap);
+   //   ::acme::del(m_pgdiplusbitmap);
 
-      //m_pimage32Host = nullptr;
+   //   //m_pimage32Host = nullptr;
 
-      m_pgdiplusbitmap = (Gdiplus::Bitmap *) posdata;
+   //   m_pgdiplusbitmap = (Gdiplus::Bitmap *) posdata;
 
-      //m_osdata[0] = m_pgdiplusbitmap;
+   //   //m_osdata[0] = m_pgdiplusbitmap;
 
-      //return true;
+   //   //return true;
 
-   }
+   //}
 
 
-   void * bitmap::detach()
-   {
+   //void * bitmap::detach()
+   //{
 
-      Gdiplus::Bitmap * pdraw2dbitmap = m_pgdiplusbitmap;
+   //   Gdiplus::Bitmap * pdraw2dbitmap = m_pgdiplusbitmap;
 
-      m_pgdiplusbitmap = nullptr;
+   //   m_pgdiplusbitmap = nullptr;
 
-      //m_pimage32Host = nullptr;
+   //   //m_pimage32Host = nullptr;
 
-      //clear_os_data();
+   //   //clear_os_data();
 
-      return m_pgdiplusbitmap;
+   //   return m_pgdiplusbitmap;
 
-   }
+   //}
 
 
    HBITMAP bitmap::_GetHBITMAP()
@@ -708,7 +706,7 @@ namespace draw2d_gdiplus
 
       }
 
-      auto sizeBitmap = GetBitmapDimension();
+      auto sizeBitmap = this->size();
 
       if (point.x < 0 || point.y < 0
          || point.x > sizeBitmap.cx - size.cx
@@ -809,7 +807,7 @@ namespace draw2d_gdiplus
 
       }
 
-      auto sizeBitmap = GetBitmapDimension();
+      auto sizeBitmap = this->size();
 
       if (point.x < 0 || point.y < 0
          || point.x > sizeBitmap.cx - size.cx

@@ -61,7 +61,7 @@ namespace draw2d_gdiplus
       //using ::image::image::create;
       void create_from_graphics(::draw2d::graphics * pdraw2dgraphics) override;
       void preserve(const ::i32_size& size, ::enum_flag eflagCreate) override;
-      void destroy() override;
+      void clear_node_data() override;
 
 
       //cvirtual bool stretch(::draw2d::graphics * pdraw2dgraphics) override;

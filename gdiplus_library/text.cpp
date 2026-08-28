@@ -289,7 +289,7 @@ namespace draw2d_gdiplus
 
          status = pgraphics->GetTransform(&m);
 
-         auto pmNew = as_auto_pointer(m.Clone());
+         auto pmNew = adopt_auto_pointer(m.Clone());
 
          status = pmNew->Translate((Gdiplus::REAL)rectangleParam.left, (Gdiplus::REAL)rectangleParam.top);
 
