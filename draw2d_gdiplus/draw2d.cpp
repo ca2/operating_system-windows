@@ -86,6 +86,17 @@ namespace draw2d_gdiplus
    }
 
 
+   bool draw2d::graphics_context_does_full_redraw()
+   {
+
+      // A layered window presents the complete offscreen bitmap. During a
+      // resize, damage rectangles may still describe the preceding control
+      // layout and can omit or clip controls whose geometry has just changed.
+      return true;
+
+   }
+
+
    void draw2d::adjust_composited_window_styles(::u32& nExStyle, ::u32& nStyle)
    {
 

@@ -326,7 +326,16 @@ namespace draw2d_gdiplus
       if (m_epen == ::draw2d::e_pen_brush)
       {
 
+         m_pdraw2dbrush->defer_update(pdraw2dgraphics);
+
          ::cast <::draw2d_gdiplus::brush> pdraw2dbrush = m_pdraw2dbrush;
+
+         if (::is_null(pdraw2dbrush->m_pgdiplusbrush))
+         {
+
+            throw ::exception(error_wrong_state);
+
+         }
 
          m_pgdipluspen = ::as_pointer(new Gdiplus::Pen(pdraw2dbrush->m_pgdiplusbrush, (Gdiplus::REAL) m_dWidth));
 

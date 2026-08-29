@@ -31,12 +31,11 @@ namespace draw2d_gdiplus
 
    bitmap::bitmap(bitmap&& bitmap) :
       DRAW2D_BITMAP_TRANSFER(bitmap),
-      m_pgdiplusbitmap(bitmap.m_pgdiplusbitmap),
+      m_pgdiplusbitmap(::transfer(bitmap.m_pgdiplusbitmap)),
       m_mem(::transfer(bitmap.m_mem))//,
       //m_pimage32Host(bitmap.m_pimage32Host)
    {
 
-      bitmap.m_pgdiplusbitmap = nullptr;
       //bitmap.m_pimage32Host = nullptr;
       bitmap.m_size.set_null();
 
@@ -75,17 +74,17 @@ namespace draw2d_gdiplus
 
       auto ppixmapOwned = pimage->m_ppixmapOwned;
 
-      if (m_bHintCpuBackingEnabled
-         && ppixmapOwned
-         && ppixmapOwned->m_pimage32Raw
-         && ppixmapOwned->m_iScan
-            >= ppixmapOwned->m_sizeRaw.cx * (::i32) sizeof(::image32_t))
-      {
+      //if (m_bHintCpuBackingEnabled
+      //   && ppixmapOwned
+      //   && ppixmapOwned->m_pimage32Raw
+      //   && ppixmapOwned->m_iScan
+      //      >= ppixmapOwned->m_sizeRaw.cx * (::i32) sizeof(::image32_t))
+      //{
 
-         host_bitmap(pdraw2dgraphics, ppixmapOwned);
+      //   host_bitmap(pdraw2dgraphics, ppixmapOwned);
 
-      }
-      else
+      //}
+      //else
       {
 
          create_bitmap(pdraw2dgraphics, pimage->raw_size(), ppixmapOwned);

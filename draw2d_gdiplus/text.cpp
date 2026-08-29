@@ -36,6 +36,8 @@ namespace draw2d_gdiplus
 
       ::cast < ::draw2d_gdiplus::font > pdraw2dgdiplusfont = pfontParam;
 
+      pdraw2dgdiplusfont->defer_update(this);
+
       auto pwritetextfont = pdraw2dgdiplusfont->m_pgdiplusfont;
 
       if (::is_null(pwritetextfont))
@@ -68,6 +70,8 @@ namespace draw2d_gdiplus
       {
 
          ::cast < ::draw2d_gdiplus::brush > pdraw2dgdiplusbrush = pbrushParam;
+
+         pdraw2dgdiplusbrush->defer_update(this);
 
          pdraw2dbrush = pdraw2dgdiplusbrush->m_pgdiplusbrush;
 

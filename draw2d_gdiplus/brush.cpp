@@ -164,7 +164,16 @@ namespace draw2d_gdiplus
 
                pdraw2dpath->add_round_rectangle(rectangleRoundRect, m_dRadius);
 
+               pdraw2dpath->defer_update(pdraw2dgraphics);
+
                auto pgdipath = (Gdiplus::GraphicsPath *)pgdipluspath->m_pgdiplusgraphicspath;
+
+               if (::is_null(pgdipath))
+               {
+
+                  throw ::exception(error_wrong_state);
+
+               }
 
                Gdiplus::PathGradientBrush * pgradientbrush = øraw_new Gdiplus::PathGradientBrush(pgdipath);
 
@@ -220,6 +229,13 @@ namespace draw2d_gdiplus
          {
 
          }
+
+      }
+
+      if (::is_null(m_pgdiplusbrush))
+      {
+
+         throw ::exception(error_wrong_state);
 
       }
 

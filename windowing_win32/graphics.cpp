@@ -1845,6 +1845,12 @@ namespace windowing_win32
 
                auto playeredwindowbufferPresentation = playeredwindowbuffer;
 
+               auto pwindowPresentation = pwindow;
+
+               auto rectangleFramePresentation = ::i32_rectangle(
+                  pointBufferItemWindow,
+                  sizeBufferItemWindow);
+
                // Keep rendering and the bitmap copy on the graphics thread, but
                // serialize the native layered-window commit with the HWND owner
                // thread. In particular, this prevents UpdateLayeredWindow from
@@ -1852,8 +1858,62 @@ namespace windowing_win32
                // main_sendø is synchronous, so draw_frame does not finish (and the
                // render buffer is not reused) until the native commit completes.
                pwindow->main_sendø()
-                  << [playeredwindowbufferPresentation]()
+                  << [playeredwindowbufferPresentation,
+                     pwindowPresentation,
+                     rectangleFramePresentation]()
                   {
+
+                     auto pinteractionPresentation =
+                        pwindowPresentation->user_interaction();
+
+                     if (pinteractionPresentation)
+                     {
+
+                        bool bFrameGeometryIsCoherent;
+
+                        {
+
+                           synchronous_lock synchronouslockBufferSizeAndPosition(
+                              pwindowPresentation->m_pmutexBufferSizeAndPosition,
+                              pinteractionPresentation,
+                              SYNCHRONOUS_LOCK_SUFFIX);
+
+                           auto rectangleSketch = ::i32_rectangle(
+                              pinteractionPresentation->const_layout().sketch().origin(),
+                              pinteractionPresentation->const_layout().sketch().size());
+
+                           // An intermediate resize frame is valid when it keeps one
+                           // edge fixed in each dimension whose size is changing. A
+                           // delayed left-grip frame which shares neither horizontal
+                           // edge with the latest request would temporarily move the
+                           // supposedly fixed right edge, so do not present it.
+                           auto bHorizontalGeometryIsCoherent =
+                              rectangleFramePresentation.width() == rectangleSketch.width()
+                              || rectangleFramePresentation.left == rectangleSketch.left
+                              || rectangleFramePresentation.right == rectangleSketch.right;
+
+                           auto bVerticalGeometryIsCoherent =
+                              rectangleFramePresentation.height() == rectangleSketch.height()
+                              || rectangleFramePresentation.top == rectangleSketch.top
+                              || rectangleFramePresentation.bottom == rectangleSketch.bottom;
+
+                           bFrameGeometryIsCoherent =
+                              bHorizontalGeometryIsCoherent
+                              && bVerticalGeometryIsCoherent;
+
+                        }
+
+                        if (!bFrameGeometryIsCoherent)
+                        {
+
+                           pinteractionPresentation->set_need_redraw();
+                           pinteractionPresentation->post_redraw();
+
+                           return;
+
+                        }
+
+                     }
 
                      playeredwindowbufferPresentation->present_window_buffer();
 

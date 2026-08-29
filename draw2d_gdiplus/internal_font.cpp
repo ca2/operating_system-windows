@@ -36,7 +36,7 @@ namespace draw2d_gdiplus
       if (m_pgdiplusprivatefontcollection)
       {
 
-         delete m_pgdiplusprivatefontcollection;
+         m_pgdiplusprivatefontcollection.destroy();
 
       }
 

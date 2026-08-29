@@ -564,9 +564,18 @@ namespace draw2d_gdiplus
 
          }
 
+         pwritetextfont->defer_update(pdraw2dgraphics);
+
          ::cast < ::draw2d_gdiplus::font > pdrawdgdiplusfont = pwritetextfont;
 
          auto pgdiplusfont = pdrawdgdiplusfont->m_pgdiplusfont;
+
+         if (::is_null(pgdiplusfont))
+         {
+
+            throw ::exception(error_wrong_state);
+
+         }
 
          INT iStyle = pgdiplusfont->GetStyle();
 

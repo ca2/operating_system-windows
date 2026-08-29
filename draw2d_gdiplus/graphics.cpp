@@ -588,7 +588,7 @@ namespace draw2d_gdiplus
          try
          {
 
-            delete m_pgdiplusgraphics;
+            m_pgdiplusgraphics.destroy();
 
          }
          catch (...)
@@ -597,8 +597,6 @@ namespace draw2d_gdiplus
             information() << "graphics::set(::draw2d::bitmap *) : Failed to delete Gdiplus::Graphics";
 
          }
-
-         m_pgdiplusgraphics = nullptr;
 
       }
 
@@ -3218,7 +3216,7 @@ namespace draw2d_gdiplus
 
       ASSERT(m_hdc != nullptr);
 
-      delete m_pgdiplusgraphics;
+      m_pgdiplusgraphics.destroy();
 
       return ::EndPage(m_hdc);
 
@@ -3494,9 +3492,7 @@ namespace draw2d_gdiplus
       if (m_pgdiplusgraphicspath != nullptr)
       {
 
-         delete m_pgdiplusgraphicspath;
-
-         m_pgdiplusgraphicspath = nullptr;
+         m_pgdiplusgraphicspath.destroy();
 
       }
 
@@ -3511,7 +3507,7 @@ namespace draw2d_gdiplus
       if (m_pgdiplusgraphicspath != nullptr)
       {
 
-         delete m_pgdiplusgraphicspath;
+         m_pgdiplusgraphicspath.destroy();
 
       }
 
@@ -3549,9 +3545,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pgdiplusgraphicspathPaint = m_pgdiplusgraphicspath;
-
-      m_pgdiplusgraphicspath = nullptr;
+      m_pgdiplusgraphicspathPaint = ::transfer(m_pgdiplusgraphicspath);
 
       //return true;
 
@@ -4960,15 +4954,13 @@ namespace draw2d_gdiplus
          try
          {
 
-            delete m_pgdiplusgraphicspath;
+            m_pgdiplusgraphicspath.destroy();
 
          }
          catch (...)
          {
 
          }
-
-         m_pgdiplusgraphicspath = nullptr;
 
       }
 
@@ -4978,15 +4970,13 @@ namespace draw2d_gdiplus
          try
          {
 
-            delete m_pgdiplusgraphicspathPaint;
+            m_pgdiplusgraphicspathPaint.destroy();
 
          }
          catch (...)
          {
 
          }
-
-         m_pgdiplusgraphicspathPaint = nullptr;
 
       }
 
@@ -6819,14 +6809,21 @@ namespace draw2d_gdiplus
 
       Gdiplus::PointF origin(0, 0);
 
-      if (count <= 0)
+      m_pwritetextfont->defer_update(this);
+
+      ::cast < ::draw2d_gdiplus::font > pdraw2dgdiplusfont = m_pwritetextfont;
+
+      auto pgdiplusfont = pdraw2dgdiplusfont->m_pgdiplusfont;
+
+      if (::is_null(pgdiplusfont))
       {
 
-         m_pwritetextfont->defer_update(this);
+         throw ::exception(error_wrong_state);
 
-         ::cast < ::draw2d_gdiplus::font > pdraw2dgdiplusfont = m_pwritetextfont;
+      }
 
-         auto pgdiplusfont = pdraw2dgdiplusfont->m_pgdiplusfont;
+      if (count <= 0)
+      {
       
          Gdiplus::RectF box(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -6845,10 +6842,6 @@ namespace draw2d_gdiplus
       Gdiplus::Region * pCharRangeRegions = øraw_new Gdiplus::Region[count];
 
       //#define ___new ACME_NEW
-
-      ::cast < ::draw2d_gdiplus::font > pdraw2dgdiplusfont = m_pwritetextfont;
-
-      auto pgdiplusfont = pdraw2dgdiplusfont->m_pgdiplusfont;
 
       m_pgdiplusgraphics->MeasureCharacterRanges(wstr, (INT)wstr.length(), pgdiplusfont, box, &strFormat, (INT)count, pCharRangeRegions);
 
@@ -7440,9 +7433,18 @@ namespace draw2d_gdiplus
 
       }
 
+      m_pwritetextfont->defer_update(this);
+
       ::cast < ::draw2d_gdiplus::font > pdraw2dgdiplusfont = m_pwritetextfont;
 
       Gdiplus::Font * pgdiplusfont = pdraw2dgdiplusfont->m_pgdiplusfont;
+
+      if (::is_null(pgdiplusfont))
+      {
+
+         throw ::exception(error_wrong_state);
+
+      }
 
       auto psystem = system();
 
@@ -7843,9 +7845,18 @@ namespace draw2d_gdiplus
 
       }
 
+      ppenParam->defer_update(this);
+
       ::cast < ::draw2d_gdiplus::pen > pdraw2dgdipluspen = ppenParam;
 
       auto pgdipluspen = pdraw2dgdipluspen->m_pgdipluspen;
+
+      if (::is_null(pgdipluspen))
+      {
+
+         throw ::exception(error_wrong_state);
+
+      }
 
       //      pdraw2dpen->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
 
@@ -8222,6 +8233,8 @@ namespace draw2d_gdiplus
          pregion = pdraw2dgdiplusregion;
 
       }
+
+      pdraw2dgdiplusregion->defer_update(this);
 
       return pdraw2dgdiplusregion->m_pgdiplusregion;
 

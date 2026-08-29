@@ -18,6 +18,8 @@ namespace draw2d_gdiplus
    font::font()
    {
 
+      m_iStyle = (int)Gdiplus::FontStyleRegular;
+
    }
 
 
@@ -33,6 +35,8 @@ namespace draw2d_gdiplus
    {
 
       m_pgdiplusfont.destroy();
+
+      m_pgdiplusfontfamily.destroy();
 
       //::write_text::font::destroy();
 
@@ -152,6 +156,8 @@ namespace draw2d_gdiplus
 
    void font::update(::draw2d::graphics * pdraw2dgraphics)
    {
+
+      m_iStyle = (int)Gdiplus::FontStyleRegular;
 
       auto & iStyle = m_iStyle;
 

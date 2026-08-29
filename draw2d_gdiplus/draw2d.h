@@ -26,6 +26,8 @@ namespace draw2d_gdiplus
 
       virtual string write_text_get_default_implementation_name() override;
 
+      bool graphics_context_does_full_redraw() override;
+
 
       //virtual ::write_text::internal_font * internal_font_from_file(::platform::context * pcontext, const ::file::path & path);
       void adjust_composited_window_styles(::u32& nExStyle, ::u32& nStyle) override;
