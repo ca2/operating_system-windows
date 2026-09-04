@@ -51,7 +51,7 @@ namespace draw2d_gdiplus
       void update_bitmap_as_render_target(
          ::acme::user::interaction * pacmeuserinteractionAffinity = nullptr, ::draw2d::graphics * pdraw2dgraphics = nullptr) override;
 
-      void create_from_data(const ::i32_size & size, const ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, bool bPreserve = false) override;
+      void create_from_data(const ::pixmap_t & pixmap, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, bool bPreserve = false) override;
       //void create(const ::i32_size & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, ::i32 iGoodStride = -1, bool bPreserve = false) override;
       //void initialize(const ::i32_size & size, ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
       //void update_as_gpu_render_target(const ::i32_size & sizeRaw, ::user::interaction * puserinteraction, ::draw2d::graphics * pdraw2dgraphics, ::enum_flag eflagCreate, ::i32 iGoodStride, bool bPreserve, bool bTopDraw2d) override;
@@ -74,7 +74,7 @@ namespace draw2d_gdiplus
 
       protected:
 
-         ::image_pixmap_lease _map(const ::i32_rectangle & rectangle) override;
+         ::image_pixmap_lease _map(::image::enum_map emap, const ::i32_rectangle & rectangle) override;
          void _unmap(::image_pixmap_lease * pimagepixmaplease) override;
 
    };

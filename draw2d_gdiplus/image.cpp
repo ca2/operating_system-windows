@@ -74,10 +74,10 @@ namespace draw2d_gdiplus
    }
 
 
-   ::image_pixmap_lease image::_map(const ::i32_rectangle & rectangle)
+   ::image_pixmap_lease image::_map(::image::enum_map emap, const ::i32_rectangle & rectangle)
    {
 
-      auto ppixmap = ::transfer(::image::image::_map(rectangle));
+      auto ppixmap = ::transfer(::image::image::_map(emap, rectangle));
 
       return ::transfer(ppixmap);
 
@@ -214,10 +214,8 @@ namespace draw2d_gdiplus
       try
       {
 
-         create_from_data(
+         create_as_descriptor(
             sizeRaw,
-            nullptr,
-            iGoodStride,
             eflagCreate,
             bPreserve);
 
@@ -230,7 +228,7 @@ namespace draw2d_gdiplus
          if (bRebindBitmap && pdraw2dgraphics && m_pdraw2dbitmap)
          {
 
-            pdraw2dgraphics->create_bitmap_graphics(m_pdraw2dbitmap);
+            pdraw2dgraphics->create_bitmap_graphics(m_pdraw2dbitmap, m_pacmeuserinteractionAffinity);
 
          }
 
@@ -243,7 +241,7 @@ namespace draw2d_gdiplus
 
          // Keep pbitmapCurrent and ppixmapOwned alive until create_bitmap_graphics
          // has destroyed the GDI+ Graphics that still references their storage.
-         pdraw2dgraphics->create_bitmap_graphics(m_pdraw2dbitmap);
+         pdraw2dgraphics->create_bitmap_graphics(m_pdraw2dbitmap, m_pacmeuserinteractionAffinity);
 
       }
 
@@ -370,11 +368,11 @@ namespace draw2d_gdiplus
    //}
 
 
-   void image::create_from_data(const ::i32_size& size, const ::image32_t * pimage32, ::i32 iScan, ::enum_flag eflagCreate, bool bPreserve)
+   void image::create_from_data(const ::pixmap_t & pixmap, ::enum_flag eflagCreate, bool bPreserve)
    {
 
       if (m_pdraw2dbitmap.is_set()
-            && size == m_sizeRaw)
+            && pixmap.m_sizeRaw == m_sizeRaw)
       {
 
          //auto pdraw2dpen = createø < ::draw2d::pen > ();         return true;
@@ -383,7 +381,7 @@ namespace draw2d_gdiplus
 
       }
 
-      if (size.is_empty())
+      if (pixmap.m_size.is_empty())
       {
 
          destroy();
@@ -449,18 +447,20 @@ namespace draw2d_gdiplus
 
       ::image32_t * pimage32Bitmap = nullptr;
 
-      auto str1 = _001_image32_diagnostics(size, pimage32, iScan);
+      auto str1 = _001_image32_diagnostics(pixmap.m_size, pixmap.m_pimage32, pixmap.m_iScan);
 
       information("draw2d_gdiplus::image::create_from_data (1) {}", str1);
 
-      if (size.cx > I32_MAXIMUM / (::i32) sizeof(::image32_t))
+      if (pixmap.m_sizeRaw.cx > I32_MAXIMUM / (::i32) sizeof(::image32_t))
       {
 
          throw ::exception(error_bad_argument);
 
       }
 
-      auto iMinimumScan = size.cx * (::i32) sizeof(::image32_t);
+      auto iMinimumScan = pixmap.m_sizeRaw.cx * (::i32) sizeof(::image32_t);
+
+      auto iScan = pixmap.m_iScan;
 
       if (iScan < iMinimumScan)
       {
@@ -469,7 +469,7 @@ namespace draw2d_gdiplus
 
       }
 
-      auto uNewScanArea = (::u64) iScan * (::u64) size.cy;
+      auto uNewScanArea = (::u64) iScan * (::u64) pixmap.m_sizeRaw.cy;
 
       if (uNewScanArea > (::u64) ::numeric_info < memsize >::maximum())
       {
@@ -487,12 +487,12 @@ namespace draw2d_gdiplus
 
          construct_newø(ppixmapOwnedNew);
 
-         ppixmapOwnedNew->create_as_descriptor(size, eflagCreate, iScan);
+         ppixmapOwnedNew->create_as_descriptor(pixmap.m_size, eflagCreate, iScan);
 
-         if (::is_set(pimage32))
+         if (::is_set(pixmap.m_pimage32))
          {
 
-            ppixmapOwnedNew->m_memoryPixmap.assign(pimage32, iNewScanArea);
+            ppixmapOwnedNew->m_memoryPixmap.assign(pixmap.m_pimage32, iNewScanArea);
 
          }
          else
@@ -523,9 +523,9 @@ namespace draw2d_gdiplus
 
       pdraw2dbitmap->m_bHintCpuBackingEnabled = m_bHintCpuBackingEnabled;
 
-      pdraw2dbitmap->create_bitmap(nullptr, size, ppixmapOwnedNew);
+      pdraw2dbitmap->create_bitmap(nullptr, pixmap.m_size, ppixmapOwnedNew);
 
-      auto str2 = _001_image32_diagnostics(size, pimage32Bitmap, iScan);
+      auto str2 = _001_image32_diagnostics(pixmap.m_size, pimage32Bitmap, iScan);
 
       information("draw2d_gdiplus::image::create_from_data (2) {}", str2);
 
@@ -572,7 +572,7 @@ namespace draw2d_gdiplus
       if (bPreserve
          && pdraw2dbitmap
          //&& pdraw2dgraphics
-          && ::is_null(pimage32)
+          && ::is_null(pixmap.m_pimage32)
          && m_pdraw2dbitmap)
          //&& m_pgraphics)
       {
@@ -624,7 +624,7 @@ namespace draw2d_gdiplus
 
       //initialize_pixmap(size, pimage32Bitmap, iScan);
 
-      create_as_descriptor(size);
+      create_as_descriptor(pixmap.m_size);
 
       //m_pgraphics->m_pimage = this;
       //m_sizeRaw.cx = width;
@@ -786,7 +786,7 @@ namespace draw2d_gdiplus
 
       auto ppixmapImageThis = this->map();
 
-      auto ppixmapGraphicsImage = pdraw2dgraphics->m_pimage->map();
+      auto ppixmapGraphicsImage = pdraw2dgraphics->m_pimageTarget->map();
 
       ppixmapImageThis->copy_from(ppixmapGraphicsImage);
 

@@ -208,7 +208,7 @@ namespace acme_windows
    }
 
 
-   void file_context::term_system()
+   void file_context::on_system_termination()
    {
 
       ::acme_windows_common::file_context::init_system();

@@ -116,12 +116,12 @@ namespace acme_windows
    }
 
 
-   void directory_context::term_system()
+   void directory_context::on_system_termination()
    {
 
       //auto estatus = 
 
-      ::directory_context::term_system();
+      ::directory_context::on_system_termination();
 
       //if (!estatus)
       //{
