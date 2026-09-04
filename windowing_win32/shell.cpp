@@ -168,26 +168,53 @@ bool IsDibSection(HBITMAP bmp)
       {
 
          ::i32 w = ds.dsBmih.biWidth;
-         ::i32 h = ds.dsBmih.biHeight;
+         ::i32 hSigned = ds.dsBmih.biHeight;
+         ::i32 h = abs(hSigned);
 
          auto pBits = ds.dsBm.bmBits;
-         ::i32 iStride = ds.dsBmih.biSizeImage / abs(h);
-         auto pimage = pparticle->image()->create_image({w, h}, (const ::image32_t *) pBits, iStride);
 
+         ::i32 iStride = ds.dsBm.bmWidthBytes;
 
+         if (iStride <= 0)
+         {
 
-         //if (h < 0)
-         //{
-         //
-         //   pimage->data()->vertical_swap_copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
+            iStride = ((w * ds.dsBmih.biBitCount + 31) / 32) * 4;
 
-         //}
-         //else
-         //{
+         }
 
-         //   pimage->data()->copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
+         if (w <= 0 || h <= 0 || !pBits || iStride <= 0)
+         {
 
-         //}
+            return nullptr;
+
+         }
+
+         auto pimage = pparticle->image()->create_image({w, h});
+
+         auto ppixmapImage = pimage->map();
+
+         if (hSigned > 0)
+         {
+
+            // A positive DIB height stores the bottom scanline first.
+            ppixmapImage->m_pimage32->vertical_swap_copy(
+               pimage->size(),
+               ppixmapImage->m_iScan,
+               (const ::image32_t *)pBits,
+               iStride);
+
+         }
+         else
+         {
+
+            // A negative DIB height is already top-down, like a ca2 pixmap.
+            ppixmapImage->m_pimage32->copy(
+               pimage->size(),
+               ppixmapImage->m_iScan,
+               (const ::image32_t *)pBits,
+               iStride);
+
+         }
 
          return pimage;
 
@@ -229,8 +256,6 @@ bool IsDibSection(HBITMAP bmp)
 
    }
    
-   ::DeleteDC(hdc);
-
    ::DeleteDC(hdc);
 
 
@@ -381,6 +406,8 @@ namespace windowing_win32
 
                      pimage = create_image_from_hbitmap(this, hbitmap);
 
+                     ::DeleteObject(hbitmap);
+
                   }
                   else
                   {
@@ -402,6 +429,8 @@ namespace windowing_win32
                         {
 
                            pimage = create_image_from_hbitmap(this, hbitmap);
+
+                           ::DeleteObject(hbitmap);
 
 
                         }
