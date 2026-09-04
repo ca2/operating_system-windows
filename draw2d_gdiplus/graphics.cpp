@@ -319,18 +319,18 @@ namespace draw2d_gdiplus
 
       //constructø(m_pdraw2dbitmapTarget);
 
-      m_pdraw2dbitmapTarget = m_pgraphicsbufferitem->m_pimageBufferItem->m_pdraw2dbitmap;
+      m_pimageTarget = m_pgraphicsbufferitem->m_pimageBufferItem;
 
       //::memory memory;
 
       //m_pdraw2dbitmapTarget->create_bitmap(this, size, memory, nullptr);
       //
-      create_bitmap_graphics(m_pdraw2dbitmapTarget);
+      create_bitmap_graphics(m_pimageTarget->m_pdraw2dbitmap, puserinteraction);
 
    }
 
 
-   void graphics::create_bitmap_graphics(::draw2d::bitmap * pdraw2dbitmap)
+   void graphics::create_bitmap_graphics(::draw2d::bitmap * pdraw2dbitmap, ::acme::user::interaction * pacmeuserinteractionAffinity)
    {
 
       ::cast < ::draw2d_gdiplus::bitmap > pdraw2dgdiplusbitmap = pdraw2dbitmap;
@@ -346,11 +346,15 @@ namespace draw2d_gdiplus
 
       close_graphics();
 
-      m_pdraw2dbitmapTarget = pdraw2dgdiplusbitmap;
+      defer_constructø(m_pimageTarget);
+
+      m_pimageTarget->create_as_descriptor(pdraw2dgdiplusbitmap->size());
+
+      m_pimageTarget->m_pdraw2dbitmap = pdraw2dgdiplusbitmap;
 
       auto pgdiplusgraphics = new Gdiplus::Graphics(pgdiplusbitmap);
 
-      m_sizeTotal2 = m_pdraw2dbitmapTarget->size();
+      m_sizeTotal2 = m_pimageTarget->m_pdraw2dbitmap->size();
 
       m_pgdiplusgraphics = ::as_pointer(pgdiplusgraphics);
 
@@ -398,11 +402,15 @@ namespace draw2d_gdiplus
 
       //m_pdraw2dbitmap = pdraw2dbitmap;
 
-      m_pdraw2dbitmapTarget = pbitmapNew;
+      defer_constructø(m_pimageTarget);
+
+      m_pimageTarget->create_as_descriptor(pbitmapNew->size());
+
+      m_pimageTarget->m_pdraw2dbitmap = pbitmapNew;
 
       auto pgdiplusgraphics = new Gdiplus::Graphics(pgdiplusbitmap);
 
-      m_sizeTotal2 = m_pdraw2dbitmapTarget->size();
+      m_sizeTotal2 = m_pimageTarget->m_pdraw2dbitmap->size();
 
       m_pgdiplusgraphics = ::as_pointer(pgdiplusgraphics);
 
@@ -484,7 +492,7 @@ namespace draw2d_gdiplus
 
                pimage->m_sizeRaw = m_sizeTotal2;
 
-               pimage->m_pdraw2dbitmap = m_pdraw2dbitmapTarget;
+               pimage->m_pdraw2dbitmap = m_pimageTarget->m_pdraw2dbitmap;
 
                pimage->set_ok_flag();
 
@@ -2637,10 +2645,10 @@ namespace draw2d_gdiplus
    ::color::color graphics::SetPixel(const ::f64_point & point, const ::color::color & color)
    {
 
-      if (m_pimage->is_ok())
+      if (m_pimageTarget->is_ok())
       {
 
-         auto ppixmapImage = m_pimage->map();
+         auto ppixmapImage = m_pimageTarget->map();
 
          ppixmapImage->set_pixel((::i32)point.x, (::i32)point.y, color);
 
@@ -2660,10 +2668,10 @@ namespace draw2d_gdiplus
    ::color::color graphics::blend_pixel(const ::f64_point & point, const ::color::color & colorChange)
    {
 
-      if (m_pimage->is_ok())
+      if (m_pimageTarget->is_ok())
       {
 
-         auto ppixmapImage = m_pimage->map();
+         auto ppixmapImage = m_pimageTarget->map();
 
          ::color::color color = ppixmapImage->get_pixel((::i32)point.x, (::i32)point.y);
 

@@ -1189,7 +1189,11 @@ namespace windowing_win32
 
          auto iScanPixmap = pixmap.m_iScan;
 
-            pimage->create_from_data(sizePixmap, pimage32Pixmap,iScanPixmap);
+         pixmap.m_bTopLeft = true;
+
+         pimage->create_from_data(pixmap);
+
+
 
             //pimage->create_as_descriptor(size);
 

@@ -59,7 +59,7 @@ namespace draw2d_gdiplus
 
       void read_pixels(const ::i32_size & size, const ::i32_point & point, ::image32_t * pimage32, ::i32 iScan) override;
       bool is_cpu_backed_by(const ::pixmap_t * ppixmap) const override;
-      void write_pixels(const ::i32_size & size, const ::i32_point & point, const ::image32_t * pimage32, ::i32 iScan) override;
+      void write_pixels(const ::i32_size & size, const ::i32_point & point, const ::image32_t * pimage32, ::i32 iScan, bool bTopDown) override;
 
 
 

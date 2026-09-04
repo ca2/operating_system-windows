@@ -913,6 +913,8 @@ namespace windowing_win32
    void graphics::destroy()
    {
 
+      m_pdraw2dgraphics.defer_destroy_and_release();
+
       ::graphics::double_buffer_graphics::destroy();
 
       destroy_buffer();
@@ -1337,7 +1339,7 @@ namespace windowing_win32
 
             auto pixmapRawData = ppixmapWindowBuffer->m_pimage32Raw;
 
-            auto ppixmapImageRawData = pbufferitem->m_pimageBufferItem->map(rectangleWindowFixed);
+            auto ppixmapImageRawData = pbufferitem->m_pimageBufferItem->map(::image::e_map_load, rectangleWindowFixed);
 
             auto pimageRawData = ppixmapImageRawData->image32();
 

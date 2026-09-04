@@ -48,7 +48,7 @@ namespace acme_windows
       void init_system() override;
 
 
-      void term_system() override;
+      void on_system_termination() override;
 
 
       void destroy() override;

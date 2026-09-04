@@ -28,7 +28,7 @@
 
 
 #include <thumbcache.h>
-
+#include <chrono>
 
 bool IsDibSection(HBITMAP bmp)
 {
@@ -168,26 +168,67 @@ bool IsDibSection(HBITMAP bmp)
       {
 
          ::i32 w = ds.dsBmih.biWidth;
-         ::i32 h = ds.dsBmih.biHeight;
+         ::i32 hSigned = ds.dsBmih.biHeight;
+         ::i32 h = abs(hSigned);
 
          auto pBits = ds.dsBm.bmBits;
-         ::i32 iStride = ds.dsBmih.biSizeImage / abs(h);
-         auto pimage = pparticle->image()->create_image({w, h}, (const ::image32_t *) pBits, iStride);
 
+         ::i32 iStride = ds.dsBm.bmWidthBytes;
 
+         if (iStride <= 0)
+         {
 
-         //if (h < 0)
+            iStride = ((w * ds.dsBmih.biBitCount + 31) / 32) * 4;
+
+         }
+
+         if (w <= 0 || h <= 0 || !pBits || iStride <= 0)
+         {
+
+            return nullptr;
+
+         }
+
+         auto pimage = pparticle->image()->create_image({w, h});
+
+         auto ppixmapImage = pimage->map();
+
+         //if (hSigned > 0)
          //{
-         //
-         //   pimage->data()->vertical_swap_copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
+
+         //   // A positive DIB height stores the bottom scanline first.
+         //   ppixmapImage->m_pimage32->y_swap_copy(
+         //      pimage->size(),
+         //      ppixmapImage->m_iScan,
+         //      (const ::image32_t *)pBits,
+         //      iStride);
 
          //}
          //else
-         //{
+         {
+            ppixmapImage->m_bTopLeft = hSigned < 0;
 
-         //   pimage->data()->copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
+            if (ppixmapImage->m_bTopLeft)
+            {
 
-         //}
+               informationf("top-down");
+
+            }
+            else
+            {
+
+               informationf("bottom-up");
+
+            }
+
+            // A negative DIB height is already top-down, like a ca2 pixmap.
+            ppixmapImage->m_pimage32->copy(
+               pimage->size(),
+               ppixmapImage->m_iScan,
+               (const ::image32_t *)pBits,
+               iStride);
+
+         }
 
          return pimage;
 
@@ -229,8 +270,6 @@ bool IsDibSection(HBITMAP bmp)
 
    }
    
-   ::DeleteDC(hdc);
-
    ::DeleteDC(hdc);
 
 
@@ -381,6 +420,8 @@ namespace windowing_win32
 
                      pimage = create_image_from_hbitmap(this, hbitmap);
 
+                     ::DeleteObject(hbitmap);
+
                   }
                   else
                   {
@@ -402,6 +443,8 @@ namespace windowing_win32
                         {
 
                            pimage = create_image_from_hbitmap(this, hbitmap);
+
+                           ::DeleteObject(hbitmap);
 
 
                         }
@@ -1870,11 +1913,11 @@ namespace windowing_win32
 
       pwindowingicon->add_icon(hicon);
 
-      auto pdrawicon = createø < ::image::icon >();
+      auto pimageicon = createø < ::image::icon >();
      
-      pdrawicon->initialize_with_windowing_icon(pwindowingicon);
+      pimageicon->initialize_with_windowing_icon(pwindowingicon);
 
-      ::image::image_source imagesource(pdrawicon);
+      ::image::image_source imagesource(pimageicon);
 
       set_image(getfileimage.m_iImage, iSize, imagesource);
 
@@ -1920,6 +1963,8 @@ namespace windowing_win32
       if (pil != nullptr)
       {
 
+         auto timeStart = ::std::chrono::steady_clock::now();
+
          HICON hicon = nullptr;
 
          if (iIcon == 356)
@@ -1931,12 +1976,33 @@ namespace windowing_win32
 
          HRESULT hr = pil->GetIcon(iIcon, ILD_TRANSPARENT, &hicon);
 
+         auto timeAfterGetIcon = ::std::chrono::steady_clock::now();
+
          if (hicon != nullptr)
          {
 
             add_icon(iSize, hicon, getfileimage);
 
             ::DestroyIcon(hicon);
+
+         }
+
+         auto timeAfterSetImage = ::std::chrono::steady_clock::now();
+         auto iGetIconMilliseconds = ::std::chrono::duration_cast<::std::chrono::milliseconds>(
+            timeAfterGetIcon - timeStart).count();
+         auto iSetImageMilliseconds = ::std::chrono::duration_cast<::std::chrono::milliseconds>(
+            timeAfterSetImage - timeAfterGetIcon).count();
+
+         if (iGetIconMilliseconds + iSetImageMilliseconds >= 10)
+         {
+
+            informationf(
+               "[shell.icon.performance] size=%d index=%d get_icon=%lldms set_image=%lldms hr=0x%08x",
+               iSize,
+               iIcon,
+               iGetIconMilliseconds,
+               iSetImageMilliseconds,
+               (unsigned int)hr);
 
          }
 

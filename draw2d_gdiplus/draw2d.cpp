@@ -56,7 +56,7 @@ namespace draw2d_gdiplus
 
          //pdraw2dgraphics->create_bitmap_graphics(pimage->get_bitmap());
 
-         pdraw2dgraphics->update_as_image_render_target(pimage);
+         pdraw2dgraphics->update_as_image_render_target(pimage, pacmeuserinteractionAffinity);
 
          return pdraw2dgraphics;
 

@@ -326,7 +326,7 @@ namespace draw2d_gdiplus
          if (::is_set(ppixmapOwned))
          {
 
-            write_pixels(ppixmapOwned->size(), {}, ppixmapOwned->data(), ppixmapOwned->m_iScan);
+            write_pixels(ppixmapOwned->size(), {}, ppixmapOwned->data(), ppixmapOwned->m_iScan, ppixmapOwned->m_bTopLeft);
 
          }
 
@@ -782,7 +782,8 @@ namespace draw2d_gdiplus
       const ::i32_size & size,
       const ::i32_point & point,
       const ::image32_t * pimage32,
-      ::i32 iScan)
+      ::i32 iScan,
+      bool bTopDown)
    {
 
       if (size.cx <= 0 || size.cy <= 0)
@@ -841,7 +842,18 @@ namespace draw2d_gdiplus
       try
       {
 
-         pimage32Target->copy(size, iScanTarget, pimage32Source, iScanSource);
+         if (bTopDown)
+         {
+
+            pimage32Target->copy(size, iScanTarget, pimage32Source, iScanSource);
+
+         }
+         else
+         {
+
+            pimage32Target->y_swap_copy(size, iScanTarget, pimage32Source, iScanSource);
+
+         }
 
       }
       catch (...)

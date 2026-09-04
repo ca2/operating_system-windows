@@ -446,6 +446,8 @@ namespace windowing_win32
 
       set_HWND(nullptr);
 
+      m_pdraw2dwindowattachment.defer_destroy_and_release();
+
       ::windowing::window::destroy();
 
       ::win32::acme::windowing::window::destroy();
