@@ -238,39 +238,39 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::create_compatible_graphics(::draw2d::graphics * pgraphics)
+   void graphics::create_compatible_graphics(::draw2d::graphics * pdraw2dgraphics)
    {
 
       close_graphics();
 
       HDC hdc = nullptr;
 
-      if (pgraphics == nullptr)
+      if (pdraw2dgraphics == nullptr)
       {
 
          hdc = ::CreateCompatibleDC(nullptr);
 
       }
-      else if (__graphics(pgraphics)->m_hdc != nullptr)
+      else if (__graphics(pdraw2dgraphics)->m_hdc != nullptr)
       {
 
-         hdc = ::CreateCompatibleDC(__graphics(pgraphics)->m_hdc);
+         hdc = ::CreateCompatibleDC(__graphics(pdraw2dgraphics)->m_hdc);
 
       }
-      else if (__graphics(pgraphics)->m_hdcGraphics != nullptr)
+      else if (__graphics(pdraw2dgraphics)->m_hdcGraphics != nullptr)
       {
 
-         hdc = ::CreateCompatibleDC(__graphics(pgraphics)->m_hdcGraphics);
+         hdc = ::CreateCompatibleDC(__graphics(pdraw2dgraphics)->m_hdcGraphics);
 
       }
       else
       {
 
-         HDC hdcTemplate = __graphics(pgraphics)->get_hdc();
+         HDC hdcTemplate = __graphics(pdraw2dgraphics)->get_hdc();
 
          hdc = ::CreateCompatibleDC(hdcTemplate);
 
-         __graphics(pgraphics)->release_hdc(hdcTemplate);
+         __graphics(pdraw2dgraphics)->release_hdc(hdcTemplate);
 
       }
 
@@ -2591,7 +2591,7 @@ namespace draw2d_gdiplus
 
       }
 
-      graphics * pgraphics = ((graphics *)this);
+      graphics * pdraw2dgraphics = ((graphics *)this);
 
       Gdiplus::Font * pgdiplusfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
 
@@ -2631,7 +2631,7 @@ namespace draw2d_gdiplus
 
       ::f64 dFontSize = pgdiplusfont->GetSize();
 
-      auto pg = (Gdiplus::Graphics*)pgraphics->get_os_data();
+      auto pg = (Gdiplus::Graphics*)pdraw2dgraphics->get_os_data();
 
       ::f64 dFontHeight = pgdiplusfont->GetHeight(pg);
 
@@ -5668,11 +5668,11 @@ namespace draw2d_gdiplus
    ::i32 CALLBACK __enum_meta_file_procedure(HDC hDC,
       HANDLETABLE * pHandleTable, METARECORD * pMetaRec, ::i32 nHandles, LPARAM lParam)
    {
-      graphics * pgraphics = (graphics *)lParam;
+      graphics * pdraw2dgraphics = (graphics *)lParam;
 
-      ASSERT_OK(pgraphics);
+      ASSERT_OK(pdraw2dgraphics);
 
-      return pgraphics->meta_file_procedure(hDC, pHandleTable, pMetaRec, nHandles);
+      return pdraw2dgraphics->meta_file_procedure(hDC, pHandleTable, pMetaRec, nHandles);
 
    }
 
@@ -5753,7 +5753,7 @@ namespace draw2d_gdiplus
       //            {
       //               // got the stock object back, so must be selecting a font
       //               throw ::not_implemented();
-      ////                  set(::draw2d_gdiplus::font::from_handle(pgraphics->get_application(), (HFONT)hObject));
+      ////                  set(::draw2d_gdiplus::font::from_handle(pdraw2dgraphics->get_application(), (HFONT)hObject));
       //               break;  // don't play the default record
       //            }
       //            else
@@ -5767,7 +5767,7 @@ namespace draw2d_gdiplus
       //         else if (nObjType == OBJ_FONT)
       //         {
       //            // play back as graphics::set(::write_text::font*)
-      ////               set(::draw2d_gdiplus::font::from_handle(pgraphics->get_application(), (HFONT)hObject));
+      ////               set(::draw2d_gdiplus::font::from_handle(pdraw2dgraphics->get_application(), (HFONT)hObject));
       //            throw ::not_implemented();
       //            break;  // don't play the default record
       //         }
@@ -5800,7 +5800,7 @@ namespace draw2d_gdiplus
    //   //   return ::PlayMetaFile(get_handle1(), hMF) != false;
    //   //}
 
-   //   //// for special playback, lParam == pgraphics
+   //   //// for special playback, lParam == pdraw2dgraphics
    //   //return ::EnumMetaFile(get_handle1(), hMF, __enum_meta_file_procedure, (LPARAM)this) != false;
 
    //   return false;
@@ -7629,7 +7629,7 @@ namespace draw2d_gdiplus
    void * graphics::detach()
    {
 
-      Gdiplus::Graphics * pgraphics = m_pgraphics;
+      Gdiplus::Graphics * pdraw2dgraphics = m_pgraphics;
 
       m_pgraphics = nullptr;
 
@@ -7637,7 +7637,7 @@ namespace draw2d_gdiplus
 
       clear_os_data();
 
-      return pgraphics;
+      return pdraw2dgraphics;
 
    }
 

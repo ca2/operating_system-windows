@@ -156,13 +156,13 @@ namespace production
    }
 
 
-   void impact::on_context_offset(::draw2d::graphics_pointer & pgraphics)
+   void impact::on_context_offset(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
    }
 
 
-   void impact:: _001OnDraw(::draw2d::graphics_pointer & pgraphics)
+   void impact:: _001OnDraw(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
 
@@ -172,12 +172,12 @@ namespace production
       ::i32_rectangle rectangleX = this->rectangle();
       //GetClientRect(rectangleX);
 
-      pgraphics->SelectObject(_001GetFont(::user::font_default));
+      pdraw2dgraphics->SelectObject(_001GetFont(::user::font_default));
 
-//      auto sz = pgraphics->get_text_extent("qg");
-      m_iLineHeight = maximum(1, pgraphics->get_current_font()->get_height());
+//      auto sz = pdraw2dgraphics->get_text_extent("qg");
+      m_iLineHeight = maximum(1, pdraw2dgraphics->get_current_font()->get_height());
 
-      pgraphics->fill_rectangle(rectangleX, argb(255, 255, 255, 255));
+      pdraw2dgraphics->fill_rectangle(rectangleX, argb(255, 255, 255, 255));
 
       ::i32_rectangle rectangleText(rectangleX);
 
@@ -198,22 +198,22 @@ namespace production
       //ClientToScreen(rectangleClip);
       ::draw2d::region_pointer rgnClip(e_create);
       rgnClip->create_rect(rectangleClip);
-      //pgraphics->Draw3dRect(rectangleText, rgb(200, 200, 200), rgb(200, 200, 200));
-      pgraphics->SelectClipRgn(rgnClip);
+      //pdraw2dgraphics->Draw3dRect(rectangleText, rgb(200, 200, 200), rgb(200, 200, 200));
+      pdraw2dgraphics->SelectClipRgn(rgnClip);
       //single_lock synchronouslock(&m_pproduction->m_mutexStatus, true);
-      //pgraphics->set_color(argb(0xcc, 90, 90, 90));
+      //pdraw2dgraphics->set_color(argb(0xcc, 90, 90, 90));
       auto pbrush = createø < ::draw2d::brush >();
       pbrush->create_solid(argb(0xcc, 90, 90, 90));
-      pgraphics->SelectObject(brush);
+      pdraw2dgraphics->SelectObject(brush);
       for(::i32 i = iStart; i < m_pproduction->m_straStatus.get_size() && y < rectangleText.bottom; i++)
       {
          rcItem = rectangleText;
          rcItem.bottom = y + m_iLineHeight;
          rcItem.top = y ;
-         pgraphics->draw_text(m_pproduction->m_straStatus[i], rcItem, e_align_bottom_left);
+         pdraw2dgraphics->draw_text(m_pproduction->m_straStatus[i], rcItem, e_align_bottom_left);
          y = rcItem.bottom;
       }
-      pgraphics->SelectClipRgn(nullptr);
+      pdraw2dgraphics->SelectClipRgn(nullptr);
 
 
 
@@ -223,23 +223,23 @@ namespace production
       if (m_pimageV)
       {
 
-         m_pimageV->to(pgraphics, rectangleArea);
+         m_pimageV->to(pdraw2dgraphics, rectangleArea);
 
       }
       else
       {
 
-         pgraphics->fill_rectangle(rectangleArea, argb(255, 100, 200, 255));
-         pgraphics->set_text_color(argb(255, 255, 255, 255));
+         pdraw2dgraphics->fill_rectangle(rectangleArea, argb(255, 100, 200, 255));
+         pdraw2dgraphics->set_solid_color(argb(255, 255, 255, 255));
 
-         pgraphics->draw_text("Production", rectangleArea, e_align_horizontal_center | e_align_vertical_center);
+         pdraw2dgraphics->draw_text("Production", rectangleArea, e_align_horizontal_center | e_align_vertical_center);
 
       }
 
       GetAreaThumbRect(rectangleArea, m_iVs);
       if (m_pimageVs)
       {
-/*         m_pimage->to(pgraphics, rectangleArea);
+/*         m_pimage->to(pdraw2dgraphics, rectangleArea);
 
       }
 
@@ -249,7 +249,7 @@ namespace production
          auto dwMin = (m_pproduction->m_tickEnd - m_pproduction->m_tickStart) / 1000 / 60;
          auto dwSeg = ((m_pproduction->m_tickEnd - m_pproduction->m_tickStart) / 1000) % 60;
          strTime.Format("%dm %ds", dwMin, dwSeg);
-         pgraphics->text_out(rectangleArea.right + 23, rectangleArea.top, strTime);
+         pdraw2dgraphics->text_out(rectangleArea.right + 23, rectangleArea.top, strTime);
       }
 
    }

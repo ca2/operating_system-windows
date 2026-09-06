@@ -12,7 +12,7 @@ namespace draw2d_gdi
       init_draw2d_gdi_mutex(pobject);
 
       create_factory < image_impl, ::image_impl >();
-      create_factory < pgraphics, ::draw2d::graphics >();
+      create_factory < pdraw2dgraphics, ::draw2d::graphics >();
       create_factory < bitmap, ::draw2d::bitmap >();
       create_factory < pen, ::draw2d::pen >();
       create_factory < brush, ::draw2d::brush >();

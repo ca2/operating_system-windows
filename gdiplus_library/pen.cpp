@@ -144,10 +144,10 @@ namespace draw2d_gdiplus
       }
    }
 
-   void __draw_gray_bitmap(::aura::application * papp, ::draw2d::graphics * pgraphics, ::i32 x, ::i32 y, const ::draw2d::bitmap &rSrc, ::color::color crBackground)
+   void __draw_gray_bitmap(::aura::application * papp, ::draw2d::graphics * pdraw2dgraphics, ::i32 x, ::i32 y, const ::draw2d::bitmap &rSrc, ::color::color crBackground)
    {
-      ASSERT(pgraphics);
-      ASSERT_KINDOF(::draw2d::graphics_pointer, pgraphics);
+      ASSERT(pdraw2dgraphics);
+      ASSERT_KINDOF(::draw2d::graphics_pointer, pdraw2dgraphics);
 
       BITMAP bm;
       ::draw2d::graphics_pointer graphicsMem, graphicsMask;
@@ -158,8 +158,8 @@ namespace draw2d_gdiplus
       ::draw2d::brush_pointer pbrushHighLight(papp, psession->get_default_color(COLOR_3DHIGHLIGHT)),
          pbrushShadow(papp, psession->get_default_color(COLOR_3DSHADOW)), spbr;
 
-      if(graphicsMem->create_compatible_graphics(pgraphics) &&
-         graphicsMask->create_compatible_graphics(pgraphics) &&
+      if(graphicsMem->create_compatible_graphics(pdraw2dgraphics) &&
+         graphicsMask->create_compatible_graphics(pdraw2dgraphics) &&
          const_cast<::draw2d::bitmap &>(rSrc).GetBitmap(&bm) &&
          bmpMask->CreateBitmap(bm.bmWidth, bm.bmHeight, 1, 1, nullptr))
       {
@@ -175,19 +175,19 @@ namespace draw2d_gdiplus
          graphicsMem->SetBkColor(rgb(255, 255, 255));
          graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsMem, 0, 0, NOTSRCERASE);
 
-         pgraphics->fill_rectangle(x, y, bm.bmWidth, bm.bmHeight, crBackground);
+         pdraw2dgraphics->fill_rectangle(x, y, bm.bmWidth, bm.bmHeight, crBackground);
 
-         pgraphics->SetBkColor(rgb(255, 255, 255));
+         pdraw2dgraphics->SetBkColor(rgb(255, 255, 255));
 
-         spbr = pgraphics->set(pbrushHighLight);
-         pgraphics->BitBlt(x + 1, y + 1, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, CP_ROP);
+         spbr = pdraw2dgraphics->set(pbrushHighLight);
+         pdraw2dgraphics->BitBlt(x + 1, y + 1, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, CP_ROP);
 
-         pgraphics->set(pbrushShadow);
-         pgraphics->BitBlt(x, y, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, CP_ROP);
+         pdraw2dgraphics->set(pbrushShadow);
+         pdraw2dgraphics->BitBlt(x, y, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, CP_ROP);
 
-         pgraphics->set(spbr);
+         pdraw2dgraphics->set(spbr);
 
-         pgraphics->SetBkColor(color32);
+         pdraw2dgraphics->SetBkColor(color32);
          graphicsMask->set(pOldMask);
       }
    }
@@ -261,10 +261,10 @@ namespace draw2d_gdiplus
       }
    }
 
-   void __draw_dithered_bitmap(::aura::application * papp, ::draw2d::graphics * pgraphics, ::i32 x, ::i32 y, const ::draw2d::bitmap &rSrc, const ::color::color & color1, const ::color::color & color2)
+   void __draw_dithered_bitmap(::aura::application * papp, ::draw2d::graphics * pdraw2dgraphics, ::i32 x, ::i32 y, const ::draw2d::bitmap &rSrc, const ::color::color & color1, const ::color::color & color2)
    {
-      ASSERT(pgraphics);
-      ASSERT_KINDOF(::draw2d::graphics_pointer, pgraphics);
+      ASSERT(pdraw2dgraphics);
+      ASSERT_KINDOF(::draw2d::graphics_pointer, pdraw2dgraphics);
 
       BITMAP bm;
       ::draw2d::graphics_pointer graphicsSrc, graphicsMask;
@@ -274,8 +274,8 @@ namespace draw2d_gdiplus
       ::draw2d::brush pbrushChecker;
       static const WORD wPat[8] = {0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa};
 
-      if(graphicsSrc->create_compatible_graphics(pgraphics) &&
-         graphicsMask->create_compatible_graphics(pgraphics) &&
+      if(graphicsSrc->create_compatible_graphics(pdraw2dgraphics) &&
+         graphicsMask->create_compatible_graphics(pdraw2dgraphics) &&
          const_cast<::draw2d::bitmap &>(rSrc).GetBitmap(&bm))
       {
          // create checker brush
@@ -302,16 +302,16 @@ namespace draw2d_gdiplus
          graphicsSrc->SetBkColor(color32);
 
          // Checker the background with white and crBackground
-         color1 = pgraphics->SetTextColor(color1);
-         color2 = pgraphics->SetBkColor(color2);
-         pgraphics->fill_rectangle(i32_rectangle(x, y, x + bm.bmWidth, y + bm.bmHeight), &pbrushChecker);
-         pgraphics->SetTextColor(color1);
-         pgraphics->SetBkColor(color2);
+         color1 = pdraw2dgraphics->SetTextColor(color1);
+         color2 = pdraw2dgraphics->SetBkColor(color2);
+         pdraw2dgraphics->fill_rectangle(i32_rectangle(x, y, x + bm.bmWidth, y + bm.bmHeight), &pbrushChecker);
+         pdraw2dgraphics->SetTextColor(color1);
+         pdraw2dgraphics->SetBkColor(color2);
 
          // Blt it
-         pgraphics->BitBlt(x, y, bm.bmWidth, bm.bmHeight, graphicsSrc, 0, 0, SRCINVERT);
-         pgraphics->BitBlt(x, y, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, SRCAND);
-         pgraphics->BitBlt(x, y, bm.bmWidth, bm.bmHeight, graphicsSrc, 0, 0, SRCINVERT);
+         pdraw2dgraphics->BitBlt(x, y, bm.bmWidth, bm.bmHeight, graphicsSrc, 0, 0, SRCINVERT);
+         pdraw2dgraphics->BitBlt(x, y, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, SRCAND);
+         pdraw2dgraphics->BitBlt(x, y, bm.bmWidth, bm.bmHeight, graphicsSrc, 0, 0, SRCINVERT);
 
          graphicsMask->set(pOldMask);
          graphicsSrc->set(pOldSrc);
@@ -321,13 +321,13 @@ namespace draw2d_gdiplus
    */
 
 
-   void pen::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void pen::create(::draw2d::graphics * pdraw2dgraphics, ::i8 iCreate)
    {
 
       if (m_epen == ::draw2d::e_pen_brush)
       {
 
-         m_ppen = øraw_new Gdiplus::Pen(m_pbrush->get_os_data <Gdiplus::Brush *>(pgraphics), (Gdiplus::REAL) m_dWidth);
+         m_ppen = øraw_new Gdiplus::Pen(m_pbrush->get_os_data <Gdiplus::Brush *>(pdraw2dgraphics), (Gdiplus::REAL) m_dWidth);
 
       }
       else

@@ -33,8 +33,8 @@
 
 
 
-#define GDI_GRAPHICS(pgraphics) (dynamic_cast < ::draw2d_gdi::graphics * > (dynamic_cast < ::draw2d::graphics * > (pgraphics)))
-#define GDI_HDC(pgraphics) ((dynamic_cast < ::draw2d_gdi::graphics * > (dynamic_cast < ::draw2d::graphics * > (pgraphics)))->get_handle())
+#define GDI_GRAPHICS(pdraw2dgraphics) (dynamic_cast < ::draw2d_gdi::graphics * > (dynamic_cast < ::draw2d::graphics * > (pdraw2dgraphics)))
+#define GDI_HDC(pdraw2dgraphics) ((dynamic_cast < ::draw2d_gdi::graphics * > (dynamic_cast < ::draw2d::graphics * > (pdraw2dgraphics)))->get_handle())
 #define GDI_DIB(imageimpl) (dynamic_cast < ::draw2d_gdi::image_impl * > (imageimpl))
 #define GDI_BRUSH(pbrush) (dynamic_cast < ::draw2d_gdi::brush * > (dynamic_cast < ::draw2d::brush * > (pbrush)))
 #define GDI_PEN(ppen) (dynamic_cast < ::draw2d_gdi::pen * > (dynamic_cast < ::draw2d::pen * > (ppen)))
@@ -54,7 +54,7 @@ namespace draw2d_gdi
    void attach(const ::draw2d::graphics * pgraphicsConst, const pointer < T > & objectConst, ::i32 iType)
    {
 
-      ::draw2d::graphics_pointer & pgraphics = (::draw2d::graphics *) pgraphicsConst;
+      ::draw2d::graphics_pointer & pdraw2dgraphics = (::draw2d::graphics *) pgraphicsConst;
       pointer < T > & o = (pointer < T > &) objectConst;
 
       if (o.is_null())
@@ -65,7 +65,7 @@ namespace draw2d_gdi
       if (pgdiobject == nullptr)
          throw invalid_argument_exception();
 
-      pgdiobject->Attach(::GetCurrentObject(GDI_GRAPHICS(pgraphics)->get_handle2(), iType));
+      pgdiobject->Attach(::GetCurrentObject(GDI_GRAPHICS(pdraw2dgraphics)->get_handle2(), iType));
 
    }
 

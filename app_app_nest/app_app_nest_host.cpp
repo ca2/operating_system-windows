@@ -601,7 +601,7 @@ namespace ca2plugin_container
    }
 
 
-   void host::_001Print(::draw2d::graphics_pointer & pgraphics)
+   void host::_001Print(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
       if(m_pcontainerapp != nullptr)
@@ -616,7 +616,7 @@ namespace ca2plugin_container
                if(m_pcontainerapp->system()->m_pplugin->m_puserinteractionHost != nullptr)
                {
 
-                  m_pcontainerapp->system()->m_pplugin->m_puserinteractionHost->_001Print(pgraphics);
+                  m_pcontainerapp->system()->m_pplugin->m_puserinteractionHost->_001Print(pdraw2dgraphics);
 
                   {
 
@@ -647,9 +647,9 @@ namespace ca2plugin_container
 
                      str.formatf("%0.1f fps",dLast);
 
-                     pgraphics->set_text_color(argb(255,255,255,0));
+                     pdraw2dgraphics->set_solid_color(argb(255,255,255,0));
 
-                     pgraphics->text_out(300,20,str);
+                     pdraw2dgraphics->text_out(300,20,str);
 
 #endif
 

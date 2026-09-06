@@ -26,7 +26,7 @@ namespace draw2d_gdi
    }
 
 
-   bool bitmap::CreateBitmap(::draw2d::graphics_pointer & pgraphics,::i32 nWidth,::i32 nHeight,UINT nPlanes,UINT nBitcount,const void * lpBits,::i32 stride)
+   bool bitmap::CreateBitmap(::draw2d::graphics_pointer & pdraw2dgraphics,::i32 nWidth,::i32 nHeight,UINT nPlanes,UINT nBitcount,const void * lpBits,::i32 stride)
    {
 
       return Attach(::CreateBitmap(nWidth,nHeight,nPlanes,nBitcount,lpBits));
@@ -41,11 +41,11 @@ namespace draw2d_gdi
 
    }
 
-   bool bitmap::CreateDIBSection(::draw2d::graphics_pointer & pgraphics,const BITMAPINFO * lpbmi,UINT usage,void **ppvBits,::i32 * stride,HANDLE hSection,::u32 offset)
+   bool bitmap::CreateDIBSection(::draw2d::graphics_pointer & pdraw2dgraphics,const BITMAPINFO * lpbmi,UINT usage,void **ppvBits,::i32 * stride,HANDLE hSection,::u32 offset)
    {
 
 
-      if(!Attach(::CreateDIBSection(pgraphics == nullptr ? nullptr : GDI_HDC(pgraphics),lpbmi,usage,ppvBits,hSection,offset)))
+      if(!Attach(::CreateDIBSection(pdraw2dgraphics == nullptr ? nullptr : GDI_HDC(pdraw2dgraphics),lpbmi,usage,ppvBits,hSection,offset)))
          return false;
 
       if(stride != nullptr)
@@ -62,10 +62,10 @@ namespace draw2d_gdi
    }
 
 
-   bool bitmap::CreateDIBitmap(::draw2d::graphics_pointer & pgraphics,const BITMAPINFOHEADER *pbmih,::u32 flInit,const void *pjBits,const BITMAPINFO *pbmi,UINT iUsage)
+   bool bitmap::CreateDIBitmap(::draw2d::graphics_pointer & pdraw2dgraphics,const BITMAPINFOHEADER *pbmih,::u32 flInit,const void *pjBits,const BITMAPINFO *pbmi,UINT iUsage)
    {
 
-      return Attach(::CreateDIBitmap(GDI_HDC(pgraphics),pbmih,flInit,pjBits,pbmi,iUsage));
+      return Attach(::CreateDIBitmap(GDI_HDC(pdraw2dgraphics),pbmih,flInit,pjBits,pbmi,iUsage));
 
    }
 
@@ -136,18 +136,18 @@ namespace draw2d_gdi
    }
 
 
-   bool bitmap::CreateCompatibleBitmap(::draw2d::graphics_pointer & pgraphics,::i32 nWidth,::i32 nHeight)
+   bool bitmap::CreateCompatibleBitmap(::draw2d::graphics_pointer & pdraw2dgraphics,::i32 nWidth,::i32 nHeight)
    {
 
-      return Attach(::CreateCompatibleBitmap((dynamic_cast<::draw2d_gdi::graphics *>(pgraphics))->get_handle1(),nWidth,nHeight));
+      return Attach(::CreateCompatibleBitmap((dynamic_cast<::draw2d_gdi::graphics *>(pdraw2dgraphics))->get_handle1(),nWidth,nHeight));
 
    }
 
 
-   bool bitmap::CreateDiscardableBitmap(::draw2d::graphics_pointer & pgraphics,::i32 nWidth,::i32 nHeight)
+   bool bitmap::CreateDiscardableBitmap(::draw2d::graphics_pointer & pdraw2dgraphics,::i32 nWidth,::i32 nHeight)
    {
 
-      return Attach(::CreateDiscardableBitmap((dynamic_cast<::draw2d_gdi::graphics *>(pgraphics))->get_handle1(),nWidth,nHeight));
+      return Attach(::CreateDiscardableBitmap((dynamic_cast<::draw2d_gdi::graphics *>(pdraw2dgraphics))->get_handle1(),nWidth,nHeight));
 
    }
 

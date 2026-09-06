@@ -52,10 +52,10 @@ namespace draw2d_gdiplus
    }
 
 
-   void font::on_create_internal_font(::draw2d::graphics * pgraphics, ::write_text::internal_font * pinternalfont)
+   void font::on_create_internal_font(::draw2d::graphics * pdraw2dgraphics, ::write_text::internal_font * pinternalfont)
    {
 
-      ::write_text::font::on_create_internal_font(pgraphics, pinternalfont);
+      ::write_text::font::on_create_internal_font(pdraw2dgraphics, pinternalfont);
 
       //::cast < ::draw2d_gdiplus::internal_font> pgdiplusinternalfont = pinternalfont;
 
@@ -161,7 +161,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void font::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void font::create(::draw2d::graphics * pdraw2dgraphics, ::i8 iCreate)
    {
 
       auto & iStyle = m_iStyle;
@@ -234,7 +234,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      bFont = defer_load_internal_font(pgraphics);
+      bFont = defer_load_internal_font(pdraw2dgraphics);
 
       //if (m_path.has_character())
       //{
@@ -248,7 +248,7 @@ namespace draw2d_gdiplus
 
       //   }
 
-      //   auto pprivatefont = pdraw2d->get_file_private_font(pgraphics->m_papplication, m_path);
+      //   auto pprivatefont = pdraw2d->get_file_private_font(pdraw2dgraphics->m_papplication, m_path);
 
       //   if (pprivatefont)
       //   {
@@ -439,7 +439,7 @@ namespace draw2d_gdiplus
 
             ::f64 dSize = pfont->GetSize();
 
-            ::f64 dFontHeight = pfont->GetHeight((Gdiplus::REAL)pgraphics->get_dpiy());
+            ::f64 dFontHeight = pfont->GetHeight((Gdiplus::REAL)pdraw2dgraphics->get_dpiy());
 
             auto & textmetric = m_textmetric2;
 
@@ -468,10 +468,10 @@ namespace draw2d_gdiplus
    }
 
 
-   ::enum_character_set font::calculate_character_set(::draw2d::graphics * pgraphics)
+   ::enum_character_set font::calculate_character_set(::draw2d::graphics * pdraw2dgraphics)
    {
 
-      return ::write_text::font::calculate_character_set(pgraphics);
+      return ::write_text::font::calculate_character_set(pdraw2dgraphics);
 
    }
 

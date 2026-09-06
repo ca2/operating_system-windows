@@ -49,9 +49,6 @@
     <ClCompile Include="win32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="window_util.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="system_interaction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -89,9 +86,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="desktop_environment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="top_level_enum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="icon.cpp">
@@ -132,9 +126,6 @@
     <ClInclude Include="icon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="top_level_enum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -151,9 +142,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="display.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="window_util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="system_interaction.h">

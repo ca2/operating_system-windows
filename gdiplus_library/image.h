@@ -54,11 +54,11 @@ namespace draw2d_gdiplus
       virtual bool host(::pixmap * pixmap, ::windowing::window * pwindow) override;
       bool on_host_read_pixels(::pixmap* pixmap) const override;
       using ::image::image::create;
-      virtual void create(::draw2d::graphics * pgraphics) override;
+      virtual void create(::draw2d::graphics * pdraw2dgraphics) override;
       void destroy() override;
 
 
-      //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
+      //cvirtual bool stretch(::draw2d::graphics * pdraw2dgraphics) override;
       //virtual bool draw(const ::image::image * pimage) override;
       virtual void _draw_raw(const ::i32_rectangle & rectangleTarget, ::image::image * pimageSrc, const ::i32_point & pointSrc) override;
 

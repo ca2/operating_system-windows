@@ -37,7 +37,7 @@ namespace draw2d_gdiplus
 //#endif
 
 
-      virtual void create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
+      virtual void create(::draw2d::graphics * pdraw2dgraphics, ::i8 iCreate) override;
       void destroy() override;
 
 
@@ -45,10 +45,10 @@ namespace draw2d_gdiplus
       void set_gdiplus_font(Gdiplus::Font * pfont) { m_osdata[0] = pfont; }
 
 
-      virtual enum_character_set calculate_character_set(::draw2d::graphics * pgraphics);
+      virtual enum_character_set calculate_character_set(::draw2d::graphics * pdraw2dgraphics);
 
 
-      void on_create_internal_font(::draw2d::graphics * pgraphics, ::write_text::internal_font * pinternalfont) override;
+      void on_create_internal_font(::draw2d::graphics * pdraw2dgraphics, ::write_text::internal_font * pinternalfont) override;
 
 
    };

@@ -165,10 +165,10 @@ namespace draw2d_gdi
    }
 
 
-   bool image::create(::draw2d::graphics_pointer & pgraphics)
+   bool image::create(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
-      auto pbitmap = dynamic_cast<::draw2d_gdi::bitmap * >(pgraphics->get_current_bitmap());
+      auto pbitmap = dynamic_cast<::draw2d_gdi::bitmap * >(pdraw2dgraphics->get_current_bitmap());
 
       if (pbitmap == nullptr)
       {
@@ -188,7 +188,7 @@ namespace draw2d_gdi
 
       }
 
-      from(pgraphics);
+      from(pdraw2dgraphics);
 
       return true;
 
@@ -214,11 +214,11 @@ namespace draw2d_gdi
    }
 
 
-   bool image::to(::draw2d::graphics_pointer & pgraphics, const ::i32_point  & point, const ::i32_size & size, const ::i32_point & pointSrc)
+   bool image::to(::draw2d::graphics_pointer & pdraw2dgraphics, const ::i32_point  & point, const ::i32_size & size, const ::i32_point & pointSrc)
    {
 
       return SetDIBitsToDevice(
-             (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle1(),
+             (dynamic_cast<::draw2d_gdi::graphics * >(pdraw2dgraphics))->get_handle1(),
              point.x, point.y,
              size.cx, size.cy,
              pointSrc.x, pointSrc.y, pointSrc.y, height() - pointSrc.y,
@@ -228,14 +228,14 @@ namespace draw2d_gdi
    }
 
 
-   bool image::from(::draw2d::graphics_pointer & pgraphics)
+   bool image::from(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
       ::draw2d::bitmap_pointer bitmap(get_application());
 
-      bitmap->CreateCompatibleBitmap(pgraphics, 1, 1);
+      bitmap->CreateCompatibleBitmap(pdraw2dgraphics, 1, 1);
 
-      ::draw2d_gdi::bitmap * pbitmap = dynamic_cast < ::draw2d_gdi::bitmap * > (pgraphics->SelectObject(bitmap));
+      ::draw2d_gdi::bitmap * pbitmap = dynamic_cast < ::draw2d_gdi::bitmap * > (pdraw2dgraphics->SelectObject(bitmap));
 
       if(pbitmap == nullptr)
          return false;
@@ -246,32 +246,32 @@ namespace draw2d_gdi
 
       if(!pbitmap->GetBitmap(&bm))
       {
-         pgraphics->SelectObject(pbitmap);
+         pdraw2dgraphics->SelectObject(pbitmap);
          return false;
       }
 
       if (!create({ bm.bmWidth, bm.bmHeight }))
       {
 
-         pgraphics->SelectObject(pbitmap);
+         pdraw2dgraphics->SelectObject(pbitmap);
 
          return false;
 
       }
 
-      bool bOk = GetDIBits(GDI_HDC(pgraphics), (HBITMAP) pbitmap->get_os_data(), 0, this->height(), m_pimage32Raw, &(m_info), DIB_RGB_COLORS) != false;
+      bool bOk = GetDIBits(GDI_HDC(pdraw2dgraphics), (HBITMAP) pbitmap->get_os_data(), 0, this->height(), m_pimage32Raw, &(m_info), DIB_RGB_COLORS) != false;
 
-      pgraphics->SelectObject(pbitmap);
+      pdraw2dgraphics->SelectObject(pbitmap);
 
       return bOk;
 
    }
 
 
-   bool image::from(const ::i32_point & pointDest, ::draw2d::graphics_pointer & pgraphics, const ::i32_point & point, const ::i32_size & sz)
+   bool image::from(const ::i32_point & pointDest, ::draw2d::graphics_pointer & pdraw2dgraphics, const ::i32_point & point, const ::i32_size & sz)
    {
 
-      return m_spgraphics->BitBlt(pointDest.x, pointDest.y, sz.cx, sz.cy, pgraphics, point.x, point.y, SRCCOPY) != false;
+      return m_spgraphics->BitBlt(pointDest.x, pointDest.y, sz.cx, sz.cy, pdraw2dgraphics, point.x, point.y, SRCCOPY) != false;
 
    }
 
@@ -2628,9 +2628,9 @@ namespace draw2d_gdi
 
    //      }
 
-   //      ::draw2d::graphics_pointer & pgraphics = pgraphicsImage;
+   //      ::draw2d::graphics_pointer & pdraw2dgraphics = pgraphicsImage;
 
-   //      if (pgraphics->get_os_data() == nullptr)
+   //      if (pdraw2dgraphics->get_os_data() == nullptr)
    //      {
 
    //         return false;
@@ -2651,14 +2651,14 @@ namespace draw2d_gdi
    //      puserinteraction->_000OnDraw(pgraphicsImage);
 
    //      m_spgraphics->SetViewportOrg(::i32_point());
-   //      //(dynamic_cast<::win::graphics * >(pgraphics))->FillSolidRect(rectangleUpdate.left, rectangleUpdate.top, 100, 100, 255);
+   //      //(dynamic_cast<::win::graphics * >(pdraw2dgraphics))->FillSolidRect(rectangleUpdate.left, rectangleUpdate.top, 100, 100, 255);
    //      m_spgraphics->SelectClipRgn(nullptr);
    //      m_spgraphics->SetViewportOrg(::i32_point());
 
    //      m_spgraphics->SelectClipRgn( nullptr);
    //      m_spgraphics->BitBlt(rectanglePaint.left, rectanglePaint.top,
    //                           rectanglePaint.width(), rectanglePaint.height(),
-   //                           pgraphics, rectangleUpdate.left, rectangleUpdate.top,
+   //                           pdraw2dgraphics, rectangleUpdate.left, rectangleUpdate.top,
    //                           SRCCOPY);
 
    //   }
@@ -3081,7 +3081,7 @@ namespace draw2d_gdi
    }
 
 
-   /*   bool image::from(::draw2d::graphics_pointer & pgraphics, FIBITMAP *pfibitmap, bool bUnloadFI)
+   /*   bool image::from(::draw2d::graphics_pointer & pdraw2dgraphics, FIBITMAP *pfibitmap, bool bUnloadFI)
       {
 
          if(pfibitmap == nullptr)

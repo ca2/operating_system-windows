@@ -99,7 +99,7 @@
 
          void LayoutLine(::i32 iSource, ::audio_mixer::source * pSource, ::i32 iStartX, ::i32 iStartY, ::i32 * iEndX, ::i32 *iEndY);
          void set_title();
-         void on_layout(::draw2d::graphics_pointer & pgraphics) override;
+         void on_layout(::draw2d::graphics_pointer & pdraw2dgraphics) override;
          bool create_control(::audio_mixer::control * pControl);
          bool CreateMuteControl(::audio_mixer::control * pControl);
          bool CreateVolumeControl(::audio_mixer::control * pControl);

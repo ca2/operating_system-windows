@@ -319,7 +319,11 @@ namespace draw2d_gdiplus
 
       //constructø(m_pdraw2dbitmapTarget);
 
+      auto & reference_pimageBufferItem = m_pgraphicsbufferitem->m_pimageBufferItem.m_p;
+
       m_pimageTarget = m_pgraphicsbufferitem->m_pimageBufferItem;
+
+      auto & reference_pimageTarget = m_pimageTarget.m_p;
 
       //::memory memory;
 

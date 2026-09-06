@@ -1,9 +1,10 @@
 #include "platform.h"
-
+#include "window.h"
 #include "windowing.h"
-#include "top_level_enum.h"
+#include "acme/operating_system/windows/top_level_enum.h"
+#include "aura/user/user/interaction_array.h"
 #include "win32.h"
-#include "window_util.h"
+//#include "window_util.h"
 
 
 #define ___TEMP_CLASS_NAME_SIZE 4096
@@ -137,26 +138,60 @@ namespace windowing_win32
 
 
 
+
 } // namespace windowing_win32
+
 
 
 namespace windows
 {
 
 
-   /// from top to bottom
-   CLASS_DECL_WINDOWING_WIN32 ::pointer<::windows::hwnd_array>get_top_level_windows(bool bDesktop, bool bVisible)
+
+   ::windows::hwnd_array get_hwnda(const ::user::interaction_array & a)
    {
 
-      /// from top to bottom
-      ::windowing_win32::top_level_enum toplevelenum(bDesktop, bVisible);
+      ::windows::hwnd_array hwnda;
 
-      return toplevelenum.m_phwnda;
+      for (::i32 i = 0; i < a.interaction_count(); i++)
+      {
+
+         auto pacmewindowingwindow = ((::user::interaction *)a.interaction_at(i))->m_pacmewindowingwindow;
+
+         auto hwnd = (HWND)::as_HWND(pacmewindowingwindow->operating_system_window());
+
+         hwnda.add(hwnd);
+
+      }
+
+      return hwnda;
+
+   }
+
+
+
+
+   ::windows::hwnd_array get_hwnda(const ::user::interaction_ptra & ptra)
+   {
+
+      ::windows::hwnd_array hwnda;
+
+      for (::i32 i = 0; i < ptra.get_size(); i++)
+      {
+
+         auto pacmewindowingwindow = ((::user::interaction *)ptra.element_at(i))->m_pacmewindowingwindow;
+
+         auto hwnd = ::as_HWND(pacmewindowingwindow->operating_system_window());
+
+         hwnda.add(hwnd);
+
+      }
+
+      return hwnda;
 
    }
 
 
 } // namespace windows
-
 
 

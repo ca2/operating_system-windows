@@ -10,9 +10,9 @@
 #include "message_window.h"
 #include "monitor.h"
 #include "system_interaction.h"
-#include "top_level_enum.h"
+//#include "top_level_enum.h"
 #include "win32.h"
-#include "window_util.h"
+//#include "window_util.h"
 #include "acme/constant/user_message.h"
 #include "acme/constant/user_key.h"
 #include "acme/exception/exception.h"
@@ -23,6 +23,7 @@
 #include "aura/platform/application.h"
 #include "aura/user/user/interaction_array.h"
 #include "aura/windowing/cursor.h"
+#include "acme/operating_system/windows/top_level_enum.h"
 #include "acme/operating_system/windows/windows.h"
 
 wparam MapLeftRightKeys(wparam vk, lparam lParam);
@@ -1346,7 +1347,7 @@ namespace windowing_win32
    bool windowing::_top_level_contains_name(const ::scoped_string & scopedstr)
    {
 
-      return _top_level_contains_predicate([this, scopedstr](HWND hwnd)
+      return ::windows::_top_level_contains_predicate([this, scopedstr](HWND hwnd)
          {
 
             //PSEUDO-Code ::i8 sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
@@ -1367,7 +1368,7 @@ namespace windowing_win32
    bool windowing::_visible_top_level_contains_name(const ::scoped_string & scopedstr)
    {
 
-      return _top_level_contains_predicate([this, scopedstr](HWND hwnd)
+      return ::windows::_top_level_contains_predicate([this, scopedstr](HWND hwnd)
          {
 
             //PSEUDO-Code ::i8 sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
@@ -1417,7 +1418,7 @@ namespace windowing_win32
    bool windowing::_visible_top_level_contains_all_names(const string_array_base& stra)
    {
 
-      return _top_level_contains_predicate([this, &stra](HWND hwnd)
+      return ::windows::_top_level_contains_predicate([this, &stra](HWND hwnd)
          {
 
             //PSEUDO-Code ::i8 sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());

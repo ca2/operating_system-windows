@@ -389,7 +389,7 @@ namespace innate_subsystem_windows
       virtual void _defer_update_double_buffering();
 
 
-      void onDraw(::innate_subsystem::GraphicsInterface * pgraphics, const ::i32_rectangle & rectangle) override;
+      void onDraw(::innate_subsystem::GraphicsInterface * pdraw2dgraphics, const ::i32_rectangle & rectangle) override;
 
 
       virtual void _doPaint(HDC hdc);

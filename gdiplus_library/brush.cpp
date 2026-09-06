@@ -38,7 +38,7 @@ namespace draw2d_gdiplus
 //
 //#endif
 
-   void brush::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void brush::create(::draw2d::graphics * pdraw2dgraphics, ::i8 iCreate)
    {
 
       if(m_ebrush == ::draw2d::e_brush_solid)
@@ -147,7 +147,7 @@ namespace draw2d_gdiplus
 
             ::pointer<::draw2d::path>ppath;
 
-            pgraphics->constructø(ppath);
+            pdraw2dgraphics->constructø(ppath);
 
             ::f64_rectangle rectangleRoundRect(m_point, m_size);
 

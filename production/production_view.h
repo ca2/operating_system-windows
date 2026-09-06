@@ -77,7 +77,7 @@ namespace production
 
 
 
-      virtual void _001OnDraw(::draw2d::graphics_pointer & pgraphics);
+      virtual void _001OnDraw(::draw2d::graphics_pointer & pdraw2dgraphics);
 
       virtual void _001OnTabClick(::i32 iTab);
       void install_message_routing(::channel * pchannel) override;
@@ -105,7 +105,7 @@ namespace production
       virtual ::i32_size get_total_size();
 
 
-      virtual void on_context_offset(::draw2d::graphics_pointer & pgraphics);
+      virtual void on_context_offset(::draw2d::graphics_pointer & pdraw2dgraphics);
 
 
    };

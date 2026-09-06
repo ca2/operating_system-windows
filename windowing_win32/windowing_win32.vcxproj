@@ -2664,12 +2664,10 @@
     <ClInclude Include="print_window.h" />
     <ClInclude Include="shell.h" />
     <ClInclude Include="system_interaction.h" />
-    <ClInclude Include="top_level_enum.h" />
     <ClInclude Include="user_system.h" />
     <ClInclude Include="win32.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="windowing.h" />
-    <ClInclude Include="window_util.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="_impl.h" />
@@ -2718,7 +2716,6 @@
     <ClCompile Include="master_device_listener.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="message_window.cpp" />
-    <ClCompile Include="top_level_enum.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="gdi.cpp" />
     <ClCompile Include="icon.cpp" />
@@ -2737,7 +2734,6 @@
     <ClCompile Include="window\window_dpi.cpp" />
     <ClCompile Include="window\window_property.cpp" />
     <ClCompile Include="window\window_show.cpp" />
-    <ClCompile Include="window_util.cpp" />
     <ClCompile Include="window\window_i_drop_target.cpp" />
     <ClCompile Include="window\window_i_unknown.cpp" />
     <ClCompile Include="window\window_scroll.cpp" />

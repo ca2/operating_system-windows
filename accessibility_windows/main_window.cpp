@@ -6,6 +6,7 @@
 #include "acme/constant/user_message.h"
 #include "acme/parallelization/mutex.h"
 #include "acme/_operating_system.h"
+#include "acme/operating_system/windows/window.h"
 
 
 namespace accessibility_windows
@@ -25,6 +26,22 @@ namespace accessibility_windows
 
    }
 
+   ::string main_window::get_title()
+   {
+
+      auto operatingsystemwindow = ::as_operating_system_window(m_hwnd);
+
+      return ::windows::get_window_text_timeout(operatingsystemwindow);
+
+   }
+
+
+   void main_window::set_size(const ::i32_size & size)
+   {
+
+      ::SetWindowPos(m_hwnd, nullptr, 0, 0, size.cx, size.cy, SWP_NOMOVE);
+
+   }
 
    
    BOOL hwnd_is_main_window(HWND handle)

@@ -35,12 +35,12 @@ namespace draw2d_gdi
    }
 
 
-   bool palette::CreateHalftonePalette(::draw2d::graphics_pointer & pgraphics)
+   bool palette::CreateHalftonePalette(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
-      ASSERT(pgraphics != nullptr && (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle1() != nullptr);
+      ASSERT(pdraw2dgraphics != nullptr && (dynamic_cast<::draw2d_gdi::graphics * >(pdraw2dgraphics))->get_handle1() != nullptr);
 
-      return Attach(::CreateHalftonePalette((dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle1()));
+      return Attach(::CreateHalftonePalette((dynamic_cast<::draw2d_gdi::graphics * >(pdraw2dgraphics))->get_handle1()));
 
    }
 

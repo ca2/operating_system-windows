@@ -32,7 +32,7 @@ namespace draw2d_gdiplus
       //virtual void * get_os_data() const;
 
 
-      virtual void create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
+      virtual void create(::draw2d::graphics * pdraw2dgraphics, ::i8 iCreate) override;
       void destroy() override;
       void destroy_os_data() override;
 

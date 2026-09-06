@@ -102,12 +102,12 @@ namespace draw2d_gdi
    }
 
 
-   bool region::CreateFromPath(::draw2d::graphics_pointer & pgraphics)
+   bool region::CreateFromPath(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
-      ASSERT(pgraphics != nullptr);
+      ASSERT(pdraw2dgraphics != nullptr);
 
-      return Attach(::PathToRegion((dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle1()));
+      return Attach(::PathToRegion((dynamic_cast<::draw2d_gdi::graphics * >(pdraw2dgraphics))->get_handle1()));
 
    }
 

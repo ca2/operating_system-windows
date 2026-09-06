@@ -40,7 +40,7 @@ namespace windows
          throw ::exception(::exception("a impact should collaborate"));
       }
 
-      ::draw2d::graphics_pointer & pgraphics = m_phprinter->create_graphics();
+      ::draw2d::graphics_pointer & pdraw2dgraphics = m_phprinter->create_graphics();
 
       // xxx
       ::image::image_pointer pimage;
@@ -49,7 +49,7 @@ namespace windows
       DOCINFOW docinfo;
       memory_set(&docinfo, 0, sizeof(docinfo));
       docinfo.cbSize = sizeof(docinfo);
-      pgraphics->StartDocW(&docinfo);
+      pdraw2dgraphics->StartDocW(&docinfo);
 
       ::i32 iPageCount = m_puserinteraction->get_total_page_count(this);
       ::i32 iPageEnd = -1;
@@ -64,33 +64,33 @@ namespace windows
          iPageEnd = iPageCount - 1;
       }
 
-      pgraphics->m_pjob = this;
+      pdraw2dgraphics->m_pjob = this;
       for (m_iPrintingPage = m_iPageStart; m_iPrintingPage <= iPageEnd; m_iPrintingPage++)
       {
-         pgraphics->StartPage();
+         pdraw2dgraphics->StartPage();
          if (m_bCancel)
          {
-            pgraphics->AbortDoc();
+            pdraw2dgraphics->AbortDoc();
 
             m_result.add(error_failed);
 
             return error_cancelled;
          }
-         m_puserinteraction->_001OnDraw(pgraphics);
+         m_puserinteraction->_001OnDraw(pdraw2dgraphics);
          if (m_bCancel)
          {
-            pgraphics->AbortDoc();
+            pdraw2dgraphics->AbortDoc();
 
             m_result.add(error_failed);
 
             return error_cancelled;
 
          }
-         pgraphics->EndPage();
+         pdraw2dgraphics->EndPage();
          if (m_bCancel)
          {
 
-            pgraphics->AbortDoc();
+            pdraw2dgraphics->AbortDoc();
 
             m_result.add(error_failed);
 
@@ -100,7 +100,7 @@ namespace windows
 
       }
 
-      pgraphics->EndDoc();
+      pdraw2dgraphics->EndDoc();
 
       return ::success;
 

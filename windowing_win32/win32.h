@@ -31,6 +31,7 @@ namespace windows
 
    using window_map = map_base < HWND, ::pointer<::windowing_win32::window >>;
 
+   CLASS_DECL_WINDOWING_WIN32 hwnd_array get_hwnda(const ::user::interaction_array & a);
 
 
 } // namespace windows

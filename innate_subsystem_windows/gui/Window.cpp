@@ -1339,10 +1339,10 @@ namespace innate_subsystem_windows
    }
 
 
-   void Window::onDraw(::innate_subsystem::GraphicsInterface * pgraphics, const ::i32_rectangle & rectangle)
+   void Window::onDraw(::innate_subsystem::GraphicsInterface * pdraw2dgraphics, const ::i32_rectangle & rectangle)
    {
 
-      m_pwindowCallback->onDraw(pgraphics, rectangle);
+      m_pwindowCallback->onDraw(pdraw2dgraphics, rectangle);
 
 
    }

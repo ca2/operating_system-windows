@@ -7,10 +7,8 @@
 #include "icon.h"
 #include "monitor.h"
 #include "system_interaction.h"
-#include "top_level_enum.h"
 #include "window.h"
 #include "windowing.h"
-#include "window_util.h"
 #include "acme/constant/activate.h"
 #include "acme/constant/id.h"
 #include "acme/constant/user_message.h"
@@ -47,6 +45,7 @@
 
 #include "acme/_operating_system.h"
 #include "acme/operating_system/windows_common/_string.h"
+#include "acme/operating_system/windows/top_level_enum.h"
 #include "acme/operating_system/windows/windows.h"
 
 
@@ -7720,7 +7719,7 @@ namespace windowing_win32
    {
 
       /// from top to bottom
-      top_level_enum toplevelenum;
+      ::windows::top_level_enum toplevelenum;
 
       auto phwnda = toplevelenum.m_phwnda;
 

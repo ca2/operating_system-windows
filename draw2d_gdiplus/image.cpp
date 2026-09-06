@@ -253,6 +253,13 @@ namespace draw2d_gdiplus
 
       //}
 
+      if (pdraw2dgraphics)
+      {
+
+         m_pgraphicsOwned = pdraw2dgraphics;
+
+      }
+
       //constructø(m_pgraphicsOwned);
 
       //m_pgraphicsOwned->create_for_image(this);

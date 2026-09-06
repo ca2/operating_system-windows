@@ -38,15 +38,15 @@ namespace draw2d_gdiplus
       bool LoadBitmap(UINT nIDResource);
       bool LoadOEMBitmap(UINT nIDBitmap); // for OBM_/OCR_/OIC_
 
-      bool CreateBitmap(::draw2d::graphics * pgraphics, ::i32 nWidth, ::i32 nHeight, UINT nPlanes, UINT nBitcount, const void * pBits, ::i32 stride);
+      bool CreateBitmap(::draw2d::graphics * pdraw2dgraphics, ::i32 nWidth, ::i32 nHeight, UINT nPlanes, UINT nBitcount, const void * pBits, ::i32 stride);
 
-      bool CreateBitmapIndirect(::draw2d::graphics * pgraphics, LPBITMAP pBitmap);
+      bool CreateBitmapIndirect(::draw2d::graphics * pdraw2dgraphics, LPBITMAP pBitmap);
 
-      void CreateCompatibleBitmap(::draw2d::graphics * pgraphics, ::i32 nWidth, ::i32 nHeight);
-      void CreateDiscardableBitmap(::draw2d::graphics * pgraphics, ::i32 nWidth, ::i32 nHeight);
-      virtual bool host_bitmap(::draw2d::graphics * pgraphics, pixmap* ppximap) override;
-      virtual void create_bitmap(::draw2d::graphics * pgraphics, const ::i32_size & size, void **ppvBits, ::i32 * stride) override;
-      virtual void CreateDIBitmap(::draw2d::graphics * pgraphics, ::i32 cx, ::i32 cy, ::u32 flInit, const void *pjBits, UINT iUsage) override;
+      void CreateCompatibleBitmap(::draw2d::graphics * pdraw2dgraphics, ::i32 nWidth, ::i32 nHeight);
+      void CreateDiscardableBitmap(::draw2d::graphics * pdraw2dgraphics, ::i32 nWidth, ::i32 nHeight);
+      virtual bool host_bitmap(::draw2d::graphics * pdraw2dgraphics, pixmap* ppximap) override;
+      virtual void create_bitmap(::draw2d::graphics * pdraw2dgraphics, const ::i32_size & size, void **ppvBits, ::i32 * stride) override;
+      virtual void CreateDIBitmap(::draw2d::graphics * pdraw2dgraphics, ::i32 cx, ::i32 cy, ::u32 flInit, const void *pjBits, UINT iUsage) override;
 
 
       ::i32 GetBitmap(BITMAP* pBitMap);

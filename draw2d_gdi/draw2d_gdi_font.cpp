@@ -107,7 +107,7 @@ namespace draw2d_gdi
    // out-of-line ::draw2d::brush, font, etc. helpers
 
    // nPointSize is actually scaled 10x
-   bool font::CreatePointFont(::i32 nPointSize, const ::scoped_string & scopedstrFaceName, ::draw2d::graphics_pointer & pgraphics)
+   bool font::CreatePointFont(::i32 nPointSize, const ::scoped_string & scopedstrFaceName, ::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
       LOGFONTW logFont;
@@ -124,24 +124,24 @@ namespace draw2d_gdi
 
       wcsncpy(logFont.lfFaceName, wstr, sizeof(logFont.lfFaceName) / sizeof(wchar_t));
 
-      return CreatePointFontIndirect(&logFont, pgraphics);
+      return CreatePointFontIndirect(&logFont, pdraw2dgraphics);
 
    }
 
    // pLogFont->nHeight is interpreted as PointSize * 10
-   bool font::CreatePointFontIndirect(const LOGFONTW* lpLogFont, ::draw2d::graphics_pointer & pgraphics)
+   bool font::CreatePointFontIndirect(const LOGFONTW* lpLogFont, ::draw2d::graphics_pointer & pdraw2dgraphics)
    {
       HDC hDC;
-      if (pgraphics != nullptr)
+      if (pdraw2dgraphics != nullptr)
       {
-         ASSERT_OK(pgraphics);
-         ASSERT((dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle2() != nullptr);
-         hDC = (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle2();
+         ASSERT_OK(pdraw2dgraphics);
+         ASSERT((dynamic_cast<::draw2d_gdi::graphics * >(pdraw2dgraphics))->get_handle2() != nullptr);
+         hDC = (dynamic_cast<::draw2d_gdi::graphics * >(pdraw2dgraphics))->get_handle2();
       }
       else
          hDC = ::GetDC(nullptr);
 
-      // convert nPointSize to logical units based on pgraphics
+      // convert nPointSize to logical units based on pdraw2dgraphics
       LOGFONTW logFont = *lpLogFont;
       ::i32_point point;
       // 72 points/inch, 10 decipoints/i32_point
@@ -152,7 +152,7 @@ namespace draw2d_gdi
       ::DPtoLP(hDC, pointOrg, 1);
       logFont.lfHeight = -abs(point.y - pointOrg.y);
 
-      if (pgraphics == nullptr)
+      if (pdraw2dgraphics == nullptr)
          ReleaseDC(nullptr, hDC);
 
 

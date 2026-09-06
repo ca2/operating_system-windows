@@ -165,9 +165,9 @@ namespace draw2d_gdi
          try
          {
 
-            ::draw2d_gdi::graphics * pgraphics = m_ptraGraphics[i];
+            ::draw2d_gdi::graphics * pdraw2dgraphics = m_ptraGraphics[i];
 
-            pgraphics->m_ptraObject.erase(this);
+            pdraw2dgraphics->m_ptraObject.erase(this);
 
          }
          catch(...)

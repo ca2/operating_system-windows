@@ -30,9 +30,16 @@ namespace accessibility_windows
 
       void post_application_exit() override;
 
+
+      ::string get_title() override;
+
+
       ::string get_window_text(const ::iptr_array & idPath) override;
       ::string indexed_get_window_text(const ::iptr_array & idPath) override;
       void activate() override;
+
+
+      void set_size(const ::i32_size & size) override;
 
 
    };

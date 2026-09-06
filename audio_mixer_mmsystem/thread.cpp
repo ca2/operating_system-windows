@@ -78,8 +78,8 @@
 //         else if(pusermessage->m_wparam == 19)
 //         {
 //            ASSERT(false);
-//            //        CDBCentral * pgraphics = (CDBCentral *) lParam;
-//            //      pgraphics->SongsCreateBuildAlbumThread(
+//            //        CDBCentral * pdraw2dgraphics = (CDBCentral *) lParam;
+//            //      pdraw2dgraphics->SongsCreateBuildAlbumThread(
 //            //        (CDataCentral::EBuildSongsAlbumOperation)
 //            //      (CDataCentral::eBuildSongsAlbumDeleteNotFound |
 //            //    CDataCentral::eBuildSongsAlbumAddNew |
@@ -89,8 +89,8 @@
 //         else if(pusermessage->m_wparam == 20)
 //         {
 //            ASSERT(false);
-//            //        CDBCentral * pgraphics = (CDBCentral *) lParam;
-//            //      pgraphics->SongsCreateBuildAlbumThread(
+//            //        CDBCentral * pdraw2dgraphics = (CDBCentral *) lParam;
+//            //      pdraw2dgraphics->SongsCreateBuildAlbumThread(
 //            //        (CDataCentral::EBuildSongsAlbumOperation)
 //            //      (CDataCentral::eBuildSongsAlbumAddNew |
 //            //    CDataCentral::eBuildSongsAlbumCreateSearchReferences),
@@ -99,8 +99,8 @@
 //         else if(pusermessage->m_wparam == 810)
 //         {
 //            ASSERT(false);
-//            //        CDBCentral * pgraphics = (CDBCentral *) lParam;
-//            //      pgraphics->SongsCreateBuildAlbumThread(
+//            //        CDBCentral * pdraw2dgraphics = (CDBCentral *) lParam;
+//            //      pdraw2dgraphics->SongsCreateBuildAlbumThread(
 //            //        (CDataCentral::EBuildSongsAlbumOperation)
 //            //      CDataCentral::eBuildSongsAlbumDeleteNotFound,
 //            //    false, this, this);

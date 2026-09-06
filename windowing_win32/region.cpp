@@ -25,7 +25,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::translate(const POINT& point, ::draw2d::graphics * pgraphics)
+   bool region::translate(const POINT& point, ::draw2d::graphics * pdraw2dgraphics)
    {
 
       return true;
@@ -33,14 +33,14 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::get_bounding_box(RECT * prectangle, ::draw2d::graphics * pgraphics)
+   bool region::get_bounding_box(RECT * prectangle, ::draw2d::graphics * pdraw2dgraphics)
    {
 
-      defer_update(pgraphics, 0);
+      defer_update(pdraw2dgraphics, 0);
 
       Gdiplus::Rect i32_rectangle;
 
-      m_pregion->GetBounds(&rectangle, __graphics(pgraphics)->m_pgraphics);
+      m_pregion->GetBounds(&rectangle, __graphics(pdraw2dgraphics)->m_pgraphics);
 
       prectangle->left = rectangle.X;
 
@@ -57,7 +57,7 @@ namespace draw2d_gdiplus
 
 
 
-   void region::expand_bounding_box(::f64_rectangle * prectangle, ::draw2d::graphics * pgraphics)
+   void region::expand_bounding_box(::f64_rectangle * prectangle, ::draw2d::graphics * pdraw2dgraphics)
    {
 
       ::i32_rectangle rectangle;
@@ -67,15 +67,15 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::contains(const POINT & point, ::draw2d::graphics * pgraphics)
+   bool region::contains(const POINT & point, ::draw2d::graphics * pdraw2dgraphics)
    {
 
-      defer_update(pgraphics, 0);
+      defer_update(pdraw2dgraphics, 0);
 
       if (!m_pregion)
       {
 
-         return ::draw2d::region::contains(point, pgraphics);
+         return ::draw2d::region::contains(point, pdraw2dgraphics);
 
       }
 
@@ -86,10 +86,10 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   bool region::create(::draw2d::graphics * pdraw2dgraphics, ::i8 iCreate)
    {
 
-      m_pregion = get(pgraphics);
+      m_pregion = get(pdraw2dgraphics);
 
       m_osdata[0] = m_pregion;
 
@@ -108,7 +108,7 @@ namespace draw2d_gdiplus
    }
 
 
-   Gdiplus::Region * region::get(::draw2d::graphics * pgraphics)
+   Gdiplus::Region * region::get(::draw2d::graphics * pdraw2dgraphics)
    {
 
       switch(m_eregion)
@@ -116,15 +116,15 @@ namespace draw2d_gdiplus
       case ::draw2d::e_region_none:
          return ___new Gdiplus::Region();
       case ::draw2d::e_region_rect:
-         return get_rect(pgraphics);
+         return get_rect(pdraw2dgraphics);
       case ::draw2d::e_region_oval:
-         return get_oval(pgraphics);
+         return get_oval(pdraw2dgraphics);
       case ::draw2d::e_region_polygon:
-         return get_polygon(pgraphics);
+         return get_polygon(pdraw2dgraphics);
       case ::draw2d::e_region_poly_polygon:
-         return get_polygon(pgraphics);
+         return get_polygon(pdraw2dgraphics);
       case ::draw2d::e_region_combine:
-         return get_combine(pgraphics);
+         return get_combine(pdraw2dgraphics);
       default:
          throw ::interface_only();
       }
@@ -133,7 +133,7 @@ namespace draw2d_gdiplus
 
    }
 
-   Gdiplus::Region * region::get_rect(::draw2d::graphics * pgraphics)
+   Gdiplus::Region * region::get_rect(::draw2d::graphics * pdraw2dgraphics)
    {
 
       Gdiplus::GraphicsPath path;
@@ -152,7 +152,7 @@ namespace draw2d_gdiplus
    }
 
 
-   Gdiplus::Region * region::get_oval(::draw2d::graphics * pgraphics)
+   Gdiplus::Region * region::get_oval(::draw2d::graphics * pdraw2dgraphics)
    {
 
       Gdiplus::GraphicsPath path;
@@ -164,7 +164,7 @@ namespace draw2d_gdiplus
    }
 
 
-   Gdiplus::Region * region::get_polygon(::draw2d::graphics * pgraphics)
+   Gdiplus::Region * region::get_polygon(::draw2d::graphics * pdraw2dgraphics)
    {
 
       Gdiplus::GraphicsPath path;
@@ -192,7 +192,7 @@ namespace draw2d_gdiplus
    }
 
 
-   Gdiplus::Region * region::get_poly_polygon(::draw2d::graphics * pgraphics)
+   Gdiplus::Region * region::get_poly_polygon(::draw2d::graphics * pdraw2dgraphics)
    {
 
       Gdiplus::GraphicsPath path;
@@ -228,7 +228,7 @@ namespace draw2d_gdiplus
    }
 
 
-   Gdiplus::Region * region::get_combine(::draw2d::graphics * pgraphics)
+   Gdiplus::Region * region::get_combine(::draw2d::graphics * pdraw2dgraphics)
    {
 
       if (!m_pregion1 || !m_pregion2)
@@ -238,9 +238,9 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::Region * pregion = m_pregion1->get_os_data < Gdiplus::Region *>(pgraphics)->Clone();
+      Gdiplus::Region * pregion = m_pregion1->get_os_data < Gdiplus::Region *>(pdraw2dgraphics)->Clone();
 
-      Gdiplus::Region * pregionOp = m_pregion2->get_os_data < Gdiplus::Region *>(pgraphics);
+      Gdiplus::Region * pregionOp = m_pregion2->get_os_data < Gdiplus::Region *>(pdraw2dgraphics);
 
       if(m_ecombine == ::draw2d::e_combine_add)
       {

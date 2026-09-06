@@ -28,7 +28,7 @@ namespace accessibility_windows
 
       //::pointer < ::operating_system::application > application_predicate(const ::function < bool(::operating_system::application * papplication) > & function) override;
 
-
+      ::pointer_array < ::accessibility::main_window > system_get_main_windows() override;
 
    };
 

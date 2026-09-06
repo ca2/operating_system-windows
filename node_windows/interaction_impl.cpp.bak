@@ -673,7 +673,7 @@ namespace windows
       if (!(GetExStyle() & WS_EX_LAYERED))
       {
 
-         //m_puserinteraction->on_layout(::draw2d::graphics_pointer & pgraphics);
+         //m_puserinteraction->on_layout(::draw2d::graphics_pointer & pdraw2dgraphics);
 
       }
 
@@ -735,7 +735,7 @@ namespace windows
       //if (!(GetExStyle() & WS_EX_LAYERED))
       //{
 
-      //   m_puserinteraction->on_layout(::draw2d::graphics_pointer & pgraphics);
+      //   m_puserinteraction->on_layout(::draw2d::graphics_pointer & pdraw2dgraphics);
 
       //}
 
@@ -1250,11 +1250,11 @@ namespace windows
       return ::GetLayeredWindowAttributes(((interaction_impl *)this)->get_handle(), pcrKey, pbAlpha, (LPDWORD)pdwFlags) != FALSE;
    }
 
-   bool interaction_impl::PrintWindow(::draw2d::graphics_pointer & pgraphics, UINT nFlags) const
+   bool interaction_impl::PrintWindow(::draw2d::graphics_pointer & pdraw2dgraphics, UINT nFlags) const
    {
       ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
       ::exception::throw_not_implemented();
-      //      return ::PrintWindow(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), nFlags) != FALSE;
+      //      return ::PrintWindow(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->get_handle(), nFlags) != FALSE;
       return false;
    }
 
@@ -2349,7 +2349,7 @@ namespace windows
    {
 
       ::exception::throw_not_implemented();
-      //::CallWindowProc(*GetSuperWndProcAddr(), get_handle(), WM_PRINT, (WPARAM)((dynamic_cast<::windows::graphics * >(pgraphics))->get_handle()), (LPARAM)(PRF_CHILDREN | PRF_CLIENT));
+      //::CallWindowProc(*GetSuperWndProcAddr(), get_handle(), WM_PRINT, (WPARAM)((dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->get_handle()), (LPARAM)(PRF_CHILDREN | PRF_CLIENT));
 
    }
 
@@ -2568,15 +2568,15 @@ namespace windows
       //if (m_spgraphics.is_set())
       //{
 
-      //   ::draw2d::graphics_pointer & pgraphics = m_spgraphics->on_begin_draw();
+      //   ::draw2d::graphics_pointer & pdraw2dgraphics = m_spgraphics->on_begin_draw();
 
-      //   if (pgraphics != nullptr)
+      //   if (pdraw2dgraphics != nullptr)
       //   {
 
       //      try
       //      {
 
-      //         _001Print(pgraphics);
+      //         _001Print(pdraw2dgraphics);
 
       //      }
       //      catch (...)
@@ -2590,12 +2590,12 @@ namespace windows
       //      try
       //      {
 
-      //         if (pgraphics != nullptr && g->attach_hdc(hdc))
+      //         if (pdraw2dgraphics != nullptr && g->attach_hdc(hdc))
       //         {
 
-      //            pgraphics->SetViewportOrg(0, 0);
+      //            pdraw2dgraphics->SetViewportOrg(0, 0);
 
-      //            g->BitBlt(rectPaint.left, rectPaint.top, rectPaint.width(), rectPaint.height(), pgraphics, rectUpdate.left, rectUpdate.top);
+      //            g->BitBlt(rectPaint.left, rectPaint.top, rectPaint.width(), rectPaint.height(), pdraw2dgraphics, rectUpdate.left, rectUpdate.top);
 
       //         }
 
@@ -3199,7 +3199,7 @@ namespace windows
    }
 
 
-   void interaction_impl::on_layout(::draw2d::graphics_pointer & pgraphics)
+   void interaction_impl::on_layout(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
 
@@ -4060,7 +4060,7 @@ namespace windows
 
    //}
 
-   bool interaction_impl::DrawCaption(::draw2d::graphics_pointer & pgraphics, const rect & prc, UINT uFlags)
+   bool interaction_impl::DrawCaption(::draw2d::graphics_pointer & pdraw2dgraphics, const rect & prc, UINT uFlags)
 
    {
 
@@ -4068,7 +4068,7 @@ namespace windows
 
       ::exception::throw_not_implemented();
       return false;
-      //      return ::DrawCaption(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), prc, uFlags) != FALSE;
+      //      return ::DrawCaption(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->get_handle(), prc, uFlags) != FALSE;
 
 
    }
@@ -4595,23 +4595,23 @@ namespace windows
 
    }
 
-   void interaction_impl::Print(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const
+   void interaction_impl::Print(::draw2d::graphics_pointer & pdraw2dgraphics, u32 dwFlags) const
    {
 
       ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
 
       ::exception::throw_not_implemented();
-      //      const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINT, (WPARAM)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), (LPARAM) dwFlags);
+      //      const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINT, (WPARAM)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->get_handle(), (LPARAM) dwFlags);
 
    }
 
-   void interaction_impl::PrintClient(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const
+   void interaction_impl::PrintClient(::draw2d::graphics_pointer & pdraw2dgraphics, u32 dwFlags) const
    {
 
       ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
 
       ::exception::throw_not_implemented();
-      //const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINTCLIENT, (WPARAM)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), (LPARAM) dwFlags);
+      //const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINTCLIENT, (WPARAM)(dynamic_cast<::windows::graphics * >(pdraw2dgraphics))->get_handle(), (LPARAM) dwFlags);
 
    }
 
@@ -5401,12 +5401,12 @@ lCallNextHook:
 
 
 
-   void interaction_impl::set_context_org(::draw2d::graphics_pointer & pgraphics)
+   void interaction_impl::set_context_org(::draw2d::graphics_pointer & pdraw2dgraphics)
    {
 
       // graphics will be already set its view port to the interaction_impl for linux - cairo with xlib
 
-      pgraphics->SetViewportOrg(::point());
+      pdraw2dgraphics->SetViewportOrg(::point());
 
    }
 
