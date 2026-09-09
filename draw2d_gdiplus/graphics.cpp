@@ -2011,7 +2011,6 @@ namespace draw2d_gdiplus
 
       Gdiplus::Bitmap * pgdiplusbitmapSource = pdraw2dgdiplusbitmap->m_pgdiplusbitmap;
 
-
       auto rectangleSource = imagedrawing.source_rectangle();
 
       auto rectangleTarget = imagedrawing.target_rectangle();
@@ -2104,7 +2103,6 @@ namespace draw2d_gdiplus
                   return;
 
                }
-
 
                if (pimageSource->m_emipmap == ::image::e_mipmap_anisotropic)
                {
