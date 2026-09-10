@@ -1039,6 +1039,9 @@ namespace windowing_win32
 
       auto p2 = pointUpdateLayeredWindow;
 
+      //p2.x += m_pwindow->m_sizeRaw.cx;
+      //p2.y += m_pwindow->m_sizeRaw.cy;
+
       POINT pointSrc = p2;
 
 

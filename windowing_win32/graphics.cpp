@@ -1366,11 +1366,11 @@ namespace windowing_win32
 
             }
 
-            auto r5 = rectangleWindowFixed;
+            //auto r5 = rectangleWindowFixed;
 
-            r5.offset(m_pwindow->m_sizeRaw);
+            //r5.offset(m_pwindow->m_sizeRaw);
 
-            auto ppixmapPixmapWindowBufferTarget = playeredwindowbuffer->m_ppixmapWindowBuffer->map(r5);
+            //auto ppixmapPixmapWindowBufferTarget = playeredwindowbuffer->m_ppixmapWindowBuffer->map(r5);
 
             //auto ppixmapImageRawData = pbufferitem->m_pimageBufferItem->map();
 
@@ -1412,7 +1412,7 @@ namespace windowing_win32
                //{},
                //ppixmapImageRawData);
 
-               ppixmapPixmapWindowBufferTarget->copy(ppixmapImageRawData);
+            playeredwindowbuffer->m_ppixmapWindowBuffer->copy(ppixmapImageRawData);
 
                //mapImageBufferItemSource.fill_byte(128);
                //pbufferitem->m_pimageBufferItem->fill_byte(128);
