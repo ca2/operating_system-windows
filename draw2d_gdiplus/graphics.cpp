@@ -352,7 +352,7 @@ namespace draw2d_gdiplus
 
       defer_constructø(m_pimageTarget);
 
-      m_pimageTarget->create_as_descriptor(pdraw2dgdiplusbitmap->size());
+      //m_pimageTarget->create_as_descriptor(pdraw2dgdiplusbitmap->size());
 
       m_pimageTarget->m_pdraw2dbitmap = pdraw2dgdiplusbitmap;
 
