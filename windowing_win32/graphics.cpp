@@ -1393,7 +1393,7 @@ namespace windowing_win32
 
             }
 
-            if (1)
+            if (0)
             {
 
                ppixmapImageRawData->blend_color({ 0, 0, 100, 100 }, argb(128, 100 / 2, 160 / 2, 200 / 2));
