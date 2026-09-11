@@ -585,11 +585,11 @@ namespace windowing_win32
 
    //      ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-   //      auto pgraphicsImageResized = pimageResized->acquire_graphics();
+   //      auto pdraw2dgraphicsImageResized = pimageResized->acquire_graphics();
 
-   //      pgraphicsImageResized->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
+   //      pdraw2dgraphicsImageResized->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
 
-   //      pgraphicsImageResized->draw(imagedrawing);
+   //      pdraw2dgraphicsImageResized->draw(imagedrawing);
 
    //      bOk = true;
 

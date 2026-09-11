@@ -1677,7 +1677,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      auto pgraphicsSrc = pgraphicsImage;
+      auto pgraphicsSrc = pdraw2dgraphicsImage;
 
       if (pgraphicsSrc == nullptr || pgraphicsSrc->get_current_bitmap() == nullptr)
       {
@@ -1757,9 +1757,9 @@ namespace draw2d_gdiplus
 
                      ::image::image_drawing imagedrawing3(imagedrawingoptions3, imagesource3);
 
-                     scoped_restore(pgraphicsImage->m_bUseImageMipMapsOrResizedImages);
+                     scoped_restore(pdraw2dgraphicsImage->m_bUseImageMipMapsOrResizedImages);
 
-                     pgraphicsImage->m_bUseImageMipMapsOrResizedImages = false;
+                     pdraw2dgraphicsImage->m_bUseImageMipMapsOrResizedImages = false;
 
                      pimage->draw(imagedrawing3);
 
@@ -7924,15 +7924,15 @@ namespace draw2d_gdiplus
 
    //         pimage1->fill(0);
 
-   //         pgraphicsImage1->set(get_current_font());
+   //         pdraw2dgraphicsImage1->set(get_current_font());
 
-   //         pgraphicsImage1->set(get_current_brush());
+   //         pdraw2dgraphicsImage1->set(get_current_brush());
 
-   //         pgraphicsImage1->set_alpha_mode(::draw2d::e_alpha_mode_blend);
+   //         pdraw2dgraphicsImage1->set_alpha_mode(::draw2d::e_alpha_mode_blend);
 
-   //         pgraphicsImage1->set_text_rendering_hint(::write_text::e_rendering_anti_alias);
+   //         pdraw2dgraphicsImage1->set_text_rendering_hint(::write_text::e_rendering_anti_alias);
 
-   //         pgraphicsImage1->text_out(0, 0, block);
+   //         pdraw2dgraphicsImage1->text_out(0, 0, block);
 
    //         i32_point pointDst;
 
@@ -8053,14 +8053,14 @@ namespace draw2d_gdiplus
 
    //            }
 
-   //            pgraphicsImage1->set_alpha_mode(::draw2d::e_alpha_mode_set);
+   //            pdraw2dgraphicsImage1->set_alpha_mode(::draw2d::e_alpha_mode_set);
 
    //            if (!pimage1->from(nullptr, pgraphicsSrc, ::i32_point(xSrc, ySrc), rectangleBlt.::f64_size()))
    //               return false;
 
    //            pimage1->blend2(::i32_point(), m_pimageAlphaBlend, i32_point(x - m_pointAlphaBlend.x, y - m_pointAlphaBlend.y), rectangleBlt.::f64_size(), 255);
 
-   //            BitBltRaw(x, y, nWidth, nHeight, pgraphicsImage1, 0, 0, dwRop);
+   //            BitBltRaw(x, y, nWidth, nHeight, pdraw2dgraphicsImage1, 0, 0, dwRop);
 
    //         }
 

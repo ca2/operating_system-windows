@@ -1547,7 +1547,7 @@ namespace windowing_win32
    //
    //      d1->g()->set_interpolation_mode(::draw2d::e_interpolation_mode_high_quality_bicubic);
    //
-   //      d1->g()->stretch(d1->rectangle(), pgraphicsImage, pimage->rectangle());
+   //      d1->g()->stretch(d1->rectangle(), pdraw2dgraphicsImage, pimage->rectangle());
    //
    //      memory m(puserinteraction->get_application());
    //

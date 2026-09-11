@@ -1669,7 +1669,7 @@ namespace draw2d_gdi
 
       pimage1->set(255, 255, 255);
 
-      pgraphicsImage1->DrawIcon(
+      pdraw2dgraphicsImage1->DrawIcon(
       0, 0,
       picon,
       cx, cy,
@@ -1684,7 +1684,7 @@ namespace draw2d_gdi
 
       pimage2->fill(0, 0, 0, 0);
 
-      pgraphicsImage2->DrawIcon(
+      pdraw2dgraphicsImage2->DrawIcon(
       0, 0,
       picon,
       cx, cy,
@@ -2628,7 +2628,7 @@ namespace draw2d_gdi
 
    //      }
 
-   //      ::draw2d::graphics_pointer & pdraw2dgraphics = pgraphicsImage;
+   //      ::draw2d::graphics_pointer & pdraw2dgraphics = pdraw2dgraphicsImage;
 
    //      if (pdraw2dgraphics->get_os_data() == nullptr)
    //      {
@@ -2643,12 +2643,12 @@ namespace draw2d_gdi
    //      rectanglePaint = rectangleWindow;
    //      rectanglePaint.offset(-rectanglePaint.top_left());
    //      m_spgraphics->SelectClipRgn(nullptr);
-   //      puserinteraction->_001OnDeferPaintLayeredWindowBackground(pgraphicsImage);
+   //      puserinteraction->_001OnDeferPaintLayeredWindowBackground(pdraw2dgraphicsImage);
    //      m_spgraphics->SelectClipRgn(nullptr);
 
    //      m_spgraphics-> SetViewportOrg(::i32_point());
 
-   //      puserinteraction->_000OnDraw(pgraphicsImage);
+   //      puserinteraction->_000OnDraw(pdraw2dgraphicsImage);
 
    //      m_spgraphics->SetViewportOrg(::i32_point());
    //      //(dynamic_cast<::win::graphics * >(pdraw2dgraphics))->FillSolidRect(rectangleUpdate.left, rectangleUpdate.top, 100, 100, 255);

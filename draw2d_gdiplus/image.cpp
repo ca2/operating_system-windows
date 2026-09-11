@@ -885,143 +885,143 @@ namespace draw2d_gdiplus
    //}
 
 
-   void image::_draw_raw(const ::i32_rectangle & rectangleDstParam, ::image::image * pimageSrc, const ::i32_point & pointSrcParam)
-   {
+   //void image::_draw_raw(const ::i32_rectangle & rectangleDstParam, ::image::image * pimageSrc, const ::i32_point & pointSrcParam)
+   //{
 
-      ::i32_rectangle rectangleTarget(rectangleDstParam);
+   //   ::i32_rectangle rectangleTarget(rectangleDstParam);
 
-      ::i32_point pointSrc(pointSrcParam);
+   //   ::i32_point pointSrc(pointSrcParam);
 
-      ::i32_size size(rectangleTarget.size());
+   //   ::i32_size size(rectangleTarget.size());
 
-      ::image::image * pimageDst = this;
+   //   ::image::image * pimageDst = this;
 
-      if (pimageDst->m_pimagepixmaplease || pimageSrc->m_pimagepixmaplease)
-      {
+   //   if (pimageDst->m_pimagepixmaplease || pimageSrc->m_pimagepixmaplease)
+   //   {
 
-         throw ::exception(error_wrong_state);
+   //      throw ::exception(error_wrong_state);
 
-      }
+   //   }
 
-      // if (pimageDst->m_bMapped && pimageSrc->m_bMapped)
-      // {
-      //
-      //    //rectangleTarget += m_point;
-      //
-      //    if (pointSrc.x < 0)
-      //    {
-      //
-      //       rectangleTarget.left -= pointSrc.x;
-      //
-      //       pointSrc.x = 0;
-      //
-      //    }
-      //
-      //    if (pointSrc.y < 0)
-      //    {
-      //
-      //       rectangleTarget.top -= pointSrc.y;
-      //
-      //       pointSrc.y = 0;
-      //
-      //    }
-      //
-      //    if (rectangleTarget.left < 0)
-      //    {
-      //
-      //       size.cx += rectangleTarget.left;
-      //
-      //       pointSrc.x -= rectangleTarget.left;
-      //
-      //       rectangleTarget.left = 0;
-      //
-      //    }
-      //
-      //    if (size.cx < 0)
-      //    {
-      //
-      //       return;
-      //
-      //    }
-      //
-      //    if (rectangleTarget.top < 0)
-      //    {
-      //
-      //       size.cy += rectangleTarget.top;
-      //
-      //       pointSrc.y -= rectangleTarget.top;
-      //
-      //       rectangleTarget.top = 0;
-      //
-      //    }
-      //
-      //    if (size.cy < 0)
-      //    {
-      //
-      //       return;
-      //
-      //    }
-      //
-      //    ::i32 xEnd = minimum(size.cx, minimum(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectangleTarget.left));
-      //
-      //    ::i32 yEnd = minimum(size.cy, minimum(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectangleTarget.top));
-      //
-      //    if (xEnd < 0)
-      //    {
-      //
-      //       return;
-      //
-      //    }
-      //
-      //    if (yEnd < 0)
-      //    {
-      //
-      //       return;
-      //
-      //    }
-      //
-      //    ::i32 scanDst = pimageDst->scan_size();
-      //
-      //    ::i32 scanSrc = pimageSrc->scan_size();
-      //
-      //    ::u8 * pdst = &((::u8 *)pimageDst->image32())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
-      //
-      //    ::u8 * psrc = &((::u8 *)pimageSrc->image32())[scanSrc * pointSrc.y + pointSrc.x * sizeof(::color::color)];
-      //
-      //    ::color::color * pdst2;
-      //
-      //    ::color::color * psrc2;
-      //
-      //    for (::i32 y = 0; y < yEnd; y++)
-      //    {
-      //
-      //       pdst2 = (::color::color *)&pdst[scanDst * y];
-      //
-      //       psrc2 = (::color::color *)&psrc[scanSrc * y];
-      //
-      //       memory_copy(pdst2, psrc2, xEnd * 4);
-      //
-      //    }
-      //
-      // }
-      // else
-      {
+   //   // if (pimageDst->m_bMapped && pimageSrc->m_bMapped)
+   //   // {
+   //   //
+   //   //    //rectangleTarget += m_point;
+   //   //
+   //   //    if (pointSrc.x < 0)
+   //   //    {
+   //   //
+   //   //       rectangleTarget.left -= pointSrc.x;
+   //   //
+   //   //       pointSrc.x = 0;
+   //   //
+   //   //    }
+   //   //
+   //   //    if (pointSrc.y < 0)
+   //   //    {
+   //   //
+   //   //       rectangleTarget.top -= pointSrc.y;
+   //   //
+   //   //       pointSrc.y = 0;
+   //   //
+   //   //    }
+   //   //
+   //   //    if (rectangleTarget.left < 0)
+   //   //    {
+   //   //
+   //   //       size.cx += rectangleTarget.left;
+   //   //
+   //   //       pointSrc.x -= rectangleTarget.left;
+   //   //
+   //   //       rectangleTarget.left = 0;
+   //   //
+   //   //    }
+   //   //
+   //   //    if (size.cx < 0)
+   //   //    {
+   //   //
+   //   //       return;
+   //   //
+   //   //    }
+   //   //
+   //   //    if (rectangleTarget.top < 0)
+   //   //    {
+   //   //
+   //   //       size.cy += rectangleTarget.top;
+   //   //
+   //   //       pointSrc.y -= rectangleTarget.top;
+   //   //
+   //   //       rectangleTarget.top = 0;
+   //   //
+   //   //    }
+   //   //
+   //   //    if (size.cy < 0)
+   //   //    {
+   //   //
+   //   //       return;
+   //   //
+   //   //    }
+   //   //
+   //   //    ::i32 xEnd = minimum(size.cx, minimum(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectangleTarget.left));
+   //   //
+   //   //    ::i32 yEnd = minimum(size.cy, minimum(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectangleTarget.top));
+   //   //
+   //   //    if (xEnd < 0)
+   //   //    {
+   //   //
+   //   //       return;
+   //   //
+   //   //    }
+   //   //
+   //   //    if (yEnd < 0)
+   //   //    {
+   //   //
+   //   //       return;
+   //   //
+   //   //    }
+   //   //
+   //   //    ::i32 scanDst = pimageDst->scan_size();
+   //   //
+   //   //    ::i32 scanSrc = pimageSrc->scan_size();
+   //   //
+   //   //    ::u8 * pdst = &((::u8 *)pimageDst->image32())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
+   //   //
+   //   //    ::u8 * psrc = &((::u8 *)pimageSrc->image32())[scanSrc * pointSrc.y + pointSrc.x * sizeof(::color::color)];
+   //   //
+   //   //    ::color::color * pdst2;
+   //   //
+   //   //    ::color::color * psrc2;
+   //   //
+   //   //    for (::i32 y = 0; y < yEnd; y++)
+   //   //    {
+   //   //
+   //   //       pdst2 = (::color::color *)&pdst[scanDst * y];
+   //   //
+   //   //       psrc2 = (::color::color *)&psrc[scanSrc * y];
+   //   //
+   //   //       memory_copy(pdst2, psrc2, xEnd * 4);
+   //   //
+   //   //    }
+   //   //
+   //   // }
+   //   // else
+   //   {
 
-         ::image::image_source imagesource(pimageSrc, ::f64_rectangle(pointSrc, size));
+   //      ::image::image_source imagesource(pimageSrc, ::f64_rectangle(pointSrc, size));
 
-         ::image::image_drawing_options imagedrawingoptions(::f64_rectangle(rectangleTarget.top_left(), size));
+   //      ::image::image_drawing_options imagedrawingoptions(::f64_rectangle(rectangleTarget.top_left(), size));
 
-         ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
+   //      ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         auto pgraphicsImageDst = pimageDst->acquire_graphics();
+   //      auto pdraw2dgraphicsImageDst = pimageDst->acquire_graphics();
 
-         pgraphicsImageDst->draw(imagedrawing);
+   //      pdraw2dgraphicsImageDst->draw(imagedrawing);
 
-      }
+   //   }
 
-      //return true;
+   //   //return true;
 
-   }
+   //}
 
 
  /*  bool image::draw(const ::i32_rectangle & rectangleTarget, ::image::image * pimage, const ::i32_point & pointSrc)
@@ -1082,10 +1082,10 @@ namespace draw2d_gdiplus
 
       {
       
-         auto pgraphicsImage1 = pimage1->acquire_graphics();
+         auto pdraw2dgraphicsImage1 = pimage1->acquire_graphics();
 
 
-         pgraphicsImage1->clear(color::white);
+         pdraw2dgraphicsImage1->clear(color::white);
 
          ::image::image_source imagesource(picon);
 
@@ -1093,9 +1093,9 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         //auto pgraphicsImage1 = pimage1->acquire_graphics();
+         //auto pdraw2dgraphicsImage1 = pimage1->acquire_graphics();
 
-         pgraphicsImage1->draw(imagedrawing);
+         pdraw2dgraphicsImage1->draw(imagedrawing);
 
       }
 
@@ -1127,11 +1127,11 @@ namespace draw2d_gdiplus
 
       {
 
-         auto pgraphicsImage2 = pimage2->acquire_graphics();
+         auto pdraw2dgraphicsImage2 = pimage2->acquire_graphics();
 
          //pimage2->fill_byte(0);
 
-         pgraphicsImage2->clear(::color::transparent);
+         pdraw2dgraphicsImage2->clear(::color::transparent);
 
          ::image::image_source imagesource(picon);
 
@@ -1139,9 +1139,9 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         //auto pgraphicsImage2 = pimage1->acquire_graphics();
+         //auto pdraw2dgraphicsImage2 = pimage1->acquire_graphics();
 
-         pgraphicsImage2->draw(imagedrawing);
+         pdraw2dgraphicsImage2->draw(imagedrawing);
 
       }
 
@@ -1176,7 +1176,7 @@ namespace draw2d_gdiplus
 
       {
 
-         auto pgraphicsImageM = pimageM->acquire_graphics();
+         auto pdraw2dgraphicsImageM = pimageM->acquire_graphics();
 
          ::image::image_source imagesource(picon);
 
@@ -1184,9 +1184,9 @@ namespace draw2d_gdiplus
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-         //auto pgraphicsImageM = pimageM->acquire_graphics();
+         //auto pdraw2dgraphicsImageM = pimageM->acquire_graphics();
 
-         pgraphicsImageM->draw(imagedrawing);
+         pdraw2dgraphicsImageM->draw(imagedrawing);
 
       }
 
@@ -1271,7 +1271,7 @@ namespace draw2d_gdiplus
       // Create an image and a thumbnail of the pimage->
       ::Gdiplus::Image image(wstr);
 
-      auto pthumbnail = as_auto_pointer(image.GetThumbnailImage(width(), height(), nullptr, nullptr));
+      auto pthumbnail = as_owned_auto_pointer(image.GetThumbnailImage(width(), height(), nullptr, nullptr));
 
       // Draw the original and the thumbnail images.
       pdraw2dgraphics->DrawImage(pthumbnail, 0, 0, pthumbnail->GetWidth(), pthumbnail->GetHeight());
