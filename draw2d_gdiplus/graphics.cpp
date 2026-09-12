@@ -1994,6 +1994,14 @@ namespace draw2d_gdiplus
 
       auto pimageSource = pimageSrc->get_source_image();
 
+      if (m_bTargetRectangleModified)
+      {
+
+         defer_on_target_rectangle_update();
+
+      }
+
+
       //}
 
       //auto pdraw2dgraphicsImage = pimage->acquire_graphics();
@@ -7593,6 +7601,7 @@ namespace draw2d_gdiplus
          | Gdiplus::StringFormatFlagsNoClip
       );
 
+      format.SetAlignment(Gdiplus::StringAlignmentNear);
       format.SetLineAlignment(Gdiplus::StringAlignmentNear);
 
       if (m_pwritetextfont->m_dFontWidth == 1.0)
@@ -7669,13 +7678,17 @@ namespace draw2d_gdiplus
 
          g_keep k(m_pgdiplusgraphics);
 
-         ::Gdiplus::PointF origin(0, 0);
+         ::Gdiplus::PointF origin(x, y);
 
          FLOAT fDpiX = m_pgdiplusgraphics->GetDpiX();
 
          Gdiplus::Matrix m;
 
          m_pgdiplusgraphics->GetTransform(&m);
+
+         Gdiplus::REAL elementsA[6];
+
+         m.GetElements(elementsA);
 
          ::auto_pointer < Gdiplus::Matrix > pmatrixNew;
 
@@ -7696,9 +7709,19 @@ namespace draw2d_gdiplus
 
          }
 
-         pmatrixNew->Translate((Gdiplus::REAL)(x / m_pwritetextfont->m_dFontWidth), (Gdiplus::REAL)y);
+         Gdiplus::REAL elementsB[6];
+
+         pmatrixNew->GetElements(elementsB);
+
+         auto offsetX = pmatrixNew->OffsetX();
+
+         auto offsetY = pmatrixNew->OffsetY();
+
+         pmatrixNew->Translate(-x-offsetX, -y - offsetY, Gdiplus::MatrixOrderAppend);
 
          pmatrixNew->Scale((Gdiplus::REAL)m_pwritetextfont->m_dFontWidth, (Gdiplus::REAL)1.0, Gdiplus::MatrixOrderAppend);
+
+         pmatrixNew->Translate(x + offsetX, y + offsetY, Gdiplus::MatrixOrderAppend);
 
          if (m_pgdiplusgraphicspath != nullptr)
          {

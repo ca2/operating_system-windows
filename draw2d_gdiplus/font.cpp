@@ -444,6 +444,9 @@ namespace draw2d_gdiplus
             textmetric.m_dExternalLeading = dSize * pgdiplusfontfamily->GetLineSpacing(iStyle) / dHeight -
                (textmetric.m_dAscent + textmetric.m_dDescent);
 
+            textmetric.m_dHeight =
+               textmetric.m_dAscent + textmetric.m_dDescent;
+
          }
 
       }
