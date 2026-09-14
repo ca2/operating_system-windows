@@ -119,77 +119,81 @@ namespace windowing_win32
    bool graphics::_on_begin(::graphics::buffer_item * pbufferitem)
    {
 
-      //auto pbufferitem = get_buffer_item();
+      return ::graphics::double_buffer_graphics::_on_begin(pbufferitem);
 
-      //buffer_size_and_position(pbufferitem);
-
-      //if (pbufferitem->m_size.is_empty())
-      //{
-
-      //}
-
-//      auto pimageBufferItem = pbufferitem->m_pimageBufferItem;
-
-//      auto & sizeImageBufferItem = pimageBufferItem->m_size;
-
-//      if (sizeImageBufferItem != pbufferitem->m_sizeBufferItem)
-
-      auto pwindowing = m_pwindow->user_interaction()->windowing();
-
-      auto pdisplay = pwindowing->display();
-
-      auto rectangleUnion = pdisplay->get_monitor_union_rectangle();
-
-      m_pwindow->m_sizeRaw = m_pwindow->m_sizeRaw.maximum(rectangleUnion.size());
-
-      auto & sizeWindow = m_pwindow->m_sizeWindow;
-
-      auto & cxWindow = sizeWindow.cx;
-
-      auto & cyWindow = sizeWindow.cy;
-
-      RECT r;
-
-      ::GetWindowRect(::as_HWND(m_pwindow->operating_system_window()), &r);
-
-      auto sizeBufferItem = pbufferitem->m_pimageBufferItem->m_size;
-
-      auto &pointBufferItem1 = pbufferitem->m_pimageBufferItem->m_point;
-      auto &pointBufferItem2 = pbufferitem->m_pointBufferItem;
-      auto &sizeBufferItem1 = pbufferitem->m_pimageBufferItem->m_size;
-      auto &sizeBufferItem2 = pbufferitem->m_sizeBufferItem;
-      auto &sizeRawBufferItem1 = pbufferitem->m_pimageBufferItem->m_sizeRaw;
-      auto &sizeRawBufferItem2 = m_pwindow->m_sizeRaw;
-
-
-      if (pbufferitem->m_pimageBufferItem.nok()
-         || pbufferitem->m_pimageBufferItem->m_point != pbufferitem->m_pointBufferItem
-         || pbufferitem->m_pimageBufferItem->m_size != pbufferitem->m_sizeBufferItem
-         || pbufferitem->m_pimageBufferItem->m_sizeRaw != m_pwindow->m_sizeRaw)
-      {
-
-         if (!update_buffer(pbufferitem))
-         {
-
-            return false;
-
-         }
-
-      }
-
-      if (!m_papplication->m_gpu.m_bUseSwapChainWindow)
-      {
-
-         if (!double_buffer_graphics::_on_begin(pbufferitem))
-         {
-
-            return false;
-
-         }
-
-      }
-
-      return true;
+//
+//
+//      //auto pbufferitem = get_buffer_item();
+//
+//      //buffer_size_and_position(pbufferitem);
+//
+//      //if (pbufferitem->m_size.is_empty())
+//      //{
+//
+//      //}
+//
+////      auto pimageBufferItem = pbufferitem->m_pimageBufferItem;
+//
+////      auto & sizeImageBufferItem = pimageBufferItem->m_size;
+//
+////      if (sizeImageBufferItem != pbufferitem->m_sizeBufferItem)
+//
+//      auto pwindowing = m_pwindow->user_interaction()->windowing();
+//
+//      auto pdisplay = pwindowing->display();
+//
+//      auto rectangleUnion = pdisplay->get_monitor_union_rectangle();
+//
+//      m_pwindow->m_sizeRaw = m_pwindow->m_sizeRaw.maximum(rectangleUnion.size());
+//
+//      auto & sizeWindow = m_pwindow->m_sizeWindow;
+//
+//      auto & cxWindow = sizeWindow.cx;
+//
+//      auto & cyWindow = sizeWindow.cy;
+//
+//      RECT r;
+//
+//      ::GetWindowRect(::as_HWND(m_pwindow->operating_system_window()), &r);
+//
+//      auto sizeBufferItem = pbufferitem->m_pimageBufferItem->m_size;
+//
+//      auto &pointBufferItem1 = pbufferitem->m_pimageBufferItem->m_point;
+//      auto &pointBufferItem2 = pbufferitem->m_pointBufferItem;
+//      auto &sizeBufferItem1 = pbufferitem->m_pimageBufferItem->m_size;
+//      auto &sizeBufferItem2 = pbufferitem->m_sizeBufferItem;
+//      auto &sizeRawBufferItem1 = pbufferitem->m_pimageBufferItem->m_sizeRaw;
+//      auto &sizeRawBufferItem2 = m_pwindow->m_sizeRaw;
+//
+//
+//      if (pbufferitem->m_pimageBufferItem.nok()
+//         || pbufferitem->m_pimageBufferItem->m_point != pbufferitem->m_pointBufferItem
+//         || pbufferitem->m_pimageBufferItem->m_size != pbufferitem->m_sizeBufferItem
+//         || pbufferitem->m_pimageBufferItem->m_sizeRaw != m_pwindow->m_sizeRaw)
+//      {
+//
+//         if (!update_buffer(pbufferitem))
+//         {
+//
+//            return false;
+//
+//         }
+//
+//      }
+//
+//      if (!m_papplication->m_gpu.m_bUseSwapChainWindow)
+//      {
+//
+//         if (!double_buffer_graphics::_on_begin(pbufferitem))
+//         {
+//
+//            return false;
+//
+//         }
+//
+//      }
+//
+//      return true;
 
    }
 
