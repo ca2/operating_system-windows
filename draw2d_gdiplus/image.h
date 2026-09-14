@@ -25,7 +25,7 @@ namespace draw2d_gdiplus
 
 
       image();
-      image(image&& image);
+      //image(image&& image);
       ~image() override;
 
 

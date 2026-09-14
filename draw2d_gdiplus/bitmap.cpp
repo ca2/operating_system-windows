@@ -30,7 +30,7 @@ namespace draw2d_gdiplus
 
 
    bitmap::bitmap(bitmap&& bitmap) :
-      DRAW2D_BITMAP_TRANSFER(bitmap),
+      //DRAW2D_BITMAP_TRANSFER(bitmap),
       m_pgdiplusbitmap(::transfer(bitmap.m_pgdiplusbitmap)),
       m_mem(::transfer(bitmap.m_mem))//,
       //m_pimage32Host(bitmap.m_pimage32Host)

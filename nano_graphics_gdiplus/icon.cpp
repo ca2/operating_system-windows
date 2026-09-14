@@ -205,22 +205,28 @@ namespace nano_graphics_gdiplus
       {
 
          delete m_pgdiplusimage;
+
       }
+
    }
 
 
-   void icon::load_image_file(const void *p, memsize size)
+   void icon::load_image_file(const ::block & block)
    {
-
 
       if (m_pgdiplusimage)
       {
 
          delete m_pgdiplusimage;
+
       }
 
-      m_pgdiplusimage = LoadGdiplusImageFromMemory((BYTE *)p, size);
+      m_pgdiplusimage = LoadGdiplusImageFromMemory((BYTE *)block.data(), block.size());
+
    }
 
 
 } // namespace nano_graphics_gdiplus
+
+
+

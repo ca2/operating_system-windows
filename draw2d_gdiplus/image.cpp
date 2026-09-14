@@ -31,12 +31,12 @@ namespace draw2d_gdiplus
    }
 
 
-   image::image(image&& image) :
-      IMAGE_IMAGE_TRANSFER(image)
-   {
+   //image::image(image&& image) :
+   //   IMAGE_IMAGE_TRANSFER(image)
+   //{
 
 
-   }
+   //}
 
 
    image::~image()
@@ -805,15 +805,18 @@ namespace draw2d_gdiplus
    void image::preserve(const ::i32_size& size, ::enum_flag eflagCreate)
    {
 
-      auto imageBefore = ::transfer(*this);
+      this->map();
+
+      auto ppixmapBefore = ::transfer(m_ppixmapOwned);
+
+      destroy();
 
       create_as_descriptor(size, eflagCreate);
 
-      auto ppixmapImageThis = this->map();
+      auto ppixmap = this->map();
 
-      auto ppixmapImageBefore = imageBefore.map();
-
-      ppixmapImageThis->copy(ppixmapImageBefore);
+      ppixmap->copy(ppixmapBefore);
+      //ppixmapImageThis->copy(ppixmapImageBefore);
       //copy(size.minimum(ppixmapImageBefore->size()), ppixmapImageBefore->data(), ppixmapImageBefore->m_iScan);
 
    }
