@@ -4,6 +4,7 @@
 #include "bitmap.h"
 #include "draw2d.h"
 #include "acme/exception/exception.h"
+#include "acme/graphics/image/image32_t.h"
 #include "aura/graphics/image/icon.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/draw2d/graphics_lease.h"
@@ -11,7 +12,7 @@
 #include "aura/user/user/interaction.h"
 
 
-CLASS_DECL_ACME ::string _001_image32_diagnostics(const ::i32_size &size, const image32_t *pimage32, int iScan);
+//CLASS_DECL_ACME ::string _001_image32_diagnostics(const ::i32_size &size, const image32_t *pimage32, int iScan);
 
 
 namespace draw2d_gdiplus
@@ -454,7 +455,7 @@ namespace draw2d_gdiplus
 
       ::image32_t * pimage32Bitmap = nullptr;
 
-      auto str1 = _001_image32_diagnostics(pixmap.m_size, pixmap.m_pimage32, pixmap.m_iScan);
+      auto str1 = _001_image32_diagnostics_t(&pixmap).as_string();
 
       information("draw2d_gdiplus::image::create_from_data (1) {}", str1);
 
@@ -532,7 +533,7 @@ namespace draw2d_gdiplus
 
       pdraw2dbitmap->create_bitmap(nullptr, pixmap.m_size, ppixmapOwnedNew);
 
-      auto str2 = _001_image32_diagnostics(pixmap.m_size, pimage32Bitmap, iScan);
+      auto str2 = _001_image32_diagnostics_t(pixmap.m_size, pimage32Bitmap, iScan).as_string();
 
       information("draw2d_gdiplus::image::create_from_data (2) {}", str2);
 
