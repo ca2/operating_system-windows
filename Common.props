@@ -13,6 +13,7 @@
   <PropertyGroup>
     <OutDir>$(TimeDir)$(PlatformName)\$(Configuration)\</OutDir>
     <IntDir>$(TimeDir)intermediate\$(PlatformName)\$(Configuration)\$(RootNamespace)\$(ProjectName)\</IntDir>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -34,6 +35,7 @@
       <PrecompiledHeaderOutputFile>$(IntDir)platform.pch</PrecompiledHeaderOutputFile>
       <BuildStlModules>false</BuildStlModules>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
     </ClCompile>
     <PreBuildEvent>
       <Command>application_build_helper --defer-prepare-folder $(ProjectDir) $(PlatformName) $(ConfigurationName)</Command>
