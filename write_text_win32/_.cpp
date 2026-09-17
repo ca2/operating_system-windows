@@ -3,3 +3,16 @@
 
 
 
+#ifdef WINDOWS
+
+
+#pragma comment(lib, "Dwrite.lib")
+
+
+#endif
+
+
+
+
+
+

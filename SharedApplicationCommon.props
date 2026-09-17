@@ -4,10 +4,7 @@
   <PropertyGroup Label="UserMacros">
     <PlatformLower2>$([System.String]::Copy('$(Platform)').ToLower())</PlatformLower2>
   </PropertyGroup>
-  <PropertyGroup>
-    <OutDir>$(TimeDir)$(PlatformName)\$(Configuration)\</OutDir>
-    <IntDir>$(TimeDir)intermediate\$(PlatformName)\$(Configuration)\$(RootNamespace)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile />
     <PreBuildEvent>

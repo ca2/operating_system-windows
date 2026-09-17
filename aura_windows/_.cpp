@@ -11,6 +11,13 @@
 //
 
 
+#ifdef WINDOWS
+
+
+#pragma comment(lib, "Gdiplus.lib")
+
+
+#endif
 
 
 
@@ -143,8 +150,6 @@ namespace windows
 //   return &::__window_procedure;
 //
 //}
-
-
 
 
 
