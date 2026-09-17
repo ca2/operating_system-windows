@@ -1,3 +1,4 @@
+// Changed by camilo on 2026-09-16 23:04 <3ThomasBorregaardSørensen!! Mummi!! bilbo!!
 // Created by camilo on 2023-10-19 15:19 <3ThomasBorregaardSorensen!!
 #pragma once
 
@@ -18,6 +19,9 @@
 
 
 #define REFERENCING_DEBUGGING 1
+
+#include "debug/should_enable_referencing_debugging.h"
+
 
 //#define REFERENCING_DEBUGGING 0
 
