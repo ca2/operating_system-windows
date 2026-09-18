@@ -42,6 +42,7 @@
     </PreBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir);$(RootParentDir)operating_system\storage-windows\$(PlatformName)\library\</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>$(__operating_system)operating_system-windows\windows10.manifest</AdditionalManifestFiles>
