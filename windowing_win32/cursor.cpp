@@ -21,7 +21,7 @@ namespace windowing_win32
    cursor::cursor(HCURSOR hcursor)
    {
 
-      set_hcursor(hcursor);
+      m_hcursor = hcursor;
 
    }
 
@@ -77,6 +77,24 @@ namespace windowing_win32
       //return estatus;
 
    }
+
+
+   HCURSOR cursor::get_hcursor() const 
+   {
+      
+      return m_hcursor;
+   
+   }
+
+
+   void cursor::set_hcursor(HCURSOR hcursor) 
+   {
+      
+      m_hcursor = hcursor;
+   
+   }
+
+
 
 
    void cursor::_create_from_image(::image::image * pimage, ::i32 xHotspot, ::i32 yHotspot)

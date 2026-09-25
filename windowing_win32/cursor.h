@@ -19,6 +19,7 @@ namespace windowing_win32
    public:
 
 
+      HCURSOR m_hcursor;
       //__creatable_from_base(cursor, ::windowing::cursor);
 
 
@@ -28,9 +29,9 @@ namespace windowing_win32
 
       void _create_os_cursor() override;
 
-      inline HCURSOR get_hcursor() const { return (HCURSOR)get_os_data(); }
+      virtual HCURSOR _get_hcursor() const;
 
-      inline void set_hcursor(HCURSOR hcursor) { set_os_data(hcursor); }
+      virtual void _set_hcursor(HCURSOR hcursor);
 
       virtual void _load_default_cursor(enum_cursor ecursor);
 

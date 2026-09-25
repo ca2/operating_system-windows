@@ -84,8 +84,8 @@ namespace draw2d_gdiplus
 
       //void create_compatible_graphics(::draw2d::graphics * pdraw2dgraphics) override;
       void create_for_window_draw2d(::user::interaction * puserinteraction, const ::i32_size & size);
-      void create_bitmap_graphics(::draw2d::bitmap * pdraw2dbitmap, ::acme::user::interaction * pacmeuserinteractionAffinity) override;
-      void _create_memory_graphics(const ::i32_size & size, ::acme::user::interaction * pacmeuserinteractionAffinity) override;
+      void create_bitmap_graphics(::draw2d::bitmap * pdraw2dbitmap, ::draw2d::domain * pdraw2ddomain) override;
+      void _create_memory_graphics(const ::i32_size & size, ::draw2d::domain * pdraw2ddomain) override;
 
       ::image::image_pointer get_current_target_image() override;
 

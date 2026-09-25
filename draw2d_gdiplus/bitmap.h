@@ -43,7 +43,7 @@ namespace draw2d_gdiplus
 
       void update_bitmap_as_image_render_target(
          ::image::image * pimage,
-         ::acme::user::interaction * pacmeuserinteractionAffinity = nullptr,
+         ::draw2d::domain * pdraw2ddomain = nullptr,
          ::draw2d::graphics * pdraw2dgraphics = nullptr) override;
       void preserve_image(const ::i32_size& size, ::image::image* pimage) override;
       bool CreateBitmap(::draw2d::graphics * pdraw2dgraphics, ::i32 nWidth, ::i32 nHeight, UINT nPlanes, UINT nBitcount, const void * pBits, ::i32 stride);
