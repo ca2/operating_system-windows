@@ -2019,7 +2019,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      ::cast < ::draw2d_gdiplus::bitmap > pdraw2dgdiplusbitmap = pimageSource->get_bitmap_as_source();
+      ::cast < ::draw2d_gdiplus::bitmap > pdraw2dgdiplusbitmap = pimageSource->get_bitmap_as_source(this);
 
       Gdiplus::Bitmap * pgdiplusbitmapSource = pdraw2dgdiplusbitmap->m_pgdiplusbitmap;
 
