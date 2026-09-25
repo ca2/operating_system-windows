@@ -49,11 +49,11 @@ namespace draw2d_gdiplus
 
 
    void image::update_bitmap_as_render_target(
-      ::acme::user::interaction * pacmeuserinteractionAffinity, ::draw2d::graphics * pdraw2dgraphics)
+      ::draw2d::domain * pdraw2ddomain, ::draw2d::graphics * pdraw2dgraphics)
    {
 
       return ::image::image::update_bitmap_as_render_target(
-         pacmeuserinteractionAffinity,
+         pdraw2ddomain,
          pdraw2dgraphics);
 
    }
@@ -155,19 +155,24 @@ namespace draw2d_gdiplus
    //}
 
 
-   void image::update_as_render_target(const ::i32_size & sizeRaw, ::user::interaction * puserinteraction, ::draw2d::graphics * pdraw2dgraphics, ::enum_flag eflagCreate, ::i32 iGoodStride, bool bPreserve, bool bTopDraw2d)
+   void image::update_as_render_target(const ::i32_size & sizeRaw, ::draw2d::domain* pdraw2ddomain, ::draw2d::graphics * pdraw2dgraphics, ::enum_flag eflagCreate, ::i32 iGoodStride, bool bPreserve, bool bTopDraw2d)
    {
 
-      if (!puserinteraction)
+      if (!pdraw2ddomain)
       {
 
          throw ::exception(
             error_null_pointer,
-            "GDI+ render target requires a user interaction");
+            "GDI+ render target requires a draw2d domain");
 
       }
 
-      m_pacmeuserinteractionAffinity = puserinteraction;
+      if (::is_set(pdraw2ddomain))
+      {
+
+         pdraw2ddomain = pdraw2ddomain;
+
+      }
 
       ::cast < ::draw2d_gdiplus::bitmap > pbitmapCurrent = m_pdraw2dbitmap;
 
@@ -217,10 +222,11 @@ namespace draw2d_gdiplus
 
          create_as_descriptor(
             sizeRaw,
+            pdraw2ddomain,
             eflagCreate,
             bPreserve);
 
-         update_bitmap_as_render_target(m_pacmeuserinteractionAffinity, pdraw2dgraphics);
+         update_bitmap_as_render_target(pdraw2ddomain, pdraw2dgraphics);
 
       }
       catch (...)
@@ -229,7 +235,7 @@ namespace draw2d_gdiplus
          if (bRebindBitmap && pdraw2dgraphics && m_pdraw2dbitmap)
          {
 
-            pdraw2dgraphics->create_bitmap_graphics(m_pdraw2dbitmap, m_pacmeuserinteractionAffinity);
+            pdraw2dgraphics->create_bitmap_graphics(m_pdraw2dbitmap, draw2d_domain());
 
          }
 
@@ -242,7 +248,7 @@ namespace draw2d_gdiplus
 
          // Keep pbitmapCurrent and ppixmapOwned alive until create_bitmap_graphics
          // has destroyed the GDI+ Graphics that still references their storage.
-         pdraw2dgraphics->create_bitmap_graphics(m_pdraw2dbitmap, m_pacmeuserinteractionAffinity);
+         pdraw2dgraphics->create_bitmap_graphics(m_pdraw2dbitmap, draw2d_domain());
 
       }
 
@@ -376,7 +382,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void image::create_from_data(const ::pixmap_t & pixmap, ::enum_flag eflagCreate, bool bPreserve)
+   void image::create_from_data(const ::pixmap_t & pixmap, ::draw2d::domain * pdraw2ddomain,  ::enum_flag eflagCreate, bool bPreserve)
    {
 
       if (m_pdraw2dbitmap.is_set()
@@ -632,7 +638,7 @@ namespace draw2d_gdiplus
 
       //initialize_pixmap(size, pimage32Bitmap, iScan);
 
-      create_as_descriptor(pixmap.m_size);
+      create_as_descriptor(pixmap.m_size, pdraw2ddomain);
 
       //m_pgraphics->m_pimage = this;
       //m_sizeRaw.cx = width;
@@ -784,7 +790,7 @@ namespace draw2d_gdiplus
 
       }
       
-      create_as_descriptor(pdraw2dbitmap->size());
+      create_as_descriptor(pdraw2dbitmap->size(), pdraw2dgraphics->draw2d_domain());
       //if (!create(pdraw2dbitmap->get_size()))
       //{
 
@@ -812,7 +818,7 @@ namespace draw2d_gdiplus
 
       destroy();
 
-      create_as_descriptor(size, eflagCreate);
+      create_as_descriptor(size, draw2d_domain(), eflagCreate);
 
       auto ppixmap = this->map();
 
@@ -1050,7 +1056,7 @@ namespace draw2d_gdiplus
 
       //auto estatus = 
       
-      create_as_descriptor({cx, cy});
+      create_as_descriptor({cx, cy}, draw2d_domain());
 
       //if (!estatus)
       //{
@@ -1075,7 +1081,7 @@ namespace draw2d_gdiplus
       
       //estatus = 
       
-      pimage1->create_as_descriptor({cx, cy});
+      pimage1->create_as_descriptor({cx, cy}, draw2d_domain());
 
       //if (!estatus)
       //{
@@ -1120,7 +1126,7 @@ namespace draw2d_gdiplus
       //estatus=
       
       pimage2->create_as_descriptor( 
-      { cx, cy } );
+      { cx, cy }, draw2d_domain());
 
  /*     if (!estatus)
       {
@@ -1169,7 +1175,7 @@ namespace draw2d_gdiplus
       // estatus = 
       
       pimageM->create_as_descriptor(
-         { cx, cy });
+         { cx, cy }, draw2d_domain());
 
       //if (!estatus)
       //{

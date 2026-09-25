@@ -12,6 +12,8 @@
 #include "acme/prototype/string/international.h"
 #include "acme/filesystem/filesystem/directory_context.h"
 #include "acme/filesystem/filesystem/file_context.h"
+#include "aura/graphics/draw2d/domain.h"
+#include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/list.h"
@@ -189,7 +191,7 @@ bool IsDibSection(HBITMAP bmp)
 
          }
 
-         auto pimage = pparticle->image()->create_image({w, h});
+         auto pimage = pparticle->image()->create_image({w, h}, pparticle->draw2d()->main_draw2d_domain());
 
          auto ppixmapImage = pimage->map();
 
@@ -240,7 +242,7 @@ bool IsDibSection(HBITMAP bmp)
 
    ::GetObject(hbitmap, sizeof(bitmap), &bitmap);
 
-   auto pimage = pparticle->image()->create_image({ bitmap.bmWidth, bitmap.bmHeight });
+   auto pimage = pparticle->image()->create_image({ bitmap.bmWidth, bitmap.bmHeight }, pparticle->draw2d()->main_draw2d_domain());
 
    auto ppixmapImage = pimage->map();
 
@@ -482,7 +484,7 @@ namespace windowing_win32
 
                   ::image::image_drawing_options imagedrawingoptions(::f64_rectangle(), ::image::e_placement_aspect_fit);
 
-                  set_image(getfileimage.m_iImage, iSize, { imagedrawingoptions, imagesource });
+                  set_image(getfileimage.m_iImage, iSize, { imagedrawingoptions, imagesource }, draw2d_domain());
 
                }
 
@@ -1897,7 +1899,7 @@ namespace windowing_win32
       else
       {
 
-         ::user::shell::set_icon(getfileimage.m_iImage, pathIconParam);
+         ::user::shell::set_icon(getfileimage.m_iImage, pathIconParam, draw2d_domain());
 
       }
 
@@ -1919,7 +1921,7 @@ namespace windowing_win32
 
       ::image::image_source imagesource(pimageicon);
 
-      set_image(getfileimage.m_iImage, iSize, imagesource);
+      set_image(getfileimage.m_iImage, iSize, imagesource, draw2d_domain());
 
    }
 

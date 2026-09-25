@@ -45,7 +45,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::draw2d::graphics_pointer draw2d::do_allocation_strategy(::acme::user::interaction * pacmeuserinteractionAffinity, ::image::image * pimage,
+   ::draw2d::graphics_pointer draw2d::do_allocation_strategy(::draw2d::domain * pdraw2ddomain, ::image::image * pimage,
                                              const ::i32_size & size)
    {
 
@@ -56,13 +56,15 @@ namespace draw2d_gdiplus
 
          //pdraw2dgraphics->create_bitmap_graphics(pimage->get_bitmap());
 
-         pdraw2dgraphics->update_as_image_render_target(pimage, pacmeuserinteractionAffinity);
+         //pdraw2dgraphics->update_as_image_render_target(pimage, pdraw2ddomain);
+
+         pdraw2dgraphics->update_as_image_render_target(pimage);
 
          return pdraw2dgraphics;
 
       }
 
-      return ::draw2d::draw2d::do_allocation_strategy(pacmeuserinteractionAffinity, pimage, size);
+      return ::draw2d::draw2d::do_allocation_strategy(pdraw2ddomain, pimage, size);
 
 }
 

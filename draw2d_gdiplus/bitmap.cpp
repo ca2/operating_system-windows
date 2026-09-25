@@ -66,11 +66,11 @@ namespace draw2d_gdiplus
 
    void bitmap::update_bitmap_as_image_render_target(
       ::image::image * pimage,
-      ::acme::user::interaction * pacmeuserinteractionAffinity,
+      ::draw2d::domain* pdraw2ddomain,
       ::draw2d::graphics * pdraw2dgraphics)
    {
 
-      __UNREFERENCED_PARAMETER(pacmeuserinteractionAffinity);
+      __UNREFERENCED_PARAMETER(pdraw2ddomain);
 
       auto ppixmapOwned = pimage->m_ppixmapOwned;
 

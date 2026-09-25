@@ -19,6 +19,7 @@
 #include "acme/prototype/string/international.h"
 #include "acme/windowing/window.h"
 #include "aura/graphics/draw2d/clip.h"
+#include "aura/graphics/draw2d/domain.h"
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/graphics/buffer_item.h"
 #include "aura/graphics/image/context.h"
@@ -171,7 +172,7 @@ namespace draw2d_gdiplus
    graphics::graphics()
    {
 
-      m_pthis = this;
+      //m_pthis = this;
       m_bPrinting = false;
       m_pgdiplusgraphics = nullptr;
       m_hdc = nullptr;
@@ -309,13 +310,18 @@ namespace draw2d_gdiplus
 
       m_bForWindowDraw2d = true;
 
-      m_pacmeuserinteractionAffinity = puserinteraction;
+      if (::is_null(draw2d_domain()))
+      {
+
+         set_draw2d_domain(puserinteraction->draw2d_domain());
+
+      }
 
       m_sizeTotal2 = size;
 
       defer_constructø(m_pgraphicsbufferitem->m_pimageBufferItem);
 
-      m_pgraphicsbufferitem->m_pimageBufferItem->update_as_render_target(size, puserinteraction, this);
+      m_pgraphicsbufferitem->m_pimageBufferItem->update_as_render_target(size, draw2d_domain(),this);
 
       //constructø(m_pdraw2dbitmapTarget);
 
@@ -329,12 +335,12 @@ namespace draw2d_gdiplus
 
       //m_pdraw2dbitmapTarget->create_bitmap(this, size, memory, nullptr);
       //
-      create_bitmap_graphics(m_pimageTarget->m_pdraw2dbitmap, puserinteraction);
+      create_bitmap_graphics(m_pimageTarget->m_pdraw2dbitmap, puserinteraction->draw2d_domain());
 
    }
 
 
-   void graphics::create_bitmap_graphics(::draw2d::bitmap * pdraw2dbitmap, ::acme::user::interaction * pacmeuserinteractionAffinity)
+   void graphics::create_bitmap_graphics(::draw2d::bitmap * pdraw2dbitmap, ::draw2d::domain * pdraw2ddomain)
    {
 
       ::cast < ::draw2d_gdiplus::bitmap > pdraw2dgdiplusbitmap = pdraw2dbitmap;
@@ -371,7 +377,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_create_memory_graphics(const ::i32_size & size, ::acme::user::interaction * pacmeuserinteractionAffinity)
+   void graphics::_create_memory_graphics(const ::i32_size & size, ::draw2d::domain *pdraw2ddomain)
    {
 
       //__UNREFERENCED_PARAMETER(size);
@@ -408,7 +414,7 @@ namespace draw2d_gdiplus
 
       defer_constructø(m_pimageTarget);
 
-      m_pimageTarget->create_as_descriptor(pbitmapNew->size());
+      m_pimageTarget->create_as_descriptor(pbitmapNew->size(), pdraw2ddomain);
 
       m_pimageTarget->m_pdraw2dbitmap = pbitmapNew;
 
@@ -455,9 +461,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         auto pacmeuserinteractionAffinity = m_pacmeuserinteractionAffinity;
-
-         auto pacmewindowingwindow = pacmeuserinteractionAffinity->acme_windowing_window();
+         auto pacmewindowingwindow = puserinteraction->acme_windowing_window();
 
          pointTarget = pacmewindowingwindow->m_pointWindowBuffer;
          sizeTarget = pacmewindowingwindow->m_sizeWindowBuffer;

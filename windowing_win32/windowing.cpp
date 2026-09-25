@@ -3,6 +3,7 @@
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 //#include "mouse_hook.h"
 //#include "keyboard_hook.h"
+#include "cursor.h"
 #include "windowing.h"
 #include "window.h"
 #include "keyboard.h"
@@ -1535,8 +1536,11 @@ namespace windowing_win32
 
       if (::is_set(pcursor))
       {
+         
+         ::cast < ::windowing_win32::cursor > pwindowingwin32cursor = pcursor;
 
-         hcursor = (HCURSOR)pcursor->get_os_data();
+
+         hcursor = (HCURSOR)pwindowingwin32cursor->m_hcursor;
 
          if (hcursor == nullptr)
          {
@@ -1552,7 +1556,7 @@ namespace windowing_win32
 
             //};
 
-            hcursor = (HCURSOR)pcursor->get_os_data();
+            hcursor = (HCURSOR)pwindowingwin32cursor->m_hcursor;
 
             //if (!hcursor)
             //{

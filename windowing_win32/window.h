@@ -971,15 +971,16 @@ namespace windowing_win32
 
       virtual void default_message_handler(::message::message * pusermessage);
 
-      virtual ::f32 get_dpi_for_window() override;
+      virtual ::f32 get_density_dpi_for_window() override;
+      virtual ::f32 get_density_base_dpi_for_window() override;
 
-      virtual ::f32 point_dpi(::f32 points) override;
+      //virtual ::f32 point_dpi(::f32 points) override;
 
-      virtual ::f32 y_dpi(::f32 y) override;
-      virtual ::f32 x_dpi(::f32 x) override;
+      //virtual ::f32 y_dpi(::f32 y) override;
+      //virtual ::f32 x_dpi(::f32 x) override;
 
-      virtual ::f32 dpiy(::f32 y) override;
-      virtual ::f32 dpix(::f32 x) override;
+      //virtual ::f32 dpiy(::f32 y) override;
+      //virtual ::f32 dpix(::f32 x) override;
 
       //void _window_request_presentation_locked() override;
       void __update_graphics_buffer() override;

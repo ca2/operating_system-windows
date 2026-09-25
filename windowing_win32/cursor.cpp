@@ -29,9 +29,9 @@ namespace windowing_win32
    cursor::~cursor()
    {
 
-      ::DestroyCursor(get_hcursor());
+      ::DestroyCursor(m_hcursor);
 
-      set_hcursor(nullptr);
+      m_hcursor = nullptr;
 
    }
 
@@ -39,7 +39,7 @@ namespace windowing_win32
    void cursor::_create_os_cursor()
    {
 
-      if (get_hcursor())
+      if (m_hcursor)
       {
 
          return;
@@ -79,7 +79,7 @@ namespace windowing_win32
    }
 
 
-   HCURSOR cursor::get_hcursor() const 
+   HCURSOR cursor::_get_hcursor() const 
    {
       
       return m_hcursor;
@@ -87,7 +87,7 @@ namespace windowing_win32
    }
 
 
-   void cursor::set_hcursor(HCURSOR hcursor) 
+   void cursor::_set_hcursor(HCURSOR hcursor) 
    {
       
       m_hcursor = hcursor;
@@ -111,7 +111,7 @@ namespace windowing_win32
 
       }
 
-      set_hcursor(hcursor);
+      m_hcursor = hcursor;
 
       //return ::success;
 
@@ -143,7 +143,7 @@ namespace windowing_win32
 
       }
 
-      set_hcursor(hcursor);
+      m_hcursor = hcursor;
 
       //return ::success;
 

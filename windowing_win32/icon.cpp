@@ -9,6 +9,8 @@
 #include "acme/filesystem/filesystem/file_context.h"
 #include "acme/filesystem/filesystem/file_system.h"
 #include "innate_ui_win32/icon.h"
+#include "aura/graphics/draw2d/domain.h"
+#include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/draw2d/graphics_lease.h"
 #include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
@@ -1191,7 +1193,7 @@ namespace windowing_win32
 
          pixmap.m_bTopLeft = true;
 
-         pimage->create_from_data(pixmap);
+         pimage->create_from_data(pixmap, draw2d()->main_draw2d_domain());
 
 
 

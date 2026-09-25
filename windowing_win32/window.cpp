@@ -8009,7 +8009,7 @@ namespace windowing_win32
    }
 
 
-   ::f32 window::get_dpi_for_window()
+   ::f32 window::get_density_dpi_for_window()
    {
 
       auto hwnd = ::as_HWND(this->operating_system_window());
@@ -8021,54 +8021,62 @@ namespace windowing_win32
    }
 
 
-   ::f32 window::point_dpi(::f32 points)
+   ::f32 window::get_density_base_dpi_for_window()
    {
-
-      ::f32 fDpi = get_dpi_for_window();
-
-      return points * fDpi / 72.f;
+      
+      return 96.f;
 
    }
 
 
-   ::f32 window::dpiy(::f32 y)
-   {
+   //::f32 window::point_dpi(::f32 points)
+   //{
 
-      ::f32 fDpi = get_dpi_for_window();
+   //   ::f32 fDpi = get_dpi_for_window();
 
-      return y * fDpi / 96.f;
+   //   return points * fDpi / 72.f;
 
-   }
-
-
-   ::f32 window::dpix(::f32 x)
-   {
-
-      ::f32 fDpi = get_dpi_for_window();
-
-      return x * fDpi / 96.f;
-
-   }
+   //}
 
 
-   ::f32 window::y_dpi(::f32 y)
-   {
+   //::f32 window::dpiy(::f32 y)
+   //{
 
-      ::f32 fDpi = get_dpi_for_window();
+   //   ::f32 fDpi = get_dpi_for_window();
 
-      return y / fDpi;
+   //   return y * fDpi / 96.f;
 
-   }
+   //}
 
 
-   ::f32 window::x_dpi(::f32 x)
-   {
+   //::f32 window::dpix(::f32 x)
+   //{
 
-      ::f32 fDpi = get_dpi_for_window();
+   //   ::f32 fDpi = get_dpi_for_window();
 
-      return x / fDpi;
+   //   return x * fDpi / 96.f;
 
-   }
+   //}
+
+
+   //::f32 window::y_dpi(::f32 y)
+   //{
+
+   //   ::f32 fDpi = get_dpi_for_window();
+
+   //   return y / fDpi;
+
+   //}
+
+
+   //::f32 window::x_dpi(::f32 x)
+   //{
+
+   //   ::f32 fDpi = get_dpi_for_window();
+
+   //   return x / fDpi;
+
+   //}
 
 
    //void window::_window_request_presentation_locked()
