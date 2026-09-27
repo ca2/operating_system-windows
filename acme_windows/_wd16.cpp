@@ -44,7 +44,7 @@ bool ReAllocSysString(BSTR * pbstr, const ::wd16_character * pchData, character_
 }
 
 
-::u32 format_message(::u32 dwFlags, const void * pSource, ::u32 dwMessageID, ::u32 dwLanguageID, ::wd16_character * pszBuffer, ::u32 nSize, va_list * pArguments) noexcept
+::u32 format_message(::u32 dwFlags, const void * pSource, ::u32 dwMessageID, ::u32 dwLanguageID, ::wide_character * pszBuffer, ::u32 nSize, va_list * pArguments) noexcept
 {
 
    return ::FormatMessageW(dwFlags, pSource, dwMessageID, dwLanguageID, pszBuffer, nSize, pArguments);
