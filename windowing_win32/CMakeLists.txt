@@ -71,12 +71,12 @@ list(APPEND draw2d_gdiplus_source
    shell.h
    system_interaction.cpp
    system_interaction.h
-   top_level_enum.cpp
-   top_level_enum.h
+   #top_level_enum.cpp
+   #top_level_enum.h
    win32.cpp
    win32.h
-   window_util.cpp
-   window_util.h
+   #window_util.cpp
+   #window_util.h
    window.cpp
    window.h
    windowing.cpp

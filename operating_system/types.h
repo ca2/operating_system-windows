@@ -17,9 +17,11 @@ typedef long double f128;
 
 
 using ansi_character = char;
-using wd16_character = wchar_t;
+//using wd16_character = wchar_t;
+using wd16_character = char16_t;
 using wd32_character = char32_t;
-using wide_character = wd16_character;
+//using wide_character = wd16_character;
+using wide_character = wchar_t;
 
 
 //using oswindow = oswindow;
