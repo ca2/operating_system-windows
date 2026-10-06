@@ -9,7 +9,7 @@
 #pragma once
 
 
-#include "aura_windows/node.h"
+#include "node_windows/node.h"
 
 
 namespace operating_ambient_windows
@@ -17,15 +17,14 @@ namespace operating_ambient_windows
 
 
    class CLASS_DECL_OPERATING_AMBIENT_WINDOWS node :
-      virtual public ::aura_windows::node
+      virtual public ::node_windows::node
    {
    public:
 
 
+
       node();
-
-
-      virtual ~node();
+      ~node() override;
 
 
       string get_user_name();

@@ -2,8 +2,7 @@
 #pragma once
 
 
-#include "aura/_.h"
-#include "aura_windows/_.h"
+#include "node_windows/_.h"
 
 
 #if defined(_operating_ambient_windows_project)

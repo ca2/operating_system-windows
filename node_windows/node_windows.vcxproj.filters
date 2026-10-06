@@ -20,9 +20,6 @@
     <ClInclude Include="aaa_node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="_library.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
