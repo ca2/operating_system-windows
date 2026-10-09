@@ -116,11 +116,13 @@ namespace draw2d_gdiplus
                if (m_size.area() > 0)
                {
 
-                  pimage = pimage->get_resized_image(m_size);
+                  m_pimageResized = pimage->get_resized_image(m_size);
+
+                  pimage = m_pimageResized;
 
                }
 
-               ::cast < ::draw2d_gdiplus::bitmap > pdraw2dbitmap = pimage->get_bitmap_as_source();
+               ::cast < ::draw2d_gdiplus::bitmap > pdraw2dbitmap = pimage->get_bitmap_as_source(pdraw2dgraphics);
 
                Gdiplus::Image * pgdiplusimage = pdraw2dbitmap->m_pgdiplusbitmap;
 
