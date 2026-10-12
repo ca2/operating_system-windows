@@ -436,7 +436,7 @@ namespace draw2d_gdiplus
 
             ::f64 dFontHeight = pwritetextfont->GetHeight((Gdiplus::REAL)pdraw2dgraphics->get_dpiy());
 
-            auto & textmetric = m_textmetric2;
+            auto & textmetric = m_textmetric4;
 
             textmetric.m_dAscent = dSize * pgdiplusfontfamily->GetCellAscent(iStyle) / dHeight;
             textmetric.m_dDescent = dSize * pgdiplusfontfamily->GetCellDescent(iStyle) / dHeight;
