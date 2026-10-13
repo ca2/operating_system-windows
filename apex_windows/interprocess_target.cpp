@@ -364,12 +364,15 @@ namespace apex_windows
 
       }
 
+#ifndef __REACTOS__
+      // UIPI message filtering is not present on XP.
       if (!ChangeWindowMessageFilterEx((HWND)get_hwnd(), WM_COPYDATA, MSGFLT_ADD, NULL))
       {
 
          information() << "Failed to change WM_COPYDATA message filter";
 
       }
+#endif
 
       ::SetTimer((HWND)get_hwnd(), 888888, 84, nullptr);
 

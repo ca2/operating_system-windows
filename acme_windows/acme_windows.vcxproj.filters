@@ -89,7 +89,7 @@
     <ClCompile Include="printer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="process.cpp">
+    <ClCompile Include="process_process.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="_no_pch.cpp">
@@ -213,7 +213,7 @@
     <ClInclude Include="printer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="process.h">
+    <ClInclude Include="process_process.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="registry.h">

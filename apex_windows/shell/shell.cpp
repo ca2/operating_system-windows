@@ -4,7 +4,7 @@
 #include "node.h"
 #include "acme/_operating_system.h"
 
-#include <ShlObj_core.h>
+#include <shlobj.h>
 
 
 namespace apex_windows

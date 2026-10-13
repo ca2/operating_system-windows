@@ -14,7 +14,7 @@ ip_enum.h
 os.h
 pipe.h
 printer.h
-process.h
+process_process.h
 registry.h
 RoundWindowApp.h
 shell.h

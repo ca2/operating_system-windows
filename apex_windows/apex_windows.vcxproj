@@ -2931,7 +2931,7 @@
     <ClInclude Include="launcher.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="aaa_os_context.h" />
-    <ClInclude Include="process.h" />
+    <ClInclude Include="process_process.h" />
     <ClInclude Include="process_data.h" />
     <ClInclude Include="service.h" />
     <ClInclude Include="service_handler.h" />
@@ -2989,7 +2989,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|ARM64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="process.cpp" />
+    <ClCompile Include="process_process.cpp" />
     <ClCompile Include="service_handler.cpp" />
     <ClCompile Include="shell\shell.cpp" />
     <ClCompile Include="shell_launcher.cpp" />

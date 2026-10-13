@@ -50,7 +50,7 @@
     <ClInclude Include="aaa_os_context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="process.h">
+    <ClInclude Include="process_process.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="service.h">
@@ -106,7 +106,7 @@
     <ClCompile Include="launcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="process.cpp">
+    <ClCompile Include="process_process.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="shell_launcher.cpp">

@@ -2964,7 +2964,7 @@
     <ClCompile Include="file_memory_map.cpp" />
     <ClCompile Include="pipe.cpp" />
     <ClCompile Include="printer.cpp" />
-    <ClCompile Include="process.cpp" />
+    <ClCompile Include="process_process.cpp" />
     <ClCompile Include="registry.cpp" />
     <ClCompile Include="serial.cpp" />
     <ClCompile Include="platform.cpp">
@@ -3096,7 +3096,7 @@
     <ClInclude Include="port_forward.h" />
     <ClInclude Include="printer.h" />
     <ClInclude Include="print_job.h" />
-    <ClInclude Include="process.h" />
+    <ClInclude Include="process_process.h" />
     <ClInclude Include="registry.h" />
     <ClInclude Include="serial.h" />
     <ClInclude Include="simple_hold_handle.h" />

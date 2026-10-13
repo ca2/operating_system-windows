@@ -28,8 +28,8 @@ list(APPEND library_source
    node.h
    #os_context.cpp
    #os_context.h
-   process.cpp
-   process.h
+   process_process.cpp
+   process_process.h
    process_data.h
    #service.cpp
    #service.h
@@ -91,6 +91,9 @@ if (MSVC)
        WS2_32
     Secur32
     Version)
+    if(MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 4 AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+       target_link_libraries(${PROJECT_NAME} PRIVATE wininet)
+    endif()
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)
