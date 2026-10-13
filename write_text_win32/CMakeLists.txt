@@ -31,24 +31,48 @@ target_precompile_headers(write_text_win32 PRIVATE platform.h)
 
 set_target_properties(write_text_win32 PROPERTIES LINKER_LANGUAGE CXX)
 
-if (MSVC)
-    target_compile_options(write_text_win32 PRIVATE "/MD$<$<CONFIG:Debug>:d>")
-    target_link_options(write_text_win32 PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
-    target_link_options(write_text_win32 PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/write_text_win32.lib")
-    target_link_options(write_text_win32 PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/write_text_win32.def")
-    target_link_libraries(write_text_win32 PRIVATE acme apex aqua aura Gdiplus Dwrite)
+if (${WIN32})
+
+
+
+
+   if(MSVC)
+
+
+      target_compile_options(${PROJECT_NAME} PRIVATE    "/MD$<$<CONFIG:Debug>:d>")
+      target_link_options(${PROJECT_NAME} PRIVATE    "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
+      target_link_options(${PROJECT_NAME} PRIVATE    "/SUBSYSTEM:WINDOWS")
+      target_link_options(${PROJECT_NAME} PRIVATE    "/bigobj")
+      target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
+      target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
+
+
+   else()
+
+
+      target_link_options(${PROJECT_NAME} PRIVATE "-mwindows")
+      target_sources(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
+
+
+   endif()
+
+
+
+   target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
+    target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
+    target_link_libraries(${PROJECT_NAME} PRIVATE acme apex aqua aura Gdiplus Dwrite)
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)
         #pkg_check_modules(PKGCONFIG glib-2.0 gtk+-3.0 gdk-3.0 appindicator-0.1)
         pkg_check_modules(PKGCONFIG glib-2.0 freetype2 gtk+-3.0 gdk-3.0)
     endif()
-    target_compile_options(write_text_win32 PRIVATE ${PKGCONFIG_CFLAGS})
-    #target_compile_options(write_text_win32 PRIVATE -std=c++14)
-    #target_link_options(write_text_win32 PRIVATE ${GTK_LDFLAGS})
-    target_link_options(write_text_win32 PRIVATE -Wl,-rpath=\$ORIGIN)
-    target_link_libraries(write_text_win32 PRIVATE z dl pthread ncurses X11 Xrender Xinerama Xft ${PKGCONFIG_LIBRARIES})
-    target_link_options(write_text_win32 PRIVATE -Wl,-z,defs)
+    target_compile_options(${PROJECT_NAME} PRIVATE ${PKGCONFIG_CFLAGS})
+    #target_compile_options(${PROJECT_NAME} PRIVATE -std=c++14)
+    #target_link_options(${PROJECT_NAME} PRIVATE ${GTK_LDFLAGS})
+    target_link_options(${PROJECT_NAME} PRIVATE -Wl,-rpath=\$ORIGIN)
+    target_link_libraries(${PROJECT_NAME} PRIVATE z dl pthread ncurses X11 Xrender Xinerama Xft ${PKGCONFIG_LIBRARIES})
+    target_link_options(${PROJECT_NAME} PRIVATE -Wl,-z,defs)
     message("PKGCONFIG_LIBRARIES is " ${PKGCONFIG_LIBRARIES})
 endif()
 

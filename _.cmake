@@ -9,9 +9,14 @@ else()
    endif()
 endif()
 
+
+if(MSVC)
 add_compile_options(
    /bigobj
 )
+endif()
+
+
 #message(STATUS "CMAKE_GENERATOR_PLATFORM is ${CMAKE_GENERATOR_PLATFORM}")
 
 set(CONFIGURATION_NAME ${CMAKE_BUILD_TYPE})

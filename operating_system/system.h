@@ -58,7 +58,9 @@
 
 //#include "cross/cross.h"
 #define __time_t time_t
+#if defined(_MSC_VER)
 #define stat64 _stat64
+#endif
 using int_bool = ::i32;
 
 
