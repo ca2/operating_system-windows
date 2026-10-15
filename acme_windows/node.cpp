@@ -266,6 +266,15 @@ namespace acme_windows
    void node::initialize(::particle* pparticle)
    {
 
+#if defined(__REACTOS__)
+      // Drive and shell probes must report missing media to the caller rather
+      // than block XP/ReactOS with a system-wide "No disk" dialog. XP has no
+      // GetErrorMode/SetThreadErrorMode; retain inherited flags via the return
+      // value and keep this process-wide policy for all worker threads.
+      const UINT previousErrorMode = ::SetErrorMode(SEM_FAILCRITICALERRORS);
+      ::SetErrorMode(previousErrorMode | SEM_FAILCRITICALERRORS);
+#endif
+
       ::platform::node::initialize(pparticle);
 
       //if (!estatus)
@@ -5618,6 +5627,12 @@ namespace acme_windows
 #endif
       RTL_OSVERSIONINFOW os_version = {0};
       GetWindowsVersion(os_version);
+
+      // NT 5.1 identifies Windows XP on either supported build path.
+      if (os_version.dwMajorVersion == 5 && os_version.dwMinorVersion == 1)
+      {
+         return "Windows XP";
+      }
 
       // Windows 10 and 11 both have major version 10 and minor version 0
       if (os_version.dwMajorVersion == 10 && os_version.dwMinorVersion == 0)

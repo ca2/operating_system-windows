@@ -504,16 +504,20 @@ return false;
 #endif
 
 #if defined(__REACTOS__)
-         // ShowWindow(SW_SHOW) already requests activation on the native UI
-         // thread. Do not post a second SetForegroundWindow transaction to
-         // another input thread while layered presentation waits on this one.
+         // A second modeless dialog can remain behind the About dialog on XP.
+         // Raise and activate it here on its native UI thread; posting this to
+         // another input thread can deadlock with layered presentation.
+         const BOOL raised = ::SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0,
+            SWP_NOMOVE | SWP_NOSIZE);
+         const BOOL activated = ::SetForegroundWindow(hwnd);
          RECT rectangle{};
          const BOOL hasRectangle = ::GetWindowRect(hwnd, &rectangle);
-         informationf("ABOUT_NATIVE shown hwnd=%p visible=%d ownerThread=%lu currentThread=%lu foreground=%p rectangleValid=%d rectangle=(%ld,%ld)-(%ld,%ld); no cross-thread foreground request",
+         informationf("ABOUT_NATIVE shown hwnd=%p visible=%d ownerThread=%lu currentThread=%lu foreground=%p rectangleValid=%d rectangle=(%ld,%ld)-(%ld,%ld) raised=%d activated=%d; native-thread foreground request",
             hwnd, (int)::IsWindowVisible(hwnd),
             (unsigned long)::GetWindowThreadProcessId(hwnd, nullptr),
             (unsigned long)::GetCurrentThreadId(), ::GetForegroundWindow(),
-            (int)hasRectangle, rectangle.left, rectangle.top, rectangle.right, rectangle.bottom);
+            (int)hasRectangle, rectangle.left, rectangle.top, rectangle.right, rectangle.bottom,
+            (int)raised, (int)activated);
 #else
           ::cast < ::win32::acme::windowing::activation_token> pwin32activationtoken = puseractivationtoken;
 

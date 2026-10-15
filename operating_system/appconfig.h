@@ -7,7 +7,11 @@
 #define default_draw2d draw2d_gdiplus
 #define default_folder folder_zip
 #define default_write_text write_text_win32
+#if defined(__REACTOS__)
+#define default_imaging imaging_freeimage
+#else
 #define default_imaging imaging_wic
+#endif
 #define default_innate_ui innate_ui_win32
 #define default_operating_ambient operating_ambient_windows
 #define default_audio audio_mmsystem

@@ -7,12 +7,13 @@
 #include <BaseTsd.h>
 #include <string.h>
 
-
+#ifdef _MSC_VER
 typedef SSIZE_T ssize_t;
+typedef int mode_t;
+#endif
 typedef int id_t;
 typedef int uid_t;
 typedef int gid_t;
 typedef int pid_t;
-typedef int mode_t;
 
 

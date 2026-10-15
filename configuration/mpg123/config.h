@@ -491,6 +491,28 @@
 #define strcasecmp _stricmp
 #define strncasecmp _strnicmp
 #elif defined(WINDOWS_DESKTOP)
+/* These C headers and runtime functions are also available on Windows XP.
+   Leave optional libraries and compiler-dependent features unconfigured. */
+#define HAVE_LIMITS_H 1
+#define HAVE_LOCALE_H 1
+#define HAVE_MEMORY_H 1
+#define HAVE_SETLOCALE 1
+#define HAVE_SIGNAL_H 1
+#define HAVE_STDIO_H 1
+#define HAVE_STDLIB_H 1
+#define HAVE_STRING_H 1
+#define HAVE_STRERROR 1
+#define HAVE_SYS_STAT_H 1
+#define HAVE_SYS_TYPES_H 1
+#define STDC_HEADERS 1
+
+/* These headers depend on the compiler, rather than the Windows version. */
+#if !defined(_MSC_VER) || _MSC_VER >= 1600
+#define HAVE_STDINT_H 1
+#endif
+#if !defined(_MSC_VER) || _MSC_VER >= 1800
+#define HAVE_INTTYPES_H 1
+#endif
 #elif defined(ANDROID)
 #define HAVE_STRING_H 1
 #define HAVE_STRERROR 1

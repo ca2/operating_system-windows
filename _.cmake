@@ -47,6 +47,7 @@ if(MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 4
    set(__REACTOS__ ON)
 endif()
 if(__REACTOS__)
+   set(default_imaging "imaging_freeimage")
    set(default_nano_idn "nano_idn_libidn")
 else()
    set(default_nano_idn "nano_idn_windows_common")

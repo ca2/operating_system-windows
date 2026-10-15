@@ -48,7 +48,7 @@ target_precompile_headers(audio_mmsystem PRIVATE platform.h)
 
 set_target_properties(audio_mmsystem PROPERTIES LINKER_LANGUAGE CXX)
 
-if (MSVC)
+if (WIN32)
 
 
 
