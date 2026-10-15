@@ -13,7 +13,7 @@ struct sz_known_folder_struct g_knownfolderstructa[] =
    {"image://",FOLDERID_Pictures},
    {"video://",FOLDERID_Videos},
    {"download://",FOLDERID_Downloads},
-   {nullptr, NULL},
+   {nullptr, {}},
 
 };
 

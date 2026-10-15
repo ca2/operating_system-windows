@@ -30,6 +30,7 @@ namespace windowing_win32
       DWORD                                              m_dwMainThreadDiagnosticCreateThreadId;
       DWORD                                              m_dwProductionDibCreateThreadId;
       bool                                               m_bWindowDC;
+      bool                                               m_bTightRawBuffer = false;
 
       ::u32                                              m_uExtraFlagsSetWindowPos;
       ::u32                                              m_uSetWindowPosLastFlags;
@@ -66,6 +67,9 @@ namespace windowing_win32
       void _configure_window();
 
       void _update_layered_window();
+#if defined(__REACTOS__)
+      void _reactos_workaround_present_opaque_window();
+#endif
       bool _create_direct_diagnostic_dib(const ::i32_size & size);
       void _destroy_direct_diagnostic_dib();
       void _update_layered_window_with_main_thread_device_independent_bitmap();

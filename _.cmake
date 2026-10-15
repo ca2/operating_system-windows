@@ -41,7 +41,16 @@ set(default_networking "networking_bsd")
 set(default_acme "acme_windows")
 set(default_acme_windowing "acme_windowing_win32")
 set(default_nano_graphics "nano_graphics_gdiplus")
-set(default_nano_idn "nano_idn_windows_common")
+# Mirror the existing ReactOS compiler selection into CMake component selection.
+if(MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 4
+   AND CMAKE_C_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+   set(__REACTOS__ ON)
+endif()
+if(__REACTOS__)
+   set(default_nano_idn "nano_idn_libidn")
+else()
+   set(default_nano_idn "nano_idn_windows_common")
+endif()
 set(default_apex "apex_windows")
 set(default_innate_ui "innate_ui_win32")
 set(default_subsystem "subsystem_windows")
@@ -112,7 +121,16 @@ link_directories(${WORKSPACE_FOLDER}/../operating_system/storage-${OPERATING_SYS
 #include_directories(${WORKSPACE_FOLDER}/source/app/_include)
 #include_directories(${WORKSPACE_FOLDER}/source/include)
 #include_directories(${WORKSPACE_FOLDER}/port/_)
-#include_directories(${WORKSPACE_FOLDER}/port/include)
+# Ninja on Windows repeatedly marks dependencies reached through these directory
+# symlinks dirty. Let MinGW record the actual header paths instead.
+if(MINGW)
+   include_directories(BEFORE
+      ${WORKSPACE_FOLDER}/port/common/rapidjson/include
+      ${WORKSPACE_FOLDER}/port/base/stb/include
+      ${WORKSPACE_FOLDER}/port/graphics/cairo/include
+      ${WORKSPACE_FOLDER}/port/graphics/freetype/include)
+endif()
+include_directories(${WORKSPACE_FOLDER}/port/include)
 #include_directories(${WORKSPACE_FOLDER}/operating_system)
 if (OPERATING_SYSTEM_POSIX)
    include_directories(${WORKSPACE_FOLDER}/operating_system/operating_system-posix)

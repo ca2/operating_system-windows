@@ -1,5 +1,6 @@
 // Create on 2021-03-21 20:00 <3ThomasBS_
 #include "platform.h"
+#include "known_folder_compat.h"
 #include "directory_system.h"
 #include "file_system.h"
 #include "acme/exception/exception.h"
@@ -600,7 +601,7 @@ pacmedir->roaming();
 
       //::OpenProcessToken(::GetCurrentProcess(), TOKEN_QUERY | TOKEN_IMPERSONATE | TOKEN_DUPLICATE, &hToken);
 
-      HRESULT hr = SHGetKnownFolderPath(kfid, 0, hToken, &pwszPath);
+      HRESULT hr = ca2_get_known_folder_path(kfid, 0, hToken, &pwszPath);
 
       defer_throw_hresult(hr);
 
@@ -1189,7 +1190,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 
          auto pacmedir = psystem->m_pdirectorysystem;
 
-pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
+// CreateDirectoryW error logging is disabled here.
 
                ::LocalFree(pszError);
 
@@ -2091,7 +2092,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 ////
 //////         auto pacmedir = psystem->m_pdirectorysystem;
 //////
-//////pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
+//////// CreateDirectoryW error logging is disabled here.
 //////
 ////               ::LocalFree(pwszError);
 ////

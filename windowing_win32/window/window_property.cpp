@@ -15,6 +15,10 @@ SHSTDAPI SHGetPropertyStoreForWindow(_In_ HWND hwnd, _In_ REFIID riid, _Outptr_ 
 HRESULT SetTouchDisableProperty(HWND hwnd, BOOL fDisableTouch)
 {
 
+#if defined(__REACTOS__)
+   // XP has no fullscreen edge-gesture feature to disable.
+   return E_NOTIMPL;
+#else
    IPropertyStore * pPropStore;
 
    HRESULT hrReturnValue = SHGetPropertyStoreForWindow(hwnd, IID_PPV_ARGS(&pPropStore));
@@ -35,5 +39,6 @@ HRESULT SetTouchDisableProperty(HWND hwnd, BOOL fDisableTouch)
    }
 
    return hrReturnValue;
+#endif
 
 }

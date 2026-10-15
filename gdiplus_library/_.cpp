@@ -9,8 +9,8 @@
 
 Gdiplus::GdiplusStartupInput *   g_pgdiplusStartupInput = nullptr;
 Gdiplus::GdiplusStartupOutput *  g_pgdiplusStartupOutput = nullptr;
-DWORD_PTR                        g_gdiplusToken = NULL;
-DWORD_PTR                        g_gdiplusHookToken = NULL;
+DWORD_PTR                        g_gdiplusToken = 0;
+DWORD_PTR                        g_gdiplusHookToken = 0;
 ::i32                            g_iGdiplusReferenceCount = 0;
 std::mutex                       g_mutexGdiplus;
 
@@ -33,9 +33,9 @@ CLASS_DECL_GDIPLUS_LIBRARY void initialize_gdiplus()
 
    g_pgdiplusStartupOutput = øraw_new Gdiplus::GdiplusStartupOutput ();
 
-   g_gdiplusToken = NULL;
+   g_gdiplusToken = 0;
 
-   g_gdiplusHookToken = NULL;
+   g_gdiplusHookToken = 0;
 
    g_pgdiplusStartupInput->SuppressBackgroundThread = true;
 
@@ -98,8 +98,8 @@ CLASS_DECL_GDIPLUS_LIBRARY void terminate_gdiplus()
       ::acme::del(g_pgdiplusStartupInput);
       ::acme::del(g_pgdiplusStartupOutput);
 
-      g_gdiplusToken = NULL;
-      g_gdiplusHookToken = NULL;
+      g_gdiplusToken = 0;
+      g_gdiplusHookToken = 0;
 
    }
 

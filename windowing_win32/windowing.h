@@ -118,7 +118,7 @@ namespace windowing_win32
       void erase_window(::acme::windowing::window * pwindow) override;
     
 
-      using windowing::windowing::get_cursor;
+      using ::windowing::windowing::get_cursor;
 
 
       virtual ::windowing::cursor * get_cursor();

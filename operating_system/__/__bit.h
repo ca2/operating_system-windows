@@ -26,7 +26,9 @@
 #define X86
 #define OS32BIT
 #define OSBIT 32
+#ifndef _X86_
 #define _X86_
+#endif
 
 #define __END_OSBIT(xxx) __CONCATENATE(xxx, 32)
 #define __MID_OSBIT(xxx, zzz) __CONCATENATE3(xxx, 32, zzz)

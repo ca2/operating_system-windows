@@ -11,7 +11,7 @@
 
 //#include "acme/_operating_system.h"
 
-#include <shobjidl_core.h>
+#include <shobjidl.h>
 
 
 
@@ -81,6 +81,8 @@ namespace windowing_win32
 
       window();
       ~window() override;
+
+      ::i32_boolean is_composite() override;
 
 
       //void assert_ok() const override;

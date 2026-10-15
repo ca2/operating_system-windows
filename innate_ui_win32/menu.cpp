@@ -1,6 +1,7 @@
 // From apex/innate_ui/menu.cpp by camilo on 2026-05-19 16:52 <3ThomasBorregaardSørensen!!
 #include "platform.h"
 #include "menu.h"
+#include "acme/operating_system/windows/modal_task_pump.h"
 
 
 namespace innate_ui_win32
@@ -76,6 +77,7 @@ namespace innate_ui_win32
          
          ::SetForegroundWindow(hwnd);
 
+         ::windows::modal_task_pump modalPump;
          ::i32 action = TrackPopupMenu(m_hmenu, TPM_NONOTIFY | TPM_RETURNCMD | TPM_RIGHTBUTTON, pos.x, pos.y, 0,
                                      hwnd, NULL);
 

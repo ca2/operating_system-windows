@@ -438,7 +438,7 @@ namespace windowing_win32
 
       //wndcls.hInstance = ::windows::get_window_procedure_hinstance();
 
-      wndcls.hInstance = (HINSTANCE)GetModuleFromFunction(wndcls.lpfnWndProc);
+      wndcls.hInstance = (HINSTANCE)GetModuleFromFunction(reinterpret_cast<void *>(wndcls.lpfnWndProc));
 
       wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
 
@@ -527,13 +527,23 @@ namespace windowing_win32
          if (hCursor == nullptr && hbrBackground == nullptr && hIcon == nullptr)
          {
 
+#if defined(__REACTOS__)
+            _snwprintf(lpwsz, iLen - 1, L"windows_interaction_impl:%p,%x", hinstance, nClassStyle);
+            lpwsz[iLen - 1] = 0;
+#else
             _snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x", hinstance, nClassStyle);
+#endif
 
          }
          else
          {
 
+#if defined(__REACTOS__)
+            _snwprintf(lpwsz, iLen - 1, L"windows_interaction_impl:%p,%x,%p,%p,%p", hinstance, nClassStyle, hCursor, hbrBackground, hIcon);
+            lpwsz[iLen - 1] = 0;
+#else
             _snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x,%p,%p,%p", hinstance, nClassStyle, hCursor, hbrBackground, hIcon);
+#endif
 
          }
 
@@ -563,7 +573,7 @@ namespace windowing_win32
       //auto hinstanceWindowProcedure = ::windows::get_window_procedure_hinstance();
       wndcls.cbClsExtra = wndcls.cbWndExtra = 40;
       //wndcls.hInstance = hinstanceWindowProcedure;
-      wndcls.hInstance = (HINSTANCE)GetModuleFromFunction(wndcls.lpfnWndProc);
+      wndcls.hInstance = (HINSTANCE)GetModuleFromFunction(reinterpret_cast<void *>(wndcls.lpfnWndProc));
       //wndcls.hIcon = hIcon;
       //wndcls.hCursor = hCursor;
       wndcls.hCursor = nullptr;

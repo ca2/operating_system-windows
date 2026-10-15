@@ -38,6 +38,12 @@ namespace windowing_win32
       ::i32  m_iDib;
 
 
+#if defined(__REACTOS__)
+      HWND m_nextClipboardViewer = nullptr;
+      bool m_clipboardViewerRegistered = false;
+      DECLARE_MESSAGE_HANDLER(on_clipboard_chain_change);
+#endif
+
       copydesk();
       ~copydesk() override;
 

@@ -31,9 +31,20 @@ namespace windowing_win32
       switch (edevice)
       {
       case ::hardware::e_device_video_input:
+#if defined(__MINGW32__)
+         return GUID{0x65e8773d, 0x8f56, 0x11d0,
+            {0xa3, 0xb9, 0x00, 0xa0, 0xc9, 0x22, 0x31, 0x96}};
+#else
          return KSCATEGORY_CAPTURE;
+#endif
       case ::hardware::e_device_monitor:
+#if defined(__MINGW32__)
+         // MinGW's ntddvdeo.h omits the documented monitor interface GUID.
+         return GUID{0xe6f07b5f, 0xee97, 0x4a90,
+            {0xb0, 0x76, 0x33, 0xf5, 0x7b, 0xf4, 0xea, 0xa7}};
+#else
          return GUID_DEVINTERFACE_MONITOR;
+#endif
 
 
       }

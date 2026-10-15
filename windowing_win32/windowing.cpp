@@ -410,7 +410,18 @@ namespace windowing_win32
       if (pinteraction && pinteraction->m_bCompositedFrameWindow)
       {
 
+#if defined(__REACTOS__)
+         if (pinteraction->window() && pinteraction->window()->is_composite())
+         {
+            draw2d()->adjust_composited_window_styles(nExStyle, nStyle);
+         }
+         else
+         {
+            nExStyle &= ~WS_EX_LAYERED;
+         }
+#else
          draw2d()->adjust_composited_window_styles(nExStyle, nStyle);
+#endif
 
          nStyle |= WS_POPUP;
 

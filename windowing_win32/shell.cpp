@@ -315,19 +315,31 @@ namespace windowing_win32
 
       auto pgetfileimage = øraw_new _get_file_image_;
 
+#if !defined(__REACTOS__)
       pgetfileimage->m_knownfoldermanager.CoCreateInstance(CLSID_KnownFolderManager);
+#endif
 
       SHGetDesktopFolder(&pgetfileimage->m_pfolderDesktop);
 
       SHGetMalloc(&pgetfileimage->m_pmalloc);
 
-      SHGetImageList(SHIL_SMALL, IID_IImageList, (void **)&pgetfileimage->m_pimagelistSmall);
+#if defined(__MINGW32__)
+      const GUID imageListId = {0x46eb5926, 0x582e, 0x4017,
+         {0x9f, 0xdf, 0xe8, 0x99, 0x8d, 0xaa, 0x09, 0x50}};
+#else
+      const GUID &imageListId = IID_IImageList;
+#endif
+      SHGetImageList(SHIL_SMALL, imageListId, (void **)&pgetfileimage->m_pimagelistSmall);
 
-      SHGetImageList(SHIL_LARGE, IID_IImageList, (void **)&pgetfileimage->m_pimagelistLarge);
+      SHGetImageList(SHIL_LARGE, imageListId, (void **)&pgetfileimage->m_pimagelistLarge);
 
-      SHGetImageList(SHIL_EXTRALARGE, IID_IImageList, (void **)&pgetfileimage->m_pimagelistExtraLarge);
+      SHGetImageList(SHIL_EXTRALARGE, imageListId, (void **)&pgetfileimage->m_pimagelistExtraLarge);
 
-      SHGetImageList(SHIL_JUMBO, IID_IImageList, (void **)&pgetfileimage->m_pimagelistJumbo);
+#if defined(__REACTOS__)
+      pgetfileimage->m_pimagelistJumbo = pgetfileimage->m_pimagelistExtraLarge;
+#else
+      SHGetImageList(SHIL_JUMBO, imageListId, (void **)&pgetfileimage->m_pimagelistJumbo);
+#endif
 
       return pgetfileimage;
 
@@ -391,7 +403,7 @@ namespace windowing_win32
          HRESULT hrGetThumbnailHandler = pthumbnailhandlerfactory->GetThumbnailHandler(
             getfileimage.m_itemidlistChild,
             nullptr,
-            __interface_of(pthumbnailprovider));
+            __uuidof(IThumbnailProvider), (void **)&pthumbnailprovider.m_p);
 
          if(SUCCEEDED(hrGetThumbnailHandler) && pthumbnailprovider)
          {
@@ -430,7 +442,11 @@ namespace windowing_win32
 
                      comptr< IShellItemImageFactory> pfactory;
 
+#if defined(__REACTOS__)
+                     HRESULT hr = E_NOTIMPL; // Continue through the existing shell icon fallback.
+#else
                      HRESULT hr = SHCreateItemFromIDList(getfileimage.m_itemidlist, IID_IShellItemImageFactory, (void **) &pfactory);
+#endif
 
                      if(SUCCEEDED(hr))
                      {
@@ -1480,6 +1496,7 @@ namespace windowing_win32
 
       }
 
+#if !defined(__REACTOS__)
       if (getfileimage.m_knownfoldermanager)
       {
 
@@ -1543,6 +1560,8 @@ namespace windowing_win32
          }
 
       }
+
+#endif
 
       SHFILEINFOW shfi = {};
 

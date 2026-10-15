@@ -296,7 +296,7 @@ namespace win32
 
             windowclass.m_wstrClassName = scopedstrClassName;
 
-            windowclass.m_hinstance = ::windows::hinstance_from_function(::windows::window::s_window_procedure);
+            windowclass.m_hinstance = ::windows::hinstance_from_function(reinterpret_cast<void *>(::windows::window::s_window_procedure));
 
             WNDCLASSEXW wndclassex{};
 
@@ -346,7 +346,8 @@ namespace win32
          void windowing::_register_default_window_class()
          {
 
-            _register_default_window_class(::windows::window::s_window_procedure);
+            _register_default_window_class(::windows::hinstance_from_function(
+               reinterpret_cast<void *>(::windows::window::s_window_procedure)));
 
          //
          //    WNDCLASSEXW wndclassex{};
@@ -442,7 +443,8 @@ namespace win32
          void windowing::_register_acme_nano_window_class()
          {
 
-            _register_acme_nano_window_class(::windows::window::s_window_procedure);
+            _register_acme_nano_window_class(::windows::hinstance_from_function(
+               reinterpret_cast<void *>(::windows::window::s_window_procedure)));
 
          //
          //    WNDCLASSEXW wndclassex{};
@@ -537,7 +539,8 @@ namespace win32
          void windowing::_register_com_host_window_class()
          {
 
-            _register_com_host_window_class(::windows::window::s_window_procedure);
+            _register_com_host_window_class(::windows::hinstance_from_function(
+               reinterpret_cast<void *>(::windows::window::s_window_procedure)));
 
          //
          //    WNDCLASSEXW wndclassex{};

@@ -97,7 +97,7 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
-if (MSVC)
+if (${WIN32})
 
 
 
@@ -109,8 +109,8 @@ if (MSVC)
       target_link_options(${PROJECT_NAME} PRIVATE    "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
       target_link_options(${PROJECT_NAME} PRIVATE    "/SUBSYSTEM:WINDOWS")
       target_link_options(${PROJECT_NAME} PRIVATE    "/bigobj")
-      target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
-      target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
+      target_link_options(${PROJECT_NAME} PRIVATE    "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
+      target_link_options(${PROJECT_NAME} PRIVATE    "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
 
 
    else()
@@ -137,7 +137,10 @@ if (MSVC)
       innate_ui_win32
       aura_windows
       aura_windows_common
-      Gdiplus Dxva2 Dwmapi Imm32)
+      Gdiplus Imm32)
+   if(NOT (MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 4 AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU"))
+      target_link_libraries(${PROJECT_NAME} PRIVATE Dxva2 Dwmapi)
+   endif()
 elseif (LINUX)
 
    if (NOT DONT_USE_PKG_CONFIG)

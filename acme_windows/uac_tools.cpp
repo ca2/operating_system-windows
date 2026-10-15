@@ -229,7 +229,7 @@ namespace uac_tools
 #endif//WIN64
 
    HRESULT
-   GetElevationType(__out TOKEN_ELEVATION_TYPE * ptet)
+   GetElevationType(_Out_ TOKEN_ELEVATION_TYPE * ptet)
    {
       if(!has_uac())
          return E_FAIL;
@@ -271,7 +271,7 @@ namespace uac_tools
    }
 
    HRESULT
-   is_elevated(__out_opt bool * pbElevated) //= nullptr )
+   is_elevated(_Out_opt_ bool * pbElevated) //= nullptr )
    {
       if(!has_uac())
          return E_FAIL;
@@ -321,11 +321,11 @@ namespace uac_tools
 
    bool
    run_elevated(
-   __in      HWND hwnd,
-   __in      const_char_pointer pszPath,
-   __in_opt   const_char_pointer pszParameters,   //   = nullptr,
-   __in_opt   const_char_pointer pszDirectory,   //   = nullptr,
-   __out_opt   HANDLE *phProcess)      //   = nullptr );
+   _In_      HWND hwnd,
+   _In_      const_char_pointer pszPath,
+   _In_opt_   const_char_pointer pszParameters,   //   = nullptr,
+   _In_opt_   const_char_pointer pszDirectory,   //   = nullptr,
+   _Out_opt_   HANDLE *phProcess)      //   = nullptr );
    {
       return shell_execute(
              hwnd,
@@ -344,30 +344,35 @@ namespace uac_tools
    //   The shared data, to be able to share
    //   data between ours and the shell proceses
 
+#ifdef _MSC_VER
 #pragma section( "ve_shared", read, write, shared )
+#define CA2_VE_SHARED __declspec(allocate("ve_shared"))
+#elif defined(__GNUC__)
+#define CA2_VE_SHARED __attribute__((section("ve_shared"), shared))
+#endif
 
-   __declspec(allocate("ve_shared"))
+   CA2_VE_SHARED
    HHOOK   hVEHook                     = nullptr;
 
-   __declspec(allocate("ve_shared"))
+   CA2_VE_SHARED
    ::u32   uVEMsg                     = 0;
 
-   __declspec(allocate("ve_shared"))
+   CA2_VE_SHARED
    bool   bVESuccess                  = false;
 
-   __declspec(allocate("ve_shared"))
+   CA2_VE_SHARED
    ::i8   szVE_Path[MAX_PATH]         = "";
 
-   __declspec(allocate("ve_shared"))
+   CA2_VE_SHARED
    ::i8   szVE_Parameters[MAX_PATH]      = "";
 
-   __declspec(allocate("ve_shared"))
+   CA2_VE_SHARED
    ::i8   szVE_Directory[MAX_PATH]      = "";
 
-   __declspec(allocate("ve_shared"))
+   CA2_VE_SHARED
    bool    bVE_NeedProcessHandle         = false;
 
-   __declspec(allocate("ve_shared"))
+   CA2_VE_SHARED
    HANDLE   hVE_Process               = nullptr;
 
    //////////////////////////////////e
@@ -398,30 +403,37 @@ namespace uac_tools
    ////////////////////////////////////////////////////////////
    // The code below needs to call GetModuleHandleEx,
    // but it is available on Windows XP and Vista only.
+#undef CA2_VE_SHARED
+
    // To make the code run under Windows 2000 as well, we will
    // link to GetModuleHandleEx dynamically:
 
    typedef
-   WINBASEAPI
-   bool
+   BOOL
    (WINAPI
     *PGetModuleHandleExW)(
-    __in        ::u32    dwFlags,
-    __in_opt    const unichar * pModuleName,
+    _In_        ::u32    dwFlags,
+    _In_opt_    const unichar * pModuleName,
 
-    __out HMODULE* phModule
+    _Out_ HMODULE* phModule
     );
 
    static PGetModuleHandleExW pGetModuleHandleExW = nullptr;
 
    bool
    RunNonElevated(
-   __in      HWND hwnd,
-   __in      const_char_pointer pszPath,
-   __in_opt   const_char_pointer pszParameters,   //   = nullptr,
-   __in_opt   const_char_pointer pszDirectory,   //   = nullptr,
-   __out_opt   HANDLE *phProcess)      //   = nullptr );
+   _In_ HWND hwnd,
+   _In_ const scoped_string & strPath,
+   _In_opt_ const scoped_string & strParameters,
+   _In_opt_ const scoped_string & strDirectory,
+   _Out_opt_ HANDLE *phProcess)
    {
+      string path(strPath);
+      string parameters(strParameters);
+      string directory(strDirectory);
+      const_char_pointer pszPath = path.c_str();
+      const_char_pointer pszParameters = !strParameters.begin() ? nullptr : parameters.c_str();
+      const_char_pointer pszDirectory = !strDirectory.begin() ? nullptr : directory.c_str();
       ASSERT(pszPath && *pszPath);   // other args are optional
 
       ASSERT(pszPath);

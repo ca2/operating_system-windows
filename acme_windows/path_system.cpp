@@ -331,6 +331,18 @@ namespace acme_windows
 
    void path_system::symbolic_link(const ::file::path & pathTarget, const ::file::path & pathSource)
    {
+#ifdef __REACTOS__
+      using create_link = BOOLEAN (WINAPI *)(LPCWSTR, LPCWSTR, DWORD);
+      auto create = reinterpret_cast<create_link>(
+         GetProcAddress(GetModuleHandleW(L"kernel32.dll"), "CreateSymbolicLinkW"));
+      if (!create)
+         throw ::exception(error_not_supported, "Symbolic-link creation is unavailable on this system");
+      ::wstring target = pathTarget.windows_path().extended_path();
+      ::wstring source = pathSource.windows_path().extended_path();
+      DWORD flags = directory_system()->is(pathSource) ? 1 : 0;
+      if (!create(target, source, flags))
+         throw ::exception(error_failed);
+#else
 
       auto windowspathTarget = pathTarget.windows_path();
 
@@ -363,6 +375,7 @@ namespace acme_windows
          throw ::exception(error_failed);
 
       }
+#endif
 
    }
 

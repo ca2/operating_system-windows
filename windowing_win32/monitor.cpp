@@ -65,7 +65,7 @@ namespace windowing_win32
    ::u32 monitor::get_monitor_color_temperature()
    {
 
-#ifdef UNIVERSAL_WINDOWS
+#if defined(UNIVERSAL_WINDOWS) || defined(__REACTOS__)
 
       return 0;
 
@@ -106,6 +106,10 @@ namespace windowing_win32
 
    bool monitor::adjust_monitor(::u32 dwTemperature, ::f64 dBrightness, ::f64 dGamma)
    {
+#if defined(__REACTOS__)
+      return false; // Physical-monitor controls require Vista.
+#else
+
 
       if (dBrightness <= 0.0)
       {
@@ -426,6 +430,7 @@ namespace windowing_win32
 
       return false;
 
+   #endif
    }
 
 

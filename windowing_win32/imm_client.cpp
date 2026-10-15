@@ -12,6 +12,11 @@
 
 #ifdef WINDOWS_DESKTOP
 
+#ifndef IME_CMODE_NATIVESYMBOL
+// Windows SDK conversion-mode flag omitted by some MinGW headers.
+#define IME_CMODE_NATIVESYMBOL 0x0080
+#endif
+
 
 imm_client::imm_client()
 {

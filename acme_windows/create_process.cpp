@@ -344,7 +344,9 @@ namespace acme_windows
       if (m_hInWr) ::CloseHandle(m_hInWr);
       if (m_pi.hProcess)::CloseHandle(m_pi.hProcess);
       if (m_pi.hThread)::CloseHandle(m_pi.hThread);
+#ifndef __REACTOS__
       if (m_hpcon) ::ClosePseudoConsole(m_hpcon);
+#endif
       //::CloseHandle(hInWr);
 
 
@@ -356,6 +358,7 @@ namespace acme_windows
       m_hInWr = nullptr;
       m_hpcon = nullptr;
 
+#ifndef __REACTOS__
       if (m_pattrList)
       {
 
@@ -364,6 +367,7 @@ namespace acme_windows
          );
          m_pattrList = nullptr;
       }
+#endif
 
    }
 
@@ -604,6 +608,22 @@ namespace acme_windows
 
    void create_process::prepare()
    {
+#ifdef __REACTOS__
+      if (m_bInteractive)
+         throw ::exception(error_not_supported, "ConPTY is unavailable on ReactOS/XP");
+      ZeroMemory(&m_si, sizeof(m_si));
+      m_si.StartupInfo.cb = sizeof(STARTUPINFOW);
+      if (m_hErrWr || m_hOutWr || m_hInRd)
+      {
+         // Classic handle inheritance; XP cannot use an explicit attribute-list whitelist.
+         m_si.StartupInfo.dwFlags |= STARTF_USESTDHANDLES;
+         m_si.StartupInfo.hStdError = m_hErrWr ? m_hErrWr : GetStdHandle(STD_ERROR_HANDLE);
+         m_si.StartupInfo.hStdOutput = m_hOutWr ? m_hOutWr : GetStdHandle(STD_OUTPUT_HANDLE);
+         m_si.StartupInfo.hStdInput = m_hInRd ? m_hInRd : GetStdHandle(STD_INPUT_HANDLE);
+      }
+      m_si.StartupInfo.dwFlags |= STARTF_USESHOWWINDOW;
+      m_si.StartupInfo.wShowWindow = ::is_screen_visible(m_edisplay) ? SW_SHOWNORMAL : SW_HIDE;
+#else
 
       if (m_bInteractive)
       {
@@ -720,6 +740,7 @@ namespace acme_windows
 
 
 
+#endif
       ZeroMemory(&m_pi, sizeof(m_pi));
 
    }

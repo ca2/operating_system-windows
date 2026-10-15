@@ -41,6 +41,20 @@ namespace write_text_win32
       DWORD dwType = 0;
       DWORD dwSize = sizeof(wszSubstitute);
 
+#if defined(__REACTOS__)
+      HKEY key = nullptr;
+      auto lstatus = ::RegOpenKeyExW(hkeyRoot, g_pwszFontSubstitutes,
+         0, KEY_QUERY_VALUE, &key);
+      if (lstatus == ERROR_SUCCESS)
+      {
+         dwSize -= sizeof(wchar_t); // Retain a terminating zero even for malformed data.
+         lstatus = ::RegQueryValueExW(key, wstrFamily, nullptr, &dwType,
+            reinterpret_cast<BYTE *>(wszSubstitute), &dwSize);
+         ::RegCloseKey(key);
+         if (lstatus == ERROR_SUCCESS && dwType != REG_SZ)
+            lstatus = ERROR_INVALID_DATA;
+      }
+#else
       auto lstatus = ::RegGetValueW(
          hkeyRoot,
          g_pwszFontSubstitutes,
@@ -49,6 +63,8 @@ namespace write_text_win32
          &dwType,
          wszSubstitute,
          &dwSize);
+
+#endif
 
       if (lstatus != ERROR_SUCCESS)
       {
@@ -251,6 +267,7 @@ namespace write_text_win32
    }
 
 
+#if !defined(__REACTOS__)
    bool font_face_resolver::_resolve_gdi_font(
       ::comptr<IDWriteFont> & pwritetextfont,
       const ::scoped_string & scopedstrFamily,
@@ -294,6 +311,8 @@ namespace write_text_win32
    }
 
 
+#endif
+
    bool font_face_resolver::resolve(
       ::write_text::font_face_source & source,
       const ::write_text::font_face_request & request)
@@ -302,6 +321,11 @@ namespace write_text_win32
       source = {};
       source.m_strResolvedFamily = resolve_substitute_family(request.m_strFamily);
 
+#if defined(__REACTOS__)
+      // Let write_text::resolve_font_face use the existing registry/file path
+      // fallback. GDI font enumeration remains available without DirectWrite.
+      return false;
+#else
       if (!m_pdwritefactory)
       {
 
@@ -520,6 +544,7 @@ namespace write_text_win32
       }
 
       return true;
+#endif
 
    }
 

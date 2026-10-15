@@ -161,9 +161,15 @@ namespace aura_windows
 
          //struct tm *p = localtime(&t);
 
+#if defined(__REACTOS__)
+         TIME_ZONE_INFORMATION i = {};
+
+         ::u32 dw = GetTimeZoneInformation(&i);
+#else
          DYNAMIC_TIME_ZONE_INFORMATION i = {};
 
          ::u32 dw = GetDynamicTimeZoneInformation(&i);
+#endif
 
          if (dw == TIME_ZONE_ID_STANDARD)
          {

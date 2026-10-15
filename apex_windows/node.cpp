@@ -66,7 +66,7 @@
 #include <ShellApi.h>
 #include <Security.h>
 #include <wincred.h>
-#include <shobjidl_core.h>
+#include <shobjidl.h>
 
 
 CLASS_DECL_ACME::file::path get_module_path(HANDLE hProcess, HMODULE hmodule);
@@ -111,7 +111,7 @@ CredPackAuthenticationBufferWfoo(
 CLASS_DECL_APEX_WINDOWS HBITMAP get_icon_hbitmap(HICON hICON);
 
 #include <shellapi.h>
-#include <shobjidl_core.h>
+#include <shobjidl.h>
 #include <iphlpapi.h>
 
 
@@ -419,9 +419,13 @@ namespace apex_windows
 
          //struct tm *p = localtime(&t);
 
+#ifdef __REACTOS__
+         TIME_ZONE_INFORMATION i = {};
+         ::u32 dw = GetTimeZoneInformation(&i);
+#else
          DYNAMIC_TIME_ZONE_INFORMATION i = {};
-
          ::u32 dw = GetDynamicTimeZoneInformation(&i);
+#endif
 
          if (dw == TIME_ZONE_ID_STANDARD)
          {
@@ -2347,6 +2351,39 @@ namespace apex_windows
          PSID* Sid
       )
    {
+#ifdef __REACTOS__
+      if (!Sid)
+      {
+         SetLastError(ERROR_INVALID_PARAMETER);
+         return FALSE;
+      }
+      *Sid = nullptr;
+      DWORD sidSize = 0, domainSize = 0;
+      SID_NAME_USE use;
+      LookupAccountName(SystemName, AccountName, nullptr, &sidSize, nullptr, &domainSize, &use);
+      if (GetLastError() != ERROR_INSUFFICIENT_BUFFER)
+         return FALSE;
+      auto sid = HeapAlloc(GetProcessHeap(), 0, sidSize);
+      auto domain = static_cast<TCHAR *>(HeapAlloc(GetProcessHeap(), 0, domainSize * sizeof(TCHAR)));
+      BOOL result = FALSE;
+      DWORD error = ERROR_NOT_ENOUGH_MEMORY;
+      if (sid && domain)
+      {
+         result = LookupAccountName(SystemName, AccountName, sid, &sidSize, domain, &domainSize, &use);
+         error = GetLastError();
+      }
+      if (domain)
+         HeapFree(GetProcessHeap(), 0, domain);
+      if (result)
+         *Sid = sid;
+      else
+      {
+         if (sid)
+            HeapFree(GetProcessHeap(), 0, sid);
+         SetLastError(error);
+      }
+      return result;
+#else
 
       LPTSTR ReferencedDomain = nullptr;
       DWORD cbSid = 128;    // initial allocation attempt
@@ -2434,11 +2471,60 @@ namespace apex_windows
       } // finally
 
       return bSuccess;
+#endif
    }
 
 
    void node::_getCredentialsForService(const ::scoped_string & scopedstrService, ::string& strUsername, ::string& strPassword)
    {
+#ifdef __REACTOS__
+      CREDUI_INFOW info{};
+      info.cbSize = sizeof(info);
+      ::wstring caption(L"ca2 service authentication");
+      ::wstring message(::string("Credentials for service: ") + scopedstrService);
+      info.pszCaptionText = caption;
+      info.pszMessageText = message;
+      wchar_t username[CREDUI_MAX_USERNAME_LENGTH + 1]{};
+      wchar_t password[CREDUI_MAX_PASSWORD_LENGTH + 1]{};
+      struct password_cleanup
+      {
+         wchar_t * buffer;
+         size_t size;
+         ~password_cleanup() { SecureZeroMemory(buffer, size); }
+      } cleanup{password, sizeof(password)};
+      ULONG nameSize = CREDUI_MAX_USERNAME_LENGTH + 1;
+      GetUserNameExW(NameSamCompatible, username, &nameSize);
+      BOOL save = FALSE;
+      DWORD authError = 0;
+      for (;;)
+      {
+         DWORD result = CredUIPromptForCredentialsW(&info, L"ca2-service", nullptr,
+            authError, username, CREDUI_MAX_USERNAME_LENGTH + 1,
+            password, CREDUI_MAX_PASSWORD_LENGTH + 1, &save,
+            CREDUI_FLAGS_GENERIC_CREDENTIALS | CREDUI_FLAGS_DO_NOT_PERSIST | CREDUI_FLAGS_ALWAYS_SHOW_UI);
+         if (result != NO_ERROR)
+         {
+            SecureZeroMemory(password, sizeof(password));
+            throw ::exception(error_failed);
+         }
+         wchar_t user[CREDUI_MAX_USERNAME_LENGTH + 1]{};
+         wchar_t domain[CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1]{};
+         result = CredUIParseUserNameW(username, user, CREDUI_MAX_USERNAME_LENGTH + 1,
+            domain, CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1);
+         HANDLE token = nullptr;
+         if (result == NO_ERROR && LogonUserW(user, domain, password,
+            LOGON32_LOGON_SERVICE, LOGON32_PROVIDER_DEFAULT, &token))
+         {
+            CloseHandle(token);
+            strUsername = username;
+            strPassword = password;
+            SecureZeroMemory(password, sizeof(password));
+            return;
+         }
+         authError = result != NO_ERROR ? result : GetLastError();
+         SecureZeroMemory(password, sizeof(password));
+      }
+#else
 
       HRESULT hr = S_OK;
       ::u32   dwResult;
@@ -2693,6 +2779,7 @@ namespace apex_windows
       strUsername = szUsername;
 
       strPassword = szPassword;
+#endif
 
    }
 

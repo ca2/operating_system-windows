@@ -6,7 +6,7 @@
 #include "acme/operating_system/windows_common/com/comptr.h"
 
 
-#include <shobjidl_core.h>
+#include <shobjidl.h>
 
 
 namespace acme_windows

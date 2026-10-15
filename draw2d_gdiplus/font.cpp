@@ -402,6 +402,39 @@ namespace draw2d_gdiplus
             iStyle,
             gdiplus_font_unit(m_fontsize));
 
+#if defined(__REACTOS__)
+         // GDI+ can return a non-null object for an unavailable font family.
+         // Such an object has no usable glyphs or metrics.
+         if (pgdiplusfont->GetLastStatus() != Gdiplus::Ok)
+         {
+            delete pgdiplusfont;
+            pgdiplusfont = nullptr;
+            LOGFONTW guiFont{};
+            if (::GetObjectW(::GetStockObject(DEFAULT_GUI_FONT), sizeof(guiFont), &guiFont))
+            {
+               Gdiplus::FontFamily guiFamily(guiFont.lfFaceName);
+               if (guiFamily.GetLastStatus() == Gdiplus::Ok)
+               {
+                  const int style = guiFamily.IsStyleAvailable(iStyle)
+                     ? iStyle : Gdiplus::FontStyleRegular;
+                  pgdiplusfont = new Gdiplus::Font(&guiFamily,
+                     gdiplus_font_size(m_fontsize), style, gdiplus_font_unit(m_fontsize));
+               }
+            }
+            if (!pgdiplusfont || pgdiplusfont->GetLastStatus() != Gdiplus::Ok)
+            {
+               delete pgdiplusfont;
+               const auto family = Gdiplus::FontFamily::GenericSansSerif();
+               const int style = family->IsStyleAvailable(iStyle)
+                  ? iStyle : Gdiplus::FontStyleRegular;
+               pgdiplusfont = new Gdiplus::Font(family,
+                  gdiplus_font_size(m_fontsize), style, gdiplus_font_unit(m_fontsize));
+            }
+            informationf("ReactOS GDI+ font fallback: requested=%s status=%d",
+               strFamilyName.c_str(), (int)pgdiplusfont->GetLastStatus());
+         }
+#endif
+
          m_pgdiplusfont = ::as_pointer(pgdiplusfont);
 
       }

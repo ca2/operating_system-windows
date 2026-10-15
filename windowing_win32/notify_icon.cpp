@@ -296,7 +296,7 @@ namespace windowing_win32
    void notify_icon::on_message_notify_icon(::message::message * pmessage)
    {
 
-      enum_message emessage = (enum_message) pmessage->m_lparam.m_lparam;
+      ::user::enum_message emessage = static_cast<::user::enum_message>(pmessage->m_lparam.m_lparam);
 
       if (emessage == ::user::e_message_left_button_down)
       {

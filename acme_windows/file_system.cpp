@@ -75,7 +75,8 @@ namespace acme_windows
 
       fileinstance.get_file_time(nullptr, nullptr, &ftWrite);
 
-      return class ::time(as_file_time(ftWrite)) + ::time::local_offset();
+      using time_type = class ::time;
+      return time_type(as_file_time(ftWrite)) + ::time::local_offset();
 
    }
 

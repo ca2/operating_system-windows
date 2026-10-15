@@ -48,7 +48,7 @@ namespace uac_tools
 
 
    HRESULT CLASS_DECL_ACME_WINDOWS
-   GetElevationType(__out TOKEN_ELEVATION_TYPE * ptet);
+   GetElevationType(_Out_ TOKEN_ELEVATION_TYPE * ptet);
 
    /*
    Use GetElevationType() to determine the elevation type of the current process.
@@ -78,7 +78,7 @@ namespace uac_tools
    */
 
    HRESULT CLASS_DECL_ACME_WINDOWS
-   is_elevated(__out_opt bool * pbElevated = nullptr);
+   is_elevated(_Out_opt_ bool * pbElevated = nullptr);
 
    /*
    Use is_elevated() to determine whether the current process is elevated or not.
@@ -108,11 +108,11 @@ namespace uac_tools
 
    bool CLASS_DECL_ACME_WINDOWS
    run_elevated(
-   __in      HWND hwnd,
-   __in      const_char_pointer pszPath,
-   __in_opt   const_char_pointer pszParameters   = nullptr,
-   __in_opt   const_char_pointer pszDirectory   = nullptr,
-   __out_opt   HANDLE *phProcess      = nullptr);
+   _In_      HWND hwnd,
+   _In_      const_char_pointer pszPath,
+   _In_opt_   const_char_pointer pszParameters   = nullptr,
+   _In_opt_   const_char_pointer pszDirectory   = nullptr,
+   _Out_opt_   HANDLE *phProcess      = nullptr);
 
    /*
    Use run_elevated() to start an elevated process. This function calls ShellExecEx() with the verb "runas"
@@ -159,11 +159,11 @@ namespace uac_tools
 
    bool CLASS_DECL_ACME_WINDOWS
    RunNonElevated(
-   __in      HWND hwnd,
-   __in      const scoped_string & strPath,
-   __in_opt   const scoped_string & strParameters   = nullptr,
-   __in_opt   const scoped_string & strDirectory   = nullptr,
-   __out_opt   HANDLE *phProcess      = nullptr);
+   _In_      HWND hwnd,
+   _In_      const scoped_string & strPath,
+   _In_opt_   const scoped_string & strParameters   = nullptr,
+   _In_opt_   const scoped_string & strDirectory   = nullptr,
+   _Out_opt_   HANDLE *phProcess      = nullptr);
 
    /*
    Use RunNonElevated() to start a non-elevated process. If the current process is not elevated,

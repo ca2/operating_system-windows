@@ -955,6 +955,7 @@ namespace windowing_win32
 
       ::cast < layered_window_buffer > playeredwindowbuffer = m_pwindowbuffer;
 
+      playeredwindowbuffer->m_bTightRawBuffer = pbufferitem->m_bTightRawBuffer;
       playeredwindowbuffer->m_pointBufferItemWindow = pointBufferItemWindow;
 
       playeredwindowbuffer->m_sizeBufferItemWindow = sizeBufferItemWindow;
@@ -1291,10 +1292,11 @@ namespace windowing_win32
       // The buffer item is the frame being presented. Do not derive its rectangle
       // from window-wide cached state, which may already describe another frame.
       auto rectangleWindow = ::i32_rectangle(
-         pbufferitem->m_pointBufferItem,
+         pbufferitem->m_bTightRawBuffer ? ::i32_point{} : pbufferitem->m_pointBufferItem,
          pbufferitem->m_sizeBufferItem);
 
-      auto rectangleRaw = ::i32_rectangle(m_pwindow->m_sizeRaw);
+      auto rectangleRaw = ::i32_rectangle(pbufferitem->m_bTightRawBuffer
+         ? pbufferitem->m_pimageBufferItem->raw_size() : m_pwindow->m_sizeRaw);
 
       auto rectangleWindowFixed = rectangleWindow.intersection(rectangleRaw);
 
@@ -1430,6 +1432,7 @@ namespace windowing_win32
       }
       ::cast < ::windowing_win32::window  > pwindow = m_pwindow;
       //if (!bLayered && !pwindow->m_hglrcProto)
+#if !defined(__REACTOS__)
       if (!bLayered && !m_papplication->m_gpu.m_bUseSwapChainWindow)
       {
 
@@ -1464,6 +1467,8 @@ namespace windowing_win32
 
       }
 
+
+#endif
 
       try
       {

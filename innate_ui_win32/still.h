@@ -19,6 +19,8 @@ namespace innate_ui_win32
 
 
       ::Gdiplus::Image * m_pgdiplusimage;
+      // GDI+ may read lazily; release only after deleting the associated image.
+      IStream * m_pImageStream;
       bool m_bIcon;
       
 

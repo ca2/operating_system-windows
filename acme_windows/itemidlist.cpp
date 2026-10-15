@@ -1,4 +1,5 @@
 #include "platform.h"
+#include "known_folder_compat.h"
 #include "itemidlist.h"
 #include "known_folder_struct.h"
 #include "acme/exception/exception.h"
@@ -1040,11 +1041,23 @@ HRESULT itemidlist::get_item_in_known_folder(itemidlist & idl, const ::scoped_st
 
       ITEMIDLIST * pidl = nullptr;
 
+#ifdef __REACTOS__
+      PWSTR folderPath = nullptr;
+      hr = ca2_get_known_folder_path(pknownfolder->m_knownfolderid, 0, handleToken, &folderPath);
+      if (SUCCEEDED(hr))
+      {
+         pidl = ILCreateFromPathW(folderPath);
+         CoTaskMemFree(folderPath);
+         if (!pidl)
+            hr = E_FAIL;
+      }
+#else
       hr = SHGetKnownFolderIDList(
          pknownfolder->m_knownfolderid,
          0,
          handleToken,
          &pidl);
+#endif
 
       if (SUCCEEDED(hr))
       {
@@ -1242,7 +1255,16 @@ string itemidlist::_path(LPCITEMIDLIST pidl)
 
    auto pwsz = wstr.get_buffer(2048);
 
-   SHGetPathFromIDListEx(pidl, pwsz, 2048, 0);
+#ifdef __REACTOS__
+   BOOL success = SHGetPathFromIDListW(pidl, pwsz);
+#else
+   BOOL success = SHGetPathFromIDListEx(pidl, pwsz, 2048, 0);
+#endif
+   if (!success)
+   {
+      wstr.release_buffer(0);
+      return {};
+   }
 
    wstr.release_buffer();
 
@@ -1257,11 +1279,24 @@ comptr < IShellFolder > itemidlist::get_shell_folder() const
 
    comptr < IShellFolder > pfolder;
 
+#ifdef __REACTOS__
+   if (!m_pidl)
+      return nullptr;
+   comptr<IShellFolder> desktop;
+   HRESULT hr = SHGetDesktopFolder(&desktop);
+   if (SUCCEEDED(hr))
+   {
+      if (!m_pidl->mkid.cb)
+         return desktop;
+      hr = desktop->BindToObject(m_pidl, nullptr, IID_IShellFolder, (void **)&pfolder);
+   }
+#else
    HRESULT hr = SHCreateItemFromIDList(
       m_pidl,
       IID_IShellFolder,
       (void **)&pfolder
       );
+#endif
 
    if (FAILED(hr))
    {
@@ -1280,11 +1315,18 @@ comptr < IShellItem > itemidlist::get_shell_item() const
 
    comptr < IShellItem > pitem;
 
+#ifdef __REACTOS__
+   using create_shell_item = HRESULT (WINAPI *)(LPCITEMIDLIST, IShellFolder *, LPCITEMIDLIST, IShellItem **);
+   auto createItem = reinterpret_cast<create_shell_item>(
+      GetProcAddress(GetModuleHandleW(L"shell32.dll"), "SHCreateShellItem"));
+   HRESULT hr = createItem ? createItem(nullptr, nullptr, m_pidl, &pitem) : E_NOTIMPL;
+#else
    HRESULT hr = SHCreateItemFromIDList(
       m_pidl,
       IID_IShellItem,
       (void **)&pitem
    );
+#endif
 
    if (FAILED(hr))
    {

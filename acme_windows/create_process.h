@@ -16,13 +16,21 @@ namespace acme_windows
    public:
 
 
+#ifdef __REACTOS__
+      struct { STARTUPINFOW StartupInfo; } m_si{};
+#else
       STARTUPINFOEX m_si = {};
+#endif
       PROCESS_INFORMATION m_pi = {};
       ::memory m_memoryAttrList;
       bool m_bInteractive = false;
 
       // === 2. Create PTY ===
+#ifdef __REACTOS__
+      void * m_hpcon = nullptr;
+#else
       HPCON m_hpcon = NULL;
+#endif
       COORD m_coordSize;
 
 
@@ -42,7 +50,11 @@ namespace acme_windows
       class ::time m_timeStart;;
 
       SECURITY_ATTRIBUTES m_saAttr = {};
+#ifdef __REACTOS__
+      void * m_pattrList;
+#else
       LPPROC_THREAD_ATTRIBUTE_LIST m_pattrList;
+#endif
 
       ::string m_strCommand;
       ::string m_strPendingCommand;

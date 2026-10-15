@@ -40,7 +40,9 @@ namespace windowing_win32
          comptr < IImageList >             m_pimagelistLarge;
          comptr < IImageList >             m_pimagelistExtraLarge;
          comptr < IImageList >             m_pimagelistJumbo;
+#if !defined(__REACTOS__)
          comptr<IKnownFolderManager>       m_knownfoldermanager;
+#endif
          comptr < IShellFolder >           m_pshellfolder;
          itemidlist                        m_itemidlist;
          itemidlist                        m_itemidlistFolder;

@@ -50,8 +50,18 @@
 //#include <ShellApi.h>
 //#include <Security.h>
 //#include <wincred.h>
-#include <shobjidl_core.h>
+#include <shobjidl.h>
+#include <shlobj.h>
 
+
+#ifdef __REACTOS__
+static int CALLBACK ca2_folder_browse_callback(HWND window, UINT message, LPARAM, LPARAM initialPath)
+{
+   if (message == BFFM_INITIALIZED && initialPath)
+      SendMessageW(window, BFFM_SETSELECTIONW, TRUE, initialPath);
+   return 0;
+}
+#endif
 
 namespace acme_windows
 {
@@ -72,6 +82,27 @@ namespace acme_windows
 
             this->defer_co_initialize_ex(false);
 
+#ifdef __REACTOS__
+            wstring initialPath;
+            if (pdialog->m_patha.has_element())
+               initialPath = pdialog->m_patha.first();
+            BROWSEINFOW browse{};
+            browse.ulFlags = BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE;
+            browse.lpfn = ca2_folder_browse_callback;
+            browse.lParam = reinterpret_cast<LPARAM>(initialPath.c_str());
+            auto pidl = SHBrowseForFolderW(&browse);
+            if (pidl)
+            {
+               wchar_t path[MAX_PATH]{};
+               BOOL success = SHGetPathFromIDListW(pidl, path);
+               CoTaskMemFree(pidl);
+               if (success)
+               {
+                  pdialog->on_chooser_response(::string(path));
+                  bOk = true;
+               }
+            }
+#else
             comptr < IFileOpenDialog > pfileopen;
 
             // Create the FileOpenDialog object.
@@ -139,6 +170,8 @@ namespace acme_windows
 
             }
 
+
+#endif
 
             if (!bOk)
             {

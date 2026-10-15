@@ -1,5 +1,6 @@
 // From node.cpp by camilo on 2023-05-17 23:17 <3ThomasBorregaardSorensen!!
 #include "platform.h"
+#include "known_folder_compat.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "node.h"
 #include "directory_system.h"
@@ -59,7 +60,7 @@
 void NotifyRecentItemsChanged();
 bool EraseRecentItem(const ::wstring& fileName) {
    PWSTR recentPath = nullptr;
-   HRESULT hr = SHGetKnownFolderPath(FOLDERID_Recent, 0, NULL, &recentPath);
+   HRESULT hr = ca2_get_known_folder_path(FOLDERID_Recent, 0, NULL, &recentPath);
    if (FAILED(hr)) {
       std::wcerr << L"Failed to get Recent folder path\n";
       return false;
@@ -88,7 +89,7 @@ bool EraseRecentItem(const ::wstring& fileName) {
 
 void NotifyRecentItemsChanged() {
    PWSTR recentPath = nullptr;
-   if (SUCCEEDED(SHGetKnownFolderPath(FOLDERID_Recent, 0, nullptr, &recentPath))) {
+   if (SUCCEEDED(ca2_get_known_folder_path(FOLDERID_Recent, 0, nullptr, &recentPath))) {
       SHChangeNotify(SHCNE_UPDATEDIR, SHCNF_PATH, recentPath, NULL);
       CoTaskMemFree(recentPath);
    }
@@ -102,7 +103,7 @@ bool AddToRecentItems(const ::wstring& targetPath, const ::wstring& title = L"")
 
    // Get the Recent Items folder path
    PWSTR pszRecent = nullptr;
-   hr = SHGetKnownFolderPath(FOLDERID_Recent, 0, NULL, &pszRecent);
+   hr = ca2_get_known_folder_path(FOLDERID_Recent, 0, NULL, &pszRecent);
    if (FAILED(hr)) {
       std::wcerr << L"Failed to get Recent folder path\n";
       return false;
@@ -137,7 +138,7 @@ namespace acme_windows
 
    thread_local OPENFILENAME * t_popenfilename;
 
-   UINT_PTR CustomOFNHookProc(
+   UINT_PTR CALLBACK CustomOFNHookProc(
       HWND unnamedParam1,
       UINT unnamedParam2,
       WPARAM unnamedParam3,

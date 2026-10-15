@@ -1,6 +1,10 @@
 // Created by camilo 2021-02-10 <3TBS_!!
 #include "platform.h"
 #include "write_text.h"
+#if defined(__REACTOS__)
+#include "acme/_operating_system.h"
+#include "acme/prototype/collection/string_array.h"
+#endif
 
 
 namespace write_text_win32
@@ -118,7 +122,38 @@ namespace write_text_win32
       auto fallbackRequest = request;
       fallbackRequest.m_strFamily = strSubstituteFamily;
 
-      return ::write_text::write_text::resolve_font_face(source, fallbackRequest);
+      if (::write_text::write_text::resolve_font_face(source, fallbackRequest))
+         return true;
+#if defined(__REACTOS__)
+      // Segoe UI is not necessarily installed on ReactOS. Prefer the host's
+      // actual GUI font before trying compatibility font families.
+      ::string_array_base candidates;
+      LOGFONTW guiFont{};
+      if (::GetObjectW(::GetStockObject(DEFAULT_GUI_FONT), sizeof(guiFont), &guiFont))
+         candidates.add(::string(guiFont.lfFaceName));
+      candidates.add("Tahoma");
+      candidates.add("DejaVu Sans");
+      candidates.add("Liberation Sans");
+      candidates.add("Arial");
+      for (const auto &family : candidates)
+      {
+         auto candidateRequest = request;
+         candidateRequest.m_strFamily = family;
+         {
+            critical_section_lock lock(&m_csFont);
+            candidateRequest.m_strFamily = m_pfontfaceresolver->resolve_substitute_family(family);
+         }
+         if (::write_text::write_text::resolve_font_face(source, candidateRequest))
+         {
+            critical_section_lock lock(&m_csFont);
+            m_mapFontFaceSource[strKey] = source;
+            informationf("ReactOS font fallback: requested=%s selected=%s file=%s",
+               request.m_strFamily.c_str(), source.m_strResolvedFamily.c_str(), source.m_path.c_str());
+            return true;
+         }
+      }
+#endif
+      return false;
 
    }
 

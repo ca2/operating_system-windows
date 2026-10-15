@@ -321,7 +321,9 @@ namespace windowing_win32
       ::windowing::window::last_install_message_routing(pchannel);
 
       USER_MESSAGE_LINK(WM_ACTIVATE, pchannel, this, &window::_001OnActivate);
+#if !defined(__REACTOS__)
       USER_MESSAGE_LINK(WM_DWMNCRENDERINGCHANGED, pchannel, this, &window::_001OnDwmNcRenderingChanged);
+#endif
 
    }
 
@@ -696,7 +698,7 @@ namespace windowing_win32
 
       HMENU hmenu = nullptr;
 
-      auto hinstance = ::windows::hinstance_from_function(::windows::window::s_window_procedure);
+      auto hinstance = ::windows::hinstance_from_function(reinterpret_cast<void *>(::windows::window::s_window_procedure));
 
       void *lpCreateParams = (::windows::window *)this;
 
@@ -750,6 +752,13 @@ namespace windowing_win32
       //dwStyle |= WS_EX_NOREDIRECTIONBITMAP;
       //dwExStyle |= WS_EX_NOREDIRECTIONBITMAP;
       //dwExStyle |= WS_EX_LAYERED;
+
+#if defined(__REACTOS__)
+      if (!is_composite())
+      {
+         dwExStyle &= ~WS_EX_LAYERED;
+      }
+#endif
 
       if (dwExStyle & WS_EX_LAYERED)
       {
@@ -3049,7 +3058,7 @@ namespace windowing_win32
       }
 
 
-      static BOOL enum_window(HWND hwnd, LPARAM lparam)
+      static BOOL CALLBACK enum_window(HWND hwnd, LPARAM lparam)
       {
 
          ::i8 sz[256];
@@ -6796,7 +6805,9 @@ namespace windowing_win32
 
       BOOL enabled = false;
 
+#if !defined(__REACTOS__)
       DwmIsCompositionEnabled(&enabled);
+#endif
 
       //data->composition_enabled = enabled;
 
@@ -6811,9 +6822,13 @@ namespace windowing_win32
 
          HWND hwnd = ::as_HWND(this->operating_system_window());
 
+#if !defined(__REACTOS__)
          DwmExtendFrameIntoClientArea(hwnd, &m);
+#endif
 
+#if !defined(__REACTOS__)
          DwmSetWindowAttribute(hwnd, DWMWA_NCRENDERING_POLICY, &dw, sizeof(::u32));
+#endif
 
       }
       else
@@ -6841,7 +6856,9 @@ namespace windowing_win32
 
       BOOL enabled = false;
 
+#if !defined(__REACTOS__)
       DwmIsCompositionEnabled(&enabled);
+#endif
 
       //data->composition_enabled = enabled;
 
@@ -6856,9 +6873,13 @@ namespace windowing_win32
 
          HWND hwnd = ::as_HWND(this->operating_system_window());
 
+#if !defined(__REACTOS__)
          DwmExtendFrameIntoClientArea(hwnd, &m);
+#endif
 
+#if !defined(__REACTOS__)
          DwmSetWindowAttribute(hwnd, DWMWA_NCRENDERING_POLICY, &dw, sizeof(::u32));
+#endif
 
       }
       else
@@ -7913,8 +7934,42 @@ namespace windowing_win32
    }
 
 
+   ::i32_boolean window::is_composite()
+   {
+#if defined(__REACTOS__)
+      // Keep opaque presentation on ReactOS, but allow the same binary to use
+      // native composition when running on genuine Windows.
+      static const bool runningOnReactOS = node()->get_current_operating_system_name() == "ReactOS";
+      if (runningOnReactOS)
+      {
+         return false;
+      }
+#endif
+      auto pinteraction = user_interaction();
+      return pinteraction && pinteraction->m_bCompositedFrameWindow;
+   }
+
+
    void window::on_message_paint(::message::message *pmessage)
    {
+#if defined(__REACTOS__)
+      if (!is_composite() && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+      {
+         PAINTSTRUCT paint{};
+         ::BeginPaint(::as_HWND(operating_system_window()), &paint);
+         ::EndPaint(::as_HWND(operating_system_window()), &paint);
+         pmessage->m_bRet = true;
+         pmessage->m_lresult = 0;
+         // Request a fresh frame without taking a rendering lock on the UI thread.
+         if (auto pinteraction = user_interaction())
+         {
+            pinteraction->set_need_redraw();
+            pinteraction->post_redraw();
+         }
+         return;
+      }
+#endif
+
 
       //PAINTSTRUCT ps;
       //HDC hdc = BeginPaint(m_hwnd, &ps);

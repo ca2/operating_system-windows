@@ -62,6 +62,10 @@ namespace windowing_win32
          //{
 
             OnClipboardUpdate();
+#if defined(__REACTOS__)
+            if (m_nextClipboardViewer)
+               SendMessageW(m_nextClipboardViewer, WM_DRAWCLIPBOARD, pmessage->m_wparam, pmessage->m_lparam);
+#endif
 
          //}
 
@@ -78,7 +82,12 @@ namespace windowing_win32
 
       ::windowing_win32::message_window::install_message_routing(pchannel);
 
+#if defined(__REACTOS__)
+      USER_MESSAGE_LINK(WM_DRAWCLIPBOARD, pchannel, this, &copydesk::_001OnClipboardUpdate);
+      USER_MESSAGE_LINK(WM_CHANGECBCHAIN, pchannel, this, &copydesk::on_clipboard_chain_change);
+#else
       USER_MESSAGE_LINK(WM_CLIPBOARDUPDATE, pchannel, this, &copydesk::_001OnClipboardUpdate);
+#endif
 
    }
 
@@ -149,7 +158,14 @@ namespace windowing_win32
 
       auto hwnd = ::as_HWND(this->operating_system_window());
 
+#if defined(__REACTOS__)
+      SetLastError(ERROR_SUCCESS);
+      m_nextClipboardViewer = SetClipboardViewer(hwnd);
+      m_clipboardViewerRegistered = m_nextClipboardViewer || GetLastError() == ERROR_SUCCESS;
+      if (!m_clipboardViewerRegistered)
+#else
       if(!::AddClipboardFormatListener(hwnd))
+#endif
       {
 
          destroy();
@@ -182,7 +198,17 @@ namespace windowing_win32
 
       auto hwnd = ::as_HWND(this->operating_system_window());
 
+#if defined(__REACTOS__)
+      if (m_clipboardViewerRegistered)
+      {
+         m_clipboardViewerRegistered = false;
+         HWND next = m_nextClipboardViewer;
+         m_nextClipboardViewer = nullptr;
+         ChangeClipboardChain(hwnd, next);
+      }
+#else
       bool bOk1 = ::RemoveClipboardFormatListener(hwnd);
+#endif
 
       //bool bOk2 = ::DestroyWindow(m_hwnd);
 
@@ -190,6 +216,18 @@ namespace windowing_win32
 
    }
 
+
+#if defined(__REACTOS__)
+   void copydesk::on_clipboard_chain_change(::message::message * pmessage)
+   {
+      HWND removed = reinterpret_cast<HWND>(static_cast<WPARAM>(pmessage->m_wparam));
+      HWND next = reinterpret_cast<HWND>(static_cast<LPARAM>(pmessage->m_lparam));
+      if (m_nextClipboardViewer == removed)
+         m_nextClipboardViewer = next;
+      else if (m_nextClipboardViewer)
+         SendMessageW(m_nextClipboardViewer, WM_CHANGECBCHAIN, pmessage->m_wparam, pmessage->m_lparam);
+   }
+#endif
 
    bool copydesk::_has_filea()
    {

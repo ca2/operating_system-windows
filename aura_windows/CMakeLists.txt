@@ -29,7 +29,7 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
-if (MSVC)
+if (${WIN32})
 
 
 
@@ -41,8 +41,8 @@ if (MSVC)
       target_link_options(${PROJECT_NAME} PRIVATE    "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
       target_link_options(${PROJECT_NAME} PRIVATE    "/SUBSYSTEM:WINDOWS")
       target_link_options(${PROJECT_NAME} PRIVATE    "/bigobj")
-      target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
-      target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
+      target_link_options(${PROJECT_NAME} PRIVATE    "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
+      target_link_options(${PROJECT_NAME} PRIVATE    "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
 
 
    else()

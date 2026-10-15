@@ -1,6 +1,9 @@
 // Created by camilo on 2026-07-30 23:35 <3ThomasBorregaardSørensen!! Mummi!! Bilbo!!
 #include "platform.h"
 #include "layered_window_buffer.h"
+#include "reactos_layered_window_workaround.h"
+#include "acme/platform/node.h"
+#include "acme/platform/system.h"
 #include "acme/operating_system/windows/device_independent_bitmap.h"
 #include "aura/graphics/graphics/buffer_item.h"
 #include "aura/windowing/display.h"
@@ -359,9 +362,62 @@ namespace windowing_win32
 
       _configure_window();
 
+#if defined(__REACTOS__)
+      if (!m_pwindow->is_composite())
+      {
+         _reactos_workaround_present_opaque_window();
+         return;
+      }
+#endif
       _update_layered_window();
 
    }
+
+
+#if defined(__REACTOS__)
+   void layered_window_buffer::_reactos_workaround_present_opaque_window()
+   {
+      ::cast<::windows::device_independent_bitmap> dib = m_ppixmapWindowBuffer;
+      const int x = m_bTightRawBuffer ? 0 : m_pointBufferItemWindow.x;
+      const int y = m_bTightRawBuffer ? 0 : m_pointBufferItemWindow.y;
+      const int width = m_sizeBufferItemWindow.cx;
+      const int height = m_sizeBufferItemWindow.cy;
+      if (!dib || !dib->m_hdcMemory || !dib->m_pimage32Raw
+         || width <= 0 || height <= 0 || x < 0 || y < 0
+         || width > dib->m_sizeRaw.cx || height > dib->m_sizeRaw.cy
+         || x > dib->m_sizeRaw.cx - width || y > dib->m_sizeRaw.cy - height
+         || dib->m_iScan <= 0
+         || static_cast<size_t>(dib->m_iScan) < (static_cast<size_t>(x) + width) * 4)
+      {
+         informationf("ReactOS opaque presentation: invalid source buffer");
+         return;
+      }
+
+      // Flatten only the presentation copy; keep the application's alpha buffer intact.
+      ::GdiFlush();
+      const bool darkMode = system()->dark_mode();
+      for (int row = 0; row < height; ++row)
+      {
+         auto pixels = reinterpret_cast<std::uint32_t *>(
+            reinterpret_cast<unsigned char *>(dib->m_pimage32Raw)
+            + static_cast<size_t>(y + row) * dib->m_iScan) + x;
+         _reactos_workaround_flatten_layered_window_onto_opaque_background(
+            pixels, width, darkMode, 255);
+      }
+      auto hdc = ::GetDC(m_hwnd);
+      if (!hdc)
+      {
+         informationf("ReactOS opaque presentation: GetDC failed error=%lu", ::GetLastError());
+         return;
+      }
+      const BOOL copied = ::BitBlt(hdc, 0, 0, width, height, dib->m_hdcMemory, x, y, SRCCOPY);
+      const DWORD error = copied ? ERROR_SUCCESS : ::GetLastError();
+      ::GdiFlush();
+      ::ReleaseDC(m_hwnd, hdc);
+      if (!copied)
+         informationf("ReactOS opaque presentation: BitBlt failed error=%lu", error);
+   }
+#endif
 
 
    void layered_window_buffer::_configure_window()
@@ -1042,7 +1098,7 @@ namespace windowing_win32
       //p2.x += m_pwindow->m_sizeRaw.cx;
       //p2.y += m_pwindow->m_sizeRaw.cy;
 
-      POINT pointSrc = p2;
+      POINT pointSrc = m_bTightRawBuffer ? POINT{0, 0} : p2;
 
 
       if (pdeviceindependentbitmap->m_sizeRaw == m_pwindow->m_sizeRaw)
@@ -1159,8 +1215,128 @@ namespace windowing_win32
 
       ::SetLastError(ERROR_SUCCESS);
 
+#if defined(__REACTOS__)
+      // ReactOS applies pptSrc again to its window-sized intermediate bitmap.
+      // Supply a top-down window-sized DIB with the requested pixels at (0,0).
+      // Copy bytes directly so premultiplied alpha is preserved exactly.
+      struct presentation_dib
+      {
+         HDC dc = nullptr;
+         HBITMAP bitmap = nullptr;
+         HGDIOBJ previous = nullptr;
+         ~presentation_dib()
+         {
+            if (previous && previous != HGDI_ERROR)
+               ::SelectObject(dc, previous);
+            if (dc)
+               ::DeleteDC(dc);
+            if (bitmap)
+               ::DeleteObject(bitmap);
+         }
+      } presentation;
+
+      const int width = sizeUpdateLayeredWindow.cx;
+      const int height = sizeUpdateLayeredWindow.cy;
+      if (width <= 0 || height <= 0 || pointSrc.x < 0 || pointSrc.y < 0
+         || width > pdeviceindependentbitmap->m_sizeRaw.cx
+         || height > pdeviceindependentbitmap->m_sizeRaw.cy
+         || pointSrc.x > pdeviceindependentbitmap->m_sizeRaw.cx - width
+         || pointSrc.y > pdeviceindependentbitmap->m_sizeRaw.cy - height
+         || !pdeviceindependentbitmap->m_pimage32Raw
+         || pdeviceindependentbitmap->m_iScan <= 0
+         || static_cast<size_t>(pdeviceindependentbitmap->m_iScan)
+            < (static_cast<size_t>(pointSrc.x) + width) * sizeof(::image32_t))
+      {
+         informationf("ReactOS layered presentation: invalid source rectangle (%ld,%ld) size=(%d,%d)",
+            pointSrc.x, pointSrc.y, width, height);
+         return;
+      }
+
+      BITMAPINFO bitmapInfo{};
+      bitmapInfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+      bitmapInfo.bmiHeader.biWidth = width;
+      bitmapInfo.bmiHeader.biHeight = -height;
+      bitmapInfo.bmiHeader.biPlanes = 1;
+      bitmapInfo.bmiHeader.biBitCount = 32;
+      bitmapInfo.bmiHeader.biCompression = BI_RGB;
+      void *pixels = nullptr;
+      presentation.dc = ::CreateCompatibleDC(hdcScreen);
+      if (presentation.dc)
+         presentation.bitmap = ::CreateDIBSection(hdcScreen, &bitmapInfo,
+            DIB_RGB_COLORS, &pixels, nullptr, 0);
+      if (presentation.bitmap && pixels)
+         presentation.previous = ::SelectObject(presentation.dc, presentation.bitmap);
+      if (!presentation.dc || !presentation.bitmap || !pixels
+         || !presentation.previous || presentation.previous == HGDI_ERROR)
+      {
+         const DWORD error = ::GetLastError();
+         informationf("ReactOS layered presentation: DIB setup failed error=%lu", error);
+         return;
+      }
+
+      const size_t rowBytes = static_cast<size_t>(width) * sizeof(::image32_t);
+      const auto source = reinterpret_cast<const unsigned char *>(pdeviceindependentbitmap->m_pimage32Raw)
+         + static_cast<size_t>(pointSrc.y) * pdeviceindependentbitmap->m_iScan
+         + static_cast<size_t>(pointSrc.x) * sizeof(::image32_t);
+      for (int row = 0; row < height; ++row)
+         memcpy(static_cast<unsigned char *>(pixels) + static_cast<size_t>(row) * rowBytes,
+            source + static_cast<size_t>(row) * pdeviceindependentbitmap->m_iScan, rowBytes);
+
+      // The compatibility build can also run on genuine Windows, whose
+      // compositor supports translucency correctly. Limit this OS workaround
+      // to ReactOS at runtime as well as at compile time.
+      static const bool runningOnReactOS = node()->get_current_operating_system_name() == "ReactOS";
+      auto presentationBlend = blendPixelFunction;
+      if (runningOnReactOS)
+      {
+         const bool darkMode = system()->dark_mode();
+         _reactos_workaround_flatten_layered_window_onto_opaque_background(
+            static_cast<std::uint32_t *>(pixels),
+            static_cast<std::size_t>(width) * height, darkMode,
+            presentationBlend.SourceConstantAlpha);
+         presentationBlend.SourceConstantAlpha = 255;
+         if (!payload("reactos_opaque_layered_workaround_traced").is_true())
+         {
+            informationf("ReactOS opaque layered-window workaround enabled; darkMode=%d", darkMode);
+            payload("reactos_opaque_layered_workaround_traced") = true;
+         }
+      }
+
+      // ReactOS draws at local (0,0) in hdcDst, then moves the window.
+      // Move first and let it obtain a window-relative DC rather than drawing
+      // into the desktop DC at screen origin. Keep activation and z-order.
+      RECT nativeRectangle{};
+      if (!::GetWindowRect(m_hwnd, &nativeRectangle)
+         || nativeRectangle.left != pointUpdateLayeredWindow.x
+         || nativeRectangle.top != pointUpdateLayeredWindow.y
+         || nativeRectangle.right - nativeRectangle.left != width
+         || nativeRectangle.bottom - nativeRectangle.top != height)
+      {
+         if (!::SetWindowPos(m_hwnd, nullptr, pointUpdateLayeredWindow.x,
+            pointUpdateLayeredWindow.y, width, height,
+            SWP_NOACTIVATE | SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_ASYNCWINDOWPOS))
+         {
+            const DWORD error = ::GetLastError();
+            informationf("ReactOS layered presentation: positioning failed error=%lu", error);
+            return;
+         }
+      }
+      // A different HWND owner may still be processing the asynchronous move.
+      // Retry on the next frame, without waiting while render locks are held.
+      if (!::GetWindowRect(m_hwnd, &nativeRectangle)
+         || nativeRectangle.left != pointUpdateLayeredWindow.x
+         || nativeRectangle.top != pointUpdateLayeredWindow.y
+         || nativeRectangle.right - nativeRectangle.left != width
+         || nativeRectangle.bottom - nativeRectangle.top != height)
+         return;
+      POINT presentationSource = {0, 0};
+      ::SetLastError(ERROR_SUCCESS);
+      auto bUpdated = ::UpdateLayeredWindow(m_hwnd, nullptr,
+         &pointUpdateLayeredWindow, &sizeUpdateLayeredWindow,
+         presentation.dc, &presentationSource, crKey, &presentationBlend, ULW_ALPHA);
+#else
       auto bUpdated = ::UpdateLayeredWindow(
-         m_hwnd, 
+         m_hwnd,
          hdcScreen,
          (POINT *)&pointUpdateLayeredWindow,
          (SIZE *)&sizeUpdateLayeredWindow,
@@ -1169,10 +1345,10 @@ namespace windowing_win32
          crKey,
          &blendPixelFunction,
          ULW_ALPHA);
-
-      ::GdiFlush();
-
+#endif
+      // Capture the presentation error before GdiFlush or resource cleanup.
       auto dwLastError = bUpdated ? ERROR_SUCCESS : ::GetLastError();
+      ::GdiFlush();
 
 #if defined(_DEBUG)
 
@@ -1360,9 +1536,32 @@ namespace windowing_win32
 
       //m_pwindow->m_sizeScreen = rectangleUnion.size();
 
-      auto pointWindow = pbufferitem->m_pointBufferItem;
+      const bool tightRawBuffer = pbufferitem->m_bTightRawBuffer;
+      auto pointWindow = tightRawBuffer ? ::i32_point{} : pbufferitem->m_pointBufferItem;
       auto sizeWindow = pbufferitem->m_sizeBufferItem;
-      auto sizeRaw = m_pwindow->m_sizeRaw;
+      auto sizeRaw = tightRawBuffer ? sizeWindow : m_pwindow->m_sizeRaw;
+      ::i32_size sizeAllocation;
+      if (tightRawBuffer)
+      {
+         sizeAllocation = sizeWindow;
+      }
+      else
+      {
+#if defined(__REACTOS__)
+      // Retain screen-sized storage plus any margin needed by a window which
+      // extends beyond the screen. Avoid an unconditional ninefold allocation.
+      const ::i64 allocationWidth = ::maximum((::i64)sizeRaw.cx,
+         (::i64)pointWindow.x + sizeWindow.cx);
+      const ::i64 allocationHeight = ::maximum((::i64)sizeRaw.cy,
+         (::i64)pointWindow.y + sizeWindow.cy);
+      if (allocationWidth > 0x7fffffff || allocationHeight > 0x7fffffff)
+         throw ::exception(error_bad_argument, "ReactOS layered bitmap dimensions overflow");
+      sizeAllocation = ::i32_size((::i32)allocationWidth, (::i32)allocationHeight);
+#else
+      sizeAllocation = sizeRaw * 3;
+#endif
+      }
+
 
       auto rectangleWindow = ::i32_rectangle(pointWindow, sizeWindow);
       auto rectangleRaw = ::i32_rectangle(sizeRaw);
@@ -1392,7 +1591,7 @@ namespace windowing_win32
          || !hdcBitmapMemory
          || !hbitmapBitmap
          || !pimage32RawBitmap
-         || !(sizeRaw *3 <= sizeRawBitmap)
+         || (tightRawBuffer ? sizeAllocation != sizeRawBitmap : !(sizeAllocation <= sizeRawBitmap))
          || pointBufferFixed != pointBitmap
          || sizeBufferFixed != sizeBitmap;
 
@@ -1411,7 +1610,7 @@ namespace windowing_win32
                   || !hdcBitmapMemory
                   || !hbitmapBitmap
                   || !pimage32RawBitmap
-                  || !(sizeRaw*3 <= sizeRawBitmap);
+                  || (tightRawBuffer ? sizeAllocation != sizeRawBitmap : !(sizeAllocation <= sizeRawBitmap));
 
                if (bNeedsNewDeviceIndependentBitmap)
                {
@@ -1419,7 +1618,7 @@ namespace windowing_win32
                   auto pdeviceindependentbitmapNew =
                      create_newø<::windows::device_independent_bitmap>();
 
-                  pdeviceindependentbitmapNew->defer_create_device_independent_bitmap(sizeRaw*3);
+                  pdeviceindependentbitmapNew->defer_create_device_independent_bitmap(sizeAllocation);
 
                   m_ppixmapWindowBuffer = pdeviceindependentbitmapNew;
                   pdeviceindependentbitmap = pdeviceindependentbitmapNew;

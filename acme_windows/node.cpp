@@ -2,6 +2,7 @@
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "node.h"
 #include "directory_system.h"
+#include "known_folder_compat.h"
 #include "file_system.h"
 #include "registry.h"
 #include "process_process.h"
@@ -50,8 +51,9 @@
 #include "acme/platform/remoting.h"
 #include "operating_system-windows_common/msvcrt_release.h"
 #define WIN32_LEAN_AND_MEAN
+#if !defined(NOMINMAX)
 #define NOMINMAX
-
+#endif
 //#include <windows.h>
 #include <tlhelp32.h>
 //#include <shellapi.h>
@@ -5219,28 +5221,22 @@ namespace acme_windows
 
       __check_refdbg
 
-      ::cast < acme_windows::directory_system > pdirectorysystem = directory_system();
-
       ::file::path pathSkyDrive;
 
-      bool bException = false;
-
-      try
+      // OneDrive is optional, and XP/ReactOS may not support its known-folder
+      // ID. A capability probe must not throw an otherwise handled exception
+      // that stops startup when a debugger breaks on C++ throws.
+      ::cotaskptr<PWSTR> knownFolderPath;
+      const HRESULT knownFolderResult = ca2_get_known_folder_path(
+         FOLDERID_OneDrive, 0, nullptr, &knownFolderPath);
+      if (SUCCEEDED(knownFolderResult) && knownFolderPath.m_p)
       {
-
-         pathSkyDrive = pdirectorysystem->_get_known_folder(FOLDERID_OneDrive);
-
-      }
-      catch (...)
-      {
-
-         bException = true;
-
+         pathSkyDrive = knownFolderPath.m_p;
       }
 
       __check_refdbg
 
-      if (bException || !directory_system()->is(pathSkyDrive))
+      if (pathSkyDrive.is_empty() || !directory_system()->is(pathSkyDrive))
       {
 
          if (::system()->is_desktop_system())
@@ -5597,6 +5593,24 @@ namespace acme_windows
     ::string node::get_current_operating_system_name()
    {
 
+#if defined(__REACTOS__)
+      // This compatibility binary may run on ReactOS or genuine Windows.
+      HKEY versionKey = nullptr;
+      if (::RegOpenKeyExW(HKEY_LOCAL_MACHINE,
+         L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", 0,
+         KEY_QUERY_VALUE, &versionKey) == ERROR_SUCCESS)
+      {
+         wchar_t productName[256] = {};
+         DWORD type = 0;
+         DWORD bytes = sizeof(productName) - sizeof(wchar_t);
+         const LONG result = ::RegQueryValueExW(versionKey, L"ProductName", nullptr,
+            &type, reinterpret_cast<BYTE *>(productName), &bytes);
+         ::RegCloseKey(versionKey);
+         if (result == ERROR_SUCCESS && type == REG_SZ
+            && wcsstr(productName, L"ReactOS"))
+            return "ReactOS";
+      }
+#endif
       RTL_OSVERSIONINFOW os_version = {0};
       GetWindowsVersion(os_version);
 
@@ -5789,7 +5803,11 @@ namespace acme_windows
 
                   unique_handle process(
                      OpenProcess(
+#ifdef __REACTOS__
+                        PROCESS_QUERY_INFORMATION | PROCESS_VM_READ |
+#else
                         PROCESS_QUERY_LIMITED_INFORMATION |
+#endif
                         PROCESS_TERMINATE |
                         SYNCHRONIZE,
                         FALSE,
@@ -5863,6 +5881,15 @@ namespace acme_windows
 
    auto psz = path.get_buffer(capacity);
 
+#ifdef __REACTOS__
+   DWORD length = GetModuleFileNameExW(uniquehandle.get(), nullptr, psz, capacity);
+   if (!length || length >= capacity)
+   {
+      path.release_buffer(0);
+      return {};
+   }
+   capacity = length;
+#else
    if (!QueryFullProcessImageNameW(
       uniquehandle.get(),
       0,
@@ -5874,6 +5901,7 @@ namespace acme_windows
 
    }
 
+#endif
    path.release_buffer(capacity);
 
    return path;

@@ -1,5 +1,6 @@
 // Created by camilo on 2024-09-12 22:45 <3ThomasBorregaardSorensen!!
 #include "platform.h"
+#include "dpi_compat.h"
 #include "innate_ui.h"
 #include "window.h"
 #include "acme/nano/nano.h"
@@ -22,7 +23,7 @@
 HFONT CreateScaledFont(HWND hWnd, ::i32 pointSize, ::i32 weight, const wchar_t *fontFamily)
 {
    // 1. Get the current DPI for the window
-   UINT dpi = GetDpiForWindow(hWnd);
+   UINT dpi = ca2_window_dpi(hWnd);
    if (dpi == 0)
       dpi = 96;
 
@@ -489,10 +490,31 @@ return false;
 
          auto hwnd = ::as_HWND(this->operating_system_window());
 
+#if defined(__REACTOS__)
+         information() << "ABOUT_NATIVE ShowWindow begin";
+#endif
          ShowWindow(hwnd, SW_SHOW);
+#if defined(__REACTOS__)
+         information() << "ABOUT_NATIVE ShowWindow returned; UpdateWindow begin";
+#endif
          
          UpdateWindow(hwnd);
+#if defined(__REACTOS__)
+         information() << "ABOUT_NATIVE UpdateWindow returned";
+#endif
 
+#if defined(__REACTOS__)
+         // ShowWindow(SW_SHOW) already requests activation on the native UI
+         // thread. Do not post a second SetForegroundWindow transaction to
+         // another input thread while layered presentation waits on this one.
+         RECT rectangle{};
+         const BOOL hasRectangle = ::GetWindowRect(hwnd, &rectangle);
+         informationf("ABOUT_NATIVE shown hwnd=%p visible=%d ownerThread=%lu currentThread=%lu foreground=%p rectangleValid=%d rectangle=(%ld,%ld)-(%ld,%ld); no cross-thread foreground request",
+            hwnd, (int)::IsWindowVisible(hwnd),
+            (unsigned long)::GetWindowThreadProcessId(hwnd, nullptr),
+            (unsigned long)::GetCurrentThreadId(), ::GetForegroundWindow(),
+            (int)hasRectangle, rectangle.left, rectangle.top, rectangle.right, rectangle.bottom);
+#else
           ::cast < ::win32::acme::windowing::activation_token> pwin32activationtoken = puseractivationtoken;
 
           if (pwin32activationtoken)
@@ -516,6 +538,7 @@ return false;
 
 
           }
+#endif
      });
 
 

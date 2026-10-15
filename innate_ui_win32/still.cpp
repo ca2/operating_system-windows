@@ -1,34 +1,46 @@
 // Created by camilo on 2024-09-13 01:00 <3ThomasBorregaardSorensen!!
 #include "platform.h"
+#include "dpi_compat.h"
 #include "icon.h"
 #include "still.h"
+#include <memory>
 #include "acme/operating_system/windows/windowing.h"
 
 
-::Gdiplus::Image * LoadImageFromMemory(const void * imageData, memsize size)
+static ::Gdiplus::Image * LoadImageFromMemory(const void * imageData, memsize size, IStream **retainedStream)
 {
-   // Create an IStream object from the memory buffer
+   *retainedStream = nullptr;
+   if (!imageData || size <= 0)
+      return nullptr;
    HGLOBAL hGlobal = GlobalAlloc(GMEM_MOVEABLE, size);
    if (!hGlobal)
       return nullptr;
-
-   void * pData = GlobalLock(hGlobal);
-   memcpy(pData, imageData, size);
-   GlobalUnlock(hGlobal);
-
-   IStream * pStream = nullptr;
-   HRESULT hr = CreateStreamOnHGlobal(hGlobal, TRUE, &pStream); // TRUE so the stream releases the memory
-   if (FAILED(hr))
+   void *pData = GlobalLock(hGlobal);
+   if (!pData)
    {
       GlobalFree(hGlobal);
       return nullptr;
    }
+   memcpy(pData, imageData, size);
+   GlobalUnlock(hGlobal);
 
-   // Load the image from the stream using GDI+
-   ::Gdiplus::Image * image = new ::Gdiplus::Image(pStream);
-   pStream->Release();
-
-   return image;
+   struct stream_scope
+   {
+      IStream *stream = nullptr;
+      ~stream_scope() { if (stream) stream->Release(); }
+   } owner;
+   if (FAILED(CreateStreamOnHGlobal(hGlobal, TRUE, &owner.stream)))
+   {
+      GlobalFree(hGlobal);
+      return nullptr;
+   }
+   std::unique_ptr<Gdiplus::Image> image(new Gdiplus::Image(owner.stream));
+   if (image->GetLastStatus() != Gdiplus::Ok)
+      return nullptr;
+   // Keep the stream alive through painting and image destruction.
+   *retainedStream = owner.stream;
+   owner.stream = nullptr;
+   return image.release();
 }
 
 namespace innate_ui_win32
@@ -38,6 +50,8 @@ namespace innate_ui_win32
 
    still::still()
    {
+      m_pgdiplusimage = nullptr;
+      m_pImageStream = nullptr;
       m_bIcon = false;
       m_iCreateStyle = WS_TABSTOP | WS_VISIBLE | WS_CHILD | SS_LEFT;
    }
@@ -45,19 +59,14 @@ namespace innate_ui_win32
 
    still::~still()
    {
-
-      if (m_pgdiplusimage)
+      delete m_pgdiplusimage;
+      m_pgdiplusimage = nullptr;
+      if (m_pImageStream)
       {
-
-         delete m_pgdiplusimage;
-
-         m_pgdiplusimage = nullptr;
-
+         m_pImageStream->Release();
+         m_pImageStream = nullptr;
       }
-
    }
-
-
 
 
    void still::_create_child(window * pwindowParent)
@@ -140,61 +149,45 @@ namespace innate_ui_win32
 
    void still::set_icon(::innate_ui::icon * piconParam)
    {
-
-      if (m_pgdiplusimage)
-      {
-
-         delete m_pgdiplusimage;
-
-         m_pgdiplusimage = nullptr;
-
-      }
-
-      ::pointer <::innate_ui_win32::icon > picon = piconParam;
-
-      if (::is_null(picon))
-      {
-
-         return;
-
-      }
-
+      ::pointer<::innate_ui_win32::icon> picon = piconParam;
+      // Image replacement must run on the same UI thread as WM_PAINT.
       main_send([this, picon]()
       {
-
-
+#if defined(__REACTOS__)
+         information() << "ABOUT_ICON replacing native image";
+#endif
+         delete m_pgdiplusimage;
+         m_pgdiplusimage = nullptr;
+         if (m_pImageStream)
+         {
+            m_pImageStream->Release();
+            m_pImageStream = nullptr;
+         }
+         if (!picon)
+            return;
+         try
+         {
             if (picon->m_memory.data() && picon->m_memory.size() > 0)
-            {
-
-
-               try
-               {
-                  m_pgdiplusimage = LoadImageFromMemory(picon->m_memory.data(), picon->m_memory.size());
-               }
-               catch (...)
-               {
-               }
-            }
+               m_pgdiplusimage = LoadImageFromMemory(picon->m_memory.data(),
+                  picon->m_memory.size(), &m_pImageStream);
             else if (picon->m_hicon)
             {
-
-               //auto hwnd = ::as_HWND(this->operating_system_window());
-
-               //::SendMessage(hwnd, STM_SETICON, (WPARAM)picon->m_hicon, 0);
-               try
-               {
-                  m_pgdiplusimage = new Gdiplus::Bitmap(picon->m_hicon);
-               }
-               catch (...)
-               {
-               }
+               std::unique_ptr<Gdiplus::Bitmap> image(new Gdiplus::Bitmap(picon->m_hicon));
+               if (image->GetLastStatus() == Gdiplus::Ok)
+                  m_pgdiplusimage = image.release();
             }
-         
+         }
+         catch (...)
+         {
+            // An unavailable icon must not prevent the dialog from opening.
+         }
+#if defined(__REACTOS__)
+         informationf("ABOUT_ICON native image ready=%d", m_pgdiplusimage != nullptr);
+#endif
       });
-
    }
 
-   
+
    bool still::on_window_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam)
    {
 
@@ -248,7 +241,7 @@ namespace innate_ui_win32
 
       // 1. Get the current DPI for the specific window (Windows 10 1607+)
       // For older versions, use GetDeviceCaps(hdc, LOGPIXELSX)
-      UINT dpi = GetDpiForWindow(hwnd);
+      UINT dpi = ca2_window_dpi(hwnd);
       if (dpi == 0)
          dpi = 96; // Fallback to default
       wstring wstr;

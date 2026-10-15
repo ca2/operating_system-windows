@@ -53,7 +53,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_compile_definitions(static_${PROJECT_NAME} PRIVATE CUBE)
 
 
-if (MSVC)
+if (${WIN32})
 
 
 
@@ -65,8 +65,8 @@ if (MSVC)
       target_link_options(${PROJECT_NAME} PRIVATE    "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
       target_link_options(${PROJECT_NAME} PRIVATE    "/SUBSYSTEM:WINDOWS")
       target_link_options(${PROJECT_NAME} PRIVATE    "/bigobj")
-      target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
-      target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
+      target_link_options(${PROJECT_NAME} PRIVATE    "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
+      target_link_options(${PROJECT_NAME} PRIVATE    "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
 
 
    else()
@@ -90,7 +90,8 @@ if (MSVC)
        CredUI
        WS2_32
     Secur32
-    Version)
+    Version
+    psapi)
     if(MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 4 AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
        target_link_libraries(${PROJECT_NAME} PRIVATE wininet)
     endif()

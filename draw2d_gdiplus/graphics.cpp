@@ -454,7 +454,8 @@ namespace draw2d_gdiplus
       if (m_pgraphicsbufferitem)
       {
 
-         pointTarget = m_pgraphicsbufferitem->m_pointBufferItem;
+         pointTarget = m_pgraphicsbufferitem->m_bTightRawBuffer
+            ? ::f64_point{} : ::f64_point(m_pgraphicsbufferitem->m_pointBufferItem);
          sizeTarget = m_pgraphicsbufferitem->m_sizeBufferItem;
 
       }
@@ -6794,7 +6795,7 @@ namespace draw2d_gdiplus
 
       rectangleBound.GetSize(&size);
 
-      return class ::f64_size((::f64)(size.Width * m_pwritetextfont->m_dFontWidth), (::f64)(size.Height));
+      return ::f64_size((::f64)(size.Width * m_pwritetextfont->m_dFontWidth), (::f64)(size.Height));
 
    }
 
@@ -6882,7 +6883,7 @@ namespace draw2d_gdiplus
 
       delete[] pCharRangeRegions;
 
-      return class ::f64_size((::f64)(rectangleBound.X * m_pwritetextfont->m_dFontWidth), (::f64)(rectangleBound.Height));
+      return ::f64_size((::f64)(rectangleBound.X * m_pwritetextfont->m_dFontWidth), (::f64)(rectangleBound.Height));
 
    }
 
