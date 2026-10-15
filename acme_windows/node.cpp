@@ -1,4 +1,5 @@
 #include "platform.h"
+#include "acme/operating_system/windows/windows_xp_compat.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "node.h"
 #include "directory_system.h"
@@ -3790,7 +3791,11 @@ namespace acme_windows
    {
 
 
+#if defined(WINDOWS_XP)
+      return ca2_xp_current_processor_index();
+#else
       return ::GetCurrentProcessorNumber();
+#endif
 
 
    }

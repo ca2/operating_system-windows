@@ -1,5 +1,6 @@
 // Created by camilo on 2022-01-21 05:05 PM <3ThomasBorregaardSorensen
 #include "platform.h"
+#include "acme/operating_system/windows/windows_xp_compat.h"
 #include "window.h"
 #include "acme/nano/graphics/context.h"
 #include "acme/operating_system/windows/windowing.h"
@@ -822,6 +823,9 @@ namespace win32
 
          bool window::_is_light_theme()
          {
+#if defined(WINDOWS_XP)
+            return ca2_xp_is_light_theme();
+#else
 
             DWORD dwBuffer;
 
@@ -844,6 +848,7 @@ namespace win32
             }
 
             return dwBuffer != FALSE;
+#endif
 
          }
 

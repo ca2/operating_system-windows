@@ -61,6 +61,11 @@ add_compile_definitions(UNICODE)
 add_compile_definitions(_UNICODE)
 add_compile_definitions(WINDOWS_DESKTOP)
 
+option(WINDOWS_XP "Enable additional Windows XP API compatibility adapters" OFF)
+if(WINDOWS_XP)
+   add_compile_definitions(WINDOWS_XP)
+endif()
+
 # The current ReactOS toolchain is 32-bit MinGW GCC, not Clang.
 if(MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 4
    AND CMAKE_C_COMPILER_ID STREQUAL "GNU"
