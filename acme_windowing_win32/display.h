@@ -37,6 +37,9 @@ namespace win32
 
 
 
+            bool is_dark_mode_through_theming() override;
+            ::string impl_get_desktop_theme() override;
+            void impl_set_desktop_theme(const ::scoped_string & scopedstrDesktopTheme) override;
             virtual void open_display();
 
             //virtual enum_display_type get_display_type();

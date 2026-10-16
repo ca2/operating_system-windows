@@ -11,6 +11,9 @@
 #include "acme/user/micro/user.h"
 #include "acme/windowing/windowing.h"
 #include "acme/_operating_system.h"
+#include "acme/platform/node.h"
+#include "acme_windows/registry.h"
+#include "acme/operating_system/windows/windows.h"
 
 namespace win32
 {
@@ -39,6 +42,43 @@ namespace win32
          {
 
 
+         }
+
+
+         bool display::is_dark_mode_through_theming()
+         {
+            return ::windows::is_windows_xp();
+         }
+
+         ::string display::impl_get_desktop_theme()
+         {
+            if (!::windows::is_windows_xp())
+            {
+               return ::acme::windowing::display::impl_get_desktop_theme();
+            }
+            ::acme_windows::registry::key key;
+            ::string strTheme;
+            if (key._open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes"))
+            {
+               key._get("CurrentTheme", strTheme);
+            }
+            return strTheme;
+         }
+
+         void display::impl_set_desktop_theme(const ::scoped_string & scopedstrDesktopTheme)
+         {
+            if (!::windows::is_windows_xp())
+            {
+               ::acme::windowing::display::impl_set_desktop_theme(scopedstrDesktopTheme);
+               return;
+            }
+            // XP's registered .theme handler loads the theme in Display Properties.
+            // Resolve virtual paths before passing the file to the operating system.
+            auto path = system()->defer_process_path(scopedstrDesktopTheme);
+            if (path.has_character())
+            {
+               node()->shell_open(path);
+            }
          }
 
 
