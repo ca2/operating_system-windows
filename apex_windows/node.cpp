@@ -44,6 +44,7 @@
 #include "operating_system/operating_system-windows/deployment/resource1.h"
 
 #include "acme/_operating_system.h"
+#include "acme/operating_system/windows/windows.h"
 
 #include <winsock2.h>
 #include <windows.h>
@@ -64,6 +65,7 @@
 #include <wtsapi32.h>
 #include <shobjidl.h>
 #include <ShellApi.h>
+#include <shlobj.h>
 #include <Security.h>
 #include <wincred.h>
 #include <shobjidl.h>
@@ -211,6 +213,30 @@ namespace windows
 
 namespace apex_windows
 {
+
+   namespace
+   {
+
+      ::file::path start_menu_programs_path()
+      {
+
+         // Ask the Shell so localized and redirected folders work on XP and newer Windows.
+         wchar_t wszPrograms[MAX_PATH] = {};
+         HRESULT hr = ::SHGetFolderPathW(
+            nullptr, CSIDL_PROGRAMS, nullptr, SHGFP_TYPE_CURRENT, wszPrograms);
+
+         if (FAILED(hr))
+         {
+
+            throw ::exception(::windows::hresult_status(hr));
+
+         }
+
+         return ::file::path(wszPrograms);
+
+      }
+
+   }
 
 
    node::node()
@@ -1170,7 +1196,10 @@ namespace apex_windows
 
                auto path = file_system()->module();
 
-               auto pathShortcut = directory_system()->roaming() / "Microsoft/Windows/Start Menu/Programs" / strRoot / (strAppName + ".lnk");
+
+               auto pathStartMenuPrograms = start_menu_programs_path();
+
+               auto pathShortcut = pathStartMenuPrograms / strRoot / (strAppName + ".lnk");
 
 #ifdef WINDOWS
 
@@ -1296,7 +1325,8 @@ namespace apex_windows
 
       //#ifdef WINDOWS_DESKTOP
 
-      pathShortcut = directory_system()->roaming() / "Microsoft/Windows/Start Menu/Programs" / strRoot / (strAppName + ".lnk");
+      auto pathPrograms = start_menu_programs_path();
+      pathShortcut = pathPrograms / strRoot / (strAppName + ".lnk");
 
       //#else
       //

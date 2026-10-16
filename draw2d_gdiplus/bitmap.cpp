@@ -353,9 +353,9 @@ namespace draw2d_gdiplus
 
       }
 
-      //m_osdata[0] = m_pgdiplusbitmap;
-
       m_size = size;
+
+      //m_osdata[0] = m_pgdiplusbitmap;
 
       set_ok_flag();
 
@@ -418,7 +418,7 @@ namespace draw2d_gdiplus
       if (m_pgdiplusbitmap == nullptr)
       {
 
-         return ::i32_size(0, 0);
+         return ::draw2d::bitmap::size();
 
       }
 
@@ -813,6 +813,8 @@ namespace draw2d_gdiplus
          || point.x > sizeBitmap.cx - size.cx
          || point.y > sizeBitmap.cy - size.cy)
       {
+
+         auto sizeBitmap2 = this->size();
 
          throw ::exception(error_bad_argument);
 

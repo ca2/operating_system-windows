@@ -24,7 +24,14 @@ list(APPEND music_midi_mmsystem_source
         _.h
         _factory.cpp
         platform.cpp
-        platform.h)
+        platform.h
+        buffer.cpp
+        in.cpp
+        midi_mmsystem.cpp
+        midi.cpp
+        out.cpp
+        sequencer.cpp
+        translation.cpp)
 
 
 
@@ -66,7 +73,7 @@ if (${WIN32})
 
    endif()
 
-    target_link_libraries(${PROJECT_NAME} PRIVATE acme apex aqua aura Gdiplus)
+    target_link_libraries(${PROJECT_NAME} PRIVATE acme apex aqua aura acme_windows multimedia_mmsystem veriwell_multimedia winmm Gdiplus)
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)

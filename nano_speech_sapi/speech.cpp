@@ -149,9 +149,14 @@ namespace sapi
 
             }
 
-            hr = SpGetDefaultTokenFromCategoryId__LangAndGender(L"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices", &ptoken, scopedstrLang, egender, "", false);
-
-            if (SUCCEEDED(hr))
+#if !defined(__REACTOS__)
+            if (SpGetDefaultTokenFromCategoryId__LangAndGender(L"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices", &ptoken, scopedstrLang, egender, "", false))
+            {
+               return ptoken;
+            }
+#endif
+            // The helper returns bool, not HRESULT. Classic SAPI also works on XP.
+            if (SpGetDefaultTokenFromCategoryId__LangAndGender(SPCAT_VOICES, &ptoken, scopedstrLang, egender, "", false))
             {
 
                return ptoken;

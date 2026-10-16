@@ -1,115 +1,22 @@
 cmake_minimum_required(VERSION 3.17)
-project(audio_mmsystem CXX)
+project(nano_speech_sapi CXX)
 
+set(library_source _.cpp _.h _factory.cpp platform.cpp platform.h speech.cpp speech.h)
+add_library(${PROJECT_NAME} SHARED ${library_source})
+add_library(static_${PROJECT_NAME} STATIC ${library_source})
 
+foreach(speech_target IN ITEMS ${PROJECT_NAME} static_${PROJECT_NAME})
+    target_compile_definitions(${speech_target} PRIVATE _${PROJECT_NAME}_project)
+    target_include_directories(${speech_target} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
+    target_link_libraries(${speech_target} PRIVATE acme apex aqua aura ole32 sapi uuid)
+    if(NOT NO_PRECOMPILED_HEADER)
+        target_precompile_headers(${speech_target} PRIVATE platform.h)
+    endif()
+endforeach()
 
-
-
-message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
-
-
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-   set(LINUX TRUE)
-   set(OPERATING_SYSTEM_NAME "linux")
-   include(FindPkgConfig)
-elseif (WIN32)
-   set(OPERATING_SYSTEM_NAME "windows")
-endif ()
-
-
-set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
-
-
-list(APPEND audio_mmsystem_source
-   _.cpp
-   _.h
-   command.h
-   _factory.cpp
-   factory_exchange.h
-   platform.cpp
-   platform.h
-   in.cpp
-   in.h
-   out.cpp
-   out.h
-   )
-
-if (MSVC)
-   set(LIBCXX_TARGETING_MSVC ON)
-else ()
-   set(LIBCXX_TARGETING_MSVC OFF)
-endif ()
-
-
-add_library(audio_mmsystem SHARED ${audio_mmsystem_source})
-
-target_precompile_headers(audio_mmsystem PRIVATE platform.h)
-
-set_target_properties(audio_mmsystem PROPERTIES LINKER_LANGUAGE CXX)
-
-if (MSVC)
-
-
-
-
-   if(MSVC)
-
-
-      target_compile_options(${PROJECT_NAME} PRIVATE    "/MD$<$<CONFIG:Debug>:d>")
-      target_link_options(${PROJECT_NAME} PRIVATE    "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
-      target_link_options(${PROJECT_NAME} PRIVATE    "/SUBSYSTEM:WINDOWS")
-      target_link_options(${PROJECT_NAME} PRIVATE    "/bigobj")
-      target_link_options(${PROJECT_NAME} PRIVATE    "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
-      target_link_options(${PROJECT_NAME} PRIVATE    "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-
-
-   else()
-
-
-      target_link_options(${PROJECT_NAME} PRIVATE "-mwindows")
-      target_sources(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-
-
-   endif()
-
-
-   target_link_libraries(${PROJECT_NAME} PRIVATE acme apex aqua aura Gdiplus)
-elseif (LINUX)
-
-   if(NOT DONT_USE_PKG_CONFIG)
-      #pkg_check_modules(PKGCONFIG glib-2.0 gtk+-3.0 gdk-3.0 appindicator-0.1)
-      pkg_check_modules(PKGCONFIG glib-2.0 freetype2 gtk+-3.0 gdk-3.0)
-   endif()
-   target_compile_options(${PROJECT_NAME} PRIVATE ${PKGCONFIG_CFLAGS})
-   #target_compile_options(${PROJECT_NAME} PRIVATE -std=c++14)
-   #target_link_options(${PROJECT_NAME} PRIVATE ${GTK_LDFLAGS})
-   target_link_options(${PROJECT_NAME} PRIVATE -Wl,-rpath=\$ORIGIN)
-   target_link_libraries(${PROJECT_NAME} PRIVATE z dl pthread ncurses X11 Xrender Xinerama Xft ${PKGCONFIG_LIBRARIES})
-   target_link_options(${PROJECT_NAME} PRIVATE -Wl,-z,defs)
-   message("PKGCONFIG_LIBRARIES is " ${PKGCONFIG_LIBRARIES})
-endif ()
-
-target_link_directories(audio_mmsystem PRIVATE ${LIBRARY_OUTPUT_PATH})
-target_link_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/storage-${OPERATING_SYSTEM_NAME}/library/x64/basis)
-target_link_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/storage-${OPERATING_SYSTEM_NAME}/third/library/x64/basis)
-
-
-##target_include_directories(audio_mmsystem PRIVATE $HOME_AAA_DIR/__aaa_config)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app/_include)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/include)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/operating_system-${OPERATING_SYSTEM_NAME})
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/operating_system-${OPERATING_SYSTEM_NAME}/_include)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/third-${OPERATING_SYSTEM_NAME}/include)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/third-${OPERATING_SYSTEM_NAME}/third/include)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/third-${OPERATING_SYSTEM_NAME}/third/include/include)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-
-
-target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)
-target_compile_definitions(audio_mmsystem PRIVATE UNICODE)
-target_compile_definitions(audio_mmsystem PRIVATE _UNICODE)
+if(MSVC)
+    target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
+else()
+    target_sources(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
+    target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
+endif()

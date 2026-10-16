@@ -36,6 +36,14 @@ set(default_write_text "write_text_win32")
 set(default_imaging "imaging_wic")
 set(default_gpu "gpu_opengl")
 set(default_audio "audio_mmsystem")
+set(default_music_midi music_midi_mmsystem CACHE STRING "Default MIDI backend")
+# Backends built for applications that offer MIDI output choices.
+set(music_midi_dependencies
+   ${default_music_midi}
+   music_midi_rtmidi
+   music_midi_tinysoundfont
+   music_midi_fluidsynth)
+list(REMOVE_DUPLICATES music_midi_dependencies)
 set(default_input "input_win32")
 set(default_networking "networking_bsd")
 set(default_acme "acme_windows")
@@ -162,15 +170,15 @@ set(APPLICATION_BUILD_HELPER_BINARY "$ENV{USERPROFILE}/code/operating_system/too
 message(STATUS "APPLICATION_BUILD_HELPER_BINARY is ${APPLICATION_BUILD_HELPER_BINARY}")
 
 
-add_custom_target(copy_libraries_step
-   COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
-   "${EXECUTABLE_OUTPUT_PATH}/../../../operating_system/storage-windows/x64/Debug/third/binary/"
-   "${EXECUTABLE_OUTPUT_PATH}"
-   COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
-   "${EXECUTABLE_OUTPUT_PATH}/../../../operating_system/storage-windows/x64/Debug/binary/"
-   "${EXECUTABLE_OUTPUT_PATH}"
-   COMMENT "copy_libraries_step"
-)
+#add_custom_target(copy_libraries_step
+#   COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+#   "${EXECUTABLE_OUTPUT_PATH}/../../../operating_system/storage-windows/x64/Debug/third/binary/"
+#   "${EXECUTABLE_OUTPUT_PATH}"
+#   COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+#   "${EXECUTABLE_OUTPUT_PATH}/../../../operating_system/storage-windows/x64/Debug/binary/"
+#   "${EXECUTABLE_OUTPUT_PATH}"
+#   COMMENT "copy_libraries_step"
+#)
 
 
 list(APPEND acme_libraries acme_windows_common acme_windows)
