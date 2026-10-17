@@ -108,13 +108,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_openssl", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "folder_zip", "..\..\..\source\app\folder_zip\folder_zip.vcxproj", "{A69CC125-E38A-4F77-9677-8860D43AB3B0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_light", "..\..\..\source\game\light\__implement\shared_game_light.vcxproj", "{1311F5EB-FD17-4D46-ABA9-D82259E36EEA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_light", "..\..\..\source\game\light\__implement\_game_light.vcxproj", "{1311F5EB-FD17-4D46-ABA9-D82259E36EEA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_complex_drawing", "..\..\..\source\app-complex\drawing\__implement\shared_app_complex_drawing.vcxproj", "{9737CA6C-C54C-42F3-8531-54BC38D69FE5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_complex_drawing", "..\..\..\source\app-complex\drawing\__implement\_app_complex_drawing.vcxproj", "{9737CA6C-C54C-42F3-8531-54BC38D69FE5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_complex_form", "..\..\..\source\app-complex\form\__implement\shared_app_complex_form.vcxproj", "{DB0DB48E-D598-4534-AC03-7177603F0937}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_complex_form", "..\..\..\source\app-complex\form\__implement\_app_complex_form.vcxproj", "{DB0DB48E-D598-4534-AC03-7177603F0937}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_complex_video_capture", "..\..\..\source\app-complex\video_capture\__implement\shared_app_complex_video_capture.vcxproj", "{E64AD1B5-1FE0-4236-9F93-30F6CBA088A2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_complex_video_capture", "..\..\..\source\app-complex\video_capture\__implement\_app_complex_video_capture.vcxproj", "{E64AD1B5-1FE0-4236-9F93-30F6CBA088A2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
@@ -125,7 +125,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_complex_video_ca
 		{F85061D8-22DC-4A8B-85EA-76D330BE52CC} = {F85061D8-22DC-4A8B-85EA-76D330BE52CC}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_particle", "..\..\..\source\game\particle\__implement\shared_game_particle.vcxproj", "{B02B60B9-171C-41B2-8DF8-2BF26F8693FC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_particle", "..\..\..\source\game\particle\__implement\_game_particle.vcxproj", "{B02B60B9-171C-41B2-8DF8-2BF26F8693FC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "video_input", "..\..\..\source\app-complex\video_input\video_input.vcxproj", "{BEB48980-1D02-491B-B6AA-33475849BF25}"
 EndProject

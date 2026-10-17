@@ -56,7 +56,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\..\source\app
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\..\source\app\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_networking_application", "..\..\..\source\app-simple\networking_application\__implement\shared_app_simple_networking_application.vcxproj", "{440D076C-B354-4DF8-BEC7-5F93508F1F1C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_networking_application", "..\..\..\source\app-simple\networking_application\__implement\_app_simple_networking_application.vcxproj", "{440D076C-B354-4DF8-BEC7-5F93508F1F1C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}

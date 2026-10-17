@@ -89,11 +89,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_csgomatchmaking", "..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_game_csgomatchmaking", "..\..\..\source\game\csgomatchmaking\static_game_csgomatchmaking.vcxproj", "{5ADC4D84-DE92-4E44-9011-3821CBB86B9C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_arch001", "..\..\..\source\game\arch001\__implement\shared_game_arch001.vcxproj", "{AA6D8B2F-89D3-45B3-AF07-2C38BBC61964}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_arch001", "..\..\..\source\game\arch001\__implement\_game_arch001.vcxproj", "{AA6D8B2F-89D3-45B3-AF07-2C38BBC61964}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_coincube", "..\..\..\source\game\coincube\__implement\shared_game_coincube.vcxproj", "{419B11B1-B266-4711-9CEA-9EF99BC2A540}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_coincube", "..\..\..\source\game\coincube\__implement\_game_coincube.vcxproj", "{419B11B1-B266-4711-9CEA-9EF99BC2A540}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_csgomatchmaking", "..\..\..\source\game\csgomatchmaking\__implement\shared_game_csgomatchmaking.vcxproj", "{DCB3F7AF-B01A-4665-86EA-28B95C5C3F60}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_csgomatchmaking", "..\..\..\source\game\csgomatchmaking\__implement\_game_csgomatchmaking.vcxproj", "{DCB3F7AF-B01A-4665-86EA-28B95C5C3F60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -149,7 +149,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "text_to_speech_google", "..
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "text_to_speech_sapi", "..\..\..\source\app-core\text_to_speech_sapi\text_to_speech_sapi.vcxproj", "{1BC6E245-E520-4A72-A676-F763CAB89CA5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_addressbook", "..\..\..\source\app-core\addressbook\__implement\shared_app_core_addressbook.vcxproj", "{A05FB765-A517-48B2-BAF2-382B64942931}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_addressbook", "..\..\..\source\app-core\addressbook\__implement\_app_core_addressbook.vcxproj", "{A05FB765-A517-48B2-BAF2-382B64942931}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1BC6E245-E520-4A72-A676-F763CAB89CA5} = {1BC6E245-E520-4A72-A676-F763CAB89CA5}
 		{38C64C42-60D1-431F-B651-80489121AA79} = {38C64C42-60D1-431F-B651-80489121AA79}
@@ -169,9 +169,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_addressbook
 		{F85061D8-22DC-4A8B-85EA-76D330BE52CC} = {F85061D8-22DC-4A8B-85EA-76D330BE52CC}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_file_manager", "..\..\..\source\app-core\file_manager\__implement\shared_app_core_file_manager.vcxproj", "{AA697E28-79BF-4889-97F4-579AD23FEEF8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_file_manager", "..\..\..\source\app-core\file_manager\__implement\_app_core_file_manager.vcxproj", "{AA697E28-79BF-4889-97F4-579AD23FEEF8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hash_hub", "..\..\..\source\app-core\hash_hub\__implement\shared_app_core_hash_hub.vcxproj", "{666CE709-A63C-4FED-ADDF-BB50F2EACC33}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_hash_hub", "..\..\..\source\app-core\hash_hub\__implement\_app_core_hash_hub.vcxproj", "{666CE709-A63C-4FED-ADDF-BB50F2EACC33}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_note", "..\..\..\source\app-core\note\__implement\shared_app_core_note.vcxproj", "{DAD741CA-CC25-40DF-9847-BCF971F208BE}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -186,9 +186,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_note", "..\
 		{F85061D8-22DC-4A8B-85EA-76D330BE52CC} = {F85061D8-22DC-4A8B-85EA-76D330BE52CC}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_photo", "..\..\..\source\app-core\photo\__implement\shared_app_core_photo.vcxproj", "{8E30EB14-B4F4-40CE-ACC8-6DE4F04D97B2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_photo", "..\..\..\source\app-core\photo\__implement\_app_core_photo.vcxproj", "{8E30EB14-B4F4-40CE-ACC8-6DE4F04D97B2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_picture", "..\..\..\source\app-core\picture\__implement\shared_app_core_picture.vcxproj", "{579FB161-11B6-41E5-BDDD-0A160997D0BB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_picture", "..\..\..\source\app-core\picture\__implement\_app_core_picture.vcxproj", "{579FB161-11B6-41E5-BDDD-0A160997D0BB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "user_text_to_speech", "..\..\..\source\app-core\user_text_to_speech\user_text_to_speech.vcxproj", "{A156A707-E332-4F7F-807B-335566C43BEC}"
 EndProject
