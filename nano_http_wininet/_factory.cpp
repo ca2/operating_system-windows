@@ -1,18 +1,6 @@
-//
-// macos/nano/_nano.cpp by camilo on 26/07/2023 22:17 <3ThomasBorregaardSorensen!!
-//
 #include "platform.h"
-#include "_http.h"
 #include "http.h"
-
-
-
-__FACTORY_EXPORT void nano_http_wininet_factory(::factory::factory * pfactory)
+__FACTORY_EXPORT void nano_http_wininet_factory(::factory::factory* factory)
 {
-
-   pfactory->add_factory_item<::windows::nano::http::http, ::nano::http::http>();
-
+   factory->add_factory_item<::windows::nano::http_native::http, ::nano::http::http>();
 }
-
-
-

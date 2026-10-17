@@ -42,6 +42,10 @@ namespace nano_graphics_gdiplus
       ::wstring wstrFontFamilyName(strFontFamilyName);
 
       m_pgdiplusfontfamily = ::as_pointer(new ::Gdiplus::FontFamily(wstrFontFamilyName));
+#if defined(__REACTOS__)
+      if (m_pgdiplusfontfamily->GetLastStatus() != ::Gdiplus::Ok)
+         m_pgdiplusfontfamily = ::as_pointer(new ::Gdiplus::FontFamily(L"Tahoma"));
+#endif
       
 
    }

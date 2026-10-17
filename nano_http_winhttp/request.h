@@ -5,6 +5,7 @@
 
 
 #include "hinternet.h"
+#include <atomic>
 
 
 namespace windows
@@ -20,12 +21,20 @@ namespace windows
       {
 
 
-         class CLASS_DECL_NANO_HTTP_WININET request :
+         class CLASS_DECL_NANO_HTTP_WINHTTP request :
             public hinternet
          {
          public:
 
             connect& m_connect;
+            std::atomic<unsigned long> m_secureFailureFlags{0};
+            DWORD m_callbackError = 0;
+            DWORD m_contextError = 0;
+            std::atomic<unsigned long> m_secureFailureCount{0};
+
+            static void CALLBACK status_callback(HINTERNET, DWORD_PTR context, DWORD status,
+               LPVOID information, DWORD informationLength) noexcept;
+            ::string security_diagnostics();
 
             request(connect& connect, const ::scoped_string& scopedstrOperation, const ::scoped_string& scopedstrObject);
             ~request() override;

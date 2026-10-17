@@ -1,5 +1,5 @@
 ;JegElskerDigThomasBorregaardSørensencamiloMummiBilbo!! 2026-05-27 22:38:12
-LIBRARY "nano_http_wininet"
+LIBRARY "nano_http_winhttp"
 
 EXPORTS
 ;audio_mmsystem_factory_exchange

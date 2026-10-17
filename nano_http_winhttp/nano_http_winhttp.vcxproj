@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM64">
@@ -76,9 +76,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{561D6A90-AB6B-485F-9FC9-128BDA62C48C}</ProjectGuid>
-    <RootNamespace>nano_http_wininet</RootNamespace>
+    <RootNamespace>nano_http_winhttp</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <ProjectName>nano_http_wininet</ProjectName>
+    <ProjectName>nano_http_winhttp</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -1454,7 +1454,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="nano_http_wininet.def" />
+    <None Include="nano_http_winhttp.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

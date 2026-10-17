@@ -1,180 +1,128 @@
-//
-// Created by camilo on 26/07/2023 23:23 <3ThomasBorregaardSorensen!!
-//
 #include "platform.h"
+#if defined(WINDOWS)
 #include "http.h"
-#include "session.h"
-#include "connect.h"
-#include "get.h"
-#include "acme/platform/system.h"
+#include "acme/nano/http/get.h"
 #include "acme/prototype/prototype/url.h"
+#include <wininet.h>
 
+namespace windows { namespace nano { namespace http_native {
 
-namespace windows
-{
-
-
-
-   namespace nano
+namespace {
+   struct native_handle
    {
+      HINTERNET value;
+      explicit native_handle(HINTERNET h) : value(h) {}
+      ~native_handle() { if (value) InternetCloseHandle(value); }
+      native_handle(const native_handle&) = delete;
+      native_handle& operator=(const native_handle&) = delete;
+   };
 
+   ::string native_error(const char* operation, DWORD code)
+   {
+      ::string text;
+      text.formatf("%s failed (Windows error %lu / 0x%08lX).", operation,
+         (unsigned long)code, (unsigned long)code);
+      wchar_t description[2048] = {};
+      auto module = GetModuleHandleW(L"wininet.dll");
+      if (FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_FROM_HMODULE
+            | FORMAT_MESSAGE_IGNORE_INSERTS, module, code, 0, description, 2048, nullptr))
+         text += " " + ::string(description);
+      if (code == ERROR_INTERNET_SEC_CERT_DATE_INVALID)
+         text += " Check the client clock and server certificate validity dates.";
+      if (code == ERROR_INTERNET_INVALID_CA)
+         text += " The certificate authority is not trusted by this system.";
+      if (code == ERROR_INTERNET_SEC_CERT_CN_INVALID)
+         text += " The certificate hostname does not match.";
+      if (code == ERROR_INTERNET_SECURITY_CHANNEL_ERROR)
+         text += " Schannel could not establish TLS; protocol/cipher compatibility may be the cause.";
+      return text;
+   }
+}
 
-      namespace http
+void http::perform(::nano::http::get* request)
+{
+   information() << "HTTPS backend: native WinINet (system Schannel); GET " << request->m_url.as_string();
+   auto fail = [this](const char* operation, DWORD code)
+   {
+      auto message = native_error(operation, code);
+      error() << message;
+      throw ::exception(error_failed, message);
+   };
+   ::wstring agent(request->m_strUserAgent);
+   native_handle session(InternetOpenW(agent, INTERNET_OPEN_TYPE_PRECONFIG, nullptr, nullptr, 0));
+   if (!session.value) fail("InternetOpenW", GetLastError());
+   DWORD timeout = 30000;
+   for (DWORD option : {INTERNET_OPTION_CONNECT_TIMEOUT, INTERNET_OPTION_SEND_TIMEOUT, INTERNET_OPTION_RECEIVE_TIMEOUT})
+      if (!InternetSetOptionW(session.value, option, &timeout, sizeof(timeout)))
+         information() << "WinINet timeout setup failed: " << (unsigned long)GetLastError();
+
+   ::wstring host(request->m_url.connect().host());
+   native_handle connection(InternetConnectW(session.value, host, INTERNET_DEFAULT_HTTPS_PORT,
+      nullptr, nullptr, INTERNET_SERVICE_HTTP, 0, 0));
+   if (!connection.value) fail("InternetConnectW", GetLastError());
+   ::wstring uri(request->m_url.request().as_string());
+   const wchar_t* accepts[] = {L"*/*", nullptr};
+   // No certificate-ignore flags and no interactive certificate/authentication prompts.
+   native_handle response(HttpOpenRequestW(connection.value, L"GET", uri, nullptr, nullptr, accepts,
+      INTERNET_FLAG_SECURE | INTERNET_FLAG_RELOAD | INTERNET_FLAG_NO_CACHE_WRITE
+         | INTERNET_FLAG_NO_UI | INTERNET_FLAG_NO_COOKIES, 0));
+   if (!response.value) fail("HttpOpenRequestW", GetLastError());
+   if (!HttpSendRequestW(response.value, nullptr, 0, nullptr, 0))
+   {
+      const DWORD code = GetLastError();
+      DWORD flags = 0, size = sizeof(flags);
+      if (InternetQueryOptionW(response.value, INTERNET_OPTION_SECURITY_FLAGS, &flags, &size))
       {
+         ::string details;
+         details.formatf("WinINet request security flags=0x%08lX (not validation results).", (unsigned long)flags);
+         error() << details;
+      }
+      fail("HttpSendRequestW", code);
+   }
+   DWORD status = 0, size = sizeof(status);
+   if (!HttpQueryInfoW(response.value, HTTP_QUERY_STATUS_CODE | HTTP_QUERY_FLAG_NUMBER,
+         &status, &size, nullptr)) fail("HttpQueryInfoW(status)", GetLastError());
+   request->set_status(status);
+   request->payload("out_attributes")["http_status_code"] = (::i64)status;
+   information() << "WinINet HTTP status " << (unsigned long)status;
 
-         http::http()
-         {
+   DWORD headerSize = 0;
+   if (!HttpQueryInfoW(response.value, HTTP_QUERY_RAW_HEADERS_CRLF, nullptr, &headerSize, nullptr)
+         && GetLastError() == ERROR_INSUFFICIENT_BUFFER)
+   {
+      ::wstring headers;
+      auto buffer = headers.get_buffer(headerSize / sizeof(wchar_t));
+      const BOOL ok = HttpQueryInfoW(response.value, HTTP_QUERY_RAW_HEADERS_CRLF, buffer, &headerSize, nullptr);
+      headers.release_buffer();
+      if (!ok) fail("HttpQueryInfoW(headers)", GetLastError());
+      ::string raw(headers);
+      request->payload("out_headers").as_property_set().parse_network_headers(raw);
+      ::string_array_base lines;
+      lines.add_lines(raw, true);
+      request->property_set().parse_network_headers(lines);
+   }
+   if (request->payload("only_headers").as_bool()) return;
+   DWORD contentLength = 0;
+   size = sizeof(contentLength);
+   if (!HttpQueryInfoW(response.value, HTTP_QUERY_CONTENT_LENGTH | HTTP_QUERY_FLAG_NUMBER,
+         &contentLength, &size, nullptr)) contentLength = 0;
+   transfer_progress_function progress;
+   progress = request->payload("transfer_progress_function");
+   char buffer[32768];
+   for (;;)
+   {
+      DWORD received = 0;
+      if (!InternetReadFile(response.value, buffer, sizeof(buffer), &received))
+         fail("InternetReadFile", GetLastError());
+      if (!received) break;
+      request->get_memory_response()->append(buffer, received);
+      if (progress)
+      {
+         const auto count = request->get_memory_response()->size();
+         progress(contentLength ? (::f64)count / contentLength : 0., count, contentLength);
+      }
+   }
+}
 
-
-         }
-
-
-         http::~http()
-         {
-
-         }
-
-
-         //void http::s_http_response(long http_status, const void * data, long size, void * userdata)
-         //{
-         //   
-         //   ::pointer < ::nano::asynchronous_http_response > passynchronoushttpdata(e_pointer_transfer, (::particle *) userdata);
-         //   
-         //   passynchronoushttpdata->m_response.m_memory.assign(data, size);
-         //   
-         //   passynchronoushttpdata->m_response.m_set["http_status_code"] = http_status;
-         //   
-         //   passynchronoushttpdata->m_happening.set_happening();
-         //   
-         //   //passynchronoushttpdata->m_function(passynchronoushttpdata);
-         //   
-         //}
-
-
-      //   void http::asynchronous_memory(const ::scoped_string & scopedstrUrl, ::pointer < ::nano::asynchronous_http_response > pasynchronoushttpresponse)
-      //   {
-      //      
-      ////      pasynchronoushttpresponse->m_function = [](::pointer < ::nano::asynchronous_http_response > pasynchronoushttpresponse)
-      ////      {                                s_http_response(pasynchronoushttpresponse);
-      ////      };
-      //      
-      //      nano_asynchronous_http_memory(scopedstrUrl.as_string().c_str(), s_http_response, pasynchronoushttpresponse.detach_particle());
-      //     
-      //   }
-
-
-         void http::perform(::nano::http::get * pnanohttpget)
-         {
-
-            //using namespace std;
-
-            //::i32 main(void)
-            //{
-               //Variables 
-               //DWORD dwSize = 0;
-               //DWORD dwDownloaded = 0;
-               //LPBYTE pszOutBuffer;
-
-               //BOOL  bResults = FALSE;
-               //HINTERNET  hSession = NULL, hConnect = NULL, hRequest = NULL;
-
-            ::windows::nano::http::session session(pnanohttpget->m_strUserAgent);
-
-            if (!session.m_hinternet)
-            {
-
-               throw ::exception(error_failed);
-
-            }
-
-            ::string strHost = pnanohttpget->m_url.connect().host();
-
-            ::windows::nano::http::connect connect(session, strHost);
-
-            if (!connect.m_hinternet)
-            {
-
-               throw ::exception(error_failed);
-
-            }
-
-            ::string strRequestUri = pnanohttpget->m_url.request().as_string();
-
-            ::windows::nano::http::get get(connect, strRequestUri);
-
-            if (!get.m_hinternet)
-            {
-
-               throw ::exception(error_failed);
-
-            }
-
-            get.send_request(pnanohttpget);
-
-            get.get_response(pnanohttpget);
-
-            // Use WinHttpOpen to obtain a session handle.
-            // Specify an HTTP server.
-            //if (hSession)
-            //   hConnect = WinHttpConnect(hSession, L"192.168.20.69", INTERNET_DEFAULT_HTTP_PORT, 0);
-            // Create an HTTP request handle.
-            //if (hConnect)
-            //   hRequest = WinHttpOpenRequest(hConnect, L"GET", L"/xyz/1.txt", NULL, WINHTTP_NO_REFERER, NULL, NULL);
-            // Send a request.
-            // Keep checking for data until there is nothing left.
-            //HANDLE hFile = CreateFile("C:\\test1.txt", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-            //if (bResults)
-            //   do
-            //   {
-            //      // Check for available data.        
-               //   dwSize = 0;
-               //   if (!WinHttpQueryDataAvailable(hRequest, &dwSize))
-               //      printf("Error %u in WinHttpQueryDataAvailable.\n", GetLastError());
-               //   // Allocate space for the buffer.        
-               //   pszOutBuffer = ___new byte[dwSize + 1];
-               //   if (!pszOutBuffer)
-               //   {
-               //      printf("Out of memory\n");
-               //      dwSize = 0;
-               //   }
-               //   else
-               //   {
-               //      // Read the Data.            
-               //      ZeroMemory(scopedstrOutBuffer, dwSize + 1);
-               //      if (!WinHttpReadData(hRequest, (LPVOID)pszOutBuffer, dwSize, &dwDownloaded))
-               //      {
-               //         printf("Error %u in WinHttpReadData.\n", GetLastError());
-               //      }
-               //      else
-               //      {
-               //         //printf("%s", pszOutBuffer); 
-               //         DWORD wmWritten;
-               //         bool fr = WriteFile(hFile, pszOutBuffer, dwSize, &wmWritten, NULL);
-               //         ::i32 n = GetLastError();
-               //      }
-               //      // Free the memory allocated to the buffer.            
-               //      delete[] pszOutBuffer;
-               //   }
-               //} while (dwSize > 0);
-               //CloseHandle(hFile);
-               //// Report any errors.
-               //if (!bResults)
-               //   printf("Error %d has occurred.\n", GetLastError());
-               //// Close any open handles.
-               //if (hRequest) WinHttpCloseHandle(hRequest);
-               //if (hConnect) WinHttpCloseHandle(hConnect);
-               //if (hSession) WinHttpCloseHandle(hSession);
-         //}
-         }
-
-
-      } // namespace http
-
-
-   }// namespace nano
-
-
-} // namespace windows
-
-
-
+}}}
+#endif
