@@ -85,7 +85,6 @@ endif()
 
 set(USE_SYSTEM_ARCHIVE TRUE)
 set(USE_SYSTEM_PCRE TRUE)
-set(USE_SYSTEM_ZLIB TRUE)
 
 
 list(APPEND app_common_dependencies
