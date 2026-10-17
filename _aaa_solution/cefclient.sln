@@ -53,7 +53,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_cefclient", "..\..\..\source\app-core\cefclient\app_core_cefclient.vcxproj", "{9E07C6C6-D678-4D97-B08D-37EA8CDE3EA3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_cefclient", "..\..\..\source\app-core\cefclient\__implement\shared_app_core_cefclient.vcxproj", "{F62E673C-B4EB-4D45-8D9D-AEE4616630F2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_cefclient", "..\..\..\source\app-core\cefclient\__implement\_app_core_cefclient.vcxproj", "{F62E673C-B4EB-4D45-8D9D-AEE4616630F2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
 		{77D5757E-2923-40F8-9CC0-A07FA5BCC236} = {77D5757E-2923-40F8-9CC0-A07FA5BCC236}

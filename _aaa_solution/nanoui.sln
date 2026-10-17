@@ -48,7 +48,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nanoui", "..\..\..\source\a
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_nanoui_example", "..\..\..\source\app-simple\nanoui_example\app_simple_nanoui_example.vcxproj", "{4EEB9763-3CAF-4436-8654-A583351353E2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_nanoui_example", "..\..\..\source\app-simple\nanoui_example\__implement\shared_app_simple_nanoui_example.vcxproj", "{17A1FD59-DA1D-42FE-AC6B-8F42031E27DB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_nanoui_example", "..\..\..\source\app-simple\nanoui_example\__implement\_app_simple_nanoui_example.vcxproj", "{17A1FD59-DA1D-42FE-AC6B-8F42031E27DB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154} = {0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}
 		{1B06FE5F-F783-41A1-AC68-0E02880DBBAC} = {1B06FE5F-F783-41A1-AC68-0E02880DBBAC}

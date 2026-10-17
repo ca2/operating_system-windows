@@ -79,11 +79,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_shortcut", "..\.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_simple_shortcut", "..\..\..\source\app-simple\shortcut\static_app_simple_shortcut.vcxproj", "{4F8D55A1-AACB-4988-99C4-AA6B0487C251}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_change_grub_default_entry", "..\..\..\source\app-simple\change_grub_default_entry\__implement\shared_app_simple_change_grub_default_entry.vcxproj", "{24AF1CE4-53C2-479D-803B-FCAD71694F85}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_change_grub_default_entry", "..\..\..\source\app-simple\change_grub_default_entry\__implement\_app_simple_change_grub_default_entry.vcxproj", "{24AF1CE4-53C2-479D-803B-FCAD71694F85}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_form", "..\..\..\source\app-simple\form\__implement\shared_app_simple_form.vcxproj", "{A8DB550C-0CAF-42E8-8D1C-3EF9DFDF80E8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_form", "..\..\..\source\app-simple\form\__implement\_app_simple_form.vcxproj", "{A8DB550C-0CAF-42E8-8D1C-3EF9DFDF80E8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_shortcut", "..\..\..\source\app-simple\shortcut\__implement\shared_app_simple_shortcut.vcxproj", "{D2A05B15-376F-4805-BE80-91207600A24F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_shortcut", "..\..\..\source\app-simple\shortcut\__implement\_app_simple_shortcut.vcxproj", "{D2A05B15-376F-4805-BE80-91207600A24F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

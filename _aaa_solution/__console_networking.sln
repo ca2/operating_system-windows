@@ -19,7 +19,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_console_http_get", "..\..\..\source\console\http_get\static_console_http_get.vcxproj", "{539672ED-09C3-44E5-8F61-E8C09320439F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_console_http_get", "..\..\..\source\console\http_get\shared_console_http_get.vcxproj", "{4B776F6A-069F-4696-A099-980D732543AC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_console_http_get", "..\..\..\source\console\http_get\_console_http_get.vcxproj", "{4B776F6A-069F-4696-A099-980D732543AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

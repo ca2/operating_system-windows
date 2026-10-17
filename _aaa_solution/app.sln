@@ -63,9 +63,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_openssl", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "folder_zip", "..\..\..\source\app\folder_zip\folder_zip.vcxproj", "{A69CC125-E38A-4F77-9677-8860D43AB3B0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_app", "..\..\..\source\app\app\__implement\shared_app_app.vcxproj", "{BE0222AE-71CA-41DB-8F40-265DEE5F7020}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_app", "..\..\..\source\app\app\__implement\_app_app.vcxproj", "{BE0222AE-71CA-41DB-8F40-265DEE5F7020}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_message_box", "..\..\..\source\app\message_box\__implement\shared_app_message_box.vcxproj", "{B2F5275E-0F5C-4EB8-8DF2-02B001853E31}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_message_box", "..\..\..\source\app\message_box\__implement\_app_message_box.vcxproj", "{B2F5275E-0F5C-4EB8-8DF2-02B001853E31}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_just_message_box", "..\..\..\source\app\just_message_box\__implement\shared_app_just_message_box.vcxproj", "{7AC3B76D-8C75-4450-8A5B-A7591C4CAE57}"
 EndProject

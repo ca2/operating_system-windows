@@ -57,7 +57,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\operat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "design_design", "..\..\..\source\design\design\design.vcxproj", "{038CB4C9-3E14-43E8-9C12-EB3B7E18E113}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_design_design", "..\..\..\source\design\design\shared_design_design.vcxproj", "{451DB026-F52E-414E-8DCA-CD36E9E87616}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_design_design", "..\..\..\source\design\design\_design_design.vcxproj", "{451DB026-F52E-414E-8DCA-CD36E9E87616}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_design_design", "..\..\..\source\design\design\static_design_design.vcxproj", "{09FF459C-5822-40DC-B5B8-DB37DD5A47D5}"
 EndProject
