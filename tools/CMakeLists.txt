@@ -10,6 +10,7 @@ set(CMAKE_PROJECT_INCLUDE "${CMAKE_PROJECT_INCLUDE}" PARENT_SCOPE)
 # Platform setup supplies compatibility mode and output paths later.
 function(ca2_add_windows_tools_targets)
     include("${CMAKE_CURRENT_FUNCTION_LIST_DIR}/reactos-import-audit/deployment-target.cmake")
+    include("${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../runtime_dependencies.cmake")
 endfunction()
 if(CMAKE_VERSION VERSION_LESS 3.19)
     message(FATAL_ERROR "Windows tools require CMake 3.19 or newer")

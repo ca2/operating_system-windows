@@ -15,12 +15,11 @@ if(NOT CA2_REACTOS_DEPLOY_DIRECTORY)
     set(CA2_REACTOS_DEPLOY_DIRECTORY "${CMAKE_SOURCE_DIR}/../_stripped_output"
         CACHE PATH "ReactOS binaries without DWARF debug sections")
 endif()
-set(runtime_stage "${CMAKE_CURRENT_BINARY_DIR}/mingw-runtime-stripped")
-add_custom_target(mingw_runtime ALL
-    COMMAND "${CMAKE_COMMAND}" -E make_directory
-        "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" "${CA2_REACTOS_DEPLOY_DIRECTORY}" "${runtime_stage}"
-    COMMENT "Staging MinGW32 runtime libraries and stripped copies"
-    VERBATIM)
+get_filename_component(CA2_REACTOS_DEPLOY_DIRECTORY "${CA2_REACTOS_DEPLOY_DIRECTORY}"
+    ABSOLUTE BASE_DIR "${CMAKE_SOURCE_DIR}")
+set(runtime_stage "${CMAKE_CURRENT_BINARY_DIR}/mingw-runtime-stamps")
+set(runtime_deploy_script "${CMAKE_CURRENT_LIST_DIR}/tools/reactos-import-audit/deployment-copy.cmake")
+set(runtime_stamps)
 
 foreach(runtime_name IN LISTS runtime_names)
     string(STRIP "${runtime_name}" runtime_name)
@@ -41,28 +40,30 @@ foreach(runtime_name IN LISTS runtime_names)
     if(NOT EXISTS "${runtime_source}")
         message(FATAL_ERROR "Missing runtime DLL for ${CMAKE_CXX_COMPILER}: ${runtime_name}. ${runtime_error}")
     endif()
-    add_custom_command(TARGET mingw_runtime POST_BUILD
+    set(runtime_stamp "${runtime_stage}/${runtime_name}.stamp")
+    add_custom_command(OUTPUT "${runtime_stamp}"
+        BYPRODUCTS
+            "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${runtime_name}"
+            "${CA2_REACTOS_DEPLOY_DIRECTORY}/${runtime_name}"
+        COMMAND "${CMAKE_COMMAND}" -E make_directory
+            "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" "${runtime_stage}"
         COMMAND "${CMAKE_COMMAND}" -E copy_if_different
             "${runtime_source}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${runtime_name}"
-        COMMAND "${CMAKE_OBJCOPY}" --strip-debug --preserve-dates
-            "${runtime_source}" "${runtime_stage}/${runtime_name}"
-        COMMAND "${CMAKE_COMMAND}" -E copy_if_different
-            "${runtime_stage}/${runtime_name}" "${CA2_REACTOS_DEPLOY_DIRECTORY}/${runtime_name}"
+        COMMAND "${CMAKE_COMMAND}"
+            "-DSOURCE_FILE=${runtime_source}"
+            "-DDESTINATION=${CA2_REACTOS_DEPLOY_DIRECTORY}"
+            "-DOBJCOPY=${CMAKE_OBJCOPY}"
+            -P "${runtime_deploy_script}"
+        COMMAND "${CMAKE_COMMAND}" -E touch "${runtime_stamp}"
+        DEPENDS "${runtime_source}" "${runtime_manifest}"
+            "${CMAKE_CURRENT_LIST_FILE}" "${runtime_deploy_script}"
+        COMMENT "Staging MinGW32 runtime ${runtime_name}"
         VERBATIM)
+    list(APPEND runtime_stamps "${runtime_stamp}")
 endforeach()
 
-# Explicit application/release targets must stage runtimes as well as ALL builds.
-function(ca2_add_mingw_runtime_dependencies directory)
-    get_property(runtime_targets DIRECTORY "${directory}" PROPERTY BUILDSYSTEM_TARGETS)
-    foreach(runtime_target IN LISTS runtime_targets)
-        get_target_property(runtime_type "${runtime_target}" TYPE)
-        if(runtime_type MATCHES "^(EXECUTABLE|SHARED_LIBRARY|MODULE_LIBRARY)$")
-            add_dependencies("${runtime_target}" mingw_runtime)
-        endif()
-    endforeach()
-    get_property(runtime_subdirectories DIRECTORY "${directory}" PROPERTY SUBDIRECTORIES)
-    foreach(runtime_subdirectory IN LISTS runtime_subdirectories)
-        ca2_add_mingw_runtime_dependencies("${runtime_subdirectory}")
-    endforeach()
-endfunction()
-ca2_add_mingw_runtime_dependencies("${CMAKE_SOURCE_DIR}")
+add_custom_target(mingw_runtime ALL DEPENDS ${runtime_stamps})
+# acme is the common base of the framework, including explicit application builds.
+if(TARGET acme)
+    add_dependencies(acme mingw_runtime)
+endif()
