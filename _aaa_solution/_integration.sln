@@ -54,7 +54,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_integration", "..\..\..\source\app\integration\app_integration.vcxproj", "{BFE8A4C4-1614-4AB7-B311-721C8DAF1F6C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_integration", "..\..\..\source\app\integration\__implement\shared_app_integration.vcxproj", "{77B48A91-36B9-406F-876B-C52AEB1ED69F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_integration", "..\..\..\source\app\integration\__implement\_app_integration.vcxproj", "{77B48A91-36B9-406F-876B-C52AEB1ED69F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -126,17 +126,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_openssl", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "database_sqlite3", "..\..\..\source\app\database_sqlite3\database_sqlite3.vcxproj", "{F85061D8-22DC-4A8B-85EA-76D330BE52CC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_arkanoid", "..\..\..\source\game\arkanoid\__implement\shared_game_arkanoid.vcxproj", "{5D5B8FE1-6EB0-4013-B095-94ED6740C59E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_arkanoid", "..\..\..\source\game\arkanoid\__implement\_game_arkanoid.vcxproj", "{5D5B8FE1-6EB0-4013-B095-94ED6740C59E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_game_of_life", "..\..\..\source\game\game_of_life\__implement\shared_game_game_of_life.vcxproj", "{637C6CF6-A527-4F7D-BB98-42323B3BF44C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_game_of_life", "..\..\..\source\game\game_of_life\__implement\_game_game_of_life.vcxproj", "{637C6CF6-A527-4F7D-BB98-42323B3BF44C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_pacman", "..\..\..\source\game\pacman\__implement\shared_game_pacman.vcxproj", "{A10CED21-13AB-4863-9347-91133F5CA98C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_pacman", "..\..\..\source\game\pacman\__implement\_game_pacman.vcxproj", "{A10CED21-13AB-4863-9347-91133F5CA98C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_sokoban", "..\..\..\source\game\sokoban\__implement\shared_game_sokoban.vcxproj", "{DCCE9968-8235-4D80-A0EF-B09CBD0910CE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_sokoban", "..\..\..\source\game\sokoban\__implement\_game_sokoban.vcxproj", "{DCCE9968-8235-4D80-A0EF-B09CBD0910CE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_tetris", "..\..\..\source\game\tetris\__implement\shared_game_tetris.vcxproj", "{EDC555DC-2B10-4873-B228-79D590F2180F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_tictactoe", "..\..\..\source\game\tictactoe\__implement\shared_game_tictactoe.vcxproj", "{B5E28C6E-3AA7-4C90-83F9-29E31BC5E699}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_tictactoe", "..\..\..\source\game\tictactoe\__implement\_game_tictactoe.vcxproj", "{B5E28C6E-3AA7-4C90-83F9-29E31BC5E699}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

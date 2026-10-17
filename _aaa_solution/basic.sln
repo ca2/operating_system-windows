@@ -140,26 +140,26 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_hello_anima
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\source\app\networking_bsd\networking_bsd.vcxproj", "{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_clockverse_no_audio", "..\..\..\source\app-core\clockverse\__implement_no_audio\shared_app_core_clockverse_no_audio.vcxproj", "{9A170000-552B-482F-81D5-91EA51AE2845}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_clockverse_no_audio", "..\..\..\source\app-core\clockverse\__implement_no_audio\_app_core_clockverse_no_audio.vcxproj", "{9A170000-552B-482F-81D5-91EA51AE2845}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_flag", "..\..\..\source\app-core\flag\__implement\shared_app_core_flag.vcxproj", "{C6E48A19-59B8-481E-AF3A-C27B66D68A84}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_flag", "..\..\..\source\app-core\flag\__implement\_app_core_flag.vcxproj", "{C6E48A19-59B8-481E-AF3A-C27B66D68A84}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_cidadedecuritiba_alphaclock", "..\..\..\source\app-cidadedecuritiba\alphaclock\__implement\shared_app_cidadedecuritiba_alphaclock.vcxproj", "{CF33DBD7-DD9B-4C80-B4ED-0C1CD4E87EDD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_cidadedecuritiba_alphaclock", "..\..\..\source\app-cidadedecuritiba\alphaclock\__implement\_app_cidadedecuritiba_alphaclock.vcxproj", "{CF33DBD7-DD9B-4C80-B4ED-0C1CD4E87EDD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_desk", "..\..\..\source\app-core\desk\__implement\shared_app_core_desk.vcxproj", "{02CC1ACA-4CDF-4724-858D-92F6AE643236}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_desk", "..\..\..\source\app-core\desk\__implement\_app_core_desk.vcxproj", "{02CC1ACA-4CDF-4724-858D-92F6AE643236}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hello_multiverse", "..\..\..\source\app-core\hello_multiverse\__implement\shared_app_core_hello_multiverse.vcxproj", "{94A00A45-B9BF-4821-B81E-4114FFB9F0A9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_hello_multiverse", "..\..\..\source\app-core\hello_multiverse\__implement\_app_core_hello_multiverse.vcxproj", "{94A00A45-B9BF-4821-B81E-4114FFB9F0A9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DBA80336-2E72-4DCE-8AB3-C362F3B19106} = {DBA80336-2E72-4DCE-8AB3-C362F3B19106}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_weather", "..\..\..\source\app-core\weather\__implement\shared_app_core_weather.vcxproj", "{7461102D-C92D-48B8-BDDB-4A1BEA11B87E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_weather", "..\..\..\source\app-core\weather\__implement\_app_core_weather.vcxproj", "{7461102D-C92D-48B8-BDDB-4A1BEA11B87E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_projection", "..\..\..\source\app-core\projection\__implement\shared_app_core_projection.vcxproj", "{3E8A35DF-2448-4A2C-9C38-FFE1ED6EDF3C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_projection", "..\..\..\source\app-core\projection\__implement\_app_core_projection.vcxproj", "{3E8A35DF-2448-4A2C-9C38-FFE1ED6EDF3C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_cefclient", "..\..\..\source\app-core\cefclient\app_core_cefclient.vcxproj", "{A728EC02-4229-3568-8E6F-B7D0484E85CD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_cefclient", "..\..\..\source\app-core\cefclient\__implement\shared_app_core_cefclient.vcxproj", "{F62E673C-B4EB-4D45-8D9D-AEE4616630F2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_cefclient", "..\..\..\source\app-core\cefclient\__implement\_app_core_cefclient.vcxproj", "{F62E673C-B4EB-4D45-8D9D-AEE4616630F2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}

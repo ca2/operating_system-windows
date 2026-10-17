@@ -104,7 +104,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_openssl", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "folder_zip", "..\..\..\source\app\folder_zip\folder_zip.vcxproj", "{A69CC125-E38A-4F77-9677-8860D43AB3B0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_drawing", "..\..\..\source\app-simple\drawing\__implement\shared_app_simple_drawing.vcxproj", "{4BEB9809-25C1-41EB-8DC1-E90A566821DF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_drawing", "..\..\..\source\app-simple\drawing\__implement\_app_simple_drawing.vcxproj", "{4BEB9809-25C1-41EB-8DC1-E90A566821DF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
@@ -116,9 +116,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_drawing",
 		{F85061D8-22DC-4A8B-85EA-76D330BE52CC} = {F85061D8-22DC-4A8B-85EA-76D330BE52CC}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_notify_drawing", "..\..\..\source\app-simple\notify_drawing\__implement\shared_app_simple_notify_drawing.vcxproj", "{876E1DB0-ADF2-4320-9D97-970725113871}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_notify_drawing", "..\..\..\source\app-simple\notify_drawing\__implement\_app_simple_notify_drawing.vcxproj", "{876E1DB0-ADF2-4320-9D97-970725113871}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_application", "..\..\..\source\app-simple\application\__implement\shared_app_simple_application.vcxproj", "{66CA2FC3-CC12-4D4F-B66C-C6A4FB0B74EB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_application", "..\..\..\source\app-simple\application\__implement\_app_simple_application.vcxproj", "{66CA2FC3-CC12-4D4F-B66C-C6A4FB0B74EB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
 	EndProjectSection

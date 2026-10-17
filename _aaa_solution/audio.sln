@@ -218,7 +218,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "folder_zip", "..\..\..\sour
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_openssl", "..\..\..\source\app\crypto_openssl\crypto_openssl.vcxproj", "{D08014E6-E329-41CF-81B5-957C290A4AA8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_clockverse", "..\..\..\source\app-core\clockverse\__implement\shared_app_core_clockverse.vcxproj", "{924D0356-4B8B-406F-B6CC-862FBE7EFBEF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_clockverse", "..\..\..\source\app-core\clockverse\__implement\_app_core_clockverse.vcxproj", "{924D0356-4B8B-406F-B6CC-862FBE7EFBEF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1BC6E245-E520-4A72-A676-F763CAB89CA5} = {1BC6E245-E520-4A72-A676-F763CAB89CA5}
 		{38C64C42-60D1-431F-B651-80489121AA79} = {38C64C42-60D1-431F-B651-80489121AA79}
@@ -233,17 +233,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_clockverse"
 		{F85061D8-22DC-4A8B-85EA-76D330BE52CC} = {F85061D8-22DC-4A8B-85EA-76D330BE52CC}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_timer", "..\..\..\source\app-core\timer\__implement\shared_app_core_timer.vcxproj", "{0567D25A-7A48-4681-AA02-167FF9FFA761}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_timer", "..\..\..\source\app-core\timer\__implement\_app_core_timer.vcxproj", "{0567D25A-7A48-4681-AA02-167FF9FFA761}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_todo", "..\..\..\source\app-core\todo\__implement\shared_app_core_todo.vcxproj", "{5A20AB2D-1E93-4099-BB32-1371A0D6F172}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_todo", "..\..\..\source\app-core\todo\__implement\_app_core_todo.vcxproj", "{5A20AB2D-1E93-4099-BB32-1371A0D6F172}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_chronometer", "..\..\..\source\app-core\chronometer\__implement\shared_app_core_chronometer.vcxproj", "{2B398103-834D-4597-BCA3-C1C3D2D36B3A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_chronometer", "..\..\..\source\app-core\chronometer\__implement\_app_core_chronometer.vcxproj", "{2B398103-834D-4597-BCA3-C1C3D2D36B3A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_auraclick", "..\..\..\source\app-core\auraclick\__implement\shared_app_core_auraclick.vcxproj", "{C9D13886-74B4-4F47-97A3-3E09508D938F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_auraclick", "..\..\..\source\app-core\auraclick\__implement\_app_core_auraclick.vcxproj", "{C9D13886-74B4-4F47-97A3-3E09508D938F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_auratype", "..\..\..\source\app-core\auratype\__implement\shared_app_core_auratype.vcxproj", "{B76A7048-8A0D-4F9D-9733-99CCE96856AF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_auratype", "..\..\..\source\app-core\auratype\__implement\_app_core_auratype.vcxproj", "{B76A7048-8A0D-4F9D-9733-99CCE96856AF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_audioaura", "..\..\..\source\app-core\audioaura\__implement\shared_app_core_audioaura.vcxproj", "{C31504BD-D493-40B4-9C80-DCB9C7544676}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_core_audioaura", "..\..\..\source\app-core\audioaura\__implement\_app_core_audioaura.vcxproj", "{C31504BD-D493-40B4-9C80-DCB9C7544676}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "user_text_to_speech", "..\..\..\source\app-core\user_text_to_speech\user_text_to_speech.vcxproj", "{A156A707-E332-4F7F-807B-335566C43BEC}"
 EndProject
