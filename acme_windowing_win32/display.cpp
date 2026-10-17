@@ -74,7 +74,7 @@ namespace win32
             }
             // XP's registered .theme handler loads the theme in Display Properties.
             // Resolve virtual paths before passing the file to the operating system.
-            auto path = system()->defer_process_path(scopedstrDesktopTheme);
+            auto path = application()->defer_process_path(scopedstrDesktopTheme);
             if (path.has_character())
             {
                node()->shell_open(path);
