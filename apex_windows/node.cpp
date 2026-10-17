@@ -3595,9 +3595,16 @@ namespace apex_windows
 
             //PeekMessage(nullptr, nullptr, 0, 0, 0);
 
+#if defined(__REACTOS__)
+            // The XP/ReactOS shell resolves ordinary Win32 paths, not extended
+            // filesystem paths (including for the working directory).
+            ::wstring windowspathTarget(path.windows_path().path());
+            ::wstring windowspathFolder(pathFolder.windows_path().path());
+#else
             ::wstring windowspathTarget(path.windows_path().extended_path());
 
             ::wstring windowspathFolder(pathFolder.windows_path().extended_path());
+#endif
 
             wstring wstrParams(scopedstrParams);
 
@@ -3644,9 +3651,16 @@ namespace apex_windows
 
             si.hInstApp = nullptr;
 
-            ShellExecuteExW(&si);
+            information() << "file_open: shell target=" << ::string(windowspathTarget)
+               << " working_directory=" << ::string(windowspathFolder);
+
+            const auto bShellExecute = ::ShellExecuteExW(&si);
+            const DWORD dwShellError = bShellExecute ? ERROR_SUCCESS : ::GetLastError();
 
             iShellExecuteExitCode = (::i32)(iptr)si.hInstApp;
+
+            information() << "file_open: shell result=" << (int)bShellExecute
+               << " shell_code=" << iShellExecuteExitCode << " windows_error=" << dwShellError;
 
             if (iShellExecuteExitCode > 32)
             {
@@ -3656,7 +3670,7 @@ namespace apex_windows
             }
             else
             {
-               lasterror = ::GetLastError();
+               lasterror = dwShellError;
                switch (iShellExecuteExitCode)
                {
                case 0:
