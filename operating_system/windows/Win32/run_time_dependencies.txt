@@ -1,0 +1,6 @@
+# Common MinGW32 runtime libraries, copied from the matching toolchain into the binary output folder.
+libgcc_s_dw2-1.dll
+libstdc++-6.dll
+libwinpthread-1.dll
+libatomic-1.dll
+libssp-0.dll

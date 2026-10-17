@@ -22,6 +22,9 @@ list(APPEND library_source
         _factory.cpp
         #_curl.cpp
         #_wget.cpp
+   get.cpp
+   get.h
+   platform.cpp
    connect.cpp
    connect.h
    #_nano_http.cpp
@@ -33,7 +36,9 @@ list(APPEND library_source
    http.cpp
    http.h
 request.cpp
-request.h)
+request.h
+session.cpp
+session.h)
 
 
 add_library(${PROJECT_NAME} SHARED ${library_source})
