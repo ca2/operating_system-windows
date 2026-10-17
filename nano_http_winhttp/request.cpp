@@ -129,9 +129,9 @@ namespace windows
             if (WinHttpQueryOption(m_hinternet, WINHTTP_OPTION_SECURITY_CERTIFICATE_STRUCT, &certificate, &size))
             {
                text += "\nServer certificate subject: ";
-               text += certificate.lpszSubjectInfo ? ::string(certificate.lpszSubjectInfo) : "(not supplied)";
+               text += certificate.lpszSubjectInfo ? ::string(certificate.lpszSubjectInfo).c_str() : "(not supplied)";
                text += "\nServer certificate issuer: ";
-               text += certificate.lpszIssuerInfo ? ::string(certificate.lpszIssuerInfo) : "(not supplied)";
+               text += certificate.lpszIssuerInfo ? ::string(certificate.lpszIssuerInfo).c_str() : "(not supplied)";
                SYSTEMTIME starts{}, expires{};
                if (FileTimeToSystemTime(&certificate.ftStart, &starts) && FileTimeToSystemTime(&certificate.ftExpiry, &expires))
                {

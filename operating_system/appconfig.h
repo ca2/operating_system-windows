@@ -7,10 +7,12 @@
 #define default_draw2d draw2d_gdiplus
 #define default_folder folder_zip
 #define default_write_text write_text_win32
-#if defined(__REACTOS__)
+#if defined(__REACTOS__) or defined(WINDOWSXP)
 #define default_imaging imaging_freeimage
+#define default_nano_http nano_http_mbedtls_with_winsock
 #else
 #define default_imaging imaging_wic
+#define default_nano_http nano_http_winhttp
 #endif
 #define default_innate_ui innate_ui_win32
 #define default_operating_ambient operating_ambient_windows
@@ -19,7 +21,6 @@
 #define acme_node acme_windows
 #define apex_node apex_windows
 #define aura_node aura_windows
-#define default_nano_http nano_http_winhttp
 #define default_nano_compress nano_compress_windows
 #define default_nano_idn nano_idn_windows_common
 
