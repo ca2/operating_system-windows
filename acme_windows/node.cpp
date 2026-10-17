@@ -362,6 +362,66 @@ namespace acme_windows
 
       }
       
+#if defined(__REACTOS__)
+      if (strCommand.case_insensitive_ends(".exe"))
+      {
+         const ::file::path pathExecutable(strCommand);
+         ::wstring executable(pathExecutable.windows_path());
+         ::wstring directory(pathExecutable.folder().windows_path());
+         ::wstring commandLine(scopedstrCommand);
+         STARTUPINFOW startup{};
+         startup.cb = sizeof(startup);
+         PROCESS_INFORMATION process{};
+         information() << "XP CreateProcess executable: " << pathExecutable;
+         information() << "XP CreateProcess directory: " << pathExecutable.folder();
+         information() << "XP CreateProcess command: " << scopedstrCommand;
+         const BOOL created = CreateProcessW(executable, commandLine.get_buffer(commandLine.length()),
+            nullptr, nullptr, FALSE, DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP,
+            nullptr, directory.has_character() ? directory.c_str() : nullptr, &startup, &process);
+         const DWORD createError = created ? ERROR_SUCCESS : GetLastError();
+         commandLine.release_buffer();
+         if (!created)
+         {
+            wchar_t description[1024] = {};
+            FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+               nullptr, createError, 0, description, 1024, nullptr);
+            ::string message;
+            message.formatf("Cannot start %s: CreateProcessW error %lu (0x%08lX). %s",
+               strCommand.c_str(), (unsigned long)createError, (unsigned long)createError,
+               ::string(description).c_str());
+            error() << message;
+            throw ::exception(error_failed, message);
+         }
+         unique_handle processHandle(process.hProcess);
+         CloseHandle(process.hThread);
+         information() << "XP process created; PID=" << (unsigned long)process.dwProcessId;
+         const DWORD waited = WaitForSingleObject(processHandle.get(), 2000);
+         if (waited == WAIT_OBJECT_0)
+         {
+            DWORD code = 0;
+            if (!GetExitCodeProcess(processHandle.get(), &code))
+               throw ::exception(error_failed, "GetExitCodeProcess failed after application startup.");
+            ::string message;
+            message.formatf("Application exited during startup: PID=%lu, code=%lu (0x%08lX).",
+               (unsigned long)process.dwProcessId, (unsigned long)code, (unsigned long)code);
+            if (code != 0)
+            {
+               if (code == 0xC0000135UL) message += " A required DLL could not be found.";
+               else if (code == 0xC0000139UL) message += " A DLL entry point is missing, possibly an API unavailable on XP.";
+               else if (code == 0xC000007BUL) message += " An executable or DLL has an invalid format or architecture.";
+               else if (code == 0xC0000142UL) message += " A DLL failed to initialize.";
+               error() << message;
+               throw ::exception(error_failed, message);
+            }
+            information() << message;
+         }
+         else if (waited == WAIT_TIMEOUT)
+            information() << "Application remains running after startup observation; PID=" << (unsigned long)process.dwProcessId;
+         else
+            information() << "Startup observation failed: Windows error " << (unsigned long)GetLastError();
+         return;
+      }
+#endif
       shell_open(strCommand, range);
 
    }
@@ -5720,6 +5780,10 @@ namespace acme_windows
             void node::defer_install_store_dependencies()
    {
 
+#if defined(__REACTOS__)
+      information() << "Skipping modern Visual C++ redistributable on XP/ReactOS; MinGW runtimes are packaged with the application.";
+      return;
+#else
       ::acme_windows::registry::key key;
 
       string strKey = "SOFTWARE\\Wow6432Node\\Microsoft\\VisualStudio\\14.0\\VC\\Runtimes\\x64"_ansi;
@@ -5777,6 +5841,7 @@ namespace acme_windows
       iExitCode = command_system("\""_ansi + pathRedist + "\" /install /norestart"_ansi, tracefunction);
 
       strOutput = straOutput.implode("\n"_ansi);
+#endif
    }
 
             bool node::terminate_other_instances_by_executable_path(

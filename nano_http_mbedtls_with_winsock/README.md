@@ -16,3 +16,8 @@ Refresh the bundle deliberately with security updates; never disable certificate
 
 The `transport` library has no ca2 runtime dependency and can be probed without launching
 an installer. Negative tests must reject expired, untrusted and wrong-host certificates.
+
+Certificate validation checks chain, hostname and dates using the embedded bundle.
+Online OCSP/revocation fetching is not implemented. This is an initial backend, not a claim
+of a complete browser HTTP/TLS implementation. The current client closes each connection.
+Override the trust bundle explicitly with `CA2_TLS_CA_BUNDLE` when using private CAs.
