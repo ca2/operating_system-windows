@@ -5,6 +5,16 @@ if(NOT MINGW OR NOT CMAKE_SIZEOF_VOID_P EQUAL 4
     return()
 endif()
 
+# Both source configuration and the deferred Windows tools hook include this file.
+# Register the deployment commands once, but allow the later hook to attach acme
+# if the first inclusion happened before that target was created.
+if(TARGET mingw_runtime)
+    if(TARGET acme)
+        add_dependencies(acme mingw_runtime)
+    endif()
+    return()
+endif()
+
 set(runtime_manifest "${CMAKE_CURRENT_LIST_DIR}/operating_system/windows/Win32/run_time_dependencies.txt")
 file(STRINGS "${runtime_manifest}" runtime_names)
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${runtime_manifest}")

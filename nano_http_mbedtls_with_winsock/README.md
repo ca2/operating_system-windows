@@ -5,6 +5,13 @@ TLS 1.2/1.3 defaults, SNI and hostname checking, bundled CA roots, bounded redir
 (HTTPS only), HTTP Content-Length and chunked decoding, progress reporting,
 30-second socket I/O/connect timeouts and a 1 GiB response limit.
 Requests are serialized to protect the default PSA implementation.
+The ca2 HTTP adapter retries transient connection failures and interrupted bodies
+up to four attempts, with 1, 2 and 4 second delays outside the transport lock.
+Partial response data and progress are reset before retrying. Certificate failures,
+malformed HTTP and HTTP error status codes are not retried. The optional
+`http_status_function` payload callback receives the retry index and a countdown
+updated each second; the installer displays it in the detail status line.
+Retries restart the complete GET; they do not resume a partial archive.
 Synchronous OS DNS resolution can take longer than socket timeouts.
 Initial scope: DNS hostnames (no IPv6 literals), direct connections (no HTTP proxies).
 

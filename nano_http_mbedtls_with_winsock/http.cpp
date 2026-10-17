@@ -9,16 +9,30 @@ void http::perform(::nano::http::get* request) {
     try {
         transfer_progress_function progress;
         progress = request->payload("transfer_progress_function");
-        auto response = ca2_tls::get(request->m_url.as_string().c_str(), request->m_strUserAgent.c_str(),
+        ::function<void(const ::scoped_string&)> status;
+        status = request->payload("http_status_function");
+        bool retryStatusVisible = false;
+        auto response = ca2_tls::get_with_retry(request->m_url.as_string().c_str(), request->m_strUserAgent.c_str(),
             request->payload("only_headers").as_bool(),
-            [request, progress](const unsigned char* bytes, size_t count, std::uint64_t total) {
+            [request, progress, status, &retryStatusVisible](const unsigned char* bytes, size_t count, std::uint64_t total) {
+                if (retryStatusVisible && status) { status(""); retryStatusVisible = false; }
                 request->get_memory_response()->append(bytes, count);
                 if (progress) {
                     const auto received = request->get_memory_response()->size();
                     progress(total ? (::f64)received / total : 0., received, total);
                 }
             },
-            [this](const std::string& text) { information() << text.c_str(); });
+            [this](const std::string& text) { information() << text.c_str(); },
+            [request, progress]() {
+                auto memory = request->get_memory_response();
+                if (memory) memory->set_size(0);
+                if (progress) progress(0., 0, 0);
+            },
+            [status, &retryStatusVisible](const std::string& text) {
+                retryStatusVisible = true;
+                if (status) status(text.c_str());
+            });
+        if (retryStatusVisible && status) status("");
         request->set_status(response.status);
         request->payload("out_attributes")["http_status_code"] = (::i64)response.status;
         ::string headers(response.headers.c_str());

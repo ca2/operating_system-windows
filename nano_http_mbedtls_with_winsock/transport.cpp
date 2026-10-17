@@ -24,6 +24,7 @@ constexpr std::size_t max_headers = 65536;
 constexpr std::uint64_t max_body = 1024ULL * 1024 * 1024;
 // Serialize use of the default PSA implementation until a threading adapter is configured.
 std::mutex tls_mutex;
+struct transient_error : std::runtime_error { using std::runtime_error::runtime_error; };
 std::string lower(std::string s) {
     for (char& c : s) if (c >= 'A' && c <= 'Z') c += 'a' - 'A';
     return s;
@@ -86,6 +87,7 @@ void connect_socket(socket_handle& socket, const url_parts& url) {
     addrinfo* addresses = nullptr;
     const auto service = std::to_string(url.port);
     const int resolved = getaddrinfo(url.host.c_str(), service.c_str(), &hints, &addresses);
+    if (resolved == WSATRY_AGAIN) throw transient_error("Winsock DNS failed: " + std::to_string(resolved));
     if (resolved) throw std::runtime_error("Winsock DNS failed: " + std::to_string(resolved));
     std::unique_ptr<addrinfo, decltype(&freeaddrinfo)> guard(addresses, freeaddrinfo);
     int last_error = 0;
@@ -120,7 +122,7 @@ void connect_socket(socket_handle& socket, const url_parts& url) {
         }
         closesocket(candidate);
     }
-    throw std::runtime_error("Winsock connect failed: " + std::to_string(last_error));
+    throw transient_error("Winsock connect failed: " + std::to_string(last_error));
 }
 struct tls_connection {
     socket_handle socket;
@@ -140,6 +142,8 @@ struct tls_connection {
             message += " Certificate verification: " + std::string(verification);
         }
         if (socket.last_error) message += " Winsock error " + std::to_string(socket.last_error) + ".";
+        if (!flags && (code == MBEDTLS_ERR_NET_RECV_FAILED || code == MBEDTLS_ERR_NET_SEND_FAILED))
+            throw transient_error(message);
         throw std::runtime_error(message);
     }
     void open(const url_parts& url, const logger& log) {
@@ -158,7 +162,7 @@ struct tls_connection {
         const DWORD started = GetTickCount();
         do {
             handshake = mbedtls_ssl_handshake(&ssl);
-            if (GetTickCount() - started > 60000) throw std::runtime_error("TLS handshake timed out.");
+            if (GetTickCount() - started > 60000) throw transient_error("TLS handshake timed out.");
         } while (handshake == MBEDTLS_ERR_SSL_WANT_READ || handshake == MBEDTLS_ERR_SSL_WANT_WRITE);
         check(handshake, "TLS handshake");
         if (mbedtls_ssl_get_verify_result(&ssl)) throw std::runtime_error("Certificate verification did not succeed.");
@@ -186,7 +190,7 @@ struct reader {
         const DWORD started = GetTickCount();
         do {
             n = mbedtls_ssl_read(&tls.ssl, bytes, sizeof(bytes));
-            if (GetTickCount() - started > 60000) throw std::runtime_error("TLS read timed out.");
+            if (GetTickCount() - started > 60000) throw transient_error("TLS read timed out.");
         } while (n == MBEDTLS_ERR_SSL_WANT_READ || n == MBEDTLS_ERR_SSL_WANT_WRITE
                 || n == MBEDTLS_ERR_SSL_RECEIVED_NEW_SESSION_TICKET);
         if (n == MBEDTLS_ERR_SSL_PEER_CLOSE_NOTIFY) { clean_close = true; return false; }
@@ -202,12 +206,12 @@ struct reader {
                 auto result = pending.substr(0, end); pending.erase(0, end + 2); return result;
             }
             if (pending.size() > max_headers) throw std::runtime_error("HTTP line too long.");
-            if (!fill()) throw std::runtime_error("Truncated HTTP headers or chunk metadata.");
+            if (!fill()) throw transient_error("Truncated HTTP headers or chunk metadata.");
         }
     }
     void exact(std::uint64_t length, const std::function<void(const char*, size_t)>& sink) {
         while (length) {
-            if (pending.empty() && !fill()) throw std::runtime_error("Truncated HTTP body.");
+            if (pending.empty() && !fill()) throw transient_error("Truncated HTTP body.");
             const auto count = static_cast<size_t>((std::min)(length, std::uint64_t(pending.size())));
             sink(pending.data(), count); pending.erase(0, count); length -= count;
         }
@@ -325,10 +329,33 @@ response get(const std::string& initial_url, const std::string& user_agent, bool
         } else if (have_length) input.exact(result.content_length, emit);
         else {
             do { emit(input.pending.data(), input.pending.size()); input.pending.clear(); } while (input.fill());
-            if (!input.clean_close) throw std::runtime_error("TLS closed without authenticated end-of-body.");
+            if (!input.clean_close) throw transient_error("TLS closed without authenticated end-of-body.");
         }
         return result;
     }
     throw std::runtime_error("Too many HTTPS redirects.");
+}
+
+response get_with_retry(const std::string& url, const std::string& user_agent, bool headers_only,
+    const receiver& receive, const logger& log, const std::function<void()>& reset, const logger& status) {
+    if (!reset) throw std::invalid_argument("HTTPS retries require a partial-response reset callback.");
+    for (unsigned attempt = 0; ; ++attempt) {
+        try { return get(url, user_agent, headers_only, receive, log); }
+        catch (const transient_error& error) {
+            // get() has released the transport mutex before we reset or wait.
+            reset();
+            if (attempt == 3) throw;
+            const unsigned seconds = 1U << attempt;
+            if (log) log(std::string(error.what()) + " Retrying HTTPS request (attempt "
+                + std::to_string(attempt + 2) + "/4) in " + std::to_string(seconds) + " seconds.");
+            for (unsigned remaining = seconds; remaining; --remaining) {
+                if (status) status("Retry " + std::to_string(attempt + 1) + "/3 (attempt "
+                    + std::to_string(attempt + 2) + "/4) in " + std::to_string(remaining)
+                    + (remaining == 1 ? " second..." : " seconds..."));
+                Sleep(1000);
+            }
+            if (status) status("Retry " + std::to_string(attempt + 1) + "/3: connecting...");
+        }
+    }
 }
 }
