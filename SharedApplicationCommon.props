@@ -4,7 +4,10 @@
   <PropertyGroup Label="UserMacros">
     <PlatformLower2>$([System.String]::Copy('$(Platform)').ToLower())</PlatformLower2>
   </PropertyGroup>
-  <PropertyGroup />
+  <PropertyGroup>
+    <GenerateManifest>true</GenerateManifest>
+    <EmbedManifest>true</EmbedManifest>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile />
     <PreBuildEvent>
@@ -13,10 +16,9 @@
     <Link>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
-      <AdditionalManifestDependencies>$(BaseDir)operating_system/operating_system-windows/tools/windows-common-controls/common-controls.manifest</AdditionalManifestDependencies>
     </Link>
     <Manifest>
-      <AdditionalManifestFiles>$(__operating_system)operating_system-windows\windows10.manifest</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(MSBuildThisFileDirectory)windows10.manifest;$(MSBuildThisFileDirectory)tools\windows-common-controls\common-controls.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
