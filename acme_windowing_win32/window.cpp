@@ -1239,11 +1239,8 @@ namespace win32
                if (strLparamString == "ImmersiveColorSet")
                {
 
-                  //system()->acme_windowing()->fetch_dark_mode();
-
-                  //update_drawing_objects();
-
-                  //redraw();
+                  // System message-only windows do not receive this broadcast.
+                  system()->acme_windowing()->fetch_system_background_color();
 
                }
                else if (wparam == SPI_SETWORKAREA)

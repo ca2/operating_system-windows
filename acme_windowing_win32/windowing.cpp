@@ -38,6 +38,9 @@ namespace win32
             m_bRunMainLoop = true;
             m_bMessageThread = true;
 
+            // Force the first style lookup to read the current Windows theme.
+            set_dark_mode_time(::time::now());
+
          }
 
 
@@ -694,9 +697,10 @@ namespace win32
 
             ::output_debug_string(str);
 
-            system()->set_background_color(colorWindowBackground);
-
+            // Invalidate style caches before the change handlers request a redraw.
             set_dark_mode_time(::time::now());
+
+            on_system_dark_mode_change(colorWindowBackground.get_luminance() <= 0.5, colorWindowBackground);
 
          }
 

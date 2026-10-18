@@ -200,6 +200,11 @@ namespace innate_ui_win32
 
          HDC hdc = ::BeginPaint(hwnd, &ps);
 
+         RECT background;
+         ::GetClientRect(hwnd, &background);
+         ::FillRect(hdc, &background, m_bDarkMode
+            ? m_hbrushDarkBackground : ::GetSysColorBrush(COLOR_3DFACE));
+
          ::Gdiplus::Graphics graphics(hdc);
 
          if (m_pgdiplusimage)

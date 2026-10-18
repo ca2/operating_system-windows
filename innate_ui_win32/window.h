@@ -27,6 +27,11 @@ namespace innate_ui_win32
       //HMENU m_hmenuSystem;
       ::i32 m_iChildIdSeed;
       ::i32 m_iCreateStyle;
+      bool m_bDarkMode = false;
+      HBRUSH m_hbrushDarkBackground = nullptr;
+
+      void refresh_theme();
+      void apply_theme(bool bDarkMode);
       //::f64 m_dFontSizeEm = 1.0;
       //::i32 m_iFontWeight = 400;
 

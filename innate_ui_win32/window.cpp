@@ -12,12 +12,65 @@
 //#include "acme/operating_system/windows/nano/user/user.h"
 #include "acme/user/user/mouse.h"
 #include "acme/operating_system/windows/window.h"
+#include "acme/operating_system/windows/dark_popup_menu.h"
 #include "acme/operating_system/windows/windowing.h"
 #include "acme_windowing_win32/activation_token.h"
 
 
 #include <commctrl.h>
 #pragma comment(lib, "Comctl32.lib")
+
+namespace
+{
+   bool innate_dark_mode()
+   {
+#if defined(__REACTOS__)
+      return false;
+#else
+      HIGHCONTRASTW contrast{sizeof(contrast)};
+      if (!SystemParametersInfoW(SPI_GETHIGHCONTRAST, sizeof(contrast), &contrast, 0)
+         || (contrast.dwFlags & HCF_HIGHCONTRASTON))
+         return false;
+
+      HKEY key = nullptr;
+      if (RegOpenKeyExW(HKEY_CURRENT_USER,
+         L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+         0, KEY_QUERY_VALUE, &key) != ERROR_SUCCESS)
+         return false;
+      DWORD value = 1, type = 0, size = sizeof(value);
+      const auto status = RegQueryValueExW(key, L"AppsUseLightTheme", nullptr,
+         &type, reinterpret_cast<BYTE *>(&value), &size);
+      RegCloseKey(key);
+      return status == ERROR_SUCCESS && type == REG_DWORD
+         && size == sizeof(value) && value == 0;
+#endif
+   }
+
+   void innate_dark_title_bar(HWND hwnd, bool dark)
+   {
+#if !defined(__REACTOS__)
+      using set_attribute = HRESULT (WINAPI *)(HWND, DWORD, LPCVOID, DWORD);
+      // Retain the optional module for the lifetime of its cached function pointer.
+      static const auto setAttribute = []() -> set_attribute
+      {
+         WCHAR path[MAX_PATH];
+         const auto length = GetSystemDirectoryW(path, MAX_PATH);
+         if (!length || length + 12 >= MAX_PATH)
+            return nullptr;
+         lstrcatW(path, L"\\dwmapi.dll");
+         const auto module = LoadLibraryW(path);
+         return module ? reinterpret_cast<set_attribute>(
+            GetProcAddress(module, "DwmSetWindowAttribute")) : nullptr;
+      }();
+      if (setAttribute)
+      {
+         const BOOL enabled = dark;
+         // Unsupported systems retain their native title bar.
+         setAttribute(hwnd, 20, &enabled, sizeof(enabled));
+      }
+#endif
+   }
+}
 
 
 HFONT CreateScaledFont(HWND hWnd, ::i32 pointSize, ::i32 weight, const wchar_t *fontFamily)
@@ -62,7 +115,32 @@ namespace innate_ui_win32
 
    window::~window()
    {
+      if (m_hbrushDarkBackground)
+         ::DeleteObject(m_hbrushDarkBackground);
+   }
 
+   void window::refresh_theme()
+   {
+      apply_theme(innate_dark_mode());
+   }
+
+   void window::apply_theme(bool bDarkMode)
+   {
+      auto hwnd = ::as_HWND(this->operating_system_window());
+      if (!::IsWindow(hwnd))
+         return;
+      if (bDarkMode && !m_hbrushDarkBackground)
+         m_hbrushDarkBackground = ::CreateSolidBrush(RGB(32, 32, 32));
+      m_bDarkMode = bDarkMode && m_hbrushDarkBackground;
+      if (!(::GetWindowLongPtrW(hwnd, GWL_STYLE) & WS_CHILD))
+         innate_dark_title_bar(hwnd, m_bDarkMode);
+      for (auto & pchild : m_childa)
+      {
+         ::pointer<window> pwindow = pchild;
+         if (pwindow)
+            pwindow->apply_theme(m_bDarkMode);
+      }
+      ::RedrawWindow(hwnd, nullptr, nullptr, RDW_INVALIDATE | RDW_ERASE | RDW_FRAME | RDW_ALLCHILDREN);
    }
 
 
@@ -282,9 +360,37 @@ namespace innate_ui_win32
       {
       case WM_SHOWWINDOW:
       {
-
+         if (wparam)
+            refresh_theme();
       }
       break;
+      case WM_SETTINGCHANGE:
+      case WM_THEMECHANGED:
+      case WM_SYSCOLORCHANGE:
+         // Broadcasts reach each top-level dialog on its owning UI thread.
+         refresh_theme();
+         break;
+      case WM_ERASEBKGND:
+         if (m_bDarkMode)
+         {
+            RECT rectangle;
+            ::GetClientRect((HWND)_HWND(), &rectangle);
+            ::FillRect((HDC)(WPARAM)wparam, &rectangle, m_hbrushDarkBackground);
+            lresult = 1;
+            return true;
+         }
+         break;
+      case WM_CTLCOLORSTATIC:
+      case WM_CTLCOLORBTN:
+         if (m_bDarkMode)
+         {
+            auto hdc = (HDC)(WPARAM)wparam;
+            ::SetTextColor(hdc, RGB(240, 240, 240));
+            ::SetBkColor(hdc, RGB(32, 32, 32));
+            lresult = (LRESULT)m_hbrushDarkBackground;
+            return true;
+         }
+         break;
       case WM_APP + 124:
       {
          PostQuitMessage(0);
@@ -300,6 +406,13 @@ namespace innate_ui_win32
       case WM_SYSCOMMAND:
       {
          ::i32 wmId = LOWORD(wparam);
+         if ((wmId & 0xfff0) == SC_MOUSEMENU || (wmId & 0xfff0) == SC_KEYMENU)
+         {
+            auto hwnd = ::as_HWND(this->operating_system_window());
+            ::windows::dark_popup_menu menuTheme(hwnd, ::GetSystemMenu(hwnd, FALSE));
+            lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
+            return true;
+         }
          if (wmId == ID_SHOW_ABOUT_BOX)
          {
             application()->show_about_box(system()->acme_windowing()->get_user_activation_token());
@@ -406,6 +519,7 @@ return false;
             _create_child(pwindowImpl);
 
             pwindowImpl->m_childa.add(this);
+            apply_theme(pwindowImpl->m_bDarkMode);
             pwindowImpl->m_iChildIdSeed++;
 
             auto hwnd = ::as_HWND(this->operating_system_window());

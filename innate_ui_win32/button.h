@@ -26,6 +26,9 @@ namespace innate_ui_win32
 
       bool _on_command() override;
 
+      bool _subclass_procedure(::lresult & lresult, ::u32 message, ::wparam wparam, ::lparam lparam) override;
+      void paint_dark_button(HDC hdc);
+
       void set_icon(::innate_ui::icon * picon) override;
 
    };
