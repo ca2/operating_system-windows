@@ -13,6 +13,7 @@
     <Link>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
+      <AdditionalManifestDependencies>$(BaseDir)operating_system/operating_system-windows/tools/windows-common-controls/common-controls.manifest</AdditionalManifestDependencies>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>$(__operating_system)operating_system-windows\windows10.manifest</AdditionalManifestFiles>
