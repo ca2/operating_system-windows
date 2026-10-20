@@ -467,7 +467,7 @@ namespace draw2d_gdiplus
 
             ::f64 dSize = pwritetextfont->GetSize();
 
-            ::f64 dFontHeight = pwritetextfont->GetHeight((Gdiplus::REAL)pdraw2dgraphics->get_dpiy());
+            ::f64 dFontHeight = pwritetextfont->GetHeight((Gdiplus::REAL)pdraw2dgraphics->get_density_dpi());
 
             auto & textmetric = m_textmetric4;
 

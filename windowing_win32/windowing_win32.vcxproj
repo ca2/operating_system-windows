@@ -2582,6 +2582,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticReleaseWithDbgInfo|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="draw2d_domain.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="copydesk.h" />
     <ClInclude Include="cursor.h" />
@@ -2612,6 +2613,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="appbar.cpp" />
+    <ClCompile Include="draw2d_domain.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="copydesk.cpp" />
     <ClCompile Include="cursor.cpp" />

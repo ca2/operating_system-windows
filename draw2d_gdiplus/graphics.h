@@ -67,8 +67,8 @@ namespace draw2d_gdiplus
       void release_hdc(HDC hdc);
 
 
-      virtual ::f64 get_dpix() override;
-      virtual ::f64 get_dpiy() override;
+      //virtual ::f64 get_dpix() override;
+      //virtual ::f64 get_dpiy() override;
 
 
       void start_layer(bool bFirstLayer, ::user::interaction * puserinteraction = nullptr) override;

@@ -8473,26 +8473,26 @@ namespace draw2d_gdiplus
    }
 
 
-   ::f64 graphics::get_dpix()
-   {
+   //::f64 graphics::get_dpix()
+   //{
 
-      if (m_pgdiplusgraphics == nullptr)
-         return 96.0;
+   //   if (m_pgdiplusgraphics == nullptr)
+   //      return 96.0;
 
-      return m_pgdiplusgraphics->GetDpiX();
+   //   return m_pgdiplusgraphics->GetDpiX();
 
-   }
+   //}
 
 
-   ::f64 graphics::get_dpiy()
-   {
+   //::f64 graphics::get_dpiy()
+   //{
 
-      if (m_pgdiplusgraphics == nullptr)
-         return 96.0;
+   //   if (m_pgdiplusgraphics == nullptr)
+   //      return 96.0;
 
-      return m_pgdiplusgraphics->GetDpiY();
+   //   return m_pgdiplusgraphics->GetDpiY();
 
-   }
+   //}
 
 
    //void graphics::set_fill_mode(::draw2d::enum_fill_mode efillmode) overrid;

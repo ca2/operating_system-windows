@@ -142,8 +142,8 @@ namespace typeface_gdiplus
       wd32_character ia[2];
       ia[0] = unicode_index(scopedstr);
       ia[1] = 0;
-      WCHAR wch[5];
-      auto len = wd32_to_wd16(wch, ia);
+      wide_character wch[5];
+      auto len = wd32_to_wide(wch, ia);
       wch[len] = L'\0';
       auto iLength = static_cast<INT>(len);
 

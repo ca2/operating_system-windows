@@ -223,7 +223,7 @@ Gdiplus::Image * LoadGdiplusImageFromMemory(BYTE * buffer, size_t bufferSize)
          }
 
 
-         void icon::load_image_file(const void * p, memsize size)
+         void icon::load_image_file(const ::block & block)
          {
 
 
@@ -234,7 +234,7 @@ Gdiplus::Image * LoadGdiplusImageFromMemory(BYTE * buffer, size_t bufferSize)
 
             }
 
-            m_pimage = LoadGdiplusImageFromMemory((BYTE *) p, size);
+            m_pimage = LoadGdiplusImageFromMemory((BYTE *)block.data(), block.size());
 
             
 
