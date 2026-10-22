@@ -24,6 +24,13 @@ namespace acme_windows
       ::file::path            m_strPrograms;
       ::file::path            m_strCommonPrograms;
 
+      ::file::path time_folder();
+      ::file::path net_seed_folder();
+      ::file::path common_app_data();
+      ::file::path user_app_data();
+      ::file::path user_programs();
+      ::file::path common_programs();
+
       directory_system();
       ~directory_system() override;
 

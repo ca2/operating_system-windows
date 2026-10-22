@@ -2328,91 +2328,98 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 
       //}
 
-      m_pathInstall = this->install();
+      //return ::success;
 
-      this->m_pplatformdir->_shell_get_special_folder_path(
-         nullptr,
-         m_strCommonAppData,
-         CSIDL_COMMON_APPDATA,
-         false);
-      //shell_get_special_folder_path(
-      // nullptr,
-      //m_pathProfile,
-      //CSIDL_PROFILE,
-      //false);
-
-      m_pathHome = this->m_pplatformdir->_get_known_folder(FOLDERID_Profile);
-
-      m_pathCa2Config = this->ca2roaming();
-
-      m_strCommonAppData /= "ca2";
-
-      m_strAppData = this->m_pplatformdir->_get_known_folder(FOLDERID_RoamingAppData);
-
-      this->m_pplatformdir->_shell_get_special_folder_path(
-         nullptr,
-         m_strPrograms,
-         CSIDL_PROGRAMS,
-         false);
-      this->m_pplatformdir->_shell_get_special_folder_path(
-         nullptr,
-         m_strCommonPrograms,
-         CSIDL_COMMON_PROGRAMS,
-         false);
-
-      {
-
-         //string strRelative;
-         //strRelative = install();
-         //index iFind = strRelative.find(':');
-         //if (iFind >= 0)
-         //{
-         //   character_count iFind1 = strRelative.rear_find("\\", iFind);
-         //   character_count iFind2 = strRelative.rear_find("/", iFind);
-         //   character_count iStart = maximum(iFind1 + 1, iFind2 + 1);
-         //   strRelative = strRelative.left(iFind - 1) + "_" + strRelative.substr(iStart, iFind - iStart) + strRelative.substr(iFind + 1);
-         //}
+   }
 
 
-
-      }
+   ::file::path directory_system::time_folder()
+   {
 
       if (m_strTimeFolder.is_empty())
       {
 
-         m_strTimeFolder = this->appdata() / "time";
+         m_strTimeFolder = appdata() / "time";
 
       }
+
+      return m_strTimeFolder;
+
+   }
+
+
+   ::file::path directory_system::net_seed_folder()
+   {
 
       if (m_strNetSeedFolder.is_empty())
       {
 
-         m_strNetSeedFolder = this->install() / "net";
+         m_strNetSeedFolder = install() / "net";
 
       }
 
-      auto psystem = system();
+      return m_strNetSeedFolder;
 
-      auto pacmedir = psystem->m_pdirectorysystem;
+   }
 
-      pacmedir->create(m_strTimeFolder);
-      //xxdebug_box("win_dir::initialize (m_strTimeFolder)", "win_dir::initialize", 0);
 
-      if (!pacmedir->is(m_strTimeFolder))
+   ::file::path directory_system::common_app_data()
+   {
+
+      if (m_strCommonAppData.is_empty())
       {
-         //return false;
+
+         m_pplatformdir->_shell_get_special_folder_path(nullptr, m_strCommonAppData, CSIDL_COMMON_APPDATA, false);
+         m_strCommonAppData /= "ca2";
 
       }
 
-          /*     auto psystem = system();
+      return m_strCommonAppData;
 
-         auto pacmedir = psystem->m_pdirectorysystem;*/
+   }
 
-      pacmedir->create(m_strTimeFolder / "time");
 
-      //xxdebug_box("win_dir::initialize", "win_dir::initialize", 0);
+   ::file::path directory_system::user_app_data()
+   {
 
-      //return ::success;
+      if (m_strAppData.is_empty())
+      {
+
+         m_strAppData = m_pplatformdir->_get_known_folder(FOLDERID_RoamingAppData);
+
+      }
+
+      return m_strAppData;
+
+   }
+
+
+   ::file::path directory_system::user_programs()
+   {
+
+      if (m_strPrograms.is_empty())
+      {
+
+         m_pplatformdir->_shell_get_special_folder_path(nullptr, m_strPrograms, CSIDL_PROGRAMS, false);
+
+      }
+
+      return m_strPrograms;
+
+   }
+
+
+   ::file::path directory_system::common_programs()
+   {
+
+      if (m_strCommonPrograms.is_empty())
+      {
+
+         m_pplatformdir->_shell_get_special_folder_path(nullptr, m_strCommonPrograms, CSIDL_COMMON_PROGRAMS, false);
+
+      }
+
+      return m_strCommonPrograms;
 
    }
 
@@ -2423,6 +2430,11 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //auto estatus =
 
       ::directory_system::init_system();
+
+      auto pathTimeFolder = time_folder();
+      auto pdirectory = system()->directory_system();
+      pdirectory->create(pathTimeFolder);
+      pdirectory->create(pathTimeFolder / "time");
 
       //if (!estatus)
       //{
