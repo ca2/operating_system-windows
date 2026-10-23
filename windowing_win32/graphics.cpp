@@ -1,6 +1,7 @@
 // created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Soerensen MY ONLY LORD
 // recreated by Camilo 2021-02-01 23:29
 #include "platform.h"
+#include "fps_debug.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "graphics.h"
 #include "display.h"
@@ -1254,6 +1255,11 @@ namespace windowing_win32
 
    void graphics::on_update_screen(::graphics::buffer_item * pbufferitem)
    {
+#if FPS_DEBUG
+      auto presentationTrace = pbufferitem->m_presentationTrace;
+      if (presentationTrace.trace)
+         presentationTrace.present_start_ns = ::graphics::presentation_trace::now_ns();
+#endif
 
       ::user::interaction * pinteraction = m_pwindow->user_interaction();
 
@@ -1347,7 +1353,9 @@ namespace windowing_win32
 
             auto pixmapRawData = ppixmapWindowBuffer->m_pimage32Raw;
 
-            auto ppixmapImageRawData = pbufferitem->m_pimageBufferItem->map(::image::e_map_load, rectangleWindowFixed);
+            // Presentation reads pixels; it must not publish a CPU edit that
+            // could later upload this mapped subrectangle at the bitmap origin.
+            auto ppixmapImageRawData = pbufferitem->m_pimageBufferItem->map(::image::e_map_read_only, rectangleWindowFixed);
 
             auto pimageRawData = ppixmapImageRawData->image32();
 
@@ -1870,11 +1878,24 @@ namespace windowing_win32
                // racing the next left-grip mouse/window-position transaction.
                // main_sendø is synchronous, so draw_frame does not finish (and the
                // render buffer is not reused) until the native commit completes.
+#if FPS_DEBUG
+               if (presentationTrace.trace)
+                  presentationTrace.owner_queued_ns = ::graphics::presentation_trace::now_ns();
+#endif
                pwindow->main_sendø()
-                  << [playeredwindowbufferPresentation,
+                  << [
+#if FPS_DEBUG
+                     presentationTrace,
+#endif
+                     playeredwindowbufferPresentation,
                      pwindowPresentation,
                      rectangleFramePresentation]()
                   {
+#if FPS_DEBUG
+                     auto traceFrame = presentationTrace;
+                     if (traceFrame.trace)
+                        traceFrame.owner_start_ns = ::graphics::presentation_trace::now_ns();
+#endif
 
                      auto pinteractionPresentation =
                         pwindowPresentation->user_interaction();
@@ -1928,7 +1949,13 @@ namespace windowing_win32
 
                      }
 
+#if FPS_DEBUG
+                     playeredwindowbufferPresentation->m_presentationTrace = traceFrame;
+#endif
                      playeredwindowbufferPresentation->present_window_buffer();
+#if FPS_DEBUG
+                     playeredwindowbufferPresentation->m_presentationTrace = {};
+#endif
 
                   };
 

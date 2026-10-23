@@ -1,4 +1,5 @@
 #include "platform.h"
+#include "fps_debug.h"
 #include "image.h"
 #include "graphics.h"
 #include "bitmap.h"
@@ -461,9 +462,11 @@ namespace draw2d_gdiplus
 
       ::image32_t * pimage32Bitmap = nullptr;
 
+#if FPS_DEBUG
       auto str1 = _001_image32_diagnostics_t(&pixmap).as_string();
 
       information("draw2d_gdiplus::image::create_from_data (1) {}", str1);
+#endif
 
       if (pixmap.m_sizeRaw.cx > I32_MAXIMUM / (::i32) sizeof(::image32_t))
       {
@@ -539,9 +542,11 @@ namespace draw2d_gdiplus
 
       pdraw2dbitmap->create_bitmap(nullptr, pixmap.m_size, ppixmapOwnedNew);
 
+#if FPS_DEBUG
       auto str2 = _001_image32_diagnostics_t(pixmap.m_size, pimage32Bitmap, iScan).as_string();
 
       information("draw2d_gdiplus::image::create_from_data (2) {}", str2);
+#endif
 
       //if (!pdraw2dbitmap->create_bitmap(nullptr, size, (void**)&pimage32, &iScan))
       //{

@@ -25,6 +25,8 @@ namespace draw2d_gdiplus
       HDC                           m_hdc;
       HDC                           m_hdcAttach;
       HDC                           m_hdcGraphics;
+      ::i32_rectangle               m_rectangleLastReportedFrame;
+      bool                          m_bReportedFrameGeometry = false;
       //::Gdiplus::Bitmap *           m_pbitmapMemoryGraphics;
 
       graphics();
@@ -72,6 +74,8 @@ namespace draw2d_gdiplus
 
 
       void start_layer(bool bFirstLayer, ::user::interaction * puserinteraction = nullptr) override;
+      void begin_draw(bool bExternalRendering, ::user::interaction * puserinteraction,
+         const ::i32_rectangle & rectangleFrame, ::image::image * pimageTarget = nullptr) override;
 
       // Constructors
       //bool CreateDC(const ::scoped_string & scopedstrDriverName, const ::scoped_string & scopedstrDeviceName,

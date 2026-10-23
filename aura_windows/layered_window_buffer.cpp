@@ -1,9 +1,12 @@
 // Created by camilo on 2026-07-30 23:35 <3ThomasBorregaardSørensen!! Mummi!! Bilbo!!
 #include "platform.h"
 #include "layered_window_buffer.h"
+#include "bitmap_deep_scanning.h"
+#include "fps_debug.h"
 #include "reactos_layered_window_workaround.h"
 #include "acme/platform/node.h"
 #include "acme/platform/system.h"
+#include "acme/prototype/datetime/_c.h"
 #include "acme/operating_system/windows/device_independent_bitmap.h"
 #include "aura/graphics/graphics/buffer_item.h"
 #include "aura/windowing/display.h"
@@ -410,10 +413,17 @@ namespace windowing_win32
          informationf("ReactOS opaque presentation: GetDC failed error=%lu", ::GetLastError());
          return;
       }
+#if FPS_DEBUG
+      auto nativeStart = ::graphics::presentation_trace::now_ns();
+#endif
       const BOOL copied = ::BitBlt(hdc, 0, 0, width, height, dib->m_hdcMemory, x, y, SRCCOPY);
       const DWORD error = copied ? ERROR_SUCCESS : ::GetLastError();
       ::GdiFlush();
       ::ReleaseDC(m_hwnd, hdc);
+#if FPS_DEBUG
+      m_presentationTrace.finish(nativeStart, ::graphics::presentation_trace::now_ns(),
+         copied != FALSE, error, "BitBlt+GdiFlush" );
+#endif
       if (!copied)
          informationf("ReactOS opaque presentation: BitBlt failed error=%lu", error);
    }
@@ -1331,10 +1341,16 @@ namespace windowing_win32
          return;
       POINT presentationSource = {0, 0};
       ::SetLastError(ERROR_SUCCESS);
+#if FPS_DEBUG
+      auto nativeStart = ::graphics::presentation_trace::now_ns();
+#endif
       auto bUpdated = ::UpdateLayeredWindow(m_hwnd, nullptr,
          &pointUpdateLayeredWindow, &sizeUpdateLayeredWindow,
          presentation.dc, &presentationSource, crKey, &presentationBlend, ULW_ALPHA);
 #else
+#if FPS_DEBUG
+      auto nativeStart = ::graphics::presentation_trace::now_ns();
+#endif
       auto bUpdated = ::UpdateLayeredWindow(
          m_hwnd,
          hdcScreen,
@@ -1349,6 +1365,10 @@ namespace windowing_win32
       // Capture the presentation error before GdiFlush or resource cleanup.
       auto dwLastError = bUpdated ? ERROR_SUCCESS : ::GetLastError();
       ::GdiFlush();
+#if FPS_DEBUG
+      m_presentationTrace.finish(nativeStart, ::graphics::presentation_trace::now_ns(),
+         bUpdated != FALSE, dwLastError, "UpdateLayeredWindow+GdiFlush" );
+#endif
 
 #if defined(_DEBUG)
 
@@ -1396,131 +1416,167 @@ namespace windowing_win32
 
 #endif
 
+#if FPS_DEBUG && BITMAP_DEEP_SCANNING
       {
 
-         auto lStyle = ::GetWindowLongPtr(m_hwnd, GWL_STYLE);
-         auto lExStyle = ::GetWindowLongPtr(m_hwnd, GWL_EXSTYLE);
-         auto hwndParent = ::GetParent(m_hwnd);
-         auto hwndOwner = ::GetWindow(m_hwnd, GW_OWNER);
-         auto hwndRoot = ::GetAncestor(m_hwnd, GA_ROOT);
-         auto hwndRootOwner = ::GetAncestor(m_hwnd, GA_ROOTOWNER);
-         auto hwndForeground = ::GetForegroundWindow();
-         auto hwndActive = ::GetActiveWindow();
-         auto hwndTop = ::GetTopWindow(nullptr);
+         // This detailed trace queries window/DWM state, samples pixels, and
+         // formats a large log line. It is intentionally per-presentation when
+         // bitmap deep scanning is enabled to capture short restore transitions.
 
-         RECT rectWindowRegion{};
-         auto iWindowRegionType = ::GetWindowRgnBox(m_hwnd, &rectWindowRegion);
+            auto lStyle = ::GetWindowLongPtr(m_hwnd, GWL_STYLE);
+            auto lExStyle = ::GetWindowLongPtr(m_hwnd, GWL_EXSTYLE);
+            auto hwndParent = ::GetParent(m_hwnd);
+            auto hwndOwner = ::GetWindow(m_hwnd, GW_OWNER);
+            auto hwndRoot = ::GetAncestor(m_hwnd, GA_ROOT);
+            auto hwndRootOwner = ::GetAncestor(m_hwnd, GA_ROOTOWNER);
+            auto hwndForeground = ::GetForegroundWindow();
+            auto hwndActive = ::GetActiveWindow();
+            auto hwndTop = ::GetTopWindow(nullptr);
 
-         DWORD dwDwmCloaked = 0;
-         HRESULT hresultDwmCloaked = S_FALSE;
-         bool bDwmGetWindowAttributeAvailable = false;
+            RECT rectangleActual{}, rectangleClient{};
+            POINT pointClientScreen{};
+            auto bGotActual = ::GetWindowRect(m_hwnd, &rectangleActual);
+            auto bGotClient = ::GetClientRect(m_hwnd, &rectangleClient);
+            auto bGotClientScreen = ::ClientToScreen(m_hwnd, &pointClientScreen);
 
-         using PFN_DWM_GET_WINDOW_ATTRIBUTE = HRESULT(WINAPI *)(HWND, DWORD, PVOID, DWORD);
+            RECT rectWindowRegion{};
+            auto iWindowRegionType = ::GetWindowRgnBox(m_hwnd, &rectWindowRegion);
 
-         auto hmoduleDwmApi = ::GetModuleHandleW(L"dwmapi.dll");
+            DWORD dwDwmCloaked = 0;
+            HRESULT hresultDwmCloaked = S_FALSE;
+            bool bDwmGetWindowAttributeAvailable = false;
 
-         if (hmoduleDwmApi)
-         {
+            using PFN_DWM_GET_WINDOW_ATTRIBUTE = HRESULT(WINAPI *)(HWND, DWORD, PVOID, DWORD);
 
-            auto pfnDwmGetWindowAttribute =
-               reinterpret_cast<PFN_DWM_GET_WINDOW_ATTRIBUTE>(
-                  ::GetProcAddress(hmoduleDwmApi, "DwmGetWindowAttribute"));
+            auto hmoduleDwmApi = ::GetModuleHandleW(L"dwmapi.dll");
 
-            if (pfnDwmGetWindowAttribute)
+            if (hmoduleDwmApi)
             {
 
-               bDwmGetWindowAttributeAvailable = true;
-               hresultDwmCloaked = pfnDwmGetWindowAttribute(
-                  m_hwnd,
-                  (DWORD)DWMWA_CLOAKED,
-                  &dwDwmCloaked,
-                  sizeof(dwDwmCloaked));
+               auto pfnDwmGetWindowAttribute =
+                  reinterpret_cast<PFN_DWM_GET_WINDOW_ATTRIBUTE>(
+                     ::GetProcAddress(hmoduleDwmApi, "DwmGetWindowAttribute"));
+
+               if (pfnDwmGetWindowAttribute)
+               {
+
+                  bDwmGetWindowAttributeAvailable = true;
+                  hresultDwmCloaked = pfnDwmGetWindowAttribute(
+                     m_hwnd,
+                     (DWORD)DWMWA_CLOAKED,
+                     &dwDwmCloaked,
+                     sizeof(dwDwmCloaked));
+
+               }
 
             }
 
-         }
-
-         informationf(
-            "MappedDibDiagnostic UpdateLayeredWindow result=%d error=%lu hwnd=%p visible=%d iconic=%d "
-            "style=0x%Ix exstyle=0x%Ix parent=%p owner=%p root=%p rootOwner=%p "
-            "foreground=%p active=%p top=%p regionType=%d region=(%ld,%ld)-(%ld,%ld) "
-            "dwmAvailable=%d dwmResult=0x%08lx cloaked=%lu "
-            "dst=(%ld,%ld) size=(%ld,%ld) src=(%ld,%ld) raw=(%d,%d) map=(%d,%d)-(%d,%d) "
-            "scan=%d opacity=%u hdcScreen=%p hdcMemory=%p selectedBitmap=%p expectedBitmap=%p "
-            "sourcePixel=0x%08x centerPixel=0x%08x alphaSamples=%u/%u "
-            "object=%p createThread=%lu presentThread=%lu "
-            "getObject=%d bitmap=(type=%ld width=%ld height=%ld widthBytes=%ld planes=%u bitsPixel=%u bits=%p) "
-            "rawBits=%p gdiPixel=0x%08lx dcType=%lu bitmapType=%lu mapMode=%d layout=0x%08lx "
-            "viewportOrigin=(%ld,%ld) windowOrigin=(%ld,%ld) dcOrigin=(%ld,%ld)",
-            (int)bUpdated,
-            (unsigned long)dwLastError,
-            m_hwnd,
-            (int)::IsWindowVisible(m_hwnd),
-            (int)::IsIconic(m_hwnd),
-            (::uptr)lStyle,
-            (::uptr)lExStyle,
-            hwndParent,
-            hwndOwner,
-            hwndRoot,
-            hwndRootOwner,
-            hwndForeground,
-            hwndActive,
-            hwndTop,
-            (int)iWindowRegionType,
-            rectWindowRegion.left,
-            rectWindowRegion.top,
-            rectWindowRegion.right,
-            rectWindowRegion.bottom,
-            (int)bDwmGetWindowAttributeAvailable,
-            (unsigned long)hresultDwmCloaked,
-            (unsigned long)dwDwmCloaked,
-            pointUpdateLayeredWindow.x,
-            pointUpdateLayeredWindow.y,
-            sizeUpdateLayeredWindow.cx,
-            sizeUpdateLayeredWindow.cy,
-            pointSrc.x,
-            pointSrc.y,
-            pdeviceindependentbitmap->m_sizeRaw.cx,
-            pdeviceindependentbitmap->m_sizeRaw.cy,
-            pdeviceindependentbitmap->m_point.x,
-            pdeviceindependentbitmap->m_point.y,
-            pdeviceindependentbitmap->m_size.cx,
-            pdeviceindependentbitmap->m_size.cy,
-            pdeviceindependentbitmap->m_iScan,
-            (unsigned int)m_pwindowWin32->m_uOpacity,
-            hdcScreen,
-            hdcMemory,
-            hbitmapSelected,
-            pdeviceindependentbitmap->m_hbitmap,
-            (unsigned int)uSourcePixel,
-            (unsigned int)uSourceCenterPixel,
-            uSampledAlphaPixels,
-            uSampledPixels,
-            pdeviceindependentbitmap,
-            (unsigned long)m_dwProductionDibCreateThreadId,
-            (unsigned long)::GetCurrentThreadId(),
-            iBitmapSourceObjectSize,
-            bitmapSource.bmType,
-            bitmapSource.bmWidth,
-            bitmapSource.bmHeight,
-            bitmapSource.bmWidthBytes,
-            bitmapSource.bmPlanes,
-            bitmapSource.bmBitsPixel,
-            bitmapSource.bmBits,
-            pdeviceindependentbitmap->m_pimage32Raw,
-            (unsigned long)colorrefGdiSource,
-            (unsigned long)iMemoryDcObjectType,
-            (unsigned long)iBitmapObjectType,
-            iMapMode,
-            (unsigned long)dwLayout,
-            pointViewportOrigin.x,
-            pointViewportOrigin.y,
-            pointWindowOrigin.x,
-            pointWindowOrigin.y,
-            pointDeviceContextOrigin.x,
-            pointDeviceContextOrigin.y);
+            informationf(
+               "MappedDibDiagnostic UpdateLayeredWindow result=%d error=%lu hwnd=%p visible=%d iconic=%d "
+               "style=0x%Ix exstyle=0x%Ix parent=%p owner=%p root=%p rootOwner=%p "
+               "foreground=%p active=%p top=%p regionType=%d region=(%ld,%ld)-(%ld,%ld) "
+               "actual=(%ld,%ld,%ld,%ld) client=(%ld,%ld,%ld,%ld) client_screen=(%ld,%ld) geometry_result=(%d,%d,%d) "
+               "dwmAvailable=%d dwmResult=0x%08lx cloaked=%lu "
+               "dst=(%ld,%ld) size=(%ld,%ld) src=(%ld,%ld) raw=(%d,%d) map=(%d,%d)-(%d,%d) "
+               "scan=%d opacity=%u hdcScreen=%p hdcMemory=%p selectedBitmap=%p expectedBitmap=%p "
+               "sourcePixel=0x%08x centerPixel=0x%08x alphaSamples=%u/%u "
+               "object=%p createThread=%lu presentThread=%lu "
+               "getObject=%d bitmap=(type=%ld width=%ld height=%ld widthBytes=%ld planes=%u bitsPixel=%u bits=%p) "
+               "rawBits=%p gdiPixel=0x%08lx dcType=%lu bitmapType=%lu mapMode=%d layout=0x%08lx "
+               "viewportOrigin=(%ld,%ld) windowOrigin=(%ld,%ld) dcOrigin=(%ld,%ld)",
+               (int)bUpdated,
+               (unsigned long)dwLastError,
+               m_hwnd,
+               (int)::IsWindowVisible(m_hwnd),
+               (int)::IsIconic(m_hwnd),
+               (::uptr)lStyle,
+               (::uptr)lExStyle,
+               hwndParent,
+               hwndOwner,
+               hwndRoot,
+               hwndRootOwner,
+               hwndForeground,
+               hwndActive,
+               hwndTop,
+               (int)iWindowRegionType,
+               rectWindowRegion.left,
+               rectWindowRegion.top,
+               rectWindowRegion.right,
+               rectWindowRegion.bottom,
+               rectangleActual.left, rectangleActual.top, rectangleActual.right, rectangleActual.bottom,
+               rectangleClient.left, rectangleClient.top, rectangleClient.right, rectangleClient.bottom,
+               pointClientScreen.x, pointClientScreen.y,
+               (int)bGotActual, (int)bGotClient, (int)bGotClientScreen,
+               (int)bDwmGetWindowAttributeAvailable,
+               (unsigned long)hresultDwmCloaked,
+               (unsigned long)dwDwmCloaked,
+               pointUpdateLayeredWindow.x,
+               pointUpdateLayeredWindow.y,
+               sizeUpdateLayeredWindow.cx,
+               sizeUpdateLayeredWindow.cy,
+               pointSrc.x,
+               pointSrc.y,
+               pdeviceindependentbitmap->m_sizeRaw.cx,
+               pdeviceindependentbitmap->m_sizeRaw.cy,
+               pdeviceindependentbitmap->m_point.x,
+               pdeviceindependentbitmap->m_point.y,
+               pdeviceindependentbitmap->m_size.cx,
+               pdeviceindependentbitmap->m_size.cy,
+               pdeviceindependentbitmap->m_iScan,
+               (unsigned int)m_pwindowWin32->m_uOpacity,
+               hdcScreen,
+               hdcMemory,
+               hbitmapSelected,
+               pdeviceindependentbitmap->m_hbitmap,
+               (unsigned int)uSourcePixel,
+               (unsigned int)uSourceCenterPixel,
+               uSampledAlphaPixels,
+               uSampledPixels,
+               pdeviceindependentbitmap,
+               (unsigned long)m_dwProductionDibCreateThreadId,
+               (unsigned long)::GetCurrentThreadId(),
+               iBitmapSourceObjectSize,
+               bitmapSource.bmType,
+               bitmapSource.bmWidth,
+               bitmapSource.bmHeight,
+               bitmapSource.bmWidthBytes,
+               bitmapSource.bmPlanes,
+               bitmapSource.bmBitsPixel,
+               bitmapSource.bmBits,
+               pdeviceindependentbitmap->m_pimage32Raw,
+               (unsigned long)colorrefGdiSource,
+               (unsigned long)iMemoryDcObjectType,
+               (unsigned long)iBitmapObjectType,
+               iMapMode,
+               (unsigned long)dwLayout,
+               pointViewportOrigin.x,
+               pointViewportOrigin.y,
+               pointWindowOrigin.x,
+               pointWindowOrigin.y,
+               pointDeviceContextOrigin.x,
+               pointDeviceContextOrigin.y);
 
       }
+#else
+      if (!bUpdated)
+      {
+
+         static thread_local ::u32 uLastMappedDibFailureTick = 0;
+         auto uMappedDibFailureTick = ::get_fast_tick_count();
+         if (!uLastMappedDibFailureTick
+            || (::u32)(uMappedDibFailureTick - uLastMappedDibFailureTick) >= 1000)
+         {
+
+            uLastMappedDibFailureTick = uMappedDibFailureTick;
+            informationf("UpdateLayeredWindow failed error=%lu hwnd=%p size=(%ld,%ld) src=(%ld,%ld)",
+               (unsigned long)dwLastError, m_hwnd,
+               sizeUpdateLayeredWindow.cx, sizeUpdateLayeredWindow.cy,
+               pointSrc.x, pointSrc.y);
+
+         }
+
+      }
+#endif
 
    }
 
@@ -1656,9 +1712,11 @@ namespace windowing_win32
       }
 
       {
+#if FPS_DEBUG
          BITMAP bitmap{};
          ::GetObject(pdeviceindependentbitmap->m_hbitmap, sizeof(bitmap), &bitmap);
          informationf("pdeviceindependentbitmap->m_hbitmap %d %d", bitmap.bmWidth, bitmap.bmHeight);
+#endif
       }
 
    }

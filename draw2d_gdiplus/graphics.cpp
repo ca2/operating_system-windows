@@ -1,6 +1,12 @@
 #include "platform.h"
+#include <climits>
+#include <atomic>
+#include <chrono>
+#include <mutex>
 #include "bitmap.h"
 #include "graphics.h"
+#include "fps_debug.h"
+#include "acme/parallelization/parallelization.h"
 #include "pen.h"
 #include "brush.h"
 #include "font.h"
@@ -36,6 +42,519 @@
 
 
 ::collection::count g_cForkBlend = 0;
+
+
+#if FPS_DEBUG
+namespace
+{
+
+   enum class opaque_copy_candidate_skip_reason : ::u32
+   {
+      eligible,
+      alpha_mode,
+      page_unit,
+      page_scale,
+      page_unit_and_scale,
+      draw_options,
+      source_rectangle,
+      target_size,
+      target_placement,
+      bitmap_size,
+      transform,
+      compositing_mode,
+      alpha_regions,
+      count
+   };
+
+
+   const char * opaque_copy_candidate_skip_reason_name(opaque_copy_candidate_skip_reason reason)
+   {
+
+      switch (reason)
+      {
+      case opaque_copy_candidate_skip_reason::eligible: return "eligible";
+      case opaque_copy_candidate_skip_reason::alpha_mode: return "alpha_mode";
+      case opaque_copy_candidate_skip_reason::page_unit: return "page_unit";
+      case opaque_copy_candidate_skip_reason::page_scale: return "page_scale";
+      case opaque_copy_candidate_skip_reason::page_unit_and_scale: return "page_unit_and_scale";
+      case opaque_copy_candidate_skip_reason::draw_options: return "draw_options";
+      case opaque_copy_candidate_skip_reason::source_rectangle: return "source_rectangle";
+      case opaque_copy_candidate_skip_reason::target_size: return "target_size";
+      case opaque_copy_candidate_skip_reason::target_placement: return "target_placement";
+      case opaque_copy_candidate_skip_reason::bitmap_size: return "bitmap_size";
+      case opaque_copy_candidate_skip_reason::transform: return "transform";
+      case opaque_copy_candidate_skip_reason::compositing_mode: return "compositing_mode";
+      case opaque_copy_candidate_skip_reason::alpha_regions: return "alpha_regions";
+      default: return "unknown";
+      }
+
+   }
+
+
+   bool is_dabzo5y_image(const ::image::image * pimage)
+   {
+
+      if (!pimage || !pimage->m_pathImageSource.has_character())
+         return false;
+
+      ::string strImagePath = pimage->m_pathImageSource;
+      return strImagePath.case_insensitive_contains("DABZO5y")
+         || strImagePath.case_insensitive_contains("DABZ05y");
+
+   }
+
+
+   bool should_report_dabzo5y_image_once(const ::image::image * pimage,
+      ::std::atomic<const void *> & lastImage)
+   {
+
+      if (!is_dabzo5y_image(pimage))
+         return false;
+
+      return lastImage.exchange(pimage, ::std::memory_order_relaxed) != pimage;
+
+   }
+
+
+   struct opaque_copy_diagnostics
+   {
+      ::std::atomic<::u64> candidate_draws{0};
+      ::std::atomic<::u64> eligible_draws{0};
+      ::std::atomic<::u64> skipped_draws[(::u32)opaque_copy_candidate_skip_reason::count]{};
+      ::std::atomic<::u64> full_attempts{0};
+      ::std::atomic<::u64> full_successes{0};
+      ::std::atomic<::u64> full_fallbacks{0};
+      ::std::atomic<::u64> full_saved_pixels{0};
+      ::std::atomic<::u64> full_elapsed_nanoseconds{0};
+      ::std::atomic<::u64> mixed_attempts{0};
+      ::std::atomic<::u64> mixed_successes{0};
+      ::std::atomic<::u64> mixed_fallbacks{0};
+      ::std::atomic<::u64> mixed_draw_errors{0};
+      ::std::atomic<::u64> mixed_region_draws{0};
+      ::std::atomic<::u64> mixed_saved_pixels{0};
+      ::std::atomic<::u64> mixed_copy_nanoseconds{0};
+      ::std::atomic<::u64> mixed_blend_nanoseconds{0};
+      ::std::atomic<::u64> mixed_elapsed_nanoseconds{0};
+      ::std::atomic<const void *> last_image{nullptr};
+      ::std::atomic<::u32> last_page_unit{0};
+      ::std::atomic<float> last_page_scale{1.0f};
+      ::std::atomic<::i64> next_report_nanoseconds{0};
+   };
+
+
+   enum class opaque_copy_experiment_phase : int
+   {
+      not_started,
+      warmup,
+      optimized,
+      alpha_blend,
+      complete
+   };
+
+
+   enum class opaque_copy_experiment_kind : int
+   {
+      fully_opaque,
+      mixed_alpha
+   };
+
+
+   struct opaque_copy_experiment_bucket
+   {
+      ::u64 draws = 0;
+      ::u64 draw_errors = 0;
+      ::u64 optimized_draws = 0;
+      ::u64 fallback_draws = 0;
+      ::u64 source_pixels = 0;
+      ::u64 target_pixels = 0;
+      ::u64 potential_opaque_pixels = 0;
+      ::u64 opaque_copy_pixels = 0;
+      ::u64 blended_pixels = 0;
+      ::u64 elapsed_nanoseconds = 0;
+      ::i32 source_width = 0;
+      ::i32 source_height = 0;
+      ::i32 target_width = 0;
+      ::i32 target_height = 0;
+      ::i32 target_x = 0;
+      ::i32 target_y = 0;
+      bool dimensions_set = false;
+      bool dimensions_vary = false;
+   };
+
+
+   struct opaque_copy_experiment
+   {
+      ::parallelization::mutex mutex;
+      bool started = false;
+      opaque_copy_experiment_phase phase = opaque_copy_experiment_phase::not_started;
+      ::std::chrono::steady_clock::time_point start;
+      opaque_copy_experiment_bucket buckets[2][2]{};
+   };
+
+
+   opaque_copy_experiment & get_opaque_copy_experiment()
+   {
+
+      static opaque_copy_experiment s_experiment;
+      return s_experiment;
+
+   }
+
+
+   const char * opaque_copy_experiment_phase_name(opaque_copy_experiment_phase phase)
+   {
+
+      switch (phase)
+      {
+      case opaque_copy_experiment_phase::warmup: return "warmup";
+      case opaque_copy_experiment_phase::optimized: return "optimized";
+      case opaque_copy_experiment_phase::alpha_blend: return "alpha_blend";
+      case opaque_copy_experiment_phase::complete: return "complete";
+      default: return "not_started";
+      }
+
+   }
+
+
+   void report_opaque_copy_experiment_phase(opaque_copy_experiment & experiment,
+      opaque_copy_experiment_phase phase)
+   {
+
+      if (phase != opaque_copy_experiment_phase::optimized
+         && phase != opaque_copy_experiment_phase::alpha_blend)
+         return;
+
+      auto phaseIndex = phase == opaque_copy_experiment_phase::optimized ? 0 : 1;
+      for (int kindIndex = 0; kindIndex < 2; ++kindIndex)
+      {
+         const auto & bucket = experiment.buckets[phaseIndex][kindIndex];
+         informationf("FPS opaque experiment: phase=%s kind=%s draws=%llu optimized_draws=%llu fallback_draws=%llu draw_errors=%llu "
+            "source_pixels=%llu target_pixels=%llu potential_opaque_pixels=%llu opaque_copy_pixels=%llu blended_pixels=%llu "
+            "potential_opaque_pct=%.2f opaque_copy_pct=%.2f blended_pct=%.2f "
+            "total_ms=%.2f avg_ms=%.3f source=%dx%d target=%dx%d at=(%d,%d) dimensions_vary=%d",
+            opaque_copy_experiment_phase_name(phase), kindIndex == 0 ? "fully_opaque" : "mixed_alpha",
+            (unsigned long long)bucket.draws, (unsigned long long)bucket.optimized_draws,
+            (unsigned long long)bucket.fallback_draws, (unsigned long long)bucket.draw_errors,
+            (unsigned long long)bucket.source_pixels, (unsigned long long)bucket.target_pixels,
+            (unsigned long long)bucket.potential_opaque_pixels,
+            (unsigned long long)bucket.opaque_copy_pixels, (unsigned long long)bucket.blended_pixels,
+            bucket.target_pixels ? 100.0 * bucket.potential_opaque_pixels / bucket.target_pixels : 0.0,
+            bucket.target_pixels ? 100.0 * bucket.opaque_copy_pixels / bucket.target_pixels : 0.0,
+            bucket.target_pixels ? 100.0 * bucket.blended_pixels / bucket.target_pixels : 0.0,
+            (double)bucket.elapsed_nanoseconds / 1000000.0,
+            bucket.draws ? (double)bucket.elapsed_nanoseconds / 1000000.0 / bucket.draws : 0.0,
+            bucket.source_width, bucket.source_height, bucket.target_width, bucket.target_height,
+            bucket.target_x, bucket.target_y, (int)bucket.dimensions_vary);
+      }
+
+   }
+
+
+   opaque_copy_experiment_phase get_opaque_copy_experiment_phase(bool eligibleCandidate)
+   {
+
+      auto & experiment = get_opaque_copy_experiment();
+      ::std::lock_guard<::parallelization::mutex> lock(experiment.mutex);
+      auto now = ::std::chrono::steady_clock::now();
+      if (!experiment.started)
+      {
+         if (!eligibleCandidate)
+            return opaque_copy_experiment_phase::not_started;
+         experiment.started = true;
+         experiment.start = now;
+         experiment.phase = opaque_copy_experiment_phase::warmup;
+         informationf("FPS opaque experiment: warmup=5s optimized=20s alpha_blend=20s; timer starts on first eligible image draw");
+      }
+
+      auto elapsed = now - experiment.start;
+      auto nextPhase = elapsed < ::std::chrono::seconds(5)
+         ? opaque_copy_experiment_phase::warmup
+         : elapsed < ::std::chrono::seconds(25)
+            ? opaque_copy_experiment_phase::optimized
+            : elapsed < ::std::chrono::seconds(45)
+               ? opaque_copy_experiment_phase::alpha_blend
+               : opaque_copy_experiment_phase::complete;
+      if (nextPhase != experiment.phase)
+      {
+         report_opaque_copy_experiment_phase(experiment, experiment.phase);
+         experiment.phase = nextPhase;
+         informationf("FPS opaque experiment: phase=%s elapsed=%.2fs",
+            opaque_copy_experiment_phase_name(nextPhase),
+            ::std::chrono::duration<double>(elapsed).count());
+      }
+      return experiment.phase;
+
+   }
+
+
+   void note_opaque_copy_experiment_draw(opaque_copy_experiment_phase phase,
+      opaque_copy_experiment_kind kind, bool drawSucceeded, ::u64 sourcePixels,
+      ::u64 targetPixels, ::u64 potentialOpaquePixels, ::u64 opaqueCopyPixels, ::u64 blendedPixels,
+      ::u64 elapsedNanoseconds, ::i32 sourceWidth, ::i32 sourceHeight,
+      ::i32 targetWidth, ::i32 targetHeight, ::i32 targetX, ::i32 targetY)
+   {
+
+      if (phase != opaque_copy_experiment_phase::optimized
+         && phase != opaque_copy_experiment_phase::alpha_blend)
+         return;
+      auto & experiment = get_opaque_copy_experiment();
+      ::std::lock_guard<::parallelization::mutex> lock(experiment.mutex);
+      auto phaseIndex = phase == opaque_copy_experiment_phase::optimized ? 0 : 1;
+      auto kindIndex = kind == opaque_copy_experiment_kind::fully_opaque ? 0 : 1;
+      auto & bucket = experiment.buckets[phaseIndex][kindIndex];
+      ++bucket.draws;
+      if (!drawSucceeded) ++bucket.draw_errors;
+      if (opaqueCopyPixels) ++bucket.optimized_draws;
+      else if (phase == opaque_copy_experiment_phase::optimized) ++bucket.fallback_draws;
+      bucket.source_pixels += sourcePixels;
+      bucket.target_pixels += targetPixels;
+      bucket.potential_opaque_pixels += potentialOpaquePixels;
+      bucket.opaque_copy_pixels += opaqueCopyPixels;
+      bucket.blended_pixels += blendedPixels;
+      bucket.elapsed_nanoseconds += elapsedNanoseconds;
+      if (!bucket.dimensions_set)
+      {
+         bucket.source_width = sourceWidth;
+         bucket.source_height = sourceHeight;
+         bucket.target_width = targetWidth;
+         bucket.target_height = targetHeight;
+         bucket.target_x = targetX;
+         bucket.target_y = targetY;
+         bucket.dimensions_set = true;
+      }
+      else if (bucket.source_width != sourceWidth || bucket.source_height != sourceHeight
+         || bucket.target_width != targetWidth || bucket.target_height != targetHeight)
+      {
+         bucket.dimensions_vary = true;
+      }
+
+   }
+
+
+   opaque_copy_diagnostics & get_opaque_copy_diagnostics()
+   {
+
+      static opaque_copy_diagnostics s_diagnostics;
+      return s_diagnostics;
+
+   }
+
+
+   ::i64 opaque_copy_steady_nanoseconds()
+   {
+
+      return ::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+         ::std::chrono::steady_clock::now().time_since_epoch()).count();
+
+   }
+
+
+   void report_opaque_copy_diagnostics_if_due()
+   {
+
+      auto & diagnostics = get_opaque_copy_diagnostics();
+      auto now = opaque_copy_steady_nanoseconds();
+      auto next = diagnostics.next_report_nanoseconds.load(::std::memory_order_relaxed);
+      if (next == 0)
+      {
+         diagnostics.next_report_nanoseconds.compare_exchange_strong(
+            next, now + 2000000000, ::std::memory_order_relaxed);
+         return;
+      }
+      if (now < next || !diagnostics.next_report_nanoseconds.compare_exchange_strong(
+         next, now + 2000000000, ::std::memory_order_relaxed))
+         return;
+
+      auto candidateDraws = diagnostics.candidate_draws.exchange(0, ::std::memory_order_relaxed);
+      auto eligibleDraws = diagnostics.eligible_draws.exchange(0, ::std::memory_order_relaxed);
+      auto skipAlphaMode = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::alpha_mode].exchange(0, ::std::memory_order_relaxed);
+      auto skipPageUnit = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::page_unit].exchange(0, ::std::memory_order_relaxed);
+      auto skipPageScale = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::page_scale].exchange(0, ::std::memory_order_relaxed);
+      auto skipPageUnitAndScale = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::page_unit_and_scale].exchange(0, ::std::memory_order_relaxed);
+      auto skipDrawOptions = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::draw_options].exchange(0, ::std::memory_order_relaxed);
+      auto skipSourceRectangle = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::source_rectangle].exchange(0, ::std::memory_order_relaxed);
+      auto skipTargetSize = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::target_size].exchange(0, ::std::memory_order_relaxed);
+      auto skipTargetPlacement = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::target_placement].exchange(0, ::std::memory_order_relaxed);
+      auto skipBitmapSize = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::bitmap_size].exchange(0, ::std::memory_order_relaxed);
+      auto skipTransform = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::transform].exchange(0, ::std::memory_order_relaxed);
+      auto skipCompositingMode = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::compositing_mode].exchange(0, ::std::memory_order_relaxed);
+      auto skipAlphaRegions = diagnostics.skipped_draws[(::u32)opaque_copy_candidate_skip_reason::alpha_regions].exchange(0, ::std::memory_order_relaxed);
+      auto fullAttempts = diagnostics.full_attempts.exchange(0, ::std::memory_order_relaxed);
+      auto fullSuccesses = diagnostics.full_successes.exchange(0, ::std::memory_order_relaxed);
+      auto fullFallbacks = diagnostics.full_fallbacks.exchange(0, ::std::memory_order_relaxed);
+      auto fullSavedPixels = diagnostics.full_saved_pixels.exchange(0, ::std::memory_order_relaxed);
+      auto fullElapsedNanoseconds = diagnostics.full_elapsed_nanoseconds.exchange(0, ::std::memory_order_relaxed);
+      auto mixedAttempts = diagnostics.mixed_attempts.exchange(0, ::std::memory_order_relaxed);
+      auto mixedSuccesses = diagnostics.mixed_successes.exchange(0, ::std::memory_order_relaxed);
+      auto mixedFallbacks = diagnostics.mixed_fallbacks.exchange(0, ::std::memory_order_relaxed);
+      auto mixedDrawErrors = diagnostics.mixed_draw_errors.exchange(0, ::std::memory_order_relaxed);
+      auto mixedRegionDraws = diagnostics.mixed_region_draws.exchange(0, ::std::memory_order_relaxed);
+      auto mixedSavedPixels = diagnostics.mixed_saved_pixels.exchange(0, ::std::memory_order_relaxed);
+      auto mixedCopyNanoseconds = diagnostics.mixed_copy_nanoseconds.exchange(0, ::std::memory_order_relaxed);
+      auto mixedBlendNanoseconds = diagnostics.mixed_blend_nanoseconds.exchange(0, ::std::memory_order_relaxed);
+      auto mixedElapsedNanoseconds = diagnostics.mixed_elapsed_nanoseconds.exchange(0, ::std::memory_order_relaxed);
+      if (candidateDraws || fullAttempts || mixedAttempts)
+      {
+         informationf("FPS opaque-copy: image=%p candidate_draws=%llu eligible_draws=%llu "
+            "skip(alpha_mode=%llu page_unit=%llu page_scale=%llu page_unit_and_scale=%llu draw_options=%llu source_rect=%llu target_size=%llu "
+            "target_placement=%llu bitmap_size=%llu transform=%llu compositing_mode=%llu alpha_regions=%llu) "
+            "page_unit_value=%u page_scale_value=%.6g "
+            "full_attempts=%llu full_success=%llu full_fallback=%llu full_saved_Mpx=%.3f full_total_ms=%.2f full_avg_ms=%.2f "
+            "mixed_attempts=%llu mixed_success=%llu mixed_fallback=%llu mixed_draw_errors=%llu "
+            "mixed_region_draws=%llu mixed_saved_Mpx=%.3f mixed_copy_ms=%.2f mixed_copy_avg_ms=%.2f "
+            "mixed_remainder_ms=%.2f mixed_remainder_avg_ms=%.2f mixed_total_ms=%.2f mixed_avg_ms=%.2f",
+            diagnostics.last_image.load(::std::memory_order_relaxed),
+            (unsigned long long)candidateDraws, (unsigned long long)eligibleDraws,
+            (unsigned long long)skipAlphaMode, (unsigned long long)skipPageUnit,
+            (unsigned long long)skipPageScale, (unsigned long long)skipPageUnitAndScale,
+            (unsigned long long)skipDrawOptions, (unsigned long long)skipSourceRectangle,
+            (unsigned long long)skipTargetSize, (unsigned long long)skipTargetPlacement,
+            (unsigned long long)skipBitmapSize, (unsigned long long)skipTransform,
+            (unsigned long long)skipCompositingMode, (unsigned long long)skipAlphaRegions,
+            diagnostics.last_page_unit.load(::std::memory_order_relaxed),
+            diagnostics.last_page_scale.load(::std::memory_order_relaxed),
+            (unsigned long long)fullAttempts, (unsigned long long)fullSuccesses,
+            (unsigned long long)fullFallbacks, (double)fullSavedPixels / 1000000.0,
+            (double)fullElapsedNanoseconds / 1000000.0,
+            fullAttempts ? (double)fullElapsedNanoseconds / 1000000.0 / fullAttempts : 0.0,
+            (unsigned long long)mixedAttempts, (unsigned long long)mixedSuccesses,
+            (unsigned long long)mixedFallbacks, (unsigned long long)mixedDrawErrors,
+            (unsigned long long)mixedRegionDraws, (double)mixedSavedPixels / 1000000.0,
+            (double)mixedCopyNanoseconds / 1000000.0,
+            mixedAttempts ? (double)mixedCopyNanoseconds / 1000000.0 / mixedAttempts : 0.0,
+            (double)mixedBlendNanoseconds / 1000000.0,
+            mixedAttempts ? (double)mixedBlendNanoseconds / 1000000.0 / mixedAttempts : 0.0,
+            (double)mixedElapsedNanoseconds / 1000000.0,
+            mixedAttempts ? (double)mixedElapsedNanoseconds / 1000000.0 / mixedAttempts : 0.0);
+      }
+
+   }
+
+
+   void note_opaque_copy_candidate_draw(const void * pimage,
+      opaque_copy_candidate_skip_reason skipReason, Gdiplus::Unit pageUnit,
+      Gdiplus::REAL pageScale)
+   {
+
+      auto & diagnostics = get_opaque_copy_diagnostics();
+      report_opaque_copy_diagnostics_if_due();
+      diagnostics.last_image.store(pimage, ::std::memory_order_relaxed);
+      if (skipReason == opaque_copy_candidate_skip_reason::page_unit
+         || skipReason == opaque_copy_candidate_skip_reason::page_scale
+         || skipReason == opaque_copy_candidate_skip_reason::page_unit_and_scale)
+      {
+         diagnostics.last_page_unit.store((::u32)pageUnit, ::std::memory_order_relaxed);
+         diagnostics.last_page_scale.store(pageScale, ::std::memory_order_relaxed);
+      }
+      diagnostics.candidate_draws.fetch_add(1, ::std::memory_order_relaxed);
+      if (skipReason == opaque_copy_candidate_skip_reason::eligible)
+         diagnostics.eligible_draws.fetch_add(1, ::std::memory_order_relaxed);
+      else
+         diagnostics.skipped_draws[(::u32)skipReason].fetch_add(1, ::std::memory_order_relaxed);
+
+   }
+
+
+   void report_dabzo5y_opaque_copy_candidate(const ::image::image * pimage,
+      opaque_copy_candidate_skip_reason skipReason, Gdiplus::Unit pageUnit,
+      Gdiplus::REAL pageScale, ::f64 xSrc, ::f64 ySrc, ::f64 nSrcWidth,
+      ::f64 nSrcHeight, ::f64 xDst, ::f64 yDst, ::f64 nDstWidth,
+      ::f64 nDstHeight)
+   {
+
+      static ::std::atomic<const void *> s_lastImage{nullptr};
+      if (!should_report_dabzo5y_image_once(pimage, s_lastImage))
+         return;
+
+      auto strProvenance = pimage->image_debug_provenance();
+      informationf("FPS DABZO5y opaque-copy candidate: image=%p reason=%s page_unit=%u page_scale=%.6g "
+         "source_size=%dx%d source_rect=(%.2f,%.2f,%.2f,%.2f) target_rect=(%.2f,%.2f,%.2f,%.2f) "
+         "cached_fully_opaque=%d provenance=%s",
+         pimage, opaque_copy_candidate_skip_reason_name(skipReason), (::u32)pageUnit,
+         (double)pageScale, pimage->width(), pimage->height(), xSrc, ySrc,
+         nSrcWidth, nSrcHeight, xDst, yDst, nDstWidth, nDstHeight,
+         (int)pimage->has_cached_fully_opaque_pixels(), strProvenance.c_str());
+
+   }
+
+
+   void report_dabzo5y_opaque_stretch(const ::image::image * pimage,
+      ::draw2d::enum_image_opacity_policy opacityPolicy, bool bStaticCacheCurrent,
+      bool bActiveGraphicsLease, bool bCacheLockAvailable, bool bCacheValid,
+      ::image::pixel_usage cachedPixelUsage, ::i32_size sizeCached, ::i32_point pointCached,
+      bool bActivePixmapLease,
+      const ::image::alpha_statistics & statistics,
+      bool bPreserveOpaqueStaticStretch, bool bUseEdgeExtendedSampling,
+      Gdiplus::Status wrapStatus, Gdiplus::Status drawStatus,
+      Gdiplus::Unit pageUnit, Gdiplus::REAL pageScale,
+      ::f64 xSrc, ::f64 ySrc, ::f64 nSrcWidth, ::f64 nSrcHeight,
+      ::f64 xDst, ::f64 yDst, ::f64 nDstWidth, ::f64 nDstHeight)
+   {
+
+      auto strProvenance = pimage->image_debug_provenance();
+      informationf("FPS DABZO5y opaque-stretch: image=%p policy=%u pixel_usage=%u "
+         "statistics_current=%d active_graphics_lease=%d statistics_lock_available=%d "
+         "cache_valid=%d cached_usage=%u cached_size=%dx%d cached_origin=(%d,%d) current_origin=(%d,%d) "
+         "active_pixmap_lease=%d "
+         "source_fully_opaque=%d source_alpha=(opaque:%llu translucent:%llu transparent:%llu) "
+         "edge_sampling_eligible=%d wrap_status=%d used_edge_sampling=%d draw_status=%d "
+         "page_unit=%u page_scale=%.6g source_size=%dx%d source_rect=(%.2f,%.2f,%.2f,%.2f) "
+         "target_rect=(%.2f,%.2f,%.2f,%.2f) provenance=%s",
+         pimage, (::u32)opacityPolicy, (::u32)pimage->get_pixel_usage(),
+         (int)bStaticCacheCurrent, (int)bActiveGraphicsLease,
+         (int)bCacheLockAvailable, (int)bCacheValid, (::u32)cachedPixelUsage,
+         sizeCached.cx, sizeCached.cy, pointCached.x, pointCached.y,
+         pimage->m_point.x, pimage->m_point.y,
+         (int)bActivePixmapLease,
+         (int)statistics.fully_opaque(),
+         (unsigned long long)statistics.opaque,
+         (unsigned long long)statistics.translucent,
+         (unsigned long long)statistics.transparent,
+         (int)bPreserveOpaqueStaticStretch, (int)wrapStatus,
+         (int)bUseEdgeExtendedSampling, (int)drawStatus, (::u32)pageUnit,
+         (double)pageScale, pimage->width(), pimage->height(), xSrc, ySrc,
+         nSrcWidth, nSrcHeight, xDst, yDst, nDstWidth, nDstHeight,
+         strProvenance.c_str());
+
+   }
+
+
+   void note_full_opaque_copy(bool succeeded, ::u64 savedPixels, ::u64 elapsedNanoseconds)
+   {
+
+      auto & diagnostics = get_opaque_copy_diagnostics();
+      diagnostics.full_attempts.fetch_add(1, ::std::memory_order_relaxed);
+      (succeeded ? diagnostics.full_successes : diagnostics.full_fallbacks)
+         .fetch_add(1, ::std::memory_order_relaxed);
+      diagnostics.full_saved_pixels.fetch_add(savedPixels, ::std::memory_order_relaxed);
+      diagnostics.full_elapsed_nanoseconds.fetch_add(elapsedNanoseconds, ::std::memory_order_relaxed);
+      report_opaque_copy_diagnostics_if_due();
+
+   }
+
+
+   void note_mixed_opaque_copy(bool succeeded, bool drawError, ::u64 savedPixels,
+      ::u64 regionDraws, ::u64 copyNanoseconds, ::u64 blendNanoseconds,
+      ::u64 elapsedNanoseconds)
+   {
+
+      auto & diagnostics = get_opaque_copy_diagnostics();
+      diagnostics.mixed_attempts.fetch_add(1, ::std::memory_order_relaxed);
+      if (succeeded) diagnostics.mixed_successes.fetch_add(1, ::std::memory_order_relaxed);
+      else if (drawError) diagnostics.mixed_draw_errors.fetch_add(1, ::std::memory_order_relaxed);
+      else diagnostics.mixed_fallbacks.fetch_add(1, ::std::memory_order_relaxed);
+      diagnostics.mixed_saved_pixels.fetch_add(savedPixels, ::std::memory_order_relaxed);
+      diagnostics.mixed_region_draws.fetch_add(regionDraws, ::std::memory_order_relaxed);
+      diagnostics.mixed_copy_nanoseconds.fetch_add(copyNanoseconds, ::std::memory_order_relaxed);
+      diagnostics.mixed_blend_nanoseconds.fetch_add(blendNanoseconds, ::std::memory_order_relaxed);
+      diagnostics.mixed_elapsed_nanoseconds.fetch_add(elapsedNanoseconds, ::std::memory_order_relaxed);
+      report_opaque_copy_diagnostics_if_due();
+
+   }
+
+
+} // namespace
+#endif
 
 
 
@@ -364,6 +883,15 @@ namespace draw2d_gdiplus
 
       auto pgdiplusgraphics = new Gdiplus::Graphics(pgdiplusbitmap);
 
+      // GDI+ starts image-backed Graphics in UnitDisplay; draw2d coordinates
+      // for this bitmap target are pixel coordinates.
+      auto pageUnitStatus = pgdiplusgraphics->SetPageUnit(Gdiplus::UnitPixel);
+      if (pageUnitStatus != Gdiplus::Ok)
+      {
+         warningf("GDI+ failed to set pixel page units for bitmap graphics: status=%d",
+            (int)pageUnitStatus);
+      }
+
       m_sizeTotal2 = m_pimageTarget->m_pdraw2dbitmap->size();
 
       m_pgdiplusgraphics = ::as_pointer(pgdiplusgraphics);
@@ -419,6 +947,13 @@ namespace draw2d_gdiplus
       m_pimageTarget->m_pdraw2dbitmap = pbitmapNew;
 
       auto pgdiplusgraphics = new Gdiplus::Graphics(pgdiplusbitmap);
+
+      auto pageUnitStatus = pgdiplusgraphics->SetPageUnit(Gdiplus::UnitPixel);
+      if (pageUnitStatus != Gdiplus::Ok)
+      {
+         warningf("GDI+ failed to set pixel page units for memory graphics: status=%d",
+            (int)pageUnitStatus);
+      }
 
       m_sizeTotal2 = m_pimageTarget->m_pdraw2dbitmap->size();
 
@@ -521,6 +1056,49 @@ namespace draw2d_gdiplus
 
    }
 
+
+
+   void graphics::begin_draw(bool bExternalRendering, ::user::interaction * puserinteraction,
+      const ::i32_rectangle & rectangleFrame, ::image::image * pimageTarget)
+   {
+
+      ::draw2d::graphics::begin_draw(bExternalRendering, puserinteraction, rectangleFrame, pimageTarget);
+
+#if FPS_DEBUG
+      if (!bExternalRendering && m_pgraphicsbufferitem && m_pgdiplusgraphics
+         && (!m_bReportedFrameGeometry || m_rectangleLastReportedFrame != rectangleFrame))
+      {
+
+         Gdiplus::Matrix transform;
+         Gdiplus::REAL elements[6]{};
+         Gdiplus::RectF clip{}, visibleClip{};
+         auto transformStatus = m_pgdiplusgraphics->GetTransform(&transform);
+         auto elementsStatus = transform.GetElements(elements);
+         auto clipStatus = m_pgdiplusgraphics->GetClipBounds(&clip);
+         auto visibleClipStatus = m_pgdiplusgraphics->GetVisibleClipBounds(&visibleClip);
+
+         informationf("Restore drawing trace: frame=(%d,%d,%d,%d) target=(%.1f,%.1f,%.1f,%.1f) "
+            "raw=(%.1f,%.1f) transform=(%.3f,%.3f,%.3f,%.3f,%.1f,%.1f) "
+            "clip=(%.1f,%.1f,%.1f,%.1f) visible_clip=(%.1f,%.1f,%.1f,%.1f) "
+            "status=(%d,%d,%d,%d)",
+            rectangleFrame.left, rectangleFrame.top, rectangleFrame.right, rectangleFrame.bottom,
+            (double)m_pointTarget.x, (double)m_pointTarget.y,
+            (double)m_sizeTarget.cx, (double)m_sizeTarget.cy,
+            (double)m_sizeTotal2.cx, (double)m_sizeTotal2.cy,
+            (double)elements[0], (double)elements[1], (double)elements[2],
+            (double)elements[3], (double)elements[4], (double)elements[5],
+            (double)clip.X, (double)clip.Y, (double)clip.Width, (double)clip.Height,
+            (double)visibleClip.X, (double)visibleClip.Y,
+            (double)visibleClip.Width, (double)visibleClip.Height,
+            (int)transformStatus, (int)elementsStatus, (int)clipStatus, (int)visibleClipStatus);
+
+         m_rectangleLastReportedFrame = rectangleFrame;
+         m_bReportedFrameGeometry = true;
+
+      }
+#endif
+
+   }
 
 
    ::i32 graphics::GetDeviceCaps(::i32 nIndex)
@@ -2047,6 +2625,355 @@ namespace draw2d_gdiplus
       Gdiplus::RectF rectfTarget((Gdiplus::REAL)xDst, (Gdiplus::REAL)yDst, (Gdiplus::REAL)nDstWidth, (Gdiplus::REAL)nDstHeight);
 
       Gdiplus::Status ret = Gdiplus::Status::GenericError;
+      // Requesting all frames only changes semantics when the source actually
+      // contains multiple frames. A one-frame image is safe for static paths.
+      auto bDrawsAllFramesOfMultiFrameImage =
+         imagedrawing.m_bDoForAllFrames && pimageSource->get_image_count() > 1;
+
+#if FPS_DEBUG
+      auto fpsExperimentPhase = opaque_copy_experiment_phase::not_started;
+      auto fpsExperimentKind = opaque_copy_experiment_kind::fully_opaque;
+      bool bFpsExperimentEligible = false;
+      bool bFpsExperimentForceAlphaBlend = false;
+      bool bFpsExperimentRecorded = false;
+      ::u64 fpsExperimentOpaquePixels = 0;
+      auto fpsExperimentOperationStart = ::std::chrono::steady_clock::now();
+      if ((::u64)pimageSource->width() * pimageSource->height() >= 65536
+         && pimageSource->has_cached_opaque_optimization_candidate())
+      {
+         auto pageUnit = m_pgdiplusgraphics->GetPageUnit();
+         auto pageScale = m_pgdiplusgraphics->GetPageScale();
+         auto skipReason = opaque_copy_candidate_skip_reason::eligible;
+         if (alpha_mode() != ::draw2d::e_alpha_mode_blend)
+            skipReason = opaque_copy_candidate_skip_reason::alpha_mode;
+         else if (pageUnit != Gdiplus::UnitPixel && pageScale != 1.0f)
+            skipReason = opaque_copy_candidate_skip_reason::page_unit_and_scale;
+         else if (pageUnit != Gdiplus::UnitPixel)
+            skipReason = opaque_copy_candidate_skip_reason::page_unit;
+         else if (pageScale != 1.0f)
+            skipReason = opaque_copy_candidate_skip_reason::page_scale;
+         else if (bDrawsAllFramesOfMultiFrameImage
+            || imagedrawing.is_matrix_filter() || !imagedrawing.opacity().is_opaque())
+            skipReason = opaque_copy_candidate_skip_reason::draw_options;
+         else if (xSrc != 0 || ySrc != 0 || !pimageSource->m_point.is_null()
+            || nSrcWidth <= 0 || nSrcHeight <= 0
+            || nSrcWidth != pimageSource->width() || nSrcHeight != pimageSource->height())
+            skipReason = opaque_copy_candidate_skip_reason::source_rectangle;
+         else if (nDstWidth != nSrcWidth || nDstHeight != nSrcHeight)
+            skipReason = opaque_copy_candidate_skip_reason::target_size;
+         else if (xDst < INT_MIN || xDst > INT_MAX || yDst < INT_MIN || yDst > INT_MAX
+            || xDst + nDstWidth > INT_MAX || yDst + nDstHeight > INT_MAX
+            || xDst != (INT)xDst || yDst != (INT)yDst)
+            skipReason = opaque_copy_candidate_skip_reason::target_placement;
+         else if (pgdiplusbitmapSource->GetWidth() != pimageSource->width()
+            || pgdiplusbitmapSource->GetHeight() != pimageSource->height())
+            skipReason = opaque_copy_candidate_skip_reason::bitmap_size;
+         else
+         {
+            Gdiplus::Matrix transform;
+            Gdiplus::REAL elements[6]{};
+            if (m_pgdiplusgraphics->GetTransform(&transform) != Gdiplus::Ok
+               || transform.GetElements(elements) != Gdiplus::Ok
+               || elements[0] != 1 || elements[1] != 0 || elements[2] != 0 || elements[3] != 1
+               || elements[4] < INT_MIN || elements[4] >= INT_MAX
+               || elements[5] < INT_MIN || elements[5] >= INT_MAX
+               || elements[4] != (INT)elements[4] || elements[5] != (INT)elements[5])
+               skipReason = opaque_copy_candidate_skip_reason::transform;
+            else if (!pimageSource->has_cached_fully_opaque_pixels())
+            {
+               if (m_pgdiplusgraphics->GetCompositingMode() != Gdiplus::CompositingModeSourceOver)
+                  skipReason = opaque_copy_candidate_skip_reason::compositing_mode;
+               else
+               {
+                  ::image::alpha_statistics statistics;
+                  if (!pimageSource->get_cached_opaque_region_statistics(statistics))
+                     skipReason = opaque_copy_candidate_skip_reason::alpha_regions;
+               }
+            }
+         }
+         if (skipReason == opaque_copy_candidate_skip_reason::eligible)
+         {
+            if (pimageSource->has_cached_fully_opaque_pixels())
+            {
+               bFpsExperimentEligible = true;
+               fpsExperimentKind = opaque_copy_experiment_kind::fully_opaque;
+               fpsExperimentOpaquePixels = (::u64)pimageSource->width() * pimageSource->height();
+            }
+            else
+            {
+               ::image::alpha_statistics statistics;
+               if (pimageSource->get_cached_opaque_region_statistics(statistics))
+               {
+                  bFpsExperimentEligible = true;
+                  fpsExperimentKind = opaque_copy_experiment_kind::mixed_alpha;
+                  fpsExperimentOpaquePixels = statistics.opaque_region_pixels;
+               }
+            }
+            fpsExperimentPhase = get_opaque_copy_experiment_phase(bFpsExperimentEligible);
+            bFpsExperimentForceAlphaBlend = bFpsExperimentEligible
+               && fpsExperimentPhase == opaque_copy_experiment_phase::alpha_blend;
+            fpsExperimentOperationStart = ::std::chrono::steady_clock::now();
+         }
+         note_opaque_copy_candidate_draw(pimageSource, skipReason, pageUnit, pageScale);
+         report_dabzo5y_opaque_copy_candidate(pimageSource, skipReason,
+            pageUnit, pageScale, xSrc, ySrc, nSrcWidth, nSrcHeight,
+            xDst, yDst, nDstWidth, nDstHeight);
+      }
+#endif
+
+      // A proven opaque static source needs no destination alpha blending.
+      // Restrict this path to a native-size, pixel-aligned full image. Scaling,
+      // rotation, filters, opacity and mixed-alpha sources retain the old path.
+#if FPS_DEBUG
+      if (!bFpsExperimentForceAlphaBlend &&
+#else
+      if (
+#endif
+         alpha_mode() == ::draw2d::e_alpha_mode_blend
+         && m_pgdiplusgraphics->GetPageUnit() == Gdiplus::UnitPixel
+         && m_pgdiplusgraphics->GetPageScale() == 1.0f
+         && !bDrawsAllFramesOfMultiFrameImage
+         && !imagedrawing.is_matrix_filter() && imagedrawing.opacity().is_opaque()
+         && xSrc == 0 && ySrc == 0 && pimageSource->m_point.is_null()
+         && nSrcWidth > 0 && nSrcHeight > 0
+         && nSrcWidth == pimageSource->width() && nSrcHeight == pimageSource->height()
+         && nDstWidth == nSrcWidth && nDstHeight == nSrcHeight
+         && (::u64)pimageSource->width() * pimageSource->height() >= 65536
+         && xDst >= INT_MIN && xDst <= INT_MAX && yDst >= INT_MIN && yDst <= INT_MAX
+         && xDst + nDstWidth <= INT_MAX && yDst + nDstHeight <= INT_MAX
+         && xDst == (INT)xDst && yDst == (INT)yDst
+         && pgdiplusbitmapSource->GetWidth() == pimageSource->width()
+         && pgdiplusbitmapSource->GetHeight() == pimageSource->height()
+         && pimageSource->has_cached_fully_opaque_pixels())
+      {
+#if FPS_DEBUG
+         auto timeFullOpaqueCopyStart = ::std::chrono::steady_clock::now();
+         bool bFullOpaqueCopySucceeded = false;
+#endif
+         Gdiplus::Matrix transform;
+         Gdiplus::REAL elements[6];
+         if (m_pgdiplusgraphics->GetTransform(&transform) == Gdiplus::Ok
+            && transform.GetElements(elements) == Gdiplus::Ok
+            && elements[0] == 1 && elements[1] == 0 && elements[2] == 0 && elements[3] == 1
+            && elements[4] >= INT_MIN && elements[4] < INT_MAX
+            && elements[5] >= INT_MIN && elements[5] < INT_MAX
+            && elements[4] == (INT)elements[4] && elements[5] == (INT)elements[5])
+         {
+            auto previousMode = m_pgdiplusgraphics->GetCompositingMode();
+            if (m_pgdiplusgraphics->SetCompositingMode(Gdiplus::CompositingModeSourceCopy) == Gdiplus::Ok)
+            {
+               auto status = m_pgdiplusgraphics->DrawImage(pgdiplusbitmapSource,
+                  Gdiplus::Rect((INT)xDst, (INT)yDst, (INT)nSrcWidth, (INT)nSrcHeight),
+                  0, 0, (INT)nSrcWidth, (INT)nSrcHeight, Gdiplus::UnitPixel);
+               m_pgdiplusgraphics->SetCompositingMode(previousMode);
+               if (status == Gdiplus::Ok)
+               {
+#if FPS_DEBUG
+                  bFullOpaqueCopySucceeded = true;
+#else
+                  return;
+#endif
+               }
+            }
+         }
+#if FPS_DEBUG
+         auto fullElapsedNanoseconds = (::u64)::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+            ::std::chrono::steady_clock::now() - timeFullOpaqueCopyStart).count();
+         auto fullSavedPixels = bFullOpaqueCopySucceeded
+            ? (::u64)pimageSource->width() * pimageSource->height() : 0;
+         note_full_opaque_copy(bFullOpaqueCopySucceeded, fullSavedPixels, fullElapsedNanoseconds);
+         if (bFullOpaqueCopySucceeded)
+         {
+            if (bFpsExperimentEligible
+               && fpsExperimentPhase == opaque_copy_experiment_phase::optimized)
+            {
+               auto targetPixels = (::u64)nDstWidth * (::u64)nDstHeight;
+               note_opaque_copy_experiment_draw(fpsExperimentPhase, fpsExperimentKind,
+                  true, (::u64)pimageSource->width() * pimageSource->height(), targetPixels,
+                  fpsExperimentOpaquePixels, fullSavedPixels, 0,
+                  (::u64)::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+                     ::std::chrono::steady_clock::now() - fpsExperimentOperationStart).count(),
+                  pimageSource->width(), pimageSource->height(), (INT)nDstWidth,
+                  (INT)nDstHeight, (INT)xDst, (INT)yDst);
+               bFpsExperimentRecorded = true;
+            }
+            return;
+         }
+#endif
+      }
+
+      // A mixed static source can still avoid blending over large regions
+      // whose alpha statistics prove every source pixel is opaque. Keep this
+      // limited to the same exact pixel-to-pixel transform as the all-opaque
+      // path; scaled or filtered draws can sample translucent pixels across
+      // an opaque-region boundary.
+#if FPS_DEBUG
+      if (!bFpsExperimentForceAlphaBlend &&
+#else
+      if (
+#endif
+         alpha_mode() == ::draw2d::e_alpha_mode_blend
+         && m_pgdiplusgraphics->GetPageUnit() == Gdiplus::UnitPixel
+         && m_pgdiplusgraphics->GetPageScale() == 1.0f
+         && m_pgdiplusgraphics->GetCompositingMode() == Gdiplus::CompositingModeSourceOver
+         && !bDrawsAllFramesOfMultiFrameImage
+         && !imagedrawing.is_matrix_filter() && imagedrawing.opacity().is_opaque()
+         && xSrc == 0 && ySrc == 0 && pimageSource->m_point.is_null()
+         && nSrcWidth > 0 && nSrcHeight > 0
+         && nSrcWidth == pimageSource->width() && nSrcHeight == pimageSource->height()
+         && nDstWidth == nSrcWidth && nDstHeight == nSrcHeight
+         && (::u64)pimageSource->width() * pimageSource->height() >= 65536
+         && xDst >= INT_MIN && xDst <= INT_MAX && yDst >= INT_MIN && yDst <= INT_MAX
+         && xDst + nDstWidth <= INT_MAX && yDst + nDstHeight <= INT_MAX
+         && xDst == (INT)xDst && yDst == (INT)yDst
+         && pgdiplusbitmapSource->GetWidth() == pimageSource->width()
+         && pgdiplusbitmapSource->GetHeight() == pimageSource->height())
+      {
+         Gdiplus::Matrix transform;
+         Gdiplus::REAL elements[6];
+         if (m_pgdiplusgraphics->GetTransform(&transform) == Gdiplus::Ok
+            && transform.GetElements(elements) == Gdiplus::Ok
+            && elements[0] == 1 && elements[1] == 0 && elements[2] == 0 && elements[3] == 1
+            && elements[4] >= INT_MIN && elements[4] < INT_MAX
+            && elements[5] >= INT_MIN && elements[5] < INT_MAX
+            && elements[4] == (INT)elements[4] && elements[5] == (INT)elements[5])
+         {
+            ::image::alpha_statistics statistics;
+#if FPS_DEBUG
+            auto timeMixedCandidateStart = ::std::chrono::steady_clock::now();
+#endif
+            if (pimageSource->get_cached_opaque_region_statistics(statistics))
+            {
+#if FPS_DEBUG
+               auto timeMixedCopyStart = timeMixedCandidateStart;
+               ::u64 mixedCopyNanoseconds = 0;
+               ::u64 mixedRegionDraws = 0;
+#endif
+               Gdiplus::Region blendedRegion(Gdiplus::Rect(
+                  (INT)xDst, (INT)yDst, (INT)nDstWidth, (INT)nDstHeight));
+               bool bRegionReady = blendedRegion.GetLastStatus() == Gdiplus::Ok;
+               for (::collection::index i = 0; bRegionReady
+                  && i < statistics.opaque_regions.get_count(); ++i)
+               {
+                  const auto & opaque = statistics.opaque_regions.element_at(i);
+                  Gdiplus::Rect rectangleOpaqueDestination(
+                     (INT)xDst + opaque.left, (INT)yDst + opaque.top,
+                     opaque.width(), opaque.height());
+                  bRegionReady = blendedRegion.Exclude(rectangleOpaqueDestination) == Gdiplus::Ok;
+               }
+
+               if (bRegionReady)
+               {
+                  auto previousMode = m_pgdiplusgraphics->GetCompositingMode();
+                  auto savedState = m_pgdiplusgraphics->Save();
+                  if (savedState != 0
+                     && m_pgdiplusgraphics->SetCompositingMode(Gdiplus::CompositingModeSourceCopy) == Gdiplus::Ok)
+                  {
+                     bool bOpaqueCopiesSucceeded = true;
+                     for (::collection::index i = 0; bOpaqueCopiesSucceeded
+                        && i < statistics.opaque_regions.get_count(); ++i)
+                     {
+                        const auto & opaque = statistics.opaque_regions.element_at(i);
+#if FPS_DEBUG
+                        auto timeRegionCopyStart = ::std::chrono::steady_clock::now();
+#endif
+                        auto status = m_pgdiplusgraphics->DrawImage(pgdiplusbitmapSource,
+                           Gdiplus::Rect((INT)xDst + opaque.left, (INT)yDst + opaque.top,
+                              opaque.width(), opaque.height()),
+                           opaque.left, opaque.top, opaque.width(), opaque.height(), Gdiplus::UnitPixel);
+#if FPS_DEBUG
+                        mixedCopyNanoseconds += (::u64)::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+                           ::std::chrono::steady_clock::now() - timeRegionCopyStart).count();
+                        ++mixedRegionDraws;
+#endif
+                        bOpaqueCopiesSucceeded = status == Gdiplus::Ok;
+                     }
+
+                     if (bOpaqueCopiesSucceeded
+                        && m_pgdiplusgraphics->SetCompositingMode(previousMode) == Gdiplus::Ok
+                        && m_pgdiplusgraphics->SetClip(&blendedRegion, Gdiplus::CombineModeIntersect) == Gdiplus::Ok)
+                     {
+#if FPS_DEBUG
+                        auto timeMixedBlendStart = ::std::chrono::steady_clock::now();
+#endif
+                        auto status = m_pgdiplusgraphics->DrawImage(pgdiplusbitmapSource,
+                           Gdiplus::Rect((INT)xDst, (INT)yDst, (INT)nDstWidth, (INT)nDstHeight),
+                           0, 0, (INT)nSrcWidth, (INT)nSrcHeight, Gdiplus::UnitPixel);
+#if FPS_DEBUG
+                        auto mixedBlendNanoseconds = (::u64)::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+                           ::std::chrono::steady_clock::now() - timeMixedBlendStart).count();
+#endif
+                        m_pgdiplusgraphics->Restore(savedState);
+                        // Do not retry the full blended draw if GDI+ reports an
+                        // error here: it does not promise that a failed draw
+                        // left the destination untouched, so retrying could
+                        // blend some translucent pixels twice. A later frame
+                        // can redraw the image normally.
+#if FPS_DEBUG
+                        auto bMixedDrawSucceeded = status == Gdiplus::Ok;
+                        auto mixedElapsedNanoseconds = (::u64)::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+                           ::std::chrono::steady_clock::now() - timeMixedCopyStart).count();
+                        auto mixedSavedPixels = bMixedDrawSucceeded ? statistics.opaque_region_pixels : 0;
+                        note_mixed_opaque_copy(bMixedDrawSucceeded, !bMixedDrawSucceeded,
+                           mixedSavedPixels, mixedRegionDraws, mixedCopyNanoseconds,
+                           mixedBlendNanoseconds, mixedElapsedNanoseconds);
+                        if (bFpsExperimentEligible
+                           && fpsExperimentPhase == opaque_copy_experiment_phase::optimized)
+                        {
+                           auto targetPixels = (::u64)nDstWidth * (::u64)nDstHeight;
+                           auto blendedPixels = bMixedDrawSucceeded
+                              ? targetPixels - (mixedSavedPixels > targetPixels ? targetPixels : mixedSavedPixels)
+                              : targetPixels;
+                           note_opaque_copy_experiment_draw(fpsExperimentPhase, fpsExperimentKind,
+                              bMixedDrawSucceeded, (::u64)pimageSource->width() * pimageSource->height(),
+                              targetPixels, fpsExperimentOpaquePixels, mixedSavedPixels, blendedPixels,
+                              (::u64)::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+                                 ::std::chrono::steady_clock::now() - fpsExperimentOperationStart).count(),
+                              pimageSource->width(), pimageSource->height(), (INT)nDstWidth,
+                              (INT)nDstHeight, (INT)xDst, (INT)yDst);
+                           bFpsExperimentRecorded = true;
+                        }
+#endif
+                        (void)status;
+                        return;
+                     }
+                     else
+                     {
+                        m_pgdiplusgraphics->Restore(savedState);
+#if FPS_DEBUG
+                        auto mixedElapsedNanoseconds = (::u64)::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+                           ::std::chrono::steady_clock::now() - timeMixedCopyStart).count();
+                        note_mixed_opaque_copy(false, false, 0, mixedRegionDraws,
+                           mixedCopyNanoseconds, 0, mixedElapsedNanoseconds);
+#endif
+                        // No blended draw has happened yet. A full SourceOver
+                        // fallback safely overwrites any opaque regions copied
+                        // before a later region failed.
+                     }
+                  }
+                  else
+                  {
+                     if (savedState != 0) m_pgdiplusgraphics->Restore(savedState);
+#if FPS_DEBUG
+                     auto mixedElapsedNanoseconds = (::u64)::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+                        ::std::chrono::steady_clock::now() - timeMixedCopyStart).count();
+                     note_mixed_opaque_copy(false, false, 0, mixedRegionDraws,
+                        mixedCopyNanoseconds, 0, mixedElapsedNanoseconds);
+#endif
+                  }
+               }
+#if FPS_DEBUG
+               else
+               {
+                  auto mixedElapsedNanoseconds = (::u64)::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+                     ::std::chrono::steady_clock::now() - timeMixedCopyStart).count();
+                  note_mixed_opaque_copy(false, false, 0, mixedRegionDraws,
+                     mixedCopyNanoseconds, 0, mixedElapsedNanoseconds);
+               }
+#endif
+            }
+         }
+      }
 
       if (m_bUseImageMipMapsOrResizedImages)
       {
@@ -2322,9 +3249,125 @@ namespace draw2d_gdiplus
          else
          {
 
-            ret = m_pgdiplusgraphics->DrawImage(pgdiplusbitmapSource, rectfTarget,
-               (Gdiplus::REAL)xSrc, (Gdiplus::REAL)ySrc,
-               (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight, Gdiplus::UnitPixel);
+            auto opacityPolicy = get_effective_image_opacity_policy();
+#if FPS_DEBUG
+            static ::std::atomic<const void *> s_lastDabzo5yStretchImage{nullptr};
+            auto bReportDabzo5yStretch = should_report_dabzo5y_image_once(
+               pimageSource, s_lastDabzo5yStretchImage);
+            ::image::alpha_statistics sourceStatistics;
+            bool bStaticCacheCurrent = false;
+            bool bActiveGraphicsLease = pimageSource->has_active_destination_graphics_lease();
+            bool bCacheLockAvailable = false;
+            bool bCacheValid = false;
+            ::image::pixel_usage cachedPixelUsage = ::image::pixel_usage::unknown;
+            ::i32_size cachedSize;
+            ::i32_point pointCached;
+            bool bActivePixmapLease = false;
+            if (bReportDabzo5yStretch)
+            {
+               ::std::unique_lock<::std::recursive_mutex> statisticsLock(
+                  pimageSource->m_mutexAlphaStatistics, ::std::try_to_lock);
+               bCacheLockAvailable = statisticsLock.owns_lock();
+               if (bCacheLockAvailable)
+               {
+                  bActivePixmapLease = pimageSource->m_pimagepixmaplease != nullptr;
+                  const auto & cache = pimageSource->m_alphastatisticscache;
+                  bCacheValid = cache.valid;
+                  cachedPixelUsage = cache.usage;
+                  cachedSize = cache.statistics.size;
+                  pointCached = cache.statistics.origin;
+                  bStaticCacheCurrent = cachedPixelUsage == ::image::pixel_usage::static_source
+                     && bCacheValid && !bActiveGraphicsLease
+                     && !bActivePixmapLease && cache.statistics.size == pimageSource->size()
+                     && cache.statistics.origin == pimageSource->m_point;
+                  if (bStaticCacheCurrent)
+                     sourceStatistics = cache.statistics;
+               }
+            }
+#endif
+            auto bPreserveOpaqueStaticStretch =
+               opacityPolicy == ::draw2d::e_image_opacity_policy_preserve_static_opaque
+               && pimageSource->has_cached_fully_opaque_pixels()
+               && !bDrawsAllFramesOfMultiFrameImage
+               && !imagedrawing.is_matrix_filter()
+               && imagedrawing.opacity().is_opaque()
+               && xSrc == 0 && ySrc == 0 && pimageSource->m_point.is_null()
+               && nSrcWidth == pimageSource->width()
+               && nSrcHeight == pimageSource->height()
+               && nDstWidth > 0 && nDstHeight > 0
+               && (nDstWidth != nSrcWidth || nDstHeight != nSrcHeight);
+
+            Gdiplus::ImageAttributes imageattributes;
+            auto wrapStatus = Gdiplus::Status::GenericError;
+            bool bUseEdgeExtendedSampling = bPreserveOpaqueStaticStretch
+               && (wrapStatus = imageattributes.SetWrapMode(Gdiplus::WrapModeTileFlipXY)) == Gdiplus::Ok;
+#if FPS_DEBUG
+            bool bFpsExperimentAlphaBlendReady = true;
+            bool bFpsExperimentRestoreCompositingMode = false;
+            auto fpsExperimentPreviousCompositingMode = m_pgdiplusgraphics->GetCompositingMode();
+            if (bFpsExperimentForceAlphaBlend
+               && fpsExperimentPreviousCompositingMode != Gdiplus::CompositingModeSourceOver)
+            {
+               if (m_pgdiplusgraphics->SetCompositingMode(Gdiplus::CompositingModeSourceOver) == Gdiplus::Ok)
+                  bFpsExperimentRestoreCompositingMode = true;
+               else
+               {
+                  bFpsExperimentAlphaBlendReady = false;
+                  static ::std::atomic<bool> s_reportedAlphaBlendSetupFailure{false};
+                  if (!s_reportedAlphaBlendSetupFailure.exchange(true, ::std::memory_order_relaxed))
+                     informationf("FPS opaque experiment: failed to select GDI+ SourceOver for alpha-blend baseline");
+               }
+            }
+#endif
+
+            if (bUseEdgeExtendedSampling)
+            {
+
+               // Mirroring the outer source pixels gives the resampler opaque
+               // edge samples instead of transparent samples beyond the image.
+               ret = m_pgdiplusgraphics->DrawImage(pgdiplusbitmapSource, rectfTarget,
+                  (Gdiplus::REAL)xSrc, (Gdiplus::REAL)ySrc,
+                  (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight,
+                  Gdiplus::UnitPixel, &imageattributes);
+
+            }
+            else
+            {
+
+               ret = m_pgdiplusgraphics->DrawImage(pgdiplusbitmapSource, rectfTarget,
+                  (Gdiplus::REAL)xSrc, (Gdiplus::REAL)ySrc,
+                  (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight, Gdiplus::UnitPixel);
+
+            }
+
+#if FPS_DEBUG
+            if (bFpsExperimentRestoreCompositingMode)
+               m_pgdiplusgraphics->SetCompositingMode(fpsExperimentPreviousCompositingMode);
+            if (bReportDabzo5yStretch)
+            {
+               report_dabzo5y_opaque_stretch(pimageSource, opacityPolicy,
+                  bStaticCacheCurrent, bActiveGraphicsLease, bCacheLockAvailable,
+                  bCacheValid, cachedPixelUsage, cachedSize, pointCached,
+                  bActivePixmapLease, sourceStatistics, bPreserveOpaqueStaticStretch,
+                  bUseEdgeExtendedSampling, wrapStatus, ret,
+                  m_pgdiplusgraphics->GetPageUnit(), m_pgdiplusgraphics->GetPageScale(),
+                  xSrc, ySrc, nSrcWidth, nSrcHeight, xDst, yDst, nDstWidth, nDstHeight);
+            }
+            if (bFpsExperimentEligible && bFpsExperimentAlphaBlendReady && !bFpsExperimentRecorded
+               && (fpsExperimentPhase == opaque_copy_experiment_phase::optimized
+                  || fpsExperimentPhase == opaque_copy_experiment_phase::alpha_blend))
+            {
+               auto targetPixels = (::u64)nDstWidth * (::u64)nDstHeight;
+               auto elapsedNanoseconds = (::u64)::std::chrono::duration_cast<::std::chrono::nanoseconds>(
+                  ::std::chrono::steady_clock::now() - fpsExperimentOperationStart).count();
+               note_opaque_copy_experiment_draw(fpsExperimentPhase, fpsExperimentKind,
+                  ret == Gdiplus::Status::Ok, (::u64)pimageSource->width() * pimageSource->height(),
+                  targetPixels, fpsExperimentOpaquePixels, 0, targetPixels, elapsedNanoseconds,
+                  pimageSource->width(), pimageSource->height(), (INT)nDstWidth,
+                  (INT)nDstHeight, (INT)xDst, (INT)yDst);
+               bFpsExperimentRecorded = true;
+            }
+#endif
 
          }
 
@@ -6709,7 +7752,7 @@ namespace draw2d_gdiplus
 
       }
 
-      if (scopedstrString.is_empty())
+      if (scopedstrString.is_empty() || iIndex == 0)
       {
 
          return ::f64_size(0, 0);
@@ -6795,7 +7838,9 @@ namespace draw2d_gdiplus
 
       rectangleBound.GetSize(&size);
 
-      return ::f64_size((::f64)(size.Width * m_pwritetextfont->m_dFontWidth), (::f64)(size.Height));
+      // A prefix extent is an endpoint relative to the drawing origin.
+      // Region width alone drops the left bearing and displaces the caret.
+      return ::f64_size((::f64)(rectangleBound.GetRight() * m_pwritetextfont->m_dFontWidth), (::f64)(size.Height));
 
    }
 

@@ -3,6 +3,7 @@
 
 
 #include "aura/windowing/window_buffer.h"
+#include "aura/graphics/graphics/presentation_trace.h"
 
 
 namespace windowing_win32
@@ -62,6 +63,7 @@ namespace windowing_win32
       void destroy_window_buffer() override;
 
       void present_window_buffer() override;
+      ::graphics::presentation_trace_frame m_presentationTrace;
 
 
       void _configure_window();
