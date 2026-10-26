@@ -1,7 +1,7 @@
 // From acme/platform/exclusive.h by camilo on 2022-10-28 15:25 <3ThomasBorregaardSorensen!!
 #include "platform.h"
 #include "exclusive.h"
-#include "acme_windows_common/mutex.h"
+//#include "acme_windows_common/mutex.h"
 #include "acme_windows_common/node.h"
 #include "acme/exception/exception.h"
 #include "acme/filesystem/filesystem/directory_system.h"
@@ -27,7 +27,7 @@ namespace acme_windows
 
          ::pointer <::acme_windows_common::node>pnode = pparticle->node();
 
-         m_pmutex = pnode->create_named_mutex(pparticle, false,scopedstrId);
+         m_pmutex = pnode->create_named_mutex(pparticle, false,scopedstrId, psecurityattributes);
 
          //m_pmutex = //allocateø ::pointer < ::mutex > (pparticle, false, strId ADD_PARAM_SEC_ATTRS);
 
@@ -40,7 +40,7 @@ namespace acme_windows
          try
          {
 
-            m_pmutex = allocateø ::acme_windows_common::mutex(pparticle, false, scopedstrId);
+            m_pmutex = allocateø ::mutex(pparticle, false, scopedstrId, psecurityattributes);
 
             m_dwLastError = ::GetLastError();
 
