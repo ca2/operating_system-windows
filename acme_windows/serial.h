@@ -190,9 +190,9 @@ namespace acme_windows
       ::serial::enum_flow_control     m_eflowcontrol; // Flow Control
 
       // Mutex used to lock the read functions
-      ::pointer <::mutex >              m_pmutexRead;
+      ::pointer <::parallelization::mutex >              m_pmutexRead;
       // Mutex used to lock the write functions
-      ::pointer < ::mutex>              m_pmutexWrite;
+      ::pointer < ::parallelization::mutex>              m_pmutexWrite;
       //HANDLE            m_hMutexWrite;
    };
 

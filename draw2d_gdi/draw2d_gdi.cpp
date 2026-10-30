@@ -30,9 +30,9 @@ DllMain(HINSTANCE hInstance, ::u32 dwReason, LPVOID lpReserved)
 
 
 
-static ::mutex * s_pmutex = nullptr;
+static ::parallelization::mutex * s_pmutex = nullptr;
 
-::mutex & draw2d_gdi_mutex()
+::parallelization::mutex & draw2d_gdi_mutex()
 {
 
    return *s_pmutex;
@@ -43,6 +43,6 @@ static ::mutex * s_pmutex = nullptr;
 void init_draw2d_gdi_mutex(::particle * pparticle)
 {
 
-   s_pmutex = ___new ::mutex();
+   s_pmutex = ___new ::parallelization::mutex();
 
 }
