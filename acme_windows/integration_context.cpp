@@ -261,8 +261,8 @@ namespace acme_windows
 #else
 
             m_strPlat1 = "64";
-            m_strPlat2 = "x86_amd64";
-            //m_strPlat2 = "amd64";
+            // Match the native x64 compiler used to create the project's PCH.
+            m_strPlat2 = "amd64";
             m_strStagePlatform = "x64";
             m_strLibPlatform = "x64/";
 
