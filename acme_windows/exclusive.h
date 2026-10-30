@@ -18,7 +18,7 @@ namespace acme_windows
 
       ::u32                         m_dwLastError;
       bool                          m_bResourceException;
-      ::pointer < ::mutex >         m_pmutex;
+      ::pointer < ::parallelization::mutex >         m_pmutex;
 
 
       exclusive(::particle * pparticle, const ::scoped_string & scopedstrName, security_attributes * psecurityattributes);

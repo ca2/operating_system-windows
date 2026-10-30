@@ -1276,7 +1276,7 @@ namespace windowing_win32
    //oswindow_dataptra * window::s_pdataptra = nullptr;
 
 
-   //::mutex * window::s_pmutex = nullptr;
+   //::parallelization::mutex * window::s_pmutex = nullptr;
 
 
    //::i32 oswindow_find_message_only_window(::user::window * pimpl)

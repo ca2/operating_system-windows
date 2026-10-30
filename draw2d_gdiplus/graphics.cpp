@@ -184,7 +184,7 @@ namespace
 
    struct opaque_copy_experiment
    {
-      ::parallelization::mutex mutex;
+      ::parallelization::fast_critical_section mutex;
       bool started = false;
       opaque_copy_experiment_phase phase = opaque_copy_experiment_phase::not_started;
       ::std::chrono::steady_clock::time_point start;
@@ -254,7 +254,7 @@ namespace
    {
 
       auto & experiment = get_opaque_copy_experiment();
-      ::std::lock_guard<::parallelization::mutex> lock(experiment.mutex);
+      ::std::lock_guard<::parallelization::fast_critical_section> lock(experiment.mutex);
       auto now = ::std::chrono::steady_clock::now();
       if (!experiment.started)
       {
@@ -298,7 +298,7 @@ namespace
          && phase != opaque_copy_experiment_phase::alpha_blend)
          return;
       auto & experiment = get_opaque_copy_experiment();
-      ::std::lock_guard<::parallelization::mutex> lock(experiment.mutex);
+      ::std::lock_guard<::parallelization::fast_critical_section> lock(experiment.mutex);
       auto phaseIndex = phase == opaque_copy_experiment_phase::optimized ? 0 : 1;
       auto kindIndex = kind == opaque_copy_experiment_kind::fully_opaque ? 0 : 1;
       auto & bucket = experiment.buckets[phaseIndex][kindIndex];

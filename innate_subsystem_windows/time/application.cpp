@@ -18,7 +18,7 @@ class block_input :
    virtual public matter
 {
 protected:
-   ::mutex        m_mutex;
+   ::parallelization::mutex        m_mutex;
    bool           m_bBlocked;
 public:  
    block_input(::i32 iSleep = 200);

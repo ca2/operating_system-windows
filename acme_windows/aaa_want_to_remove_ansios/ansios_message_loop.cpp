@@ -7,7 +7,7 @@ public:
 
 
    simple_event                     m_happening;
-   ::mutex                     m_mutex;
+   ::parallelization::mutex                     m_mutex;
    ::ref_array < MESSAGE >           m_msgptra;
 
 

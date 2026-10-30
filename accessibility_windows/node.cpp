@@ -915,7 +915,7 @@ namespace acme_windows
    //         if (g_iMemoryCounters)
    //         {
    //
-   //            g_pmutexMemoryCounters = ___new ::mutex(e_create_new, false, "Global\\ca2_memory_counters");
+   //            g_pmutexMemoryCounters = ___new ::parallelization::mutex(e_create_new, false, "Global\\ca2_memory_counters");
    //
    //         }
    //

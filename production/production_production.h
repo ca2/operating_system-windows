@@ -56,14 +56,14 @@ namespace production
 
       string_array_base                 m_straMirror;
       string_array_base                 m_straMirrorStatus;
-      ::mutex                   m_mutexStatus;
+      ::parallelization::mutex                   m_mutexStatus;
       string_array_base                 m_straStatus;
       bool                    m_bLoop;
       ::i32                     m_iLoop;
       ::i32                     m_iLoopCount;
       string                  m_strSubversionRevision;
       string_array_base                 m_straCompress;
-      ::mutex                   m_mutexCompress;
+      ::parallelization::mutex                   m_mutexCompress;
       string                  m_strBuildTook;
       string                  m_strSpc;
       string                  m_strSignTool;
@@ -82,7 +82,7 @@ namespace production
       string                  m_strTwitterConsumerKey;
       string                  m_strTwitterConsumerSecret;
 
-      ::mutex                   m_mutexRelease;
+      ::parallelization::mutex                   m_mutexRelease;
       string_array_base                 m_straRelease;
       ::i32                 m_iRelease;
 

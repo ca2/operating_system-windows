@@ -405,16 +405,16 @@ namespace music
          }
 
 
-         static ::mutex * s_pmutex = nullptr;
+         static ::parallelization::mutex * s_pmutex = nullptr;
 
 
-         //::mutex & get_midi_mutex()
+         //::parallelization::mutex & get_midi_mutex()
          //{
 
          //   if(s_pmutex == nullptr)
          //   {
 
-         //      s_pmutex = ___new ::mutex();
+         //      s_pmutex = ___new ::parallelization::mutex();
 
          //      // TODO :
          //      // register s_pmutex in Sys(::get_thread_app()).register_static_system_object

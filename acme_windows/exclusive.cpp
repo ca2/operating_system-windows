@@ -29,7 +29,7 @@ namespace acme_windows
 
          m_pmutex = pnode->create_named_mutex(pparticle, false,scopedstrId, psecurityattributes);
 
-         //m_pmutex = //allocateø ::pointer < ::mutex > (pparticle, false, strId ADD_PARAM_SEC_ATTRS);
+         //m_pmutex = //allocateø ::pointer < ::parallelization::mutex > (pparticle, false, strId ADD_PARAM_SEC_ATTRS);
 
          //m_dwLastError = ::GetLastError();
 
@@ -40,7 +40,7 @@ namespace acme_windows
          try
          {
 
-            m_pmutex = allocateø ::mutex(pparticle, false, scopedstrId, psecurityattributes);
+            m_pmutex = allocateø ::parallelization::mutex(pparticle, false, scopedstrId, psecurityattributes);
 
             m_dwLastError = ::GetLastError();
 

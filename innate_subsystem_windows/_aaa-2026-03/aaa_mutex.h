@@ -6,7 +6,7 @@ namespace windows
 
 
    class CLASS_DECL_ACME_WINDOWS mutex :
-      virtual public ::mutex
+      virtual public ::parallelization::mutex
    {
    public:
 
@@ -29,7 +29,7 @@ namespace windows
       bool already_exists();
 
 
-      static ::mutex open_mutex(const ::scoped_string & scopedstrName) { return ::open_mutex(pszName); }
+      static ::parallelization::mutex open_mutex(const ::scoped_string & scopedstrName) { return ::open_mutex(pszName); }
 
 
    };
@@ -42,7 +42,7 @@ CLASS_DECL_ACME_WINDOWS void wait_until_mutex_does_not_exist(const ::scoped_stri
 
 
 
-CLASS_DECL_ACME_WINDOWS::mutex * get_ui_destroyed_mutex();
+CLASS_DECL_ACME_WINDOWS ::parallelization::mutex * get_ui_destroyed_mutex();
 
 
 
@@ -54,19 +54,19 @@ namespace install
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS ::mutex :
-      public ::mutex
+   class CLASS_DECL_ACME_WINDOWS mutex :
+      public ::parallelization::mutex
    {
    public:
 
       // null_dacl_sync_options
-      ::mutex(string strPlatform, string strSuffix = "");
+      mutex(string strPlatform, string strSuffix = "");
 
    };
 
 
    class CLASS_DECL_ACME_WINDOWS admin_mutex :
-      public ::mutex
+      public ::parallelization::mutex
    {
    public:
 
