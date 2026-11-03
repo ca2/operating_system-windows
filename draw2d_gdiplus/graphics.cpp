@@ -6139,6 +6139,10 @@ namespace draw2d_gdiplus
          m_pgdiplusgraphics->SetInterpolationMode(Gdiplus::InterpolationModeNearestNeighbor);
 
       }
+      else if (einterpolationmode == ::draw2d::e_interpolation_mode_bilinear)
+      {
+         m_pgdiplusgraphics->SetInterpolationMode(Gdiplus::InterpolationModeBilinear);
+      }
       else if (einterpolationmode == ::draw2d::e_interpolation_mode_high_quality_bicubic)
       {
 

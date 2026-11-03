@@ -468,7 +468,7 @@ namespace windowing_win32
 
       HBRUSH hbrushBackground = nullptr;
 
-      if (m_papplication->m_gpu.m_bUseSwapChainWindow)
+      if (m_papplication->use_gpu_swap_chain())
       {
 
          hbrushBackground = (HBRUSH)CreateSolidBrush(0x00000000);

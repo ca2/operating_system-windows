@@ -285,7 +285,7 @@ namespace windowing_win32
    bool layered_window_buffer::_create_window_device_context(const ::i32_size & size, ::i32 iStrideParam)
    {
 
-      if (m_papplication->m_gpu.m_bUseSwapChainWindow)
+      if (m_papplication->use_gpu_swap_chain())
       {
 
          return true;
@@ -332,7 +332,7 @@ namespace windowing_win32
    void layered_window_buffer::_destroy_window_device_context()
    {
 
-      if (m_papplication->m_gpu.m_bUseSwapChainWindow)
+      if (m_papplication->use_gpu_swap_chain())
       {
 
          return;
@@ -356,7 +356,7 @@ namespace windowing_win32
    void layered_window_buffer::present_window_buffer()
    {
 
-      if (m_papplication->m_gpu.m_bUseSwapChainWindow)
+      if (m_papplication->use_gpu_swap_chain())
       {
 
          return;

@@ -182,7 +182,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      if (!m_papplication->m_gpu.m_bUseSwapChainWindow)
+//      if (!m_papplication->use_gpu_swap_chain())
 //      {
 //
 //         if (!double_buffer_graphics::_on_begin(pbufferitem))
@@ -207,7 +207,7 @@ namespace windowing_win32
       auto bSynchronousLayeredPresentation =
          hwnd
          && (::GetWindowLongPtr(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
-         && !m_papplication->m_gpu.m_bUseSwapChainWindow;
+         && !m_papplication->use_gpu_swap_chain();
 
       // A software layered-window update is the frame commit: it supplies the
       // pixels and the destination rectangle together. Keep that commit in the
@@ -286,13 +286,13 @@ namespace windowing_win32
 //         ////m_bDibIsHostingBuffer = false;
 //
 //         //if (playeredwindowbuffer
-//         //   && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+//         //   && !m_papplication->use_gpu_swap_chain())
 //         //{
 //
 //
 //         //::pointer < layered_window_buffer > playeredwindowbuffer = m_pwindowbuffer;
 //
-//         if (playeredwindowbuffer && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+//         if (playeredwindowbuffer && !m_papplication->use_gpu_swap_chain())
 //         {
 //
 //            //if (m_bDibIsHostingBuffer)
@@ -302,7 +302,7 @@ namespace windowing_win32
 //            //   //m_bDibIsHostingBuffer = false;
 //
 //            //   //if (playeredwindowbuffer
-//            //   //   && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+//            //   //   && !m_papplication->use_gpu_swap_chain())
 //            //   //{
 //
 //            //   //   ppixmapPreviousWindowBuffer =
@@ -418,7 +418,7 @@ namespace windowing_win32
 //              ////m_bDibIsHostingBuffer = false;
 //
 //              ////if (playeredwindowbuffer
-//              ////   && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+//              ////   && !m_papplication->use_gpu_swap_chain())
 //              ////{
 //
 //              ////   ppixmapPreviousWindowBuffer =
@@ -567,7 +567,7 @@ namespace windowing_win32
 //
 //               m_pdraw2dgraphics->create_for_window_draw2d(m_pwindow->user_interaction(), m_pwindow->m_sizeRaw);
 //               
-//               pbufferitem->m_pimageBufferItem->m_bHintCpuBackingEnabled = !m_papplication->m_gpu.m_bUseSwapChainWindow;
+//               pbufferitem->m_pimageBufferItem->m_bHintCpuBackingEnabled = !m_papplication->use_gpu_swap_chain();
 //
 //            }
 //
@@ -629,7 +629,7 @@ namespace windowing_win32
 //
 //      //::pointer < layered_window_buffer > playeredwindowbuffer;
 //
-//      //if (bLayered && ! m_papplication->m_gpu.m_bUseSwapChainWindow)
+//      //if (bLayered && ! m_papplication->use_gpu_swap_chain())
 //      //{
 //
 //      //   auto & pwindowbuffer = m_pwindowbuffer;
@@ -783,7 +783,7 @@ namespace windowing_win32
 ////
 ////            auto puserinteraction = dynamic_cast < ::user::interaction * >( m_pwindow->m_pacmeuserinteraction.m_p);
 ////
-////            ////if (m_papplication->m_gpu.m_bUseSwapChainWindow)
+////            ////if (m_papplication->use_gpu_swap_chain())
 ////            ////{
 ////
 ////            ////   pbufferitem->m_pgraphics->create_offscreen_graphics_for_swap_chain_blitting(pbufferitem->m_sizeBufferItemDraw);
@@ -879,7 +879,7 @@ namespace windowing_win32
       auto bSynchronousLayeredPresentation =
          hwnd
          && (::GetWindowLongPtr(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
-         && !m_papplication->m_gpu.m_bUseSwapChainWindow;
+         && !m_papplication->use_gpu_swap_chain();
 
       if (bSynchronousLayeredPresentation)
       {
@@ -1308,7 +1308,7 @@ namespace windowing_win32
 
       auto sizeWindowFixed = rectangleWindowFixed.size();
 
-      if (playeredwindowbuffer && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+      if (playeredwindowbuffer && !m_papplication->use_gpu_swap_chain())
       {
 
 
@@ -1318,7 +1318,7 @@ namespace windowing_win32
          //m_bDibIsHostingBuffer = false;
 
          //if (playeredwindowbuffer
-         //   && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+         //   && !m_papplication->use_gpu_swap_chain())
          //{
 
          //   ppixmapPreviousWindowBuffer =
@@ -1441,7 +1441,7 @@ namespace windowing_win32
       ::cast < ::windowing_win32::window  > pwindow = m_pwindow;
       //if (!bLayered && !pwindow->m_hglrcProto)
 #if !defined(__REACTOS__)
-      if (!bLayered && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+      if (!bLayered && !m_papplication->use_gpu_swap_chain())
       {
 
          //::cast < ::windowing_win32::window  > pwindow = m_pwindow;
@@ -1496,7 +1496,7 @@ namespace windowing_win32
 
          auto sizeBufferItemWindowFixed = sizeWindowFixed;
 
-         if (playeredwindowbuffer && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+         if (playeredwindowbuffer && !m_papplication->use_gpu_swap_chain())
          {
 
 
@@ -1847,7 +1847,7 @@ namespace windowing_win32
          {
 
 
-            if (m_papplication->m_gpu.m_bUseSwapChainWindow)
+            if (m_papplication->use_gpu_swap_chain())
             {
 
                //auto pdraw2dgraphics = pbufferitem->g();
@@ -2011,7 +2011,7 @@ namespace windowing_win32
 
 #ifdef _DEBUG
 
-         if (playeredwindowbuffer && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+         if (playeredwindowbuffer && !m_papplication->use_gpu_swap_chain())
          {
 
             //HBITMAP b1 = (HBITMAP)::GetCurrentObject(playeredwindowbuffer->m_hdc, OBJ_BITMAP);

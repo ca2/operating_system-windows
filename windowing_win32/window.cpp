@@ -729,7 +729,7 @@ namespace windowing_win32
       if (puserinteraction && puserinteraction->is_graphical())
       {
 
-         if (m_papplication->m_bGpu)
+         if (m_papplication->m_bGpu2)
          {
 
             auto pgpuapproach = m_papplication->get_gpu_approach();
@@ -833,7 +833,7 @@ namespace windowing_win32
       if (puserinteraction && puserinteraction->is_graphical())
       {
 
-         if (m_papplication->m_bGpu)
+         if (m_papplication->m_bGpu2)
          {
 
             auto pgpuapproach = m_papplication->m_pgpuapproach;
@@ -2524,7 +2524,7 @@ namespace windowing_win32
       // HWND has the new left-resize rectangle but still contains the old frame.
       // Keep this path for visibility, activation and z-order only.
       if ((_get_ex_style() & WS_EX_LAYERED)
-         && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+         && !m_papplication->use_gpu_swap_chain())
       {
 
          bNoMove = true;
@@ -5824,7 +5824,7 @@ namespace windowing_win32
       if (!puserinteraction
          || !puserinteraction->is_window_resizing()
          || !(_get_ex_style() & WS_EX_LAYERED)
-         || m_papplication->m_gpu.m_bUseSwapChainWindow)
+         || m_papplication->use_gpu_swap_chain())
       {
 
          return;
@@ -7953,7 +7953,7 @@ namespace windowing_win32
    void window::on_message_paint(::message::message *pmessage)
    {
 #if defined(__REACTOS__)
-      if (!is_composite() && !m_papplication->m_gpu.m_bUseSwapChainWindow)
+      if (!is_composite() && !m_papplication->use_gpu_swap_chain())
       {
          PAINTSTRUCT paint{};
          ::BeginPaint(::as_HWND(operating_system_window()), &paint);
@@ -8275,7 +8275,7 @@ namespace windowing_win32
       if (message == WM_PAINT)
       {
 
-         if (m_papplication->m_gpu.m_bUseSwapChainWindow)
+         if (m_papplication->use_gpu_swap_chain())
          {
 
             auto hwnd = ::as_HWND(this->operating_system_window());
