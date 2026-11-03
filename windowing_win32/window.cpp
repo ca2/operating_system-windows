@@ -729,7 +729,7 @@ namespace windowing_win32
       if (puserinteraction && puserinteraction->is_graphical())
       {
 
-         if (m_papplication->m_bGpu2)
+         if (m_papplication->is_using_gpu())
          {
 
             auto pgpuapproach = m_papplication->get_gpu_approach();
@@ -833,7 +833,7 @@ namespace windowing_win32
       if (puserinteraction && puserinteraction->is_graphical())
       {
 
-         if (m_papplication->m_bGpu2)
+         if (m_papplication->is_using_gpu())
          {
 
             auto pgpuapproach = m_papplication->m_pgpuapproach;
@@ -8884,6 +8884,18 @@ namespace windowing_win32
 
       if (pwindowpos)
       {
+
+         // Activation/z-order notifications carry no geometry change. For
+         // layered windows the new size is committed by UpdateLayeredWindow;
+         // querying the HWND here can still return the previous frame's size
+         // and overwrite a pending fullscreen layout.
+         if ((pwindowpos->flags & (SWP_NOMOVE | SWP_NOSIZE)) == (SWP_NOMOVE | SWP_NOSIZE))
+         {
+
+            return;
+
+         }
+
 
          // WINDOWPOS coordinates whose SWP_NOMOVE/SWP_NOSIZE bits are set are
          // not geometry. In particular, the layered-window presentation path
