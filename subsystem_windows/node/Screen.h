@@ -35,7 +35,7 @@ namespace subsystem_windows
 {
    // This class get info for a windows desktop.
    class CLASS_DECL_SUBSYSTEM_WINDOWS Screen :
-   virtual public Implementation<::subsystem::ScreenInterface>
+   virtual public ::subsystem::Implementation<::subsystem::ScreenInterface>
    {
    public:
       Screen();

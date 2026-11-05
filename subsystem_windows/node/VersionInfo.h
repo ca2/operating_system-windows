@@ -35,7 +35,7 @@ namespace subsystem_windows
     * Contains information about executable file version info.
     */
    class CLASS_DECL_SUBSYSTEM_WINDOWS VersionInfo :
-   virtual public Implementation<::subsystem::VersionInfoInterface>
+   virtual public ::subsystem::Implementation<::subsystem::VersionInfoInterface>
    {
    public:
       /**

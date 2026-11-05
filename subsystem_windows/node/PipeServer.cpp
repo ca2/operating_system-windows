@@ -203,6 +203,9 @@ namespace subsystem_windows
          return;
       }
       try {
+
+         REFDBG_THIS(::system());
+
          ::system()->m_papplication->construct_newø(s_pdynamiclibraryKernel32);
          s_pdynamiclibraryKernel32->initialize_dynamic_library("Kernel32.dll");
          s_GetNamedPipeClientProcessId = (pGetNamedPipeClientProcessId)s_pdynamiclibraryKernel32->getProcAddress("GetNamedPipeClientProcessId");

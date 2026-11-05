@@ -35,7 +35,7 @@ namespace innate_subsystem_windows
 {
    
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Menu :
-      virtual public Implementation<innate_subsystem::MenuInterface>
+      virtual public ::subsystem::Implementation<innate_subsystem::MenuInterface>
    {
       public:
       Menu();

@@ -49,7 +49,7 @@ namespace subsystem_windows
        * @fixme rename it.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS CurrentConsoleProcess : 
-         virtual public Implementation<::subsystem::CurrentConsoleProcessInterface, Process>
+         virtual public ::subsystem::Implementation<::subsystem::CurrentConsoleProcessInterface, Process>
       {
       public:
          /**

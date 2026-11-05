@@ -35,7 +35,7 @@ namespace subsystem_windows
        * Contains the security information associated with an object.
        */
       class SecurityDescriptor :
-      virtual public Implementation<::subsystem::SecurityDescriptorInterface>
+      virtual public ::subsystem::Implementation<::subsystem::SecurityDescriptorInterface>
       {
       public:
          /**

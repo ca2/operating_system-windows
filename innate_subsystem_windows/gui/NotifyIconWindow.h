@@ -54,7 +54,7 @@ namespace innate_subsystem_windows
    // };
 
    class NotifyIconWindow :
-      virtual public Implementation<innate_subsystem::NotifyIconWindowCallback, Window>
+      virtual public ::subsystem::Implementation<innate_subsystem::NotifyIconWindowCallback, Window>
    {
    public:
 

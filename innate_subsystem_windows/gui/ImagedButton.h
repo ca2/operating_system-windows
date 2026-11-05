@@ -39,7 +39,7 @@ namespace innate_subsystem_windows
     //
 
     class ImagedButton : //public Control
-   virtual public Implementation<::innate_subsystem::ImagedButtonInterface, Control>
+   virtual public ::subsystem::Implementation<::innate_subsystem::ImagedButtonInterface, Control>
         //,    virtual public Control
     {
     public:

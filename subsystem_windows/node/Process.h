@@ -35,7 +35,7 @@
        * Enables you to start and stop local processes.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS Process :
-      virtual public Implementation<::subsystem::ProcessInterface>
+      virtual public ::subsystem::Implementation<::subsystem::ProcessInterface>
       {
       public:
 

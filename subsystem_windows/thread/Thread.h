@@ -53,7 +53,7 @@
 //    * @fixme member of HDESK type in THREAD class???
 //    */
 //   class CLASS_DECL_SUBSYSTEM_WINDOWS Thread :
-//   virtual public Implementation<::subsystem::ThreadCallback>
+//   virtual public ::subsystem::Implementation<::subsystem::ThreadCallback>
 //   {
 //   public:
 //      /**

@@ -40,7 +40,7 @@ namespace subsystem_windows
       @remark: can work only in XP and later cause it uses WTSQueryUserToken function.
       */
       class CLASS_DECL_SUBSYSTEM_WINDOWS Impersonator :
-      virtual public Implementation<::subsystem::ImpersonatorInterface>
+      virtual public ::subsystem::Implementation<::subsystem::ImpersonatorInterface>
       {
       public:
          //Impersonator(LogWriter *log);

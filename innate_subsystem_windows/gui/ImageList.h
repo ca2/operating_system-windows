@@ -14,7 +14,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS ImageList :
-   virtual public Implementation<::innate_subsystem::ImageListInterface>
+   virtual public ::subsystem::Implementation<::innate_subsystem::ImageListInterface>
    {
    public:
 

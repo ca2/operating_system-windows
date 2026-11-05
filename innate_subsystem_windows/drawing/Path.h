@@ -11,7 +11,7 @@ namespace innate_subsystem_windows
 
 
    class Path : 
-      virtual public Implementation<::innate_subsystem::PathInterface>
+      virtual public ::subsystem::Implementation<::innate_subsystem::PathInterface>
    {
    public:
 

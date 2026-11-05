@@ -37,7 +37,7 @@ namespace subsystem_windows
     * Wrapper on WinAPI workstation functions.
     */
    class CLASS_DECL_SUBSYSTEM_WINDOWS Workstation:
-         virtual public Implementation<subsystem::WorkstationInterface>
+         virtual public ::subsystem::Implementation<subsystem::WorkstationInterface>
    {
    public:
 

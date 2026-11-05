@@ -33,7 +33,7 @@ namespace subsystem_windows
 
    // Class for intercepting keyboard on low level.
    class CLASS_DECL_SUBSYSTEM_WINDOWS OperatingSystemHook :
-   virtual  public Implementation<::subsystem::OperatingSystemHookInterface>
+   virtual  public ::subsystem::Implementation<::subsystem::OperatingSystemHookInterface>
    {
    public:
 

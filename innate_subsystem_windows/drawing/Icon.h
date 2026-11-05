@@ -37,7 +37,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Icon :
-      virtual public Implementation<::innate_subsystem::IconInterface>
+      virtual public ::subsystem::Implementation<::innate_subsystem::IconInterface>
    {
    public:
 

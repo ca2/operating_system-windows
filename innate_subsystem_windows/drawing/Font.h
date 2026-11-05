@@ -38,7 +38,7 @@ namespace innate_subsystem_windows
 
 
    class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Font :
-virtual public Implementation<::innate_subsystem::FontInterface>
+virtual public ::subsystem::Implementation<::innate_subsystem::FontInterface>
    {
    public:
 

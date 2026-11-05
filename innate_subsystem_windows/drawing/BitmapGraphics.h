@@ -36,7 +36,7 @@ namespace innate_subsystem_windows
    // Object that creates bitmap with specified size and allow to
    // draw into in through Graphics class methods.
    class BitmapGraphics :
-      virtual public Implementation<::innate_subsystem::BitmapGraphicsInterface, Graphics>
+      virtual public ::subsystem::Implementation<::innate_subsystem::BitmapGraphicsInterface, Graphics>
    {
    public:
 

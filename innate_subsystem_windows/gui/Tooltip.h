@@ -39,7 +39,7 @@ namespace innate_subsystem_windows
 
 
     class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS Tooltip :
-    virtual public Implementation<::innate_subsystem::TooltipInterface, Control>
+    virtual public ::subsystem::Implementation<::innate_subsystem::TooltipInterface, Control>
     {
     public:
         Tooltip();

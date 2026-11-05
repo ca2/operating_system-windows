@@ -41,7 +41,7 @@ namespace subsystem_windows
        * Have hidden main window and main scopedstrMessage loop.
        */
       class CLASS_DECL_SUBSYSTEM_WINDOWS OperatingSystemApplication :
-      virtual public Implementation< ::subsystem::OperatingSystemApplicationCallback > ,
+      virtual public ::subsystem::Implementation< ::subsystem::OperatingSystemApplicationCallback > ,
          virtual public ::subsystem::Thread
       {
       public:

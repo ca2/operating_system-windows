@@ -10,7 +10,7 @@
 
 
     class CLASS_DECL_INNATE_SUBSYSTEM_WINDOWS SystemMetrics :
-         virtual public Implementation < ::innate_subsystem::SystemMetricsInterface>
+         virtual public ::subsystem::Implementation < ::innate_subsystem::SystemMetricsInterface>
     {
     public:
 

@@ -451,7 +451,7 @@ namespace innate_subsystem_windows
       return ::as_operating_system_window(hwndChild);
    }
 
-   void Window::subclassControlById(::Particle * pWindowControl, ::u32 id)
+   void Window::subclassControlById(::subsystem::Particle * pWindowControl, ::u32 id)
    {
 
        auto pwindow = pWindowControl->impl<innate_subsystem_windows::Window>();
