@@ -1,0 +1,3 @@
+LIBRARY "nano_http_wininet"
+
+EXPORTS
