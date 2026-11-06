@@ -72,7 +72,7 @@ namespace win32
             virtual bool _set_window_long_ptr(::i32 iIndex, ::iptr iLong);
 
 
-            void create_window() override;
+            void create_window(::enum_parallelization eparallelization) override;
 
             void _create_window() override;
 
