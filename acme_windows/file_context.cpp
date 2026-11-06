@@ -512,6 +512,13 @@ namespace acme_windows
          FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_DELETE_ON_CLOSE, nullptr))
       {
 
+         if (path.flags() & ::file::e_flag_no_exception)
+         {
+
+            return;
+
+         }
+
          auto lasterror = ::windows::get_last_error();
 
          ::windows::throw_file_last_error_exception(path, ::file::e_open_read | ::file::e_open_write, lasterror, "apex_windows::file_context::erase safe_create_file failed");
