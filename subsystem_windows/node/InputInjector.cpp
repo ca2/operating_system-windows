@@ -180,9 +180,9 @@ namespace subsystem_windows
          HKL hklCurrent = (HKL)0x04090409;
          try {
             hklCurrent = _getCurrentKbdLayout();
-            m_plogwriter->debug("Current keyboard layout = {:#08x}", (::i32)hklCurrent);
+            m_plogwriter->debug("Current keyboard layout = {:#016x}", (::iptr)hklCurrent);
             vkKeyScanResult = _searchVirtKey(ch, hklCurrent);
-            m_plogwriter->debug("The virtual code scan result = {}", (::i32)vkKeyScanResult);
+            m_plogwriter->debug("The virtual code scan result = {}", (::iptr)vkKeyScanResult);
          } catch (...) {
             m_plogwriter->debug("Can't insert the ::i8 by simulating a key press event,"
                       " therefore try insert it as an unicode symbol");
@@ -326,7 +326,7 @@ namespace subsystem_windows
          // Special trick to get round a problem when printing the ^6 characters
          // instead of estimated 6.
          if (!modifiersPressed) {
-            ::u16 layout = ((::u32)hklCurrent & 0xffff0000) >> 16;
+            ::u16 layout = (::u16) ((((::uptr)hklCurrent) & 0xffff0000) >> 16);
             const ::u16 TURKISH = MAKELANGID(LANG_TURKISH, SUBLANG_DEFAULT);
             const ::u16 NORWEGIAN = MAKELANGID(LANG_NORWEGIAN, SUBLANG_DEFAULT);
             const ::u16 BRAZILIAN = MAKELANGID(LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN);
