@@ -100,7 +100,7 @@ namespace subsystem_windows
 
       /**
        * Token of interactive user process in active console session
-       * that will be used if WTSQueryToken WinAPI function is unavaliable
+       * that will be used if WTSQueryToken WinAPI function is unavailable
        * in queryConsoleUserToken() call.
        */
        HANDLE m_userProcessToken;
@@ -123,15 +123,15 @@ namespace subsystem_windows
 
       /**
        * Gets active console session id.
-       * @return active console session id if WTS is avaliable or 0 if
-       * WinAPI WTSGetActiveConsoleSessionId function not avaliable.
+       * @return active console session id if WTS is available or 0 if
+       * WinAPI WTSGetActiveConsoleSessionId function not available.
        */
        virtual DWORD getActiveConsoleSessionId(::subsystem::LogWriter *log);
 
       /**
       * Gets RDP console session id.
-      * @return RDP console session id if WTS is avaliable and RDP console exists or 0 if
-      * WinAPI WTSEnumerateSessions function not avaliable or there is no sessions with RDP in name.
+      * @return RDP console session id if WTS is available and RDP console exists or 0 if
+      * WinAPI WTSEnumerateSessions function not available or there is no sessions with RDP in name.
       */
        virtual DWORD getRdpSessionId(::subsystem::LogWriter *log);
 
@@ -144,7 +144,7 @@ namespace subsystem_windows
        * Queries user token in active console session.
        * @return user token.
        * @throws SystemException on fail.
-       * @remark if WTSQueryUserToken is avaliable when it will be used with
+       * @remark if WTSQueryUserToken is available when it will be used with
        * session id equal to active console session id, if not, then user
        * process id will be used to get user token (this id can be set by using of
        * defineConsoleUserProcessId() method).
@@ -156,7 +156,7 @@ namespace subsystem_windows
       /**
        * Defines global (for WTS class) user process that will be used
        * for getting token of user in active console session if WTSQueryUserToken WinAPI function
-       * is unavaliable (Windows 2000 case).
+       * is unavailable (Windows 2000 case).
        * @param userProcessId user process id.
        */
        virtual void defineConsoleUserProcessId(DWORD userProcessId);

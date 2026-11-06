@@ -234,7 +234,7 @@ namespace win32
          }
 
 
-         void window::create_window()
+         void window::create_window(enum_parallelization eparallelization)
          {
 
             user_post([this]()
