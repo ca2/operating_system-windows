@@ -204,7 +204,7 @@ namespace subsystem_windows
       }
       try {
 
-         REFDBG_THIS(::system());
+         REFDBG_SYSTEM();
 
          ::system()->m_papplication->construct_newø(s_pdynamiclibraryKernel32);
          s_pdynamiclibraryKernel32->initialize_dynamic_library("Kernel32.dll");

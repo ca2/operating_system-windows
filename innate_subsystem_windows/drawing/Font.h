@@ -42,6 +42,14 @@ virtual public ::subsystem::Implementation<::innate_subsystem::FontInterface>
    {
    public:
 
+
+      // protected:
+//    HPEN m_pen;
+//
+//    friend class Graphics;
+      Gdiplus::Font* m_pfont;
+
+
       //public:
       //Pen(::i32 type, ::i32 width, const ::color::color & color);
       Font();
@@ -50,17 +58,13 @@ virtual public ::subsystem::Implementation<::innate_subsystem::FontInterface>
 
       //void * _HGDIOBJ() override;
 
-      virtual void initialize_pixel_font(const ::i8 * pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight = 400, bool bItalic = false) override;
-      virtual void initialize_point_font(const ::i8 *pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight = 400,
-                                         bool bItalic = false) override;
+      virtual void initialize_pixel_font(const_char_pointer pszFamily, ::f64 fPixelHeight, ::i32 iFontWeight = 400, 
+         bool bItalic = false, bool bUnderline = false) override;
+      virtual void initialize_point_font(const_char_pointer pszFamily, ::f64 fPixelHeight, ::i32 iFontWeight = 400,
+         bool bItalic = false, bool bUnderline = false) override;
 
       void destroyGraphicsObject() override;
 
-      // protected:
-      //    HPEN m_pen;
-      //
-      //    friend class Graphics;
-      Gdiplus::Font * m_pfont;
    };
 
 

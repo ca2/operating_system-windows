@@ -51,11 +51,11 @@ namespace innate_subsystem_windows
       //void * _HGDIOBJ() override;
 
 
-      void initialize_pen(innate_subsystem::enum_pen epen, ::f32 fWidth, const color::color& color) override;
+      void initialize_pen(::nano::graphics::enum_pen epen, ::f64 fWidth, const color::color& color) override;
 
 
-           void setStartCap(::innate_subsystem::enum_line_cap elinecap) override;
-      void setEndCap(::innate_subsystem::enum_line_cap elinecap) override;
+           void setStartCap(::nano::graphics::enum_line_cap elinecap) override;
+      void setEndCap(::nano::graphics::enum_line_cap elinecap) override;
 
 
       void destroyGraphicsObject() override;

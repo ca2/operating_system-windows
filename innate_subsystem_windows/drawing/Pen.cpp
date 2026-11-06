@@ -64,7 +64,7 @@ namespace innate_subsystem_windows
    //
    // }
 
-   void Pen::initialize_pen(innate_subsystem::enum_pen epen, ::f32 fWidth, const color::color& color)
+   void Pen::initialize_pen(::nano::graphics::enum_pen epen, ::f64 fWidth, const color::color& color)
    {
 
       destroyGraphicsObject();
@@ -87,12 +87,12 @@ namespace innate_subsystem_windows
 
    
 
-      void Pen::setStartCap(::innate_subsystem::enum_line_cap elinecap)
+      void Pen::setStartCap(::nano::graphics::enum_line_cap elinecap)
    {
 
       ::Gdiplus::LineCap egdipluslinecap = ::Gdiplus::LineCapFlat;
 
-      if (elinecap == ::innate_subsystem::e_line_cap_round)
+      if (elinecap == ::nano::graphics::e_line_cap_round)
       {
 
          egdipluslinecap = ::Gdiplus::LineCapRound;
@@ -102,12 +102,12 @@ namespace innate_subsystem_windows
    }
 
 
-   void Pen::setEndCap(::innate_subsystem::enum_line_cap elinecap)
+   void Pen::setEndCap(::nano::graphics::enum_line_cap elinecap)
    {
 
       ::Gdiplus::LineCap egdipluslinecap = ::Gdiplus::LineCapFlat;
 
-      if (elinecap == ::innate_subsystem::e_line_cap_round)
+      if (elinecap == ::nano::graphics::e_line_cap_round)
       {
 
          egdipluslinecap = ::Gdiplus::LineCapRound;

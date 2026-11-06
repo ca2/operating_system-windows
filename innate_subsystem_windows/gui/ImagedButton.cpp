@@ -117,13 +117,13 @@ namespace innate_subsystem_windows
       TEXTMETRIC metric;
       GetTextMetrics(dc, &metric);
 
-      RECT imageRect;
+      RECT prectImage;
 
       calcRect(&itemRect, isPressed == TRUE, 0, metric.tmHeight,
-               m_size.cx, m_size.cy, &captionRect, &imageRect);
+               m_size.cx, m_size.cy, &captionRect, &prectImage);
 
       if (m_picon->m_hicon != NULL) {
-         drawIcon(&dc, &imageRect, isPressed == TRUE, isDisabled == TRUE);
+         drawIcon(&dc, &prectImage, isPressed == TRUE, isDisabled == TRUE);
       }
 
       if (!title.is_empty()) {
@@ -216,36 +216,36 @@ namespace innate_subsystem_windows
    void ImagedButton::calcRect(RECT* buttonRect, bool isButtonPressed,
                                DWORD textWidth, DWORD textHeight,
                                DWORD imageWidth, DWORD imageHeight,
-                               RECT * textRect, RECT* imageRect)
+                               RECT * prectText, RECT* prectImage)
    {
-      CopyRect(imageRect, buttonRect);
-      CopyRect(textRect, buttonRect);
+      CopyRect(prectImage, buttonRect);
+      CopyRect(prectText, buttonRect);
 
       if (m_picon) {
          long buttonWidth = buttonRect->right - buttonRect->left;
          long buttonHeight = -buttonRect->top + buttonRect->bottom;
 
          // Center image horizontally
-         pimageRect->left += ((buttonWidth - (long)imageWidth) / 2);
+         prectImage->left += ((buttonWidth - (long)imageWidth) / 2);
          // Center image vertically
-         pimageRect->top += (((buttonHeight) - (long)imageHeight) / 2) - textHeight;
+         prectImage->top += (((buttonHeight) - (long)imageHeight) / 2) - textHeight;
 
          DWORD margin = 10;
-         textRect->top += (textHeight + margin) * 2;
+         prectText->top += (textHeight + margin) * 2;
       }
 
       // If button is pressed then press image also
       if (isButtonPressed && !m_isUsingTheme) {
-         OffsetRect(imageRect, 1, 1);
+         OffsetRect(prectImage, 1, 1);
       }
    }
 
-   void ImagedButton::drawIcon(HDC* dc, RECT* imageRect, bool isPressed, bool isDisabled)
+   void ImagedButton::drawIcon(HDC* dc, RECT* prectImage, bool isPressed, bool isDisabled)
    {
       DrawState(*dc, NULL, NULL, (::lparam)m_picon->m_hicon, 0,
-                pimageRect->left, pimageRect->top,
-                (pimageRect->right - pimageRect->left),
-                (pimageRect->bottom - pimageRect->top),
+                prectImage->left, prectImage->top,
+                (prectImage->right - prectImage->left),
+                (prectImage->bottom - prectImage->top),
                 (isDisabled ? DSS_DISABLED : DSS_NORMAL) | DST_ICON);
    } // End of drawIcon
 

@@ -110,7 +110,7 @@ namespace innate_subsystem_windows
       void drawBitmap(::innate_subsystem::BitmapInterface * pbitmap, const ::i32_rectangle & rectangle) override;
       void drawBitmap(::innate_subsystem::BitmapInterface *bitmap, const ::i32_point & point, const ::i32_rectangle & rectangle) override;
       // Draws text.
-      void drawText(const ::scoped_string & scopedstr, ::f64_rectangle &rect, ::u32 format, enum_align ealign) override;
+      void drawText(const ::scoped_string& scopedstr, ::f64_rectangle& rect, const ::e_draw_text& edrawtext = {}, enum_align ealign = e_align_top_left) override;
 
 
       void doPath(::innate_subsystem::PathInterface *ppath, ::innate_subsystem::BrushInterface *pbrush,

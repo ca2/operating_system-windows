@@ -10,7 +10,7 @@ namespace innate_subsystem_windows
 {
 
 
-   class KeyboardLayout : virtual public ::Implementation < ::innate_subsystem::KeyboardLayoutInterface >
+   class KeyboardLayout : virtual public ::subsystem::Implementation < ::innate_subsystem::KeyboardLayoutInterface >
    {
    public:
 

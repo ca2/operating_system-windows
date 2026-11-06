@@ -112,7 +112,7 @@ void
    void Dialog::show()
    {
       if (::as_HWND(this->operating_system_window()) == NULL) {
-         create();
+         create(false);
       } else {
          ShowWindow(::as_HWND(this->operating_system_window()), SW_SHOW);
          setForeground();
@@ -139,7 +139,7 @@ void
 
 
 
-   void Dialog::create()
+   void Dialog::create(bool bChild)
    {
 
       ::system()->acme_windowing()->send([&]()

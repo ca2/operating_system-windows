@@ -52,24 +52,24 @@ Font::~Font()
    // }
 
 
-   void Font::initialize_pixel_font(const ::i8 *pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight, bool bItalic)
+   void Font::initialize_pixel_font(const_char_pointer pszFamily, ::f64 fPixelHeight, ::i32 iFontWeight, bool bItalic, bool bUnderline)
    {
 destroyGraphicsObject();
 
 
-      Gdiplus::REAL fontSize =(Gdiplus::REAL) iPixelHeight;
+      Gdiplus::REAL fontSize =(Gdiplus::REAL) fPixelHeight;
       m_pfont = new Gdiplus::Font(::wstring(pszFamily), fontSize,
          iFontWeight >= 500 ? (bItalic ? Gdiplus::FontStyleBoldItalic : Gdiplus::FontStyleBold) :
          (bItalic ? Gdiplus::FontStyleItalic : Gdiplus::FontStyleRegular), ::Gdiplus::UnitPixel);
 
    }
 
-   void Font::initialize_point_font(const ::i8 *pszFamily, ::i32 iPixelHeight, ::i32 iFontWeight, bool bItalic)
+   void Font::initialize_point_font(const_char_pointer pszFamily, ::f64 fPixelHeight, ::i32 iFontWeight, bool bItalic, bool bUnderline)
    {
       destroyGraphicsObject();
 
 
-      Gdiplus::REAL fontSize = (Gdiplus::REAL)iPixelHeight;
+      Gdiplus::REAL fontSize = (Gdiplus::REAL)fPixelHeight;
       m_pfont =
          new Gdiplus::Font(::wstring(pszFamily), fontSize,
                            iFontWeight >= 500 ? (bItalic ? Gdiplus::FontStyleBoldItalic : Gdiplus::FontStyleBold)

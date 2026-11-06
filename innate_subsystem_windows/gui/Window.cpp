@@ -181,7 +181,7 @@ namespace innate_subsystem_windows
    ::f32 Window::getWindowScale()
    {
 
-      return get_window_scale();
+      return get_density_for_window();
 
    }
 

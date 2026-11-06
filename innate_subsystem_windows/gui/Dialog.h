@@ -55,7 +55,7 @@ namespace innate_subsystem_windows
 
 
       // Method creates non modal window but not shows it
-      void create() override;
+      void create(bool bChild) override;
 
 
       //
