@@ -237,7 +237,7 @@ namespace win32
          void window::create_window(enum_parallelization eparallelization)
          {
 
-            user_post([this]()
+            user_call(eparallelization, [this]()
             {
 
                _create_window();
