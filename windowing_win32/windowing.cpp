@@ -106,7 +106,7 @@ namespace windowing_win32
 
       //psysteminteraction->create_host(e_parallelization_synchronous);
 
-      psysteminteraction->create_window();
+      psysteminteraction->create_window(e_parallelization_asynchronous);
 
       //if(!estatus)
       //{

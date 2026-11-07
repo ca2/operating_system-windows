@@ -465,10 +465,10 @@ namespace windowing_win32
 
 
    //void window::create_window(::windowing::window * pimpl)
-   void window::create_window()
+   void window::create_window(::enum_parallelization eparallelization)
    {
 
-      ::windowing::window::create_window();
+      ::windowing::window::create_window(eparallelization);
 
    }
 
