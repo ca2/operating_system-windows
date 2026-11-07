@@ -359,7 +359,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_arch001", "..\..\..\so
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_game_arch001", "..\..\..\source\game\arch001\_game_arch001.vcxproj", "{AA6D8B2F-89D3-45B3-AF07-2C38BBC61964}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_change_grub_default_entry", "..\..\..\source\app-simple\change_grub_default_entry\change_grub_default_entry.vcxproj", "{6D3C8026-2626-4D4A-9C5C-E1DE3BE8F6AA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_change_grub_default_entry", "..\..\..\source\app-simple\change_grub_default_entry\app_simple_change_grub_default_entry.vcxproj", "{6D3C8026-2626-4D4A-9C5C-E1DE3BE8F6AA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_change_grub_default_entry", "..\..\..\source\app-simple\change_grub_default_entry\_app_simple_change_grub_default_entry.vcxproj", "{24AF1CE4-53C2-479D-803B-FCAD71694F85}"
 EndProject
@@ -367,7 +367,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_tranquillum", ".
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_shortcut", "..\..\..\source\app-simple\shortcut\app_simple_shortcut.vcxproj", "{C7201A26-86DC-4726-9456-AEDCBE98206B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_shortcut", "..\..\..\source\app-simple\shortcut\_app_simple_shortcut.vcxproj", "{D2A05B15-376F-4805-BE80-91207600A24F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_shortcut_amender", "..\..\..\source\app-simple\shortcut\_app_simple_shortcut_amender.vcxproj", "{D2A05B15-376F-4805-BE80-91207600A24F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_csgomatchmaking", "..\..\..\source\game\csgomatchmaking\game_csgomatchmaking.vcxproj", "{0B9D6395-5BCC-4D20-A318-9C4B1B3C6CB1}"
 EndProject

@@ -122,7 +122,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\..
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_anthill", "..\..\..\source\app\experience_anthill\experience_anthill.vcxproj", "{0BB1A1D1-7B7D-4484-9DF5-060481390526}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_a2", "..\..\..\source\app-veriwell\a2\veriwell_a2.vcxproj", "{4CE59FCC-9A79-4766-9134-897A083095A0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_a2", "..\..\..\source\app-veriwell\a2\app_veriwell_a2.vcxproj", "{4CE59FCC-9A79-4766-9134-897A083095A0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio", "..\..\..\source\app-core\audio\audio.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
 EndProject
