@@ -128,7 +128,18 @@ foreach ($config in $Configuration) {
     if ($BuildWrapper) {
         # CEF itself is prebuilt. Only its C++ adapter needs our CRT/toolset.
         $build = Join-Path $cache "wrapper-$PlatformToolset"
-        & cmake -S $SdkRoot -B $build -G 'Visual Studio 18 2026' -A x64 -T $PlatformToolset '-DUSE_SANDBOX=OFF' '-DUSE_ATL=OFF' '-DCEF_RUNTIME_LIBRARY_FLAG=/MD'
+        $configure = @('-S', $SdkRoot, '-B', $build, '-G', 'Visual Studio 18 2026', '-A', 'x64', '-T', $PlatformToolset,
+            '-DUSE_SANDBOX=OFF', '-DUSE_ATL=OFF', '-DCEF_RUNTIME_LIBRARY_FLAG=/MD')
+        $cacheFile = Join-Path $build 'CMakeCache.txt'
+        if (Test-Path -LiteralPath $cacheFile) {
+            $cacheText = Get-Content -LiteralPath $cacheFile -Raw
+            if ($cacheText -match '(?m)^CMAKE_HOME_DIRECTORY:INTERNAL=([^\r\n]+)' -and
+                [IO.Path]::GetFullPath($Matches[1]) -ne [IO.Path]::GetFullPath($SdkRoot)) {
+                # CMake records absolute paths; refresh after moving this tool.
+                $configure = @('--fresh') + $configure
+            }
+        }
+        & cmake @configure
         if ($LASTEXITCODE) { throw 'CEF wrapper configuration failed' }
         & cmake --build $build --config $config --target libcef_dll_wrapper --parallel 8
         if ($LASTEXITCODE) { throw "CEF $config wrapper build failed" }

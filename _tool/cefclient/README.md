@@ -29,6 +29,6 @@ accepts one configuration at a time; cefclient's project supplies its output
 directory automatically.
 
 CEF distributes its C++ wrapper as source. `-BuildWrapper` builds only that small
-adapter using CMake 3.23+ and Visual Studio 2026, with `/MDd` for Debug and `/MD`
+adapter using CMake 3.24+ and Visual Studio 2026, with `/MDd` for Debug and `/MD`
 for Release. `-PlatformToolset` defaults to `v143`. The cefclient project invokes
 this option automatically before linking; later builds reuse cached outputs.
