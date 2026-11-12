@@ -772,6 +772,7 @@ namespace acme_windows
       range2.defer_consume_word(strCandidateFile);
 
       ::string str2;
+      bool bCommandShell = false;
 
       if (str.begins_eat("powershell://"))
       {
@@ -786,6 +787,7 @@ namespace acme_windows
       else if (str1.is_empty() || str1.case_insensitive_ends(".cmd"))
       {
 
+         bCommandShell = true;
          ::string strCmd = node()->_get_cmd_path().windows_path().path();
 
          str1 = strCmd;
@@ -826,7 +828,15 @@ namespace acme_windows
 
       ::wstring wstrWorkingDirectory;
 
-      wstrWorkingDirectory = m_pathWorkingDirectory.windows_path().path();
+      ::string strWorkingDirectory = m_pathWorkingDirectory.windows_path().path();
+      // cmd.exe mistakes extended local drive paths for UNC paths and silently
+      // switches to the Windows directory. Keep native executable paths intact.
+      if (bCommandShell && strWorkingDirectory.begins(R"(\\?\)")
+         && strWorkingDirectory.size() >= 7 && strWorkingDirectory[5] == ':')
+      {
+         strWorkingDirectory.begins_eat(R"(\\?\)");
+      }
+      wstrWorkingDirectory = strWorkingDirectory;
 
       LPCWSTR pszWorkingDirectory = nullptr;
 
