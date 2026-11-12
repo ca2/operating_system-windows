@@ -641,6 +641,10 @@ enum aiComponent
 #define AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS \
     "IMPORT_FBX_PRESERVE_PIVOTS"
 
+/** Whether to ignore the FBX axis configuration. Default: false. */
+#define AI_CONFIG_IMPORT_FBX_IGNORE_UP_DIRECTION \
+    "AI_CONFIG_IMPORT_FBX_IGNORE_UP_DIRECTION"
+
              // ---------------------------------------------------------------------------
              /** @brief Specifies whether the importer will drop empty animation curves or
               *    animation curves which match the bind pose transformation over their

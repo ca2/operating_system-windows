@@ -38,7 +38,7 @@ failed-reallocation behavior, and the Windows last-error value are preserved.
 The standalone tests can be built with the selected MinGW compiler:
 
 ```
-g++ -std=c++17 -DMEMORY_DIAGNOSTICS=1 operating_system/operating_system-windows/tools/memory-diagnostics/tests.cpp source/app/acme/memory/diagnostics.cpp -o memory-diagnostics-test.exe
+g++ -std=c++17 -DMEMORY_DIAGNOSTICS=1 operating_system/operating_system-windows/_tool/memory-diagnostics/tests.cpp source/app/acme/memory/diagnostics.cpp -o memory-diagnostics-test.exe
 memory-diagnostics-test.exe memory-diagnostics-test.log
 ```
 

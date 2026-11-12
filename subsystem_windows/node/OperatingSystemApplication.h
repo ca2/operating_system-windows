@@ -46,7 +46,7 @@ namespace subsystem_windows
       {
       public:
 
-         Implement1Callbackø(OperatingSystemApplication);
+         //Implement1Callbackø(OperatingSystemApplication);
 
          ::i32 m_iExitCode = 0;
          HINSTANCE m_appInstance;

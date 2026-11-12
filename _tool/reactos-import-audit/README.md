@@ -99,7 +99,7 @@ builds do not enable this deployment step.
 For a manual deployment outside the CMake integration, run on the development host:
 
 ```powershell
-.\tools\reactos-import-audit\prepare-reactos-deployment.ps1 `
+.\_tool\reactos-import-audit\prepare-reactos-deployment.ps1 `
   -SourceDirectory .\cmake-build-debug-mingw-reactos\output `
   -DestinationDirectory .\cmake-build-debug-mingw-reactos\reactos-deploy
 ```

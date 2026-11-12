@@ -26,7 +26,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_form", "..\..\..
 		{D6B5B8F3-A524-4E73-8343-C3D5D558ADE3} = {D6B5B8F3-A524-4E73-8343-C3D5D558ADE3}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_os_drag_and_drop", "..\..\..\source\app-simple\os_drag_and_drop\simple_os_drag_and_drop.vcxproj", "{527051F1-A381-4D7F-BE3E-5E85CDCED43B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_os_drag_and_drop", "..\..\..\source\app-simple\os_drag_and_drop\app_simple_os_drag_and_drop.vcxproj", "{527051F1-A381-4D7F-BE3E-5E85CDCED43B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3C892817-9F8B-493C-A3E1-AAC25943A7F9} = {3C892817-9F8B-493C-A3E1-AAC25943A7F9}
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
@@ -67,7 +67,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\operat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "database_sqlite3", "..\..\..\source\app\database_sqlite3\database_sqlite3.vcxproj", "{F85061D8-22DC-4A8B-85EA-76D330BE52CC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_change_grub_default_entry", "..\..\..\source\app-simple\change_grub_default_entry\change_grub_default_entry.vcxproj", "{6D3C8026-2626-4D4A-9C5C-E1DE3BE8F6AA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_change_grub_default_entry", "..\..\..\source\app-simple\change_grub_default_entry\app_simple_change_grub_default_entry.vcxproj", "{6D3C8026-2626-4D4A-9C5C-E1DE3BE8F6AA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_simple_form", "..\..\..\source\app-simple\form\static_app_simple_form.vcxproj", "{8D5FFE5A-44A7-4477-9A32-5AAD6B9FB06C}"
 EndProject
@@ -83,7 +83,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_change_grub_def
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_form", "..\..\..\source\app-simple\form\__implement\_app_simple_form.vcxproj", "{A8DB550C-0CAF-42E8-8D1C-3EF9DFDF80E8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_shortcut", "..\..\..\source\app-simple\shortcut\__implement\_app_simple_shortcut.vcxproj", "{D2A05B15-376F-4805-BE80-91207600A24F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_simple_shortcut_amender", "..\..\..\source\app-simple\shortcut\__implement\_app_simple_shortcut_amender.vcxproj", "{D2A05B15-376F-4805-BE80-91207600A24F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

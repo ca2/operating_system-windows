@@ -5,7 +5,7 @@ declared in `source/**/__implement/CMakeLists.txt`. Component sources are unchan
 The helper can also be used explicitly after `add_executable`:
 
 ```cmake
-include("${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/tools/windows-common-controls/common-controls.cmake")
+include("${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/_tool/windows-common-controls/common-controls.cmake")
 ca2_enable_windows_common_controls(my_executable)
 ```
 

@@ -25,7 +25,7 @@ if(NOT deploy_scheduled)
                     "-DSOURCE_FILE=$<TARGET_FILE:${target}>"
                     "-DDESTINATION=${CA2_REACTOS_DEPLOY_DIRECTORY}"
                     "-DOBJCOPY=${CMAKE_OBJCOPY}"
-                    -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/tools/reactos-import-audit/deployment-copy.cmake"
+                    -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/_tool/reactos-import-audit/deployment-copy.cmake"
                 COMMENT "Preparing ReactOS deployment: ${target}"
                 VERBATIM)
             if(type STREQUAL "EXECUTABLE")
@@ -35,7 +35,7 @@ if(NOT deploy_scheduled)
                         "-DDESTINATION=${CA2_REACTOS_DEPLOY_DIRECTORY}"
                         "-DOBJCOPY=${CMAKE_OBJCOPY}"
                         -DRUNTIME_ONLY=ON
-                        -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/tools/reactos-import-audit/deployment-copy.cmake"
+                        -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/_tool/reactos-import-audit/deployment-copy.cmake"
                     VERBATIM)
             endif()
         endforeach()

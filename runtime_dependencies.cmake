@@ -28,7 +28,7 @@ endif()
 get_filename_component(CA2_REACTOS_DEPLOY_DIRECTORY "${CA2_REACTOS_DEPLOY_DIRECTORY}"
     ABSOLUTE BASE_DIR "${CMAKE_SOURCE_DIR}")
 set(runtime_stage "${CMAKE_CURRENT_BINARY_DIR}/mingw-runtime-stamps")
-set(runtime_deploy_script "${CMAKE_CURRENT_LIST_DIR}/tools/reactos-import-audit/deployment-copy.cmake")
+set(runtime_deploy_script "${CMAKE_CURRENT_LIST_DIR}/_tool/reactos-import-audit/deployment-copy.cmake")
 set(runtime_stamps)
 
 foreach(runtime_name IN LISTS runtime_names)

@@ -38,7 +38,7 @@ foreach(component IN ITEMS avutil swresample avformat avcodec swscale)
         add_custom_command(TARGET port_runtime_${component} POST_BUILD
             COMMAND "${CMAKE_COMMAND}" "-DSOURCE_FILE=${ffmpeg_dll}"
                 "-DDESTINATION=${CA2_REACTOS_DEPLOY_DIRECTORY}" "-DOBJCOPY=${CMAKE_OBJCOPY}"
-                -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/tools/reactos-import-audit/deployment-copy.cmake" VERBATIM)
+                -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/_tool/reactos-import-audit/deployment-copy.cmake" VERBATIM)
     endif()
     add_dependencies(port_all port_runtime_${component})
 endforeach()
@@ -58,7 +58,7 @@ if(MINGW)
             add_custom_command(TARGET port_runtime_ffmpeg_atomic POST_BUILD
                 COMMAND "${CMAKE_COMMAND}" "-DSOURCE_FILE=${ffmpeg_atomic_runtime}"
                     "-DDESTINATION=${CA2_REACTOS_DEPLOY_DIRECTORY}" "-DOBJCOPY=${CMAKE_OBJCOPY}"
-                    -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/tools/reactos-import-audit/deployment-copy.cmake" VERBATIM)
+                    -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/_tool/reactos-import-audit/deployment-copy.cmake" VERBATIM)
         endif()
         add_dependencies(port_all port_runtime_ffmpeg_atomic)
     endif()
