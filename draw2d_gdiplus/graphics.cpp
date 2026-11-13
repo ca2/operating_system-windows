@@ -8732,7 +8732,7 @@ namespace draw2d_gdiplus
 
          g_keep k(m_pgdiplusgraphics);
 
-         ::Gdiplus::PointF origin(x, y);
+         ::Gdiplus::PointF origin((::Gdiplus::REAL) x, (::Gdiplus::REAL) y);
 
          FLOAT fDpiX = m_pgdiplusgraphics->GetDpiX();
 
@@ -8771,11 +8771,11 @@ namespace draw2d_gdiplus
 
          auto offsetY = pmatrixNew->OffsetY();
 
-         pmatrixNew->Translate(-x-offsetX, -y - offsetY, Gdiplus::MatrixOrderAppend);
+         pmatrixNew->Translate((::Gdiplus::REAL)( - x - offsetX), (::Gdiplus::REAL)( - y - offsetY), Gdiplus::MatrixOrderAppend);
 
          pmatrixNew->Scale((Gdiplus::REAL)m_pwritetextfont->m_dFontWidth, (Gdiplus::REAL)1.0, Gdiplus::MatrixOrderAppend);
 
-         pmatrixNew->Translate(x + offsetX, y + offsetY, Gdiplus::MatrixOrderAppend);
+         pmatrixNew->Translate((::Gdiplus::REAL)(x + offsetX), (::Gdiplus::REAL)(y + offsetY), Gdiplus::MatrixOrderAppend);
 
          if (m_pgdiplusgraphicspath != nullptr)
          {
