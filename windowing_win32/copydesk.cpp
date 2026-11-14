@@ -240,17 +240,45 @@ namespace windowing_win32
    HGLOBAL copydesk::hglobal_get_filea(const ::file::path_array_base & patha)
    {
 
+      ::wstring_array wstra;
+
       character_count iLen = 0;
 
       for (::i32 i = 0; i < patha.get_size(); i++)
       {
 
-         iLen += utf8_to_unicode_count(patha[i]) + 1;
+         auto path = patha[i];
+
+         auto psz = path.c_str();
+
+         auto wstr = path.windows_path();
+
+         auto pwsz = wstr.c_str();
+
+         wstra.add(wstr);
+
+         iLen += wstr.length() + 1;
 
       }
 
-      HGLOBAL hglb = ::GlobalAlloc(GMEM_MOVEABLE, (SIZE_T) (sizeof(DROPFILES) + (iLen + 1) * sizeof(WCHAR)));
+
+      //for (::i32 i = 0; i < patha.get_size(); i++)
+      //{
+
+      //   auto
+
+      //   iLen += utf8_to_unicode_count(patha[i]) + 1;
+
+      //}
+
+      HGLOBAL hglb = ::GlobalAlloc(GMEM_MOVEABLE | GMEM_ZEROINIT, (SIZE_T) (sizeof(DROPFILES) + (iLen + 1) * sizeof(WCHAR)));
+      if (!hglb) return nullptr;
       LPDROPFILES pDropFiles = (LPDROPFILES) ::GlobalLock(hglb);
+      if (!pDropFiles)
+      {
+         ::GlobalFree(hglb);
+         return nullptr;
+      }
       pDropFiles->pFiles = sizeof(DROPFILES);
       pDropFiles->pt.x = 0;
       pDropFiles->pt.y = 0;
@@ -264,13 +292,19 @@ namespace windowing_win32
       unichar * pwsz = (unichar *)psz;
 
 
-      for (::i32 i = 0; i < patha.get_size(); i++)
+      for (::i32 i = 0; i < wstra.get_size(); i++)
       {
 
-         ::collection::count c = utf8_to_unicode_count(patha[i]) + 1;
+         //::collection::count c = utf8_to_unicode_count(patha[i]) + 1;
 
-         utf8_to_unicode(pwsz, c, patha[i]);
+         auto& wstrSource =  wstra[i];
 
+         auto pwszSource = wstrSource.c_str();
+
+         auto c = wstrSource.length() + 1;
+
+         //utf8_to_unicode(pwsz, c, patha[i]);
+         memcpy(pwsz, pwszSource, c * sizeof(pwszSource[0]));
 
          pwsz += c;
 
@@ -495,30 +529,64 @@ namespace windowing_win32
 
    bool copydesk::_set_filea(const ::file::path_array_base & patha, enum_op eop)
    {
-
       _synchronous_lock synchronouslock(synchronization());
-
       auto hwnd = ::as_HWND(this->operating_system_window());
+      if (!hwnd || patha.is_empty()) return false;
+
+      const auto formatEffect = ::RegisterClipboardFormatW(L"Preferred DropEffect");
+      if (!formatEffect) return false;
+      auto hdrop = hglobal_get_filea(patha);
+      if (!hdrop) return false;
+      auto heffect = ::GlobalAlloc(GMEM_MOVEABLE | GMEM_ZEROINIT, sizeof(DWORD));
+      if (!heffect)
+      {
+         ::GlobalFree(hdrop);
+         return false;
+      }
+      auto peffect = static_cast<DWORD *>(::GlobalLock(heffect));
+      if (!peffect)
+      {
+         ::GlobalFree(heffect);
+         ::GlobalFree(hdrop);
+         return false;
+      }
+      *peffect = eop == e_op_cut ? DROPEFFECT_MOVE : DROPEFFECT_COPY;
+      ::GlobalUnlock(heffect);
 
       if (!::OpenClipboard(hwnd))
       {
-
+         ::GlobalFree(heffect);
+         ::GlobalFree(hdrop);
          return false;
-
       }
 
-      EmptyClipboard();
-
-      SetClipboardData(CF_HDROP, hglobal_get_filea(patha));
-
-      SetClipboardData(CF_UNICODETEXT, hglobal_get_wide_text(patha.implode("\r\n")));
-
-      SetClipboardData(CF_TEXT, hglobal_get_utf8_text(patha.implode("\r\n")));
-
-      VERIFY(::CloseClipboard());
-
-      return true;
-
+      // SetClipboardData takes ownership only when it succeeds.
+      auto publish = [](UINT format, HGLOBAL memory)
+      {
+         if (!memory) return false;
+         if (::SetClipboardData(format, memory)) return true;
+         ::GlobalFree(memory);
+         return false;
+      };
+      bool succeeded = false;
+      if (::EmptyClipboard())
+      {
+         const bool filesPublished = publish(CF_HDROP, hdrop);
+         const bool effectPublished = publish(formatEffect, heffect);
+         succeeded = filesPublished && effectPublished;
+         if (succeeded)
+         {
+            publish(CF_UNICODETEXT, hglobal_get_wide_text(patha.implode("\r\n")));
+            publish(CF_TEXT, hglobal_get_utf8_text(patha.implode("\r\n")));
+         }
+      }
+      else
+      {
+         ::GlobalFree(heffect);
+         ::GlobalFree(hdrop);
+      }
+      const bool closed = ::CloseClipboard() != FALSE;
+      return succeeded && closed;
    }
 
 
