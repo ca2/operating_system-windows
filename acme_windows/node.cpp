@@ -338,12 +338,18 @@ namespace acme_windows
 
       HWND hwndMain = acme_get_main_hwnd();
 
-      ::i32 iRet = (::i32)(iptr) ::ShellExecuteW(hwndMain,
+      auto result = (::iptr) ::ShellExecuteW(hwndMain,
          L"open",
          wstrFile,
          pwszParams,
          pwszFolder,
          SW_SHOWNORMAL);
+      if (result <= 32)
+      {
+         ::string message;
+         message.formatf("System shell could not open %s (shell error %d).", pathFile.c_str(), static_cast<int>(result));
+         throw ::exception(error_failed, message);
+      }
 
    }
 
