@@ -53,6 +53,9 @@ namespace acme_windows
 
 
 
+      bool is_symbolic_link(const ::scoped_string & scopedstrLink) override;
+      ::file::path symbolic_link_destination(const ::scoped_string & scopedstrLink) override;
+
       void symbolic_link(const ::file::path & pathTarget, const ::file::path & pathSource) override;
 
 

@@ -338,12 +338,18 @@ namespace acme_windows
 
       HWND hwndMain = acme_get_main_hwnd();
 
-      ::i32 iRet = (::i32)(iptr) ::ShellExecuteW(hwndMain,
+      auto result = (::iptr) ::ShellExecuteW(hwndMain,
          L"open",
          wstrFile,
          pwszParams,
          pwszFolder,
          SW_SHOWNORMAL);
+      if (result <= 32)
+      {
+         ::string message;
+         message.formatf("System shell could not open %s (shell error %d).", pathFile.c_str(), static_cast<int>(result));
+         throw ::exception(error_failed, message);
+      }
 
    }
 
@@ -3376,6 +3382,28 @@ namespace acme_windows
 
       return pcreateprocess->m_iExitCode;
 
+   }
+
+
+   ::i32 node::command_system_memory(const ::scoped_string& scopedstr, bool bInteractive, const memory_dump_function& memorydumpfunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
+   {
+      auto process = create_newø < ::acme_windows::create_process >();
+      process->m_bInteractive = bInteractive;
+      process->m_pathWorkingDirectory = pathWorkingDirectory.is_empty() ? directory_system()->current() : pathWorkingDirectory;
+      process->m_edisplay = edisplay;
+      process->initialize_stdout();
+      if (!bInteractive) process->initialize_stderr();
+      process->initialize_stdin();
+      process->prepare();
+      if (edisplay == e_display_up) process->set_create_new_console();
+      else if (!bInteractive && !::is_screen_visible(edisplay))
+      {
+         // Captured commands use pipes and need no console host of their own.
+         process->m_dwCreationFlags |= CREATE_NO_WINDOW;
+      }
+      process->call_create_process(scopedstr);
+      process->wait_process(nullptr, true, memorydumpfunction);
+      return process->m_iExitCode;
    }
 
 

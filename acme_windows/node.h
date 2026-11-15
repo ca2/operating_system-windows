@@ -246,6 +246,7 @@ namespace acme_windows
       //void command_system(string_array_base & straOutput, ::i32 & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
       virtual ::i32 _command_system(const ::scoped_string& scopedstr, const ::scoped_string& scopedstrCommand, const trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay, bool bInteractive);
       ::i32 command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
+      ::i32 command_system_memory(const ::scoped_string& scopedstr, bool bInteractive = false, const memory_dump_function& memorydumpfunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
       //::i32 command_system(const ::scoped_string& scopedstr, const class ::time& timeOut = 15_min) override;
       //::i32 interactive_command_system(const ::scoped_string& scopedstrPrompt, const ::scoped_string& scopedstrCommand, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
       //void open_terminal_and_run(const ::scoped_string& scopedstr);

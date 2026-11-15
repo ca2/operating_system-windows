@@ -6,6 +6,9 @@
 #include "acme/filesystem/filesystem/directory_system.h"
 #include "acme/filesystem/filesystem/path.h"
 #include "acme/_operating_system.h"
+#include "acme/operating_system/windows_common/file.h"
+#include "acme/prototype/prototype/memory.h"
+#include <winioctl.h>
 
 
 namespace acme_windows
@@ -329,6 +332,66 @@ namespace acme_windows
    }
 
 
+   bool path_system::is_symbolic_link(const ::scoped_string & scopedstrLink)
+   {
+      ::file::path path(scopedstrLink);
+      ::wstring name = path.windows_path().extended_path();
+      WIN32_FIND_DATAW data{};
+      auto find = ::FindFirstFileW(name.c_str(), &data);
+      if (find == INVALID_HANDLE_VALUE)
+      {
+         auto error = ::GetLastError();
+         if (error == ERROR_FILE_NOT_FOUND || error == ERROR_PATH_NOT_FOUND) return false;
+         throw ::exception(error_failed, "Cannot inspect symbolic link: " + path);
+      }
+      ::FindClose(find);
+      return (data.dwFileAttributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0
+         && data.dwReserved0 == 0xA000000CUL; // IO_REPARSE_TAG_SYMLINK
+   }
+
+
+   ::file::path path_system::symbolic_link_destination(const ::scoped_string & scopedstrLink)
+   {
+      ::file::path path(scopedstrLink);
+      ::windows::file_instance file;
+      if (!file.safe_create_file(path, 0, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+         nullptr, OPEN_EXISTING, FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_BACKUP_SEMANTICS, nullptr))
+         throw ::exception(error_failed, "Cannot open symbolic-link entry: " + path);
+      ::memory buffer;
+      buffer.set_size(16 * 1024);
+      DWORD returned = 0;
+      if (!::DeviceIoControl(reinterpret_cast<HANDLE>(file.m_u), FSCTL_GET_REPARSE_POINT,
+         nullptr, 0, buffer.data(), static_cast<DWORD>(buffer.size()), &returned, nullptr))
+         throw ::exception(error_failed, "Cannot read symbolic-link target: " + path);
+      // Fixed-width Win32 wire layout; no newer OS imports or DDK headers.
+      struct link_reparse_data
+      {
+         DWORD tag;
+         WORD dataLength, reserved;
+         WORD substituteOffset, substituteLength, printOffset, printLength;
+         DWORD flags;
+         WCHAR characters[1];
+      };
+      constexpr DWORD headerBytes = 20;
+      if (returned < headerBytes) throw ::exception(error_failed, "Truncated symbolic-link data: " + path);
+      auto data = reinterpret_cast<const link_reparse_data *>(buffer.data());
+      auto offset = static_cast<DWORD>(data->substituteOffset);
+      auto length = static_cast<DWORD>(data->substituteLength);
+      if (data->tag != 0xA000000CUL || data->dataLength + 8U > returned
+         || !length || offset % sizeof(WCHAR) || length % sizeof(WCHAR)
+         || headerBytes + offset + length > returned)
+         throw ::exception(error_failed, "Invalid symbolic-link data: " + path);
+      ::wstring wide(data->characters + offset / sizeof(WCHAR), length / sizeof(WCHAR));
+      ::string destination(wide);
+      if (!(data->flags & 1U)) // SYMLINK_FLAG_RELATIVE
+      {
+         if (destination.case_insensitive_begins_eat("\\??\\UNC\\")) destination = "\\\\" + destination;
+         else destination.begins_eat("\\??\\");
+      }
+      return destination;
+   }
+
+
    void path_system::symbolic_link(const ::file::path & pathTarget, const ::file::path & pathSource)
    {
 #ifdef __REACTOS__
@@ -368,6 +431,11 @@ namespace acme_windows
       dwFlag |= SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE;
 
       bool bOk = ::CreateSymbolicLinkW(wstrTarget, wstrSource, dwFlag);
+      if (!bOk && ::GetLastError() == ERROR_INVALID_PARAMETER)
+      {
+         bOk = ::CreateSymbolicLinkW(wstrTarget, wstrSource,
+            dwFlag & ~SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE);
+      }
 
       if (!bOk)
       {
