@@ -3379,6 +3379,23 @@ namespace acme_windows
    }
 
 
+   ::i32 node::command_system_memory(const ::scoped_string& scopedstr, bool bInteractive, const memory_dump_function& memorydumpfunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
+   {
+      auto process = create_newø < ::acme_windows::create_process >();
+      process->m_bInteractive = bInteractive;
+      process->m_pathWorkingDirectory = pathWorkingDirectory.is_empty() ? directory_system()->current() : pathWorkingDirectory;
+      process->m_edisplay = edisplay;
+      process->initialize_stdout();
+      if (!bInteractive) process->initialize_stderr();
+      process->initialize_stdin();
+      process->prepare();
+      if (edisplay == e_display_up) process->set_create_new_console();
+      process->call_create_process(scopedstr);
+      process->wait_process(nullptr, true, memorydumpfunction);
+      return process->m_iExitCode;
+   }
+
+
    ::i32 node::command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
    {
 

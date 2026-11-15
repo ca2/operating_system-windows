@@ -817,6 +817,15 @@ namespace acme_windows
       wstr1 = str1;
       wstr2 = str2;
 
+      // lpApplicationName does not search PATH. Resolve quoted bare executable
+      // names before CreateProcessW, without routing them through cmd.exe.
+      if (!bCommandShell && !str1.contains("/") && !str1.contains("\\"))
+      {
+         WCHAR resolved[32768];
+         auto length = ::SearchPathW(nullptr, wstr1.c_str(), L".exe", 32768, resolved, nullptr);
+         if (length > 0 && length < 32768) wstr1 = resolved;
+      }
+
       //STARTUPINFO si = { {sizeof(si)} };
       //PROCESS_INFORMATION pi = {};
 
@@ -1069,7 +1078,7 @@ namespace acme_windows
 //
 //   }
 
-   void create_process::wait_process(const trace_function& tracefunction, bool bLineTrace)
+   void create_process::wait_process(const trace_function& tracefunction, bool bLineTrace, const memory_dump_function& memorydumpfunction)
    {
 
       //auto phappeningEndOut = create_newø < manual_reset_happening >();
@@ -1158,7 +1167,11 @@ namespace acme_windows
                   if(dwReadOut > 0)
                   {
 
-                  m_strOutput.append(szOut, dwReadOut);
+                  if (memorydumpfunction)
+                  {
+                     memorydumpfunction(e_trace_level_information, szOut, dwReadOut);
+                  }
+                  else m_strOutput.append(szOut, dwReadOut);
 
                   if (tracefunction)
                   {
@@ -1222,7 +1235,11 @@ namespace acme_windows
                if (ReadFile(m_hErrRd, szErr, sizeof(szErr), &dwReadErr, nullptr) && dwReadErr > 0)
                {
 
-                  m_strError.append(szErr, dwReadErr);
+                  if (memorydumpfunction)
+                  {
+                     memorydumpfunction(e_trace_level_error, szErr, dwReadErr);
+                  }
+                  else m_strError.append(szErr, dwReadErr);
 
                   if (tracefunction)
                   {

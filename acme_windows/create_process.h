@@ -89,7 +89,7 @@ namespace acme_windows
 
       void call_create_process(const ::scoped_string& scopedstr);
 
-      void wait_process(const trace_function& tracefunction, bool bLineTrace = true);
+      void wait_process(const trace_function& tracefunction, bool bLineTrace = true, const memory_dump_function& memorydumpfunction = nullptr);
 
       //void _read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string * pstrOut, OVERLAPPED * poverlapped);
       //void __read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string* pstrOut, const void * p, ::collection::count c);
