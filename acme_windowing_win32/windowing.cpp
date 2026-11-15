@@ -5,6 +5,7 @@
 #include "activation_token.h"
 #include "windowing.h"
 #include "window.h"
+#include "acme/exception/exception_pointer.h"
 #include "acme/constant/user_message.h"
 #include "acme/handler/request.h"
 #include "acme/nano/nano.h"
@@ -145,7 +146,7 @@ namespace win32
             if (!phappening->wait(timeout))
             {
 
-               throw ::exception(error_timeout);
+               øthrow <::exception>(error_timeout);
                //phappening.release();
 
                //return false;
