@@ -1443,7 +1443,20 @@ namespace acme_windows
 
          }
 
-         preempt(40_ms);
+         if (m_bInteractive)
+         {
+            preempt(40_ms);
+         }
+         else if (!bFinished)
+         {
+            // Wake immediately when the child exits. Keep a bounded wait so
+            // both output pipes continue to drain while the child is running.
+            if (::WaitForSingleObject(m_pi.hProcess, 40) == WAIT_FAILED)
+            {
+               auto lasterror = ::windows::get_last_error();
+               throw ::exception(::windows::last_error_status(lasterror));
+            }
+         }
 
       }
 

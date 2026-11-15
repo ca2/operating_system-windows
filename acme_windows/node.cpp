@@ -3390,6 +3390,11 @@ namespace acme_windows
       process->initialize_stdin();
       process->prepare();
       if (edisplay == e_display_up) process->set_create_new_console();
+      else if (!bInteractive && !::is_screen_visible(edisplay))
+      {
+         // Captured commands use pipes and need no console host of their own.
+         process->m_dwCreationFlags |= CREATE_NO_WINDOW;
+      }
       process->call_create_process(scopedstr);
       process->wait_process(nullptr, true, memorydumpfunction);
       return process->m_iExitCode;
