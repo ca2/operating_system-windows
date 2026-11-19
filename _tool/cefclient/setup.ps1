@@ -5,6 +5,10 @@ param(
     [string] $SdkRoot,
     [string] $StorageRoot,
     [string] $RuntimeDirectory,
+    [ValidateSet('x64', 'ARM64')]
+    [string] $Architecture = 'x64',
+    [string] $CMakeExecutable,
+    [string] $ExternalBuildRoot,
     [string] $PlatformToolset = 'v143',
     [switch] $BuildWrapper
 )
@@ -15,12 +19,42 @@ if ($RuntimeDirectory -and $Configuration.Count -ne 1) {
     throw '-RuntimeDirectory requires exactly one configuration'
 }
 $version = '109.1.13+g18f6895+chromium-109.0.5414.87'
-$package = "cef_binary_${version}_windows64"
+$distribution = if ($Architecture -eq 'ARM64') { 'windowsarm64' } else { 'windows64' }
+$package = "cef_binary_${version}_${distribution}"
+$sha1 = if ($Architecture -eq 'ARM64') { '792e35caa8a32d0c4f4f0c33ed447535020d62db' } else { '3c4c025052cd14167e2289c6248302cb0cbc45bd' }
+$length = if ($Architecture -eq 'ARM64') { 248412821 } else { 272266263 }
 $checkoutRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\..\..'))
 if (!$StorageRoot) {
     $StorageRoot = [IO.Path]::GetFullPath((Join-Path $checkoutRoot '..\operating_system\storage-windows'))
 }
-$cache = Join-Path $PSScriptRoot 'cmake-build-prebuilt'
+if (!$ExternalBuildRoot) {
+    $ExternalBuildRoot = Join-Path (Split-Path $StorageRoot) 'external_build\cef'
+}
+# libarchive refuses extraction through a symlink in an absolute output path.
+# Resolve directory-link ancestors without requiring newer native APIs or PS7.
+function Resolve-CefPhysicalDirectory([string] $Path) {
+    $item = Get-Item -LiteralPath $Path -Force
+    if ($item.LinkType -and $item.Target) {
+        $target = @($item.Target)[0]
+        if (![IO.Path]::IsPathRooted($target)) { $target = Join-Path $item.Parent.FullName $target }
+        return Resolve-CefPhysicalDirectory $target
+    }
+    if (!$item.Parent) { return $item.FullName }
+    return Join-Path (Resolve-CefPhysicalDirectory $item.Parent.FullName) $item.Name
+}
+New-Item -ItemType Directory -Path $ExternalBuildRoot -Force | Out-Null
+$cache = Resolve-CefPhysicalDirectory $ExternalBuildRoot
+if (!$CMakeExecutable) {
+    $command = Get-Command cmake.exe -ErrorAction SilentlyContinue
+    if ($command) { $CMakeExecutable = $command.Source }
+    else {
+        $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
+        if (Test-Path -LiteralPath $vswhere) {
+            $CMakeExecutable = & $vswhere -latest -products '*' -find 'Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' | Select-Object -First 1
+        }
+    }
+}
+if (!$CMakeExecutable) { throw 'CMake was not found. Install the Visual Studio CMake tools or supply -CMakeExecutable.' }
 function Get-CefFileHash([string] $LiteralPath, [string] $Algorithm) {
     # Build environments can omit the PowerShell module providing Get-FileHash.
     $stream = [IO.File]::OpenRead($LiteralPath)
@@ -45,18 +79,16 @@ if (!$SdkRoot) {
     if (!(Test-Path (Join-Path $SdkRoot 'include\cef_version.h'))) {
         New-Item -ItemType Directory -Path $cache -Force | Out-Null
         $archive = Join-Path $cache "$package.tar.bz2"
-        $sha1 = '3c4c025052cd14167e2289c6248302cb0cbc45bd'
         if ((Test-Path $archive) -and (Get-CefFileHash $archive SHA1) -ne $sha1) {
             Remove-Item -LiteralPath $archive
         }
         if (!(Test-Path $archive)) {
             $url = 'https://cef-builds.spotifycdn.com/' + [Uri]::EscapeDataString("$package.tar.bz2")
-            Write-Host "Downloading official prebuilt CEF $version (Windows x64)..."
+            Write-Host "Downloading official prebuilt CEF $version (Windows $Architecture)..."
             $partial = "$archive.partial"
             if (Get-Command curl.exe -ErrorAction SilentlyContinue) {
                 # Bounded range requests also work through proxies that buffer
                 # a complete response before forwarding large downloads.
-                $length = 272266263
                 $chunkSize = 16MB
                 $stream = [IO.File]::Create($partial)
                 try {
@@ -84,7 +116,7 @@ if (!$SdkRoot) {
         }
         Push-Location $cache
         try {
-            & cmake -E tar xjf $archive
+            & $CMakeExecutable -E tar xjf $archive
             if ($LASTEXITCODE) { throw 'CEF SDK extraction failed' }
         } finally { Pop-Location }
     }
@@ -98,9 +130,9 @@ if ($sdkVersion -notmatch ('#define CEF_VERSION "' + [regex]::Escape($version) +
 foreach ($config in $Configuration) {
     $source = Join-Path $SdkRoot $config
     if (!(Test-Path (Join-Path $source 'libcef.dll'))) {
-        throw "SDK is missing $config\libcef.dll; supply the standard Windows x64 distribution"
+        throw "SDK is missing $config\libcef.dll; supply the standard Windows $Architecture distribution"
     }
-    $destination = Join-Path $StorageRoot "x64\$config"
+    $destination = Join-Path $StorageRoot "$Architecture\$config"
     $binary = Join-Path $destination 'binary'
     $library = Join-Path $destination 'library'
     New-Item -ItemType Directory -Path $binary, $library -Force | Out-Null
@@ -127,8 +159,8 @@ foreach ($config in $Configuration) {
 
     if ($BuildWrapper) {
         # CEF itself is prebuilt. Only its C++ adapter needs our CRT/toolset.
-        $build = Join-Path $cache "wrapper-$PlatformToolset"
-        $configure = @('-S', $SdkRoot, '-B', $build, '-G', 'Visual Studio 18 2026', '-A', 'x64', '-T', $PlatformToolset,
+        $build = Join-Path $cache "wrapper-$Architecture-$PlatformToolset"
+        $configure = @('-S', $SdkRoot, '-B', $build, '-G', 'Visual Studio 18 2026', '-A', $Architecture, '-T', $PlatformToolset,
             '-DUSE_SANDBOX=OFF', '-DUSE_ATL=OFF', '-DCEF_RUNTIME_LIBRARY_FLAG=/MD')
         $cacheFile = Join-Path $build 'CMakeCache.txt'
         if (Test-Path -LiteralPath $cacheFile) {
@@ -139,9 +171,9 @@ foreach ($config in $Configuration) {
                 $configure = @('--fresh') + $configure
             }
         }
-        & cmake @configure
+        & $CMakeExecutable @configure
         if ($LASTEXITCODE) { throw 'CEF wrapper configuration failed' }
-        & cmake --build $build --config $config --target libcef_dll_wrapper --parallel 8
+        & $CMakeExecutable --build $build --config $config --target libcef_dll_wrapper --parallel 8
         if ($LASTEXITCODE) { throw "CEF $config wrapper build failed" }
         Copy-CefFile (Join-Path $build "libcef_dll_wrapper\$config\libcef_dll_wrapper.lib") (Join-Path $library 'libcef_dll_wrapper.lib')
     }
