@@ -309,13 +309,11 @@ namespace apex_windows
 
    bool process::kill()
    {
-
-      throw ::exception(::error_failed, "serious?! I don't believe... LOL...");
-      
-      //::system(string("taskkill /F /T /PID " ) + ::as_string((::i32) m_pi.dwProcessId));
-
-      return true;
-      //return TerminateProcess(m_pi.hthread, -1) != false;
+      if (m_pi.hProcess == nullptr || m_pi.hProcess == INVALID_HANDLE_VALUE)
+         return false;
+      if (WaitForSingleObject(m_pi.hProcess, 0) == WAIT_OBJECT_0)
+         return true;
+      return TerminateProcess(m_pi.hProcess, 1) != false;
 
    }
 
