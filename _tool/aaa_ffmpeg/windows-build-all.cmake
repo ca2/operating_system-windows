@@ -1,14 +1,14 @@
 # windows-build-all owns dependency policy; the external project stays standalone.
 # -DFFMPEG_* overrides remain available in CLion/CMake profiles.
 if(__REACTOS__)
-    set(default_ffmpeg_install "${PORT_STORAGE_ROOT}/${CMAKE_BUILD_TYPE}/third/ffmpeg-xp")
+    set(default_ffmpeg_install "${PORT_STORAGE_ROOT}/${CMAKE_BUILD_TYPE}/binary")
 else()
     if(CMAKE_SIZEOF_VOID_P EQUAL 8)
         set(ca2_ffmpeg_arch x64)
     else()
         set(ca2_ffmpeg_arch Win32)
     endif()
-    set(default_ffmpeg_install "${CMAKE_SOURCE_DIR}/../operating_system/storage-windows/${ca2_ffmpeg_arch}/${CMAKE_BUILD_TYPE}/third/ffmpeg")
+    set(default_ffmpeg_install "${CMAKE_SOURCE_DIR}/../operating_system/storage-windows/${ca2_ffmpeg_arch}/${CMAKE_BUILD_TYPE}/binary")
 endif()
 if(__REACTOS__)
     set(ca2_ffmpeg_version 6.1.6)
@@ -38,10 +38,21 @@ foreach(component IN ITEMS avutil swresample avformat avcodec swscale)
         add_custom_command(TARGET port_runtime_${component} POST_BUILD
             COMMAND "${CMAKE_COMMAND}" "-DSOURCE_FILE=${ffmpeg_dll}"
                 "-DDESTINATION=${CA2_REACTOS_DEPLOY_DIRECTORY}" "-DOBJCOPY=${CMAKE_OBJCOPY}"
-                -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/tools/reactos-import-audit/deployment-copy.cmake" VERBATIM)
+                -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/_tool/reactos-import-audit/deployment-copy.cmake" VERBATIM)
     endif()
     add_dependencies(port_all port_runtime_${component})
 endforeach()
+add_custom_target(ffmpeg_storage
+    COMMAND "${CMAKE_COMMAND}" "-DINSTALL_DIR=${FFMPEG_INSTALL_DIR}"
+        "-DSTORAGE_BINARY_DIR=${default_ffmpeg_install}"
+        -P "${CMAKE_CURRENT_LIST_DIR}/../stage-sdk.cmake"
+    DEPENDS ffmpeg_build
+    COMMENT "Staging FFmpeg storage binaries and libraries" VERBATIM)
+add_dependencies(ffmpeg_xp_build ffmpeg_storage)
+foreach(component IN ITEMS avutil swresample avformat avcodec swscale)
+    add_dependencies(port_runtime_${component} ffmpeg_storage)
+endforeach()
+add_dependencies(port_all ffmpeg_storage)
 add_dependencies(port_all ffmpeg_build)
 
 # 32-bit FFmpeg may use GCC's out-of-line 64-bit atomics. Other compiler
@@ -58,7 +69,7 @@ if(MINGW)
             add_custom_command(TARGET port_runtime_ffmpeg_atomic POST_BUILD
                 COMMAND "${CMAKE_COMMAND}" "-DSOURCE_FILE=${ffmpeg_atomic_runtime}"
                     "-DDESTINATION=${CA2_REACTOS_DEPLOY_DIRECTORY}" "-DOBJCOPY=${CMAKE_OBJCOPY}"
-                    -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/tools/reactos-import-audit/deployment-copy.cmake" VERBATIM)
+                    -P "${CMAKE_SOURCE_DIR}/operating_system/operating_system-windows/_tool/reactos-import-audit/deployment-copy.cmake" VERBATIM)
         endif()
         add_dependencies(port_all port_runtime_ffmpeg_atomic)
     endif()

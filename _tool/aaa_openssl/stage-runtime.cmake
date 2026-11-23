@@ -1,3 +1,4 @@
+include("${CMAKE_CURRENT_LIST_DIR}/../stage-sdk.cmake")
 file(MAKE_DIRECTORY "${OUTPUT_DIR}")
 file(GLOB runtime_dlls "${INSTALL_DIR}/bin/libcrypto-3*.dll" "${INSTALL_DIR}/bin/libssl-3*.dll")
 list(LENGTH runtime_dlls count)

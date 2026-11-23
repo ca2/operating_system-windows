@@ -78,6 +78,7 @@ namespace windowing_win32
 
       //::i32 get_image_by_file_extension(image_key & key);
 
+      bool get_image_by_file_extension(::user::shell::_get_file_image_ & getfileimage) override;
       void get_image_by_file_extension(_get_file_image_ & getfileimage);
 
 

@@ -13,7 +13,8 @@ MSVC and 64-bit MinGW do not use this runtime target.
 - `reactos-layered-probe`: layered-window diagnostics.
 - `windows-xp-compat`: shared Windows/XP adapter regression tests.
 - `memory-diagnostics`: Windows heap tracking tests and address resolution.
-- `openssl`, `ffmpeg`: parent-project Windows SDK build and staging adapters;
-  standalone external build projects remain under `port/external_build`.
+- OpenSSL, FFmpeg, and CEF now use the active formulas under
+  `port/external_build`. Their former integrations are archived in
+  `aaa_openssl`, `aaa_ffmpeg`, and `aaa_cefclient`.
 
 Platform-independent tools belong under `source/app/tools` when added.

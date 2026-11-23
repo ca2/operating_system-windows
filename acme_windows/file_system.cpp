@@ -62,7 +62,10 @@ namespace acme_windows
 
       ::windows::file_instance fileinstance;
 
-      if (!fileinstance.safe_create_file(path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL))
+      // Directory handles require BACKUP_SEMANTICS. It also works for files
+      // and is supported by Windows XP/ReactOS without newer API imports.
+      if (!fileinstance.safe_create_file(path, GENERIC_READ, FILE_SHARE_READ, NULL,
+         OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL))
       {
 
          auto lasterror = ::windows::get_last_error();

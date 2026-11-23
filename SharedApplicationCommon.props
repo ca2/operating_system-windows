@@ -18,7 +18,7 @@
       </ModuleDefinitionFile>
     </Link>
     <Manifest>
-      <AdditionalManifestFiles>$(MSBuildThisFileDirectory)windows10.manifest;$(MSBuildThisFileDirectory)tools\windows-common-controls\common-controls.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(MSBuildThisFileDirectory)windows10.manifest;$(MSBuildThisFileDirectory)_tool\windows-common-controls\common-controls.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>

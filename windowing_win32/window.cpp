@@ -661,6 +661,16 @@ namespace windowing_win32
       {
 
          win32_windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
+         if (puserinteraction && (puserinteraction->m_ewindowflag & e_window_flag_satellite_window))
+         {
+            auto powner = puserinteraction->owner_interaction();
+            if (powner && powner->window())
+            {
+               // For a top-level popup, CreateWindowEx's parent parameter is its owner.
+               hwndParent = ::as_HWND(powner->window()->operating_system_window());
+               dwExStyle &= ~WS_EX_APPWINDOW;
+            }
+         }
 
          x = m_pointWindow.x;
 

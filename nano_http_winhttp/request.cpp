@@ -288,83 +288,61 @@ namespace windows
 
             transferprogressfunction = pnanohttpget->payload("transfer_progress_function");
 
-            dwSize = 0;
-            do
+            auto pmemoryResponse = pnanohttpget->get_memory_response();
+
+            if (contentLength > 0)
             {
 
-               if (!WinHttpQueryDataAvailable(m_hinternet, &dwSize))
-               {
-                  //            printf("Error %u in WinHttpQueryDataAvailable.\n", GetLastError());
+               pmemoryResponse->set_size((memsize)contentLength);
+               pmemoryResponse->set_size(0);
 
-                  return false;
+            }
 
-               }
-               ::memory memory;
+            const DWORD dwChunkSize = 1024 * 1024;
+            ::memory memoryBuffer;
+            memoryBuffer.set_size(dwChunkSize);
 
-               memory.set_size(dwSize);
-               // Allocate space for the buffer.        
-               //pszOutBuffer = ___new byte[dwSize + 1];
-               //if (!pszOutBuffer)
-               //{
-                 // printf("Out of memory\n");
-                  //dwSize = 0;
-               //}
-               //else
-               //{
-               // 
-               memory.zero();
-               // Read the Data.            
-               //ZeroMemory(scopedstrOutBuffer, dwSize + 1);
+            for (;;)
+            {
+
                DWORD dwDownloaded = 0;
-               if (!WinHttpReadData(m_hinternet, (LPVOID)memory.data(), dwSize, &dwDownloaded))
+
+               if (!WinHttpReadData(m_hinternet, (LPVOID)memoryBuffer.data(), dwChunkSize, &dwDownloaded))
                {
                   //printf("Error %u in WinHttpReadData.\n", GetLastError());
                   return false;
                }
 
-               memory.set_size(dwDownloaded);
-
-               if (dwDownloaded > 0)
+               if (dwDownloaded == 0)
                {
 
-                  pnanohttpget->get_memory_response()->append(memory);
+                  break;
 
-                  if (transferprogressfunction)
+               }
+
+               pmemoryResponse->append(memoryBuffer.data(), dwDownloaded);
+
+               if (transferprogressfunction)
+               {
+
+                  if (contentLength > 0)
                   {
 
-                     if (contentLength > 0)
-                     {
+                     transferprogressfunction((::f64)pmemoryResponse->size() /
+                        (::f64)contentLength, pmemoryResponse->size(),
+                        contentLength);
+                  }
+                  else
+                  {
 
-                        transferprogressfunction((::f64)pnanohttpget->get_memory_response()->size() /
-                           (::f64)contentLength, pnanohttpget->get_memory_response()->size(),
-                           contentLength);
-                     }
-                     else
-                     {
-
-                        transferprogressfunction(0., pnanohttpget->get_memory_response()->size(),
-                           0);
-
-                     }
-
+                     transferprogressfunction(0., pmemoryResponse->size(),
+                        0);
 
                   }
 
                }
 
-               //dwSize -= dwDownloaded;
-               //else
-               //
-               //{
-               //   //printf("%s", pszOutBuffer); 
-               //   DWORD wmWritten;
-               //   bool fr = WriteFile(hFile, pszOutBuffer, dwSize, &wmWritten, NULL);
-               //   ::i32 n = GetLastError();
-               ////}
-               // Free the memory allocated to the buffer.            
-               //delete[] pszOutBuffer;
-            //}
-            } while (dwSize > 0);
+            }
 
             return true;
 

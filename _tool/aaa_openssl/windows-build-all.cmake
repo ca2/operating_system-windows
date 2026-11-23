@@ -25,6 +25,7 @@ set_property(DIRECTORY "${CMAKE_SOURCE_DIR}" PROPERTY INCLUDE_DIRECTORIES "${ope
 add_custom_target(openssl_xp_build DEPENDS openssl_build)
 add_custom_target(openssl_runtime
     COMMAND "${CMAKE_COMMAND}" "-DINSTALL_DIR=${OPENSSL_INSTALL_DIR}"
+        "-DSTORAGE_BINARY_DIR=${default_openssl_install}"
         "-DOUTPUT_DIR=${EXECUTABLE_OUTPUT_PATH}" "-DDEPLOY_DIR=${CA2_REACTOS_DEPLOY_DIRECTORY}"
         "-DXP=${__REACTOS__}" "-DOBJCOPY=${CMAKE_OBJCOPY}"
         -P "${CMAKE_CURRENT_LIST_DIR}/stage-runtime.cmake"

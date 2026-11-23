@@ -24,6 +24,12 @@ selects pristine FFmpeg C sources, rather than the wrapper project).
 `CMAKE_BUILD_TYPE`, architecture and compiler are inherited from the parent.
 Debug/Release SDKs go to separate storage directories. XP uses `Win32` storage
 and the XP profile; recent Windows storage follows the compiler's pointer size.
+The default SDK prefix is `<architecture>/<configuration>/binary` under
+`../operating_system/storage-windows`. Runtime DLLs are also staged directly
+into that `binary` directory, and import/static libraries into the sibling
+`library` directory, including when `FFMPEG_INSTALL_DIR` overrides the SDK prefix.
+Existing CMake caches keep their explicit SDK prefix until reconfigured with
+`-U FFMPEG_INSTALL_DIR`.
 
 The imported avutil, swresample, avcodec, avformat and swscale targets serve the
 audio resampler and video decoder dependencies. Their runtime targets stage DLLs

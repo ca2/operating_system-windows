@@ -1256,6 +1256,12 @@ namespace windowing_win32
    }
 
 
+   bool shell::get_image_by_file_extension(::user::shell::_get_file_image_ & getfileimage)
+   {
+      get_image_by_file_extension(static_cast<_get_file_image_ &>(getfileimage));
+      return getfileimage.m_iImage >= 0;
+   }
+
    void shell::get_image_by_file_extension(_get_file_image_ & getfileimage)
    {
 
