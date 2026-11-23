@@ -77,6 +77,9 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int)
     if (root.empty())
         return report_error(L"Could not find tool/shell. Run shell.exe from the windows-simple checkout.");
 
+    if (!is_file(root / L"operating_system" / L"operating_system-windows" / L"tool" / L"shell"))
+        return report_error(L"The Windows tool submodule is missing. Run git submodule update --init --recursive.");
+
     const auto git_bash = find_git_bash();
     if (git_bash.empty())
         return report_error(L"Could not find git-bash.exe. Install Git for Windows and try again.");

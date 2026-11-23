@@ -1,0 +1,4 @@
+[submodule "tool"]
+	path = tool
+	url = ../windows-tool
+	branch = main
