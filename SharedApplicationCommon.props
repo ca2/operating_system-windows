@@ -10,9 +10,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile />
-    <PreBuildEvent>
-      <Command>application_build_helper --defer-prepare-folder $(ProjectDir) $(PlatformName) $(ConfigurationName)</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
     <Link>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>

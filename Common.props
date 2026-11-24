@@ -38,7 +38,7 @@
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
     </ClCompile>
     <PreBuildEvent>
-      <Command>application_build_helper --defer-prepare-folder $(ProjectDir) $(PlatformName) $(ConfigurationName)</Command>
+      <Command>$(BaseDir)/operating_system/operating_system-windows/tool/bin/$(PlatformName)/application_build_helper --defer-prepare-folder $(ProjectDir) $(PlatformName) $(ConfigurationName)</Command>
     </PreBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir);$(RootParentDir)operating_system\storage-windows\$(PlatformName)\library\</AdditionalLibraryDirectories>

@@ -5,9 +5,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile />
-    <PreBuildEvent>
-      <Command>application_build_helper --defer-prepare-folder $(ProjectDir) $(PlatformName) $(ConfigurationName)</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
     <Link>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <ModuleDefinitionFile>$(ProjectName).def</ModuleDefinitionFile>
