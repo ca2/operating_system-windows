@@ -9,7 +9,8 @@
   <ItemDefinitionGroup>
     <ClCompile />
     <PreBuildEvent>
-      <Command>&quot;$(ApplicationBuildHelperCommand)&quot; --defer-prepare-folder &quot;$(MSBuildProjectDirectory)&quot; &quot;$(PlatformName)&quot; &quot;$(ConfigurationName)&quot;</Command>
+      <Command>$(ApplicationBuildHelperIntegrationEnvironmentCommand)
+&quot;$(ApplicationBuildHelperCommand)&quot; --defer-prepare-folder &quot;$(MSBuildProjectDirectory)&quot; &quot;$(PlatformName)&quot; &quot;$(ConfigurationName)&quot;</Command>
     </PreBuildEvent>
     <Link>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>

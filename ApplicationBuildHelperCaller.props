@@ -5,6 +5,7 @@
     <HelperCallerArchitecture Condition="'$(HelperCallerArchitecture)' == ''">$(PROCESSOR_ARCHITECTURE)</HelperCallerArchitecture>
     <HelperCallerArchitecture>$([System.String]::Copy('$(HelperCallerArchitecture)').ToLower())</HelperCallerArchitecture>
     <HelperCallerArchitecture Condition="'$(HelperCallerArchitecture)' == 'amd64'">x64</HelperCallerArchitecture>
+    <ApplicationBuildHelperIntegrationEnvironmentCommand Condition="'$(ApplicationBuildHelperIntegrationFolder)' != ''">set &quot;APPLICATION_BUILD_HELPER_INTEGRATION_FOLDER=$(ApplicationBuildHelperIntegrationFolder)&quot;</ApplicationBuildHelperIntegrationEnvironmentCommand>
     <ApplicationBuildHelperCommand>$(MSBuildThisFileDirectory)tool\bin\$(HelperCallerArchitecture)\application_build_helper.exe</ApplicationBuildHelperCommand>
   </PropertyGroup>
 </Project>
