@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
+  <Import Project="$(MSBuildThisFileDirectory)ApplicationBuildHelperCaller.props" Condition="'$(ApplicationBuildHelperCommand)' == ''" />
   <PropertyGroup Label="UserMacros">
     <BaseDir>$(SolutionDir)..\</BaseDir>
     <TimeDir>$(BaseDir)time-windows\</TimeDir>
@@ -38,7 +39,7 @@
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
     </ClCompile>
     <PreBuildEvent>
-      <Command>application_build_helper --defer-prepare-folder $(ProjectDir) $(PlatformName) $(ConfigurationName)</Command>
+      <Command>&quot;$(ApplicationBuildHelperCommand)&quot; --defer-prepare-folder &quot;$(MSBuildProjectDirectory)&quot; &quot;$(PlatformName)&quot; &quot;$(ConfigurationName)&quot;</Command>
     </PreBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir);$(RootParentDir)operating_system\storage-windows\$(PlatformName)\library\</AdditionalLibraryDirectories>

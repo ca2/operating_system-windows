@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <HelperCallerArchitecture>$(PROCESSOR_ARCHITEW6432)</HelperCallerArchitecture>
+    <HelperCallerArchitecture Condition="'$(HelperCallerArchitecture)' == ''">$(PROCESSOR_ARCHITECTURE)</HelperCallerArchitecture>
+    <HelperCallerArchitecture>$([System.String]::Copy('$(HelperCallerArchitecture)').ToLower())</HelperCallerArchitecture>
+    <HelperCallerArchitecture Condition="'$(HelperCallerArchitecture)' == 'amd64'">x64</HelperCallerArchitecture>
+    <ApplicationBuildHelperCommand>$(MSBuildThisFileDirectory)tool\bin\$(HelperCallerArchitecture)\application_build_helper.exe</ApplicationBuildHelperCommand>
+  </PropertyGroup>
+</Project>
