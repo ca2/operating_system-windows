@@ -10,6 +10,7 @@
     <RootParentDir>$(SolutionDir)..\..\</RootParentDir>
     <RootParentDirOperatingSystem>$(RootParentDir)operating_system\</RootParentDirOperatingSystem>
     <PlatformLower>$([System.String]::Copy('$(Platform)').ToLower())</PlatformLower>
+    <PlatformIncludeDirectories>$(RootParentDir)operating_system/include;$(RootParentDir)operating_system/storage-windows/$(PlatformName)/$(Configuration)/include;$(BaseDir)include;.;$(ProjectDir);$(ProjectDir)..;$(ProjectDir)../include;$(ProjectDir)../..;$(__sensitive)/sensitive/include;$(BaseDir)../port/include;$(BaseDir)source/include;$(BaseDir)operating_system/operating_system-windows/include/configuration_selection/$(Configuration);$(BaseDir)operating_system/operating_system-windows/configuration;$(BaseDir)operating_system/operating_system-windows/include;$(BaseDir)operating_system/operating_system-windows;$(BaseDir)operating_system/operating_system-windows_common;$(BaseDir)operating_system;$(BaseDir)source/app/_include;$(BaseDir)source/app/include;$(BaseDir)port/include;$(BaseDir);$(BaseDir)source;$(BaseDir)source/app;$(USERPROFILE)/software</PlatformIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(TimeDir)$(PlatformName)\$(Configuration)\</OutDir>
@@ -18,7 +19,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(RootParentDir)operating_system/include;$(RootParentDir)operating_system/storage-windows/$(PlatformName)/$(Configuration)/include;$(BaseDir)include;.;$(ProjectDir);$(ProjectDir)..;$(ProjectDir)../include;$(ProjectDir)../..;$(__sensitive)/sensitive/include;$(BaseDir)../port/include;$(BaseDir)source/include;$(BaseDir)operating_system/operating_system-windows/include/configuration_selection/$(Configuration);$(BaseDir)operating_system/operating_system-windows/configuration;$(BaseDir)operating_system/operating_system-windows/include;$(BaseDir)operating_system/operating_system-windows;$(BaseDir)operating_system/operating_system-windows_common;$(BaseDir)operating_system;$(BaseDir)source/app/_include;$(BaseDir)source/app/include;$(BaseDir)port/include;$(BaseDir);$(BaseDir)source;$(BaseDir)source/app;$(USERPROFILE)/software;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PlatformIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_$(ProjectName)_project;_output_type_$(OutputType);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
@@ -40,7 +41,7 @@
     </ClCompile>
     <PreBuildEvent>
       <Command>$(ApplicationBuildHelperIntegrationEnvironmentCommand)
-&quot;$(ApplicationBuildHelperCommand)&quot; --defer-prepare-folder &quot;$(MSBuildProjectDirectory)&quot; &quot;$(PlatformName)&quot; &quot;$(ConfigurationName)&quot;</Command>
+"$(ApplicationBuildHelperCommand)" --defer-prepare-folder "$(MSBuildProjectDirectory)" "$(PlatformName)" "$(ConfigurationName)"</Command>
     </PreBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir);$(RootParentDir)operating_system\storage-windows\$(PlatformName)\library\</AdditionalLibraryDirectories>
@@ -71,6 +72,9 @@
     </BuildMacro>
     <BuildMacro Include="PlatformLower">
       <Value>$(PlatformLower)</Value>
+    </BuildMacro>
+    <BuildMacro Include="PlatformIncludeDirectories">
+      <Value>$(PlatformIncludeDirectories)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>
